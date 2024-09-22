@@ -36,12 +36,12 @@ export default function PriceOfExistence() {
             {`39.37" x 23.62" x 35.43"`}
           </p>
           <p className="mt-2">
-            <strong>{`Materials:`}</strong> 
+            <strong>{`Materials:`}</strong>
             {`Skeleton, Dollar Bills, Digital Display
             TVs, Metal, Custom Electronics`}
           </p>
           <p className="mt-4">
-            <strong>{`Price of Exist`}</strong> 
+            <strong>{`Price of Exist`}</strong>
             {`explores the intersection of
             consumer culture and digital realms, capturing the essence of our
             artificial capitalist identity. This installation, featuring a

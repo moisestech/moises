@@ -6,7 +6,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="animate-appear p-4">
+    <div className="animate-appear">
       <pre className="inline-block bg-muted px-2 py-1 rounded-lg">
         {pathname}
       </pre>

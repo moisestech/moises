@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.wiki-font {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', 'Source Serif Pro', serif;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
