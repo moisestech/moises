@@ -8,7 +8,6 @@ import './globals.css';
 // COMPONENTS
 import { Header } from '@/components/Header';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -55,17 +54,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-        <body className={`${inter.className}`}>
-          <Header />
-          {children}
-        </body>
+      <body className={`${inter.className}`}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

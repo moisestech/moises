@@ -22,32 +22,39 @@ export default async function Home() {
   return (
     <div className="flex flex-col mt-52 w-full">
       {images.map((image, index) => {
-      const colors = ['bg-lime-400', 'bg-blue-400', 'bg-red-400'];
-      const color = colors[index % colors.length];
-      const isEven = index % 2 === 0;
-      return (
-        <article key={index} className="flex h-[500px] overflow-y-hidden w-full">
-        {isEven && (
-          <div className={`${color} w-96`}>
-            <h2 className="text-4xl m-20 mr-40 font-bold text-black">{image.header}</h2>
-          </div>
-        )}
-        <div className="w-full">
-          <Image
-            className={'w-full h-auto'}
-            width={800}
-            height={800}
-            src={image.src}
-            alt={image.alt}
-            />
-        </div>
-        {!isEven && (
-          <div className={`${color} w-96`}>
-          <h2 className="text-4xl m-20 mr-40 font-bold text-black">{image.header}</h2>
-          </div>
-        )}
-        </article>
-      );
+        const colors = ['bg-lime-400', 'bg-blue-400', 'bg-red-400'];
+        const color = colors[index % colors.length];
+        const isEven = index % 2 === 0;
+        return (
+          <article
+            key={index}
+            className="flex h-[500px] overflow-y-hidden w-full"
+          >
+            {isEven && (
+              <div className={`${color} w-96`}>
+                <h2 className="text-4xl m-20 mr-40 font-bold text-black">
+                  {image.header}
+                </h2>
+              </div>
+            )}
+            <div className="w-full">
+              <Image
+                className={'w-full h-auto'}
+                width={800}
+                height={800}
+                src={image.src}
+                alt={image.alt}
+              />
+            </div>
+            {!isEven && (
+              <div className={`${color} w-96`}>
+                <h2 className="text-4xl m-20 mr-40 font-bold text-black">
+                  {image.header}
+                </h2>
+              </div>
+            )}
+          </article>
+        );
       })}
     </div>
   );

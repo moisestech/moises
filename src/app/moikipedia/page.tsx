@@ -301,7 +301,6 @@ const Section: FC<SectionProps> = ({ id, title, content, border = true }) => (
 );
 
 const WikipediaPage: FC = () => {
-
   // const { darkMode } = useAppContext();
 
   const darkMode = false;
@@ -310,7 +309,6 @@ const WikipediaPage: FC = () => {
     <section
       className={`min-h-screen ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}
     >
-
       <div className="max-w-5xl mx-auto p-6">
         {/* Header with Theme Toggle */}
         <div
