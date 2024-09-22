@@ -87,19 +87,19 @@ const data: ArtistData = {
         Venezuelan-born, Miami-based interdisciplinary artist. Known primarily
         for his exploration of Post-internet{' '}
         <span style={{ color: '#36c' }}>sculptures</span> and new media
-        installation art, Sanabria's practice also includes software
+        installation art, {`Sanabria's`} practice also includes software
         development, curating and publishing. The intersection between machine
-        philosophy, social media, and memetics, Sanabria's work spans innovative
+        philosophy, social media, and memetics, {`Sanabria's`} work spans innovative
         mediums such as artificial intelligence, conceptual sculpture, and new
         media installations.
       </div>
       <div>
         In 2012, the Haus Del Kulturwelt in Berlin curated one of his
-        collective's artwork. Some of Sanabria's better known works include{' '}
+        {`collective's`} artwork. Some of {`Sanabria's`} better known works include{' '}
         <i>5 Million Dollars 1 Terabyte</i>, consisting of a hard drive with 5
         million dollars worth of software; <i>VR Hug</i>, a photo depicting two
         people with VR Headsets hugging; and <i>McDonald Brass Knuckles</i>,
-        brass knuckles in the shape of the McDonald's logo.
+        brass knuckles in the shape of the {`McDonald's`} logo.
       </div>
     </>
   ),
