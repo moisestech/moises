@@ -1,4 +1,6 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+'use client'
+
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 interface AppContextProps {
   darkMode: boolean;
@@ -11,7 +13,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [darkMode, setDarkMode] = useState(false);
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle('dark');
+  };
+
+  useEffect(() => {
+    // Set initial theme
+    document.documentElement.classList.toggle('dark', darkMode);
+  }, []);
 
   return (
     <AppContext.Provider value={{ darkMode, toggleDarkMode }}>

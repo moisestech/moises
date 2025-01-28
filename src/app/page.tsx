@@ -1,61 +1,50 @@
+import ArtworkGrid from '@/components/ArtworkGrid';
 import Image from 'next/image';
+import PageLayout from '@/components/PageLayout';
 
-export default async function Home() {
-  const images = [
-    {
-      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
-      header: 'Digital Divinities at Bakehouse Art Complex',
-      alt: 'Moises Sanabria & Fabiola Larios - Digitial Divinities at Bakehouse Art Complex, 2024',
-    },
-    {
-      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp',
-      header: 'Baby AGI at BreadBytes',
-      alt: 'Moises Sanabria - Baby AGI at BreadBytes, Bakehouse Art Complex, 2023',
-    },
-    {
-      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717962487/art/moisestech-website/vr_hug_moisesdsanabria_tomgalle_2017_csfeef.jpg',
-      header: 'Meme Art at Data Dating',
-      alt: 'Moises Sanabria & Tom Galle - VR Hug, 2017',
-    },
-  ];
+export default function Home() {
+    return (
+        <PageLayout>
+            <main className="flex min-h-screen flex-col items-center">
+                {/* Hero Image */}
+                <div className="w-full h-[70vh] relative">
+                    <Image
+                        src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg"
+                        alt="Hero Image"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
 
-  return (
-    <div className="flex flex-col mt-52 w-full">
-      {images.map((image, index) => {
-        const colors = ['bg-lime-400', 'bg-blue-400', 'bg-red-400'];
-        const color = colors[index % colors.length];
-        const isEven = index % 2 === 0;
-        return (
-          <article
-            key={index}
-            className="flex h-[500px] overflow-y-hidden w-full"
-          >
-            {isEven && (
-              <div className={`${color} w-96`}>
-                <h2 className="text-4xl m-20 mr-40 font-bold text-black">
-                  {image.header}
-                </h2>
-              </div>
-            )}
-            <div className="w-full">
-              <Image
-                className={'w-full h-auto'}
-                width={800}
-                height={800}
-                src={image.src}
-                alt={image.alt}
-              />
-            </div>
-            {!isEven && (
-              <div className={`${color} w-96`}>
-                <h2 className="text-4xl m-20 mr-40 font-bold text-black">
-                  {image.header}
-                </h2>
-              </div>
-            )}
-          </article>
-        );
-      })}
-    </div>
-  );
+                {/* Welcome Text */}
+                <div className="w-full py-32 px-8">
+                    <div className="max-w-7xl mx-auto flex justify-between items-start">
+                        <div>
+                            <h1 className="text-7xl font-bold mb-6">
+                                Welcome
+                            </h1>
+                            <p className="text-2xl">
+                                Explore art and ideas with Moises Sanabria.
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-end space-y-4">
+                            <p className="text-xl">
+                                Open 10:30 a.m. - 5:30 p.m. today
+                            </p>
+                            <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors">
+                                Plan your visit
+                            </button>
+                        </div>
+                    </div>
+                    <div className="max-w-7xl mx-auto">
+                        <div className="w-full h-0.5 bg-current opacity-20 mt-12"></div>
+                    </div>
+                </div>
+
+                {/* Artwork Grid */}
+                <ArtworkGrid />
+            </main>
+        </PageLayout>
+    );
 }

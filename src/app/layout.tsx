@@ -6,7 +6,11 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 // COMPONENTS
-import { Header } from '@/components/Header';
+import Header from '@/components/Header';
+import { AppProvider } from '@/context/appContext';
+import { ThemeProvider } from 'next-themes';
+import { Toaster } from "@/components/ui/toaster";
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -56,10 +60,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
-        <Header />
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-white dark:bg-black text-black dark:text-white transition-colors duration-300`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <AppProvider>
+            <Header />
+            {children}
+            <Footer />
+            <Toaster />
+          </AppProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

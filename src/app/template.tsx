@@ -1,16 +1,16 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
   return (
-    <div className="animate-appear">
-      <pre className="inline-block bg-muted px-2 py-1 rounded-lg">
-        {pathname}
-      </pre>
+    <motion.main
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      className="pt-[160px] min-h-screen" // Add padding top to account for fixed header
+    >
       {children}
-    </div>
+    </motion.main>
   );
 }
