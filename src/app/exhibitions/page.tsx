@@ -11,14 +11,14 @@ const exhibitions = [
     {
         title: "CONTINUUM",
         location: "MUNAG, Antigua Guatemala",
-        date: "March 2024 - Present",
+        date: "Mar 2024 - Present",
         description: "A solo exhibition featuring 'Price of Existence' and 'Smart Shoppers', exploring the intersection of value, technology, and human consciousness in the digital age.",
         image: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831888/art/moisestech-website/moises-sanabria-price-of-existence_u899xj.jpg"
     },
     {
         title: "Digital Divinities",
         location: "Bakehouse Art Complex, Miami",
-        date: "February 2024 - Present",
+        date: "Feb 2024 - Present",
         description: "An exploration of divinity in the digital age through AI-generated sculptures and installations.",
         image: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg"
     }

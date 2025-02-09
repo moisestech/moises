@@ -138,8 +138,8 @@ const WikipediaPage: FC = () => {
   const isDark = theme === 'dark';
 
   return (
-    <section className={`min-h-screen ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      <div className="max-w-5xl mx-auto p-6">
+    <section className={`${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+      <div className="max-w-5xl mx-auto p-6 mt-40">
         {/* Header with Theme Toggle */}
         <div
           className={`flex justify-between items-center mb-4 border-y-gray-400 ${

@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'MoMA Sans';
+  src: url('/fonts/moma-sans__regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MoMA Sans';
+  src: url('/fonts/moma-sans__light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MoMA Sans';
+  src: url('/fonts/moma-sans__bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 .wiki-font {
   font-family: 'Linux Libertine', 'Georgia', 'Times', 'Source Serif Pro', serif;
 }

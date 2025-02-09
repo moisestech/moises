@@ -17,9 +17,9 @@ export default function Footer() {
 
     return (
         <footer className="bg-[#444444] text-white">
-            <div className="max-w-7xl mx-auto px-8 py-16">
+            <div className="max-w-7xl mx-auto px-6">
                 {/* Main Navigation */}
-                <nav className="mb-16">
+                <nav className="pt-16 mb-16">
                     <ul className="flex flex-col md:flex-row gap-6 md:gap-16">
                         <li>
                             <Link href="/about" onClick={(e) => handleNavClick(e, '/about')} className="hover:underline text-lg">

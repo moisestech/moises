@@ -22,7 +22,7 @@ export default function ArtworkPage({ params }: PageProps) {
     const color = colors[artworkIndex % colors.length];
 
     return (
-        <main className="min-h-screen w-full">
+        <main className="w-full">
             {/* Title Banner */}
             <div className={`${color} w-full py-20 px-8 mt-24`}>
                 <div className="max-w-7xl mx-auto">
@@ -47,7 +47,7 @@ export default function ArtworkPage({ params }: PageProps) {
             </div>
 
             {/* Content Section */}
-            <div className="max-w-7xl mx-auto px-8 py-16">
+            <div className="max-w-7xl mx-auto py-16">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                     {/* Metadata Column */}
                     <div className="space-y-8">
