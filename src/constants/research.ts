@@ -1,0 +1,163 @@
+interface Research {
+    title: string;
+    year: number;
+    description: string;
+    artistic_intent: string;
+    technical_requirements: {
+        power: string[];
+        mounting: string[];
+        space: {
+            pedestal_size: string;
+            wall_clearance: string;
+            power_access: string;
+        };
+        interactive_elements?: string[];
+    };
+    components: {
+        mask: {
+            material: string;
+            customization: string[];
+        };
+        hardware: {
+            model: string;
+            specifications: string[];
+            power_requirements: string;
+        };
+        mounting: {
+            type: string[];
+            materials: string[];
+        };
+        display: {
+            pedestal: string;
+            lighting: string;
+        };
+    };
+    materials: string[];
+    dimensions: string;
+    images: {
+        url: string;
+        caption: string;
+    }[];
+    tags: string[];
+    interpretation: string;
+    exhibition: string;
+    installation_notes: string[];
+    future_iterations?: string[];
+    on_view: boolean;
+}
+
+export const research: { [key: string]: Research } = {
+    privacy_mask: {
+        title: "Privacy Mask",
+        year: 2025,
+        description: "Privacy Mask radically investigates the 'price of privacy' through a meticulously constructed critique of digital subscription anonymity in our surveillance era. The installation centers on a gold-plated Guy Fawkes mask an iconic symbol of anonymous resistance transformed through its integration with Wi-Fi routers Antennas and ATM/POS 'We Accept' decal as the masks headband. The piece manifests as a laboratory-like exploration where an ATM/POS terminal mounted on the mask's forehead directly confronts viewers with the commodification of digital privacy. The two Wi-Fi routers with protruding antennas create a broadband signal exoskeleton. The work examines how privacy tools remain paradoxically tethered to corporate infrastructures. Decals of VPN company logos (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad), serves as a critical discourse on the commercialization of anonymity trade-off to buy back privacy in an era where data extraction runs rampant and personal security becomes a product to be bought and sold.",
+        artistic_intent: "The VPN Mask critiques the illusion of digital anonymity in an era of mass surveillance. The piece fuses the iconography of privacy and resistance with the very corporate entities that sell privacy as a product, emphasizing its status as a cultural artifact of digital resistance.",
+        technical_requirements: {
+            power: [
+                "110-240V power connection required for routers",
+                "Continuous power supply for LED indicators",
+                "Hidden cable management system"
+            ],
+            mounting: [
+                "Custom bracket system for mask and router assembly",
+                "Secure mounting for ATM/POS terminal on mask forehead",
+                "3D-printed or CNC-cut acrylic frame"
+            ],
+            space: {
+                pedestal_size: "18\" x 18\" (45cm x 45cm) minimum",
+                wall_clearance: "1 foot (30 cm) for antenna extension",
+                power_access: "Requires proximity to power outlet"
+            },
+            interactive_elements: [
+                "Optional Raspberry Pi display for dynamic IP address",
+                "Functional ATM/POS terminal interface",
+                "LED indicator system"
+            ]
+        },
+        components: {
+            mask: {
+                material: "Gold-plated ABS plastic",
+                customization: [
+                    "NordVPN logo",
+                    "ExpressVPN logo",
+                    "Surfshark logo",
+                    "ProtonVPN logo",
+                    "Mullvad logo"
+                ]
+            },
+            hardware: {
+                model: "Ubiquiti UniFi Tri-Band Wi-Fi 6E Router",
+                specifications: [
+                    "6 adjustable antennas",
+                    "LED indicator system",
+                    "Black finish",
+                    "Cybernetic aesthetic"
+                ],
+                power_requirements: "110-240V continuous power"
+            },
+            mounting: {
+                type: [
+                    "Custom bracket system",
+                    "3D-printed frame",
+                    "CNC-cut acrylic components"
+                ],
+                materials: [
+                    "Acrylic",
+                    "3D printing filament",
+                    "Metal brackets"
+                ]
+            },
+            display: {
+                pedestal: "Standard white museum pedestal with cable management",
+                lighting: "Dramatic spot lighting for shadow effects"
+            }
+        },
+        materials: [
+            "Gold-plated ABS plastic mask",
+            "Vinyl VPN company logo stickers",
+            "Ubiquiti UniFi Tri-Band Wi-Fi 6E routers",
+            "ATM/POS terminal with keypad",
+            "LED lights",
+            "Custom mounting hardware",
+            "3D-printed components",
+            "Acrylic structural elements"
+        ],
+        dimensions: "24\" x 18\" x 12\" (including antennas)",
+        images: [
+            {
+                url: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                caption: "Privacy Mask - Front view showing gold mask with VPN logos and ATM terminal"
+            }
+        ],
+        tags: [
+            "sculpture",
+            "digital privacy",
+            "surveillance",
+            "technology",
+            "VPN",
+            "corporate critique",
+            "interactive art",
+            "cybernetic",
+            "hardware art",
+            "digital resistance",
+            "anonymity",
+            "commodification"
+        ],
+        interpretation: "The artwork explores the paradox of digital privacy in an age where anonymity itself has become a commodity. By combining the iconic Guy Fawkes mask—a symbol of resistance and anonymity—with corporate VPN branding and functional technology, the piece questions whether true digital privacy is possible within existing corporate infrastructures. The ATM/POS terminal represents the monetization of privacy, while the glowing router antennas suggest constant connectivity even in supposed anonymity.",
+        exhibition: "Digital Privacy in the Age of Surveillance",
+        installation_notes: [
+            "Requires professional installation for electrical components",
+            "Cable management must be hidden within pedestal",
+            "Lighting should be adjusted to maximize shadow effects",
+            "Regular maintenance needed for LED functionality",
+            "Backup power system recommended for continuous operation"
+        ],
+        future_iterations: [
+            "Integration of real-time VPN network statistics",
+            "Interactive payment processing simulation",
+            "Expanded LED programming for dynamic lighting effects",
+            "Mobile app integration for viewer interaction"
+        ],
+        on_view: false
+    }
+};
