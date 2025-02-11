@@ -244,10 +244,8 @@ export const research: { [key: string]: ResearchItem } = {
             "Gold-plated ABS plastic mask",
             "Vinyl VPN company logo stickers",
             "Ubiquiti UniFi Tri-Band Wi-Fi 6E routers",
-            "ATM/POS terminal with keypad",
             "LED lights",
             "Custom mounting hardware",
-            "3D-printed components",
             "Acrylic structural elements"
         ],
         dimensions: "24\" x 18\" x 12\" (including antennas)",
