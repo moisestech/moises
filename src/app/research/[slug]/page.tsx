@@ -95,8 +95,8 @@ export default function ResearchItemPage({ params }: Props) {
           
           <div className="prose dark:prose-invert max-w-none space-y-16">
             <div>
-              <h2>Description</h2>
-              <EnhancedDescription 
+            <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Description</h2>
+            <EnhancedDescription 
                 description={item.description}
                 interactiveContent={item.interactiveContent}
               />
