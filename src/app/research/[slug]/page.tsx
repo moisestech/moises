@@ -1,6 +1,7 @@
-import { research } from '@/constants/research';
+import { research, InteractiveContent } from '@/constants/research';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import InteractiveText from '@/components/InteractiveText';
 
 interface Props {
   params: {
@@ -12,6 +13,50 @@ export function generateStaticParams() {
   return Object.keys(research).map((slug) => ({
     slug,
   }));
+}
+
+function EnhancedDescription({ description, interactiveContent }: { 
+  description: string, 
+  interactiveContent: InteractiveContent[] 
+}) {
+  let enhancedText = description;
+  
+  // Sort interactive content by text length (longest first) to avoid nested replacements
+  const sortedContent = [...interactiveContent].sort(
+    (a, b) => b.text.length - a.text.length
+  );
+
+  // Replace each interactive text instance with a marker
+  sortedContent.forEach((content, index) => {
+    enhancedText = enhancedText.replace(
+      content.text,
+      `|||${index}|||`
+    );
+  });
+
+  // Split by markers and map to components
+  const parts = enhancedText.split('|||');
+  
+  return (
+    <p>
+      {parts.map((part, index) => {
+        const contentIndex = parseInt(part);
+        if (!isNaN(contentIndex)) {
+          const content = sortedContent[contentIndex];
+          return (
+            <InteractiveText
+              key={index}
+              type={content.type}
+              content={content.content}
+            >
+              {content.text}
+            </InteractiveText>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </p>
+  );
 }
 
 export default function ResearchItemPage({ params }: Props) {
@@ -48,10 +93,13 @@ export default function ResearchItemPage({ params }: Props) {
             <p className="text-xl text-gray-600 dark:text-gray-400 mt-4">{item.year}</p>
           </div>
           
-          <div className="prose dark:prose-invert max-w-none space-y-8">
+          <div className="prose dark:prose-invert max-w-none space-y-16">
             <div>
-              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Description</h2>
-              <p>{item.description}</p>
+              <h2>Description</h2>
+              <EnhancedDescription 
+                description={item.description}
+                interactiveContent={item.interactiveContent}
+              />
             </div>
 
             <div>

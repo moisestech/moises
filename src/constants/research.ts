@@ -1,7 +1,24 @@
-interface Research {
+export interface InteractiveContent {
+    type: 'italic' | 'highlight' | 'link';
+    text: string;
+    content: {
+        text?: string;
+        image?: {
+            src: string;
+            alt: string;
+        };
+        link?: {
+            url: string;
+            label: string;
+        };
+    };
+}
+
+interface ResearchItem {
     title: string;
     year: number;
     description: string;
+    interactiveContent: InteractiveContent[];
     artistic_intent: string;
     technical_requirements: {
         power: string[];
@@ -46,11 +63,122 @@ interface Research {
     on_view: boolean;
 }
 
-export const research: { [key: string]: Research } = {
+export const research: { [key: string]: ResearchItem } = {
     privacy_mask: {
         title: "Privacy Mask",
         year: 2025,
         description: "Privacy Mask visually investigates the 'price of privacy in our surveillance era. The installation centers on a gold-plated Guy Fawkes mask an iconic symbol of anonymous resistance transformed through its integration with Wi-Fi routers Antennas and ATM/POS 'We Accept' decal as the masks headband. The piece manifests as a laboratory-like exploration where an ATM/POS decal mounted on the mask's forehead directly confronts viewers with the commodification of digital privacy. The two Wi-Fi routers with protruding antennas create a broadband signal exoskeleton. The work examines how privacy tools remain paradoxically tethered to corporate infrastructures. Decals of VPN company logos (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad), serves as a critical discourse on the commercialization of anonymity trade-off to buy back privacy in an era where data extraction runs rampant and personal security becomes a product to be bought and sold.",
+        interactiveContent: [
+            {
+                type: 'italic',
+                text: "price of privacy",
+                content: {
+                    text: "Privacy has become a commodity rather than a fundamental right in the digital age, where personal data protection is increasingly monetized."
+                }
+            },
+            {
+                type: 'highlight',
+                text: "surveillance era",
+                content: {
+                    text: "The current age of digital surveillance capitalism, where personal data is continuously collected, analyzed, and monetized by tech companies."
+                }
+            },
+            {
+                type: 'link',
+                text: "gold-plated Guy Fawkes mask",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "Guy Fawkes Mask Placeholder"
+                    },
+                    link: {
+                        url: "https://amazon.com/guy-fawkes-mask",
+                        label: "View on Amazon"
+                    }
+                }
+            },
+            {
+                type: 'highlight',
+                text: "Wi-Fi routers",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "WiFi Router Placeholder"
+                    }
+                }
+            },
+            {
+                type: 'highlight',
+                text: "ATM/POS 'We Accept' decal",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "ATM/POS Decal Placeholder"
+                    },
+                    link: {
+                        url: "https://amazon.com/atm-pos-decal",
+                        label: "View on Amazon"
+                    }
+                }
+            },
+            {
+                type: 'highlight',
+                text: "commodification of digital privacy",
+                content: {
+                    text: "The process by which personal privacy and data protection have become products to be bought and sold in the digital marketplace."
+                }
+            },
+            {
+                type: 'highlight',
+                text: "NordVPN",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "NordVPN Logo Placeholder"
+                    }
+                }
+            },
+            {
+                type: 'highlight',
+                text: "ExpressVPN",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "ExpressVPN Logo Placeholder"
+                    }
+                }
+            },
+            {
+                type: 'highlight',
+                text: "Surfshark",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "Surfshark Logo Placeholder"
+                    }
+                }
+            },
+            {
+                type: 'highlight',
+                text: "ProtonVPN",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "ProtonVPN Logo Placeholder"
+                    }
+                }
+            },
+            {
+                type: 'highlight',
+                text: "Mullvad",
+                content: {
+                    image: {
+                        src: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png",
+                        alt: "Mullvad Logo Placeholder"
+                    }
+                }
+            }
+        ],
         artistic_intent: "The Privacy Mask critiques the illusion of digital anonymity in an era of mass surveillance. The piece fuses the iconography of privacy and resistance with the very corporate entities that sell privacy as a product, emphasizing its status as a cultural artifact of digital resistance.",
         technical_requirements: {
             power: [
