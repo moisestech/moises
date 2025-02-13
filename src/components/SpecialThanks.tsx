@@ -17,36 +17,39 @@ interface PartnerCategory {
 // Placeholder data - this should eventually come from artist.ts
 const partnerData: PartnerCategory[] = [
   {
-    title: "Free Admission Partner",
+    title: 'Free Admission Partner',
     partners: [
-      { name: "Bakehouse Art Complex", logo: "/partners/bac-logo.jpg" },
-    ]
+      { name: 'Bakehouse Art Complex', logo: '/partners/bac-logo.jpg' },
+    ],
   },
   {
-    title: "Exhibition Support",
+    title: 'Exhibition Support',
     partners: [
-      { name: "Bakehouse Art Complex", logo: "/partners/bac-logo.jpg" },
-    ]
+      { name: 'Bakehouse Art Complex', logo: '/partners/bac-logo.jpg' },
+    ],
   },
   {
-    title: "Neighborhood Partner",
+    title: 'Neighborhood Partner',
     partners: [
-      { name: "Miami-Dade County Department of Cultural Affairs", logo: "/partners/mia-date-cultural-affairs.avif" },
-    ]
+      {
+        name: 'Miami-Dade County Department of Cultural Affairs',
+        logo: '/partners/mia-date-cultural-affairs.avif',
+      },
+    ],
   },
   {
-    title: "Leadership Partner",
+    title: 'Leadership Partner',
     partners: [
-      { name: "Bakehouse Art Complex", logo: "/partners/bac-logo.jpg" },
-    ]
-  }
+      { name: 'Bakehouse Art Complex', logo: '/partners/bac-logo.jpg' },
+    ],
+  },
 ];
 
 // Flatten all partners into a single array
-const allPartners = partnerData.flatMap(category => 
-  category.partners.map(partner => ({
+const allPartners = partnerData.flatMap((category) =>
+  category.partners.map((partner) => ({
     ...partner,
-    category: category.title
+    category: category.title,
   }))
 );
 
@@ -66,7 +69,7 @@ export default function SpecialThanks() {
   return (
     <section className="py-16 md:py-24 px-4 md:px-8 w-full">
       <div className="max-w-7xl mx-auto">
-        <motion.h2 
+        <motion.h2
           className="text-md font-['MoMA_Sans'] text-left mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,7 +80,7 @@ export default function SpecialThanks() {
         <div className="space-y-8">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentPartner.name + "-container"}
+              key={currentPartner.name + '-container'}
               className="flex justify-start items-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -95,7 +98,7 @@ export default function SpecialThanks() {
             </motion.div>
 
             <motion.h3
-              key={currentPartner.category + "-title"}
+              key={currentPartner.category + '-title'}
               className="text-xl md:text-2xl font-bold text-left"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -109,4 +112,4 @@ export default function SpecialThanks() {
       </div>
     </section>
   );
-} 
+}

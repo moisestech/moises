@@ -5,19 +5,11 @@ import { useAppContext } from '@/context/appContext';
 import { Search } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { useToast } from "@/hooks/use-toast";
-import { MorphingText } from "@/components/ui/morphing-text";
+import { useToast } from '@/hooks/use-toast';
+import { MorphingText } from '@/components/ui/morphing-text';
 import { Menu, X } from 'lucide-react';
 
-const texts = [
-  "TECH",
-  "SANABRIA",
-  "ART",
-  "DIGITAL",
-  "AI",
-  "MEME",
-  "NEW MEDIA"
-];
+const texts = ['TECH', 'SANABRIA', 'ART', 'DIGITAL', 'AI', 'MEME', 'NEW MEDIA'];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,12 +44,15 @@ export default function Header() {
   const isDark = theme === 'dark';
   console.log('Current theme:', theme); // Debug log
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path: string
+  ) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     toast({
-      title: "Coming Soon",
-      description: "This section is under construction.",
+      title: 'Coming Soon',
+      description: 'This section is under construction.',
     });
   };
 
@@ -71,7 +66,9 @@ export default function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-colors font-['MoMA_Sans'] ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors font-['MoMA_Sans'] ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}
+      >
         {/* Fixed Visit Button */}
         <div className="hidden md:block absolute right-0 top-[30px] px-10 z-10">
           <Link
@@ -83,16 +80,22 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className={`transition-all duration-300 ${isScrolled ? 'h-[80px]' : 'h-auto'}`}>
+        <div
+          className={`transition-all duration-300 ${isScrolled ? 'h-[80px]' : 'h-auto'}`}
+        >
           {/* First row */}
-          <div 
+          <div
             className={`transition-transform duration-300 ${
-              isScrolled ? '-translate-y-full opacity-0 md:h-0 overflow-hidden' : 'translate-y-0 opacity-100'
+              isScrolled
+                ? '-translate-y-full opacity-0 md:h-0 overflow-hidden'
+                : 'translate-y-0 opacity-100'
             }`}
           >
             <div className="max-w-7xl mx-auto px-10 pt-7 flex justify-between items-start">
               <Link href="/" className="flex items-baseline">
-                <span className="text-4xl md:text-7xl font-bold tracking-tighter mr-2">Moises</span>
+                <span className="text-4xl md:text-7xl font-bold tracking-tighter mr-2">
+                  Moises
+                </span>
               </Link>
               <div className="hidden md:flex items-center space-x-4 mr-[120px] pt-1">
                 <button
@@ -101,8 +104,12 @@ export default function Header() {
                 >
                   {isDark ? '🌞' : '🌙'}
                 </button>
-                <button className="px-4 py-2 text-sm font-light hover:bg-opacity-20 hover:bg-gray-500 transition-colors">EN</button>
-                <button className="px-4 py-2 text-sm font-light hover:bg-opacity-20 hover:bg-gray-500 transition-colors">ES</button>
+                <button className="px-4 py-2 text-sm font-light hover:bg-opacity-20 hover:bg-gray-500 transition-colors">
+                  EN
+                </button>
+                <button className="px-4 py-2 text-sm font-light hover:bg-opacity-20 hover:bg-gray-500 transition-colors">
+                  ES
+                </button>
               </div>
               <div className="md:hidden flex items-center gap-3">
                 <Link
@@ -112,7 +119,7 @@ export default function Header() {
                 >
                   Visit
                 </Link>
-                <button 
+                <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   className="p-2"
                 >
@@ -127,7 +134,7 @@ export default function Header() {
           </div>
 
           {/* Second row - desktop only */}
-          <div 
+          <div
             className={`transition-all duration-300 ${isDark ? 'bg-black' : 'bg-white'} backdrop-blur-sm hidden md:block w-full ${
               isScrolled ? 'fixed top-0 left-0 right-0 border-t' : 'relative'
             } ${isDark ? 'border-gray-800' : 'border-gray-200'}`}
@@ -137,9 +144,13 @@ export default function Header() {
                 <ul className="flex space-x-8 text-xl items-center">
                   {menuItems.map((item) => (
                     <li key={item.path}>
-                      <Link 
-                        href={item.path} 
-                        onClick={(e) => item.path === '/moikipedia' ? undefined : handleNavClick(e, item.path)} 
+                      <Link
+                        href={item.path}
+                        onClick={(e) =>
+                          item.path === '/moikipedia'
+                            ? undefined
+                            : handleNavClick(e, item.path)
+                        }
                         className="hover:text-gray-600 transition-colors rounded-full py-2 font-bold"
                       >
                         {item.label}
@@ -157,7 +168,7 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div 
+      <div
         className={`fixed inset-0 bg-white z-40 transition-transform duration-300 transform ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         } md:hidden font-['MoMA_Sans']`}
@@ -167,9 +178,13 @@ export default function Header() {
             <ul className="space-y-8">
               {menuItems.map((item) => (
                 <li key={item.path}>
-                  <Link 
-                    href={item.path} 
-                    onClick={(e) => item.path === '/moikipedia' ? undefined : handleNavClick(e, item.path)}
+                  <Link
+                    href={item.path}
+                    onClick={(e) =>
+                      item.path === '/moikipedia'
+                        ? undefined
+                        : handleNavClick(e, item.path)
+                    }
                     className="text-4xl font-bold text-black hover:text-gray-600 transition-colors block"
                   >
                     {item.label}

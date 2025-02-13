@@ -1,6 +1,12 @@
-'use client'
+'use client';
 
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from 'react';
 
 interface AppContextProps {
   darkMode: boolean;
@@ -13,7 +19,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [darkMode, setDarkMode] = useState(false);
-  
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.documentElement.classList.toggle('dark');

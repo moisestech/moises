@@ -45,7 +45,9 @@ export default function LandingCollection() {
                 />
               </div>
               <div className="space-y-1">
-                <p className="font-bold text-lg line-clamp-1 leading-none">{artwork.title}</p>
+                <p className="font-bold text-lg line-clamp-1 leading-none">
+                  {artwork.title}
+                </p>
                 {artwork.medium && (
                   <p className="text-gray-500 dark:text-gray-400 text-sm italic line-clamp-1 -mt-0.5 leading-none">
                     {artwork.medium}
@@ -58,4 +60,4 @@ export default function LandingCollection() {
       </div>
     </section>
   );
-} 
+}

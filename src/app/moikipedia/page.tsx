@@ -13,57 +13,90 @@ const TableOfContents: FC = () => (
     </h2>
     <ul className="list-disc list-inside">
       <li>
-        <a href="#bio" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#bio"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Biography
         </a>
       </li>
       <li>
-        <a href="#early-life" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#early-life"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Early Life and Education
         </a>
       </li>
       <li>
-        <a href="#art-practice" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#art-practice"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Art Practice
         </a>
       </li>
       <li>
-        <a href="#professional-work" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#professional-work"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Professional Work
         </a>
       </li>
       <li>
-        <a href="#exhibitions" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#exhibitions"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Exhibitions
         </a>
       </li>
       <li>
-        <a href="#selected-works" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#selected-works"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Selected Works
         </a>
       </li>
       <li>
-        <a href="#press" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#press"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Press and Recognition
         </a>
       </li>
       <li>
-        <a href="#style" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#style"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Style and Influences
         </a>
       </li>
       <li>
-        <a href="#education" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#education"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Education
         </a>
       </li>
       <li>
-        <a href="#awards" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#awards"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           Awards & Honors
         </a>
       </li>
       <li>
-        <a href="#external-links" className="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="#external-links"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           External Links
         </a>
       </li>
@@ -77,11 +110,13 @@ const InfoTable: FC = () => {
   const isDark = theme === 'dark';
 
   return (
-    <div className={`border ${isDark ? 'border-gray-700' : 'border-gray-300'} mb-8 ml-8 ${isDark ? 'bg-gray-900' : 'bg-gray-100'} min-w-80 max-h-80`}>
+    <div
+      className={`border ${isDark ? 'border-gray-700' : 'border-gray-300'} mb-8 ml-8 ${isDark ? 'bg-gray-900' : 'bg-gray-100'} min-w-80 max-h-80`}
+    >
       <span className="p-2 font-bold text-lg justify-center w-full flex">
         {artistData.name}
       </span>
-    <table className="w-full text-sm dark:bg-gray-900">
+      <table className="w-full text-sm dark:bg-gray-900">
         <tbody>
           <tr>
             <th className="text-left p-2 font-bold">Born</th>
@@ -138,7 +173,9 @@ const WikipediaPage: FC = () => {
   const isDark = theme === 'dark';
 
   return (
-    <section className={`${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+    <section
+      className={`${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}
+    >
       <div className="max-w-5xl mx-auto p-6 mt-40">
         {/* Header with Theme Toggle */}
         <div
@@ -168,19 +205,34 @@ const WikipediaPage: FC = () => {
             borderBottomWidth: '1px',
           }}
         >
-          <span className={`border-b-2 text-sm ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+          <span
+            className={`border-b-2 text-sm ${isDark ? 'text-blue-400' : 'text-blue-600'}`}
+          >
             Article
           </span>
           <span className="text-sm">Read</span>
         </div>
 
         <article className="flex">
-          <Section id="bio" title="" content={artistData.biography} border={false} />
+          <Section
+            id="bio"
+            title=""
+            content={artistData.biography}
+            border={false}
+          />
           <InfoTable />
         </article>
 
-        <Section id="early-life" title="Early Life and Education" content={artistData.earlyLife} />
-        <Section id="art-practice" title="Art Practice" content={artistData.artPractice} />
+        <Section
+          id="early-life"
+          title="Early Life and Education"
+          content={artistData.earlyLife}
+        />
+        <Section
+          id="art-practice"
+          title="Art Practice"
+          content={artistData.artPractice}
+        />
         <Section
           id="professional-work"
           title="Professional Work"
@@ -193,7 +245,8 @@ const WikipediaPage: FC = () => {
             <ul className="list-disc list-inside">
               {artistData.exhibitions.map((exhibition, index) => (
                 <li key={index}>
-                  <strong>{exhibition.title}</strong>, {exhibition.location} ({exhibition.year})
+                  <strong>{exhibition.title}</strong>, {exhibition.location} (
+                  {exhibition.year})
                 </li>
               ))}
             </ul>

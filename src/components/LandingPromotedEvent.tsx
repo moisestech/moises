@@ -19,9 +19,10 @@ export default function LandingPromotedEvent() {
               </h3>
             </div>
             <p className="text-md md:text-lg text-black/80 max-w-lg">
-              Join us for a 1 day of engaging activities that explore creativity and technology in the world.
+              Join us for a 1 day of engaging activities that explore creativity
+              and technology in the world.
             </p>
-            <Link 
+            <Link
               href="/events"
               className="inline-block text-lg font-bold text-black hover:text-black/80 transition-colors"
             >
@@ -42,4 +43,4 @@ export default function LandingPromotedEvent() {
       </div>
     </section>
   );
-} 
+}

@@ -15,12 +15,15 @@ export function generateStaticParams() {
   }));
 }
 
-function EnhancedDescription({ description, interactiveContent }: { 
-  description: string, 
-  interactiveContent: InteractiveContent[] 
+function EnhancedDescription({
+  description,
+  interactiveContent,
+}: {
+  description: string;
+  interactiveContent: InteractiveContent[];
 }) {
   let enhancedText = description;
-  
+
   // Sort interactive content by text length (longest first) to avoid nested replacements
   const sortedContent = [...interactiveContent].sort(
     (a, b) => b.text.length - a.text.length
@@ -28,15 +31,12 @@ function EnhancedDescription({ description, interactiveContent }: {
 
   // Replace each interactive text instance with a marker
   sortedContent.forEach((content, index) => {
-    enhancedText = enhancedText.replace(
-      content.text,
-      `|||${index}|||`
-    );
+    enhancedText = enhancedText.replace(content.text, `|||${index}|||`);
   });
 
   // Split by markers and map to components
   const parts = enhancedText.split('|||');
-  
+
   return (
     <p>
       {parts.map((part, index) => {
@@ -80,7 +80,9 @@ export default function ResearchItemPage({ params }: Props) {
                 className="object-cover"
               />
               {image.caption && (
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{image.caption}</p>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  {image.caption}
+                </p>
               )}
             </div>
           ))}
@@ -89,33 +91,45 @@ export default function ResearchItemPage({ params }: Props) {
         {/* Right Column - Details */}
         <div className="space-y-16">
           <div>
-            <h1 className="font-['MoMA_Sans'] text-4xl md:text-5xl font-bold">{item.title}</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 mt-4">{item.year}</p>
+            <h1 className="font-['MoMA_Sans'] text-4xl md:text-5xl font-bold">
+              {item.title}
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-400 mt-4">
+              {item.year}
+            </p>
           </div>
-          
+
           <div className="prose dark:prose-invert max-w-none space-y-16">
             <div>
-            <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Description</h2>
-            <EnhancedDescription 
+              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">
+                Description
+              </h2>
+              <EnhancedDescription
                 description={item.description}
                 interactiveContent={item.interactiveContent}
               />
             </div>
 
             <div>
-              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Artistic Intent</h2>
+              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">
+                Artistic Intent
+              </h2>
               <p>{item.artistic_intent}</p>
             </div>
 
             {item.interpretation && (
               <div>
-                <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Interpretation</h2>
+                <h2 className="font-['MoMA_Sans'] text-2xl font-bold">
+                  Interpretation
+                </h2>
                 <p>{item.interpretation}</p>
               </div>
             )}
 
             <div>
-              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Technical Requirements</h2>
+              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">
+                Technical Requirements
+              </h2>
               <div className="space-y-8">
                 <div>
                   <h3>Power</h3>
@@ -127,18 +141,31 @@ export default function ResearchItemPage({ params }: Props) {
                 </div>
 
                 <div>
-                  <h3 className="font-['MoMA_Sans'] text-2xl font-bold">Space Requirements</h3>
+                  <h3 className="font-['MoMA_Sans'] text-2xl font-bold">
+                    Space Requirements
+                  </h3>
                   <ul>
-                    <li>Pedestal Size: {item.technical_requirements.space.pedestal_size}</li>
-                    <li>Wall Clearance: {item.technical_requirements.space.wall_clearance}</li>
-                    <li>Power Access: {item.technical_requirements.space.power_access}</li>
+                    <li>
+                      Pedestal Size:{' '}
+                      {item.technical_requirements.space.pedestal_size}
+                    </li>
+                    <li>
+                      Wall Clearance:{' '}
+                      {item.technical_requirements.space.wall_clearance}
+                    </li>
+                    <li>
+                      Power Access:{' '}
+                      {item.technical_requirements.space.power_access}
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
 
             <div>
-              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Materials</h2>
+              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">
+                Materials
+              </h2>
               <ul>
                 {item.materials.map((material, index) => (
                   <li key={index}>{material}</li>
@@ -147,10 +174,13 @@ export default function ResearchItemPage({ params }: Props) {
             </div>
 
             <div>
-            <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Tags</h2>
+              <h2 className="font-['MoMA_Sans'] text-2xl font-bold">Tags</h2>
               <div className="flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm"
+                  >
                     {tag}
                   </span>
                 ))}

@@ -12,7 +12,12 @@ export default function LandingExhibitions() {
   const gap = 24; // Gap between slides
 
   const nextSlide = () => {
-    setPosition((prev) => Math.max(-(exhibitions.length - 2) * (slideWidth + gap), prev - (slideWidth + gap)));
+    setPosition((prev) =>
+      Math.max(
+        -(exhibitions.length - 2) * (slideWidth + gap),
+        prev - (slideWidth + gap)
+      )
+    );
   };
 
   const prevSlide = () => {
@@ -37,7 +42,9 @@ export default function LandingExhibitions() {
             <button
               onClick={nextSlide}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-              disabled={position <= -(exhibitions.length - 2) * (slideWidth + gap)}
+              disabled={
+                position <= -(exhibitions.length - 2) * (slideWidth + gap)
+              }
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -48,7 +55,7 @@ export default function LandingExhibitions() {
           <motion.div
             className="flex gap-6"
             animate={{ x: position }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             {exhibitions.map((exhibition, index) => (
               <div
@@ -69,13 +76,13 @@ export default function LandingExhibitions() {
                   <h3 className="text-xl md:text-2xl font-['MoMA_Sans'] font-bold">
                     {exhibition.title}
                   </h3>
-                    <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                      <span className="font-bold">{exhibition.date}</span>
-                        {exhibition.location && (
-                        <span className="text-gray-600 dark:text-gray-400">
-                            {exhibition.location}
-                        </span>
-                        )}
+                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                    <span className="font-bold">{exhibition.date}</span>
+                    {exhibition.location && (
+                      <span className="text-gray-600 dark:text-gray-400">
+                        {exhibition.location}
+                      </span>
+                    )}
                     {/* {exhibition.description && (
                       <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
                         {exhibition.description}
@@ -90,4 +97,4 @@ export default function LandingExhibitions() {
       </div>
     </section>
   );
-} 
+}

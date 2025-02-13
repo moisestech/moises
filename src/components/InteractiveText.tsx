@@ -23,7 +23,11 @@ interface InteractiveTextProps {
   content: TooltipContent;
 }
 
-export default function InteractiveText({ children, type, content }: InteractiveTextProps) {
+export default function InteractiveText({
+  children,
+  type,
+  content,
+}: InteractiveTextProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -41,10 +45,10 @@ export default function InteractiveText({ children, type, content }: Interactive
       >
         {children}
       </span>
-      
+
       <AnimatePresence>
         {isHovered && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
@@ -54,25 +58,27 @@ export default function InteractiveText({ children, type, content }: Interactive
             {content.text && (
               <div className="p-4 text-sm leading-relaxed">
                 {content.text.split(' ').map((word, i) => {
-                  const isKeyword = /^[A-Z]/.test(word) || 
-                                  word.includes('privacy') || 
-                                  word.includes('data') || 
-                                  word.includes('digital') ||
-                                  word.includes('surveillance');
+                  const isKeyword =
+                    /^[A-Z]/.test(word) ||
+                    word.includes('privacy') ||
+                    word.includes('data') ||
+                    word.includes('digital') ||
+                    word.includes('surveillance');
                   return (
                     <span key={i}>
                       {isKeyword ? (
                         <span className="font-semibold">{word}</span>
-                      ) : word}
-                      {' '}
+                      ) : (
+                        word
+                      )}{' '}
                     </span>
                   );
                 })}
               </div>
             )}
-            
+
             {content.image && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 }}
@@ -86,18 +92,28 @@ export default function InteractiveText({ children, type, content }: Interactive
                 />
               </motion.div>
             )}
-            
+
             {content.link && (
               <div className="p-3 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700">
-                <Link 
+                <Link
                   href={content.link.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center"
                 >
                   {content.link.label}
-                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
                   </svg>
                 </Link>
               </div>
