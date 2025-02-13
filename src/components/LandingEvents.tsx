@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { events, eventCategories } from '@/constants/events2';
 import type { Event, EventCategory } from '@/constants/events2';

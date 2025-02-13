@@ -5,6 +5,8 @@ import SpecialThanks from '@/components/SpecialThanks';
 import LandingExhibitions from '@/components/LandingExhibitions';
 import LandingPromotedEvent from '@/components/LandingPromotedEvent';
 import LandingCollection from '@/components/LandingCollection';
+import LandingEvents from '@/components/LandingEvents';
+
 export default function Home() {
   return (
     <PageLayout>
@@ -56,6 +58,9 @@ export default function Home() {
 
         {/* Landing Collection */}
         <LandingCollection />
+
+        {/* Landing Events */}
+        <LandingEvents />
 
         {/* Artwork Grid */}
         <div className="w-full px-2 sm:px-4 md:px-8">

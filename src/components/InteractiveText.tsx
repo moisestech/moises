@@ -82,13 +82,14 @@ export default function InteractiveText({
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 }}
-                className="relative w-full aspect-video"
+                className="relative w-full aspect-square"
               >
                 <Image
                   src={content.image.src}
                   alt={content.image.alt}
                   fill
-                  className="object-cover"
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </motion.div>
             )}
