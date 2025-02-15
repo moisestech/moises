@@ -14,7 +14,7 @@ export const exhibitions: Exhibitions[] = [
     date: 'February 21-22',
     imageUrl:
       '/events/performance-in-flux-feb/performance-in-flux-feb21-22-orlando.png',
-    location: 'Orlando, FL',
+    location: 'Orlando, USA',
     description:
       'A two-day performance art event exploring the intersection of technology and human expression.',
   },
@@ -44,14 +44,14 @@ export const exhibitions: Exhibitions[] = [
     date: '2024',
     imageUrl:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483923/art/moisestech-website/exhibitions/dec_2024_dminti_notions_of_home/NotionsOfHome_banner_soubxf.jpg',
-    location: 'Miami, FL',
+    location: 'Miami, USA',
     description:
       'ICA Miami X Dminti presents Notions of Home, a group exhibition featuring works by artists from across the globe.',
   },
   {
     id: 6,
-    title: 'Breadbytes, 2023',
-    date: 'Dec 6, 2025',
+    title: 'Breadbytes',
+    date: '2023',
     imageUrl:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483633/art/moisestech-website/exhibitions/dec_2023_bakehouse_breadbytes/exhibition_shot_2_nbx7ky.jpg',
     location: 'Miami, USA',
