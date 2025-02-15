@@ -49,6 +49,7 @@ export const artist: Artist = {
         'Medical anatomical skeleton model',
         '100 Million Venezuelan Bolívares',
       ],
+      medium: 'Sculpture',
       dimensions: 'Life-size (approx. 5\'7" height)',
       images: [
         {
@@ -83,6 +84,7 @@ export const artist: Artist = {
         'LED bulbs',
         'Paiz shopping cart',
       ],
+      medium: 'New Media Installation',
       dimensions: 'L: 42" x W: 20" x H: 36"',
       images: [
         {
@@ -226,6 +228,7 @@ export const artist: Artist = {
           caption: "Corporate Weapons - McDonald's",
         },
       ],
+      medium: 'Metal Object',
       tags: [
         'corporate critique',
         'capitalism',
@@ -371,9 +374,9 @@ export const artist: Artist = {
       title: 'Google Gradients',
       year: 2015,
       description:
-        "art404's 'Google Gradients' is a series of large-scale banners created from over half a million images sourced from Google Images. These images were classified by color and intensity using the MatLab algorithm and printed on six 30-foot vinyl banners. The artwork draws inspiration from the physical languages and signs of daily digital interactions, exploring the intersection of AI, algorithms, and digital culture.",
+        "art404's 'Google Gradients' is a series of large-scale banners created from over half a million images sourced from Google Images. These images were classified by color and intensity using the MatLab algorithm and printed on six 30-foot vinyl banners. The artwork draws inspiration from the physical languages and signs of daily digital interactions, exploring the intersection of AI, algorithms, and digital culture. Digital images classified by MatLab and Google's Cloud Vision, printed on vinyl banners.",
       medium:
-        "Digital images classified by MatLab and Google's Cloud Vision, printed on vinyl banners",
+        "New Media Installation",
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1738040061/art/moisestech-website/tumblr_npjxkgHw7X1r1ubs7o1_1280_sjcvjv.jpg',
@@ -428,6 +431,7 @@ export const artist: Artist = {
         'Meditation tools',
         'LED lights',
       ],
+      medium: 'Photography',
       dimensions: 'Variable (installation)',
       images: [
         {
@@ -454,6 +458,7 @@ export const artist: Artist = {
         'Nike Air Max Deluxe',
         'PC liquid cooling components (pipes, coolant, fittings)',
       ],
+      medium: 'Photography',
       dimensions: 'Life-size (approx. 12" x 15" x 7")',
       images: [
         {
