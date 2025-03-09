@@ -1,3 +1,5 @@
+import { InteractiveContent } from './research';
+
 interface Artwork {
   title: string;
   year: number;
@@ -21,12 +23,25 @@ interface Artwork {
   interpretation?: string;
   exhibition?: string;
   on_view: boolean;
+  interactiveContent?: InteractiveContent[];
+  technical_requirements?: {
+    power?: string[];
+    mounting?: string[];
+    space?: {
+      dimensions?: string;
+      requirements?: string[];
+    };
+  };
   video?: {
+    type: string;
+    id: string;
     url: string;
-    duration: string;
-    format: string;
-    resolution: string;
-    technical_details: string;
+    title: string;
+    caption: string;
+    duration?: string;
+    format?: string;
+    resolution?: string;
+    technical_details?: string;
   };
 }
 
@@ -594,56 +609,136 @@ export const artist: Artist = {
         'The work exemplifies the "uneasy energies in technological times" that defined transmediale 2012\'s exhibition theme. As part of "Dark Drives," curated by Jacob Lillemose, the piece represents one of the "distortions, ambiguities, irritations, ironies, and unrest" that characterize our relationship with modern technology. The hard drive\'s contents challenge standardized perceptions of technology and property, creating an unresolvable tension between the object\'s legitimate exterior and its illicit contents - a perfect embodiment of the exhibition\'s exploration of "in/compatible" elements in digital culture.',
       exhibition: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible',
       on_view: false,
-      video: {
-        url: 'URL_TO_VIDEO',
-        duration: '2:37',
-        format: 'MP4',
-        resolution: '1920x1080',
-        technical_details: 'Created using YOLOv4 object detection with real-time processing'
-      },
     },
     groceries_quarantine: {
-      title: 'Groceries Quarantine',
+      title: 'Groceries in the Times of Quarantine',
       year: 2020,
-      location: 'Online',
-      curator: 'Johan Munoz',
-      description:
-        'Groceries Quarantine is a series of digital artworks created during the COVID-19 pandemic. Each piece explores the theme of isolation and the impact of the pandemic on daily life. The series includes digital paintings, animations, and interactive installations.',
-      materials: [
-        'Digital painting',
-        'Animation',
-        'Interactive installation',
-      ],
-      links: [
+      curator: 'Johann C. Muñoz',
+      location: 'a_part: A Quarantine Collaboration',
+      description: 'A video artwork that employs YOLOv4 object detection with real-time processing to explore pandemic isolation through the lens of everyday grocery items. Curated by Johan Munoz and presented online, this work transforms mundane consumer objects into conceptual artifacts by utilizing YOLOv4\'s grid-based simultaneous prediction mechanism—a computer vision framework that divides video frames into sections while predicting bounding boxes and class probabilities with remarkable efficiency. The artwork leverages this neural network architecture not merely as a technical tool but as a conceptual framework that mirrors how machine perception increasingly mediates human experience in contemporary society.',
+      interpretation: 'The video gains particular relevance within the context of COVID-19, when digital surveillance and algorithmic systems became more prominent in daily life. By implementing real-time object detection, the work engages with what Harun Farocki termed "operational images"—visuals that serve functional purposes within digital infrastructures rather than purely representational ones. This approach positions the video at the intersection of creative expression and technological critique, highlighting how computational seeing transforms ordinary objects into data points categorized by confidence scores.',
+      medium: 'Video with Real-time Object Detection',
+      interactiveContent: [
         {
-          url: 'https://www.johanmunoz.com/groceries-quarantine',
-          label: 'Moises Sanabria - Groceries Quarantine'
+          type: 'link',
+          text: 'YOLOv4',
+          content: {
+            text: 'Real-time object detection system',
+            link: {
+              url: 'https://en.wikipedia.org/wiki/You_Only_Look_Once',
+              label: 'Learn more about YOLO'
+            }
+          }
+        },
+        {
+          type: 'link',
+          text: 'pandemic isolation',
+          content: {
+            text: 'Social distancing during COVID-19',
+            link: {
+              url: 'https://en.wikipedia.org/wiki/Social_distancing',
+              label: 'Learn about social distancing'
+            }
+          }
+        },
+        {
+          type: 'link',
+          text: 'class probabilities',
+          content: {
+            text: 'Statistical likelihood in machine learning',
+            link: {
+              url: 'https://en.wikipedia.org/wiki/Probability',
+              label: 'Understanding probability'
+            }
+          }
+        },
+        {
+          type: 'link',
+          text: 'neural network',
+          content: {
+            text: 'AI system architecture',
+            link: {
+              url: 'https://en.wikipedia.org/wiki/Artificial_neural_network',
+              label: 'Neural networks explained'
+            }
+          }
+        },
+        {
+          type: 'link',
+          text: 'machine perception',
+          content: {
+            text: 'Computer vision systems',
+            link: {
+              url: 'https://en.wikipedia.org/wiki/Computer_vision',
+              label: 'About computer vision'
+            }
+          }
+        },
+        {
+          type: 'link',
+          text: 'COVID-19',
+          content: {
+            text: 'Global pandemic context',
+            link: {
+              url: 'https://en.wikipedia.org/wiki/COVID-19_pandemic',
+              label: 'COVID-19 pandemic overview'
+            }
+          }
+        },
+        {
+          type: 'link',
+          text: 'Harun Farocki',
+          content: {
+            text: 'Media artist and theorist',
+            link: {
+              url: 'https://en.wikipedia.org/wiki/Harun_Farocki',
+              label: 'About Harun Farocki'
+            }
+          }
         }
       ],
-      medium: 'Digital',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1741546765/art/moisestech-website/artworks/2020_groceries_in_the_times_of_quarantine/moises-sanabria-groceries-in-the-times-of-quarantine-2020_bhiwwg.png',
-          caption: 'Groceries Quarantine - Digital painting',
+          caption: 'Groceries Quarantine - Smartphone recording with object detection overlay',
+        }
+      ],
+      links: [
+        {
+          url: 'https://e-issues.globalartdaily.com/a_part-Gives-Artists-36-Hours-to-React',
+          label: 'Global Art Daily Coverage'
         },
         {
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/groceries-quarantine-2_qjzj53.jpg',
-          caption: 'Groceries Quarantine - Digital animation',
-        },
-        {
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/groceries-quarantine-3_qjzj53.jpg',
-          caption: 'Groceries Quarantine - Interactive installation',
-        },
+          url: 'https://www.johanncmunoz.com/quarantine-collaboration-main',
+          label: 'a_part Exhibition Documentation'
+        }
       ],
       tags: [
         'digital art',
         'pandemic',
         'isolation',
         'COVID-19',
-        'online',
+        'computer vision',
+        'machine learning',
+        'YOLOv4',
+        'object detection',
+        'surveillance',
         'interactive',
+        'algorithmic perception'
       ],
-      on_view: true,
+      exhibition: 'a_part: A Quarantine Collaboration',
+      on_view: false,
+      video: {
+        type: 'vimeo',
+        id: '430192355',
+        url: 'https://vimeo.com/430192355',
+        title: 'Groceries in the Times of Quarantine',
+        caption: 'Real-time object detection video artwork exploring pandemic isolation',
+        duration: '3:24',
+        format: 'HD Video',
+        resolution: '1920x1080',
+        technical_details: 'Real-time YOLOv4 object detection, H.264 codec'
+      },
     },
   },
 };

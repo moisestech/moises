@@ -15,7 +15,7 @@ export function generateStaticParams() {
   }));
 }
 
-function EnhancedDescription({
+export function EnhancedDescription({
   description,
   interactiveContent,
 }: {

@@ -1,6 +1,8 @@
 import { artist } from '@/constants/artworks';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { InteractiveContent } from '@/constants/research';
+import InteractiveText from '@/components/InteractiveText';
 
 interface PageProps {
   params: {
@@ -16,6 +18,50 @@ const colors = [
   'bg-orange-400',
   'bg-green-400',
 ];
+
+export function EnhancedDescription({
+  description,
+  interactiveContent,
+}: {
+  description: string;
+  interactiveContent: InteractiveContent[];
+}) {
+  let enhancedText = description;
+
+  // Sort interactive content by text length (longest first) to avoid nested replacements
+  const sortedContent = [...interactiveContent].sort(
+    (a, b) => b.text.length - a.text.length
+  );
+
+  // Replace each interactive text instance with a marker
+  sortedContent.forEach((content, index) => {
+    enhancedText = enhancedText.replace(content.text, `|||${index}|||`);
+  });
+
+  // Split by markers and map to components
+  const parts = enhancedText.split('|||');
+
+  return (
+    <p className="text-lg leading-relaxed">
+      {parts.map((part, index) => {
+        const contentIndex = parseInt(part);
+        if (!isNaN(contentIndex)) {
+          const content = sortedContent[contentIndex];
+          return (
+            <InteractiveText
+              key={index}
+              type={content.type}
+              content={content.content}
+            >
+              {content.text}
+            </InteractiveText>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </p>
+  );
+}
 
 export default function ArtworkPage({ params }: PageProps) {
   const artwork = artist.artworks[params.slug];
@@ -117,7 +163,49 @@ export default function ArtworkPage({ params }: PageProps) {
 
           {/* Description Column */}
           <div className="md:col-span-2">
-            <p className="text-lg leading-relaxed">{artwork.description}</p>
+            <EnhancedDescription
+              description={artwork.description}
+              interactiveContent={artwork.interactiveContent || []}
+            />
+            {artwork.interpretation && (
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold mb-4">Interpretation</h3>
+                <EnhancedDescription
+                  description={artwork.interpretation}
+                  interactiveContent={artwork.interactiveContent || []}
+                />
+              </div>
+            )}
+
+            {/* Video Section */}
+              {artwork.video && (
+                <div className="mb-16">
+                  <div className="aspect-video w-full relative">
+                    {artwork.video.type === 'vimeo' && (
+                      <iframe
+                        src={`https://player.vimeo.com/video/${artwork.video.id}?h=00000000&title=0&byline=0&portrait=0`}
+                        title={artwork.video.title}
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        className="absolute top-0 left-0 w-full h-full"
+                      />
+                    )}
+                  </div>
+                  {artwork.video.caption && (
+                    <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+                      {artwork.video.caption}
+                    </p>
+                  )}
+                  <a 
+                    href={artwork.video.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    Watch on Vimeo
+                  </a>
+                </div>
+              )}
           </div>
         </div>
 
