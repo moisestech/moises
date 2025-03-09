@@ -9,6 +9,12 @@ export default function ResearchPage() {
         Research
       </h1>
 
+      <div className="prose dark:prose-invert max-w-none mb-12">
+        <p className="text-lg leading-relaxed">
+          The Research Lab explores the intersection of technology, spirituality, and environmental impact through artistic experimentation and community engagement. Our initiatives focus on transforming e-waste into interactive sculptures, developing new frameworks for digital art, and fostering dialogue about technological obsolescence in contemporary culture. Through workshops, exhibitions, and collaborative projects, we aim to build a more robust and critical tech-art community in the South Florida region and beyond.
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {Object.entries(research).map(([slug, item]) => (
           <Link href={`/research/${slug}`} key={slug} className="group">

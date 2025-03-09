@@ -8,6 +8,7 @@ interface Artwork {
   materials?: string[];
   medium?: string;
   dimensions?: string;
+  role?: string;
   images: {
     url: string;
     caption?: string;
@@ -20,6 +21,13 @@ interface Artwork {
   interpretation?: string;
   exhibition?: string;
   on_view: boolean;
+  video?: {
+    url: string;
+    duration: string;
+    format: string;
+    resolution: string;
+    technical_details: string;
+  };
 }
 
 interface Artist {
@@ -168,7 +176,7 @@ export const artist: Artist = {
     },
     baby_agi: {
       title: 'Baby AGI',
-      year: 2024,
+      year: 2023,
       description:
         'An exploration of artificial general intelligence through the lens of developmental stages, questioning the nature of machine learning and consciousness.',
       medium: 'Digital Installation',
@@ -198,18 +206,42 @@ export const artist: Artist = {
       on_view: false,
     },
     digital_divinities: {
-      title: 'Digital Divinities',
-      year: 2024,
+      title: 'Ephemeral Reflections of Digital Divinities',
+      year: 2023,
+      location: 'Lincoln Road, Miami, USA',
+      collaboration: 'Fabiola Larios',
       description:
-        'A series of digital sculptures exploring the concept of divinity in the digital age.',
-      medium: 'Digital Sculpture',
+        'Ephemeral Reflections of Digital Divinities (2023) is a provocative installation that examines the evolution of self-representation from ancient Greek mythology to the digital age. This collaborative piece by Fabiola Larios and Moises Sanabria draws upon the timeless inspiration of the Greek Muses, while simultaneously exploring the impact of social media and digital culture on self-perception. The artwork creates AI-generated muses in real-time, using the viewer\'s photograph as the basis for constructing digital identities.',
+      materials: [
+        'Computer Vision Cameras',
+        'Realtime Image Generation Model',
+        'TouchDesigner',
+        'Custom LED Hardware Panel'
+      ],
+      medium: 'New Media Interactive Installation',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
-          caption: 'Digital Divinities - Digital sculpture series',
-        },
+          caption: 'Ephemeral Reflections of Digital Divinities - Interactive installation view'
+        }
       ],
-      tags: ['digital art', 'sculpture', 'divine', 'technology'],
+      tags: [
+        'interactive installation',
+        'artificial intelligence',
+        'computer vision',
+        'Greek mythology',
+        'digital identity',
+        'real-time generation',
+        'LED display',
+        'social media',
+        'self-representation',
+        'Art Week',
+        'Adobe'
+      ],
+      interpretation: 
+        'The installation bridges ancient mythology with contemporary digital culture, exploring how self-representation has evolved from classical ideals to modern digital identities. Through real-time AI generation, it questions the nature of divine inspiration in an age of algorithmic creation.',
+      exhibition: 'Art Week Miami',
+      role: 'Artist, Technical Director, Operations',
       on_view: true,
     },
     corporate_weapons: {
@@ -269,6 +301,34 @@ export const artist: Artist = {
       ],
       on_view: true,
     },
+    beyond_money: {
+      title: 'Beyond Money',
+      year: 2022,
+      location: 'Foundation',
+      description:
+        '',
+      materials: [
+        'GANs',
+        'AI',
+        'NFT',
+        'capitalism',
+      ],
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
+          caption: 'GAN interpolation of a banknote',
+        },
+      ],
+      tags: [
+        'performance art',
+        'digital distraction',
+        'productivity',
+        'technology',
+        'nature',
+        'hyper-connectivity',
+      ],
+      on_view: true,
+    },
     touchgrass_station: {
       title: 'Touch Grass Station',
       year: 2024,
@@ -311,7 +371,7 @@ export const artist: Artist = {
     },
     ai_everydays: {
       title: 'AI Everydays: The First 5000',
-      year: 2024,
+      year: 2022,
       description:
         'AI Everydays: The First 5000 (2022) is a conceptual AI artwork that reflects on the speed of contemporary algorithmic production and the role of the artist in automation. The piece presents a combinatory projection of emerging technologies represented as a set of data maps that speculate on possible futures.',
       medium: 'AI-Generated Images, Algorithmic Processing',
@@ -357,7 +417,7 @@ export const artist: Artist = {
     },
     generative_text_art: {
       title: 'Generative Text Art',
-      year: 2024,
+      year: 2015,
       description:
         'A series of generative text art exploring the concept of AI in the digital age.',
       medium: 'Generative Text Art',
@@ -397,7 +457,7 @@ export const artist: Artist = {
     },
     neural_wealth: {
       title: 'Neural Wealth',
-      year: 2024,
+      year: 2018,
       description:
         "Neural Wealth captures the essence of humanity's evolving relationship with technology and the mind. In this digital photograph, the artist is depicted in a hospital setting, fully connected to an EEG machine, evoking a surreal, almost Matrix-like aesthetic.",
       medium:
@@ -421,7 +481,7 @@ export const artist: Artist = {
     },
     meditation_battlestation: {
       title: 'Meditation Battlestation',
-      year: 2024,
+      year: 2018,
       description:
         'Meditation Battlestation is an original artwork that forms part of the online performance series created by Tom Galle, Moises Sanabria, and Eva Papamargariti between 2016 and 2018. The piece explores the intersection of digital culture, technology, and mindfulness in the context of modern life.',
       materials: [
@@ -476,6 +536,114 @@ export const artist: Artist = {
         'mixed media',
       ],
       on_view: false,
+    },
+    five_million_dollars: {
+      title: '5 Million Dollars 1 Terabyte',
+      year: 2011,
+      location: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible, Berlin',
+      curator: 'Jacob Lillemose',
+      collaboration: 'ART404',
+      description: 
+        'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968).',
+      materials: [
+        '1TB External Hard Drive',
+        'Illegally downloaded software collection ($5M worth)',
+        'Custom plinth'
+      ],
+      medium: 'New Media Installation',
+      dimensions: '6.5" x 4.5" x 1.5" (hard drive dimensions)',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/5-million-dollars-1-terabyte_art404.jpg',
+          caption: '5 Million Dollars 1 Terabyte - Installation view at transmediale 2012. © Genz, Lindner / transmediale',
+        }
+      ],
+      links: [
+        {
+          url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
+          label: 'Transmediale Archive - Artwork Documentation'
+        },
+        {
+          url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte-by-art-404',
+          label: 'Transmediale Archive - Installation Photography'
+        },
+        {
+          url: 'https://archive.transmediale.de/content/art-404',
+          label: 'Art 404 Artist Profile'
+        },
+        {
+          url: 'https://archive.transmediale.de/festival-2012/exhibition',
+          label: 'Dark Drives Exhibition Documentation'
+        }
+      ],
+      tags: [
+        'conceptual art',
+        'digital property',
+        'piracy',
+        'value',
+        'minimalism',
+        'intellectual property',
+        'data storage',
+        'Art 404',
+        'transmediale',
+        'in/compatible',
+        'uneasy energies',
+        'dark drives'
+      ],
+      interpretation: 
+        'The work exemplifies the "uneasy energies in technological times" that defined transmediale 2012\'s exhibition theme. As part of "Dark Drives," curated by Jacob Lillemose, the piece represents one of the "distortions, ambiguities, irritations, ironies, and unrest" that characterize our relationship with modern technology. The hard drive\'s contents challenge standardized perceptions of technology and property, creating an unresolvable tension between the object\'s legitimate exterior and its illicit contents - a perfect embodiment of the exhibition\'s exploration of "in/compatible" elements in digital culture.',
+      exhibition: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible',
+      on_view: false,
+      video: {
+        url: 'URL_TO_VIDEO',
+        duration: '2:37',
+        format: 'MP4',
+        resolution: '1920x1080',
+        technical_details: 'Created using YOLOv4 object detection with real-time processing'
+      },
+    },
+    groceries_quarantine: {
+      title: 'Groceries Quarantine',
+      year: 2020,
+      location: 'Online',
+      curator: 'Johan Munoz',
+      description:
+        'Groceries Quarantine is a series of digital artworks created during the COVID-19 pandemic. Each piece explores the theme of isolation and the impact of the pandemic on daily life. The series includes digital paintings, animations, and interactive installations.',
+      materials: [
+        'Digital painting',
+        'Animation',
+        'Interactive installation',
+      ],
+      links: [
+        {
+          url: 'https://www.johanmunoz.com/groceries-quarantine',
+          label: 'Moises Sanabria - Groceries Quarantine'
+        }
+      ],
+      medium: 'Digital',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1741546765/art/moisestech-website/artworks/2020_groceries_in_the_times_of_quarantine/moises-sanabria-groceries-in-the-times-of-quarantine-2020_bhiwwg.png',
+          caption: 'Groceries Quarantine - Digital painting',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/groceries-quarantine-2_qjzj53.jpg',
+          caption: 'Groceries Quarantine - Digital animation',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/groceries-quarantine-3_qjzj53.jpg',
+          caption: 'Groceries Quarantine - Interactive installation',
+        },
+      ],
+      tags: [
+        'digital art',
+        'pandemic',
+        'isolation',
+        'COVID-19',
+        'online',
+        'interactive',
+      ],
+      on_view: true,
     },
   },
 };

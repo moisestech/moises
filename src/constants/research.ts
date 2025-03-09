@@ -286,4 +286,255 @@ export const research: { [key: string]: ResearchItem } = {
     ],
     on_view: false,
   },
+  vr_jesus_mary: {
+    title: 'VR Jesus Mary',
+    year: 2025,
+    description: "VR Jesus Mary investigates the intersection of religious iconography and virtual reality technology. The installation features a life-sized religious figure constructed from salvaged VR headsets, LED matrices, and discarded tech components. The piece transforms as viewers approach, with motion sensors triggering different visual experiences through the headsets' displays. This work explores themes of digital worship, technological spirituality, and the evolution of religious experience in our increasingly virtual world.",
+    interactiveContent: [
+      {
+        type: 'highlight',
+        text: 'VR headsets',
+        content: {
+          text: 'Repurposed virtual reality headsets serve as both structural elements and symbolic windows into digital spirituality.',
+        },
+      },
+      {
+        type: 'italic',
+        text: 'digital worship',
+        content: {
+          text: 'The emerging phenomenon of religious and spiritual practices taking place in virtual spaces.',
+        },
+      }
+    ],
+    artistic_intent: "The piece examines how traditional religious iconography adapts to and is transformed by digital technology, questioning whether virtual experiences can facilitate genuine spiritual connection.",
+    technical_requirements: {
+      power: [
+        '120V power supply for LED matrices',
+        'USB power for motion sensors',
+        'Backup power system for continuous operation'
+      ],
+      mounting: [
+        'Steel framework for structural support',
+        'Wall-mounted components',
+        'Secure mounting for VR headsets'
+      ],
+      space: {
+        pedestal_size: '6ft x 6ft base',
+        wall_clearance: '3 feet for viewer interaction',
+        power_access: 'Floor and wall power access required'
+      },
+      interactive_elements: [
+        'Motion sensors for proximity detection',
+        'LED matrix displays',
+        'Optional sound components'
+      ]
+    },
+    components: {
+      mask: {
+        material: 'Recycled VR headsets and electronic components',
+        customization: [
+          'LED matrix integration',
+          'Motion sensor system',
+          'Custom power distribution'
+        ]
+      },
+      hardware: {
+        model: 'Various recycled VR headsets',
+        specifications: [
+          'Modified display panels',
+          'Custom LED controllers',
+          'Arduino-based sensor system'
+        ],
+        power_requirements: '120V AC, converted to 5V DC'
+      },
+      mounting: {
+        type: [
+          'Steel framework',
+          'Wall mounts',
+          'Custom brackets'
+        ],
+        materials: [
+          'Steel tubing',
+          'Aluminum brackets',
+          '3D printed components'
+        ]
+      },
+      display: {
+        pedestal: 'Custom steel base with cable management',
+        lighting: 'Programmable LED ambient lighting'
+      }
+    },
+    materials: [
+      'Recycled VR headsets',
+      'LED matrices',
+      'Motion sensors',
+      'Steel framework',
+      'Electronic components',
+      'Power distribution system'
+    ],
+    dimensions: '6ft x 6ft x 8ft (including base)',
+    images: [
+      {
+        url: 'https://placeholder-url.com/vr-jesus-mary-concept',
+        caption: 'VR Jesus Mary - Conceptual rendering showing LED integration'
+      }
+    ],
+    tags: [
+      'interactive installation',
+      'religious art',
+      'virtual reality',
+      'electronic sculpture',
+      'recycled technology',
+      'digital spirituality',
+      'motion sensing',
+      'LED art'
+    ],
+    interpretation: "VR Jesus Mary challenges viewers to consider how traditional religious imagery and experience translate into the digital age. Through its use of recycled VR technology, the piece suggests both the potential and limitations of digital spiritual experiences while questioning the role of technology in modern religious practice.",
+    exhibition: 'Digital Devotion: Technology and Spirituality',
+    installation_notes: [
+      'Requires professional electrical installation',
+      'Motion sensor calibration needed',
+      'Regular LED matrix maintenance',
+      'Careful cable management essential',
+      'Climate control recommended for electronics'
+    ],
+    future_iterations: [
+      'Integration with live VR experiences',
+      'Enhanced interactive elements',
+      'Expanded sensor capabilities',
+      'Mobile app integration'
+    ],
+    on_view: false
+  },
+  immortal_obsolescence_2025: {
+    title: 'Immortal Obsolescence',
+    year: 2025,
+    description: 
+      "A year-long initiative exploring the intersection of technology, spirituality, and environmental impact in Miami's emerging tech art scene. The project transforms e-waste into interactive sculptures and performances, questioning the permanence of digital culture while creating new meaning from technological debris.",
+    interactiveContent: [
+      {
+        type: 'highlight',
+        text: 'e-waste transformation',
+        content: {
+          text: 'The process of converting discarded electronic components into artistic works, challenging the concept of technological obsolescence.'
+        }
+      },
+      {
+        type: 'italic',
+        text: 'digital worship',
+        content: {
+          text: 'The emerging phenomenon of spiritual practices mediated through technology, examining how digital tools influence religious and contemplative experiences.'
+        }
+      }
+    ],
+    artistic_intent: 
+      "To establish a new framework for considering obsolescence, sustainability, and digital culture in contemporary art while fostering a community of practitioners at the intersection of technology and artistic expression.",
+    technical_requirements: {
+      power: [
+        'Various voltage requirements for different installations',
+        'Sustainable power management systems',
+        'Battery backup systems for continuous operation'
+      ],
+      mounting: [
+        'Custom mounting solutions for each sculpture',
+        'Mobile display systems for TV Bicycle',
+        'Floor installation infrastructure for Touch Grass Circuit'
+      ],
+      space: {
+        pedestal_size: 'Variable depending on installation',
+        wall_clearance: 'Minimum 3 feet for interactive works',
+        power_access: 'Multiple power points required'
+      },
+      interactive_elements: [
+        'Motion sensors for VR Jesus Mary',
+        'Pressure sensors for Touch Grass Circuit',
+        'LED matrices and displays',
+        'Animatronic components'
+      ]
+    },
+    components: {
+      mask: {
+        material: 'Salvaged VR headsets and electronic components',
+        customization: [
+          'LED integration',
+          'Motion sensor systems',
+          'Custom power distribution'
+        ]
+      },
+      hardware: {
+        model: 'Various recycled electronics',
+        specifications: [
+          'Modified display panels',
+          'Custom LED controllers',
+          'Arduino-based sensor systems',
+          'Animatronic control units'
+        ],
+        power_requirements: '110-240V AC with DC conversion'
+      },
+      mounting: {
+        type: [
+          'Custom steel frameworks',
+          'Mobile platforms',
+          'Floor mounting systems'
+        ],
+        materials: [
+          'Recycled metal',
+          'Sustainable composites',
+          '3D printed components'
+        ]
+      },
+      display: {
+        pedestal: 'Various custom bases with integrated cable management',
+        lighting: 'Programmable LED systems'
+      }
+    },
+    materials: [
+      'Salvaged VR headsets',
+      'Vintage television sets',
+      'Circuit boards',
+      'Keyboards',
+      'Calculators',
+      'LED components',
+      'Motion sensors',
+      'Pressure sensors',
+      'Animatronic parts'
+    ],
+    dimensions: 'Variable installation sizes',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739417794/art/moisestech-website/research/immortal-obsolescence/concept-render.jpg',
+        caption: 'Concept rendering of Immortal Obsolescence installations'
+      }
+    ],
+    tags: [
+      'e-waste',
+      'interactive installation',
+      'sustainability',
+      'digital culture',
+      'animatronics',
+      'virtual reality',
+      'religious art',
+      'technology',
+      'community engagement',
+      'Miami tech art'
+    ],
+    interpretation: 
+      "The project series examines the lifecycle of technology through artistic transformation, creating a dialogue between obsolescence and innovation. Each installation approaches this theme from a different angle: religious iconography, market dynamics, personal interaction, and human-machine integration.",
+    exhibition: 'Multiple venues throughout Miami, 2025-2026',
+    installation_notes: [
+      'Requires specialized technical setup for each piece',
+      'Community workshop integration',
+      'Documentation throughout process',
+      'Regular maintenance schedules',
+      'Sustainable power management'
+    ],
+    future_iterations: [
+      'Expanded animatronic capabilities',
+      'Enhanced interactive elements',
+      'Community contribution features',
+      'Mobile workshop units',
+      'Online documentation platform'
+    ],
+    on_view: false
+  }
 };
