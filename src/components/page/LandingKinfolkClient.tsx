@@ -20,6 +20,8 @@ import {
   MessageSquare,
   FileText,
   BookOpen,
+  Menu,
+  X,
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
@@ -66,8 +68,8 @@ const navigation = [
 ];
 
 export default function LandingPage() {
-  // Add state for active section
   const [activeSection, setActiveSection] = useState("overview");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Add scroll spy effect
   useEffect(() => {
@@ -89,21 +91,98 @@ export default function LandingPage() {
     return () => observer.disconnect();
   }, []);
 
+  // Add smooth scrolling behavior
+  const scrollToSection = (sectionId: string) => {
+    setIsMenuOpen(false); // Close mobile menu after clicking
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80; // Account for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  // Enhanced mobile menu with better styling and interaction
+  const MobileMenu = () => (
+    <div 
+      className={`
+        fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out
+        ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}
+    >
+      {/* Overlay */}
+      <div 
+        className="absolute inset-0 bg-black/50"
+        onClick={() => setIsMenuOpen(false)}
+      />
+      
+      {/* Menu Content */}
+      <div className="relative w-4/5 max-w-sm h-full bg-white">
+        <div className="flex flex-col h-full">
+          {/* Menu Header */}
+          <div className="p-4 border-b flex justify-between items-center">
+            <span className="font-bold text-lg text-black">Navigation</span>
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 hover:bg-gray-100 rounded-full"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Menu Items */}
+          <nav className="flex-1 overflow-y-auto py-4">
+            {navigation.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => scrollToSection(item.href.slice(1))}
+                className={`
+                  w-full px-6 py-4 text-left text-lg font-medium transition-colors
+                  ${activeSection === item.href.slice(1)
+                    ? "text-orange-500 bg-orange-50"
+                    : "text-black hover:bg-gray-50"
+                  }
+                `}
+              >
+                {item.name}
+              </button>
+            ))}
+          </nav>
+
+          {/* Menu Footer */}
+          <div className="p-4 border-t">
+            <p className="text-sm text-black/60">
+              © {new Date().getFullYear()} Kinfolk Tech Foundation
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Updated Navigation */}
+      {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white">
         <div className="container flex h-16 items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center gap-2">
-            <span className="text-xl font-bold tracking-tight text-black">
+            <span className="text-base md:text-xl font-bold tracking-tight text-black truncate">
               Kinfolk AI Technical Workshop
             </span>
           </div>
+
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-6">
             {navigation.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={() => scrollToSection(item.href.slice(1))}
                 className={`text-sm font-medium transition-colors ${
                   activeSection === item.href.slice(1)
                     ? "text-orange-500 border-b-2 border-orange-500"
@@ -111,68 +190,60 @@ export default function LandingPage() {
                 }`}
               >
                 {item.name}
-              </Link>
+              </button>
             ))}
           </nav>
-          <Button variant="outline" size="icon" className="md:hidden border border-zinc-200">
-            <span className="sr-only">Toggle menu</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6"
-            >
-              <line x1="4" x2="20" y1="12" y2="12" />
-              <line x1="4" x2="20" y1="6" y2="6" />
-              <line x1="4" x2="20" y1="18" y2="18" />
-            </svg>
-          </Button>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="md:hidden p-2 rounded-md hover:bg-gray-100"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
         </div>
       </header>
 
+      {/* Mobile Menu */}
+      <MobileMenu />
+
       <main className="flex-1">
-        {/* Hero Section with Gradient Banner */}
+        {/* Hero Section - Mobile Responsive */}
         <section className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500"></div>
-          <div className="relative container py-16 md:py-24">
-            <div className="max-w-3xl space-y-5">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-white">
+          <div className="relative container py-12 md:py-24">
+            <div className="max-w-3xl space-y-4 md:space-y-5">
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white">
                 AI Transformation for Historical Narratives
               </h1>
-              <p className="text-xl text-white">
-                Technical implementation plan for leveraging Unity and AI to amplify Black & Brown historical narratives
+              <p className="text-lg md:text-xl text-white">
+                Technical implementation plan for leveraging Unity and AI
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <a 
-                  href="tel:9545884680"
-                  className="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 text-lg font-medium text-orange-600 hover:bg-white/90 transition-colors"
-                >
-                  Schedule a Consultation
-                </a>
+                <Button size="lg" className="w-full sm:w-auto bg-white text-orange-600 hover:bg-white/90">
+                  Explore Technical Implementation
+                </Button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Overview Section */}
-        <section id="overview" className="py-16 md:py-20 bg-white">
+        {/* Content Sections - Mobile Responsive */}
+        <section id="overview" className="py-12 md:py-20 bg-white">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl font-bold tracking-tight mb-4 text-black">Technical Overview</h2>
-              <p className="text-lg text-black/80">
-                {`A comprehensive implementation plan for integrating Unity's AI capabilities`}
+            <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 px-4">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 md:mb-4 text-black">
+                Technical Overview
+              </h2>
+              <p className="text-base md:text-lg text-black/80">
+                A comprehensive implementation plan for integrating Unity&apos;s AI capabilities
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-start">
+            {/* Grid Layout - Stack on mobile */}
+            <div className="grid md:grid-cols-2 gap-6 md:gap-12 px-4">
               <div>
-                <p className="text-lg text-black/80 mb-6">
+                <p className="text-base md:text-lg text-black/80 mb-6">
                   {`This technical workshop provides a comprehensive implementation plan for integrating Unity's AI
                   capabilities with Kinfolk's mission to preserve and amplify Black & Brown historical narratives. The
                   focus is on practical, technical solutions that can be implemented within existing resource
@@ -180,7 +251,7 @@ export default function LandingPage() {
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Cpu className="h-5 w-5 text-orange-500 mt-1" />
+                    <Cpu className="h-5 w-5 text-orange-500 mt-1 shrink-0" />
                     <div>
                       <h3 className="font-medium text-black">Unity AI Integration</h3>
                       <p className="text-sm text-black/80">
@@ -189,7 +260,7 @@ export default function LandingPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Database className="h-5 w-5 text-orange-500 mt-1" />
+                    <Database className="h-5 w-5 text-orange-500 mt-1 shrink-0" />
                     <div>
                       <h3 className="font-medium text-black">Data Pipeline Architecture</h3>
                       <p className="text-sm text-black/80">
@@ -198,7 +269,7 @@ export default function LandingPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Code className="h-5 w-5 text-orange-500 mt-1" />
+                    <Code className="h-5 w-5 text-orange-500 mt-1 shrink-0" />
                     <div>
                       <h3 className="font-medium text-black">Implementation Codebase</h3>
                       <p className="text-sm text-black/80">
@@ -955,9 +1026,10 @@ export default function LandingPage() {
         </section>
       </main>
 
+      {/* Footer - Mobile Responsive */}
       <footer className="border-t bg-white">
-        <div className="container py-8">
-          <div className="text-center text-sm text-black">
+        <div className="container py-6 md:py-8 px-4">
+          <div className="text-center text-sm text-black/70">
             <p>© {new Date().getFullYear()} Kinfolk Tech Foundation. All rights reserved.</p>
           </div>
         </div>
