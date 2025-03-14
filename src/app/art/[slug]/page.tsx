@@ -19,7 +19,8 @@ const colors = [
   'bg-green-400',
 ];
 
-export function EnhancedDescription({
+// Make EnhancedDescription a regular function component (not exported)
+function EnhancedDescription({
   description,
   interactiveContent,
 }: {
@@ -63,7 +64,7 @@ export function EnhancedDescription({
   );
 }
 
-export default function ArtworkPage({ params }: PageProps) {
+export default async function ArtPage({ params }: PageProps) {
   const artwork = artist.artworks[params.slug];
 
   if (!artwork) {
@@ -258,4 +259,21 @@ export default function ArtworkPage({ params }: PageProps) {
       </div>
     </main>
   );
+}
+
+// Optional: Add generateMetadata if needed
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  return {
+    title: `Art - ${params.slug}`,
+    // ... other metadata
+  };
+}
+
+// Optional: Add generateStaticParams if using static generation
+export async function generateStaticParams() {
+  return [
+    { slug: 'art-1' },
+    { slug: 'art-2' },
+    // ... other slugs
+  ];
 }
