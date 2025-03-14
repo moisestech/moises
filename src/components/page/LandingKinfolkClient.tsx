@@ -25,6 +25,8 @@ import {
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
+import Image from "next/image"
+import FlipText from "@/components/ui/flip-text"
 
 import { Button } from "@/components/ui/button"
 
@@ -125,8 +127,17 @@ export default function LandingPage() {
       <div className="relative w-4/5 max-w-sm h-full bg-white">
         <div className="flex flex-col h-full">
           {/* Menu Header */}
-          <div className="p-4 border-b flex justify-between items-center">
-            <span className="font-bold text-lg text-black">Navigation</span>
+          <div className="p-4 border-b flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Image
+                src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1741975586/kinfolk/kinfolk-logo_mqvust.png"
+                alt="Kinfolk Logo"
+                width={24}
+                height={24}
+                className="h-6 w-auto"
+              />
+              <span className="font-bold text-lg text-black">Navigation</span>
+            </div>
             <button
               onClick={() => setIsMenuOpen(false)}
               className="p-2 hover:bg-gray-100 rounded-full"
@@ -170,11 +181,24 @@ export default function LandingPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white">
         <div className="container flex h-16 items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <span className="text-base md:text-xl font-bold tracking-tight text-black truncate">
-              Kinfolk AI Technical Workshop
-            </span>
+          {/* Logo + Text */}
+          <div className="flex items-end justify-end gap-4">
+            <Image
+              src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1741975586/kinfolk/kinfolk-logo_mqvust.png"
+              alt="Kinfolk Logo"
+              width={300}
+              height={300}
+              className="h-8 w-auto"
+            />
+            <div className="flex items-end justify-end gap-2">
+              <FlipText
+                duration={0.5}
+                delayMultiple={0.05}
+                className="text-2xl text-amber-500 tracking-tight"
+              >
+                AI Technical Workshop
+              </FlipText>
+            </div>
           </div>
 
           {/* Desktop Navigation */}
