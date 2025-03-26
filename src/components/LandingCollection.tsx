@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { artist } from '@/constants/artworks';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 export default function LandingCollection() {
@@ -26,26 +27,32 @@ export default function LandingCollection() {
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300">
             Discover artwork that speaks to you, from 1990 to today.
           </p>
-          <div className="flex items-center space-x-2 font-bold text-lg cursor-pointer group">
-            <span>Find your favorites</span>
-            <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-          </div>
+          <Link href="/works" className="group">
+            <div className="flex items-center space-x-2 font-bold text-lg cursor-pointer">
+              <span>Find your favorites</span>
+              <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
         </div>
 
         {/* Column 2 - Artwork Grid */}
         <div className="col-span-5 grid grid-cols-2 md:grid-cols-3 gap-10">
           {randomArtworks.map(([key, artwork]) => (
-            <div key={key} className="flex flex-col space-y-2">
-              <div className="relative aspect-[4/3]">
+            <Link 
+              key={key} 
+              href={`/art/${key}`} 
+              className="flex flex-col space-y-2 group transition-transform hover:scale-[1.02] duration-200"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src={artwork.images[0].url}
                   alt={artwork.images[0].caption || artwork.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="space-y-1">
-                <p className="font-bold text-lg line-clamp-1 leading-none">
+                <p className="font-bold text-lg line-clamp-1 leading-none group-hover:underline">
                   {artwork.title}
                 </p>
                 {artwork.medium && (
@@ -54,7 +61,7 @@ export default function LandingCollection() {
                   </p>
                 )}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

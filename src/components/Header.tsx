@@ -61,6 +61,7 @@ export default function Header() {
     { label: 'Exhibitions', path: '/exhibitions' },
     { label: 'Events', path: '/events' },
     { label: 'Art and Artist', path: '/moikipedia' },
+    { label: 'CV', path: '/cv' },
     { label: 'Store', path: '/store' },
   ];
 
@@ -147,7 +148,7 @@ export default function Header() {
                       <Link
                         href={item.path}
                         onClick={(e) =>
-                          item.path === '/moikipedia'
+                          item.path === '/moikipedia' || item.path === '/cv'
                             ? undefined
                             : handleNavClick(e, item.path)
                         }
@@ -181,7 +182,7 @@ export default function Header() {
                   <Link
                     href={item.path}
                     onClick={(e) =>
-                      item.path === '/moikipedia'
+                      item.path === '/moikipedia' || item.path === '/cv'
                         ? undefined
                         : handleNavClick(e, item.path)
                     }

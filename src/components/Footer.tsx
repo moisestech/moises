@@ -53,6 +53,14 @@ export default function Footer() {
             </li>
             <li>
               <Link
+                href="/cv"
+                className="hover:underline text-lg"
+              >
+                CV
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/teaching"
                 onClick={(e) => handleNavClick(e, '/teaching')}
                 className="hover:underline text-lg"

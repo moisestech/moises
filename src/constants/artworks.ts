@@ -61,6 +61,135 @@ export const artist: Artist = {
     "Sanabria explores the network effects of automation and artificial intelligence on visual culture through poetic computation. His work encompasses manual techniques, conceptual art, and programming infrastructure, utilizing code and artistic gestures to create a unique aesthetic experience. At the human and emotional level, Sanabria's work emphasizes the creative kernel that is uniquely human, creating artworks that speculate on the value of data and the future of law amid technological change. In contrast, he employs innovative acceleration at a macro level, using the newest technologies to scaffold new forms of aesthetic governance over AI tools and social networks. Sanabria's pursuit of a visual language and aesthetic experience enabled by technology and imagination speaks to the critical importance of steering society's thinking amid incoming changes in techno-capitalism and social tendencies.",
 
   artworks: {
+    privacy_as_a_service: {
+      title: 'Privacy as a Service',
+      year: 2025,
+      description:
+        'A gold Guy Fawkes mask, covered in VPN company logos (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad), sits on a museum pedestal in a stark white contemporary gallery. Attached to the mask\'s forehead, a mounted ATM/POS terminal with a keypad and card reader symbolizes the monetization of privacy, displaying fake transactions, subscription plans, and randomized IP addresses. Behind the mask, two Ubiquiti UniFi Tri-Band Wi-Fi 6E routers extend their six antennas like a cybernetic exoskeleton, their LED lights glowing, highlighting the paradox of corporate-controlled anonymity. The sterile white backdrop and dramatic lighting cast sharp shadows, emphasizing the fusion of surveillance, commerce, and digital resistance in the modern age.',
+      medium: 'Mixed-media sculpture',
+      materials: [
+        'Gold-plated resin Guy Fawkes mask',
+        'ATM/POS terminal',
+        'Ubiquiti UniFi Tri-Band Wi-Fi 6E routers',
+        'Custom LED display',
+        'Corporate VPN logo decals'
+      ],
+      dimensions: '24" x 18" x 14" (incl. router antennas)',
+      role: 'Concept and Fabrication',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962524/art/moisestech-website/artworks/2025_privacy_mask/moises-sanabria-privacy-mask_ewms3y.jpg',
+          caption: 'Corporate Anonymity - Gold Guy Fawkes mask with VPN logos and hardware'
+        }
+      ],
+      tags: [
+        'sculpture',
+        'surveillance',
+        'privacy',
+        'digital culture',
+        'capitalism',
+        'anonymity',
+        'corporate critique'
+      ],
+      interpretation: 
+        'The piece creates a striking visual paradox that challenges viewers to consider how corporate interests have co-opted privacy technology and online anonymity. By transforming the Guy Fawkes mask—a symbol of anti-establishment resistance—into a gold-plated corporate billboard, the work highlights the commercialization of digital privacy and the uncomfortable reality that our attempts to escape surveillance often funnel through commercial gatekeepers.',
+      interactiveContent: [
+        {
+          type: "link",
+          text: "Guy Fawkes mask",
+          content: {
+            text: "A stylized depiction of Guy Fawkes that became a symbol of protest and anonymity, particularly through its association with the hacktivist group Anonymous",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Guy_Fawkes_mask",
+              label: "Learn about Guy Fawkes mask symbolism"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "monetization of privacy",
+          content: {
+            text: "The business practice of selling privacy as a commercial service rather than treating it as a fundamental right",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Privacy_as_a_service",
+              label: "Explore privacy as a service"
+            }
+          }
+        }
+      ],
+      on_view: true,
+      technical_requirements: {
+        power: ['Standard 120V outlet for router and display functionality'],
+        mounting: ['Museum pedestal (white, 36" height)'],
+        space: {
+          dimensions: '4 ft x 4 ft area minimum',
+          requirements: ['Spotlighting', 'White gallery walls']
+        }
+      }
+    },
+    simulation_faith: {
+      title: 'Simulation Faith',
+      year: 2024,
+      description:
+        'A minimalist installation featuring a suspended baby Jesus adorned with a glowing VR headset, exploring themes of faith, simulation, and technological transcendence. The work interrogates the intersection of spirituality and digital illusion, casting light on the ways belief systems evolve in an era mediated by screens and artificial experiences. By merging religious iconography with virtual immersion, the piece questions whether digital realities will become the new sacred spaces of the future.',
+      medium: 'Mixed-media installation',
+      materials: [
+        'Porcelain-like resin',
+        'VR headset',
+        'Suspension system',
+        'LED lighting'
+      ],
+      dimensions: '3 ft x 2 ft x 1.5 ft (sculpture), variable installation space',
+      role: 'Concept, Design, and Fabrication',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg',
+          caption: 'Simulation Faith - Suspended baby Jesus sculpture with VR headset'
+        }
+      ],
+      tags: [
+        'installation',
+        'sculpture',
+        'religion',
+        'virtual reality',
+        'technology',
+        'spirituality',
+        'digital culture'
+      ],
+      interactiveContent: [
+        {
+          type: "link",
+          text: "digital realities",
+          content: {
+            text: "Immersive computer-generated environments that simulate physical presence",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Virtual_reality",
+              label: "Learn about virtual reality"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "religious iconography",
+          content: {
+            text: "Visual symbols and images used in religious art and devotion",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Religious_art",
+              label: "Explore religious art history"
+            }
+          }
+        }
+      ],
+      on_view: true,
+      technical_requirements: {
+        power: ['120V outlet', 'Low-voltage LED transformer'],
+        mounting: ['Ceiling suspension system', 'Steel cables'],
+        space: {
+          dimensions: 'Minimum 8 ft x 8 ft area, 10 ft ceiling height',
+          requirements: ['Dimmed ambient lighting', 'White or neutral walls']
+        }
+      }
+    },
     price_of_existence: {
       title: 'Price of Existence',
       year: 2024,
@@ -427,6 +556,41 @@ export const artist: Artist = {
         'VRChat',
         'technology',
         'social interaction',
+      ],
+      interactiveContent: [
+        {
+          type: "link",
+          text: "VRchat.net",
+          content: {
+            text: "A free-to-play massively multiplayer online virtual reality social platform",
+            link: {
+              url: "https://vrchat.com/",
+              label: "Visit VRChat website"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "Gallery 41 Cooper",
+          content: {
+            text: "An exhibition space at Cooper Union for the Advancement of Science and Art in New York City",
+            link: {
+              url: "https://cooper.edu/art/gallery",
+              label: "Learn about Cooper Union Gallery"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "virtual reality",
+          content: {
+            text: "A simulated experience that can be similar to or completely different from the real world",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Virtual_reality",
+              label: "Read about virtual reality"
+            }
+          }
+        }
       ],
       on_view: false,
     },
