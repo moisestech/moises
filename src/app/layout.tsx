@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 
 // STYLES
 import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 
 // COMPONENTS
@@ -10,6 +11,22 @@ import { ThemeProvider } from 'next-themes';
 import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
+
+const spaceMono = localFont({
+  src: [
+    {
+      path: '../../public/fonts/space-mono-bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/space-mono-bold.ttf',
+      weight: '700',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-space-mono'
+});
 
 export const metadata: Metadata = {
   title: 'Moises Sanabria',
@@ -59,7 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-white dark:bg-black text-black dark:text-white transition-colors duration-300`}
+        className={`${inter.className} ${spaceMono.variable} bg-white dark:bg-black text-black dark:text-white transition-colors duration-300`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}

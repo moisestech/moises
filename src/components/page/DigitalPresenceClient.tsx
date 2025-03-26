@@ -19,6 +19,9 @@ import {
   Users,
   Laptop,
   CheckCircle,
+  ClipboardList,
+  Send,
+  UserCheck,
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
@@ -59,12 +62,30 @@ const SectionDivider = () => (
 // Navigation items
 const navigation = [
   { name: "Overview", href: "#overview" },
-  { name: "Course Index", href: "#course-index" },
-  { name: "Day 1", href: "#day-1" },
-  { name: "Day 2", href: "#day-2" },
-  { name: "Day 3", href: "#day-3" },
-  { name: "Day 4", href: "#day-4" },
+  { name: "Schedule", href: "#schedule" },
+  { name: "What You'll Learn", href: "#learn" },
+  { name: "Eligibility", href: "#eligibility" },
+  { name: "Apply", href: "#apply" },
+  { name: "Instructor", href: "#instructor" },
 ];
+
+// Add placeholder image URLs
+const PLACEHOLDER_IMAGES = {
+  hero: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030235/own-your-digital-presence/website-building-hero-image_exoyv7.png",
+  schedule: {
+    day1: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg",
+    day2: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030278/own-your-digital-presence/website-building-day-2-3-weekend-in-person_jm1abi.jpg",
+    day3: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030278/own-your-digital-presence/website-building-day-2-3-weekend-in-person_jm1abi.jpg",
+    day4: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030367/own-your-digital-presence/website-building-day-4-online-presentations_tncppm.jpg"
+  }
+}
+
+// Add animated gradient text component
+const AnimatedGradientText = ({ children }: { children: React.ReactNode }) => (
+  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-gradient">
+    {children}
+  </span>
+);
 
 export default function DigitalPresenceClient() {
   const [activeSection, setActiveSection] = useState("overview");
@@ -73,6 +94,33 @@ export default function DigitalPresenceClient() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [expandedDay, setExpandedDay] = useState<string | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Add schedule details
+  const scheduleDetails = {
+    day1: [
+      "Introduction to website building fundamentals",
+      "Understanding domains and hosting options",
+      "Overview of no-code platforms",
+      "Basic design principles and best practices",
+      "Setting up your development environment"
+    ],
+    day2: [
+      "Hands-on website creation workshop",
+      "Customizing templates and layouts",
+      "Adding and organizing content",
+      "Mobile responsiveness basics",
+      "Integrating social media links"
+    ],
+    day4: [
+      "Advanced features and customization",
+      "Social media integration",
+      "Website performance optimization",
+      "Final website review and feedback",
+      "Launch preparation and next steps"
+    ]
+  };
 
   // Add scroll spy effect
   useEffect(() => {
@@ -259,6 +307,19 @@ export default function DigitalPresenceClient() {
     </div>
   );
 
+  // Add mouse move handler for parallax
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const x = (clientX / window.innerWidth - 0.5) * 20; // 20px max movement
+      const y = (clientY / window.innerHeight - 0.5) * 20;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
@@ -312,24 +373,49 @@ export default function DigitalPresenceClient() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"></div>
-          <div className="relative container py-12 md:py-24">
-            <div className="max-w-3xl space-y-4 md:space-y-5">
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white">
-                Build Your Website: Own Your Digital Presence
-              </h1>
-              <p className="text-lg md:text-xl text-white">
-                A practical, hands-on course designed to teach accessible and open-source solutions to design, host, and manage your website domain.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button 
-                  size="lg" 
-                  onClick={() => setIsWaitlistOpen(true)}
-                  className="w-full sm:w-auto bg-white text-indigo-600 hover:bg-white/90"
-                >
-                  Join Waitlist
-                </Button>
+        <section className="relative min-h-[60vh]">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 opacity-90"></div>
+          <div className="relative container py-12 md:py-24 h-full">
+            <div className="grid md:grid-cols-2 gap-8 items-center h-full">
+              <div className="space-y-4 md:space-y-5">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white font-space-mono">
+                  Website Building Workshop
+                </h1>
+                <p className="text-lg md:text-xl text-white">
+                  A practical, hands-on workshop designed to teach accessible and open-source solutions to design, host, and manage your website.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Button 
+                    size="lg" 
+                    onClick={() => setIsWaitlistOpen(true)}
+                    className="w-full sm:w-auto bg-white text-indigo-600 hover:bg-white/90"
+                  >
+                    Apply Now
+                  </Button>
+                </div>
+                <div className="text-white/80 text-sm mt-4">
+                  <p>Applications open: March 15, 2024</p>
+                  <p>Application deadline: April 1, 2024</p>
+                  <p className="font-semibold text-white">No Coding Experience Required!</p>
+                </div>
+              </div>
+              <div 
+                className="relative h-[300px] md:h-[500px] rounded-xl overflow-hidden"
+                style={{
+                  transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+                  transition: 'transform 0.1s ease-out'
+                }}
+              >
+                <Image
+                  src={PLACEHOLDER_IMAGES.hero}
+                  alt="Website Building Workshop"
+                  fill
+                  className="object-cover"
+                  style={{
+                    transform: `scale(1.1)`,
+                    transition: 'transform 0.1s ease-out'
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -349,11 +435,11 @@ export default function DigitalPresenceClient() {
                 variants={fadeIn}
                 className="space-y-4 text-center mb-12"
               >
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-gray-900">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
                   Workshop Overview
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  This four-day intensive weekend workshop equips artists and creators with the knowledge, skills, and web fundamentals needed to build and optimize their websites.
+                  As <Link href="https://www.bacfl.org/" className="text-indigo-600 hover:text-indigo-800">Bakehouse</Link> continues to expand its <AnimatedGradientText>digital initiatives</AnimatedGradientText>, we are committed to providing artists with the tools to <AnimatedGradientText>navigate the evolving online landscape</AnimatedGradientText>. This workshop will give participants the technical and conceptual knowledge necessary to <AnimatedGradientText>establish a compelling online presence</AnimatedGradientText>.
                 </p>
               </motion.div>
 
@@ -362,116 +448,58 @@ export default function DigitalPresenceClient() {
                   variants={fadeIn}
                   className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-sm border border-blue-100"
                 >
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <Layers className="text-blue-600 h-5 w-5" />
-                    Scope of the Course
-                  </h3>
-                  <p className="text-gray-700">
-                    {`Attendees will learn web design principles, build shareable websites and explore UX/UI fundamentals. The course covers how to launch, host, and build websites using SquareSpace, Wix, Github, as well as HTML, CSS, JS. By the end, you'll have a functional webpage and a strong foundation in web design principles.`}
-                  </p>
+                  <div className="space-y-6">
+                    <div className="relative h-[200px] rounded-lg overflow-hidden">
+                      <Image
+                        src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743021790/own-your-digital-presence/website-building-workshop-focus_wvkiwk.jpg"
+                        alt="Workshop Focus"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Layers className="text-blue-600 h-5 w-5" />
+                        Workshop Focus
+                      </h3>
+                      <p className="text-gray-700">
+                        Led by Bakehouse artist Moises Sanabria, this workshop will equip artists and creators with the knowledge, skills, and web fundamentals needed to build and optimize their websites, while seamlessly incorporating AI tools throughout the process.
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
 
                 <motion.div
                   variants={fadeIn}
                   className="bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-xl shadow-sm border border-purple-100"
                 >
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <Users className="text-purple-600 h-5 w-5" />
-                    Who Can Participate
-                  </h3>
-                  <p className="text-gray-700">
-                    Open to beginners, artists, and creators from Bakehouse with no prior experience in coding or web design. The instructor will be available for questions during breaks and after sessions.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  variants={fadeIn}
-                  className="bg-gradient-to-br from-indigo-50 to-blue-50 p-6 rounded-xl shadow-sm border border-indigo-100"
-                >
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <Clock className="text-indigo-600 h-5 w-5" />
-                    Course Length
-                  </h3>
-                  <ul className="text-gray-700 space-y-2">
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-500 mt-1">•</span>
-                      <span><strong>Duration:</strong> 4 Days (Friday - Monday)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-500 mt-1">•</span>
-                      <span><strong>Schedule:</strong> Friday, Saturday, Sunday, and Monday. 6 hours each day</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-500 mt-1">•</span>
-                      <span><strong>Sessions:</strong> 3 hours in the morning, break, then 3 hours in the afternoon</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-500 mt-1">•</span>
-                      <span><strong>Total Hours:</strong> 24 hours (6 hours/day)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-indigo-500 mt-1">•</span>
-                      <span><strong>Format:</strong> Combination of virtual and in-person, with office hours for individual guidance</span>
-                    </li>
-                  </ul>
-                </motion.div>
-
-                <motion.div
-                  variants={fadeIn}
-                  className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl shadow-sm border border-purple-100"
-                >
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <DollarSign className="text-blue-600 h-5 w-5" />
-                    Fee Structure
-                  </h3>
-                  <ul className="text-gray-700 space-y-2">
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-500 mt-1">•</span>
-                      <span><strong>Market Rate:</strong> $50 x 24 hours = $1,200 per participant</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-500 mt-1">•</span>
-                      <span><strong>Discounted Rate:</strong> $2,000 total (group rate)</span>
-                    </li>
-                  </ul>
+                  <div className="space-y-6">
+                    <div className="relative h-[200px] rounded-lg overflow-hidden">
+                      <Image
+                        src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743022346/own-your-digital-presence/website-building-who-can-participate_egsesz.jpg"
+                        alt="Who Can Participate"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Users className="text-purple-600 h-5 w-5" />
+                        Who Can Participate
+                      </h3>
+                      <p className="text-gray-700">
+                        Open to artists affiliated with Bakehouse Art Complex, including studio residents and associate members, with no prior experience in coding or web design required.
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
               </div>
-
-              <motion.div
-                variants={fadeIn}
-                className="mt-16 p-8 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white"
-              >
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Laptop className="h-5 w-5" />
-                  Requirements for Participation
-                </h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2">
-                    <span className="text-indigo-200 mt-1">•</span>
-                    <span>Laptop or desktop computer</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-indigo-200 mt-1">•</span>
-                    <span>Reliable internet connection</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-indigo-200 mt-1">•</span>
-                    <span>No prior coding or design knowledge required</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-indigo-200 mt-1">•</span>
-                    <span>Basic familiarity with using a web browser and file management is helpful</span>
-                  </li>
-                </ul>
-              </motion.div>
             </motion.div>
           </div>
         </section>
-        
-        <SectionDivider />
 
-        {/* Course Index Section */}
-        <section id="course-index" className="py-16 bg-gray-50">
+        {/* What You'll Learn Section */}
+        <section id="learn" className="py-16 bg-gray-50">
           <div className="container">
             <motion.div
               initial="initial"
@@ -484,234 +512,93 @@ export default function DigitalPresenceClient() {
                 variants={fadeIn}
                 className="space-y-4 text-center mb-12"
               >
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-gray-900">
-                  Course Index
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                  {`What You'll Learn`}
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  Our comprehensive curriculum is structured to give you a complete overview of web development fundamentals.
+                  Comprehensive web design knowledge and practical skills for artists
                 </p>
               </motion.div>
 
-              <motion.div
-                variants={fadeIn}
-                className="mt-8 space-y-6"
-              >
-                <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 group transition-all duration-300 hover:shadow-md">
-                  <h3 className="text-lg font-semibold mb-3 text-indigo-600 flex items-center gap-2">
-                    <Calendar className="h-5 w-5" />
-                    Pre-Engagement: Virtual Application Survey
-                  </h3>
-                  <p className="text-gray-700 mb-4">
-                    Before the workshop begins, participants will complete a survey to tailor the course to their needs. The survey will collect information such as your background, interests, experience level, and reference websites.
-                  </p>
-                  <div className="pl-6 border-l-2 border-indigo-200">
-                    <p className="text-gray-600 italic">
-                      As an attendee, you should have all of your assets ready ahead of time to take the most advantage of this workshop.
-                    </p>
-                  </div>
-                </div>
-
-                <div id="day-1" className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-sm border border-blue-100 group transition-all duration-300 hover:shadow-md">
-                  <motion.h3 
-                    variants={fadeIn}
-                    className="text-lg font-semibold mb-3 text-blue-600 flex items-center gap-2"
-                  >
-                    <Calendar className="h-5 w-5" />
-                    Day 1 (Virtual - Friday Late Afternoon): Foundations of Website Creation
-                  </motion.h3>
-                  
-                  <div className="space-y-4 mt-4">
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Session 1: Understanding Websites & Digital Presence (1 Hour)</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>Introduction and participant intros</li>
-                        <li>Discussion: Reference websites artists admire and why</li>
-                        <li>Key considerations: Costs, complexity, maintainability, link rot</li>
-                        <li>Making a sustainable web presence for artists</li>
-                      </ul>
-                    </motion.div>
-                    
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Session 2: Domains, Hosting, and Web Platforms (1 Hour)</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>Domains and hosting overview: Namecheap, GoDaddy, shared vs. cloud hosting</li>
-                        <li>AI-Powered Domain, and Website Creation Tools</li>
-                        <li>Choosing the right platform: SquareSpace, Wix, WordPress</li>
-                        <li>No-code vs. custom-coded sites: Evaluating trade-offs</li>
-                        <li>Introduction to GitHub as a hosting solution</li>
-                      </ul>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div id="day-2" className="p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-sm border border-indigo-100 group transition-all duration-300 hover:shadow-md">
-                  <motion.h3 
-                    variants={fadeIn}
-                    className="text-lg font-semibold mb-3 text-indigo-600 flex items-center gap-2"
-                  >
-                    <Calendar className="h-5 w-5" />
-                    Day 2 (In-Person - Saturday): Architecting Your Website
-                  </motion.h3>
-                  
-                  <div className="space-y-4 mt-4">
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Morning Session: Essential Web Components & Functionality</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>Understanding web structure: Headers, footers, sections, and grids</li>
-                        <li>Add AI wireframing tools (Figma with AI)</li>
-                        <li>Components overview: Carousels, modals, menus, image galleries</li>
-                        <li>Mobile-first design: Why it matters and how to optimize</li>
-                        <li>Hands-on: Planning your site layout with sketches and wireframes</li>
-                      </ul>
-                    </motion.div>
-                    
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Afternoon Session: Connecting Content to Your Pages</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>How images, text, and links integrate into web pages</li>
-                        <li>Structuring and linking sections for better navigation</li>
-                        <li>Understanding file formats: JPG, PNG, SVG, and optimizing for the web</li>
-                        <li>Workshop: Creating a basic site framework with placeholders</li>
-                      </ul>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div id="day-3" className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-sm border border-blue-100 group transition-all duration-300 hover:shadow-md">
-                  <motion.h3 
-                    variants={fadeIn}
-                    className="text-lg font-semibold mb-3 text-purple-600 flex items-center gap-2"
-                  >
-                    <Calendar className="h-5 w-5" />
-                    Day 3 (In-Person - Sunday): Building Your Website
-                  </motion.h3>
-                  
-                  <div className="space-y-4 mt-4">
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Morning Session: HTML, Metadata, & GitHub Fundamentals</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>HTML Basics: Structure, tags, and elements</li>
-                        <li>Introduction to GitHub: Repositories, version control, and GitHub Pages hosting</li>
-                        <li>Workshop: Building a static homepage from scratch with HTML</li>
-                      </ul>
-                    </motion.div>
-                    
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Afternoon Session: Styling & Interactivity</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>CSS fundamentals: Layout, colors, typography, and spacing</li>
-                        <li>Adding interactivity with JavaScript: Buttons, forms, and simple animations</li>
-                        <li>Show AI animation tools that require minimal coding</li>
-                        <li>Workshop: Implementing styles and interactive elements</li>
-                      </ul>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div id="day-4" className="p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl shadow-sm border border-purple-100 group transition-all duration-300 hover:shadow-md">
-                  <motion.h3 
-                    variants={fadeIn}
-                    className="text-lg font-semibold mb-3 text-blue-600 flex items-center gap-2"
-                  >
-                    <Calendar className="h-5 w-5" />
-                    Day 4 (Virtual - Monday Evening): Advanced Features & Launch
-                  </motion.h3>
-                  
-                  <div className="space-y-4 mt-4">
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Morning Session: Responsive Design & Data Management</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>Adapting sites for mobile and desktop users</li>
-                        <li>Connecting forms and collecting data securely</li>
-                        <li>Basics of user data management and privacy policies</li>
-                        <li>Hands-on: Ensuring your website is responsive and functional</li>
-                      </ul>
-                    </motion.div>
-                    
-                    <motion.div 
-                      variants={fadeIn}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <h4 className="font-medium mb-2">Afternoon Session: Publishing, Optimization & Final Presentation</h4>
-                      <ul className="pl-5 space-y-1 text-gray-700 list-disc">
-                        <li>Debugging common issues and improving website performance</li>
-                        <li>Hosting final sites: GitHub Pages, Wix, or Squarespace</li>
-                        <li>Testing and optimizing for speed, usability, and accessibility</li>
-                        <li>Final Project Showcase: Participants present their completed websites</li>
-                        <li>Wrap-up: Resources for continued learning, and best practices for maintenance</li>
-                      </ul>
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        <SectionDivider />
-
-        {/* Final CTA Section */}
-        <section className="py-16 bg-white">
-          <div className="container">
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={staggerChildren}
-              className="max-w-4xl mx-auto text-center"
-            >
-              <motion.h2 
-                variants={fadeIn}
-                className="text-3xl md:text-4xl font-bold tracking-tighter text-gray-900 mb-6"
-              >
-                Ready to Own Your Digital Presence?
-              </motion.h2>
-              
-              <motion.p
-                variants={fadeIn}
-                className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-              >
-                Join our community of artists and creators learning to build and manage their own digital spaces. Sign up for the waitlist and be the first to know when registration opens.
-              </motion.p>
-              
-              <motion.div
-                variants={fadeIn}
-              >
-                <Button 
-                  size="lg" 
-                  onClick={() => setIsWaitlistOpen(true)}
-                  className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white hover:opacity-90"
+              <div className="grid md:grid-cols-2 gap-8">
+                <motion.div
+                  variants={fadeIn}
+                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-200"
                 >
-                  Join Waitlist
-                </Button>
-              </motion.div>
+                  <div className="space-y-6">
+                    <div className="relative h-[200px] rounded-lg overflow-hidden">
+                      <Image
+                        src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030835/own-your-digital-presence/website-building-technical-skills_a6sfj2.jpg"
+                        alt="Technical Skills"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Code className="text-indigo-600 h-5 w-5" />
+                        Technical Skills
+                      </h3>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500 mt-1">•</span>
+                          <span>Fundamentals of website creation (domains, hosting, platforms)</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500 mt-1">•</span>
+                          <span>No-code platforms like Squarespace and Wix</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500 mt-1">•</span>
+                          <span>Basic coding with GitHub and version control</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={fadeIn}
+                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-200"
+                >
+                  <div className="space-y-6">
+                    <div className="relative h-[200px] rounded-lg overflow-hidden">
+                      <Image
+                        src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030824/own-your-digital-presence/website-building-digital-presence_i5pkjy.jpg"
+                        alt="Digital Presence"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Globe className="text-indigo-600 h-5 w-5" />
+                        Digital Presence
+                      </h3>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500 mt-1">•</span>
+                          <span>Social link optimization, and Mobile-first responsive design</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500 mt-1">•</span>
+                          <span>Metadata optimization and accessibility best practices</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500 mt-1">•</span>
+                          <span>Portfolio presentation and online engagement strategies</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
-        
-        {/* Workshop Instructor Info */}
-        <section className="py-16 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+
+        {/* Schedule Section */}
+        <section id="schedule" className="py-16 bg-white">
           <div className="container">
             <motion.div
               initial="initial"
@@ -722,29 +609,454 @@ export default function DigitalPresenceClient() {
             >
               <motion.div 
                 variants={fadeIn}
+                className="space-y-4 text-center mb-12"
+              >
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                  Workshop Schedule
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  A four-day intensive hybrid workshop combining virtual and in-person sessions
+                </p>
+              </motion.div>
+
+              <div className="space-y-8">
+                <motion.div
+                  variants={fadeIn}
+                  className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl shadow-sm border border-blue-100"
+                >
+                  <div className="grid md:grid-cols-2 gap-6 items-center">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Calendar className="text-blue-600 h-5 w-5" />
+                        Day 1: Virtual Introduction
+                      </h3>
+                      <p className="text-gray-700">
+                        April 12, 2024 at 2:00 PM - Foundations of website building and design basics
+                      </p>
+                      <Link 
+                        href="#learn" 
+                        className="text-blue-600 hover:text-blue-800 mt-4 inline-flex items-center gap-1 cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setExpandedDay(expandedDay === "day1" ? null : "day1");
+                        }}
+                      >
+                        Learn more <ChevronRight className={`h-4 w-4 transition-transform ${expandedDay === "day1" ? "rotate-90" : ""}`} />
+                      </Link>
+                    </div>
+                    <div className="relative h-[200px] rounded-lg overflow-hidden">
+                      <Image
+                        src={PLACEHOLDER_IMAGES.schedule.day1}
+                        alt="Day 1 Workshop"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+
+                {expandedDay === "day1" && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-4 space-y-2"
+                  >
+                    {scheduleDetails.day1.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="flex items-start gap-2 text-sm text-gray-700"
+                      >
+                        <span className="text-blue-500 mt-1">•</span>
+                        <span>{item}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+
+                <motion.div
+                  variants={fadeIn}
+                  className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl shadow-sm border border-indigo-100"
+                >
+                  <div className="grid md:grid-cols-2 gap-6 items-center">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Calendar className="text-indigo-600 h-5 w-5" />
+                        Day 2 & 3: In-Person Workshop
+                      </h3>
+                      <p className="text-gray-700">
+                        April 13-14, 2024 at 10:00 AM at Bakehouse - Hands-on practice and website customization
+                      </p>
+                      <Link 
+                        href="#learn" 
+                        className="text-indigo-600 hover:text-indigo-800 mt-4 inline-flex items-center gap-1 cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setExpandedDay(expandedDay === "day2" ? null : "day2");
+                        }}
+                      >
+                        Learn more <ChevronRight className={`h-4 w-4 transition-transform ${expandedDay === "day2" ? "rotate-90" : ""}`} />
+                      </Link>
+                    </div>
+                    <div className="relative h-[200px] rounded-lg overflow-hidden">
+                      <Image
+                        src={PLACEHOLDER_IMAGES.schedule.day2}
+                        alt="Day 2 & 3 Workshop"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+
+                {expandedDay === "day2" && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-4 space-y-2"
+                  >
+                    {scheduleDetails.day2.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="flex items-start gap-2 text-sm text-gray-700"
+                      >
+                        <span className="text-indigo-500 mt-1">•</span>
+                        <span>{item}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+
+                <motion.div
+                  variants={fadeIn}
+                  className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-xl shadow-sm border border-purple-100"
+                >
+                  <div className="grid md:grid-cols-2 gap-6 items-center">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Calendar className="text-purple-600 h-5 w-5" />
+                        Day 4: Virtual Wrap-up
+                      </h3>
+                      <p className="text-gray-700">
+                        April 15, 2024 at 2:00 PM - Advanced features and final website review
+                      </p>
+                      <Link 
+                        href="#learn" 
+                        className="text-purple-600 hover:text-purple-800 mt-4 inline-flex items-center gap-1 cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setExpandedDay(expandedDay === "day4" ? null : "day4");
+                        }}
+                      >
+                        Learn more <ChevronRight className={`h-4 w-4 transition-transform ${expandedDay === "day4" ? "rotate-90" : ""}`} />
+                      </Link>
+                    </div>
+                    <div className="relative h-[200px] rounded-lg overflow-hidden">
+                      <Image
+                        src={PLACEHOLDER_IMAGES.schedule.day4}
+                        alt="Day 4 Workshop"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+
+                {expandedDay === "day4" && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-4 space-y-2"
+                  >
+                    {scheduleDetails.day4.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="flex items-start gap-2 text-sm text-gray-700"
+                      >
+                        <span className="text-purple-500 mt-1">•</span>
+                        <span>{item}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Eligibility Section */}
+        <section id="eligibility" className="py-16 bg-gray-50">
+          <div className="container">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={staggerChildren}
+              className="max-w-4xl mx-auto"
+            >
+              <motion.div 
+                variants={fadeIn}
+                className="space-y-4 text-center mb-12"
+              >
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                  Eligibility & Requirements
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Open to Bakehouse artists with varying levels of experience
+                </p>
+              </motion.div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <motion.div
+                  variants={fadeIn}
+                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-200"
+                >
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <CheckCircle className="text-green-600 h-5 w-5" />
+                    Who Can Apply
+                  </h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-500 mt-1">•</span>
+                      <span>Bakehouse studio residents</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-500 mt-1">•</span>
+                      <span>Bakehouse associate members</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-500 mt-1">•</span>
+                      <span>Artists with existing websites looking to redesign</span>
+                    </li>
+                  </ul>
+                </motion.div>
+
+                <motion.div
+                  variants={fadeIn}
+                  className="bg-white p-6 rounded-xl shadow-sm border border-gray-200"
+                >
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Laptop className="text-blue-600 h-5 w-5" />
+                    Technical Requirements
+                  </h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 mt-1">•</span>
+                      <span>Laptop or desktop computer</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 mt-1">•</span>
+                      <span>Reliable internet connection</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 mt-1">•</span>
+                      <span>Basic familiarity with web browsers</span>
+                    </li>
+                  </ul>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Application Section */}
+        <section id="apply" className="py-16 bg-white">
+          <div className="container">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={staggerChildren}
+              className="max-w-4xl mx-auto"
+            >
+              <motion.div 
+                variants={fadeIn}
+                className="space-y-4 text-center mb-12"
+              >
+                <div className="relative h-[300px] w-full max-w-2xl mx-auto mb-8 rounded-xl overflow-hidden bg-gray-50">
+                  <Image
+                    src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743031965/own-your-digital-presence/website-building-survey-image_pu9rk3.png"
+                    alt="Application Survey"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                  How to Apply
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Submit your application to join our next workshop
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={fadeIn}
+                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white p-8 rounded-xl"
+              >
+                <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                  <ClipboardList className="h-6 w-6" />
+                  Application Process
+                </h3>
+                <div className="space-y-6">
+                  <motion.div 
+                    className="flex items-start gap-4 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors cursor-pointer group"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-lg font-bold">
+                      <ClipboardList className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium mb-1">Pre-engagement Survey</h4>
+                      <p className="text-white/80 text-sm">
+                        Help us understand your goals and tailor the course to your needs
+                      </p>
+                    </div>
+                    <ChevronRight className="h-5 w-5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </motion.div>
+
+                  <motion.div 
+                    className="flex items-start gap-4 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors cursor-pointer group"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-lg font-bold">
+                      <FileText className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium mb-1">Application Submission</h4>
+                      <p className="text-white/80 text-sm">
+                        Share your interest and goals for the workshop
+                      </p>
+                    </div>
+                    <Send className="h-5 w-5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </motion.div>
+
+                  <motion.div 
+                    className="flex items-start gap-4 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors cursor-pointer group"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-lg font-bold">
+                      <UserCheck className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium mb-1">Review Process</h4>
+                      <p className="text-white/80 text-sm">
+                        Applications reviewed by Bakehouse staff and Moises Sanabria
+                      </p>
+                    </div>
+                    <UserCheck className="h-5 w-5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </motion.div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-white/20">
+                  <p className="text-sm text-white/80">
+                    Selected participants will be notified by April 15, 2025
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={fadeIn}
+                className="mt-8 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    size="lg" 
+                    onClick={() => setIsWaitlistOpen(true)}
+                    className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white hover:opacity-90 text-xl px-8 py-6 shadow-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-300 animate-pulse [animation-duration:3s]"
+                  >
+                    Start Application
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Instructor Section */}
+        <section id="instructor" className="py-16 bg-gray-50">
+          <div className="container">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={staggerChildren}
+              className="max-w-4xl mx-auto"
+            >
+              <motion.div 
+                variants={fadeIn}
+                className="space-y-4 text-center mb-12"
+              >
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                  About the Instructor
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Meet Moises Sanabria
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={fadeIn}
                 className="bg-white rounded-xl overflow-hidden shadow-lg"
               >
                 <div className="md:flex">
                   <div className="md:w-1/3 bg-gray-100 flex items-center justify-center p-6">
-                    <div className="h-48 w-48 rounded-full bg-gradient-to-br from-blue-200 to-indigo-200 flex items-center justify-center">
-                      <PenTool className="h-16 w-16 text-indigo-600" />
+                    <div className="relative h-full w-full">
+                      <Image
+                        src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743020508/own-your-digital-presence/MoisesTech_Zepeto_2025_drfjjf.png"
+                        alt="Moises Sanabria"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                   </div>
                   <div className="md:w-2/3 p-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Bakehouse Artist Tech Initiative</h2>
-                    <p className="text-gray-600 mb-6">
-                      A collaborative program designed to empower artists with technology skills for the digital age.
-                    </p>
-                    
-                    <h3 className="text-lg font-semibold text-indigo-600 mb-2">About the Instructor</h3>
-                    <p className="text-gray-700 mb-4">
-                      Our workshop is led by experienced web developers and designers who specialize in artist websites and digital presence. They bring years of practical experience helping creators establish their online identity.
-                    </p>
-                    
-                    <div className="flex gap-4 mt-6">
-                      <Link href="#" className="text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1">
-                        Learn more <ChevronRight className="h-4 w-4" />
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                      <Link 
+                        href="#instructor" 
+                        className="hover:text-indigo-600 transition-colors"
+                      >
+                        Moises Sanabria
                       </Link>
+                    </h3>
+                    <p className="text-gray-600 mb-6">
+                      A Venezuelan-born, Miami-based interdisciplinary artist whose work explores the intersections of machine philosophy, digital culture, and memetics within the context of networked social media life.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="text-lg font-semibold text-indigo-600 mb-2">Experience</h4>
+                        <ul className="text-gray-700 space-y-2">
+                          <li>• 12 years of Frontend Engineering experience in JavaScript, HTML, CSS, and UI/UX</li>
+                          <li>• Co-founder of AI24 Live</li>
+                          <li>• Co-founder of digital art collective ART404 (Artnotfound)</li>
+                          <li>• Resident artist at Bakehouse Art Complex since 2022</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h4 className="text-lg font-semibold text-indigo-600 mb-2">Education</h4>
+                        <ul className="text-gray-700 space-y-2">
+                          <li>• School of Poetic Computation</li>
+                          <li>• The Cooper Union, New York</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -759,6 +1071,14 @@ export default function DigitalPresenceClient() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center">
+              <div className="relative h-16 w-48 mx-auto mb-6">
+                <Image
+                  src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743031011/own-your-digital-presence/bac-logo_yb7coc.jpg"
+                  alt="Bakehouse Art Complex Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <h2 className="text-2xl font-bold mb-6">
                 Bakehouse Artist Tech Initiative
               </h2>
@@ -766,7 +1086,7 @@ export default function DigitalPresenceClient() {
                 {`Empowering artists with the digital skills needed to thrive in today's technology-driven world.`}
               </p>
               <p className="text-sm text-gray-500">
-                © {new Date().getFullYear()} Bakehouse Art Complex. All rights reserved.
+                © {new Date().getFullYear()} Moises Sanabria. All rights reserved.
               </p>
             </div>
           </div>
@@ -774,4 +1094,4 @@ export default function DigitalPresenceClient() {
       </footer>
     </div>
   );
-} 
+}
