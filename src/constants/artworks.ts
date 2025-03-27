@@ -61,11 +61,11 @@ export const artist: Artist = {
     "Sanabria explores the network effects of automation and artificial intelligence on visual culture through poetic computation. His work encompasses manual techniques, conceptual art, and programming infrastructure, utilizing code and artistic gestures to create a unique aesthetic experience. At the human and emotional level, Sanabria's work emphasizes the creative kernel that is uniquely human, creating artworks that speculate on the value of data and the future of law amid technological change. In contrast, he employs innovative acceleration at a macro level, using the newest technologies to scaffold new forms of aesthetic governance over AI tools and social networks. Sanabria's pursuit of a visual language and aesthetic experience enabled by technology and imagination speaks to the critical importance of steering society's thinking amid incoming changes in techno-capitalism and social tendencies.",
 
   artworks: {
-    privacy_as_a_service: {
-      title: 'Privacy as a Service',
+    privacy_is_a_luxury: {
+      title: 'Privacy is a Luxury',
       year: 2025,
       description:
-        'A gold Guy Fawkes mask, covered in VPN company logos (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad), sits on a museum pedestal in a stark white contemporary gallery. Attached to the mask\'s forehead, a mounted ATM/POS terminal with a keypad and card reader symbolizes the monetization of privacy, displaying fake transactions, subscription plans, and randomized IP addresses. Behind the mask, two Ubiquiti UniFi Tri-Band Wi-Fi 6E routers extend their six antennas like a cybernetic exoskeleton, their LED lights glowing, highlighting the paradox of corporate-controlled anonymity. The sterile white backdrop and dramatic lighting cast sharp shadows, emphasizing the fusion of surveillance, commerce, and digital resistance in the modern age.',
+        'A critique of how privacy is no longer a right but a luxury, this sculpture reconfigures the iconic protest mask into a shrine of monetized privacy[ A gold Guy Fawkes mask, covered in VPN company logos (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad), sits on a museum pedestal in a stark white contemporary gallery. Attached to the mask\'s forehead, a mounted ATM/POS terminal with a keypad and card reader symbolizes the monetization of privacy, displaying fake transactions, subscription plans, and randomized IP addresses. Behind the mask, two Ubiquiti UniFi Tri-Band Wi-Fi 6E routers extend their six antennas like a cybernetic exoskeleton, their LED lights glowing, highlighting the paradox of corporate-controlled anonymity. The sterile white backdrop and dramatic lighting cast sharp shadows, emphasizing the fusion of surveillance, commerce, and digital resistance in the modern age.',
       medium: 'Mixed-media sculpture',
       materials: [
         'Gold-plated resin Guy Fawkes mask',
@@ -129,15 +129,14 @@ export const artist: Artist = {
     },
     simulation_faith: {
       title: 'Simulation Faith',
-      year: 2024,
+      year: 2025,
       description:
-        'A minimalist installation featuring a suspended baby Jesus adorned with a glowing VR headset, exploring themes of faith, simulation, and technological transcendence. The work interrogates the intersection of spirituality and digital illusion, casting light on the ways belief systems evolve in an era mediated by screens and artificial experiences. By merging religious iconography with virtual immersion, the piece questions whether digital realities will become the new sacred spaces of the future.',
+        'Blurring the sacred with the synthetic, the work becomes a symbol of a generation whose spiritual frameworks are now mediated by technology. A minimalist installation featuring a suspended baby Jesus adorned with a glowing VR headset, exploring themes of faith, simulation, and technological transcendence. The work interrogates the intersection of spirituality and digital illusion, casting light on the ways belief systems evolve in an era mediated by screens and artificial experiences. By merging religious iconography with virtual immersion, the piece questions whether digital realities will become the new sacred spaces of the future.',
       medium: 'Mixed-media installation',
       materials: [
         'Porcelain-like resin',
         'VR headset',
-        'Suspension system',
-        'LED lighting'
+        'Interactive lighting'
       ],
       dimensions: '3 ft x 2 ft x 1.5 ft (sculpture), variable installation space',
       role: 'Concept, Design, and Fabrication',
