@@ -1085,7 +1085,7 @@ export default function DigitalPresenceClient() {
             <div className="text-center">
               <div className="relative h-16 w-48 mx-auto mb-6">
                 <Image
-                  src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743031011/own-your-digital-presence/bac-logo_yb7coc.jpg"
+                  src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743038354/own-your-digital-presence/bac-logo-white_nzrksu.png"
                   alt="Bakehouse Art Complex Logo"
                   fill
                   className="object-contain"
