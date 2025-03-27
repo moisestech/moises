@@ -354,12 +354,13 @@ export const artist: Artist = {
       location: 'Lincoln Road, Miami, USA',
       collaboration: 'Fabiola Larios',
       description:
-        'Ephemeral Reflections of Digital Divinities (2023) is a provocative installation that examines the evolution of self-representation from ancient Greek mythology to the digital age. This collaborative piece by Fabiola Larios and Moises Sanabria draws upon the timeless inspiration of the Greek Muses, while simultaneously exploring the impact of social media and digital culture on self-perception. The artwork creates AI-generated muses in real-time, using the viewer\'s photograph as the basis for constructing digital identities.',
+        'Viewers become muses in real-time, generating new digital divinities that echo ancient mythology through the lens of algorithmic identity. Ephemeral Reflections of Digital Divinities (2023) is a provocative installation that examines the evolution of self-representation from ancient Greek mythology to the digital age. This collaborative piece by Fabiola Larios and Moises Sanabria draws upon the timeless inspiration of the Greek Muses, while simultaneously exploring the impact of social media and digital culture on self-perception. The artwork creates AI-generated muses in real-time, using the viewer\'s photograph as the basis for constructing digital identities.',
       materials: [
         'Computer Vision Cameras',
         'Realtime Image Generation Model',
         'TouchDesigner',
-        'Custom LED Hardware Panel'
+        'Custom LED Hardware Panel',
+        'Bust Statue'
       ],
       medium: 'New Media Interactive Installation',
       images: [
@@ -902,6 +903,55 @@ export const artist: Artist = {
         resolution: '1920x1080',
         technical_details: 'Real-time YOLOv4 object detection, H.264 codec'
       },
+    },
+    doomscrolling_marathon: {
+      title: 'Doomscrolling Marathon',
+      year: 2024,
+      location: 'Aparadores, Mexico City, Mexico',
+      curator: 'Alonso Cedillo',
+      description: 'By transforming a personal TikTok scroll into a collective urban spectacle, Doomscrolling Marathon reflects on the fragility of attention in an age of infinite feed. The work turns private digital behavior into shared emotional overload, asking how we perform, absorb, and lose ourselves in algorithmic rituals.',
+      materials: [
+        'Large-format LED screen',
+        'Curated TikTok video stream',
+        'Public plaza infrastructure'
+      ],
+      medium: 'New Media Installation',
+      dimensions: 'Approx. 10 ft x 6 ft screen display (site-specific)',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743116742/art/moisestech-website/artworks/2024_doomscrolling_marathon/moises-sanabria-doomscrolling-marathon-proyecto-aparadores-cdmx-2024_jilui4.png',
+          caption: 'Doomscrolling Marathon - Installation view at Aparadores, Mexico City'
+        }
+      ],
+      links: [
+        {
+          url: 'https://www.instagram.com/p/DEA9GIrJxao/',
+          label: 'Instagram Video'
+        }
+      ],
+      tags: [
+        'installation',
+        'digital art',
+        'social media',
+        'public art',
+        'TikTok',
+        'attention economy',
+        'urban spectacle',
+        'algorithmic culture',
+        'Mexico City',
+        'Aparadores'
+      ],
+      interpretation: 'The work creates a powerful commentary on how private digital behaviors become public spectacles in our hyperconnected world. By displaying a curated TikTok feed on a large public screen, it transforms individual scrolling into a collective experience, highlighting both the performative nature of social media consumption and the overwhelming nature of infinite content streams.',
+      exhibition: 'Aparadores, Mexico City',
+      on_view: true,
+      video: {
+        type: 'instagram',
+        id: 'DEA9GIrJxao',
+        url: 'https://www.instagram.com/p/DEA9GIrJxao/',
+        title: 'Doomscrolling Marathon',
+        caption: 'Installation documentation at Aparadores, Mexico City',
+        format: 'Instagram Video'
+      }
     },
   },
 };
