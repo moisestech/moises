@@ -100,25 +100,58 @@ export default function DigitalPresenceClient() {
   // Add schedule details
   const scheduleDetails = {
     day1: [
-      "Introduction to website building fundamentals",
-      "Understanding domains and hosting options",
-      "Overview of no-code platforms",
-      "Basic design principles and best practices",
-      "Setting up your development environment"
+      "Session 1: Understanding Websites & Digital Presence (1 Hour)",
+      "Introduction and participant intros",
+      "Discussion: Reference websites artists admire and why",
+      "Key considerations: Costs, complexity, maintainability, link rot",
+      "Making a sustainable web presence for artists",
+      "Break (20 minutes)",
+      "Session 2: Domains, Hosting, and Web Platforms (1 Hour)",
+      "Domains and hosting overview",
+      "AI-Powered Domain and Website Creation Tools",
+      "Choosing the right platform: SquareSpace, Wix, WordPress",
+      "No-code vs. custom-coded sites",
+      "Introduction to GitHub as a hosting solution"
     ],
     day2: [
-      "Hands-on website creation workshop",
-      "Customizing templates and layouts",
-      "Adding and organizing content",
-      "Mobile responsiveness basics",
-      "Integrating social media links"
+      "Morning Session: Essential Web Components & Functionality",
+      "Understanding web structure: Headers, footers, sections, and grids",
+      "AI wireframing tools (Figma with AI)",
+      "Components overview: Carousels, modals, menus, image galleries",
+      "Mobile-first design principles",
+      "Hands-on: Planning your site layout",
+      "Break (1 Hour)",
+      "Afternoon Session: Connecting Content to Your Pages",
+      "How images, text, and links integrate into web pages",
+      "Structuring and linking sections",
+      "Understanding file formats: JPG, PNG, SVG",
+      "Workshop: Creating a basic site framework"
+    ],
+    day3: [
+      "Morning Session: HTML, Metadata, & GitHub Fundamentals",
+      "HTML Basics: Structure, tags, and elements",
+      "Introduction to GitHub: Repositories and version control",
+      "Workshop: Building a static homepage",
+      "Break (1 Hour)",
+      "Afternoon Session: Styling & Interactivity",
+      "CSS fundamentals: Layout, colors, typography",
+      "Adding interactivity with JavaScript",
+      "AI animation tools with minimal coding",
+      "Workshop: Implementing styles and interactive elements"
     ],
     day4: [
-      "Advanced features and customization",
-      "Social media integration",
-      "Website performance optimization",
-      "Final website review and feedback",
-      "Launch preparation and next steps"
+      "Morning Session: Responsive Design & Data Management",
+      "Adapting sites for mobile and desktop users",
+      "Connecting forms and collecting data securely",
+      "Basics of user data management and privacy policies",
+      "Hands-on: Ensuring website responsiveness",
+      "Break (20 Minutes)",
+      "Afternoon Session: Publishing, Optimization & Final Presentation",
+      "Debugging common issues and performance optimization",
+      "Hosting final sites: GitHub Pages, Wix, or Squarespace",
+      "Testing for speed, usability, and accessibility",
+      "Final Project Showcase",
+      "Wrap-up: Resources and maintenance best practices"
     ]
   };
 
@@ -406,8 +439,9 @@ export default function DigitalPresenceClient() {
                   </Button>
                 </div>
                 <div className="text-white/80 text-sm mt-4">
-                  <p>Applications open: March 15, 2024</p>
-                  <p>Application deadline: April 1, 2024</p>
+                  <p>Applications open: March 28, 2024</p>
+                  <p>Application deadline: April 11, 2024</p>
+                  <p>Workshop dates: April 18-21, 2024</p>
                   <p className="font-semibold text-white">No Coding Experience Required!</p>
                 </div>
               </div>
@@ -420,7 +454,7 @@ export default function DigitalPresenceClient() {
               >
                 <Image
                   src={PLACEHOLDER_IMAGES.hero}
-                  alt="Website Building Workshop"
+                  alt="Website Building Workshop Hero Image 2024 - Bakehouse Art Complex"
                   fill
                   className="object-cover"
                   style={{
@@ -464,7 +498,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
                       <Image
                         src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743021790/own-your-digital-presence/website-building-workshop-focus_wvkiwk.jpg"
-                        alt="Workshop Focus"
+                        alt="Website Building Workshop Focus - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -489,7 +523,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
                       <Image
                         src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743022346/own-your-digital-presence/website-building-who-can-participate_egsesz.jpg"
-                        alt="Who Can Participate"
+                        alt="Website Building Workshop Participants - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -541,7 +575,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
                       <Image
                         src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030835/own-your-digital-presence/website-building-technical-skills_a6sfj2.jpg"
-                        alt="Technical Skills"
+                        alt="Website Building Technical Skills Workshop - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -577,7 +611,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
                       <Image
                         src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030824/own-your-digital-presence/website-building-digital-presence_i5pkjy.jpg"
-                        alt="Digital Presence"
+                        alt="Digital Presence Workshop - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -643,7 +677,7 @@ export default function DigitalPresenceClient() {
                         Day 1: Virtual Introduction
                       </h3>
                       <p className="text-gray-700">
-                        April 12, 2024 at 2:00 PM - Foundations of website building and design basics
+                        April 18, 2024 at 6:00 PM - Virtual Introduction to Website Building
                       </p>
                       <Link 
                         href="#learn" 
@@ -659,7 +693,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
                       <Image
                         src={PLACEHOLDER_IMAGES.schedule.day1}
-                        alt="Day 1 Workshop"
+                        alt="Day 1 Virtual Website Building Workshop - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -700,7 +734,7 @@ export default function DigitalPresenceClient() {
                         Day 2 & 3: In-Person Workshop
                       </h3>
                       <p className="text-gray-700">
-                        April 13-14, 2024 at 10:00 AM at Bakehouse - Hands-on practice and website customization
+                        April 19-20, 2024 at Bakehouse - In-Person Workshop (10:00 AM - 3:00 PM)
                       </p>
                       <Link 
                         href="#learn" 
@@ -716,7 +750,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
                       <Image
                         src={PLACEHOLDER_IMAGES.schedule.day2}
-                        alt="Day 2 & 3 Workshop"
+                        alt="Day 2-3 In-Person Website Building Workshop - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -757,7 +791,7 @@ export default function DigitalPresenceClient() {
                         Day 4: Virtual Wrap-up
                       </h3>
                       <p className="text-gray-700">
-                        April 15, 2024 at 2:00 PM - Advanced features and final website review
+                        April 21, 2024 at 6:00 PM - Virtual Wrap-up and Final Presentations
                       </p>
                       <Link 
                         href="#learn" 
@@ -773,7 +807,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
                       <Image
                         src={PLACEHOLDER_IMAGES.schedule.day4}
-                        alt="Day 4 Workshop"
+                        alt="Day 4 Virtual Website Building Workshop - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -899,7 +933,7 @@ export default function DigitalPresenceClient() {
                 <div className="relative h-[300px] w-full max-w-2xl mx-auto mb-8 rounded-xl overflow-hidden bg-gray-50">
                   <Image
                     src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743031965/own-your-digital-presence/website-building-survey-image_pu9rk3.png"
-                    alt="Application Survey"
+                    alt="Website Building Workshop Application Survey - Bakehouse Art Complex 2024"
                     fill
                     className="object-contain"
                   />
@@ -1032,7 +1066,7 @@ export default function DigitalPresenceClient() {
                     <div className="relative h-full w-full">
                       <Image
                         src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743020508/own-your-digital-presence/MoisesTech_Zepeto_2025_drfjjf.png"
-                        alt="Moises Sanabria"
+                        alt="Moises Sanabria - Website Building Workshop Instructor - Bakehouse Art Complex 2024"
                         fill
                         className="object-cover"
                       />
@@ -1086,7 +1120,7 @@ export default function DigitalPresenceClient() {
               <div className="relative h-16 w-48 mx-auto mb-6">
                 <Image
                   src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743038354/own-your-digital-presence/bac-logo-white_nzrksu.png"
-                  alt="Bakehouse Art Complex Logo"
+                  alt="Bakehouse Art Complex Logo 2024"
                   fill
                   className="object-contain"
                 />
@@ -1098,7 +1132,10 @@ export default function DigitalPresenceClient() {
                 {`Empowering artists with the digital skills needed to thrive in today's technology-driven world.`}
               </p>
               <p className="text-sm text-gray-500">
-                © {new Date().getFullYear()} Moises Sanabria. All rights reserved.
+                For more information, contact Laura Novoa at lnovoa@bacfl.org
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                © {new Date().getFullYear()} Bakehouse Art Complex. All rights reserved.
               </p>
             </div>
           </div>

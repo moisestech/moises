@@ -224,7 +224,7 @@ export const artist: Artist = {
       ],
       on_view: true,
     },
-    smartshoppers: {
+    smart_shoppers: {
       title: 'Smart Shoppers',
       year: 2024,
       location: 'CONTINUUM at MUNAGGT, Fundación Paiz',
