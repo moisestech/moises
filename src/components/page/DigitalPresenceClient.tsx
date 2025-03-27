@@ -310,6 +310,16 @@ export default function DigitalPresenceClient() {
   // Add mouse move handler for parallax
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      const heroSection = document.querySelector('section');
+      if (!heroSection) return;
+      
+      const rect = heroSection.getBoundingClientRect();
+      if (e.clientY < rect.top || e.clientY > rect.bottom || 
+          e.clientX < rect.left || e.clientX > rect.right) {
+        setMousePosition({ x: 0, y: 0 });
+        return;
+      }
+
       const { clientX, clientY } = e;
       const x = (clientX / window.innerWidth - 0.5) * 20; // 20px max movement
       const y = (clientY / window.innerHeight - 0.5) * 20;
@@ -328,13 +338,15 @@ export default function DigitalPresenceClient() {
           {/* Logo + Text */}
           <div className="flex items-end justify-end gap-4">
             <div className="flex items-end justify-end gap-2">
-              <FlipText
-                duration={0.5}
-                delayMultiple={0.05}
-                className="text-2xl text-indigo-600 tracking-tight"
-              >
-                Own Your Digital Presence
-              </FlipText>
+              <div className="relative">
+                <FlipText
+                  duration={0.5}
+                  delayMultiple={0.05}
+                  className="text-2xl text-indigo-600 tracking-tight"
+                >
+                  Own Your Digital Presence
+                </FlipText>
+              </div>
             </div>
           </div>
 
