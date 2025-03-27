@@ -1058,7 +1058,7 @@ export default function DigitalPresenceClient() {
                           <li>• 12 years of Frontend Engineering experience in JavaScript, HTML, CSS, and UI/UX</li>
                           <li>• Co-founder of AI24 Live</li>
                           <li>• Co-founder of digital art collective ART404 (Artnotfound)</li>
-                          <li>• Resident artist at Bakehouse Art Complex since 2022</li>
+                          <li>• Resident artist at Bakehouse Art Complex since 2023</li>
                         </ul>
                       </div>
                       
