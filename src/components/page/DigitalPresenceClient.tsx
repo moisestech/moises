@@ -22,11 +22,13 @@ import {
   ClipboardList,
   Send,
   UserCheck,
+  ArrowUpRight,
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import FlipText from "@/components/ui/flip-text"
+import ControlledFlipText from "@/components/ui/controlled-flip-text"
 import { Button } from "@/components/ui/button"
 
 // Animation variants
@@ -38,6 +40,39 @@ const fadeIn = {
 
 const staggerChildren = {
   animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
+// Add new animation variants
+const hoverScale = {
+  hover: { scale: 1.02 },
+  tap: { scale: 0.98 }
+}
+
+const hoverRotate = {
+  hover: { rotate: 5 },
+  tap: { rotate: 0 }
+}
+
+const hoverLift = {
+  hover: { y: -5 },
+  tap: { y: 0 }
+}
+
+// Add new animation variants for text reveal
+const textReveal = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+}
+
+// Add new animation variants for staggered children
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
     transition: {
       staggerChildren: 0.1
     }
@@ -96,6 +131,7 @@ export default function DigitalPresenceClient() {
   const [submitted, setSubmitted] = useState(false);
   const [expandedDay, setExpandedDay] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [titleAnimationKey, setTitleAnimationKey] = useState(0);
 
   // Add schedule details
   const scheduleDetails = {
@@ -122,6 +158,49 @@ export default function DigitalPresenceClient() {
     ]
   };
 
+  // Add countdown timer state
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    expired: false
+  });
+  
+  // Set the deadline date - April 11, 2025 at 11:59 pm EST
+  useEffect(() => {
+    const deadline = new Date("April 11, 2025 23:59:00 EDT").getTime();
+    
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const timeLeft = deadline - now;
+      
+      if (timeLeft <= 0) {
+        setCountdown({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          expired: true
+        });
+      } else {
+        setCountdown({
+          days: Math.floor(timeLeft / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((timeLeft % (1000 * 60)) / 1000),
+          expired: false
+        });
+      }
+    };
+    
+    // Update countdown immediately and then every second
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   // Add scroll spy effect
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -142,9 +221,13 @@ export default function DigitalPresenceClient() {
     return () => observer.disconnect();
   }, []);
 
-  // Add smooth scrolling behavior
+  // Update the scrollToSection function to use the animation key counter
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false); // Close mobile menu after clicking
+    
+    // Increment the animation key to trigger a new animation
+    setTitleAnimationKey(prev => prev + 1);
+    
     const element = document.getElementById(sectionId);
     if (element) {
       const headerOffset = 80; // Account for fixed header
@@ -206,7 +289,7 @@ export default function DigitalPresenceClient() {
           {/* Menu Items */}
           <nav className="flex-1 overflow-y-auto py-4">
             {navigation.map((item) => (
-              <button
+              <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href.slice(1))}
                 className={`
@@ -216,9 +299,11 @@ export default function DigitalPresenceClient() {
                     : "text-black hover:bg-gray-50"
                   }
                 `}
+                whileHover={{ x: 10 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {item.name}
-              </button>
+              </motion.button>
             ))}
           </nav>
 
@@ -339,13 +424,15 @@ export default function DigitalPresenceClient() {
           <div className="flex items-end justify-end gap-4">
             <div className="flex items-end justify-end gap-2">
               <div className="relative">
-                <FlipText
+                <ControlledFlipText
                   duration={0.5}
                   delayMultiple={0.05}
                   className="text-2xl text-indigo-600 tracking-tight"
+                  animationKey={titleAnimationKey}
+                  autoAnimateInterval={30000} // Optional: auto-animate every 30 seconds
                 >
                   Own Your Digital Presence
-                </FlipText>
+                </ControlledFlipText>
               </div>
             </div>
           </div>
@@ -353,7 +440,7 @@ export default function DigitalPresenceClient() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-6">
             {navigation.map((item) => (
-              <button
+              <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href.slice(1))}
                 className={`text-sm font-medium transition-colors ${
@@ -361,9 +448,11 @@ export default function DigitalPresenceClient() {
                     ? "text-indigo-600 border-b-2 border-indigo-600"
                     : "text-black hover:text-indigo-600"
                 }`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 {item.name}
-              </button>
+              </motion.button>
             ))}
           </nav>
 
@@ -390,29 +479,87 @@ export default function DigitalPresenceClient() {
           <div className="relative container py-12 md:py-24 h-full">
             <div className="grid md:grid-cols-2 gap-8 items-center h-full">
               <div className="space-y-4 md:space-y-5">
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white font-space-mono">
-                  Website Building Workshop
-                </h1>
-                <p className="text-lg md:text-xl text-white">
-                  A practical, hands-on workshop designed to teach accessible and open-source solutions to design, host, and manage your website.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button 
-                    size="lg" 
-                    onClick={() => setIsWaitlistOpen(true)}
-                    className="w-full sm:w-auto bg-white text-indigo-600 hover:bg-white/90"
+                <motion.div 
+                  className="space-y-4 md:space-y-5"
+                  initial="hidden"
+                  animate="visible"
+                  variants={staggerContainer}
+                >
+                  <motion.h1 
+                    variants={textReveal}
+                    className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white font-space-mono"
                   >
-                    Apply Now
-                  </Button>
+                    Website Building Workshop
+                  </motion.h1>
+                  <motion.p 
+                    variants={textReveal}
+                    className="text-lg md:text-xl text-white"
+                  >
+                    A practical, hands-on workshop designed to teach accessible and open-source solutions to design, host, and manage your website.
+                  </motion.p>
+                </motion.div>
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative w-full sm:w-auto group"
+                  >
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-slow"></div>
+                    <button 
+                      onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdnzQvUzZGQnyj6f9fQBepDDF-e7BuesQJLdzdldqVlk1h5mQ/viewform', '_blank')}
+                      className="relative w-full px-8 py-4 bg-white rounded-lg leading-none flex items-center justify-center divide-x divide-gray-300"
+                    >
+                      <span className="pr-4 text-indigo-600 font-bold">APPLY</span>
+                      <span className="pl-4 text-indigo-500 group-hover:text-indigo-700 flex items-center justify-center transition-colors">
+                        NOW <ArrowUpRight className="ml-1 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </span>
+                    </button>
+                  </motion.div>
                 </div>
                 <div className="text-white/80 text-sm mt-4">
-                  <p>Applications open: March 15, 2024</p>
-                  <p>Application deadline: April 1, 2024</p>
-                  <p className="font-semibold text-white">No Coding Experience Required!</p>
+                  <p>Applications open: April 1, 2025</p>
+                  <div className="font-semibold text-white mt-2">
+                    <p className="mb-2">Application deadline: Friday, April 11, 2025 at 11:59 pm EST</p>
+                    
+                    {/* Countdown timer animation */}
+                    {!countdown.expired ? (
+                      <div className="flex justify-center gap-3 mt-3 text-base">
+                        <div className="flex flex-col items-center">
+                          <div className="bg-indigo-600/30 rounded-md px-3 py-1 min-w-[3.5rem] text-xl font-bold">
+                            {countdown.days.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-xs mt-1 text-white/70">DAYS</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="bg-indigo-600/30 rounded-md px-3 py-1 min-w-[3.5rem] text-xl font-bold animate-pulse-slow">
+                            {countdown.hours.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-xs mt-1 text-white/70">HOURS</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="bg-indigo-600/30 rounded-md px-3 py-1 min-w-[3.5rem] text-xl font-bold">
+                            {countdown.minutes.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-xs mt-1 text-white/70">MINS</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="bg-indigo-600/30 rounded-md px-3 py-1 min-w-[3.5rem] text-xl font-bold animate-pulse">
+                            {countdown.seconds.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-xs mt-1 text-white/70">SECS</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-yellow-300">Application deadline has passed</p>
+                    )}
+                  </div>
+                  <p className="font-semibold text-white mt-3">No Coding Experience Required!</p>
                 </div>
               </div>
-              <div 
+              <motion.div 
                 className="relative h-[300px] md:h-[500px] rounded-xl overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 style={{
                   transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
                   transition: 'transform 0.1s ease-out'
@@ -428,7 +575,7 @@ export default function DigitalPresenceClient() {
                     transition: 'transform 0.1s ease-out'
                   }}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -447,9 +594,14 @@ export default function DigitalPresenceClient() {
                 variants={fadeIn}
                 className="space-y-4 text-center mb-12"
               >
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                <motion.h2 
+                  variants={fadeIn}
+                  className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   Workshop Overview
-                </h2>
+                </motion.h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   As <Link href="https://www.bacfl.org/" className="text-indigo-600 hover:text-indigo-800">Bakehouse</Link> continues to expand its <AnimatedGradientText>digital initiatives</AnimatedGradientText>, we are committed to providing artists with the tools to <AnimatedGradientText>navigate the evolving online landscape</AnimatedGradientText>. This workshop will give participants the technical and conceptual knowledge necessary to <AnimatedGradientText>establish a compelling online presence</AnimatedGradientText>.
                 </p>
@@ -459,6 +611,8 @@ export default function DigitalPresenceClient() {
                 <motion.div
                   variants={fadeIn}
                   className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-sm border border-blue-100"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="space-y-6">
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
@@ -484,6 +638,8 @@ export default function DigitalPresenceClient() {
                 <motion.div
                   variants={fadeIn}
                   className="bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-xl shadow-sm border border-purple-100"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="space-y-6">
                     <div className="relative h-[200px] rounded-lg overflow-hidden">
@@ -524,9 +680,14 @@ export default function DigitalPresenceClient() {
                 variants={fadeIn}
                 className="space-y-4 text-center mb-12"
               >
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                <motion.h2 
+                  variants={fadeIn}
+                  className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   {`What You'll Learn`}
-                </h2>
+                </motion.h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   Comprehensive web design knowledge and practical skills for artists
                 </p>
@@ -623,9 +784,14 @@ export default function DigitalPresenceClient() {
                 variants={fadeIn}
                 className="space-y-4 text-center mb-12"
               >
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                <motion.h2 
+                  variants={fadeIn}
+                  className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   Workshop Schedule
-                </h2>
+                </motion.h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   A four-day intensive hybrid workshop combining virtual and in-person sessions
                 </p>
@@ -635,6 +801,8 @@ export default function DigitalPresenceClient() {
                 <motion.div
                   variants={fadeIn}
                   className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl shadow-sm border border-blue-100"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="grid md:grid-cols-2 gap-6 items-center">
                     <div>
@@ -643,7 +811,7 @@ export default function DigitalPresenceClient() {
                         Day 1: Virtual Introduction
                       </h3>
                       <p className="text-gray-700">
-                        April 12, 2024 at 2:00 PM - Foundations of website building and design basics
+                        Friday, April 24, 2025 at 6:00 - 8:30 PM - An introductory virtual session on the foundations of website building and design basics
                       </p>
                       <Link 
                         href="#learn" 
@@ -692,6 +860,8 @@ export default function DigitalPresenceClient() {
                 <motion.div
                   variants={fadeIn}
                   className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl shadow-sm border border-indigo-100"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="grid md:grid-cols-2 gap-6 items-center">
                     <div>
@@ -700,7 +870,7 @@ export default function DigitalPresenceClient() {
                         Day 2 & 3: In-Person Workshop
                       </h3>
                       <p className="text-gray-700">
-                        April 13-14, 2024 at 10:00 AM at Bakehouse - Hands-on practice and website customization
+                        Saturday, April 26 & Sunday, April 27, 2025 at 10:00 AM - 3:00 PM at Bakehouse - Hands-on practice and website customization
                       </p>
                       <Link 
                         href="#learn" 
@@ -749,6 +919,8 @@ export default function DigitalPresenceClient() {
                 <motion.div
                   variants={fadeIn}
                   className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-xl shadow-sm border border-purple-100"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="grid md:grid-cols-2 gap-6 items-center">
                     <div>
@@ -757,7 +929,7 @@ export default function DigitalPresenceClient() {
                         Day 4: Virtual Wrap-up
                       </h3>
                       <p className="text-gray-700">
-                        April 15, 2024 at 2:00 PM - Advanced features and final website review
+                        Monday, April 28, 2025 at 6:00 - 8:30 PM - A wrap-up virtual session on advanced features to ensure your website is responsive and functional
                       </p>
                       <Link 
                         href="#learn" 
@@ -821,9 +993,14 @@ export default function DigitalPresenceClient() {
                 variants={fadeIn}
                 className="space-y-4 text-center mb-12"
               >
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono">
+                <motion.h2 
+                  variants={fadeIn}
+                  className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 font-space-mono"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   Eligibility & Requirements
-                </h2>
+                </motion.h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                   Open to Bakehouse artists with varying levels of experience
                 </p>
@@ -833,6 +1010,8 @@ export default function DigitalPresenceClient() {
                 <motion.div
                   variants={fadeIn}
                   className="bg-white p-6 rounded-xl shadow-sm border border-gray-200"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                     <CheckCircle className="text-green-600 h-5 w-5" />
@@ -923,7 +1102,7 @@ export default function DigitalPresenceClient() {
                 <div className="space-y-6">
                   <motion.div 
                     className="flex items-start gap-4 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors cursor-pointer group"
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.02, y: -5 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-lg font-bold">
@@ -940,7 +1119,7 @@ export default function DigitalPresenceClient() {
 
                   <motion.div 
                     className="flex items-start gap-4 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors cursor-pointer group"
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.02, y: -5 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-lg font-bold">
@@ -957,7 +1136,7 @@ export default function DigitalPresenceClient() {
 
                   <motion.div 
                     className="flex items-start gap-4 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors cursor-pointer group"
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.02, y: -5 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-lg font-bold">
@@ -977,6 +1156,42 @@ export default function DigitalPresenceClient() {
                   <p className="text-sm text-white/80">
                     Selected participants will be notified by April 15, 2025
                   </p>
+                  <div className="mt-4 bg-white/10 p-3 rounded-lg">
+                    <p className="text-sm font-semibold mb-2 text-white">
+                      Application Deadline: Friday, April 11, 2025 at 11:59 PM EST
+                    </p>
+                    {/* Countdown timer for application section */}
+                    {!countdown.expired ? (
+                      <div className="flex justify-start gap-3 mt-2">
+                        <div className="flex flex-col items-center">
+                          <div className="bg-white/10 rounded-md px-2 py-1 min-w-[2.5rem] text-sm font-bold">
+                            {countdown.days.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-[10px] mt-1 text-white/70">DAYS</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="bg-white/10 rounded-md px-2 py-1 min-w-[2.5rem] text-sm font-bold">
+                            {countdown.hours.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-[10px] mt-1 text-white/70">HOURS</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="bg-white/10 rounded-md px-2 py-1 min-w-[2.5rem] text-sm font-bold">
+                            {countdown.minutes.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-[10px] mt-1 text-white/70">MINS</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="bg-white/10 rounded-md px-2 py-1 min-w-[2.5rem] text-sm font-bold animate-pulse">
+                            {countdown.seconds.toString().padStart(2, '0')}
+                          </div>
+                          <span className="text-[10px] mt-1 text-white/70">SECS</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-yellow-300 text-sm">Application deadline has passed</p>
+                    )}
+                  </div>
                 </div>
               </motion.div>
 
@@ -990,7 +1205,7 @@ export default function DigitalPresenceClient() {
                 >
                   <Button 
                     size="lg" 
-                    onClick={() => setIsWaitlistOpen(true)}
+                    onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdnzQvUzZGQnyj6f9fQBepDDF-e7BuesQJLdzdldqVlk1h5mQ/viewform', '_blank')}
                     className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white hover:opacity-90 text-xl px-8 py-6 shadow-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-300 animate-pulse [animation-duration:3s]"
                   >
                     Start Application
@@ -1039,14 +1254,19 @@ export default function DigitalPresenceClient() {
                     </div>
                   </div>
                   <div className="md:w-2/3 p-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    <motion.h3 
+                      className="text-2xl font-bold text-gray-900 mb-4"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
                       <Link 
-                        href="#instructor" 
+                        href="https://moises.tech" 
+                        target="_blank"
                         className="hover:text-indigo-600 transition-colors"
                       >
                         Moises Sanabria
                       </Link>
-                    </h3>
+                    </motion.h3>
                     <p className="text-gray-600 mb-6">
                       A Venezuelan-born, Miami-based interdisciplinary artist whose work explores the intersections of machine philosophy, digital culture, and memetics within the context of networked social media life.
                     </p>
@@ -1083,14 +1303,18 @@ export default function DigitalPresenceClient() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="relative h-16 w-48 mx-auto mb-6">
+              <motion.div 
+                className="relative h-16 w-48 mx-auto mb-6"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <Image
                   src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1743038354/own-your-digital-presence/bac-logo-white_nzrksu.png"
                   alt="Bakehouse Art Complex Logo"
                   fill
                   className="object-contain"
                 />
-              </div>
+              </motion.div>
               <h2 className="text-2xl font-bold mb-6">
                 Bakehouse Artist Tech Initiative
               </h2>
@@ -1104,6 +1328,22 @@ export default function DigitalPresenceClient() {
           </div>
         </div>
       </footer>
+      
+      {/* Add keyframe animations */}
+      <style jsx global>{`
+        @keyframes pulse-slow {
+          0%, 100% {
+            opacity: 0.7;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        
+        .animate-pulse-slow {
+          animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+      `}</style>
     </div>
   );
 }
