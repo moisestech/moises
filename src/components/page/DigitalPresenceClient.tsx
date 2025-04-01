@@ -27,8 +27,6 @@ import {
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import FlipText from "@/components/ui/flip-text"
-import ControlledFlipText from "@/components/ui/controlled-flip-text"
 import { Button } from "@/components/ui/button"
 
 // Animation variants
@@ -131,7 +129,6 @@ export default function DigitalPresenceClient() {
   const [submitted, setSubmitted] = useState(false);
   const [expandedDay, setExpandedDay] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [titleAnimationKey, setTitleAnimationKey] = useState(0);
 
   // Add schedule details
   const scheduleDetails = {
@@ -221,12 +218,9 @@ export default function DigitalPresenceClient() {
     return () => observer.disconnect();
   }, []);
 
-  // Update the scrollToSection function to use the animation key counter
+  // Update the scrollToSection function to remove animation logic
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false); // Close mobile menu after clicking
-    
-    // Increment the animation key to trigger a new animation
-    setTitleAnimationKey(prev => prev + 1);
     
     const element = document.getElementById(sectionId);
     if (element) {
@@ -423,17 +417,9 @@ export default function DigitalPresenceClient() {
           {/* Logo + Text */}
           <div className="flex items-end justify-end gap-4">
             <div className="flex items-end justify-end gap-2">
-              <div className="relative">
-                <ControlledFlipText
-                  duration={0.5}
-                  delayMultiple={0.05}
-                  className="text-2xl text-indigo-600 tracking-tight"
-                  animationKey={titleAnimationKey}
-                  autoAnimateInterval={30000} // Optional: auto-animate every 30 seconds
-                >
-                  Own Your Digital Presence
-                </ControlledFlipText>
-              </div>
+              <h1 className="text-2xl text-indigo-600 tracking-tight font-bold">
+                Own Your Digital Presence
+              </h1>
             </div>
           </div>
 
