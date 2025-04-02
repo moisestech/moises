@@ -14,10 +14,30 @@ export interface InteractiveContent {
   };
 }
 
-interface ResearchItem {
+export interface ResearchItem {
   title: string;
   year: number;
   description: string;
+  essay?: string;
+  implementation?: {
+    timeline: string;
+    locations: string[];
+    technical_setup: string;
+    collaborations: string[];
+    documentation: string;
+    relevant_experience: string;
+  };
+  budget?: {
+    items: {
+      name: string;
+      amount: number;
+    }[];
+    total: number;
+  };
+  supplemental_materials?: {
+    title: string;
+    content: string[];
+  }[];
   interactiveContent: InteractiveContent[];
   artistic_intent: string;
   technical_requirements: {
@@ -31,7 +51,7 @@ interface ResearchItem {
     interactive_elements?: string[];
   };
   components: {
-    mask: {
+    structure: {
       material: string;
       customization: string[];
     };
@@ -61,14 +81,22 @@ interface ResearchItem {
   installation_notes: string[];
   future_iterations?: string[];
   on_view: boolean;
+  enhancedDescriptions: {
+    overview: string;
+    essay: string;
+    implementation: string;
+    budget: string;
+    technical: string;
+    gallery: string;
+  };
 }
 
 export const research: { [key: string]: ResearchItem } = {
-  privacy_mask: {
-    title: 'Privacy Mask',
+  privacy_is_a_luxury: {
+    title: 'Privacy is a Luxury',
     year: 2025,
     description:
-      "Privacy Mask visually investigates the 'price of privacy in our surveillance era. The installation centers on a gold-plated Guy Fawkes mask an iconic symbol of anonymous resistance transformed through its integration with Wi-Fi routers Antennas and ATM/POS 'We Accept' decal as the masks headband. The piece manifests as a laboratory-like exploration where an ATM/POS decal mounted on the mask's forehead directly confronts viewers with the commodification of digital privacy. The two Wi-Fi routers with protruding antennas create a broadband signal exoskeleton. The work examines how privacy tools remain paradoxically tethered to corporate infrastructures. Decals of VPN company logos (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad), serves as a critical discourse on the commercialization of anonymity trade-off to buy back privacy in an era where data extraction runs rampant and personal security becomes a product to be bought and sold.",
+      "Privacy is a Luxury visually investigates the 'price of privacy in our surveillance era. The installation centers on a gold-plated Guy Fawkes mask an iconic symbol of anonymous resistance transformed through its integration with Wi-Fi routers Antennas and ATM/POS 'We Accept' decal as the masks headband. The piece manifests as a laboratory-like exploration where an ATM/POS decal mounted on the mask's forehead directly confronts viewers with the commodification of digital privacy. The two Wi-Fi routers with protruding antennas create a broadband signal exoskeleton. The work examines how privacy tools remain paradoxically tethered to corporate infrastructures. Decals of VPN company logos (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad), serves as a critical discourse on the commercialization of anonymity trade-off to buy back privacy in an era where data extraction runs rampant and personal security becomes a product to be bought and sold.",
     interactiveContent: [
       {
         type: 'italic',
@@ -181,7 +209,7 @@ export const research: { [key: string]: ResearchItem } = {
       },
     ],
     artistic_intent:
-      'The Privacy Mask critiques the illusion of digital anonymity in an era of mass surveillance. The piece fuses the iconography of privacy and resistance with the very corporate entities that sell privacy as a product, emphasizing its status as a cultural artifact of digital resistance.',
+      'The Privacy is a Luxury critiques the illusion of digital anonymity in an era of mass surveillance. The piece fuses the iconography of privacy and resistance with the very corporate entities that sell privacy as a product, emphasizing its status as a cultural artifact of digital resistance.',
     technical_requirements: {
       power: [
         '110-240V power connection required for routers',
@@ -205,7 +233,7 @@ export const research: { [key: string]: ResearchItem } = {
       ],
     },
     components: {
-      mask: {
+      structure: {
         material: 'Gold-plated ABS plastic',
         customization: [
           'NordVPN logo',
@@ -249,9 +277,9 @@ export const research: { [key: string]: ResearchItem } = {
     dimensions: '24" x 18" x 12" (including antennas)',
     images: [
       {
-        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739160442/art/moisestech-website/research/moises-sanabria-privacy-mask-net-gala-proposal-25_pgepj6.png',
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962524/art/moisestech-website/artworks/2025_privacy_mask/moises-sanabria-privacy-mask_ewms3y.jpg',
         caption:
-          'Privacy Mask - Front view showing gold mask with VPN logos and ATM terminal',
+          'Privacy is a Luxury - Front view showing gold mask with VPN logos and ATM terminal',
       },
     ],
     tags: [
@@ -285,256 +313,343 @@ export const research: { [key: string]: ResearchItem } = {
       'Mobile app integration for viewer interaction',
     ],
     on_view: false,
+    enhancedDescriptions: {
+      overview: "Privacy is a Luxury explores the intersection of digital privacy and corporate surveillance through a sculptural installation. The work combines iconic symbols of digital resistance with commercial privacy products, creating a critical examination of how privacy has become a commodity in our surveillance era. The installation's physical manifestation serves as both a commentary and a functional object, highlighting the paradox of privacy tools that remain tethered to corporate infrastructures.",
+      essay: "This critical examination of digital privacy draws from contemporary surveillance studies and critical theory. The project's theoretical framework engages with key concepts in surveillance capitalism, digital culture, and the evolving relationship between personal privacy and corporate data collection. Through its sculptural format, the work creates a space for inquiry into how privacy tools and resistance symbols are co-opted by commercial interests.",
+      implementation: "The project's implementation focuses on creating a precise, museum-quality installation that combines industrial design with digital components. Each element is carefully selected for both aesthetic impact and functional reliability, ensuring the piece can effectively communicate its message while maintaining operational stability in gallery settings.",
+      budget: "The project's budget is structured to support both the physical components and digital elements of the installation. Key investments include the gold-plated mask, Wi-Fi routers, and custom mounting hardware. The budget also accounts for professional installation, documentation, and contingency funds to ensure successful exhibition.",
+      technical: "The technical requirements for Privacy is a Luxury are designed to ensure reliable operation in gallery settings. The installation combines industrial-grade components with digital elements, creating a stable and visually striking presentation. Each component is carefully selected for durability, ease of installation, and maintenance in exhibition spaces.",
+      gallery: "The gallery showcases the Privacy is a Luxury installation in various exhibition contexts. Each image captures different aspects of the work, from detailed views of the VPN logos and ATM terminal to full installation shots that demonstrate the piece's presence in gallery spaces. The documentation highlights both the technical precision and conceptual depth of the installation."
+    }
   },
-  vr_jesus_mary: {
-    title: 'VR Jesus Mary',
+  the_algorithm_is_outside: {
+    title: 'The Algorithm is Outside',
     year: 2025,
-    description: "VR Jesus Mary investigates the intersection of religious iconography and virtual reality technology. The installation features a life-sized religious figure constructed from salvaged VR headsets, LED matrices, and discarded tech components. The piece transforms as viewers approach, with motion sensors triggering different visual experiences through the headsets' displays. This work explores themes of digital worship, technological spirituality, and the evolution of religious experience in our increasingly virtual world.",
+    description: "The Algorithm is Outside, an art project by Moises Sanabria, interrogates how machine intelligence permeates daily life, public space, and collective behavior. This work can be framed within contemporary machine philosophy and critical theory that question the blurring of human and technological realms.",
+    essay: `The Algorithm is Outside, an art project by Moises Sanabria, interrogates how machine intelligence permeates daily life, public space, and collective behavior. This work can be framed within contemporary machine philosophy and critical theory that question the blurring of human and technological realms. Philosopher Bernard Stiegler asserts that technology (technics) is not external to humanity but an essential part of it – an exteriorisation of memory and thought that fundamentally shapes human experience.
+
+Similarly, Yuk Hui emphasizes that modern algorithms are more than tools; they inhabit a technical milieu that co-constitutes our thinking and culture. In this view, the "algorithm outside" is literally an externalized mind, a cognitive architecture in the public domain that we continuously interact with and "permanently negotiate" as it changes us.
+
+AI, Infrastructure, and Everyday Life as Technological Habitat
+As algorithms migrate from laboratories into infrastructure and public space, theorists warn of new power dynamics. Shoshana Zuboff's notion of surveillance capitalism details how ubiquitous AI and data capture turn daily life into a raw material for profit, "exploiting human nature" just as industrial capitalism once exploited nature. The algorithmic systems that govern social media feeds, smart city sensors, or navigation maps now actively shape our movements and choices.
+
+Digital Behavior and Collective Rituals in the Public Sphere
+Beyond infrastructure, The Algorithm is Outside delves into the social and ritualistic dimensions of our entanglement with AI. Byung-Chul Han laments the "disappearance of rituals" in hyper-digital society – the erosion of shared temporal structures and communal practices that ground meaning. In place of traditional rituals, we witness the rise of algorithmically mediated behaviors: the swipes, likes, and navigation routes that millions perform in unison, guided by the gentle coercion of code.`,
+    implementation: {
+      timeline: "Starting in September 2025",
+      locations: [
+        "Urban Parks: Bayfront Park, Maurice A. Ferré Park",
+        "Community Spaces: Wynwood Walls area, Little Haiti Cultural Complex",
+        "Beachfront Locations: South Pointe Park, North Beach Bandshell"
+      ],
+      technical_setup: "The installation will be constructed using accessible 'Pro-Jax' scaffold systems, either 12' or 18' units with guardrails and outriggers, to securely hold six vertically-mounted screens. An industrial engineer will audit the scaffolding to ensure structural integrity, portability, and rapid installation, enabling two people to fully assemble the structure in less than one hour.",
+      collaborations: [
+        "Installation Specialist: Ensuring structural safety and ease of assembly",
+        "Documentation Team: Professional videographers and photographers",
+        "Local Organizations: Community arts groups and neighborhood associations"
+      ],
+      documentation: "High-quality video and photography documentation will be integral, creating an interactive online archive and promoting dialogue around digital and physical community interactions.",
+      relevant_experience: "Previous projects, including 'Google Gradients' (2015) and 'Doomscrolling Marathon' (2024), demonstrate Sanabria's ability to effectively transform complex digital phenomena into engaging physical installations."
+    },
+    budget: {
+      items: [
+        { name: "Scaffold unit", amount: 2179 },
+        { name: "Installation Specialist", amount: 1500 },
+        { name: "Documentation & Videographer", amount: 500 },
+        { name: "Travel and Logistics", amount: 500 },
+        { name: "Electric chargers", amount: 821 },
+        { name: "Contingency/Insurance", amount: 500 }
+      ],
+      total: 6000
+    },
+    supplemental_materials: [
+      {
+        title: "Internet Scaffold Assembly Guide",
+        content: [
+          "Frame Assembly: Illustration of assembling the Pro-Jax scaffold unit",
+          "Securing Scaffold: Image showing how to firmly secure outriggers and guard rails",
+          "TV Mounting: Illustration detailing the attachment of mounting brackets",
+          "Cable Management: Depiction of neatly routing HDMI and power cables",
+          "Battery Setup: Illustration showing placement of rechargeable battery units",
+          "Activation: Final image of completed assembly with all TVs powered on",
+          "Safety Notice: Important: Consult installation specialist for assembly audit prior to public activation."
+        ]
+      }
+    ],
     interactiveContent: [
       {
         type: 'highlight',
-        text: 'VR headsets',
+        text: 'machine philosophy',
         content: {
-          text: 'Repurposed virtual reality headsets serve as both structural elements and symbolic windows into digital spirituality.',
-        },
+          text: 'Contemporary philosophical framework examining the relationship between human consciousness and technological systems, particularly how machines extend and transform human capabilities.',
+          link: {
+            url: 'https://www.e-flux.com/journal/86/161887/cosmotechnics-as-cosmopolitics/',
+            label: 'Read more on e-flux'
+          }
+        }
       },
-      {
-        type: 'italic',
-        text: 'digital worship',
-        content: {
-          text: 'The emerging phenomenon of religious and spiritual practices taking place in virtual spaces.',
-        },
-      }
-    ],
-    artistic_intent: "The piece examines how traditional religious iconography adapts to and is transformed by digital technology, questioning whether virtual experiences can facilitate genuine spiritual connection.",
-    technical_requirements: {
-      power: [
-        '120V power supply for LED matrices',
-        'USB power for motion sensors',
-        'Backup power system for continuous operation'
-      ],
-      mounting: [
-        'Steel framework for structural support',
-        'Wall-mounted components',
-        'Secure mounting for VR headsets'
-      ],
-      space: {
-        pedestal_size: '6ft x 6ft base',
-        wall_clearance: '3 feet for viewer interaction',
-        power_access: 'Floor and wall power access required'
-      },
-      interactive_elements: [
-        'Motion sensors for proximity detection',
-        'LED matrix displays',
-        'Optional sound components'
-      ]
-    },
-    components: {
-      mask: {
-        material: 'Recycled VR headsets and electronic components',
-        customization: [
-          'LED matrix integration',
-          'Motion sensor system',
-          'Custom power distribution'
-        ]
-      },
-      hardware: {
-        model: 'Various recycled VR headsets',
-        specifications: [
-          'Modified display panels',
-          'Custom LED controllers',
-          'Arduino-based sensor system'
-        ],
-        power_requirements: '120V AC, converted to 5V DC'
-      },
-      mounting: {
-        type: [
-          'Steel framework',
-          'Wall mounts',
-          'Custom brackets'
-        ],
-        materials: [
-          'Steel tubing',
-          'Aluminum brackets',
-          '3D printed components'
-        ]
-      },
-      display: {
-        pedestal: 'Custom steel base with cable management',
-        lighting: 'Programmable LED ambient lighting'
-      }
-    },
-    materials: [
-      'Recycled VR headsets',
-      'LED matrices',
-      'Motion sensors',
-      'Steel framework',
-      'Electronic components',
-      'Power distribution system'
-    ],
-    dimensions: '6ft x 6ft x 8ft (including base)',
-    images: [
-      {
-        url: 'https://placeholder-url.com/vr-jesus-mary-concept',
-        caption: 'VR Jesus Mary - Conceptual rendering showing LED integration'
-      }
-    ],
-    tags: [
-      'interactive installation',
-      'religious art',
-      'virtual reality',
-      'electronic sculpture',
-      'recycled technology',
-      'digital spirituality',
-      'motion sensing',
-      'LED art'
-    ],
-    interpretation: "VR Jesus Mary challenges viewers to consider how traditional religious imagery and experience translate into the digital age. Through its use of recycled VR technology, the piece suggests both the potential and limitations of digital spiritual experiences while questioning the role of technology in modern religious practice.",
-    exhibition: 'Digital Devotion: Technology and Spirituality',
-    installation_notes: [
-      'Requires professional electrical installation',
-      'Motion sensor calibration needed',
-      'Regular LED matrix maintenance',
-      'Careful cable management essential',
-      'Climate control recommended for electronics'
-    ],
-    future_iterations: [
-      'Integration with live VR experiences',
-      'Enhanced interactive elements',
-      'Expanded sensor capabilities',
-      'Mobile app integration'
-    ],
-    on_view: false
-  },
-  immortal_obsolescence_2025: {
-    title: 'Immortal Obsolescence',
-    year: 2025,
-    description: 
-      "A year-long initiative exploring the intersection of technology, spirituality, and environmental impact in Miami's emerging tech art scene. The project transforms e-waste into interactive sculptures and performances, questioning the permanence of digital culture while creating new meaning from technological debris.",
-    interactiveContent: [
       {
         type: 'highlight',
-        text: 'e-waste transformation',
+        text: 'Bernard Stiegler',
         content: {
-          text: 'The process of converting discarded electronic components into artistic works, challenging the concept of technological obsolescence.'
+          text: 'French philosopher who argues that technology (technics) is not external to humanity but an essential part of it – an exteriorisation of memory and thought that fundamentally shapes human experience.',
+          link: {
+            url: 'https://en.wikipedia.org/wiki/Bernard_Stiegler',
+            label: 'Learn more about Stiegler'
+          }
         }
       },
       {
-        type: 'italic',
-        text: 'digital worship',
+        type: 'highlight',
+        text: 'Yuk Hui',
         content: {
-          text: 'The emerging phenomenon of spiritual practices mediated through technology, examining how digital tools influence religious and contemplative experiences.'
+          text: 'Philosopher who emphasizes that modern algorithms are more than tools; they inhabit a technical milieu that co-constitutes our thinking and culture.',
+          link: {
+            url: 'https://www.e-flux.com/journal/86/161887/cosmotechnics-as-cosmopolitics/',
+            label: 'Read Hui\'s work'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'surveillance capitalism',
+        content: {
+          text: 'A new economic order that claims human experience as free raw material for hidden commercial practices of extraction, prediction, and sales.',
+          link: {
+            url: 'https://en.wikipedia.org/wiki/Surveillance_capitalism',
+            label: 'Learn more on Wikipedia'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'Shoshana Zuboff',
+        content: {
+          text: 'Professor and author who coined the term "surveillance capitalism" and details how ubiquitous AI and data capture turn daily life into a raw material for profit.',
+          link: {
+            url: 'https://en.wikipedia.org/wiki/Shoshana_Zuboff',
+            label: 'Learn more about Zuboff'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'Byung-Chul Han',
+        content: {
+          text: 'Philosopher who discusses the "disappearance of rituals" in hyper-digital society and the erosion of shared temporal structures.',
+          link: {
+            url: 'https://english.elpais.com/',
+            label: 'Read Han\'s analysis'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'digital rituals',
+        content: {
+          text: 'The emergence of algorithmically mediated behaviors that replace traditional communal practices, creating new forms of collective experience.',
+          link: {
+            url: 'https://english.elpais.com/',
+            label: 'Read more about digital rituals'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'Pro-Jax scaffold systems',
+        content: {
+          text: 'Industrial-grade scaffold systems used for the installation, providing a modular and portable infrastructure for public display.',
+          image: {
+            src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596908/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image3-2025_wtttsq.png',
+            alt: 'Pro-Jax scaffold system in use'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'Google Gradients',
+        content: {
+          text: 'Previous project by Moises Sanabria (2015) that demonstrated effective transformation of digital phenomena into physical installations.',
+          link: {
+            url: 'https://moises.tech/artworks/google-gradients',
+            label: 'View Google Gradients'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'Doomscrolling Marathon',
+        content: {
+          text: 'Recent project by Moises Sanabria (2024) exploring digital behaviors and collective experiences.',
+          link: {
+            url: 'https://moises.tech/artworks/doomscrolling-marathon',
+            label: 'View Doomscrolling Marathon'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'Bayfront Park',
+        content: {
+          text: 'One of the key installation locations in Miami, representing the intersection of public space and digital infrastructure.',
+          image: {
+            src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596908/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image3-2025_wtttsq.png',
+            alt: 'Installation at Bayfront Park'
+          }
+        }
+      },
+      {
+        type: 'highlight',
+        text: 'Wynwood Walls',
+        content: {
+          text: 'Community space where the installation will be displayed, highlighting the intersection of art, technology, and public engagement.',
+          image: {
+            src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596909/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image1-2025_lqf7zs.png',
+            alt: 'Installation at Wynwood Walls'
+          }
         }
       }
     ],
-    artistic_intent: 
-      "To establish a new framework for considering obsolescence, sustainability, and digital culture in contemporary art while fostering a community of practitioners at the intersection of technology and artistic expression.",
+    artistic_intent: "To make visible the invisible workings of AI in public space, treating the algorithm as an embodied actor in our shared environment rather than a black-box confined to screens. The project aims to transform the algorithm from an occult mechanism of control into an object of communal inquiry and ritual.",
     technical_requirements: {
       power: [
-        'Various voltage requirements for different installations',
-        'Sustainable power management systems',
-        'Battery backup systems for continuous operation'
+        'Rechargeable battery packs for mobile units',
+        'Outdoor electric chargers',
+        'HDMI control units for content management',
+        'Backup power systems for continuous operation'
       ],
       mounting: [
-        'Custom mounting solutions for each sculpture',
-        'Mobile display systems for TV Bicycle',
-        'Floor installation infrastructure for Touch Grass Circuit'
+        'Pro-Jax scaffold systems (12\' or 18\' units)',
+        'Guardrails and outriggers',
+        'TV mounting brackets',
+        'Cable management system'
       ],
       space: {
-        pedestal_size: 'Variable depending on installation',
-        wall_clearance: 'Minimum 3 feet for interactive works',
-        power_access: 'Multiple power points required'
+        pedestal_size: 'Variable based on scaffold unit',
+        wall_clearance: 'Minimum 3 feet for public interaction',
+        power_access: 'Requires proximity to power source or battery charging station'
       },
       interactive_elements: [
-        'Motion sensors for VR Jesus Mary',
-        'Pressure sensors for Touch Grass Circuit',
-        'LED matrices and displays',
-        'Animatronic components'
+        'Six vertically-mounted screens',
+        'QR code submission system',
+        'Content curation interface',
+        'Documentation equipment'
       ]
     },
     components: {
-      mask: {
-        material: 'Salvaged VR headsets and electronic components',
+      structure: {
+        material: 'Industrial-grade scaffold components',
         customization: [
-          'LED integration',
-          'Motion sensor systems',
-          'Custom power distribution'
+          'Screen mounting system',
+          'Cable routing channels',
+          'Weather protection elements'
         ]
       },
       hardware: {
-        model: 'Various recycled electronics',
+        model: 'Pro-Jax scaffold system',
         specifications: [
-          'Modified display panels',
-          'Custom LED controllers',
-          'Arduino-based sensor systems',
-          'Animatronic control units'
+          'Portable and modular design',
+          'Safety-certified components',
+          'Weather-resistant materials',
+          'Quick-assembly system'
         ],
-        power_requirements: '110-240V AC with DC conversion'
+        power_requirements: 'Multiple power options (battery/AC)'
       },
       mounting: {
         type: [
-          'Custom steel frameworks',
-          'Mobile platforms',
-          'Floor mounting systems'
+          'Scaffold frame',
+          'Screen brackets',
+          'Cable management'
         ],
         materials: [
-          'Recycled metal',
-          'Sustainable composites',
-          '3D printed components'
+          'Steel scaffold components',
+          'Aluminum mounting hardware',
+          'Weather-resistant cables'
         ]
       },
       display: {
-        pedestal: 'Various custom bases with integrated cable management',
-        lighting: 'Programmable LED systems'
+        pedestal: 'Scaffold base with integrated power management',
+        lighting: 'Ambient lighting for evening visibility'
       }
     },
     materials: [
-      'Salvaged VR headsets',
-      'Vintage television sets',
-      'Circuit boards',
-      'Keyboards',
-      'Calculators',
-      'LED components',
-      'Motion sensors',
-      'Pressure sensors',
-      'Animatronic parts'
+      'Pro-Jax scaffold system',
+      'Six TV screens',
+      'Mounting brackets',
+      'Power management system',
+      'HDMI control units',
+      'Documentation equipment',
+      'Safety equipment',
+      'Transportation materials'
     ],
-    dimensions: 'Variable installation sizes',
+    dimensions: 'Variable based on scaffold unit (12\' or 18\')',
     images: [
       {
-        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739417794/art/moisestech-website/research/immortal-obsolescence/concept-render.jpg',
-        caption: 'Concept rendering of Immortal Obsolescence installations'
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596908/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image3-2025_wtttsq.png',
+        caption: 'Conceptual rendering of the installation in Bayfront Park, Miami'
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596909/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image1-2025_lqf7zs.png',
+        caption: 'Conceptual rendering of the installation in Wynwood Walls area'
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596910/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image2-2025_t9y9ur.png',
+        caption: 'Conceptual rendering of the installation in South Pointe Park'
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596910/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image4-2025_nbriyb.png',
+        caption: 'Conceptual rendering of the installation in North Beach Bandshell'
       }
     ],
     tags: [
-      'e-waste',
+      'public art',
+      'digital infrastructure',
+      'surveillance capitalism',
+      'machine philosophy',
       'interactive installation',
-      'sustainability',
-      'digital culture',
-      'animatronics',
-      'virtual reality',
-      'religious art',
-      'technology',
+      'social media',
+      'urban intervention',
       'community engagement',
-      'Miami tech art'
+      'digital culture',
+      'critical theory',
+      'scaffold installation',
+      'public space',
+      'AI art',
+      'urban technology',
+      'social practice'
     ],
-    interpretation: 
-      "The project series examines the lifecycle of technology through artistic transformation, creating a dialogue between obsolescence and innovation. Each installation approaches this theme from a different angle: religious iconography, market dynamics, personal interaction, and human-machine integration.",
-    exhibition: 'Multiple venues throughout Miami, 2025-2026',
+    interpretation: "The project examines how algorithms have become embedded in our physical environment, transforming public space into a technological habitat. Through its public installation format, it makes visible the invisible forces that shape our daily lives and collective behaviors.",
+    exhibition: 'Multiple public locations in Miami, 2025',
     installation_notes: [
-      'Requires specialized technical setup for each piece',
-      'Community workshop integration',
-      'Documentation throughout process',
-      'Regular maintenance schedules',
-      'Sustainable power management'
+      'Requires professional installation audit',
+      'Regular power management monitoring',
+      'Weather protection measures',
+      'Safety protocol implementation',
+      'Community engagement coordination',
+      'Scaffold assembly verification',
+      'Screen calibration and testing',
+      'Power system maintenance',
+      'Documentation setup'
     ],
     future_iterations: [
-      'Expanded animatronic capabilities',
-      'Enhanced interactive elements',
-      'Community contribution features',
-      'Mobile workshop units',
-      'Online documentation platform'
+      'Expanded location network',
+      'Enhanced interactive features',
+      'Community content curation platform',
+      'Documentation archive development',
+      'Mobile app integration',
+      'Additional screen configurations',
+      'Advanced weather protection',
+      'Solar power integration',
+      'Extended battery life systems'
     ],
-    on_view: false
+    on_view: false,
+    enhancedDescriptions: {
+      overview: "The Algorithm is Outside explores the intersection of digital infrastructure and public space. Through its conceptual framework and physical manifestation, the project examines how algorithms shape our collective behavior and transform urban environments into technological habitats. The installation's modular design allows for flexible deployment across various public locations, creating a network of algorithmic interventions that make visible the invisible forces shaping our daily lives.",
+      essay: "This critical examination of algorithmic influence in public space draws from contemporary machine philosophy and critical theory. The project's theoretical framework engages with key concepts in surveillance capitalism, digital culture, and the evolving relationship between human consciousness and technological systems. Through its public installation format, the work creates a space for communal inquiry into the ways algorithms mediate our experience of urban environments.",
+      implementation: "The project's implementation strategy focuses on creating a scalable, modular system that can be deployed across multiple public locations in Miami. Each installation site is carefully selected to maximize public engagement and create meaningful interactions with the surrounding urban context. The technical setup combines industrial-grade scaffolding with digital displays, creating a temporary infrastructure that transforms public space into a site of algorithmic intervention.",
+      budget: "The project's budget is structured to support both the physical infrastructure and the digital components of the installation. Key investments include the scaffold system, display technology, and power management solutions. The budget also accounts for professional installation, documentation, and contingency funds to ensure successful deployment across multiple locations.",
+      technical: "The technical requirements for The Algorithm is Outside are designed to ensure reliable operation in various outdoor conditions. The installation combines industrial-grade scaffolding with weather-resistant digital displays and power management systems. Each component is carefully selected for durability, ease of installation, and maintenance in public spaces.",
+      gallery: "The gallery showcases conceptual renderings of The Algorithm is Outside in various public locations throughout Miami. Each image represents a different site-specific installation, demonstrating how the work adapts to and transforms different urban contexts. The renderings highlight the project's modular design and its potential to create meaningful interactions between digital infrastructure and public space."
+    },
   }
 };

@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function ResearchPage() {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="max-w-7xl mx-auto px-12 py-24 mt-24">
       <h1 className="font-['MoMA_Sans'] text-4xl md:text-5xl font-bold mb-8">
         Research
       </h1>

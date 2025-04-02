@@ -62,7 +62,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/teaching"
-                onClick={(e) => handleNavClick(e, '/teaching')}
+                onClick={(e) => handleNavClick(e, '/workshop')}
                 className="hover:underline text-lg"
               >
                 Teaching
