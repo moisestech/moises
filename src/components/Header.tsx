@@ -60,7 +60,7 @@ export default function Header() {
     { label: 'Visit', path: '/visit' },
     { label: 'Exhibitions', path: '/exhibitions' },
     { label: 'Events', path: '/events' },
-    { label: 'Art and Artist', path: '/moikipedia' },
+    { label: 'Art and Artist', path: '/bio' },
     { label: 'CV', path: '/cv' },
     { label: 'Store', path: '/store' },
   ];

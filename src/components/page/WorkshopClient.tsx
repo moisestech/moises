@@ -81,32 +81,90 @@ export default function WorkshopClient() {
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-left">
             {[
               {
-                title: "Scale Tech Non-Profits",
-                description: "Custom software solutions to help your organization and community grow."
+                title: "Digital Presence",
+                description: "Build and optimize your online portfolio and website.",
+                link: "/workshop/own-your-digital-presence",
+                disabled: false
               },
               {
-                title: "Digital Presence",
-                description: "Build and optimize your online portfolio and website."
+                title: "SEO Optimization",
+                description: "Get found, get seen, and expand your reach with search engine optimization strategies.",
+                link: "https://fabiola.io/workshop_seo/index.html",
+                disabled: false
+              },
+              {
+                title: "Scale Tech Non-Profits",
+                description: "Custom software solutions to help your organization and community grow.",
+                link: "/workshop/tech-nonprofit",
+                disabled: true
               },
               {
                 title: "AI & Art",
-                description: "Learn how to integrate AI tools into your creative process."
+                description: "Learn how to integrate AI tools into your creative process.",
+                link: "/workshop/ai-and-the-arts",
+                disabled: true
+              },
+              {
+                title: "The Art of AI Marketing",
+                description: "Learn how to stand out in the age of AI-generated content.",
+                link: "/workshop/the-art-of-ai-marketing",
+                disabled: true
               }
             ].map((feature, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
-                className="backdrop-blur-md bg-white/10 p-6 rounded-xl transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(129,140,248,0.3)] card-glass"
-              >
-                <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hover-lift transition-transform duration-300">
-                  {feature.title}
-                </h3>
-                <p className="text-white/70">
-                  {feature.description}
-                </p>
-              </motion.div>
+              feature.disabled ? (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
+                  className="backdrop-blur-md bg-white/5 p-6 rounded-xl transform transition-all duration-300 card-glass h-full flex flex-col border border-white/10 relative overflow-hidden cursor-not-allowed"
+                >
+                  <div className="absolute inset-0 bg-black/30 z-10"></div>
+                  <div className="absolute top-3 right-3 z-20">
+                    <span className="bg-purple-500/80 text-white text-xs px-2 py-1 rounded-full">Coming Soon</span>
+                  </div>
+                  <div className="relative z-0">
+                    <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400/50 to-purple-400/50 bg-clip-text text-transparent">
+                      {feature.title}
+                    </h3>
+                    <p className="text-white/50">
+                      {feature.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ) : (
+                <Link 
+                  href={feature.link}
+                  key={index}
+                  target={feature.link.startsWith('http') ? '_blank' : '_self'}
+                  rel={feature.link.startsWith('http') ? 'noopener noreferrer' : ''}
+                  className="group"
+                >
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
+                    className="backdrop-blur-md bg-white/10 p-6 rounded-xl transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(147,51,234,0.5)] card-glass cursor-pointer h-full flex flex-col border border-white/10 group-hover:border-purple-500/50 relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:via-purple-500/5 group-hover:to-purple-500/10 transition-all duration-500"></div>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(147,51,234,0.2),rgba(0,0,0,0))]"></div>
+                    </div>
+                    <div className="relative z-10">
+                      <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-pink-300 transition-all duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-white/70 group-hover:text-white/90 transition-colors duration-300">
+                        {feature.description}
+                      </p>
+                      <div className="mt-4 flex items-center text-purple-300 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <span className="text-sm font-medium">Explore workshop</span>
+                        <ArrowUpRight className="h-4 w-4 ml-1" />
+                      </div>
+                    </div>
+                  </motion.div>
+                </Link>
+              )
             ))}
           </div>
         </div>
