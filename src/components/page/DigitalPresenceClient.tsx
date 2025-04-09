@@ -505,7 +505,7 @@ export default function DigitalPresenceClient() {
                 <div className="text-white/80 text-sm mt-4">
                   <p>Applications open: April 1, 2025</p>
                   <div className="font-semibold text-white mt-2">
-                    <p className="mb-2">Application deadline: Friday, April 14, 2025 at 11:59 pm EST</p>
+                    <p className="mb-2">Application deadline: Monday, April 14, 2025 at 11:59 pm EST</p>
                     
                     {/* Countdown timer animation */}
                     {!countdown.expired ? (
@@ -797,7 +797,7 @@ export default function DigitalPresenceClient() {
                         Day 1: Virtual Introduction
                       </h3>
                       <p className="text-gray-700">
-                        Friday, April 24, 2025 at 6:00 - 8:30 PM - An introductory virtual session on the foundations of website building and design basics
+                        Monday, April 24, 2025 at 6:00 - 8:30 PM - An introductory virtual session on the foundations of website building and design basics
                       </p>
                       <Link 
                         href="#learn" 
@@ -1144,7 +1144,7 @@ export default function DigitalPresenceClient() {
                   </p>
                   <div className="mt-4 bg-white/10 p-3 rounded-lg">
                     <p className="text-sm font-semibold mb-2 text-white">
-                      Application Deadline: Friday, April 14, 2025 at 11:59 PM EST
+                      Application Deadline: Monday, April 14, 2025 at 11:59 PM EST
                     </p>
                     {/* Countdown timer for application section */}
                     {!countdown.expired ? (
