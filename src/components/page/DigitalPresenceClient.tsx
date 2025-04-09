@@ -164,9 +164,9 @@ export default function DigitalPresenceClient() {
     expired: false
   });
   
-  // Set the deadline date - April 11, 2025 at 11:59 pm EST
+  // Set the deadline date - April 14, 2025 at 11:59 pm EST
   useEffect(() => {
-    const deadline = new Date("April 11, 2025 23:59:00 EDT").getTime();
+    const deadline = new Date("April 14, 2025 23:59:00 EDT").getTime();
     
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -505,7 +505,7 @@ export default function DigitalPresenceClient() {
                 <div className="text-white/80 text-sm mt-4">
                   <p>Applications open: April 1, 2025</p>
                   <div className="font-semibold text-white mt-2">
-                    <p className="mb-2">Application deadline: Friday, April 11, 2025 at 11:59 pm EST</p>
+                    <p className="mb-2">Application deadline: Friday, April 14, 2025 at 11:59 pm EST</p>
                     
                     {/* Countdown timer animation */}
                     {!countdown.expired ? (
@@ -1144,7 +1144,7 @@ export default function DigitalPresenceClient() {
                   </p>
                   <div className="mt-4 bg-white/10 p-3 rounded-lg">
                     <p className="text-sm font-semibold mb-2 text-white">
-                      Application Deadline: Friday, April 11, 2025 at 11:59 PM EST
+                      Application Deadline: Friday, April 14, 2025 at 11:59 PM EST
                     </p>
                     {/* Countdown timer for application section */}
                     {!countdown.expired ? (
