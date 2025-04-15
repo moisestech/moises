@@ -294,8 +294,16 @@ const WorkshopCanvas = () => {
     
     animate()
     
-    // Cleanup function
+    // Store canvas reference for cleanup
+    const canvasRef = renderer.domElement;
+
     return () => {
+      // Use stored reference in cleanup
+      const ctx = canvasRef.getContext('2d');
+      if (ctx) {
+        ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
+      }
+      
       window.removeEventListener('resize', handleResize)
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('touchmove', handleTouchMove)

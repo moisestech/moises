@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   title: "Workshops | Moises Sanabria & Fabiola Larios",
   description: "Explore our workshops on digital presence, AI art, tech for non-profits, and more. Join us to learn and grow in the digital age.",
   openGraph: {
-    title: "Workshops | Moises Sanabria",
+    title: "Workshops | Moises Sanabria & Fabiola Larios",
     description: "Explore our workshops on digital presence, AI art, tech for non-profits, and more. Join us to learn and grow in the digital age.",
     url: "https://moises.tech/workshop",
-    siteName: "Moises Sanabria",
+    siteName: "Moises Sanabria & Fabiola Larios",
     images: [
       {
         url: "/images/website-building-hero-image.png",

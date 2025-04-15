@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   images: {
     remotePatterns: [
       {
@@ -9,5 +9,23 @@ module.exports = {
         pathname: '/**',
       },
     ],
+    domains: [
+      'example.com',
+      'res.cloudinary.com',
+      'www.augustoesquivel.com',
+      'shawnamoulton.com',
+      'www.moreldoucet.com',
+      'moniquelazard.com',
+      'monicalopezdevictoria.com',
+      'christine-cortes.com',
+      'mateoseza.art',
+      'wooslerdelisfort.com',
+      'www.pedrowazzan.com',
+      'www.dianaespin.com',
+      'www.maipdesigns.com',
+      'www.christinapettersson.com'
+    ],
   },
 };
+
+module.exports = nextConfig;

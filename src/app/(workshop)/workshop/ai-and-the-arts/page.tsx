@@ -1,16 +1,5 @@
-import dynamic from 'next/dynamic'
-import { Metadata } from 'next'
+import AIArtsLandingClient from '@/components/page/AIArtsLandingClient'
 
-// Use dynamic import to load the client component
-const AIArtsClient = dynamic(() => import('@/components/page/AIArtsClient'), {
-  ssr: false // Disable server-side rendering
-})
-
-export const metadata: Metadata = {
-  title: 'AI and the Arts | Moises Sanabria',
-  description: 'Explore the intersection of artificial intelligence and creative expression with our innovative workshop series.',
-}
-
-export default function AIArtsPage() {
-  return <AIArtsClient />
+export default function AIArtsLanding() {
+  return <AIArtsLandingClient />
 } 

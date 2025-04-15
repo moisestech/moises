@@ -168,7 +168,7 @@ export default function TechNonprofitClient() {
   const workshopDetails = [
     {
       title: "Own Your Digital Presence",
-      description: "Website Building, SEO, Accessibility",
+      description: "Website Building, Performance, Accessibility",
       icon: <Globe className="h-6 w-6" />
     },
     {
@@ -513,7 +513,7 @@ export default function TechNonprofitClient() {
             </p>
             
             <p className="text-xl text-gray-300">
-              {`We've seen what's possible when art institutions like Bakehouse empower their artists with workshops and tech. From DIY websites to SEO strategies, and even automated content outreach—we build the tools that artists, staff, and audiences actually use.`}
+              {`We've seen what's possible when art institutions like Bakehouse empower their artists with workshops and tech. From DIY websites to performance optimization, and even automated content outreach—we build the tools that artists, staff, and audiences actually use.`}
             </p>
             
             <blockquote className="text-xl italic text-gray-300 border-l-4 border-blue-500 pl-4 my-8">
