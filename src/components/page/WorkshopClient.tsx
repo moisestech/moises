@@ -87,9 +87,9 @@ export default function WorkshopClient() {
                 disabled: false
               },
               {
-                title: "Performance Optimization",
+                title: "SEO Workshop",
                 description: "Get found, get seen, and expand your reach with search engine optimization strategies.",
-                link: "https://fabiola.io/workshop/performance/index.html",
+                link: "https://fabiola.io/workshop_seo/index.html",
                 disabled: false
               },
               {
