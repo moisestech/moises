@@ -42,7 +42,8 @@ import {
   BarChart2,
   Activity,
   Presentation,
-  ArrowUpCircle
+  ArrowUpCircle,
+  Brain
 } from 'lucide-react'
 
 export const workshopInfoNavigation = {
@@ -85,6 +86,18 @@ export const workshopContentNavigation = {
               href: "/workshop/own-your-digital-presence/day/1/session/1/digital-presence",
               icon: Globe,
               description: "Understanding online presence"
+            },
+            {
+              title: "AI Fundamentals",
+              href: "/workshop/own-your-digital-presence/day/1/session/1/ai-fundamentals",
+              icon: Brain,
+              description: "Introduction to AI tools for artists"
+            },
+            {
+              title: "AI Tools",
+              href: "/workshop/own-your-digital-presence/day/1/session/1/ai-tools",
+              icon: Code,
+              description: "Practical AI applications for artists"
             },
             {
               title: "Examples",
@@ -261,6 +274,12 @@ export const workshopContentNavigation = {
               href: "/workshop/own-your-digital-presence/day/2/session/2/customization",
               icon: Paintbrush,
               description: "Advanced design customization"
+            },
+            {
+              title: "CustomGPT Workshop",
+              href: "/workshop/own-your-digital-presence/day/2/session/2/customgpt",
+              icon: Brain,
+              description: "Building your own AI assistant"
             },
             {
               title: "Launch",
