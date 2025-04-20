@@ -10,7 +10,7 @@ jest.mock('next/navigation', () => ({
 
 describe('WorkshopNavigation', () => {
   beforeEach(() => {
-    (usePathname as jest.Mock).mockReturnValue('/workshop/own-your-digital-presence/day/1/participants');
+    (usePathname as jest.Mock).mockReturnValue('/workshop/own-your-digital-presence/day/1/session/1/introduction/participants');
   });
 
   it('initializes with correct sections open based on current path', () => {

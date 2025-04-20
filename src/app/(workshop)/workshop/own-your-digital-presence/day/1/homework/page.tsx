@@ -23,31 +23,31 @@ const pageOptions = [
     title: "Homepage",
     icon: Home,
     color: "from-blue-500 to-indigo-500",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/homepage"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/homepage"
   },
   {
     title: "Gallery/Portfolio",
     icon: Palette,
     color: "from-purple-500 to-pink-500",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/squarespace"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/gallery"
   },
   {
     title: "About/CV",
     icon: User,
     color: "from-amber-500 to-orange-500",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/squarespace"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/about-cv"
   },
   {
     title: "Events",
     icon: Calendar,
     color: "from-emerald-500 to-teal-500",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/squarespace"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/events"
   },
   {
     title: "Contact",
     icon: Mail,
     color: "from-rose-500 to-pink-500",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/squarespace"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/contact"
   }
 ];
 

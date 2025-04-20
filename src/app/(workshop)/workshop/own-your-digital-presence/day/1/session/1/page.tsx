@@ -26,7 +26,8 @@ import {
   Archive,
   Stars,
   Link2,
-  FileCheck
+  FileCheck,
+  Search
 } from 'lucide-react';
 import { FaSquarespace, FaWix, FaGithub } from 'react-icons/fa';
 import { SiWebflow } from "react-icons/si";
@@ -56,54 +57,64 @@ const sections = [
         icon: BookOpen
       },
       {
-        title: "Why Digital Presence Matters",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/digital-presence",
+        title: "Participants",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/introduction/participants",
+        icon: Users
+      },
+      {
+        title: "Digital Presence",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/introduction/digital-presence",
         icon: Globe
       },
       {
-        title: "Artist Website Examples",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/artist-websites",
-        icon: Image
+        title: "Analysis",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/introduction/analysis",
+        icon: Search
+      },
+      {
+        title: "Sustainability",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/introduction/sustainability",
+        icon: RefreshCw
       },
       {
         title: "Vocabulary Basics",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/vocabulary",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/introduction/vocabulary",
         icon: FileText
       }
     ]
   },
   {
-    title: "Digital Presence Fundamentals",
+    title: "Web Fundamentals",
     color: "from-purple-500 to-purple-600",
     items: [
       {
         title: "What Makes a Good Homepage?",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/homepage",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/homepage",
         icon: Globe
       },
       {
         title: "Hosting Media Strategically",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/media",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/media",
         icon: Image
       },
       {
         title: "Mobile Navigation Demos",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/mobile",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/mobile",
         icon: Smartphone
       },
       {
         title: "The Living Archive Approach",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/archive",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/archive",
         icon: Archive
       },
       {
         title: "Organizing Content Types",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/content",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/content",
         icon: Layers
       },
       {
         title: "Above-the-Fold Principles",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/above-the-fold",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/above-the-fold",
         icon: FileText
       }
     ]
@@ -114,22 +125,22 @@ const sections = [
     items: [
       {
         title: "Squarespace Guide",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/squarespace",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/squarespace",
         icon: FileText
       },
       {
         title: "GitHub Pages Guide",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/github",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/github",
         icon: FileText
       },
       {
         title: "Wix Guide",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/wix",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/wix",
         icon: FileText
       },
       {
         title: "Webflow Guide",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/webflow",
+        href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/webflow",
         icon: FileText
       }
     ]
@@ -140,22 +151,22 @@ const sections = [
     items: [
       {
         title: "Using AI to Mock Up Layouts",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/ai-tools/layout",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/layout",
         icon: Stars
       },
       {
         title: "Using AI for Art Assets",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/ai-tools/assets",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/assets",
         icon: Image
       },
       {
         title: "Smart Bios + CVs with AI",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/ai-tools/content",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/content",
         icon: FileText
       },
       {
         title: "Link Tools + Calendars",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/tools",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/tools",
         icon: Link2
       }
     ]
@@ -196,21 +207,21 @@ const platforms = [
     icon: FaGithub,
     description: "Free hosting for static websites with version control",
     color: "from-gray-800 to-gray-900",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/github"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/github"
   },
   {
     title: "Wix",
     icon: FaWix,
     description: "Drag-and-drop website builder with extensive customization",
     color: "from-yellow-500 to-yellow-600",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/wix"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/wix"
   },
   {
     title: "Webflow",
     icon: SiWebflow,
     description: "Design-focused platform with advanced customization",
     color: "from-blue-500 to-blue-600",
-    href: "/workshop/own-your-digital-presence/day/1/session/1/webflow"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/webflow"
   }
 ];
 
@@ -219,19 +230,19 @@ const foundations = [
     title: "Introduction",
     description: "Learn about the importance of digital presence and how to get started",
     icon: BookOpen,
-    href: "/workshop/own-your-digital-presence/day/1/session/1/intro"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/introduction"
   },
   {
     title: "Digital Presence",
     description: "Understand the key elements of a strong digital presence",
     icon: Globe,
-    href: "/workshop/own-your-digital-presence/day/1/session/1/digital-presence"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/introduction/digital-presence"
   },
   {
     title: "Homepage",
     description: "Learn how to create an effective homepage for your website",
     icon: Home,
-    href: "/workshop/own-your-digital-presence/day/1/session/1/homepage"
+    href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/homepage"
   }
 ];
 

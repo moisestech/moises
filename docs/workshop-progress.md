@@ -4,12 +4,12 @@
 
 ### Introduction & Overview
 - [x] [Welcome + Workshop Overview](/workshop/own-your-digital-presence/day/1/session/1/welcome)
-- [x] [Why Digital Presence Matters](/workshop/own-your-digital-presence/day/1/session/1/digital-presence)
+- [x] [Why Digital Presence Matters](/workshop/own-your-digital-presence/day/1/session/1/introduction/digital-presence)
 - [x] [Artist Website Examples](/workshop/own-your-digital-presence/day/1/session/1/artist-websites)
 - [x] [Vocabulary Basics](/workshop/own-your-digital-presence/day/1/session/1/vocabulary)
 
-### Digital Presence Fundamentals
-- [x] [What Makes a Good Homepage?](/workshop/own-your-digital-presence/day/1/session/1/homepage)
+### Web Fundamentals
+- [x] [What Makes a Good Homepage?](/workshop/own-your-digital-presence/day/1/session/1/foundations/homepage)
 - [x] [Hosting Media Strategically](/workshop/own-your-digital-presence/day/1/session/1/media)
 - [x] [Mobile Navigation Demos](/workshop/own-your-digital-presence/day/1/session/1/mobile)
 - [x] [The Living Archive Approach](/workshop/own-your-digital-presence/day/1/session/1/archive)
@@ -19,14 +19,14 @@
 ### Platform Selection
 - [x] [Squarespace Guide](/workshop/own-your-digital-presence/day/1/session/1/squarespace)
 - [x] [GitHub Pages Guide](/workshop/own-your-digital-presence/day/1/session/1/github)
-- [x] [Wix Guide](/workshop/own-your-digital-presence/day/1/session/1/wix)
+- [x] [Wix Guide](/workshop/own-your-digital-presence/day/1/session/1/platform/wix)
 - [x] [Webflow Guide](/workshop/own-your-digital-presence/day/1/session/1/webflow)
 
 ### AI & Tools
-- [x] [Using AI to Mock Up Layouts](/workshop/own-your-digital-presence/day/1/session/1/ai-tools/layout)
-- [x] [Using AI for Art Assets](/workshop/own-your-digital-presence/day/1/session/1/ai-tools/assets)
-- [x] [Smart Bios + CVs with AI](/workshop/own-your-digital-presence/day/1/session/1/ai-tools/content)
-- [x] [Link Tools + Calendars](/workshop/own-your-digital-presence/day/1/session/1/tools)
+- [x] [Using AI to Mock Up Layouts](/workshop/own-your-digital-presence/day/1/session/2/ai-tools/layout)
+- [x] [Using AI for Art Assets](/workshop/own-your-digital-presence/day/1/session/2/ai-tools/assets)
+- [x] [Smart Bios + CVs with AI](/workshop/own-your-digital-presence/day/2/session/1/ai-tools/content)
+- [x] [Link Tools + Calendars](/workshop/own-your-digital-presence/day/2/session/1/tools)
 
 ### Resources
 - [x] [Worksheet](/workshop/own-your-digital-presence/day/1/session/1/resources/worksheet)

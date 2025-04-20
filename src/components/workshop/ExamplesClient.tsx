@@ -34,37 +34,37 @@ export default function ExamplesClient() {
               title: "Portfolio Websites",
               description: "Showcase your work and artistic journey",
               icon: User,
-              link: "/workshop/own-your-digital-presence/day/1/session/1/examples/portfolios"
+              link: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/examples/portfolios"
             },
             {
               title: "Landing Pages",
               description: "Create focused, conversion-oriented pages",
               icon: Layout,
-              link: "/workshop/own-your-digital-presence/day/1/session/1/examples/landing-pages"
+              link: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/examples/landing-pages"
             },
             {
               title: "Business Websites",
               description: "Professional sites for artists and creatives",
               icon: Globe,
-              link: "/workshop/own-your-digital-presence/day/1/session/1/examples/websites"
+              link: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/examples/websites"
             },
             {
               title: "Case Studies",
               description: "Real-world examples and success stories",
               icon: Eye,
-              link: "/workshop/own-your-digital-presence/day/1/session/1/examples/case-studies"
+              link: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/examples/case-studies"
             },
             {
               title: "Mobile-First Design",
               description: "Responsive and mobile-optimized examples",
               icon: Smartphone,
-              link: "/workshop/own-your-digital-presence/day/1/session/1/examples/mobile"
+              link: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/examples/mobile"
             },
             {
               title: "Visual Galleries",
               description: "Showcase your work with stunning visuals",
               icon: Image,
-              link: "/workshop/own-your-digital-presence/day/1/session/1/examples/galleries"
+              link: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/examples/galleries"
             }
           ].map((example, index) => (
             <Link key={example.title} href={example.link}>

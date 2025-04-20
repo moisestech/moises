@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 
 interface PlatformBadgeProps {
-  platform: 'pricing' | 'bestFor'
+  platform: 'wix' | 'squarespace' | 'github' | 'pricing' | 'bestFor'
   children: React.ReactNode
 }
 
@@ -12,7 +12,13 @@ export function PlatformBadge({ platform, children }: PlatformBadgeProps) {
         'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium',
         platform === 'pricing'
           ? 'bg-blue-100 text-blue-800'
-          : 'bg-purple-100 text-purple-800'
+          : platform === 'bestFor'
+          ? 'bg-purple-100 text-purple-800'
+          : platform === 'wix'
+          ? 'bg-yellow-100 text-yellow-800'
+          : platform === 'squarespace'
+          ? 'bg-gray-100 text-gray-800'
+          : 'bg-blue-100 text-blue-800'
       )}
     >
       {children}
@@ -21,7 +27,7 @@ export function PlatformBadge({ platform, children }: PlatformBadgeProps) {
 }
 
 interface PlatformTagProps {
-  platform: 'pricing' | 'bestFor'
+  platform: 'wix' | 'squarespace' | 'github' | 'pricing' | 'bestFor'
   children: React.ReactNode
 }
 
@@ -32,7 +38,13 @@ export function PlatformTag({ platform, children }: PlatformTagProps) {
         'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium',
         platform === 'pricing'
           ? 'bg-blue-100 text-blue-800'
-          : 'bg-purple-100 text-purple-800'
+          : platform === 'bestFor'
+          ? 'bg-purple-100 text-purple-800'
+          : platform === 'wix'
+          ? 'bg-yellow-100 text-yellow-800'
+          : platform === 'squarespace'
+          ? 'bg-gray-100 text-gray-800'
+          : 'bg-blue-100 text-blue-800'
       )}
     >
       {children}

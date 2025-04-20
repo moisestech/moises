@@ -50,7 +50,7 @@ const participants: Array<{
 }> = [
   {
     name: "Augusto Esquivel",
-    website: "www.augustoesquivel.com",
+    website: "augustoesquivel.com",
     platforms: ["squarespace", "coding"],
     webDesignLevel: 1,
     aiLevel: 1,
@@ -102,7 +102,7 @@ const participants: Array<{
   },
   {
     name: "Morel Doucet",
-    website: "www.moreldoucet.com",
+    website: "moreldoucet.com",
     platforms: ["squarespace", "coding"],
     webDesignLevel: 3,
     aiLevel: 3,
@@ -220,7 +220,7 @@ const participants: Array<{
   },
   {
     name: "Pedro Wazzan",
-    website: "www.pedrowazzan.com",
+    website: "pedrowazzan.com",
     platforms: ["squarespace"],
     webDesignLevel: 1,
     aiLevel: 1,
@@ -239,7 +239,7 @@ const participants: Array<{
   },
   {
     name: "Diana Espin",
-    website: "www.dianaespin.com",
+    website: "dianaespin.com",
     platforms: ["squarespace"],
     webDesignLevel: 3,
     aiLevel: 2,
@@ -259,7 +259,7 @@ const participants: Array<{
   },
   {
     name: "Mariale Icaza",
-    website: "www.maipdesigns.com",
+    website: "maipdesigns.com",
     platforms: ["wix"],
     webDesignLevel: 3,
     aiLevel: 3,
@@ -278,7 +278,7 @@ const participants: Array<{
   },
   {
     name: "Christina Pettersson",
-    website: "www.christinapettersson.com",
+    website: "christinapettersson.com",
     platforms: ["other"],
     webDesignLevel: 1,
     aiLevel: 1,
@@ -375,9 +375,16 @@ export default function ParticipantsClient() {
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               Workshop Participants
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600 mb-6">
               Meet your fellow artists and explore their digital presence
             </p>
+            <Link 
+              href="/workshop/own-your-digital-presence/day/1/session/1/introduction/digital-presence"
+              className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700"
+            >
+              <Globe className="w-5 h-5" />
+              <span className="font-medium">Continue to Digital Presence</span>
+            </Link>
           </motion.section>
 
           {/* Participants Grid */}

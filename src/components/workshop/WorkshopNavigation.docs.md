@@ -124,7 +124,7 @@ Workshop Content
 The WorkshopNavigation component should:
 
 1. **Path-Based Section Opening**
-   - When on `/workshop/own-your-digital-presence/day/1/participants`:
+   - When on `/workshop/own-your-digital-presence/day/1/session/1/introduction/participants`:
      - "Workshop Content" section should be open
      - "Day 1" section should be open
      - "Participants" item should be highlighted
@@ -152,7 +152,7 @@ The WorkshopNavigation component should:
 ## Test Cases
 
 ### Path-Based Opening
-1. Navigate to `/workshop/own-your-digital-presence/day/1/participants`
+1. Navigate to `/workshop/own-your-digital-presence/day/1/session/1/introduction/participants`
    - Expected: Day 1 section open, Participants highlighted
 2. Navigate to `/workshop/own-your-digital-presence/day/1/session/1`
    - Expected: Day 1 and Session 1 sections open
@@ -181,13 +181,13 @@ The WorkshopNavigation component should:
 
 1. **Path Handling**
    ```typescript
-   // Current path: /workshop/own-your-digital-presence/day/1/participants
+   // Current path: /workshop/own-your-digital-presence/day/1/session/1/introduction/participants
    const sections = new Set([
      '/workshop',
      '/workshop/own-your-digital-presence',
      '/workshop/own-your-digital-presence/day',
      '/workshop/own-your-digital-presence/day/1',
-     '/workshop/own-your-digital-presence/day/1/participants'
+     '/workshop/own-your-digital-presence/day/1/session/1/introduction/participants'
    ])
    ```
 
