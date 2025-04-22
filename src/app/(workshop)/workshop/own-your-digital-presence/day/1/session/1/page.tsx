@@ -138,58 +138,11 @@ const sections = [
         href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/wix",
         icon: FileText
       },
-      {
-        title: "Webflow Guide",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/webflow",
-        icon: FileText
-      }
-    ]
-  },
-  {
-    title: "AI & Tools",
-    color: "from-pink-500 to-pink-600",
-    items: [
-      {
-        title: "Using AI to Mock Up Layouts",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/layout",
-        icon: Stars
-      },
-      {
-        title: "Using AI for Art Assets",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/assets",
-        icon: Image
-      },
-      {
-        title: "Smart Bios + CVs with AI",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/content",
-        icon: FileText
-      },
-      {
-        title: "Link Tools + Calendars",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/tools",
-        icon: Link2
-      }
-    ]
-  },
-  {
-    title: "Resources",
-    color: "from-indigo-500 to-indigo-600",
-    items: [
-      {
-        title: "Worksheet",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/resources/worksheet",
-        icon: ClipboardList
-      },
-      {
-        title: "Checklist",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/resources/checklist",
-        icon: FileCheck
-      },
-      {
-        title: "Templates",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/resources/templates",
-        icon: FileText
-      }
+      // {
+      //   title: "Webflow Guide",
+      //   href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/webflow",
+      //   icon: FileText
+      // }
     ]
   }
 ];

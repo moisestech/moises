@@ -120,25 +120,25 @@ const participants: Array<{
       }
     }
   },
-  {
-    name: "Monique Lazard",
-    website: "moniquelazard.com",
-    platforms: ["squarespace"],
-    webDesignLevel: 3,
-    aiLevel: 1,
-    goals: "Learn how to edit website and make changes",
-    overview: "Monique Lazard is a visual artist working in painting, drawing, and mixed media. Her work explores themes of memory, identity, and the natural world.",
-    architecture: {
-      home: {
-        title: "Home",
-        children: {
-          about: { title: "About" },
-          work: { title: "Work" },
-          contact: { title: "Contact" }
-        }
-      }
-    }
-  },
+  // {
+  //   name: "Monique Lazard",
+  //   website: "moniquelazard.com",
+  //   platforms: ["squarespace"],
+  //   webDesignLevel: 3,
+  //   aiLevel: 1,
+  //   goals: "Learn how to edit website and make changes",
+  //   overview: "Monique Lazard is a visual artist working in painting, drawing, and mixed media. Her work explores themes of memory, identity, and the natural world.",
+  //   architecture: {
+  //     home: {
+  //       title: "Home",
+  //       children: {
+  //         about: { title: "About" },
+  //         work: { title: "Work" },
+  //         contact: { title: "Contact" }
+  //       }
+  //     }
+  //   }
+  // },
   {
     name: "Monica Lopez De Victoria",
     website: "monicalopezdevictoria.com",
@@ -179,26 +179,26 @@ const participants: Array<{
       }
     }
   },
-  {
-    name: "Mateo SeZa",
-    website: "mateoseza.art",
-    platforms: ["squarespace", "wix"],
-    webDesignLevel: 3,
-    aiLevel: 3,
-    goals: "Present artwork professionally and enhance digital presence",
-    overview: "Mateo SeZa is a multidisciplinary artist working across painting, sculpture, and digital media. His work explores themes of technology, identity, and human connection.",
-    architecture: {
-      home: {
-        title: "Home",
-        children: {
-          about: { title: "About" },
-          work: { title: "Work" },
-          exhibitions: { title: "Exhibitions" },
-          contact: { title: "Contact" }
-        }
-      }
-    }
-  },
+  // {
+  //   name: "Mateo SeZa",
+  //   website: "mateoseza.art",
+  //   platforms: ["squarespace", "wix"],
+  //   webDesignLevel: 3,
+  //   aiLevel: 3,
+  //   goals: "Present artwork professionally and enhance digital presence",
+  //   overview: "Mateo SeZa is a multidisciplinary artist working across painting, sculpture, and digital media. His work explores themes of technology, identity, and human connection.",
+  //   architecture: {
+  //     home: {
+  //       title: "Home",
+  //       children: {
+  //         about: { title: "About" },
+  //         work: { title: "Work" },
+  //         exhibitions: { title: "Exhibitions" },
+  //         contact: { title: "Contact" }
+  //       }
+  //     }
+  //   }
+  // },
   {
     name: "Wooster Delisfort",
     website: "wooslerdelisfort.com",

@@ -20,7 +20,7 @@
 - [x] [Squarespace Guide](/workshop/own-your-digital-presence/day/1/session/1/squarespace)
 - [x] [GitHub Pages Guide](/workshop/own-your-digital-presence/day/1/session/1/github)
 - [x] [Wix Guide](/workshop/own-your-digital-presence/day/1/session/1/platform/wix)
-- [x] [Webflow Guide](/workshop/own-your-digital-presence/day/1/session/1/webflow)
+- [ ] [Webflow Guide](/workshop/own-your-digital-presence/day/1/session/1/webflow)
 
 ### AI & Tools
 - [x] [Using AI to Mock Up Layouts](/workshop/own-your-digital-presence/day/1/session/2/ai-tools/layout)
