@@ -40,6 +40,12 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useInView } from "react-intersection-observer"
+import { TechNonprofitNav } from "@/components/workshop/TechNonprofitNav"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { translations } from "@/lib/translations/tech-nonprofit"
+import { Mail, Phone, MapPin } from "lucide-react"
+import { ThemeToggle } from '@/components/common/ThemeToggle'
+import { useTheme } from '@/contexts/ThemeContext'
 
 // Animation variants
 const fadeIn = {
@@ -62,22 +68,13 @@ const SectionDivider = ({ className = "" }: { className?: string }) => (
   <div className={`w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent ${className}`} />
 )
 
-// Navigation items
-const navigation = [
-  { name: "Overview", href: "#overview" },
-  { name: "Services", href: "#services" },
-  { name: "Workshops", href: "#workshops" },
-  { name: "Case Studies", href: "#case-studies" },
-  { name: "Contact", href: "#contact" },
-]
-
 // Add placeholder image URLs
 const PLACEHOLDER_IMAGES = {
-  hero: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030235/own-your-digital-presence/website-building-hero-image_exoyv7.png",
+  hero: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1745329555/tech-nonprofit/nonprofit-tech-image-1_y8rgsz.png",
   services: {
     communication: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg",
-    dashboard: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030278/own-your-digital-presence/website-building-day-2-3-weekend-in-person_jm1abi.jpg",
-    workshop: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030278/own-your-digital-presence/website-building-day-2-3-weekend-in-person_jm1abi.jpg",
+    dashboard: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1745329555/tech-nonprofit/nonprofit-tech-image-2_ctm1ft.png",
+    workshop: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1745329555/tech-nonprofit/nonprofit-tech-image-3_qkdzir.png",
     microtools: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030367/own-your-digital-presence/website-building-day-4-online-presentations_tncppm.jpg"
   }
 }
@@ -90,36 +87,29 @@ const AnimatedGradientText = ({ children }: { children: React.ReactNode }) => (
 )
 
 export default function TechNonprofitClient() {
-  const [activeSection, setActiveSection] = useState("overview")
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { language } = useLanguage()
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [message, setMessage] = useState("")
   const [submitted, setSubmitted] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
   })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const { theme } = useTheme()
+
+  const t = translations[language]
 
   // Intersection observer for sections
-  const [heroRef, heroInView] = useInView({ threshold: 0.5 })
-  const [storyRef, storyInView] = useInView({ threshold: 0.5 })
-  const [offerRef, offerInView] = useInView({ threshold: 0.5 })
-  const [workshopsRef, workshopsInView] = useInView({ threshold: 0.5 })
-  const [ctaRef, ctaInView] = useInView({ threshold: 0.5 })
-
-  // Update active section based on scroll position
-  useEffect(() => {
-    if (heroInView) setActiveSection("overview")
-    else if (storyInView) setActiveSection("story")
-    else if (offerInView) setActiveSection("offer")
-    else if (workshopsInView) setActiveSection("workshops")
-    else if (ctaInView) setActiveSection("cta")
-  }, [heroInView, storyInView, offerInView, workshopsInView, ctaInView])
+  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5 })
+  const { ref: storyRef, inView: storyInView } = useInView({ threshold: 0.5 })
+  const { ref: offerRef, inView: offerInView } = useInView({ threshold: 0.5 })
+  const { ref: workshopsRef, inView: workshopsInView } = useInView({ threshold: 0.5 })
+  const { ref: ctaRef, inView: ctaInView } = useInView({ threshold: 0.5 })
 
   // Countdown timer
   useEffect(() => {
@@ -138,6 +128,18 @@ export default function TechNonprofitClient() {
     }, 1000)
 
     return () => clearInterval(timer)
+  }, [])
+
+  // Mouse move effect for hero section
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY
+      })
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   // Add services details
@@ -193,23 +195,6 @@ export default function TechNonprofitClient() {
     }
   ]
 
-  // Update the scrollToSection function to remove animation logic
-  const scrollToSection = (sectionId: string) => {
-    setIsMenuOpen(false) // Close mobile menu after clicking
-    
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const headerOffset = 80 // Account for fixed header
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      })
-    }
-  }
-
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Here you would typically send the data to your backend or a service
@@ -225,34 +210,6 @@ export default function TechNonprofitClient() {
       setMessage("")
     }, 3000)
   }
-
-  // Mobile menu component
-  const MobileMenu = () => (
-    <div className={`fixed inset-0 z-50 bg-black/80 backdrop-blur-md ${isMenuOpen ? 'block' : 'hidden'}`}>
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-white">Menu</h2>
-          <button 
-            onClick={() => setIsMenuOpen(false)}
-            className="text-white hover:text-blue-400 transition-colors"
-          >
-            <X className="h-6 w-6" />
-          </button>
-        </div>
-        <nav className="flex flex-col space-y-4">
-          {navigation.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => scrollToSection(item.href.substring(1))}
-              className="text-left text-xl text-white hover:text-blue-400 transition-colors py-2"
-            >
-              {item.name}
-            </button>
-          ))}
-        </nav>
-      </div>
-    </div>
-  )
 
   // Contact modal component
   const ContactModal = () => (
@@ -327,74 +284,28 @@ export default function TechNonprofitClient() {
     </div>
   )
 
-  // Mouse move effect for hero section
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      {/* Mobile Menu */}
-      <MobileMenu />
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === 'dark' 
+        ? 'bg-gradient-to-b from-gray-900 to-black text-white' 
+        : 'bg-gradient-to-b from-gray-50 to-white text-gray-900'
+    }`}>
+      {/* Navigation */}
+      <div className={`fixed top-0 left-0 right-0 z-50 ${
+        theme === 'dark' 
+          ? 'bg-gray-900/80 backdrop-blur-md border-b border-gray-800' 
+          : 'bg-white/80 backdrop-blur-md border-b border-gray-200'
+      }`}>
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <TechNonprofitNav />
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+          </div>
+        </div>
+      </div>
       
       {/* Contact Modal */}
       <ContactModal />
-      
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-black/80 backdrop-blur-md border-b border-gray-800">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                Bakehouse Artist Tech Initiative
-              </span>
-            </Link>
-            
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              {navigation.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href.substring(1))}
-                  className={`text-sm font-medium transition-colors ${
-                    activeSection === item.href.substring(1)
-                      ? 'text-blue-400'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ))}
-            </nav>
-            
-            {/* Contact Button */}
-            <div className="hidden md:block">
-              <Button
-                onClick={() => setIsContactOpen(true)}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-              >
-                Contact Us
-              </Button>
-            </div>
-            
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="md:hidden text-white"
-            >
-              <Menu className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
-      </header>
       
       {/* Hero Section */}
       <section id="overview" className="pt-32 pb-20 relative overflow-hidden">
@@ -406,21 +317,25 @@ export default function TechNonprofitClient() {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="block">Creative Innovation</span>
-                <span className="block">Needs a <AnimatedGradientText>Digital Ally</AnimatedGradientText></span>
+              <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                <span className="block">{t.hero.title}</span>
+                <span className="block">{t.hero.subtitle}</span>
               </h1>
               
-              <p className="text-xl text-gray-300 max-w-2xl">
-                {`Let's imagine what cultural institutions could do with their own tech arm — tailored, thoughtful, and built to amplify your impact across exhibitions, workshops, and community-led events.`}
+              <p className={`text-xl ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              } max-w-2xl`}>
+                {t.hero.description}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button
-                  onClick={() => scrollToSection('services')}
+                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full flex items-center justify-center gap-2"
                 >
-                  Explore Our Services
+                  {t.hero.exploreServices}
                   <ChevronRight className="h-5 w-5" />
                 </Button>
                 
@@ -429,7 +344,7 @@ export default function TechNonprofitClient() {
                   variant="outline"
                   className="border border-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-full"
                 >
-                  Schedule a Call
+                  {t.hero.scheduleCall}
                 </Button>
               </div>
             </motion.div>
@@ -500,25 +415,24 @@ export default function TechNonprofitClient() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center space-y-6"
           >
             <h2 className="text-3xl md:text-4xl font-bold">
-              What Happens When <AnimatedGradientText>Cultural Vision Meets Digital Power</AnimatedGradientText>?
+              {t.story.title}
             </h2>
             
             <p className="text-xl text-gray-300">
-              Le Cube Garges already leads the way in creative innovation, transforming how we engage with digital culture, community, and the future. But what if every exhibition had a custom-built, lightweight digital companion? What if artists and audiences could connect online just as meaningfully as they do in person?
+              {t.story.description1}
             </p>
             
             <p className="text-xl text-gray-300">
-              {`We've seen what's possible when art institutions like Bakehouse empower their artists with workshops and tech. From DIY websites to performance optimization, and even automated content outreach—we build the tools that artists, staff, and audiences actually use.`}
+              {t.story.description2}
             </p>
             
             <blockquote className="text-xl italic text-gray-300 border-l-4 border-blue-500 pl-4 my-8">
-              &ldquo;Technology, at its best, is invisible—felt only in the clarity of communication and the ease of creation.&rdquo;
-              <footer className="text-right text-gray-400 mt-2">— Moises Sanabria</footer>
+              &ldquo;{t.story.quote}&rdquo;
+              <footer className="text-right text-gray-400 mt-2">— {t.story.quoteAuthor}</footer>
             </blockquote>
           </motion.div>
         </div>
@@ -537,15 +451,15 @@ export default function TechNonprofitClient() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Custom Support for <AnimatedGradientText>Creative Organizations</AnimatedGradientText>
+              {t.services.title}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Think of us as your flexible, mission-aligned tech partner. No overhead. Just targeted, scalable solutions to support your programming, audiences, and staff.
+              {t.services.subtitle}
             </p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {servicesDetails.map((service, index) => (
+            {t.services.items.map((service: { title: string; description: string }, index: number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -556,13 +470,24 @@ export default function TechNonprofitClient() {
               >
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-500/10 p-3 rounded-lg text-blue-400">
-                    {service.icon}
+                    {servicesDetails[index].icon}
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                     <p className="text-gray-300">{service.description}</p>
                   </div>
                 </div>
+                {index === 1 && (
+                  <div className="mt-4">
+                    <Image
+                      src={PLACEHOLDER_IMAGES.services.dashboard}
+                      alt="Dashboard Example"
+                      width={500}
+                      height={300}
+                      className="w-full h-auto rounded-lg"
+                    />
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -575,7 +500,7 @@ export default function TechNonprofitClient() {
             className="mt-12 text-center"
           >
             <p className="text-xl font-medium text-blue-400">
-              We believe culture deserves great technology. So we offer fractional services — only what you need, when you need it.
+              {t.services.conclusion}
             </p>
           </motion.div>
         </div>
@@ -593,16 +518,34 @@ export default function TechNonprofitClient() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <div className="relative rounded-xl overflow-hidden shadow-2xl mb-12 max-w-[400px] mx-auto">
+              <Image
+                src={PLACEHOLDER_IMAGES.services.workshop}
+                alt="Workshop Example"
+                width={400}
+                height={225}
+                className="w-full h-auto"
+              />
+              
+              {/* Animated gradient overlay */}
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 pointer-events-none"
+                style={{
+                  transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
+                }}
+              />
+            </div>
+
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Teaching Artists to <AnimatedGradientText>Thrive Online</AnimatedGradientText>
+              {t.workshops.title}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {`We've delivered hands-on digital workshops at institutions like Bakehouse, the ICA, and more—focused on helping artists grow their digital presence, visibility, and reach. All of our workshops are designed for non-coders, artists, and educators.`}
+              {t.workshops.subtitle}
             </p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {workshopDetails.map((workshop, index) => (
+            {t.workshops.items.map((workshop: { title: string; description: string }, index: number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -612,7 +555,7 @@ export default function TechNonprofitClient() {
                 className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-purple-500/50 transition-colors"
               >
                 <div className="bg-purple-500/10 p-3 rounded-lg text-purple-400 w-fit mb-4">
-                  {workshop.icon}
+                  {workshopDetails[index].icon}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{workshop.title}</h3>
                 <p className="text-gray-300">{workshop.description}</p>
@@ -628,7 +571,7 @@ export default function TechNonprofitClient() {
             className="mt-12 text-center"
           >
             <p className="text-xl italic text-gray-300">
-              {`"We don't just teach artists how to code — we teach them how to connect."`}
+              {t.workshops.conclusion}
             </p>
           </motion.div>
         </div>
@@ -647,10 +590,10 @@ export default function TechNonprofitClient() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              A Space as Bold as Your Mission Deserves a <AnimatedGradientText>Tech Partner Who Gets It</AnimatedGradientText>
+              {t.caseStudies.title}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {`You're already doing the hard part: reaching the community, supporting interdisciplinary creation, and tackling societal change. Our goal is to amplify that with thoughtful, human tech.`}
+              {t.caseStudies.subtitle}
             </p>
           </motion.div>
           
@@ -662,24 +605,14 @@ export default function TechNonprofitClient() {
               viewport={{ once: true }}
               className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
             >
-              <h3 className="text-2xl font-bold mb-6">{`Let's imagine together:`}</h3>
+              <h3 className="text-2xl font-bold mb-6">{t.caseStudies.description}</h3>
               <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
-                  <span className="text-gray-300">An artist dashboard with workshop materials in both French and English</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
-                  <span className="text-gray-300">{`A browser app where a family can see what's happening next weekend`}</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
-                  <span className="text-gray-300">A prompt-based generative art tool for youth in your FabLab</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
-                  <span className="text-gray-300">A monthly content automation that schedules your entire calendar on Instagram and email in one click</span>
-                </li>
+                {t.caseStudies.examples.map((example, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">{example}</span>
+                  </li>
+                ))}
               </ul>
             </motion.div>
             
@@ -755,10 +688,10 @@ export default function TechNonprofitClient() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to <AnimatedGradientText>Prototype a Better Future</AnimatedGradientText>?
+              {t.contact.title}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {`We'd love to start small — a co-hosted workshop, a custom browser experience for your next exhibition, or a digital training series for your staff and artists.`}
+              {t.contact.subtitle}
             </p>
           </motion.div>
           
@@ -770,15 +703,15 @@ export default function TechNonprofitClient() {
               viewport={{ once: true }}
               className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
             >
-              <h3 className="text-2xl font-bold mb-6">{`Let's build something for your next season.`}</h3>
+              <h3 className="text-2xl font-bold mb-6">{t.contact.description}</h3>
               <p className="text-gray-300 mb-6">
-                Schedule a discovery call to discuss your needs and how we can help.
+                {t.contact.buildSomething}
               </p>
               <Button
                 onClick={() => setIsContactOpen(true)}
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
               >
-                Schedule a Call
+                {t.contact.scheduleCall}
               </Button>
             </motion.div>
             
@@ -789,20 +722,16 @@ export default function TechNonprofitClient() {
               viewport={{ once: true }}
               className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
             >
-              <h3 className="text-2xl font-bold mb-6">Resources</h3>
+              <h3 className="text-2xl font-bold mb-6">{t.contact.resources}</h3>
               <ul className="space-y-4">
-                <li className="flex items-center gap-3">
-                  <FileText className="h-5 w-5 text-blue-400" />
-                  <span className="text-gray-300">Download the One-Pager (PDF)</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <ClipboardList className="h-5 w-5 text-blue-400" />
-                  <span className="text-gray-300">View Sample Workshop Curriculum</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Sparkles className="h-5 w-5 text-blue-400" />
-                  <span className="text-gray-300">Live Demo Available – App walkthrough + Workshop plan</span>
-                </li>
+                {t.contact.resourcesList.map((resource, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    {index === 0 && <FileText className="h-5 w-5 text-blue-400" />}
+                    {index === 1 && <ClipboardList className="h-5 w-5 text-blue-400" />}
+                    {index === 2 && <Sparkles className="h-5 w-5 text-blue-400" />}
+                    <span className="text-gray-300">{resource.title}</span>
+                  </li>
+                ))}
               </ul>
             </motion.div>
           </div>
@@ -815,7 +744,7 @@ export default function TechNonprofitClient() {
             className="mt-12 text-center"
           >
             <p className="text-xl italic text-gray-300">
-              &ldquo;A pôle of cultural innovation, open to all audiences.&rdquo;
+              {t.contact.conclusion}
             </p>
           </motion.div>
         </div>
@@ -828,27 +757,27 @@ export default function TechNonprofitClient() {
             <div className="mb-6 md:mb-0">
               <h3 className="text-xl font-bold mb-2">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                  Bakehouse Artist Tech Initiative
+                  Artist Tech Initiative
                 </span>
               </h3>
-              <p className="text-gray-400">Empowering artists with technology</p>
+              <p className="text-gray-400">{t.footer.tagline}</p>
             </div>
             
             <div className="flex gap-6">
               <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
+                {t.footer.links.home}
               </Link>
               <Link href="/workshop" className="text-gray-400 hover:text-white transition-colors">
-                Workshops
+                {t.footer.links.workshops}
               </Link>
               <Link href="https://moises.tech" target="_blank" className="text-gray-400 hover:text-white transition-colors">
-                Moises Sanabria
+                {t.footer.links.moises}
               </Link>
             </div>
           </div>
           
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            <p>© {new Date().getFullYear()} Bakehouse Artist Tech Initiative. All rights reserved.</p>
+            <p>{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</p>
           </div>
         </div>
       </footer>

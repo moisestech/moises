@@ -186,30 +186,6 @@ export default function DigitalPresencePage() {
             </div>
           </motion.section>
 
-          {/* Platform Options */}
-          <motion.section
-            variants={fadeIn}
-            className="bg-white rounded-xl shadow-lg p-8"
-          >
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Platform Options</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {platforms.map((platform) => (
-                <motion.div
-                  key={platform.name}
-                  whileHover={{ y: -5 }}
-                  className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <PlatformBadge platform={platform.name}>
-                      {platform.title}
-                    </PlatformBadge>
-                  </div>
-                  <p className="text-gray-600">{platform.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
-
           {/* Best Practices */}
           <motion.section
             variants={fadeIn}

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
   BookOpen, 
@@ -149,29 +149,86 @@ const sections = [
 
 const buildingBlocks = [
   {
+    id: 'public-presence',
     title: "Public Digital Presence",
     description: "We're building a professional online space that represents your artistic identity and makes your work accessible to a global audience.",
     icon: Globe,
     color: "bg-indigo-100",
-    hoverColor: "hover:bg-indigo-200"
+    hoverColor: "hover:bg-indigo-200",
+    details: [
+      {
+        title: "Global Accessibility",
+        description: "Make your work available to audiences worldwide, breaking geographical barriers.",
+        icon: Globe
+      },
+      {
+        title: "Professional Identity",
+        description: "Establish a consistent and professional online presence that reflects your artistic practice.",
+        icon: User
+      },
+      {
+        title: "24/7 Availability",
+        description: "Your work is accessible anytime, allowing for continuous engagement with your audience.",
+        icon: Server
+      }
+    ]
   },
   {
+    id: 'storytelling',
     title: "Storytelling & Clarity",
     description: "Learn how to present your work with clear narratives and professional presentation that engages viewers and communicates your artistic vision.",
     icon: BookOpen,
     color: "bg-purple-100",
-    hoverColor: "hover:bg-purple-200"
+    hoverColor: "hover:bg-purple-200",
+    details: [
+      {
+        title: "Narrative Structure",
+        description: "Create compelling stories around your work that engage and connect with viewers.",
+        icon: FileText
+      },
+      {
+        title: "Visual Communication",
+        description: "Use visual elements to effectively communicate your artistic vision and process.",
+        icon: LucideImage
+      },
+      {
+        title: "Professional Presentation",
+        description: "Present your work in a way that maintains its integrity and impact.",
+        icon: Layout
+      }
+    ]
   },
   {
+    id: 'professional-hub',
     title: "Professional Hub",
     description: "Create a space where curators, collectors, and collaborators can discover your work, understand your practice, and connect with you.",
     icon: Users,
     color: "bg-pink-100",
-    hoverColor: "hover:bg-pink-200"
+    hoverColor: "hover:bg-pink-200",
+    details: [
+      {
+        title: "Professional Network",
+        description: "Connect with industry professionals and potential collaborators.",
+        icon: Users
+      },
+      {
+        title: "Portfolio Showcase",
+        description: "Present your work in a professional context that appeals to collectors and curators.",
+        icon: Archive
+      },
+      {
+        title: "Contact & Collaboration",
+        description: "Make it easy for professionals to reach out and engage with your work.",
+        icon: MessageSquare
+      }
+    ]
   }
 ]
 
 export default function Day1Session1Introduction() {
+  const [activeTab, setActiveTab] = useState('public-presence')
+  const currentBlock = buildingBlocks.find(block => block.id === activeTab)
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <header className="relative h-96 overflow-hidden">
@@ -223,24 +280,62 @@ export default function Day1Session1Introduction() {
             className="bg-white rounded-2xl shadow-xl p-8"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-8">Building Your Digital Presence</h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            
+            {/* Tab Navigation */}
+            <div className="flex space-x-4 mb-8 border-b border-gray-200">
               {buildingBlocks.map((block) => (
-                <motion.div
-                  key={block.title}
-                  whileHover={cardHover}
-                  className={`${block.color} ${block.hoverColor} p-6 rounded-xl shadow-md transition-colors`}
+                <button
+                  key={block.id}
+                  onClick={() => setActiveTab(block.id)}
+                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    activeTab === block.id
+                      ? 'border-indigo-500 text-indigo-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
                 >
-                  <motion.div
-                    whileHover={iconHover}
-                    className="w-12 h-12 rounded-lg bg-white/50 flex items-center justify-center mb-4"
-                  >
-                    <block.icon className="w-6 h-6 text-gray-700" />
-                  </motion.div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{block.title}</h3>
-                  <p className="text-gray-700">{block.description}</p>
-                </motion.div>
+                  {block.title}
+                </button>
               ))}
             </div>
+
+            {/* Active Tab Content */}
+            {currentBlock && (
+              <motion.div
+                key={currentBlock.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="space-y-6"
+              >
+                {/* Main Description */}
+                <div className={`${currentBlock.color} p-6 rounded-xl shadow-md`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-white/50 flex items-center justify-center">
+                      <currentBlock.icon className="w-6 h-6 text-gray-700" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900">{currentBlock.title}</h3>
+                  </div>
+                  <p className="text-gray-700">{currentBlock.description}</p>
+                </div>
+
+                {/* Details Grid */}
+                <div className="grid md:grid-cols-3 gap-6">
+                  {currentBlock.details.map((detail, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={cardHover}
+                      className="bg-white p-6 rounded-xl shadow-md border border-gray-100"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center mb-4">
+                        <detail.icon className="w-5 h-5 text-gray-600" />
+                      </div>
+                      <h4 className="text-lg font-medium text-gray-900 mb-2">{detail.title}</h4>
+                      <p className="text-gray-600">{detail.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </motion.section>
 
           {/* Platform Requirements */}

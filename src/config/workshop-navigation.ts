@@ -120,6 +120,12 @@ const session1Config = {
           description: "Understanding website layout principles"
         },
         {
+          title: "Structure",
+          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/structure",
+          icon: Layers,
+          description: "Understanding website architecture and page organization"
+        },
+        {
           title: "Assets",
           href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/assets",
           icon: Image,
@@ -340,7 +346,7 @@ const day1Session1Config = {
           description: "Maintaining your digital presence"
         },
         {
-          title: "Vocabulary Basics",
+          title: "Vocabulary",
           href: "/workshop/own-your-digital-presence/day/1/session/1/introduction/vocabulary",
           icon: FileText,
           description: "Essential digital presence terminology"
@@ -358,6 +364,12 @@ const day1Session1Config = {
           href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/layout",
           icon: Layout,
           description: "Understanding website layout principles"
+        },
+        {
+          title: "Structure",
+          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/structure",
+          icon: Layers,
+          description: "Understanding website architecture and page organization"
         },
         {
           title: "Assets",

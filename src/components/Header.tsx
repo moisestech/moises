@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useToast } from '@/hooks/use-toast';
 import { MorphingText } from '@/components/ui/morphing-text';
 import { Menu, X } from 'lucide-react';
+import { LanguageSelector } from '@/components/common/LanguageSelector';
 
 const texts = ['TECH', 'SANABRIA', 'ART', 'DIGITAL', 'AI', 'MEME', 'NEW MEDIA'];
 
@@ -105,12 +106,6 @@ export default function Header() {
                 >
                   {isDark ? '🌞' : '🌙'}
                 </button>
-                <button className="px-4 py-2 text-sm font-light hover:bg-opacity-20 hover:bg-gray-500 transition-colors">
-                  EN
-                </button>
-                <button className="px-4 py-2 text-sm font-light hover:bg-opacity-20 hover:bg-gray-500 transition-colors">
-                  ES
-                </button>
               </div>
               <div className="md:hidden flex items-center gap-3">
                 <Link
@@ -201,8 +196,6 @@ export default function Header() {
             >
               {isDark ? '🌞' : '🌙'}
             </button>
-            <button className="px-4 py-2 text-xl font-light">EN</button>
-            <button className="px-4 py-2 text-xl font-light">ES</button>
           </div>
         </div>
       </div>

@@ -96,7 +96,7 @@ export default function WorkshopClient() {
                 title: "Scale Tech Non-Profits",
                 description: "Custom software solutions to help your organization and community grow.",
                 link: "/workshop/tech-nonprofit",
-                disabled: true
+                disabled: false
               },
               {
                 title: "AI & Art",
@@ -178,9 +178,9 @@ export default function WorkshopClient() {
         className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/10 p-4 text-center text-white/60 text-sm"
       >
         <p>
-          Bakehouse Artist Tech Initiative — 
+          Artist Tech Initiative — 
           <Link href="https://moises.tech" target="_blank" className="underline hover:text-white transition-colors">
-            Moises Sanabria
+            Moises Sanabria & Fabiola Larios
           </Link>
         </p>
       </motion.div>
