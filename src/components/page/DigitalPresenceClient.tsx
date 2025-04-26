@@ -28,6 +28,7 @@ import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { useTheme } from "@/contexts/ThemeContext"
 
 // Animation variants
 const fadeIn = {
@@ -78,19 +79,22 @@ const staggerContainer = {
 }
 
 // Custom divider component with blue/purple theme
-const SectionDivider = () => (
-  <div className="container py-8">
-    <div className="flex items-center justify-center gap-4">
-      <div className="h-px bg-indigo-200 flex-1" />
-      <div className="flex gap-2">
-        <div className="h-2 w-2 rounded-full bg-blue-400" />
-        <div className="h-2 w-2 rounded-full bg-indigo-500" />
-        <div className="h-2 w-2 rounded-full bg-purple-500" />
+const SectionDivider = () => {
+  const { theme } = useTheme();
+  return (
+    <div className="container py-8">
+      <div className="flex items-center justify-center gap-4">
+        <div className={`h-px ${theme === 'dark' ? 'bg-indigo-800' : 'bg-indigo-200'} flex-1`} />
+        <div className="flex gap-2">
+          <div className={`h-2 w-2 rounded-full ${theme === 'dark' ? 'bg-blue-500' : 'bg-blue-400'}`} />
+          <div className={`h-2 w-2 rounded-full ${theme === 'dark' ? 'bg-indigo-600' : 'bg-indigo-500'}`} />
+          <div className={`h-2 w-2 rounded-full ${theme === 'dark' ? 'bg-purple-600' : 'bg-purple-500'}`} />
+        </div>
+        <div className={`h-px ${theme === 'dark' ? 'bg-indigo-800' : 'bg-indigo-200'} flex-1`} />
       </div>
-      <div className="h-px bg-indigo-200 flex-1" />
     </div>
-  </div>
-);
+  );
+};
 
 // Navigation items
 const navigation = [
@@ -114,13 +118,21 @@ const PLACEHOLDER_IMAGES = {
 }
 
 // Add animated gradient text component
-const AnimatedGradientText = ({ children }: { children: React.ReactNode }) => (
-  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-gradient">
-    {children}
-  </span>
-);
+const AnimatedGradientText = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useTheme();
+  return (
+    <span className={`bg-clip-text text-transparent bg-gradient-to-r ${
+      theme === 'dark'
+        ? 'from-blue-400 via-indigo-400 to-purple-400'
+        : 'from-blue-600 via-indigo-600 to-purple-600'
+    } animate-gradient`}>
+      {children}
+    </span>
+  );
+};
 
 export default function DigitalPresenceClient() {
+  const { theme } = useTheme();
   const [activeSection, setActiveSection] = useState("overview");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
@@ -250,142 +262,6 @@ export default function DigitalPresenceClient() {
     }, 3000);
   };
 
-  // Enhanced mobile menu with better styling and interaction
-  const MobileMenu = () => (
-    <div 
-      className={`
-        fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out
-        ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}
-    >
-      {/* Overlay */}
-      <div 
-        className="absolute inset-0 bg-black/50"
-        onClick={() => setIsMenuOpen(false)}
-      />
-      
-      {/* Menu Content */}
-      <div className="relative w-4/5 max-w-sm h-full bg-white">
-        <div className="flex flex-col h-full">
-          {/* Menu Header */}
-          <div className="p-4 border-b flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="font-bold text-lg text-black">Navigation</span>
-            </div>
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 hover:bg-gray-100 rounded-full"
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-
-          {/* Menu Items */}
-          <nav className="flex-1 overflow-y-auto py-4">
-            {navigation.map((item) => (
-              <motion.button
-                key={item.name}
-                onClick={() => scrollToSection(item.href.slice(1))}
-                className={`
-                  w-full px-6 py-4 text-left text-lg font-medium transition-colors
-                  ${activeSection === item.href.slice(1)
-                    ? "text-indigo-600 bg-indigo-50"
-                    : "text-black hover:bg-gray-50"
-                  }
-                `}
-                whileHover={{ x: 10 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {item.name}
-              </motion.button>
-            ))}
-          </nav>
-
-          {/* Menu Footer */}
-          <div className="p-4 border-t">
-            <p className="text-sm text-black/60">
-              © {new Date().getFullYear()} Bakehouse Artist Tech Initiative
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Waitlist Modal
-  const WaitlistModal = () => (
-    <div 
-      className={`
-        fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out
-        ${isWaitlistOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-      `}
-    >
-      {/* Overlay */}
-      <div 
-        className="absolute inset-0 bg-black/50"
-        onClick={() => setIsWaitlistOpen(false)}
-      />
-      
-      {/* Modal Content */}
-      <div className="relative bg-white w-11/12 max-w-md rounded-lg shadow-lg p-6 transform transition-transform duration-300 ease-in-out">
-        <button
-          onClick={() => setIsWaitlistOpen(false)}
-          className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100"
-        >
-          <X className="h-5 w-5" />
-        </button>
-
-        <h3 className="text-xl font-bold mb-4">Join the Waitlist</h3>
-        
-        {submitted ? (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-8"
-          >
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <p className="text-lg font-medium">Thank you for joining!</p>
-            <p className="text-gray-600 mt-2">{`We'll notify you when registration opens.`}</p>
-          </motion.div>
-        ) : (
-          <form onSubmit={handleWaitlistSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white">
-              Join Waitlist
-            </Button>
-          </form>
-        )}
-      </div>
-    </div>
-  );
-
   // Add mouse move handler for parallax
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -410,15 +286,21 @@ export default function DigitalPresenceClient() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className={`flex min-h-screen flex-col ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full border-b bg-white">
+      <header className={`sticky top-0 z-40 w-full border-b ${
+        theme === 'dark' 
+          ? 'bg-gray-900/80 backdrop-blur-sm border-gray-800' 
+          : 'bg-white/80 backdrop-blur-sm border-gray-200'
+      }`}>
         <div className="container flex h-16 items-center justify-between">
           {/* Logo + Text */}
           <div className="flex items-end justify-end gap-4">
             <div className="flex items-end justify-end gap-2">
-              <h1 className="text-2xl text-indigo-600 tracking-tight font-bold">
-                Own Your Digital Presence
+              <h1 className={`text-2xl tracking-tight font-bold ${
+                theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
+              }`}>
+                Own Your Digital Presence TEST
               </h1>
             </div>
           </div>
@@ -431,8 +313,12 @@ export default function DigitalPresenceClient() {
                 onClick={() => scrollToSection(item.href.slice(1))}
                 className={`text-sm font-medium transition-colors ${
                   activeSection === item.href.slice(1)
-                    ? "text-indigo-600 border-b-2 border-indigo-600"
-                    : "text-black hover:text-indigo-600"
+                    ? theme === 'dark'
+                      ? "text-indigo-400 border-b-2 border-indigo-400"
+                      : "text-indigo-600 border-b-2 border-indigo-600"
+                    : theme === 'dark'
+                      ? "text-gray-300 hover:text-indigo-400"
+                      : "text-black hover:text-indigo-600"
                 }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -445,23 +331,212 @@ export default function DigitalPresenceClient() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(true)}
-            className="md:hidden p-2 rounded-md hover:bg-gray-100"
+            className={`md:hidden p-2 rounded-md ${
+              theme === 'dark'
+                ? 'hover:bg-gray-800'
+                : 'hover:bg-gray-100'
+            }`}
           >
-            <Menu className="h-6 w-6" />
+            <Menu className={`h-6 w-6 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`} />
           </button>
         </div>
       </header>
 
       {/* Mobile Menu */}
-      <MobileMenu />
+      <div 
+        className={`
+          fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out
+          ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
+        {/* Overlay */}
+        <div 
+          className="absolute inset-0 bg-black/50"
+          onClick={() => setIsMenuOpen(false)}
+        />
+        
+        {/* Menu Content */}
+        <div className={`relative w-4/5 max-w-sm h-full ${
+          theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+        }`}>
+          <div className="flex flex-col h-full">
+            {/* Menu Header */}
+            <div className={`p-4 border-b ${
+              theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+            } flex items-center justify-between`}>
+              <div className="flex items-center gap-3">
+                <span className={`font-bold text-lg ${
+                  theme === 'dark' ? 'text-white' : 'text-black'
+                }`}>Navigation</span>
+              </div>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className={`p-2 rounded-full ${
+                  theme === 'dark'
+                    ? 'hover:bg-gray-800'
+                    : 'hover:bg-gray-100'
+                }`}
+              >
+                <X className={`h-6 w-6 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`} />
+              </button>
+            </div>
+
+            {/* Menu Items */}
+            <nav className="flex-1 overflow-y-auto py-4">
+              {navigation.map((item) => (
+                <motion.button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.href.slice(1))}
+                  className={`
+                    w-full px-6 py-4 text-left text-lg font-medium transition-colors
+                    ${activeSection === item.href.slice(1)
+                      ? theme === 'dark'
+                        ? "text-indigo-400 bg-indigo-900/50"
+                        : "text-indigo-600 bg-indigo-50"
+                      : theme === 'dark'
+                        ? "text-gray-300 hover:bg-gray-800"
+                        : "text-black hover:bg-gray-50"
+                    }
+                  `}
+                  whileHover={{ x: 10 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+            </nav>
+
+            {/* Menu Footer */}
+            <div className={`p-4 border-t ${
+              theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+            }`}>
+              <p className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>
+                © {new Date().getFullYear()} Bakehouse Artist Tech Initiative
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Waitlist Modal */}
-      <WaitlistModal />
+      <div 
+        className={`
+          fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out
+          ${isWaitlistOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+        `}
+      >
+        {/* Overlay */}
+        <div 
+          className="absolute inset-0 bg-black/50"
+          onClick={() => setIsWaitlistOpen(false)}
+        />
+        
+        {/* Modal Content */}
+        <div className={`relative w-11/12 max-w-md rounded-lg shadow-lg p-6 transform transition-transform duration-300 ease-in-out ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+        }`}>
+          <button
+            onClick={() => setIsWaitlistOpen(false)}
+            className={`absolute top-4 right-4 p-1 rounded-full ${
+              theme === 'dark'
+                ? 'hover:bg-gray-700'
+                : 'hover:bg-gray-100'
+            }`}
+          >
+            <X className={`h-5 w-5 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`} />
+          </button>
+
+          <h3 className={`text-xl font-bold mb-4 ${
+            theme === 'dark' ? 'text-white' : 'text-gray-900'
+          }`}>Join the Waitlist</h3>
+          
+          {submitted ? (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-8"
+            >
+              <CheckCircle className={`w-16 h-16 ${
+                theme === 'dark' ? 'text-green-400' : 'text-green-500'
+              } mx-auto mb-4`} />
+              <p className={`text-lg font-medium ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>Thank you for joining!</p>
+              <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                {`We'll notify you when registration opens.`}
+              </p>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleWaitlistSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="name" className={`block text-sm font-medium mb-1 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}>
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className={`w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                    theme === 'dark'
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-white border-gray-300 text-gray-900'
+                  }`}
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className={`block text-sm font-medium mb-1 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className={`w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                    theme === 'dark'
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-white border-gray-300 text-gray-900'
+                  }`}
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <Button 
+                type="submit" 
+                className={`w-full ${
+                  theme === 'dark'
+                    ? 'bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500'
+                    : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600'
+                } text-white`}
+              >
+                Join Waitlist
+              </Button>
+            </form>
+          )}
+        </div>
+      </div>
 
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative min-h-[60vh]">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 opacity-90"></div>
+          <div className={`absolute inset-0 bg-gradient-to-r ${
+            theme === 'dark'
+              ? 'from-blue-900 via-indigo-900 to-purple-900'
+              : 'from-blue-600 via-indigo-600 to-purple-600'
+          } opacity-90`}></div>
           <div className="relative container py-12 md:py-24 h-full">
             <div className="grid md:grid-cols-2 gap-8 items-center h-full">
               <div className="space-y-4 md:space-y-5">
@@ -567,7 +642,9 @@ export default function DigitalPresenceClient() {
         </section>
 
         {/* Workshop Overview Section */}
-        <section id="overview" className="py-16 bg-white">
+        <section id="overview" className={`py-16 ${
+          theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+        }`}>
           <div className="container">
             <motion.div
               initial="initial"
@@ -653,7 +730,9 @@ export default function DigitalPresenceClient() {
         </section>
 
         {/* What You'll Learn Section */}
-        <section id="learn" className="py-16 bg-gray-50">
+        <section id="learn" className={`py-16 ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+        }`}>
           <div className="container">
             <motion.div
               initial="initial"
@@ -757,7 +836,9 @@ export default function DigitalPresenceClient() {
         </section>
 
         {/* Schedule Section */}
-        <section id="schedule" className="py-16 bg-white">
+        <section id="schedule" className={`py-16 ${
+          theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+        }`}>
           <div className="container">
             <motion.div
               initial="initial"
@@ -966,7 +1047,9 @@ export default function DigitalPresenceClient() {
         </section>
 
         {/* Eligibility Section */}
-        <section id="eligibility" className="py-16 bg-gray-50">
+        <section id="eligibility" className={`py-16 ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+        }`}>
           <div className="container">
             <motion.div
               initial="initial"
@@ -1048,7 +1131,9 @@ export default function DigitalPresenceClient() {
         </section>
 
         {/* Application Section */}
-        <section id="apply" className="py-16 bg-white">
+        <section id="apply" className={`py-16 ${
+          theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+        }`}>
           <div className="container">
             <motion.div
               initial="initial"
@@ -1203,7 +1288,9 @@ export default function DigitalPresenceClient() {
         </section>
 
         {/* Instructor Section */}
-        <section id="instructor" className="py-16 bg-gray-50">
+        <section id="instructor" className={`py-16 ${
+          theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+        }`}>
           <div className="container">
             <motion.div
               initial="initial"
@@ -1285,7 +1372,9 @@ export default function DigitalPresenceClient() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className={`py-12 ${
+        theme === 'dark' ? 'bg-gray-900' : 'bg-gray-900'
+      } text-white`}>
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center">

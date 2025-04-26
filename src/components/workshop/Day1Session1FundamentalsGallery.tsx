@@ -400,3 +400,4 @@ export default function Day1Session1FundamentalsGallery() {
     </div>
   )
 } 
+ 

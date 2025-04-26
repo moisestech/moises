@@ -37,7 +37,7 @@ export default function DigitalPresenceLayout({
           <DarkLightThemeSelector />
         </div>
         <main className={cn(
-          "p-8",
+          "py-8",
           theme === 'dark' ? 'bg-gray-900' : 'bg-white'
         )}>
           {children}

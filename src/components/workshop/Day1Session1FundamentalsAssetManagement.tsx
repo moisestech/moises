@@ -318,3 +318,43 @@ export default function Day1Session1FundamentalsAssetManagement() {
     </div>
   )
 } 
+          {sections.map((section) => (
+            <motion.section
+              key={section.title}
+              variants={fadeIn}
+              className="bg-white rounded-2xl shadow-xl p-8"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`p-3 rounded-lg bg-gradient-to-r ${section.color}`}>
+                  <section.icon className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900">{section.title}</h2>
+                  <p className="text-lg text-gray-600">{section.description}</p>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {section.items.map((item) => (
+                  <motion.div
+                    key={item.title}
+                    whileHover={{ scale: 1.02 }}
+                    className={`bg-gradient-to-r ${section.color} rounded-xl p-6 shadow-md`}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4"
+                    >
+                      <item.icon className="w-6 h-6 text-white" />
+                    </motion.div>
+                    <h4 className="text-xl font-semibold text-white mb-2">{item.title}</h4>
+                    <p className="text-white/90">{item.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.section>
+          ))}
+        </motion.div>
+      </main>
+    </div>
+  )
+} 

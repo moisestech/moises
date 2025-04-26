@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft, Globe, Image, Layout, FileText, Users, Zap, Shield, Clock, BookOpen, Play, RefreshCw, Copy, File, Link2, Search, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -271,8 +272,14 @@ const templateSwitching = {
       icon: Layout,
       content: "Get started by selecting a new template from our huge range of professionally designed templates. There are a variety of options and categories available including portfolio sites, business services, eCommerce templates and more, so you can choose the best style for your brand needs.",
       links: [
-        "View our Wix Editor templates",
-        "View our Studio Editor templates"
+        {
+          text: "View Wix Editor templates",
+          url: "https://www.wix.com/website/templates"
+        },
+        {
+          text: "View Studio Editor templates",
+          url: "https://www.wix.com/studio"
+        }
       ]
     },
     {
@@ -280,8 +287,14 @@ const templateSwitching = {
       icon: Copy,
       content: "To make the process much easier when starting again with a new template, you can copy and paste elements and pages from your old site, or save and re-use design assets, depending on which editor you are using.",
       links: [
-        "Copying elements from a Wix Editor site",
-        "Copying elements from a Studio Editor site"
+        {
+          text: "Copying elements from a Wix Editor site",
+          url: "https://support.wix.com/en/article/wix-editor-copying-and-pasting-elements-and-pages-to-another-site"
+        },
+        {
+          text: "Copying elements from a Studio Editor site",
+          url: "https://support.wix.com/en/article/studio-editor-request-copying-and-pasting-pages-between-sites"
+        }
       ]
     },
     {
@@ -289,7 +302,14 @@ const templateSwitching = {
       icon: File,
       content: "All the media from your existing site is saved under Site Files in your Media Manager. Site Files folders can be accessed from the Media Manager from all the sites in your account. If you want to add any file from your existing site to your new site, just import it from the Site Files folder.",
       links: [
-        "Search your Media Manager to find the file you need"
+        {
+          text: "Import media from another site",
+          url: "https://support.wix.com/en/article/wix-media-importing-media-from-one-wix-site-to-another"
+        },
+        {
+          text: "Search your Media Manager",
+          url: "https://support.wix.com/en/article/wix-media-searching-for-a-file-in-the-media-manager"
+        }
       ]
     },
     {
@@ -297,8 +317,14 @@ const templateSwitching = {
       icon: RefreshCw,
       content: "When starting over with a new template, it's important to note that there are some features that you can transfer over to the new site and some that you can't.",
       links: [
-        "What other features can I transfer to a new template?",
-        "What features can't I transfer to a new template?"
+        {
+          text: "What other features can I transfer to a new template?",
+          url: null // Disabled link
+        },
+        {
+          text: "What features can't I transfer to a new template?",
+          url: null // Disabled link
+        }
       ]
     },
     {
@@ -306,7 +332,10 @@ const templateSwitching = {
       icon: Link2,
       content: "Once your new site is ready, you can transfer your plan which you used to upgrade your site, and the domain from your old site to your new one. This ensures that your site will be fully functioning and live on the internet with your unique domain name, just as it used to be. The process takes just a couple of minutes.",
       links: [
-        "Learn how to transfer your plan and domain to your new site"
+        {
+          text: "Learn how to transfer your plan and domain to your new site",
+          url: null // Disabled link
+        }
       ]
     }
   ],
@@ -335,20 +364,32 @@ const templateSwitching = {
 };
 
 export default function WixPlatformClient() {
+  const { theme } = useTheme();
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+      <header className={`sticky top-0 z-50 ${
+        theme === 'dark' 
+          ? 'bg-gray-900/80 backdrop-blur-sm border-b border-gray-800' 
+          : 'bg-white/80 backdrop-blur-sm border-b border-gray-200'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link 
               href="/workshop/own-your-digital-presence/day/1/session/1"
-              className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+              className={`flex items-center ${
+                theme === 'dark'
+                  ? 'text-gray-300 hover:text-indigo-400'
+                  : 'text-gray-600 hover:text-indigo-600'
+              } transition-colors`}
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
               <span className="text-sm font-medium">Back to Session 1</span>
             </Link>
-            <h1 className="text-lg font-space-mono font-medium text-gray-900">
+            <h1 className={`text-lg font-space-mono font-medium ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               Wix Platform Guide
             </h1>
           </div>
@@ -365,10 +406,14 @@ export default function WixPlatformClient() {
           {/* Introduction */}
           <motion.section
             variants={fadeIn}
-            className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl p-8 text-white"
+            className={`bg-gradient-to-r ${
+              theme === 'dark'
+                ? 'from-blue-900 to-indigo-900'
+                : 'from-blue-500 to-indigo-500'
+            } rounded-2xl p-8 text-white`}
           >
             <h1 className="text-4xl font-bold mb-4">Wix Platform Guide</h1>
-            <p className="text-xl text-blue-100">
+            <p className={`text-xl ${theme === 'dark' ? 'text-blue-100' : 'text-blue-50'}`}>
               Learn how to create a professional artist website using Wix's intuitive platform
             </p>
           </motion.section>
@@ -376,41 +421,71 @@ export default function WixPlatformClient() {
           {/* Template Switching Section */}
           <motion.section variants={fadeIn} className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-blue-100">
-                <RefreshCw className="w-6 h-6 text-blue-600" />
+              <div className={`p-3 rounded-lg ${
+                theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+              }`}>
+                <RefreshCw className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-gray-900">{templateSwitching.title}</h2>
-                <p className="text-gray-500">{templateSwitching.duration}</p>
+                <h2 className={`text-3xl font-bold ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>{templateSwitching.title}</h2>
+                <p className={theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}>{templateSwitching.duration}</p>
               </div>
             </div>
-            <p className="text-gray-600 mb-6">{templateSwitching.description}</p>
+            <p className={`mb-6 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{templateSwitching.description}</p>
             
             <div className="grid grid-cols-1 gap-6">
               {templateSwitching.steps.map((step, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className={`rounded-xl shadow-lg p-6 ${
+                    theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+                  }`}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-blue-100">
-                      <step.icon className="w-6 h-6 text-blue-600" />
+                    <div className={`p-3 rounded-lg ${
+                      theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+                    }`}>
+                      <step.icon className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-gray-600 mb-4">{step.content}</p>
+                      <h3 className={`text-xl font-bold mb-2 ${
+                        theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}>{step.title}</h3>
+                      <p className={`mb-4 ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                      }`}>{step.content}</p>
                       {step.links && (
                         <div className="space-y-2">
                           {step.links.map((link, i) => (
-                            <a
+                            <div
                               key={i}
-                              href="#"
-                              className="text-blue-600 hover:text-blue-800 flex items-center gap-2"
+                              className={`flex items-center gap-2 ${
+                                link.url
+                                  ? theme === 'dark'
+                                    ? 'text-blue-400 hover:text-blue-300 cursor-pointer'
+                                    : 'text-blue-600 hover:text-blue-800 cursor-pointer'
+                                  : theme === 'dark'
+                                    ? 'text-gray-500 cursor-not-allowed'
+                                    : 'text-gray-400 cursor-not-allowed'
+                              }`}
                             >
                               <Link2 className="w-4 h-4" />
-                              <span>{link}</span>
-                            </a>
+                              {link.url ? (
+                                <a
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="hover:underline"
+                                >
+                                  {link.text}
+                                </a>
+                              ) : (
+                                <span>{link.text} (Coming Soon)</span>
+                              )}
+                            </div>
                           ))}
                         </div>
                       )}
@@ -424,20 +499,28 @@ export default function WixPlatformClient() {
           {/* FAQs Section */}
           <motion.section variants={fadeIn} className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-blue-100">
-                <HelpCircle className="w-6 h-6 text-blue-600" />
+              <div className={`p-3 rounded-lg ${
+                theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+              }`}>
+                <HelpCircle className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
+              <h2 className={`text-3xl font-bold ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>Frequently Asked Questions</h2>
             </div>
             <div className="grid grid-cols-1 gap-6">
               {templateSwitching.faqs.map((faq, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className={`rounded-xl shadow-lg p-6 ${
+                    theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+                  }`}
                 >
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
+                  <h3 className={`text-xl font-bold mb-2 ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>{faq.question}</h3>
+                  <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{faq.answer}</p>
                 </motion.div>
               ))}
             </div>
@@ -446,21 +529,29 @@ export default function WixPlatformClient() {
           {/* What You'll Learn */}
           <motion.section variants={fadeIn} className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-blue-100">
-                <BookOpen className="w-6 h-6 text-blue-600" />
+              <div className={`p-3 rounded-lg ${
+                theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+              }`}>
+                <BookOpen className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900">What You'll Learn</h2>
+              <h2 className={`text-3xl font-bold ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>What You'll Learn</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {learningObjectives.map((objective, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className={`rounded-xl shadow-lg p-6 ${
+                    theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+                  }`}
                 >
                   <div className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2" />
-                    <span className="text-gray-600">{objective}</span>
+                    <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                      theme === 'dark' ? 'bg-blue-400' : 'bg-blue-600'
+                    }`} />
+                    <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{objective}</span>
                   </div>
                 </motion.div>
               ))}
@@ -470,29 +561,39 @@ export default function WixPlatformClient() {
           {/* Course Content */}
           <motion.section variants={fadeIn} className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-lg bg-blue-100">
-                <Play className="w-6 h-6 text-blue-600" />
+              <div className={`p-3 rounded-lg ${
+                theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+              }`}>
+                <Play className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900">Course Content</h2>
+              <h2 className={`text-3xl font-bold ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>Course Content</h2>
             </div>
             <div className="grid grid-cols-1 gap-4">
               {courseContent.map((item, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className={`rounded-xl shadow-lg p-6 ${
+                    theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+                  }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-lg bg-blue-100">
-                        <item.icon className="w-6 h-6 text-blue-600" />
+                      <div className={`p-3 rounded-lg ${
+                        theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+                      }`}>
+                        <item.icon className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                        <p className="text-gray-600">{item.description}</p>
+                        <h3 className={`text-xl font-bold ${
+                          theme === 'dark' ? 'text-white' : 'text-gray-900'
+                        }`}>{item.title}</h3>
+                        <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{item.description}</p>
                       </div>
                     </div>
-                    <span className="text-sm text-gray-500">{item.duration}</span>
+                    <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}>{item.duration}</span>
                   </div>
                 </motion.div>
               ))}
@@ -501,26 +602,38 @@ export default function WixPlatformClient() {
 
           {/* Features */}
           <motion.section variants={fadeIn} className="space-y-6">
-            <h2 className="text-3xl font-bold text-gray-900">Key Features</h2>
+            <h2 className={`text-3xl font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Key Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className={`rounded-xl shadow-lg p-6 ${
+                    theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+                  }`}
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-lg bg-blue-100">
-                      <feature.icon className="w-6 h-6 text-blue-600" />
+                    <div className={`p-3 rounded-lg ${
+                      theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+                    }`}>
+                      <feature.icon className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
+                    <h3 className={`text-xl font-bold ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>{feature.title}</h3>
                   </div>
-                  <p className="text-gray-600 mb-4">{feature.description}</p>
+                  <p className={`mb-4 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>{feature.description}</p>
                   <ul className="space-y-2">
                     {feature.details.map((detail, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2" />
-                        <span className="text-gray-600">{detail}</span>
+                        <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                          theme === 'dark' ? 'bg-blue-400' : 'bg-blue-600'
+                        }`} />
+                        <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -531,26 +644,40 @@ export default function WixPlatformClient() {
 
           {/* Steps */}
           <motion.section variants={fadeIn} className="space-y-6">
-            <h2 className="text-3xl font-bold text-gray-900">Getting Started</h2>
+            <h2 className={`text-3xl font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Getting Started</h2>
             <div className="grid grid-cols-1 gap-6">
               {steps.map((step, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className={`rounded-xl shadow-lg p-6 ${
+                    theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+                  }`}
                 >
                   <div className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-medium">
+                    <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                      theme === 'dark'
+                        ? 'bg-blue-900/50 text-blue-400'
+                        : 'bg-blue-100 text-blue-600'
+                    }`}>
                       {index + 1}
                     </span>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-gray-600 mb-4">{step.description}</p>
+                      <h3 className={`text-xl font-bold mb-2 ${
+                        theme === 'dark' ? 'text-white' : 'text-gray-900'
+                      }`}>{step.title}</h3>
+                      <p className={`mb-4 ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                      }`}>{step.description}</p>
                       <ul className="space-y-2">
                         {step.checklist.map((item, i) => (
                           <li key={i} className="flex items-start gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2" />
-                            <span className="text-gray-600">{item}</span>
+                            <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                              theme === 'dark' ? 'bg-blue-400' : 'bg-blue-600'
+                            }`} />
+                            <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -563,25 +690,35 @@ export default function WixPlatformClient() {
 
           {/* Best Practices */}
           <motion.section variants={fadeIn} className="space-y-6">
-            <h2 className="text-3xl font-bold text-gray-900">Best Practices</h2>
+            <h2 className={`text-3xl font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Best Practices</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {bestPractices.map((practice, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className={`rounded-xl shadow-lg p-6 ${
+                    theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+                  }`}
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-lg bg-blue-100">
-                      <practice.icon className="w-6 h-6 text-blue-600" />
+                    <div className={`p-3 rounded-lg ${
+                      theme === 'dark' ? 'bg-blue-900/50' : 'bg-blue-100'
+                    }`}>
+                      <practice.icon className={theme === 'dark' ? 'text-blue-400' : 'text-blue-600'} />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">{practice.title}</h3>
+                    <h3 className={`text-xl font-bold ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>{practice.title}</h3>
                   </div>
                   <ul className="space-y-2">
                     {practice.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2" />
-                        <span className="text-gray-600">{item}</span>
+                        <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                          theme === 'dark' ? 'bg-blue-400' : 'bg-blue-600'
+                        }`} />
+                        <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{item}</span>
                       </li>
                     ))}
                   </ul>

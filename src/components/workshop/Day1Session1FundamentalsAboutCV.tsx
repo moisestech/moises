@@ -499,3 +499,4 @@ export default function Day1Session1FundamentalsAboutCV() {
     </div>
   )
 } 
+ 

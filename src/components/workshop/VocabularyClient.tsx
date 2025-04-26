@@ -479,3 +479,225 @@ export default function VocabularyClient() {
     </div>
   );
 } 
+
+          {gameMode === 'learn' ? (
+            // Learning Mode
+            <>
+              {/* Platform Filter */}
+              <motion.div variants={fadeIn} className="flex items-center gap-4">
+                <div className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                  <Filter className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`} />
+                </div>
+                <div className="flex gap-2">
+                  {(['all', 'squarespace', 'wix', 'github'] as const).map(platform => (
+                    <button
+                      key={platform}
+                      onClick={() => setPlatformFilter(platform)}
+                      className={`px-4 py-2 rounded-lg transition-colors ${
+                        platformFilter === platform
+                          ? theme === 'dark'
+                            ? 'bg-indigo-600 text-white'
+                            : 'bg-indigo-500 text-white'
+                          : theme === 'dark'
+                            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      {platform === 'all' ? 'All Platforms' : (
+                        <div className="flex items-center gap-2">
+                          <PlatformIcon platform={platform} size={16} />
+                          <span>{platform.charAt(0).toUpperCase() + platform.slice(1)}</span>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Vocabulary Sections */}
+              {vocabularySections.map((section, sectionIndex) => (
+                <div key={sectionIndex}>
+                  <motion.section variants={fadeIn} className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className={`p-3 rounded-lg ${theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'}`}>
+                        {React.createElement(section.icon, { className: `w-6 h-6 ${theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'}` })}
+                      </div>
+                      <h2 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{section.title}</h2>
+                    </div>
+
+                    <div className={`rounded-xl shadow-lg overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+                      <div className="p-6">
+                        <div className="space-y-4">
+                          {section.terms
+                            .filter(term => platformFilter === 'all' || term.platforms.includes(platformFilter))
+                            .map((term, termIndex) => (
+                              <div 
+                                key={termIndex}
+                                className={`rounded-lg overflow-hidden transition-all duration-200 ${
+                                  theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+                                }`}
+                              >
+                                <div className="p-4">
+                                  <div className="flex items-center gap-4 mb-2">
+                                    <div className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'}`}>
+                                      {React.createElement(term.icon, { className: `w-5 h-5 ${theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'}` })}
+                                    </div>
+                                    <h3 className={`text-lg font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                                      {term.term}
+                                    </h3>
+                                  </div>
+                                  <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                                    {term.definition}
+                                  </p>
+                                  <div className="flex gap-2 mt-3">
+                                    {term.platforms.map(platform => (
+                                      <div 
+                                        key={platform}
+                                        className={`p-1 rounded ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'}`}
+                                      >
+                                        <PlatformIcon platform={platform} size={16} />
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.section>
+
+                  {sectionIndex < vocabularySections.length - 1 && (
+                    <DecorativeDivider
+                      icon={section.icon}
+                      gradientColors={{
+                        from: theme === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(99, 102, 241, 0.2)',
+                        via: theme === 'dark' ? 'rgba(168, 85, 247, 0.3)' : 'rgba(168, 85, 247, 0.2)',
+                        to: theme === 'dark' ? 'rgba(236, 72, 153, 0.3)' : 'rgba(236, 72, 153, 0.2)'
+                      }}
+                      iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+                    />
+                  )}
+                </div>
+              ))}
+            </>
+          ) : (
+            // Challenge Mode
+            <motion.div variants={fadeIn} className="space-y-8">
+              {/* Platform Filter */}
+              <div className="flex items-center gap-4">
+                <div className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'}`}>
+                  <Filter className={`w-5 h-5 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`} />
+                </div>
+                <div className="flex gap-2">
+                  {(['all', 'squarespace', 'wix', 'github'] as const).map(platform => (
+                    <button
+                      key={platform}
+                      onClick={() => {
+                        setPlatformFilter(platform);
+                        setCurrentTerm(0);
+                        setScore(0);
+                      }}
+                      className={`px-4 py-2 rounded-lg transition-colors ${
+                        platformFilter === platform
+                          ? theme === 'dark'
+                            ? 'bg-indigo-600 text-white'
+                            : 'bg-indigo-500 text-white'
+                          : theme === 'dark'
+                            ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      {platform === 'all' ? 'All Platforms' : (
+                        <div className="flex items-center gap-2">
+                          <PlatformIcon platform={platform} size={16} />
+                          <span>{platform.charAt(0).toUpperCase() + platform.slice(1)}</span>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Challenge Card */}
+              <div className={`rounded-xl shadow-lg overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+                <div className="p-8">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`p-3 rounded-lg ${theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'}`}>
+                      {React.createElement(currentTermData.icon, { className: `w-6 h-6 ${theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'}` })}
+                    </div>
+                    <h2 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                      {currentTermData.term}
+                    </h2>
+                  </div>
+
+                  <div className="space-y-4">
+                    {shuffledOptions.map((option, index) => (
+                      <button
+                        key={index}
+                        onClick={() => !showFeedback && handleAnswer(option)}
+                        disabled={showFeedback}
+                        className={`w-full p-4 rounded-lg text-left transition-colors ${
+                          showFeedback
+                            ? option === currentTermData.definition
+                              ? theme === 'dark'
+                                ? 'bg-green-900/50 text-green-300'
+                                : 'bg-green-100 text-green-800'
+                              : selectedOption === option
+                                ? theme === 'dark'
+                                  ? 'bg-red-900/50 text-red-300'
+                                  : 'bg-red-100 text-red-800'
+                                : theme === 'dark'
+                                  ? 'bg-gray-700/50 text-gray-300'
+                                  : 'bg-gray-100 text-gray-700'
+                            : theme === 'dark'
+                              ? 'bg-gray-700/50 text-gray-300 hover:bg-gray-600'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+
+                  {showFeedback && (
+                    <div className="mt-6 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        {isCorrect ? (
+                          <>
+                            <CheckCircle2 className={`w-5 h-5 ${theme === 'dark' ? 'text-green-400' : 'text-green-600'}`} />
+                            <span className={theme === 'dark' ? 'text-green-400' : 'text-green-600'}>
+                              Correct! +1 point
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <XCircle className={`w-5 h-5 ${theme === 'dark' ? 'text-red-400' : 'text-red-600'}`} />
+                            <span className={theme === 'dark' ? 'text-red-400' : 'text-red-600'}>
+                              Try again!
+                            </span>
+                          </>
+                        )}
+                      </div>
+                      <button
+                        onClick={nextTerm}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
+                          theme === 'dark'
+                            ? 'bg-indigo-600 text-white hover:bg-indigo-500'
+                            : 'bg-indigo-500 text-white hover:bg-indigo-600'
+                        } transition-colors`}
+                      >
+                        Next Term
+                        <RefreshCw className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </motion.div>
+      </main>
+    </div>
+  );
+} 
