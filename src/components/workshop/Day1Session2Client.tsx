@@ -3,15 +3,22 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { 
-  Stars,
-  LucideImage,
+  Globe,
+  Layout,
   FileText,
   Link2,
   ClipboardList,
   FileCheck,
-  Sparkles
+  Sparkles,
+  Code2,
+  Palette,
+  Stars,
+  Settings,
+  BookOpen
 } from 'lucide-react'
 import Link from 'next/link'
+import { useTheme } from '@/contexts/ThemeContext'
+import { PlatformIcon } from './PlatformIcons'
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -40,66 +47,90 @@ const iconHover = {
 
 const sections = [
   {
-    title: "AI & Tools",
-    color: "from-pink-500 to-pink-600",
+    title: "Platform Guides",
+    color: "from-indigo-500 to-indigo-600",
     items: [
       {
-        title: "Using AI to Mock Up Layouts",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/layout",
-        icon: Stars,
-        description: "Learn how to use AI to create and visualize website layouts"
+        title: "Squarespace Guide",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/squarespace",
+        platform: "squarespace",
+        description: "Build your site with Squarespace's intuitive tools"
       },
       {
-        title: "Using AI for Art Assets",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/assets",
-        icon: LucideImage,
-        description: "Generate and optimize visual assets for your website"
+        title: "Wix Guide",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/wix",
+        platform: "wix",
+        description: "Create your website using Wix's drag-and-drop builder"
       },
       {
-        title: "Smart Bios + CVs with AI",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/ai-tools/content",
-        icon: FileText,
-        description: "Create compelling artist statements and professional bios"
+        title: "GitHub Pages Guide",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/github",
+        platform: "github",
+        description: "Host your site with GitHub Pages"
+      }
+    ]
+  },
+  {
+    title: "Essential Tools",
+    color: "from-purple-500 to-purple-600",
+    items: [
+      {
+        title: "Design Tools",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/tools/design",
+        icon: Palette,
+        description: "Essential design tools for your website"
       },
       {
-        title: "Link Tools + Calendars",
-        href: "/workshop/own-your-digital-presence/day/1/session/2/tools",
-        icon: Link2,
-        description: "Manage your online presence with smart tools"
+        title: "Development Tools",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/tools/development",
+        icon: Code2,
+        description: "Useful development tools and extensions"
+      },
+      {
+        title: "Productivity Tools",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/tools/productivity",
+        icon: Settings,
+        description: "Tools to streamline your workflow"
       }
     ]
   },
   {
     title: "Resources",
-    color: "from-indigo-500 to-indigo-600",
+    color: "from-pink-500 to-pink-600",
     items: [
       {
-        title: "Worksheet",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/resources/worksheet",
-        icon: ClipboardList,
-        description: "Step-by-step guide to plan your website"
+        title: "Getting Started Guide",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/resources/guide",
+        icon: BookOpen,
+        description: "Comprehensive guide to begin your journey"
       },
       {
-        title: "Checklist",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/resources/checklist",
+        title: "Platform Checklist",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/resources/checklist",
         icon: FileCheck,
-        description: "Ensure you have everything you need"
+        description: "Essential items for each platform"
       },
       {
-        title: "Templates",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/resources/templates",
+        title: "Templates & Assets",
+        href: "/workshop/own-your-digital-presence/day/1/session/2/resources/templates",
         icon: FileText,
-        description: "Ready-to-use templates for your content"
+        description: "Ready-to-use templates and resources"
       }
     ]
   }
 ]
 
 export default function Day1Session2Client() {
+  const { theme } = useTheme()
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
       <header className="relative h-96 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <div className={`absolute inset-0 bg-gradient-to-r ${
+          theme === 'dark'
+            ? 'from-indigo-900 via-purple-900 to-pink-900'
+            : 'from-indigo-500 via-purple-500 to-pink-500'
+        }`}>
           <div className="absolute inset-0 bg-[url('/images/wave.svg')] bg-cover opacity-20" />
         </div>
         <div className="relative h-full flex items-center justify-center">
@@ -121,13 +152,13 @@ export default function Day1Session2Client() {
                 repeatType: "reverse"
               }}
             >
-              <Sparkles className="w-16 h-16 text-white" />
+              <Globe className="w-16 h-16 text-white" />
             </motion.div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Session 2: AI & Resources
+              Session 2: Platform Guides
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
-              Discover how AI can enhance your website creation process and access valuable resources to streamline your workflow.
+              Learn how to build your website using popular platforms and access essential resources.
             </p>
           </motion.div>
         </div>
@@ -144,10 +175,14 @@ export default function Day1Session2Client() {
             <motion.section
               key={section.title}
               variants={fadeIn}
-              className="bg-white rounded-2xl shadow-xl p-8"
+              className={`rounded-2xl shadow-xl p-8 ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+              }`}
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">{section.title}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <h2 className={`text-3xl font-bold mb-8 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>{section.title}</h2>
+              <div className="grid md:grid-cols-3 gap-6">
                 {section.items.map((item) => (
                   <Link 
                     key={item.title}
@@ -162,7 +197,11 @@ export default function Day1Session2Client() {
                         whileHover={iconHover}
                         className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mb-4"
                       >
-                        <item.icon className="w-6 h-6 text-white" />
+                        {'platform' in item ? (
+                          <PlatformIcon platform={item.platform} size={24} />
+                        ) : (
+                          <item.icon className="w-6 h-6 text-white" />
+                        )}
                       </motion.div>
                       <h4 className="text-xl font-semibold text-white mb-2">{item.title}</h4>
                       <p className="text-white/90">{item.description}</p>

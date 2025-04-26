@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Wix Platform Guide',
     description: 'Master Wix for your artist website with this comprehensive guide.',
     type: 'website',
-    url: 'https://moises.works/workshop/own-your-digital-presence/day/1/session/1/platforms/wix',
+    url: 'https://moises.works/workshop/own-your-digital-presence/day/1/session/2/platforms/wix',
     images: [
       {
         url: '/images/wix-platform.jpg',

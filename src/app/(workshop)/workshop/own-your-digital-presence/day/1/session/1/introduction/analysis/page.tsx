@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import AnalysisClient from '@/components/workshop/AnalysisClient';
+import { Day1Session1IntroAnalysisClient } from '@/components/workshop/Day1Session1IntroAnalysisClient'
 
 export const metadata: Metadata = {
   title: 'Website Analysis & Best Practices | Digital Presence Workshop',
@@ -22,5 +22,5 @@ export const metadata: Metadata = {
 };
 
 export default function AnalysisPage() {
-  return <AnalysisClient />;
+  return <Day1Session1IntroAnalysisClient />;
 } 

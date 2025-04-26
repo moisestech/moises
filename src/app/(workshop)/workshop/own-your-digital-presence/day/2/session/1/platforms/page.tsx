@@ -126,7 +126,7 @@ export default function PlatformsPage() {
                 {/* Wix Guides */}
                 <div className="space-y-4">
                   <Link 
-                    href="/workshop/own-your-digital-presence/day/2/session/1/platforms/wix"
+                    href="/workshop/own-your-digital-presence/day/2/session/2/platforms/wix"
                     className={cn(
                       "group flex items-center gap-3 p-4 rounded-lg border border-yellow-200",
                       "hover:border-yellow-200 hover:bg-yellow-50/50 transition-colors"
@@ -142,25 +142,25 @@ export default function PlatformsPage() {
                   </Link>
                   <div className="space-y-2 pl-4">
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/wix/structure"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/wix/structure"
                       className="text-sm text-gray-600 hover:text-yellow-600 transition-colors"
                     >
                       • Structure & Layout
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/wix/components"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/wix/components"
                       className="text-sm text-gray-600 hover:text-yellow-600 transition-colors"
                     >
                       • Components & Features
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/wix/mobile"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/wix/mobile"
                       className="text-sm text-gray-600 hover:text-yellow-600 transition-colors"
                     >
                       • Mobile Design
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/wix/implementation"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/wix/implementation"
                       className="text-sm text-gray-600 hover:text-yellow-600 transition-colors"
                     >
                       • Implementation Guide
@@ -171,7 +171,7 @@ export default function PlatformsPage() {
                 {/* Squarespace Guides */}
                 <div className="space-y-4">
                   <Link 
-                    href="/workshop/own-your-digital-presence/day/2/session/1/platforms/squarespace"
+                    href="/workshop/own-your-digital-presence/day/2/session/2/platforms/squarespace"
                     className={cn(
                       "group flex items-center gap-3 p-4 rounded-lg border border-gray-200",
                       "hover:border-gray-200 hover:bg-gray-50/50 transition-colors"
@@ -187,25 +187,25 @@ export default function PlatformsPage() {
                   </Link>
                   <div className="space-y-2 pl-4">
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/squarespace/structure"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/squarespace/structure"
                       className="text-sm text-gray-600 hover:text-gray-600 transition-colors"
                     >
                       • Structure & Layout
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/squarespace/components"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/squarespace/components"
                       className="text-sm text-gray-600 hover:text-gray-600 transition-colors"
                     >
                       • Components & Features
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/squarespace/mobile"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/squarespace/mobile"
                       className="text-sm text-gray-600 hover:text-gray-600 transition-colors"
                     >
                       • Mobile Design
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/squarespace/implementation"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/squarespace/implementation"
                       className="text-sm text-gray-600 hover:text-gray-600 transition-colors"
                     >
                       • Implementation Guide
@@ -216,7 +216,7 @@ export default function PlatformsPage() {
                 {/* GitHub Guides */}
                 <div className="space-y-4">
                   <Link 
-                    href="/workshop/own-your-digital-presence/day/2/session/1/platforms/github"
+                    href="/workshop/own-your-digital-presence/day/2/session/2/platforms/github"
                     className={cn(
                       "group flex items-center gap-3 p-4 rounded-lg border border-blue-200",
                       "hover:border-blue-200 hover:bg-blue-50/50 transition-colors"
@@ -232,25 +232,25 @@ export default function PlatformsPage() {
                   </Link>
                   <div className="space-y-2 pl-4">
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/github/structure"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/github/structure"
                       className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
                     >
                       • Structure & Setup
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/github/components"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/github/components"
                       className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
                     >
                       • Component Development
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/github/mobile"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/github/mobile"
                       className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
                     >
                       • Mobile-First Development
                     </Link>
                     <Link 
-                      href="/workshop/own-your-digital-presence/day/2/session/1/platforms/github/implementation"
+                      href="/workshop/own-your-digital-presence/day/2/session/2/platforms/github/implementation"
                       className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
                     >
                       • Deployment Guide

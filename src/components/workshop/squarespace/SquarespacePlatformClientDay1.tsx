@@ -1,14 +1,34 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowLeft, Layout, Image, FileText, Users, Zap, Shield, Clock, BookOpen, Play, RefreshCw, Copy, File, Link2, Search, HelpCircle, Sparkles, Mail, Database, Menu, Video, ShieldCheck, Home, Info, Phone, PenTool, Globe2, Star, Grid, Type, Palette, Code, Calendar, Map, Music, Share2, Rss, Cloud, ShoppingCart } from 'lucide-react';
-import Link from 'next/link';
+import React from 'react'
+import { motion } from 'framer-motion'
+import { 
+  ArrowLeft,
+  Layout,
+  Image,
+  FileText,
+  Settings,
+  Globe,
+  Laptop,
+  Code2,
+  Palette,
+  Sparkles,
+  RefreshCw,
+  Link2,
+  Search,
+  ShoppingCart,
+  Users,
+  MessageSquare
+} from 'lucide-react'
+import Link from 'next/link'
+import { useTheme } from '@/contexts/ThemeContext'
+import DecorativeDivider from '@/components/common/DecorativeDivider'
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.5 }
-};
+}
 
 const staggerChildren = {
   animate: {
@@ -16,231 +36,169 @@ const staggerChildren = {
       staggerChildren: 0.1
     }
   }
-};
-
-const squarespaceContent = {
-  title: "Squarespace Platform Guide",
-  description: "Learn how to create and customize your website using Squarespace's powerful tools and features.",
-  sections: [
-    {
-      title: "Choosing a Template",
-      icon: Layout,
-      description: "All Squarespace 7.1 templates have the same features and style options. Your choice is a starting point that doesn't limit your design possibilities.",
-      keyPoints: [
-        "Explore the template store or use Squarespace Blueprint",
-        "Focus on structure and style rather than demo content",
-        "Customize any template to meet your needs",
-        "Change designs later using pages, sections, and style settings"
-      ]
-    },
-    {
-      title: "Creating Your Design",
-      icon: Palette,
-      description: "Customize your site's appearance with curated font and color themes.",
-      keyPoints: [
-        "Choose from curated font packs and scale base font size",
-        "Select color palettes and theme options",
-        "Create logos with Squarespace Logo (free for subscribers)",
-        "Upload custom images or use stock images",
-        "Follow accessibility guidelines for better design"
-      ]
-    },
-    {
-      title: "Adding Content with Blocks",
-      icon: Grid,
-      description: "Blocks are drag-and-drop features that display content on your site. Use them to customize pages with various content types.",
-      blocks: [
-        {
-          name: "Text & Content",
-          icon: Type,
-          items: ["Text", "Markdown", "Quote", "Line", "Spacer"]
-        },
-        {
-          name: "Media",
-          icon: Image,
-          items: ["Image", "Gallery", "Video", "Audio", "SoundCloud"]
-        },
-        {
-          name: "Interactive",
-          icon: Share2,
-          items: ["Button", "Form", "Newsletter", "Social Links", "Search"]
-        },
-        {
-          name: "Business",
-          icon: Database,
-          items: ["Product", "Calendar", "Scheduling", "Reservations", "Donation"]
-        },
-        {
-          name: "Integration",
-          icon: Code,
-          items: ["Embed", "Map", "Instagram", "RSS", "Amazon"]
-        }
-      ]
-    },
-    {
-      title: "Site Subscription Features",
-      icon: Shield,
-      description: "Every full Squarespace website subscription includes comprehensive tools and features.",
-      features: [
-        "Drag-and-drop site building tools",
-        "Content hosting on robust infrastructure",
-        "Built-in search engine optimization",
-        "Squarespace and Google Analytics integration",
-        "Responsive design for all devices",
-        "24/7 customer support"
-      ]
-    }
-  ]
-};
+}
 
 const features = [
   {
-    title: "Design Tools",
+    title: "Visual Editor",
+    description: "Intuitive drag-and-drop interface",
     icon: Layout,
-    description: "Professional design capabilities",
     details: [
-      "Custom templates",
-      "Style editor",
-      "Mobile optimization",
-      "Design flexibility"
+      "No coding required",
+      "Real-time preview",
+      "Mobile-responsive layouts",
+      "Pre-designed sections"
     ]
   },
   {
     title: "Portfolio Features",
+    description: "Professional portfolio tools",
     icon: Image,
-    description: "Specialized tools for artists",
     details: [
       "Gallery layouts",
-      "Portfolio templates",
       "Image optimization",
-      "Lightbox effects"
-    ]
-  },
-  {
-    title: "E-commerce",
-    icon: ShoppingCart,
-    description: "Sell your artwork online",
-    details: [
-      "Product galleries",
-      "Inventory management",
-      "Payment processing",
-      "Order tracking"
+      "Lightbox effects",
+      "Custom image captions"
     ]
   },
   {
     title: "Content Management",
-    icon: FileText,
     description: "Easy content organization",
+    icon: FileText,
     details: [
       "Blog functionality",
-      "Page scheduling",
-      "Multiple authors",
-      "Content versioning"
+      "Content scheduling",
+      "Version history",
+      "SEO tools"
+    ]
+  },
+  {
+    title: "E-commerce",
+    description: "Built-in online store",
+    icon: ShoppingCart,
+    details: [
+      "Product galleries",
+      "Secure checkout",
+      "Inventory management",
+      "Digital products"
     ]
   }
-];
+]
 
-const steps = [
+const guides = [
   {
     title: "Getting Started",
-    description: "Set up your Squarespace account and choose a template",
-    checklist: [
-      "Create Squarespace account",
-      "Select a portfolio template",
-      "Choose a domain name",
-      "Set up your profile"
+    icon: Laptop,
+    steps: [
+      "Create a Squarespace account",
+      "Choose a template",
+      "Set up your domain",
+      "Configure basic settings"
     ]
   },
   {
-    title: "Design",
-    description: "Customize your website's appearance",
-    checklist: [
-      "Upload your artwork",
+    title: "Design Customization",
+    icon: Palette,
+    steps: [
       "Customize colors and fonts",
+      "Modify layout settings",
       "Add your branding",
-      "Set up navigation"
+      "Adjust spacing and styles"
     ]
   },
   {
-    title: "Content",
-    description: "Add and organize your content",
-    checklist: [
-      "Create portfolio pages",
-      "Add artwork descriptions",
-      "Set up your blog",
-      "Add contact information"
+    title: "Content Setup",
+    icon: FileText,
+    steps: [
+      "Create main pages",
+      "Set up navigation",
+      "Add portfolio items",
+      "Configure blog"
     ]
   },
   {
-    title: "E-commerce Setup",
-    description: "Configure your online store",
-    checklist: [
-      "Add product listings",
-      "Set up payment methods",
-      "Configure shipping options",
-      "Test checkout process"
+    title: "Advanced Features",
+    icon: Settings,
+    steps: [
+      "Set up analytics",
+      "Configure marketing tools",
+      "Add third-party integrations",
+      "Enable advanced features"
     ]
   }
-];
+]
 
 const bestPractices = [
   {
-    title: "Design",
-    icon: Layout,
-    items: [
-      "Keep design clean and focused",
-      "Use consistent branding",
-      "Ensure good contrast",
-      "Optimize for mobile"
-    ]
-  },
-  {
-    title: "Content",
-    icon: FileText,
-    items: [
-      "Write compelling descriptions",
-      "Use high-quality images",
-      "Add alt text",
-      "Keep content fresh"
-    ]
-  },
-  {
     title: "Performance",
-    icon: Zap,
-    items: [
-      "Optimize image sizes",
-      "Use built-in tools",
-      "Regular updates",
-      "Monitor analytics"
+    icon: Sparkles,
+    tips: [
+      "Optimize images before upload",
+      "Use lazy loading for galleries",
+      "Minimize custom code",
+      "Enable browser caching"
     ]
   },
   {
-    title: "Security",
-    icon: Shield,
-    items: [
-      "Enable SSL",
-      "Use strong passwords",
-      "Regular backups",
-      "Secure forms"
+    title: "SEO",
+    icon: Search,
+    tips: [
+      "Set up meta descriptions",
+      "Use proper heading structure",
+      "Add alt text to images",
+      "Create SEO-friendly URLs"
+    ]
+  },
+  {
+    title: "Maintenance",
+    icon: RefreshCw,
+    tips: [
+      "Regular content updates",
+      "Monitor analytics",
+      "Backup your content",
+      "Check for broken links"
+    ]
+  },
+  {
+    title: "Engagement",
+    icon: Users,
+    tips: [
+      "Add contact forms",
+      "Enable comments",
+      "Integrate social media",
+      "Set up newsletters"
     ]
   }
-];
+]
 
-export default function SquarespacePlatformClient() {
+export default function SquarespacePlatformClientDay1() {
+  const { theme } = useTheme()
+
   return (
-    <div className="min-h-screen bg-white">
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
+      {/* Sticky Header */}
+      <header className={`sticky top-0 z-50 ${
+        theme === 'dark' 
+          ? 'bg-gray-900/80 border-gray-800' 
+          : 'bg-white/80 border-gray-200'
+      } backdrop-blur-sm border-b`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link 
-              href="/workshop/own-your-digital-presence/day/2/session/1"
-              className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+              href="/workshop/own-your-digital-presence/day/1/session/2"
+              className={`flex items-center ${
+                theme === 'dark'
+                  ? 'text-gray-300 hover:text-indigo-400'
+                  : 'text-gray-600 hover:text-indigo-600'
+              } transition-colors`}
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
-              <span className="text-sm font-medium">Back to Session 1</span>
+              <span className="text-sm font-medium">Back to Session 2</span>
             </Link>
-            <h1 className="text-lg font-space-mono font-medium text-gray-900">
-              {squarespaceContent.title}
+            <h1 className={`text-lg font-space-mono font-medium ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
+              Squarespace Guide
             </h1>
           </div>
         </div>
@@ -253,175 +211,205 @@ export default function SquarespacePlatformClient() {
           variants={staggerChildren}
           className="space-y-12"
         >
-          {/* Introduction */}
+          {/* Hero Section */}
           <motion.section
             variants={fadeIn}
-            className="bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl p-8 text-white"
+            className="relative overflow-hidden rounded-2xl"
           >
-            <h1 className="text-4xl font-bold mb-4">{squarespaceContent.title}</h1>
-            <p className="text-lg text-blue-100">{squarespaceContent.description}</p>
+            <div className={`absolute inset-0 bg-gradient-to-r ${
+              theme === 'dark'
+                ? 'from-indigo-900 via-purple-900 to-pink-900'
+                : 'from-indigo-500 via-purple-500 to-pink-500'
+            }`}>
+              <div className="absolute inset-0 bg-[url('/images/wave.svg')] bg-cover opacity-20" />
+            </div>
+            <div className="relative p-8 text-white">
+              <motion.div
+                className="flex justify-center mb-8"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                <Layout className="w-16 h-16" />
+              </motion.div>
+              <h1 className="text-4xl md:text-6xl font-bold text-center mb-6">
+                Squarespace Guide
+              </h1>
+              <p className="text-xl text-center text-white/90 max-w-3xl mx-auto">
+                Build your professional portfolio with Squarespace's powerful platform
+              </p>
+            </div>
           </motion.section>
 
-          {/* New Content Sections */}
-          {squarespaceContent.sections.map((section, index) => (
-            <motion.section
-              key={index}
-              variants={fadeIn}
-              className="bg-white rounded-xl shadow-lg p-6"
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-blue-100">
-                  <section.icon className="w-6 h-6 text-blue-600" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">{section.title}</h2>
-                  <p className="text-gray-600 mb-6">{section.description}</p>
-                  
-                  {section.keyPoints && (
-                    <div className="space-y-3">
-                      {section.keyPoints.map((point, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <div className="mt-1">
-                            <div className="w-2 h-2 rounded-full bg-blue-500" />
-                          </div>
-                          <p className="text-gray-600">{point}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {section.blocks && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                      {section.blocks.map((block, i) => (
-                        <div key={i} className="bg-gray-50 rounded-lg p-4">
-                          <div className="flex items-center gap-3 mb-3">
-                            <div className="p-2 rounded-lg bg-blue-100">
-                              <block.icon className="w-5 h-5 text-blue-600" />
-                            </div>
-                            <h3 className="font-semibold text-gray-900">{block.name}</h3>
-                          </div>
-                          <div className="space-y-2">
-                            {block.items.map((item, j) => (
-                              <div key={j} className="flex items-center gap-2 text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-gray-400" />
-                                <span>{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {section.features && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                      {section.features.map((feature, i) => (
-                        <div key={i} className="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
-                          <div className="mt-1">
-                            <div className="w-2 h-2 rounded-full bg-blue-500" />
-                          </div>
-                          <p className="text-gray-600">{feature}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.section>
-          ))}
-
-          {/* Existing Features Section */}
-          <motion.section variants={fadeIn} className="space-y-6">
-            <h2 className="text-3xl font-bold text-gray-900">Key Features</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+          {/* Features Section */}
+          <motion.section
+            variants={fadeIn}
+            className={`rounded-2xl shadow-xl p-8 ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            }`}
+          >
+            <h2 className={`text-3xl font-bold mb-8 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Key Features</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map((feature) => (
+                <div
+                  key={feature.title}
+                  className={`rounded-xl p-6 ${
+                    theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+                  }`}
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-lg bg-purple-100">
-                      <feature.icon className="w-6 h-6 text-purple-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
+                  <div className={`p-3 rounded-lg ${
+                    theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'
+                  } mb-4`}>
+                    <feature.icon className={`w-6 h-6 ${
+                      theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
+                    }`} />
                   </div>
-                  <p className="text-gray-600 mb-4">{feature.description}</p>
+                  <h3 className={`text-xl font-semibold mb-2 ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>{feature.title}</h3>
+                  <p className={`mb-4 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>{feature.description}</p>
                   <ul className="space-y-2">
-                    {feature.details.map((detail, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-2" />
-                        <span className="text-gray-600">{detail}</span>
+                    {feature.details.map((detail, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                          theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                        }`} />
+                        <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                          {detail}
+                        </span>
                       </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               ))}
             </div>
           </motion.section>
 
-          {/* Existing Steps Section */}
-          <motion.section variants={fadeIn} className="space-y-6">
-            <h2 className="text-3xl font-bold text-gray-900">Getting Started</h2>
-            <div className="grid grid-cols-1 gap-6">
-              {steps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+          <DecorativeDivider
+            icon={Code2}
+            gradientColors={{
+              from: theme === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(99, 102, 241, 0.2)',
+              via: theme === 'dark' ? 'rgba(168, 85, 247, 0.3)' : 'rgba(168, 85, 247, 0.2)',
+              to: theme === 'dark' ? 'rgba(236, 72, 153, 0.3)' : 'rgba(236, 72, 153, 0.2)'
+            }}
+            iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+          />
+
+          {/* Step-by-Step Guide */}
+          <motion.section
+            variants={fadeIn}
+            className={`rounded-2xl shadow-xl p-8 ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            }`}
+          >
+            <h2 className={`text-3xl font-bold mb-8 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Step-by-Step Guide</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {guides.map((guide) => (
+                <div
+                  key={guide.title}
+                  className={`rounded-xl p-6 ${
+                    theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+                  }`}
                 >
-                  <div className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm font-medium">
-                      {index + 1}
-                    </span>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-gray-600 mb-4">{step.description}</p>
-                      <ul className="space-y-2">
-                        {step.checklist.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-2" />
-                            <span className="text-gray-600">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className={`p-3 rounded-lg ${
+                    theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'
+                  } mb-4`}>
+                    <guide.icon className={`w-6 h-6 ${
+                      theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
+                    }`} />
                   </div>
-                </motion.div>
+                  <h3 className={`text-xl font-semibold mb-4 ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>{guide.title}</h3>
+                  <ol className="space-y-2">
+                    {guide.steps.map((step, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className={`flex-shrink-0 w-6 h-6 rounded-full ${
+                          theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'
+                        } flex items-center justify-center text-sm ${
+                          theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
+                        }`}>
+                          {index + 1}
+                        </span>
+                        <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                          {step}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               ))}
             </div>
           </motion.section>
 
-          {/* Existing Best Practices Section */}
-          <motion.section variants={fadeIn} className="space-y-6">
-            <h2 className="text-3xl font-bold text-gray-900">Best Practices</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {bestPractices.map((practice, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn}
-                  className="bg-white rounded-xl shadow-lg p-6"
+          <DecorativeDivider
+            icon={Settings}
+            gradientColors={{
+              from: theme === 'dark' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)',
+              via: theme === 'dark' ? 'rgba(5, 150, 105, 0.3)' : 'rgba(5, 150, 105, 0.2)',
+              to: theme === 'dark' ? 'rgba(4, 120, 87, 0.3)' : 'rgba(4, 120, 87, 0.2)'
+            }}
+            iconColor={theme === 'dark' ? 'text-emerald-400/50' : 'text-emerald-500/50'}
+          />
+
+          {/* Best Practices */}
+          <motion.section
+            variants={fadeIn}
+            className={`rounded-2xl shadow-xl p-8 ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            }`}
+          >
+            <h2 className={`text-3xl font-bold mb-8 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Best Practices</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {bestPractices.map((practice) => (
+                <div
+                  key={practice.title}
+                  className={`rounded-xl p-6 ${
+                    theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+                  }`}
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-lg bg-purple-100">
-                      <practice.icon className="w-6 h-6 text-purple-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900">{practice.title}</h3>
+                  <div className={`p-3 rounded-lg ${
+                    theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'
+                  } mb-4`}>
+                    <practice.icon className={`w-6 h-6 ${
+                      theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
+                    }`} />
                   </div>
+                  <h3 className={`text-xl font-semibold mb-4 ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>{practice.title}</h3>
                   <ul className="space-y-2">
-                    {practice.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-2" />
-                        <span className="text-gray-600">{item}</span>
+                    {practice.tips.map((tip, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                          theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                        }`} />
+                        <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                          {tip}
+                        </span>
                       </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               ))}
             </div>
           </motion.section>
         </motion.div>
       </main>
     </div>
-  );
+  )
 } 

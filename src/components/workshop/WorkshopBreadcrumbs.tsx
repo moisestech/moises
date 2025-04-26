@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { workshopContentNavigation } from '@/config/workshop-navigation'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/contexts/ThemeContext'
 
 interface NavigationItem {
   title: string
@@ -70,19 +71,33 @@ function findPathInNavigation(path: string): BreadcrumbItem[] | null {
 export function WorkshopBreadcrumbs() {
   const pathname = usePathname()
   const breadcrumbs = findPathInNavigation(pathname)
+  const { theme } = useTheme()
 
   if (breadcrumbs === null) return null
 
   return (
-    <nav className="flex items-center space-x-2 text-sm text-gray-500">
+    <nav className={cn(
+      "flex items-center space-x-2 text-sm",
+      theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+    )}>
       {breadcrumbs.map((crumb, index) => (
         <div key={crumb.href} className="flex items-center">
-          {index > 0 && <ChevronRight className="h-4 w-4 mx-2" />}
+          {index > 0 && <ChevronRight className={cn(
+            "h-4 w-4 mx-2",
+            theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+          )} />}
           <Link
             href={crumb.href}
             className={cn(
-              "hover:text-indigo-600 transition-colors",
-              index === breadcrumbs.length - 1 && "text-indigo-600 font-medium"
+              "transition-colors",
+              theme === 'dark' 
+                ? "hover:text-indigo-400" 
+                : "hover:text-indigo-600",
+              index === breadcrumbs.length - 1 && theme === 'dark'
+                ? "text-indigo-400 font-medium"
+                : index === breadcrumbs.length - 1
+                  ? "text-indigo-600 font-medium"
+                  : ""
             )}
           >
             {crumb.title}
@@ -91,4 +106,4 @@ export function WorkshopBreadcrumbs() {
       ))}
     </nav>
   )
-} 
+}

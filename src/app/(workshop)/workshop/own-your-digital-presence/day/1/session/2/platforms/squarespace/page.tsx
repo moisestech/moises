@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import SquarespacePlatformClient from '@/components/workshop/squarespace/SquarespacePlatformClientDay1';
+import SquarespacePlatformClientDay1 from '@/components/workshop/squarespace/SquarespacePlatformClientDay1';
 
 export const metadata: Metadata = {
-  title: 'Squarespace Platform Guide | Digital Presence Workshop',
-  description: 'Learn how to create a professional artist website using Squarespace. Comprehensive guide to templates, design tools, and e-commerce features.',
+  title: 'Squarespace Guide | Digital Presence Workshop',
+  description: 'Learn how to build your professional portfolio website using Squarespace\'s powerful platform and features.',
   keywords: 'Squarespace, website builder, artist website, Squarespace templates, e-commerce, digital presence',
   openGraph: {
     title: 'Squarespace Platform Guide',
@@ -22,5 +22,5 @@ export const metadata: Metadata = {
 };
 
 export default function SquarespacePlatformPage() {
-  return <SquarespacePlatformClient />;
+  return <SquarespacePlatformClientDay1 />;
 } 

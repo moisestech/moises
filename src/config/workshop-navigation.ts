@@ -114,6 +114,12 @@ const session1Config = {
       description: "Core concepts of digital presence",
       items: [
         {
+          title: "Homepage",
+          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/homepage",
+          icon: Home,
+          description: "Creating an effective homepage for your digital presence"
+        },
+        {
           title: "Layout",
           href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/layout",
           icon: Layout,
@@ -132,16 +138,16 @@ const session1Config = {
           description: "Managing and organizing digital assets"
         },
         {
-          title: "Media",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/media",
-          icon: ImagePlus,
-          description: "Working with different media types"
-        },
-        {
           title: "Content",
           href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/content",
           icon: FileText,
           description: "Content creation and organization"
+        },
+        {
+          title: "Mobile",
+          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/mobile",
+          icon: Smartphone,
+          description: "Create a responsive and mobile friendly website"
         },
         {
           title: "Events",
@@ -177,25 +183,25 @@ const session1Config = {
     },
     {
       title: "Platform Guides",
-      href: "/workshop/own-your-digital-presence/day/1/session/1/platforms",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/platforms",
       icon: Monitor,
       description: "Platform-specific guides and tutorials",
       items: [
         {
           title: "Wix",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/wix",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/wix",
           icon: FaWix,
           description: "Wix platform guide and tutorials"
         },
         {
           title: "Squarespace",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/squarespace",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/squarespace",
           icon: FaSquarespace,
           description: "Squarespace platform guide and tutorials"
         },
         {
           title: "GitHub",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/github",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/github",
           icon: FaGithub,
           description: "GitHub platform guide and tutorials"
         }
@@ -237,74 +243,6 @@ const session2Config = {
         }
       ]
     },
-    {
-      title: "AI Fundamentals",
-      href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals",
-      icon: Brain,
-      description: "Introduction to AI tools for artists",
-      items: [
-        {
-          title: "LLMs",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/llms",
-          icon: MessageSquare,
-          description: "Understanding Large Language Models"
-        },
-        {
-          title: "Image Models",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/image-models",
-          icon: Image,
-          description: "AI models for image generation and editing"
-        },
-        {
-          title: "Prompting",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/prompting",
-          icon: PenTool,
-          description: "Effective prompting techniques and strategies"
-        },
-        {
-          title: "Ethics",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ethics",
-          icon: Shield,
-          description: "Ethical considerations in AI usage"
-        },
-        {
-          title: "Assets",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/assets",
-          icon: Image,
-          description: "Managing and organizing AI-generated assets"
-        },
-        {
-          title: "Content",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/content",
-          icon: FileText,
-          description: "Creating and managing AI-assisted content"
-        },
-        {
-          title: "Layout",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/layout",
-          icon: Layout,
-          description: "AI tools for website layout and design"
-        },
-        {
-          title: "AI Refresh",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ai-refresh",
-          icon: RefreshCw,
-          description: "Using AI to refresh and update content"
-        }
-      ]
-    },
-    {
-      title: "Productivity",
-      href: "/workshop/own-your-digital-presence/day/1/session/2/productivity",
-      icon: Zap,
-      description: "Productivity tools and systems for artists"
-    },
-    {
-      title: "Content Strategy",
-      href: "/workshop/own-your-digital-presence/day/1/session/2/content-strategy",
-      icon: FileText,
-      description: "Developing a content strategy for your website"
-    }
   ]
 }
 
@@ -360,6 +298,12 @@ const day1Session1Config = {
       description: "Core concepts of digital presence",
       items: [
         {
+          title: "Homepage",
+          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/homepage",
+          icon: Home,
+          description: "Creating an effective homepage for your digital presence"
+        },
+        {
           title: "Layout",
           href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/layout",
           icon: Layout,
@@ -378,16 +322,16 @@ const day1Session1Config = {
           description: "Managing and organizing digital assets"
         },
         {
-          title: "Media",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/media",
-          icon: ImagePlus,
-          description: "Working with different media types"
-        },
-        {
           title: "Content",
           href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/content",
           icon: FileText,
           description: "Content creation and organization"
+        },
+        {
+          title: "Mobile",
+          href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/mobile",
+          icon: Smartphone,
+          description: "Create a responsive and mobile friendly website"
         },
         {
           title: "Events",
@@ -421,32 +365,6 @@ const day1Session1Config = {
         }
       ]
     },
-    {
-      title: "Platform Guides",
-      href: "/workshop/own-your-digital-presence/day/1/session/1/platforms",
-      icon: Monitor,
-      description: "Platform-specific guides and tutorials",
-      items: [
-        {
-          title: "Wix",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/wix",
-          icon: FaWix,
-          description: "Wix platform guide and tutorials"
-        },
-        {
-          title: "Squarespace",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/squarespace",
-          icon: FaSquarespace,
-          description: "Squarespace platform guide and tutorials"
-        },
-        {
-          title: "GitHub",
-          href: "/workshop/own-your-digital-presence/day/1/session/1/platforms/github",
-          icon: FaGithub,
-          description: "GitHub platform guide and tutorials"
-        }
-      ]
-    }
   ]
 }
 
@@ -457,6 +375,32 @@ const day1Session2Config = {
   icon: MessageSquare,
   description: "Content Organization & Customization",
   items: [
+    {
+      title: "Platform Guides",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/platforms",
+      icon: Monitor,
+      description: "Platform-specific guides and tutorials",
+      items: [
+        {
+          title: "Wix",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/wix",
+          icon: FaWix,
+          description: "Wix platform guide and tutorials"
+        },
+        {
+          title: "Squarespace",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/squarespace",
+          icon: FaSquarespace,
+          description: "Squarespace platform guide and tutorials"
+        },
+        {
+          title: "GitHub",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/platforms/github",
+          icon: FaGithub,
+          description: "GitHub platform guide and tutorials"
+        }
+      ]
+    },
     {
       title: "AI Tools",
       href: "/workshop/own-your-digital-presence/day/2/session/2/ai",
@@ -482,76 +426,7 @@ const day1Session2Config = {
           description: "Master GitHub Copilot for development"
         }
       ]
-    },
-    {
-      title: "AI Fundamentals",
-      href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals",
-      icon: Brain,
-      description: "Introduction to AI tools for artists",
-      items: [
-        {
-          title: "LLMs",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/llms",
-          icon: MessageSquare,
-          description: "Understanding Large Language Models"
-        },
-        {
-          title: "Image Models",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/image-models",
-          icon: Image,
-          description: "AI models for image generation and editing"
-        },
-        {
-          title: "Prompting",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/prompting",
-          icon: PenTool,
-          description: "Effective prompting techniques and strategies"
-        },
-        {
-          title: "Ethics",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ethics",
-          icon: Shield,
-          description: "Ethical considerations in AI usage"
-        },
-        {
-          title: "Assets",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/assets",
-          icon: Image,
-          description: "Managing and organizing AI-generated assets"
-        },
-        {
-          title: "Content",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/content",
-          icon: FileText,
-          description: "Creating and managing AI-assisted content"
-        },
-        {
-          title: "Layout",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/layout",
-          icon: Layout,
-          description: "AI tools for website layout and design"
-        },
-        {
-          title: "AI Refresh",
-          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ai-refresh",
-          icon: RefreshCw,
-          description: "Using AI to refresh and update content"
-        }
-      ]
-    },
-    {
-      title: "Productivity",
-      href: "/workshop/own-your-digital-presence/day/1/session/2/productivity",
-      icon: Zap,
-      description: "Productivity tools and systems for artists"
-    },
-    {
-      title: "Content Strategy",
-      href: "/workshop/own-your-digital-presence/day/1/session/2/content-strategy",
-      icon: FileText,
-      description: "Developing a content strategy for your website"
-    }
-  ]
+    },  ]
 }
 
 // Day 2 Session 1 Configuration
@@ -810,7 +685,88 @@ const day2Session1Config = {
           description: "Platform-specific publishing guides"
         }
       ]
-    }
+    },
+    {
+      title: "Productivity",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/productivity",
+      icon: Zap,
+      description: "Productivity tools and systems for artists"
+    },
+    {
+      title: "Content Strategy",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/content-strategy",
+      icon: FileText,
+      description: "Developing a content strategy for your website"
+    },
+
+    {
+      title: "Productivity",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/productivity",
+      icon: Zap,
+      description: "Productivity tools and systems for artists"
+    },
+    {
+      title: "Content Strategy",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/content-strategy",
+      icon: FileText,
+      description: "Developing a content strategy for your website"
+    },
+    {
+      title: "AI Fundamentals",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals",
+      icon: Brain,
+      description: "Introduction to AI tools for artists",
+      items: [
+        {
+          title: "LLMs",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/llms",
+          icon: MessageSquare,
+          description: "Understanding Large Language Models"
+        },
+        {
+          title: "Image Models",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/image-models",
+          icon: Image,
+          description: "AI models for image generation and editing"
+        },
+        {
+          title: "Prompting",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/prompting",
+          icon: PenTool,
+          description: "Effective prompting techniques and strategies"
+        },
+        {
+          title: "Ethics",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ethics",
+          icon: Shield,
+          description: "Ethical considerations in AI usage"
+        },
+        {
+          title: "Assets",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/assets",
+          icon: Image,
+          description: "Managing and organizing AI-generated assets"
+        },
+        {
+          title: "Content",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/content",
+          icon: FileText,
+          description: "Creating and managing AI-assisted content"
+        },
+        {
+          title: "Layout",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/layout",
+          icon: Layout,
+          description: "AI tools for website layout and design"
+        },
+        {
+          title: "AI Refresh",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ai-refresh",
+          icon: RefreshCw,
+          description: "Using AI to refresh and update content"
+        }
+      ]
+    },
   ]
 }
 
@@ -962,6 +918,62 @@ const day2Session2Config = {
           href: "/workshop/own-your-digital-presence/day/2/session/2/resources/checklist",
           icon: CheckCircle,
           description: "Detailed launch checklist"
+        }
+      ]
+    },
+    {
+      title: "AI Fundamentals",
+      href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals",
+      icon: Brain,
+      description: "Introduction to AI tools for artists",
+      items: [
+        {
+          title: "LLMs",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/llms",
+          icon: MessageSquare,
+          description: "Understanding Large Language Models"
+        },
+        {
+          title: "Image Models",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/image-models",
+          icon: Image,
+          description: "AI models for image generation and editing"
+        },
+        {
+          title: "Prompting",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/prompting",
+          icon: PenTool,
+          description: "Effective prompting techniques and strategies"
+        },
+        {
+          title: "Ethics",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ethics",
+          icon: Shield,
+          description: "Ethical considerations in AI usage"
+        },
+        {
+          title: "Assets",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/assets",
+          icon: Image,
+          description: "Managing and organizing AI-generated assets"
+        },
+        {
+          title: "Content",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/content",
+          icon: FileText,
+          description: "Creating and managing AI-assisted content"
+        },
+        {
+          title: "Layout",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/layout",
+          icon: Layout,
+          description: "AI tools for website layout and design"
+        },
+        {
+          title: "AI Refresh",
+          href: "/workshop/own-your-digital-presence/day/1/session/2/ai-fundamentals/ai-refresh",
+          icon: RefreshCw,
+          description: "Using AI to refresh and update content"
         }
       ]
     }
@@ -1327,30 +1339,10 @@ export const workshopContentNavigation = {
         day1Session1Config,
         day1Session2Config,
         {
-          title: "Homework Challenges",
+          title: "Challenges",
           href: "/workshop/own-your-digital-presence/day/1/homework",
           icon: ClipboardList,
-          description: "Day 1 homework challenges and exercises",
-          items: [
-            {
-              title: "Digital Presence Analysis",
-              href: "/workshop/own-your-digital-presence/day/1/homework/analysis",
-              icon: Search,
-              description: "Analyze and document your current digital presence"
-            },
-            {
-              title: "Platform Research",
-              href: "/workshop/own-your-digital-presence/day/1/homework/research",
-              icon: Monitor,
-              description: "Research and compare different website platforms"
-            },
-            {
-              title: "Content Planning",
-              href: "/workshop/own-your-digital-presence/day/1/homework/content",
-              icon: FileText,
-              description: "Plan your website content and structure"
-            }
-          ]
+          description: "Day 1 homework challenges and exercises"
         }
       ]
     },

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ContentFundamentalsClient from '@/components/workshop/ContentFundamentalsClient';
+import Day1Session1FundamentalsContent from '@/components/workshop/Day1Session1FundamentalsContent';
 
 export const metadata: Metadata = {
   title: 'Content Management Fundamentals | Digital Presence Workshop',
@@ -21,6 +21,6 @@ export const metadata: Metadata = {
   }
 };
 
-export default function ContentFundamentalsPage() {
-  return <ContentFundamentalsClient />;
+export default function ContentPage() {
+  return <Day1Session1FundamentalsContent />
 } 

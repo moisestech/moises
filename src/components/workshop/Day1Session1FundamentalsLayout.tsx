@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 import { 
   LayoutGrid, 
   AlignCenter, 
@@ -30,9 +31,13 @@ import {
   FileText,
   Image,
   GalleryHorizontal,
-  Split
+  Split,
+  Sparkles,
+  Settings
 } from 'lucide-react'
 import { useState } from 'react'
+import { useTheme } from '@/contexts/ThemeContext'
+import DecorativeDivider from '@/components/common/DecorativeDivider'
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -336,12 +341,41 @@ const layoutPatterns = [
 ]
 
 export default function Day1Session1FundamentalsLayout() {
+  const { theme } = useTheme()
   const [activePrinciple, setActivePrinciple] = useState(0)
   const [activePattern, setActivePattern] = useState(0)
   const [showPatterns, setShowPatterns] = useState(false)
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
+      {/* Header */}
+      <header className={`sticky top-0 z-50 ${
+        theme === 'dark' 
+          ? 'bg-gray-900/80 border-gray-800' 
+          : 'bg-white/80 border-gray-200'
+      } backdrop-blur-sm border-b`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link 
+              href="/workshop/own-your-digital-presence/day/1/session/1/fundamentals"
+              className={`flex items-center ${
+                theme === 'dark'
+                  ? 'text-gray-300 hover:text-indigo-400'
+                  : 'text-gray-600 hover:text-indigo-600'
+              } transition-colors`}
+            >
+              <ArrowLeft className="h-5 w-5 mr-2" />
+              <span className="text-sm font-medium">Back to Fundamentals</span>
+            </Link>
+            <h1 className={`text-lg font-space-mono font-medium ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
+              Layout Fundamentals
+            </h1>
+          </div>
+        </div>
+      </header>
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial="initial"
@@ -352,21 +386,60 @@ export default function Day1Session1FundamentalsLayout() {
           {/* Header */}
           <motion.section
             variants={fadeIn}
-            className="text-center"
+            className="relative overflow-hidden rounded-2xl"
           >
-            <h1 className="text-4xl font-bold mb-4">Layout Fundamentals</h1>
-            <p className="text-xl text-gray-600">
-              Master the core principles of effective layout design
-            </p>
+            <div className={`absolute inset-0 bg-gradient-to-r ${
+              theme === 'dark'
+                ? 'from-indigo-900 via-purple-900 to-pink-900'
+                : 'from-indigo-500 via-purple-500 to-pink-500'
+            }`}>
+              <div className="absolute inset-0 bg-[url('/images/wave.svg')] bg-cover opacity-20" />
+            </div>
+            <div className="relative p-8 text-white">
+              <motion.div
+                className="flex justify-center mb-8"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                <LayoutGrid className="w-16 h-16" />
+              </motion.div>
+              <h1 className="text-4xl md:text-6xl font-bold text-center mb-6">
+                Layout Fundamentals
+              </h1>
+              <p className="text-xl text-center text-white/90 max-w-3xl mx-auto">
+                Master the core principles of effective layout design
+              </p>
+            </div>
           </motion.section>
+
+          <DecorativeDivider
+            icon={Grid}
+            gradientColors={{
+              from: theme === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(99, 102, 241, 0.2)',
+              via: theme === 'dark' ? 'rgba(168, 85, 247, 0.3)' : 'rgba(168, 85, 247, 0.2)',
+              to: theme === 'dark' ? 'rgba(236, 72, 153, 0.3)' : 'rgba(236, 72, 153, 0.2)'
+            }}
+            iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+          />
 
           {/* Toggle between Principles and Patterns */}
           <motion.div variants={fadeIn} className="flex justify-center gap-4">
             <motion.button
               className={`px-4 py-2 rounded-lg transition-colors ${
                 !showPatterns
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? theme === 'dark'
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-indigo-500 text-white'
+                  : theme === 'dark'
+                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
               onClick={() => setShowPatterns(false)}
               whileHover={{ scale: 1.05 }}
@@ -377,8 +450,12 @@ export default function Day1Session1FundamentalsLayout() {
             <motion.button
               className={`px-4 py-2 rounded-lg transition-colors ${
                 showPatterns
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? theme === 'dark'
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-indigo-500 text-white'
+                  : theme === 'dark'
+                    ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
               onClick={() => setShowPatterns(true)}
               whileHover={{ scale: 1.05 }}
@@ -395,8 +472,12 @@ export default function Day1Session1FundamentalsLayout() {
                 key={index}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                   (showPatterns ? activePattern : activePrinciple) === index
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? theme === 'dark'
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-indigo-500 text-white'
+                    : theme === 'dark'
+                      ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
                 onClick={() => showPatterns ? setActivePattern(index) : setActivePrinciple(index)}
                 whileHover={{ scale: 1.05 }}
@@ -418,25 +499,35 @@ export default function Day1Session1FundamentalsLayout() {
               exit="exit"
               className="space-y-6"
             >
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className={`rounded-xl shadow-lg p-6 ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+              }`}>
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 rounded-lg bg-blue-100">
+                  <div className={`p-3 rounded-lg ${
+                    theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'
+                  }`}>
                     {React.createElement(
                       (showPatterns ? layoutPatterns : principles)[showPatterns ? activePattern : activePrinciple].icon,
                       { 
-                        className: "w-6 h-6 text-blue-600",
+                        className: theme === 'dark' ? 'w-6 h-6 text-indigo-400' : 'w-6 h-6 text-indigo-600',
                         key: `icon-${showPatterns ? activePattern : activePrinciple}`
                       }
                     )}
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900">
+                  <h2 className={`text-2xl font-bold ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {(showPatterns ? layoutPatterns : principles)[showPatterns ? activePattern : activePrinciple].title}
                   </h2>
                 </div>
-                <p className="text-gray-600 mb-6">
+                <p className={`${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                } mb-6`}>
                   {(showPatterns ? layoutPatterns : principles)[showPatterns ? activePattern : activePrinciple].description}
                 </p>
-                <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                <ul className={`list-disc list-inside ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                } space-y-2 mb-6`}>
                   {(showPatterns ? layoutPatterns : principles)[showPatterns ? activePattern : activePrinciple].details.map((detail, index) => (
                     <li key={index}>{detail}</li>
                   ))}
@@ -445,6 +536,106 @@ export default function Day1Session1FundamentalsLayout() {
               </div>
             </motion.section>
           </AnimatePresence>
+
+          <DecorativeDivider
+            icon={Settings}
+            gradientColors={{
+              from: theme === 'dark' ? 'rgba(236, 72, 153, 0.3)' : 'rgba(236, 72, 153, 0.2)',
+              via: theme === 'dark' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(239, 68, 68, 0.2)',
+              to: theme === 'dark' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(245, 158, 11, 0.2)'
+            }}
+            iconColor={theme === 'dark' ? 'text-pink-400/50' : 'text-pink-500/50'}
+          />
+
+          {/* Additional Tips */}
+          <motion.section
+            variants={fadeIn}
+            className={`rounded-2xl shadow-xl p-8 ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            }`}
+          >
+            <h2 className={`text-3xl font-bold mb-6 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Pro Tips</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className={`p-6 rounded-xl ${
+                theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+              }`}>
+                <h3 className={`text-xl font-semibold mb-4 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>For Artists</h3>
+                <ul className="space-y-3">
+                  <li className={`flex items-start gap-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                      theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                    }`} />
+                    Let your work breathe with ample white space
+                  </li>
+                  <li className={`flex items-start gap-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                      theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                    }`} />
+                    Use consistent spacing between portfolio items
+                  </li>
+                  <li className={`flex items-start gap-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                      theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                    }`} />
+                    Consider the visual hierarchy of your portfolio
+                  </li>
+                </ul>
+              </div>
+              <div className={`p-6 rounded-xl ${
+                theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50'
+              }`}>
+                <h3 className={`text-xl font-semibold mb-4 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>For Designers</h3>
+                <ul className="space-y-3">
+                  <li className={`flex items-start gap-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                      theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                    }`} />
+                    Maintain a consistent grid system
+                  </li>
+                  <li className={`flex items-start gap-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                      theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                    }`} />
+                    Use modular scales for typography
+                  </li>
+                  <li className={`flex items-start gap-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    <div className={`w-1.5 h-1.5 rounded-full mt-2 ${
+                      theme === 'dark' ? 'bg-indigo-400' : 'bg-indigo-600'
+                    }`} />
+                    Test layouts across different devices
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </motion.section>
+
+          <DecorativeDivider
+            icon={Sparkles}
+            gradientColors={{
+              from: theme === 'dark' ? 'rgba(168, 85, 247, 0.3)' : 'rgba(168, 85, 247, 0.2)',
+              via: theme === 'dark' ? 'rgba(236, 72, 153, 0.3)' : 'rgba(236, 72, 153, 0.2)',
+              to: theme === 'dark' ? 'rgba(244, 63, 94, 0.3)' : 'rgba(244, 63, 94, 0.2)'
+            }}
+            iconColor={theme === 'dark' ? 'text-purple-400/50' : 'text-purple-500/50'}
+          />
         </motion.div>
       </main>
     </div>

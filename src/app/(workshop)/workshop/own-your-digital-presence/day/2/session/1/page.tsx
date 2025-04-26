@@ -155,7 +155,7 @@ export default function Day2Session1Page() {
               </p>
               <div className="grid gap-4">
                 <Link 
-                  href="/workshop/own-your-digital-presence/day/2/session/1/platforms/wix"
+                  href="/workshop/own-your-digital-presence/day/2/session/2/platforms/wix"
                   className={cn(
                     "group flex items-center gap-3 p-4 rounded-lg border border-gray-200",
                     "hover:border-indigo-200 hover:bg-indigo-50/50 transition-colors"
@@ -171,7 +171,7 @@ export default function Day2Session1Page() {
                 </Link>
 
                 <Link 
-                  href="/workshop/own-your-digital-presence/day/2/session/1/platforms/squarespace"
+                  href="/workshop/own-your-digital-presence/day/2/session/2/platforms/squarespace"
                   className={cn(
                     "group flex items-center gap-3 p-4 rounded-lg border border-gray-200",
                     "hover:border-indigo-200 hover:bg-indigo-50/50 transition-colors"
@@ -187,7 +187,7 @@ export default function Day2Session1Page() {
                 </Link>
 
                 <Link 
-                  href="/workshop/own-your-digital-presence/day/2/session/1/platforms/github"
+                  href="/workshop/own-your-digital-presence/day/2/session/2/platforms/github"
                   className={cn(
                     "group flex items-center gap-3 p-4 rounded-lg border border-gray-200",
                     "hover:border-indigo-200 hover:bg-indigo-50/50 transition-colors"

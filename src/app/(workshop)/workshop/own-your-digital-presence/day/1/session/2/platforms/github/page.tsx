@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'GitHub Platform Guide',
     description: 'Master GitHub for your artist website with this comprehensive guide.',
     type: 'website',
-    url: 'https://moises.works/workshop/own-your-digital-presence/day/1/session/1/platforms/github',
+    url: 'https://moises.works/workshop/own-your-digital-presence/day/1/session/2/platforms/github',
     images: [
       {
         url: '/images/github-platform.jpg',

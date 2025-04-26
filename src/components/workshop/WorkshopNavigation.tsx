@@ -7,6 +7,7 @@ import { ChevronRight, Menu, X } from 'lucide-react'
 import { workshopContentNavigation, workshopInfoNavigation } from '@/config/workshop-navigation'
 import { getPageState } from '@/config/workshop-page-states'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/contexts/ThemeContext'
 
 type NavigationItem = {
   title: string
@@ -35,6 +36,7 @@ function NavigationSection({
   onToggleSection
 }: NavigationSectionProps) {
   const pathname = usePathname()
+  const { theme } = useTheme()
   const isActive = pathname === href || pathname?.startsWith(href + '/')
   const hasChildren = items && items.length > 0
   const isOpen = openSections.has(href)
@@ -76,21 +78,37 @@ function NavigationSection({
   return (
     <div className={cn(
       "space-y-0.5",
-      isParentOfActive && "bg-indigo-50/50 rounded-lg",
-      isOpenAccordion && "bg-gray-50/50 rounded-lg",
+      isParentOfActive && theme === 'dark' 
+        ? "bg-indigo-900/20 rounded-lg" 
+        : isParentOfActive 
+          ? "bg-indigo-50/50 rounded-lg"
+          : "",
+      isOpenAccordion && theme === 'dark'
+        ? "bg-gray-800/20 rounded-lg"
+        : isOpenAccordion
+          ? "bg-gray-50/50 rounded-lg"
+          : "",
       level > 0 && "ml-2"
     )}>
       <Link
         href={href}
         className={cn(
           "group flex items-center gap-1.5 rounded-lg px-1.5 py-1 text-sm font-medium transition-colors",
-          isActive
-            ? "bg-indigo-50 text-indigo-600"
-            : isParentOfActive
-              ? "text-indigo-700 hover:bg-indigo-100/50"
-              : isOpenAccordion
-                ? "text-gray-700 hover:bg-gray-100/50"
-                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+          isActive && theme === 'dark'
+            ? "bg-indigo-900/30 text-indigo-400"
+            : isActive
+              ? "bg-indigo-50 text-indigo-600"
+              : isParentOfActive && theme === 'dark'
+                ? "text-indigo-300 hover:bg-indigo-900/20"
+                : isParentOfActive
+                  ? "text-indigo-700 hover:bg-indigo-100/50"
+                  : isOpenAccordion && theme === 'dark'
+                    ? "text-gray-300 hover:bg-gray-800/20"
+                    : isOpenAccordion
+                      ? "text-gray-700 hover:bg-gray-100/50"
+                      : theme === 'dark'
+                        ? "text-gray-400 hover:bg-gray-800/20 hover:text-gray-300"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
           level > 0 && "ml-2",
           isDisabled && "opacity-50 cursor-not-allowed"
         )}
@@ -99,10 +117,21 @@ function NavigationSection({
       >
         <Icon className={cn(
           "h-3 w-3 flex-shrink-0",
-          isActive ? "text-indigo-600" 
-            : isParentOfActive ? "text-indigo-700"
-            : isOpenAccordion ? "text-gray-700"
-            : "text-gray-500"
+          isActive && theme === 'dark'
+            ? "text-indigo-400"
+            : isActive
+              ? "text-indigo-600"
+              : isParentOfActive && theme === 'dark'
+                ? "text-indigo-300"
+                : isParentOfActive
+                  ? "text-indigo-700"
+                  : isOpenAccordion && theme === 'dark'
+                    ? "text-gray-300"
+                    : isOpenAccordion
+                      ? "text-gray-700"
+                      : theme === 'dark'
+                        ? "text-gray-500"
+                        : "text-gray-500"
         )} />
         <span className="flex-1 truncate pr-1">{title}</span>
         {hasChildren && (
@@ -110,10 +139,21 @@ function NavigationSection({
             className={cn(
               "h-3 w-3 flex-shrink-0 transition-transform",
               isOpen ? "rotate-90" : "",
-              isActive ? "text-indigo-600" 
-                : isParentOfActive ? "text-indigo-700"
-                : isOpenAccordion ? "text-gray-700"
-                : "text-gray-500"
+              isActive && theme === 'dark'
+                ? "text-indigo-400"
+                : isActive
+                  ? "text-indigo-600"
+                  : isParentOfActive && theme === 'dark'
+                    ? "text-indigo-300"
+                    : isParentOfActive
+                      ? "text-indigo-700"
+                      : isOpenAccordion && theme === 'dark'
+                        ? "text-gray-300"
+                        : isOpenAccordion
+                          ? "text-gray-700"
+                          : theme === 'dark'
+                            ? "text-gray-500"
+                            : "text-gray-500"
             )}
           />
         )}
@@ -121,8 +161,16 @@ function NavigationSection({
       {hasChildren && isOpen && !isCollapsed && (
         <div className={cn(
           "space-y-0.5",
-          isParentOfActive && "border-l-2 border-indigo-200 ml-2 pl-1",
-          isOpenAccordion && "border-l-2 border-gray-200 ml-2 pl-1"
+          isParentOfActive && theme === 'dark'
+            ? "border-l-2 border-indigo-800 ml-2 pl-1"
+            : isParentOfActive
+              ? "border-l-2 border-indigo-200 ml-2 pl-1"
+              : "",
+          isOpenAccordion && theme === 'dark'
+            ? "border-l-2 border-gray-700 ml-2 pl-1"
+            : isOpenAccordion
+              ? "border-l-2 border-gray-200 ml-2 pl-1"
+              : ""
         )}>
           {items.map((item) => (
             <NavigationSection 
@@ -144,6 +192,7 @@ export function WorkshopNavigation() {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [openSections, setOpenSections] = useState<Set<string>>(new Set())
   const pathname = usePathname()
+  const { theme } = useTheme()
 
   // Initialize open sections based on current path
   useEffect(() => {
@@ -266,10 +315,16 @@ export function WorkshopNavigation() {
   )
 
   return (
-    <div className="flex flex-col gap-6 w-full">
+    <div className={cn(
+      "flex flex-col gap-6 w-full",
+      theme === 'dark' ? 'text-gray-300' : 'text-gray-900'
+    )}>
       {/* Info Navigation */}
       <div>
-        <h2 className="text-lg font-semibold mb-4">{workshopInfoNavigation.title}</h2>
+        <h2 className={cn(
+          "text-lg font-semibold mb-4",
+          theme === 'dark' ? 'text-gray-200' : 'text-gray-900'
+        )}>{workshopInfoNavigation.title}</h2>
         <nav className="space-y-1">
           {workshopInfoNavigation.items.map(renderNavigationItem)}
         </nav>
@@ -278,7 +333,10 @@ export function WorkshopNavigation() {
       {/* Content Navigation */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold">{workshopContentNavigation.title}</h2>
+          <h2 className={cn(
+            "text-lg font-semibold",
+            theme === 'dark' ? 'text-gray-200' : 'text-gray-900'
+          )}>{workshopContentNavigation.title}</h2>
           <button
             onClick={() => {
               setIsCollapsed(!isCollapsed)
@@ -286,7 +344,12 @@ export function WorkshopNavigation() {
                 setOpenSections(new Set()) // Close all sections when collapsing
               }
             }}
-            className="p-2 hover:bg-gray-100 rounded-md"
+            className={cn(
+              "p-2 rounded-md transition-colors",
+              theme === 'dark' 
+                ? 'hover:bg-gray-800/50 text-gray-400' 
+                : 'hover:bg-gray-100 text-gray-500'
+            )}
           >
             {isCollapsed ? (
               <Menu className="h-5 w-5" />
@@ -301,4 +364,4 @@ export function WorkshopNavigation() {
       </div>
     </div>
   )
-} 
+}

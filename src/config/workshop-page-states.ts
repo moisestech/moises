@@ -1,9 +1,9 @@
 export const WORKSHOP_PAGE_STATES = {
   days: {
     '1': true,  // Day 1 is enabled
-    '2': true,  // Day 2 is enabled
-    '3': true,  // Day 3 is enabled
-    '4': true,  // Day 4 is enabled
+    '2': false,  // Day 2 is enabled
+    '3': false,  // Day 3 is enabled
+    '4': false,  // Day 4 is enabled
   },
   sessions: {
     '1': {

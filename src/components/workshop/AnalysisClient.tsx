@@ -21,6 +21,8 @@ import {
   LucideIcon
 } from 'lucide-react';
 import Link from 'next/link';
+import { useTheme } from '@/contexts/ThemeContext';
+import DecorativeDivider from '@/components/common/DecorativeDivider';
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -409,6 +411,7 @@ const webVitals = [
 ]
 
 export default function AnalysisClient() {
+  const { theme } = useTheme();
   const [currentSection, setCurrentSection] = useState(0);
   const [currentVital, setCurrentVital] = useState(0);
 
@@ -433,19 +436,19 @@ export default function AnalysisClient() {
   const SectionIcon = currentSectionData.icon;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+      <header className={`sticky top-0 z-50 ${theme === 'dark' ? 'bg-gray-900/80' : 'bg-white/80'} backdrop-blur-sm border-b ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link 
               href="/workshop/own-your-digital-presence/day/1/session/1"
-              className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+              className={`flex items-center ${theme === 'dark' ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'} transition-colors`}
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
               <span className="text-sm font-medium">Back to Session 1</span>
             </Link>
-            <h1 className="text-lg font-space-mono font-medium text-gray-900">
+            <h1 className={`text-lg font-space-mono font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Website Analysis
             </h1>
           </div>
@@ -460,42 +463,42 @@ export default function AnalysisClient() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Website Analysis Guide</h2>
-            <p className="text-lg text-gray-600 mb-6">
+          <div className={`rounded-2xl p-8 ${theme === 'dark' ? 'bg-gradient-to-r from-indigo-900/50 to-purple-900/50' : 'bg-gradient-to-r from-indigo-50 to-purple-50'}`}>
+            <h2 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'} mb-4`}>Website Analysis Guide</h2>
+            <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} mb-6`}>
               A comprehensive analysis of your website helps identify strengths, areas for improvement, and opportunities for optimization. Here are the key aspects we'll examine:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded-xl shadow-sm">
+              <div className={`p-6 rounded-xl shadow-sm ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 bg-indigo-100 rounded-lg">
-                    <Gauge className="h-5 w-5 text-indigo-600" />
+                  <div className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-indigo-900/50' : 'bg-indigo-100'}`}>
+                    <Gauge className={`h-5 w-5 ${theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'}`} />
                   </div>
-                  <h3 className="font-semibold text-gray-900">Performance</h3>
+                  <h3 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Performance</h3>
                 </div>
-                <p className="text-gray-600">
+                <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
                   Evaluate loading speed, responsiveness, and overall user experience metrics.
                 </p>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm">
+              <div className={`p-6 rounded-xl shadow-sm ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 bg-purple-100 rounded-lg">
-                    <Eye className="h-5 w-5 text-purple-600" />
+                  <div className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-purple-900/50' : 'bg-purple-100'}`}>
+                    <Eye className={`h-5 w-5 ${theme === 'dark' ? 'text-purple-400' : 'text-purple-600'}`} />
                   </div>
-                  <h3 className="font-semibold text-gray-900">Accessibility</h3>
+                  <h3 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Accessibility</h3>
                 </div>
-                <p className="text-gray-600">
+                <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
                   Ensure your site is usable by everyone, including those with disabilities.
                 </p>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm">
+              <div className={`p-6 rounded-xl shadow-sm ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 bg-pink-100 rounded-lg">
-                    <Smartphone className="h-5 w-5 text-pink-600" />
+                  <div className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-pink-900/50' : 'bg-pink-100'}`}>
+                    <Smartphone className={`h-5 w-5 ${theme === 'dark' ? 'text-pink-400' : 'text-pink-600'}`} />
                   </div>
-                  <h3 className="font-semibold text-gray-900">Mobile Experience</h3>
+                  <h3 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Mobile Experience</h3>
                 </div>
-                <p className="text-gray-600">
+                <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
                   Check how well your site performs and looks on mobile devices.
                 </p>
               </div>
@@ -503,11 +506,21 @@ export default function AnalysisClient() {
           </div>
         </motion.div>
 
+        <DecorativeDivider
+          icon={Gauge}
+          gradientColors={{
+            from: 'rgba(59, 130, 246, 0.2)',
+            via: 'rgba(99, 102, 241, 0.2)',
+            to: 'rgba(168, 85, 247, 0.2)'
+          }}
+          iconColor="text-blue-500/50"
+        />
+
         {/* Section Navigation */}
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={prevSection}
-            className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+            className={`flex items-center ${theme === 'dark' ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'} transition-colors`}
           >
             <ChevronLeft className="h-5 w-5 mr-2" />
             <span className="text-sm font-medium">Previous</span>
@@ -525,7 +538,7 @@ export default function AnalysisClient() {
           </div>
           <button
             onClick={nextSection}
-            className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+            className={`flex items-center ${theme === 'dark' ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'} transition-colors`}
           >
             <span className="text-sm font-medium">Next</span>
             <ChevronRight className="h-5 w-5 ml-2" />
@@ -565,7 +578,7 @@ export default function AnalysisClient() {
                 <div className="flex items-center justify-between">
                   <button
                     onClick={prevVital}
-                    className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+                    className={`flex items-center ${theme === 'dark' ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'} transition-colors`}
                   >
                     <ChevronLeft className="h-5 w-5 mr-2" />
                     <span className="text-sm font-medium">Previous Metric</span>
@@ -583,7 +596,7 @@ export default function AnalysisClient() {
                   </div>
                   <button
                     onClick={nextVital}
-                    className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+                    className={`flex items-center ${theme === 'dark' ? 'text-gray-300 hover:text-indigo-400' : 'text-gray-600 hover:text-indigo-600'} transition-colors`}
                   >
                     <span className="text-sm font-medium">Next Metric</span>
                     <ChevronRight className="h-5 w-5 ml-2" />
@@ -597,35 +610,35 @@ export default function AnalysisClient() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden"
+                  className={`rounded-xl shadow-lg overflow-hidden ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}
                 >
                   <div className="p-8">
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="p-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600">
+                      <div className={`p-3 rounded-lg bg-gradient-to-r ${theme === 'dark' ? 'from-blue-900 to-blue-800' : 'from-blue-500 to-blue-600'}`}>
                         <currentVitalData.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-900">{currentVitalData.name}</h3>
-                        <p className="text-gray-600">{currentVitalData.description}</p>
+                        <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{currentVitalData.name}</h3>
+                        <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{currentVitalData.description}</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div className="bg-green-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-green-900 mb-3">Ideal Performance</h4>
-                        <p className="text-green-600 font-medium">{currentVitalData.ideal}</p>
+                      <div className={`p-6 rounded-lg ${theme === 'dark' ? 'bg-green-900/30' : 'bg-green-50'}`}>
+                        <h4 className={`font-bold ${theme === 'dark' ? 'text-green-300' : 'text-green-900'} mb-3`}>Ideal Performance</h4>
+                        <p className={`font-medium ${theme === 'dark' ? 'text-green-400' : 'text-green-600'}`}>{currentVitalData.ideal}</p>
                       </div>
-                      <div className="bg-red-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-red-900 mb-3">Poor Performance</h4>
-                        <p className="text-red-600 font-medium">{currentVitalData.poor}</p>
+                      <div className={`p-6 rounded-lg ${theme === 'dark' ? 'bg-red-900/30' : 'bg-red-50'}`}>
+                        <h4 className={`font-bold ${theme === 'dark' ? 'text-red-300' : 'text-red-900'} mb-3`}>Poor Performance</h4>
+                        <p className={`font-medium ${theme === 'dark' ? 'text-red-400' : 'text-red-600'}`}>{currentVitalData.poor}</p>
                       </div>
-                      <div className="bg-blue-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-blue-900 mb-3">Optimization Tips</h4>
+                      <div className={`p-6 rounded-lg ${theme === 'dark' ? 'bg-blue-900/30' : 'bg-blue-50'}`}>
+                        <h4 className={`font-bold ${theme === 'dark' ? 'text-blue-300' : 'text-blue-900'} mb-3`}>Optimization Tips</h4>
                         <ul className="space-y-2">
                           {currentVitalData.tips.map((tip, i) => (
                             <li key={i} className="flex items-start gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2" />
-                              <span className="text-gray-600">{tip}</span>
+                              <div className={`w-1.5 h-1.5 rounded-full mt-2 ${theme === 'dark' ? 'bg-blue-400' : 'bg-blue-600'}`} />
+                              <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>{tip}</span>
                             </li>
                           ))}
                         </ul>
@@ -633,6 +646,37 @@ export default function AnalysisClient() {
                     </div>
                   </div>
                 </motion.div>
+
+                {/* Additional Resources */}
+                <div className={`p-6 rounded-xl ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                  <h4 className={`font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'} mb-4`}>Additional Resources</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                      <h5 className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'} mb-2`}>PageSpeed Insights</h5>
+                      <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} mb-3`}>Get detailed performance analysis and recommendations</p>
+                      <a 
+                        href="https://pagespeed.web.dev/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={`text-sm font-medium ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}
+                      >
+                        Visit PageSpeed Insights →
+                      </a>
+                    </div>
+                    <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                      <h5 className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'} mb-2`}>Web Vitals Extension</h5>
+                      <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} mb-3`}>Monitor Core Web Vitals in real-time</p>
+                      <a 
+                        href="https://pagespeed.web.dev/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={`text-sm font-medium ${theme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}
+                      >
+                        Install Extension →
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="grid gap-8">
@@ -653,6 +697,17 @@ export default function AnalysisClient() {
                             {'name' in item ? item.name : item.title}
                           </h3>
                         </div>
+
+                        <DecorativeDivider
+                          icon={ItemIcon}
+                          gradientColors={{
+                            from: 'rgba(16, 185, 129, 0.2)',
+                            via: 'rgba(5, 150, 105, 0.2)',
+                            to: 'rgba(4, 120, 87, 0.2)'
+                          }}
+                          iconColor="text-emerald-500/50"
+                          className="my-6"
+                        />
 
                         {currentSectionData.id === 'web-vitals' && 'name' in item && item.name === "Accessing Web Vitals" ? (
                           <div className="space-y-8">
@@ -729,7 +784,7 @@ export default function AnalysisClient() {
                                     href="https://pagespeed.web.dev/" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                                    className={`text-blue-600 hover:text-blue-700 text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
                                   >
                                     Visit PageSpeed Insights →
                                   </a>
@@ -741,7 +796,7 @@ export default function AnalysisClient() {
                                     href="https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibma" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                                    className={`text-blue-600 hover:text-blue-700 text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}
                                   >
                                     Install Extension →
                                   </a>
@@ -797,6 +852,16 @@ export default function AnalysisClient() {
             )}
           </motion.div>
         </AnimatePresence>
+
+        <DecorativeDivider
+          icon={Navigation}
+          gradientColors={{
+            from: 'rgba(168, 85, 247, 0.2)',
+            via: 'rgba(236, 72, 153, 0.2)',
+            to: 'rgba(244, 63, 94, 0.2)'
+          }}
+          iconColor="text-purple-500/50"
+        />
       </main>
     </div>
   );

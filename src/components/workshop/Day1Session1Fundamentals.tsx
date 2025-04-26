@@ -22,6 +22,7 @@ import {
   FileCheck
 } from 'lucide-react'
 import Link from 'next/link'
+import { useTheme } from '@/contexts/ThemeContext'
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -66,12 +67,6 @@ const sections = [
         href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/layout",
         icon: GalleryHorizontal,
         description: "Design layouts that showcase your work effectively"
-      },
-      {
-        title: "Platform Layouts",
-        href: "/workshop/own-your-digital-presence/day/1/session/1/fundamentals/platforms",
-        icon: Palette,
-        description: "Compare layout options across different platforms"
       }
     ]
   },
@@ -202,8 +197,10 @@ const sections = [
 ]
 
 export default function Day1Session1Fundamentals() {
+  const { theme } = useTheme()
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
       <header className="relative h-96 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
           <div className="absolute inset-0 bg-[url('/images/wave.svg')] bg-cover opacity-20" />
@@ -251,15 +248,15 @@ export default function Day1Session1Fundamentals() {
             <motion.section
               key={section.title}
               variants={fadeIn}
-              className="bg-white rounded-2xl shadow-xl p-8"
+              className={`rounded-2xl shadow-xl p-8 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className={`p-3 rounded-lg bg-gradient-to-r ${section.color}`}>
                   <section.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900">{section.title}</h2>
-                  <p className="text-lg text-gray-600">{section.description}</p>
+                  <h2 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{section.title}</h2>
+                  <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{section.description}</p>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

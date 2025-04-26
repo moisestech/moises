@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ExternalLink, Globe, Code, User, ChevronDown, ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Globe, Code, User, ChevronDown, ChevronUp, Stars, FileText, Layout } from 'lucide-react';
 import { PlatformIcon } from './PlatformIcons';
 import { ProfileBanner } from './ProfileBanner';
 import { WebsitePreview } from './WebsitePreview';
@@ -9,6 +9,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { GradientBanner } from './GradientBanner';
 import { ProfileIcon } from './ProfileIcon';
+import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 
 interface ProfileCardProps {
   participant: {
@@ -38,6 +40,7 @@ interface ProfileCardProps {
     mobilePreview?: string;
     desktopPreview?: string;
   };
+  activeSection: 'goals' | 'overview' | 'architecture';
 }
 
 const LevelIndicator = ({ level }: { level: number }) => (
@@ -46,7 +49,7 @@ const LevelIndicator = ({ level }: { level: number }) => (
       <div
         key={i}
         className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${
-          i < level ? 'bg-indigo-600' : 'bg-gray-200'
+          i < level ? 'bg-indigo-600' : 'bg-gray-200 dark:bg-gray-700'
         }`}
       />
     ))}
@@ -54,6 +57,8 @@ const LevelIndicator = ({ level }: { level: number }) => (
 );
 
 const WebsiteArchitecture = ({ architecture }: { architecture: ProfileCardProps['participant']['architecture'] }) => {
+  const { theme } = useTheme();
+
   interface TreeNodeProps {
     node: {
       title: string;
@@ -79,8 +84,14 @@ const WebsiteArchitecture = ({ architecture }: { architecture: ProfileCardProps[
     return (
       <div className="space-y-2">
         <div className="flex items-center" style={{ marginLeft: `${indent}px` }}>
-          <div className={`w-2 h-2 rounded-full ${hasChildren ? 'bg-blue-500' : 'bg-gray-300'}`} />
-          <span className="ml-2 text-sm font-medium">{node.title}</span>
+          <div className={cn(
+            "w-2 h-2 rounded-full",
+            hasChildren ? 'bg-blue-500' : theme === 'dark' ? 'bg-gray-500' : 'bg-gray-300'
+          )} />
+          <span className={cn(
+            "ml-2 text-sm font-medium",
+            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+          )}>{node.title}</span>
         </div>
         {hasChildren && node.children && (
           <div className="space-y-2">
@@ -94,7 +105,10 @@ const WebsiteArchitecture = ({ architecture }: { architecture: ProfileCardProps[
   };
 
   return (
-    <div className="p-4 bg-gray-50 rounded-lg">
+    <div className={cn(
+      "p-4 rounded-lg",
+      theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+    )}>
       <TreeNode node={architecture.home} />
     </div>
   );
@@ -132,27 +146,46 @@ const useParticipantColor = (name: string) => {
   };
 };
 
-export function ProfileCard({ participant }: ProfileCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+export function ProfileCard({ participant, activeSection }: ProfileCardProps) {
   const { gradient, from, to } = useParticipantColor(participant.name);
+  const { theme } = useTheme();
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div className={cn(
+      "rounded-xl shadow-sm border overflow-hidden",
+      theme === 'dark' 
+        ? 'bg-gray-800 border-gray-700' 
+        : 'bg-white border-gray-200'
+    )}>
       {/* Gradient Banner */}
       <div className={`h-24 bg-gradient-to-r ${gradient}`} />
 
       <div className="p-6">
         <div className="flex flex-col items-center text-center -mt-16 mb-4">
-          <div className="w-16 h-16 rounded-full bg-white border-4 border-white shadow-md flex items-center justify-center mb-3">
-            <User className="w-8 h-8 text-indigo-600" />
+          <div className={cn(
+            "w-16 h-16 rounded-full border-4 shadow-md flex items-center justify-center mb-3",
+            theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-white'
+          )}>
+            <User className={cn(
+              "w-8 h-8",
+              theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
+            )} />
           </div>
           <div>
-            <h3 className="text-lg font-medium text-gray-900">{participant.name}</h3>
+            <h3 className={cn(
+              "text-lg font-medium",
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            )}>{participant.name}</h3>
             <a 
               href={`https://${participant.website}`} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-sm text-indigo-600 hover:text-indigo-700 flex items-center justify-center gap-1"
+              className={cn(
+                "text-sm flex items-center justify-center gap-1",
+                theme === 'dark' 
+                  ? 'text-indigo-400 hover:text-indigo-300' 
+                  : 'text-indigo-600 hover:text-indigo-700'
+              )}
             >
               <Globe className="w-4 h-4" />
               {participant.website}
@@ -162,12 +195,20 @@ export function ProfileCard({ participant }: ProfileCardProps) {
         
         <div className="space-y-4">
           <div>
-            <h4 className="text-sm font-medium text-gray-500 mb-2">Platforms</h4>
+            <h4 className={cn(
+              "text-sm font-medium mb-2",
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+            )}>Platforms</h4>
             <div className="flex flex-wrap gap-2">
               {participant.platforms.map((platform) => (
                 <span
                   key={platform}
-                  className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs"
+                  className={cn(
+                    "px-2 py-1 rounded-full text-xs",
+                    theme === 'dark'
+                      ? 'bg-gray-700 text-gray-300'
+                      : 'bg-gray-100 text-gray-700'
+                  )}
                 >
                   {platform}
                 </span>
@@ -177,51 +218,69 @@ export function ProfileCard({ participant }: ProfileCardProps) {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h4 className="text-sm font-medium text-gray-500 mb-2">Web Design Level</h4>
+              <h4 className={cn(
+                "text-sm font-medium mb-2",
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              )}>Web Design Level</h4>
               <LevelIndicator level={participant.webDesignLevel} />
             </div>
             <div>
-              <h4 className="text-sm font-medium text-gray-500 mb-2">AI Level</h4>
+              <h4 className={cn(
+                "text-sm font-medium mb-2",
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              )}>AI Level</h4>
               <LevelIndicator level={participant.aiLevel} />
             </div>
           </div>
 
-          <div>
-            <h4 className="text-sm font-medium text-gray-500 mb-2">Goals</h4>
-            <p className="text-sm text-gray-700">{Array.isArray(participant.goals) ? participant.goals.join(', ') : participant.goals}</p>
-          </div>
-
-          <div>
-            <h4 className="text-sm font-medium text-gray-500 mb-2">Overview</h4>
-            <p className="text-sm text-gray-700">{participant.overview}</p>
-          </div>
+          {/* Section Content */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSection}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="min-h-[100px]"
+            >
+              {activeSection === 'goals' && (
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                  <h4 className={cn(
+                    "text-sm font-medium mb-2",
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                  )}>Goals</h4>
+                  <p className={cn(
+                    "text-sm",
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  )}>{Array.isArray(participant.goals) ? participant.goals.join(', ') : participant.goals}</p>
+                </div>
+              )}
+              
+              {activeSection === 'overview' && (
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                  <h4 className={cn(
+                    "text-sm font-medium mb-2",
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                  )}>Overview</h4>
+                  <p className={cn(
+                    "text-sm",
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  )}>{participant.overview}</p>
+                </div>
+              )}
+              
+              {activeSection === 'architecture' && (
+                <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                  <h4 className={cn(
+                    "text-sm font-medium mb-2",
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                  )}>Website Architecture</h4>
+                  <WebsiteArchitecture architecture={participant.architecture} />
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
-
-        {/* Expand/Collapse Button */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="mt-3 sm:mt-4 w-full p-1.5 sm:p-2 flex items-center justify-between text-xs sm:text-sm text-gray-600 hover:bg-gray-50 rounded-lg"
-        >
-          <span>View Website Architecture</span>
-          {isExpanded ? (
-            <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4" />
-          ) : (
-            <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
-          )}
-        </button>
-
-        {/* Expanded Content */}
-        {isExpanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-3 sm:mt-4"
-          >
-            <WebsiteArchitecture architecture={participant.architecture} />
-          </motion.div>
-        )}
       </div>
     </div>
   );
