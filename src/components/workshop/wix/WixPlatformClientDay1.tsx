@@ -390,7 +390,7 @@ export default function WixPlatformClient() {
             <h1 className={`text-lg font-space-mono font-medium ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
-              Wix Platform Guide
+              Artist's Guide to Wix
             </h1>
           </div>
         </div>
@@ -412,7 +412,7 @@ export default function WixPlatformClient() {
                 : 'from-blue-500 to-indigo-500'
             } rounded-2xl p-8 text-white`}
           >
-            <h1 className="text-4xl font-bold mb-4">Wix Platform Guide</h1>
+            <h1 className="text-4xl font-bold mb-4">Artist's Guide to Wix</h1>
             <p className={`text-xl ${theme === 'dark' ? 'text-blue-100' : 'text-blue-50'}`}>
               Learn how to create a professional artist website using Wix's intuitive platform
             </p>
