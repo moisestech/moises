@@ -321,17 +321,82 @@ export const artist: Artist = {
     baby_agi: {
       title: 'Baby AGI',
       year: 2023,
-      description:
-        'An exploration of artificial general intelligence through the lens of developmental stages, questioning the nature of machine learning and consciousness.',
-      medium: 'Digital Installation',
+      location: 'Swenson Gallery, Breadbytes: Next Generation exhibition',
+      description: 'Captures the nascent stages of Artificial General Intelligence (AGI), symbolizing the impending paradigm shift towards harmonious coexistence with advanced AI. This ready-made assembly—a smart baby stroller, intricately crafted from PC gaming components and AI-enhanced GPUs—epitomizes the Pre-Natal Genesis of AGI, highlighting the profound influence of such technologies on Generation Alpha, those born amidst the AI revolution. The robotic hands, delicately guiding the stroller, underscore our collective voyage into the AI epoch, while subtly emphasizing humanity\'s pivotal role in shaping AI\'s formative years.',
+      materials: [
+        'Baby Stroller',
+        'TV Display',
+        'Custom PC Components',
+        'AI-enhanced GPUs',
+        'Robotic Hands',
+        'Custom Electronics'
+      ],
+      medium: 'Mixed Media Installation with Generative Animation',
+      dimensions: 'Life-size baby stroller with integrated components',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp',
           caption: 'Baby AGI - Digital installation exploring AI development',
         },
       ],
-      tags: ['AI', 'technology', 'consciousness', 'digital art'],
+      tags: [
+        'AI',
+        'AGI',
+        'technology',
+        'consciousness',
+        'digital art',
+        'Generation Alpha',
+        'accelerationism',
+        'synthetic cognition',
+        'algorithmic growth',
+        'generative art'
+      ],
+      interpretation: 'A looping generative animation maps the transition from birth to Artificial General Intelligence, questioning the linearity of human development versus synthetic cognition. The work serves as a meditation on accelerationism, questioning what happens when machines not only mimic but complete the arc of human growth faster than we can comprehend. It engages with the idea that Gen Alpha is growing up in a reality fundamentally altered by AI, exploring the cognition gap emerging between generations—a generational digital divide.',
+      exhibition: 'Breadbytes: Next Generation',
       on_view: false,
+      video: {
+        type: 'vimeo',
+        id: '1079770763',
+        url: 'https://vimeo.com/1079770763',
+        title: 'Baby AGI - Generative Loop Animation',
+        caption: 'A generative loop from birth to AGI questions if we\'re still the smartest species.',
+        technical_details: 'Looping generative animation exploring synthetic childhood and algorithmic growth'
+      },
+      interactiveContent: [
+        {
+          type: "link",
+          text: "Artificial General Intelligence",
+          content: {
+            text: "A hypothetical type of artificial intelligence that would have the ability to understand, learn, and apply knowledge in ways similar to humans",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Artificial_general_intelligence",
+              label: "Learn about AGI"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "Generation Alpha",
+          content: {
+            text: "The demographic cohort succeeding Generation Z, including those born from the early 2010s",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Generation_Alpha",
+              label: "Learn about Generation Alpha"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "accelerationism",
+          content: {
+            text: "A philosophical and political movement emphasizing the role of technological change in social transformation",
+            link: {
+              url: "https://en.wikipedia.org/wiki/Accelerationism",
+              label: "Explore accelerationism"
+            }
+          }
+        }
+      ]
     },
     laptop_face: {
       title: 'Laptop Face',

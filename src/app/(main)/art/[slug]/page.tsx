@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
+import VimeoPlayer from '@/components/common/VimeoPlayer';
 
 interface PageProps {
   params: {
@@ -179,34 +180,42 @@ export default async function ArtPage({ params }: PageProps) {
             )}
 
             {/* Video Section */}
-              {artwork.video && (
-                <div className="mb-16">
-                  <div className="aspect-video w-full relative">
-                    {artwork.video.type === 'vimeo' && (
-                      <iframe
-                        src={`https://player.vimeo.com/video/${artwork.video.id}?h=00000000&title=0&byline=0&portrait=0`}
-                        title={artwork.video.title}
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                        className="absolute top-0 left-0 w-full h-full"
-                      />
-                    )}
-                  </div>
-                  {artwork.video.caption && (
-                    <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-                      {artwork.video.caption}
-                    </p>
-                  )}
-                  <a 
-                    href={artwork.video.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-block text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                  >
-                    Watch on Vimeo
-                  </a>
-                </div>
-              )}
+            {artwork.video && (
+              <div className="mt-16 mb-16">
+                <h3 className="text-2xl font-semibold mb-6">Video Documentation</h3>
+                {artwork.video.type === 'vimeo' && (
+                  <VimeoPlayer
+                    videoId={artwork.video.id}
+                    title={artwork.video.title}
+                    aspectRatio="16:9"
+                    className="mb-4"
+                  />
+                )}
+                {artwork.video.caption && (
+                  <p className="mt-4 text-base text-gray-600 dark:text-gray-400">
+                    {artwork.video.caption}
+                  </p>
+                )}
+                {artwork.video.technical_details && (
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-500">
+                    {artwork.video.technical_details}
+                  </p>
+                )}
+                <a 
+                  href={artwork.video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  Watch on Vimeo
+                  <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
