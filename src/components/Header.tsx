@@ -57,7 +57,7 @@ export default function Header() {
     { label: 'Exhibitions', path: '/exhibitions' },
     { label: 'Events', path: '/events' },
     { label: 'Art and Artist', path: '/bio', enabled: true },
-    { label: 'CV', path: '/cv' },
+    { label: 'CV', path: '/cv', enabled: true },
     { label: 'Store', path: '/store' },
   ];
 
