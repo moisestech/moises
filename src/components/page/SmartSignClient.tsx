@@ -1,10 +1,41 @@
 'use client'
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Play, Tv, Users, BarChart, Calendar, Image as ImageIcon, Lock, Zap, Building, Palette, Coffee, Check, Tag, Clock, Shield } from "lucide-react";
+import DecorativeDivider from '@/components/common/DecorativeDivider'
+
+// Add new animation variants
+const iconCarousel = {
+  initial: { opacity: 0, scale: 0.8 },
+  animate: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.8 },
+  transition: { duration: 0.5 }
+};
+
+const floatAnimation = {
+  animate: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+// Add SmartSign specific icons
+const smartSignIcons = [
+  { icon: Tv, label: "Digital Displays" },
+  { icon: Calendar, label: "Event Scheduling" },
+  { icon: Users, label: "Community Engagement" },
+  { icon: ImageIcon, label: "Multimedia Content" },
+  { icon: Zap, label: "Smart Automation" },
+  { icon: Shield, label: "Secure Access" }
+];
 
 export default function SmartSignClient() {
   const [formData, setFormData] = useState({
@@ -26,6 +57,17 @@ export default function SmartSignClient() {
   // Add new animation states
   const [hoverIndex, setHoverIndex] = useState(-1);
 
+  // Add new state for icon carousel
+  const [activeIconIndex, setActiveIconIndex] = useState(0);
+
+  // Add useEffect for icon carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIconIndex((prev) => (prev + 1) % smartSignIcons.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -37,7 +79,7 @@ export default function SmartSignClient() {
 
   return (
     <main className="min-h-screen bg-zinc-900 text-white overflow-hidden" ref={containerRef}>
-      {/* Updated Hero Section with new background */}
+      {/* Updated Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.15),transparent_70%)]" />
         <div className="absolute inset-0">
@@ -97,6 +139,9 @@ export default function SmartSignClient() {
           <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
             SmartSign transforms any screen—whether it's a Smart TV or Raspberry Pi-connected display—into a powerful, versatile digital sign optimized for galleries, nonprofits, and event spaces. Instantly communicate events, share multimedia content, and foster deeper community engagement.
           </p>
+          <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
+            Co-designed with artists, for artists. Accessibility and inclusivity baked in (ADA, dyslexia font, multi-language).
+          </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="#demo" 
                   className="bg-gradient-to-r from-yellow-500 to-lime-500 hover:from-yellow-600 hover:to-lime-600 text-black font-medium px-8 py-3 rounded-full transition-all duration-300 inline-flex items-center gap-2 transform hover:scale-105 hover:shadow-[0_0_30px_rgba(234,179,8,0.3)]">
@@ -106,10 +151,33 @@ export default function SmartSignClient() {
             <Link href="#features"
                   className="border border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10 px-8 py-3 rounded-full transition-colors inline-flex items-center gap-2">
               <ArrowRight className="w-5 h-5" />
-              Explore Features
+              Start 30-Day Pilot
             </Link>
           </div>
         </motion.div>
+
+        {/* Add icon carousel */}
+        <div className="absolute bottom-20 left-0 right-0 flex justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIconIndex}
+              className="flex flex-col items-center gap-2"
+              variants={iconCarousel}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <div className="w-16 h-16 bg-yellow-500/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-yellow-500/20">
+                {React.createElement(smartSignIcons[activeIconIndex].icon, {
+                  className: "w-8 h-8 text-yellow-400"
+                })}
+              </div>
+              <span className="text-sm text-yellow-200">
+                {smartSignIcons[activeIconIndex].label}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </section>
 
       {/* Updated Features Section */}
@@ -197,6 +265,17 @@ export default function SmartSignClient() {
         </div>
       </section>
 
+      <DecorativeDivider 
+        icon={Tv}
+        gradientColors={{
+          from: 'rgba(234, 179, 8, 0.1)',
+          via: 'rgba(132, 204, 22, 0.1)',
+          to: 'rgba(234, 179, 8, 0.1)'
+        }}
+        iconColor="text-yellow-400/50"
+        className="my-16"
+      />
+
       {/* Use Cases Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 to-lime-500/10" />
@@ -251,6 +330,17 @@ export default function SmartSignClient() {
         </div>
       </section>
 
+      <DecorativeDivider 
+        icon={Calendar}
+        gradientColors={{
+          from: 'rgba(234, 179, 8, 0.1)',
+          via: 'rgba(132, 204, 22, 0.1)',
+          to: 'rgba(234, 179, 8, 0.1)'
+        }}
+        iconColor="text-yellow-400/50"
+        className="my-16"
+      />
+
       {/* Updated Pricing Section */}
       <section className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/5 via-lime-500/5 to-transparent" />
@@ -265,21 +355,22 @@ export default function SmartSignClient() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Pricing & Services</h2>
             <p className="text-gray-300">Transparent pricing with no hidden costs</p>
             <div className="mt-6 inline-block bg-white/5 rounded-lg px-4 py-2 border border-white/10">
-              <p className="text-sm text-gray-300">All plans include a one-time setup fee of <span className="text-yellow-400 font-semibold">$500</span> for custom app development</p>
+              <p className="text-sm text-gray-300">Setup fee varies by plan (Solo $750 | Community $1 200 | Pro custom).</p>
             </div>
+            <p className="mt-3 text-sm text-gray-400">Save 15% with annual payment (popular for grant budgets).</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Starter",
+                title: "Solo",
                 setupIncludes: [
-                  "Custom app development",
+                  "Custom app development ($750)",
                   "Basic branding integration",
                   "Installation support",
-                  "1 display configuration"
+                  "1–2 display configurations"
                 ],
-                monthlyPrice: "$49",
+                monthlyPrice: "$119",
                 monthlyFeatures: [
                   "Event Scheduling & Automation",
                   "Basic User Management",
@@ -290,14 +381,14 @@ export default function SmartSignClient() {
               {
                 title: "Community",
                 setupIncludes: [
-                  "Custom app development",
+                  "Custom app development ($1 200)",
                   "Advanced branding integration",
                   "Installation & training",
                   "Up to 3 display configurations"
                 ],
-                monthlyPrice: "$99",
+                monthlyPrice: "$199",
                 monthlyFeatures: [
-                  "All Starter features",
+                  "All Solo features",
                   "Community content submissions",
                   "Advanced filtering & tagging",
                   "Priority Email and Chat Support",
@@ -308,13 +399,13 @@ export default function SmartSignClient() {
               {
                 title: "Pro",
                 setupIncludes: [
-                  "Custom app development",
+                  "Setup fee starts at $1 200",
                   "Premium branding integration",
                   "Full team training",
                   "Unlimited display configurations",
                   "Custom feature development"
                 ],
-                monthlyPrice: "Custom",
+                monthlyPrice: "$299–$499",
                 monthlyFeatures: [
                   "All Community features",
                   "Customized Templates",
@@ -350,9 +441,6 @@ export default function SmartSignClient() {
                       </li>
                     ))}
                   </ul>
-                  <p className="text-lg font-semibold text-yellow-400">
-                    {plan.title === "Pro" ? "Starting at $500" : "$500"}
-                  </p>
                 </div>
 
                 {/* Monthly section */}
@@ -360,7 +448,7 @@ export default function SmartSignClient() {
                   <p className="text-sm text-gray-400 mb-2">Monthly support & features:</p>
                   <p className="text-3xl font-bold mb-4 text-yellow-400">
                     {plan.monthlyPrice}
-                    <span className="text-sm font-normal text-gray-400">/month</span>
+                    <span className="text-sm font-normal text-gray-400">/month{plan.title === "Pro" ? "*" : ""}</span>
                   </p>
                   <ul className="space-y-2 mb-8">
                     {plan.monthlyFeatures.map((feature, i) => (
@@ -383,8 +471,23 @@ export default function SmartSignClient() {
               </motion.div>
             ))}
           </div>
+
+          <p className="mt-6 text-xs text-gray-500 italic text-center">
+            * Exact Pro pricing depends on custom integrations and SLA.
+          </p>
         </div>
       </section>
+
+      <DecorativeDivider 
+        icon={Users}
+        gradientColors={{
+          from: 'rgba(234, 179, 8, 0.1)',
+          via: 'rgba(132, 204, 22, 0.1)',
+          to: 'rgba(234, 179, 8, 0.1)'
+        }}
+        iconColor="text-yellow-400/50"
+        className="my-16"
+      />
 
       {/* Interactive Footer with Parallax Effect */}
       <motion.footer 
@@ -399,8 +502,14 @@ export default function SmartSignClient() {
       >
         <div className="max-w-6xl mx-auto px-4 relative z-10">
           <div className="text-center">
+            <blockquote className="text-gray-400 text-sm">
+              "SmartSign transformed our gallery's digital presence overnight. The community engagement has been incredible." — Maria, Contemporary Art Space
+            </blockquote>
+            <blockquote className="mt-6 text-gray-400 text-sm">
+              "The 30-day pilot let our board see SmartSign in action—approval was unanimous." — Carla, Community Arts Center
+            </blockquote>
             <motion.p 
-              className="text-gray-400"
+              className="text-gray-400 mt-8"
               style={{
                 opacity: useTransform(scrollYProgress, [0, 1], [0.5, 1])
               }}
@@ -441,6 +550,32 @@ export default function SmartSignClient() {
 
         .animate-float {
           animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
+          }
+          50% {
+            box-shadow: 0 0 20px 10px rgba(234, 179, 8, 0.2);
+          }
+        }
+
+        .animate-pulse-glow {
+          animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes icon-float {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(5deg);
+          }
+        }
+
+        .animate-icon-float {
+          animation: icon-float 4s ease-in-out infinite;
         }
       `}</style>
     </main>

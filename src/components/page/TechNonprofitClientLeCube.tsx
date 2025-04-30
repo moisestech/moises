@@ -46,6 +46,7 @@ import { translations } from "@/lib/translations/tech-nonprofit"
 import { Mail, Phone, MapPin } from "lucide-react"
 import { ThemeToggle } from '@/components/common/ThemeToggle'
 import { useTheme } from '@/contexts/ThemeContext'
+import DecorativeDivider from '@/components/common/DecorativeDivider'
 
 // Animation variants
 const fadeIn = {
@@ -211,15 +212,27 @@ export default function TechNonprofitClient() {
     }, 3000)
   }
 
+  const openEmail = () => {
+    window.location.href = 'mailto:m@moises.tech?subject=Schedule%20a%20Call%20-%20Artist%20Tech%20Initiative';
+  }
+
   // Contact modal component
   const ContactModal = () => (
-    <div className={`fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center ${isContactOpen ? 'block' : 'hidden'}`}>
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
+    <div className={`fixed inset-0 z-50 ${
+      theme === 'dark' ? 'bg-black/80' : 'bg-white/80'
+    } backdrop-blur-md flex items-center justify-center ${isContactOpen ? 'block' : 'hidden'}`}>
+      <div className={`${
+        theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+      } rounded-lg p-6 max-w-md w-full mx-4`}>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Contact Us</h2>
+          <h2 className={`text-2xl font-bold ${
+            theme === 'dark' ? 'text-white' : 'text-gray-900'
+          }`}>Contact Us</h2>
           <button 
             onClick={() => setIsContactOpen(false)}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+            className={`${
+              theme === 'dark' ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'
+            } transition-colors`}
           >
             <X className="h-6 w-6" />
           </button>
@@ -227,14 +240,22 @@ export default function TechNonprofitClient() {
         
         {submitted ? (
           <div className="text-center py-8">
-            <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">Message Sent!</h3>
-            <p className="text-gray-600 dark:text-gray-300">{`Thank you for reaching out. We'll get back to you soon.`}</p>
+            <CheckCircle className={`h-12 w-12 ${
+              theme === 'dark' ? 'text-green-400' : 'text-green-500'
+            } mx-auto mb-4`} />
+            <h3 className={`text-xl font-bold mb-2 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Message Sent!</h3>
+            <p className={`${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>{`Thank you for reaching out. We'll get back to you soon.`}</p>
           </div>
         ) : (
           <form onSubmit={handleContactSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="name" className={`block text-sm font-medium ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+              } mb-1`}>
                 Name
               </label>
               <input
@@ -242,12 +263,16 @@ export default function TechNonprofitClient() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className={`w-full px-4 py-2 border ${
+                  theme === 'dark' ? 'border-gray-600 bg-gray-700 text-white' : 'border-gray-300 bg-white text-gray-900'
+                } rounded-md`}
                 required
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="email" className={`block text-sm font-medium ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+              } mb-1`}>
                 Email
               </label>
               <input
@@ -255,12 +280,16 @@ export default function TechNonprofitClient() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className={`w-full px-4 py-2 border ${
+                  theme === 'dark' ? 'border-gray-600 bg-gray-700 text-white' : 'border-gray-300 bg-white text-gray-900'
+                } rounded-md`}
                 required
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label htmlFor="message" className={`block text-sm font-medium ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+              } mb-1`}>
                 Message
               </label>
               <textarea
@@ -268,13 +297,19 @@ export default function TechNonprofitClient() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className={`w-full px-4 py-2 border ${
+                  theme === 'dark' ? 'border-gray-600 bg-gray-700 text-white' : 'border-gray-300 bg-white text-gray-900'
+                } rounded-md`}
                 required
               ></textarea>
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+              className={`w-full ${
+                theme === 'dark' 
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white' 
+                  : 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white'
+              }`}
             >
               Send Message
             </Button>
@@ -333,16 +368,24 @@ export default function TechNonprofitClient() {
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button
                   onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full flex items-center justify-center gap-2"
+                  className={`${
+                    theme === 'dark' 
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white' 
+                      : 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white'
+                  } px-6 py-3 rounded-full flex items-center justify-center gap-2`}
                 >
                   {t.hero.exploreServices}
                   <ChevronRight className="h-5 w-5" />
                 </Button>
                 
                 <Button
-                  onClick={() => setIsContactOpen(true)}
+                  onClick={openEmail}
                   variant="outline"
-                  className="border border-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-full"
+                  className={`border ${
+                    theme === 'dark' 
+                      ? 'border-gray-700 hover:bg-gray-800 text-white' 
+                      : 'border-gray-300 hover:bg-gray-100 text-gray-900'
+                  } px-6 py-3 rounded-full`}
                 >
                   {t.hero.scheduleCall}
                 </Button>
@@ -410,7 +453,9 @@ export default function TechNonprofitClient() {
       <SectionDivider />
       
       {/* The Story Section */}
-      <section className="py-20 bg-black/50">
+      <section className={`py-20 ${
+        theme === 'dark' ? 'bg-black/50' : 'bg-gray-50'
+      }`}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -418,21 +463,31 @@ export default function TechNonprofitClient() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl font-bold">
+            <h2 className={`text-3xl md:text-4xl font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.story.title}
             </h2>
             
-            <p className="text-xl text-gray-300">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
               {t.story.description1}
             </p>
             
-            <p className="text-xl text-gray-300">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
               {t.story.description2}
             </p>
             
-            <blockquote className="text-xl italic text-gray-300 border-l-4 border-blue-500 pl-4 my-8">
+            <blockquote className={`text-xl italic ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } border-l-4 border-blue-500 pl-4 my-8`}>
               &ldquo;{t.story.quote}&rdquo;
-              <footer className="text-right text-gray-400 mt-2">— {t.story.quoteAuthor}</footer>
+              <footer className={`text-right ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              } mt-2`}>— {t.story.quoteAuthor}</footer>
             </blockquote>
           </motion.div>
         </div>
@@ -450,10 +505,14 @@ export default function TechNonprofitClient() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.services.title}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
               {t.services.subtitle}
             </p>
           </motion.div>
@@ -466,15 +525,23 @@ export default function TechNonprofitClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-colors"
+                className={`${
+                  theme === 'dark' 
+                    ? 'bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-blue-500/50' 
+                    : 'bg-white/50 backdrop-blur-sm border-gray-200 hover:border-blue-500/50'
+                } p-6 rounded-xl border transition-colors`}
               >
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-500/10 p-3 rounded-lg text-blue-400">
                     {servicesDetails[index].icon}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                    <p className="text-gray-300">{service.description}</p>
+                    <h3 className={`text-xl font-bold mb-2 ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>{service.title}</h3>
+                    <p className={`${
+                      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                    }`}>{service.description}</p>
                   </div>
                 </div>
                 {index === 1 && (
@@ -509,7 +576,9 @@ export default function TechNonprofitClient() {
       <SectionDivider />
       
       {/* Workshops Section */}
-      <section id="workshops" className="py-20 bg-black/50">
+      <section id="workshops" className={`py-20 ${
+        theme === 'dark' ? 'bg-black/50' : 'bg-gray-50'
+      }`}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -518,28 +587,14 @@ export default function TechNonprofitClient() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="relative rounded-xl overflow-hidden shadow-2xl mb-12 max-w-[400px] mx-auto">
-              <Image
-                src={PLACEHOLDER_IMAGES.services.workshop}
-                alt="Workshop Example"
-                width={400}
-                height={225}
-                className="w-full h-auto"
-              />
-              
-              {/* Animated gradient overlay */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 pointer-events-none"
-                style={{
-                  transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
-                }}
-              />
-            </div>
-
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.workshops.title}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
               {t.workshops.subtitle}
             </p>
           </motion.div>
@@ -552,35 +607,56 @@ export default function TechNonprofitClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-purple-500/50 transition-colors"
+                className={`${
+                  theme === 'dark' 
+                    ? 'bg-gray-800/30 backdrop-blur-sm border-gray-700 hover:border-purple-500/50' 
+                    : 'bg-white/30 backdrop-blur-sm border-gray-200 hover:border-purple-500/50'
+                } p-6 rounded-xl border transition-colors`}
               >
                 <div className="bg-purple-500/10 p-3 rounded-lg text-purple-400 w-fit mb-4">
                   {workshopDetails[index].icon}
                 </div>
-                <h3 className="text-xl font-bold mb-2">{workshop.title}</h3>
-                <p className="text-gray-300">{workshop.description}</p>
+                <h3 className={`text-xl font-bold mb-2 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>{workshop.title}</h3>
+                <p className={`${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`}>{workshop.description}</p>
               </motion.div>
             ))}
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
-            <p className="text-xl italic text-gray-300">
-              {t.workshops.conclusion}
+            <p className={`text-2xl font-medium ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            } max-w-3xl mx-auto leading-relaxed`}>
+              We don't just teach artists how to code — we teach them how to connect.
             </p>
           </motion.div>
         </div>
       </section>
-      
-      <SectionDivider />
+
+      <DecorativeDivider 
+        icon={Sparkles}
+        gradientColors={{
+          from: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)',
+          via: theme === 'dark' ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0.05)',
+          to: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)'
+        }}
+        iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+        className="my-16"
+      />
       
       {/* Case Studies Section */}
-      <section id="case-studies" className="py-20">
+      <section id="case-studies" className={`py-20 ${
+        theme === 'dark' ? 'bg-black/50' : 'bg-gray-50'
+      }`}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -589,10 +665,14 @@ export default function TechNonprofitClient() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.caseStudies.title}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
               {t.caseStudies.subtitle}
             </p>
           </motion.div>
@@ -603,14 +683,24 @@ export default function TechNonprofitClient() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
+              className={`${
+                theme === 'dark' 
+                  ? 'bg-gray-800/30 backdrop-blur-sm border-gray-700' 
+                  : 'bg-white/30 backdrop-blur-sm border-gray-200'
+              } p-8 rounded-xl border`}
             >
-              <h3 className="text-2xl font-bold mb-6">{t.caseStudies.description}</h3>
+              <h3 className={`text-2xl font-bold mb-6 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>{t.caseStudies.description}</h3>
               <ul className="space-y-4">
                 {t.caseStudies.examples.map((example, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">{example}</span>
+                    <CheckCircle className={`h-6 w-6 ${
+                      theme === 'dark' ? 'text-green-400' : 'text-green-600'
+                    } mt-1 flex-shrink-0`} />
+                    <span className={`${
+                      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                    }`}>{example}</span>
                   </li>
                 ))}
               </ul>
@@ -632,7 +722,6 @@ export default function TechNonprofitClient() {
                   className="w-full h-auto"
                 />
                 
-                {/* Animated gradient overlay */}
                 <div 
                   className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 pointer-events-none"
                   style={{
@@ -678,7 +767,9 @@ export default function TechNonprofitClient() {
       <SectionDivider />
       
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-black/50">
+      <section id="contact" className={`py-20 ${
+        theme === 'dark' ? 'bg-black/50' : 'bg-gray-50'
+      }`}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -687,10 +778,14 @@ export default function TechNonprofitClient() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.contact.title}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
               {t.contact.subtitle}
             </p>
           </motion.div>
@@ -701,15 +796,27 @@ export default function TechNonprofitClient() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
+              className={`${
+                theme === 'dark' 
+                  ? 'bg-gray-800/30 backdrop-blur-sm border-gray-700' 
+                  : 'bg-white/30 backdrop-blur-sm border-gray-200'
+              } p-8 rounded-xl border`}
             >
-              <h3 className="text-2xl font-bold mb-6">{t.contact.description}</h3>
-              <p className="text-gray-300 mb-6">
+              <h3 className={`text-2xl font-bold mb-6 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>{t.contact.description}</h3>
+              <p className={`${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              } mb-6`}>
                 {t.contact.buildSomething}
               </p>
               <Button
-                onClick={() => setIsContactOpen(true)}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                onClick={openEmail}
+                className={`w-full ${
+                  theme === 'dark' 
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white' 
+                    : 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white'
+                }`}
               >
                 {t.contact.scheduleCall}
               </Button>
@@ -720,16 +827,30 @@ export default function TechNonprofitClient() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
+              className={`${
+                theme === 'dark' 
+                  ? 'bg-gray-800/30 backdrop-blur-sm border-gray-700' 
+                  : 'bg-white/30 backdrop-blur-sm border-gray-200'
+              } p-8 rounded-xl border`}
             >
-              <h3 className="text-2xl font-bold mb-6">{t.contact.resources}</h3>
+              <h3 className={`text-2xl font-bold mb-6 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>{t.contact.resources}</h3>
               <ul className="space-y-4">
                 {t.contact.resourcesList.map((resource, index) => (
                   <li key={index} className="flex items-center gap-3">
-                    {index === 0 && <FileText className="h-5 w-5 text-blue-400" />}
-                    {index === 1 && <ClipboardList className="h-5 w-5 text-blue-400" />}
-                    {index === 2 && <Sparkles className="h-5 w-5 text-blue-400" />}
-                    <span className="text-gray-300">{resource.title}</span>
+                    {index === 0 && <FileText className={`h-5 w-5 ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                    }`} />}
+                    {index === 1 && <ClipboardList className={`h-5 w-5 ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                    }`} />}
+                    {index === 2 && <Sparkles className={`h-5 w-5 ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                    }`} />}
+                    <span className={`${
+                      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                    }`}>{resource.title}</span>
                   </li>
                 ))}
               </ul>
@@ -743,40 +864,69 @@ export default function TechNonprofitClient() {
             viewport={{ once: true }}
             className="mt-12 text-center"
           >
-            <p className="text-xl italic text-gray-300">
+            <p className={`text-xl italic ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
               {t.contact.conclusion}
             </p>
           </motion.div>
         </div>
       </section>
+
+      <DecorativeDivider 
+        icon={Sparkles}
+        gradientColors={{
+          from: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)',
+          via: theme === 'dark' ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0.05)',
+          to: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)'
+        }}
+        iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+        className="my-16"
+      />
       
       {/* Footer */}
-      <footer className="py-12 border-t border-gray-800">
+      <footer className={`py-12 ${
+        theme === 'dark' ? 'border-t border-gray-800' : 'border-t border-gray-200'
+      }`}>
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
-              <h3 className="text-xl font-bold mb-2">
+              <h3 className={`text-xl font-bold mb-2 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
                   Artist Tech Initiative
                 </span>
               </h3>
-              <p className="text-gray-400">{t.footer.tagline}</p>
+              <p className={`${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              }`}>{t.footer.tagline}</p>
             </div>
             
             <div className="flex gap-6">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/" className={`${
+                theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+              } transition-colors`}>
                 {t.footer.links.home}
               </Link>
-              <Link href="/workshop" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/workshop" className={`${
+                theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+              } transition-colors`}>
                 {t.footer.links.workshops}
               </Link>
-              <Link href="https://moises.tech" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="https://moises.tech" target="_blank" className={`${
+                theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'
+              } transition-colors`}>
                 {t.footer.links.moises}
               </Link>
             </div>
           </div>
           
-          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+          <div className={`mt-8 pt-8 ${
+            theme === 'dark' ? 'border-t border-gray-800' : 'border-t border-gray-200'
+          } text-center ${
+            theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
+          } text-sm`}>
             <p>{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</p>
           </div>
         </div>
