@@ -27,6 +27,41 @@ const floatAnimation = {
   }
 };
 
+// Add new animation variants
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
+
+const hoverScale = {
+  scale: 1.05,
+  transition: {
+    type: "spring",
+    stiffness: 400,
+    damping: 10
+  }
+};
+
+const pulse = {
+  scale: [1, 1.1, 1],
+  transition: {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }
+};
+
 // Add SmartSign specific icons
 const smartSignIcons = [
   { icon: Tv, label: "Digital Displays" },
@@ -35,6 +70,26 @@ const smartSignIcons = [
   { icon: ImageIcon, label: "Multimedia Content" },
   { icon: Zap, label: "Smart Automation" },
   { icon: Shield, label: "Secure Access" }
+];
+
+const tips = [
+  "Transform any screen into a dynamic digital sign",
+  "Automatically update content based on your schedule",
+  "Engage your audience with interactive displays",
+  "Simplify your digital signage management",
+  "Showcase events and announcements in real-time",
+  "Support multiple display configurations",
+  "Access your content from anywhere",
+  "Built with accessibility in mind"
+];
+
+const features = [
+  { icon: Tv, title: "Dynamic Displays", description: "Transform any screen into a smart digital sign" },
+  { icon: Calendar, title: "Smart Scheduling", description: "Automatically update content based on your schedule" },
+  { icon: Users, title: "Community Focus", description: "Engage your audience with interactive displays" },
+  { icon: ImageIcon, title: "Rich Media", description: "Showcase videos, images, and interactive content" },
+  { icon: Zap, title: "Smart Automation", description: "Automate content updates and scheduling" },
+  { icon: Shield, title: "Secure Access", description: "Control who can update your displays" }
 ];
 
 export default function SmartSignClient() {
@@ -47,6 +102,8 @@ export default function SmartSignClient() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [currentTip, setCurrentTip] = useState(0);
   
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -68,6 +125,24 @@ export default function SmartSignClient() {
     return () => clearInterval(interval);
   }, []);
 
+  // Add useEffect for tips rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTip((prev) => (prev + 1) % tips.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Add useEffect for reduced motion
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -79,11 +154,11 @@ export default function SmartSignClient() {
 
   return (
     <main className="min-h-screen bg-zinc-900 text-white overflow-hidden" ref={containerRef}>
-      {/* Updated Hero Section */}
+      {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.15),transparent_70%)]" />
         <div className="absolute inset-0">
-          {/* Animated grid background with new colors */}
+          {/* Animated grid background */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#eab30833_1px,transparent_1px),linear-gradient(to_bottom,#eab30833_1px,transparent_1px)] bg-[size:14px_24px]" />
           </div>
@@ -112,75 +187,241 @@ export default function SmartSignClient() {
             ))}
           </div>
         </div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-4xl mx-auto px-4 text-center"
-        >
-          <motion.div
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative"
-          >
-            {/* Glowing effect behind title */}
-            <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-yellow-500/20 via-lime-500/20 to-yellow-500/20 rounded-full" />
-            <h1 className="relative text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-lime-300 to-yellow-400 bg-clip-text text-transparent animate-text-shine">
-              SmartSign
-            </h1>
-          </motion.div>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-yellow-200">
-            Dynamic Digital Signage for Galleries & Nonprofit Event Spaces
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            Engaging. Versatile. Community-Driven.
-          </p>
-          <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-            SmartSign transforms any screen—whether it's a Smart TV or Raspberry Pi-connected display—into a powerful, versatile digital sign optimized for galleries, nonprofits, and event spaces. Instantly communicate events, share multimedia content, and foster deeper community engagement.
-          </p>
-          <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto">
-            Co-designed with artists, for artists. Accessibility and inclusivity baked in (ADA, dyslexia font, multi-language).
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="#demo" 
-                  className="bg-gradient-to-r from-yellow-500 to-lime-500 hover:from-yellow-600 hover:to-lime-600 text-black font-medium px-8 py-3 rounded-full transition-all duration-300 inline-flex items-center gap-2 transform hover:scale-105 hover:shadow-[0_0_30px_rgba(234,179,8,0.3)]">
-              <Play className="w-5 h-5" />
-              Schedule Your Free Demo
-            </Link>
-            <Link href="#features"
-                  className="border border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10 px-8 py-3 rounded-full transition-colors inline-flex items-center gap-2">
-              <ArrowRight className="w-5 h-5" />
-              Start 30-Day Pilot
-            </Link>
-          </div>
-        </motion.div>
 
-        {/* Add icon carousel */}
-        <div className="absolute bottom-20 left-0 right-0 flex justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIconIndex}
-              className="flex flex-col items-center gap-2"
-              variants={iconCarousel}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <div className="w-16 h-16 bg-yellow-500/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-yellow-500/20">
-                {React.createElement(smartSignIcons[activeIconIndex].icon, {
-                  className: "w-8 h-8 text-yellow-400"
-                })}
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="text-center md:text-left">
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
+                  <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20">
+                    <Tv className="w-5 h-5 text-yellow-400" />
+                    <span className="text-sm font-medium text-yellow-200">Smart Digital Signage</span>
+                  </motion.div>
+                </div>
+                
+                <motion.h1 
+                  variants={fadeIn}
+                  className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-lime-300 to-yellow-400"
+                >
+                  Transform Your Space
+                  <br />
+                  With SmartSign
+                </motion.h1>
+                
+                <motion.p 
+                  variants={fadeIn}
+                  className="text-xl text-gray-300 max-w-2xl mb-8"
+                >
+                  Dynamic digital signage that adapts to your needs, engages your audience, and simplifies your workflow
+                </motion.p>
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentTip}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-lg text-yellow-400 font-medium mb-12"
+                  >
+                    {tips[currentTip]}
+                  </motion.div>
+                </AnimatePresence>
+
+                <motion.div 
+                  variants={fadeIn}
+                  className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+                >
+                  <motion.button
+                    whileHover={reducedMotion ? {} : hoverScale}
+                    className="px-8 py-4 rounded-lg font-medium bg-yellow-500 text-black hover:bg-yellow-600 transition-colors"
+                  >
+                    Schedule Demo
+                  </motion.button>
+                  <motion.button
+                    whileHover={reducedMotion ? {} : hoverScale}
+                    className="px-8 py-4 rounded-lg font-medium border border-yellow-500/20 hover:border-yellow-500/40 transition-colors text-yellow-200"
+                  >
+                    Start Free Trial
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            <div className="h-[400px] md:h-[500px] flex items-center justify-center">
+              <div className="grid grid-cols-3 gap-8">
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex flex-col items-center gap-4"
+                  >
+                    <motion.div
+                      animate={{
+                        y: [0, -10, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2
+                      }}
+                      className="w-16 h-16 bg-yellow-500/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-yellow-500/20"
+                    >
+                      {React.createElement(feature.icon, {
+                        className: "w-8 h-8 text-yellow-400"
+                      })}
+                    </motion.div>
+                    <span className="text-sm text-yellow-200 text-center">{feature.title}</span>
+                  </motion.div>
+                ))}
               </div>
-              <span className="text-sm text-yellow-200">
-                {smartSignIcons[activeIconIndex].label}
-              </span>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          </div>
+
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn}
+                className="bg-zinc-800/80 backdrop-blur-xl rounded-xl border border-yellow-500/20 p-6"
+                whileHover={reducedMotion ? {} : hoverScale}
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div
+                    animate={reducedMotion ? {} : pulse}
+                    className="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center"
+                  >
+                    {React.createElement(feature.icon, {
+                      className: "w-6 h-6 text-yellow-400"
+                    })}
+                  </motion.div>
+                  <h3 className="text-lg font-bold">{feature.title}</h3>
+                </div>
+                <p className="text-gray-300">{feature.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Updated Features Section */}
+      {/* Icon Carousel Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/5 via-lime-500/5 to-transparent" />
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="text-center md:text-left">
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
+                  <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20">
+                    <Tv className="w-5 h-5 text-yellow-400" />
+                    <span className="text-sm font-medium text-yellow-200">Smart Digital Signage</span>
+                  </motion.div>
+                </div>
+                
+                <motion.h2 
+                  variants={fadeIn}
+                  className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-lime-300 to-yellow-400"
+                >
+                  Transform Your Space
+                  <br />
+                  With SmartSign
+                </motion.h2>
+                
+                <motion.p 
+                  variants={fadeIn}
+                  className="text-xl text-gray-300 max-w-2xl mb-8"
+                >
+                  Dynamic digital signage that adapts to your needs, engages your audience, and simplifies your workflow
+                </motion.p>
+
+                <motion.div 
+                  variants={fadeIn}
+                  className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+                >
+                  <motion.button
+                    whileHover={reducedMotion ? {} : hoverScale}
+                    className="px-8 py-4 rounded-lg font-medium bg-yellow-500 text-black hover:bg-yellow-600 transition-colors"
+                  >
+                    Schedule Demo
+                  </motion.button>
+                  <motion.button
+                    whileHover={reducedMotion ? {} : hoverScale}
+                    className="px-8 py-4 rounded-lg font-medium border border-yellow-500/20 hover:border-yellow-500/40 transition-colors text-yellow-200"
+                  >
+                    Start Free Trial
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            <div className="h-[400px] md:h-[500px] flex items-center justify-center">
+              <div className="grid grid-cols-3 gap-8">
+                {smartSignIcons.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex flex-col items-center gap-4"
+                  >
+                    <motion.div
+                      animate={{
+                        y: [0, -10, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2
+                      }}
+                      className="w-16 h-16 bg-yellow-500/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-yellow-500/20"
+                    >
+                      {React.createElement(item.icon, {
+                        className: "w-8 h-8 text-yellow-400"
+                      })}
+                    </motion.div>
+                    <span className="text-sm text-yellow-200 text-center">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Tv}
+        gradientColors={{
+          from: 'rgba(234, 179, 8, 0.1)',
+          via: 'rgba(132, 204, 22, 0.1)',
+          to: 'rgba(234, 179, 8, 0.1)'
+        }}
+        iconColor="text-yellow-400/50"
+        className="my-16"
+      />
+
+      {/* Features Section */}
       <section id="features" className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/5 via-lime-500/5 to-transparent" />
         <div className="max-w-6xl mx-auto px-4">
@@ -264,17 +505,6 @@ export default function SmartSignClient() {
           </div>
         </div>
       </section>
-
-      <DecorativeDivider 
-        icon={Tv}
-        gradientColors={{
-          from: 'rgba(234, 179, 8, 0.1)',
-          via: 'rgba(132, 204, 22, 0.1)',
-          to: 'rgba(234, 179, 8, 0.1)'
-        }}
-        iconColor="text-yellow-400/50"
-        className="my-16"
-      />
 
       {/* Use Cases Section */}
       <section className="py-20 relative overflow-hidden">
