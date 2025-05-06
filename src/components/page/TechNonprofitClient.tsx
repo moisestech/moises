@@ -36,21 +36,24 @@ import {
   ChevronDown,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useInView } from "react-intersection-observer"
 import { TechNonprofitNav } from "@/components/workshop/TechNonprofitNavLeCube"
 import { useLanguage } from "@/contexts/LanguageContext"
-import { translations } from "@/lib/translations/tech-nonprofit"
+import { translations } from "@/lib/translations/tech-nonprofit-oolite"
 import { Mail, Phone, MapPin } from "lucide-react"
 import { ThemeToggle } from '@/components/common/ThemeToggle'
 import { useTheme } from '@/contexts/ThemeContext'
+import DecorativeDivider from '@/components/common/DecorativeDivider'
+import LargeIconCarousel from '@/components/common/LargeIconCarousel'
 
 // Animation variants
 const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
 }
 
 const staggerContainer = {
@@ -63,28 +66,81 @@ const staggerContainer = {
   },
 }
 
-// Custom divider component with blue/purple theme
-const SectionDivider = ({ className = "" }: { className?: string }) => (
-  <div className={`w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent ${className}`} />
-)
-
-// Add placeholder image URLs
-const PLACEHOLDER_IMAGES = {
-  hero: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1745329555/tech-nonprofit/nonprofit-tech-image-1_y8rgsz.png",
-  services: {
-    communication: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg",
-    dashboard: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1745329555/tech-nonprofit/nonprofit-tech-image-2_ctm1ft.png",
-    workshop: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1745329555/tech-nonprofit/nonprofit-tech-image-3_qkdzir.png",
-    microtools: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030367/own-your-digital-presence/website-building-day-4-online-presentations_tncppm.jpg"
+const hoverScale = {
+  scale: 1.05,
+  transition: {
+    type: "spring",
+    stiffness: 400,
+    damping: 10
   }
 }
 
-// Add animated gradient text component
-const AnimatedGradientText = ({ children }: { children: React.ReactNode }) => (
-  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-gradient">
-    {children}
-  </span>
-)
+const pulse = {
+  scale: [1, 1.1, 1],
+  transition: {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }
+}
+
+// Icons for the carousel
+const carouselIcons = [
+  { icon: Building2, label: "Community Impact" },
+  { icon: Rocket, label: "Digital Innovation" },
+  { icon: Heart, label: "Social Good" },
+  { icon: Globe, label: "Global Reach" },
+  { icon: Users, label: "Team Collaboration" },
+  { icon: Target, label: "Mission Focus" }
+]
+
+// Services data
+const services = [
+  {
+    icon: MessageSquare,
+    title: "Communication Platform",
+    description: "Browser-based messaging and event broadcasting system for seamless team coordination."
+  },
+  {
+    icon: Monitor,
+    title: "Digital Dashboards",
+    description: "Custom portals for staff, volunteers, and stakeholders with role-based access."
+  },
+  {
+    icon: Code,
+    title: "Tech Infrastructure",
+    description: "Scalable solutions for events, programs, and community engagement."
+  },
+  {
+    icon: Zap,
+    title: "Process Automation",
+    description: "Streamline operations with smart workflows and AI-powered tools."
+  }
+]
+
+// Workshop topics
+const workshops = [
+  {
+    icon: Globe,
+    title: "Digital Presence",
+    description: "Build and optimize your online presence"
+  },
+  {
+    icon: Cpu,
+    title: "AI for Good",
+    description: "Leverage AI for social impact"
+  },
+  {
+    icon: Network,
+    title: "Community Building",
+    description: "Engage and grow your digital community"
+  },
+  {
+    icon: Target,
+    title: "Impact Metrics",
+    description: "Track and visualize your social impact"
+  }
+]
 
 export default function TechNonprofitClient() {
   const { language } = useLanguage()
@@ -101,15 +157,16 @@ export default function TechNonprofitClient() {
   })
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const { theme } = useTheme()
+  const [reducedMotion, setReducedMotion] = useState(false)
+  const containerRef = useRef(null)
 
   const t = translations[language]
 
   // Intersection observer for sections
-  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5 })
-  const { ref: storyRef, inView: storyInView } = useInView({ threshold: 0.5 })
-  const { ref: offerRef, inView: offerInView } = useInView({ threshold: 0.5 })
-  const { ref: workshopsRef, inView: workshopsInView } = useInView({ threshold: 0.5 })
-  const { ref: ctaRef, inView: ctaInView } = useInView({ threshold: 0.5 })
+  const [heroRef, heroInView] = useInView({ threshold: 0.5 })
+  const [servicesRef, servicesInView] = useInView({ threshold: 0.5 })
+  const [workshopsRef, workshopsInView] = useInView({ threshold: 0.5 })
+  const [impactRef, impactInView] = useInView({ threshold: 0.5 })
 
   // Countdown timer
   useEffect(() => {
@@ -142,58 +199,14 @@ export default function TechNonprofitClient() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  // Add services details
-  const servicesDetails = [
-    {
-      title: "Browser-Based Communication App",
-      description: "Built-in messaging and event broadcasting system. Staff, artists, and attendees stay connected during festivals, exhibitions, and workshops—without needing WhatsApp or Slack.",
-      icon: <MessageSquare className="h-6 w-6" />
-    },
-    {
-      title: "Artist & Staff Dashboards",
-      description: "Log in, post updates, RSVP to events, and access internal resources. A unified, clean experience with roles and permissions.",
-      icon: <Monitor className="h-6 w-6" />
-    },
-    {
-      title: "Workshop Infrastructure",
-      description: "We build the tech layer behind live and hybrid events: registration flows, feedback surveys, AI co-pilots, and even post-event recaps.",
-      icon: <Users className="h-6 w-6" />
-    },
-    {
-      title: "Custom Microtools",
-      description: "Need a light event map? A tool for kids to remix art with AI? A drop-in chatbot for your cinema program? We can make it, and make it simple.",
-      icon: <Code className="h-6 w-6" />
-    }
-  ]
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReducedMotion(mediaQuery.matches)
 
-  // Add workshop details
-  const workshopDetails = [
-    {
-      title: "Own Your Digital Presence",
-      description: "Website Building, Performance, Accessibility",
-      icon: <Globe className="h-6 w-6" />
-    },
-    {
-      title: "AI for Artists",
-      description: "Prompting, Co-creation, Ethics of Generative Art",
-      icon: <Cpu className="h-6 w-6" />
-    },
-    {
-      title: "Creative Social Media & Meme Branding",
-      description: "Engage your audience with creative content strategies",
-      icon: <Network className="h-6 w-6" />
-    },
-    {
-      title: "Marketing Automation for Cultural Orgs",
-      description: "Streamline your outreach and engagement",
-      icon: <Zap className="h-6 w-6" />
-    },
-    {
-      title: "Build Your Portfolio",
-      description: "Design, UX, and storytelling for artists",
-      icon: <Paintbrush className="h-6 w-6" />
-    }
-  ]
+    const handleChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mediaQuery.addEventListener("change", handleChange)
+    return () => mediaQuery.removeEventListener("change", handleChange)
+  }, [])
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -308,8 +321,39 @@ export default function TechNonprofitClient() {
       <ContactModal />
       
       {/* Hero Section */}
-      <section id="overview" className="pt-32 pb-20 relative overflow-hidden">
-        <div className="container mx-auto px-4">
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          {/* Animated grid background */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#6366f133_1px,transparent_1px),linear-gradient(to_bottom,#6366f133_1px,transparent_1px)] bg-[size:14px_24px]" />
+          </div>
+          {/* Floating particles effect */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-indigo-500/30 rounded-full"
+                animate={{
+                  x: [
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerWidth,
+                  ],
+                  y: [
+                    Math.random() * window.innerHeight,
+                    Math.random() * window.innerHeight,
+                  ],
+                }}
+                transition={{
+                  duration: Math.random() * 10 + 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -321,7 +365,9 @@ export default function TechNonprofitClient() {
                 theme === 'dark' ? 'text-white' : 'text-gray-900'
               }`}>
                 <span className="block">{t.hero.title}</span>
-                <span className="block">{t.hero.subtitle}</span>
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                  {t.hero.subtitle}
+                </span>
               </h1>
               
               <p className={`text-xl ${
@@ -333,454 +379,258 @@ export default function TechNonprofitClient() {
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button
                   onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full flex items-center justify-center gap-2"
+                  className={`${
+                    theme === 'dark' 
+                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white' 
+                      : 'bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white'
+                  } px-6 py-3 rounded-full flex items-center justify-center gap-2`}
                 >
                   {t.hero.exploreServices}
                   <ChevronRight className="h-5 w-5" />
                 </Button>
                 
                 <Button
-                  onClick={() => setIsContactOpen(true)}
                   variant="outline"
-                  className="border border-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-full"
+                  className={`border ${
+                    theme === 'dark' 
+                      ? 'border-gray-700 hover:bg-gray-800 text-white' 
+                      : 'border-gray-300 hover:bg-gray-100 text-gray-900'
+                  } px-6 py-3 rounded-full`}
                 >
                   {t.hero.scheduleCall}
                 </Button>
               </div>
             </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                  src={PLACEHOLDER_IMAGES.hero}
-                  alt="Tech for Non-Profits"
-                  width={600}
-                  height={400}
-                  className="w-full h-auto"
-                />
-                
-                {/* Animated gradient overlay */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 pointer-events-none"
-                  style={{
-                    transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
-                  }}
-                />
-              </div>
-              
-              {/* Floating elements */}
-              <motion.div
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute -top-6 -right-6 bg-blue-500/10 backdrop-blur-md p-4 rounded-lg border border-blue-500/20"
-              >
-                <Building2 className="h-8 w-8 text-blue-400" />
-              </motion.div>
-              
-              <motion.div
-                animate={{
-                  y: [0, 10, 0],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-                className="absolute -bottom-6 -left-6 bg-purple-500/10 backdrop-blur-md p-4 rounded-lg border border-purple-500/20"
-              >
-                <Rocket className="h-8 w-8 text-purple-400" />
-              </motion.div>
-            </motion.div>
+
+            <div className="h-[400px] md:h-[500px] flex items-center justify-center">
+              <LargeIconCarousel icons={carouselIcons} reducedMotion={reducedMotion} />
+            </div>
           </div>
         </div>
       </section>
       
-      <SectionDivider />
-      
-      {/* The Story Section */}
-      <section className="py-20 bg-black/50">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center space-y-6"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold">
-              {t.story.title}
-            </h2>
-            
-            <p className="text-xl text-gray-300">
-              {t.story.description1}
-            </p>
-            
-            <p className="text-xl text-gray-300">
-              {t.story.description2}
-            </p>
-            
-            <blockquote className="text-xl italic text-gray-300 border-l-4 border-blue-500 pl-4 my-8">
-              &ldquo;{t.story.quote}&rdquo;
-              <footer className="text-right text-gray-400 mt-2">— {t.story.quoteAuthor}</footer>
-            </blockquote>
-          </motion.div>
-        </div>
-      </section>
-      
-      <SectionDivider />
+      <DecorativeDivider 
+        icon={Sparkles}
+        gradientColors={{
+          from: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)',
+          via: theme === 'dark' ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0.05)',
+          to: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)'
+        }}
+        iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+        className="my-16"
+      />
       
       {/* Services Section */}
-      <section id="services" className="py-20">
+      <section id="services" ref={servicesRef} className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.services.title}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
               {t.services.subtitle}
             </p>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {t.services.items.map((service: { title: string; description: string }, index: number) => (
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {services.map((service, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                key={service.title}
+                variants={fadeIn}
+                initial="initial"
+                whileInView="animate"
                 viewport={{ once: true }}
-                className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-colors"
+                className={`${
+                  theme === 'dark' 
+                    ? 'bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-indigo-500/50' 
+                    : 'bg-white/50 backdrop-blur-sm border-gray-200 hover:border-indigo-500/50'
+                } p-6 rounded-xl border transition-colors`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="bg-blue-500/10 p-3 rounded-lg text-blue-400">
-                    {servicesDetails[index].icon}
+                  <div className={`bg-indigo-500/10 p-3 rounded-lg ${
+                    theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
+                  }`}>
+                    <service.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                    <p className="text-gray-300">{service.description}</p>
+                    <h3 className={`text-xl font-bold mb-2 ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>{service.title}</h3>
+                    <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                      {service.description}
+                    </p>
                   </div>
                 </div>
-                {index === 1 && (
-                  <div className="mt-4">
-                    <Image
-                      src={PLACEHOLDER_IMAGES.services.dashboard}
-                      alt="Dashboard Example"
-                      width={500}
-                      height={300}
-                      className="w-full h-auto rounded-lg"
-                    />
-                  </div>
-                )}
               </motion.div>
             ))}
           </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
-            <p className="text-xl font-medium text-blue-400">
-              {t.services.conclusion}
-            </p>
-          </motion.div>
         </div>
       </section>
       
-      <SectionDivider />
+      <DecorativeDivider 
+        icon={Target}
+        gradientColors={{
+          from: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)',
+          via: theme === 'dark' ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0.05)',
+          to: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)'
+        }}
+        iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+        className="my-16"
+      />
       
       {/* Workshops Section */}
-      <section id="workshops" className="py-20 bg-black/50">
+      <section id="workshops" ref={workshopsRef} className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="relative rounded-xl overflow-hidden shadow-2xl mb-12 max-w-[400px] mx-auto">
-              <Image
-                src={PLACEHOLDER_IMAGES.services.workshop}
-                alt="Workshop Example"
-                width={400}
-                height={225}
-                className="w-full h-auto"
-              />
-              
-              {/* Animated gradient overlay */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 pointer-events-none"
-                style={{
-                  transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
-                }}
-              />
-            </div>
-
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.workshops.title}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
               {t.workshops.subtitle}
             </p>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.workshops.items.map((workshop: { title: string; description: string }, index: number) => (
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {workshops.map((workshop, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                key={workshop.title}
+                variants={fadeIn}
+                initial="initial"
+                whileInView="animate"
                 viewport={{ once: true }}
-                className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-purple-500/50 transition-colors"
+                whileHover={reducedMotion ? {} : hoverScale}
+                className={`${
+                  theme === 'dark' 
+                    ? 'bg-gray-800/30 backdrop-blur-sm border-gray-700 hover:border-purple-500/50' 
+                    : 'bg-white/30 backdrop-blur-sm border-gray-200 hover:border-purple-500/50'
+                } p-6 rounded-xl border transition-colors`}
               >
-                <div className="bg-purple-500/10 p-3 rounded-lg text-purple-400 w-fit mb-4">
-                  {workshopDetails[index].icon}
+                <div className={`bg-purple-500/10 p-3 rounded-lg text-purple-400 w-fit mb-4`}>
+                  <workshop.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">{workshop.title}</h3>
-                <p className="text-gray-300">{workshop.description}</p>
+                <h3 className={`text-xl font-bold mb-2 ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>{workshop.title}</h3>
+                <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                  {workshop.description}
+                </p>
               </motion.div>
             ))}
           </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
-            <p className="text-xl italic text-gray-300">
-              {t.workshops.conclusion}
-            </p>
-          </motion.div>
         </div>
       </section>
       
-      <SectionDivider />
+      <DecorativeDivider 
+        icon={Heart}
+        gradientColors={{
+          from: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)',
+          via: theme === 'dark' ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0.05)',
+          to: theme === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0.05)'
+        }}
+        iconColor={theme === 'dark' ? 'text-indigo-400/50' : 'text-indigo-500/50'}
+        className="my-16"
+      />
       
-      {/* Case Studies Section */}
-      <section id="case-studies" className="py-20">
+      {/* Impact Section */}
+      <section id="impact" ref={impactRef} className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
               {t.caseStudies.title}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className={`text-xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
               {t.caseStudies.subtitle}
             </p>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          <div className="grid md:grid-cols-2 gap-8">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
               viewport={{ once: true }}
-              className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
+              className={`${
+                theme === 'dark' 
+                  ? 'bg-gray-800/30 backdrop-blur-sm border-gray-700' 
+                  : 'bg-white/30 backdrop-blur-sm border-gray-200'
+              } p-8 rounded-xl border`}
             >
-              <h3 className="text-2xl font-bold mb-6">{t.caseStudies.description}</h3>
+              <h3 className={`text-2xl font-bold mb-6 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>{t.caseStudies.description}</h3>
               <ul className="space-y-4">
                 {t.caseStudies.examples.map((example, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">{example}</span>
+                    <CheckCircle className={`h-6 w-6 ${
+                      theme === 'dark' ? 'text-green-400' : 'text-green-600'
+                    } mt-1 flex-shrink-0`} />
+                    <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                      {example}
+                    </span>
                   </li>
                 ))}
               </ul>
             </motion.div>
-            
+
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
               viewport={{ once: true }}
-              className="relative"
+              className="relative h-[400px] rounded-xl overflow-hidden"
             >
-              <div className="relative rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                  src={PLACEHOLDER_IMAGES.services.dashboard}
-                  alt="Tech Dashboard"
-                  width={600}
-                  height={400}
-                  className="w-full h-auto"
-                />
-                
-                {/* Animated gradient overlay */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 pointer-events-none"
-                  style={{
-                    transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
-                  }}
-                />
-              </div>
-              
-              {/* Floating elements */}
-              <motion.div
-                animate={{
-                  y: [0, -10, 0],
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20" />
+              <div 
+                className="absolute inset-0 bg-[linear-gradient(45deg,rgba(99,102,241,0.1)_25%,transparent_25%,transparent_50%,rgba(99,102,241,0.1)_50%,rgba(99,102,241,0.1)_75%,transparent_75%,transparent)] bg-[length:64px_64px]"
+                style={{
+                  animation: "gradient-move 3s linear infinite",
                 }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute -top-6 -right-6 bg-blue-500/10 backdrop-blur-md p-4 rounded-lg border border-blue-500/20"
-              >
-                <Target className="h-8 w-8 text-blue-400" />
-              </motion.div>
-              
-              <motion.div
-                animate={{
-                  y: [0, 10, 0],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-                className="absolute -bottom-6 -left-6 bg-purple-500/10 backdrop-blur-md p-4 rounded-lg border border-purple-500/20"
-              >
-                <Heart className="h-8 w-8 text-purple-400" />
-              </motion.div>
+              />
             </motion.div>
           </div>
         </div>
       </section>
-      
-      <SectionDivider />
-      
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-black/50">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {t.contact.title}
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t.contact.subtitle}
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
-            >
-              <h3 className="text-2xl font-bold mb-6">{t.contact.description}</h3>
-              <p className="text-gray-300 mb-6">
-                {t.contact.buildSomething}
-              </p>
-              <Button
-                onClick={() => setIsContactOpen(true)}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-              >
-                {t.contact.scheduleCall}
-              </Button>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-gray-700"
-            >
-              <h3 className="text-2xl font-bold mb-6">{t.contact.resources}</h3>
-              <ul className="space-y-4">
-                {t.contact.resourcesList.map((resource, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    {index === 0 && <FileText className="h-5 w-5 text-blue-400" />}
-                    {index === 1 && <ClipboardList className="h-5 w-5 text-blue-400" />}
-                    {index === 2 && <Sparkles className="h-5 w-5 text-blue-400" />}
-                    <span className="text-gray-300">{resource.title}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
-            <p className="text-xl italic text-gray-300">
-              {t.contact.conclusion}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-      
-      {/* Footer */}
-      <footer className="py-12 border-t border-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <h3 className="text-xl font-bold mb-2">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                  Artist Tech Initiative
-                </span>
-              </h3>
-              <p className="text-gray-400">{t.footer.tagline}</p>
-            </div>
-            
-            <div className="flex gap-6">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                {t.footer.links.home}
-              </Link>
-              <Link href="/workshop" className="text-gray-400 hover:text-white transition-colors">
-                {t.footer.links.workshops}
-              </Link>
-              <Link href="https://moises.tech" target="_blank" className="text-gray-400 hover:text-white transition-colors">
-                {t.footer.links.moises}
-              </Link>
-            </div>
-          </div>
-          
-          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            <p>{t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}</p>
-          </div>
-        </div>
-      </footer>
+
+      <style jsx global>{`
+        @keyframes gradient-move {
+          0% {
+            background-position: 0 0;
+          }
+          100% {
+            background-position: 64px 64px;
+          }
+        }
+      `}</style>
     </div>
   )
 } 

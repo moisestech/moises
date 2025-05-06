@@ -94,7 +94,7 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
     },
     story: {
       title: "What Happens When Cultural Vision Meets Digital Power?",
-      description1: "Le Cube Garges already leads the way in creative innovation, transforming how we engage with digital culture, community, and the future. But what if every exhibition had a custom-built, lightweight digital companion? What if artists and audiences could connect online just as meaningfully as they do in person?",
+      description1: "Oolite Arts already leads the way in creative innovation, transforming how we engage with digital culture, community, and the future. But what if every exhibition had a custom-built, lightweight digital companion? What if artists and audiences could connect online just as meaningfully as they do in person?",
       description2: "We've seen what's possible when art institutions like Bakehouse empower their artists with workshops and tech. From DIY websites to performance optimization, and even automated content outreach—we build the tools that artists, staff, and audiences actually use.",
       quote: "Technology, at its best, is invisible—felt only in the clarity of communication and the ease of creation.",
       quoteAuthor: "Moises Sanabria"
@@ -154,9 +154,9 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
       subtitle: "You're already doing the hard part: reaching the community, supporting interdisciplinary creation, and tackling societal change. Our goal is to amplify that with thoughtful, human tech.",
       description: "Let's imagine together:",
       examples: [
-        "An artist dashboard with workshop materials in both French and English",
+        "An artist dashboard with workshop materials in multiple languages",
         "A browser app where a family can see what's happening next weekend",
-        "A prompt-based generative art tool for youth in your FabLab",
+        "A prompt-based generative art tool for youth in your studio spaces",
         "A monthly content automation that schedules your entire calendar on Instagram and email in one click"
       ]
     },
@@ -187,7 +187,7 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
         message: "Message",
         submit: "Submit"
       },
-      conclusion: "A pôle of cultural innovation, open to all audiences."
+      conclusion: "A center of cultural innovation, open to all audiences."
     },
     footer: {
       tagline: "Empowering artists with technology",
@@ -197,6 +197,128 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
         moises: "Moises Sanabria"
       },
       copyright: "© {year} Artist Tech Initiative. All rights reserved."
+    }
+  },
+  es: {
+    navigation: {
+      home: "Inicio",
+      services: "Servicios",
+      workshops: "Talleres",
+      contact: "Contacto",
+    },
+    hero: {
+      title: "Innovación Digital",
+      subtitle: "Para el Impacto Social",
+      description: "Transformamos organizaciones sin fines de lucro con tecnología accesible y herramientas digitales que amplifican su impacto en la comunidad.",
+      exploreServices: "Explorar Servicios",
+      scheduleCall: "Agendar Llamada",
+      cta: "Agendar Llamada"
+    },
+    story: {
+      title: "¿Qué Sucede Cuando la Visión Social Se Une al Poder Digital?",
+      description1: "Oolite Arts lidera el camino en innovación creativa, transformando la manera en que interactuamos con la cultura digital, la comunidad y el futuro. Imagina cada iniciativa con un componente digital personalizado, cada programa con alcance amplificado.",
+      description2: "Hemos visto el impacto cuando las organizaciones empoderan a sus equipos con tecnología accesible. Desde plataformas web hasta automatización de procesos—construimos herramientas que realmente funcionan para tu misión.",
+      quote: "La tecnología, en su mejor expresión, es invisible—se siente solo en la claridad de la comunicación y la facilidad de creación.",
+      quoteAuthor: "Moises Sanabria"
+    },
+    services: {
+      title: "Soluciones Digitales para ONGs",
+      subtitle: "Somos tu aliado tecnológico flexible y alineado con tu misión. Sin complicaciones. Solo soluciones específicas y escalables para potenciar tu impacto.",
+      items: [
+        {
+          title: "Plataforma de Comunicación",
+          description: "Sistema integrado de mensajería y difusión de eventos. Mantén conectados a tu equipo, voluntarios y beneficiarios sin necesidad de WhatsApp o Slack."
+        },
+        {
+          title: "Paneles de Control",
+          description: "Acceso personalizado para equipo y voluntarios. Una experiencia unificada y simple con roles y permisos."
+        },
+        {
+          title: "Infraestructura Digital",
+          description: "Construimos la base tecnológica para tus eventos y programas: registro, encuestas, asistentes virtuales y más."
+        },
+        {
+          title: "Herramientas a Medida",
+          description: "¿Necesitas un mapa de impacto? ¿Un sistema de registro de beneficiarios? Lo hacemos simple y efectivo."
+        }
+      ],
+      conclusion: "Creemos que el sector social merece tecnología de calidad. Por eso ofrecemos servicios flexibles — solo lo que necesitas, cuando lo necesitas."
+    },
+    workshops: {
+      title: "Capacitación Digital para ONGs",
+      subtitle: "Ofrecemos talleres prácticos enfocados en ayudar a organizaciones sociales a desarrollar su presencia digital, visibilidad e impacto. Diseñados para equipos sin experiencia técnica.",
+      items: [
+        {
+          title: "Presencia Digital",
+          description: "Optimiza tu visibilidad en línea"
+        },
+        {
+          title: "IA para el Bien Social",
+          description: "Tecnología con propósito social"
+        },
+        {
+          title: "Comunidad Digital",
+          description: "Construye y fortalece tu comunidad"
+        },
+        {
+          title: "Métricas de Impacto",
+          description: "Mide y comunica tus resultados"
+        },
+        {
+          title: "Automatización",
+          description: "Optimiza procesos y operaciones"
+        }
+      ],
+      conclusion: "No solo enseñamos tecnología — empoderamos organizaciones."
+    },
+    caseStudies: {
+      title: "Tu Misión Merece Tecnología que la Potencie",
+      subtitle: "Ya estás haciendo el trabajo importante: impactando en la comunidad y generando cambio social. Nuestro objetivo es amplificar ese impacto con tecnología accesible.",
+      description: "Imagina las posibilidades:",
+      examples: [
+        "Un panel de control multilingüe para tu equipo y voluntarios",
+        "Una aplicación donde los beneficiarios pueden ver programas y eventos",
+        "Automatización de reportes de impacto y comunicaciones",
+        "Herramientas digitales que hacen tu trabajo más efectivo"
+      ]
+    },
+    contact: {
+      title: "¿Listo para Potenciar tu Impacto?",
+      subtitle: "Empecemos con algo simple — un taller conjunto, una herramienta digital para tu próximo programa, o capacitación para tu equipo.",
+      description: "Construyamos algo para tu organización.",
+      buildSomething: "Agenda una llamada para discutir tus necesidades y cómo podemos ayudar.",
+      scheduleCall: "Agendar Llamada",
+      resources: "Recursos",
+      resourcesList: [
+        {
+          title: "Descargar Presentación (PDF)",
+          description: ""
+        },
+        {
+          title: "Ver Programa de Talleres",
+          description: ""
+        },
+        {
+          title: "Demo Disponible",
+          description: "Demostración y plan de implementación"
+        }
+      ],
+      form: {
+        name: "Nombre",
+        email: "Correo",
+        message: "Mensaje",
+        submit: "Enviar"
+      },
+      conclusion: "Tecnología accesible para amplificar el impacto social."
+    },
+    footer: {
+      tagline: "Empoderando organizaciones sociales con tecnología",
+      links: {
+        home: "Inicio",
+        workshops: "Talleres",
+        moises: "Moises Sanabria"
+      },
+      copyright: "© {year} Artist Tech Initiative. Todos los derechos reservados."
     }
   },
   fr: {
@@ -216,7 +338,7 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
     },
     story: {
       title: "Que Se Passe-t-il Quand la Vision Culturelle Rencontre la Puissance Numérique ?",
-      description1: "Le Cube Garges est déjà à l'avant-garde de l'innovation créative, transformant notre façon d'interagir avec la culture numérique, la communauté et l'avenir. Et si chaque exposition avait son compagnon numérique sur mesure ? Et si les artistes et le public pouvaient se connecter en ligne aussi significativement qu'en personne ?",
+      description1: "Oolite Arts est déjà à l'avant-garde de l'innovation créative, transformant notre façon d'interagir avec la culture numérique, la communauté et l'avenir. Et si chaque exposition avait son compagnon numérique sur mesure ? Et si les artistes et le public pouvaient se connecter en ligne aussi significativement qu'en personne ?",
       description2: "Nous avons vu ce qui est possible quand les institutions artistiques comme Bakehouse donnent à leurs artistes les outils technologiques. Des sites web DIY à l'optimisation des performances, en passant par l'automatisation du contenu — nous créons les outils que les artistes, le personnel et le public utilisent réellement.",
       quote: "La technologie, à son meilleur, est invisible — ressentie uniquement dans la clarté de la communication et la facilité de création.",
       quoteAuthor: "Moises Sanabria"
@@ -276,9 +398,9 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
       subtitle: "Vous faites déjà la partie difficile : atteindre la communauté, soutenir la création interdisciplinaire et relever les défis sociétaux. Notre objectif est d'amplifier cela avec une technologie réfléchie et humaine.",
       description: "Imaginons ensemble :",
       examples: [
-        "Un tableau de bord artiste avec des supports d'atelier en français et en anglais",
+        "Un tableau de bord artiste avec des supports d'atelier en plusieurs langues",
         "Une application navigateur où une famille peut voir ce qui se passe le week-end prochain",
-        "Un outil d'art génératif basé sur des prompts pour les jeunes de votre FabLab",
+        "Un outil d'art génératif basé sur des prompts pour les jeunes de vos espaces studio",
         "Une automatisation mensuelle de contenu qui planifie votre calendrier entier sur Instagram et email en un clic"
       ]
     },
@@ -309,7 +431,7 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
         message: "Message",
         submit: "Soumettre"
       },
-      conclusion: "Un pôle d'innovation culturelle, ouvert à tous les publics."
+      conclusion: "Un centre d'innovation culturelle, ouvert à tous les publics."
     },
     footer: {
       tagline: "Donner du pouvoir aux artistes grâce à la technologie",

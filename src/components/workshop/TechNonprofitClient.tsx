@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { translations } from '@/lib/translations/tech-nonprofit';
+import { translations } from '@/lib/translations/tech-nonprofit-lecube';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';

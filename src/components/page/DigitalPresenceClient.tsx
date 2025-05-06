@@ -300,7 +300,7 @@ export default function DigitalPresenceClient() {
               <h1 className={`text-2xl tracking-tight font-bold ${
                 theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'
               }`}>
-                Own Your Digital Presence TEST
+                Own Your Digital Presence
               </h1>
             </div>
           </div>
