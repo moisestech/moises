@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Play, BookOpen, Users, Calendar } from "lucide-react";
+import AIArtsLandingClientFooter from "@/components/workshop/AIArtsLandingClientFooter";
 
 export default function AIArtsLandingClient() {
   return (
@@ -30,9 +31,16 @@ export default function AIArtsLandingClient() {
               Watch Preview
             </Link>
             <Link href="/workshop/ai-and-the-arts/syllabus"
-                  className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-3 rounded-full transition-colors inline-flex items-center gap-2">
-              <BookOpen className="w-5 h-5" />
-              View Syllabus
+                  className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-3 rounded-full transition-colors inline-flex items-center gap-2 group">
+              <BookOpen className="w-5 h-5 transition-transform group-hover:scale-110" />
+              <span>View Syllabus</span>
+              <motion.span
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="hidden group-hover:inline-block"
+              >
+                →
+              </motion.span>
             </Link>
           </div>
         </motion.div>
@@ -82,15 +90,16 @@ export default function AIArtsLandingClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-colors"
+                className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-colors group"
               >
-                <path.icon className="w-8 h-8 text-purple-400 mb-4" />
+                <path.icon className="w-8 h-8 text-purple-400 mb-4 transition-transform group-hover:scale-110" />
                 <h3 className="text-xl font-bold mb-2">{path.title}</h3>
                 <p className="text-gray-400 mb-4">{path.description}</p>
                 <p className="text-purple-400 mb-4">{path.price}</p>
                 <Link href={path.link}
-                      className="inline-flex items-center text-purple-400 hover:text-purple-300">
-                  Learn more <ArrowRight className="w-4 h-4 ml-2" />
+                      className="inline-flex items-center text-purple-400 hover:text-purple-300 group-hover:gap-2 transition-all">
+                  Learn more 
+                  <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-all" />
                 </Link>
               </motion.div>
             ))}
@@ -119,9 +128,9 @@ export default function AIArtsLandingClient() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-colors h-full"
+                className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-colors h-full group"
               >
-                <h3 className="text-xl font-bold mb-4">Course Introduction</h3>
+                <h3 className="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors">Course Introduction</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>• Overview of AI in arts</li>
                   <li>• Available tools and technologies</li>
@@ -136,9 +145,9 @@ export default function AIArtsLandingClient() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-colors h-full"
+                className="bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-colors h-full group"
               >
-                <h3 className="text-xl font-bold mb-4">Tools Overview</h3>
+                <h3 className="text-xl font-bold mb-4 group-hover:text-purple-400 transition-colors">Tools Overview</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li>• Video generation</li>
                   <li>• Music composition</li>
@@ -149,6 +158,9 @@ export default function AIArtsLandingClient() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <AIArtsLandingClientFooter />
     </main>
   );
 } 

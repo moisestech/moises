@@ -23,11 +23,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      document.body.style.backgroundColor = savedTheme === 'dark' ? '#000' : '#fff';
     } else {
       // Check system preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setTheme(prefersDark ? 'dark' : 'light');
       document.documentElement.classList.toggle('dark', prefersDark);
+      document.body.style.backgroundColor = prefersDark ? '#000' : '#fff';
     }
   }, []);
 
@@ -36,11 +38,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    document.body.style.backgroundColor = newTheme === 'dark' ? '#000' : '#fff';
   };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+      <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'}`}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 }
