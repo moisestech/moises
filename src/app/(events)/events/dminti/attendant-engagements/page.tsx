@@ -1,10 +1,19 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
 import { ThemeProvider } from "@/contexts/ThemeContext"
-import DMINTIClient from "@/components/page/DMINTIClient"
 
-const DMINTIClientComponent = dynamic(() => import('@/components/page/DMINTIClient'), {
-  ssr: false
+// Dynamically import the client component with no SSR
+const DMINTIClient = dynamic(() => import('@/components/page/DMINTIClient'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-screen flex items-center justify-center">
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#4D9DE0]/20 via-[#E041B5]/20 to-[#41E079]/20 blur-2xl rounded-2xl animate-pulse" />
+        <div className="relative px-8 py-4 text-sm">Loading Experience...</div>
+      </div>
+    </div>
+  )
 })
 
 export const metadata: Metadata = {
@@ -15,7 +24,16 @@ export const metadata: Metadata = {
 export default function AttendantEngagementsPage() {
   return (
     <ThemeProvider>
-      <DMINTIClient />
+      <Suspense fallback={
+        <div className="w-full h-screen flex items-center justify-center">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#4D9DE0]/20 via-[#E041B5]/20 to-[#41E079]/20 blur-2xl rounded-2xl animate-pulse" />
+            <div className="relative px-8 py-4 text-sm">Loading Experience...</div>
+          </div>
+        </div>
+      }>
+        <DMINTIClient />
+      </Suspense>
     </ThemeProvider>
   )
 } 
