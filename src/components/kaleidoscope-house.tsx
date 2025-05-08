@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import { useFrame } from "@react-three/fiber"
-import { MeshTransmissionMaterial, useTexture } from "@react-three/drei"
+import { MeshTransmissionMaterial, useTexture, Html } from "@react-three/drei"
 import * as THREE from "three"
 import { useTheme } from "next-themes"
 
@@ -12,26 +12,92 @@ interface KaleidoscopeHouseProps {
 }
 
 export function KaleidoscopeHouse({ position = [0, 0, 0], scale = 1 }: KaleidoscopeHouseProps) {
+  console.log('[KaleidoscopeHouse] Initializing component with position:', position, 'scale:', scale)
   const houseRef = useRef<THREE.Group>(null)
-  const houseImageTexture = useTexture("https://res.cloudinary.com/dck5rzi4h/image/upload/v1746639320/DMINTI/Screenshot_20250507_121642_Instagram_r2t7vk.jpg")
+  const [isLoading, setIsLoading] = useState(true)
+  const [loadError, setLoadError] = useState<Error | null>(null)
+  const [useFallbackTexture, setUseFallbackTexture] = useState(false)
+
+  useEffect(() => {
+    console.log('[KaleidoscopeHouse] Component mounted')
+    return () => {
+      console.log('[KaleidoscopeHouse] Component unmounting')
+    }
+  }, [])
+
+  // Load texture with error handling and fallback
+  const houseImageTexture = useTexture(
+    useFallbackTexture 
+      ? "/textures/fallback.jpg"  // Local fallback texture
+      : "https://res.cloudinary.com/dck5rzi4h/image/upload/v1746639320/DMINTI/Screenshot_20250507_121642_Instagram_r2t7vk.jpg",
+    (texture) => {
+      console.log('[KaleidoscopeHouse] Texture loaded successfully')
+      setIsLoading(false)
+    }
+  )
+
+  // Handle texture loading errors
+  useEffect(() => {
+    if (houseImageTexture instanceof Error) {
+      console.error('[KaleidoscopeHouse] Error loading texture:', houseImageTexture)
+      if (!useFallbackTexture) {
+        console.log('[KaleidoscopeHouse] Attempting to use fallback texture')
+        setUseFallbackTexture(true)
+      } else {
+        setLoadError(houseImageTexture)
+        setIsLoading(false)
+      }
+    }
+  }, [houseImageTexture, useFallbackTexture])
+
   const { theme } = useTheme()
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    console.log('[KaleidoscopeHouse] Checking device type')
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768)
+      const width = window.innerWidth
+      const isMobileDevice = width <= 768
+      console.log('[KaleidoscopeHouse] Device width:', width, 'isMobile:', isMobileDevice)
+      setIsMobile(isMobileDevice)
     }
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    return () => {
+      console.log('[KaleidoscopeHouse] Removing resize listener')
+      window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   // Create a stylized house inspired by the Kaleidoscope House image
   useFrame((state) => {
     if (houseRef.current) {
-      houseRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.15) * 0.1
+      const rotation = Math.sin(state.clock.getElapsedTime() * 0.15) * 0.1
+      houseRef.current.rotation.y = rotation
     }
   })
+
+  if (loadError) {
+    console.error('[KaleidoscopeHouse] Rendering error state due to texture loading failure')
+    return (
+      <mesh position={position} scale={scale}>
+        <boxGeometry args={[3, 2, 2]} />
+        <meshBasicMaterial color={theme === "dark" ? "#ffffff" : "#f0f0f0"} opacity={0.5} transparent />
+      </mesh>
+    )
+  }
+
+  if (isLoading) {
+    console.log('[KaleidoscopeHouse] Still loading texture')
+    return (
+      <mesh position={position} scale={scale}>
+        <boxGeometry args={[3, 2, 2]} />
+        <meshBasicMaterial color={theme === "dark" ? "#ffffff" : "#f0f0f0"} opacity={0.3} transparent />
+      </mesh>
+    )
+  }
+
+  console.log('[KaleidoscopeHouse] Rendering house with theme:', theme, 'isMobile:', isMobile)
 
   // Colors from the Kaleidoscope House image
   const colors = {
@@ -44,9 +110,9 @@ export function KaleidoscopeHouse({ position = [0, 0, 0], scale = 1 }: Kaleidosc
   }
 
   // Adjust material properties based on theme and device
-  const transmission = theme === "dark" ? (isMobile ? 0.9 : 0.95) : (isMobile ? 0.8 : 0.85)
-  const thickness = theme === "dark" ? (isMobile ? 0.4 : 0.5) : (isMobile ? 0.2 : 0.3)
-  const roughness = theme === "dark" ? (isMobile ? 0.1 : 0.05) : (isMobile ? 0.15 : 0.1)
+  const transmission = theme === "dark" ? (isMobile ? 0.7 : 0.8) : (isMobile ? 0.6 : 0.7)
+  const thickness = theme === "dark" ? (isMobile ? 0.3 : 0.4) : (isMobile ? 0.2 : 0.3)
+  const roughness = theme === "dark" ? (isMobile ? 0.2 : 0.15) : (isMobile ? 0.25 : 0.2)
   const samples = isMobile ? 2 : 4
 
   return (

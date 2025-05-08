@@ -16,8 +16,10 @@ const ThemeContext = createContext<ThemeContextType>({
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('dark');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme') as Theme;
     if (savedTheme) {
@@ -40,6 +42,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
     document.body.style.backgroundColor = newTheme === 'dark' ? '#000' : '#fff';
   };
+
+  // Prevent flash of wrong theme
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-black">
+        {children}
+      </div>
+    );
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

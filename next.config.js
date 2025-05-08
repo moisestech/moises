@@ -36,25 +36,36 @@ const nextConfig = {
   swcMinify: true,
   
   // Configure webpack for better performance
-  webpack: (config, { dev, isServer }) => {
-    // Optimize Three.js bundle
-    if (!dev && !isServer) {
-      config.optimization.splitChunks.cacheGroups.three = {
-        test: /[\\/]node_modules[\\/]three[\\/]/,
-        name: 'three',
-        priority: 10,
+  webpack: (config) => {
+    // Initialize splitChunks if it doesn't exist
+    if (!config.optimization.splitChunks) {
+      config.optimization.splitChunks = {
         chunks: 'all',
+        cacheGroups: {}
       }
     }
+
+    // Initialize cacheGroups if it doesn't exist
+    if (!config.optimization.splitChunks.cacheGroups) {
+      config.optimization.splitChunks.cacheGroups = {}
+    }
+
+    // Add Three.js optimization
+    config.optimization.splitChunks.cacheGroups.three = {
+      test: /[\\/]node_modules[\\/]three[\\/]/,
+      name: 'three',
+      chunks: 'all',
+      priority: 10,
+    }
+
     return config
   },
 
   // Configure experimental features
   experimental: {
-    // Optimize server components
-    serverComponents: true,
-    // Optimize concurrent features
-    concurrentFeatures: true,
+    // Remove invalid options
+    optimizeCss: true,
+    scrollRestoration: true,
   },
 };
 

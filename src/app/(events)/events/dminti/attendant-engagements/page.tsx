@@ -1,38 +1,41 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
-import { ThemeProvider } from "@/contexts/ThemeContext"
 
-// Dynamically import the client component with no SSR
-const DMINTIClient = dynamic(() => import('@/components/page/DMINTIClient'), {
+const ThemeProvider = dynamic(() => import('@/contexts/ThemeContext').then(mod => mod.ThemeProvider), {
+  ssr: false
+})
+
+// Basic layout component without any heavy dependencies
+const BasicLayout = dynamic(() => import('@/components/page/BasicLayout'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-screen flex items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center">
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-[#4D9DE0]/20 via-[#E041B5]/20 to-[#41E079]/20 blur-2xl rounded-2xl animate-pulse" />
-        <div className="relative px-8 py-4 text-sm">Loading Experience...</div>
+        <div className="relative px-8 py-4 text-sm">Loading...</div>
       </div>
     </div>
   )
 })
 
 export const metadata: Metadata = {
-  title: 'Notions of Home | DMINTI Exhibition',
-  description: 'A digital dialogue with Laurie Simmons and Peter Wheelwright\'s Kaleidoscope (...Bigger) House featuring works by Frank Lepkowski, Ana María Caballero, Carla Gannis, SamJ, and more.',
+  title: 'DMINTI - Attendant Engagements',
+  description: 'A culminating, one-night-only digital art exhibition celebrating the creative impact of The Kaleidoscope (...Bigger) House.',
 }
 
 export default function AttendantEngagementsPage() {
   return (
     <ThemeProvider>
       <Suspense fallback={
-        <div className="w-full h-screen flex items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-[#4D9DE0]/20 via-[#E041B5]/20 to-[#41E079]/20 blur-2xl rounded-2xl animate-pulse" />
-            <div className="relative px-8 py-4 text-sm">Loading Experience...</div>
+            <div className="relative px-8 py-4 text-sm">Initializing...</div>
           </div>
         </div>
       }>
-        <DMINTIClient />
+        <BasicLayout />
       </Suspense>
     </ThemeProvider>
   )
