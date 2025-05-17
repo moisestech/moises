@@ -20,6 +20,7 @@ export interface ArtistData {
   name: string;
   birth: string;
   nationality: string;
+  image: string;
   knownFor: string[];
   notableWorks: string[];
   biography: string;
@@ -39,6 +40,7 @@ export const artistData: ArtistData = {
   name: 'Moises Sanabria',
   birth: '6 August 1990, (age 34), Caracas, Venezuela',
   nationality: 'Venezuelan-American',
+  image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1747486394/art/moisestech-website/bio/moises-pfp-test-user-face-3_exmerc.jpg',
   knownFor: ['Sculpture', 'New media installation art'],
   notableWorks: [
     '5 Million Dollars 1 Terabyte',

@@ -94,8 +94,8 @@ export function FeaturedWorks() {
     },
     {
       id: 5,
-      name: "Moises Sanabria & Fabiola Larios",
-      handle: "@moisesdsanabria + @fabiolalariosm",
+      name: "Fabiola Larios & Moises Sanabria",
+      handle: "@fabiolalariosm + @moisesdsanabria",
       title: "Bones and Robots",
       description: "Fabiola Larios and Moises Sanabria depict a post-human landscape, a gilded skeleton and a sleek robot represent humanity's dual legacy: preserving the past and pursuing immortality. The video considers the links between memory and endurance; as the skeleton says in the work, 'Memory is the echo of who we were, whispered into the silence of what we've become'. Home and identity are influenced by the past and molded by the present.",
       visual: "Dual-channel GIF (skeleton and robot facing each other with glitch effect).",

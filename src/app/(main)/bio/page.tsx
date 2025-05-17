@@ -4,7 +4,7 @@ import { FC, ReactNode } from 'react';
 import { useTheme } from 'next-themes';
 import { TfiMenuAlt } from 'react-icons/tfi';
 import { artistData } from '@/constants/artist';
-
+import Image from 'next/image';
 // Table of Contents component
 const TableOfContents: FC = () => (
   <div className="my-4 p-4 border rounded bg-gray-200 dark:bg-gray-800">
@@ -109,13 +109,25 @@ const InfoTable: FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
+  
   return (
     <div
-      className={`border ${isDark ? 'border-gray-700' : 'border-gray-300'} mb-8 ml-8 ${isDark ? 'bg-gray-900' : 'bg-gray-100'} min-w-80 max-h-80`}
+      className={`border ${isDark ? 'border-gray-700' : 'border-gray-300'} mb-8 ml-8 max-h-[800px] ${isDark ? 'bg-gray-900' : 'bg-gray-100'} min-w-80`}
     >
       <span className="p-2 font-bold text-lg justify-center w-full flex">
         {artistData.name}
       </span>
+
+      {/* image */}
+      <div className="w-full flex justify-center items-center h-80 relative w-full">
+        <Image
+          src={artistData.image}
+          alt={artistData.name}
+          fill
+          className="object-cover"
+        />
+      </div>
+      
       <table className="w-full text-sm dark:bg-gray-900">
         <tbody>
           <tr>
@@ -214,20 +226,23 @@ const WikipediaPage: FC = () => {
         </div>
 
         <article className="flex">
+          <div className="w-full flex flex-col justify-center items-center relative">
+
           <Section
             id="bio"
             title=""
             content={artistData.biography}
             border={false}
           />
-          <InfoTable />
-        </article>
-
         <Section
           id="early-life"
           title="Early Life and Education"
           content={artistData.earlyLife}
         />
+          </div>
+          <InfoTable />
+        </article>
+
         <Section
           id="art-practice"
           title="Art Practice"
