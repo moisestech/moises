@@ -20,6 +20,7 @@ import {
   Heart,
   Sparkles,
   FileText,
+  Network,
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -30,35 +31,35 @@ const fadeInUp = {
 
 const sections = [
   {
-    title: "Budget Details",
+    title: "Impact You Can Screenshot",
     description: "Detailed breakdown of the $24,850 pilot program with interactive visualizations.",
     icon: DollarSign,
     href: "/grant/knight-foundation/budget",
     color: "blue"
   },
   {
-    title: "Workshop Program",
-    description: "4 free capacity clinics with accessibility-first approach.",
+    title: "4 Zero-Cost Skill Sprints",
+    description: "Free capacity clinics with accessibility-first approach.",
     icon: Calendar,
     href: "/grant/knight-foundation/workshops",
     color: "purple"
   },
   {
-    title: "Smart Sign Platform",
+    title: "Plug-n-Play Community Screens",
     description: "Open-source React + Supabase digital signage solution.",
     icon: Tv,
     href: "/grant/knight-foundation/smart-sign",
     color: "pink"
   },
   {
-    title: "Impact & ROI",
+    title: "License → Re-fuel → Repeat",
     description: "Measurable outcomes and return on investment across sectors.",
     icon: Target,
     href: "/grant/knight-foundation/impact-roi",
     color: "indigo"
   },
   {
-    title: "Project Timeline",
+    title: "Human-Ready AI Toolkits",
     description: "6-month pilot roadmap from launch to sustainability.",
     icon: Clock,
     href: "/grant/knight-foundation/roadmap",
@@ -102,33 +103,51 @@ export default function KnightFoundationLanding() {
       <TechNonprofitNavKF />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20">
-        <div className="container mx-auto px-4">
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className={`absolute inset-0 ${
+          isDark ? 'bg-black' : 'bg-white'
+        }`}>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/10 via-transparent to-[#A4FF4E]/10 animate-pulse" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             variants={fadeInUp}
             initial="initial"
             animate="animate"
-            className="text-center mb-12"
+            className="text-center"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-              <Brain className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-blue-400">
-                Knight Foundation Proposal
-              </span>
-            </div>
-            <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${
+            <h1 className={`text-[120px] md:text-[140px] font-bold leading-[1] tracking-tight mb-8 ${
               isDark ? 'text-white' : 'text-gray-900'
             }`}>
-              Building Digital Capacity
-              <br />
-              in Miami's Creative Community
+              MAKE AI FOR ALL
             </h1>
-            <p className={`text-xl ${
+            <p className={`text-2xl mb-12 ${
               isDark ? 'text-gray-300' : 'text-gray-600'
             } max-w-3xl mx-auto`}>
-              A $24,850 pilot program to transform how Miami's artists and cultural organizations
-              leverage technology for impact and sustainability
+              Knight-seeded pilot turning idle screens into culture hubs
             </p>
+            <div className="flex items-center justify-center gap-6">
+              <Link
+                href="/grant/knight-foundation/pilot"
+                className={`px-8 py-4 rounded-lg font-medium ${
+                  isDark 
+                    ? 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90' 
+                    : 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90'
+                } transition-colors`}
+              >
+                See the 6-Month Pilot
+              </Link>
+              <Link
+                href="/grant/knight-foundation/proposal.pdf"
+                className={`px-8 py-4 rounded-lg font-medium border ${
+                  isDark 
+                    ? 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10' 
+                    : 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10'
+                } transition-colors`}
+              >
+                Download 1-page PDF
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -325,6 +344,151 @@ export default function KnightFoundationLanding() {
         }}
         iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
       />
+
+      {/* Impact Bar */}
+      <div className={`sticky top-0 z-50 ${
+        isDark ? 'bg-black/80' : 'bg-white/80'
+      } backdrop-blur-md border-b ${
+        isDark ? 'border-gray-800' : 'border-gray-200'
+      }`}>
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4 overflow-x-auto">
+            {[
+              { value: "120+", label: "Learners" },
+              { value: "6", label: "Screens" },
+              { value: "3", label: "Venues" },
+              { value: "100%", label: "Bilingual" }
+            ].map((metric, index) => (
+              <motion.div
+                key={metric.label}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: index * 0.1 }}
+                className={`flex items-center gap-2 px-4 ${
+                  index < 3 ? 'border-r' : ''
+                } ${
+                  isDark ? 'border-gray-800' : 'border-gray-200'
+                }`}
+              >
+                <span className={`text-2xl font-bold ${
+                  isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
+                }`}>{metric.value}</span>
+                <span className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                  {metric.label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Ethics Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+              className={`text-[120px] font-bold leading-[1] tracking-tight ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}
+            >
+              ETHICS
+            </motion.div>
+            <motion.div
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+              className="space-y-6"
+            >
+              <ul className={`space-y-4 ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                <li className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-full ${
+                    isDark ? 'bg-[#A4FF4E]/20' : 'bg-[#A4FF4E]/20'
+                  } flex items-center justify-center`}>
+                    <Code className={`w-4 h-4 ${
+                      isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
+                    }`} />
+                  </div>
+                  Creative Commons code
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-full ${
+                    isDark ? 'bg-[#A4FF4E]/20' : 'bg-[#A4FF4E]/20'
+                  } flex items-center justify-center`}>
+                    <BarChart className={`w-4 h-4 ${
+                      isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
+                    }`} />
+                  </div>
+                  Live equity metrics
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-full ${
+                    isDark ? 'bg-[#A4FF4E]/20' : 'bg-[#A4FF4E]/20'
+                  } flex items-center justify-center`}>
+                    <Network className={`w-4 h-4 ${
+                      isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
+                    }`} />
+                  </div>
+                  Open API
+                </li>
+              </ul>
+              <Link
+                href="/grant/knight-foundation/ethics"
+                className={`inline-flex items-center gap-2 text-[#A4FF4E] hover:underline`}
+              >
+                See our Responsible-AI rubric
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final Callout */}
+      <section className="py-20">
+        <div className={`grid md:grid-cols-2 gap-0 ${
+          isDark ? 'bg-black' : 'bg-white'
+        }`}>
+          <div className={`p-12 ${
+            isDark ? 'bg-gradient-to-r from-[#A4FF4E]/20 to-transparent' : 'bg-gradient-to-r from-[#A4FF4E]/10 to-transparent'
+          }`}>
+            <h2 className={`text-3xl font-bold mb-4 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>
+              Knight's $24,850 sparks a self-funded, bilingual tech spine for Miami's creatives. Ready to light the fuse?
+            </h2>
+            <div className="mt-8 flex items-center gap-4">
+              <Link
+                href="/grant/knight-foundation/support"
+                className={`px-8 py-4 rounded-lg font-medium ${
+                  isDark 
+                    ? 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90' 
+                    : 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90'
+                } transition-colors`}
+              >
+                Sign Support Letter
+              </Link>
+              <Link
+                href="/grant/knight-foundation/demo"
+                className={`px-8 py-4 rounded-lg font-medium border ${
+                  isDark 
+                    ? 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10' 
+                    : 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10'
+                } transition-colors`}
+              >
+                Book Demo
+              </Link>
+            </div>
+          </div>
+          <div className={`p-12 ${
+            isDark ? 'bg-black' : 'bg-white'
+          }`} />
+        </div>
+      </section>
     </main>
   );
 } 
