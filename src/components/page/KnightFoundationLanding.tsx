@@ -30,7 +30,7 @@ const fadeInUp = {
 const sections = [
   {
     title: "Budget Details",
-    description: "Detailed breakdown of the $150,000 funding request with interactive visualizations.",
+    description: "Detailed breakdown of the $100,000 funding request with interactive visualizations.",
     icon: DollarSign,
     href: "/grant/knight-foundation/budget",
     color: "blue"
