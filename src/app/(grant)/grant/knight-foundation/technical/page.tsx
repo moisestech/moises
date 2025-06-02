@@ -1,17 +1,10 @@
-import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+import TechnicalClientPage from './TechnicalClientPage';
 
-// Import the client component dynamically with no SSR
-const TechNonprofitTechnicalKF = dynamic(
-  () => import('@/components/page/TechNonprofitTechnicalKF'),
-  { ssr: false }
-);
-
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Technical Details | Knight Foundation Proposal',
   description: 'Detailed technical implementation and architecture for our Knight Foundation grant proposal.',
 };
 
 export default function TechnicalDetailsPage() {
-  return <TechNonprofitTechnicalKF />;
+  return <TechnicalClientPage />;
 } 
