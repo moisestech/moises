@@ -32,6 +32,7 @@ import { CursorTrail } from '../shared/CursorTrail';
 import '../../styles/theme.css';
 import { KFPrinciplesSection } from '@/components/knight-foundation/KFPrinciplesSection';
 import { KFProgramDetailsGrid } from '@/components/knight-foundation/KFProgramDetailsGrid';
+import { KFMetricsBar } from '@/components/knight-foundation/KFMetricsBar';
 
 // Micro-motifs as SVG paths
 const motifs = {
@@ -124,6 +125,9 @@ const KnightFoundationLanding: React.FC = () => {
         <MicroMotif type="wiggle" className="absolute bottom-10 left-10 text-[#A4FF4E]" />
         <MicroMotif type="binary" className="absolute top-10 right-10 text-[#A4FF4E]" />
       </section>
+
+      {/* Animated Metrics Bar with narrative header */}
+      <KFMetricsBar />
 
       {/* Impact Bar */}
       <section className="sticky top-0 bg-black/80 backdrop-blur-sm z-30 py-4">
