@@ -118,7 +118,7 @@ export default function KnightFoundationLanding() {
             <p className={`text-xl ${
               isDark ? 'text-gray-300' : 'text-gray-600'
             } max-w-3xl mx-auto`}>
-              A $150,000 proposal to transform how Miami's artists and cultural organizations
+              A $100,000 proposal to transform how Miami's artists and cultural organizations
               leverage technology for impact and sustainability
             </p>
           </motion.div>

@@ -37,51 +37,51 @@ const fadeInUp = {
 
 // Budget data
 const budgetData = {
-  totalRequest: 150000,
+  totalRequest: 100000,
   categories: [
     {
       name: "Personnel",
-      amount: 90000,
+      amount: 60000,
       breakdown: [
-        { title: "Program Director", amount: 45000 },
-        { title: "Technical Lead", amount: 30000 },
-        { title: "Community Manager", amount: 15000 }
+        { title: "Program Director", amount: 30000 },
+        { title: "Technical Lead", amount: 20000 },
+        { title: "Community Manager", amount: 10000 }
       ]
     },
     {
       name: "Equipment",
-      amount: 25000,
+      amount: 16667,
       breakdown: [
-        { title: "Laptops & Tablets", amount: 15000 },
-        { title: "Projection Equipment", amount: 7000 },
-        { title: "Audio/Video Gear", amount: 3000 }
+        { title: "Laptops & Tablets", amount: 10000 },
+        { title: "Projection Equipment", amount: 4667 },
+        { title: "Audio/Video Gear", amount: 2000 }
       ]
     },
     {
       name: "Venue & Events",
-      amount: 20000,
+      amount: 13333,
       breakdown: [
-        { title: "Venue Rentals", amount: 8000 },
-        { title: "Catering & Supplies", amount: 7000 },
-        { title: "Event Insurance", amount: 5000 }
+        { title: "Venue Rentals", amount: 5333 },
+        { title: "Catering & Supplies", amount: 4667 },
+        { title: "Event Insurance", amount: 3333 }
       ]
     },
     {
       name: "Marketing",
-      amount: 10000,
+      amount: 6667,
       breakdown: [
-        { title: "Digital Advertising", amount: 5000 },
-        { title: "Print Materials", amount: 3000 },
-        { title: "Community Outreach", amount: 2000 }
+        { title: "Digital Advertising", amount: 3333 },
+        { title: "Print Materials", amount: 2000 },
+        { title: "Community Outreach", amount: 1334 }
       ]
     },
     {
       name: "Software & Services",
-      amount: 5000,
+      amount: 3333,
       breakdown: [
-        { title: "Cloud Credits", amount: 2500 },
-        { title: "Software Licenses", amount: 1500 },
-        { title: "Streaming Services", amount: 1000 }
+        { title: "Cloud Credits", amount: 1667 },
+        { title: "Software Licenses", amount: 1000 },
+        { title: "Streaming Services", amount: 666 }
       ]
     }
   ]
