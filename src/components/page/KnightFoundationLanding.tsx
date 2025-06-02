@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
@@ -21,12 +21,61 @@ import {
   Sparkles,
   FileText,
   Network,
+  Play,
+  CheckCircle,
 } from 'lucide-react';
+import { MicroMotif } from '../shared/MicroMotif';
+import { ChromeIcon } from '../shared/ChromeIcon';
+import { NeonText } from '../shared/NeonText';
+import { ChromeButton } from '../shared/ChromeButton';
+import { CursorTrail } from '../shared/CursorTrail';
+import '../styles/theme.css';
 
+// Micro-motifs as SVG paths
+const motifs = {
+  wiggle: "M0 10 Q5 0 10 10 T20 10 T30 10 T40 10",
+  binary: "M0 0 L10 0 M0 10 L10 10 M20 0 L30 0 M20 10 L30 10",
+  plusMinus: "M0 5 L10 5 M5 0 L5 10 M20 5 L30 5 M25 0 L25 10"
+};
+
+// Animation variants
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.5 }
+};
+
+const pulse = {
+  initial: { scale: 1 },
+  animate: { 
+    scale: [1, 1.1, 1],
+    transition: { duration: 0.5 }
+  }
+};
+
+// Cursor trail effect
+const useCursorTrail = () => {
+  const [position, setPosition] = React.useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      setIsVisible(true);
+    };
+
+    const handleMouseLeave = () => setIsVisible(false);
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  return { position, isVisible };
 };
 
 const sections = [
@@ -92,23 +141,18 @@ const principles = [
   }
 ];
 
-export default function KnightFoundationLanding() {
+const KnightFoundationLanding: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const { position, isVisible } = useCursorTrail();
 
   return (
-    <main className={`min-h-screen ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-    }`}>
-      <TechNonprofitNavKF />
-
+    <div className="min-h-screen bg-black text-white">
+      <CursorTrail />
+      
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className={`absolute inset-0 ${
-          isDark ? 'bg-black' : 'bg-white'
-        }`}>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/10 via-transparent to-[#A4FF4E]/10 animate-pulse" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#1a1a1a]" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             variants={fadeInUp}
@@ -116,51 +160,57 @@ export default function KnightFoundationLanding() {
             animate="animate"
             className="text-center"
           >
-            <h1 className={`text-[120px] md:text-[140px] font-bold leading-[1] tracking-tight mb-8 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
+            <h1 className="text-[120px] md:text-[140px] font-bold leading-[1] tracking-tight mb-8 text-white">
               MAKE AI FOR ALL
             </h1>
-            <p className={`text-2xl mb-12 ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <p className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
               Knight-seeded pilot turning idle screens into culture hubs
             </p>
             <div className="flex items-center justify-center gap-6">
               <Link
                 href="/grant/knight-foundation/pilot"
-                className={`px-8 py-4 rounded-lg font-medium ${
-                  isDark 
-                    ? 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90' 
-                    : 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90'
-                } transition-colors`}
+                className="px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
               >
                 See the 6-Month Pilot
               </Link>
               <Link
                 href="/grant/knight-foundation/proposal.pdf"
-                className={`px-8 py-4 rounded-lg font-medium border ${
-                  isDark 
-                    ? 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10' 
-                    : 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10'
-                } transition-colors`}
+                className="px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
               >
                 Download 1-page PDF
               </Link>
             </div>
           </motion.div>
         </div>
+        <MicroMotif type="wiggle" className="absolute bottom-10 left-10 text-[#A4FF4E]" />
+        <MicroMotif type="binary" className="absolute top-10 right-10 text-[#A4FF4E]" />
       </section>
 
-      <DecorativeDivider 
-        icon={Brain}
-        gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
-        }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
-      />
+      {/* Impact Bar */}
+      <section className="sticky top-0 bg-black/80 backdrop-blur-sm z-30 py-4">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-8">
+              <div className="text-center">
+                <NeonText text="120+" size="sm" />
+                <p className="text-sm text-gray-400">Learners</p>
+              </div>
+              <div className="text-center">
+                <NeonText text="6" size="sm" />
+                <p className="text-sm text-gray-400">Screens</p>
+              </div>
+              <div className="text-center">
+                <NeonText text="3" size="sm" />
+                <p className="text-sm text-gray-400">Venues</p>
+              </div>
+              <div className="text-center">
+                <NeonText text="100%" size="sm" />
+                <p className="text-sm text-gray-400">Bilingual</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Principles Section */}
       <section className="py-20">
@@ -171,12 +221,8 @@ export default function KnightFoundationLanding() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Our Principles</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our Principles</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Core values that guide our approach
             </p>
           </motion.div>
@@ -188,23 +234,15 @@ export default function KnightFoundationLanding() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-xl border ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700'
-                    : 'bg-white border-gray-200'
-                }`}
+                className="p-6 rounded-xl border bg-gray-800/50 border-gray-700"
               >
-                <div className={`w-12 h-12 mb-4 rounded-full ${
-                  isDark ? 'bg-blue-500/20' : 'bg-blue-100'
-                } flex items-center justify-center`}>
+                <div className="w-12 h-12 mb-4 rounded-full bg-blue-500/20 flex items-center justify-center">
                   {React.createElement(principle.icon, {
-                    className: isDark ? 'text-blue-400' : 'text-blue-600'
+                    className: 'text-blue-400'
                   })}
                 </div>
-                <h3 className={`text-xl font-bold mb-2 ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>{principle.title}</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                <h3 className="text-xl font-bold mb-2 text-white">{principle.title}</h3>
+                <p className="text-gray-300">
                   {principle.description}
                 </p>
               </motion.div>
@@ -216,61 +254,12 @@ export default function KnightFoundationLanding() {
       <DecorativeDivider 
         icon={Target}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(59, 130, 246, 0.1)',
+          via: 'rgba(147, 51, 234, 0.1)',
+          to: 'rgba(59, 130, 246, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-blue-400/50"
       />
-
-      {/* Key Metrics */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            className="text-center mb-12"
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Pilot Program Metrics</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
-              Measurable impact across our community
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            {[
-              { value: "120+", label: "Workshop Participants" },
-              { value: "4", label: "Free Clinics" },
-              { value: "3", label: "Partner Venues" },
-              { value: "100%", label: "Bilingual Content" }
-            ].map((metric, index) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-xl border text-center ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700'
-                    : 'bg-white border-gray-200'
-                }`}
-              >
-                <div className={`text-3xl font-bold mb-2 ${
-                  isDark ? 'text-blue-400' : 'text-blue-600'
-                }`}>{metric.value}</div>
-                <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-                  {metric.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Sections Grid */}
       <section className="py-20">
@@ -281,12 +270,8 @@ export default function KnightFoundationLanding() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Pilot Program Details</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Pilot Program Details</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Explore each aspect of our lean, focused approach
             </p>
           </motion.div>
@@ -298,33 +283,21 @@ export default function KnightFoundationLanding() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`group p-6 rounded-xl border ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700 hover:border-blue-500/50'
-                    : 'bg-white border-gray-200 hover:border-blue-500/50'
-                } transition-colors`}
+                className="group p-6 rounded-xl border bg-gray-800/50 border-gray-700 hover:border-blue-500/50 transition-colors"
               >
                 <Link href={section.href} className="block">
-                  <div className={`w-12 h-12 mb-4 rounded-full ${
-                    isDark ? 'bg-blue-500/20' : 'bg-blue-100'
-                  } flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                  <div className="w-12 h-12 mb-4 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                     {React.createElement(section.icon, {
-                      className: isDark ? 'text-blue-400' : 'text-blue-600'
+                      className: 'text-blue-400'
                     })}
                   </div>
-                  <h3 className={`text-xl font-bold mb-2 ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  } group-hover:text-blue-500 transition-colors`}>
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-blue-500 transition-colors">
                     {section.title}
                   </h3>
-                  <p className={`${
-                    isDark ? 'text-gray-300' : 'text-gray-600'
-                  } mb-4`}>
+                  <p className="text-gray-300 mb-4">
                     {section.description}
                   </p>
-                  <div className={`inline-flex items-center gap-2 ${
-                    isDark ? 'text-blue-400' : 'text-blue-600'
-                  }`}>
+                  <div className="inline-flex items-center gap-2 text-blue-400">
                     <span>Learn more</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -338,49 +311,12 @@ export default function KnightFoundationLanding() {
       <DecorativeDivider 
         icon={Sparkles}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(59, 130, 246, 0.1)',
+          via: 'rgba(147, 51, 234, 0.1)',
+          to: 'rgba(59, 130, 246, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-blue-400/50"
       />
-
-      {/* Impact Bar */}
-      <div className={`sticky top-0 z-50 ${
-        isDark ? 'bg-black/80' : 'bg-white/80'
-      } backdrop-blur-md border-b ${
-        isDark ? 'border-gray-800' : 'border-gray-200'
-      }`}>
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4 overflow-x-auto">
-            {[
-              { value: "120+", label: "Learners" },
-              { value: "6", label: "Screens" },
-              { value: "3", label: "Venues" },
-              { value: "100%", label: "Bilingual" }
-            ].map((metric, index) => (
-              <motion.div
-                key={metric.label}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: index * 0.1 }}
-                className={`flex items-center gap-2 px-4 ${
-                  index < 3 ? 'border-r' : ''
-                } ${
-                  isDark ? 'border-gray-800' : 'border-gray-200'
-                }`}
-              >
-                <span className={`text-2xl font-bold ${
-                  isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
-                }`}>{metric.value}</span>
-                <span className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-                  {metric.label}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Ethics Section */}
       <section className="py-20">
@@ -390,9 +326,7 @@ export default function KnightFoundationLanding() {
               variants={fadeInUp}
               initial="initial"
               animate="animate"
-              className={`text-[120px] font-bold leading-[1] tracking-tight ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}
+              className="text-[120px] font-bold leading-[1] tracking-tight text-white"
             >
               ETHICS
             </motion.div>
@@ -402,43 +336,29 @@ export default function KnightFoundationLanding() {
               animate="animate"
               className="space-y-6"
             >
-              <ul className={`space-y-4 ${
-                isDark ? 'text-gray-300' : 'text-gray-600'
-              }`}>
+              <ul className="space-y-4 text-gray-300">
                 <li className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-full ${
-                    isDark ? 'bg-[#A4FF4E]/20' : 'bg-[#A4FF4E]/20'
-                  } flex items-center justify-center`}>
-                    <Code className={`w-4 h-4 ${
-                      isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
-                    }`} />
+                  <div className="w-8 h-8 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                    <Code className="w-4 h-4 text-[#A4FF4E]" />
                   </div>
                   Creative Commons code
                 </li>
                 <li className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-full ${
-                    isDark ? 'bg-[#A4FF4E]/20' : 'bg-[#A4FF4E]/20'
-                  } flex items-center justify-center`}>
-                    <BarChart className={`w-4 h-4 ${
-                      isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
-                    }`} />
+                  <div className="w-8 h-8 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                    <BarChart className="w-4 h-4 text-[#A4FF4E]" />
                   </div>
                   Live equity metrics
                 </li>
                 <li className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-full ${
-                    isDark ? 'bg-[#A4FF4E]/20' : 'bg-[#A4FF4E]/20'
-                  } flex items-center justify-center`}>
-                    <Network className={`w-4 h-4 ${
-                      isDark ? 'text-[#A4FF4E]' : 'text-[#A4FF4E]'
-                    }`} />
+                  <div className="w-8 h-8 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                    <Network className="w-4 h-4 text-[#A4FF4E]" />
                   </div>
                   Open API
                 </li>
               </ul>
               <Link
                 href="/grant/knight-foundation/ethics"
-                className={`inline-flex items-center gap-2 text-[#A4FF4E] hover:underline`}
+                className="inline-flex items-center gap-2 text-[#A4FF4E] hover:underline"
               >
                 See our Responsible-AI rubric
                 <ArrowRight className="w-4 h-4" />
@@ -450,45 +370,31 @@ export default function KnightFoundationLanding() {
 
       {/* Final Callout */}
       <section className="py-20">
-        <div className={`grid md:grid-cols-2 gap-0 ${
-          isDark ? 'bg-black' : 'bg-white'
-        }`}>
-          <div className={`p-12 ${
-            isDark ? 'bg-gradient-to-r from-[#A4FF4E]/20 to-transparent' : 'bg-gradient-to-r from-[#A4FF4E]/10 to-transparent'
-          }`}>
-            <h2 className={`text-3xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
+        <div className="grid md:grid-cols-2 gap-0 bg-black">
+          <div className="p-12 bg-gradient-to-r from-[#A4FF4E]/20 to-transparent">
+            <h2 className="text-3xl font-bold mb-4 text-white">
               Knight's $24,850 sparks a self-funded, bilingual tech spine for Miami's creatives. Ready to light the fuse?
             </h2>
             <div className="mt-8 flex items-center gap-4">
               <Link
                 href="/grant/knight-foundation/support"
-                className={`px-8 py-4 rounded-lg font-medium ${
-                  isDark 
-                    ? 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90' 
-                    : 'bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90'
-                } transition-colors`}
+                className="px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
               >
                 Sign Support Letter
               </Link>
               <Link
                 href="/grant/knight-foundation/demo"
-                className={`px-8 py-4 rounded-lg font-medium border ${
-                  isDark 
-                    ? 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10' 
-                    : 'border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10'
-                } transition-colors`}
+                className="px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
               >
                 Book Demo
               </Link>
             </div>
           </div>
-          <div className={`p-12 ${
-            isDark ? 'bg-black' : 'bg-white'
-          }`} />
+          <div className="p-12 bg-black" />
         </div>
       </section>
-    </main>
+    </div>
   );
-} 
+};
+
+export default KnightFoundationLanding; 

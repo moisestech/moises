@@ -1,0 +1,126 @@
+:root {
+  /* AI24 Brand Colors */
+  --ai24-green: #A5FF4E;
+  --ai24-chrome: #d7d7d7;
+  --ai24-bg: #000;
+  --ai24-gray: #8f8f8f;
+
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* Neon Glow Effects */
+.neon-glow {
+  text-shadow: 0 0 10px var(--ai24-green),
+               0 0 20px var(--ai24-green),
+               0 0 30px var(--ai24-green);
+}
+
+.neon-border {
+  box-shadow: 0 0 10px var(--ai24-green),
+              inset 0 0 10px var(--ai24-green);
+}
+
+/* Chrome Icon Styles */
+.chrome-icon {
+  filter: drop-shadow(0 0 2px var(--ai24-chrome));
+  background: linear-gradient(45deg, var(--ai24-chrome), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Micro-motif Animations */
+@keyframes wiggle {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes binary {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+@keyframes plusMinus {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.motif-wiggle {
+  stroke-dasharray: 100;
+  animation: wiggle 2s linear infinite;
+}
+
+.motif-binary {
+  animation: binary 1.5s ease-in-out infinite;
+}
+
+.motif-plusMinus {
+  animation: plusMinus 2s ease-in-out infinite;
+}
+
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Utility Classes */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Chrome Button Styles */
+.chrome-button {
+  position: relative;
+  background: linear-gradient(45deg, var(--ai24-chrome), #fff);
+  border: none;
+  padding: 0.5rem 1rem;
+  color: var(--ai24-bg);
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.chrome-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.chrome-button:hover::before {
+  left: 100%;
+} 
