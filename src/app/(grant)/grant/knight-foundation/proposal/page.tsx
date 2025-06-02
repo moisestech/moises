@@ -1,17 +1,10 @@
-import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+import ProposalClientPage from './ProposalClientPage';
 
-// Import the client component dynamically with no SSR
-const ProposalPage = dynamic(
-  () => import('@/components/page/KnightFoundationProposalPage'),
-  { ssr: false }
-);
-
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Full Proposal | Knight Foundation',
-  description: 'Complete 1,000-word proposal narrative for the AI24 × Knight Art + Tech Expansion Fund.',
+  description: 'Read the complete proposal narrative for the Knight Foundation grant.'
 };
 
-export default function ProposalDetailsPage() {
-  return <ProposalPage />;
+export default function ProposalPage() {
+  return <ProposalClientPage />;
 } 

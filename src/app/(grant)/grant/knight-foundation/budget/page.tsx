@@ -1,17 +1,10 @@
-import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+import BudgetClientPage from './BudgetClientPage';
 
-// Import the client component dynamically with no SSR
-const BudgetPage = dynamic(
-  () => import('@/components/page/BudgetPage'),
-  { ssr: false }
-);
-
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Budget Details | Knight Foundation Proposal',
-  description: 'Detailed budget breakdown and allocation strategy for the Knight Foundation grant proposal, including interactive visualizations and quarterly projections.'
+  description: 'Detailed budget breakdown for our Knight Foundation grant proposal.'
 };
 
-export default function BudgetDetailsPage() {
-  return <BudgetPage />;
+export default function BudgetPage() {
+  return <BudgetClientPage />;
 } 

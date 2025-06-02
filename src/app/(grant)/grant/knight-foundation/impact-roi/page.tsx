@@ -1,11 +1,5 @@
 import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
-
-// Import the client component dynamically with no SSR
-const ImpactROIPage = dynamic(
-  () => import('@/components/page/ImpactROIPage'),
-  { ssr: false }
-);
+import ImpactROIClientPage from './ImpactROIClientPage';
 
 export const metadata: Metadata = {
   title: 'Impact & ROI | Knight Foundation Proposal',
@@ -13,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ImpactROIDetailsPage() {
-  return <ImpactROIPage />;
+  return <ImpactROIClientPage />;
 } 
