@@ -10,10 +10,14 @@ const milestones = [
   "Open-source repo • first paid license"
 ];
 
-export function TimelineVertical() {
-  // Create refs and inView states for each milestone
-  const refs = React.useMemo(() => milestones.map(() => React.createRef<HTMLDivElement>()), []);
+function useMilestoneInViews(count: number) {
+  const refs = React.useMemo(() => Array.from({ length: count }, () => React.createRef<HTMLDivElement>()), [count]);
   const inViews = refs.map(ref => useInView(ref, { once: true }));
+  return { refs, inViews };
+}
+
+export function TimelineVertical() {
+  const { refs, inViews } = useMilestoneInViews(milestones.length);
 
   return (
     <div className="py-20">
