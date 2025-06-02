@@ -10,18 +10,35 @@ const milestones = [
   "Open-source repo • first paid license"
 ];
 
-// Custom hook: calls useInView a fixed number of times
-function useMilestoneInViews(count: number) {
-  // Pre-create refs as RefObject<HTMLDivElement>[]
-  const refs = React.useMemo(() => Array.from({ length: count }, () => React.createRef<HTMLDivElement>()), [count]);
-  // Call useInView for each ref at the top level
-  const inViews = refs.map(ref => useInView(ref, { once: true }));
-  return { refs, inViews };
+function MilestoneItem({ milestone, index }: { milestone: string; index: number }) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -20 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+      transition={{ delay: index * 0.2 }}
+      className="relative pl-16 mb-12 last:mb-0"
+    >
+      {/* Dot */}
+      <div className="absolute left-6 w-4 h-4 rounded-full bg-[#A4FF4E] transform -translate-x-1/2 mt-2" />
+
+      {/* Content */}
+      <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <div className="flex items-center gap-4 mb-2">
+          <span className="text-[#A4FF4E] font-bold">0{index + 1}</span>
+          <h3 className="text-xl font-bold text-white">
+            {milestone}
+          </h3>
+        </div>
+      </div>
+    </motion.div>
+  );
 }
 
 export function TimelineVertical() {
-  const { refs, inViews } = useMilestoneInViews(milestones.length);
-
   return (
     <div className="py-20">
       <div className="max-w-2xl mx-auto">
@@ -30,27 +47,7 @@ export function TimelineVertical() {
           <div className="absolute left-8 top-0 bottom-0 w-px bg-[#A4FF4E]/20" />
 
           {milestones.map((milestone, index) => (
-            <motion.div
-              key={index}
-              ref={refs[index]}
-              initial={{ opacity: 0, x: -20 }}
-              animate={inViews[index] ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ delay: index * 0.2 }}
-              className="relative pl-16 mb-12 last:mb-0"
-            >
-              {/* Dot */}
-              <div className="absolute left-6 w-4 h-4 rounded-full bg-[#A4FF4E] transform -translate-x-1/2 mt-2" />
-
-              {/* Content */}
-              <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
-                <div className="flex items-center gap-4 mb-2">
-                  <span className="text-[#A4FF4E] font-bold">0{index + 1}</span>
-                  <h3 className="text-xl font-bold text-white">
-                    {milestone}
-                  </h3>
-                </div>
-              </div>
-            </motion.div>
+            <MilestoneItem key={index} milestone={milestone} index={index} />
           ))}
         </div>
       </div>

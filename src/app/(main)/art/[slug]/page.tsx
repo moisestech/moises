@@ -279,7 +279,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 // Optional: Add generateStaticParams if using static generation
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return [
     { slug: 'art-1' },
     { slug: 'art-2' },
