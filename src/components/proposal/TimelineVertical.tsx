@@ -10,8 +10,11 @@ const milestones = [
   "Open-source repo • first paid license"
 ];
 
+// Custom hook: calls useInView a fixed number of times
 function useMilestoneInViews(count: number) {
+  // Pre-create refs as RefObject<HTMLDivElement>[]
   const refs = React.useMemo(() => Array.from({ length: count }, () => React.createRef<HTMLDivElement>()), [count]);
+  // Call useInView for each ref at the top level
   const inViews = refs.map(ref => useInView(ref, { once: true }));
   return { refs, inViews };
 }
