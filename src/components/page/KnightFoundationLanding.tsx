@@ -29,7 +29,7 @@ import { ChromeIcon } from '../shared/ChromeIcon';
 import { NeonText } from '../shared/NeonText';
 import { ChromeButton } from '../shared/ChromeButton';
 import { CursorTrail } from '../shared/CursorTrail';
-import '../styles/theme.css';
+import '../../styles/theme.css';
 
 // Micro-motifs as SVG paths
 const motifs = {
