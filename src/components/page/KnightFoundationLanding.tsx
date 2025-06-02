@@ -30,6 +30,8 @@ import { NeonText } from '../shared/NeonText';
 import { ChromeButton } from '../shared/ChromeButton';
 import { CursorTrail } from '../shared/CursorTrail';
 import '../../styles/theme.css';
+import { KFPrinciplesSection } from '@/components/knight-foundation/KFPrinciplesSection';
+import { KFProgramDetailsGrid } from '@/components/knight-foundation/KFProgramDetailsGrid';
 
 // Micro-motifs as SVG paths
 const motifs = {
@@ -77,69 +79,6 @@ const useCursorTrail = () => {
 
   return { position, isVisible };
 };
-
-const sections = [
-  {
-    title: "Impact You Can Screenshot",
-    description: "Detailed breakdown of the $24,850 pilot program with interactive visualizations.",
-    icon: DollarSign,
-    href: "/grant/knight-foundation/budget",
-    color: "blue"
-  },
-  {
-    title: "4 Zero-Cost Skill Sprints",
-    description: "Free capacity clinics with accessibility-first approach.",
-    icon: Calendar,
-    href: "/grant/knight-foundation/workshops",
-    color: "purple"
-  },
-  {
-    title: "Plug-n-Play Community Screens",
-    description: "Open-source React + Supabase digital signage solution.",
-    icon: Tv,
-    href: "/grant/knight-foundation/smart-sign",
-    color: "pink"
-  },
-  {
-    title: "License → Re-fuel → Repeat",
-    description: "Measurable outcomes and return on investment across sectors.",
-    icon: Target,
-    href: "/grant/knight-foundation/impact-roi",
-    color: "indigo"
-  },
-  {
-    title: "Human-Ready AI Toolkits",
-    description: "6-month pilot roadmap from launch to sustainability.",
-    icon: Clock,
-    href: "/grant/knight-foundation/roadmap",
-    color: "green"
-  },
-  {
-    title: "Full Proposal",
-    description: "Read our complete 1,000-word proposal narrative.",
-    icon: FileText,
-    href: "/grant/knight-foundation/proposal",
-    color: "yellow"
-  }
-];
-
-const principles = [
-  {
-    title: "Human-Centric",
-    description: "Technology that amplifies human efforts, not replaces them",
-    icon: Heart
-  },
-  {
-    title: "Community-Driven",
-    description: "Built with and for Miami's creative ecosystem",
-    icon: Users
-  },
-  {
-    title: "Sustainable Impact",
-    description: "Self-sustaining model through license revenue",
-    icon: Target
-  }
-];
 
 const KnightFoundationLanding: React.FC = () => {
   const { theme } = useTheme();
@@ -213,43 +152,7 @@ const KnightFoundationLanding: React.FC = () => {
       </section>
 
       {/* Principles Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our Principles</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Core values that guide our approach
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {principles.map((principle, index) => (
-              <motion.div
-                key={principle.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border bg-gray-800/50 border-gray-700"
-              >
-                <div className="w-12 h-12 mb-4 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  {React.createElement(principle.icon, {
-                    className: 'text-blue-400'
-                  })}
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-white">{principle.title}</h3>
-                <p className="text-gray-300">
-                  {principle.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <KFPrinciplesSection />
 
       <DecorativeDivider 
         icon={Target}
@@ -261,52 +164,8 @@ const KnightFoundationLanding: React.FC = () => {
         iconColor="text-blue-400/50"
       />
 
-      {/* Sections Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Pilot Program Details</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Explore each aspect of our lean, focused approach
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sections.map((section, index) => (
-              <motion.div
-                key={section.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group p-6 rounded-xl border bg-gray-800/50 border-gray-700 hover:border-blue-500/50 transition-colors"
-              >
-                <Link href={section.href} className="block">
-                  <div className="w-12 h-12 mb-4 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    {React.createElement(section.icon, {
-                      className: 'text-blue-400'
-                    })}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-blue-500 transition-colors">
-                    {section.title}
-                  </h3>
-                  <p className="text-gray-300 mb-4">
-                    {section.description}
-                  </p>
-                  <div className="inline-flex items-center gap-2 text-blue-400">
-                    <span>Learn more</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Program Details Grid */}
+      <KFProgramDetailsGrid />
 
       <DecorativeDivider 
         icon={Sparkles}
