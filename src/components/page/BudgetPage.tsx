@@ -37,51 +37,52 @@ const fadeInUp = {
 
 // Budget data
 const budgetData = {
-  totalRequest: 100000,
+  totalRequest: 24850,
   categories: [
     {
-      name: "Personnel",
-      amount: 60000,
+      name: "Staff",
+      amount: 15000,
       breakdown: [
-        { title: "Program Director", amount: 30000 },
-        { title: "Technical Lead", amount: 20000 },
-        { title: "Community Manager", amount: 10000 }
+        { title: "Moises - Project Lead / Dev (0.3 FTE × 6 mo)", amount: 9000 },
+        { title: "Fabiola - Community / Growth (0.15 FTE × 6 mo)", amount: 3000 },
+        { title: "Mentor Micro-stipends (3 Miami artists)", amount: 3000 }
       ]
     },
     {
-      name: "Equipment",
-      amount: 16667,
+      name: "App / CRM / Signage",
+      amount: 4000,
       breakdown: [
-        { title: "Laptops & Tablets", amount: 10000 },
-        { title: "Projection Equipment", amount: 4667 },
-        { title: "Audio/Video Gear", amount: 2000 }
+        { title: "React + Supabase Board skin (40 hrs)", amount: 3000 },
+        { title: "Hosting / SaaS (6 mo)", amount: 1000 }
       ]
     },
     {
-      name: "Venue & Events",
-      amount: 13333,
+      name: "Hardware",
+      amount: 3000,
       breakdown: [
-        { title: "Venue Rentals", amount: 5333 },
-        { title: "Catering & Supplies", amount: 4667 },
-        { title: "Event Insurance", amount: 3333 }
+        { title: "6 × Raspberry Pi 5 kits + mounts + SD cards", amount: 1200 },
+        { title: "Refurbished dev/stream laptop", amount: 800 }
       ]
     },
     {
-      name: "Marketing",
-      amount: 6667,
+      name: "Workshop Ops",
+      amount: 2000,
       breakdown: [
-        { title: "Digital Advertising", amount: 3333 },
-        { title: "Print Materials", amount: 2000 },
-        { title: "Community Outreach", amount: 1334 }
+        { title: "4 free capacity clinics (snacks, ASL, childcare)", amount: 2000 }
       ]
     },
     {
-      name: "Software & Services",
-      amount: 3333,
+      name: "Infra / Insurance",
+      amount: 1000,
       breakdown: [
-        { title: "Cloud Credits", amount: 1667 },
-        { title: "Software Licenses", amount: 1000 },
-        { title: "Streaming Services", amount: 666 }
+        { title: "Two weekend van rentals & COI", amount: 1000 }
+      ]
+    },
+    {
+      name: "Contingency",
+      amount: 850,
+      breakdown: [
+        { title: "Buffer for parts / overruns", amount: 850 }
       ]
     }
   ]
@@ -272,6 +273,174 @@ export default function BudgetPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Clock}
+        gradientColors={{
+          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
+          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
+          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+        }}
+        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+      />
+
+      {/* Budget Timeline */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>Budget Justification</h2>
+            <p className={`text-xl ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
+              Detailed breakdown of our $24,850 request
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`p-6 rounded-xl border ${
+              isDark
+                ? 'bg-gray-800/50 border-gray-700'
+                : 'bg-white border-gray-200'
+            }`}
+          >
+            <div className="space-y-8">
+              <div>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>Staff & Expertise (60% of budget)</h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Moises Sanabria (Project Lead/Developer, 0.3 FTE) - $9,000</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Covers 0.3 FTE for six months to design, code, deploy, document, and maintain the open-source 
+                      Announcement Board and to lead all four clinics. Knight dollars buy human knowledge that persists 
+                      beyond hardware life-cycles.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Fabiola Larios (Community & Growth, 0.15 FTE) - $3,000</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Funds 0.15 FTE community manager who recruits participants, handles bilingual comms, and tracks 
+                      KPIs—critical for equitable reach.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Mentor Stipends - $3,000</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Pays three Miami artists ($1,000 each) who co-teach, localize curricula, and provide cultural 
+                      context—keeping 60%+ of grant dollars in neighborhood paychecks.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>Technology & Infrastructure (40% of budget)</h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>React + Supabase Build - $3,000</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Freelance support (40 hrs) to harden code, write tests, and create installer scripts so Akron/Detroit 
+                      peers can spin up their own boards—core to Knight's digital-capacity goal.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Hosting / SaaS (6 mo) - $1,000</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Supabase Pro, PostHog cloud, HubSpot Starter, Streamlabs—kept to minimal starter tiers; we teach 
+                      these same tools in the clinics.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Hardware (Pi kits) - $1,200</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Six Raspberry Pi 5 players plus SD cards and mounts turn existing venue TVs into boards—low-cost, 
+                      replicable infrastructure.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Dev / Stream Laptop - $800</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Refurbished Legion laptop powers live-coding demos and hybrid streaming; chosen for longevity and 
+                      repairability.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Workshop Ops - $2,000</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Snacks, ASL interpreters, childcare, and venue A/V rentals ensure workshops are welcoming to parents, 
+                      Deaf participants, and low-income artists—aligning with Knight's inclusion values.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Van Rentals & COI - $1,000</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Two weekend vans plus insurance move gear to Little Haiti & Downtown pop-ups, extending reach to 
+                      underserved neighborhoods.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className={`font-semibold mb-2 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>Contingency (3.5%) - $850</h4>
+                    <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                      Covers minor part failures or bandwidth upgrades; any unspent funds roll into additional screen kits.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className={`text-xl font-bold mb-4 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>Alignment with Fund Priorities</h3>
+                <ul className={`space-y-2 ${
+                  isDark ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  <li><strong>Digital tools & infrastructure:</strong> Boards, Pi kits, and cloud stack give artists concrete technology they can control.</li>
+                  <li><strong>Capacity-building expertise:</strong> 60% of funds pay humans (salaries, mentors, interpreters) who transfer skills, not just install gear.</li>
+                  <li><strong>Replicability & sustainability:</strong> Open-source code, Creative-Commons templates, and a clear earned-income pathway let the model grow without perpetual grants.</li>
+                </ul>
+                <p className={`mt-4 ${
+                  isDark ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  At &lt;$25K, every Knight dollar directly amplifies community voices, leaving Miami with working screens, 
+                  trained stewards, and an evidence-based template ready for Akron and Detroit.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

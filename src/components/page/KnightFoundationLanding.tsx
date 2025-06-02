@@ -19,6 +19,7 @@ import {
   Brain,
   Heart,
   Sparkles,
+  FileText,
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -30,21 +31,21 @@ const fadeInUp = {
 const sections = [
   {
     title: "Budget Details",
-    description: "Detailed breakdown of the $100,000 funding request with interactive visualizations.",
+    description: "Detailed breakdown of the $24,850 pilot program with interactive visualizations.",
     icon: DollarSign,
     href: "/grant/knight-foundation/budget",
     color: "blue"
   },
   {
     title: "Workshop Program",
-    description: "24 free workshops across Miami's creative community with hybrid delivery.",
+    description: "4 free capacity clinics with accessibility-first approach.",
     icon: Calendar,
     href: "/grant/knight-foundation/workshops",
     color: "purple"
   },
   {
     title: "Smart Sign Platform",
-    description: "Technical implementation of our digital signage solution.",
+    description: "Open-source React + Supabase digital signage solution.",
     icon: Tv,
     href: "/grant/knight-foundation/smart-sign",
     color: "pink"
@@ -58,10 +59,17 @@ const sections = [
   },
   {
     title: "Project Timeline",
-    description: "Detailed roadmap from launch to sustainability.",
+    description: "6-month pilot roadmap from launch to sustainability.",
     icon: Clock,
     href: "/grant/knight-foundation/roadmap",
     color: "green"
+  },
+  {
+    title: "Full Proposal",
+    description: "Read our complete 1,000-word proposal narrative.",
+    icon: FileText,
+    href: "/grant/knight-foundation/proposal",
+    color: "yellow"
   }
 ];
 
@@ -118,7 +126,7 @@ export default function KnightFoundationLanding() {
             <p className={`text-xl ${
               isDark ? 'text-gray-300' : 'text-gray-600'
             } max-w-3xl mx-auto`}>
-              A $100,000 proposal to transform how Miami's artists and cultural organizations
+              A $24,850 pilot program to transform how Miami's artists and cultural organizations
               leverage technology for impact and sustainability
             </p>
           </motion.div>
@@ -196,6 +204,55 @@ export default function KnightFoundationLanding() {
         iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
       />
 
+      {/* Key Metrics */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>Pilot Program Metrics</h2>
+            <p className={`text-xl ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            } max-w-3xl mx-auto`}>
+              Measurable impact across our community
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            {[
+              { value: "120+", label: "Workshop Participants" },
+              { value: "4", label: "Free Clinics" },
+              { value: "3", label: "Partner Venues" },
+              { value: "100%", label: "Bilingual Content" }
+            ].map((metric, index) => (
+              <motion.div
+                key={metric.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={`p-6 rounded-xl border text-center ${
+                  isDark
+                    ? 'bg-gray-800/50 border-gray-700'
+                    : 'bg-white border-gray-200'
+                }`}
+              >
+                <div className={`text-3xl font-bold mb-2 ${
+                  isDark ? 'text-blue-400' : 'text-blue-600'
+                }`}>{metric.value}</div>
+                <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                  {metric.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Sections Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -207,11 +264,11 @@ export default function KnightFoundationLanding() {
           >
             <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
               isDark ? 'text-white' : 'text-gray-900'
-            }`}>Proposal Details</h2>
+            }`}>Pilot Program Details</h2>
             <p className={`text-xl ${
               isDark ? 'text-gray-300' : 'text-gray-600'
             } max-w-3xl mx-auto`}>
-              Explore each aspect of our comprehensive plan
+              Explore each aspect of our lean, focused approach
             </p>
           </motion.div>
 
@@ -268,55 +325,6 @@ export default function KnightFoundationLanding() {
         }}
         iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
       />
-
-      {/* Key Metrics */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            className="text-center mb-12"
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Key Metrics</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
-              Measurable impact across our community
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            {[
-              { value: "500+", label: "Workshop Participants" },
-              { value: "24", label: "Free Workshops" },
-              { value: "8", label: "Partner Venues" },
-              { value: "70%", label: "Local Investment" }
-            ].map((metric, index) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-xl border text-center ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700'
-                    : 'bg-white border-gray-200'
-                }`}
-              >
-                <div className={`text-3xl font-bold mb-2 ${
-                  isDark ? 'text-blue-400' : 'text-blue-600'
-                }`}>{metric.value}</div>
-                <div className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-                  {metric.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
     </main>
   );
 } 
