@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 // Import the client component dynamically with no SSR
 const ProposalPage = dynamic(
-  () => import('@/components/page/ProposalPage'),
+  () => import('@/components/page/KnightFoundationProposalPage'),
   { ssr: false }
 );
 
