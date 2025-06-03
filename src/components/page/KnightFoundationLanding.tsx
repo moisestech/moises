@@ -93,13 +93,12 @@ const heroWords = [
   'BILINGUAL OR BUST',
 ];
 
-const [mainWordIndex, setMainWordIndex] = React.useState(0);
-const [isGlitching, setIsGlitching] = React.useState(false);
-
 const KnightFoundationLanding: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const { position, isVisible } = useCursorTrail();
+  const [mainWordIndex, setMainWordIndex] = React.useState(0);
+  const [isGlitching, setIsGlitching] = React.useState(false);
 
   return (
     <div className="min-h-screen bg-black text-white">
