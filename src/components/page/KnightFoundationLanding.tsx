@@ -33,6 +33,10 @@ import '../../styles/theme.css';
 import { KFPrinciplesSection } from '@/components/knight-foundation/KFPrinciplesSection';
 import { KFProgramDetailsGrid } from '@/components/knight-foundation/KFProgramDetailsGrid';
 import { KFMetricsBar } from '@/components/knight-foundation/KFMetricsBar';
+import { ControlledFlipText } from '@/components/ui/controlled-flip-text';
+import { ManifestoStrip } from '@/components/proposal/ManifestoStrip';
+import { ClinicsCarousel } from '@/components/proposal/ClinicsCarousel';
+import AboveTheFoldAIWords3D from '@/components/knight-foundation/AboveTheFoldAIWords3D';
 
 // Micro-motifs as SVG paths
 const motifs = {
@@ -81,6 +85,17 @@ const useCursorTrail = () => {
   return { position, isVisible };
 };
 
+const heroWords = [
+  'MAKE AI FOR ALL',
+  'ETHICS BEFORE ALGORITHMS',
+  'AI FOR COMMUNITY',
+  'OPEN SOURCE FUTURE',
+  'BILINGUAL OR BUST',
+];
+
+const [mainWordIndex, setMainWordIndex] = React.useState(0);
+const [isGlitching, setIsGlitching] = React.useState(false);
+
 const KnightFoundationLanding: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -91,8 +106,9 @@ const KnightFoundationLanding: React.FC = () => {
       <CursorTrail />
       
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#1a1a1a]" />
+      <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+        <AboveTheFoldAIWords3D className="absolute inset-0 z-0" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#1a1a1a] z-0" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             variants={fadeInUp}
@@ -100,9 +116,38 @@ const KnightFoundationLanding: React.FC = () => {
             animate="animate"
             className="text-center"
           >
-            <h1 className="text-[120px] md:text-[140px] font-bold leading-[1] tracking-tight mb-8 text-white">
-              MAKE AI FOR ALL
-            </h1>
+            <div
+              className="mb-8 cursor-pointer select-none"
+              onMouseEnter={() => setIsGlitching(true)}
+              onMouseLeave={() => setIsGlitching(false)}
+              onClick={() => setMainWordIndex((mainWordIndex + 1) % heroWords.length)}
+            >
+              <ControlledFlipText
+                className={`text-[80px] md:text-[120px] font-bold leading-[1] tracking-tight text-white drop-shadow-lg ${isGlitching ? 'glitch-rgb' : ''}`}
+                duration={0.5}
+                delayMultiple={0.06}
+                animationKey={mainWordIndex + (isGlitching ? '-glitch' : '')}
+              >
+                {heroWords[mainWordIndex]}
+              </ControlledFlipText>
+              <style jsx>{`
+                .glitch-rgb {
+                  text-shadow:
+                    2px 0 8px #A4FF4E,
+                    -2px 0 8px #3B82F6,
+                    0 2px 8px #EC4899;
+                  animation: glitch 0.4s infinite alternate;
+                }
+                @keyframes glitch {
+                  0% { transform: translateX(0); }
+                  20% { transform: translateX(-2px); }
+                  40% { transform: translateX(2px); }
+                  60% { transform: translateX(-1px); }
+                  80% { transform: translateX(1px); }
+                  100% { transform: translateX(0); }
+                }
+              `}</style>
+            </div>
             <p className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
               Knight-seeded pilot turning idle screens into culture hubs
             </p>
@@ -122,38 +167,14 @@ const KnightFoundationLanding: React.FC = () => {
             </div>
           </motion.div>
         </div>
-        <MicroMotif type="wiggle" className="absolute bottom-10 left-10 text-[#A4FF4E]" />
-        <MicroMotif type="binary" className="absolute top-10 right-10 text-[#A4FF4E]" />
+        <MicroMotif type="wiggle" className="absolute bottom-10 left-10 text-[#A4FF4E] z-10" />
+        <MicroMotif type="binary" className="absolute top-10 right-10 text-[#A4FF4E] z-10" />
       </section>
+
+      <ManifestoStrip />
 
       {/* Animated Metrics Bar with narrative header */}
       <KFMetricsBar />
-
-      {/* Impact Bar */}
-      <section className="sticky top-0 bg-black/80 backdrop-blur-sm z-30 py-4">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-8">
-              <div className="text-center">
-                <NeonText text="120+" size="sm" />
-                <p className="text-sm text-gray-400">Learners</p>
-              </div>
-              <div className="text-center">
-                <NeonText text="6" size="sm" />
-                <p className="text-sm text-gray-400">Screens</p>
-              </div>
-              <div className="text-center">
-                <NeonText text="3" size="sm" />
-                <p className="text-sm text-gray-400">Venues</p>
-              </div>
-              <div className="text-center">
-                <NeonText text="100%" size="sm" />
-                <p className="text-sm text-gray-400">Bilingual</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Principles Section */}
       <KFPrinciplesSection />
@@ -180,6 +201,16 @@ const KnightFoundationLanding: React.FC = () => {
         }}
         iconColor="text-blue-400/50"
       />
+
+      {/* Spinning/3D Carousel Clinics Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">
+            <span className="text-[#A4FF4E]">Skill</span> Clinics
+          </h2>
+          <ClinicsCarousel />
+        </div>
+      </section>
 
       {/* Ethics Section */}
       <section className="py-20">

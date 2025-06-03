@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { WorkshopNavigation } from '../WorkshopNavigation';
 import { usePathname } from 'next/navigation';
 
@@ -30,7 +31,7 @@ describe('WorkshopNavigation', () => {
     
     // Click on Session 1
     const session1Section = screen.getByText('Session 1');
-    fireEvent.click(session1Section);
+    userEvent.click(session1Section);
     
     // Session 1 should now be open
     expect(session1Section.closest('div')).toHaveClass('rotate-90');
@@ -45,7 +46,7 @@ describe('WorkshopNavigation', () => {
     
     // Click on Day 2
     const day2Section = screen.getByText('Day 2');
-    fireEvent.click(day2Section);
+    userEvent.click(day2Section);
     
     // Day 1 should be closed
     const day1Section = screen.getByText('Day 1');
@@ -60,7 +61,7 @@ describe('WorkshopNavigation', () => {
     
     // Click on Session 1
     const session1Section = screen.getByText('Session 1');
-    fireEvent.click(session1Section);
+    userEvent.click(session1Section);
     
     // Day 1 should remain open
     const day1Section = screen.getByText('Day 1');
@@ -75,7 +76,7 @@ describe('WorkshopNavigation', () => {
     
     // Click on Day 1 to close it
     const day1Section = screen.getByText('Day 1');
-    fireEvent.click(day1Section);
+    userEvent.click(day1Section);
     
     // Day 1 should be closed
     expect(day1Section.closest('div')).not.toHaveClass('rotate-90');
@@ -102,7 +103,7 @@ describe('WorkshopNavigation', () => {
     
     // Click collapse button
     const collapseButton = screen.getByRole('button');
-    fireEvent.click(collapseButton);
+    userEvent.click(collapseButton);
     
     // All sections should be closed
     const day1Section = screen.getByText('Day 1');
