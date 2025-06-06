@@ -26,7 +26,7 @@ const team = [
     }
   },
   {
-    name: "Chu Lopez",
+    name: "Sam Lopez de Victoria",
     role: "Community Lead",
     image: "/team/chu.jpg",
     motif: Sparkles,

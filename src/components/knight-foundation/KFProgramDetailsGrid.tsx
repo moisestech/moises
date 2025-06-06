@@ -43,7 +43,7 @@ const details = [
   },
   {
     title: 'Human-Ready AI Toolkits',
-    description: '6-month pilot roadmap from launch to sustainability.',
+    description: '1 Year Pilot roadmap from launch to sustainability.',
     icon: Clock,
     href: '/grant/knight-foundation/roadmap',
     ascii: 'AI',

@@ -37,6 +37,7 @@ import { ControlledFlipText } from '@/components/ui/controlled-flip-text';
 import { ManifestoStrip } from '@/components/proposal/ManifestoStrip';
 import { ClinicsCarousel } from '@/components/proposal/ClinicsCarousel';
 import AboveTheFoldAIWords3D from '@/components/knight-foundation/AboveTheFoldAIWords3D';
+import KnightFoundationProposalPage from './KnightFoundationProposalPage';
 
 // Micro-motifs as SVG paths
 const motifs = {
@@ -155,7 +156,7 @@ const KnightFoundationLanding: React.FC = () => {
                 href="/grant/knight-foundation/pilot"
                 className="px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
               >
-                See the 6-Month Pilot
+                See the 1 Year Pilot
               </Link>
               <Link
                 href="/grant/knight-foundation/proposal.pdf"
@@ -201,15 +202,22 @@ const KnightFoundationLanding: React.FC = () => {
         iconColor="text-blue-400/50"
       />
 
+      {/* Proposal Section (imported) */}
+      <section id="proposal" className="py-20">
+        <div className="container mx-auto px-4">
+          <KnightFoundationProposalPage />
+        </div>
+      </section>
+
       {/* Spinning/3D Carousel Clinics Section */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">
             <span className="text-[#A4FF4E]">Skill</span> Clinics
           </h2>
           <ClinicsCarousel />
         </div>
-      </section>
+      </section> */}
 
       {/* Ethics Section */}
       <section className="py-20">
@@ -249,13 +257,22 @@ const KnightFoundationLanding: React.FC = () => {
                   Open API
                 </li>
               </ul>
-              <Link
-                href="/grant/knight-foundation/ethics"
-                className="inline-flex items-center gap-2 text-[#A4FF4E] hover:underline"
-              >
-                See our Responsible-AI rubric
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                <Link
+                  href="/grant/knight-foundation/ethics"
+                  className="inline-flex items-center gap-2 text-[#A4FF4E] hover:underline"
+                >
+                  See our Responsible-AI rubric
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/grant/knight-foundation/budget"
+                  className="inline-flex items-center gap-2 text-[#A4FF4E] hover:underline"
+                >
+                  See Budget Details
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </motion.div>
           </div>
         </div>

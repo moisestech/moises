@@ -18,16 +18,6 @@ const events = [
     image:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831899/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-3_ugyjht.jpg',
   },
-  {
-    title: 'Artist Talk: Neural Capitalism',
-    date: 'April 20, 2024',
-    time: '7:00 PM - 9:00 PM',
-    location: 'Bakehouse Art Complex, Miami',
-    description:
-      'Join Moises Sanabria for a discussion on the intersection of artificial intelligence, art, and capitalism. The talk will explore themes from his recent works and the future of creative practice in an AI-driven world.',
-    image:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/neural-wealth_isqxjd.jpg',
-  },
 ];
 
 export default function Events() {

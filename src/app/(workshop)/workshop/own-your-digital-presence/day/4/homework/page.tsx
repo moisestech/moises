@@ -39,7 +39,7 @@ const tasks = [
   },
   {
     title: "Future Roadmap",
-    description: "Create a 6-month roadmap for your website's growth, including planned features and content updates.",
+    description: "Create a 1 Year Pilot roadmap for your website's growth, including planned features and content updates.",
     deadline: "Before Day 4 Session 2",
     points: 4
   }

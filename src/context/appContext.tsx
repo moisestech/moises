@@ -28,7 +28,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     // Set initial theme
     document.documentElement.classList.toggle('dark', darkMode);
-  }, []);
+  }, [darkMode]);
 
   return (
     <AppContext.Provider value={{ darkMode, toggleDarkMode }}>

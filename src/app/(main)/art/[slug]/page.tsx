@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
 import VimeoPlayer from '@/components/common/VimeoPlayer';
+import { seoKeywordsAlpha } from '../../../../../lib/seoKeywords';
+import type { Metadata } from 'next';
 
 interface PageProps {
   params: {
@@ -270,11 +272,37 @@ export default async function ArtPage({ params }: PageProps) {
   );
 }
 
-// Optional: Add generateMetadata if needed
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const work = artist.artworks[params.slug];
+  if (!work) return {};
+
+  // Find up to 8 matching keywords from seoKeywordsAlpha
+  const tagKeywords = (work.tags || []).map(t => t.toLowerCase());
+  const matchedKeywords = seoKeywordsAlpha.filter((kw: string) => tagKeywords.some(tag => kw.includes(tag)));
+  const extraKeywords = ['moises sanabria', 'new media art', 'miami artist'];
+  const allKeywords = Array.from(new Set([
+    ...tagKeywords,
+    ...matchedKeywords.slice(0, 8),
+    ...extraKeywords
+  ])).join(', ');
+
   return {
-    title: `Art - ${params.slug}`,
-    // ... other metadata
+    title: `${work.title} – Moises Sanabria`,
+    description: work.description?.slice(0, 155) || '',
+    keywords: allKeywords,
+    alternates: { canonical: `/art/${params.slug}` },
+    openGraph: {
+      title: work.title,
+      description: work.description,
+      images: work.images?.[0]?.url ?? '',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: work.title,
+      description: work.description,
+      images: [work.images?.[0]?.url ?? ''],
+    },
   };
 }
 

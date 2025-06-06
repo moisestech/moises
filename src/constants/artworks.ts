@@ -84,13 +84,14 @@ export const artist: Artist = {
         }
       ],
       tags: [
-        'sculpture',
-        'surveillance',
-        'privacy',
-        'digital culture',
-        'capitalism',
-        'anonymity',
-        'corporate critique'
+        'surveillance art',
+        'privacy sculpture',
+        'technofetishism',
+        'capitalism critique art',
+        'digital capitalism',
+        'consumerism art',
+        'cybernetic aesthetics',
+        'new media art'
       ],
       interpretation: 
         'The piece creates a striking visual paradox that challenges viewers to consider how corporate interests have co-opted privacy technology and online anonymity. By transforming the Guy Fawkes mask—a symbol of anti-establishment resistance—into a gold-plated corporate billboard, the work highlights the commercialization of digital privacy and the uncomfortable reality that our attempts to escape surveillance often funnel through commercial gatekeepers.',
@@ -148,13 +149,13 @@ export const artist: Artist = {
         }
       ],
       tags: [
-        'installation',
-        'sculpture',
-        'religion',
-        'virtual reality',
-        'technology',
+        'virtual reality art',
+        'post-internet sculpture',
+        'cybernetic aesthetics',
+        'interactive installation art',
+        'new media art',
         'spirituality',
-        'digital culture'
+        'digital culture',
       ],
       interactiveContent: [
         {
@@ -214,13 +215,14 @@ export const artist: Artist = {
         },
       ],
       tags: [
-        'installation',
-        'currency',
-        'mortality',
-        'capitalism',
-        'identity',
-        'consumption',
+        'capitalism critique art',
+        'consumerism art',
         'ephemeral wealth',
+        'mortality',
+        'currency',
+        'identity',
+        'installation',
+        'new media art'
       ],
       on_view: true,
     },
@@ -245,14 +247,14 @@ export const artist: Artist = {
         },
       ],
       tags: [
-        '3D printing',
-        'artificial intelligence',
-        'consumerism',
-        'capitalism',
-        'brain',
-        'shopping cart',
-        'LED lights',
-        'digital culture',
+        'ai art',
+        'ai sculpture',
+        'consumerism art',
+        'capitalism critique art',
+        'digital capitalism',
+        'brain rot meme',
+        'new media art',
+        'shopping cart'
       ],
       on_view: true,
     },
@@ -277,13 +279,13 @@ export const artist: Artist = {
         },
       ],
       tags: [
-        'virtual reality',
+        'virtual reality art',
         'intimacy',
         'technology',
         'digital culture',
-        'anxiety',
         'connection',
-        'Data Dating',
+        'contemporary art miami',
+        'new media art'
       ],
       on_view: false,
     },
@@ -300,7 +302,14 @@ export const artist: Artist = {
           caption: 'VR Bubble Bath - Man in bathtub wearing VR headset',
         },
       ],
-      tags: ['photography', 'virtual reality', 'intimacy', 'technology'],
+      tags: [
+        'virtual reality art',
+        'technology',
+        'intimacy',
+        'digital culture',
+        'contemporary art miami',
+        'new media art'
+      ],
       on_view: false,
     },
     eye_plug: {
