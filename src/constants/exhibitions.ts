@@ -11,6 +11,7 @@ export interface Exhibitions {
   support?: string;
   links?: string;
   partners?: string[];
+  link?: string;
 }
 
 export const exhibitions: Exhibitions[] = [
@@ -34,7 +35,7 @@ export const exhibitions: Exhibitions[] = [
     location: 'Thessaloniki, Greece',
     description: 'This exhibition explores the complex relationship between humans and technology, examining how digital devices have evolved beyond tools to become objects of desire and worship. Through diverse artworks, the exhibition investigates how technology shapes modern identity, self-representation, and our understanding of gender in the digital age. Featured works highlight the intimate fusion of human bodies with technological extensions, revealing patterns of power, dependency, and pleasure in our digital interactions. The exhibition critically examines contemporary phenomena including technological messianism, digital behavior modification, innovation obsession, and the pursuit of perfection through technological means. It invites viewers to reflect on their own relationship with technology and its role in shaping human consciousness and desire.',
     tags: ["Technology", "Identity", "Digital Culture", "Body Politics"],
-
+    link: 'https://www.momus.gr/en/exhibitions/tehnofetihismos-whip-it-shape',
   },
   {
     id: 3,

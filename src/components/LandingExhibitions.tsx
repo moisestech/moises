@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { exhibitions } from '@/constants/exhibitions';
 
 export default function LandingExhibitions() {
@@ -58,38 +58,65 @@ export default function LandingExhibitions() {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             {exhibitions.map((exhibition, index) => (
-              <div
-                key={exhibition.id}
-                className="flex-none w-[580px] flex flex-col"
-              >
-                <div className="w-full relative mb-4">
-                  <div className="w-full relative pt-[56.25%]">
+              <div key={exhibition.id} className="flex-none w-[580px] flex flex-col">
+                <motion.a
+                  href={exhibition.link || '#'}
+                  target={exhibition.link && exhibition.link.startsWith('http') ? '_blank' : undefined}
+                  rel={exhibition.link && exhibition.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="relative block group focus:outline-none"
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  tabIndex={0}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.04, boxShadow: '0 0 32px #22d3ee', borderColor: '#22d3ee' }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                    className="aspect-video relative overflow-hidden border-2 border-transparent group-hover:border-cyan-400 transition-all duration-300"
+                  >
                     <Image
                       src={exhibition.imageUrl}
                       alt={exhibition.title}
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                  </div>
-                </div>
-                <div className="flex-none">
-                  <h3 className="text-xl md:text-2xl font-['MoMA_Sans'] font-bold">
-                    {exhibition.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                    <span className="font-bold">{exhibition.date}</span>
-                    {exhibition.location && (
-                      <span className="text-gray-600 dark:text-gray-400">
-                        {exhibition.location}
-                      </span>
+                    {exhibition.link && exhibition.link.startsWith('http') && (
+                      <div className="absolute top-3 right-3 z-10 flex items-center gap-1 bg-black/60 rounded-full px-2 py-1">
+                        <ExternalLink className="w-5 h-5 text-cyan-400" />
+                        <span className="text-xs text-cyan-200 hidden group-hover:inline">External</span>
+                      </div>
                     )}
-                    {/* {exhibition.description && (
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
-                        {exhibition.description}
-                      </p>
-                    )} */}
+                    {/* Animated gradient pulse overlay */}
+                    <motion.div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background:
+                          'radial-gradient(circle at 60% 40%, #22d3ee33 0%, transparent 80%)',
+                        filter: 'blur(24px)',
+                        opacity: 0.3,
+                      }}
+                      animate={{ opacity: [0.3, 0.6, 0.3] }}
+                      transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+                    />
+                  </motion.div>
+                  <div className="py-4 flex flex-col gap-2 items-start">
+                    <h3 className="font-['MoMA_Sans'] font-bold text-3xl mb-2 text-left">
+                      {exhibition.title}
+                    </h3>
+                    <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                      <span className="font-bold">{exhibition.date}</span>
+                      {exhibition.location && (
+                        <span className="text-gray-600 dark:text-gray-400">
+                          {exhibition.location}
+                        </span>
+                      )}
+                      {/* {exhibition.description && (
+                        <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                          {exhibition.description}
+                        </p>
+                      )} */}
+                    </div>
                   </div>
-                </div>
+                </motion.a>
               </div>
             ))}
           </motion.div>

@@ -7,6 +7,7 @@ export interface Event {
   description: string;
   tag: string;
   link: string;
+  promoted?: boolean;
 }
 
 export interface EventCategory {
@@ -26,6 +27,7 @@ const events: Event[] = [
       'A two-day performance art event exploring the intersection of technology and human expression.',
     link: 'https://www.bacfl.org/events/performance-in-flux-february-2025',
     tag: 'Gallery experience',
+    promoted: false,
   },
   {
     id: 2,
@@ -33,11 +35,12 @@ const events: Event[] = [
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739126832/art/moisestech-website/events/moises-sanabria-open-studios-red-world-eye_nagdb6.jpg',
     title: 'Bakehouse Open Studios',
     description:
-      'Join us for the first open studio event of the year! Visit Bakehouse artists in their studios, groove to tunes by local DJs',
+      "Join us for the first open studio event of the year! Visit Bakehouse artists in their studios, groove to tunes by local DJs, and stop by resident organization Bookleggers Library for a free book. Don't miss your last chance to see our fall exhibitions. Complimentary bevvies will be served, including beer courtesy of OFF SITE. Free RSVP. More info: https://www.bacfl.org/events/open-studios-march-2025",
     date: 'Mar 11',
     location: 'Wynwood, Miami, USA',
     link: 'https://www.bacfl.org/events/open-studios-march-2025',
     tag: 'Gallery experience',
+    promoted: true,
   },
   {
     id: 3,
@@ -45,11 +48,12 @@ const events: Event[] = [
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739627138/art/moisestech-website/events/logo-swiss-creator-academy_xquotg.jpg',
     title: 'Swiss Creator Academy',
     description:
-      'Hear artist, proffesionals, and researchers about contemporary content creation in the image economy',
-      date: 'Mar 11',
-      location: 'Winterthur, Switzerland',
-      link: 'https://www.swisscreatoracademy.com',
-      tag: 'Lecture',
+      'Hear artists, professionals, and researchers about contemporary content creation in the image economy',
+    date: 'Mar 11',
+    location: 'Winterthur, Switzerland',
+    link: 'https://www.swisscreatoracademy.com',
+    tag: 'Lecture',
+    promoted: false,
   },
 ];
 

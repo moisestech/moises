@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, ReactNode } from 'react';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/contexts/ThemeContext';
 import { TfiMenuAlt } from 'react-icons/tfi';
 import { artistData } from '@/constants/artist';
 import Image from 'next/image';
@@ -112,7 +112,7 @@ const InfoTable: FC = () => {
   
   return (
     <div
-      className={`border ${isDark ? 'border-gray-700' : 'border-gray-300'} mb-8 ml-8 max-h-[800px] ${isDark ? 'bg-gray-900' : 'bg-gray-100'} min-w-80`}
+      className={`${isDark ? 'bg-black text-white' : 'bg-white text-black'} border ${isDark ? 'border-gray-700' : 'border-gray-300'} mb-8 ml-8 max-h-[800px] ${isDark ? 'bg-gray-900' : 'bg-gray-100'} min-w-80`}
     >
       <span className="p-2 font-bold text-lg justify-center w-full flex">
         {artistData.name}
@@ -183,152 +183,153 @@ const Section: FC<SectionProps> = ({ id, title, content, border = true }) => (
 const WikipediaPage: FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  console.log('theme:', theme, 'isDark:', isDark);
 
   return (
-    <section
-      className={`${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}
-    >
-      <div className="max-w-5xl mx-auto p-6 mt-40">
-        {/* Header with Theme Toggle */}
-        <div
-          className={`flex justify-between items-center mb-4 border-y-gray-400 ${
-            isDark ? 'border-gray-700' : 'border-gray-300'
-          }`}
-          style={{
-            borderBottomWidth: '1px',
-          }}
-        >
-          <div className="flex items-center">
-            <h2 className="text-xl font-bold mr-2 flex items-center">
-              <TfiMenuAlt className="mr-2" />
-            </h2>
-            <h1 className="text-3xl font-serif wiki-font">{artistData.name}</h1>
-          </div>
-          <span className="font-bold text-sm" style={{ color: '#36c' }}>
-            1 language
-          </span>
-        </div>
-
-        <div
-          className={`flex justify-between mb-8 border-y-gray-400 ${
-            isDark ? 'border-gray-700' : 'border-gray-300'
-          }`}
-          style={{
-            borderBottomWidth: '1px',
-          }}
-        >
-          <span
-            className={`border-b-2 text-sm ${isDark ? 'text-blue-400' : 'text-blue-600'}`}
+    <main className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+      <section>
+        <div className="max-w-5xl mx-auto p-6 mt-40">
+          {/* Header with Theme Toggle */}
+          <div
+            className={`flex justify-between items-center mb-4 border-y-gray-400 ${
+              isDark ? 'border-gray-700' : 'border-gray-300'
+            }`}
+            style={{
+              borderBottomWidth: '1px',
+            }}
           >
-            Article
-          </span>
-          <span className="text-sm">Read</span>
-        </div>
+            <div className="flex items-center">
+              <h2 className="text-xl font-bold mr-2 flex items-center">
+                <TfiMenuAlt className="mr-2" />
+              </h2>
+              <h1 className="text-3xl font-serif wiki-font">{artistData.name}</h1>
+            </div>
+            <span className="font-bold text-sm" style={{ color: '#36c' }}>
+              1 language
+            </span>
+          </div>
 
-        <article className="flex">
-          <div className="w-full flex flex-col justify-center items-center relative">
+          <div
+            className={`flex justify-between mb-8 border-y-gray-400 ${
+              isDark ? 'border-gray-700' : 'border-gray-300'
+            }`}
+            style={{
+              borderBottomWidth: '1px',
+            }}
+          >
+            <span
+              className={`border-b-2 text-sm ${isDark ? 'text-blue-400' : 'text-blue-600'}`}
+            >
+              Article
+            </span>
+            <span className="text-sm">Read</span>
+          </div>
+
+          <article className="flex">
+            <div className="w-full flex flex-col justify-center items-center relative">
+
+            <Section
+              id="bio"
+              title=""
+              content={artistData.biography}
+              border={false}
+            />
+          <Section
+            id="early-life"
+            title="Early Life and Education"
+            content={artistData.earlyLife}
+          />
+            </div>
+            <InfoTable />
+          </article>
 
           <Section
-            id="bio"
-            title=""
-            content={artistData.biography}
-            border={false}
+            id="art-practice"
+            title="Art Practice"
+            content={artistData.artPractice}
           />
-        <Section
-          id="early-life"
-          title="Early Life and Education"
-          content={artistData.earlyLife}
-        />
-          </div>
-          <InfoTable />
-        </article>
-
-        <Section
-          id="art-practice"
-          title="Art Practice"
-          content={artistData.artPractice}
-        />
-        <Section
-          id="professional-work"
-          title="Professional Work"
-          content={artistData.professionalWork}
-        />
-        <Section
-          id="exhibitions"
-          title="Exhibitions"
-          content={
-            <ul className="list-disc list-inside">
-              {artistData.exhibitions.map((exhibition, index) => (
-                <li key={index}>
-                  <strong>{exhibition.title}</strong>, {exhibition.location} (
-                  {exhibition.year})
-                </li>
-              ))}
-            </ul>
-          }
-        />
-        <Section
-          id="selected-works"
-          title="Selected Works"
-          content={
-            <ul className="list-disc list-inside">
-              {artistData.selectedWorks.map((work, index) => (
-                <li key={index}>
-                  <strong>{work.title}</strong> ({work.year})
-                </li>
-              ))}
-            </ul>
-          }
-        />
-        <Section
-          id="press"
-          title="Press and Recognition"
-          content={artistData.pressRecognition}
-        />
-        <Section
-          id="style"
-          title="Style and Influences"
-          content={artistData.styleAndInfluences}
-        />
-        <Section
-          id="education"
-          title="Education"
-          content={
-            <ul className="list-disc list-inside">
-              {artistData.education.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          }
-        />
-        <Section
-          id="awards"
-          title="Awards & Honors"
-          content={
-            <ul className="list-disc list-inside">
-              {artistData.awards.map((award, index) => (
-                <li key={index}>{award}</li>
-              ))}
-            </ul>
-          }
-        />
-        <Section
-          id="external-links"
-          title="External Links"
-          content={
-            <ul className="list-disc list-inside">
-              {artistData.externalLinks.map((link, index) => (
-                <li key={index}>
-                  <a href={link.url} className="text-blue-600 hover:underline">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          }
-        />
-      </div>
-    </section>
+          <Section
+            id="professional-work"
+            title="Professional Work"
+            content={artistData.professionalWork}
+          />
+          <Section
+            id="exhibitions"
+            title="Exhibitions"
+            content={
+              <ul className="list-disc list-inside">
+                {artistData.exhibitions.map((exhibition, index) => (
+                  <li key={index}>
+                    <strong>{exhibition.title}</strong>, {exhibition.location} (
+                    {exhibition.year})
+                  </li>
+                ))}
+              </ul>
+            }
+          />
+          <Section
+            id="selected-works"
+            title="Selected Works"
+            content={
+              <ul className="list-disc list-inside">
+                {artistData.selectedWorks.map((work, index) => (
+                  <li key={index}>
+                    <strong>{work.title}</strong> ({work.year})
+                  </li>
+                ))}
+              </ul>
+            }
+          />
+          <Section
+            id="press"
+            title="Press and Recognition"
+            content={artistData.pressRecognition}
+          />
+          <Section
+            id="style"
+            title="Style and Influences"
+            content={artistData.styleAndInfluences}
+          />
+          <Section
+            id="education"
+            title="Education"
+            content={
+              <ul className="list-disc list-inside">
+                {artistData.education.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            }
+          />
+          <Section
+            id="awards"
+            title="Awards & Honors"
+            content={
+              <ul className="list-disc list-inside">
+                {artistData.awards.map((award, index) => (
+                  <li key={index}>{award}</li>
+                ))}
+              </ul>
+            }
+          />
+          <Section
+            id="external-links"
+            title="External Links"
+            content={
+              <ul className="list-disc list-inside">
+                {artistData.externalLinks.map((link, index) => (
+                  <li key={index}>
+                    <a href={link.url} className="text-blue-600 hover:underline">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            }
+          />
+        </div>
+      </section>
+    </main>
   );
 };
 

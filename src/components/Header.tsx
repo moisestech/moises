@@ -56,9 +56,9 @@ export default function Header() {
     { label: 'Visit', path: '/visit' },
     { label: 'Exhibitions', path: '/exhibitions' },
     { label: 'Events', path: '/events' },
-    { label: 'Art and Artist', path: '/bio', enabled: true },
-    { label: 'CV', path: '/cv', enabled: true },
-    { label: 'Store', path: '/store' },
+    { label: 'Art and Artist', path: '/portfolio', enabled: true },
+    { label: 'Bio', path: '/bio', enabled: true },
+    { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },
   ];
 
   return (
@@ -72,13 +72,28 @@ export default function Header() {
       >
         {/* Fixed Visit Button */}
         <div className="hidden md:block absolute right-0 top-[30px] px-10 z-10">
-          <Link
-            href="/visit"
-            onClick={(e) => handleNavClick(e, '/visit')}
-            className="bg-cyan-400 text-black px-6 py-2 font-['MoMA_Sans'] font-bold"
+          <a
+            href="http://calendly.com/moisestech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-cyan-400 text-black px-6 py-2 font-['MoMA_Sans'] font-bold transition-transform transition-shadow duration-200 rounded shadow-md hover:scale-105 hover:shadow-[0_0_24px_4px_rgba(34,211,238,0.5)] focus:scale-105 focus:shadow-[0_0_24px_4px_rgba(34,211,238,0.5)] relative overflow-hidden group"
+            style={{
+              background: 'linear-gradient(90deg, #22d3ee 0%, #67e8f9 100%)',
+            }}
           >
-            Visit
-          </Link>
+            <span className="relative z-10">Visit</span>
+            {/* Animated gradient overlay */}
+            <span className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300" style={{
+              background: 'linear-gradient(270deg, #67e8f9, #22d3ee, #67e8f9)',
+              animation: 'visit-gradient-move 2s linear infinite',
+            }} />
+            <style jsx>{`
+              @keyframes visit-gradient-move {
+                0% { background-position: 0% 50%; }
+                100% { background-position: 100% 50%; }
+              }
+            `}</style>
+          </a>
         </div>
 
         <div className={`transition-all duration-300 ${isScrolled ? 'h-[80px]' : 'h-auto'}`}>
@@ -107,13 +122,28 @@ export default function Header() {
                 </button>
               </div>
               <div className="md:hidden flex items-center gap-3">
-                <Link
-                  href="/visit"
-                  onClick={(e) => handleNavClick(e, '/visit')}
-                  className="bg-cyan-400 text-black px-6 py-2 font-['MoMA_Sans'] font-bold"
+                <a
+                  href="http://calendly.com/moisestech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-cyan-400 text-black px-6 py-2 font-['MoMA_Sans'] font-bold transition-transform transition-shadow duration-200 rounded shadow-md hover:scale-105 hover:shadow-[0_0_24px_4px_rgba(34,211,238,0.5)] focus:scale-105 focus:shadow-[0_0_24px_4px_rgba(34,211,238,0.5)] relative overflow-hidden group"
+                  style={{
+                    background: 'linear-gradient(90deg, #22d3ee 0%, #67e8f9 100%)',
+                  }}
                 >
-                  Visit
-                </Link>
+                  <span className="relative z-10">Visit</span>
+                  {/* Animated gradient overlay */}
+                  <span className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300" style={{
+                    background: 'linear-gradient(270deg, #67e8f9, #22d3ee, #67e8f9)',
+                    animation: 'visit-gradient-move 2s linear infinite',
+                  }} />
+                  <style jsx>{`
+                    @keyframes visit-gradient-move {
+                      0% { background-position: 0% 50%; }
+                      100% { background-position: 100% 50%; }
+                    }
+                  `}</style>
+                </a>
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   className="p-2"
@@ -141,21 +171,34 @@ export default function Header() {
                 <ul className="flex space-x-8 text-xl items-center">
                   {menuItems.map((item) => (
                     <li key={item.path}>
-                      <Link
-                        href={item.path}
-                        onClick={(e) =>
-                          item.enabled || item.path === '/bio'
-                            ? undefined
-                            : handleNavClick(e, item.path)
-                        }
-                        className={`transition-colors rounded-full py-2 font-bold ${
-                          theme === 'dark'
-                            ? 'hover:text-gray-300'
-                            : 'hover:text-gray-600'
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
+                      {item.external ? (
+                        <a
+                          href={item.path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`transition-colors rounded-full py-2 font-bold ${
+                            theme === 'dark' ? 'hover:text-gray-300' : 'hover:text-gray-600'
+                          }`}
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.path}
+                          onClick={(e) =>
+                            item.enabled || item.path === '/bio'
+                              ? undefined
+                              : handleNavClick(e, item.path)
+                          }
+                          className={`transition-colors rounded-full py-2 font-bold ${
+                            theme === 'dark'
+                              ? 'hover:text-gray-300'
+                              : 'hover:text-gray-600'
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                   <li>
@@ -181,21 +224,32 @@ export default function Header() {
             <ul className="space-y-8">
               {menuItems.map((item) => (
                 <li key={item.path}>
-                  <Link
-                    href={item.path}
-                    onClick={(e) =>
-                      item.enabled || item.path === '/bio'
-                        ? undefined
-                        : handleNavClick(e, item.path)
-                    }
-                    className={`text-4xl font-bold transition-colors block ${
-                      theme === 'dark'
-                        ? 'text-white hover:text-gray-300'
-                        : 'text-black hover:text-gray-600'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
+                  {item.external ? (
+                    <a
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-4xl font-bold transition-colors block ${
+                        theme === 'dark' ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.path}
+                      onClick={(e) =>
+                        item.enabled || item.path === '/bio'
+                          ? undefined
+                          : handleNavClick(e, item.path)
+                      }
+                      className={`text-4xl font-bold transition-colors block ${
+                        theme === 'dark' ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
