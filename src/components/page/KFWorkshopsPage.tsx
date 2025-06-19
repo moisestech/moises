@@ -7,17 +7,17 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
 import { 
-  BarChart,
-  Target,
-  ArrowRight,
+  Calendar,
   ChevronLeft,
-  DollarSign,
   Users,
-  LineChart,
-  TrendingUp,
-  Activity,
-  Globe,
+  MapPin,
+  Monitor,
+  Brain,
+  Laptop,
   Sparkles,
+  ArrowRight,
+  Clock,
+  Target,
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -26,41 +26,53 @@ const fadeInUp = {
   transition: { duration: 0.5 }
 };
 
-// Impact data by vertical
-const impactData = {
-  artists: {
-    partners: ["Bakehouse", "Edge Zones", "Locust Projects"],
-    kpi: "100 artists open AI accounts; 30 grant-ready proposals",
-    path: "8 venues license signage SaaS ($4K/yr sustaining income)"
+// Workshop data
+const workshopData = [
+  {
+    host: "Bakehouse Art Complex",
+    quarter: "Q3 '25",
+    workshops: [
+      "GPT-4 on $0 budget",
+      "Gen-4 Storyboarding",
+      "Prompt Gym"
+    ],
+    activation: "Night-wall projection of workshop outputs",
+    reach: { inPerson: 60, stream: 300 }
   },
-  film: {
-    partners: ["UM Cinema", "Miami Film Fest", "O-Cinema"],
-    kpi: "8 AI-audited shorts; avg $8K VFX saving",
-    path: "AI24 Seal required by 2 SE-US festivals"
+  {
+    host: "Edge Zones",
+    quarter: "Q4 '25",
+    workshops: [
+      "Community Archives × Stable Diffusion",
+      "AI Mural Mapping",
+      "Canva-AI Meme Ethics"
+    ],
+    activation: "Block-party DJ set + AI visuals",
+    reach: { inPerson: 75, stream: 250 }
   },
-  education: {
-    partners: ["NWSA", "FIU", "UM", "MDC Wolfson"],
-    kpi: "3 schools embed AI24 modules → 400 students/yr",
-    path: "Adoption in 6 US & 2 EU art programs"
+  {
+    host: "PAMM",
+    quarter: "Q4 '25",
+    workshops: [
+      "Voice-clone captions for accessibility",
+      "Curating AI in museums"
+    ],
+    activation: "AI on the Terrace outdoor screening",
+    reach: { inPerson: 400, stream: 500 }
   },
-  brands: {
-    partners: ["The Community", "República Havas", "Alma DDB"],
-    kpi: "2 pilot ads cut turnaround 40%",
-    path: "$60K/yr in B2B studio-in-a-box rollouts"
-  },
-  institutions: {
-    partners: ["PAMM", "Vizcaya", "Miami Book Fair"],
-    kpi: "PAMM & Book Fair display signage; share rubric",
-    path: "4 additional orgs subscribe to ethics rubric service"
-  },
-  research: {
-    partners: ["FIU AI Hub", "MAGIC (MDC)", "CodeArt Miami"],
-    kpi: "Release open-source Watermark plugin → 150 dl",
-    path: "500+ downloads, 20 paid support contracts"
+  {
+    host: "NWSA",
+    quarter: "Q1 '26",
+    workshops: [
+      "No-GPU Short-Film Pipeline",
+      "GitHub Copilot for Performance"
+    ],
+    activation: "5-hr hackathon; judged by faculty",
+    reach: { inPerson: 90, stream: 600 }
   }
-};
+];
 
-export default function ImpactROIPage() {
+export default function WorkshopsPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -89,18 +101,172 @@ export default function ImpactROIPage() {
             className="text-center mb-12"
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 mb-6">
-              <Target className="w-4 h-4 text-[#A4FF4E]" />
+              <Calendar className="w-4 h-4 text-[#A4FF4E]" />
               <span className="text-sm font-medium text-[#A4FF4E]">
-                Impact & ROI Analysis
+                Workshop Program
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              Measurable Community Impact
+              Hands-on AI Education
             </h1>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Transforming investment into sustainable community value
+              24 free workshops across Miami's creative community
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Brain}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Workshop Grid */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Workshop Schedule</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
+              Tailored programs at key community venues
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {workshopData.map((venue, index) => (
+              <motion.div
+                key={venue.host}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#A4FF4E]">{venue.host}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <MapPin className="w-4 h-4 text-[#A4FF4E]/80" />
+                      <span className="text-sm text-[#A4FF4E]/80">{venue.quarter}</span>
+                    </div>
+                  </div>
+                  <div className="px-3 py-1 rounded-full bg-[#A4FF4E]/10 text-[#A4FF4E] border border-[#A4FF4E]/30">
+                    {venue.workshops.length} Workshops
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">Workshop Topics</h4>
+                    <ul className="space-y-2">
+                      {venue.workshops.map((workshop) => (
+                        <li
+                          key={workshop}
+                          className="flex items-center gap-2 text-gray-300"
+                        >
+                          <Laptop className="w-4 h-4 text-[#A4FF4E]" />
+                          {workshop}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">Community Activation</h4>
+                    <p className="text-gray-300">
+                      {venue.activation}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-dashed border-[#A4FF4E]/30">
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <div className="text-sm font-medium text-[#A4FF4E]/80">In-Person</div>
+                        <div className="text-xl font-bold text-[#A4FF4E]">{venue.reach.inPerson}</div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-[#A4FF4E]/80">Streaming</div>
+                        <div className="text-xl font-bold text-[#A4FF4E]">{venue.reach.stream}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Sparkles}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Workshop Features */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Workshop Features</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
+              Every workshop includes
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                title: "Hybrid Format",
+                description: "In-person + live streaming with chat",
+                icon: Monitor
+              },
+              {
+                title: "Inclusive Design",
+                description: "ASL, childcare, and snacks provided",
+                icon: Users
+              },
+              {
+                title: "Take-home Resources",
+                description: "Code templates and workflow guides",
+                icon: Brain
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+              >
+                <div className="w-12 h-12 mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                  {React.createElement(feature.icon, {
+                    className: 'text-[#A4FF4E] w-7 h-7'
+                  })}
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-[#A4FF4E]">{feature.title}</h3>
+                <p className="text-gray-300">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -114,7 +280,7 @@ export default function ImpactROIPage() {
         iconColor="text-[#A4FF4E]/50"
       />
 
-      {/* Impact Grid */}
+      {/* Workshop Statistics */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
@@ -123,179 +289,40 @@ export default function ImpactROIPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Vertical-Specific Impact</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Workshop Impact</h2>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Targeted outcomes across key sectors
+              Expected outcomes from our workshop program
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Object.entries(impactData).map(([key, data], index) => (
-              <motion.div
-                key={key}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
-              >
-                <h3 className="text-xl font-bold mb-4 capitalize text-[#A4FF4E]">{key}</h3>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">Partners</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {data.partners.map((partner) => (
-                        <span
-                          key={partner}
-                          className="text-sm px-2 py-1 rounded-full bg-[#A4FF4E]/10 text-[#A4FF4E] border border-[#A4FF4E]/30"
-                        >
-                          {partner}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">KPI</h4>
-                    <p className="text-gray-300">
-                      {data.kpi}
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">Growth Path</h4>
-                    <p className="text-gray-300">
-                      {data.path}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <DecorativeDivider 
-        icon={LineChart}
-        gradientColors={{
-          from: 'rgba(164, 255, 78, 0.1)',
-          via: 'rgba(59, 130, 246, 0.1)',
-          to: 'rgba(164, 255, 78, 0.1)'
-        }}
-        iconColor="text-[#A4FF4E]/50"
-      />
-
-      {/* ROI Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Return on Investment</h2>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Every dollar multiplies through our ecosystem
-            </p>
-          </motion.div>
-
-          {/* ROI Metrics Grid */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {[
               {
-                metric: "3x",
-                label: "Impact Multiplier",
-                description: "Every $1 generates $3 in community value",
-                icon: TrendingUp
-              },
-              {
-                metric: "70%",
-                label: "Local Investment",
-                description: "Of budget goes directly to Miami talent",
-                icon: Users
-              },
-              {
-                metric: "$60K",
-                label: "Annual Revenue",
-                description: "Projected sustainable income by 2026",
-                icon: DollarSign
-              }
-            ].map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
-              >
-                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
-                  {React.createElement(item.icon, {
-                    className: 'text-[#A4FF4E] w-7 h-7'
-                  })}
-                </div>
-                <div className="text-3xl font-bold mb-2 text-[#A4FF4E]">{item.metric}</div>
-                <div className="font-medium mb-2 text-white">{item.label}</div>
-                <div className="text-sm text-gray-300">{item.description}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <DecorativeDivider 
-        icon={Activity}
-        gradientColors={{
-          from: 'rgba(164, 255, 78, 0.1)',
-          via: 'rgba(59, 130, 246, 0.1)',
-          to: 'rgba(164, 255, 78, 0.1)'
-        }}
-        iconColor="text-[#A4FF4E]/50"
-      />
-
-      {/* Key Impact Metrics */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Key Impact Metrics</h2>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Quantifiable outcomes that demonstrate our community value
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                metric: "220+",
-                label: "Artists Trained",
-                description: "Workshop participants across all clinics",
-                icon: Users,
+                metric: "24",
+                label: "Total Workshops",
+                description: "Across 4 venues",
+                icon: Calendar,
                 color: "text-[#A4FF4E]"
               },
               {
-                metric: "60K+",
-                label: "Screen Impressions",
-                description: "Community engagement through Smart Signs",
-                icon: Globe,
+                metric: "1,025",
+                label: "Total Reach",
+                description: "In-person + streaming",
+                icon: Users,
                 color: "text-[#3B82F6]"
               },
               {
-                metric: "40%+",
-                label: "Women Participants",
-                description: "Exceeding diversity and inclusion goals",
-                icon: Activity,
+                metric: "100%",
+                label: "Free Access",
+                description: "No cost to participants",
+                icon: Target,
                 color: "text-[#EC4899]"
               },
               {
-                metric: "100%",
-                label: "Open Source",
-                description: "All tools and code freely available",
-                icon: Sparkles,
+                metric: "4",
+                label: "Venues",
+                description: "Community partners",
+                icon: MapPin,
                 color: "text-[#8B5CF6]"
               }
             ].map((item, index) => (
@@ -304,7 +331,7 @@ export default function ImpactROIPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300 text-center"
               >
                 <div className={`w-12 h-12 mx-auto mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center`}>
                   {React.createElement(item.icon, {
@@ -321,7 +348,7 @@ export default function ImpactROIPage() {
       </section>
 
       <DecorativeDivider 
-        icon={BarChart}
+        icon={Clock}
         gradientColors={{
           from: 'rgba(164, 255, 78, 0.1)',
           via: 'rgba(59, 130, 246, 0.1)',
@@ -341,10 +368,10 @@ export default function ImpactROIPage() {
           >
             <div className="p-8 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#A4FF4E]">
-                Ready to Amplify Community Impact?
+                Ready to Join Our Workshops?
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Join us in creating sustainable, measurable change across Miami's creative community
+                Free, accessible AI education for Miami's creative community
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -355,11 +382,11 @@ export default function ImpactROIPage() {
                   Back to Overview
                 </Link>
                 <Link
-                  href="/grant/knight-foundation/budget"
+                  href="/grant/knight-foundation/impact-roi"
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
                 >
-                  <DollarSign className="w-5 h-5" />
-                  View Budget Details
+                  <Target className="w-5 h-5" />
+                  View Impact Metrics
                 </Link>
               </div>
             </div>

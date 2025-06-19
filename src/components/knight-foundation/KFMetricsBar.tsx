@@ -4,7 +4,7 @@ import { NeonText } from '../shared/NeonText';
 
 const metrics = [
   { value: '120+', label: 'Workshop Participants', info: "Miami's creative community, engaged and growing!" },
-  { value: '4', label: 'Free Clinics', info: 'Zero-cost, high-impact learning sprints.' },
+  { value: '8', label: 'Free Clinics', info: 'Zero-cost, high-impact learning sprints.' },
   { value: '3', label: 'Partner Venues', info: "From Little Haiti to Downtown, we're everywhere." },
   { value: '100%', label: 'Bilingual Content', info: 'English & Spanish, no one left behind.' }
 ];

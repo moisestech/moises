@@ -20,7 +20,31 @@ import {
   Cloud,
   Settings,
   Zap,
-  Clock
+  Clock,
+  ArrowRight,
+  Target,
+  Activity,
+  Database,
+  Server,
+  Globe,
+  Shield,
+  Cpu,
+  Network,
+  GitBranch,
+  Container,
+  Workflow,
+  Github,
+  Code,
+  Layers,
+  Box,
+  Package,
+  Terminal,
+  HardDrive,
+  Database as DatabaseIcon,
+  Cloud as CloudIcon,
+  Square,
+  Circle,
+  Triangle,
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -34,75 +58,79 @@ const features = [
     title: "Real-time Translation",
     description: "Instant ASL to text and vice versa using advanced ML models",
     icon: Brain,
-    color: "blue"
+    color: "text-[#A4FF4E]"
   },
   {
     title: "Low-latency Processing",
     description: "Edge computing ensures minimal delay in translations",
     icon: Zap,
-    color: "purple"
+    color: "text-[#3B82F6]"
   },
   {
     title: "Cloud Integration",
     description: "Secure cloud storage and model updates",
     icon: Cloud,
-    color: "pink"
+    color: "text-[#EC4899]"
   },
   {
     title: "Mobile Companion",
     description: "Cross-platform mobile app for remote access",
     icon: Smartphone,
-    color: "indigo"
+    color: "text-[#8B5CF6]"
   },
   {
     title: "Offline Support",
     description: "Core features work without internet connection",
     icon: Wifi,
-    color: "green"
+    color: "text-[#10B981]"
   },
   {
     title: "Easy Configuration",
     description: "Simple setup and customization options",
     icon: Settings,
-    color: "orange"
+    color: "text-[#F59E0B]"
   }
 ];
 
 const techStack = [
   {
     category: "Frontend",
+    icon: Code,
     technologies: [
-      "React Native",
-      "TensorFlow.js",
-      "WebRTC",
-      "Tailwind CSS"
+      { name: "React Native", icon: Square },
+      { name: "TensorFlow.js", icon: Brain },
+      { name: "WebRTC", icon: Globe },
+      { name: "Tailwind CSS", icon: Sparkles }
     ]
   },
   {
     category: "Backend",
+    icon: Server,
     technologies: [
-      "Node.js",
-      "WebSocket",
-      "Redis",
-      "PostgreSQL"
+      { name: "Node.js", icon: Terminal },
+      { name: "WebSocket", icon: Network },
+      { name: "Redis", icon: DatabaseIcon },
+      { name: "PostgreSQL", icon: DatabaseIcon }
     ]
   },
   {
     category: "ML/AI",
+    icon: Brain,
     technologies: [
-      "TensorFlow",
-      "MediaPipe",
-      "OpenCV",
-      "ONNX Runtime"
+      { name: "TensorFlow", icon: Brain },
+      { name: "MediaPipe", icon: Cpu },
+      { name: "OpenCV", icon: Monitor },
+      { name: "ONNX Runtime", icon: Activity }
     ]
   },
   {
     category: "DevOps",
+    icon: Workflow,
     technologies: [
-      "Docker",
-      "Kubernetes",
-      "GitHub Actions",
-      "AWS"
+      { name: "Docker", icon: Container },
+      { name: "Kubernetes", icon: GitBranch },
+      { name: "GitHub Actions", icon: Github },
+      { name: "AWS", icon: CloudIcon }
     ]
   }
 ];
@@ -112,20 +140,14 @@ export default function SmartSignPage() {
   const isDark = theme === 'dark';
 
   return (
-    <main className={`min-h-screen ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-    }`}>
+    <main className="min-h-screen bg-black text-white">
       <TechNonprofitNavKF />
 
       {/* Back to Main */}
       <div className="fixed top-24 left-4 z-30">
         <Link
           href="/grant/knight-foundation"
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg ${
-            isDark 
-              ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' 
-              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-          } transition-colors`}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E] transition-colors shadow-neon"
         >
           <ChevronLeft className="w-4 h-4" />
           Back to Overview
@@ -141,20 +163,16 @@ export default function SmartSignPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-              <Monitor className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-blue-400">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 mb-6">
+              <Monitor className="w-4 h-4 text-[#A4FF4E]" />
+              <span className="text-sm font-medium text-[#A4FF4E]">
                 Technical Details
               </span>
             </div>
-            <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               Smart Sign Platform
             </h1>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
               Real-time ASL translation powered by edge computing
             </p>
           </motion.div>
@@ -164,11 +182,11 @@ export default function SmartSignPage() {
       <DecorativeDivider 
         icon={Brain}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-[#A4FF4E]/50"
       />
 
       {/* Features Grid */}
@@ -180,12 +198,8 @@ export default function SmartSignPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Key Features</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Key Features</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
               Core capabilities of the Smart Sign platform
             </p>
           </motion.div>
@@ -197,21 +211,15 @@ export default function SmartSignPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-xl border ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700'
-                    : 'bg-white border-gray-200'
-                }`}
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
               >
-                <div className={`w-12 h-12 mb-4 rounded-full bg-${feature.color}-500/20 flex items-center justify-center`}>
+                <div className="w-12 h-12 mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
                   {React.createElement(feature.icon, {
-                    className: `text-${feature.color}-400`
+                    className: `${feature.color} w-7 h-7`
                   })}
                 </div>
-                <h3 className={`text-xl font-bold mb-2 ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>{feature.title}</h3>
-                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                <h3 className="text-xl font-bold mb-2 text-[#A4FF4E]">{feature.title}</h3>
+                <p className="text-gray-300">
                   {feature.description}
                 </p>
               </motion.div>
@@ -223,11 +231,11 @@ export default function SmartSignPage() {
       <DecorativeDivider 
         icon={Code2}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-[#A4FF4E]/50"
       />
 
       {/* Tech Stack */}
@@ -239,12 +247,8 @@ export default function SmartSignPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Technology Stack</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Technology Stack</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
               Modern tools and frameworks powering Smart Sign
             </p>
           </motion.div>
@@ -256,25 +260,28 @@ export default function SmartSignPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-xl border ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700'
-                    : 'bg-white border-gray-200'
-                }`}
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
               >
-                <h3 className={`text-xl font-bold mb-4 ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>{stack.category}</h3>
-                <ul className="space-y-2">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                    {React.createElement(stack.icon, {
+                      className: 'text-[#A4FF4E] w-5 h-5'
+                    })}
+                  </div>
+                  <h3 className="text-xl font-bold text-[#A4FF4E]">{stack.category}</h3>
+                </div>
+                <ul className="space-y-3">
                   {stack.technologies.map((tech) => (
                     <li
-                      key={tech}
-                      className={`flex items-center gap-2 ${
-                        isDark ? 'text-gray-300' : 'text-gray-600'
-                      }`}
+                      key={tech.name}
+                      className="flex items-center gap-3 text-gray-300 hover:text-[#A4FF4E] transition-colors"
                     >
-                      <Laptop className="w-4 h-4" />
-                      {tech}
+                      <div className="w-6 h-6 rounded-full bg-[#A4FF4E]/10 flex items-center justify-center">
+                        {React.createElement(tech.icon, {
+                          className: 'text-[#A4FF4E] w-3 h-3'
+                        })}
+                      </div>
+                      <span className="text-sm font-medium">{tech.name}</span>
                     </li>
                   ))}
                 </ul>
@@ -287,11 +294,11 @@ export default function SmartSignPage() {
       <DecorativeDivider 
         icon={Lightbulb}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-[#A4FF4E]/50"
       />
 
       {/* Implementation Timeline */}
@@ -303,12 +310,8 @@ export default function SmartSignPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Implementation Plan</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Implementation Plan</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
               Development roadmap and milestones
             </p>
           </motion.div>
@@ -318,6 +321,7 @@ export default function SmartSignPage() {
               {
                 phase: "Phase 1: Core Development",
                 duration: "Q3 2025",
+                icon: Code2,
                 tasks: [
                   "Set up development environment",
                   "Implement basic ML models",
@@ -328,6 +332,7 @@ export default function SmartSignPage() {
               {
                 phase: "Phase 2: Feature Implementation",
                 duration: "Q4 2025",
+                icon: Brain,
                 tasks: [
                   "Enhance ML model accuracy",
                   "Add offline capabilities",
@@ -338,6 +343,7 @@ export default function SmartSignPage() {
               {
                 phase: "Phase 3: Optimization",
                 duration: "Q1 2026",
+                icon: Zap,
                 tasks: [
                   "Performance optimization",
                   "Security hardening",
@@ -348,6 +354,7 @@ export default function SmartSignPage() {
               {
                 phase: "Phase 4: Launch",
                 duration: "Q2 2026",
+                icon: Target,
                 tasks: [
                   "Final testing and QA",
                   "Community deployment",
@@ -361,43 +368,85 @@ export default function SmartSignPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-xl border ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700'
-                    : 'bg-white border-gray-200'
-                }`}
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className={`text-xl font-bold ${
-                      isDark ? 'text-white' : 'text-gray-900'
-                    }`}>{phase.phase}</h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Clock className={`w-4 h-4 ${
-                        isDark ? 'text-gray-400' : 'text-gray-500'
-                      }`} />
-                      <span className={`text-sm ${
-                        isDark ? 'text-gray-400' : 'text-gray-500'
-                      }`}>{phase.duration}</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                      {React.createElement(phase.icon, {
+                        className: 'text-[#A4FF4E] w-5 h-5'
+                      })}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-[#A4FF4E]">{phase.phase}</h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        <Clock className="w-4 h-4 text-[#A4FF4E]/80" />
+                        <span className="text-sm text-[#A4FF4E]/80">{phase.duration}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {phase.tasks.map((task) => (
                     <li
                       key={task}
-                      className={`flex items-center gap-2 ${
-                        isDark ? 'text-gray-300' : 'text-gray-600'
-                      }`}
+                      className="flex items-center gap-3 text-gray-300"
                     >
-                      <Sparkles className="w-4 h-4" />
-                      {task}
+                      <div className="w-2 h-2 rounded-full bg-[#A4FF4E]"></div>
+                      <span className="text-sm">{task}</span>
                     </li>
                   ))}
                 </ul>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Shield}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Call to Action */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center"
+          >
+            <div className="p-8 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#A4FF4E]">
+                Ready to Build Smart Signs?
+              </h2>
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Join us in creating accessible technology for Miami's creative community
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/grant/knight-foundation"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                  Back to Overview
+                </Link>
+                <Link
+                  href="/grant/knight-foundation/workshops"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
+                >
+                  <Users className="w-5 h-5" />
+                  View Workshops
+                </Link>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>

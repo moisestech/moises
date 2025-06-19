@@ -19,14 +19,14 @@ const principles = [
     image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214591/ai24/app/ai24-knight-foundation/Sustainability_Flywheel_in_Neon_Gradients_a5617k.png',
     funFact: 'We build for long-term change.'
   },
-  {
-    title: 'AI24 Academy',
-    description: "Boot-camp for ethical, creative AI in Miami.",
-    icon: Users,
-    ascii: 'AI',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214582/ai24/app/ai24-knight-foundation/AI24_Academy_Boot-Camp_Promo_fhtvvt.png',
-    funFact: 'Training the next wave.'
-  },
+  // {
+  //   title: 'AI24 Academy',
+  //   description: "Boot-camp for ethical, creative AI in Miami.",
+  //   icon: Users,
+  //   ascii: 'AI',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214582/ai24/app/ai24-knight-foundation/AI24_Academy_Boot-Camp_Promo_fhtvvt.png',
+  //   funFact: 'Training the next wave.'
+  // },
   {
     title: 'Ethical Creativity',
     description: "AI24: Ethical creativity in action.",
@@ -43,14 +43,14 @@ const principles = [
     image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214556/ai24/app/ai24-knight-foundation/AI24_Promo__Enhance_Your_Impact_nn3qlb.png',
     funFact: 'Amplify your reach.'
   },
-  {
-    title: 'Ethics Meets Innovation',
-    description: "AI24: Ethics meets innovation.",
-    icon: Target,
-    ascii: 'EMI',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214536/ai24/app/ai24-knight-foundation/AI24__Ethics_Meets_Innovation_agmnga.png',
-    funFact: 'Where values drive tech.'
-  },
+  // {
+  //   title: 'Ethics Meets Innovation',
+  //   description: "AI24: Ethics meets innovation.",
+  //   icon: Target,
+  //   ascii: 'EMI',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214536/ai24/app/ai24-knight-foundation/AI24__Ethics_Meets_Innovation_agmnga.png',
+  //   funFact: 'Where values drive tech.'
+  // },
   {
     title: 'AI Ethics in Design',
     description: "AI Ethics in digital design.",
@@ -59,22 +59,22 @@ const principles = [
     image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214526/ai24/app/ai24-knight-foundation/AI_Ethics_in_Digital_Design_dfpg5k.png',
     funFact: 'Designing with conscience.'
   },
-  {
-    title: 'Innovating for Everyone',
-    description: "AI24: Innovating for everyone.",
-    icon: Users,
-    ascii: 'IFE',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214515/ai24/app/ai24-knight-foundation/AI24__Innovating_for_Everyone_nl7v9x.png',
-    funFact: 'Tech for all.'
-  },
-  {
-    title: 'Sustainability Strategy',
-    description: "Impact flywheel: Sustainability strategy.",
-    icon: Heart,
-    ascii: 'SS',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214503/ai24/app/ai24-knight-foundation/Impact_Flywheel__Sustainability_Strategy_vb4f9o.png',
-    funFact: 'Circular impact.'
-  },
+  // {
+  //   title: 'Innovating for Everyone',
+  //   description: "AI24: Innovating for everyone.",
+  //   icon: Users,
+  //   ascii: 'IFE',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214515/ai24/app/ai24-knight-foundation/AI24__Innovating_for_Everyone_nl7v9x.png',
+  //   funFact: 'Tech for all.'
+  // },
+  // {
+  //   title: 'Sustainability Strategy',
+  //   description: "Impact flywheel: Sustainability strategy.",
+  //   icon: Heart,
+  //   ascii: 'SS',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214503/ai24/app/ai24-knight-foundation/Impact_Flywheel__Sustainability_Strategy_vb4f9o.png',
+  //   funFact: 'Circular impact.'
+  // },
   {
     title: 'Impact Targets',
     description: "Impact targets for Miami's future.",
@@ -83,14 +83,14 @@ const principles = [
     image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214491/ai24/app/ai24-knight-foundation/Impact_Targets_for_Miami_s_Future_duh3ib.png',
     funFact: 'Aiming for change.'
   },
-  {
-    title: 'Announcement Board',
-    description: "Community announcement board design.",
-    icon: Info,
-    ascii: 'CAB',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214479/ai24/app/ai24-knight-foundation/Community_Announcement_Board_Design_yxfblq.png',
-    funFact: 'Broadcasting community.'
-  }
+  // {
+  //   title: 'Announcement Board',
+  //   description: "Community announcement board design.",
+  //   icon: Info,
+  //   ascii: 'CAB',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214479/ai24/app/ai24-knight-foundation/Community_Announcement_Board_Design_yxfblq.png',
+  //   funFact: 'Broadcasting community.'
+  // }
 ];
 
 export function KFPrinciplesSection() {

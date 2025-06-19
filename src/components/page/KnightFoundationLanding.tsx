@@ -37,7 +37,17 @@ import { ControlledFlipText } from '@/components/ui/controlled-flip-text';
 import { ManifestoStrip } from '@/components/proposal/ManifestoStrip';
 import { ClinicsCarousel } from '@/components/proposal/ClinicsCarousel';
 import AboveTheFoldAIWords3D from '@/components/knight-foundation/AboveTheFoldAIWords3D';
-import KnightFoundationProposalPage from './KnightFoundationProposalPage';
+import { KFProposalSection } from '@/components/knight-foundation/KFProposalSection';
+import { MiamiLocationsImage } from '../proposal/MiamiLocationsImage';
+import { ProposalTextReveal } from '../proposal/ProposalTextReveal';
+import { NeedAndSolution } from '../proposal/NeedAndSolution';
+import { TimelineVertical } from '../proposal/TimelineVertical';
+import { TeamGrid } from '../proposal/TeamGrid';
+import { OutcomesSection } from '@/components/knight-foundation/proposal/OutcomesSection';
+import { ImpactSection } from '@/components/knight-foundation/proposal/ImpactSection';
+import { SustainabilitySection } from '@/components/knight-foundation/proposal/SustainabilitySection';
+import { BudgetSection } from '@/components/knight-foundation/proposal/BudgetSection';
+import { TimelineSection } from '@/components/knight-foundation/proposal/TimelineSection';
 
 // Micro-motifs as SVG paths
 const motifs = {
@@ -104,9 +114,10 @@ const KnightFoundationLanding: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       <CursorTrail />
+      <TechNonprofitNavKF />
       
-      {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+      {/* Hero Section - Overview */}
+      <section id="overview" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
         <AboveTheFoldAIWords3D className="absolute inset-0 z-0" />
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#1a1a1a] z-0" />
         <div className="container mx-auto px-4 relative z-10">
@@ -149,20 +160,20 @@ const KnightFoundationLanding: React.FC = () => {
               `}</style>
             </div>
             <p className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-              Knight-seeded pilot turning idle screens into culture hubs
+              Knight-seeded pilot integrating hardware & software into educational live event culture hubs.
             </p>
             <div className="flex items-center justify-center gap-6">
               <Link
-                href="/grant/knight-foundation/pilot"
+                href="/grant/knight-foundation/roadmap"
                 className="px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
               >
                 See the 1 Year Pilot
               </Link>
               <Link
-                href="/grant/knight-foundation/proposal.pdf"
+                href="/grant/knight-foundation/proposal"
                 className="px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
               >
-                Download 1-page PDF
+                View Full Proposal
               </Link>
             </div>
           </motion.div>
@@ -173,51 +184,338 @@ const KnightFoundationLanding: React.FC = () => {
 
       <ManifestoStrip />
 
-      {/* Animated Metrics Bar with narrative header */}
-      <KFMetricsBar />
+      <MiamiLocationsImage />
 
-      {/* Principles Section */}
-      <KFPrinciplesSection />
+      <ProposalTextReveal />
+
+      {/* Digital Capacity Section */}
+      <section id="capacity" className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Digital <span className="text-[#A4FF4E]">Capacity</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Building sustainable technology infrastructure for Miami's creative community
+            </p>
+          </motion.div>
+          
+          {/* Animated Metrics Bar */}
+          <KFMetricsBar />
+        </div>
+      </section>
 
       <DecorativeDivider 
         icon={Target}
         gradientColors={{
-          from: 'rgba(59, 130, 246, 0.1)',
-          via: 'rgba(147, 51, 234, 0.1)',
-          to: 'rgba(59, 130, 246, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor="text-blue-400/50"
+        iconColor="text-[#A4FF4E]/50"
       />
 
-      {/* Program Details Grid */}
-      <KFProgramDetailsGrid />
+      {/* ROI Section */}
+      <section id="roi" className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Return on <span className="text-[#A4FF4E]">Investment</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Measurable impact and sustainable growth for Miami's creative ecosystem
+            </p>
+          </motion.div>
+          
+          {/* Proposal Section with ROI focus */}
+          <KFProposalSection />
+        </div>
+      </section>
 
       <DecorativeDivider 
         icon={Sparkles}
         gradientColors={{
-          from: 'rgba(59, 130, 246, 0.1)',
-          via: 'rgba(147, 51, 234, 0.1)',
-          to: 'rgba(59, 130, 246, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor="text-blue-400/50"
+        iconColor="text-[#A4FF4E]/50"
       />
 
-      {/* Proposal Section (imported) */}
-      <section id="proposal" className="py-20">
+      {/* Principles Section */}
+      <section id="principles" className="py-20">
         <div className="container mx-auto px-4">
-          <KnightFoundationProposalPage />
+          <KFPrinciplesSection />
         </div>
       </section>
 
-      {/* Spinning/3D Carousel Clinics Section */}
-      {/* <section className="py-20">
+      <DecorativeDivider 
+        icon={DollarSign}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Budget Section */}
+      <section id="budget" className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            <span className="text-[#A4FF4E]">Skill</span> Clinics
-          </h2>
-          <ClinicsCarousel />
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Budget <span className="text-[#A4FF4E]">Overview</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Transparent allocation of $24,850 for maximum community impact
+            </p>
+          </motion.div>
+          
+          {/* Program Details Grid with budget focus */}
+          <KFProgramDetailsGrid />
         </div>
-      </section> */}
+      </section>
+
+      <DecorativeDivider 
+        icon={Calendar}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Workshops Section */}
+      <section id="workshops" className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Skill <span className="text-[#A4FF4E]">Clinics</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              24 free workshops across Miami's creative community
+            </p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "AI Fundamentals",
+                description: "Introduction to ethical AI tools and workflows",
+                icon: Brain,
+                link: "/grant/knight-foundation/workshops"
+              },
+              {
+                title: "Smart Signs",
+                description: "Digital signage and community engagement",
+                icon: Tv,
+                link: "/grant/knight-foundation/smart-signs"
+              },
+              {
+                title: "Sustainability",
+                description: "Building lasting impact and revenue streams",
+                icon: Heart,
+                link: "/grant/knight-foundation/sustainability"
+              }
+            ].map((workshop, index) => (
+              <motion.div
+                key={workshop.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+              >
+                <div className="w-12 h-12 mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                  {React.createElement(workshop.icon, {
+                    className: 'text-[#A4FF4E] w-6 h-6'
+                  })}
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-[#A4FF4E]">{workshop.title}</h3>
+                <p className="text-gray-300 mb-4">{workshop.description}</p>
+                <Link
+                  href={workshop.link}
+                  className="inline-flex items-center gap-2 text-[#A4FF4E] hover:underline"
+                >
+                  Learn More
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={BarChart}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Impact Section */}
+      <section id="impact" className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Community <span className="text-[#A4FF4E]">Impact</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Measurable outcomes and sustainable growth for Miami's creative ecosystem
+            </p>
+          </motion.div>
+          
+          {/* Need & Solution with impact focus */}
+          <NeedAndSolution />
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Clock}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Timeline Section */}
+      <section id="roadmap" className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Project <span className="text-[#A4FF4E]">Timeline</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              12-month implementation roadmap with key milestones
+            </p>
+          </motion.div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
+                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Phase 1: Foundation (Months 1-3)</h3>
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#A4FF4E]" />
+                    Hardware procurement and setup
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#A4FF4E]" />
+                    Software development and testing
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#A4FF4E]" />
+                    Community partner onboarding
+                  </li>
+                </ul>
+              </div>
+              <div className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
+                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Phase 2: Launch (Months 4-6)</h3>
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#A4FF4E]" />
+                    First workshops and community events
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#A4FF4E]" />
+                    Smart Signs deployment
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-[#A4FF4E]" />
+                    Impact measurement and optimization
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-8 text-center">
+              <Link
+                href="/grant/knight-foundation/roadmap"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
+              >
+                <ArrowRight className="w-5 h-5" />
+                View Detailed Timeline
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Users}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Take-aways Section */}
+      <section id="takeaways" className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Key <span className="text-[#A4FF4E]">Take-aways</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              What Miami's creative community will gain from this investment
+            </p>
+          </motion.div>
+          
+          {/* Team Grid with focus on outcomes */}
+          <TeamGrid />
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Code}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
 
       {/* Ethics Section */}
       <section className="py-20">
@@ -259,10 +557,10 @@ const KnightFoundationLanding: React.FC = () => {
               </ul>
               <div className="flex flex-col sm:flex-row gap-4 mt-6">
                 <Link
-                  href="/grant/knight-foundation/ethics"
+                  href="/grant/knight-foundation/impact-roi"
                   className="inline-flex items-center gap-2 text-[#A4FF4E] hover:underline"
                 >
-                  See our Responsible-AI rubric
+                  View Impact Metrics
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
@@ -287,16 +585,16 @@ const KnightFoundationLanding: React.FC = () => {
             </h2>
             <div className="mt-8 flex items-center gap-4">
               <Link
-                href="/grant/knight-foundation/support"
+                href="/grant/knight-foundation/proposal"
                 className="px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
               >
-                Sign Support Letter
+                View Full Proposal
               </Link>
               <Link
-                href="/grant/knight-foundation/demo"
+                href="/grant/knight-foundation/roadmap"
                 className="px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
               >
-                Book Demo
+                See Timeline
               </Link>
             </div>
           </div>

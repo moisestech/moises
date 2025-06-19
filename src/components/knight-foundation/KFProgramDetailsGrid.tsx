@@ -1,62 +1,65 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  DollarSign, Calendar, Tv, Target, Clock, FileText, ArrowRight, Info
+  DollarSign, Calendar, Tv, Target, Clock, FileText, ArrowRight, Info, BarChart, Users, Brain, RefreshCw
 } from 'lucide-react';
+
+const baseUrl = '/grant/knight-foundation';
 
 const details = [
   {
-    title: 'Impact You Can Screenshot',
-    description: 'Detailed breakdown of the $24,850 pilot program with interactive visualizations.',
-    icon: DollarSign,
-    href: '/grant/knight-foundation/budget',
+    title: 'Impact Analytics',
+    description: 'Real-time dashboard tracking community engagement, workshop participation, and digital skill development.',
+    icon: BarChart,
+    href: `${baseUrl}/impact-roi`,
     ascii: '$$',
-    image: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80',
-    funFact: 'Every dollar is visualized!'
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296175/ai24/app/ai24-impact-analytics_whswlb.png',
+    funFact: 'Live metrics in real-time!'
   },
   {
-    title: '4 Zero-Cost Skill Sprints',
-    description: 'Free capacity clinics with accessibility-first approach.',
-    icon: Calendar,
-    href: '/grant/knight-foundation/workshops',
+    title: 'Zero-Cost Skill Sprints',
+    description: 'Free, bilingual skill clinics with ASL interpretation, childcare, and accessibility-first design.',
+    icon: Users,
+    href: `${baseUrl}/workshops`,
     ascii: '===',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-    funFact: 'Workshops are always free.'
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296176/ai24/app/ai24-skill-clinics-accessibility_vtmheh.png',
+    funFact: '100% accessible to all!'
   },
   {
-    title: 'Plug-n-Play Community Screens',
-    description: 'Open-source React + Supabase digital signage solution.',
+    title: 'Community Screens',
+    description: 'Plug-n-play Smart Signs transforming venue TVs into interactive community announcement boards.',
     icon: Tv,
-    href: '/grant/knight-foundation/smart-sign',
+    href: `${baseUrl}/community-smart-signs`,
     ascii: '[TV]',
-    image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80',
-    funFact: 'Screens run on open source!'
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296177/ai24/app/ai24-community-event-screens_ko2n5f.png',
+    funFact: 'Raspberry Pi powered!'
   },
   {
-    title: 'License → Re-fuel → Repeat',
-    description: 'Measurable outcomes and return on investment across sectors.',
-    icon: Target,
-    href: '/grant/knight-foundation/impact-roi',
+    title: 'License → Refuel → Repeat',
+    description: 'Sustainable growth model with $39/month venue licenses funding continued expansion.',
+    icon: RefreshCw,
+    href: `${baseUrl}/sustainability-cycle`,
     ascii: '->',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80',
-    funFact: 'ROI is tracked in real time.'
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296202/ai24/app/ai24-license-refuel-repeat_mfouvn.png',
+    funFact: 'Self-sustaining model!'
   },
   {
     title: 'Human-Ready AI Toolkits',
-    description: '1 Year Pilot roadmap from launch to sustainability.',
-    icon: Clock,
-    href: '/grant/knight-foundation/roadmap',
+    description: 'Curated AI tools designed with human needs in mind—accessible, ethical, and empowering.',
+    icon: Brain,
+    href: `${baseUrl}/ai-toolkits`,
     ascii: 'AI',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-    funFact: 'AI tools for everyone.'
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296307/ai24/app/ai24-human-ready-ai-toolkits_s4hid3.png',
+    funFact: 'AI built for humans!'
   },
   {
     title: 'Full Proposal',
-    description: 'Read our complete 1,000-word proposal narrative.',
+    description: 'Complete 20-page proposal with detailed technical specifications, budget, and implementation timeline.',
     icon: FileText,
+    href: `${baseUrl}/proposal`,
     ascii: '[TXT]',
-    image: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80',
-    funFact: 'The full story, in one place.'
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296308/ai24/app/ai24-full-proposal_aiiadr.png',
+    funFact: 'Everything you need to know!'
   }
 ];
 
@@ -75,7 +78,7 @@ export function KFProgramDetailsGrid() {
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Pilot Program Details</h2>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-          Explore each aspect of our lean, focused approach
+          Explore each aspect of our comprehensive AI24 mobile laboratory proposal
         </p>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">

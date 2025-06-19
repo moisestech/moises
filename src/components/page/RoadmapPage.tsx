@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
+import { TimelineSection } from '@/components/knight-foundation/proposal/TimelineSection';
+import { TimelineVertical } from '@/components/proposal/TimelineVertical';
 import {
   ChevronLeft,
   Map,
@@ -310,6 +312,32 @@ export default function RoadmapPage() {
 
       <DecorativeDivider 
         icon={Brain}
+        gradientColors={{
+          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
+          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
+          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+        }}
+        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+      />
+
+      {/* Timeline Section */}
+      <TimelineSection />
+
+      <DecorativeDivider 
+        icon={Clock}
+        gradientColors={{
+          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
+          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
+          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+        }}
+        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+      />
+
+      {/* Timeline Vertical */}
+      <TimelineVertical />
+
+      <DecorativeDivider 
+        icon={Sparkles}
         gradientColors={{
           from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
           via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',

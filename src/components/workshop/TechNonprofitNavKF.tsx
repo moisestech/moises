@@ -21,7 +21,7 @@ const navigation = [
 
 export function TechNonprofitNavKF() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("budget");
+  const [activeSection, setActiveSection] = useState("overview");
   const { theme } = useTheme();
 
   const scrollToSection = (sectionId: string) => {
@@ -64,22 +64,17 @@ export function TechNonprofitNavKF() {
       initial={{ opacity: 0 }}
       animate={{ opacity: isMenuOpen ? 1 : 0 }}
       transition={{ duration: 0.3 }}
-      className={`fixed inset-0 z-50 ${
-        theme === 'dark' ? 'bg-black/80' : 'bg-white/80'
-      } backdrop-blur-md ${isMenuOpen ? 'block' : 'hidden'}`}
+      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md"
+      style={{ display: isMenuOpen ? 'block' : 'none' }}
     >
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center mb-8">
-          <h2 className={`text-2xl font-bold ${
-            theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`}>Menu</h2>
+          <h2 className="text-2xl font-bold text-white">Menu</h2>
           <div className="flex items-center gap-4">
             <DarkLightThemeSelector />
             <button 
               onClick={() => setIsMenuOpen(false)}
-              className={`${
-                theme === 'dark' ? 'text-white hover:text-blue-400' : 'text-gray-900 hover:text-blue-600'
-              } transition-colors`}
+              className="text-white hover:text-[#A4FF4E] transition-colors"
             >
               <X className="h-6 w-6" />
             </button>
@@ -90,9 +85,7 @@ export function TechNonprofitNavKF() {
             <button
               key={item.name}
               onClick={() => scrollToSection(item.href.substring(1))}
-              className={`text-left text-xl ${
-                theme === 'dark' ? 'text-white hover:text-blue-400' : 'text-gray-900 hover:text-blue-600'
-              } transition-colors py-2`}
+              className="text-left text-xl text-white hover:text-[#A4FF4E] transition-colors py-2"
             >
               {item.name}
             </button>
@@ -104,19 +97,11 @@ export function TechNonprofitNavKF() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-40 ${
-        theme === 'dark' 
-          ? 'bg-black/80 backdrop-blur-md border-b border-gray-800' 
-          : 'bg-white/80 backdrop-blur-md border-b border-gray-200'
-      }`}>
+      <header className="fixed top-0 left-0 right-0 z-40 bg-black/80 backdrop-blur-md border-b border-gray-800">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <Link href="/grant/knight-foundation" className="text-xl font-bold">
-              <span className={`${
-                theme === 'dark' 
-                  ? 'bg-gradient-to-r from-blue-400 to-purple-400' 
-                  : 'bg-gradient-to-r from-blue-600 to-purple-600'
-              } bg-clip-text text-transparent`}>
+              <span className="bg-gradient-to-r from-[#A4FF4E] to-[#00FF88] bg-clip-text text-transparent">
                 Knight Foundation Proposal
               </span>
             </Link>
@@ -129,8 +114,8 @@ export function TechNonprofitNavKF() {
                     onClick={() => scrollToSection(item.href.substring(1))}
                     className={`text-sm font-medium transition-colors ${
                       activeSection === item.href.substring(1)
-                        ? theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
-                        : theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                        ? 'text-[#A4FF4E]'
+                        : 'text-gray-300 hover:text-white'
                     }`}
                   >
                     {item.name}
@@ -142,9 +127,7 @@ export function TechNonprofitNavKF() {
               
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className={`md:hidden ${
-                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                }`}
+                className="md:hidden text-white"
               >
                 <Menu className="h-6 w-6" />
               </button>

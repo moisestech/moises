@@ -2,7 +2,7 @@
 import dynamic from 'next/dynamic';
 
 const WorkshopsPage = dynamic(
-  () => import('@/components/page/WorkshopsPage'),
+  () => import('@/components/page/KFWorkshopsPage'),
   { ssr: false }
 );
 
