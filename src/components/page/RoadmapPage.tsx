@@ -169,20 +169,14 @@ export default function RoadmapPage() {
   const isDark = theme === 'dark';
 
   return (
-    <main className={`min-h-screen ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-    }`}>
+    <main className="min-h-screen bg-black text-white">
       <TechNonprofitNavKF />
 
       {/* Back to Main */}
       <div className="fixed top-24 left-4 z-30">
         <Link
           href="/grant/knight-foundation"
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg ${
-            isDark 
-              ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' 
-              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-          } transition-colors`}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E] transition-colors shadow-neon"
         >
           <ChevronLeft className="w-4 h-4" />
           Back to Overview
@@ -198,20 +192,16 @@ export default function RoadmapPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-              <Map className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-blue-400">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 mb-6">
+              <Map className="w-4 h-4 text-[#A4FF4E]" />
+              <span className="text-sm font-medium text-[#A4FF4E]">
                 Project Roadmap
               </span>
             </div>
-            <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               Implementation Timeline
             </h1>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
               Detailed project phases and milestones
             </p>
           </motion.div>
@@ -221,11 +211,11 @@ export default function RoadmapPage() {
       <DecorativeDivider 
         icon={Target}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-[#A4FF4E]/50"
       />
 
       {/* Milestones */}
@@ -241,17 +231,9 @@ export default function RoadmapPage() {
                 className="mb-16 last:mb-0"
               >
                 <div className="flex items-center gap-4 mb-8">
-                  <Flag className={`w-6 h-6 ${
-                    isDark ? 'text-blue-400' : 'text-blue-600'
-                  }`} />
-                  <h2 className={`text-2xl md:text-3xl font-bold ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  }`}>{milestone.phase}</h2>
-                  <div className={`px-3 py-1 rounded-full text-sm ${
-                    isDark
-                      ? 'bg-blue-500/10 text-blue-400'
-                      : 'bg-blue-100 text-blue-600'
-                  }`}>
+                  <Flag className="w-6 h-6 text-[#A4FF4E]" />
+                  <h2 className="text-2xl md:text-3xl font-bold text-white">{milestone.phase}</h2>
+                  <div className="px-3 py-1 rounded-full text-sm bg-[#A4FF4E]/10 text-[#A4FF4E] border border-[#A4FF4E]/30">
                     {milestone.quarter}
                   </div>
                 </div>
@@ -262,21 +244,11 @@ export default function RoadmapPage() {
                       key={objective.title}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className={`p-6 rounded-xl border ${
-                        isDark
-                          ? 'bg-gray-800/50 border-gray-700'
-                          : 'bg-white border-gray-200'
-                      }`}
+                      className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
                     >
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className={`text-xl font-bold ${
-                          isDark ? 'text-white' : 'text-gray-900'
-                        }`}>{objective.title}</h3>
-                        <div className={`px-3 py-1 rounded-full text-sm ${
-                          isDark
-                            ? 'bg-purple-500/10 text-purple-400'
-                            : 'bg-purple-100 text-purple-600'
-                        }`}>
+                        <h3 className="text-xl font-bold text-white">{objective.title}</h3>
+                        <div className="px-3 py-1 rounded-full text-sm bg-[#A4FF4E]/20 text-[#A4FF4E] border border-[#A4FF4E]/30">
                           {objective.status}
                         </div>
                       </div>
@@ -284,11 +256,9 @@ export default function RoadmapPage() {
                         {objective.tasks.map((task) => (
                           <li
                             key={task}
-                            className={`flex items-center gap-2 ${
-                              isDark ? 'text-gray-300' : 'text-gray-600'
-                            }`}
+                            className="flex items-center gap-2 text-gray-300"
                           >
-                            <CheckCircle2 className="w-4 h-4" />
+                            <CheckCircle2 className="w-4 h-4 text-[#A4FF4E]" />
                             {task}
                           </li>
                         ))}
@@ -299,9 +269,7 @@ export default function RoadmapPage() {
 
                 {index < milestones.length - 1 && (
                   <div className="flex justify-center my-8">
-                    <ArrowRight className={`w-8 h-8 ${
-                      isDark ? 'text-gray-600' : 'text-gray-400'
-                    }`} />
+                    <ArrowRight className="w-8 h-8 text-[#A4FF4E]/50" />
                   </div>
                 )}
               </motion.div>
@@ -313,11 +281,11 @@ export default function RoadmapPage() {
       <DecorativeDivider 
         icon={Brain}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-[#A4FF4E]/50"
       />
 
       {/* Timeline Section */}
@@ -326,11 +294,11 @@ export default function RoadmapPage() {
       <DecorativeDivider 
         icon={Clock}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-[#A4FF4E]/50"
       />
 
       {/* Timeline Vertical */}
@@ -339,11 +307,11 @@ export default function RoadmapPage() {
       <DecorativeDivider 
         icon={Sparkles}
         gradientColors={{
-          from: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
-          via: isDark ? 'rgba(147, 51, 234, 0.1)' : 'rgba(124, 58, 237, 0.1)',
-          to: isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)'
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
         }}
-        iconColor={isDark ? 'text-blue-400/50' : 'text-blue-600/50'}
+        iconColor="text-[#A4FF4E]/50"
       />
 
       {/* Success Metrics */}
@@ -355,12 +323,8 @@ export default function RoadmapPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>Success Metrics</h2>
-            <p className={`text-xl ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            } max-w-3xl mx-auto`}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Success Metrics</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
               Key performance indicators and goals
             </p>
           </motion.div>
@@ -400,31 +364,21 @@ export default function RoadmapPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-xl border ${
-                  isDark
-                    ? 'bg-gray-800/50 border-gray-700'
-                    : 'bg-white border-gray-200'
-                }`}
+                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
               >
-                <div className={`w-12 h-12 mb-4 rounded-full ${
-                  isDark ? 'bg-blue-500/20' : 'bg-blue-100'
-                } flex items-center justify-center`}>
+                <div className="w-12 h-12 mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
                   {React.createElement(metric.icon, {
-                    className: isDark ? 'text-blue-400' : 'text-blue-600'
+                    className: 'text-[#A4FF4E] w-6 h-6'
                   })}
                 </div>
-                <h3 className={`text-xl font-bold mb-4 ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>{metric.title}</h3>
+                <h3 className="text-xl font-bold mb-4 text-white">{metric.title}</h3>
                 <ul className="space-y-2">
                   {metric.metrics.map((item) => (
                     <li
                       key={item}
-                      className={`flex items-center gap-2 ${
-                        isDark ? 'text-gray-300' : 'text-gray-600'
-                      }`}
+                      className="flex items-center gap-2 text-gray-300"
                     >
-                      <CheckCircle2 className="w-4 h-4" />
+                      <CheckCircle2 className="w-4 h-4 text-[#A4FF4E]" />
                       {item}
                     </li>
                   ))}

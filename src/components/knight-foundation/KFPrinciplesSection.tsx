@@ -11,14 +11,14 @@ const principles = [
     image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214598/ai24/app/ai24-knight-foundation/Futuristic_Philosophy_in_Metallic_Design_qolmr3.png',
     funFact: 'We design for people first!'
   },
-  {
-    title: 'Sustainable Impact',
-    description: "Self-sustaining model through license revenue",
-    icon: Target,
-    ascii: '->',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214591/ai24/app/ai24-knight-foundation/Sustainability_Flywheel_in_Neon_Gradients_a5617k.png',
-    funFact: 'We build for long-term change.'
-  },
+  // {
+  //   title: 'Sustainable Impact',
+  //   description: "Self-sustaining model through license revenue",
+  //   icon: Target,
+  //   ascii: '->',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214591/ai24/app/ai24-knight-foundation/Sustainability_Flywheel_in_Neon_Gradients_a5617k.png',
+  //   funFact: 'We build for long-term change.'
+  // },
   // {
   //   title: 'AI24 Academy',
   //   description: "Boot-camp for ethical, creative AI in Miami.",
@@ -29,20 +29,20 @@ const principles = [
   // },
   {
     title: 'Ethical Creativity',
-    description: "AI24: Ethical creativity in action.",
+    description: "AI24: Ethical creativity meets art in action.",
     icon: Info,
     ascii: 'EC',
     image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214568/ai24/app/ai24-knight-foundation/AI24__Ethical_Creativity_in_Action_jlukuu.png',
-    funFact: 'Ethics meets art.'
+    funFact: 'Creating with conscience.'
   },
-  {
-    title: 'Enhance Your Impact',
-    description: "AI24 Promo: Enhance your impact.",
-    icon: Heart,
-    ascii: 'EYI',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214556/ai24/app/ai24-knight-foundation/AI24_Promo__Enhance_Your_Impact_nn3qlb.png',
-    funFact: 'Amplify your reach.'
-  },
+  // {
+  //   title: 'Enhance Your Impact',
+  //   description: "AI24 Promo: Enhance your impact.",
+  //   icon: Heart,
+  //   ascii: 'EYI',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214556/ai24/app/ai24-knight-foundation/AI24_Promo__Enhance_Your_Impact_nn3qlb.png',
+  //   funFact: 'Amplify your reach.'
+  // },
   // {
   //   title: 'Ethics Meets Innovation',
   //   description: "AI24: Ethics meets innovation.",
@@ -51,14 +51,14 @@ const principles = [
   //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214536/ai24/app/ai24-knight-foundation/AI24__Ethics_Meets_Innovation_agmnga.png',
   //   funFact: 'Where values drive tech.'
   // },
-  {
-    title: 'AI Ethics in Design',
-    description: "AI Ethics in digital design.",
-    icon: Info,
-    ascii: 'AED',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214526/ai24/app/ai24-knight-foundation/AI_Ethics_in_Digital_Design_dfpg5k.png',
-    funFact: 'Designing with conscience.'
-  },
+  // {
+  //   title: 'Ethical Creativity',
+  //   description: "AI Ethics in digital design.",
+  //   icon: Info,
+  //   ascii: 'AED',
+  //   image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1749214526/ai24/app/ai24-knight-foundation/AI_Ethics_in_Digital_Design_dfpg5k.png',
+  //   funFact: 'Designing with conscience.'
+  // },
   // {
   //   title: 'Innovating for Everyone',
   //   description: "AI24: Innovating for everyone.",

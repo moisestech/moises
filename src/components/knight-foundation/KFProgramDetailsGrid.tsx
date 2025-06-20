@@ -8,13 +8,13 @@ const baseUrl = '/grant/knight-foundation';
 
 const details = [
   {
-    title: 'Impact Analytics',
-    description: 'Real-time dashboard tracking community engagement, workshop participation, and digital skill development.',
-    icon: BarChart,
-    href: `${baseUrl}/impact-roi`,
-    ascii: '$$',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296175/ai24/app/ai24-impact-analytics_whswlb.png',
-    funFact: 'Live metrics in real-time!'
+    title: 'Human-Ready AI Toolkits',
+    description: 'Curated AI tools designed with human needs in mind—accessible, ethical, and empowering.',
+    icon: Brain,
+    href: `${baseUrl}/ai-toolkits`,
+    ascii: 'AI',
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296307/ai24/app/ai24-human-ready-ai-toolkits_s4hid3.png',
+    funFact: 'AI built for humans!'
   },
   {
     title: 'Zero-Cost Skill Sprints',
@@ -44,13 +44,13 @@ const details = [
     funFact: 'Self-sustaining model!'
   },
   {
-    title: 'Human-Ready AI Toolkits',
-    description: 'Curated AI tools designed with human needs in mind—accessible, ethical, and empowering.',
-    icon: Brain,
-    href: `${baseUrl}/ai-toolkits`,
-    ascii: 'AI',
-    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296307/ai24/app/ai24-human-ready-ai-toolkits_s4hid3.png',
-    funFact: 'AI built for humans!'
+    title: 'Impact Analytics',
+    description: 'Real-time dashboard tracking community engagement, workshop participation, and digital skill development.',
+    icon: BarChart,
+    href: `${baseUrl}/impact-roi`,
+    ascii: '$$',
+    image: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1750296175/ai24/app/ai24-impact-analytics_whswlb.png',
+    funFact: 'Live metrics in real-time!'
   },
   {
     title: 'Full Proposal',

@@ -160,8 +160,9 @@ const KnightFoundationLanding: React.FC = () => {
               `}</style>
             </div>
             <p className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-              Knight-seeded pilot integrating hardware & software into educational live event culture hubs.
+              Knight-seeded pilot building sustainable technology infrastructure and educational live event culture hubs.
             </p>
+              {/* , for Miami's creative community. */}
             <div className="flex items-center justify-center gap-6">
               <Link
                 href="/grant/knight-foundation/roadmap"
@@ -186,7 +187,27 @@ const KnightFoundationLanding: React.FC = () => {
 
       <MiamiLocationsImage />
 
+      <DecorativeDivider 
+        icon={Sparkles}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
       <ProposalTextReveal />
+
+      <DecorativeDivider 
+        icon={Sparkles}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
 
       {/* Digital Capacity Section */}
       <section id="capacity" className="py-20">
@@ -200,13 +221,13 @@ const KnightFoundationLanding: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               Digital <span className="text-[#A4FF4E]">Capacity</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Building sustainable technology infrastructure for Miami's creative community
-            </p>
           </motion.div>
           
           {/* Animated Metrics Bar */}
           <KFMetricsBar />
+
+          {/* Proposal Section with ROI focus */}
+          {/* <KFProposalSection /> */}
         </div>
       </section>
 
@@ -219,6 +240,9 @@ const KnightFoundationLanding: React.FC = () => {
         }}
         iconColor="text-[#A4FF4E]/50"
       />
+
+      {/* Program Details Grid with budget focus */}
+      <KFProgramDetailsGrid />
 
       {/* ROI Section */}
       <section id="roi" className="py-20">
@@ -236,9 +260,6 @@ const KnightFoundationLanding: React.FC = () => {
               Measurable impact and sustainable growth for Miami's creative ecosystem
             </p>
           </motion.div>
-          
-          {/* Proposal Section with ROI focus */}
-          <KFProposalSection />
         </div>
       </section>
 
@@ -285,9 +306,6 @@ const KnightFoundationLanding: React.FC = () => {
               Transparent allocation of $24,850 for maximum community impact
             </p>
           </motion.div>
-          
-          {/* Program Details Grid with budget focus */}
-          <KFProgramDetailsGrid />
         </div>
       </section>
 
