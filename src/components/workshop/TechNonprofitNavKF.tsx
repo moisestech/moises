@@ -1,28 +1,122 @@
 'use client';
 
+// REACT & NEXT
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useTheme } from '@/contexts/ThemeContext';
-import { DarkLightThemeSelector } from '@/components/common/DarkLightThemeSelector';
 
-const navigation = [
-  { name: "Overview", href: "#overview" },
-  { name: "Digital Capacity", href: "#capacity" },
-  { name: "ROI", href: "#roi" },
-  { name: "Principles", href: "#principles" },
-  { name: "Budget", href: "#budget" },
-  { name: "Workshops", href: "#workshops" },
-  { name: "Impact", href: "#impact" },
-  { name: "Timeline", href: "#roadmap" },
-  { name: "Take-aways", href: "#takeaways" }
+// THIRD PARTY
+import { motion } from 'framer-motion';
+
+// CONTEXT
+import { useTheme } from '@/contexts/ThemeContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+// COMPONENTS
+import { DarkLightThemeSelector } from '@/components/common/DarkLightThemeSelector';
+import { LanguageSelector } from '@/components/common/LanguageSelector';
+
+// ICONS
+import { Menu, X } from 'lucide-react';
+
+// TRANSLATIONS
+import { proposalTranslations } from '@/translations/proposal';
+
+// Landing page navigation (sections)
+const landingNavigation = [
+  { name: "Overview", href: "#overview", key: "overview" },
+  { name: "Digital Capacity", href: "#capacity", key: "digitalCapacity" },
+  { name: "ROI", href: "#roi", key: "roi" },
+  { name: "Principles", href: "#principles", key: "principles" },
+  { name: "Budget", href: "#budget", key: "budget" },
+  { name: "Workshops", href: "#workshops", key: "workshops" },
+  { name: "Impact", href: "#impact", key: "impact" },
+  { name: "Timeline", href: "#roadmap", key: "timeline" },
+  { name: "Take-aways", href: "#takeaways", key: "takeaways" }
 ];
+
+// Other pages navigation (links to other pages)
+const otherPagesNavigation = [
+  { name: "Overview", href: "/grant/knight-foundation", key: "overview" },
+  { name: "Proposal", href: "/grant/knight-foundation/proposal", key: "proposal" },
+  { name: "Roadmap", href: "/grant/knight-foundation/roadmap", key: "roadmap" },
+  { name: "Workshops", href: "/grant/knight-foundation/workshops", key: "workshops" },
+  { name: "Smart Signs", href: "/grant/knight-foundation/smart-signs", key: "smartSigns" },
+  { name: "Sustainability", href: "/grant/knight-foundation/sustainability", key: "sustainability" },
+  { name: "AI Toolkits", href: "/grant/knight-foundation/ai-toolkits", key: "aiToolkits" },
+  { name: "Impact & ROI", href: "/grant/knight-foundation/impact-roi", key: "impactRoi" },
+  { name: "Budget", href: "/grant/knight-foundation/budget", key: "budget" }
+];
+
+// Translations
+const translations = {
+  en: {
+    menu: "Menu",
+    overview: "Overview",
+    digitalCapacity: "Digital Capacity",
+    roi: "ROI",
+    principles: "Principles",
+    budget: "Budget",
+    workshops: "Workshops",
+    impact: "Impact",
+    timeline: "Timeline",
+    takeaways: "Take-aways",
+    proposal: "Proposal",
+    roadmap: "Roadmap",
+    smartSigns: "Smart Signs",
+    sustainability: "Sustainability",
+    aiToolkits: "AI Toolkits",
+    impactRoi: "Impact & ROI"
+  },
+  es: {
+    menu: "Menú",
+    overview: "Resumen",
+    digitalCapacity: "Capacidad Digital",
+    roi: "ROI",
+    principles: "Principios",
+    budget: "Presupuesto",
+    workshops: "Talleres",
+    impact: "Impacto",
+    timeline: "Cronograma",
+    takeaways: "Conclusiones",
+    proposal: "Propuesta",
+    roadmap: "Hoja de Ruta",
+    smartSigns: "Señales Inteligentes",
+    sustainability: "Sostenibilidad",
+    aiToolkits: "Herramientas IA",
+    impactRoi: "Impacto y ROI"
+  },
+  fr: {
+    menu: "Menu",
+    overview: "Aperçu",
+    digitalCapacity: "Capacité Numérique",
+    roi: "ROI",
+    principles: "Principes",
+    budget: "Budget",
+    workshops: "Ateliers",
+    impact: "Impact",
+    timeline: "Calendrier",
+    takeaways: "Points Clés",
+    proposal: "Proposition",
+    roadmap: "Feuille de Route",
+    smartSigns: "Panneaux Intelligents",
+    sustainability: "Durabilité",
+    aiToolkits: "Outils IA",
+    impactRoi: "Impact et ROI"
+  }
+};
 
 export function TechNonprofitNavKF() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("overview");
   const { theme } = useTheme();
+  const { language } = useLanguage();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const t = translations[language];
+  const isLandingPage = pathname === '/grant/knight-foundation';
+  const navigation = isLandingPage ? landingNavigation : otherPagesNavigation;
 
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false);
@@ -38,26 +132,37 @@ export function TechNonprofitNavKF() {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = navigation.map(item => item.href.substring(1));
-      const scrollPosition = window.scrollY + 100;
+  const navigateToPage = (href: string) => {
+    setIsMenuOpen(false);
+    if (href.startsWith('/')) {
+      router.push(href);
+    } else {
+      scrollToSection(href.substring(1));
+    }
+  };
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+  useEffect(() => {
+    if (isLandingPage) {
+      const handleScroll = () => {
+        const sections = landingNavigation.map(item => item.href.substring(1));
+        const scrollPosition = window.scrollY + 100;
+
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
-      }
-    };
+      };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [isLandingPage]);
 
   const MobileMenu = () => (
     <motion.div
@@ -69,8 +174,9 @@ export function TechNonprofitNavKF() {
     >
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-white">Menu</h2>
+          <h2 className="text-2xl font-bold text-white">{t.menu}</h2>
           <div className="flex items-center gap-4">
+            <LanguageSelector />
             <DarkLightThemeSelector />
             <button 
               onClick={() => setIsMenuOpen(false)}
@@ -84,10 +190,10 @@ export function TechNonprofitNavKF() {
           {navigation.map((item) => (
             <button
               key={item.name}
-              onClick={() => scrollToSection(item.href.substring(1))}
+              onClick={() => navigateToPage(item.href)}
               className="text-left text-xl text-white hover:text-[#A4FF4E] transition-colors py-2"
             >
-              {item.name}
+              {t[item.key as keyof typeof t] || item.name}
             </button>
           ))}
         </nav>
@@ -111,19 +217,23 @@ export function TechNonprofitNavKF() {
                 {navigation.map((item) => (
                   <button
                     key={item.name}
-                    onClick={() => scrollToSection(item.href.substring(1))}
+                    onClick={() => navigateToPage(item.href)}
                     className={`text-sm font-medium transition-colors ${
-                      activeSection === item.href.substring(1)
+                      (isLandingPage && activeSection === item.href.substring(1)) ||
+                      (!isLandingPage && pathname === item.href)
                         ? 'text-[#A4FF4E]'
                         : 'text-gray-300 hover:text-white'
                     }`}
                   >
-                    {item.name}
+                    {t[item.key as keyof typeof t] || item.name}
                   </button>
                 ))}
               </nav>
 
-              <DarkLightThemeSelector />
+              <div className="flex items-center gap-4">
+                <LanguageSelector />
+                <DarkLightThemeSelector />
+              </div>
               
               <button
                 onClick={() => setIsMenuOpen(true)}

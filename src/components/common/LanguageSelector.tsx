@@ -1,14 +1,22 @@
 'use client';
 
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useTheme } from '@/contexts/ThemeContext';
-import { Button } from '@/components/ui/button';
-import { Globe, Check } from 'lucide-react';
+// UI
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
+// COMPONENTS
+import { Button } from '@/components/ui/button';
+
+// CONTEXT
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
+
+// ICONS
+import { Globe, Check } from 'lucide-react';
+
 
 const languages = [
   { code: 'en', label: 'English', flag: '🇺🇸' },
