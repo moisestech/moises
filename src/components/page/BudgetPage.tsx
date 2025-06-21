@@ -14,7 +14,13 @@ import {
   Laptop,
   Sparkles,
   Clock,
-  Briefcase
+  Briefcase,
+  Code,
+  Tv,
+  Brain,
+  Globe,
+  CheckCircle,
+  Target
 } from 'lucide-react';
 import {
   BarChart,
@@ -35,60 +41,65 @@ const fadeInUp = {
   transition: { duration: 0.5 }
 };
 
-// Budget data
+// Updated budget data to match the exact $24,950 breakdown
 const budgetData = {
-  totalRequest: 24850,
+  totalRequest: 24950,
   categories: [
     {
-      name: "Staff",
-      amount: 15000,
+      name: "Program Salaries & Wages",
+      amount: 10300,
       breakdown: [
-        { title: "Moises - Project Lead / Dev (0.3 FTE × 6 mo)", amount: 9000 },
-        { title: "Fabiola - Community / Growth (0.15 FTE × 6 mo)", amount: 3000 },
-        { title: "Mentor Micro-stipends (3 Miami artists)", amount: 3000 }
-      ]
+        { title: "Lead Developer (PT) - 10 hrs/week × 6 months × $29/hr", amount: 7000 },
+        { title: "Bilingual Coordinator (PT) - 6 hrs/week × 6 months × $23/hr", amount: 3300 }
+      ],
+      description: "Part-time staff to build, secure, document the stack and translate UI, caption videos, run help desk"
     },
     {
-      name: "App / CRM / Signage",
-      amount: 4000,
+      name: "Contracted Services",
+      amount: 5850,
       breakdown: [
-        { title: "React + Supabase Board skin (40 hrs)", amount: 3000 },
-        { title: "Hosting / SaaS (6 mo)", amount: 1000 }
-      ]
+        { title: "Web/LMS codebase development (React + Supabase)", amount: 3500 },
+        { title: "Automation scripts for metrics & data cleaning", amount: 1500 },
+        { title: "Documentation and testing", amount: 850 }
+      ],
+      description: "One-off tech work including building the web/LMS codebase plus automation scripts"
     },
     {
-      name: "Hardware",
-      amount: 3000,
+      name: "Hardware & Materials",
+      amount: 6900,
       breakdown: [
-        { title: "6 × Raspberry Pi 5 kits + mounts + SD cards", amount: 1200 },
-        { title: "Refurbished dev/stream laptop", amount: 800 }
-      ]
+        { title: "2 × Museum-grade Smart Signs (screens + Raspberry Pi players)", amount: 2400 },
+        { title: "12 × Raspberry-Pi learning stations for workshops", amount: 1800 },
+        { title: "Portable LaserCube projector", amount: 1200 },
+        { title: "Short-throw LED projector", amount: 800 },
+        { title: "Refurbished Legion laptop for demos", amount: 700 }
+      ],
+      description: "Hardware fleet including Smart Signs, Pi kits, projectors, and demo equipment"
     },
     {
-      name: "Workshop Ops",
-      amount: 2000,
+      name: "Cloud & Admin Costs",
+      amount: 1400,
       breakdown: [
-        { title: "4 free capacity clinics (snacks, ASL, childcare)", amount: 2000 }
-      ]
+        { title: "Supabase Pro (6 months)", amount: 600 },
+        { title: "PostHog analytics (6 months)", amount: 400 },
+        { title: "Streamlabs for livestreaming (6 months)", amount: 400 }
+      ],
+      description: "Six months of cloud services for reliable platform operation"
     },
     {
-      name: "Infra / Insurance",
-      amount: 1000,
+      name: "Contingency & Spare Parts",
+      amount: 500,
       breakdown: [
-        { title: "Two weekend van rentals & COI", amount: 1000 }
-      ]
-    },
-    {
-      name: "Contingency",
-      amount: 850,
-      breakdown: [
-        { title: "Buffer for parts / overruns", amount: 850 }
-      ]
+        { title: "Extra cables and connectors", amount: 200 },
+        { title: "Backup Raspberry Pi", amount: 150 },
+        { title: "Replacement projector lamp", amount: 150 }
+      ],
+      description: "Backup equipment to keep everything running if something fails mid-event"
     }
   ]
 };
 
-const COLORS = ['#3B82F6', '#6366F1', '#8B5CF6', '#EC4899', '#F43F5E'];
+const COLORS = ['#A4FF4E', '#3B82F6', '#8B5CF6', '#EC4899', '#F59E0B'];
 
 export default function BudgetPage() {
   const { theme } = useTheme();
@@ -137,7 +148,7 @@ export default function BudgetPage() {
               {formatCurrency(budgetData.totalRequest)}
             </h1>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Total funding request for 12-month program
+              Total funding request for 12-month AI24 program
             </p>
           </motion.div>
         </div>
@@ -145,6 +156,88 @@ export default function BudgetPage() {
 
       <DecorativeDivider 
         icon={Building2}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Activity Summary */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">
+              Activity Summary
+            </h2>
+            <p className="text-xl text-[#A4FF4E]/80 mb-8 text-center">
+              Over 1 year <strong>AI24</strong> will
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              {[
+                {
+                  title: "Build",
+                  description: "a bilingual web platform",
+                  icon: Code,
+                  color: "text-[#A4FF4E]"
+                },
+                {
+                  title: "Roll out",
+                  description: "a small but visible hardware fleet",
+                  icon: Tv,
+                  color: "text-[#3B82F6]"
+                },
+                {
+                  title: "Train",
+                  description: "venue stewards through free micro-courses",
+                  icon: Brain,
+                  color: "text-[#8B5CF6]"
+                },
+                {
+                  title: "Spark public excitement",
+                  description: "with laser pop-ups",
+                  icon: Sparkles,
+                  color: "text-[#EC4899]"
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className={`w-12 h-12 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center`}>
+                      {React.createElement(item.icon, {
+                        className: `${item.color} w-6 h-6`
+                      })}
+                    </div>
+                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                  </div>
+                  <p className="text-gray-300">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
+              <p className="text-gray-300 text-center">
+                All gear packs into two rolling cases, so the lab can move from studio to street festival overnight.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Target}
         gradientColors={{
           from: 'rgba(164, 255, 78, 0.1)',
           via: 'rgba(59, 130, 246, 0.1)',
@@ -162,9 +255,9 @@ export default function BudgetPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Budget Overview</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Budget Breakdown</h2>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Detailed breakdown by category
+              Detailed allocation of $24,950 for maximum community impact
             </p>
           </motion.div>
 
@@ -190,7 +283,7 @@ export default function BudgetPage() {
                       label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                     >
                       {budgetData.categories.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill="#A4FF4E" opacity={0.7 - index * 0.1} />
+                        <Cell key={`cell-${index}`} fill={COLORS[index]} opacity={0.8} />
                       ))}
                     </Pie>
                     <Tooltip
@@ -227,14 +320,15 @@ export default function BudgetPage() {
                       {formatCurrency(category.amount)}
                     </div>
                   </div>
+                  <p className="text-[#A4FF4E]/80 mb-4 text-sm">{category.description}</p>
                   <div className="space-y-3">
                     {category.breakdown.map((item) => (
                       <div
                         key={item.title}
                         className="flex items-center justify-between"
                       >
-                        <span className="text-[#A4FF4E]/80">{item.title}</span>
-                        <span className="text-[#A4FF4E]/80">{formatCurrency(item.amount)}</span>
+                        <span className="text-[#A4FF4E]/80 text-sm">{item.title}</span>
+                        <span className="text-[#A4FF4E]/80 text-sm font-mono">{formatCurrency(item.amount)}</span>
                       </div>
                     ))}
                   </div>
@@ -255,7 +349,7 @@ export default function BudgetPage() {
         iconColor="text-[#A4FF4E]/50"
       />
 
-      {/* Budget Timeline */}
+      {/* Budget Justification */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
@@ -266,7 +360,7 @@ export default function BudgetPage() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Budget Justification</h2>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Detailed breakdown of our $24,850 request
+              How each dollar creates lasting community capacity
             </p>
           </motion.div>
 
@@ -277,97 +371,138 @@ export default function BudgetPage() {
           >
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Staff & Expertise (60% of budget)</h3>
+                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Program Salaries & Wages (41% of budget)</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Moises Sanabria (Project Lead/Developer, 0.3 FTE) - $9,000</h4>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Lead Developer (PT) - $7,000</h4>
                     <p className="text-[#A4FF4E]/80">
-                      Covers 0.3 FTE for six months to design, code, deploy, document, and maintain the open-source 
-                      Announcement Board and to lead all four clinics. Knight dollars buy human knowledge that persists 
-                      beyond hardware life-cycles.
+                      10 hours per week for six months to build, secure, and document the open-core website 
+                      and Learning Portal. This role ensures the platform is robust, well-documented, and 
+                      ready for community use.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Fabiola Larios (Community & Growth, 0.15 FTE) - $3,000</h4>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Bilingual Coordinator (PT) - $3,300</h4>
                     <p className="text-[#A4FF4E]/80">
-                      Funds 0.15 FTE community manager who recruits participants, handles bilingual comms, and tracks 
-                      KPIs—critical for equitable reach.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Mentor Stipends - $3,000</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Pays three Miami artists ($1,000 each) who co-teach, localize curricula, and provide cultural 
-                      context—keeping 60%+ of grant dollars in neighborhood paychecks.
+                      6 hours per week for six months to translate UI, caption videos, run online help desk, 
+                      and ensure the platform serves Miami's diverse community effectively.
                     </p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Technology & Infrastructure (40% of budget)</h3>
+                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Contracted Services (23% of budget)</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">React + Supabase Build - $3,000</h4>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Web/LMS Codebase Development - $3,500</h4>
                     <p className="text-[#A4FF4E]/80">
-                      Freelance support (40 hrs) to harden code, write tests, and create installer scripts so Akron/Detroit 
-                      peers can spin up their own boards—core to Knight's digital-capacity goal.
+                      Building the React + Supabase platform with QR links, live visitor stats, and three 
+                      micro-courses: Web-Design for Smart Signs, Ethical AI Agents, and Bilingual SEO.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Hosting / SaaS (6 mo) - $1,000</h4>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Automation Scripts - $1,500</h4>
                     <p className="text-[#A4FF4E]/80">
-                      Supabase Pro, PostHog cloud, HubSpot Starter, Streamlabs—kept to minimal starter tiers; we teach 
-                      these same tools in the clinics.
+                      Scripts that copy weekly metrics to GitHub and clean data for the dashboard, ensuring 
+                      transparency and easy reporting.
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Hardware (Pi kits) - $1,200</h4>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Documentation & Testing - $850</h4>
                     <p className="text-[#A4FF4E]/80">
-                      Six Raspberry Pi 5 players plus SD cards and mounts turn existing venue TVs into boards—low-cost, 
-                      replicable infrastructure.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Dev / Stream Laptop - $800</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Refurbished Legion laptop powers live-coding demos and hybrid streaming; chosen for longevity and 
-                      repairability.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Workshop Ops - $2,000</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Snacks, ASL interpreters, childcare, and venue A/V rentals ensure workshops are welcoming to parents, 
-                      Deaf participants, and low-income artists—aligning with Knight's inclusion values.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Van Rentals & COI - $1,000</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Two weekend vans plus insurance move gear to Little Haiti & Downtown pop-ups, extending reach to 
-                      underserved neighborhoods.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Contingency (3.5%) - $850</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Covers minor part failures or bandwidth upgrades; any unspent funds roll into additional screen kits.
+                      Comprehensive documentation and testing to ensure the platform is reliable and 
+                      user-friendly for community stewards.
                     </p>
                   </div>
                 </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Hardware & Materials (28% of budget)</h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Smart Signs - $2,400</h4>
+                    <p className="text-[#A4FF4E]/80">
+                      Two museum-grade Smart Signs for Bakehouse & Locust lobbies to broadcast events and 
+                      impact data, creating visible community engagement.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Learning Stations - $1,800</h4>
+                    <p className="text-[#A4FF4E]/80">
+                      Twelve Raspberry-Pi learning stations for workshops, allowing participants to code 
+                      along and preview results instantly.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Projectors - $2,000</h4>
+                    <p className="text-[#A4FF4E]/80">
+                      Portable LaserCube and short-throw LED projectors for pop-up events, projecting 
+                      AI visuals, live stats, and partner branding.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Demo Laptop - $700</h4>
+                    <p className="text-[#A4FF4E]/80">
+                      Refurbished Legion laptop for live demos and development work during events.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Cloud & Admin Costs (6% of budget)</h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Supabase Pro - $600</h4>
+                    <p className="text-[#A4FF4E]/80">
+                      Six months of reliable database and backend services for the platform.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">PostHog Analytics - $400</h4>
+                    <p className="text-[#A4FF4E]/80">
+                      Six months of analytics to track community engagement and platform usage.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Streamlabs - $400</h4>
+                    <p className="text-[#A4FF4E]/80">
+                      Six months of reliable livestreaming services for events and tutorials.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Contingency & Spare Parts (2% of budget)</h3>
+                <p className="text-[#A4FF4E]/80">
+                  Extra cables, backup Raspberry Pi, and replacement projector lamp to ensure everything 
+                  keeps running smoothly during events. This small buffer prevents disruptions and 
+                  maintains professional quality.
+                </p>
               </div>
 
               <div>
                 <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Alignment with Fund Priorities</h3>
                 <ul className="space-y-2 text-[#A4FF4E]/80">
-                  <li><strong>Digital tools & infrastructure:</strong> Boards, Pi kits, and cloud stack give artists concrete technology they can control.</li>
-                  <li><strong>Capacity-building expertise:</strong> 60% of funds pay humans (salaries, mentors, interpreters) who transfer skills, not just install gear.</li>
-                  <li><strong>Replicability & sustainability:</strong> Open-source code, Creative-Commons templates, and a clear earned-income pathway let the model grow without perpetual grants.</li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
+                    <span><strong>Digital tools & infrastructure:</strong> Smart Signs, Pi kits, and cloud stack give artists concrete technology they can control.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
+                    <span><strong>Capacity-building expertise:</strong> 41% of funds pay humans who transfer skills, not just install gear.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
+                    <span><strong>Replicability & sustainability:</strong> Open-source code, Creative-Commons templates, and clear earned-income pathway let the model grow without perpetual grants.</span>
+                  </li>
                 </ul>
                 <p className="mt-4 text-[#A4FF4E]/80">
-                  At &lt;$25K, every Knight dollar directly amplifies community voices, leaving Miami with working screens, 
-                  trained stewards, and an evidence-based template ready for Akron and Detroit.
+                  At $24,950, every Knight dollar directly amplifies community voices, leaving Miami with 
+                  working screens, trained stewards, and an evidence-based template ready for replication.
                 </p>
               </div>
             </div>
@@ -409,10 +544,10 @@ export default function BudgetPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={[
-                    { quarter: 'Q3 2025', amount: 45000 },
-                    { quarter: 'Q4 2025', amount: 40000 },
-                    { quarter: 'Q1 2026', amount: 35000 },
-                    { quarter: 'Q2 2026', amount: 30000 },
+                    { quarter: 'Q3 2025', amount: 8500 },
+                    { quarter: 'Q4 2025', amount: 7200 },
+                    { quarter: 'Q1 2026', amount: 5800 },
+                    { quarter: 'Q2 2026', amount: 3450 },
                   ]}
                   margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                 >
