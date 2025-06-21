@@ -7,7 +7,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { TechNonprofitNavKF } from "@/components/workshop/TechNonprofitNavKF";
 import DecorativeDivider from "@/components/common/DecorativeDivider";
 import {
-  Users, FileText, Target, Brain, BarChart, Monitor, Shield, Network, Building2, DollarSign, Sparkles, ArrowRight, CheckCircle, Lightbulb
+  Users, FileText, Target, Brain, BarChart, Monitor, Shield, Network, Building2, DollarSign, Sparkles, ArrowRight, CheckCircle, Lightbulb, Globe, Award, Clock
 } from "lucide-react";
 
 const fadeInUp = {
@@ -21,93 +21,111 @@ const SECTIONS = [
     key: "about",
     icon: Users,
     title: "Tell us more about yourself or your organization (150 words)",
-    content: `AI24 is an artist-led technology studio founded by Moises Sanabria (Venezuelan-born, Miami-based AI engineer and interdisciplinary artist) and Fabiola Larios (Mexican New Media Artist). We operate a micro-lab at the Bakehouse Art Complex, where we prototype open-source tools that merge ethical AI, community storytelling, and measurable impact. Our mission is to make emerging creative-tech ethical, affordable, and bilingual—especially for Latinx and Afro-Caribbean artists who are often last to get access. Since 2021 we have produced free workshops on AI image workflows, built Supabase-powered web apps, and advised nonprofits on technical website integrations for more functionality (User authentication, Shop). AI24's small size lets us iterate fast; our partnerships with Bakehouse, Edge Zones, and Locust Projects give us reach across three neighborhoods.`
+    content: `AI24 is an artist-run tech studio launched by Moises Sanabria (Venezuelan-born AI engineer / new-media artist) and Fabiola Larios (Mexican new-media artist). From a micro-lab inside the Bakehouse Art Complex we build bilingual, ethics-first creative tools that Latinx and Afro-Caribbean artists can actually afford. Since 2020 we've:
+run free AI-art workshop sessions in English & Spanish,
+built web apps (AI art, event signage and learning management systems), and
+helped cultural organizations broadcast their programs.
+Our model is "open core, sustainable extras": the base code is released for non-profit use, while premium hosting and analytics fund updates. Tutorials are CC BY-NC so teachers can share them freely. Small by choice, we iterate fast and test in the wild—first at Bakehouse, then Locust Projects (Little Haiti). These partnerships give our AI lab real neighborhood reach without big overhead.`
   },
   {
     key: "one_sentence",
     icon: Lightbulb,
-    title: "One-sentence project description (50 words)",
-    content: `Moises Sanabria with the project AI24 will launch an mobile AI laboratory that deploys twelve raspberry-pi learning stations, a suitcase-laser classroom, and a bilingual Learning Management System across Bakehouse, Edge Zones, and Locust Projects, equipping Miami artists with open, ethical creative-tech and a self-funded skill & communications pipeline that keeps growing long after the grant.`
+    title: "How would you describe your project in a sentence? (50 words)",
+    content: `Launch a mobile AI laboratory that deploys 2 museum-grade Smart Signs, a 12 AI mobile learning stations, and a bilingual Learning Management System across Bakehouse, Locust Projects, and beyond—equipping Miami artists with open, ethical creative-tech and a self-funded skill & communications pipeline that keeps growing long after the grant.`
   },
   {
     key: "activities",
     icon: Brain,
-    title: "Activities supported by the Fund (250 words)",
+    title: "Describe the activities that would be carried out with support from the Knight Art + Tech Expansion Fund. (250 words)",
     content: [
-      { subtitle: "Hardware & Installation", items: [
-        "Purchase twelve Smart Sign kits—24″ IPS monitor, Raspberry Pi 5, VESA stand, wireless keyboard/mouse—packed in flight-cases.",
-        "Add one LaserCube WiFi projector and one 4 000-lumen short-throw LED projector for pop-up activations.",
-        "Configure PoE injectors and Wi-Fi extenders so each host has reliable networking."
+      { subtitle: "Tech Build", items: [
+        "Launch an open-core website for each host (React + Supabase) with QR links and live visitor stats.",
+        "Embed a Learning Portal featuring three founder-authored micro-courses—Web-Design, Ethical Creative AI, SEO Presence—complete with videos, quizzes, and mobile friendly."
       ]},
-      { subtitle: "Software & Infrastructure", items: [
-        "Fork AI24's MIT-licensed React | PostGres Database codebase; brand each venue instance; enable bilingual UI, QR generation, and live PostHog analytics.",
-        "Build an integrated LMS portal (video lessons, quizzes, micro-badges) that plugs into the same Database project."
+      { subtitle: "Hardware Roll-out", items: [
+        "Install 2 museum-grade Smart Signs (Bakehouse & Locust lobbies) to broadcast events.",
+        "Assemble 12 Raspberry-Pi \"learning stations,\" laptop-sized kits used in workshops so participants can learn and interact along and preview results instantly."
       ]},
       { subtitle: "Staff & Training", items: [
-        "Lead Developer (0.25 FTE) codes, hardens, and documents the stack.",
-        "Bilingual Coordinator (0.15 FTE) translates UI, writes captions, and manages an online help desk.",
-        "Two \"Screen-Admin Skill Sprints\" (3 h each, EN/ES + captioned) teach stewards to post content, moderate, and view metrics."
+        "Lead Tech Developer (part-time) builds, secures, and documents the stack.",
+        "Bilingual Tech Coordinator (part-time) teaches, host, event representative assistant.",
+        "Smart Sign Skill Sprints (2 hrs, EN/ES) so stewards learn to post content, moderate feeds, and read metrics."
       ]},
       { subtitle: "Community Engagement", items: [
-        "Use LaserCube and projector for three outdoor or lobby projections that showcase AI-generated visuals, screen stats, and partner branding.",
-        "Record and upload tutorials; archive all screen posts and KPI snapshots to GitHub + Airtable under CC BY."
+        "Take a portable LaserCube and short-throw projector to three pop-ups, projecting AI visuals and partner branding.",
+        "Record every session; upload tutorials and weekly KPI snapshots to a public GitHub archive under CC BY-NC."
       ]},
       { subtitle: "Logistics", items: [
-        "All gear fits into two rolling cases that load into a standard cargo van, allowing the lab to serve festivals or additional venues on request."
+        "Smart Signs, Pi kits, laser, and projector fit into two rolling cases that slide into a standard cargo van, letting the lab reach festivals or future partner sites on short notice.",
+        "Deliver bilingual tech platform, hands-on training and public demos that transform hardware into lasting community capacity."
       ]}
     ]
   },
   {
     key: "outcomes",
     icon: BarChart,
-    title: "Outcomes of successful implementation (250 words)",
+    title: "Describe the outcomes that would result from successful implementation of the activities described above. (250 words)",
     content: [
       { subtitle: "Access & Skills", items: [
-        "100 Miami artists complete at least one LMS micro-course on ethical AI or Smart Sign admin.",
-        "300 additional community members attend or view live streamed sessions."
+        "At least 200 Miami artists finish one LMS micro-course on Ethical AI, SEO, Web Design, or Smart Sign User; another 400 community members attend or watch a streamed workshop.",
+        "Graduates earn digital badges they can add to résumés and grant apps."
       ]},
       { subtitle: "Visibility", items: [
-        "60 000 bilingual impressions across in-venue screens, website embeds, and QR scans.",
-        "800 livestream and social-media video views of projection events."
+        "Smart Signs, web embeds, and QR flyers generate 40 000 bilingual impressions; three LaserCube pop-ups and archived streams add another 600 replay views, giving partners a clear public-reach metric."
       ]},
       { subtitle: "Equity", items: [
-        "Demographic dashboard shows ≥ 40 % women-identifying and ≥ 30 % Spanish/Haitian-Creole participants.",
-        "All video lessons include human-reviewed EN/ES captions; one flagship tutorial includes an ASL overlay pilot."
+        "The live dashboard shows ≥ 40 % women-identifying participants and ≥ 30 % Spanish or Haitian-Creole speakers.",
+        "All videos ship with human-checked EN/ES captions; one flagship tutorial pilots an ASL overlay, setting a future standard."
       ]},
-      { subtitle: "Open Technology", items: [
-        "Full code released on GitHub with install script; at least three external pull requests merged.",
-        "GitHub/Airtable archive preserves every post, livestream file, and weekly KPI snapshot under CC BY, creating a reusable dataset for researchers."
+      { subtitle: "Open Tech", items: [
+        "All code lands on GitHub under MIT; weekly data snapshots are CC BY."
       ]},
       { subtitle: "Sustainability", items: [
-        "At least one host venue upgrades to a $39/month nonprofit license, fully covering Year-2 hosting.",
-        "LMS micro-courses generate $1 500 in fee revenue, earmarked for mentor stipends."
+        "At least one host upgrades to the $39/month nonprofit license, covering Year-2 hosting costs.",
+        "Micro-courses bring in $1.5 K, earmarked for mentor stipends and new lesson production."
       ]},
       { subtitle: "Scalability", items: [
-        "Written playbook and parts list enable any future Knight city to replicate the lab without proprietary fees.",
-        "LaserCube pop-ups generate press coverage and sponsor attention, paving the way for new partner sites."
+        "A public parts list and step-by-step playbook let any future Knight city replicate the lab for under $1 500 in hardware.",
+        "LaserCube activations will be pitched to at least one additional venue, seeding the next rollout site.",
+        "Together these outcomes tie hardware, software, and human fluency into a repeatable, transparent model—exactly the digital capacity Knight seeks to build."
       ]}
     ]
   },
   {
     key: "measurement",
     icon: Monitor,
-    title: "How we'll know we reached those outcomes",
-    content: `Impact is tracked by an automated Tableau dashboard that pulls directly from: PostHog analytics (screen / web views, QR scans), Supabase tables (course_completion, user roles), YouTube & Streamlabs APIs (livestream views), and an IR beam foot-traffic counter at Locust Projects. Demographic and language data come from optional sign-in forms and chat-language tags, aggregated and anonymized. Metrics refresh every six hours, and Knight reviewers receive a weekly digest email generated by a Supabase Edge Function. Pull-request counts and open-source forks are monitored via the GitHub REST API. A green "Hosting Paid" indicator lights up when Stripe records the first nonprofit license payment. Because all raw data is stored in GitHub/Airtable and the dashboard link is public, anyone can audit or replicate our outcome calculations.`
+    title: "How will you know this project led to those outcomes?",
+    content: `A public Data Analytics (Looker Studio dashboard) pulls live data from three automated feeds:
+1. Product Analytics (PostHog) logs screen views and QR-code hits for both Smart Signs and the web application.
+2. Database (Supabase) captures LMS course completions plus anonymous language and gender tags from an opt-in sign-in form.
+3. YouTube / Streamlabs adds total livestream minutes watched and peak-concurrent viewers.
+A Supabase Edge Function refreshes the source sheet every every day and pushes a weekly CSV snapshot to a public GitHub repo. GitHub's API also lists outside pull-requests and forks, giving Knight an open-source score in real time. The dashboard link is pinned on both Smart Signs once a day so visitors can verify the numbers themselves. No paid software, no hidden data—anyone can audit, remix, or research the figures.`
   },
   {
     key: "sustainability",
     icon: Shield,
-    title: "Sustaining outcomes beyond the grant",
-    content: `The WebApp is MIT-licensed and costs <$30/month to self-host, but most venues prefer convenience. A $39/month nonprofit SaaS tier covers Supabase/PostHog costs and funds minor upgrades. Optional premium modules (sponsor slides, multi-venue dashboard) provide upsell revenue, while $9–$29 LMS micro-courses generate cash for mentor stipends. Because hardware is commodity and tutorials are Creative Commons, new venues can join the network cheaply, driving additional subscriptions. If all three pilot hosts convert, Year-2 hosting and bug-fix time are entirely community-funded.`
+    title: "How will you sustain the positive outcomes of the effort beyond the funding period? If this is not intended to be a sustainable effort, please explain why.",
+    content: `Bakehouse Art Complex hosts the lab studio, assigns three staff stewards, and donates A/V for four Skill Sprints.
+Locust Projects provides lobby display space, pushes calls to its 12 K-subscriber list, and co-leads the second workshop block.
+We're also expanding ties—built through prior workshops—with five Miami institutions:
+Miami Dade College AI Center, New World School of the Arts, Code/Art, FIU College of Communication, Edge Zones.
+This network spans four Miami neighborhoods and the full K-12-to-graduate pipeline, amplifying impact without adding cost to the Knight budget.`
   },
   {
     key: "partners",
     icon: Network,
-    title: "Project partners",
+    title: "Who are your partners in this project?",
     content: [
-      { subtitle: "Bakehouse Art Complex", items: ["provides a lab studio, three staff stewards, venue and A/V for one skill sprint, and in-kind childcare/snacks."] },
-      { subtitle: "Edge Zones", items: ["hosts a street-party projection; supplies outdoor wall space and community marketing."] },
-      { subtitle: "Locust Projects", items: ["supplies lobby install space, foot-traffic counter, and marketing list; co-hosts the second skill sprint."] }
+      { subtitle: "Bakehouse Art Complex", items: ["hosts the lab studio, assigns three staff stewards, and donates A/V for four Skill Sprints."] },
+      { subtitle: "Locust Projects", items: ["provides lobby display space, pushes calls to its 12 K-subscriber list, and co-leads the second workshop block."] },
+      { subtitle: "Expanding Network", items: [
+        "Miami Dade College AI Center",
+        "New World School of the Arts", 
+        "Code/Art",
+        "FIU College of Communication",
+        "Edge Zones"
+      ]},
+      { subtitle: "Network Impact", items: ["This network spans four Miami neighborhoods and the full K-12-to-graduate pipeline, amplifying impact without adding cost to the Knight budget."] }
     ]
   },
   {
@@ -130,6 +148,18 @@ export default function KnightFoundationProposalPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <TechNonprofitNavKF />
+      
+      {/* Back to Main */}
+      <div className="fixed top-24 left-4 z-30">
+        <Link
+          href="/grant/knight-foundation"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E] transition-colors shadow-neon"
+        >
+          <ArrowRight className="w-4 h-4 rotate-180" />
+          Back to Overview
+        </Link>
+      </div>
+
       <section className="pt-32 pb-12">
         <div className="container mx-auto px-4">
           <motion.div
@@ -145,14 +175,15 @@ export default function KnightFoundationProposalPage() {
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              AI24 Mobile Laboratory
+              AI24 Mobile AI Laboratory
             </h1>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Complete proposal for Knight Foundation Art + Tech Expansion Fund
+              Knight Art + Tech Expansion Fund Proposal
             </p>
           </motion.div>
         </div>
       </section>
+
       {SECTIONS.map((section, idx) => (
         <React.Fragment key={section.key}>
           <DecorativeDivider
@@ -183,6 +214,7 @@ export default function KnightFoundationProposalPage() {
                       </h2>
                     </div>
                   </div>
+                  
                   {Array.isArray(section.content) ? (
                     section.content.every(
                       (item) => typeof item === 'object' && 'subtitle' in item && 'items' in item
@@ -213,7 +245,10 @@ export default function KnightFoundationProposalPage() {
                       </ul>
                     )
                   ) : (
-                    <p className="text-gray-300 leading-relaxed text-lg">{section.content}</p>
+                    // String content
+                    <div className="text-gray-300 leading-relaxed whitespace-pre-line">
+                      {section.content}
+                    </div>
                   )}
                 </div>
               </motion.div>
@@ -221,15 +256,8 @@ export default function KnightFoundationProposalPage() {
           </section>
         </React.Fragment>
       ))}
-      <DecorativeDivider
-        icon={Sparkles}
-        gradientColors={{
-          from: "rgba(164, 255, 78, 0.1)",
-          via: "rgba(59, 130, 246, 0.1)",
-          to: "rgba(164, 255, 78, 0.1)"
-        }}
-        iconColor="text-[#A4FF4E]/50"
-      />
+
+      {/* Call to Action */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
@@ -240,10 +268,10 @@ export default function KnightFoundationProposalPage() {
           >
             <div className="p-8 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#A4FF4E]">
-                Ready to Support Our Mission?
+                Ready to Support Digital Capacity?
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Join us in creating sustainable, accessible AI education for Miami's creative community
+                Join us in building Miami's first sustainable creative-tech infrastructure
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

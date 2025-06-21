@@ -25,17 +25,17 @@ const team = [
       linkedin: "https://linkedin.com/in/fabiolalarios"
     }
   },
-  {
-    name: "Sam Lopez de Victoria",
-    role: "Community Lead",
-    image: "/team/chu.jpg",
-    motif: Sparkles,
-    social: {
-      github: "https://github.com/alex",
-      twitter: "https://twitter.com/alex",
-      linkedin: "https://linkedin.com/in/alex"
-    }
-  }
+  // {
+  //   name: "Sam Lopez de Victoria",
+  //   role: "Community Lead",
+  //   image: "/team/chu.jpg",
+  //   motif: Sparkles,
+  //   social: {
+  //     github: "https://github.com/alex",
+  //     twitter: "https://twitter.com/alex",
+  //     linkedin: "https://linkedin.com/in/alex"
+  //   }
+  // }
 ];
 
 export function TeamGrid() {
