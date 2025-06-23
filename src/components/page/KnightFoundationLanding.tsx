@@ -205,6 +205,53 @@ const KnightFoundationLanding: React.FC = () => {
               Measurable impact and sustainable growth for Miami's creative ecosystem
             </p>
           </motion.div>
+          
+          {/* ROI Overview Cards */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+            {[
+              {
+                metric: "3x",
+                label: "Impact Multiplier",
+                description: "Every $1 generates $3 in community value"
+              },
+              {
+                metric: "70%",
+                label: "Local Investment",
+                description: "Of budget goes directly to Miami talent"
+              },
+              {
+                metric: "$60K",
+                label: "Annual Revenue",
+                description: "Projected sustainable income by 2026"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={`p-6 rounded-xl border-2 ${themeColors.cardBorder} ${themeColors.cardBg} ${themeColors.text} shadow-neon hover:${themeColors.shadowNeon} hover:${themeColors.cardBorder}/80 transition-all duration-300`}
+              >
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
+                  <Target className={`w-7 h-7 ${isDark ? 'text-[#A4FF4E]' : 'text-[#2563EB]'}`} />
+                </div>
+                <div className={`text-3xl font-bold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#2563EB]'}`}>{item.metric}</div>
+                <div className="font-medium mb-2 text-white">{item.label}</div>
+                <div className="text-sm text-gray-300">{item.description}</div>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* View Detailed ROI Button */}
+          <div className="text-center">
+            <Link
+              href="/grant/knight-foundation/impact-roi"
+              className={`inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium ${themeColors.buttonBg} ${themeColors.buttonText} ${themeColors.buttonHover} transition-colors`}
+            >
+              <Target className="w-5 h-5" />
+              View Impact & ROI Analysis
+            </Link>
+          </div>
         </div>
       </section>
 
