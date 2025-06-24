@@ -46,23 +46,24 @@ const fadeInUp = {
 };
 
 // Quarterly roadmap data based on the Knight Foundation grant
+// Total budget: $24,950 distributed across 4 quarters
 const quarterlyRoadmap = [
   {
     quarter: "Q4 2025",
-    subtitle: "Oct – Dec '25 · Build & Stage",
-    phase: "Build & Stage",
+    subtitle: "Oct – Dec '25 · Build \u0026 Stage",
+    phase: "Build \u0026 Stage",
     icon: HardDrive,
-    primarySpend: "$9,850",
+    primarySpend: "$9,500",
     cumulativePercent: "38%",
     deliverables: [
       {
-        title: "Order & receive 2 Smart-Sign screens + 12 Pi learning kits",
+        title: "Order \u0026 receive 2 Smart-Sign screens + 12 Pi learning kits",
         icon: Monitor,
         category: "Hardware",
         status: "Hardware Procurement"
       },
       {
-        title: "Spin up Supabase project; configure PostHog & Looker Studio",
+        title: "Spin up Supabase project; configure PostHog \u0026 Looker Studio",
         icon: Wifi,
         category: "Infrastructure",
         status: "Cloud Setup"
@@ -75,9 +76,8 @@ const quarterlyRoadmap = [
       }
     ],
     budgetBreakdown: [
-      { item: "Hardware & materials", amount: "$6,900" },
-      { item: "Program salaries", amount: "$2,600" },
-      { item: "Cloud subs", amount: "$350" }
+      { item: "Hardware \u0026 Materials", amount: "$6,900" },
+      { item: "Program Salaries (2.6k)", amount: "$2,600" }
     ]
   },
   {
@@ -108,15 +108,15 @@ const quarterlyRoadmap = [
       }
     ],
     budgetBreakdown: [
-      { item: "Salaries", amount: "$2,600" },
+      { item: "Salaries (2.6k)", amount: "$2,600" },
       { item: "Contract dev (LMS build)", amount: "$3,000" },
-      { item: "Cloud", amount: "$350" }
+      { item: "Cloud (350)", amount: "$350" }
     ]
   },
   {
     quarter: "Q2 2026",
-    subtitle: "Apr – Jun '26 · Teach & Test",
-    phase: "Teach & Test",
+    subtitle: "Apr – Jun '26 · Teach \u0026 Test",
+    phase: "Teach \u0026 Test",
     icon: GraduationCap,
     primarySpend: "$4,600",
     cumulativePercent: "87%",
@@ -141,17 +141,17 @@ const quarterlyRoadmap = [
       }
     ],
     budgetBreakdown: [
-      { item: "Salaries", amount: "$2,600" },
+      { item: "Salaries (2.6k)", amount: "$2,600" },
       { item: "Contract (automation script)", amount: "$1,650" },
-      { item: "Cloud", amount: "$350" }
+      { item: "Cloud (350)", amount: "$350" }
     ]
   },
   {
     quarter: "Q3 2026",
-    subtitle: "Jul – Sep '26 · Engage & Sustain",
-    phase: "Engage & Sustain",
+    subtitle: "Jul – Sep '26 · Engage \u0026 Sustain",
+    phase: "Engage \u0026 Sustain",
     icon: Zap,
-    primarySpend: "$3,350",
+    primarySpend: "$4,900",
     cumulativePercent: "100%",
     deliverables: [
       {
@@ -174,12 +174,15 @@ const quarterlyRoadmap = [
       }
     ],
     budgetBreakdown: [
-      { item: "Salaries", amount: "$2,500" },
-      { item: "Contingency / spares", amount: "$500" },
-      { item: "Cloud", amount: "$350" }
+      { item: "Salaries (2.5k)", amount: "$2,500" },
+      { item: "Cloud \u0026 Admin (700)", amount: "$700" },
+      { item: "Contracted Services (1.2k)", amount: "$1,200" },
+      { item: "Contingency / spares (500)", amount: "$500" }
     ]
   }
 ];
+
+// Budget verification: $9,500 + $5,950 + $4,600 + $4,900 = $24,950 ✓
 
 // Running metrics that will be tracked
 const runningMetrics = [
