@@ -41,7 +41,7 @@ const otherPagesNavigation = [
   { name: "Proposal", href: "/grant/knight-foundation/proposal", key: "proposal" },
   { name: "Roadmap", href: "/grant/knight-foundation/roadmap", key: "roadmap" },
   { name: "Workshops", href: "/grant/knight-foundation/workshops", key: "workshops" },
-  { name: "Smart Signs", href: "/grant/knight-foundation/smart-signs", key: "smartSigns" },
+  { name: "Smart Signs", href: "/services/smart-signs", key: "smartSigns" },
   { name: "Sustainability", href: "/grant/knight-foundation/sustainability", key: "sustainability" },
   { name: "AI Toolkits", href: "/grant/knight-foundation/ai-toolkits", key: "aiToolkits" },
   { name: "Impact & ROI", href: "/grant/knight-foundation/impact-roi", key: "impactRoi" },

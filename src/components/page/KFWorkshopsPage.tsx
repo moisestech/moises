@@ -110,7 +110,7 @@ export default function WorkshopsPage() {
               Hands-on AI Education
             </h1>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              24 free workshops across Miami's creative community
+              8 free workshops across Miami's creative community
             </p>
           </motion.div>
         </div>

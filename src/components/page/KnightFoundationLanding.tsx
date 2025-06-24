@@ -335,7 +335,7 @@ const KnightFoundationLanding: React.FC = () => {
               Skill <span className={isDark ? 'text-[#A4FF4E]' : 'text-[#2563EB]'}>Clinics</span>
             </h2>
             <p className={`text-xl ${themeColors.textSecondary} max-w-3xl mx-auto`}>
-              24 free workshops across Miami's creative community
+              8 free workshops across Miami's creative community
             </p>
           </motion.div>
           

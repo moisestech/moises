@@ -75,7 +75,7 @@ const budgetData = {
     label: "Workshop Ops (8%)",
     value: 8400,
     items: [
-      { label: "24 Free Workshops", value: 8400, description: "Includes ASL, childcare, and snacks" }
+      { label: "8 Free Workshops", value: 8400, description: "Includes documentation, and snacks" }
     ]
   },
   infra: {
