@@ -120,23 +120,51 @@ const detailedSections = [
       breakdown: [
         {
           label: "Total Project Budget",
-          amount: "$29,850",
+          amount: "$29,950",
           color: "text-white"
         },
         {
           label: "Knight Foundation Request",
-          amount: "$24,850",
+          amount: "$24,950",
           color: "text-[#A4FF4E]"
         },
+      ],
+      distribution: [
         {
-          label: "Additional Funding Required",
-          amount: "$5,000",
-          color: "text-yellow-400"
+          category: "Program Salaries & Wages",
+          percentage: "41%",
+          amount: "$10,300",
+          description: "Part-time staff to build, secure, document the stack and translate UI, caption videos, run help desk"
+        },
+        {
+          category: "Contracted Services",
+          percentage: "23%",
+          amount: "$5,850",
+          description: "One-off tech work including building the web/LMS codebase plus automation scripts"
+        },
+        {
+          category: "Hardware & Materials",
+          percentage: "28%",
+          amount: "$6,900",
+          description: "Hardware fleet including Smart Signs, Pi kits, projectors, and demo equipment"
+        },
+        {
+          category: "Cloud & Admin Costs",
+          percentage: "6%",
+          amount: "$1,400",
+          description: "Six months of cloud services for reliable platform operation"
+        },
+        {
+          category: "Contingency & Spare Parts",
+          percentage: "2%",
+          amount: "$500",
+          description: "Backup equipment to keep everything running if something fails mid-event"
         }
       ],
       note: "83% of total budget requested from Knight Foundation",
       image: "/images/placeholder-budget.jpg",
-      additionalInfo: "Our budget prioritizes human capital and community impact. 60% goes directly to Miami talent (salaries, mentors, interpreters), ensuring the majority of funds stay in the local economy and create lasting community value."
+      additionalInfo: "Our budget prioritizes human capital and community impact. 60% goes directly to Miami talent (salaries, mentors, interpreters), ensuring the majority of funds stay in the local economy and create lasting community value.",
+      fullBudgetLink: "/grant/knight-foundation/budget"
     }
   }
 ];
@@ -434,6 +462,36 @@ export function KFMetricsBar() {
                             <p className="text-sm text-[#A4FF4E]/80 text-center">
                               {detailedSections.find(s => s.id === 'budget')?.content.note}
                             </p>
+                          </div>
+                          
+                          <h4 className="text-lg font-bold text-[#A4FF4E] mb-3 mt-6">Budget Distribution</h4>
+                          <div className="space-y-2">
+                            {detailedSections.find(s => s.id === 'budget')?.content.distribution?.map((dist, index) => (
+                              <div key={index} className="p-3 bg-black/50 rounded-lg border border-[#A4FF4E]/30">
+                                <div className="flex justify-between items-center mb-1">
+                                  <span className="text-gray-200 font-medium">{dist.category}</span>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-[#A4FF4E] font-bold">{dist.percentage}</span>
+                                    <span className="text-white font-bold">{dist.amount}</span>
+                                  </div>
+                                </div>
+                                <div className="text-xs text-gray-400">
+                                  {dist.description}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          <div className="mt-4 text-center">
+                            <a 
+                              href={detailedSections.find(s => s.id === 'budget')?.content.fullBudgetLink} 
+                              className="inline-flex items-center gap-2 px-4 py-2 bg-[#A4FF4E]/20 border border-[#A4FF4E]/30 rounded-lg text-[#A4FF4E] hover:bg-[#A4FF4E]/30 transition-colors"
+                            >
+                              View Full Budget Details
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                              </svg>
+                            </a>
                           </div>
                         </div>
                         <div className="relative">
