@@ -61,9 +61,9 @@ This network spans four Miami neighborhoods and the full K-12-to-graduate pipeli
     networkImpact: "Network Impact",
 
     // Budget items
-    totalBudget: "Total project budget: $24 850",
-    knightEligible: "Knight-eligible cash items (hardware, infra, dev, archive, contingency): $24 850",
-    fundingRequested: "Funding requested from Knight: $24 850",
+    totalBudget: "Total project budget: $24 950",
+    knightEligible: "Knight-eligible cash items (hardware, infra, dev, archive, contingency): $24 950",
+    fundingRequested: "Funding requested from Knight: $24 950",
     otherRevenue: "How other revenue will be raised: The three host venues have confirmed in-kind support letters covering space rental, snacks, and volunteer camera ops"
   },
 
@@ -129,9 +129,9 @@ Esta red abarca cuatro vecindarios de Miami y la tubería completa de K-12 a gra
     networkImpact: "Impacto de la Red",
 
     // Budget items
-    totalBudget: "Presupuesto total del proyecto: $24 850",
-    knightEligible: "Elementos de efectivo elegibles para Knight (hardware, infraestructura, desarrollo, archivo, contingencia): $24 850",
-    fundingRequested: "Financiamiento solicitado a Knight: $24 850",
+    totalBudget: "Presupuesto total del proyecto: $24 950",
+    knightEligible: "Elementos de efectivo elegibles para Knight (hardware, infraestructura, desarrollo, archivo, contingencia): $24 950",
+    fundingRequested: "Financiamiento solicitado a Knight: $24 950",
     otherRevenue: "Cómo se recaudarán otros ingresos: Los tres lugares anfitriones han confirmado cartas de apoyo en especie cubriendo alquiler de espacio, refrigerios y operadores de cámara voluntarios"
   },
 
@@ -197,9 +197,9 @@ Ce réseau couvre quatre quartiers de Miami et le pipeline complet K-12-à-gradu
     networkImpact: "Impact du Réseau",
 
     // Budget items
-    totalBudget: "Budget total du projet: $24 850",
-    knightEligible: "Éléments en espèces éligibles Knight (matériel, infrastructure, développement, archive, contingence): $24 850",
-    fundingRequested: "Financement demandé à Knight: $24 850",
+    totalBudget: "Budget total du projet: $24 950",
+    knightEligible: "Éléments en espèces éligibles Knight (matériel, infrastructure, développement, archive, contingence): $24 950",
+    fundingRequested: "Financement demandé à Knight: $24 950",
     otherRevenue: "Comment d'autres revenus seront levés: Les trois lieux hôtes ont confirmé des lettres de soutien en nature couvrant la location d'espace, les collations et les opérateurs de caméra volontaires"
   }
 }; 
