@@ -150,15 +150,11 @@ export function KFProposalSection() {
             <div className={`space-y-2 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               <div className="flex justify-between items-center">
                 <span>Total Project Budget:</span>
-                <span className="font-bold">$29,850</span>
+                <span className="font-bold">$29,950</span>
               </div>
               <div className="flex justify-between items-center">
                 <span>Knight Foundation Request:</span>
-                <span className="font-bold">$24,850</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Additional Funding Required:</span>
-                <span className="font-bold">$5,000</span>
+                <span className="font-bold">$24,950</span>
               </div>
             </div>
           </motion.div>

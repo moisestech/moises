@@ -42,7 +42,7 @@ const otherPagesNavigation = [
   { name: "Roadmap", href: "/grant/knight-foundation/roadmap", key: "roadmap" },
   { name: "Workshops", href: "/grant/knight-foundation/workshops", key: "workshops" },
   { name: "Smart Signs", href: "/services/smart-signs", key: "smartSigns" },
-  { name: "Sustainability", href: "/grant/knight-foundation/sustainability", key: "sustainability" },
+  { name: "Sustainability", href: "/grant/knight-foundation/sustainability-cycle", key: "sustainability" },
   { name: "AI Toolkits", href: "/grant/knight-foundation/ai-toolkits", key: "aiToolkits" },
   { name: "Impact & ROI", href: "/grant/knight-foundation/impact-roi", key: "impactRoi" },
   { name: "Budget", href: "/grant/knight-foundation/budget", key: "budget" }

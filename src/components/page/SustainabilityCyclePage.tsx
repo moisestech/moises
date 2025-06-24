@@ -35,7 +35,7 @@ const flywheelStages = [
   {
     stage: "1. Initial Investment",
     title: "Knight Foundation Grant",
-    amount: "$24,850",
+    amount: "$24,950",
     description: "Seed funding to launch the program",
     icon: DollarSign,
     color: "text-[#A4FF4E]",
@@ -148,7 +148,7 @@ export default function SustainabilityCyclePage() {
               Flywheel Sustainability
             </h1>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              How $24,850 becomes a self-funding ecosystem for Miami's creative community
+              How $24,950 becomes a self-funding ecosystem for Miami's creative community
             </p>
           </motion.div>
         </div>

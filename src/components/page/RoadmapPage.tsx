@@ -281,6 +281,88 @@ export default function RoadmapPage() {
       </section>
 
       <DecorativeDivider 
+        icon={Building2}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Activity Summary */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">
+              Activity Summary
+            </h2>
+            <p className="text-xl text-[#A4FF4E]/80 mb-8 text-center">
+              Over 1 year <strong>AI24</strong> will
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              {[
+                {
+                  title: "Build",
+                  description: "a bilingual web platform",
+                  icon: Code,
+                  color: "text-[#A4FF4E]"
+                },
+                {
+                  title: "Roll out",
+                  description: "a small but visible hardware fleet",
+                  icon: Tv,
+                  color: "text-[#3B82F6]"
+                },
+                {
+                  title: "Train",
+                  description: "venue stewards through free micro-courses",
+                  icon: Brain,
+                  color: "text-[#8B5CF6]"
+                },
+                {
+                  title: "Spark public excitement",
+                  description: "with laser pop-ups",
+                  icon: Sparkles,
+                  color: "text-[#EC4899]"
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className={`w-12 h-12 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center`}>
+                      {React.createElement(item.icon, {
+                        className: `${item.color} w-6 h-6`
+                      })}
+                    </div>
+                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                  </div>
+                  <p className="text-gray-300">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
+              <p className="text-gray-300 text-center">
+                All gear packs into two rolling cases, so the lab can move from studio to street festival overnight.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
         icon={Target}
         gradientColors={{
           from: 'rgba(164, 255, 78, 0.1)',
