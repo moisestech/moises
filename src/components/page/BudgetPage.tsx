@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
+import { BackToOverview } from '@/components/shared/BackToOverview';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
 import {
   ChevronLeft,
@@ -49,8 +50,8 @@ const budgetData = {
       name: "Program Salaries & Wages",
       amount: 10300,
       breakdown: [
-        { title: "Lead Developer (PT) - 10 hrs/week × 6 months × $29/hr", amount: 7000 },
-        { title: "Bilingual Coordinator (PT) - 6 hrs/week × 6 months × $23/hr", amount: 3300 }
+        { title: "Lead Developer (PT) - 10 hrs/week × 12 months × $29/hr", amount: 7000 },
+        { title: "Bilingual Coordinator (PT) - 6 hrs/week × 12 months × $23/hr", amount: 3300 }
       ],
       description: "Part-time staff to build, secure, document the stack and translate UI, caption videos, run help desk"
     },
@@ -80,11 +81,11 @@ const budgetData = {
       name: "Cloud & Admin Costs",
       amount: 1400,
       breakdown: [
-        { title: "Supabase Pro (6 months)", amount: 600 },
-        { title: "PostHog analytics (6 months)", amount: 400 },
-        { title: "Streamlabs for livestreaming (6 months)", amount: 400 }
+        { title: "Supabase Pro (12 months)", amount: 600 },
+        { title: "PostHog analytics (12 months)", amount: 400 },
+        { title: "Streamlabs for livestreaming (12 months)", amount: 400 }
       ],
-      description: "Six months of cloud services for reliable platform operation"
+      description: "Twelve months of cloud services for reliable platform operation"
     },
     {
       name: "Contingency & Spare Parts",
@@ -117,17 +118,7 @@ export default function BudgetPage() {
   return (
     <main className={`min-h-screen bg-black text-white`}>
       <TechNonprofitNavKF />
-
-      {/* Back to Main */}
-      <div className="fixed top-24 left-4 z-30">
-        <Link
-          href="/grant/knight-foundation"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E] transition-colors shadow-neon"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          Back to Overview
-        </Link>
-      </div>
+      <BackToOverview />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20">
@@ -238,7 +229,7 @@ export default function BudgetPage() {
                       {formatCurrency(category.amount)}
                     </div>
                   </div>
-                  <p className="text-[#A4FF4E]/80 mb-4 text-sm">{category.description}</p>
+                  <p className="text-white mb-4 text-sm">{category.description}</p>
                   <div className="space-y-3">
                     {category.breakdown.map((item) => (
                       <div
@@ -287,48 +278,48 @@ export default function BudgetPage() {
             animate={{ opacity: 1, y: 0 }}
             className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon"
           >
-            <div className="space-y-8">
-              <div>
+            <div className="space-y-12">
+              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
                 <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Program Salaries & Wages (41% of budget)</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Lead Developer (PT) - $7,000</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      10 hours per week for six months to build, secure, and document the open-core website 
+                <div className="space-y-6">
+                  <div className="p-4 rounded-lg bg-black/50">
+                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Lead Developer (PT) - 7,000</h4>
+                    <p className="text-white">
+                      10 hours per week for twelve months to build, secure, and document the open-core website 
                       and Learning Portal. This role ensures the platform is robust, well-documented, and 
                       ready for community use.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Bilingual Coordinator (PT) - $3,300</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      6 hours per week for six months to translate UI, caption videos, run online help desk, 
+                    <p className="text-white">
+                      6 hours per week for twelve months to translate UI, caption videos, run online help desk, 
                       and ensure the platform serves Miami's diverse community effectively.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div>
+              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
                 <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Contracted Services (23% of budget)</h3>
-                <div className="space-y-4">
-                  <div>
+                <div className="space-y-6">
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Web/LMS Codebase Development - $3,500</h4>
-                    <p className="text-[#A4FF4E]/80">
+                    <p className="text-white">
                       Building the React + Supabase platform with QR links, live visitor stats, and three 
                       micro-courses: Web-Design for Smart Signs, Ethical AI Agents, and Bilingual SEO.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Automation Scripts - $1,500</h4>
-                    <p className="text-[#A4FF4E]/80">
+                    <p className="text-white">
                       Scripts that copy weekly metrics to GitHub and clean data for the dashboard, ensuring 
                       transparency and easy reporting.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Documentation & Testing - $850</h4>
-                    <p className="text-[#A4FF4E]/80">
+                    <p className="text-white">
                       Comprehensive documentation and testing to ensure the platform is reliable and 
                       user-friendly for community stewards.
                     </p>
@@ -336,92 +327,105 @@ export default function BudgetPage() {
                 </div>
               </div>
 
-              <div>
+              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
                 <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Hardware & Materials (28% of budget)</h3>
-                <div className="space-y-4">
-                  <div>
+                <div className="space-y-6">
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Smart Signs - $2,400</h4>
-                    <p className="text-[#A4FF4E]/80">
+                    <p className="text-white">
                       Two museum-grade Smart Signs for Bakehouse & Locust lobbies to broadcast events and 
                       impact data, creating visible community engagement.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Learning Stations - $1,800</h4>
-                    <p className="text-[#A4FF4E]/80">
+                    <p className="text-white">
                       Twelve Raspberry-Pi learning stations for workshops, allowing participants to code 
                       along and preview results instantly.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Projectors - $2,000</h4>
-                    <p className="text-[#A4FF4E]/80">
+                    <p className="text-white">
                       Portable LaserCube and short-throw LED projectors for pop-up events, projecting 
                       AI visuals, live stats, and partner branding.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Demo Laptop - $700</h4>
-                    <p className="text-[#A4FF4E]/80">
+                    <p className="text-white">
                       Refurbished Legion laptop for live demos and development work during events.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div>
+              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
                 <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Cloud & Admin Costs (6% of budget)</h3>
-                <div className="space-y-4">
-                  <div>
+                <div className="space-y-6">
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Supabase Pro - $600</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Six months of reliable database and backend services for the platform.
+                    <p className="text-white">
+                      Twelve months of reliable database and backend services for the platform.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">PostHog Analytics - $400</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Six months of analytics to track community engagement and platform usage.
+                    <p className="text-white">
+                      Twelve months of analytics to track community engagement and platform usage.
                     </p>
                   </div>
-                  <div>
+                  <div className="p-4 rounded-lg bg-black/50">
                     <h4 className="font-semibold mb-2 text-[#A4FF4E]">Streamlabs - $400</h4>
-                    <p className="text-[#A4FF4E]/80">
-                      Six months of reliable livestreaming services for events and tutorials.
+                    <p className="text-white">
+                      Twelve months of reliable livestreaming services for events and tutorials.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div>
+              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
                 <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Contingency & Spare Parts (2% of budget)</h3>
-                <p className="text-[#A4FF4E]/80">
-                  Extra cables, backup Raspberry Pi, and replacement projector lamp to ensure everything 
-                  keeps running smoothly during events. This small buffer prevents disruptions and 
-                  maintains professional quality.
-                </p>
+                <div className="p-4 rounded-lg bg-black/50">
+                  <p className="text-white">
+                    Extra cables, backup Raspberry Pi, and replacement projector lamp to ensure everything 
+                    keeps running smoothly during events. This small buffer prevents disruptions and 
+                    maintains professional quality.
+                  </p>
+                </div>
               </div>
 
-              <div>
+              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
                 <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Alignment with Fund Priorities</h3>
-                <ul className="space-y-2 text-[#A4FF4E]/80">
-                  <li className="flex items-start gap-2">
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3 p-4 rounded-lg bg-black/50">
                     <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
-                    <span><strong>Digital tools & infrastructure:</strong> Smart Signs, Pi kits, and cloud stack give artists concrete technology they can control.</span>
+                    <div>
+                      <span className="font-semibold text-[#A4FF4E]">Digital tools & infrastructure:</span>
+                      <span className="text-white"> Smart Signs, Pi kits, and cloud stack give artists concrete technology they can control.</span>
+                    </div>
                   </li>
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start gap-3 p-4 rounded-lg bg-black/50">
                     <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
-                    <span><strong>Capacity-building expertise:</strong> 41% of funds pay humans who transfer skills, not just install gear.</span>
+                    <div>
+                      <span className="font-semibold text-[#A4FF4E]">Capacity-building expertise:</span>
+                      <span className="text-white"> 41% of funds pay humans who transfer skills, not just install gear.</span>
+                    </div>
                   </li>
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start gap-3 p-4 rounded-lg bg-black/50">
                     <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
-                    <span><strong>Replicability & sustainability:</strong> Open-source code, Creative-Commons templates, and clear earned-income pathway let the model grow without perpetual grants.</span>
+                    <div>
+                      <span className="font-semibold text-[#A4FF4E]">Replicability & sustainability:</span>
+                      <span className="text-white"> Open-source code, Creative-Commons templates, and clear earned-income pathway let the model grow without perpetual grants.</span>
+                    </div>
                   </li>
                 </ul>
-                <p className="mt-4 text-[#A4FF4E]/80">
-                  At $24,950, every Knight dollar directly amplifies community voices, leaving Miami with 
-                  working screens, trained stewards, and an evidence-based template ready for replication.
-                </p>
+                <div className="mt-6 p-4 rounded-lg bg-black/50">
+                  <p className="text-white">
+                    At $24,950, every Knight dollar directly amplifies community voices, leaving Miami with 
+                    working screens, trained stewards, and an evidence-based template ready for replication.
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>

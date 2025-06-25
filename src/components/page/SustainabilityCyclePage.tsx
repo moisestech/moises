@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
+import { BackToOverview } from '@/components/shared/BackToOverview';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
 import {
   ChevronLeft,
@@ -117,17 +118,7 @@ export default function SustainabilityCyclePage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <TechNonprofitNavKF />
-
-      {/* Back to Main */}
-      <div className="fixed top-24 left-4 z-30">
-        <Link
-          href="/grant/knight-foundation"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E] transition-colors shadow-neon"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          Back to Overview
-        </Link>
-      </div>
+      <BackToOverview />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20">
@@ -293,6 +284,38 @@ export default function SustainabilityCyclePage() {
                 </motion.div>
               </div>
 
+              {/* Connecting Lines - Desktop Only */}
+              <svg className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+                {flywheelStages.map((_, index) => {
+                  const angle1 = (index * 72) - 90;
+                  const angle2 = ((index + 1) * 72) - 90;
+                  const radius = 280;
+                  const centerX = 400; // Half of max-width
+                  const centerY = 400; // Half of height
+                  const x1 = Math.cos((angle1 * Math.PI) / 180) * radius + centerX;
+                  const y1 = Math.sin((angle1 * Math.PI) / 180) * radius + centerY;
+                  const x2 = Math.cos((angle2 * Math.PI) / 180) * radius + centerX;
+                  const y2 = Math.sin((angle2 * Math.PI) / 180) * radius + centerY;
+
+                  return (
+                    <motion.line
+                      key={index}
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ delay: index * 0.2 + 1, duration: 1 }}
+                      x1={x1}
+                      y1={y1}
+                      x2={x2}
+                      y2={y2}
+                      stroke="#A4FF4E"
+                      strokeWidth="2"
+                      strokeDasharray="5,5"
+                      opacity="0.6"
+                    />
+                  );
+                })}
+              </svg>
+
               {/* Flywheel Stages */}
               <div className="relative w-full h-full">
                 {flywheelStages.map((stage, index) => {
@@ -307,7 +330,7 @@ export default function SustainabilityCyclePage() {
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.2, duration: 0.5 }}
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
                       style={{
                         transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`
                       }}
@@ -347,38 +370,6 @@ export default function SustainabilityCyclePage() {
                   );
                 })}
               </div>
-
-              {/* Connecting Lines - Desktop Only */}
-              <svg className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                {flywheelStages.map((_, index) => {
-                  const angle1 = (index * 72) - 90;
-                  const angle2 = ((index + 1) * 72) - 90;
-                  const radius = 280;
-                  const centerX = 400; // Half of max-width
-                  const centerY = 400; // Half of height
-                  const x1 = Math.cos((angle1 * Math.PI) / 180) * radius + centerX;
-                  const y1 = Math.sin((angle1 * Math.PI) / 180) * radius + centerY;
-                  const x2 = Math.cos((angle2 * Math.PI) / 180) * radius + centerX;
-                  const y2 = Math.sin((angle2 * Math.PI) / 180) * radius + centerY;
-
-                  return (
-                    <motion.line
-                      key={index}
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ delay: index * 0.2 + 1, duration: 1 }}
-                      x1={x1}
-                      y1={y1}
-                      x2={x2}
-                      y2={y2}
-                      stroke="#A4FF4E"
-                      strokeWidth="2"
-                      strokeDasharray="5,5"
-                      opacity="0.6"
-                    />
-                  );
-                })}
-              </svg>
             </div>
           </div>
         </div>
@@ -499,6 +490,22 @@ export default function SustainabilityCyclePage() {
               </motion.div>
             ))}
           </div>
+
+          {/* Link to Impact ROI */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="text-center mt-12"
+          >
+            <Link
+              href="/grant/knight-foundation/impact-roi"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
+            >
+              <BarChart className="w-5 h-5" />
+              View Detailed Impact & ROI Analysis
+            </Link>
+          </motion.div>
         </div>
       </section>
 

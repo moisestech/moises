@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
+import { BackToOverview } from '@/components/shared/BackToOverview';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
 import { 
   Calendar,
@@ -27,7 +28,7 @@ const fadeInUp = {
 };
 
 // Workshop data
-const workshopData = [
+const confirmedWorkshops = [
   {
     host: "Bakehouse Art Complex",
     quarter: "Q3 '25",
@@ -51,24 +52,47 @@ const workshopData = [
     reach: { inPerson: 75, stream: 250 }
   },
   {
-    host: "PAMM",
-    quarter: "Q4 '25",
+    host: "Locust Projects",
+    quarter: "Q1 '26",
     workshops: [
       "Voice-clone captions for accessibility",
       "Curating AI in museums"
     ],
     activation: "AI on the Terrace outdoor screening",
     reach: { inPerson: 400, stream: 500 }
+  }
+];
+
+const potentialWorkshops = [
+  {
+    host: "PAMM",
+    quarter: "TBD",
+    workshops: [
+      "AI Ethics in Museum Collections",
+      "Digital Curation with AI Tools"
+    ],
+    activation: "AI-curated exhibition preview",
+    reach: { inPerson: 200, stream: 800 }
   },
   {
     host: "NWSA",
-    quarter: "Q1 '26",
+    quarter: "TBD",
     workshops: [
       "No-GPU Short-Film Pipeline",
       "GitHub Copilot for Performance"
     ],
     activation: "5-hr hackathon; judged by faculty",
     reach: { inPerson: 90, stream: 600 }
+  },
+  {
+    host: "The Lab Miami",
+    quarter: "TBD",
+    workshops: [
+      "AI for Startup Branding",
+      "Automated Content Creation"
+    ],
+    activation: "Startup pitch night with AI demos",
+    reach: { inPerson: 120, stream: 400 }
   }
 ];
 
@@ -77,19 +101,9 @@ export default function WorkshopsPage() {
   const isDark = theme === 'dark';
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className={`min-h-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <TechNonprofitNavKF />
-
-      {/* Back to Main */}
-      <div className="fixed top-24 left-4 z-30">
-        <Link
-          href="/grant/knight-foundation"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E] transition-colors shadow-neon"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          Back to Overview
-        </Link>
-      </div>
+      <BackToOverview />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20">
@@ -100,13 +114,17 @@ export default function WorkshopsPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 mb-6">
+            <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full ${
+              isDark 
+                ? 'bg-[#A4FF4E]/10 border border-[#A4FF4E]/30' 
+                : 'bg-[#A4FF4E]/20 border border-[#A4FF4E]/50'
+            } mb-6`}>
               <Calendar className="w-4 h-4 text-[#A4FF4E]" />
               <span className="text-sm font-medium text-[#A4FF4E]">
                 Workshop Program
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-black'}`}>
               Hands-on AI Education
             </h1>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
@@ -135,20 +153,22 @@ export default function WorkshopsPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Workshop Schedule</h2>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Confirmed Workshop Schedule</h2>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
-              Tailored programs at key community venues
+              8 workshops across 3 confirmed community venues
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {workshopData.map((venue, index) => (
+            {confirmedWorkshops.map((venue, index) => (
               <motion.div
                 key={venue.host}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+                className={`p-6 rounded-xl border-2 border-[#A4FF4E] ${
+                  isDark ? 'bg-black/80 text-white' : 'bg-white/80 text-black border-gray-200'
+                } shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300`}
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
@@ -158,7 +178,11 @@ export default function WorkshopsPage() {
                       <span className="text-sm text-[#A4FF4E]/80">{venue.quarter}</span>
                     </div>
                   </div>
-                  <div className="px-3 py-1 rounded-full bg-[#A4FF4E]/10 text-[#A4FF4E] border border-[#A4FF4E]/30">
+                  <div className={`px-3 py-1 rounded-full ${
+                    isDark 
+                      ? 'bg-[#A4FF4E]/10 text-[#A4FF4E] border border-[#A4FF4E]/30'
+                      : 'bg-[#A4FF4E]/20 text-[#A4FF4E] border border-[#A4FF4E]/50'
+                  }`}>
                     {venue.workshops.length} Workshops
                   </div>
                 </div>
@@ -170,7 +194,7 @@ export default function WorkshopsPage() {
                       {venue.workshops.map((workshop) => (
                         <li
                           key={workshop}
-                          className="flex items-center gap-2 text-gray-300"
+                          className={`flex items-center gap-2 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                         >
                           <Laptop className="w-4 h-4 text-[#A4FF4E]" />
                           {workshop}
@@ -181,7 +205,7 @@ export default function WorkshopsPage() {
 
                   <div>
                     <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">Community Activation</h4>
-                    <p className="text-gray-300">
+                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                       {venue.activation}
                     </p>
                   </div>
@@ -195,6 +219,105 @@ export default function WorkshopsPage() {
                       <div>
                         <div className="text-sm font-medium text-[#A4FF4E]/80">Streaming</div>
                         <div className="text-xl font-bold text-[#A4FF4E]">{venue.reach.stream}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={Sparkles}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Potential Workshops */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Potential Future Workshops</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
+              Additional venues for potential expansion
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {potentialWorkshops.map((venue, index) => (
+              <motion.div
+                key={venue.host}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className={`p-6 rounded-xl border-2 ${
+                  isDark 
+                    ? 'border-gray-500 bg-black/60 text-white shadow-neon hover:shadow-[0_0_30px_rgba(128,128,128,0.3)] hover:border-gray-400'
+                    : 'border-gray-300 bg-white/60 text-black shadow-neon hover:shadow-[0_0_30px_rgba(128,128,128,0.3)] hover:border-gray-400'
+                } transition-all duration-300`}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className={`text-xl font-bold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{venue.host}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <MapPin className={`w-4 h-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
+                      <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{venue.quarter}</span>
+                    </div>
+                  </div>
+                  <div className={`px-3 py-1 rounded-full ${
+                    isDark 
+                      ? 'bg-gray-500/10 text-gray-300 border border-gray-500/30'
+                      : 'bg-gray-300/20 text-gray-600 border border-gray-300/50'
+                  }`}>
+                    {venue.workshops.length} Workshops
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className={`text-sm font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Workshop Topics</h4>
+                    <ul className="space-y-2">
+                      {venue.workshops.map((workshop) => (
+                        <li
+                          key={workshop}
+                          className={`flex items-center gap-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
+                        >
+                          <Laptop className={`w-4 h-4 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
+                          {workshop}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className={`text-sm font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Community Activation</h4>
+                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {venue.activation}
+                    </p>
+                  </div>
+
+                  <div className={`flex items-center justify-between pt-4 border-t border-dashed ${
+                    isDark ? 'border-gray-500/30' : 'border-gray-300/30'
+                  }`}>
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <div className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>In-Person</div>
+                        <div className={`text-xl font-bold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{venue.reach.inPerson}</div>
+                      </div>
+                      <div>
+                        <div className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Streaming</div>
+                        <div className={`text-xl font-bold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>{venue.reach.stream}</div>
                       </div>
                     </div>
                   </div>
@@ -238,14 +361,14 @@ export default function WorkshopsPage() {
                 icon: Monitor
               },
               {
-                title: "Inclusive Design",
-                description: "ASL, childcare, and snacks provided",
-                icon: Users
-              },
-              {
                 title: "Take-home Resources",
                 description: "Code templates and workflow guides",
                 icon: Brain
+              },
+              {
+                title: "Community Focus",
+                description: "Designed for Miami's creative community",
+                icon: Users
               }
             ].map((feature, index) => (
               <motion.div
@@ -253,7 +376,9 @@ export default function WorkshopsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
+                className={`p-6 rounded-xl border-2 border-[#A4FF4E] ${
+                  isDark ? 'bg-black/80 text-white' : 'bg-white/80 text-black border-gray-200'
+                } shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300`}
               >
                 <div className="w-12 h-12 mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center">
                   {React.createElement(feature.icon, {
@@ -261,7 +386,7 @@ export default function WorkshopsPage() {
                   })}
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-[#A4FF4E]">{feature.title}</h3>
-                <p className="text-gray-300">
+                <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   {feature.description}
                 </p>
               </motion.div>
@@ -295,34 +420,34 @@ export default function WorkshopsPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                metric: "24",
+                metric: "8",
                 label: "Total Workshops",
-                description: "Across 4 venues",
+                description: "Across 3 venues",
                 icon: Calendar,
                 color: "text-[#A4FF4E]"
               },
               {
-                metric: "1,025",
-                label: "Total Reach",
-                description: "In-person + streaming",
-                icon: Users,
-                color: "text-[#3B82F6]"
-              },
-              {
-                metric: "100%",
-                label: "Free Access",
-                description: "No cost to participants",
-                icon: Target,
-                color: "text-[#EC4899]"
-              },
-              {
-                metric: "4",
+                metric: "3",
                 label: "Venues",
                 description: "Community partners",
                 icon: MapPin,
+                color: "text-[#3B82F6]"
+              },
+              {
+                metric: "535",
+                label: "In-Person Reach",
+                description: "Total participants",
+                icon: Users,
+                color: "text-[#EC4899]"
+              },
+              {
+                metric: "1,050",
+                label: "Streaming Reach",
+                description: "Total viewers",
+                icon: Monitor,
                 color: "text-[#8B5CF6]"
               }
             ].map((item, index) => (
@@ -331,7 +456,9 @@ export default function WorkshopsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300 text-center"
+                className={`p-6 rounded-xl border-2 border-[#A4FF4E] ${
+                  isDark ? 'bg-black/80 text-white' : 'bg-white/80 text-black border-gray-200'
+                } shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300`}
               >
                 <div className={`w-12 h-12 mx-auto mb-4 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center`}>
                   {React.createElement(item.icon, {
@@ -339,8 +466,8 @@ export default function WorkshopsPage() {
                   })}
                 </div>
                 <div className={`text-3xl font-bold mb-2 ${item.color}`}>{item.metric}</div>
-                <div className="font-medium mb-2 text-white">{item.label}</div>
-                <div className="text-sm text-gray-300">{item.description}</div>
+                <div className={`font-medium mb-2 ${isDark ? 'text-white' : 'text-black'}`}>{item.label}</div>
+                <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{item.description}</div>
               </motion.div>
             ))}
           </div>
@@ -366,12 +493,14 @@ export default function WorkshopsPage() {
             animate="animate"
             className="text-center"
           >
-            <div className="p-8 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
+            <div className={`p-8 rounded-xl border-2 border-[#A4FF4E] ${
+              isDark ? 'bg-black/80 text-white' : 'bg-white/80 text-black border-gray-200'
+            } shadow-neon`}>
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#A4FF4E]">
-                Ready to Join Our Workshops?
+                Ready to Join a Workshop?
               </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Free, accessible AI education for Miami's creative community
+              <p className={`text-xl mb-8 max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                Free, hands-on AI education for Miami's creative community
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -382,11 +511,13 @@ export default function WorkshopsPage() {
                   Back to Overview
                 </Link>
                 <Link
-                  href="/grant/knight-foundation/impact-roi"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
+                  href="/grant/knight-foundation/ai-toolkits"
+                  className={`inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] ${
+                    isDark ? 'hover:bg-[#A4FF4E]/10' : 'hover:bg-[#A4FF4E]/5'
+                  } transition-colors`}
                 >
-                  <Target className="w-5 h-5" />
-                  View Impact Metrics
+                  <Brain className="w-5 h-5" />
+                  Explore AI Toolkits
                 </Link>
               </div>
             </div>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
+import { BackToOverview } from '@/components/shared/BackToOverview';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
 import {
   ChevronLeft,
@@ -142,17 +143,7 @@ export default function SmartSignPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <TechNonprofitNavKF />
-
-      {/* Back to Main */}
-      <div className="fixed top-24 left-4 z-30">
-        <Link
-          href="/grant/knight-foundation"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E] transition-colors shadow-neon"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          Back to Overview
-        </Link>
-      </div>
+      <BackToOverview />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20">

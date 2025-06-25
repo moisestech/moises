@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { TechNonprofitNavKF } from '@/components/workshop/TechNonprofitNavKF';
+import { BackToOverview } from '@/components/shared/BackToOverview';
 import DecorativeDivider from '@/components/common/DecorativeDivider';
 import { 
   BarChart,
@@ -36,42 +37,48 @@ const fadeInUp = {
 const impactData = {
   artists: {
     icon: Palette,
-    partners: ["Bakehouse Art Complex", "Edge Zones Contemporary Art", "Locust Projects"],
+    confirmedPartners: ["Bakehouse Art Complex", "Edge Zones Contemporary Art", "Locust Projects"],
+    potentialPartners: ["Miami Art Week", "Art Basel Miami Beach"],
     kpi: "100+ artists trained in AI tools; 30 grant-ready proposals",
     path: "8 venues license signage SaaS ($32K/yr sustaining income)",
     details: "90% of creators report AI tools save time and money. Partnering with Miami's premier art incubators."
   },
   film: {
     icon: Film,
-    partners: ["University of Miami Cinema", "Miami Film Festival", "O Cinema"],
+    confirmedPartners: [],
+    potentialPartners: ["University of Miami Cinema", "Miami Film Festival", "O Cinema"],
     kpi: "8 AI-audited shorts; avg $8K VFX saving per film",
     path: "AI24 Seal required by 2 SE-US festivals",
     details: "AI tools allow 5-10x more video content with same budget. Traditional VFX costs ~$1,800/minute."
   },
   education: {
     icon: GraduationCap,
-    partners: ["Northwest School of the Arts", "FIU AI Hub", "UM Studios", "MDC Wolfson"],
+    confirmedPartners: [],
+    potentialPartners: ["Northwest School of the Arts", "FIU AI Hub", "UM Studios", "MDC Wolfson"],
     kpi: "3 schools embed AI ethics modules → 400 students/yr",
     path: "Adoption in 6 US & 2 EU art programs",
     details: "91% of artists want verifiable attribution tools. 89% say AI content should be clearly labeled."
   },
   brands: {
     icon: Building,
-    partners: ["The Community", "República Havas", "Alma DDB"],
+    confirmedPartners: [],
+    potentialPartners: ["The Community", "República Havas", "Alma DDB"],
     kpi: "2 pilot ads cut turnaround 40% using AI tools",
     path: "$60K/yr in B2B studio-in-a-box rollouts",
     details: "AI-driven editing can produce 40-100% more content with same resources."
   },
   institutions: {
     icon: Building2,
-    partners: ["Pérez Art Museum (PAMM)", "Vizcaya Museum", "Miami Book Fair"],
+    confirmedPartners: [],
+    potentialPartners: ["Pérez Art Museum (PAMM)", "Vizcaya Museum", "Miami Book Fair"],
     kpi: "2 flagship institutions display AI-curated content",
     path: "4 additional orgs subscribe to ethics rubric service",
     details: "Implementing Google SynthID-style invisible watermarks for AI transparency."
   },
   research: {
     icon: Code,
-    partners: ["FIU AI Hub", "MAGIC (MDC)", "Code/Art Miami"],
+    confirmedPartners: [],
+    potentialPartners: ["FIU AI Hub", "MAGIC (MDC)", "Code/Art Miami"],
     kpi: "Open-source watermark plugin → 150 downloads",
     path: "500+ downloads, 20 paid support contracts",
     details: "Inspired by Google SynthID technology for AI-generated media identification."
@@ -104,21 +111,7 @@ export default function ImpactROIPage() {
   return (
     <main className={`min-h-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <TechNonprofitNavKF />
-
-      {/* Back to Main */}
-      <div className="fixed top-24 left-4 z-30">
-        <Link
-          href="/grant/knight-foundation"
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg ${
-            isDark 
-              ? 'bg-[#18181b] hover:bg-[#232323] text-[#A4FF4E] border border-[#A4FF4E]' 
-              : 'bg-gray-100 hover:bg-gray-200 text-[#A4FF4E] border border-[#A4FF4E]'
-          } transition-colors shadow-neon`}
-        >
-          <ChevronLeft className="w-4 h-4" />
-          Back to Overview
-        </Link>
-      </div>
+      <BackToOverview />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20">
@@ -243,13 +236,41 @@ export default function ImpactROIPage() {
                   <div>
                     <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">Confirmed Partners</h4>
                     <div className="flex flex-wrap gap-2">
-                      {data.partners.map((partner) => (
+                      {data.confirmedPartners.length > 0 ? (
+                        data.confirmedPartners.map((partner) => (
+                          <span
+                            key={partner}
+                            className={`text-xs px-2 py-1 rounded-full ${
+                              isDark 
+                                ? 'bg-[#A4FF4E]/10 text-[#A4FF4E] border border-[#A4FF4E]/30'
+                                : 'bg-[#A4FF4E]/20 text-[#A4FF4E] border border-[#A4FF4E]/50'
+                            }`}
+                          >
+                            {partner}
+                          </span>
+                        ))
+                      ) : (
+                        <span className={`text-xs px-2 py-1 rounded-full ${
+                          isDark 
+                            ? 'bg-gray-500/10 text-gray-400 border border-gray-500/30'
+                            : 'bg-gray-200 text-gray-600 border border-gray-300'
+                        }`}>
+                          No confirmed partners yet
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium mb-2 text-[#A4FF4E]/80">Potential Partners</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {data.potentialPartners.map((partner) => (
                         <span
                           key={partner}
                           className={`text-xs px-2 py-1 rounded-full ${
                             isDark 
-                              ? 'bg-[#A4FF4E]/10 text-[#A4FF4E] border border-[#A4FF4E]/30'
-                              : 'bg-[#A4FF4E]/20 text-[#A4FF4E] border border-[#A4FF4E]/50'
+                              ? 'bg-gray-500/10 text-gray-400 border border-gray-500/30'
+                              : 'bg-gray-200 text-gray-600 border border-gray-300'
                           }`}
                         >
                           {partner}
