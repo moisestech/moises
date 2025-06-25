@@ -27,7 +27,7 @@ const milestones = [
   { text: "Reach 100 course completions milestone", month: "Jun '26 (M9)" },
   { text: "LaserCube Pop-Up #2 (Design District)", month: "Jul '26 (M10)" },
   { text: "Publish open-source playbook + parts list", month: "Jul '26 (M10)" },
-  { text: "Secure first nonprofit license ($39/mo) → covers Year-2 hosting", month: "Aug '26 (M11)" },
+  { text: "Secure first nonprofit license ($99/mo) → covers Year-2 hosting", month: "Aug '26 (M11)" },
   { text: "Merge external pull-request #1", month: "Aug '26 (M11)" },
   { text: "Produce \"Year-1 Impact Reel\" (for Knight + partners)", month: "Sep '26 (M12)" },
   { text: "Hit 200 course completions / 40k bilingual impressions", month: "Sep '26 (M12)" },

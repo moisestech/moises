@@ -271,7 +271,7 @@ const quarterlyRoadmap = [
         month: "Jul '26 (M10)"
       },
       {
-        title: "Secure first nonprofit license ($39/mo) → covers Year-2 hosting",
+        title: "Secure first nonprofit license ($99/mo) → covers Year-2 hosting",
         icon: Award,
         category: "Sustainability",
         status: "Revenue Generation",

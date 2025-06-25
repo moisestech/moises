@@ -603,7 +603,7 @@ export default function ImpactROIPage() {
               <div className={`flex items-center gap-3 p-4 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20`}>
                 <DollarSign className="w-6 h-6 text-[#F59E0B]" />
                 <div>
-                  <div className="font-bold text-[#F59E0B]">1 paid nonprofit license ($39/mo)</div>
+                  <div className="font-bold text-[#F59E0B]">1 paid nonprofit license ($99/mo)</div>
                   <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Covers Year-2 hosting costs</div>
                 </div>
               </div>

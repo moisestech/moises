@@ -502,6 +502,115 @@ export default function BudgetPage() {
           </motion.div>
         </div>
       </section>
+
+      <DecorativeDivider 
+        icon={Clock}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Navigation to Related Pages */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Explore Related Analysis</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-8">
+              See how this budget translates into measurable impact and sustainable growth
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Impact & ROI Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="group"
+            >
+              <Link href="/grant/knight-foundation/impact-roi">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <BarChart className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                      Impact & ROI Analysis
+                    </h3>
+                    <p className="text-gray-300 mb-6">
+                      See how $24,950 creates measurable community impact with live metrics tracking and detailed outcomes
+                    </p>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                      <span>View Impact</span>
+                      <ChevronLeft className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 rotate-180" />
+                    </div>
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Sustainability Cycle Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="group"
+            >
+              <Link href="/grant/knight-foundation/sustainability-cycle">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Sparkles className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                      Sustainability Model
+                    </h3>
+                    <p className="text-gray-300 mb-6">
+                      Discover how this investment becomes a self-funding ecosystem through the sustainability flywheel
+                    </p>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                      <span>View Model</span>
+                      <ChevronLeft className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 rotate-180" />
+                    </div>
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                </div>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Bottom Note */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-12 p-6 rounded-xl border border-[#A4FF4E]/20 bg-black/40 max-w-2xl mx-auto text-center"
+          >
+            <p className="text-gray-300">
+              <span className="text-[#A4FF4E] font-medium">Budget transparency</span> and impact measurement go hand-in-hand. Explore how each dollar creates lasting community value.
+            </p>
+          </motion.div>
+        </div>
+      </section>
     </main>
   );
 } 

@@ -521,7 +521,7 @@ export default function SustainabilityCyclePage() {
                     Nonprofit License Model
                   </h3>
                   <div className="text-center mb-6">
-                    <div className="text-4xl font-bold text-[#F59E0B] mb-2">$39</div>
+                    <div className="text-4xl font-bold text-[#F59E0B] mb-2">$99</div>
                     <div className="text-sm text-gray-400">Per Month</div>
                   </div>
                   <p className="text-gray-300 mb-6 text-center">
@@ -672,39 +672,101 @@ export default function SustainabilityCyclePage() {
         iconColor="text-[#A4FF4E]/50"
       />
 
-      {/* Call to Action */}
+      {/* Navigation to Related Pages */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
             variants={fadeInUp}
             initial="initial"
             animate="animate"
-            className="text-center"
+            className="text-center mb-12"
           >
-            <div className="p-8 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#A4FF4E]">
-                Ready to Build a Sustainable Future?
-              </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Join us in creating a self-funding ecosystem for Miami's creative community
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/grant/knight-foundation"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium bg-[#A4FF4E] text-black hover:bg-[#A4FF4E]/90 transition-colors"
-                >
-                  <ArrowRight className="w-5 h-5" />
-                  Back to Overview
-                </Link>
-                <Link
-                  href="/grant/knight-foundation/budget"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-medium border border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-colors"
-                >
-                  <DollarSign className="w-5 h-5" />
-                  View Budget Details
-                </Link>
-              </div>
-            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Explore Related Analysis</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-8">
+              See how the sustainability model connects to budget allocation and measurable impact
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Budget Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="group"
+            >
+              <Link href="/grant/knight-foundation/budget">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <DollarSign className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                      Budget Breakdown
+                    </h3>
+                    <p className="text-gray-300 mb-6">
+                      Explore the detailed $24,950 budget allocation that funds this sustainable ecosystem
+                    </p>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                      <span>View Budget</span>
+                      <ChevronLeft className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 rotate-180" />
+                    </div>
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Impact & ROI Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="group"
+            >
+              <Link href="/grant/knight-foundation/impact-roi">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <BarChart className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                      Impact & ROI Analysis
+                    </h3>
+                    <p className="text-gray-300 mb-6">
+                      See how the sustainability model translates into measurable community impact and returns
+                    </p>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                      <span>View Impact</span>
+                      <ChevronLeft className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 rotate-180" />
+                    </div>
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                </div>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Bottom Note */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-12 p-6 rounded-xl border border-[#A4FF4E]/20 bg-black/40 max-w-2xl mx-auto text-center"
+          >
+            <p className="text-gray-300">
+              <span className="text-[#A4FF4E] font-medium">Sustainability</span> is built on smart budgeting and measurable outcomes. Explore how each component works together.
+            </p>
           </motion.div>
         </div>
       </section>
