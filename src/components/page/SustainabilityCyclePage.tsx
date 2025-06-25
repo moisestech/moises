@@ -24,6 +24,7 @@ import {
   BarChart,
   Clock,
   Sparkles,
+  Code,
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -425,6 +426,158 @@ export default function SustainabilityCyclePage() {
 
       <DecorativeDivider 
         icon={Building2}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
+      {/* Sustainability Tracking Metrics */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Sustainability Tracking</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-4">
+              Key metrics for long-term sustainability and community engagement
+            </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30">
+              <Activity className="w-4 h-4 text-[#A4FF4E]" />
+              <span className="text-sm text-[#A4FF4E]">Real-time tracking throughout the grant period</span>
+            </div>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+            {/* Community Contributions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="group"
+            >
+              <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300 p-8">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Code className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300 text-center">
+                    Community Code Contributions
+                  </h3>
+                  <div className="text-center mb-6">
+                    <div className="text-4xl font-bold text-[#10B981] mb-2">≥3</div>
+                    <div className="text-sm text-gray-400">External Pull Requests</div>
+                  </div>
+                  <p className="text-gray-300 mb-6 text-center">
+                    Open-source community engagement and code contributions to ensure long-term project sustainability
+                  </p>
+                  
+                  {/* Progress indicator */}
+                  <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
+                    <motion.div
+                      className="bg-gradient-to-r from-[#10B981] to-[#059669] h-2 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: '100%' }}
+                      transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
+                    />
+                  </div>
+                  
+                  <div className="text-center">
+                    <span className="px-3 py-1 rounded-full text-xs bg-[#10B981]/20 text-[#10B981] font-medium">
+                      Target: Community Engagement
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#10B981] via-[#059669] to-[#10B981] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+              </div>
+            </motion.div>
+
+            {/* Nonprofit License */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="group"
+            >
+              <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300 p-8">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <DollarSign className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300 text-center">
+                    Nonprofit License Model
+                  </h3>
+                  <div className="text-center mb-6">
+                    <div className="text-4xl font-bold text-[#F59E0B] mb-2">$39</div>
+                    <div className="text-sm text-gray-400">Per Month</div>
+                  </div>
+                  <p className="text-gray-300 mb-6 text-center">
+                    Sustainable revenue model covering Year-2 hosting costs and ensuring long-term project viability
+                  </p>
+                  
+                  {/* Progress indicator */}
+                  <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
+                    <motion.div
+                      className="bg-gradient-to-r from-[#F59E0B] to-[#D97706] h-2 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: '100%' }}
+                      transition={{ duration: 2, delay: 0.7, ease: "easeOut" }}
+                    />
+                  </div>
+                  
+                  <div className="text-center">
+                    <span className="px-3 py-1 rounded-full text-xs bg-[#F59E0B]/20 text-[#F59E0B] font-medium">
+                      Target: Revenue Generation
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#F59E0B] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Sustainability Model Summary */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="p-8 rounded-xl border-2 border-[#A4FF4E] bg-black/80 shadow-neon max-w-3xl mx-auto"
+          >
+            <div className="text-center">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-4">
+                <RefreshCw className="w-6 h-6 text-black" />
+              </div>
+              <h3 className="text-xl font-bold text-[#A4FF4E] mb-4">Sustainable Replication Model</h3>
+              <p className="text-gray-300 mb-4">
+                Community contributions + nonprofit licensing = Year-2 hosting covered
+              </p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30">
+                <span className="text-sm text-[#A4FF4E] font-medium">
+                  Self-funding ecosystem for long-term impact
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={DollarSign}
         gradientColors={{
           from: 'rgba(164, 255, 78, 0.1)',
           via: 'rgba(59, 130, 246, 0.1)',

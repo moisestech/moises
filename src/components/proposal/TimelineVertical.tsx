@@ -1,5 +1,6 @@
-import React from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ChevronUp, Calendar, Clock } from 'lucide-react';
 
 const milestones = [
   { text: "Sign MOUs with Bakehouse & Locust Projects", month: "Oct '25 (M1)" },
@@ -33,27 +34,55 @@ const milestones = [
   { text: "Prepare grant close-out report & next-city prospectus", month: "Sep '26 (M12)" }
 ];
 
-function MilestoneItem({ milestone, index }: { milestone: { text: string; month: string }; index: number }) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
+// Group milestones by quarter for compact view
+const quarterlyMilestones = [
+  {
+    quarter: "Q4 2025",
+    period: "Oct – Dec '25",
+    phase: "Build & Stage",
+    milestones: milestones.slice(0, 8),
+    color: "from-[#A4FF4E] to-[#00FF88]"
+  },
+  {
+    quarter: "Q1 2026", 
+    period: "Jan – Mar '26",
+    phase: "Deploy",
+    milestones: milestones.slice(8, 16),
+    color: "from-[#3B82F6] to-[#1D4ED8]"
+  },
+  {
+    quarter: "Q2 2026",
+    period: "Apr – Jun '26", 
+    phase: "Teach & Test",
+    milestones: milestones.slice(16, 22),
+    color: "from-[#8B5CF6] to-[#7C3AED]"
+  },
+  {
+    quarter: "Q3 2026",
+    period: "Jul – Sep '26",
+    phase: "Engage & Sustain", 
+    milestones: milestones.slice(22, 28),
+    color: "from-[#EC4899] to-[#DB2777]"
+  }
+];
 
+function MilestoneItem({ milestone, index }: { milestone: { text: string; month: string }; index: number }) {
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, x: -20 }}
-      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-      transition={{ delay: index * 0.2 }}
-      className="relative pl-16 mb-12 last:mb-0"
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.1 }}
+      className="relative pl-16 mb-8 last:mb-0"
     >
       {/* Dot */}
       <div className="absolute left-6 w-4 h-4 rounded-full bg-[#A4FF4E] transform -translate-x-1/2 mt-2" />
 
       {/* Content */}
-      <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+      <div className="bg-gray-900 rounded-xl p-6 border border-gray-800 hover:border-[#A4FF4E]/30 transition-colors">
         <div className="flex items-center gap-4 mb-2">
           <span className="text-[#A4FF4E] font-bold">0{index + 1}</span>
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-white">
+            <h3 className="text-lg font-bold text-white">
               {milestone.text}
             </h3>
             <p className="text-sm text-[#A4FF4E]/80 mt-1">{milestone.month}</p>
@@ -64,18 +93,128 @@ function MilestoneItem({ milestone, index }: { milestone: { text: string; month:
   );
 }
 
+function CompactQuarterView({ quarter, isExpanded }: { quarter: typeof quarterlyMilestones[0]; isExpanded: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="mb-8"
+    >
+      <div className="flex items-center gap-4 mb-4">
+        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${quarter.color} flex items-center justify-center`}>
+          <Calendar className="w-6 h-6 text-white" />
+        </div>
+        <div>
+          <h3 className="text-xl font-bold text-white">{quarter.quarter}</h3>
+          <p className="text-[#A4FF4E]/80">{quarter.period} · {quarter.phase}</p>
+        </div>
+      </div>
+      
+      {isExpanded ? (
+        <div className="ml-16">
+          {quarter.milestones.map((milestone, index) => (
+            <MilestoneItem key={index} milestone={milestone} index={index} />
+          ))}
+        </div>
+      ) : (
+        <div className="ml-16 space-y-2">
+          {quarter.milestones.slice(0, 3).map((milestone, index) => (
+            <div key={index} className="flex items-center gap-3 text-gray-300">
+              <div className="w-2 h-2 rounded-full bg-[#A4FF4E]" />
+              <span className="text-sm">{milestone.text}</span>
+            </div>
+          ))}
+          {quarter.milestones.length > 3 && (
+            <div className="text-sm text-[#A4FF4E]/60 italic">
+              +{quarter.milestones.length - 3} more milestones...
+            </div>
+          )}
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
 export function TimelineVertical() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="py-20">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-4xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">12-Month Implementation Timeline</h2>
+          <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-6">
+            Detailed month-by-month breakdown of all project milestones
+          </p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30">
+            <Clock className="w-4 h-4 text-[#A4FF4E]" />
+            <span className="text-sm text-[#A4FF4E]">28 total milestones across 4 quarters</span>
+          </div>
+        </motion.div>
+
+        {/* Compact View */}
         <div className="relative">
           {/* Vertical Line */}
           <div className="absolute left-8 top-0 bottom-0 w-px bg-[#A4FF4E]/20" />
 
-          {milestones.map((milestone, index) => (
-            <MilestoneItem key={index} milestone={milestone} index={index} />
-          ))}
+          <div className="space-y-8">
+            {quarterlyMilestones.map((quarter, index) => (
+              <CompactQuarterView key={quarter.quarter} quarter={quarter} isExpanded={isExpanded} />
+            ))}
+          </div>
         </div>
+
+        {/* Expand/Collapse Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-center mt-12"
+        >
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl font-medium border-2 border-[#A4FF4E] text-[#A4FF4E] hover:bg-[#A4FF4E]/10 transition-all duration-300 hover:shadow-[0_0_20px_rgba(164,255,78,0.3)]"
+          >
+            {isExpanded ? (
+              <>
+                <ChevronUp className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span>Show Compact View</span>
+              </>
+            ) : (
+              <>
+                <ChevronDown className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span>View in Detail</span>
+              </>
+            )}
+          </button>
+        </motion.div>
+
+        {/* Summary Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 p-6 rounded-xl border border-[#A4FF4E]/20 bg-black/40 max-w-2xl mx-auto text-center"
+        >
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <div className="text-2xl font-bold text-[#A4FF4E]">28</div>
+              <div className="text-sm text-gray-400">Total Milestones</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-[#A4FF4E]">4</div>
+              <div className="text-sm text-gray-400">Quarters</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-[#A4FF4E]">12</div>
+              <div className="text-sm text-gray-400">Months</div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

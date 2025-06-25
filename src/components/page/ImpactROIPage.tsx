@@ -468,6 +468,165 @@ export default function ImpactROIPage() {
         iconColor="text-[#A4FF4E]/50"
       />
 
+      {/* Live Running Metrics Dashboard */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Live Running Metrics</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-4">
+              Public dashboard refreshes every 6 hours
+            </p>
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${
+              isDark ? 'bg-[#A4FF4E]/10 border border-[#A4FF4E]/30' : 'bg-[#A4FF4E]/20 border border-[#A4FF4E]/50'
+            }`}>
+              <BarChart className="w-4 h-4 text-[#A4FF4E]" />
+              <span className="text-sm text-[#A4FF4E]">Live tracking throughout the grant period</span>
+            </div>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+            {[
+              {
+                title: "Course Completions",
+                target: "200",
+                description: "Participants completing micro-courses",
+                icon: GraduationCap,
+                color: "text-[#A4FF4E]"
+              },
+              {
+                title: "Livestream Attendees",
+                target: "400",
+                description: "Live workshop participants",
+                icon: Users,
+                color: "text-[#3B82F6]"
+              },
+              {
+                title: "Bilingual Impressions",
+                target: "40,000",
+                description: "Smart Sign display reach",
+                icon: Globe,
+                color: "text-[#8B5CF6]"
+              },
+              {
+                title: "Women Participation",
+                target: "≥40%",
+                description: "Women-identifying participants",
+                icon: Activity,
+                color: "text-[#EC4899]"
+              },
+              {
+                title: "ES/HT Participants",
+                target: "≥30%",
+                description: "Spanish/Haitian Creole speakers",
+                icon: Users,
+                color: "text-[#F59E0B]"
+              },
+              {
+                title: "External Pull Requests",
+                target: "≥3",
+                description: "Community code contributions",
+                icon: Code,
+                color: "text-[#10B981]"
+              }
+            ].map((metric, index) => {
+              const Icon = metric.icon;
+              return (
+                <motion.div
+                  key={metric.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`p-6 rounded-xl border-2 border-[#A4FF4E] ${
+                    isDark ? 'bg-black/80 text-white' : 'bg-white/80 text-black border-gray-200'
+                  } shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300 group`}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className={`w-12 h-12 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center group-hover:bg-[#A4FF4E]/30 transition-colors`}>
+                      <Icon className={`w-6 h-6 ${metric.color}`} />
+                    </div>
+                    <div>
+                      <div className={`text-2xl font-bold ${metric.color}`}>
+                        {metric.target}
+                      </div>
+                      <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Target</div>
+                    </div>
+                  </div>
+                  <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-black'}`}>{metric.title}</h3>
+                  <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{metric.description}</p>
+                  
+                  {/* Animated progress indicator */}
+                  <div className="mt-4">
+                    <div className={`w-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'} rounded-full h-1`}>
+                      <motion.div
+                        className={`h-1 rounded-full bg-gradient-to-r ${
+                          metric.color.includes('#A4FF4E') ? 'from-[#A4FF4E]/70 to-[#A4FF4E]' : 
+                          metric.color.includes('#3B82F6') ? 'from-[#3B82F6]/70 to-[#3B82F6]' : 
+                          metric.color.includes('#8B5CF6') ? 'from-[#8B5CF6]/70 to-[#8B5CF6]' : 
+                          metric.color.includes('#EC4899') ? 'from-[#EC4899]/70 to-[#EC4899]' : 
+                          metric.color.includes('#F59E0B') ? 'from-[#F59E0B]/70 to-[#F59E0B]' : 
+                          'from-[#10B981]/70 to-[#10B981]'
+                        }`}
+                        initial={{ width: 0 }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: 2, delay: index * 0.2, ease: "easeOut" }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Additional Sustainability Metrics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className={`p-8 rounded-xl border-2 border-[#A4FF4E] ${
+              isDark ? 'bg-black/80 text-white' : 'bg-white/80 text-black border-gray-200'
+            } shadow-neon max-w-4xl mx-auto`}
+          >
+            <h3 className="text-xl font-bold text-[#A4FF4E] mb-6 text-center">Additional Sustainability Targets</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className={`flex items-center gap-3 p-4 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20`}>
+                <Code className="w-6 h-6 text-[#10B981]" />
+                <div>
+                  <div className="font-bold text-[#10B981]">≥3 external pull-requests merged</div>
+                  <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Community code contributions</div>
+                </div>
+              </div>
+              <div className={`flex items-center gap-3 p-4 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20`}>
+                <DollarSign className="w-6 h-6 text-[#F59E0B]" />
+                <div>
+                  <div className="font-bold text-[#F59E0B]">1 paid nonprofit license ($39/mo)</div>
+                  <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Covers Year-2 hosting costs</div>
+                </div>
+              </div>
+            </div>
+            <div className={`mt-6 p-4 rounded-lg bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 text-center`}>
+              <p className="text-[#A4FF4E] font-medium">
+                Sustainable replication model → Year-2 hosting covered
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <DecorativeDivider 
+        icon={BarChart}
+        gradientColors={{
+          from: 'rgba(164, 255, 78, 0.1)',
+          via: 'rgba(59, 130, 246, 0.1)',
+          to: 'rgba(164, 255, 78, 0.1)'
+        }}
+        iconColor="text-[#A4FF4E]/50"
+      />
+
       {/* Call to Action */}
       <section className="py-20">
         <div className="container mx-auto px-4">

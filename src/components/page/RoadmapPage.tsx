@@ -389,76 +389,12 @@ export default function RoadmapPage() {
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              AI24 Implementation Timeline
+              Implementation Timeline
             </h1>
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-4">
               Grant funds released ≈ October 2025; pilot closes September 2026
             </p>
-            <div className="text-lg text-gray-300 max-w-4xl mx-auto">
-              <p className="mb-6">
-                This one-year cadence lines up spending with concrete actions:
-              </p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  {
-                    phase: "gear purchased up front",
-                    icon: Monitor,
-                    color: "text-[#A4FF4E]",
-                    description: "Hardware & infrastructure setup"
-                  },
-                  {
-                    phase: "code and courses built in winter",
-                    icon: Code,
-                    color: "text-[#3B82F6]",
-                    description: "Development & content creation"
-                  },
-                  {
-                    phase: "skills delivered in spring",
-                    icon: GraduationCap,
-                    color: "text-[#8B5CF6]",
-                    description: "Training & workshops"
-                  },
-                  {
-                    phase: "public activations plus sustainability milestones by summer's end",
-                    icon: Sparkles,
-                    color: "text-[#EC4899]",
-                    description: "Events & long-term impact"
-                  }
-                ].map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <motion.div
-                      key={item.phase}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="group relative p-4 rounded-xl border border-[#A4FF4E]/20 bg-black/40 hover:bg-[#A4FF4E]/5 hover:border-[#A4FF4E]/60 transition-all duration-300 cursor-pointer"
-                      whileHover={{ 
-                        scale: 1.02,
-                        boxShadow: "0 0 30px rgba(164, 255, 78, 0.2)"
-                      }}
-                    >
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className={`w-10 h-10 rounded-full bg-[#A4FF4E]/10 flex items-center justify-center group-hover:bg-[#A4FF4E]/20 transition-colors duration-300`}>
-                          <Icon className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform duration-300`} />
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm font-medium text-white group-hover:text-[#A4FF4E] transition-colors duration-300">
-                            {item.phase}
-                          </p>
-                          <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      {/* Glow effect on hover */}
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-[#A4FF4E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
+
           </motion.div>
         </div>
       </section>
@@ -480,14 +416,16 @@ export default function RoadmapPage() {
             variants={fadeInUp}
             initial="initial"
             animate="animate"
-            className="max-w-4xl mx-auto"
+            className="max-w-6xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center">
-              Activity Summary
-            </h2>
-            <p className="text-xl text-[#A4FF4E]/80 mb-8 text-center">
-              Over 1 year <strong>AI24</strong> will
-            </p>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                <span className="bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] bg-clip-text text-transparent">Activity Summary</span>
+              </h2>
+              <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-8">
+                Over 1 year <strong>AI24</strong> will transform digital capacity through strategic phases
+              </p>
+            </div>
             
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               {[
@@ -495,52 +433,118 @@ export default function RoadmapPage() {
                   title: "Build",
                   description: "a bilingual web platform",
                   icon: Code,
-                  color: "text-[#A4FF4E]"
+                  gradient: "from-[#A4FF4E] to-[#00FF88]",
+                  image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop&crop=center",
+                  phase: "Q4 2025"
                 },
                 {
                   title: "Roll out",
                   description: "a small but visible hardware fleet",
-                  icon: Tv,
-                  color: "text-[#3B82F6]"
+                  icon: Monitor,
+                  gradient: "from-[#3B82F6] to-[#1D4ED8]",
+                  image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=200&fit=crop&crop=center",
+                  phase: "Q1 2026"
                 },
                 {
                   title: "Train",
                   description: "venue stewards through free micro-courses",
-                  icon: Brain,
-                  color: "text-[#8B5CF6]"
+                  icon: GraduationCap,
+                  gradient: "from-[#8B5CF6] to-[#7C3AED]",
+                  image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=200&fit=crop&crop=center",
+                  phase: "Q2 2026"
                 },
                 {
                   title: "Spark public excitement",
                   description: "with laser pop-ups",
                   icon: Sparkles,
-                  color: "text-[#EC4899]"
+                  gradient: "from-[#EC4899] to-[#DB2777]",
+                  image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=200&fit=crop&crop=center",
+                  phase: "Q3 2026"
                 }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300"
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`w-12 h-12 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center`}>
-                      {React.createElement(item.icon, {
-                        className: `${item.color} w-6 h-6`
-                      })}
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.15 }}
+                    className="group relative overflow-hidden rounded-2xl border border-[#A4FF4E]/20 bg-black/60 backdrop-blur-sm hover:border-[#A4FF4E]/60 transition-all duration-500 cursor-pointer"
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: "0 0 40px rgba(164, 255, 78, 0.3)"
+                    }}
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+                      <div 
+                        className="w-full h-full bg-cover bg-center"
+                        style={{ backgroundImage: `url(${item.image})` }}
+                      />
                     </div>
-                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                  </div>
-                  <p className="text-gray-300">{item.description}</p>
-                </motion.div>
-              ))}
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+                    
+                    <div className="relative p-6">
+                      <div className="flex items-start gap-4">
+                        {/* Animated Icon */}
+                        <div className="relative">
+                          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.gradient} p-0.5 group-hover:scale-110 transition-transform duration-500`}>
+                            <div className="w-full h-full rounded-2xl bg-black flex items-center justify-center">
+                              <Icon className="w-8 h-8 text-white group-hover:animate-pulse" />
+                            </div>
+                          </div>
+                          {/* Glow effect */}
+                          <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`} />
+                        </div>
+                        
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h4 className="text-xl font-bold text-white group-hover:text-[#A4FF4E] transition-colors duration-300">
+                              {item.title}
+                            </h4>
+                            <span className="px-2 py-1 rounded-full text-xs bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                              {item.phase}
+                            </span>
+                          </div>
+                          <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Animated border gradient */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                  </motion.div>
+                );
+              })}
             </div>
 
-            <div className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon">
-              <p className="text-gray-300 text-center">
-                All gear packs into two rolling cases, so the lab can move from studio to street festival overnight.
-              </p>
-            </div>
+            {/* Bottom Callout */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 backdrop-blur-sm"
+            >
+              {/* Animated background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 animate-pulse" />
+              
+              <div className="relative p-8 text-center">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center">
+                    <Tv className="w-6 h-6 text-black" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">Portable Innovation Lab</h3>
+                </div>
+                <p className="text-gray-300 max-w-2xl mx-auto">
+                  All gear packs into two rolling cases, so the lab can move from studio to street festival overnight. 
+                  <span className="text-[#A4FF4E] font-medium"> Ready for any venue, anywhere.</span>
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -727,19 +731,6 @@ export default function RoadmapPage() {
       </section>
 
       <DecorativeDivider 
-        icon={Brain}
-        gradientColors={{
-          from: 'rgba(164, 255, 78, 0.1)',
-          via: 'rgba(59, 130, 246, 0.1)',
-          to: 'rgba(164, 255, 78, 0.1)'
-        }}
-        iconColor="text-[#A4FF4E]/50"
-      />
-
-      {/* Timeline Section */}
-      <TimelineSection />
-
-      <DecorativeDivider 
         icon={Clock}
         gradientColors={{
           from: 'rgba(164, 255, 78, 0.1)',
@@ -762,7 +753,7 @@ export default function RoadmapPage() {
         iconColor="text-[#A4FF4E]/50"
       />
 
-      {/* Running Metrics Dashboard */}
+      {/* Navigation to Related Pages */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div
@@ -771,86 +762,92 @@ export default function RoadmapPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Running Metrics</h2>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-4">
-              Public dashboard refreshes every 6 hours
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Explore Related Metrics</h2>
+            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-8">
+              Dive deeper into impact tracking and sustainability measures
             </p>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30">
-              <BarChart3 className="w-4 h-4 text-[#A4FF4E]" />
-              <span className="text-sm text-[#A4FF4E]">Live tracking throughout the grant period</span>
-            </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {runningMetrics.map((metric, index) => {
-              const Icon = metric.icon;
-              return (
-                <motion.div
-                  key={metric.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300 group"
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-[#A4FF4E]/20 flex items-center justify-center group-hover:bg-[#A4FF4E]/30 transition-colors">
-                      <Icon className={`w-6 h-6 ${metric.color}`} />
-                    </div>
-                    <div>
-                      <div className={`text-2xl font-bold ${metric.color}`}>
-                        {metric.target}
-                      </div>
-                      <div className="text-sm text-gray-400">Target</div>
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-white">{metric.title}</h3>
-                  <p className="text-gray-300 text-sm">{metric.description}</p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Impact & ROI Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="group"
+            >
+              <Link href="/grant/knight-foundation/impact-roi">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  {/* Animated progress indicator */}
-                  <div className="mt-4">
-                    <div className="w-full bg-gray-700 rounded-full h-1">
-                      <motion.div
-                        className={`h-1 rounded-full bg-gradient-to-r ${metric.color.includes('#A4FF4E') ? 'from-[#A4FF4E]/70 to-[#A4FF4E]' : metric.color.includes('#3B82F6') ? 'from-[#3B82F6]/70 to-[#3B82F6]' : metric.color.includes('#8B5CF6') ? 'from-[#8B5CF6]/70 to-[#8B5CF6]' : metric.color.includes('#EC4899') ? 'from-[#EC4899]/70 to-[#EC4899]' : metric.color.includes('#F59E0B') ? 'from-[#F59E0B]/70 to-[#F59E0B]' : 'from-[#10B981]/70 to-[#10B981]'}`}
-                        initial={{ width: 0 }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: 2, delay: index * 0.2, ease: "easeOut" }}
-                      />
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <BarChart3 className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                      Impact & ROI
+                    </h3>
+                    <p className="text-gray-300 mb-6">
+                      View live metrics dashboard, course completions, workshop attendance, and bilingual reach tracking
+                    </p>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                      <span>View Metrics</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Sustainability Cycle Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="group"
+            >
+              <Link href="/grant/knight-foundation/sustainability-cycle">
+                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Award className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                      Sustainability Cycle
+                    </h3>
+                    <p className="text-gray-300 mb-6">
+                      Explore nonprofit licensing model, community contributions, and long-term replication framework
+                    </p>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                      <span>View Model</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                </div>
+              </Link>
+            </motion.div>
           </div>
 
-          {/* Additional Sustainability Metrics */}
+          {/* Bottom Note */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="mt-12 p-8 rounded-xl border-2 border-[#A4FF4E] bg-black/80 shadow-neon max-w-4xl mx-auto"
+            transition={{ delay: 0.3 }}
+            className="mt-12 p-6 rounded-xl border border-[#A4FF4E]/20 bg-black/40 max-w-2xl mx-auto text-center"
           >
-            <h3 className="text-xl font-bold text-[#A4FF4E] mb-6 text-center">Additional Sustainability Targets</h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <GitBranch className="w-6 h-6 text-[#10B981]" />
-                <div>
-                  <div className="font-bold text-[#10B981]">≥3 external pull-requests merged</div>
-                  <div className="text-sm text-gray-400">Community code contributions</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <Award className="w-6 h-6 text-[#F59E0B]" />
-                <div>
-                  <div className="font-bold text-[#F59E0B]">1 paid nonprofit license ($39/mo)</div>
-                  <div className="text-sm text-gray-400">Covers Year-2 hosting costs</div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-6 p-4 rounded-lg bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 text-center">
-              <p className="text-[#A4FF4E] font-medium">
-                Sustainable replication model → Year-2 hosting covered
-              </p>
-            </div>
+            <p className="text-gray-300">
+              <span className="text-[#A4FF4E] font-medium">Running metrics</span> and sustainability targets are tracked in real-time across our grant pages for comprehensive project monitoring.
+            </p>
           </motion.div>
         </div>
       </section>
