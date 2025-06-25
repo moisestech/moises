@@ -63,9 +63,9 @@ export default function Home() {
         <LandingEvents />
 
         {/* Artwork Grid */}
-        <div className="w-full px-2 sm:px-4 md:px-8">
+        {/* <div className="w-full px-2 sm:px-4 md:px-8">
           <ArtworkGrid />
-        </div>
+        </div> */}
 
         {/* Special Thanks */}
         <SpecialThanks />

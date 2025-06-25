@@ -122,7 +122,7 @@ const KnightFoundationLanding: React.FC = () => {
 
   return (
     <div className={`min-h-screen ${themeColors.background} ${themeColors.text}`}>
-      <CursorTrail />
+      <CursorTrail disabled={false} />
       <TechNonprofitNavKF />
       
       {/* Hero Section - Overview */}

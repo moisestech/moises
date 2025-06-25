@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -75,6 +75,13 @@ export function HeroSection() {
   const currentSubtitle = subtitles[language];
   const currentButtons = buttonTexts[language];
 
+  const handleClick = useCallback(() => {
+    setMainWordIndex((prev) => (prev + 1) % currentHeroWords.length);
+    setIsGlitching(true);
+    // Turn off glitch effect after a short delay
+    setTimeout(() => setIsGlitching(false), 500);
+  }, [currentHeroWords.length]);
+
   // Theme-aware colors
   const themeColors = {
     primary: isDark ? '#A4FF4E' : '#2563EB',
@@ -103,9 +110,7 @@ export function HeroSection() {
         >
           <div
             className="mb-8 cursor-pointer select-none"
-            onMouseEnter={() => setIsGlitching(true)}
-            onMouseLeave={() => setIsGlitching(false)}
-            onClick={() => setMainWordIndex((mainWordIndex + 1) % currentHeroWords.length)}
+            onClick={handleClick}
           >
             <ControlledFlipText
               className={`text-[80px] md:text-[120px] font-bold leading-[1] tracking-tight ${themeColors.text} drop-shadow-lg ${isGlitching ? 'glitch-rgb' : ''}`}

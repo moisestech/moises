@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html, OrbitControls } from '@react-three/drei';
 import { Brain, Users, Code, Network, Heart, Sparkles } from 'lucide-react';
@@ -14,7 +14,12 @@ const WORDS = [
 
 function FloatingWord({ word, icon: Icon, color, position, def }: any) {
   const ref = useRef<any>();
-  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = useCallback(() => {
+    setClicked(!clicked);
+  }, [clicked]);
+
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     if (ref.current) {
@@ -22,16 +27,19 @@ function FloatingWord({ word, icon: Icon, color, position, def }: any) {
       ref.current.rotation.y = Math.sin(t / 2 + position[0]) * 0.2;
     }
   });
+
   return (
     <group ref={ref} position={position}>
-      <mesh
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
+      <mesh onClick={handleClick}>
         <Html center style={{ pointerEvents: 'auto' }}>
           <div
             className="flex flex-col items-center group select-none"
-            style={{ filter: hovered ? `drop-shadow(0 0 16px ${color})` : undefined, cursor: 'pointer' }}
+            style={{ 
+              filter: clicked ? `drop-shadow(0 0 16px ${color})` : undefined, 
+              cursor: 'pointer',
+              transform: clicked ? 'scale(1.1)' : 'scale(1)',
+              transition: 'all 0.3s ease'
+            }}
           >
             <Icon className="w-10 h-10 mb-2" style={{ color }} />
             <span
@@ -40,7 +48,7 @@ function FloatingWord({ word, icon: Icon, color, position, def }: any) {
             >
               {word}
             </span>
-            {hovered && (
+            {clicked && (
               <div className="mt-2 px-4 py-2 rounded-lg bg-black/90 text-white text-xs border border-[#A4FF4E] shadow-xl animate-fade-in z-50" style={{ minWidth: 180 }}>
                 {def}
               </div>
