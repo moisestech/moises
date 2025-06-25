@@ -35,7 +35,8 @@ import {
   PlayCircle,
   Monitor,
   Wifi,
-  HardDrive
+  HardDrive,
+  FileText
 } from 'lucide-react';
 import { TimelineSection } from '@/components/knight-foundation/proposal/TimelineSection';
 import { TimelineVertical } from '@/components/proposal/TimelineVertical';
@@ -58,22 +59,60 @@ const quarterlyRoadmap = [
     cumulativePercent: "38%",
     deliverables: [
       {
-        title: "Order \u0026 receive 2 Smart-Sign screens + 12 Pi learning kits",
+        title: "Sign MOUs with Bakehouse \u0026 Locust Projects",
+        icon: FileText,
+        category: "Partnerships",
+        status: "Agreement Finalization",
+        month: "Oct '25 (M1)"
+      },
+      {
+        title: "Order 2 Smart Signs + 12 Pi learning kits",
         icon: Monitor,
         category: "Hardware",
-        status: "Hardware Procurement"
+        status: "Hardware Procurement",
+        month: "Oct '25 (M1)"
       },
       {
-        title: "Spin up Supabase project; configure PostHog \u0026 Looker Studio",
-        icon: Wifi,
+        title: "Create Supabase project and GitHub repo skeleton",
+        icon: GitBranch,
         category: "Infrastructure",
-        status: "Cloud Setup"
+        status: "Cloud Setup",
+        month: "Oct '25 (M1)"
       },
       {
-        title: "Push open-core repo to GitHub",
+        title: "Skin UI (EN/ES) and deploy Web-App MVP to Vercel",
+        icon: Code,
+        category: "Development",
+        status: "UI Development",
+        month: "Nov '25 (M2)"
+      },
+      {
+        title: "PostHog + Looker Studio wired to demo data",
+        icon: BarChart3,
+        category: "Analytics",
+        status: "Metrics Setup",
+        month: "Nov '25 (M2)"
+      },
+      {
+        title: "Draft Micro-Course #1 outline",
+        icon: PlayCircle,
+        category: "Content",
+        status: "Course Planning",
+        month: "Nov '25 (M2)"
+      },
+      {
+        title: "Push open-core repo public",
         icon: GitBranch,
         category: "Development",
-        status: "Code Base"
+        status: "Code Release",
+        month: "Dec '25 (M3)"
+      },
+      {
+        title: "Film \u0026 edit Micro-Course #1: Web-Design for Smart Signs",
+        icon: PlayCircle,
+        category: "Content",
+        status: "Course Creation",
+        month: "Dec '25 (M3)"
       }
     ],
     budgetBreakdown: [
@@ -90,22 +129,60 @@ const quarterlyRoadmap = [
     cumulativePercent: "66%",
     deliverables: [
       {
-        title: "Install Smart-Sign #1 in Bakehouse lobby",
-        icon: Tv,
+        title: "Install Smart Sign #1 in Bakehouse lobby",
+        icon: Monitor,
         category: "Installation",
-        status: "Hardware Deployment"
+        status: "Hardware Deployment",
+        month: "Jan '26 (M4)"
       },
       {
-        title: "Assemble 6 Pi kits; begin internal beta",
+        title: "Assemble 6 Pi kits for in-house beta",
         icon: Code,
         category: "Development",
-        status: "Beta Testing"
+        status: "Beta Setup",
+        month: "Jan '26 (M4)"
       },
       {
-        title: "Record Micro-course #1 (Web-Design for Smart Signs)",
+        title: "Internal beta \u0026 bug-fix sprint",
+        icon: Code,
+        category: "Development",
+        status: "Beta Testing",
+        month: "Jan '26 (M4)"
+      },
+      {
+        title: "Record Micro-Course #2 (Ethical AI Agents)",
         icon: PlayCircle,
         category: "Content",
-        status: "Course Creation"
+        status: "Course Creation",
+        month: "Feb '26 (M5)"
+      },
+      {
+        title: "Add QR flyers + live metrics slide",
+        icon: BarChart3,
+        category: "Analytics",
+        status: "Metrics Implementation",
+        month: "Feb '26 (M5)"
+      },
+      {
+        title: "Start gathering early user testimonials",
+        icon: Users,
+        category: "Community",
+        status: "Feedback Collection",
+        month: "Feb '26 (M5)"
+      },
+      {
+        title: "Run Screen-Admin Skill Sprint #1 (EN/ES, captioned)",
+        icon: Users,
+        category: "Training",
+        status: "Workshop Delivery",
+        month: "Mar '26 (M6)"
+      },
+      {
+        title: "Launch Micro-Course #2 to LMS",
+        icon: PlayCircle,
+        category: "Content",
+        status: "Course Launch",
+        month: "Mar '26 (M6)"
       }
     ],
     budgetBreakdown: [
@@ -123,22 +200,46 @@ const quarterlyRoadmap = [
     cumulativePercent: "87%",
     deliverables: [
       {
-        title: "Host Screen-Admin Skill Sprint #1 (EN/ES, captioned)",
-        icon: Users,
-        category: "Training",
-        status: "Workshop Delivery"
+        title: "Install Smart Sign #2 at Locust Projects",
+        icon: Monitor,
+        category: "Installation",
+        status: "Hardware Deployment",
+        month: "Apr '26 (M7)"
       },
       {
-        title: "Launch Micro-course #2 (Ethical AI Agents)",
-        icon: Brain,
-        category: "Content",
-        status: "Course Launch"
+        title: "Assemble remaining 6 Pi kits",
+        icon: Code,
+        category: "Development",
+        status: "Hardware Assembly",
+        month: "Apr '26 (M7)"
       },
       {
-        title: "Add QR flyers; begin live metrics",
+        title: "LaserCube Pop-Up #1 (Little Haiti w/ Edge Zones)",
+        icon: Sparkles,
+        category: "Events",
+        status: "Public Activation",
+        month: "May '26 (M8)"
+      },
+      {
+        title: "Live KPI dashboard public",
         icon: BarChart3,
         category: "Analytics",
-        status: "Metrics Implementation"
+        status: "Dashboard Launch",
+        month: "May '26 (M8)"
+      },
+      {
+        title: "Run Skill Sprint #2 + capture footage",
+        icon: Users,
+        category: "Training",
+        status: "Workshop Delivery",
+        month: "Jun '26 (M9)"
+      },
+      {
+        title: "Reach 100 course completions milestone",
+        icon: GraduationCap,
+        category: "Milestone",
+        status: "Progress Tracking",
+        month: "Jun '26 (M9)"
       }
     ],
     budgetBreakdown: [
@@ -156,22 +257,53 @@ const quarterlyRoadmap = [
     cumulativePercent: "100%",
     deliverables: [
       {
-        title: "Install Smart-Sign #2 at Locust; assemble remaining Pi kits",
-        icon: Monitor,
-        category: "Installation",
-        status: "Final Deployment"
-      },
-      {
-        title: "LaserCube pop-up #1 (Little Haiti) + pop-up #2 (Design District)",
+        title: "LaserCube Pop-Up #2 (Design District)",
         icon: Sparkles,
         category: "Events",
-        status: "Public Activations"
+        status: "Public Activation",
+        month: "Jul '26 (M10)"
       },
       {
-        title: "Publish playbook + parts list; first nonprofit license signed",
+        title: "Publish open-source playbook + parts list",
         icon: Award,
         category: "Sustainability",
-        status: "Replication Framework"
+        status: "Documentation",
+        month: "Jul '26 (M10)"
+      },
+      {
+        title: "Secure first nonprofit license ($39/mo) → covers Year-2 hosting",
+        icon: Award,
+        category: "Sustainability",
+        status: "Revenue Generation",
+        month: "Aug '26 (M11)"
+      },
+      {
+        title: "Merge external pull-request #1",
+        icon: GitBranch,
+        category: "Development",
+        status: "Community Contribution",
+        month: "Aug '26 (M11)"
+      },
+      {
+        title: "Produce \"Year-1 Impact Reel\" (for Knight + partners)",
+        icon: PlayCircle,
+        category: "Content",
+        status: "Impact Documentation",
+        month: "Sep '26 (M12)"
+      },
+      {
+        title: "Hit 200 course completions / 40k bilingual impressions",
+        icon: TrendingUp,
+        category: "Milestone",
+        status: "Target Achievement",
+        month: "Sep '26 (M12)"
+      },
+      {
+        title: "Prepare grant close-out report \u0026 next-city prospectus",
+        icon: FileText,
+        category: "Reporting",
+        status: "Project Closure",
+        month: "Sep '26 (M12)"
       }
     ],
     budgetBreakdown: [
@@ -262,11 +394,71 @@ export default function RoadmapPage() {
             <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-4">
               Grant funds released ≈ October 2025; pilot closes September 2026
             </p>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              This one-year cadence lines up spending with concrete actions: gear purchased up front, 
-              code and courses built in winter, skills delivered in spring, and public activations 
-              plus sustainability milestones by summer's end.
-            </p>
+            <div className="text-lg text-gray-300 max-w-4xl mx-auto">
+              <p className="mb-6">
+                This one-year cadence lines up spending with concrete actions:
+              </p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  {
+                    phase: "gear purchased up front",
+                    icon: Monitor,
+                    color: "text-[#A4FF4E]",
+                    description: "Hardware & infrastructure setup"
+                  },
+                  {
+                    phase: "code and courses built in winter",
+                    icon: Code,
+                    color: "text-[#3B82F6]",
+                    description: "Development & content creation"
+                  },
+                  {
+                    phase: "skills delivered in spring",
+                    icon: GraduationCap,
+                    color: "text-[#8B5CF6]",
+                    description: "Training & workshops"
+                  },
+                  {
+                    phase: "public activations plus sustainability milestones by summer's end",
+                    icon: Sparkles,
+                    color: "text-[#EC4899]",
+                    description: "Events & long-term impact"
+                  }
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div
+                      key={item.phase}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="group relative p-4 rounded-xl border border-[#A4FF4E]/20 bg-black/40 hover:bg-[#A4FF4E]/5 hover:border-[#A4FF4E]/60 transition-all duration-300 cursor-pointer"
+                      whileHover={{ 
+                        scale: 1.02,
+                        boxShadow: "0 0 30px rgba(164, 255, 78, 0.2)"
+                      }}
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className={`w-10 h-10 rounded-full bg-[#A4FF4E]/10 flex items-center justify-center group-hover:bg-[#A4FF4E]/20 transition-colors duration-300`}>
+                          <Icon className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform duration-300`} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-white group-hover:text-[#A4FF4E] transition-colors duration-300">
+                            {item.phase}
+                          </p>
+                          <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Glow effect on hover */}
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-[#A4FF4E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -462,6 +654,11 @@ export default function RoadmapPage() {
                                     <span className="px-2 py-1 rounded-full text-xs bg-gray-500/20 text-gray-300">
                                       {deliverable.status}
                                     </span>
+                                    {deliverable.month && (
+                                      <span className="px-2 py-1 rounded-full text-xs bg-blue-500/20 text-blue-300">
+                                        {deliverable.month}
+                                      </span>
+                                    )}
                                   </div>
                                   <p className="text-gray-200 text-sm">{deliverable.title}</p>
                                 </div>
@@ -644,10 +841,15 @@ export default function RoadmapPage() {
               <div className="flex items-center gap-3 p-4 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
                 <Award className="w-6 h-6 text-[#F59E0B]" />
                 <div>
-                  <div className="font-bold text-[#F59E0B]">1 nonprofit license covering Year-2 hosting</div>
-                  <div className="text-sm text-gray-400">Sustainable replication model</div>
+                  <div className="font-bold text-[#F59E0B]">1 paid nonprofit license ($39/mo)</div>
+                  <div className="text-sm text-gray-400">Covers Year-2 hosting costs</div>
                 </div>
               </div>
+            </div>
+            <div className="mt-6 p-4 rounded-lg bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 text-center">
+              <p className="text-[#A4FF4E] font-medium">
+                Sustainable replication model → Year-2 hosting covered
+              </p>
             </div>
           </motion.div>
         </div>
