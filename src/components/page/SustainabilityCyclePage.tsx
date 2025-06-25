@@ -47,7 +47,7 @@ const flywheelStages = [
     stage: "2. Community Engagement",
     title: "Workshops & Training",
     participants: "1,025+",
-    description: "Free workshops across Miami venues",
+    description: "Free workshop participants across Miami venues",
     icon: Users,
     color: "text-[#3B82F6]",
     bgColor: "bg-[#3B82F6]/20"
@@ -318,59 +318,62 @@ export default function SustainabilityCyclePage() {
               </svg>
 
               {/* Flywheel Stages */}
-              <div className="relative w-full h-full">
-                {flywheelStages.map((stage, index) => {
-                  const angle = (index * 72) - 90; // 360° / 5 stages = 72°, start at -90° for top
-                  const radius = 280; // Distance from center
-                  const x = Math.cos((angle * Math.PI) / 180) * radius;
-                  const y = Math.sin((angle * Math.PI) / 180) * radius;
+              {flywheelStages.map((stage, index) => {
+                const angle = (index * 72) - 90; // 360° / 5 stages = 72°, start at -90° for top
+                const radius = 280; // Distance from center
+                const centerX = 400; // Half of max-width
+                const centerY = 400; // Half of height
+                const x = Math.cos((angle * Math.PI) / 180) * radius + centerX;
+                const y = Math.sin((angle * Math.PI) / 180) * radius + centerY;
 
-                  return (
-                    <motion.div
-                      key={stage.stage}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.2, duration: 0.5 }}
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
-                      style={{
-                        transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`
-                      }}
-                    >
-                      <div className="w-64 p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/90 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className={`w-10 h-10 rounded-full ${stage.bgColor} flex items-center justify-center`}>
-                            {React.createElement(stage.icon, {
-                              className: `${stage.color} w-5 h-5`
-                            })}
-                          </div>
-                          <div>
-                            <div className="text-xs font-medium text-[#A4FF4E]/80">{stage.stage}</div>
-                            <div className={`text-lg font-bold ${stage.color}`}>{stage.title}</div>
-                          </div>
+                return (
+                  <motion.div
+                    key={stage.stage}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.2, duration: 0.5 }}
+                    className="absolute z-20"
+                    style={{
+                      left: `${x}px`,
+                      top: `${y}px`,
+                      transform: 'translate(-50%, -50%)',
+                      width: '256px' // Explicit width to ensure proper centering
+                    }}
+                  >
+                    <div className="w-full p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/90 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80 transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className={`w-10 h-10 rounded-full ${stage.bgColor} flex items-center justify-center`}>
+                          {React.createElement(stage.icon, {
+                            className: `${stage.color} w-5 h-5`
+                          })}
                         </div>
-                        <div className="space-y-2">
-                          {stage.amount && (
-                            <div className={`text-2xl font-bold ${stage.color}`}>{stage.amount}</div>
-                          )}
-                          {stage.participants && (
-                            <div className={`text-2xl font-bold ${stage.color}`}>{stage.participants}</div>
-                          )}
-                          {stage.impact && (
-                            <div className={`text-2xl font-bold ${stage.color}`}>{stage.impact}</div>
-                          )}
-                          {stage.revenue && (
-                            <div className={`text-2xl font-bold ${stage.color}`}>{stage.revenue}</div>
-                          )}
-                          {stage.projection && (
-                            <div className={`text-2xl font-bold ${stage.color}`}>{stage.projection}</div>
-                          )}
-                          <div className="text-sm text-gray-300">{stage.description}</div>
+                        <div>
+                          <div className="text-xs font-medium text-[#A4FF4E]/80">{stage.stage}</div>
+                          <div className={`text-lg font-bold ${stage.color}`}>{stage.title}</div>
                         </div>
                       </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
+                      <div className="space-y-2">
+                        {stage.amount && (
+                          <div className={`text-2xl font-bold ${stage.color}`}>{stage.amount}</div>
+                        )}
+                        {stage.participants && (
+                          <div className={`text-2xl font-bold ${stage.color}`}>{stage.participants}</div>
+                        )}
+                        {stage.impact && (
+                          <div className={`text-2xl font-bold ${stage.color}`}>{stage.impact}</div>
+                        )}
+                        {stage.revenue && (
+                          <div className={`text-2xl font-bold ${stage.color}`}>{stage.revenue}</div>
+                        )}
+                        {stage.projection && (
+                          <div className={`text-2xl font-bold ${stage.color}`}>{stage.projection}</div>
+                        )}
+                        <div className="text-sm text-gray-300">{stage.description}</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
