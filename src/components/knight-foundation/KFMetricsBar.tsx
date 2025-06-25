@@ -55,7 +55,7 @@ const detailedSections = [
     content: {
       items: [
         {
-          title: "Deploy 12 Smart Signs",
+          title: "Deploy 3 Smart Signs",
           description: "Across three partner venues",
           status: "Planned",
           icon: Globe,
@@ -120,7 +120,7 @@ const detailedSections = [
       breakdown: [
         {
           label: "Total Project Budget",
-          amount: "$29,950",
+          amount: "$24,950",
           color: "text-white"
         },
         {

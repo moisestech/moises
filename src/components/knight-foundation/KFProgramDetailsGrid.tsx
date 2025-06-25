@@ -36,7 +36,7 @@ const details = [
   },
   {
     title: 'License → Refuel → Repeat',
-    description: 'Sustainable growth model with $39/month venue licenses funding continued expansion.',
+    description: 'Sustainable growth model with $99/month venue licenses funding continued expansion.',
     icon: RefreshCw,
     href: `${baseUrl}/sustainability-cycle`,
     ascii: '->',

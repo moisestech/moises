@@ -226,7 +226,7 @@ const sustainabilityData = {
   signage: {
     label: "Signage SaaS",
     value: 39000,
-    description: "Non-profit ($39) and agency ($149) licenses"
+    description: "Non-profit ($99) and agency ($149) licenses"
   },
   licensing: {
     label: "Tool Licensing",

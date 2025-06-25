@@ -79,7 +79,7 @@ const SECTIONS = [
         "All code lands on GitHub under MIT; weekly data snapshots are CC BY."
       ]},
       { subtitleKey: "sustainabilityOutcomes", items: [
-        "At least one host upgrades to the $39/month nonprofit license, covering Year-2 hosting costs.",
+        "At least one host upgrades to the $99/month nonprofit license, covering Year-2 hosting costs.",
         "Micro-courses bring in $1.5 K, earmarked for mentor stipends and new lesson production."
       ]},
       { subtitleKey: "scalability", items: [

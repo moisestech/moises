@@ -351,13 +351,13 @@ const KnightFoundationLanding: React.FC = () => {
                 title: "Smart Signs",
                 description: "Digital signage and community engagement",
                 icon: Tv,
-                link: "/grant/knight-foundation/smart-signs"
+                link: "/services/smartsign"
               },
               {
                 title: "Sustainability",
                 description: "Building lasting impact and revenue streams",
                 icon: Heart,
-                link: "/grant/knight-foundation/sustainability"
+                link: "/grant/knight-foundation/sustainability-cycle"
               }
             ].map((workshop, index) => (
               <motion.div

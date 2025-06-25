@@ -21,7 +21,7 @@ export function SustainabilitySection() {
       items: [
         'WebApp is MIT-licensed and costs <$30/month to self-host',
         'Most venues prefer the convenience of managed hosting',
-        '$39/month nonprofit SaaS tier covers Supabase/PostHog costs'
+        '$99/month nonprofit SaaS tier covers Supabase/PostHog costs'
       ]
     },
     {
@@ -89,7 +89,7 @@ export function SustainabilitySection() {
               isDark ? 'text-gray-300' : 'text-gray-600'
             }`}>
               The WebApp is MIT-licensed and costs &lt;$30/month to self-host, but most venues prefer convenience. 
-              A $39/month nonprofit SaaS tier covers Supabase/PostHog costs and funds minor upgrades. Optional 
+              A $99/month nonprofit SaaS tier covers Supabase/PostHog costs and funds upgrades. Optional 
               premium modules (sponsor slides, multi-venue dashboard) provide upsell revenue, while $9–$29 LMS 
               micro-courses generate cash for mentor stipends. Because hardware is commodity and tutorials are 
               Creative Commons, new venues can join the network cheaply, driving additional subscriptions. If all 

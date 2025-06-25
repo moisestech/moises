@@ -88,7 +88,7 @@ export function KFProposalSection() {
             <ul className={`space-y-2 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               <li className="flex items-start gap-2">
                 <CheckCircle className={`w-5 h-5 mt-0.5 ${isDark ? 'text-[#A4FF4E]' : 'text-blue-500'}`} />
-                <span>Deploy 12 Smart Signs across three venues</span>
+                <span>Deploy 3 Smart Signs across three venues</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle className={`w-5 h-5 mt-0.5 ${isDark ? 'text-[#A4FF4E]' : 'text-blue-500'}`} />

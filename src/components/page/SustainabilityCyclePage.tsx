@@ -61,8 +61,8 @@ const flywheelStages = [
   },
   {
     stage: "4. Revenue Generation",
-    title: "Venue Licenses",
-    revenue: "$39/month",
+    title: "Smart Sign Venue Licenses",
+    revenue: "$99/month",
     description: "Per venue for Smart Sign services",
     icon: TrendingUp,
     color: "text-[#8B5CF6]",
@@ -460,8 +460,8 @@ export default function SustainabilityCyclePage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
               {
-                title: "Venue Licenses",
-                amount: "$39/month",
+                title: "Smart Sign Venue Licenses",
+                amount: "$99/month",
                 description: "Per venue for Smart Sign services",
                 icon: Building2,
                 color: "text-[#A4FF4E]"

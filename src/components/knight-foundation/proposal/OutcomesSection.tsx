@@ -58,7 +58,7 @@ export function OutcomesSection() {
       icon: Sparkles,
       image: '/images/outcomes/sustainability.jpg',
       items: [
-        'At least one host venue upgrades to a $39/month nonprofit license, fully covering Year-2 hosting.',
+        'At least one host venue upgrades to a $99/month nonprofit license, fully covering Year-2 hosting.',
         'LMS micro-courses generate $1 500 in fee revenue, earmarked for mentor stipends.'
       ]
     },

@@ -22,7 +22,7 @@ export function BudgetSection() {
         { description: 'LaserCube projectors (3 × $1,200)', amount: 3600 },
         { description: 'Raspberry Pi 5s (3 × $150)', amount: 450 },
         { description: 'IR beam counters (3 × $50)', amount: 150 },
-        { description: 'Year-1 hosting (3 × $39 × 12)', amount: 1404 }
+        { description: 'Year-1 hosting (3 × $99 × 3)', amount: 891 }
       ]
     },
     {
