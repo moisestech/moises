@@ -105,6 +105,9 @@ const COLORS = ['#A4FF4E', '#3B82F6', '#8B5CF6', '#EC4899', '#F59E0B'];
 export default function BudgetPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  
+  // Use bright lime green for dark mode, darker lime green for light mode
+  const primaryColor = isDark ? '#A4FF4E' : '#22C55E';
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -116,7 +119,7 @@ export default function BudgetPage() {
   };
 
   return (
-    <main className={`min-h-screen bg-black text-white`}>
+    <main className={`min-h-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <TechNonprofitNavKF />
       <BackToOverview />
 
@@ -129,16 +132,20 @@ export default function BudgetPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#A4FF4E]/10 border border-[#A4FF4E]/30 mb-6">
-              <DollarSign className="w-4 h-4 text-[#A4FF4E]" />
-              <span className="text-sm font-medium text-[#A4FF4E]">
+            <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full ${
+              isDark 
+                ? 'bg-[#A4FF4E]/10 border border-[#A4FF4E]/30' 
+                : 'bg-[#22C55E]/20 border border-[#22C55E]/50'
+            } mb-6`}>
+              <DollarSign className={`w-4 h-4 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`} />
+              <span className={`text-sm font-medium ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>
                 Budget Details
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-black'}`}>
               {formatCurrency(budgetData.totalRequest)}
             </h1>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
+            <p className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-[#A4FF4E]/80' : 'text-[#22C55E]/80'}`}>
               Total funding request for 12-month AI24 program
             </p>
           </motion.div>
@@ -148,11 +155,11 @@ export default function BudgetPage() {
       <DecorativeDivider 
         icon={Target}
         gradientColors={{
-          from: 'rgba(164, 255, 78, 0.1)',
+          from: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)',
           via: 'rgba(59, 130, 246, 0.1)',
-          to: 'rgba(164, 255, 78, 0.1)'
+          to: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)'
         }}
-        iconColor="text-[#A4FF4E]/50"
+        iconColor={isDark ? 'text-[#A4FF4E]/50' : 'text-[#22C55E]/50'}
       />
 
       {/* Budget Overview */}
@@ -164,8 +171,8 @@ export default function BudgetPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Budget Breakdown</h2>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Budget Breakdown</h2>
+            <p className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-[#A4FF4E]/80' : 'text-[#22C55E]/80'}`}>
               Detailed allocation of $24,950 for maximum community impact
             </p>
           </motion.div>
@@ -175,9 +182,13 @@ export default function BudgetPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon"
+              className={`p-6 rounded-xl border-2 ${
+                isDark 
+                  ? 'border-[#A4FF4E] bg-black/80 text-white' 
+                  : 'border-[#22C55E] bg-white/80 text-black border-gray-200'
+              } shadow-neon`}
             >
-              <h3 className="text-xl font-bold mb-6 text-[#A4FF4E]">Budget Distribution</h3>
+              <h3 className={`text-xl font-bold mb-6 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Budget Distribution</h3>
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -187,7 +198,7 @@ export default function BudgetPage() {
                       cy="50%"
                       labelLine={false}
                       outerRadius={150}
-                      fill="#A4FF4E"
+                      fill={primaryColor}
                       dataKey="amount"
                       label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                     >
@@ -198,14 +209,14 @@ export default function BudgetPage() {
                     <Tooltip
                       formatter={(value: number) => formatCurrency(value)}
                       contentStyle={{
-                        backgroundColor: '#18181b',
-                        border: '1px solid #A4FF4E',
+                        backgroundColor: isDark ? '#18181b' : '#ffffff',
+                        border: `1px solid ${primaryColor}`,
                         borderRadius: '0.5rem',
-                        color: '#A4FF4E',
-                        boxShadow: '0 0 24px #A4FF4E44',
+                        color: primaryColor,
+                        boxShadow: `0 0 24px ${primaryColor}44`,
                       }}
                       itemStyle={{
-                        color: '#A4FF4E',
+                        color: primaryColor,
                       }}
                     />
                   </PieChart>
@@ -221,23 +232,27 @@ export default function BudgetPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon"
+                  className={`p-6 rounded-xl border-2 ${
+                    isDark 
+                      ? 'border-[#A4FF4E] bg-black/80 text-white shadow-neon hover:shadow-[0_0_30px_rgba(164,255,78,0.3)] hover:border-[#A4FF4E]/80' 
+                      : 'border-[#22C55E] bg-white/80 text-black border-gray-200 shadow-neon hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:border-[#22C55E]/80'
+                  } transition-all duration-300`}
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-[#A4FF4E]">{category.name}</h3>
-                    <div className="text-xl font-bold text-[#A4FF4E]">
+                    <h3 className={`text-xl font-bold ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>{category.name}</h3>
+                    <div className={`text-xl font-bold ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>
                       {formatCurrency(category.amount)}
                     </div>
                   </div>
-                  <p className="text-white mb-4 text-sm">{category.description}</p>
+                  <p className={`mb-4 text-sm ${isDark ? 'text-white' : 'text-black'}`}>{category.description}</p>
                   <div className="space-y-3">
                     {category.breakdown.map((item) => (
                       <div
                         key={item.title}
                         className="flex items-center justify-between"
                       >
-                        <span className="text-[#A4FF4E]/80 text-sm">{item.title}</span>
-                        <span className="text-[#A4FF4E]/80 text-sm font-mono">{formatCurrency(item.amount)}</span>
+                        <span className={`text-sm ${isDark ? 'text-[#A4FF4E]/80' : 'text-gray-600'}`}>{item.title}</span>
+                        <span className={`text-sm font-mono ${isDark ? 'text-[#A4FF4E]/80' : 'text-gray-600'}`}>{formatCurrency(item.amount)}</span>
                       </div>
                     ))}
                   </div>
@@ -251,11 +266,11 @@ export default function BudgetPage() {
       <DecorativeDivider 
         icon={Clock}
         gradientColors={{
-          from: 'rgba(164, 255, 78, 0.1)',
+          from: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)',
           via: 'rgba(59, 130, 246, 0.1)',
-          to: 'rgba(164, 255, 78, 0.1)'
+          to: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)'
         }}
-        iconColor="text-[#A4FF4E]/50"
+        iconColor={isDark ? 'text-[#A4FF4E]/50' : 'text-[#22C55E]/50'}
       />
 
       {/* Budget Justification */}
@@ -267,8 +282,8 @@ export default function BudgetPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Budget Justification</h2>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Budget Justification</h2>
+            <p className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-[#A4FF4E]/80' : 'text-[#22C55E]/80'}`}>
               How each dollar creates lasting community capacity
             </p>
           </motion.div>
@@ -276,23 +291,31 @@ export default function BudgetPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon"
+            className={`p-6 rounded-xl border-2 ${
+              isDark 
+                ? 'border-[#A4FF4E] bg-black/80 text-white' 
+                : 'border-[#22C55E] bg-white/80 text-black border-gray-200'
+            } shadow-neon`}
           >
             <div className="space-y-12">
-              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Program Salaries & Wages (41% of budget)</h3>
+              <div className={`p-6 rounded-lg border ${
+                isDark 
+                  ? 'bg-[#A4FF4E]/5 border-[#A4FF4E]/20' 
+                  : 'bg-[#22C55E]/5 border-[#22C55E]/20'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Program Salaries & Wages (41% of budget)</h3>
                 <div className="space-y-6">
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Lead Developer (PT) - 7,000</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Lead Developer (PT) - 7,000</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       10 hours per week for twelve months to build, secure, and document the open-core website 
                       and Learning Portal. This role ensures the platform is robust, well-documented, and 
                       ready for community use.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Bilingual Coordinator (PT) - $3,300</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Bilingual Coordinator (PT) - $3,300</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       6 hours per week for twelve months to translate UI, caption videos, run online help desk, 
                       and ensure the platform serves Miami's diverse community effectively.
                     </p>
@@ -300,26 +323,30 @@ export default function BudgetPage() {
                 </div>
               </div>
 
-              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Contracted Services (23% of budget)</h3>
+              <div className={`p-6 rounded-lg border ${
+                isDark 
+                  ? 'bg-[#A4FF4E]/5 border-[#A4FF4E]/20' 
+                  : 'bg-[#22C55E]/5 border-[#22C55E]/20'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Contracted Services (23% of budget)</h3>
                 <div className="space-y-6">
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Web/LMS Codebase Development - $3,500</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Web/LMS Codebase Development - $3,500</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Building the React + Supabase platform with QR links, live visitor stats, and three 
                       micro-courses: Web-Design for Smart Signs, Ethical AI Agents, and Bilingual SEO.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Automation Scripts - $1,500</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Automation Scripts - $1,500</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Scripts that copy weekly metrics to GitHub and clean data for the dashboard, ensuring 
                       transparency and easy reporting.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Documentation & Testing - $850</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Documentation & Testing - $850</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Comprehensive documentation and testing to ensure the platform is reliable and 
                       user-friendly for community stewards.
                     </p>
@@ -327,67 +354,79 @@ export default function BudgetPage() {
                 </div>
               </div>
 
-              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Hardware & Materials (28% of budget)</h3>
+              <div className={`p-6 rounded-lg border ${
+                isDark 
+                  ? 'bg-[#A4FF4E]/5 border-[#A4FF4E]/20' 
+                  : 'bg-[#22C55E]/5 border-[#22C55E]/20'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Hardware & Materials (28% of budget)</h3>
                 <div className="space-y-6">
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Smart Signs - $2,400</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Smart Signs - $2,400</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Two museum-grade Smart Signs for Bakehouse & Locust lobbies to broadcast events and 
                       impact data, creating visible community engagement.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Learning Stations - $1,800</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Learning Stations - $1,800</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Twelve Raspberry-Pi learning stations for workshops, allowing participants to code 
                       along and preview results instantly.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Projectors - $2,000</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Projectors - $2,000</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Portable LaserCube and short-throw LED projectors for pop-up events, projecting 
                       AI visuals, live stats, and partner branding.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Demo Laptop - $700</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Demo Laptop - $700</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Refurbished Legion laptop for live demos and development work during events.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Cloud & Admin Costs (6% of budget)</h3>
+              <div className={`p-6 rounded-lg border ${
+                isDark 
+                  ? 'bg-[#A4FF4E]/5 border-[#A4FF4E]/20' 
+                  : 'bg-[#22C55E]/5 border-[#22C55E]/20'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Cloud & Admin Costs (6% of budget)</h3>
                 <div className="space-y-6">
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Supabase Pro - $600</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Supabase Pro - $600</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Twelve months of reliable database and backend services for the platform.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">PostHog Analytics - $400</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>PostHog Analytics - $400</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Twelve months of analytics to track community engagement and platform usage.
                     </p>
                   </div>
-                  <div className="p-4 rounded-lg bg-black/50">
-                    <h4 className="font-semibold mb-2 text-[#A4FF4E]">Streamlabs - $400</h4>
-                    <p className="text-white">
+                  <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <h4 className={`font-semibold mb-2 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Streamlabs - $400</h4>
+                    <p className={isDark ? 'text-white' : 'text-black'}>
                       Twelve months of reliable livestreaming services for events and tutorials.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Contingency & Spare Parts (2% of budget)</h3>
-                <div className="p-4 rounded-lg bg-black/50">
-                  <p className="text-white">
+              <div className={`p-6 rounded-lg border ${
+                isDark 
+                  ? 'bg-[#A4FF4E]/5 border-[#A4FF4E]/20' 
+                  : 'bg-[#22C55E]/5 border-[#22C55E]/20'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Contingency & Spare Parts (2% of budget)</h3>
+                <div className={`p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                  <p className={isDark ? 'text-white' : 'text-black'}>
                     Extra cables, backup Raspberry Pi, and replacement projector lamp to ensure everything 
                     keeps running smoothly during events. This small buffer prevents disruptions and 
                     maintains professional quality.
@@ -395,33 +434,37 @@ export default function BudgetPage() {
                 </div>
               </div>
 
-              <div className="p-6 rounded-lg bg-[#A4FF4E]/5 border border-[#A4FF4E]/20">
-                <h3 className="text-xl font-bold mb-4 text-[#A4FF4E]">Alignment with Fund Priorities</h3>
+              <div className={`p-6 rounded-lg border ${
+                isDark 
+                  ? 'bg-[#A4FF4E]/5 border-[#A4FF4E]/20' 
+                  : 'bg-[#22C55E]/5 border-[#22C55E]/20'
+              }`}>
+                <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Alignment with Fund Priorities</h3>
                 <ul className="space-y-4">
-                  <li className="flex items-start gap-3 p-4 rounded-lg bg-black/50">
-                    <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
+                  <li className={`flex items-start gap-3 p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <CheckCircle className={`w-5 h-5 mt-0.5 flex-shrink-0 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`} />
                     <div>
-                      <span className="font-semibold text-[#A4FF4E]">Digital tools & infrastructure:</span>
-                      <span className="text-white"> Smart Signs, Pi kits, and cloud stack give artists concrete technology they can control.</span>
+                      <span className={`font-semibold ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Digital tools & infrastructure:</span>
+                      <span className={isDark ? 'text-white' : 'text-black'}> Smart Signs, Pi kits, and cloud stack give artists concrete technology they can control.</span>
                     </div>
                   </li>
-                  <li className="flex items-start gap-3 p-4 rounded-lg bg-black/50">
-                    <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
+                  <li className={`flex items-start gap-3 p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <CheckCircle className={`w-5 h-5 mt-0.5 flex-shrink-0 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`} />
                     <div>
-                      <span className="font-semibold text-[#A4FF4E]">Capacity-building expertise:</span>
-                      <span className="text-white"> 41% of funds pay humans who transfer skills, not just install gear.</span>
+                      <span className={`font-semibold ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Capacity-building expertise:</span>
+                      <span className={isDark ? 'text-white' : 'text-black'}> 41% of funds pay humans who transfer skills, not just install gear.</span>
                     </div>
                   </li>
-                  <li className="flex items-start gap-3 p-4 rounded-lg bg-black/50">
-                    <CheckCircle className="w-5 h-5 mt-0.5 text-[#A4FF4E] flex-shrink-0" />
+                  <li className={`flex items-start gap-3 p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                    <CheckCircle className={`w-5 h-5 mt-0.5 flex-shrink-0 ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`} />
                     <div>
-                      <span className="font-semibold text-[#A4FF4E]">Replicability & sustainability:</span>
-                      <span className="text-white"> Open-source code, Creative-Commons templates, and clear earned-income pathway let the model grow without perpetual grants.</span>
+                      <span className={`font-semibold ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Replicability & sustainability:</span>
+                      <span className={isDark ? 'text-white' : 'text-black'}> Open-source code, Creative-Commons templates, and clear earned-income pathway let the model grow without perpetual grants.</span>
                     </div>
                   </li>
                 </ul>
-                <div className="mt-6 p-4 rounded-lg bg-black/50">
-                  <p className="text-white">
+                <div className={`mt-6 p-4 rounded-lg ${isDark ? 'bg-black/50' : 'bg-gray-50'}`}>
+                  <p className={isDark ? 'text-white' : 'text-black'}>
                     At $24,950, every Knight dollar directly amplifies community voices, leaving Miami with 
                     working screens, trained stewards, and an evidence-based template ready for replication.
                   </p>
@@ -435,11 +478,11 @@ export default function BudgetPage() {
       <DecorativeDivider 
         icon={Clock}
         gradientColors={{
-          from: 'rgba(164, 255, 78, 0.1)',
+          from: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)',
           via: 'rgba(59, 130, 246, 0.1)',
-          to: 'rgba(164, 255, 78, 0.1)'
+          to: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)'
         }}
-        iconColor="text-[#A4FF4E]/50"
+        iconColor={isDark ? 'text-[#A4FF4E]/50' : 'text-[#22C55E]/50'}
       />
 
       {/* Budget Timeline */}
@@ -451,8 +494,8 @@ export default function BudgetPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Quarterly Spending</h2>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Quarterly Spending</h2>
+            <p className={`text-xl max-w-3xl mx-auto ${isDark ? 'text-[#A4FF4E]/80' : 'text-[#22C55E]/80'}`}>
               Projected expenditure timeline
             </p>
           </motion.div>
@@ -460,7 +503,11 @@ export default function BudgetPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-6 rounded-xl border-2 border-[#A4FF4E] bg-black/80 text-white shadow-neon"
+            className={`p-6 rounded-xl border-2 ${
+              isDark 
+                ? 'border-[#A4FF4E] bg-black/80 text-white' 
+                : 'border-[#22C55E] bg-white/80 text-black border-gray-200'
+            } shadow-neon`}
           >
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -473,29 +520,29 @@ export default function BudgetPage() {
                   ]}
                   margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#A4FF4E22" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#A4FF4E22" : "#22C55E22"} />
                   <XAxis
                     dataKey="quarter"
-                    tick={{ fill: '#A4FF4E' }}
+                    tick={{ fill: primaryColor }}
                   />
                   <YAxis
-                    tick={{ fill: '#A4FF4E' }}
+                    tick={{ fill: primaryColor }}
                     tickFormatter={(value) => formatCurrency(value)}
                   />
                   <Tooltip
                     formatter={(value: number) => formatCurrency(value)}
                     contentStyle={{
-                      backgroundColor: '#18181b',
-                      border: '1px solid #A4FF4E',
+                      backgroundColor: isDark ? '#18181b' : '#ffffff',
+                      border: `1px solid ${primaryColor}`,
                       borderRadius: '0.5rem',
-                      color: '#A4FF4E',
-                      boxShadow: '0 0 24px #A4FF4E44',
+                      color: primaryColor,
+                      boxShadow: `0 0 24px ${primaryColor}44`,
                     }}
                     itemStyle={{
-                      color: '#A4FF4E',
+                      color: primaryColor,
                     }}
                   />
-                  <Bar dataKey="amount" fill="#A4FF4E" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="amount" fill={primaryColor} radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -506,11 +553,11 @@ export default function BudgetPage() {
       <DecorativeDivider 
         icon={Clock}
         gradientColors={{
-          from: 'rgba(164, 255, 78, 0.1)',
+          from: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)',
           via: 'rgba(59, 130, 246, 0.1)',
-          to: 'rgba(164, 255, 78, 0.1)'
+          to: isDark ? 'rgba(164, 255, 78, 0.1)' : 'rgba(34, 197, 94, 0.1)'
         }}
-        iconColor="text-[#A4FF4E]/50"
+        iconColor={isDark ? 'text-[#A4FF4E]/50' : 'text-[#22C55E]/50'}
       />
 
       {/* Navigation to Related Pages */}
@@ -522,8 +569,8 @@ export default function BudgetPage() {
             animate="animate"
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Explore Related Analysis</h2>
-            <p className="text-xl text-[#A4FF4E]/80 max-w-3xl mx-auto mb-8">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Explore Related Analysis</h2>
+            <p className={`text-xl max-w-3xl mx-auto mb-8 ${isDark ? 'text-[#A4FF4E]/80' : 'text-[#22C55E]/80'}`}>
               See how this budget translates into measurable impact and sustainable growth
             </p>
           </motion.div>
@@ -537,28 +584,52 @@ export default function BudgetPage() {
               className="group"
             >
               <Link href="/grant/knight-foundation/impact-roi">
-                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                <div className={`relative overflow-hidden rounded-2xl border-2 ${
+                  isDark 
+                    ? 'border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5' 
+                    : 'border-[#22C55E] bg-white/80 hover:bg-[#22C55E]/5'
+                } transition-all duration-300 cursor-pointer p-8 text-center`}>
                   {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                    isDark 
+                      ? 'bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5' 
+                      : 'bg-gradient-to-r from-[#22C55E]/5 via-[#16A34A]/5 to-[#22C55E]/5'
+                  }`} />
                   
                   <div className="relative">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <BarChart className="w-8 h-8 text-black" />
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 ${
+                      isDark 
+                        ? 'bg-gradient-to-br from-[#A4FF4E] to-[#00FF88]' 
+                        : 'bg-gradient-to-br from-[#22C55E] to-[#16A34A]'
+                    }`}>
+                      <BarChart className={`w-8 h-8 ${isDark ? 'text-black' : 'text-white'}`} />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                    <h3 className={`text-2xl font-bold mb-4 group-hover:transition-colors duration-300 ${
+                      isDark 
+                        ? 'text-white group-hover:text-[#A4FF4E]' 
+                        : 'text-black group-hover:text-[#22C55E]'
+                    }`}>
                       Impact & ROI Analysis
                     </h3>
-                    <p className="text-gray-300 mb-6">
+                    <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                       See how $24,950 creates measurable community impact with live metrics tracking and detailed outcomes
                     </p>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                    <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium ${
+                      isDark 
+                        ? 'bg-[#A4FF4E]/20 text-[#A4FF4E]' 
+                        : 'bg-[#22C55E]/20 text-[#22C55E]'
+                    }`}>
                       <span>View Impact</span>
                       <ChevronLeft className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 rotate-180" />
                     </div>
                   </div>
                   
                   {/* Glow effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                  <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm ${
+                    isDark 
+                      ? 'bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E]' 
+                      : 'bg-gradient-to-r from-[#22C55E] via-[#16A34A] to-[#22C55E]'
+                  }`} />
                 </div>
               </Link>
             </motion.div>
@@ -571,28 +642,52 @@ export default function BudgetPage() {
               className="group"
             >
               <Link href="/grant/knight-foundation/sustainability-cycle">
-                <div className="relative overflow-hidden rounded-2xl border-2 border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5 transition-all duration-300 cursor-pointer p-8 text-center">
+                <div className={`relative overflow-hidden rounded-2xl border-2 ${
+                  isDark 
+                    ? 'border-[#A4FF4E] bg-black/80 hover:bg-[#A4FF4E]/5' 
+                    : 'border-[#22C55E] bg-white/80 hover:bg-[#22C55E]/5'
+                } transition-all duration-300 cursor-pointer p-8 text-center`}>
                   {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                    isDark 
+                      ? 'bg-gradient-to-r from-[#A4FF4E]/5 via-[#00FF88]/5 to-[#A4FF4E]/5' 
+                      : 'bg-gradient-to-r from-[#22C55E]/5 via-[#16A34A]/5 to-[#22C55E]/5'
+                  }`} />
                   
                   <div className="relative">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A4FF4E] to-[#00FF88] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Sparkles className="w-8 h-8 text-black" />
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 ${
+                      isDark 
+                        ? 'bg-gradient-to-br from-[#A4FF4E] to-[#00FF88]' 
+                        : 'bg-gradient-to-br from-[#22C55E] to-[#16A34A]'
+                    }`}>
+                      <Sparkles className={`w-8 h-8 ${isDark ? 'text-black' : 'text-white'}`} />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#A4FF4E] transition-colors duration-300">
+                    <h3 className={`text-2xl font-bold mb-4 group-hover:transition-colors duration-300 ${
+                      isDark 
+                        ? 'text-white group-hover:text-[#A4FF4E]' 
+                        : 'text-black group-hover:text-[#22C55E]'
+                    }`}>
                       Sustainability Model
                     </h3>
-                    <p className="text-gray-300 mb-6">
+                    <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                       Discover how this investment becomes a self-funding ecosystem through the sustainability flywheel
                     </p>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A4FF4E]/20 text-[#A4FF4E] font-medium">
+                    <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium ${
+                      isDark 
+                        ? 'bg-[#A4FF4E]/20 text-[#A4FF4E]' 
+                        : 'bg-[#22C55E]/20 text-[#22C55E]'
+                    }`}>
                       <span>View Model</span>
                       <ChevronLeft className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 rotate-180" />
                     </div>
                   </div>
                   
                   {/* Glow effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+                  <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm ${
+                    isDark 
+                      ? 'bg-gradient-to-r from-[#A4FF4E] via-[#00FF88] to-[#A4FF4E]' 
+                      : 'bg-gradient-to-r from-[#22C55E] via-[#16A34A] to-[#22C55E]'
+                  }`} />
                 </div>
               </Link>
             </motion.div>
@@ -603,10 +698,14 @@ export default function BudgetPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mt-12 p-6 rounded-xl border border-[#A4FF4E]/20 bg-black/40 max-w-2xl mx-auto text-center"
+            className={`mt-12 p-6 rounded-xl border ${
+              isDark 
+                ? 'border-[#A4FF4E]/20 bg-black/40' 
+                : 'border-[#22C55E]/20 bg-gray-50'
+            } max-w-2xl mx-auto text-center`}
           >
-            <p className="text-gray-300">
-              <span className="text-[#A4FF4E] font-medium">Budget transparency</span> and impact measurement go hand-in-hand. Explore how each dollar creates lasting community value.
+            <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+              <span className={`font-medium ${isDark ? 'text-[#A4FF4E]' : 'text-[#22C55E]'}`}>Budget transparency</span> and impact measurement go hand-in-hand. Explore how each dollar creates lasting community value.
             </p>
           </motion.div>
         </div>

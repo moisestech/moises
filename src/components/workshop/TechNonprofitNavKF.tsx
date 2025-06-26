@@ -17,35 +17,52 @@ import { DarkLightThemeSelector } from '@/components/common/DarkLightThemeSelect
 import { LanguageSelector } from '@/components/common/LanguageSelector';
 
 // ICONS
-import { Menu, X } from 'lucide-react';
+import { 
+  Menu, 
+  X, 
+  Home, 
+  Zap, 
+  TrendingUp, 
+  Scale, 
+  GraduationCap, 
+  Heart, 
+  Clock, 
+  Lightbulb,
+  FileText,
+  Map,
+  Building2,
+  BarChart3,
+  DollarSign,
+  RefreshCw
+} from 'lucide-react';
 
 // TRANSLATIONS
 import { proposalTranslations } from '@/translations/proposal';
 
-// Landing page navigation (sections)
+// Landing page navigation (sections) with icons
 const landingNavigation = [
-  { name: "Overview", href: "#overview", key: "overview" },
-  { name: "Digital Capacity", href: "#capacity", key: "digitalCapacity" },
-  { name: "ROI", href: "#roi", key: "roi" },
-  { name: "Principles", href: "#principles", key: "principles" },
-  { name: "Budget", href: "#budget", key: "budget" },
-  { name: "Workshops", href: "#workshops", key: "workshops" },
-  { name: "Impact", href: "#impact", key: "impact" },
-  { name: "Timeline", href: "#roadmap", key: "timeline" },
-  { name: "Take-aways", href: "#takeaways", key: "takeaways" }
+  { name: "Overview", href: "#overview", key: "overview", icon: Home },
+  { name: "Digital Capacity", href: "#capacity", key: "digitalCapacity", icon: Zap },
+  { name: "ROI", href: "#roi", key: "roi", icon: TrendingUp },
+  { name: "Principles", href: "#principles", key: "principles", icon: Scale },
+  { name: "Budget", href: "#budget", key: "budget", icon: DollarSign },
+  { name: "Workshops", href: "#workshops", key: "workshops", icon: GraduationCap },
+  { name: "Impact", href: "#impact", key: "impact", icon: Heart },
+  { name: "Timeline", href: "#roadmap", key: "timeline", icon: Clock },
+  { name: "Take-aways", href: "#takeaways", key: "takeaways", icon: Lightbulb }
 ];
 
-// Other pages navigation (links to other pages)
+// Other pages navigation (links to other pages) with icons
 const otherPagesNavigation = [
-  { name: "Overview", href: "/grant/knight-foundation", key: "overview" },
-  { name: "Proposal", href: "/grant/knight-foundation/proposal", key: "proposal" },
-  { name: "Roadmap", href: "/grant/knight-foundation/roadmap", key: "roadmap" },
-  { name: "Workshops", href: "/grant/knight-foundation/workshops", key: "workshops" },
-  { name: "Smart Signs", href: "/services/smartsign", key: "smartSigns" },
-  { name: "Sustainability", href: "/grant/knight-foundation/sustainability-cycle", key: "sustainability" },
-  { name: "AI Toolkits", href: "/grant/knight-foundation/ai-toolkits", key: "aiToolkits" },
-  { name: "Impact & ROI", href: "/grant/knight-foundation/impact-roi", key: "impactRoi" },
-  { name: "Budget", href: "/grant/knight-foundation/budget", key: "budget" }
+  { name: "Overview", href: "/grant/knight-foundation", key: "overview", icon: Home },
+  { name: "Proposal", href: "/grant/knight-foundation/proposal", key: "proposal", icon: FileText },
+  { name: "Roadmap", href: "/grant/knight-foundation/roadmap", key: "roadmap", icon: Map },
+  { name: "Workshops", href: "/grant/knight-foundation/workshops", key: "workshops", icon: GraduationCap },
+  { name: "Smart Signs", href: "/services/smartsign", key: "smartSigns", icon: Building2 },
+  { name: "Sustainability", href: "/grant/knight-foundation/sustainability-cycle", key: "sustainability", icon: RefreshCw },
+  { name: "AI Toolkits", href: "/grant/knight-foundation/ai-toolkits", key: "aiToolkits", icon: Zap },
+  { name: "Impact & ROI", href: "/grant/knight-foundation/impact-roi", key: "impactRoi", icon: BarChart3 },
+  { name: "Budget", href: "/grant/knight-foundation/budget", key: "budget", icon: DollarSign }
 ];
 
 // Translations
@@ -187,16 +204,42 @@ export function TechNonprofitNavKF() {
             </button>
           </div>
         </div>
-        <nav className="flex flex-col space-y-4">
-          {navigation.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => navigateToPage(item.href)}
-              className={`text-left text-xl ${isDark ? 'text-white hover:text-[#A4FF4E]' : 'text-black hover:text-[#A4FF4E]'} transition-colors py-2`}
-            >
-              {t[item.key as keyof typeof t] || item.name}
-            </button>
-          ))}
+        <nav className="grid grid-cols-3 gap-4">
+          {navigation.map((item) => {
+            const Icon = item.icon;
+            const isActive = (isLandingPage && activeSection === item.href.substring(1)) ||
+                           (!isLandingPage && pathname === item.href);
+            return (
+              <button
+                key={item.name}
+                onClick={() => navigateToPage(item.href)}
+                className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-300 ${
+                  isActive
+                    ? 'border-[#A4FF4E] bg-[#A4FF4E]/10 shadow-[0_0_20px_rgba(164,255,78,0.3)]'
+                    : isDark 
+                      ? 'border-gray-700 bg-black/50 hover:border-[#A4FF4E]/60 hover:bg-[#A4FF4E]/5'
+                      : 'border-gray-200 bg-white/50 hover:border-[#A4FF4E]/60 hover:bg-[#A4FF4E]/5'
+                }`}
+              >
+                <Icon className={`w-6 h-6 transition-colors ${
+                  isActive 
+                    ? 'text-[#A4FF4E]' 
+                    : isDark 
+                      ? 'text-gray-300 group-hover:text-[#A4FF4E]'
+                      : 'text-gray-600 group-hover:text-[#A4FF4E]'
+                }`} />
+                <span className={`text-xs font-medium text-center ${
+                  isActive 
+                    ? 'text-[#A4FF4E]' 
+                    : isDark 
+                      ? 'text-gray-300 group-hover:text-[#A4FF4E]'
+                      : 'text-gray-600 group-hover:text-[#A4FF4E]'
+                }`}>
+                  {t[item.key as keyof typeof t] || item.name}
+                </span>
+              </button>
+            );
+          })}
         </nav>
       </div>
     </motion.div>
@@ -207,36 +250,66 @@ export function TechNonprofitNavKF() {
       <header className={`fixed top-0 left-0 right-0 z-40 ${isDark ? 'bg-black/80 border-gray-800' : 'bg-white/80 border-gray-200'} backdrop-blur-md border-b`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link href="/grant/knight-foundation" className="text-xl font-bold">
-              <span className="bg-gradient-to-r from-[#A4FF4E] to-[#00FF88] bg-clip-text text-transparent">
-                Knight Foundation Proposal
-              </span>
-            </Link>
+            {/* Left: Logo */}
+            <div className="flex-shrink-0">
+              <Link href="/grant/knight-foundation" className="text-xl font-bold">
+                <span className="bg-gradient-to-r from-[#A4FF4E] to-[#00FF88] bg-clip-text text-transparent">
+                  Knight Foundation Proposal
+                </span>
+              </Link>
+            </div>
             
-            <div className="flex items-center gap-8">
-              <nav className="hidden md:flex items-center space-x-8">
-                {navigation.map((item) => (
-                  <button
+            {/* Center: Desktop Navigation - Icon Grid */}
+            <nav className="hidden md:flex items-center gap-2">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                const isActive = (isLandingPage && activeSection === item.href.substring(1)) ||
+                               (!isLandingPage && pathname === item.href);
+                return (
+                  <motion.button
                     key={item.name}
                     onClick={() => navigateToPage(item.href)}
-                    className={`text-sm font-medium transition-colors ${
-                      (isLandingPage && activeSection === item.href.substring(1)) ||
-                      (!isLandingPage && pathname === item.href)
-                        ? 'text-[#A4FF4E]'
+                    className={`group relative flex items-center justify-center w-12 h-12 rounded-xl border-2 transition-all duration-300 ${
+                      isActive
+                        ? 'border-[#A4FF4E] bg-[#A4FF4E]/10 shadow-[0_0_20px_rgba(164,255,78,0.3)]'
                         : isDark 
-                          ? 'text-gray-300 hover:text-white'
-                          : 'text-gray-600 hover:text-black'
+                          ? 'border-gray-700 bg-black/50 hover:border-[#A4FF4E]/60 hover:bg-[#A4FF4E]/5'
+                          : 'border-gray-200 bg-white/50 hover:border-[#A4FF4E]/60 hover:bg-[#A4FF4E]/5'
                     }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {t[item.key as keyof typeof t] || item.name}
-                  </button>
-                ))}
-              </nav>
+                    <Icon className={`w-5 h-5 transition-colors ${
+                      isActive 
+                        ? 'text-[#A4FF4E]' 
+                        : isDark 
+                          ? 'text-gray-300 group-hover:text-[#A4FF4E]'
+                          : 'text-gray-600 group-hover:text-[#A4FF4E]'
+                    }`} />
+                    
+                    {/* Tooltip */}
+                    <div className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${
+                      isDark 
+                        ? 'bg-[#18181b] text-white border border-[#A4FF4E]' 
+                        : 'bg-white text-gray-800 border border-[#A4FF4E] shadow-lg'
+                    }`}>
+                      {t[item.key as keyof typeof t] || item.name}
+                      {/* Arrow */}
+                      <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 rotate-45 ${
+                        isDark 
+                          ? 'bg-[#18181b] border-l border-t border-[#A4FF4E]' 
+                          : 'bg-white border-l border-t border-[#A4FF4E]'
+                      }`} />
+                    </div>
+                  </motion.button>
+                );
+              })}
+            </nav>
 
-              <div className="flex items-center gap-4">
-                <LanguageSelector />
-                <DarkLightThemeSelector />
-              </div>
+            {/* Right: Language Selectors and Mobile Menu */}
+            <div className="flex items-center gap-4">
+              <LanguageSelector />
+              <DarkLightThemeSelector />
               
               <button
                 onClick={() => setIsMenuOpen(true)}
