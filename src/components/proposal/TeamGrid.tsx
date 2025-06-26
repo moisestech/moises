@@ -6,23 +6,23 @@ const team = [
   {
     name: "Moises Sanabria",
     role: "Lead Developer",
-    image: "/team/moises.jpg",
+    image: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1750944896/portraits/moises-sanabria-portrait_qtathx.jpg",
     motif: Heart,
     social: {
-      github: "https://github.com/moises",
-      twitter: "https://twitter.com/moises",
-      linkedin: "https://linkedin.com/in/moises"
+      github: "https://github.com/moisestech",
+      twitter: "https://x.com/moisesdsanabria",
+      linkedin: "https://www.linkedin.com/in/moisesdsanabria/"
     }
   },
   {
     name: "Fabiola Larios",
     role: "Community & Growth",
-    image: "/team/fabiola.jpg",
+    image: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1750944838/portraits/fabiola-larios-portrait_nhilh4.jpg",
     motif: Users,
     social: {
-      github: "https://github.com/fabiola",
-      twitter: "https://twitter.com/fabiolalarios",
-      linkedin: "https://linkedin.com/in/fabiolalarios"
+      github: "https://github.com/fabiolaio",
+      twitter: "https://x.com/fabiolalariosm",
+      linkedin: "https://www.linkedin.com/in/fabiolaio/"
     }
   },
   // {
@@ -42,7 +42,7 @@ export function TeamGrid() {
   return (
     <div className="py-20">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {team.map((member, index) => (
             <motion.div
               key={index}

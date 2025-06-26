@@ -11,7 +11,7 @@ const needItems = [
 
 const solutionItems = [
   "Plug-n-Play Community Screens — <$200 Pi kits",
-  "4 Zero-Cost Skill Sprints — EN/ES/ASL",
+  "4 Zero-Cost Skill Sprints — EN/ES",
   "Templates you can clone",
   "Live metrics you can screenshot"
 ];

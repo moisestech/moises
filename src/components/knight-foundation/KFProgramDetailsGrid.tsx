@@ -18,7 +18,7 @@ const details = [
   },
   {
     title: 'Zero-Cost Skill Sprints',
-    description: 'Free, bilingual skill clinics with ASL interpretation, childcare, and accessibility-first design.',
+    description: 'Free, bilingual skill clinics with accessibility-first design.',
     icon: Users,
     href: `${baseUrl}/workshops`,
     ascii: '===',

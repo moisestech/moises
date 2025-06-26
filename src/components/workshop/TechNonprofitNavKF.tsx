@@ -16,6 +16,10 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { DarkLightThemeSelector } from '@/components/common/DarkLightThemeSelector';
 import { LanguageSelector } from '@/components/common/LanguageSelector';
 
+// LOGOS
+import Logo from '@/app/(grant)/grant/knight-foundation/Logo';
+import LogoIcon from '@/app/(grant)/grant/knight-foundation/LogoIcon';
+
 // ICONS
 import { 
   Menu, 
@@ -38,6 +42,37 @@ import {
 
 // TRANSLATIONS
 import { proposalTranslations } from '@/translations/proposal';
+
+// Knight Foundation Logo Component
+const KnightFoundationLogo = ({ className = '', size = 'md' }: { className?: string; size?: 'sm' | 'md' | 'lg' }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  
+  const sizeClasses = {
+    sm: 'w-6 h-6',
+    md: 'w-8 h-8',
+    lg: 'w-12 h-12'
+  };
+
+  return (
+    <svg 
+      className={`${sizeClasses[size]} ${className}`}
+      viewBox="0 0 495.817 495.817" 
+      fill="currentColor" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect 
+        width="495.817" 
+        height="495.817" 
+        fill={isDark ? '#fff' : '#010101'}
+      />
+      <path 
+        d="M276.241,162.911v56.665h120.413s0,56.665,0,56.665h-120.413v113.33l-91.636-141.663,91.636-141.663h134.58s0,56.664,0,56.664h-134.58ZM120.413,280.155v109.413h70.775l-70.775-109.413ZM191.187,106.246h-70.775v109.413l70.775-109.413Z" 
+        fill={isDark ? '#010101' : '#fff'}
+      />
+    </svg>
+  );
+};
 
 // Landing page navigation (sections) with icons
 const landingNavigation = [
@@ -250,12 +285,12 @@ export function TechNonprofitNavKF() {
       <header className={`fixed top-0 left-0 right-0 z-40 ${isDark ? 'bg-black/80 border-gray-800' : 'bg-white/80 border-gray-200'} backdrop-blur-md border-b`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            {/* Left: Logo */}
-            <div className="flex-shrink-0">
-              <Link href="/grant/knight-foundation" className="text-xl font-bold">
-                <span className="bg-gradient-to-r from-[#A4FF4E] to-[#00FF88] bg-clip-text text-transparent">
-                  Knight Foundation Proposal
-                </span>
+            {/* Left: Logo Group */}
+            <div className="flex-shrink-0 flex items-center gap-3">
+              <Link href="/grant/knight-foundation" className="flex items-center gap-3">
+                <KnightFoundationLogo size="md" className={isDark ? 'text-white' : 'text-black'} />
+                <X className={`w-4 h-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
+                <LogoIcon size="md" className={isDark ? 'text-white' : 'text-black'} />
               </Link>
             </div>
             
