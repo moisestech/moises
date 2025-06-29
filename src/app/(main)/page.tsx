@@ -3,7 +3,7 @@ import Image from 'next/image';
 import PageLayout from '@/components/PageLayout';
 import SpecialThanks from '@/components/SpecialThanks';
 import LandingExhibitions from '@/components/LandingExhibitions';
-import LandingPromotedEvent from '@/components/LandingPromotedEvent';
+import { LandingPromotedEvent, Footer } from '@/features/landing';
 import LandingCollection from '@/components/LandingCollection';
 import LandingEvents from '@/components/LandingEvents';
 

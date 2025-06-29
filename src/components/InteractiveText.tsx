@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 interface TooltipContent {
   text?: string;
@@ -29,16 +30,21 @@ export default function InteractiveText({
   content,
 }: InteractiveTextProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
     <span className="relative inline-block group">
       <span
         className={`
-          ${type === 'italic' ? 'italic text-blue-600 dark:text-blue-400' : ''}
-          ${type === 'highlight' ? 'text-blue-600 dark:text-blue-400' : ''}
-          ${type === 'link' ? 'text-blue-600 dark:text-blue-400' : ''}
-          cursor-help border-b border-dotted border-blue-300 dark:border-blue-600
-          hover:text-blue-800 dark:hover:text-blue-300 transition-colors
+          ${type === 'italic' ? 'italic' : ''}
+          ${type === 'highlight' ? '' : ''}
+          ${type === 'link' ? '' : ''}
+          cursor-help border-b border-dotted transition-colors
+          ${isDark 
+            ? 'text-[#67e8f9] border-[#67e8f9] hover:text-[#67e8f9]' 
+            : 'text-[#2563eb] border-[#2563eb] hover:text-[#2563eb]'
+          }
         `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -100,7 +106,11 @@ export default function InteractiveText({
                   href={content.link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center"
+                  className={`text-sm flex items-center transition-colors ${
+                    isDark 
+                      ? 'text-[#67e8f9] hover:text-[#67e8f9]' 
+                      : 'text-[#2563eb] hover:text-[#2563eb]'
+                  }`}
                 >
                   {content.link.label}
                   <svg

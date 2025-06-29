@@ -23,10 +23,26 @@ export default function LandingPromotedEvent() {
               and technology in the world.
             </p>
             <Link
-              href="/events"
-              className="inline-block text-lg font-bold text-black hover:text-black/80 transition-colors"
+              href="https://www.bacfl.org/events/open-studios-march-2025"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 text-lg font-bold text-black hover:text-black/80 transition-colors"
             >
               Learn More
+              <svg
+                className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
             </Link>
           </div>
 

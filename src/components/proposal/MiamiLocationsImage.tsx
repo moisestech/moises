@@ -85,7 +85,7 @@ export function MiamiLocationsImage({ className = '' }: MiamiLocationsImageProps
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-          />
+        />
         </AnimatePresence>
         
         {/* Sheen Effect */}
@@ -155,22 +155,22 @@ export function MiamiLocationsImage({ className = '' }: MiamiLocationsImageProps
         {/* Interactive Hotspots */}
         <div className="absolute inset-0">
           {currentImage.hotspots.map((hotspot, index) => (
-            <motion.div 
+          <motion.div 
               key={hotspot.name}
               className={`absolute ${hotspot.position} w-4 h-4 ${hotspot.color} rounded-full cursor-pointer`}
-              whileHover={{ scale: 2, backgroundColor: 'rgba(164, 255, 78, 0.9)' }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="absolute -top-8 -left-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
-                <div className={`px-2 py-1 rounded text-xs font-medium ${
-                  isDark ? 'bg-[#A4FF4E] text-black' : 'bg-blue-500 text-white'
-                }`}>
+            whileHover={{ scale: 2, backgroundColor: 'rgba(164, 255, 78, 0.9)' }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="absolute -top-8 -left-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
+              <div className={`px-2 py-1 rounded text-xs font-medium ${
+                isDark ? 'bg-[#A4FF4E] text-black' : 'bg-blue-500 text-white'
+              }`}>
                   {hotspot.name}
-                </div>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
           ))}
-        </div>
+              </div>
 
         {/* Carousel Navigation Dots */}
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex gap-2">
@@ -205,15 +205,15 @@ export function MiamiLocationsImage({ className = '' }: MiamiLocationsImageProps
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.5 }}
-          >
-            <h3 className={`text-xl md:text-2xl font-bold mb-2 ${
-              isDark ? 'text-[#A4FF4E]' : 'text-blue-400'
-            }`}>
+      >
+        <h3 className={`text-xl md:text-2xl font-bold mb-2 ${
+          isDark ? 'text-[#A4FF4E]' : 'text-blue-400'
+        }`}>
               {currentImage.title}
-            </h3>
-            <p className="text-white/90 text-sm md:text-base">
+        </h3>
+        <p className="text-white/90 text-sm md:text-base">
               {currentImage.description}
-            </p>
+        </p>
           </motion.div>
         </AnimatePresence>
       </motion.div>

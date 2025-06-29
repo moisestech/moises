@@ -17,7 +17,6 @@ import { DarkLightThemeSelector } from '@/components/common/DarkLightThemeSelect
 import { LanguageSelector } from '@/components/common/LanguageSelector';
 
 // LOGOS
-import Logo from '@/app/(grant)/grant/knight-foundation/Logo';
 import LogoIcon from '@/app/(grant)/grant/knight-foundation/LogoIcon';
 
 // ICONS

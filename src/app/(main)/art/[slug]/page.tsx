@@ -81,12 +81,12 @@ export default async function ArtPage({ params }: PageProps) {
   return (
     <main className="w-full">
       {/* Title Banner */}
-      <div className={`${color} w-full py-20 px-8 mt-24`}>
+      <div className={`${color} w-full py-20 px-8 mt-40`}>
         <div className="max-w-7xl mx-auto">
           <h1 className="text-8xl font-bold text-black dark:text-white">
             {artwork.title}
           </h1>
-          <p className="text-4xl mt-4 text-black/60 dark:text-white/60">
+          <p className="text-4xl font-bold mt-4 text-black dark:text-white">
             {artwork.year}
           </p>
         </div>
@@ -104,31 +104,31 @@ export default async function ArtPage({ params }: PageProps) {
       </div>
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto py-16">
+      <div className="max-w-7xl mx-auto py-16 px-11">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           {/* Metadata Column */}
           <div className="space-y-8">
             {artwork.location && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Location</h3>
+                <h3 className="text-lg font-bold mb-2">Location</h3>
                 <p>{artwork.location}</p>
               </div>
             )}
             {artwork.curator && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Curator</h3>
+                <h3 className="text-lg font-bold mb-2">Curator</h3>
                 <p>{artwork.curator}</p>
               </div>
             )}
             {artwork.collaboration && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Collaboration</h3>
+                <h3 className="text-lg font-bold mb-2">Collaboration</h3>
                 <p>{artwork.collaboration}</p>
               </div>
             )}
             {artwork.materials && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Materials</h3>
+                <h3 className="text-lg font-bold mb-2">Materials</h3>
                 <ul className="list-disc pl-4">
                   {artwork.materials.map((material, index) => (
                     <li key={index}>{material}</li>
@@ -138,19 +138,19 @@ export default async function ArtPage({ params }: PageProps) {
             )}
             {artwork.medium && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Medium</h3>
+                <h3 className="text-lg font-bold mb-2">Medium</h3>
                 <p>{artwork.medium}</p>
               </div>
             )}
             {artwork.dimensions && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Dimensions</h3>
+                <h3 className="text-lg font-bold mb-2">Dimensions</h3>
                 <p>{artwork.dimensions}</p>
               </div>
             )}
             {artwork.tags && (
               <div>
-                <h3 className="text-lg font-semibold mb-2">Tags</h3>
+                <h3 className="text-lg font-bold mb-2">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {artwork.tags.map((tag, index) => (
                     <span
@@ -308,9 +308,5 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 // Optional: Add generateStaticParams if using static generation
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  return [
-    { slug: 'art-1' },
-    { slug: 'art-2' },
-    // ... other slugs
-  ];
+  return Object.keys(artist.artworks).map(slug => ({ slug }));
 }

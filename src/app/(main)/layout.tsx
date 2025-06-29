@@ -1,5 +1,5 @@
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Header } from '@/features/landing';
+import Footer from '@/features/landing/components/Footer';
 import { AppProvider } from '@/context/appContext';
 import type { ReactNode } from 'react';
 

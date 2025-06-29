@@ -1,12 +1,12 @@
 'use client';
 
-import type { Event, EventCategory } from '@/constants/events2';
+import type { Event, EventCategory } from '@/constants/events';
 
 // NEXT
 import Image from 'next/image';
 
 // CONSTANTS
-import { events, eventCategories } from '@/constants/events2';
+import { events, eventCategories } from '@/constants/events';
 
 // COMPONENTS
 import { Carousel } from 'react-responsive-carousel';

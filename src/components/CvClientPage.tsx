@@ -105,7 +105,7 @@ const InteractiveLink = ({ title, url, interactiveContent }: {
         })}
         {interactiveContent.every(content => content.text !== title) && (
           url ? (
-            <Link href={url} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Link href={url} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-600 dark:text-[#67e8f9] dark:hover:text-[#67e8f9] transition-colors">
               {title}
             </Link>
           ) : title
@@ -115,7 +115,7 @@ const InteractiveLink = ({ title, url, interactiveContent }: {
   }
   
   return url ? (
-    <Link href={url} target="_blank" rel="noopener noreferrer" className="font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+    <Link href={url} target="_blank" rel="noopener noreferrer" className="font-medium underline hover:text-blue-600 dark:text-[#67e8f9] dark:hover:text-[#67e8f9] transition-colors">
       {title}
     </Link>
   ) : (
@@ -154,7 +154,7 @@ const CvClientPage = () => {
   const listItemVariants = getListItemVariants(isDark);
 
   return (
-    <div className="max-w-7xl px-11 py-6 mx-auto print:py-4 print:px-2">
+    <div className="max-w-7xl px-11 pt-20 md:pb-6 mx-auto print:py-4 print:px-2">
       <style jsx global>{`
         @media print {
           body {
@@ -201,6 +201,20 @@ const CvClientPage = () => {
             margin: 1cm;
             size: A4;
           }
+        }
+        a.underline, a.underline:visited {
+          text-decoration: underline;
+        }
+        /* Highlight color for links on hover/focus */
+        a.underline:hover, a.underline:focus {
+          color: #2563eb !important;
+        }
+        /* Base text color for underlined links in dark mode */
+        .dark a.underline, .dark a.underline:visited {
+          color: #67e8f9 !important;
+        }
+        .dark a.underline:hover, .dark a.underline:focus {
+          color: #67e8f9 !important;
         }
       `}</style>
 
@@ -513,9 +527,9 @@ const CvClientPage = () => {
         transition={{ delay: 1, duration: 0.5 }}
         whileHover={{ scale: 1.05, backgroundColor: isDark ? "#4B5563" : "#333" }}
         onClick={() => window.print()} 
-        className="mt-10 px-4 py-2 bg-black dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors print:hidden rounded-md"
+        className="mt-10 px-4 py-2 bg-black dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors print:hidden"
       >
-        Print CV
+        Download CV
       </motion.button>
     </div>
   );

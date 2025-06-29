@@ -105,7 +105,7 @@ const COLORS = ['#A4FF4E', '#3B82F6', '#8B5CF6', '#EC4899', '#F59E0B'];
 export default function BudgetPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  
+
   // Use bright lime green for dark mode, darker lime green for light mode
   const primaryColor = isDark ? '#A4FF4E' : '#22C55E';
 

@@ -12,6 +12,7 @@ export interface Exhibitions {
   links?: string;
   partners?: string[];
   link?: string;
+  shortName?: string;
 }
 
 export const exhibitions: Exhibitions[] = [
@@ -28,13 +29,16 @@ export const exhibitions: Exhibitions[] = [
   },
   {
     id: 2,
-    title: 'Technofetishim',
-    date: 'Apr',
+    title: 'Technofetishism: Whip it into Shape',
+    date: 'March 21, 2025 - August 31, 2025',
     imageUrl:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1740950484/art/moisestech-website/exhibitions/apr_2025_technofetishism_momus/momus-exhibition-banner_uun9rx.jpg',
-    location: 'Thessaloniki, Greece',
-    description: 'This exhibition explores the complex relationship between humans and technology, examining how digital devices have evolved beyond tools to become objects of desire and worship. Through diverse artworks, the exhibition investigates how technology shapes modern identity, self-representation, and our understanding of gender in the digital age. Featured works highlight the intimate fusion of human bodies with technological extensions, revealing patterns of power, dependency, and pleasure in our digital interactions. The exhibition critically examines contemporary phenomena including technological messianism, digital behavior modification, innovation obsession, and the pursuit of perfection through technological means. It invites viewers to reflect on their own relationship with technology and its role in shaping human consciousness and desire.',
-    tags: ["Technology", "Identity", "Digital Culture", "Body Politics"],
+    location: 'MOMus-Experimental Center for the Arts (Warehouse B1, Pier A\', Port), Thessaloniki, Greece',
+    shortName: 'MOMus',
+    description: 'A track from the 80\'s (Whip it, Devo), inspired by a novel from the 70\'s (Gravity\'s Rainbow, Thomas Pynchon) examines the collapse of a society, that stupefied by a delirium of overconsumption and information overload, worships the almost religious submission to technology —through which power is manifested, expanded, and normalized. The exhibition explores the fetishisation of technology by our contemporary techno-capitalist society, which has transformed technological objects into sources of sexual arousal, substitutes for desire, and venerated fetishes. The works presented offer a critical reflection on how technology mediates—and sometimes distorts—our notions of intimacy, eroticism, desire, and communication, our own identity, blurring the boundaries between freedom, compulsion, and constraint.',
+    tags: ["Technology", "Identity", "Digital Culture", "Body Politics", "Technofetishism", "Contemporary Art"],
+    curator: 'Eirini Papakostantinou, Art Historian, Curator MOMus-Experimental Center for the Arts',
+    featured_work: 'Collaboration with Tom Galle and John Yuyi',
     link: 'https://www.momus.gr/en/exhibitions/tehnofetihismos-whip-it-shape',
   },
   {
@@ -110,5 +114,27 @@ export const exhibitions: Exhibitions[] = [
     location: 'Miami, USA',
     description:
       'Join us for the first open studio event of the year! Visit Bakehouse artists in their studios, groove to tunes by local DJs',
+  },
+  {
+    id: 11,
+    title: 'Dark Drives: Uneasy Energies in Technological Times',
+    date: 'January 28 - February 5, 2012',
+    imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/5-million-dollars-1-terabyte_art404.jpg',
+    location: 'Haus der Kulturen der Welt, Berlin, Germany',
+    description: 'Part of transmediale 2012 in/compatible festival, this exhibition focused on "uneasy energies in technological times." Curated by Jacob Lillemose, the exhibition explored distortions, ambiguities, irritations, ironies, and unrest as significant trajectories in our relations with modern technology. The exhibition argued that these problematic states constitute fundamental aspects of technological times rather than obstacles to be overcome.',
+    tags: ["Digital Culture", "Technology", "Conceptual Art", "Media Art"],
+    featured_work: '5 Million Dollars 1 Terabyte',
+    curator: 'Jacob Lillemose',
+    link: 'https://archive.transmediale.de/festival-2012/exhibition',
+  },
+  {
+    id: 10,
+    title: 'Algoritmica Intima: Runtime',
+    date: 'June - July 2025',
+    imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751123479/art/moisestech-website/exhibitions/june_2025_algoritmica_intima_cdmx/algoritmica-intima-exhibitions-june-2025_zmg4mq.jpg',
+    location: 'Centro Cultural Afirme, Mexico City, Mexico',
+    description: 'An exhibition exploring the intimate relationship between algorithms and human experience, examining how computational processes shape our understanding of intimacy, identity, and connection in the digital age.',
+    tags: ["Digital Art", "Algorithms", "Intimacy", "Technology"],
+    curator: 'Centro Cultural Afirme',
   },
 ];

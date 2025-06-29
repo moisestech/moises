@@ -65,13 +65,13 @@ export const cvData = {
   publications: [
     {
       year: "2024",
-      title: "Our Media Art Salon series",
+      title: "Oolite Media Art Salon series",
       details: "Curated by Kelani Nicole, Miami, FL, USA",
       link: "https://drive.google.com/file/d/16AJTphGcx4crHOeLI6PH2Yr9ywbX5gUh/view?usp=drive_link",
       interactiveContent: [
         {
           type: "link",
-          text: "Our Media Art Salon series",
+          text: "Oolite Media Art Salon series",
           content: {
             text: "A curated dialogue series focusing on contemporary media art practices and digital culture",
             link: {

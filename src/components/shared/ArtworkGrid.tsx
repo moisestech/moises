@@ -2,15 +2,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { artist } from '@/constants/artworks';
 
-export default function ArtworkGrid() {
+interface ArtworkGridProps {
+  minYear?: number;
+  maxYear?: number;
+}
+
+export default function ArtworkGrid({ minYear, maxYear }: ArtworkGridProps) {
   // Get artwork entries with their slugs
-  const artworkEntries = Object.entries(artist.artworks).sort(
-    ([, a], [, b]) => {
-      if (a.on_view && !b.on_view) return -1;
-      if (!a.on_view && b.on_view) return 1;
-      return 0;
-    }
-  );
+  let artworkEntries = Object.entries(artist.artworks);
+
+  // Filter by year range if provided
+  if (minYear !== undefined || maxYear !== undefined) {
+    artworkEntries = artworkEntries.filter(([, artwork]) => {
+      if (typeof artwork.year !== 'number') return false;
+      if (minYear !== undefined && artwork.year < minYear) return false;
+      if (maxYear !== undefined && artwork.year > maxYear) return false;
+      return true;
+    });
+  }
+
+  artworkEntries = artworkEntries.sort(([, a], [, b]) => {
+    if (a.on_view && !b.on_view) return -1;
+    if (!a.on_view && b.on_view) return 1;
+    return 0;
+  });
 
   const colors = {
     'bg-lime-400': 'text-lime-500',

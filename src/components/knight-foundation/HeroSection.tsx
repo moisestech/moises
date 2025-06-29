@@ -101,6 +101,7 @@ export function HeroSection() {
     <section id="overview" className={`min-h-screen flex flex-col items-center justify-center relative overflow-hidden ${isDark ? 'bg-black' : 'bg-white'}`}>
       <AboveTheFoldAIWords3D className="absolute inset-0 z-0" />
       <div className={`absolute inset-0 bg-gradient-to-br ${themeColors.background} z-0`} />
+      
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           variants={fadeInUp}
@@ -157,6 +158,7 @@ export function HeroSection() {
           </div>
         </motion.div>
       </div>
+      
       <MicroMotif type="wiggle" className={`absolute bottom-10 left-10 ${isDark ? 'text-[#A4FF4E]' : 'text-[#2563EB]'} z-10`} />
       <MicroMotif type="binary" className={`absolute top-10 right-10 ${isDark ? 'text-[#A4FF4E]' : 'text-[#2563EB]'} z-10`} />
     </section>

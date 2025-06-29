@@ -814,6 +814,10 @@ export const artist: Artist = {
       ],
       links: [
         {
+          url: 'https://rhizome.org/editorial/2011/aug/16/5-million-dollars-1-terabyte-2011/',
+          label: 'Rhizome Editorial - 5 Million Dollars 1 Terabyte'
+        },
+        {
           url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
           label: 'Transmediale Archive - Artwork Documentation'
         },
@@ -1027,6 +1031,93 @@ export const artist: Artist = {
         caption: 'Installation documentation at Aparadores, Mexico City',
         format: 'Instagram Video'
       }
+    },
+    netflix_n_chill_airbnb: {
+      title: 'Netflix n Chill AirBnb',
+      year: 2016,
+      location: 'Materialising the Internet, MU Artspace, Dutch Design Week',
+      curator: 'Nadine Roestenburg',
+      description:
+        'A groundbreaking 2016 digital art piece that explores the intersection of streaming culture, hospitality, and digital intimacy. This work exemplifies the innovative approach to materializing internet culture into physical spaces. The piece examines how our digital behaviors and expectations are reshaping physical environments and social interactions, particularly through the lens of the "Netflix and Chill" phenomenon and the rise of short-term rental platforms like Airbnb.',
+      materials: [
+        'Digital photography',
+        'Mixed media installation',
+        'Interactive elements'
+      ],
+      medium: 'Digital Art / Installation',
+      dimensions: 'Variable installation dimensions',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751215753/art/moisestech-website/artworks/2016_netflix_and_chill_airbnb/netflix-n-chill-airbnb_materializing-the-internet-1_2016_ltlwz9.jpg',
+          caption: 'Netflix n Chill AirBnb - Main installation view'
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751215755/art/moisestech-website/artworks/2016_netflix_and_chill_airbnb/netflix-n-chill-airbnb_materializing-the-internet-2_2016_lsbsvk.jpg',
+          caption: 'Netflix n Chill AirBnb - Detail view 1'
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751215744/art/moisestech-website/artworks/2016_netflix_and_chill_airbnb/netflix-n-chill-airbnb_materializing-the-internet-6_2016_yzjudj.jpg',
+          caption: 'Netflix n Chill AirBnb - Detail view 2'
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751215749/art/moisestech-website/artworks/2016_netflix_and_chill_airbnb/netflix-n-chill-airbnb_materializing-the-internet-5_2016_mhbfeq.jpg',
+          caption: 'Netflix n Chill AirBnb - Detail view 3'
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751215748/art/moisestech-website/artworks/2016_netflix_and_chill_airbnb/netflix-n-chill-airbnb_materializing-the-internet-3_2016_dplwhk.jpg',
+          caption: 'Netflix n Chill AirBnb - Detail view 4'
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751215746/art/moisestech-website/artworks/2016_netflix_and_chill_airbnb/netflix-n-chill-airbnb_materializing-the-internet-7_2016_swgets.jpg',
+          caption: 'Netflix n Chill AirBnb - Detail view 5'
+        }
+      ],
+      links: [
+        {
+          url: 'https://digicult.it/articles/web/materialising-the-internet/',
+          label: 'Exhibition Review on Digicult'
+        }
+      ],
+      tags: [
+        'digital art',
+        'post-internet art',
+        'streaming culture',
+        'hospitality art',
+        'digital intimacy',
+        'airbnb culture',
+        'netflix and chill',
+        'materializing the internet',
+        'dutch design week',
+        'contemporary art'
+      ],
+      interpretation: 
+        'The work explores the intersection of digital streaming culture and physical hospitality spaces. It examines how our digital behaviors and expectations are reshaping physical environments and social interactions. The piece was part of a larger exploration of how the internet transcends screens to become tangible in our physical world, demonstrating that virtual and real are no longer separate spheres.',
+      interactiveContent: [
+        {
+          type: "link",
+          text: "Materialising the Internet",
+          content: {
+            text: "An exhibition featuring over 20 international artists and designers who turned the internet into something tangible",
+            link: {
+              url: "https://digicult.it/articles/web/materialising-the-internet/",
+              label: "Read exhibition review"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "Dutch Design Week",
+          content: {
+            text: "An annual design event in Eindhoven, Netherlands, showcasing innovative design and technology",
+            link: {
+              url: "https://dutchdesignweek.nl/",
+              label: "Visit Dutch Design Week"
+            }
+          }
+        }
+      ],
+      exhibition: 'Materialising the Internet at MU Artspace, Dutch Design Week 2017',
+      on_view: false
     },
   },
 };

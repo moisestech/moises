@@ -27,7 +27,7 @@ export default function LandingCollection() {
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300">
             Discover artwork that speaks to you, from 1990 to today.
           </p>
-          <Link href="/works" className="group">
+          <Link href="/collection" className="group">
             <div className="flex items-center space-x-2 font-bold text-lg cursor-pointer">
               <span>Find your favorites</span>
               <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />

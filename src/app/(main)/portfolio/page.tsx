@@ -1,6 +1,6 @@
 "use client";
 
-import ArtworkGrid from '@/components/ArtworkGrid';
+import ArtworkGrid from '@/components/shared/ArtworkGrid';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function PortfolioPage() {
