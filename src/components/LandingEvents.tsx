@@ -38,7 +38,7 @@ export default function LandingEvents() {
                 <div key={index} className="relative">
                   <div className="aspect-video relative">
                     <Image
-                      src={event.image}
+                      src={event.image || event.imageUrl || '/placeholder.jpg'}
                       alt={event.title}
                       fill
                       className="object-cover"

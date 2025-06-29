@@ -32,8 +32,8 @@ function EnhancedDescription({
 }) {
   let enhancedText = description;
 
-  // Sort interactive content by text length (longest first) to avoid nested replacements
-  const sortedContent = [...interactiveContent].sort(
+  // Defensive: filter out any undefined/null and handle missing interactiveContent
+  const sortedContent = [...(interactiveContent || [])].filter(Boolean).sort(
     (a, b) => b.text.length - a.text.length
   );
 
@@ -51,6 +51,7 @@ function EnhancedDescription({
         const contentIndex = parseInt(part);
         if (!isNaN(contentIndex)) {
           const content = sortedContent[contentIndex];
+          if (!content) return null;
           return (
             <InteractiveText
               key={index}

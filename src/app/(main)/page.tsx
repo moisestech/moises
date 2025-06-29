@@ -1,4 +1,3 @@
-import ArtworkGrid from '@/components/ArtworkGrid';
 import Image from 'next/image';
 import PageLayout from '@/components/PageLayout';
 import SpecialThanks from '@/components/SpecialThanks';
