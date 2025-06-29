@@ -157,7 +157,7 @@ export default function DesktopNavigation({ menuItems, onDropdownOpen }: Desktop
           />
           {/* Sticky Navbar and Dropdown */}
           <div className="fixed top-0 left-0 w-full z-50">
-            <div className={`${isDark ? 'bg-black border-black' : 'bg-white'} border-b shadow-sm transition-all duration-300`}>
+            <div className={`${isDark ? 'bg-black border-black' : 'bg-white border-none'} border-b shadow-sm transition-all duration-300`}>
               <div className="max-w-7xl mx-auto px-11 py-6 flex items-center">
                 <ul className="flex space-x-8 text-xl items-center">
                   <li>
