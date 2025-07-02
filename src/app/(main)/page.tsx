@@ -9,7 +9,8 @@ import LandingEvents from '@/components/LandingEvents';
 
 export const metadata: Metadata = {
   title: 'Moises Sanabria — New Media Sculpture',
-  description: 'Moises Sanabria is a Venezuelan, Miami interdisciplinary artist at Bakehouse Art Complex creating new media sculptures reflecting on machine philosophy, memetic culture, doomscrolling and brainrot theory, materializing the internet, and networked social-media life.',
+  description: 'Miami Venezuelan interdisciplinary artist at Bakehouse Art Complex exploring speculative futures, brainrot theory, and materializing the internet.',
+  // Full description: Moises Sanabria is a Venezuelan, Miami interdisciplinary artist at Bakehouse Art Complex creating new media sculptures reflecting on machine philosophy, memetic culture, doomscrolling and brainrot theory, materializing the internet, and networked social-media life.
   keywords: [
     'ai art',
     'generative ai art', 
@@ -74,13 +75,15 @@ export default function Home() {
           </div>
         </div>
 
+        <h1 className="display-none">Moises Sanabria</h1>
+
         {/* Welcome Text */}
         <div className="w-full py-6 sm:py-16 md:py-20 lg:py-6 px-6">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start">
             <div className="text-center md:text-left">
-              <h1 className="font-['MoMA_Sans'] text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mb-4 md:mb4">
+              <p className="font-['MoMA_Sans'] text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mb-4 md:mb4">
                 Welcome
-              </h1>
+              </p>
               <p className="font-bold text-lg sm:text-xl md:text-2xl">
                 Explore art and ideas with Moises Sanabria.
               </p>
