@@ -1,10 +1,61 @@
 import Image from 'next/image';
+import { Metadata } from 'next';
 import PageLayout from '@/components/PageLayout';
 import SpecialThanks from '@/components/SpecialThanks';
 import LandingExhibitions from '@/components/LandingExhibitions';
 import { LandingPromotedEvent, Footer } from '@/features/landing';
 import LandingCollection from '@/components/LandingCollection';
 import LandingEvents from '@/components/LandingEvents';
+
+export const metadata: Metadata = {
+  title: 'Moises Sanabria — New Media Sculpture',
+  description: 'Moises Sanabria is a Venezuelan, Miami interdisciplinary artist at Bakehouse Art Complex creating new media sculptures reflecting on machine philosophy, memetic culture, doomscrolling and brainrot theory, materializing the internet, and networked social-media life.',
+  keywords: [
+    'ai art',
+    'generative ai art', 
+    'new media art',
+    'virtual reality art',
+    'algorithmic art',
+    'interactive installation art',
+    'machine learning art',
+    'nft conceptual art',
+    'post‑internet sculpture',
+    'privacy art',
+    'accelerationism art',
+    'consumerism art',
+    'cybernetic aesthetics',
+    'technofetishism',
+    'attention economy art',
+    'digital capitalism',
+    'data capitalism',
+    'capitalism critique art',
+    'doom scrolling'
+  ].join(', '),
+  openGraph: {
+    title: 'Moises Sanabria — New Media Sculpture',
+    description: 'Moises Sanabria is a Venezuelan, Miami interdisciplinary artist at Bakehouse Art Complex creating new media sculptures reflecting on machine philosophy, memetic culture, doomscrolling and brainrot theory, materializing the internet, and networked social-media life.',
+    type: 'website',
+    url: 'https://moises.tech',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Moises Sanabria - Digital Divinities installation at Bakehouse Art Complex Open Studios Spring 2024'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Moises Sanabria — New Media Sculpture',
+    description: 'Moises Sanabria is a Venezuelan, Miami interdisciplinary artist at Bakehouse Art Complex creating new media sculptures reflecting on machine philosophy, memetic culture, doomscrolling and brainrot theory, materializing the internet, and networked social-media life.',
+    images: ['https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg']
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
+};
 
 export default function Home() {
   return (
@@ -15,7 +66,7 @@ export default function Home() {
           <div className="w-full md:h-[550px] relative">
             <Image
               src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg"
-              alt="Hero Image"
+              alt="Moises Sanabria - Digital Divinities installation at Bakehouse Art Complex Open Studios Spring 2024"
               fill
               className="object-cover"
               priority
