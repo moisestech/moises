@@ -796,7 +796,7 @@ export const artist: Artist = {
       year: 2011,
       location: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible, Berlin',
       curator: 'Jacob Lillemose',
-      collaboration: 'ART404',
+      collaboration: 'ART404, Manuel Palou',
       description: 
         'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968).',
       materials: [
@@ -808,7 +808,7 @@ export const artist: Artist = {
       dimensions: '6.5" x 4.5" x 1.5" (hard drive dimensions)',
       images: [
         {
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/5-million-dollars-1-terabyte_art404.jpg',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751681091/art/moisestech-website/artworks/2011_5_million_1_terabyte/five-million-dollars-1-terabyte-2011-art404_daxvlx.jpg',
           caption: '5 Million Dollars 1 Terabyte - Installation view at transmediale 2012. © Genz, Lindner / transmediale',
         }
       ],
