@@ -6,6 +6,7 @@ import LandingExhibitions from '@/components/LandingExhibitions';
 import { LandingPromotedEvent, Footer } from '@/features/landing';
 import LandingCollection from '@/components/LandingCollection';
 import LandingEvents from '@/components/LandingEvents';
+import { Visit360Dialog } from '@/components/ui/Visit360Dialog';
 
 export const metadata: Metadata = {
   title: 'Moises Sanabria — New Media Sculpture',
@@ -92,9 +93,13 @@ export default function Home() {
               <p className="text-base sm:text-lg md:text-xl text-center md:text-right">
                 The studio is open 10:30 a.m. - 5:30 p.m. today.
               </p>
-              <button className="w-full md:w-auto px-6 sm:px-8 py-3 bg-black hover:bg-gray-900 text-white font-bold transition-colors text-base sm:text-lg">
-                Plan your visit
-              </button>
+              <Visit360Dialog
+                trigger={
+                  <button className="w-full md:w-auto px-6 sm:px-8 py-3 bg-black hover:bg-gray-900 text-white font-bold transition-colors text-base sm:text-lg">
+                    Plan your visit
+                  </button>
+                }
+              />
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -27,7 +27,6 @@ export default function MobileMenu({ menuItems, isOpen, onToggle }: MobileMenuPr
   const isDark = theme === 'dark';
 
   useEffect(() => {
-    // Prevent scrolling when mobile menu is open
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -50,26 +49,42 @@ export default function MobileMenu({ menuItems, isOpen, onToggle }: MobileMenuPr
   return (
     <>
       {/* Mobile Menu Toggle Button */}
-      <button
-        onClick={onToggle}
-        className="p-2"
-      >
-        {isOpen ? (
-          <X className="h-8 w-8" />
-        ) : (
-          <Menu className="h-8 w-8" />
-        )}
-      </button>
+      <div className="fixed top-6 right-6 z-60 md:hidden">
+        <button
+          onClick={onToggle}
+          className="p-2 z-60 relative"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isOpen ? (
+            <X className="h-8 w-8" color={isDark ? '#fff' : '#000'} />
+          ) : (
+            <Menu className="h-8 w-8" color={isDark ? '#fff' : '#000'} />
+          )}
+        </button>
+      </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 transition-transform duration-300 transform ${
+      <div className={`fixed inset-0 z-50 transition-transform duration-300 transform ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
-      } md:hidden font-['MoMA_Sans'] ${
-        isDark 
-          ? 'bg-black text-white' 
-          : 'bg-white text-black'
-      }`}>
-        <div className="h-full flex flex-col pt-32 px-8">
+      } md:hidden font-['MoMA_Sans'] bg-transparent`}>
+        {/* Close (X) Button - only visible when menu is open */}
+        {isOpen && (
+          <div className="fixed top-6 right-6 z-60 md:hidden">
+            <button
+              onClick={onToggle}
+              className="p-2 z-60 relative"
+              aria-label="Close menu"
+            >
+              <X className="h-8 w-8" color={isDark ? '#fff' : '#000'} />
+            </button>
+          </div>
+        )}
+        {/* Animated Silver Gradient Background */}
+        <div
+          className={`absolute inset-0 z-0 pointer-events-none animated-silver-gradient ${isDark ? 'dark-gradient' : 'light-gradient'} ${isOpen ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
+          aria-hidden="true"
+        />
+        <div className="h-full flex flex-col pt-32 px-8 relative z-10">
           <nav>
             <ul className="space-y-8">
               {menuItems.map((item) => (
@@ -104,11 +119,34 @@ export default function MobileMenu({ menuItems, isOpen, onToggle }: MobileMenuPr
               ))}
             </ul>
           </nav>
-          <div className="mt-auto mb-8 flex items-center space-x-4">
+          <div className={`mt-auto mb-8 flex items-center space-x-4 ${isDark ? 'text-white' : 'text-black'}`}>
             <ThemeToggle />
           </div>
         </div>
       </div>
+      {/* Animated Silver Gradient CSS */}
+      <style jsx>{`
+        /* Animated gradient always animates on open, then becomes solid after animation end */
+        .animated-silver-gradient {
+          background: linear-gradient(120deg, rgba(255,255,255,1) 0%, rgba(220,220,220,0.85) 30%, rgba(180,180,180,0.7) 60%, rgba(230,230,230,0.6) 100%);
+          animation: shimmer 2s linear 1;
+          transition: opacity 0.5s;
+        }
+        .dark-gradient {
+          background: linear-gradient(120deg, rgba(0,0,0,1) 0%, rgba(80,80,80,0.85) 30%, rgba(160,160,160,0.7) 60%, rgba(120,120,120,0.6) 100%);
+        }
+        .light-gradient {
+          background: linear-gradient(120deg, rgba(255,255,255,1) 0%, rgba(240,240,240,0.85) 30%, rgba(200,200,200,0.7) 60%, rgba(220,220,220,0.6) 100%);
+        }
+        @keyframes shimmer {
+          0% {
+            background-position: 0% 50%;
+          }
+          100% {
+            background-position: 100% 50%;
+          }
+        }
+      `}</style>
     </>
   );
-} 
+}
