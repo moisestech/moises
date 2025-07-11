@@ -96,7 +96,7 @@ export default function Home() {
               <Visit360Dialog
                 trigger={
                   <button className="w-full md:w-auto px-6 sm:px-8 py-3 bg-black hover:bg-gray-900 text-white font-bold transition-colors text-base sm:text-lg">
-                    Plan your visit
+                    Virtual Studio Tour
                   </button>
                 }
               />

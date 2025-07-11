@@ -32,6 +32,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={`${inter.className} ${spaceMono.variable} bg-white dark:bg-black text-black dark:text-white transition-colors duration-300`}>
         <ThemeProvider>
           <LanguageProvider>
