@@ -5,7 +5,7 @@ import Header from '@/features/landing/components/Header';
 export default function NotFound() {
   return (
     <>
-      <Header />
+      <Header onMobileMenuToggle={() => {}} mobileMenuOpen={false} />
       <div className="min-h-screen flex flex-col items-start justify-end bg-white px-10 text-black py-16 mx-auto">
         <div className="mb-8">
           <Image
