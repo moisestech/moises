@@ -76,7 +76,7 @@ export default function Home() {
           </div>
         </div>
 
-        <h1 className="display-none">Moises Sanabria</h1>
+        <h1 className="display-none sr-only">Moises Sanabria</h1>
 
         {/* Welcome Text */}
         <div className="w-full py-6 sm:py-16 md:py-20 lg:py-6 px-6">

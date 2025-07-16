@@ -26,7 +26,7 @@ export default function LandingExhibitions() {
 
   return (
     <section id="exhibitions">
-      <div className="w-full px-6 pb-10">
+      <div className="w-full px-2 sm:px-4 md:px-6 pb-10">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl md:text-4xl font-['MoMA_Sans'] font-bold">
             Exhibitions
@@ -51,14 +51,18 @@ export default function LandingExhibitions() {
           </div>
         </div>
 
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-x-auto md:overflow-hidden">
           <motion.div
-            className="flex gap-6"
+            className="flex gap-4 md:gap-6"
             animate={{ x: position }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            style={{ minWidth: 0 }}
           >
             {exhibitions.map((exhibition, index) => (
-              <div key={exhibition.id} className="flex-none w-[580px] flex flex-col">
+              <div
+                key={exhibition.id}
+                className="flex-none w-[calc(100vw-1rem)] sm:w-[420px] md:w-[580px] flex flex-col"
+              >
                 <motion.a
                   href={exhibition.link || '#'}
                   target={exhibition.link && exhibition.link.startsWith('http') ? '_blank' : undefined}

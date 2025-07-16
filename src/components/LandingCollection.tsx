@@ -17,10 +17,10 @@ export default function LandingCollection() {
   }, []);
 
   return (
-    <section className="w-full px-6 py-16 bg-white dark:bg-black">
-      <div className="max-w-7xl mx-auto grid grid-cols-7 gap-12">
+    <section className="w-full px-2 sm:px-4 md:px-6 py-16 bg-white dark:bg-black">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-7 gap-8 md:gap-12">
         {/* Column 1 - Text Content */}
-        <div className="col-span-2 flex flex-col justify-center space-y-6">
+        <div className="md:col-span-2 flex flex-col justify-center space-y-6 mb-8 md:mb-0">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-['MoMA_Sans'] font-bold leading-tight">
             Art in our collection
           </h2>
@@ -36,7 +36,7 @@ export default function LandingCollection() {
         </div>
 
         {/* Column 2 - Artwork Grid */}
-        <div className="col-span-5 grid grid-cols-2 md:grid-cols-3 gap-10">
+        <div className="md:col-span-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
           {randomArtworks.map(([key, artwork]) => (
             <Link 
               key={key} 
