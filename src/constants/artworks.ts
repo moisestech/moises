@@ -534,8 +534,16 @@ export const artist: Artist = {
       ],
       images: [
         {
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1752671997/art/moisestech-website/artworks/2021_beyond_money/moises-sanabria-beyond-money-1_2021_deslxp.png',
           caption: 'GAN interpolation of a banknote',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1752671997/art/moisestech-website/artworks/2021_beyond_money/moises-sanabria-beyond-money-2_2021_rphxi6.png',
+          caption: 'GAN interpolgration of a banknote'
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1752671997/art/moisestech-website/artworks/2021_beyond_money/moises-sanabria-beyond-money-3_2021_ui5zar.png',
+          caption: 'GAN interpolgration of a banknote'
         },
       ],
       tags: [
