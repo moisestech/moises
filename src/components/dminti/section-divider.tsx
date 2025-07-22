@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, easeInOut, easeOut } from 'framer-motion'
 import { useTheme } from '@/contexts/ThemeContext'
 
 export function SectionDivider() {
@@ -14,7 +14,7 @@ export function SectionDivider() {
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
+        ease: easeOut
       }
     }
   }
@@ -26,7 +26,7 @@ export function SectionDivider() {
     transition: {
       duration: 4,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: easeInOut
     }
   }
 
@@ -81,7 +81,7 @@ export function SectionDivider() {
             transition: {
               duration: 5,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: easeInOut
             }
           }}
           style={{ transformOrigin: 'center' }}
@@ -105,7 +105,7 @@ export function SectionDivider() {
             transition: {
               duration: 6,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: easeInOut
             }
           }}
           style={{ transformOrigin: 'center' }}
@@ -128,7 +128,7 @@ export function SectionDivider() {
             transition: {
               duration: 5,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: easeInOut
             }
           }}
           style={{ transformOrigin: 'center' }}
@@ -152,7 +152,7 @@ export function SectionDivider() {
             transition: {
               duration: 4,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: easeInOut
             }
           }}
           style={{ transformOrigin: 'center' }}
@@ -183,7 +183,7 @@ export function SectionDivider() {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: easeInOut
           }}
           style={{ mixBlendMode: 'soft-light' }}
         />
