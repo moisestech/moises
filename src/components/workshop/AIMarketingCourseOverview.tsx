@@ -43,7 +43,7 @@ const staggerContainer = {
 const hoverScale = {
   scale: 1.02,
   transition: {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 400,
     damping: 10
   }

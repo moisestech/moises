@@ -44,7 +44,7 @@ const cardHover = {
   scale: 1.02,
   transition: { 
     duration: 0.2,
-    ease: "easeOut"
+    ease: "easeOut" as const
   }
 };
 

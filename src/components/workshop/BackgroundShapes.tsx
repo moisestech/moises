@@ -9,7 +9,7 @@ const shapeVariants = {
     transition: {
       duration: 8,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }
   }
 };
@@ -21,7 +21,7 @@ const rotateVariants = {
     transition: {
       duration: 20,
       repeat: Infinity,
-      ease: "linear"
+      ease: "linear" as const
     }
   }
 };
@@ -92,10 +92,10 @@ export default function BackgroundShapes() {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut" as const
         }}
       />
-      {shapes.map((shape) => {
+      {shapes.map((shape: Shape) => {
         const shapeStyles: MotionStyle = {
           position: "absolute",
           top: shape.top,

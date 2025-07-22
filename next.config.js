@@ -33,7 +33,7 @@ const nextConfig = {
   },
 
   // Optimize build
-  swcMinify: true,
+  // swcMinify: true,
   
   // Configure webpack for better performance
   webpack: (config) => {

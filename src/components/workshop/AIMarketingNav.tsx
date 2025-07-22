@@ -23,7 +23,7 @@ const hoverScale = {
     stiffness: 400,
     damping: 10
   }
-};
+} as const;
 
 export default function AIMarketingNav() {
   const [activeSection, setActiveSection] = useState<string | null>(null);

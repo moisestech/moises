@@ -424,7 +424,7 @@ export default function TechNonprofitClient() {
                 transition={{
                   duration: 4,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut" as const
                 }}
                 className="absolute -top-6 -right-6 bg-blue-500/10 backdrop-blur-md p-4 rounded-lg border border-blue-500/20"
               >
@@ -438,7 +438,7 @@ export default function TechNonprofitClient() {
                 transition={{
                   duration: 5,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "easeInOut" as const,
                   delay: 1
                 }}
                 className="absolute -bottom-6 -left-6 bg-purple-500/10 backdrop-blur-md p-4 rounded-lg border border-purple-500/20"
@@ -738,7 +738,7 @@ export default function TechNonprofitClient() {
                 transition={{
                   duration: 4,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut" as const
                 }}
                 className="absolute -top-6 -right-6 bg-blue-500/10 backdrop-blur-md p-4 rounded-lg border border-blue-500/20"
               >
@@ -752,7 +752,7 @@ export default function TechNonprofitClient() {
                 transition={{
                   duration: 5,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "easeInOut" as const,
                   delay: 1
                 }}
                 className="absolute -bottom-6 -left-6 bg-purple-500/10 backdrop-blur-md p-4 rounded-lg border border-purple-500/20"

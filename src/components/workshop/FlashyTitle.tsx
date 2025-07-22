@@ -22,7 +22,7 @@ const titleVariants = {
     scale: 1,
     transition: {
       duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99]
+      ease: [0.6, -0.05, 0.01, 0.99] as const
     }
   }
 };
@@ -39,14 +39,14 @@ const iconVariants = {
     rotate: 0,
     transition: {
       duration: 1,
-      ease: [0.6, -0.05, 0.01, 0.99]
+      ease: [0.6, -0.05, 0.01, 0.99] as const
     }
   },
   hover: {
     scale: 1.1,
     rotate: 5,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 400,
       damping: 10
     }

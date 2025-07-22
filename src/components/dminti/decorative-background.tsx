@@ -43,7 +43,7 @@ export function DecorativeBackground() {
         transition={{
           duration: 10,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut" as const
         }}
         className={`absolute top-1/3 right-1/4 w-96 h-96 rounded-full ${
           theme === 'dark' 
@@ -60,7 +60,7 @@ export function DecorativeBackground() {
         transition={{
           duration: 12,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut" as const
         }}
         className={`absolute bottom-1/4 left-1/3 w-96 h-96 rounded-full ${
           theme === 'dark' 

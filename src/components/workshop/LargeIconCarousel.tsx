@@ -45,7 +45,7 @@ const iconVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
+      ease: "easeOut" as const
     }
   },
   exit: { 
@@ -54,7 +54,7 @@ const iconVariants = {
     y: -20,
     transition: {
       duration: 0.5,
-      ease: "easeIn"
+      ease: "easeIn" as const
     }
   }
 };

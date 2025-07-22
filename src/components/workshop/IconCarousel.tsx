@@ -32,9 +32,9 @@ const carouselVariants = {
     transition: {
       x: {
         repeat: Infinity,
-        repeatType: "loop",
+        repeatType: "loop" as const,
         duration: 20,
-        ease: "linear"
+        ease: "linear" as const
       }
     }
   }
@@ -47,13 +47,13 @@ const iconVariants = {
     opacity: 1,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
+      ease: "easeOut" as const
     }
   },
   hover: {
     scale: 1.2,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 400,
       damping: 10
     }
