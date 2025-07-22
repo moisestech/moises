@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeIn, easeOut } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -27,7 +27,7 @@ const iconVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
+      ease: easeOut
     }
   },
   exit: { 
@@ -36,7 +36,7 @@ const iconVariants = {
     y: -20,
     transition: {
       duration: 0.5,
-      ease: "easeIn"
+      ease: easeIn
     }
   }
 };
