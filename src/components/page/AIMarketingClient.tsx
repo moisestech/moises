@@ -129,7 +129,7 @@ const staggerChildren = {
 const hoverScale = {
   scale: 1.05,
   transition: {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 400,
     damping: 10
   }
@@ -140,7 +140,7 @@ const pulse = {
   transition: {
     duration: 2,
     repeat: Infinity,
-    ease: "easeInOut"
+    ease: "easeInOut" as const
   }
 };
 
