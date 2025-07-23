@@ -40,7 +40,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useInView } from "react-intersection-observer"
-import { TechNonprofitNav } from "@/components/workshop/TechNonprofitNavOolite"
+import { TechNonprofitNavOolite } from "@/components/workshop/TechNonprofitNavOolite"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { translations } from "@/lib/translations/tech-nonprofit-lecube"
 import { Mail, Phone, MapPin } from "lucide-react"
@@ -332,7 +332,7 @@ export default function TechNonprofitClient() {
           : 'bg-white/80 backdrop-blur-md border-b border-gray-200'
       }`}>
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <TechNonprofitNav />
+          <TechNonprofitNavOolite />
           <div className="flex items-center gap-4">
             <ThemeToggle />
           </div>
