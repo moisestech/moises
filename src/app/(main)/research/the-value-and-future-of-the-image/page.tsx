@@ -304,7 +304,7 @@ export default function TheValueAndFutureOfTheImagePage() {
         {intro[lang]}
       </div>
       <div className="mb-8">
-        <MuxPlayer playbackId="placeholder-playback-id" streamType="on-demand" />
+        <MuxPlayer playbackId="01sFWJUjcOIvJiyAtwHaNYcRsd00d9VTZyHxobiR38Fe00" streamType="on-demand" />
       </div>
       <div className="space-y-8">
         {slides.map((slide, idx) => (
