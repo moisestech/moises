@@ -651,5 +651,35 @@ Beyond infrastructure, The Algorithm is Outside delves into the social and ritua
       technical: "The technical requirements for The Algorithm is Outside are designed to ensure reliable operation in various outdoor conditions. The installation combines industrial-grade scaffolding with weather-resistant digital displays and power management systems. Each component is carefully selected for durability, ease of installation, and maintenance in public spaces.",
       gallery: "The gallery showcases conceptual renderings of The Algorithm is Outside in various public locations throughout Miami. Each image represents a different site-specific installation, demonstrating how the work adapts to and transforms different urban contexts. The renderings highlight the project's modular design and its potential to create meaningful interactions between digital infrastructure and public space."
     },
+  },
+  value_of_the_image: {
+    title: 'Value of the Image / Valor de la Imagen',
+    year: 2024,
+    description: 'A bilingual talk and research project exploring the evolving value of the image in art, society, and technology, from modernism to the age of AI. Includes a full video and transcript in English and Spanish.',
+    essay: '',
+    implementation: undefined,
+    budget: undefined,
+    supplemental_materials: [],
+    interactiveContent: [],
+    artistic_intent: '',
+    technical_requirements: { power: [], mounting: [], space: { pedestal_size: '', wall_clearance: '', power_access: '' } },
+    components: { structure: { material: '', customization: [] }, hardware: { model: '', specifications: [], power_requirements: '' }, mounting: { type: [], materials: [] }, display: { pedestal: '', lighting: '' } },
+    materials: [],
+    dimensions: '',
+    images: [],
+    tags: ['talk', 'bilingual', 'AI', 'art', 'society', 'technology', 'image', 'future'],
+    interpretation: '',
+    exhibition: '',
+    installation_notes: [],
+    future_iterations: [],
+    on_view: true,
+    enhancedDescriptions: {
+      overview: 'A bilingual exploration of the value of the image, its evolution, and its future in the context of art, technology, and society.',
+      essay: '',
+      implementation: '',
+      budget: '',
+      technical: '',
+      gallery: ''
+    }
   }
 };
