@@ -213,6 +213,10 @@ export const artist: Artist = {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831890/art/moisestech-website/price_of_existence_detail_uuw5yf.jpg',
           caption: 'Price of Existence - Detail view',
         },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753724794/art/moisestech-website/artworks/2024_price_of_existence/MoisesSanabria-PriceOfExistence-2024_e4mizb.jpg',
+          caption: 'Price of Existence - 2024 installation at MUNAG, Antigua Guatemala',
+        },
       ],
       tags: [
         'capitalism critique art',

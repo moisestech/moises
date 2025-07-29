@@ -666,7 +666,12 @@ Beyond infrastructure, The Algorithm is Outside delves into the social and ritua
     components: { structure: { material: '', customization: [] }, hardware: { model: '', specifications: [], power_requirements: '' }, mounting: { type: [], materials: [] }, display: { pedestal: '', lighting: '' } },
     materials: [],
     dimensions: '',
-    images: [],
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739628542/art/moisestech-website/talks/24_artec_moises-sanabria_valor-de-la-imagen_dfbhqb.webp',
+        caption: 'Value of the Image / Valor de la Imagen - Bilingual talk and research project'
+      }
+    ],
     tags: ['talk', 'bilingual', 'AI', 'art', 'society', 'technology', 'image', 'future'],
     interpretation: '',
     exhibition: '',
@@ -680,6 +685,41 @@ Beyond infrastructure, The Algorithm is Outside delves into the social and ritua
       budget: '',
       technical: '',
       gallery: ''
+    }
+  },
+  echo_economies: {
+    title: 'Echo Economies',
+    year: 2025,
+    description: 'An installation exploring algorithmic capitalism through kinetic sculpture, data flows, and interactive experiences. Features four interconnected pieces: DATAFALL SPINE, BABY AGI, SMART SHOPPERS, and LIQUID ENTERTAINMENT.',
+    essay: '',
+    implementation: undefined,
+    budget: undefined,
+    supplemental_materials: [],
+    interactiveContent: [],
+    artistic_intent: 'I explore what it means to live inside the feed. Born in Venezuela and based in Miami, I treat AI models, livestreams, and retail detritus as one sculptural vocabulary. My practice asks how platform logic — ranking, scoring, infinite scroll — rewrites faith, labor, and desire in contemporary life.',
+    technical_requirements: { power: [], mounting: [], space: { pedestal_size: '', wall_clearance: '', power_access: '' } },
+    components: { structure: { material: '', customization: [] }, hardware: { model: '', specifications: [], power_requirements: '' }, mounting: { type: [], materials: [] }, display: { pedestal: '', lighting: '' } },
+    materials: [],
+    dimensions: '',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753568528/art/moisestech-website/research/echo-economies/echo-economies-locus-project-proposal-Jul-2025_dppydw.png',
+        caption: 'Echo Economies - Algorithmic capitalism installation at Locust Projects'
+      }
+    ],
+    tags: ['installation', 'algorithmic capitalism', 'kinetic sculpture', 'data art', 'interactive', 'Miami', 'AI', 'robotics', 'market data', 'digital economy'],
+    interpretation: 'Echo Economies transforms Locust\'s Project Room into a closed ecosystem where data falls, labor twitches, and value recombines. The installation explores the intersection of algorithmic capitalism, human attention, and digital infrastructure through four interconnected kinetic sculptures.',
+    exhibition: 'Locust Projects, Miami - 2025',
+    installation_notes: [],
+    future_iterations: [],
+    on_view: false,
+    enhancedDescriptions: {
+      overview: 'Echo Economies is a comprehensive installation that explores algorithmic capitalism through kinetic sculpture, data flows, and interactive experiences. The project features four interconnected pieces that create a closed ecosystem where data falls, labor twitches, and value recombines.',
+      essay: 'The installation stages questions economists and technologists are only beginning to ask. How does attention liquefy into currency, turning screen time into "liquidity"? Where does power concentrate when algorithms treat human labor as a series of micro-futures?',
+      implementation: 'All four works run on a single MQTT backbone: one Raspberry Pi ingests data, cues motions, and synchronizes light pulses. The visitor\'s journey — consume, compute, liquidate — unfolds clockwise yet loops infinitely.',
+      budget: 'Total production budget of $3,750, including 9 borrowed 42" TVs, Raspberry Pi systems, servo arms, 3D printing materials, and holographic DVD sleeves.',
+      technical: 'Hardware is consumer-grade, modular, and largely owned or loaned. A single Pi hub minimizes points of failure; daily reboot scripts and a backup SD card provide resilience.',
+      gallery: 'The installation creates a cohesive techno-sculptural vocabulary with hacked consumer objects retrofitted with screens and sensors, giving the space a networked concept aesthetic.'
     }
   }
 };

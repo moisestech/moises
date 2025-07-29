@@ -14,7 +14,11 @@ export default function ResearchIndexPage() {
         {Object.entries(research).map(([slug, item]) => (
           <Link
             key={slug}
-            href={slug === 'value_of_the_image' ? '/research/the-value-and-future-of-the-image' : `/research/${slug}`}
+            href={
+              slug === 'value_of_the_image' ? '/research/the-value-and-future-of-the-image' :
+              slug === 'echo_economies' ? '/research/locust-echo-economies' :
+              `/research/${slug}`
+            }
             className="block group border rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200"
           >
             <div className="relative aspect-[4/3] mb-4">
