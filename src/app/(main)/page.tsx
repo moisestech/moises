@@ -10,7 +10,8 @@ import { Visit360Dialog } from '@/components/ui/Visit360Dialog';
 
 export const metadata: Metadata = {
   title: 'Moises Sanabria — New Media Sculpture',
-  description: 'Moises Sanabria is a Miami Venezuelan interdisciplinary artist at Bakehouse Art Complex exploring speculative futures, brainrot theory, and materializing the internet.',
+  description: 'Moises Sanabria is a Miami Venezuelan interdisciplinary artist at Bakehouse Art Complex materializing the internet.',
+  // description: 'Moises Sanabria is a Miami Venezuelan interdisciplinary artist at Bakehouse Art Complex exploring speculative futures, brainrot theory, and materializing the internet.',
   // Full description: Moises Sanabria is a Venezuelan, Miami interdisciplinary artist at Bakehouse Art Complex creating new media sculptures reflecting on machine philosophy, memetic culture, doomscrolling and brainrot theory, materializing the internet, and networked social-media life.
   keywords: [
     'ai art',

@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ChevronRight, ExternalLink, FileText, Calendar, MapPin, Users, Camera, DollarSign, Wrench, BookOpen, Info, Lightbulb, Eye, Zap, Ruler, ImageIcon, Settings, Receipt } from 'lucide-react'
 import EnhancedDescription from '@/components/EnhancedDescription'
+import { SystemArchitectureVisualization } from '@/components/page/SystemArchitectureVisualization'
 
 interface ResearchPageClientProps {
   item: ResearchItem
@@ -259,6 +260,15 @@ export default function ResearchPageClient({ item }: ResearchPageClientProps) {
               interactiveContent={item.interactiveContent}
             />
           </Card>
+          
+          {/* System Architecture Visualization - Only show for I Will Remember You */}
+          {item.title === 'I Will Remember You' && (
+            <SystemArchitectureVisualization 
+              title="System Architecture Visualization"
+              description="Interactive 3D visualization showing the technical components and data flow of the I Will Remember You installation"
+            />
+          )}
+          
           <Card className="p-6">
             <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <Zap className="h-5 w-5 text-yellow-500" />

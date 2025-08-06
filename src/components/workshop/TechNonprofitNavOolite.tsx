@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // THIRD PARTY
 import { motion } from 'framer-motion';
@@ -38,7 +39,9 @@ import {
   Cpu,
   Camera,
   Monitor,
-  Rocket
+  Rocket,
+  BookOpen,
+  Target
 } from 'lucide-react';
 
 // Oolite Logo Component
@@ -52,35 +55,32 @@ const OoliteLogo = ({ className = '', size = 'md' }: { className?: string; size?
     lg: 'w-12 h-12'
   };
 
+  const logoSrc = isDark 
+    ? "https://res.cloudinary.com/dck5rzi4h/image/upload/v1753833092/tech-nonprofit/oolite/logos/oolite-arts-logo-white_sbfeqz.png"
+    : "https://res.cloudinary.com/dck5rzi4h/image/upload/v1753833092/tech-nonprofit/oolite/logos/oolite-arts-logo-black_sx0l62.png";
+
   return (
-    <div className={`${sizeClasses[size]} ${className} flex items-center justify-center rounded-lg ${
-      isDark ? 'bg-purple-600' : 'bg-purple-500'
-    } text-white font-bold text-xs`}>
-      O
+    <div className={`${sizeClasses[size]} ${className} flex items-center justify-center`}>
+      <Image
+        src={logoSrc}
+        alt="Oolite Arts"
+        width={size === 'sm' ? 24 : size === 'md' ? 32 : 48}
+        height={size === 'sm' ? 24 : size === 'md' ? 32 : 48}
+        className="object-contain"
+      />
     </div>
   );
 };
 
-// Landing page navigation (sections) with icons
-const landingNavigation = [
-  { name: "Overview", href: "#overview", key: "overview", icon: Home },
-  { name: "Timeline", href: "#timeline", key: "timeline", icon: Clock },
-  { name: "Budget", href: "#budget", key: "budget", icon: DollarSign },
-  { name: "Workshops", href: "#workshops", key: "workshops", icon: GraduationCap },
-  { name: "Impact", href: "#impact", key: "impact", icon: Heart },
-  { name: "Roadmap", href: "#roadmap", key: "roadmap", icon: Map },
-  { name: "Take-aways", href: "#takeaways", key: "takeaways", icon: Lightbulb }
-];
-
-// Other pages navigation (links to other pages) with icons
-const otherPagesNavigation = [
-  { name: "Overview", href: "/workshop/tech-nonprofit/oolite", key: "overview", icon: Home },
-  { name: "Budget", href: "/workshop/tech-nonprofit/oolite/budget", key: "budget", icon: DollarSign },
-  { name: "Roadmap", href: "/workshop/tech-nonprofit/oolite/roadmap", key: "roadmap", icon: Map },
-  { name: "Workshops", href: "/workshop/tech-nonprofit/oolite/workshops", key: "workshops", icon: GraduationCap },
-  { name: "Digital Arts Lab", href: "/workshop/tech-nonprofit/oolite/lab", key: "lab", icon: Building2 },
-  { name: "AI Tools", href: "/workshop/tech-nonprofit/oolite/ai-tools", key: "aiTools", icon: Cpu },
-  { name: "Impact & ROI", href: "/workshop/tech-nonprofit/oolite/impact-roi", key: "impactRoi", icon: BarChart3 }
+// Navigation (links to pages) with icons
+const navigation = [
+  { name: 'Overview', href: '/tech-nonprofit/oolite', key: 'overview', icon: Home },
+  { name: 'Roadmap', href: '/tech-nonprofit/oolite/roadmap', key: 'roadmap', icon: Map },
+  { name: 'Budget', href: '/tech-nonprofit/oolite/budget', key: 'budget', icon: DollarSign },
+  { name: 'Workshops', href: '/tech-nonprofit/oolite/workshops', key: 'workshops', icon: BookOpen },
+  { name: 'Digital Arts Lab', href: '/tech-nonprofit/oolite/lab', key: 'lab', icon: Building2 },
+  // { name: 'AI Tools', href: '/tech-nonprofit/oolite/ai-tools', key: 'aiTools', icon: Cpu }, // Hidden for production
+  { name: 'Impact & ROI', href: '/tech-nonprofit/oolite/impact-roi', key: 'impactRoi', icon: Target }
 ];
 
 // Translations
@@ -93,7 +93,6 @@ const translations = {
     workshops: "Workshops",
     impact: "Impact",
     roadmap: "Roadmap",
-    takeaways: "Take-aways",
     lab: "Digital Arts Lab",
     aiTools: "AI Tools",
     impactRoi: "Impact & ROI"
@@ -106,9 +105,8 @@ const translations = {
     workshops: "Talleres",
     impact: "Impacto",
     roadmap: "Hoja de Ruta",
-    takeaways: "Conclusiones",
-    lab: "Laboratorio de Arte Digital",
-    aiTools: "Herramientas IA",
+    lab: "Laboratorio de Artes Digitales",
+    aiTools: "Herramientas de IA",
     impactRoi: "Impacto y ROI"
   },
   fr: {
@@ -119,190 +117,174 @@ const translations = {
     workshops: "Ateliers",
     impact: "Impact",
     roadmap: "Feuille de Route",
-    takeaways: "Points Clés",
-    lab: "Laboratoire d'Art Numérique",
-    aiTools: "Outils IA",
+    lab: "Laboratoire d'Arts Numériques",
+    aiTools: "Outils d'IA",
     impactRoi: "Impact et ROI"
+  },
+  ht: {
+    menu: "Meni",
+    overview: "Apèsi",
+    timeline: "Orè",
+    budget: "Bidjè",
+    workshops: "Atelye",
+    impact: "Enpak",
+    roadmap: "Wout",
+    lab: "Laboratwa Atizay Dijital",
+    aiTools: "Zouti IA",
+    impactRoi: "Enpak ak ROI"
   }
 };
 
 export function TechNonprofitNavOolite() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("overview");
   const { theme } = useTheme();
   const { language } = useLanguage();
-  const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  const t = translations[language];
-  const isLandingPage = pathname === '/workshop/tech-nonprofit/oolite';
-  const navigation = isLandingPage ? landingNavigation : otherPagesNavigation;
+  const router = useRouter();
   const isDark = theme === 'dark';
 
-  const scrollToSection = (sectionId: string) => {
-    setIsMenuOpen(false);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
-  };
+  const t = translations[language as keyof typeof translations] || translations.en;
 
   const navigateToPage = (href: string) => {
-    setIsMenuOpen(false);
-    if (href.startsWith('/')) {
-      router.push(href);
-    } else {
-      scrollToSection(href.substring(1));
-    }
+    router.push(href);
+    setMobileMenuOpen(false);
   };
-
-  useEffect(() => {
-    if (isLandingPage) {
-      const handleScroll = () => {
-        const sections = landingNavigation.map(item => item.href.substring(1));
-        const scrollPosition = window.scrollY + 100;
-
-        for (const section of sections) {
-          const element = document.getElementById(section);
-          if (element) {
-            const { offsetTop, offsetHeight } = element;
-            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-              setActiveSection(section);
-              break;
-            }
-          }
-        }
-      };
-
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
-  }, [isLandingPage]);
 
   const MobileMenu = () => (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: isMenuOpen ? 1 : 0 }}
+      initial={{ opacity: 0, x: '100%' }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: '100%' }}
       transition={{ duration: 0.3 }}
-      className={`fixed inset-0 z-50 ${isDark ? 'bg-black/80' : 'bg-white/80'} backdrop-blur-md`}
-      style={{ display: isMenuOpen ? 'block' : 'none' }}
+      className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm ${
+        isDark ? 'bg-gray-900' : 'bg-white'
+      } shadow-xl`}
     >
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-black'}`}>{t.menu}</h2>
-          <div className="flex items-center gap-4">
-            <LanguageSelector />
+      <div className="flex h-full flex-col">
+        {/* Header */}
+        <div className={`flex items-center justify-between p-6 border-b ${
+          isDark ? 'border-gray-700' : 'border-gray-200'
+        }`}>
+          <div className="flex items-center gap-3">
+            <OoliteLogo size="sm" />
+            <span className={`font-bold text-lg ${isDark ? 'text-white' : 'text-black'}`}>
+              Digital Arts Lab
+            </span>
+          </div>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className={`p-2 rounded-lg ${
+              isDark ? 'text-gray-400 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-black hover:bg-gray-100'
+            }`}
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="flex-1 p-6">
+          <ul className="space-y-4">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
+              
+              return (
+                <li key={item.key}>
+                  <button
+                    onClick={() => navigateToPage(item.href)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                      isActive
+                        ? isDark 
+                          ? 'bg-[#00FFFF]/20 text-[#00FFFF] border border-[#00FFFF]/30' 
+                          : 'bg-[#00FFFF]/20 text-[#00FFFF] border border-[#00FFFF]/30'
+                        : isDark 
+                          ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
+                          : 'text-gray-700 hover:text-black hover:bg-gray-100'
+                    }`}
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span className="font-medium">{t[item.key as keyof typeof t] || item.name}</span>
+                    {isActive && (
+                      <div className="ml-auto w-2 h-2 rounded-full bg-[#00FFFF]" />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        {/* Footer */}
+        <div className={`p-6 border-t ${
+          isDark ? 'border-gray-700' : 'border-gray-200'
+        }`}>
+          <div className="flex items-center justify-between">
             <DarkLightThemeSelector />
-            <button 
-              onClick={() => setIsMenuOpen(false)}
-              className={`${isDark ? 'text-white hover:text-purple-400' : 'text-black hover:text-purple-600'} transition-colors`}
-            >
-              <X className="h-6 w-6" />
-            </button>
+            <LanguageSelector />
           </div>
         </div>
-        <nav className="grid grid-cols-3 gap-4">
-          {navigation.map((item) => {
-            const Icon = item.icon;
-            const isActive = (isLandingPage && activeSection === item.href.substring(1)) ||
-                           (!isLandingPage && pathname === item.href);
-            return (
-              <button
-                key={item.name}
-                onClick={() => navigateToPage(item.href)}
-                className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-300 ${
-                  isActive
-                    ? 'border-purple-500 bg-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,0.3)]'
-                    : isDark 
-                      ? 'border-gray-700 bg-black/50 hover:border-purple-500/60 hover:bg-purple-500/5'
-                      : 'border-gray-200 bg-white/50 hover:border-purple-500/60 hover:bg-purple-500/5'
-                }`}
-              >
-                <Icon className={`w-6 h-6 transition-colors ${
-                  isActive 
-                    ? 'text-purple-500' 
-                    : isDark 
-                      ? 'text-gray-300 group-hover:text-purple-500'
-                      : 'text-gray-600 group-hover:text-purple-500'
-                }`} />
-                <span className={`text-xs font-medium text-center ${
-                  isActive 
-                    ? 'text-purple-500' 
-                    : isDark 
-                      ? 'text-gray-300 group-hover:text-purple-500'
-                      : 'text-gray-600 group-hover:text-purple-500'
-                }`}>
-                  {t[item.key as keyof typeof t] || item.name}
-                </span>
-              </button>
-            );
-          })}
-        </nav>
       </div>
     </motion.div>
   );
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-40 ${isDark ? 'bg-black/80 border-gray-800' : 'bg-white/80 border-gray-200'} backdrop-blur-md border-b`}>
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            {/* Left: Logo Group */}
-            <div className="flex-shrink-0 flex items-center gap-3">
-              <Link href="/workshop/tech-nonprofit/oolite" className="flex items-center gap-3">
-                <OoliteLogo size="md" className={isDark ? 'text-white' : 'text-black'} />
-                <span className={`font-bold text-lg ${isDark ? 'text-white' : 'text-black'}`}>
-                  Digital Arts Lab
-                </span>
-              </Link>
+      {/* Desktop Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-md border-b transition-all duration-300 ${
+        isDark 
+          ? 'bg-black/80 border-gray-800/50' 
+          : 'bg-white/80 border-gray-200/50'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo and Brand */}
+            <div className="flex items-center gap-3">
+              <OoliteLogo />
+              <span className={`font-bold text-xl ${isDark ? 'text-white' : 'text-black'}`}>
+                Digital Arts Lab
+              </span>
             </div>
-            
-            {/* Center: Desktop Navigation - Icon Grid */}
+
+            {/* Desktop Navigation Links - Icon Grid */}
             <nav className="hidden md:flex items-center gap-2">
               {navigation.map((item) => {
                 const Icon = item.icon;
-                const isActive = (isLandingPage && activeSection === item.href.substring(1)) ||
-                               (!isLandingPage && pathname === item.href);
+                const isActive = pathname === item.href;
+                
                 return (
                   <motion.button
                     key={item.name}
                     onClick={() => navigateToPage(item.href)}
                     className={`group relative flex items-center justify-center w-12 h-12 rounded-xl border-2 transition-all duration-300 ${
                       isActive
-                        ? 'border-purple-500 bg-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+                        ? 'border-[#00FFFF] bg-[#00FFFF]/10 shadow-[0_0_20px_rgba(0,255,255,0.3)]'
                         : isDark 
-                          ? 'border-gray-700 bg-black/50 hover:border-purple-500/60 hover:bg-purple-500/5'
-                          : 'border-gray-200 bg-white/50 hover:border-purple-500/60 hover:bg-purple-500/5'
+                          ? 'border-gray-700 bg-black/50 hover:border-[#00FFFF]/60 hover:bg-[#00FFFF]/5'
+                          : 'border-gray-200 bg-white/50 hover:border-[#00FFFF]/60 hover:bg-[#00FFFF]/5'
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Icon className={`w-5 h-5 transition-colors ${
                       isActive 
-                        ? 'text-purple-500' 
+                        ? 'text-[#00FFFF]' 
                         : isDark 
-                          ? 'text-gray-300 group-hover:text-purple-500'
-                          : 'text-gray-600 group-hover:text-purple-500'
+                          ? 'text-gray-300 group-hover:text-[#00FFFF]'
+                          : 'text-gray-600 group-hover:text-[#00FFFF]'
                     }`} />
                     
                     {/* Tooltip */}
                     <div className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${
                       isDark 
-                        ? 'bg-[#18181b] text-white border border-purple-500' 
-                        : 'bg-white text-gray-800 border border-purple-500 shadow-lg'
+                        ? 'bg-[#18181b] text-white border border-[#00FFFF]' 
+                        : 'bg-white text-gray-800 border border-[#00FFFF] shadow-lg'
                     }`}>
                       {t[item.key as keyof typeof t] || item.name}
                       {/* Arrow */}
                       <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 rotate-45 ${
                         isDark 
-                          ? 'bg-[#18181b] border-l border-t border-purple-500' 
-                          : 'bg-white border-l border-t border-purple-500'
+                          ? 'bg-[#18181b] border-l border-t border-[#00FFFF]' 
+                          : 'bg-white border-l border-t border-[#00FFFF]'
                       }`} />
                     </div>
                   </motion.button>
@@ -310,23 +292,37 @@ export function TechNonprofitNavOolite() {
               })}
             </nav>
 
-            {/* Right: Language Selectors and Mobile Menu */}
-            <div className="flex items-center gap-4">
-              <LanguageSelector />
-              <DarkLightThemeSelector />
+            {/* Right side controls */}
+            <div className="flex items-center gap-2">
+              <div className="hidden md:flex items-center gap-2">
+                <DarkLightThemeSelector />
+                <LanguageSelector />
+              </div>
               
+              {/* Mobile menu button */}
               <button
-                onClick={() => setIsMenuOpen(true)}
-                className={`md:hidden ${isDark ? 'text-white' : 'text-black'}`}
+                onClick={() => setMobileMenuOpen(true)}
+                className={`md:hidden p-2 rounded-lg ${
+                  isDark ? 'text-gray-400 hover:text-white hover:bg-gray-800' : 'text-gray-600 hover:text-black hover:bg-gray-100'
+                }`}
               >
-                <Menu className="h-6 w-6" />
+                <Menu className="w-6 h-6" />
               </button>
             </div>
           </div>
         </div>
-      </header>
+      </nav>
 
-      <MobileMenu />
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50">
+          <div 
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <MobileMenu />
+        </div>
+      )}
     </>
   );
 } 

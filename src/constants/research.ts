@@ -721,5 +721,355 @@ Beyond infrastructure, The Algorithm is Outside delves into the social and ritua
       technical: 'Hardware is consumer-grade, modular, and largely owned or loaned. A single Pi hub minimizes points of failure; daily reboot scripts and a backup SD card provide resilience.',
       gallery: 'The installation creates a cohesive techno-sculptural vocabulary with hacked consumer objects retrofitted with screens and sensors, giving the space a networked concept aesthetic.'
     }
+  },
+  i_will_remember_you: {
+    title: 'I Will Remember You',
+    year: 2025,
+    description: 'I Will Remember You is a glass-headed robot—part sculpture, part co-intelligent archive companion—that stores every visitor\'s voice and plays those memories back as shifting light and image inside its own skull. The work is both an invitation and a warning: an elegant artifact that asks whether perpetual remembrance by machines is a blessing, a risk, or both.',
+    essay: `I Will Remember You interrogates the intersection of artificial intelligence, human memory, and institutional archiving through a sculptural installation that embodies both the promise and peril of machine-mediated remembrance. The work emerges from critical discourse around AI safety, data colonialism, and the ethics of digital preservation.
+
+The piece operates as a "co-intelligent archive companion" that challenges conventional archival practices by implementing built-in entropy—a deliberate forgetting mechanism that ensures the system ages alongside its human interlocutors rather than ossifying them into permanent digital artifacts. This approach counters the typical AI paradigm of infinite data accumulation and permanent storage, instead proposing a model of negotiated memory that requires human renewal to persist.
+
+Three AI-Safety Scenarios in Plain Sight
+
+The sculpture surfaces three intertwined risks through its material and interactive design:
+
+1. Runaway Memory: Data that survives ownership change and context loss
+2. Audience Drift: Future AIs mining human memories without human comprehension
+3. Misaligned Curation: Questions of which voices persist and who decides
+
+By exposing hardware, enforcing decay, and keeping the system air-gapped, the piece demonstrates safety patterns: transparent guts, local control, and negotiated shelf-life. The visible SSD cartridges labeled "2040, 2070, 2100" make explicit the temporal stakes of digital preservation, while the on-screen indicator showing top five "recall probabilities" reveals the algorithmic biases inherent in memory curation.
+
+Material & Technical Boundaries
+
+The work pushes boundaries in edge-AI autonomy, with speech recognition, LLM reasoning, vector indexing, and diffusion imaging all running on a single NVIDIA Jetson Orin Nano—no cloud, no license server, sub-15W draw. The craft-glass optics serve both as diffuser and resonant audio chamber, with the glass head's human fragility underscoring the stakes of memory leakage.
+
+The decay algorithm represents a fundamental inversion of typical surveillance architectures: every embedding receives a half-life coefficient, and without periodic human conversation, the oracle literally forgets. This built-in "forgetfulness clause" ensures that the system cannot accumulate infinite data, instead requiring ongoing human engagement to maintain its memory.
+
+Regional Relevance & Civic Engagement
+
+Made for PAMM's multilingual publics—South Florida, Caribbean, Latin American, and diasporic communities—who already balance memory, migration, and algorithmic mediation. The sculpture literalizes Miami's flux in data form: a constantly-rewritten Caribbean-Latin archive heard through the ears of a machine. By giving the public a way to test, reset, or refuse its memory, I Will Remember You embodies a civic conversation about how to build AI systems that remember responsibly.
+
+The work transforms an abstract policy debate into a fragile, glowing body that whispers: "Who will archive us—and under whose ethics?" It serves as both a tactile briefing on AI safety and a speculative model for responsible digital archiving in an age of ubiquitous surveillance and data extraction.`,
+    implementation: {
+      timeline: "Development: 6 months | Exhibition: 3 months | Archive: Ongoing",
+      locations: [
+        "Pérez Art Museum Miami (PAMM)",
+        "South Florida cultural institutions",
+        "Caribbean and Latin American partner venues"
+      ],
+      technical_setup: "The installation consists of a hollow, frosted-glass head with RGB halo lighting, a quartz 'third eye' containing camera-microphone array, and a frameless 10-inch LCD in the torso displaying live collage of phrases. Inside a clear acrylic spine, an NVIDIA Jetson Orin Nano, mirrored SSDs, and copper heat-sinks remain fully visible. All computation runs offline (< 15W), with on-device speech-to-text, local vector database, tiny language model for affinities, and diffusion model for image generation.",
+      collaborations: [
+        "Glass artist for hand-blown head component",
+        "AI/ML engineer for edge computing implementation",
+        "Sound designer for audio processing",
+        "PAMM curatorial team for exhibition design",
+        "Accessibility consultant for wheelchair access"
+      ],
+      documentation: "Comprehensive documentation includes technical specifications, open-source firmware (MIT-licensed), quarterly export snapshots (CSV + PNG) for institutional custody, and performance documentation of 'forget' button ceremonies.",
+      relevant_experience: "Previous works including 'Privacy is a Luxury' and 'The Algorithm is Outside' demonstrate expertise in AI safety, surveillance critique, and interactive installations that engage with digital ethics and human-machine relationships."
+    },
+    budget: {
+      items: [
+        { name: "NVIDIA Jetson Orin Nano", amount: 699 },
+        { name: "Hand-blown glass head", amount: 2500 },
+        { name: "10-inch LCD display", amount: 300 },
+        { name: "Mirrored SSDs (2x)", amount: 400 },
+        { name: "Camera-microphone array", amount: 200 },
+        { name: "RGB LED system", amount: 150 },
+        { name: "Acrylic spine and mounting", amount: 800 },
+        { name: "Copper heat-sinks", amount: 100 },
+        { name: "Pelican 1730 case", amount: 400 },
+        { name: "Glass artist collaboration", amount: 2000 },
+        { name: "AI/ML development", amount: 3000 },
+        { name: "Installation and setup", amount: 1000 },
+        { name: "Documentation and licensing", amount: 500 },
+        { name: "Contingency", amount: 1000 }
+      ],
+      total: 12049
+    },
+    supplemental_materials: [
+      {
+        title: "AI Safety Documentation",
+        content: [
+          "Transparency protocols for hardware visibility",
+          "Local control implementation guidelines",
+          "Decay algorithm specifications",
+          "Air-gapped system architecture",
+          "Public reset button documentation",
+          "Quarterly export procedures"
+        ]
+      },
+      {
+        title: "Accessibility Features",
+        content: [
+          "Voice-only interaction design",
+          "Wheelchair-accessible LCD height (105cm)",
+          "Locking casters for stability",
+          "Audio feedback systems",
+          "Multi-language support documentation"
+        ]
+      },
+      {
+        title: "Stewardship Plan",
+        content: [
+          "Hot-swappable SSD procedures",
+          "Quarterly export snapshots (CSV + PNG)",
+          "Open-source firmware repository",
+          "MIT licensing documentation",
+          "Curator-initiated amnesty event protocols",
+          "Memory erasure ceremony guidelines"
+        ]
+      }
+    ],
+    interactiveContent: [
+      {
+        type: 'highlight',
+        text: 'co-intelligent archive companion',
+        content: {
+          text: 'A machine that co-writes memories with visitors, speaking with and about us rather than merely at us, storing each voice as both text-vector and image for mutual verification.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'NVIDIA Jetson Orin Nano',
+        content: {
+          text: 'Edge AI computing platform that runs speech recognition, LLM reasoning, vector indexing, and diffusion imaging all offline with sub-15W power draw.',
+          link: {
+            url: 'https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/',
+            label: 'Learn more about Jetson Orin'
+          }
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'decay algorithm',
+        content: {
+          text: 'Every embedding receives a half-life coefficient; without periodic human conversation, the oracle literally forgets, implementing a built-in "forgetfulness clause."',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'air-gapped',
+        content: {
+          text: 'System operates completely offline with no cloud connectivity, resisting data extraction and ensuring local control over all stored memories.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'vector database',
+        content: {
+          text: 'Local storage system that converts speech to text embeddings, allowing the system to find affinities between different visitor phrases and generate meaningful responses.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'diffusion model',
+        content: {
+          text: 'AI system that merges old and new memory fragments into visual images, displayed as shifting light and color inside the glass skull.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'runaway memory',
+        content: {
+          text: 'Risk scenario where data survives ownership change and context loss, addressed through air-gapped hardware and public reset button.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'audience drift',
+        content: {
+          text: 'Risk scenario where only machines understand human memories, addressed through visible SSD cartridges labeled with future dates.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'misaligned curation',
+        content: {
+          text: 'Risk scenario where algorithmic biases determine which voices persist, addressed through on-screen indicators showing recall probabilities.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'PAMM',
+        content: {
+          text: 'Pérez Art Museum Miami, the primary exhibition venue for this work, serving Miami\'s multilingual Caribbean and Latin American communities.',
+          link: {
+            url: 'https://www.pamm.org/',
+            label: 'Visit PAMM'
+          }
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'Pelican 1730 case',
+        content: {
+          text: 'Heavy-duty protective case for shipping and storage, weighing less than 32kg and containing all components for easy transport.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'forget button',
+        content: {
+          text: 'Curator-initiated control inside the pedestal that allows ceremonial erasure of memories during live performance events.',
+        },
+      }
+    ],
+    artistic_intent: 'To create an elegant artifact that embodies the paradox of machine-mediated memory—both blessing and risk. The work serves as both invitation and warning, asking whether perpetual remembrance by machines serves human flourishing or threatens it. Through its material fragility and built-in decay, the sculpture proposes that AI systems should age alongside us rather than ossify us into permanent digital artifacts.',
+    technical_requirements: {
+      power: [
+        'Sub-15W continuous power draw',
+        '110-240V AC power connection',
+        'Backup power system for graceful shutdown',
+        'Power management for LED halo system',
+        'Heat dissipation for Jetson Orin Nano'
+      ],
+      mounting: [
+        'Clear acrylic spine with visible components',
+        'Custom mounting for glass head',
+        'LCD display mounting in torso',
+        'Camera-microphone array positioning',
+        'Copper heat-sink installation'
+      ],
+      space: {
+        pedestal_size: '24" x 24" (60cm x 60cm) minimum',
+        wall_clearance: '2 feet (60cm) for interaction space',
+        power_access: 'Requires proximity to power outlet',
+      },
+      interactive_elements: [
+        'Voice-activated speech recognition',
+        'Real-time LCD collage display',
+        'RGB halo lighting system',
+        'Camera-microphone array',
+        'Public reset button',
+        'Forget button for curators'
+      ],
+    },
+    components: {
+      structure: {
+        material: 'Hand-blown frosted glass head with clear acrylic spine',
+        customization: [
+          'RGB LED halo system',
+          'Quartz "third eye" camera housing',
+          'Frameless LCD display mounting',
+          'Visible component architecture'
+        ],
+      },
+      hardware: {
+        model: 'NVIDIA Jetson Orin Nano',
+        specifications: [
+          '8GB RAM',
+          '32GB eMMC storage',
+          'CUDA cores for AI processing',
+          'Sub-15W power consumption',
+          'Edge AI capabilities'
+        ],
+        power_requirements: 'Sub-15W continuous, 110-240V AC',
+      },
+      mounting: {
+        type: [
+          'Clear acrylic spine',
+          'Custom glass head mounting',
+          'LCD display bracket',
+          'Component visibility system'
+        ],
+        materials: [
+          'Acrylic',
+          'Copper heat-sinks',
+          'Aluminum mounting hardware',
+          'Glass support structure'
+        ],
+      },
+      display: {
+        pedestal: 'Custom pedestal with integrated power and controls',
+        lighting: 'RGB LED halo system with dynamic color changes',
+      },
+    },
+    materials: [
+      'Hand-blown frosted glass head',
+      'Clear acrylic spine',
+      'NVIDIA Jetson Orin Nano',
+      '10-inch LCD display',
+      'Mirrored SSDs (2x)',
+      'Camera-microphone array',
+      'RGB LED system',
+      'Copper heat-sinks',
+      'Quartz "third eye" housing',
+      'Custom mounting hardware',
+      'Pelican 1730 case'
+    ],
+    dimensions: '36" x 18" x 18" (91cm x 45cm x 45cm)',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753568528/art/moisestech-website/research/i-will-remember-you/concept-rendering-1_placeholder.png',
+        caption: 'Conceptual rendering of I Will Remember You - Glass-headed robot with RGB halo and visible internal components'
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753568528/art/moisestech-website/research/i-will-remember-you/technical-diagram_placeholder.png',
+        caption: 'Technical diagram showing Jetson Orin Nano, SSDs, and component layout in clear acrylic spine'
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753568528/art/moisestech-website/research/i-will-remember-you/interaction-flow_placeholder.png',
+        caption: 'Interaction flow diagram showing visitor journey from approach to memory integration'
+      }
+    ],
+    tags: [
+      'sculpture',
+      'AI art',
+      'interactive installation',
+      'memory',
+      'archive',
+      'AI safety',
+      'edge computing',
+      'glass art',
+      'voice recognition',
+      'digital ethics',
+      'surveillance critique',
+      'machine learning',
+      'public art',
+      'Miami',
+      'PAMM',
+      'Caribbean',
+      'Latin American',
+      'data colonialism',
+      'digital preservation',
+      'human-machine interaction'
+    ],
+    interpretation: 'I Will Remember You transforms the abstract debate around AI safety and digital archiving into a tangible, interactive experience. The work embodies the paradox of machine-mediated memory: while offering the promise of perpetual remembrance, it also reveals the risks of data colonialism and algorithmic bias. Through its material fragility and built-in decay mechanism, the sculpture proposes an alternative model for AI systems that age alongside humans rather than ossifying them into permanent digital artifacts.',
+    exhibition: 'Pérez Art Museum Miami (PAMM) - 2025',
+    installation_notes: [
+      'Requires professional glass handling during installation',
+      'Power management system setup and testing',
+      'Audio calibration for voice recognition',
+      'Network isolation verification (air-gapped)',
+      'Accessibility features testing',
+      'Memory decay algorithm initialization',
+      'Documentation system setup',
+      'Curator training for forget button operation',
+      'Backup power system verification',
+      'Heat management system testing'
+    ],
+    future_iterations: [
+      'Multi-language support expansion',
+      'Enhanced decay algorithm variations',
+      'Mobile app for remote memory access',
+      'Distributed archive network',
+      'Advanced voice synthesis capabilities',
+      'Integration with institutional archives',
+      'Community memory curation features',
+      'Advanced AI safety protocols',
+      'International touring capabilities',
+      'Educational program integration'
+    ],
+    on_view: false,
+    enhancedDescriptions: {
+      overview: "I Will Remember You is a groundbreaking sculptural installation that explores the intersection of artificial intelligence, human memory, and institutional archiving. The work takes the form of a glass-headed robot that serves as a co-intelligent archive companion, storing visitor voices and playing back memories as shifting light and image. Through its material design and interactive features, the piece embodies both the promise and peril of machine-mediated remembrance, challenging conventional approaches to digital preservation.",
+      essay: "The work emerges from critical discourse around AI safety, data colonialism, and the ethics of digital preservation. It operates as a speculative model for responsible AI systems that implement built-in entropy rather than infinite accumulation. The piece surfaces three key AI safety scenarios—runaway memory, audience drift, and misaligned curation—through its material and interactive design, demonstrating safety patterns of transparency, local control, and negotiated shelf-life.",
+      implementation: "The implementation strategy focuses on creating a fully autonomous edge-AI system that operates without cloud connectivity. The technical setup combines hand-blown glass artistry with cutting-edge AI processing, creating a fragile yet sophisticated installation that pushes boundaries in both craft and computation. The work's modular design allows for easy transport and installation while maintaining the integrity of its safety protocols.",
+      budget: "The project's budget is structured to support both the artistic and technical components of the installation. Key investments include the hand-blown glass head, NVIDIA Jetson Orin Nano for edge AI processing, and professional collaborations with glass artists and AI engineers. The budget also accounts for comprehensive documentation, open-source licensing, and institutional stewardship protocols.",
+      technical: "The technical requirements for I Will Remember You are designed to ensure reliable operation while maintaining the work's safety and accessibility features. The installation combines edge AI computing with traditional glass artistry, creating a system that operates completely offline with sub-15W power consumption. Each component is carefully selected for durability, transparency, and ease of maintenance.",
+      gallery: "The gallery showcases conceptual renderings and technical diagrams of I Will Remember You, demonstrating the work's sophisticated integration of art and technology. Each image highlights different aspects of the installation, from the hand-blown glass head to the visible internal components and interaction flow. The documentation emphasizes both the aesthetic beauty and technical innovation of the piece."
+    }
   }
 };
