@@ -3,18 +3,33 @@
 import React from "react";
 import "../../../styles/automation-tokens.css";
 import { WORKSHOP_PROMPS } from "../../../data/script";
+import { TextReveal } from "../../../components/magicui/text-reveal";
+import TerminalNav from "../../../components/automation/TerminalNav";
 
 export default function WorkshopPage() {
   return (
     <main className="bg-grid" style={{ minHeight: "100vh", padding: "16px" }}>
-      <header style={{ textAlign: "center", margin: "12px 0 16px" }}>
-        <div className="kicker mono">Day 1</div>
-        <h1 className="title">Agents 101 — Build Your Helper</h1>
+      <header style={{ 
+        textAlign: "center", 
+        margin: "12px 0 16px",
+        height: "200px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}>
+        <div className="kicker mono">Part 1: Workshop</div>
+        <h1 className="title" style={{ margin: "20px 0" }}>
+          Artist In The Automation
+        </h1>
         <p style={{ maxWidth: 740, margin: "8px auto", color: "var(--muted)" }}>
           No code. Drag + drop a role, give it a job (copy line, slogan, tiny beat),
-          save your output. Tomorrow you'll hear it onstage.
+          save your output. In one hour, you'll hear it onstage.
         </p>
       </header>
+
+      <section className="container">
+        <TerminalNav currentPage="workshop" />
+      </section>
 
       <section className="container">
         <div className="grid g3">
@@ -40,7 +55,7 @@ export default function WorkshopPage() {
             <div className="kicker mono">Step 3</div>
             <h3 style={{ margin: "8px 0", color: "var(--accent)" }}>Hear It Live</h3>
             <p className="sub">
-              Your agent will appear in tonight's performance. Watch how it 
+              Your agent will appear in tonight's performance (in 1 hour). Watch how it 
               interacts with other voices in the synthetic symposium.
             </p>
           </div>
@@ -102,7 +117,7 @@ export default function WorkshopPage() {
             <div>
               <h4 style={{ color: "var(--accent)", marginBottom: 8 }}>Workshop Output</h4>
               <p className="sub">
-                All prompts are collected and formatted into tonight's performance script. 
+                All prompts are collected and formatted into tonight's performance script (in 1 hour). 
                 Your agent will speak your exact words, credited to you.
               </p>
             </div>

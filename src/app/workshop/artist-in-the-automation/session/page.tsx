@@ -1,30 +1,42 @@
 "use client";
 
 import React from "react";
-import "../../../styles/automation-tokens.css";
+import "../../../../styles/automation-tokens.css";
 import Link from "next/link";
+import TerminalNav from "../../../../components/automation/TerminalNav";
 
 export default function SessionPage() {
   return (
     <main className="bg-grid" style={{ minHeight: "100vh", padding: "16px" }}>
-      <header style={{ textAlign: "center", margin: "12px 0 16px" }}>
+      <header style={{ 
+        textAlign: "center", 
+        margin: "12px 0 16px",
+        height: "200px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}>
         <div className="kicker mono">Locust Late @ The DiLL</div>
         <h1 className="title">
           Artist in the Automation — <span className="mono">[Agents 101 + Live Set]</span>
         </h1>
         <p style={{ maxWidth: 740, margin: "8px auto", color: "var(--muted)" }}>
-          Build a tiny AI helper in the workshop. Hear it onstage 60 minutes later—an AI radio-play x DJ/VJ set where agents are mixed live.
+          A single evening with two parts that build on each other. Build a tiny AI helper in the workshop, hear it onstage 60 minutes later.
         </p>
       </header>
+
+      <section className="container">
+        <TerminalNav currentPage="session" />
+      </section>
 
       <section className="container">
         <div className="grid g3">
           <div className="card">
             <div className="kicker mono">Part 1</div>
-            <h3 style={{ margin: "8px 0", color: "var(--accent)" }}>Agents 101 Workshop</h3>
+            <h3 style={{ margin: "8px 0", color: "var(--accent)" }}>Agents 101 Workshop (60 min)</h3>
             <p className="sub">
               Guests use a drag-and-drop app to create tiny "AI helpers." One might write a headline, 
-              another might generate a beat, another might invent a slogan.
+              another might generate a beat, another might invent a slogan. Everyone leaves knowing how to point an AI tool at a task without writing code.
             </p>
             <Link href="/workshop/artist-in-the-automation" className="btn btn-accent" style={{ marginTop: 12 }}>
               View Workshop
@@ -33,10 +45,10 @@ export default function SessionPage() {
           
           <div className="card">
             <div className="kicker mono">Part 2</div>
-            <h3 style={{ margin: "8px 0", color: "var(--accent)" }}>Synthetic Symposium</h3>
+            <h3 style={{ margin: "8px 0", color: "var(--accent)" }}>Synthetic Symposium (25 min)</h3>
             <p className="sub">
               An hour later those same helpers appear on the big screens. They talk, sing, or clash 
-              while Moises acts as DJ-moderator—mixing their voices, adding music, and jumping in with live commentary.
+              while Moises acts as DJ-moderator—mixing their voices, adding music, and jumping in with live commentary. The audience can nudge the discussion from their phones.
             </p>
             <Link href="/workshop/artist-in-the-automation/performance" className="btn btn-accent" style={{ marginTop: 12 }}>
               View Performance

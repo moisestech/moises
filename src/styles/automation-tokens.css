@@ -205,3 +205,13 @@ html, body {
   filter: contrast(1.08) saturate(1.1);
   transform: translateZ(0);
 }
+
+/* Consistent header styling */
+.page-header {
+  text-align: center;
+  margin: 12px 0 16px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

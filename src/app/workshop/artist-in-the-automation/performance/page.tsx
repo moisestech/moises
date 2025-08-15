@@ -19,6 +19,7 @@ import Ticker from "../../../../components/automation/Ticker";
 import HumanMinute from "../../../../components/automation/HumanMinute";
 import ModerationPanel from "../../../../components/automation/ModerationPanel";
 import FaultOverlay from "../../../../components/automation/FaultOverlay";
+import TerminalNav from "../../../../components/automation/TerminalNav";
 
 export default function PerformancePage() {
   // Current lines (what appears on each screen)
@@ -145,12 +146,23 @@ export default function PerformancePage() {
     <main className="bg-grid" style={{ minHeight: "100vh", padding: "12px 12px 0" }}>
       <NorthStar />
 
-      <header style={{ textAlign: "center", margin: "10px 0 12px" }}>
-        <div className="kicker mono">Locust Late @ The DiLL</div>
+      <header style={{ 
+        textAlign: "center", 
+        margin: "10px 0 12px",
+        height: "200px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}>
+        <div className="kicker mono">Part 2: Live Performance</div>
         <h1 className="title">
-          Artist in the Automation — <span className="mono">[Live Set]</span>
+          Artist in the Automation — <span className="mono">[Synthetic Symposium]</span>
         </h1>
       </header>
+
+      <section style={{ maxWidth: 1100, margin: "0 auto 20px", padding: "0 12px" }}>
+        <TerminalNav currentPage="performance" />
+      </section>
 
       {/* Three-screen wall */}
       <section style={{
@@ -170,7 +182,7 @@ export default function PerformancePage() {
               lines[a]
             }
             isActive={activeAgent === a}
-            isMuted={Date.now() < globalMuteUntil || (muted[a] && muted[a] > Date.now())}
+            isMuted={Boolean(Date.now() < globalMuteUntil || (muted[a] && muted[a] > Date.now()))}
           />
         ))}
       </section>
