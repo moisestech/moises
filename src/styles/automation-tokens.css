@@ -1,0 +1,207 @@
+:root {
+  /* Core palette - hacker capitalism automation aesthetic */
+  --bg: #0b0c10;
+  --surface: #0f1116;
+  --line: #1a1d25;
+  --fg: #f5f7fa;
+  --muted: #a7a7b3;
+  
+  /* Neon accents */
+  --accent: #00ffd0;
+  --accent2: #ff5fd2;
+  --accent3: #f2c14e;
+  
+  /* Agent colors */
+  --polly: #58ffa6;
+  --grit: #f2c14e;
+  --spec: #ff6bd6;
+  --sys: #8ea0b5;
+  --g404: #ff4a4a;
+  --fault: #9b7bff;
+  
+  /* Shadows and effects */
+  --shadow: 0 20px 40px rgba(0,0,0,.35);
+  --glow: 0 0 20px rgba(0,255,208,0.3);
+  
+  /* Typography */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  --font-sans: system-ui, -apple-system, Segoe UI, Inter, Roboto, sans-serif;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.6 var(--font-sans);
+}
+
+/* Utility classes */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.g3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.g2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .g3 {
+    grid-template-columns: 1fr;
+  }
+  .g2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Grid overlay + scanlines for hacker aesthetic */
+.bg-grid {
+  background:
+    linear-gradient(transparent 96%, rgba(255,255,255,0.03) 96%) 0 0/100% 3px,
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px) 0 0/24px 24px,
+    linear-gradient(0deg, rgba(255,255,255,0.025) 1px, transparent 1px) 0 0/24px 24px;
+}
+
+/* Card styling */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* Typography hierarchy */
+.kicker {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+}
+
+.title {
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: 0.2px;
+}
+
+.sub {
+  color: var(--muted);
+  max-width: 720px;
+}
+
+/* Badge styling */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #0b0c10;
+  font-family: var(--font-mono);
+}
+
+/* Button styling */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--fg);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--fg);
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.02));
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-1px);
+}
+
+.btn-accent {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-accent:hover {
+  background: rgba(0,255,208,0.1);
+  box-shadow: var(--glow);
+}
+
+/* Divider */
+.hr {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+}
+
+/* Caret animation */
+.caret::after {
+  content: "▌";
+  margin-left: 4px;
+  animation: blink 0.9s step-end infinite;
+  color: var(--accent);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Breathing animation for agent screens */
+@keyframes breath {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* Pulse animation for active indicators */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Marquee animation for ticker */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Glitch effect on hover */
+.glitch:hover {
+  filter: contrast(1.08) saturate(1.1);
+  transform: translateZ(0);
+}
