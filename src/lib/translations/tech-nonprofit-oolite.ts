@@ -443,4 +443,126 @@ export const translations: Record<Language, TechNonprofitTranslations> = {
       copyright: "© {year} Artist Tech Initiative. Tous droits réservés."
     }
   },
+  ht: {
+    navigation: {
+      home: "Kay",
+      services: "Sèvis",
+      workshops: "Atelye",
+      contact: "Kontak",
+    },
+    hero: {
+      title: "Inovasyon Kreyatif",
+      subtitle: "Bezwen yon Alye Dijital",
+      description: "Ann imajine sa enstitisyon kiltirèl yo ta ka fè ak pwòp branch teknoloji yo — pèsonalize, reflechi, ak bati pou anplifye enpak ou atravè ekspozisyon, atelye, ak evènman ki dirije pa kominote a.",
+      exploreServices: "Eksplore Sèvis Nou yo",
+      scheduleCall: "Pwograme yon Apèl",
+      cta: "Pwograme yon Apèl"
+    },
+    story: {
+      title: "Kisa ki Rive Lè Vizyon Kiltirèl Rankontre Pouvwa Dijital?",
+      description1: "Oolite Arts deja dirije wout la nan inovasyon kreyatif, transfòme kijan nou angaje ak kilti dijital, kominote, ak lavni an. Men sa ki ta rive si chak ekspozisyon te gen yon konpayon dijital lejè ki bati sou koutim? Sa ki ta rive si atis yo ak odyans yo ta ka konekte an liy menm jan ki siyifikatif tankou yo fè an pèsonè?",
+      description2: "Nou te wè sa ki posib lè enstitisyon atizay tankou Bakehouse bay atis yo pouvwa ak atelye ak teknoloji. Soti nan sit entènèt DIY rive nan optimizasyon pèfòmans, e menm otomatik kontni outreach—nou bati zouti ke atis, pèsonèl, ak odyans yo reyèlman itilize.",
+      quote: "Teknoloji, nan pi bon li, envizib—santi sèlman nan klète kominikasyon ak fasilite kreyasyon.",
+      quoteAuthor: "Moises Sanabria"
+    },
+    services: {
+      title: "Sipò Koutim pou Òganizasyon Kreyatif",
+      subtitle: "Panse nan nou kòm patnè teknoloji fleksib, aliyen ak misyon ou. Pa gen depans jeneral. Sèlman solisyon sib ak eskale pou sipòte pwogramasyon ou, odyans, ak pèsonèl.",
+      items: [
+        {
+          title: "Aplikasyon Kominikasyon ki Baze sou Navigatè",
+          description: "Sistèm mesaj ak emisyon evènman entegre. Pèsonèl, atis, ak patisipan rete konekte pandan festival, ekspozisyon, ak atelye—san bezwen WhatsApp oswa Slack."
+        },
+        {
+          title: "Tablodbò pou Atis ak Pèsonèl",
+          description: "Konekte, pote ajou, konfime evènman, ak aksè resous entèn. Yon eksperyans inifye, pwòp ak wòl ak pèmisyon."
+        },
+        {
+          title: "Enfrastrikti Atelye",
+          description: "Nou bati kouch teknoloji dèyè evènman an dirèk ak ibrid: flou anrejistreman, sondaj fidbak, ko-pilòt IA, e menm rezime pòs-evènman."
+        },
+        {
+          title: "Mikwo-zouti Koutim",
+          description: "Bezwen yon kat evènman lejè? Yon zouti pou timoun yo remiks atizay ak IA? Yon chatbot pou pwogram sinema ou? Nou ka fè li, epi fè li senp."
+        }
+      ],
+      conclusion: "Nou kwè kilti merite gwo teknoloji. Se poutèt sa nou ofri sèvis fraksyonèl — sèlman sa ou bezwen, lè ou bezwen li."
+    },
+    workshops: {
+      title: "Anseye Atis yo Pou yo Pwospere An Liy",
+      subtitle: "Nou te bay atelye dijital pratik nan enstitisyon tankou Bakehouse, ICA, ak plis—konsantre sou ede atis yo grandi prezans dijital yo, vizibilite, ak rive. Tout atelye nou yo fèt pou moun ki pa pwogramatè, atis, ak edikatè.",
+      items: [
+        {
+          title: "Pwopriyete Prezans Dijital Ou",
+          description: "Bati Sit Entènèt, Pèfòmans, Aksesibilite"
+        },
+        {
+          title: "IA pou Atis",
+          description: "Prompting, Ko-kreyasyon, Etik Atizay Jenèratif"
+        },
+        {
+          title: "Rezo Sosyal Kreyatif ak Branding Mem",
+          description: "Angaje odyans ou ak estrateji kontni kreyatif"
+        },
+        {
+          title: "Otomatizasyon Maketing pou Òganizasyon Kiltirèl",
+          description: "Optimize outreach ak angajman ou"
+        },
+        {
+          title: "Bati Portfolio Ou",
+          description: "Konsepsyon, UX, ak istwa pou atis"
+        }
+      ],
+      conclusion: "Nou pa sèlman anseye atis yo kijan pou pwograme — nou anseye yo kijan pou konekte."
+    },
+    caseStudies: {
+      title: "Yon Espas ki Odyas kòm Misyon Ou Merite yon Patnè Teknoloji ki Konprann Li",
+      subtitle: "Ou deja ap fè pati difisil la: rive nan kominote a, sipòte kreyasyon entèdisiplinè, ak atake chanjman sosyete. Objektif nou an se anplifye sa ak teknoloji reflechi ak imen.",
+      description: "Ann imajine ansanm:",
+      examples: [
+        "Yon tablodbò atis ak materyèl atelye an plizyè lang",
+        "Yon aplikasyon navigatè kote yon fanmi ka wè sa ki ap rive pwochen wikenn nan",
+        "Yon zouti atizay jenèratif ki baze sou prompt pou jèn nan espas estidyo ou",
+        "Yon otomatizasyon kontni chak mwa ki pwograme tout kalandriye ou sou Instagram ak imèl nan yon sèl klike"
+      ]
+    },
+    contact: {
+      title: "Ou Pare pou Pwototip yon Pi Bon Lavni?",
+      subtitle: "Nou ta renmen kòmanse ti — yon atelye ko-òganize, yon eksperyans navigatè koutim pou pwochen ekspozisyon ou, oswa yon seri fòmasyon dijital pou pèsonèl ou ak atis.",
+      description: "Ann bati yon bagay pou pwochen sezon ou.",
+      buildSomething: "Pwograme yon apèl dekouvèt pou diskite bezwen ou yo ak kijan nou ka ede.",
+      scheduleCall: "Pwograme yon Apèl",
+      resources: "Resous",
+      resourcesList: [
+        {
+          title: "Telechaje One-Pager la (PDF)",
+          description: ""
+        },
+        {
+          title: "Wè Egzanp Pwogram Atelye",
+          description: ""
+        },
+        {
+          title: "Demo An Dirèk Disponib",
+          description: "Toune aplikasyon an + Plan atelye"
+        }
+      ],
+      form: {
+        name: "Non",
+        email: "Imèl",
+        message: "Mesaj",
+        submit: "Voye"
+      },
+      conclusion: "Yon pòl inovasyon kiltirèl, ouvè a tout piblik."
+    },
+    footer: {
+      tagline: "Bay atis yo pouvwa ak teknoloji",
+      links: {
+        home: "Kay",
+        workshops: "Atelye",
+        moises: "Moises Sanabria"
+      },
+      copyright: "© {year} Artist Tech Initiative. Tout dwa rezève."
+    }
+  }
 }; 

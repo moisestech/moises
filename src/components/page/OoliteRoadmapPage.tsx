@@ -28,7 +28,7 @@ import {
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TechNonprofitNavOolite } from '@/components/workshop/TechNonprofitNavOolite';
-import { ooliteTranslations } from '@/translations/oolite';
+import { ooliteTranslations } from '@/translations/oolite/index';
 
 // Timeline Progress Nodes Component
 function TimelineProgressNodes() {
@@ -221,13 +221,13 @@ export default function OoliteRoadmapPage() {
     {
       quarter: "Q1",
       period: "Aug–Oct",
-      title: t?.foundationPhase || "Foundation Phase",
-      description: t?.foundationDescription || "Establishing the digital arts lab infrastructure and conducting initial needs assessment with resident artists.",
+      title: "Foundation Phase",
+      description: "Establishing the digital arts lab infrastructure and conducting initial needs assessment with resident artists.",
       milestones: [
-        t?.phase0RoomRefresh || "Phase-0 room refresh (Aug)",
-        t?.phase1CoreGear || "Phase-1 core gear arrival (Sept)", 
-        t?.needsAssessmentLabs || "Needs-assessment labs",
-        t?.openLabLaunch || "Open-Lab Launch (Oct 1)"
+        "Phase-0 room refresh (Aug)",
+        "Phase-1 core gear arrival (Sept)", 
+        "Needs-assessment labs",
+        "Open-Lab Launch (Oct 1)"
       ],
       status: 'upcoming',
       icon: Building2,
@@ -236,34 +236,34 @@ export default function OoliteRoadmapPage() {
         {
           month: "August 2025",
           activities: [
-            t?.hardwareProcurement || "Hardware procurement and delivery",
-            t?.softwareDevelopmentKickoff || "Software development kickoff", 
-            t?.staffHiringOnboarding || "Staff hiring and onboarding",
-            t?.communityPartnerIdentification || "Community partner identification"
+            "Hardware procurement and delivery",
+            "Software development kickoff", 
+            "Staff hiring and onboarding",
+            "Community partner identification"
           ],
-          milestones: [t?.labSpaceSecured || "Lab space secured", t?.coreTeamAssembled || "Core team assembled"],
+          milestones: ["Lab space secured", "Core team assembled"],
           budget: "$25K"
         },
         {
           month: "September 2025", 
           activities: [
-            t?.equipmentInstallation || "Equipment installation and testing",
-            t?.softwareDevelopmentPhase1 || "Software development phase 1",
-            t?.staffTrainingPrograms || "Staff training programs",
-            t?.communityOutreachInitiatives || "Community outreach initiatives"
+            "Equipment installation and testing",
+            "Software development phase 1",
+            "Staff training programs",
+            "Community outreach initiatives"
           ],
-          milestones: [t?.equipmentOperational || "Equipment operational", t?.softwareV1Complete || "Software v1.0 complete"],
+          milestones: ["Equipment operational", "Software v1.0 complete"],
           budget: "$20K"
         },
         {
           month: "October 2025",
           activities: [
-            t?.systemIntegration || "System integration and testing",
-            t?.staffTrainingCompletion || "Staff training completion",
-            t?.communityPartnershipLaunch || "Community partnership launch",
-            t?.openLabPreparation || "Open lab preparation and soft launch"
+            "System integration and testing",
+            "Staff training completion",
+            "Community partnership launch",
+            "Open lab preparation and soft launch"
           ],
-          milestones: [t?.labFullyOperational || "Lab fully operational", t?.openLabLaunch || "Open lab launch"],
+          milestones: ["Lab fully operational", "Open lab launch"],
           budget: "$15K"
         }
       ]
@@ -271,13 +271,13 @@ export default function OoliteRoadmapPage() {
     {
       quarter: "Q2",
       period: "Nov–Jan",
-      title: t?.launchPhase || "Launch Phase",
-      description: t?.launchDescription || "Launching the digital arts lab with initial programming and community engagement initiatives.",
+      title: "Launch Phase",
+      description: "Launching the digital arts lab with initial programming and community engagement initiatives.",
       milestones: [
-        t?.openLabLaunch || "Open-Lab Launch (Nov)",
-        t?.firstWorkshopSeries || "First workshop series (Dec)",
-        t?.communityPartnerships || "Community partnerships established",
-        t?.initialAssessment || "Initial impact assessment"
+        "Open-Lab Launch (Nov)",
+        "First workshop series (Dec)",
+        "Community partnerships established",
+        "Initial impact assessment"
       ],
       status: 'upcoming',
       icon: Rocket,
@@ -286,34 +286,34 @@ export default function OoliteRoadmapPage() {
         {
           month: "November 2025",
           activities: [
-            t?.openLabGrandOpening || "Open lab grand opening",
-            t?.firstWorkshopLaunch || "First workshop launch",
-            t?.communityOutreach || "Community outreach and marketing",
-            t?.partnershipDevelopment || "Partnership development"
+            "Open lab grand opening",
+            "First workshop launch",
+            "Community outreach and marketing",
+            "Partnership development"
           ],
-          milestones: [t?.labOpenToPublic || "Lab open to public", t?.firstWorkshopCompleted || "First workshop completed"],
+          milestones: ["Lab open to public", "First workshop completed"],
           budget: "$10K"
         },
         {
           month: "December 2025",
           activities: [
-            t?.holidayProgramming || "Holiday programming and events",
-            t?.workshopSeriesExpansion || "Workshop series expansion",
-            t?.communityFeedback || "Community feedback collection",
-            t?.partnershipStrengthening || "Partnership strengthening"
+            "Holiday programming and events",
+            "Workshop series expansion",
+            "Community feedback collection",
+            "Partnership strengthening"
           ],
-          milestones: [t?.holidayEventsCompleted || "Holiday events completed", t?.workshopSeriesLaunched || "Workshop series launched"],
+          milestones: ["Holiday events completed", "Workshop series launched"],
           budget: "$8K"
         },
         {
           month: "January 2026",
           activities: [
-            t?.newYearProgramming || "New year programming launch",
-            t?.communityAssessment || "Community assessment and feedback",
-            t?.partnershipEvaluation || "Partnership evaluation",
-            t?.programOptimization || "Program optimization based on feedback"
+            "New year programming launch",
+            "Community assessment and feedback",
+            "Partnership evaluation",
+            "Program optimization based on feedback"
           ],
-          milestones: [t?.newYearProgramsLaunched || "New year programs launched", t?.communityAssessmentComplete || "Community assessment complete"],
+          milestones: ["New year programs launched", "Community assessment complete"],
           budget: "$12K"
         }
       ]
@@ -321,13 +321,13 @@ export default function OoliteRoadmapPage() {
     {
       quarter: "Q3",
       period: "Feb–Apr",
-      title: t?.growthPhase || "Growth Phase",
-      description: t?.growthDescription || "Expanding programming and establishing advanced workshops and community partnerships.",
+      title: "Growth Phase",
+      description: "Expanding programming and establishing advanced workshops and community partnerships.",
       milestones: [
-        t?.advancedWorkshops || "Advanced workshops launch (Feb)",
-        t?.communityPartnerships || "Community partnerships expansion (Mar)",
-        t?.impactAssessment || "Impact assessment and optimization (Apr)",
-        t?.programScaling || "Program scaling and expansion"
+        "Advanced workshops launch (Feb)",
+        "Community partnerships expansion (Mar)",
+        "Impact assessment and optimization (Apr)",
+        "Program scaling and expansion"
       ],
       status: 'upcoming',
       icon: TrendingUp,
@@ -336,34 +336,34 @@ export default function OoliteRoadmapPage() {
         {
           month: "February 2026",
           activities: [
-            t?.advancedWorkshopLaunch || "Advanced workshop launch",
-            t?.specializedPrograms || "Specialized programs development",
-            t?.communityPartnershipExpansion || "Community partnership expansion",
-            t?.impactMeasurement || "Impact measurement implementation"
+            "Advanced workshop launch",
+            "Specialized programs development",
+            "Community partnership expansion",
+            "Impact measurement implementation"
           ],
-          milestones: [t?.advancedWorkshopsLaunched || "Advanced workshops launched", t?.specializedProgramsActive || "Specialized programs active"],
+          milestones: ["Advanced workshops launched", "Specialized programs active"],
           budget: "$15K"
         },
         {
           month: "March 2026",
           activities: [
-            t?.springProgramming || "Spring programming and events",
-            t?.partnershipStrengthening || "Partnership strengthening",
-            t?.communityEngagement || "Community engagement initiatives",
-            t?.programEvaluation || "Program evaluation and feedback"
+            "Spring programming and events",
+            "Partnership strengthening",
+            "Community engagement initiatives",
+            "Program evaluation and feedback"
           ],
-          milestones: [t?.springProgramsLaunched || "Spring programs launched", t?.partnershipsStrengthened || "Partnerships strengthened"],
+          milestones: ["Spring programs launched", "Partnerships strengthened"],
           budget: "$12K"
         },
         {
           month: "April 2026",
           activities: [
-            t?.impactAssessment || "Impact assessment and analysis",
-            t?.programOptimization || "Program optimization",
-            t?.communityFeedback || "Community feedback integration",
-            t?.futurePlanning || "Future planning and strategy"
+            "Impact assessment and analysis",
+            "Program optimization",
+            "Community feedback integration",
+            "Future planning and strategy"
           ],
-          milestones: [t?.impactAssessmentComplete || "Impact assessment complete", t?.programOptimized || "Program optimized"],
+          milestones: ["Impact assessment complete", "Program optimized"],
           budget: "$10K"
         }
       ]
@@ -371,13 +371,13 @@ export default function OoliteRoadmapPage() {
     {
       quarter: "Q4",
       period: "May–Jul",
-      title: t?.optimizationPhase || "Optimization Phase",
-      description: t?.optimizationDescription || "Optimizing operations, scaling successful programs, and preparing for long-term sustainability.",
+      title: "Optimization Phase",
+      description: "Optimizing operations, scaling successful programs, and preparing for long-term sustainability.",
       milestones: [
-        t?.programOptimization || "Program optimization and scaling (May)",
-        t?.sustainabilityPlanning || "Sustainability planning (Jun)",
-        t?.annualAssessment || "Annual assessment and planning (Jul)",
-        t?.futureRoadmap || "Future roadmap development"
+        "Program optimization and scaling (May)",
+        "Sustainability planning (Jun)",
+        "Annual assessment and planning (Jul)",
+        "Future roadmap development"
       ],
       status: 'upcoming',
       icon: Target,
@@ -386,34 +386,34 @@ export default function OoliteRoadmapPage() {
         {
           month: "May 2026",
           activities: [
-            t?.programScaling || "Program scaling and expansion",
-            t?.optimizationImplementation || "Optimization implementation",
-            t?.communityImpact || "Community impact measurement",
-            t?.partnershipEvaluation || "Partnership evaluation and renewal"
+            "Program scaling and expansion",
+            "Optimization implementation",
+            "Community impact measurement",
+            "Partnership evaluation and renewal"
           ],
-          milestones: [t?.programsScaled || "Programs scaled", t?.optimizationComplete || "Optimization complete"],
+          milestones: ["Programs scaled", "Optimization complete"],
           budget: "$12K"
         },
         {
           month: "June 2026",
           activities: [
-            t?.sustainabilityPlanning || "Sustainability planning",
-            t?.longTermStrategy || "Long-term strategy development",
-            t?.communityEngagement || "Community engagement optimization",
-            t?.partnershipStrengthening || "Partnership strengthening"
+            "Sustainability planning",
+            "Long-term strategy development",
+            "Community engagement optimization",
+            "Partnership strengthening"
           ],
-          milestones: [t?.sustainabilityPlanComplete || "Sustainability plan complete", t?.longTermStrategyDeveloped || "Long-term strategy developed"],
+          milestones: ["Sustainability plan complete", "Long-term strategy developed"],
           budget: "$8K"
         },
         {
           month: "July 2026",
           activities: [
-            t?.annualAssessment || "Annual assessment and evaluation",
-            t?.futurePlanning || "Future planning and roadmap",
-            t?.communityFeedback || "Community feedback integration",
-            t?.nextYearPreparation || "Next year preparation"
+            "Annual assessment and evaluation",
+            "Future planning and roadmap",
+            "Community feedback integration",
+            "Next year preparation"
           ],
-          milestones: [t?.annualAssessmentComplete || "Annual assessment complete", t?.futureRoadmapDeveloped || "Future roadmap developed"],
+          milestones: ["Annual assessment complete", "Future roadmap developed"],
           budget: "$10K"
         }
       ]

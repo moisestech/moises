@@ -41,7 +41,7 @@ import {
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TechNonprofitNavOolite } from '@/components/workshop/TechNonprofitNavOolite';
-import { ooliteTranslations } from '@/translations/oolite';
+import { ooliteTranslations } from '@/translations/oolite/index';
 import Link from 'next/link';
 
 // Magic UI Components

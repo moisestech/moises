@@ -26,7 +26,7 @@ const heroWords = {
   ],
   es: [
     'IA PARA TODOS',
-    'ÉTICA ANTES QUE ALGORITMOS',
+    'ÉTICA ANTES QUE ALGORITHMOS',
     'IA PARA LA COMUNIDAD',
     'FUTURO DE CÓDIGO ABIERTO',
     'BILINGÜE O NADA',
@@ -37,6 +37,13 @@ const heroWords = {
     'IA POUR LA COMMUNAUTÉ',
     'AVENIR OPEN SOURCE',
     'BILINGUE OU RIEN',
+  ],
+  ht: [
+    'FE IA POU TOUT MOUN',
+    'ETIK ANVAN ALGORITM',
+    'IA POU KOMINOTE',
+    'LAVI NI KÒD LIB',
+    'BILENG OUBYEN PA GEN ANYEN',
   ]
 };
 
@@ -44,7 +51,8 @@ const heroWords = {
 const subtitles = {
   en: "Knight-seeded pilot building sustainable technology infrastructure and educational live event culture hubs.",
   es: "Piloto financiado por Knight construyendo infraestructura tecnológica sostenible y centros culturales de eventos educativos en vivo.",
-  fr: "Pilote financé par Knight construisant une infrastructure technologique durable et des centres culturels d'événements éducatifs en direct."
+  fr: "Pilote financé par Knight construisant une infrastructure technologique durable et des centres culturels d'événements éducatifs en direct.",
+  ht: "Pilòt finanse pa Knight ki bati enfrastrikti teknoloji dirab ak sant kiltirèl evènman edikatif an dirèk."
 };
 
 // Button text translations
@@ -60,6 +68,10 @@ const buttonTexts = {
   fr: {
     seePilot: "Voir le Pilote d'1 An",
     viewProposal: "Voir la Proposition Complète"
+  },
+  ht: {
+    seePilot: "Wè Pilòt 1 Ane",
+    viewProposal: "Wè Pwopozisyon Konplè"
   }
 };
 

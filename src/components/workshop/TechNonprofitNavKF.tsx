@@ -154,6 +154,24 @@ const translations = {
     sustainability: "Durabilité",
     aiToolkits: "Outils IA",
     impactRoi: "Impact et ROI"
+  },
+  ht: {
+    menu: "Meni",
+    overview: "Apèsi",
+    digitalCapacity: "Kapasite Dijital",
+    roi: "ROI",
+    principles: "Prensip",
+    budget: "Bidjè",
+    workshops: "Atelye",
+    impact: "Enpak",
+    timeline: "Orè",
+    takeaways: "Pwen Kle",
+    proposal: "Pwopozisyon",
+    roadmap: "Wout",
+    smartSigns: "Siyal Entèlijan",
+    sustainability: "Durabilite",
+    aiToolkits: "Zouti IA",
+    impactRoi: "Enpak ak ROI"
   }
 };
 

@@ -201,5 +201,73 @@ Ce réseau couvre quatre quartiers de Miami et le pipeline complet K-12-à-gradu
     knightEligible: "Éléments en espèces éligibles Knight (matériel, infrastructure, développement, archive, contingence): $24 950",
     fundingRequested: "Financement demandé à Knight: $24 950",
     otherRevenue: "Comment d'autres revenus seront levés: Les trois lieux hôtes ont confirmé des lettres de soutien en nature couvrant la location d'espace, les collations et les opérateurs de caméra volontaires"
+  },
+
+  ht: {
+    // Page header
+    pageTitle: "Laboratwa Mobil IA AI24",
+    pageSubtitle: "Pwopozisyon pou Fon Ekspansyon Atizay + Teknoloji Knight",
+    backToOverview: "Retounen nan Apèsi",
+    readyToSupport: "Ou Pare pou Sipòte Kapasite Dijital?",
+    readyToSupportSubtitle: "Rantre nan nou pou bati premye enfrastrikti teknoloji kreyatif dirab Miami",
+    viewBudgetDetails: "Wè Detay Bidjè",
+
+    // Section titles
+    aboutTitle: "Di nou plis sou ou oswa òganizasyon ou (150 mo)",
+    oneSentenceTitle: "Kijan ou ta dekri pwojè ou nan yon fraz? (50 mo)",
+    activitiesTitle: "Dekri aktivite ki ta fèt ak sipò Fon Ekspansyon Atizay + Teknoloji Knight. (250 mo)",
+    outcomesTitle: "Dekri rezilta ki ta soti nan aplikasyon siksè aktivite ki dekri anwo yo. (250 mo)",
+    measurementTitle: "Kijan ou ap konnen pwojè sa a mennen nan rezilta sa yo?",
+    sustainabilityTitle: "Kijan ou ap kenbe rezilta pozitif efò a apre peryòd finansman an? Si sa pa vle di yon efò dirab, eksplike poukisa.",
+    partnersTitle: "Ki moun ki patnè ou yo nan pwojè sa a?",
+    budgetTitle: "Rezime Bidjè ak Revni",
+
+    // Content
+    about: `AI24 se yon estidyo teknoloji ki dirije pa atis ki te lanse pa Moises Sanabria (enjenyè IA Venezwelyen / atis nouvo medya) ak Fabiola Larios (atis nouvo medya Meksiken). Soti nan yon mikwo-lab andedan Bakehouse Art Complex nou bati zouti kreyatif bileng ak etik ke atis Latinx ak Afwo-Karayib yo ka reyèlman peye. Depi 2020 nou te:
+kouri sesyon atelye atizay-IA gratis an Anglè ak Panyòl,
+bati aplikasyon entènèt (atizay IA, siyalizasyon evènman ak sistèm jesyon aprantisaj), ak
+ede òganizasyon kiltirèl yo emèt pwogram yo.
+Modèl nou an se "nwayo ouvè, ekstra dirab": kòd baz la lage pou itilizasyon ki pa pou pwofi, pandan ke hosting prim ak analitik finanse mizajou. Tutoryèl yo se CC BY-NC pou pwofesè yo ka pataje yo lib. Ti pa chwa, nou itere rapid epi teste nan sovaj—premye nan Bakehouse, Lè sa a Locust Projects (Little Haiti). Patenarya sa yo bay laboratwa IA nou an reyèl rive katye san gwo depans jeneral.`,
+
+    oneSentence: `Lanse yon laboratwa mobil IA ki deplwaye 2 Siyal Entèlijan nivo mize, 12 estasyon aprantisaj mobil IA, ak yon Sistèm Jesyon Aprantisaj bileng atravè Bakehouse, Locust Projects, ak pi lwen—ekipe atis Miami ak teknoloji kreyatif ouvè ak etik ak yon tiyo konpetans ak kominikasyon oto-finanse ki kontinye grandi lontan apre sibvansyon an.`,
+
+    measurement: `Yon tablo analiz done piblik (Looker Studio dashboard) rale done an dirèk soti nan twa flit otomatik:
+1. Analiz Pwodwi (PostHog) anrejistre vizyon ekran ak klike kòd QR pou tou de Siyal Entèlijan yo ak aplikasyon entènèt la.
+2. Baz Done (Supabase) kaptire konplete kou LMS plis tags anonim lang ak sèks soti nan yon fòm koneksyon opsyonèl.
+3. YouTube / Streamlabs ajoute minit total difizyon an dirèk gade ak telespektatè pèk konkiran.
+Yon Fonksyon Edge Supabase rafrechi fèy sous la chak jou epi pouse yon snapshot CSV semèn nan yon repo GitHub piblik. API GitHub la tou lis pull-requests ekstèn ak fork, bay Knight yon nòt kòd ouvè an tan reyèl. Lyen tablo a epingle sou tou de Siyal Entèlijan yo yon fwa pa jou pou vizitè yo ka verifye nimewo yo tèt yo. Pa gen lojisyèl peye, pa gen done kache—nenpòt moun ka odit, remiks oswa rechèch chif yo.`,
+
+    sustainability: `Bakehouse Art Complex òganize estidyo laboratwa a, asiyen twa administratè pèsonèl, epi bay A/V pou kat Sprint Konpetans.
+Locust Projects bay espas ekspozisyon lobi, pouse apèl nan lis 12K abònman li yo, epi ko-dirije dezyèm blòk atelye a.
+Nou tou ap elaji lyen—bati atravè atelye anvan—ak senk enstitisyon Miami:
+Sant IA Miami Dade College, New World School of the Arts, Code/Art, FIU College of Communication, Edge Zones.
+Rezo sa a kouvri kat katye Miami ak tiyo konplè K-12-a-gradye, anplifye enpak san ajoute kòt nan bidjè Knight.`,
+
+    // Activity sections
+    techBuild: "Bati Teknoloji",
+    hardwareRollout: "Deplwaye Aparèy",
+    staffTraining: "Pèsonèl ak Fòmasyon",
+    communityEngagement: "Angajman Kominote",
+    logistics: "Lojistik",
+
+    // Outcome sections
+    accessSkills: "Aksè ak Konpetans",
+    visibility: "Vizibilite",
+    equity: "Egalite",
+    openTech: "Teknoloji Ouvè",
+    sustainabilityOutcomes: "Durabilite",
+    scalability: "Eskalabilite",
+
+    // Partner sections
+    bakehouse: "Bakehouse Art Complex",
+    locustProjects: "Locust Projects",
+    expandingNetwork: "Rezo k ap Elaji",
+    networkImpact: "Enpak Rezo",
+
+    // Budget items
+    totalBudget: "Bidjè total pwojè: $24 950",
+    knightEligible: "Eleman kach elijib Knight (aparéy, enfrastrikti, devlopman, achiv, kontenjans): $24 950",
+    fundingRequested: "Finansman mande nan Knight: $24 950",
+    otherRevenue: "Kijan lòt revni ap leve: Twa kote anfitròn yo te konfime lèt sipò an natir kouvri lwe espas, ti goute ak operatè kamera volontè"
   }
 }; 
