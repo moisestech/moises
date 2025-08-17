@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import "../../../styles/automation-tokens.css";
-import { WORKSHOP_PROMPS } from "../../../data/script";
-import { TextReveal } from "../../../components/magicui/text-reveal";
-import TerminalNav from "../../../components/automation/TerminalNav";
+import "@/styles/automation-tokens.css";
+import { WORKSHOP_PROMPS } from "@/data/script";
+import { TextReveal } from "@/components/magicui/text-reveal";
+import TerminalNav from "@/components/automation/TerminalNav";
 
 export default function WorkshopPage() {
   return (

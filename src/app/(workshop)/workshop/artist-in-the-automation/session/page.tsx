@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import "../../../../styles/automation-tokens.css";
+import "@/styles/automation-tokens.css";
 import Link from "next/link";
-import TerminalNav from "../../../../components/automation/TerminalNav";
+import TerminalNav from "@/components/automation/TerminalNav";
 
 export default function SessionPage() {
   return (

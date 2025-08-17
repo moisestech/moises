@@ -1,25 +1,25 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import "../../../../styles/automation-tokens.css";
+import "@/styles/automation-tokens.css";
 
-import { AgentKey } from "../../../../data/agents";
-import { SCRIPT, Cue, Agent } from "../../../../data/script";
+import { AgentKey } from "@/data/agents";
+import { SCRIPT, Cue, Agent } from "@/data/script";
 
-import NorthStar from "../../../../components/automation/NorthStar";
-import SegmentBumper from "../../../../components/automation/SegmentBumper";
-import AgentScreen from "../../../../components/automation/AgentScreen";
-import PoetryCaption from "../../../../components/automation/PoetryCaption";
-import TimelinePlayer from "../../../../components/automation/TimelinePlayer";
-import MusicDeck from "../../../../components/automation/MusicDeck";
-import CardPanel from "../../../../components/automation/CardPanel";
-import CreditLedger from "../../../../components/automation/CreditLedger";
-import OrgChart from "../../../../components/automation/OrgChart";
-import Ticker from "../../../../components/automation/Ticker";
-import HumanMinute from "../../../../components/automation/HumanMinute";
-import ModerationPanel from "../../../../components/automation/ModerationPanel";
-import FaultOverlay from "../../../../components/automation/FaultOverlay";
-import TerminalNav from "../../../../components/automation/TerminalNav";
+import NorthStar from "@/components/automation/NorthStar";
+import SegmentBumper from "@/components/automation/SegmentBumper";
+import AgentScreen from "@/components/automation/AgentScreen";
+import PoetryCaption from "@/components/automation/PoetryCaption";
+import TimelinePlayer from "@/components/automation/TimelinePlayer";
+import MusicDeck from "@/components/automation/MusicDeck";
+import CardPanel from "@/components/automation/CardPanel";
+import CreditLedger from "@/components/automation/CreditLedger";
+import OrgChart from "@/components/automation/OrgChart";
+import Ticker from "@/components/automation/Ticker";
+import HumanMinute from "@/components/automation/HumanMinute";
+import ModerationPanel from "@/components/automation/ModerationPanel";
+import FaultOverlay from "@/components/automation/FaultOverlay";
+import TerminalNav from "@/components/automation/TerminalNav";
 
 export default function PerformancePage() {
   // Current lines (what appears on each screen)
