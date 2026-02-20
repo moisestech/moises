@@ -235,14 +235,7 @@ export const fr = {
   revenueDescription: "Revenus annuels projetés des programmes et services",
   artistsServed: "Artistes Servis",
   artistsServedDescription: "Nombre d'artistes servis directement par le laboratoire",
-  viewDetailedImpactAnalysis: "Voir l'Analyse Détaillée d'Impact",
-
-  // Announcements Section
-  announcementsTitle: "Quoi de neuf à Oolite Arts",
-  announcementsSubtitle: "Expositions, événements et mises à jour des programmes",
-  featuredAnnouncements: "Annonces en Vedette",
-  viewAllAnnouncements: "Voir Toutes les Annonces",
-  learnMore: "En Savoir Plus"
+  viewDetailedImpactAnalysis: "Voir l'Analyse Détaillée d'Impact"
 };
 
 export const ht = {
@@ -476,14 +469,7 @@ export const ht = {
   revenueDescription: "Revni anyèl pwograme nan pwogram ak sèvis",
   artistsServed: "Atis Sèvi",
   artistsServedDescription: "Kantite atis sèvi dirèkteman pa laboratwa a",
-  viewDetailedImpactAnalysis: "Wè Analiz Detaye Enpak",
-
-  // Announcements Section
-  announcementsTitle: "Kisa ki nouvo nan Oolite Arts",
-  announcementsSubtitle: "Ekspozisyon, evènman ak aktyalizasyon pwogram",
-  featuredAnnouncements: "Anons En Vedèt",
-  viewAllAnnouncements: "Wè Tout Anons",
-  learnMore: "Plis Enfòmasyon"
+  viewDetailedImpactAnalysis: "Wè Analiz Detaye Enpak"
 };
 
 // Export the combined translations object

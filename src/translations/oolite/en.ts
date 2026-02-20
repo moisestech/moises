@@ -229,12 +229,5 @@ export const en = {
   revenueDescription: "Projected annual revenue from programs and services",
   artistsServed: "Artists Served",
   artistsServedDescription: "Number of artists directly served by the lab",
-  viewDetailedImpactAnalysis: "View Detailed Impact Analysis",
-
-  // Announcements Section
-  announcementsTitle: "What's New at Oolite Arts",
-  announcementsSubtitle: "Exhibitions, events, and program updates",
-  featuredAnnouncements: "Featured Announcements",
-  viewAllAnnouncements: "View All Announcements",
-  learnMore: "Learn More"
+  viewDetailedImpactAnalysis: "View Detailed Impact Analysis"
 };
