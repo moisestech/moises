@@ -23,6 +23,7 @@ import {
   X, 
   Home, 
   Zap, 
+  Megaphone,
   TrendingUp, 
   Scale, 
   GraduationCap, 
@@ -75,6 +76,7 @@ const OoliteLogo = ({ className = '', size = 'md' }: { className?: string; size?
 // Navigation (links to pages) with icons
 const navigation = [
   { name: 'Overview', href: '/tech-nonprofit/oolite', key: 'overview', icon: Home },
+  { name: 'Announcements', href: '/tech-nonprofit/oolite/announcements', key: 'announcements', icon: Megaphone },
   { name: 'Roadmap', href: '/tech-nonprofit/oolite/roadmap', key: 'roadmap', icon: Map },
   { name: 'Budget', href: '/tech-nonprofit/oolite/budget', key: 'budget', icon: DollarSign },
   { name: 'Workshops', href: '/tech-nonprofit/oolite/workshops', key: 'workshops', icon: BookOpen },
@@ -88,6 +90,7 @@ const translations = {
   en: {
     menu: "Menu",
     overview: "Overview",
+    announcements: "Announcements",
     timeline: "Timeline",
     budget: "Budget",
     workshops: "Workshops",
@@ -100,6 +103,7 @@ const translations = {
   es: {
     menu: "Menú",
     overview: "Resumen",
+    announcements: "Anuncios",
     timeline: "Cronograma",
     budget: "Presupuesto",
     workshops: "Talleres",
@@ -112,6 +116,7 @@ const translations = {
   fr: {
     menu: "Menu",
     overview: "Aperçu",
+    announcements: "Annonces",
     timeline: "Calendrier",
     budget: "Budget",
     workshops: "Ateliers",
@@ -124,6 +129,7 @@ const translations = {
   ht: {
     menu: "Meni",
     overview: "Apèsi",
+    announcements: "Anons",
     timeline: "Orè",
     budget: "Bidjè",
     workshops: "Atelye",

@@ -48,6 +48,7 @@ import Link from 'next/link';
 import { SparklesText } from "@/components/magicui/sparkles-text";
 import { MorphingText } from "@/components/magicui/morphing-text";
 import { HyperText } from "@/components/magicui/hyper-text";
+import { OoliteAnnouncementsSection } from "@/components/page/OoliteAnnouncementsSection";
 
 interface TimelineItem {
   quarter: string;
@@ -81,11 +82,6 @@ export default function OoliteDigitalOverviewPage() {
       overview: "https://res.cloudinary.com/dck5rzi4h/image/upload/v1743021790/own-your-digital-presence/website-building-workshop-focus_wvkiwk.jpg"
     }
   };
-
-  // Debug: Log current language and translation object
-  console.log('Current language:', language);
-  console.log('Translation object:', t);
-  console.log('Hero title:', t?.heroTitle);
 
   const timelineItems: TimelineItem[] = [
     {
@@ -789,6 +785,13 @@ export default function OoliteDigitalOverviewPage() {
             </div>
           </div>
         </motion.section>
+
+        {/* Announcements Section */}
+        <OoliteAnnouncementsSection
+          limit={4}
+          showViewAll={true}
+          compact={true}
+        />
 
         {/* Call to Action */}
         <motion.section

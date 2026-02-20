@@ -229,5 +229,12 @@ export const es = {
   revenueDescription: "Ingresos anuales proyectados de programas y servicios",
   artistsServed: "Artistas Atendidos",
   artistsServedDescription: "Número de artistas atendidos directamente por el laboratorio",
-  viewDetailedImpactAnalysis: "Ver Análisis Detallado de Impacto"
+  viewDetailedImpactAnalysis: "Ver Análisis Detallado de Impacto",
+
+  // Announcements Section
+  announcementsTitle: "Qué hay de nuevo en Oolite Arts",
+  announcementsSubtitle: "Exposiciones, eventos y actualizaciones de programas",
+  featuredAnnouncements: "Anuncios Destacados",
+  viewAllAnnouncements: "Ver Todos los Anuncios",
+  learnMore: "Más Información"
 };
