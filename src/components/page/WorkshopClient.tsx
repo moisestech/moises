@@ -1,280 +1,493 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
+import { ArrowUpRight, Mail, CheckCircle, Building2, Users, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
+import { track } from '@/lib/analytics'
 
-// Import Three.js components with dynamic loading to avoid SSR issues
 const WorkshopCanvas = dynamic(
   () => import('@/components/canvas/WorkshopCanvas'),
   { ssr: false }
 )
 
+/** Append UTM params from current URL to a base path or URL */
+function useUtmUrl(baseUrl: string): string {
+  const [url, setUrl] = useState(baseUrl)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const utm = ['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term']
+    const u = new URLSearchParams()
+    utm.forEach((k) => {
+      const v = params.get(k)
+      if (v) u.set(k, v)
+    })
+    const qs = u.toString()
+    const sep = baseUrl.includes('?') ? '&' : (baseUrl.startsWith('/') ? '?' : '&')
+    setUrl(qs ? `${baseUrl}${sep}${qs}` : baseUrl)
+  }, [baseUrl])
+  return url
+}
+
+const WORKSHOP_FEATURES = [
+  {
+    title: 'Digital Presence',
+    description: 'Build and optimize your online portfolio and website.',
+    link: '/workshop/own-your-digital-presence',
+    disabled: false,
+    instructor: null,
+    instructorRole: null,
+  },
+  {
+    title: 'SEO Workshop',
+    description: 'Get found, get seen, and expand your reach with search engine optimization strategies.',
+    link: 'https://fabiola.io/workshop_seo/index.html',
+    disabled: false,
+    instructor: 'Fabiola Larios',
+    instructorRole: 'SEO Workshop Lead',
+    instructorAvatar: 'https://ui-avatars.com/api/?name=Fabiola+Larios&background=7c3aed&color=fff&size=64',
+  },
+  {
+    title: 'Scale Tech Non-Profits',
+    description: 'Custom software solutions to help your organization and community grow.',
+    link: '/workshop/tech-nonprofit',
+    disabled: false,
+    instructor: null,
+    instructorRole: null,
+  },
+  {
+    title: 'The Art of AI Agents',
+    description: 'Artist task automation—n8n, AI agents, and workflow design.',
+    link: '/workshop/the-art-of-ai-agents',
+    disabled: false,
+    instructor: null,
+    instructorRole: null,
+  },
+  {
+    title: 'AI & Art',
+    description: 'Learn how to integrate AI tools into your creative process.',
+    link: '/workshop/ai-and-the-arts',
+    disabled: true,
+    instructor: null,
+    instructorRole: null,
+  },
+  {
+    title: 'The Art of AI Marketing',
+    description: 'Learn how to stand out in the age of AI-generated content.',
+    link: '/workshop/the-art-of-ai-marketing',
+    disabled: true,
+    instructor: null,
+    instructorRole: null,
+  },
+]
+
 export default function WorkshopClient() {
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const contactUrl = useUtmUrl(WORKSHOP_HUB.CTA_INSTITUTIONS.LINK)
+  const calendlyUrl = useUtmUrl(CALENDLY_URL)
+
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+    setLoading(true)
+    try {
+      const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          utm_source: params.get('utm_source'),
+          utm_campaign: params.get('utm_campaign'),
+          utm_medium: params.get('utm_medium'),
+          utm_content: params.get('utm_content'),
+          utm_term: params.get('utm_term'),
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Failed')
+      setSubmitted(true)
+      track('waitlist_submit_success', { source: 'talk_hub' })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black">
-      {/* Canvas Background - will be loaded client-side only */}
+    <main className="relative flex min-h-screen flex-col items-center overflow-hidden bg-black">
       <div className="absolute inset-0 z-0">
         <WorkshopCanvas />
       </div>
-      
-      {/* Gradient overlay for better text readability */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none"></div>
-      
-      {/* Content Overlay */}
-      <div className="relative z-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          {/* Glowing title with animation */}
-          <div className="glow-container mb-6 relative">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-6 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-transparent animate-text-gradient"
-            >
-              <span className="block hover-lift transition-transform duration-300">Art × Technology</span>
-              <span className="block hover-lift transition-transform duration-300">Workshops</span>
-            </motion.h1>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 1 }}
-              className="glow-effect absolute inset-0 blur-xl opacity-30 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"
-            />
-          </div>
-          
-          {/* Animated subtitle */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="mx-auto mb-8 max-w-2xl text-lg sm:text-xl text-white/80 animate-fade-in hover-lift transition-transform duration-300"
-          >
-            Explore the intersection of creativity and innovation through 
-            immersive learning experiences designed for artists and technologists.
-          </motion.p>
-          
-          {/* Animated workshop link */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-10 animate-float"
-          >
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none" />
+
+      <div className="relative z-10 w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Hub note - mobile-first, QR context */}
+        <p className="text-center text-white/50 text-xs sm:text-sm mb-6">
+          {WORKSHOP_HUB.FOOTER.NOTE}
+        </p>
+
+        {/* Hero - mobile-first: headline + value prop above fold */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 sm:mb-12"
+        >
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3">
+            {WORKSHOP_HUB.HERO.HEADLINE}
+          </h1>
+          <p className="text-lg sm:text-xl text-purple-300 font-medium mb-2 sm:mb-4">
+            {WORKSHOP_HUB.HERO.SUBHEADLINE}
+          </p>
+          <p className="text-white/80 text-sm sm:text-base max-w-2xl mx-auto">
+            {WORKSHOP_HUB.HERO.VALUE_PROP}
+          </p>
+        </motion.div>
+
+        {/* Two CTA cards - stacked on mobile, side-by-side on desktop */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-16"
+        >
+          {/* Card A: Institutions → /contact */}
+          <div className="backdrop-blur-md bg-white/10 p-4 sm:p-6 rounded-xl border border-white/10 flex flex-col">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+              <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+              <h2 className="text-lg sm:text-xl font-bold text-white">
+                {WORKSHOP_HUB.CTA_INSTITUTIONS.TITLE}
+              </h2>
+            </div>
+            <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6 text-white/80 text-xs sm:text-sm">
+              {WORKSHOP_HUB.CTA_INSTITUTIONS.BULLETS.map((b, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400 mt-0.5 shrink-0" />
+                  {b}
+                </li>
+              ))}
+            </ul>
             <Link
-              href="/workshop/own-your-digital-presence"
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white transition-all duration-300 ease-out hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(79,70,229,0.8)]"
+              href={contactUrl}
+              onClick={() => track('cta_institutions_click', { source: 'talk_hub' })}
+              className="mt-auto w-full inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3.5 sm:py-3 text-white font-medium hover:opacity-90 transition-opacity min-h-[44px] text-sm sm:text-base"
+              aria-label={WORKSHOP_HUB.CTA_INSTITUTIONS.BUTTON_LABEL}
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-0 transition-opacity group-hover:opacity-100"></span>
-              <span className="absolute inset-0 flex justify-center items-center">
-                <span className="h-full w-full animate-spin-slow bg-[conic-gradient(from_0deg,transparent_0%,white_10%,transparent_80%)] opacity-0 group-hover:opacity-20"></span>
-              </span>
-              <span className="relative flex items-center gap-2 font-medium transition-all duration-300">
-                Own Your Digital Presence Workshop
-                <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </span>
+              {WORKSHOP_HUB.CTA_INSTITUTIONS.BUTTON_LABEL}
+              <ArrowUpRight className="w-4 h-4" />
             </Link>
-          </motion.div>
-          
-          {/* Workshop features */}
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-left">
-            {[
-              {
-                title: "Digital Presence",
-                description: "Build and optimize your online portfolio and website.",
-                link: "/workshop/own-your-digital-presence",
-                disabled: false
-              },
-              {
-                title: "SEO Workshop",
-                description: "Get found, get seen, and expand your reach with search engine optimization strategies.",
-                link: "https://fabiola.io/workshop_seo/index.html",
-                disabled: false
-              },
-              {
-                title: "Scale Tech Non-Profits",
-                description: "Custom software solutions to help your organization and community grow.",
-                link: "/workshop/tech-nonprofit",
-                disabled: false
-              },
-              {
-                title: "AI & Art",
-                description: "Learn how to integrate AI tools into your creative process.",
-                link: "/workshop/ai-and-the-arts",
-                disabled: true
-              },
-              {
-                title: "The Art of AI Marketing",
-                description: "Learn how to stand out in the age of AI-generated content.",
-                link: "/workshop/the-art-of-ai-marketing",
-                disabled: true
-              }
-            ].map((feature, index) => (
+          </div>
+
+          {/* Card B: Workshop Waitlist */}
+          <div className="backdrop-blur-md bg-white/10 p-4 sm:p-6 rounded-xl border border-white/10 flex flex-col">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+              <Users className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+              <h2 className="text-lg sm:text-xl font-bold text-white">
+                {WORKSHOP_HUB.CTA_WORKSHOP.TITLE}
+              </h2>
+            </div>
+            <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6 text-white/80 text-xs sm:text-sm">
+              {WORKSHOP_HUB.CTA_WORKSHOP.BULLETS.map((b, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400 mt-0.5 shrink-0" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+            {submitted ? (
+              <div className="mt-auto">
+                <p className="text-green-400 text-sm font-medium flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 shrink-0" />
+                  You&apos;re on the list. Check your inbox soon.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleWaitlistSubmit} className="mt-auto space-y-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  inputMode="email"
+                  autoComplete="email"
+                  className="w-full rounded-lg bg-black/30 border border-white/20 px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 min-h-[44px] text-base"
+                  aria-label="Email for workshop waitlist"
+                />
+                {error && (
+                  <p className="text-red-400 text-sm">{error}</p>
+                )}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3.5 sm:py-3 text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50 min-h-[44px] text-sm sm:text-base"
+                >
+                  {loading ? 'Joining…' : WORKSHOP_HUB.CTA_WORKSHOP.BUTTON_LABEL}
+                </button>
+              </form>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Get the resources - mini-section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mb-12 sm:mb-16"
+        >
+          <h2 className="text-base sm:text-lg font-semibold text-white/90 mb-4 text-center">
+            Get the resources
+          </h2>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+            {WORKSHOP_HUB.RESOURCES.map((r, i) =>
+              r.external ? (
+                <a
+                  key={i}
+                  href={calendlyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-200 text-sm sm:text-base transition-colors"
+                >
+                  <Download className="w-4 h-4 shrink-0" />
+                  {r.label}
+                </a>
+              ) : (
+                <Link
+                  key={i}
+                  href={r.href}
+                  className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-200 text-sm sm:text-base transition-colors"
+                >
+                  <Download className="w-4 h-4 shrink-0" />
+                  {r.label}
+                </Link>
+              )
+            )}
+          </div>
+        </motion.section>
+
+        {/* What you'll leave with */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-16"
+        >
+          <h2 className="text-lg font-semibold text-white/90 mb-4 text-center">
+            What you&apos;ll leave with
+          </h2>
+          <ul className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+            {WORKSHOP_HUB.WHAT_YOU_LEAVE_WITH.map((item, i) => (
+              <li
+                key={i}
+                className="flex items-center gap-2 text-white/80 text-sm sm:text-base"
+              >
+                <CheckCircle className="w-4 h-4 text-purple-400 shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </motion.section>
+
+        {/* About + Trust signals */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-16 text-center"
+        >
+          <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto mb-4">
+            {WORKSHOP_HUB.ABOUT.BIO}
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 text-white/50 text-xs sm:text-sm">
+            {WORKSHOP_HUB.ABOUT.TRUST_SIGNALS.map((sig, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10"
+              >
+                <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center shrink-0">
+                  {sig.logo ? (
+                    <Image src={sig.logo} alt="" width={24} height={24} />
+                  ) : (
+                    <span className="text-white/30 text-[10px] font-medium">
+                      {sig.name.slice(0, 2).toUpperCase()}
+                    </span>
+                  )}
+                </div>
+                <span>{sig.name}</span>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Explore our workshops */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <h2 className="text-xl font-bold text-white mb-6 text-center">
+            Explore our workshops
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {WORKSHOP_FEATURES.map((feature, index) => (
               feature.disabled ? (
-                <motion.div 
+                <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
-                  className="backdrop-blur-md bg-white/5 p-6 rounded-xl transform transition-all duration-300 card-glass h-full flex flex-col border border-white/10 relative overflow-hidden cursor-not-allowed"
+                  transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                  className="backdrop-blur-md bg-white/5 p-6 rounded-xl border border-white/10 relative overflow-hidden cursor-not-allowed"
                 >
-                  <div className="absolute inset-0 bg-black/30 z-10"></div>
+                  <div className="absolute inset-0 bg-black/30 z-10" />
                   <div className="absolute top-3 right-3 z-20">
-                    <span className="bg-purple-500/80 text-white text-xs px-2 py-1 rounded-full">Coming Soon</span>
+                    <span className="bg-purple-500/80 text-white text-xs px-2 py-1 rounded-full">
+                      Coming Soon
+                    </span>
                   </div>
                   <div className="relative z-0">
-                    <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400/50 to-purple-400/50 bg-clip-text text-transparent">
+                    <h3 className="text-lg font-bold text-white/70 mb-2">
                       {feature.title}
                     </h3>
-                    <p className="text-white/50">
-                      {feature.description}
-                    </p>
+                    <p className="text-white/50 text-sm">{feature.description}</p>
                   </div>
                 </motion.div>
               ) : (
-                <Link 
+                <Link
                   href={feature.link}
                   key={index}
                   target={feature.link.startsWith('http') ? '_blank' : '_self'}
                   rel={feature.link.startsWith('http') ? 'noopener noreferrer' : ''}
-                  className="group"
+                  className="group block"
+                  onClick={() =>
+                    track('workshop_card_click', { workshop: feature.title })
+                  }
                 >
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
-                    className="backdrop-blur-md bg-white/10 p-6 rounded-xl transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(147,51,234,0.5)] card-glass cursor-pointer h-full flex flex-col border border-white/10 group-hover:border-purple-500/50 relative overflow-hidden"
+                    transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                    className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/10 hover:border-purple-500/50 transition-all h-full flex flex-col"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:via-purple-500/5 group-hover:to-purple-500/10 transition-all duration-500"></div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(147,51,234,0.2),rgba(0,0,0,0))]"></div>
-                    </div>
-                    <div className="relative z-10">
-                      <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-pink-300 transition-all duration-300">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">
                         {feature.title}
                       </h3>
-                      <p className="text-white/70 group-hover:text-white/90 transition-colors duration-300">
-                        {feature.description}
-                      </p>
-                      <div className="mt-4 flex items-center text-purple-300 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                        <span className="text-sm font-medium">Explore workshop</span>
-                        <ArrowUpRight className="h-4 w-4 ml-1" />
-                      </div>
+                      <ArrowUpRight className="w-4 h-4 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                     </div>
+                    <p className="text-white/70 text-sm mb-3 flex-1">
+                      {feature.description}
+                    </p>
+                    {feature.instructor && (
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center overflow-hidden shrink-0">
+                          {feature.instructorAvatar ? (
+                            <Image
+                              src={feature.instructorAvatar}
+                              alt={feature.instructor}
+                              width={32}
+                              height={32}
+                              className="object-cover"
+                            />
+                          ) : (
+                            <span className="text-purple-400/80 text-xs font-medium">
+                              {feature.instructor
+                                .split(' ')
+                                .map((n) => n[0])
+                                .join('')}
+                            </span>
+                          )}
+                        </div>
+                        <div>
+                          <p className="text-purple-400/90 text-xs font-medium">
+                            with {feature.instructor}
+                          </p>
+                          {feature.instructorRole && (
+                            <p className="text-white/50 text-[10px]">
+                              {feature.instructorRole}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </motion.div>
                 </Link>
               )
             ))}
           </div>
-        </div>
+        </motion.section>
+
+        {/* Footer */}
+        <motion.footer
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="mt-16 pt-8 border-t border-white/10 text-center"
+        >
+          <a
+            href={`mailto:${WORKSHOP_HUB.FOOTER.EMAIL}`}
+            className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            {WORKSHOP_HUB.FOOTER.EMAIL}
+          </a>
+          <p className="mt-4 text-white/50 text-sm">
+            Artist Tech Initiative —{' '}
+            <Link href="https://moises.tech" target="_blank" className="underline hover:text-white">
+              Moises Sanabria
+            </Link>
+            {' & '}
+            <Link href="https://fabiola.io" target="_blank" className="underline hover:text-white">
+              Fabiola Larios
+            </Link>
+          </p>
+        </motion.footer>
       </div>
 
-      {/* Glass footer with credits */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-0 left-0 right-0 backdrop-blur-md bg-white/10 p-4 text-center text-white/60 text-sm"
-      >
-        <p>
-          Artist Tech Initiative — 
-          <Link href="https://moises.tech" target="_blank" className="underline hover:text-white transition-colors">
-            Moises Sanabria & Fabiola Larios
-          </Link>
-        </p>
-      </motion.div>
-
-      {/* Add some global styles for animations */}
       <style jsx global>{`
         @keyframes text-gradient {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
-        
         @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
-        
         @keyframes float {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
         }
-        
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
         @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
-        
+        @keyframes glow {
+          0% { opacity: 0.2; transform: scale(0.95); }
+          100% { opacity: 0.4; transform: scale(1.05); }
+        }
         .animate-text-gradient {
           background-size: 200% auto;
           animation: text-gradient 5s ease infinite;
         }
-        
         .animate-fade-in {
           animation: fade-in 1s ease-out forwards;
         }
-        
         .animate-float {
           animation: float 4s ease-in-out infinite;
         }
-        
         .animate-spin-slow {
           animation: spin-slow 8s linear infinite;
         }
-        
-        .hover-lift:hover {
-          transform: translateY(-3px);
-        }
-        
-        .glow-effect {
-          animation: glow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-          0% {
-            opacity: 0.2;
-            transform: scale(0.95);
-          }
-          100% {
-            opacity: 0.4;
-            transform: scale(1.05);
-          }
-        }
-        
-        .card-glass {
-          position: relative;
-          overflow: hidden;
-        }
-        
         .card-glass::before {
           content: '';
           position: absolute;
@@ -290,11 +503,10 @@ export default function WorkshopClient() {
           );
           transition: 0.5s;
         }
-        
         .card-glass:hover::before {
           left: 100%;
         }
       `}</style>
     </main>
   )
-} 
+}

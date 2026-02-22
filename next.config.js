@@ -15,6 +15,7 @@ const nextConfig = {
     ],
     domains: [
       'example.com',
+      'ui-avatars.com',
       'res.cloudinary.com',
       'www.augustoesquivel.com',
       'shawnamoulton.com',
