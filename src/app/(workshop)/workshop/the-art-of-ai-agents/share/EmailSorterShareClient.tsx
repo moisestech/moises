@@ -1,0 +1,304 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Copy, Check, ExternalLink, ArrowLeft, Instagram } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const SLIDES_URL =
+  'https://www.canva.com/design/DAG8XUDbk08/WLDVoo18PxMVv9kem2jPxw/view?utm_content=DAG8XUDbk08&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea00d41ad3';
+
+const PROMPT_FIELD = `Topic: {{ $json.subject }}
+Description: {{ $json.text }}
+Sender: {{ $json.from.text }}`;
+
+const SYSTEM_MESSAGE = `** role **
+You are an email assistant for a working artist. Your job is to reduce inbox stress by assigning ONE clear label to each incoming email.
+
+** categories (return exactly one of these, lowercase) **
+- urgent: time-sensitive, needs action today (deadlines, contract issues, payment problems, shipping problems, venue emergencies)
+- opportunities: open calls, grants, residencies, commissions, curatorial invitations, speaking gigs
+- exhibitions: show logistics, install schedules, openings, curator communications, loan agreements
+- studio_admin: invoices, payments, receipts, shipping, taxes, contracts, paperwork, insurance, W-9s
+- press: interviews, press requests, image requests, publication, podcast, PR
+- newsletters: mailing lists, Substack, event blasts, platform updates, non-urgent updates
+- personal: friends/family, personal messages not related to work
+- spam: suspicious, promotional junk, scams, irrelevant cold outreach
+
+** rules **
+- Read the subject, body, and sender.
+- Pick the single best category.
+- If unsure, return "newsletters" (default safe bucket).
+- Do not invent new labels.
+
+** output format (json only) **
+{ "email_label": "opportunities" }`;
+
+const GMAIL_LABELS = `urgent
+opportunities
+exhibitions
+studio_admin
+press
+newsletters
+personal
+spam`;
+
+function CopyBlock({
+  label,
+  description,
+  content,
+  copiedId,
+  onCopy,
+  blockId,
+}: {
+  label: string;
+  description: string;
+  content: string;
+  copiedId: string | null;
+  onCopy: (id: string) => void;
+  blockId: string;
+}) {
+  const [plainText, setPlainText] = useState(false);
+  const isCopied = copiedId === blockId;
+
+  return (
+    <div className="rounded-xl border border-white/10 bg-black/40 overflow-hidden mb-6 backdrop-blur-sm">
+      <div className="px-4 py-3 border-b border-white/10 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h3 className="font-semibold text-white text-sm">{label}</h3>
+          <p className="text-white/60 text-xs mt-0.5">{description}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setPlainText(!plainText)}
+            className="text-xs text-white/60 hover:text-white transition-colors"
+          >
+            {plainText ? 'View as code' : 'View as plain text'}
+          </button>
+          <button
+            onClick={() => onCopy(blockId)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7f5af0] hover:bg-[#8b6cf7] text-white text-xs font-medium transition-colors"
+          >
+            {isCopied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+            {isCopied ? 'Copied!' : 'Copy'}
+          </button>
+        </div>
+      </div>
+      <pre
+        className={`p-4 text-xs sm:text-sm leading-relaxed overflow-x-auto whitespace-pre-wrap font-mono text-white/90 ${
+          plainText ? 'bg-transparent' : ''
+        }`}
+      >
+        {content}
+      </pre>
+    </div>
+  );
+}
+
+export default function EmailSorterShareClient() {
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopy = async (id: string, content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = content;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-[#0a0a0f] text-[#e0e0e0]">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl"
+          style={{ background: 'radial-gradient(circle, #7f5af0 0%, transparent 70%)' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-15 blur-3xl"
+          style={{ background: 'radial-gradient(circle, #ff6ac1 0%, transparent 70%)' }}
+        />
+      </div>
+
+      <div className="relative max-w-2xl mx-auto px-4 py-12 sm:py-16 pt-20">
+        <Link
+          href="/workshop/the-art-of-ai-agents"
+          className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to workshop
+        </Link>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1
+            className="text-2xl sm:text-3xl font-bold mb-2"
+            style={{
+              background: 'linear-gradient(135deg, #7f5af0 0%, #ff6ac1 50%, #42d392 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Email Sorter Handout
+          </h1>
+          <p className="text-white/70 text-sm sm:text-base mb-8">
+            Copy each block into n8n. Scan the QR from the slide to get here.
+          </p>
+
+          {/* Block A: Prompt field */}
+          <CopyBlock
+            blockId="prompt"
+            label="Block A — Prompt field"
+            description="Paste this in the n8n node that sends the email data TO the AI (e.g. Set node or the message input). Uses n8n expressions to pass subject, body, sender."
+            content={PROMPT_FIELD}
+            copiedId={copiedId}
+            onCopy={(id) => handleCopy(id, PROMPT_FIELD)}
+          />
+
+          {/* Block B: System message */}
+          <CopyBlock
+            blockId="system"
+            label="Block B — System message"
+            description="Paste this in the AI Agent node's System Message field. This defines the assistant's role and categories."
+            content={SYSTEM_MESSAGE}
+            copiedId={copiedId}
+            onCopy={(id) => handleCopy(id, SYSTEM_MESSAGE)}
+          />
+
+          {/* Gmail labels */}
+          <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 overflow-hidden mb-8 backdrop-blur-sm">
+            <div className="px-4 py-3 border-b border-amber-500/20 flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 className="font-semibold text-white text-sm">Gmail labels</h3>
+                <p className="text-amber-400/90 text-xs mt-0.5">
+                  Create these labels in Gmail exactly as shown (lowercase). Your Switch/filter outputs must match.
+                </p>
+              </div>
+              <button
+                onClick={() => handleCopy('gmail', GMAIL_LABELS)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7f5af0] hover:bg-[#8b6cf7] text-white text-xs font-medium transition-colors"
+              >
+                {copiedId === 'gmail' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiedId === 'gmail' ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
+            <pre className="p-4 text-xs sm:text-sm leading-relaxed overflow-x-auto whitespace-pre-wrap font-mono text-white/90">
+              {GMAIL_LABELS}
+            </pre>
+            <p className="px-4 pb-4 text-amber-400/80 text-xs">
+              ⚠️ If your label is studio/admin but the AI outputs studio_admin, routing breaks. Match exactly.
+            </p>
+          </div>
+
+          {/* Slides link */}
+          <div className="rounded-xl border border-white/10 bg-white/5 p-6 mb-12 backdrop-blur-sm hover:border-[#7f5af0]/30 transition-colors">
+            <h2 className="text-lg font-semibold mb-2">Workshop slides</h2>
+            <p className="text-white/70 text-sm mb-4">Follow along with the full presentation.</p>
+            <a
+              href={SLIDES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#42d392] hover:text-[#67e8f9] font-medium transition-colors"
+            >
+              Open slides on Canva
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* 360 Experiences */}
+          <div className="rounded-xl border border-white/10 bg-white/5 p-6 mb-12 backdrop-blur-sm">
+            <div className="flex items-start gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#7f5af0]/30 to-[#ff6ac1]/30 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                <Image
+                  src="https://ui-avatars.com/api/?name=Fabiola+Larios&background=7f5af0&color=fff&size=128"
+                  alt="Fabiola Larios"
+                  width={64}
+                  height={64}
+                  className="rounded-full object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold mb-1">360 Experiences</h2>
+                <p className="text-white/70 text-sm mb-1">
+                  Immersive 360° photo captures of exhibitions and studios.
+                </p>
+                <p className="text-[#7f5af0] text-sm font-medium">
+                  Fabiola Larios — Director of Digital at Oolite Arts, 360 Lead
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* About Us */}
+          <div className="rounded-xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-sm">
+            <h2 className="text-xl font-bold text-center mb-8">About us</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden mb-4">
+                  <Image
+                    src="https://ui-avatars.com/api/?name=Moises+Sanabria&background=7f5af0&color=fff&size=128"
+                    alt="Moises Sanabria"
+                    width={96}
+                    height={96}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="font-semibold text-lg mb-1">Moises Sanabria</h3>
+                <p className="text-white/70 text-sm mb-3">
+                  Technical Director of Digital at Oolite Arts. Builds automation tools.
+                </p>
+                <a
+                  href="https://instagram.com/moisesdsanabria"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#7f5af0] hover:text-[#8b6cf7] text-sm transition-colors"
+                >
+                  <Instagram className="w-4 h-4" />
+                  @moisesdsanabria
+                </a>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden mb-4">
+                  <Image
+                    src="https://ui-avatars.com/api/?name=Fabiola+Larios&background=ff6ac1&color=fff&size=128"
+                    alt="Fabiola Larios"
+                    width={96}
+                    height={96}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="font-semibold text-lg mb-1">Fabiola Larios</h3>
+                <p className="text-white/70 text-sm mb-3">
+                  Director of Digital at Oolite Arts. SEO & digital presence workshops. 360 Lead.
+                </p>
+                <a
+                  href="https://instagram.com/fabiolalariosm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#7f5af0] hover:text-[#8b6cf7] text-sm transition-colors"
+                >
+                  <Instagram className="w-4 h-4" />
+                  @fabiolalariosm
+                </a>
+              </div>
+            </div>
+            <p className="text-center text-white/50 text-xs mt-6">Follow us on IG</p>
+          </div>
+        </motion.div>
+      </div>
+    </main>
+  );
+}

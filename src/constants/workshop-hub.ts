@@ -7,14 +7,12 @@ export const CALENDLY_URL =
   "https://calendly.com/moisestech/15-minute-meeting";
 
 export const WORKSHOP_HUB = {
-  PAGE_TITLE: "Talk Hub",
-  PAGE_SUBTITLE: "Automation Workshop + Partnerships",
+  PAGE_TITLE: "Art & Technology Workshops",
+  PAGE_SUBTITLE: "Talk Hub",
 
   HERO: {
-    HEADLINE: "Talk Hub",
-    SUBHEADLINE: "Automation & partnerships for artists and orgs",
-    VALUE_PROP:
-      "Automation, institutional memory, and cognitive offloading—so you can focus on making.",
+    HEADLINE: "Art & Technology Workshops",
+    SUBHEADLINE: "Talk Hub — Automation & partnerships for artists and orgs",
   },
 
   CTA_INSTITUTIONS: {
@@ -50,23 +48,39 @@ export const WORKSHOP_HUB = {
       href: "/workshop/the-art-of-ai-agents",
       description: "Slides, notes, and resources",
       external: false,
+      icon: "package",
     },
     {
       label: "Example automations",
       href: "/workshop/the-art-of-ai-agents#examples",
       description: "Coming soon",
       external: false,
+      icon: "cog",
     },
     {
       label: "Book a discovery call",
       href: CALENDLY_URL,
       description: "15-min meet & greet",
       external: true,
+      icon: "phone",
     },
   ],
 
   ABOUT: {
-    BIO: "Moises Sanabria is Technical Director of Digital at Oolite Arts and co-founder of Artist Tech Initiative. He builds automation tools and teaches artists to offload repetitive tasks so they can focus on making. Fabiola Larios leads the SEO / digital presence workshops.",
+    MOISES: {
+      name: "Moises Sanabria",
+      role: "Technical Director of Digital at Oolite Arts",
+      bio: "Builds automation tools, institutional digital infrastructure, and teaches artists to offload repetitive tasks.",
+      avatar: "https://ui-avatars.com/api/?name=Moises+Sanabria&background=7f5af0&color=fff&size=128",
+      instagram: "moisesdsanabria",
+    },
+    FABIOLA: {
+      name: "Fabiola Larios",
+      role: "Director of Digital at Oolite Arts",
+      bio: "SEO & digital presence workshops. 360 Lead Director of Digital. Immersive 360° captures of exhibitions and studios.",
+      avatar: "https://ui-avatars.com/api/?name=Fabiola+Larios&background=ff6ac1&color=fff&size=128",
+      instagram: "fabiolalariosm",
+    },
     TRUST_SIGNALS: [
       { name: "Oolite Arts", logo: null },
       { name: "Locust Projects", logo: null },
@@ -76,6 +90,5 @@ export const WORKSHOP_HUB = {
 
   FOOTER: {
     EMAIL: "m@moises.tech",
-    NOTE: "This page is the hub — scan the QR at the talk for quick access.",
   },
 } as const;

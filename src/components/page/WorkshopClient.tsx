@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowUpRight, Mail, CheckCircle, Building2, Users, Download } from 'lucide-react'
+import { ArrowUpRight, Mail, CheckCircle, Building2, Users, Package, Settings, Phone, Instagram } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
 import { track } from '@/lib/analytics'
@@ -131,26 +131,27 @@ export default function WorkshopClient() {
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        {/* Hub note - mobile-first, QR context */}
-        <p className="text-center text-white/50 text-xs sm:text-sm mb-6">
-          {WORKSHOP_HUB.FOOTER.NOTE}
-        </p>
-
-        {/* Hero - mobile-first: headline + value prop above fold */}
+        {/* Hero - flashy headline, mobile-friendly */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-8 sm:mb-12"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3">
+          <h1
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3"
+            style={{
+              background: 'linear-gradient(135deg, #a78bfa 0%, #22d3ee 50%, #f472b6 100%)',
+              backgroundSize: '200% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: '0 0 40px rgba(167, 139, 250, 0.3)',
+            }}
+          >
             {WORKSHOP_HUB.HERO.HEADLINE}
           </h1>
-          <p className="text-lg sm:text-xl text-purple-300 font-medium mb-2 sm:mb-4">
+          <p className="text-lg sm:text-xl text-purple-300/90 font-medium">
             {WORKSHOP_HUB.HERO.SUBHEADLINE}
-          </p>
-          <p className="text-white/80 text-sm sm:text-base max-w-2xl mx-auto">
-            {WORKSHOP_HUB.HERO.VALUE_PROP}
           </p>
         </motion.div>
 
@@ -162,7 +163,12 @@ export default function WorkshopClient() {
           className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-16"
         >
           {/* Card A: Institutions → /contact */}
-          <div className="backdrop-blur-md bg-white/10 p-4 sm:p-6 rounded-xl border border-white/10 flex flex-col">
+          <Link
+            href={contactUrl}
+            onClick={() => track('cta_institutions_click', { source: 'talk_hub' })}
+            className="group/card block"
+          >
+          <div className="backdrop-blur-md bg-white/10 p-4 sm:p-6 rounded-xl border border-white/10 flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] hover:shadow-cyan-500/20">
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
               <h2 className="text-lg sm:text-xl font-bold text-white">
@@ -177,19 +183,15 @@ export default function WorkshopClient() {
                 </li>
               ))}
             </ul>
-            <Link
-              href={contactUrl}
-              onClick={() => track('cta_institutions_click', { source: 'talk_hub' })}
-              className="mt-auto w-full inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3.5 sm:py-3 text-white font-medium hover:opacity-90 transition-opacity min-h-[44px] text-sm sm:text-base"
-              aria-label={WORKSHOP_HUB.CTA_INSTITUTIONS.BUTTON_LABEL}
-            >
+            <span className="mt-auto w-full inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3.5 sm:py-3 text-white font-medium group-hover/card:opacity-90 transition-opacity min-h-[44px] text-sm sm:text-base">
               {WORKSHOP_HUB.CTA_INSTITUTIONS.BUTTON_LABEL}
               <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            </span>
           </div>
+          </Link>
 
           {/* Card B: Workshop Waitlist */}
-          <div className="backdrop-blur-md bg-white/10 p-4 sm:p-6 rounded-xl border border-white/10 flex flex-col">
+          <div className="backdrop-blur-md bg-white/10 p-4 sm:p-6 rounded-xl border border-white/10 flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)]">
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <Users className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
               <h2 className="text-lg sm:text-xl font-bold text-white">
@@ -239,7 +241,7 @@ export default function WorkshopClient() {
           </div>
         </motion.div>
 
-        {/* Get the resources - mini-section */}
+        {/* Get the resources - mini-section with icons + glow */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -249,30 +251,33 @@ export default function WorkshopClient() {
           <h2 className="text-base sm:text-lg font-semibold text-white/90 mb-4 text-center">
             Get the resources
           </h2>
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
-            {WORKSHOP_HUB.RESOURCES.map((r, i) =>
-              r.external ? (
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6">
+            {WORKSHOP_HUB.RESOURCES.map((r, i) => {
+              const Icon = r.icon === 'package' ? Package : r.icon === 'cog' ? Settings : Phone;
+              const resourceLinkClass =
+                'inline-flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 bg-white/5 transition-all duration-300 hover:border-cyan-400/50 hover:shadow-[0_0_24px_rgba(34,211,238,0.2)] hover:bg-white/10 text-purple-300 hover:text-cyan-300 text-sm sm:text-base font-medium';
+              return r.external ? (
                 <a
                   key={i}
                   href={calendlyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-200 text-sm sm:text-base transition-colors"
+                  className={resourceLinkClass}
                 >
-                  <Download className="w-4 h-4 shrink-0" />
+                  <span className="p-2 rounded-lg bg-cyan-500/20">
+                    <Icon className="w-5 h-5 text-cyan-400" />
+                  </span>
                   {r.label}
                 </a>
               ) : (
-                <Link
-                  key={i}
-                  href={r.href}
-                  className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-200 text-sm sm:text-base transition-colors"
-                >
-                  <Download className="w-4 h-4 shrink-0" />
+                <Link key={i} href={r.href} className={resourceLinkClass}>
+                  <span className="p-2 rounded-lg bg-cyan-500/20">
+                    <Icon className="w-5 h-5 text-cyan-400" />
+                  </span>
                   {r.label}
                 </Link>
-              )
-            )}
+              );
+            })}
           </div>
         </motion.section>
 
@@ -299,16 +304,101 @@ export default function WorkshopClient() {
           </ul>
         </motion.section>
 
-        {/* About + Trust signals */}
+        {/* 360 Experiences */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mb-16"
+        >
+          <div className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/10 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <Image
+                src={WORKSHOP_HUB.ABOUT.FABIOLA.avatar}
+                alt={WORKSHOP_HUB.ABOUT.FABIOLA.name}
+                width={80}
+                height={80}
+                className="rounded-full object-cover"
+              />
+            </div>
+            <div className="text-center sm:text-left">
+              <h2 className="text-lg font-semibold text-white mb-1">360 Experiences</h2>
+              <p className="text-white/70 text-sm mb-1">
+                Immersive 360° photo captures of exhibitions and studios.
+              </p>
+              <p className="text-purple-400 text-sm font-medium">
+                {WORKSHOP_HUB.ABOUT.FABIOLA.name} — Director of Digital at Oolite Arts, 360 Lead
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* About us */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-16"
+        >
+          <h2 className="text-xl font-bold text-white mb-8 text-center">About us</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <div className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/10 flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden mb-4">
+                <Image
+                  src={WORKSHOP_HUB.ABOUT.MOISES.avatar}
+                  alt={WORKSHOP_HUB.ABOUT.MOISES.name}
+                  width={80}
+                  height={80}
+                  className="rounded-full object-cover"
+                />
+              </div>
+              <h3 className="font-semibold text-white mb-1">{WORKSHOP_HUB.ABOUT.MOISES.name}</h3>
+              <p className="text-purple-400 text-xs font-medium mb-2">{WORKSHOP_HUB.ABOUT.MOISES.role}</p>
+              <p className="text-white/70 text-sm mb-3">{WORKSHOP_HUB.ABOUT.MOISES.bio}</p>
+              <a
+                href={`https://instagram.com/${WORKSHOP_HUB.ABOUT.MOISES.instagram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 text-sm transition-colors"
+              >
+                <Instagram className="w-4 h-4" />
+                @{WORKSHOP_HUB.ABOUT.MOISES.instagram}
+              </a>
+            </div>
+            <div className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/10 flex flex-col items-center text-center">
+              <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden mb-4">
+                <Image
+                  src={WORKSHOP_HUB.ABOUT.FABIOLA.avatar}
+                  alt={WORKSHOP_HUB.ABOUT.FABIOLA.name}
+                  width={80}
+                  height={80}
+                  className="rounded-full object-cover"
+                />
+              </div>
+              <h3 className="font-semibold text-white mb-1">{WORKSHOP_HUB.ABOUT.FABIOLA.name}</h3>
+              <p className="text-purple-400 text-xs font-medium mb-2">{WORKSHOP_HUB.ABOUT.FABIOLA.role}</p>
+              <p className="text-white/70 text-sm mb-3">{WORKSHOP_HUB.ABOUT.FABIOLA.bio}</p>
+              <a
+                href={`https://instagram.com/${WORKSHOP_HUB.ABOUT.FABIOLA.instagram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 text-sm transition-colors"
+              >
+                <Instagram className="w-4 h-4" />
+                @{WORKSHOP_HUB.ABOUT.FABIOLA.instagram}
+              </a>
+            </div>
+          </div>
+          <p className="text-center text-white/50 text-xs mt-4">Follow us on IG</p>
+        </motion.section>
+
+        {/* Trust signals */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
           className="mb-16 text-center"
         >
-          <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto mb-4">
-            {WORKSHOP_HUB.ABOUT.BIO}
-          </p>
           <div className="flex flex-wrap justify-center gap-3 text-white/50 text-xs sm:text-sm">
             {WORKSHOP_HUB.ABOUT.TRUST_SIGNALS.map((sig, i) => (
               <div
