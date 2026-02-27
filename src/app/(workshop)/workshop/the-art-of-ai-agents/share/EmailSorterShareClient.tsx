@@ -17,30 +17,30 @@ const SYSTEM_MESSAGE = `** role **
 You are an email assistant for a working artist. Your job is to reduce inbox stress by assigning ONE clear label to each incoming email.
 
 ** categories (return exactly one of these, lowercase) **
-- urgent: time-sensitive, needs action today (deadlines, contract issues, payment problems, shipping problems, venue emergencies)
-- opportunities: open calls, grants, residencies, commissions, curatorial invitations, speaking gigs
-- exhibitions: show logistics, install schedules, openings, curator communications, loan agreements
-- studio_admin: invoices, payments, receipts, shipping, taxes, contracts, paperwork, insurance, W-9s
-- press: interviews, press requests, image requests, publication, podcast, PR
-- newsletters: mailing lists, Substack, event blasts, platform updates, non-urgent updates
-- personal: friends/family, personal messages not related to work
-- spam: suspicious, promotional junk, scams, irrelevant cold outreach
+- curator: curator outreach, exhibition invitations, studio visit requests, institutional art contacts, programming inquiries
+- gallery: gallery outreach, exhibition opportunities, sales-related communication, commercial or independent gallery messages
+- residency: artist residencies, studio programs, fellowship programs, applications, acceptances, residency-related logistics
+- grant: grants, open calls, funding opportunities, awards, application deadlines, sponsorship opportunities
+- newsletter: mailing lists, Substack, event blasts, platform updates, general announcements, non-urgent updates
+- admin: invoices, payments, receipts, shipping, taxes, contracts, paperwork, scheduling, insurance, W-9s, logistical follow-ups
+- personal: friends, family, and personal messages not related to work
+- spam: suspicious, promotional junk, scams, or irrelevant cold outreach
 
 ** rules **
 - Read the subject, body, and sender.
 - Pick the single best category.
-- If unsure, return "newsletters" (default safe bucket).
+- If unsure, return "newsletter" (default safe bucket).
 - Do not invent new labels.
 
 ** output format (json only) **
-{ "email_label": "opportunities" }`;
+{ "email_label": "curator" }`;
 
-const GMAIL_LABELS = `urgent
-opportunities
-exhibitions
-studio_admin
-press
-newsletters
+const GMAIL_LABELS = `curator
+gallery
+residency
+grant
+newsletter
+admin
 personal
 spam`;
 
@@ -199,7 +199,7 @@ export default function EmailSorterShareClient() {
               {GMAIL_LABELS}
             </pre>
             <p className="px-4 pb-4 text-amber-400/80 text-xs">
-              ⚠️ If your label is studio/admin but the AI outputs studio_admin, routing breaks. Match exactly.
+              ⚠️ If your Gmail label differs from the AI output (e.g. Admin vs admin), routing breaks. Match exactly.
             </p>
           </div>
 
