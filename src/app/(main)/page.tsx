@@ -118,6 +118,42 @@ export default function Home() {
         {/* Landing Collection */}
         <LandingCollection />
 
+        {/* Press Coverage */}
+        <section className="w-full px-6 py-16 bg-gray-50 dark:bg-gray-900">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">Recent Press</h2>
+            <div className="bg-white dark:bg-black p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+              <div className="text-center mb-4">
+                <h3 className="text-xl font-semibold mb-2">CONTINUUM Exhibition Coverage</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  Featured in eP Investiga's coverage of the CONTINUUM exhibition at MUNAG, Antigua Guatemala
+                </p>
+              </div>
+              <div className="flex items-center justify-center space-x-4">
+                <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <strong>Featured Works:</strong> "The Price of Existence" & "Smart Shoppers"
+                </div>
+                <a 
+                  href="https://epinvestiga.com/dominical/continuum-una-mirada-a-los-avances-en-la-expresion-artistica/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
+                >
+                  Read Article →
+                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              </div>
+              <div className="text-center mt-4 text-xs text-gray-500 dark:text-gray-400">
+                Organized by Fundación Paiz para la Educación y la Cultura
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Landing Events */}
         <LandingEvents />
 

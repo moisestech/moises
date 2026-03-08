@@ -7,9 +7,12 @@ interface Artwork {
   curator?: string;
   collaboration?: string;
   description: string;
+  description_es?: string;
   materials?: string[];
   medium?: string;
   dimensions?: string;
+  weight?: string;
+  price?: string;
   role?: string;
   images: {
     url: string;
@@ -198,12 +201,15 @@ export const artist: Artist = {
       curator: 'Waseem A. Syed',
       description:
         'Price of Existence is a poignant installation that features a human skeleton wrapped in 100 million Venezuelan Bolívares, confronting the transient nature of wealth and the human cost of relentless consumerism. The artwork explores how objects and symbols of value, such as money, become intertwined with our identity and existence. It invites viewers to reflect on the ways in which we, as a society, assign worth to currency and its effect on our lives. In a world dominated by consumption, this piece challenges us to acknowledge the human cost involved in the continuous search for material value. The installation juxtaposes the skeletal representation of human mortality with the ephemeral nature of wealth, symbolizing the fragility of life and the fleeting nature of monetary value. This stark contrast forces viewers to question how deeply consumption and wealth permeate our identities and influence our existence.',
+      description_es:
+        'Price of Existence es una instalación conmovedora que presenta un esqueleto humano envuelto en 100 millones de Bolívares venezolanos, confrontando la naturaleza transitoria de la riqueza y el costo humano del consumismo despiadado. La obra de arte explora cómo los objetos y símbolos de valor, como el dinero, se entrelazan con nuestra identidad y existencia. Invita a los espectadores a reflexionar sobre las formas en que, como sociedad, asignamos valor a la moneda y su efecto en nuestras vidas. En un mundo dominado por el consumo, esta pieza nos desafía a reconocer el costo humano involucrado en la búsqueda continua de valor material. La instalación yuxtapone la representación esquelética de la mortalidad humana con la naturaleza efímera de la riqueza, simbolizando la fragilidad de la vida y la naturaleza fugaz del valor monetario. Este contraste marcado obliga a los espectadores a cuestionar qué tan profundamente el consumo y la riqueza impregnan nuestras identidades e influyen en nuestra existencia.',
       materials: [
         'Medical anatomical skeleton model',
         '100 Million Venezuelan Bolívares',
       ],
       medium: 'Sculpture',
-      dimensions: 'Life-size (approx. 5\'7" height)',
+      dimensions: '170 cm height x 45 cm width x 30 cm depth',
+      weight: 'Approximately 8-12 kg',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1738035709/art/moisestech-website/price_of_existence_wideshot.png',
@@ -237,13 +243,16 @@ export const artist: Artist = {
       curator: 'Waseem A. Syed',
       description:
         'Smart Shoppers explores the commercialization of human intelligence in the age of capitalism, using the symbol of a glowing 3D-printed brain overflowing from a shopping cart. The artwork critiques how human cognitive value has become commodified, particularly in an era dominated by artificial intelligence (AI). The vibrant, glowing brain juxtaposes the mechanical nature of capitalism with the human essence of thought and intelligence. The shopping cart, a symbol of consumerism, acts as a container for the brain, symbolizing how human capabilities are increasingly reduced to products to be bought, sold, and exploited in the capitalist system. By merging the organic and technological, the artwork highlights the tension between human identity and the digital marketplace. The glowing 3D brain further underscores the commodification of intelligence, while the LED lights evoke the pervasive nature of technology in shaping modern life.',
+      description_es:
+        'Smart Shoppers explora la comercialización de la inteligencia humana en la era del capitalismo, utilizando el símbolo de un cerebro brillante impreso en 3D que se desborda de un carrito de compras. La obra de arte critica cómo el valor cognitivo humano se ha convertido en una mercancía, particularmente en una era dominada por la inteligencia artificial (IA). El cerebro vibrante y brillante yuxtapone la naturaleza mecánica del capitalismo con la esencia humana del pensamiento y la inteligencia. El carrito de compras, símbolo del consumismo, actúa como un contenedor para el cerebro, simbolizando cómo las capacidades humanas se reducen cada vez más a productos para ser comprados, vendidos y explotados en el sistema capitalista. Al fusionar lo orgánico y lo tecnológico, la obra de arte destaca la tensión entre la identidad humana y el mercado digital. El cerebro 3D brillante subraya aún más la mercantilización de la inteligencia, mientras que las luces LED evocan la naturaleza omnipresente de la tecnología en la configuración de la vida moderna.',
       materials: [
         'Glowing 3D printed brains',
         'LED bulbs',
         'Paiz shopping cart',
       ],
       medium: 'New Media Installation',
-      dimensions: 'L: 42" x W: 20" x H: 36"',
+      dimensions: '107 cm x 51 cm x 91 cm (L x W x H)',
+      weight: 'Approximately 15-25 kg',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
@@ -336,6 +345,8 @@ export const artist: Artist = {
       year: 2023,
       location: 'Swenson Gallery, Breadbytes: Next Generation exhibition',
       description: 'Captures the nascent stages of Artificial General Intelligence (AGI), symbolizing the impending paradigm shift towards harmonious coexistence with advanced AI. This ready-made assembly—a smart baby stroller, intricately crafted from PC gaming components and AI-enhanced GPUs—epitomizes the Pre-Natal Genesis of AGI, highlighting the profound influence of such technologies on Generation Alpha, those born amidst the AI revolution. The robotic hands, delicately guiding the stroller, underscore our collective voyage into the AI epoch, while subtly emphasizing humanity\'s pivotal role in shaping AI\'s formative years.',
+      description_es:
+        'Captura las etapas incipientes de la Inteligencia General Artificial (AGI), simbolizando el cambio de paradigma inminente hacia la coexistencia armoniosa con IA avanzada. Este ensamblaje ready-made—un cochecito inteligente, intrincadamente elaborado con componentes de PC gaming y GPUs mejoradas con IA—epitomiza el Génesis Pre-Natal de AGI, destacando la profunda influencia de tales tecnologías en la Generación Alpha, aquellos nacidos en medio de la revolución de IA. Las manos robóticas, guiando delicadamente el cochecito, subrayan nuestro viaje colectivo hacia la época de IA, mientras enfatizan sutilmente el papel fundamental de la humanidad en dar forma a los años formativos de la IA.',
       materials: [
         'Baby Stroller',
         'TV Display',
@@ -345,7 +356,8 @@ export const artist: Artist = {
         'Custom Electronics'
       ],
       medium: 'Mixed Media Installation with Generative Animation',
-      dimensions: 'Life-size baby stroller with integrated components',
+      dimensions: '120 cm x 60 cm x 100 cm (L x W x H)',
+      weight: 'Approximately 25-35 kg',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp',
@@ -701,8 +713,12 @@ export const artist: Artist = {
       year: 2015,
       description:
         "art404's 'Google Gradients' is a series of large-scale banners created from over half a million images sourced from Google Images. These images were classified by color and intensity using the MatLab algorithm and printed on six 30-foot vinyl banners. The artwork draws inspiration from the physical languages and signs of daily digital interactions, exploring the intersection of AI, algorithms, and digital culture. Digital images classified by MatLab and Google's Cloud Vision, printed on vinyl banners.",
+      description_es:
+        "Los 'Google Gradients' de art404 son una serie de banners a gran escala creados a partir de más de medio millón de imágenes obtenidas de Google Images. Estas imágenes fueron clasificadas por color e intensidad usando el algoritmo MatLab e impresas en seis banners de vinilo de 30 pies. La obra de arte se inspira en los lenguajes físicos y signos de las interacciones digitales cotidianas, explorando la intersección entre IA, algoritmos y cultura digital. Imágenes digitales clasificadas por MatLab y Google Cloud Vision, impresas en banners de vinilo.",
       medium:
         "New Media Installation",
+      dimensions: '6 banners: 914 cm height x 250 cm width each (30 ft x 8.2 ft)',
+      weight: 'Approximately 45-60 kg total (7.5-10 kg per banner)',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1738040061/art/moisestech-website/tumblr_npjxkgHw7X1r1ubs7o1_1280_sjcvjv.jpg',
@@ -811,13 +827,16 @@ export const artist: Artist = {
       collaboration: 'ART404, Manuel Palou',
       description: 
         'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968).',
+      description_es:
+        'A primera vista, el disco duro externo negro colocado en el pedestal es reconocible como un objeto de deseo vendido en tiendas de medios de todo el mundo. Su estética minimalista fría invoca la autoridad de la tecnología. Es una caja negra que protege de manera eficiente y segura lo que hay dentro. Sin embargo, el contenido invisible cuenta una historia diferente. El disco duro contiene software descargado y recopilado ilegalmente por valor de $5 millones, desde AutoCAD hasta libros de ficción, llenando su capacidad de 1 terabyte. El objeto encarna un desafío a los derechos de propiedad intelectual, presentándose como un artefacto ambiguo que es simultáneamente hermoso, efectivo e ilegal - muy parecido al monolito negro de 2001: Una Odisea del Espacio (1968) de Stanley Kubrick.',
       materials: [
         '1TB External Hard Drive',
         'Illegally downloaded software collection ($5M worth)',
         'Custom plinth'
       ],
       medium: 'New Media Installation',
-      dimensions: '6.5" x 4.5" x 1.5" (hard drive dimensions)',
+      dimensions: '16.5 cm x 11.4 cm x 3.8 cm (hard drive) + pedestal base',
+      weight: 'Approximately 2-3 kg (including pedestal)',
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751681091/art/moisestech-website/artworks/2011_5_million_1_terabyte/five-million-dollars-1-terabyte-2011-art404_daxvlx.jpg',
@@ -1042,6 +1061,107 @@ export const artist: Artist = {
         title: 'Doomscrolling Marathon',
         caption: 'Installation documentation at Aparadores, Mexico City',
         format: 'Instagram Video'
+      }
+    },
+    in_crypto_we_trust: {
+      title: 'In Crypto We Trust',
+      year: 2024,
+      collaboration: 'Fabiola Larios',
+      description:
+        'Our Crypto who art in Blockchain, decentralized be thy governance; Ethereum come, thy mint be done IRL as it is in IPFS. Shill us this day our daily Gas; and forgive us our CO2 Emissions as we forgive those who Fiat money against us; and lead us not into a market bubble, but deliver us from centralization. Send >\n\nThe 3D glTF crypto coin results from a StyleGAN2 model trained on 500+ cryptocurrency logos. The two sides of the coin are the Bitcoin and Ethereum logos reinterpreted by the machine learning model.\n\nThe work "In Crypto We Trust" symbolizes the connection between crypto communities and a strong belief system around collective economic salvation. Faith mantras such as, "we are all going to make it" (wagmi), "crypto is real", "to the moon", and many more, are based on technological ideology and financial speculation. Through the work we are interested in highlighting how new generations are building new techno-denomination founded through decentralization.\n\nBlockchain is a decentralized technology allowing mass collectivity around crypto economies, far beyond many other type of organizations. The tightness of crypto communities is grounded in shared technological faith and economic optimism.',
+      description_es:
+        'Un cubo de acero de 1 metro por 1 metro que contiene cadenas de bloques de acero, con un holograma en su interior que proyecta una moneda criptográfica 3D generada por un modelo StyleGAN2 entrenado con más de 500 logos de criptomonedas. Los dos lados de la moneda son los logos de Bitcoin y Ethereum reinterpretados por el modelo de aprendizaje automático.\n\nLa obra "In Crypto We Trust" simboliza la conexión entre las comunidades cripto y un fuerte sistema de creencias en torno a la salvación económica colectiva. Mantras de fe como "todos vamos a lograrlo" (wagmi), "crypto es real", "a la luna", y muchos más, se basan en ideología tecnológica y especulación financiera. A través de la obra nos interesa destacar cómo las nuevas generaciones están construyendo una nueva tecno-denominación fundada en la descentralización.',
+      materials: [
+        'Lightweight steel frame structure',
+        'Steel block chains',
+        'Holographic projection system',
+        'StyleGAN2 trained model',
+        '500+ cryptocurrency logos dataset',
+        '3D glTF model generation',
+        'Bitcoin and Ethereum logo reinterpretations'
+      ],
+      medium: 'Mixed Media Installation - Lightweight Steel Cube with Holographic Projection',
+      dimensions: '100 cm x 100 cm x 100 cm (1m cube)',
+      weight: 'Approximately 15-25 kg',
+      price: '$10,000 USD (~$200,000 MXN)',
+      role: 'Concept, AI Model Training, and 3D Generation',
+      images: [
+        {
+          url: '/placeholder.jpg',
+          caption: 'In Crypto We Trust - 3D glTF crypto coin generated by StyleGAN2'
+        }
+      ],
+      tags: [
+        'cryptocurrency art',
+        'blockchain art',
+        'AI-generated art',
+        'StyleGAN2',
+        '3D modeling',
+        'digital currency',
+        'techno-religion',
+        'decentralization',
+        'machine learning art',
+        'crypto culture',
+        'wagmi',
+        'bitcoin',
+        'ethereum'
+      ],
+      interpretation: 
+        'This work explores the intersection of technology, faith, and economics in cryptocurrency communities. By using StyleGAN2 to reinterpret Bitcoin and Ethereum logos, the piece questions how machine learning can generate new forms of digital iconography that reflect the techno-spiritual aspects of crypto culture. The work examines how decentralized technologies create new forms of collective belief systems and economic optimism.',
+      interactiveContent: [
+        {
+          type: "link",
+          text: "StyleGAN2",
+          content: {
+            text: "A generative adversarial network architecture for generating high-quality images",
+            link: {
+              url: "https://en.wikipedia.org/wiki/StyleGAN",
+              label: "Learn about StyleGAN2"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "glTF",
+          content: {
+            text: "A 3D file format for efficient transmission and loading of 3D scenes and models",
+            link: {
+              url: "https://en.wikipedia.org/wiki/GlTF",
+              label: "About glTF format"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "wagmi",
+          content: {
+            text: "Crypto community acronym meaning 'We're All Gonna Make It'",
+            link: {
+              url: "https://www.coindesk.com/learn/what-does-wagmi-mean-in-crypto/",
+              label: "Learn about WAGMI"
+            }
+          }
+        },
+        {
+          type: "link",
+          text: "IPFS",
+          content: {
+            text: "InterPlanetary File System - a distributed file storage protocol",
+            link: {
+              url: "https://en.wikipedia.org/wiki/InterPlanetary_File_System",
+              label: "About IPFS"
+            }
+          }
+        }
+      ],
+      on_view: true,
+      technical_requirements: {
+        power: ['Standard electrical outlet for holographic projection system', 'LED lighting system'],
+        mounting: ['Floor installation - lightweight structure (15-25kg)', 'Stable surface for 1m cube'],
+        space: {
+          dimensions: 'Minimum 2m x 2m area for proper viewing',
+          requirements: ['Controlled lighting environment', 'Access to electrical outlet', 'Clear viewing angles around cube']
+        }
       }
     },
     netflix_n_chill_airbnb: {

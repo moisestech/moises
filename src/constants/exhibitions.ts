@@ -18,6 +18,20 @@ export interface Exhibitions {
 export const exhibitions: Exhibitions[] = [
   {
     id: 1,
+    title: 'CONTINUUM',
+    date: 'July - September 2024',
+    imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
+    location: 'MUNAG & CFCE, Antigua Guatemala',
+    description: 'A groundbreaking exhibition showcasing digital art and new media from eight countries, exploring the evolution of artistic expression through technology. The exhibition features works that challenge traditional boundaries and demonstrate how artists use digital tools to create meaningful connections between past, present, and future.',
+    tags: ["Digital Art", "New Media", "International", "Technology", "Contemporary Art"],
+    curator: 'Waseem A. Syed',
+    featured_work: 'Smart Shoppers & The Price of Existence',
+    link: 'https://fundacionpaiz.org.gt/continuum-una-exposicion-sobre-futuros-y-tradiciones-mutantes/',
+    partners: ['Fundación Paiz para la Educación y la Cultura'],
+    support: 'Fundación Paiz para la Educación y la Cultura'
+  },
+  {
+    id: 2,
     title: 'The Net Art Gala',
     date: 'May',
     imageUrl:
@@ -28,7 +42,7 @@ export const exhibitions: Exhibitions[] = [
 
   },
   {
-    id: 2,
+    id: 3,
     title: 'Technofetishism: Whip it into Shape',
     date: 'March 21, 2025 - August 31, 2025',
     imageUrl:
@@ -42,7 +56,7 @@ export const exhibitions: Exhibitions[] = [
     link: 'https://www.momus.gr/en/exhibitions/tehnofetihismos-whip-it-shape',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Bakehouse Open Studios',
     date: 'Mar 11',
     imageUrl:
@@ -52,7 +66,7 @@ export const exhibitions: Exhibitions[] = [
       'Join us for the first open studio event of the year! Visit Bakehouse artists in their studios, groove to tunes by local DJs',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Performance in Flux',
     date: 'February 21-22',
     imageUrl:
@@ -62,7 +76,7 @@ export const exhibitions: Exhibitions[] = [
       'A two-day performance art event exploring the intersection of technology and human expression.',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Low Resolution',
     date: 'Oct 23, 2024',
     imageUrl:
@@ -72,7 +86,7 @@ export const exhibitions: Exhibitions[] = [
       'Join us for the first open studio event of the year! Visit Bakehouse artists in their studios, groove to tunes by local DJs',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Notions of Home',
     date: 'December 6, 2024',
     imageUrl:
@@ -82,7 +96,7 @@ export const exhibitions: Exhibitions[] = [
       'ICA Miami X Dminti presents Notions of Home, a group exhibition featuring works by artists from across the globe.',
   },
   {
-    id: 7,
+    id: 8,
     title: 'Artweek Satellite Art Show',
     date: 'Dec 6-11, 2024',
     imageUrl:
@@ -92,7 +106,7 @@ export const exhibitions: Exhibitions[] = [
       'A two-day performance art event exploring the intersection of technology and human expression.',
   },
   {
-    id: 8,
+    id: 9,
     title: 'Breadbytes: Artmaking for the Next Generation',
     date: 'November 3, 2023 - February 3, 2024',
     imageUrl:
@@ -106,7 +120,7 @@ export const exhibitions: Exhibitions[] = [
     links: 'https://www.bacfl.org/exhibitions/breadbytes-artmaking-for-the-next-generation'
   },
   {
-    id: 9,
+    id: 10,
     title: 'Future Muses',
     date: 'December 9, 2023',
     imageUrl:
@@ -116,7 +130,7 @@ export const exhibitions: Exhibitions[] = [
       'Join us for the first open studio event of the year! Visit Bakehouse artists in their studios, groove to tunes by local DJs',
   },
   {
-    id: 11,
+    id: 12,
     title: 'Dark Drives: Uneasy Energies in Technological Times',
     date: 'January 28 - February 5, 2012',
     imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831875/art/moisestech-website/5-million-dollars-1-terabyte_art404.jpg',
@@ -128,7 +142,7 @@ export const exhibitions: Exhibitions[] = [
     link: 'https://archive.transmediale.de/festival-2012/exhibition',
   },
   {
-    id: 10,
+    id: 13,
     title: 'Algoritmica Intima: Runtime',
     date: 'June - July 2025',
     imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751123479/art/moisestech-website/exhibitions/june_2025_algoritmica_intima_cdmx/algoritmica-intima-exhibitions-june-2025_zmg4mq.jpg',

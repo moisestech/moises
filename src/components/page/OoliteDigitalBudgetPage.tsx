@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   DollarSign, 
@@ -205,11 +205,33 @@ const budgetData = {
 const COLORS = ['#A4FF4E', '#3B82F6', '#8B5CF6', '#EC4899', '#F59E0B'];
 
 export default function OoliteDigitalBudgetPage() {
+  console.log('🔵 [OoliteDigitalBudgetPage] Component rendering started');
+  console.log('🔵 [OoliteDigitalBudgetPage] Current pathname:', typeof window !== 'undefined' ? window.location.pathname : 'SSR');
+  
   const { theme } = useTheme();
+  console.log('🔵 [OoliteDigitalBudgetPage] Theme:', theme);
+  
   const isDark = theme === 'dark';
+  console.log('🔵 [OoliteDigitalBudgetPage] isDark:', isDark);
+  
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  console.log('🔵 [OoliteDigitalBudgetPage] expandedCategories initialized:', Array.from(expandedCategories));
+
+  // Log component mount and lifecycle
+  useEffect(() => {
+    console.log('🔵 [OoliteDigitalBudgetPage] Component mounted');
+    console.log('🔵 [OoliteDigitalBudgetPage] Window pathname:', window.location.pathname);
+    console.log('🔵 [OoliteDigitalBudgetPage] Window href:', window.location.href);
+    console.log('🔵 [OoliteDigitalBudgetPage] Theme on mount:', theme);
+    console.log('🔵 [OoliteDigitalBudgetPage] isDark on mount:', isDark);
+    
+    return () => {
+      console.log('🔵 [OoliteDigitalBudgetPage] Component unmounting');
+    };
+  }, [theme, isDark]);
 
   const formatCurrency = (value: number) => {
+    console.log('🔵 [OoliteDigitalBudgetPage] formatCurrency called with:', value);
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -219,13 +241,17 @@ export default function OoliteDigitalBudgetPage() {
   };
 
   const toggleCategoryExpansion = (categoryName: string) => {
+    console.log('🔵 [OoliteDigitalBudgetPage] toggleCategoryExpansion called for:', categoryName);
     const newExpanded = new Set(expandedCategories);
     if (newExpanded.has(categoryName)) {
       newExpanded.delete(categoryName);
+      console.log('🔵 [OoliteDigitalBudgetPage] Collapsing category:', categoryName);
     } else {
       newExpanded.add(categoryName);
+      console.log('🔵 [OoliteDigitalBudgetPage] Expanding category:', categoryName);
     }
     setExpandedCategories(newExpanded);
+    console.log('🔵 [OoliteDigitalBudgetPage] Updated expandedCategories:', Array.from(newExpanded));
   };
 
   const scrollToCategory = (categoryName: string) => {
@@ -267,6 +293,15 @@ export default function OoliteDigitalBudgetPage() {
     }
     return null;
   };
+
+  console.log('🔵 [OoliteDigitalBudgetPage] About to render JSX');
+  console.log('🔵 [OoliteDigitalBudgetPage] budgetData.totalRequest:', budgetData.totalRequest);
+  console.log('🔵 [OoliteDigitalBudgetPage] budgetData.categories.length:', budgetData.categories.length);
+
+  // Log before render
+  if (typeof window !== 'undefined') {
+    console.log('🔵 [OoliteDigitalBudgetPage] Rendering main element');
+  }
 
   return (
     <main className={`min-h-screen ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>

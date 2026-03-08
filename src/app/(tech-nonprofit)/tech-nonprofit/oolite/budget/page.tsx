@@ -6,5 +6,10 @@ export const metadata = {
 };
 
 export default function OoliteBudgetPage() {
+  // Server component - logs will appear in server console
+  console.log('🟡 [OoliteBudgetPage] Server component rendering');
+  console.log('🟡 [OoliteBudgetPage] Metadata:', JSON.stringify(metadata, null, 2));
+  console.log('🟡 [OoliteBudgetPage] About to render OoliteDigitalBudgetClientPage');
+  
   return <OoliteDigitalBudgetClientPage />;
 } 

@@ -722,6 +722,21 @@ export const cvData = {
   ],
   press: [
     {
+      year: "2024",
+      items: [
+        { 
+          project: "The Price of Existence & Smart Shoppers", 
+          publications: [
+            { 
+              name: "eP Investiga", 
+              title: "Continuum, una mirada a los avances en la expresión artística",
+              url: "https://epinvestiga.com/dominical/continuum-una-mirada-a-los-avances-en-la-expresion-artistica/"
+            }
+          ]
+        }
+      ]
+    },
+    {
       year: "2016",
       items: [
         { 

@@ -56,6 +56,27 @@ export default function PriceOfExistence() {
             poignantly addresses the struggle to reconcile personal convictions
             with the pervasive influence of a market-oriented existence.`}
           </p>
+          
+          {/* Press Coverage */}
+          <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <h3 className="text-lg font-semibold mb-3">Press Coverage</h3>
+            <div className="text-sm">
+              <p className="mb-2">
+                <strong>eP Investiga</strong> - "Continuum, una mirada a los avances en la expresión artística"
+              </p>
+              <p className="text-gray-600 dark:text-gray-400 mb-3">
+                Featured in the CONTINUUM exhibition at MUNAG, Antigua Guatemala, organized by Fundación Paiz para la Educación y la Cultura.
+              </p>
+              <a 
+                href="https://epinvestiga.com/dominical/continuum-una-mirada-a-los-avances-en-la-expresion-artistica/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 underline text-sm"
+              >
+                Read full article →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
