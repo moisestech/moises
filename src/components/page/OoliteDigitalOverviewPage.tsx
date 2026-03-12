@@ -7,7 +7,6 @@ import MuxPlayer from "@mux/mux-player-react";
 import { 
   Target, 
   Calendar, 
-  DollarSign, 
   BarChart3, 
   Users, 
   Monitor, 
@@ -244,24 +243,6 @@ export default function OoliteDigitalOverviewPage() {
             {/* Enhanced Navigation Pills with Cyan Theme */}
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <motion.div 
-                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 255, 255, 0.6)" }}
-                className="flex items-center gap-2 px-6 py-3 rounded-full cursor-pointer transition-all duration-300 backdrop-blur-md border border-[#00FFFF]/40 bg-[#00FFFF]/20 text-[#00FFFF] hover:bg-[#00FFFF]/30 hover:border-[#00FFFF]/60"
-                onClick={() => {
-                  if (window.location.pathname === '/tech-nonprofit/oolite') {
-                    const element = document.getElementById('budget');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  } else {
-                    window.location.href = '/tech-nonprofit/oolite/budget';
-                  }
-                }}
-              >
-                <DollarSign className="h-5 w-5" />
-                <span className="font-semibold">{t.capitalBudget}</span>
-              </motion.div>
-              
-              <motion.div 
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 128, 255, 0.6)" }}
                 className="flex items-center gap-2 px-6 py-3 rounded-full cursor-pointer transition-all duration-300 backdrop-blur-md border border-[#0080FF]/40 bg-[#0080FF]/20 text-[#0080FF] hover:bg-[#0080FF]/30 hover:border-[#0080FF]/60"
                 onClick={() => {
@@ -387,22 +368,14 @@ export default function OoliteDigitalOverviewPage() {
 
         {/* Quick Stats - Enhanced with Cyan Glow Effects */}
         <motion.section
-          id="budget"
+          id="overview"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="mb-20"
         >
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { 
-                icon: DollarSign, 
-                label: "Capital Budget", 
-                value: "$80k", 
-                color: "#00FFFF",
-                href: "/tech-nonprofit/oolite/budget",
-                sectionId: "budget"
-              },
               { 
                 icon: Calendar, 
                 label: "Timeline", 
@@ -814,15 +787,6 @@ export default function OoliteDigitalOverviewPage() {
                 {t.exploreDetails}
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/tech-nonprofit/oolite/budget"
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium ${
-                    theme === 'dark' ? 'bg-[#00FFFF]/20 text-[#00FFFF] hover:bg-[#00FFFF]/30' : 'bg-[#00FFFF]/10 text-[#00FFFF] hover:bg-[#00FFFF]/20'
-                  } transition-colors`}
-                >
-                  <DollarSign className="h-5 w-5" />
-                  {t.viewBudgetDetails}
-                </Link>
                 <Link
                   href="/tech-nonprofit/oolite/roadmap"
                   className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium ${

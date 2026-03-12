@@ -33,7 +33,6 @@ import {
   Map,
   Building2,
   BarChart3,
-  DollarSign,
   RefreshCw,
   Palette,
   Cpu,
@@ -76,7 +75,6 @@ const OoliteLogo = ({ className = '', size = 'md' }: { className?: string; size?
 const navigation = [
   { name: 'Overview', href: '/tech-nonprofit/oolite', key: 'overview', icon: Home },
   { name: 'Roadmap', href: '/tech-nonprofit/oolite/roadmap', key: 'roadmap', icon: Map },
-  { name: 'Budget', href: '/tech-nonprofit/oolite/budget', key: 'budget', icon: DollarSign },
   { name: 'Workshops', href: '/tech-nonprofit/oolite/workshops', key: 'workshops', icon: BookOpen },
   { name: 'Digital Arts Lab', href: '/tech-nonprofit/oolite/lab', key: 'lab', icon: Building2 },
   // { name: 'AI Tools', href: '/tech-nonprofit/oolite/ai-tools', key: 'aiTools', icon: Cpu }, // Hidden for production
