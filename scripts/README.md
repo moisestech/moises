@@ -4,7 +4,34 @@ Terminal-based tools for organizing and analyzing your draft files.
 
 ## Available Scripts
 
-### 1. Process All Drafts
+### 1. Process ChatGPT Export
+**File:** `process-chatgpt-export.mjs`
+
+Processes a ChatGPT conversation export that has been formatted with authorship markers.
+
+```bash
+node scripts/process-chatgpt-export.mjs [filename]
+```
+
+**What it does:**
+- Parses authorship markers (●, ○, ◐, •, @, §)
+- Maps content blocks to chapters based on keywords
+- Extracts entities (vocabulary, authors, artworks)
+- Generates a processing report
+- Saves results to `.filename.processed.json`
+
+**Before running:**
+- Export your ChatGPT conversation using the prompt in `content/born-into-the-machine/CHATGPT_EXPORT_PROMPT.md`
+- Save the formatted export to `content/born-into-the-machine/drafts/`
+
+**Example:**
+```bash
+node scripts/process-chatgpt-export.mjs chatgpt-conversation-2025-01-15.md
+```
+
+---
+
+### 2. Process All Drafts
 **File:** `process-drafts-standalone.mjs`
 
 Automatically processes all draft files, extracts entities, and generates analysis files.
