@@ -33,8 +33,43 @@ export const EYEBEAM_INQUIRY = {
       description:
         'A durational work centered on bodily exhaustion, remote labor, and algorithmic attention capture. While walking on a treadmill, I code, scroll, and work within a mediated environment that collapses labor, performance, and platform dependency into one continuous loop.',
       relevance: 'Examines attention as infrastructure and the body as a site of platform governance.',
-      imageUrl:
-        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
+      images: [
+        {
+          type: 'video',
+          vimeoId: '1009954393',
+          caption: 'Doomscrolling Treadmill + Touch Grass Station - Chroma Art Film Festival',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
+          caption: 'Doom Scrolling Treadmill - View',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831898/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-4_qjc5w3.jpg',
+          caption: 'Doom Scrolling Treadmill - View 2',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831896/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-5_rji3st.jpg',
+          caption: 'Doom Scrolling Treadmill - View 3',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831899/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-3_ugyjht.jpg',
+          caption: 'Touch Grass Station - View',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831898/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-2_qjc5w3.jpg',
+          caption: 'Touch Grass Station - View 2',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743116742/art/moisestech-website/artworks/2024_doomscrolling_marathon/moises-sanabria-doomscrolling-marathon-proyecto-aparadores-cdmx-2024_jilui4.png',
+          caption: 'Doomscrolling Marathon - Installation at Aparadores, Mexico City',
+        },
+      ],
     },
     {
       slug: 'simulation_faith',
@@ -44,8 +79,13 @@ export const EYEBEAM_INQUIRY = {
       description:
         'A devotional figure reimagined through synthetic mediation, asking how spiritual symbols persist, mutate, or become absorbed into technologically saturated reality.',
       relevance: 'Explores belief, ritual, and mediated perception in synthetic environments.',
-      imageUrl:
-        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg',
+      images: [
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg',
+          caption: 'Simulation Faith - Suspended baby Jesus sculpture with VR headset',
+        },
+      ],
     },
     {
       slug: 'price_of_existence',
@@ -55,8 +95,23 @@ export const EYEBEAM_INQUIRY = {
       description:
         'A human skeleton wrapped in devalued Venezuelan currency, reflecting on collapse, value, extraction, and the instability of material and symbolic systems.',
       relevance: 'Connects economic systems, memory, and embodied precarity.',
-      imageUrl:
-        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1738035709/art/moisestech-website/price_of_existence_wideshot.png',
+      images: [
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1738035709/art/moisestech-website/price_of_existence_wideshot.png',
+          caption: 'Price of Existence - Full installation view',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831890/art/moisestech-website/price_of_existence_detail_uuw5yf.jpg',
+          caption: 'Price of Existence - Detail view',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753724794/art/moisestech-website/artworks/2024_price_of_existence/MoisesSanabria-PriceOfExistence-2024_e4mizb.jpg',
+          caption: 'Price of Existence - 2024 installation at MUNAG, Antigua Guatemala',
+        },
+      ],
     },
   ],
 

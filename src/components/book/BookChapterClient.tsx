@@ -7,12 +7,14 @@ import { ViewModeToggle } from './ViewModeToggle';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Edit, ArrowLeft } from 'lucide-react';
+import { useIsLocalhost } from '@/hooks/useIsLocalhost';
 
 interface BookChapterClientProps {
   chapter: BookChapter;
 }
 
 export function BookChapterClient({ chapter }: BookChapterClientProps) {
+  const isLocalhost = useIsLocalhost();
   const [viewMode, setViewMode] = useState<ViewMode>('all');
   const [displayMode, setDisplayMode] = useState<'subtle' | 'prominent'>('subtle');
   
@@ -50,13 +52,15 @@ export function BookChapterClient({ chapter }: BookChapterClientProps) {
                 </Link>
               )}
             </div>
-            <Link
-              href={`/research/born-into-the-machine/${chapter.slug}/edit`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Edit className="h-4 w-4" />
-              Edit Chapter
-            </Link>
+            {isLocalhost && (
+              <Link
+                href={`/research/born-into-the-machine/${chapter.slug}/edit`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Edit className="h-4 w-4" />
+                Edit Chapter
+              </Link>
+            )}
           </div>
         </div>
 

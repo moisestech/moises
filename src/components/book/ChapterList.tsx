@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ChapterMetadata } from '@/lib/book/types';
 import { BookOpen, Edit, Eye, FileText, AlertTriangle, Tag, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useIsLocalhost } from '@/hooks/useIsLocalhost';
 
 interface ChapterListProps {
   chapters: ChapterMetadata[];
@@ -16,6 +17,7 @@ export function ChapterList({
   bookTitle,
   bookDescription,
 }: ChapterListProps) {
+  const isLocalhost = useIsLocalhost();
   const sortedChapters = [...chapters].sort((a, b) => a.order - b.order);
 
   return (
@@ -150,14 +152,16 @@ export function ChapterList({
                   <Eye className="h-4 w-4" />
                   Read
                 </Link>
-                <Link
-                  href={`/research/born-into-the-machine/${chapter.slug}/edit`}
-                  className="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <Edit className="h-4 w-4" />
-                  Edit
-                </Link>
+                {isLocalhost && (
+                  <Link
+                    href={`/research/born-into-the-machine/${chapter.slug}/edit`}
+                    className="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Edit className="h-4 w-4" />
+                    Edit
+                  </Link>
+                )}
                 {hasSlop && (
                   <Link
                     href={`/research/born-into-the-machine/${chapter.slug}-preview`}
@@ -193,21 +197,23 @@ export function ChapterList({
           </Link>
         </div>
 
-        <div className="p-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4 text-black dark:text-white">Draft Files</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Create <code className="px-1 py-0.5 bg-white dark:bg-gray-800 rounded text-sm">.md</code> files in{' '}
-            <code className="px-1 py-0.5 bg-white dark:bg-gray-800 rounded text-sm">content/born-into-the-machine/drafts/</code>{' '}
-            and paste your ChatGPT conversations directly into them. The system will automatically detect and parse them.
-          </p>
-          <Link
-            href="/research/born-into-the-machine/drafts"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-          >
-            <FileText className="h-4 w-4" />
-            View Drafts
-          </Link>
-        </div>
+        {isLocalhost && (
+          <div className="p-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
+            <h2 className="text-2xl font-semibold mb-4 text-black dark:text-white">Draft Files</h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Create <code className="px-1 py-0.5 bg-white dark:bg-gray-800 rounded text-sm">.md</code> files in{' '}
+              <code className="px-1 py-0.5 bg-white dark:bg-gray-800 rounded text-sm">content/born-into-the-machine/drafts/</code>{' '}
+              and paste your ChatGPT conversations directly into them. The system will automatically detect and parse them.
+            </p>
+            <Link
+              href="/research/born-into-the-machine/drafts"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              <FileText className="h-4 w-4" />
+              View Drafts
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -39,8 +39,8 @@ export function ChapterRenderer({
   console.log('[ChapterRenderer] Filtered block types:', filteredBlocks.map(b => b.type));
 
   return (
-    <div className="max-w-4xl mx-auto prose prose-lg dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300">
-      <h1 className="text-4xl font-bold mb-4 text-black dark:text-white">{chapter.title || 'Untitled Chapter'}</h1>
+    <div className="max-w-4xl mx-auto prose dark:prose-invert prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:text-5xl prose-p:leading-relaxed prose-headings:font-bold prose-h2:text-6xl prose-h3:text-5xl prose-li:text-5xl prose-li:leading-relaxed">
+      <h1 className="text-6xl font-bold mb-6 text-black dark:text-white">{chapter.title || 'Untitled Chapter'}</h1>
       
       <div className="space-y-6">
         {filteredBlocks.map((block, index) => (
@@ -95,7 +95,7 @@ function ContentBlockRenderer({
       <div className="mb-2">
         <AuthorshipBadge type={block.type} displayMode={displayMode} />
       </div>
-      <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300">
+      <div className="prose dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:text-5xl prose-p:leading-relaxed prose-headings:font-bold prose-h2:text-6xl prose-h3:text-5xl prose-li:text-5xl prose-li:leading-relaxed">
         <ReactMarkdown>{block.text}</ReactMarkdown>
       </div>
     </div>
