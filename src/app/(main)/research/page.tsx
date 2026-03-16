@@ -9,6 +9,13 @@ export default function ResearchIndexPage() {
         <p className="text-lg leading-relaxed">
           The Research Lab explores the intersection of technology, spirituality, and environmental impact through artistic experimentation and community engagement. My initiatives focus on transforming e-waste into interactive sculptures, developing new frameworks for digital art, and fostering dialogue about technological acceleration in contemporary culture. Through workshops, exhibitions, and collaborative projects, I aim to build a more robust and critical tech-art community in the South Florida region and beyond.
         </p>
+        <p className="text-lg leading-relaxed">
+          Current writing includes a practice-based paper on noise, slop, and synthetic abundance in generative AI.{' '}
+          <Link href="/noisy-systems" className="underline underline-offset-4 hover:no-underline">
+            Noisy Systems
+          </Link>
+          {' '}—a research companion for the proposed submission.
+        </p>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {Object.entries(research).map(([slug, item]) => (

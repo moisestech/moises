@@ -83,14 +83,18 @@ export default function NoisySystemsPageClient() {
             {NOISY_SYSTEMS.selectedWorks.map((work) => {
               const artwork = artist.artworks[work.slug];
               if (!artwork) return null;
-              const image = artwork.images[0];
+              const image = 'imageOverride' in work && work.imageOverride
+                ? work.imageOverride
+                : artwork.images[0];
+              const imageUrl = image.url;
+              const imageAlt = 'alt' in image ? image.alt : (image.caption || artwork.title);
               return (
                 <ArtworkEntry
                   key={work.slug}
                   title={artwork.title}
                   year={artwork.year}
-                  imageUrl={image.url}
-                  imageAlt={image.caption || artwork.title}
+                  imageUrl={imageUrl}
+                  imageAlt={imageAlt}
                   description={artwork.description}
                   relevance={work.relevance}
                   slug={work.slug}

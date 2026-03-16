@@ -18,14 +18,17 @@ export function MarginalNote({ children }: MarginalNoteProps) {
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
-      <span
-        className={`ml-0.5 text-[10px] leading-none opacity-60 hover:opacity-100 transition-opacity cursor-default ${
+      <button
+        type="button"
+        onClick={() => setIsExpanded((v) => !v)}
+        className={`ml-0.5 text-[10px] leading-none opacity-60 hover:opacity-100 transition-opacity cursor-pointer bg-transparent border-0 p-0 ${
           isDark ? 'text-gray-500' : 'text-gray-400'
         }`}
         aria-label="Process note"
+        aria-expanded={isExpanded}
       >
         •
-      </span>
+      </button>
       {isExpanded && (
         <span
           className={`absolute left-0 top-full z-10 mt-1 max-w-xs rounded px-3 py-2 text-xs leading-relaxed shadow-lg ${
@@ -38,3 +41,4 @@ export function MarginalNote({ children }: MarginalNoteProps) {
     </span>
   );
 }
+

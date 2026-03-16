@@ -38,6 +38,10 @@ export const NOISY_SYSTEMS = {
       relevance:
         'Examines attention as infrastructure and the body as a site of platform governance—the treadmill as a feedback loop between labor, scrolling, and algorithmic capture.',
       conceptualTag: 'attention capture',
+      imageOverride: {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743116742/art/moisestech-website/artworks/2024_doomscrolling_marathon/moises-sanabria-doomscrolling-marathon-proyecto-aparadores-cdmx-2024_jilui4.png',
+        alt: 'Doomscrolling Treadmill - Installation at Aparadores, Mexico City',
+      },
     },
     {
       slug: 'smart_shoppers',
@@ -73,10 +77,10 @@ export const NOISY_SYSTEMS = {
 
   bio: {
     summary:
-      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and engineer. His work examines how algorithmic environments, consumer objects, digital platforms, and AI systems shape belief, labor, value, identity, and attention. He is co-founder of AI24 Live.',
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist, engineer, and writer whose work examines how algorithmic environments, consumer objects, and digital platforms shape belief, labor, value, and identity in contemporary life. Working across sculpture, installation, performance, coding, AI systems, and digital media, he creates artworks that materialize the internet as object, ritual, and infrastructure. He is co-founder and creative director of AI24 Live and an early member of the post-internet collective ART404. His work has been exhibited at Transmediale (Berlin), ICA Miami, Superblue, MUNAG (Guatemala City), and MOMus (Thessaloniki). He holds a BFA from The Cooper Union and is a resident artist at Bakehouse Art Complex in Miami.',
     links: [
       { label: 'Full bio', href: '/bio' },
-      { label: 'Artist statement', href: '/art' },
+      { label: 'Portfolio', href: '/portfolio' },
       { label: 'CV', href: '/resume' },
     ],
   },
@@ -85,7 +89,7 @@ export const NOISY_SYSTEMS = {
     { label: 'Main website', href: '/' },
     { label: 'Born into the Machine', href: '/research/born-into-the-machine' },
     { label: 'Full bio', href: '/bio' },
-    { label: 'Artist statement', href: '/art' },
+    { label: 'Portfolio', href: '/portfolio' },
     { label: 'CV', href: '/resume' },
   ],
 

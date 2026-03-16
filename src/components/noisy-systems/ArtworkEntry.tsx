@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -25,12 +26,26 @@ export function ArtworkEntry({
   slug,
   conceptualTag,
 }: ArtworkEntryProps) {
+  const [showOverlay, setShowOverlay] = useState(false);
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   return (
     <article className="space-y-4 sm:space-y-6">
-      <div className="group relative aspect-[4/3] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+      <div
+        className="group relative aspect-[4/3] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900"
+        onClick={() => conceptualTag && setShowOverlay((v) => !v)}
+        onMouseLeave={() => setShowOverlay(false)}
+        role={conceptualTag ? 'button' : undefined}
+        tabIndex={conceptualTag ? 0 : undefined}
+        aria-label={conceptualTag ? `Show conceptual note: ${conceptualTag}` : undefined}
+        onKeyDown={(e) => {
+          if (conceptualTag && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            setShowOverlay((v) => !v);
+          }
+        }}
+      >
         <Image
           src={imageUrl}
           alt={imageAlt}
@@ -39,7 +54,11 @@ export function ArtworkEntry({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
         />
         {conceptualTag && (
-          <div className="absolute inset-0 flex items-end justify-start p-4 opacity-0 transition-opacity duration-150 group-hover:opacity-100 bg-gradient-to-t from-black/60 to-transparent dark:from-black/70 dark:to-transparent">
+          <div
+            className={`absolute inset-0 flex items-end justify-start p-4 transition-opacity duration-150 bg-gradient-to-t from-black/60 to-transparent dark:from-black/70 dark:to-transparent ${
+              showOverlay ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+            }`}
+          >
             <span className="text-sm font-medium text-white drop-shadow-sm">
               {conceptualTag}
             </span>
