@@ -27,9 +27,13 @@ export default function NoisySystemsPageClient() {
         isDark ? 'bg-black text-white' : 'bg-white text-black'
       }`}
     >
-      <article className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
-        {/* 1. Hero */}
-        <SectionWrapper>
+      {/* Hero - matches Eyebeam structure */}
+      <section
+        className={`mt-[200px] min-h-[200px] flex flex-col justify-center px-6 sm:px-10 lg:px-11 mb-16 sm:mb-24 border-b border-current/10 pb-16 sm:pb-24 ${
+          isDark ? 'text-white' : 'text-gray-900'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto">
           <h1
             className={`text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight mb-6 ${headingClass}`}
           >
@@ -45,8 +49,10 @@ export default function NoisySystemsPageClient() {
             {NOISY_SYSTEMS.hero.framingParagraph}
           </p>
           <p className={`text-sm ${textMutedLight}`}>{NOISY_SYSTEMS.hero.cfpNote}</p>
-        </SectionWrapper>
+        </div>
+      </section>
 
+      <article className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
         {/* 2. Abstract */}
         <SectionWrapper withBorder>
           <h2 className={`text-2xl sm:text-3xl font-semibold mb-6 tracking-tight ${headingClass}`}>
