@@ -2,161 +2,14 @@
 
 import { FC, ReactNode } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { TfiMenuAlt } from 'react-icons/tfi';
 import { artistData } from '@/constants/artist';
-import Image from 'next/image';
-// Table of Contents component
-const TableOfContents: FC = () => (
-  <div className="my-4 p-4 border rounded bg-gray-200 dark:bg-gray-800">
-    <h2 className="text-xl font-bold mb-2 flex items-center">
-      <TfiMenuAlt className="mr-2" /> Table of Contents
-    </h2>
-    <ul className="list-disc list-inside">
-      <li>
-        <a
-          href="#bio"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Biography
-        </a>
-      </li>
-      <li>
-        <a
-          href="#early-life"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Early Life and Education
-        </a>
-      </li>
-      <li>
-        <a
-          href="#art-practice"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Art Practice
-        </a>
-      </li>
-      <li>
-        <a
-          href="#professional-work"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Professional Work
-        </a>
-      </li>
-      <li>
-        <a
-          href="#exhibitions"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Exhibitions
-        </a>
-      </li>
-      <li>
-        <a
-          href="#selected-works"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Selected Works
-        </a>
-      </li>
-      <li>
-        <a
-          href="#press"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Press and Recognition
-        </a>
-      </li>
-      <li>
-        <a
-          href="#style"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Style and Influences
-        </a>
-      </li>
-      <li>
-        <a
-          href="#education"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Education
-        </a>
-      </li>
-      <li>
-        <a
-          href="#awards"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Awards & Honors
-        </a>
-      </li>
-      <li>
-        <a
-          href="#external-links"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          External Links
-        </a>
-      </li>
-    </ul>
-  </div>
-);
-
-// Info Table component
-const InfoTable: FC = () => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
-  
-  return (
-    <div
-      className={`${isDark ? 'bg-black text-white' : 'bg-white text-black'} border ${isDark ? 'border-gray-700' : 'border-gray-300'} mb-8 ml-8 max-h-[800px] ${isDark ? 'bg-gray-900' : 'bg-gray-100'} min-w-80`}
-    >
-      <span className="p-2 font-bold text-lg justify-center w-full flex">
-        {artistData.name}
-      </span>
-
-      {/* image */}
-      <div className="w-full flex justify-center items-center h-80 relative w-full">
-        <Image
-          src={artistData.image}
-          alt={artistData.name}
-          fill
-          className="object-cover"
-        />
-      </div>
-      
-      <table className="w-full text-sm dark:bg-gray-900">
-        <tbody>
-          <tr>
-            <th className="text-left p-2 font-bold">Born</th>
-            <td className="p-2">{artistData.birth}</td>
-          </tr>
-          <tr>
-            <th className="text-left p-2 font-bold">Nationality</th>
-            <td className="p-2">{artistData.nationality}</td>
-          </tr>
-          <tr>
-            <th className="text-left p-2 font-bold">Known For</th>
-            <td className="p-2">{artistData.knownFor.join(' · ')}</td>
-          </tr>
-          <tr>
-            <th className="text-left p-2 font-bold">Notable Works</th>
-            <td className="p-2">
-              <i>{artistData.notableWorks.join(' · ')}</i>
-            </td>
-          </tr>
-          <tr>
-            <th className="text-left p-2 font-bold">Awards</th>
-            <td className="p-2">{artistData.awards.join(', ')}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-};
+import {
+  WikiLink,
+  CitationTooltip,
+  Infobox,
+  TableOfContents,
+  References,
+} from '@/components/wiki';
 
 // Section component for rendering different sections of the page
 interface SectionProps {
@@ -166,112 +19,234 @@ interface SectionProps {
   border?: boolean;
 }
 
-const Section: FC<SectionProps> = ({ id, title, content, border = true }) => (
-  <section id={id} className="mb-8">
-    <h2
-      className="text-2xl wiki-font font-normal font-serif mb-2"
-      style={{
-        borderBottomWidth: border ? '1px' : '0px',
-      }}
-    >
-      {title}
-    </h2>
-    <div className="font-serif">{content}</div>
-  </section>
-);
+const Section: FC<SectionProps> = ({ id, title, content, border = true }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const borderColor = isDark ? '#54595d' : '#a2a9b1';
+  const textColor = isDark ? '#f8f9fa' : '#202122';
+
+  return (
+    <section id={id} className="mb-6">
+      {title && (
+        <h2
+          className="text-2xl wiki-font font-normal font-serif mb-3"
+          style={{
+            borderBottomWidth: border ? '1px' : '0px',
+            borderBottomColor: borderColor,
+            borderBottomStyle: border ? 'solid' : 'none',
+            color: textColor,
+            paddingBottom: border ? '0.25rem' : '0',
+          }}
+        >
+          {title}
+        </h2>
+      )}
+      <div className="wiki-font text-[15px] leading-7" style={{ color: textColor }}>
+        {content}
+      </div>
+    </section>
+  );
+};
 
 const WikipediaPage: FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  console.log('theme:', theme, 'isDark:', isDark);
+
+  // Wikipedia colors
+  const linkColor = isDark ? '#5A9FD4' : '#0645ad';
+  const visitedColor = isDark ? '#9A9AFF' : '#0b0080';
+  const borderColor = isDark ? '#54595d' : '#a2a9b1';
+  const bgColor = isDark ? '#000000' : '#ffffff';
+  const textColor = isDark ? '#f8f9fa' : '#202122';
+  const subtitleColor = isDark ? '#a7d7f9' : '#54595d';
+
+  // Citations data
+  const citations: Record<number, string> = {
+    1: 'Artist CV, exhibition history, and educational background compiled from the studio archive.',
+    2: 'Exhibition records and press coverage from institutional archives and media databases.',
+    3: 'Work descriptions and artistic practice statements from artist interviews and studio documentation.',
+  };
+
+  // References for the References section
+  const references = [
+    {
+      id: 1,
+      text: 'Artist CV, exhibition history, and educational background compiled from the studio archive.',
+    },
+    {
+      id: 2,
+      text: 'Exhibition records and press coverage from institutional archives and media databases.',
+    },
+    {
+      id: 3,
+      text: 'Work descriptions and artistic practice statements from artist interviews and studio documentation.',
+    },
+  ];
 
   return (
-    <main className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      <section>
-        <div className="max-w-5xl mx-auto p-6 mt-40">
-          {/* Header with Theme Toggle */}
-          <div
-            className={`flex justify-between items-center mb-4 border-y-gray-400 ${
-              isDark ? 'border-gray-700' : 'border-gray-300'
-            }`}
-            style={{
-              borderBottomWidth: '1px',
-            }}
-          >
-            <div className="flex items-center">
-              <h2 className="text-xl font-bold mr-2 flex items-center">
-                <TfiMenuAlt className="mr-2" />
-              </h2>
-              <h1 className="text-3xl font-serif wiki-font">{artistData.name}</h1>
-            </div>
-            <span className="font-bold text-sm" style={{ color: '#36c' }}>
-              1 language
-            </span>
-          </div>
+    <main
+      className="min-h-screen transition-colors duration-300"
+      style={{ backgroundColor: bgColor, color: textColor }}
+    >
+      <div className="max-w-[1000px] mx-auto px-4 pt-32 pb-12">
+        {/* Page Title */}
+        <div className="mb-4">
+          <h1 className="text-[32px] wiki-font font-normal mb-1" style={{ color: textColor }}>
+            {artistData.name}
+          </h1>
+          <p className="text-sm italic" style={{ color: subtitleColor }}>
+            From the networked public record
+          </p>
+        </div>
 
-          <div
-            className={`flex justify-between mb-8 border-y-gray-400 ${
-              isDark ? 'border-gray-700' : 'border-gray-300'
-            }`}
-            style={{
-              borderBottomWidth: '1px',
-            }}
-          >
+        {/* Article Tabs */}
+        <div
+          className="flex justify-between items-center mb-6 pb-2 border-b"
+          style={{ borderColor: borderColor }}
+        >
+          <div className="flex gap-4 text-sm">
             <span
-              className={`border-b-2 text-sm ${isDark ? 'text-blue-400' : 'text-blue-600'}`}
+              className="border-b-2 pb-1 font-medium"
+              style={{ borderColor: linkColor, color: linkColor }}
             >
               Article
             </span>
-            <span className="text-sm">Read</span>
+            <span className="text-sm" style={{ color: textColor }}>
+              Talk
+            </span>
+          </div>
+          <span className="text-sm" style={{ color: textColor }}>
+            Read
+          </span>
+        </div>
+
+        {/* Main Article Layout */}
+        <article className="relative">
+          {/* Lead Section with Infobox */}
+          <div className="flex flex-col lg:flex-row gap-6 mb-6">
+            <div className="flex-1">
+              <Section
+                id="bio"
+                title=""
+                content={
+                  <p>
+                    <WikiLink term="Moises Sanabria">Moises Sanabria</WikiLink> (born 6 August
+                    1990) is a Venezuelan-born, Miami-based interdisciplinary artist. Known
+                    primarily for his exploration of{' '}
+                    <WikiLink term="Post-internet">Post-internet</WikiLink> sculptures and new
+                    media installation art, Sanabria's practice also includes software
+                    development, curating and publishing
+                    <CitationTooltip number={1} text={citations[1]} />. In 2012, the{' '}
+                    <WikiLink term="Haus Del Kulturwelt">Haus Del Kulturwelt</WikiLink> in Berlin
+                    curated one of his collective's artwork. Some of Sanabria's better known works
+                    include "<WikiLink term="5 Million Dollars 1 Terabyte">
+                      5 Million Dollars 1 Terabyte
+                    </WikiLink>
+                    ", consisting of a hard drive with 5 million dollars worth of software; "
+                    <WikiLink term="VR Hug">VR Hug</WikiLink>", a photo depicting two people with
+                    VR Headsets hugging; and "<WikiLink term="McDonald Brass Knuckles">
+                      McDonald Brass Knuckles
+                    </WikiLink>
+                    ", brass knuckles in the shape of the McDonald's logo.
+                  </p>
+                }
+                border={false}
+              />
+            </div>
+            <div className="lg:block">
+              <Infobox />
+            </div>
           </div>
 
-          <article className="flex">
-            <div className="w-full flex flex-col justify-center items-center relative">
+          {/* Table of Contents */}
+          <TableOfContents />
 
-            <Section
-              id="bio"
-              title=""
-              content={artistData.biography}
-              border={false}
-            />
+          {/* Early Life Section */}
           <Section
             id="early-life"
             title="Early Life and Education"
-            content={artistData.earlyLife}
+            content={
+              <p>
+                Sanabria was born in Venezuela in the 1990s and later moved to Miami, Florida.
+                Raised amidst the burgeoning digital age, he cultivated a fascination with the
+                intersection of technology and human experience. Without formal training in art, he
+                began exploring digital mediums and meme cultures, gaining insights through
+                self-study and engagement with online communities. He further honed his skills and
+                artistic philosophy by attending the <WikiLink term="New World School of Art">
+                  New World School of Art
+                </WikiLink>{' '}
+                in Miami, followed by studies at the{' '}
+                <WikiLink term="School for Poetic Computation">
+                  School for Poetic Computation
+                </WikiLink>
+                . He later graduated with a Bachelor of Fine Arts from{' '}
+                <WikiLink term="The Cooper Union">The Cooper Union</WikiLink> in New York in 2015
+                <CitationTooltip number={1} text={citations[1]} />. His educational journey also
+                extended to specialized programs such as "<WikiLink term="The Neural Aesthetic">
+                  The Neural Aesthetic
+                </WikiLink>
+                " by <WikiLink term="Gene Kogan">Gene Kogan</WikiLink> at the{' '}
+                <WikiLink term="School of Machines">School of Machines</WikiLink> in Berlin,
+                reinforcing his affinity for merging art with technology.
+              </p>
+            }
           />
-            </div>
-            <InfoTable />
-          </article>
 
+          {/* Art Practice Section */}
           <Section
             id="art-practice"
             title="Art Practice"
-            content={artistData.artPractice}
+            content={
+              <p>
+                His practice, deeply embedded in the digital era, incorporates humor and critique,
+                often placing him in the role of a satirical observer of technological advancement.
+                Sanabria's work is characterized by a fusion of digital humanities, social trends,
+                and technology. Utilizing AI, live-streaming, video, and new media installations, his
+                art often delves into themes of memory, value, and human identity within the
+                rapidly evolving technological landscape
+                <CitationTooltip number={3} text={citations[3]} />. He describes his practice as
+                an ongoing conversation between academic aesthetics and internet meme culture.
+              </p>
+            }
           />
+
+          {/* Professional Work Section */}
           <Section
             id="professional-work"
             title="Professional Work"
-            content={artistData.professionalWork}
+            content={
+              <p>
+                Sanabria co-founded the artificial intelligence media channel{' '}
+                <WikiLink term="AI24">AI24</WikiLink> and was an active member of the digital art
+                collective <WikiLink term="ART404">ART404</WikiLink>. He gained recognition for
+                pushing the boundaries of digital art and media critique.
+              </p>
+            }
           />
+
+          {/* Exhibitions Section */}
           <Section
             id="exhibitions"
             title="Exhibitions"
             content={
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-1">
                 {artistData.exhibitions.map((exhibition, index) => (
                   <li key={index}>
-                    <strong>{exhibition.title}</strong>, {exhibition.location} (
-                    {exhibition.year})
+                    <strong>{exhibition.title}</strong>, {exhibition.location} ({exhibition.year}
+                    )
+                    <CitationTooltip number={2} text={citations[2]} />
                   </li>
                 ))}
               </ul>
             }
           />
+
+          {/* Selected Works Section */}
           <Section
             id="selected-works"
             title="Selected Works"
             content={
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-1">
                 {artistData.selectedWorks.map((work, index) => (
                   <li key={index}>
                     <strong>{work.title}</strong> ({work.year})
@@ -280,46 +255,85 @@ const WikipediaPage: FC = () => {
               </ul>
             }
           />
+
+          {/* Press and Recognition Section */}
           <Section
             id="press"
             title="Press and Recognition"
-            content={artistData.pressRecognition}
+            content={
+              <p>
+                Sanabria's work has been covered by a variety of media outlets including{' '}
+                <WikiLink term="Rhizome">Rhizome</WikiLink>, <WikiLink term="Wired">Wired</WikiLink>
+                , <WikiLink term="The Guardian">The Guardian</WikiLink>, and{' '}
+                <WikiLink term="Forbes">Forbes</WikiLink>
+                <CitationTooltip number={2} text={citations[2]} />. In 2012, he received a{' '}
+                <WikiLink term="Webby Award">Webby Award</WikiLink> for his project "
+                <WikiLink term="Social Weird - Sad Tweets">
+                  Social Weird - Sad Tweets
+                </WikiLink>
+                ," which further solidified his reputation as a critical voice in digital art.
+              </p>
+            }
           />
+
+          {/* Style and Influences Section */}
           <Section
             id="style"
             title="Style and Influences"
-            content={artistData.styleAndInfluences}
+            content={
+              <p>
+                His practice is marked by an entanglement with digital newness, social trends, and
+                machine philosophy. Sanabria often addresses the intersection of art, technology, and
+                the human experience, capturing the complexities of modern existence in an
+                increasingly interconnected digital world.
+              </p>
+            }
           />
+
+          {/* Education Section */}
           <Section
             id="education"
             title="Education"
             content={
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-1">
                 {artistData.education.map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
               </ul>
             }
           />
+
+          {/* Awards Section */}
           <Section
             id="awards"
             title="Awards & Honors"
             content={
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-1">
                 {artistData.awards.map((award, index) => (
                   <li key={index}>{award}</li>
                 ))}
               </ul>
             }
           />
+
+          {/* References Section */}
+          <References references={references} />
+
+          {/* External Links Section */}
           <Section
             id="external-links"
             title="External Links"
             content={
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-1">
                 {artistData.externalLinks.map((link, index) => (
                   <li key={index}>
-                    <a href={link.url} className="text-blue-600 hover:underline">
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                      style={{ color: linkColor }}
+                    >
                       {link.label}
                     </a>
                   </li>
@@ -327,8 +341,8 @@ const WikipediaPage: FC = () => {
               </ul>
             }
           />
-        </div>
-      </section>
+        </article>
+      </div>
     </main>
   );
 };
