@@ -74,6 +74,8 @@ export type FieldGuideHost = {
   name: string;
   bio: string;
   websiteUrl: string | null;
+  /** Anchor text for the link under the bio; defaults to “Website” in the UI */
+  websiteLinkLabel?: string;
   /** Use null imageUrl for generated placeholder avatar */
   portrait: FieldGuidePortraitMeta;
 };
@@ -559,6 +561,7 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         bio: 'René Morales is Senior Curatorial Fellow at Bakehouse Art Complex (from August 2025). Born in Cienfuegos, Cuba, and raised in Miami, he was formerly James W. Alsdorf Chief Curator at the Museum of Contemporary Art Chicago and Director of Curatorial Affairs & Chief Curator at Pérez Art Museum Miami, with more than 25 years of experience and over 50 major exhibitions. At BAC he mentors resident artists and contributes to the organization’s curatorial roadmap and campus redevelopment.',
         websiteUrl:
           'https://www.bacfl.org/blog/bakehouse-art-complex-appoints-acclaimed-curator-renmorales-as-senior-curatorial-fellow',
+        websiteLinkLabel: 'René Morales — BAC announcement',
         portrait: {
           imageUrl: null,
           sourcePageUrl: null,
@@ -589,7 +592,7 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         external: true,
       },
       {
-        label: 'René Morales — Senior Curatorial Fellow, BAC',
+        label: 'René Morales',
         href: 'https://www.bacfl.org/blog/bakehouse-art-complex-appoints-acclaimed-curator-renmorales-as-senior-curatorial-fellow',
         external: true,
       },

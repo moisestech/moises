@@ -525,7 +525,7 @@ export default function BacFieldGuideClient() {
                           rel="noopener noreferrer"
                           className={`inline-block mt-2 text-sm font-medium underline underline-offset-4 ${accentLink}`}
                         >
-                          Website
+                          {h.websiteLinkLabel ?? 'Website'}
                         </a>
                       ) : (
                         <p className={`mt-2 text-sm ${muted}`}>Website — add link in constants when ready</p>
