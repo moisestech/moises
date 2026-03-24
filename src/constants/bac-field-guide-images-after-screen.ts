@@ -545,7 +545,7 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       },
       {
         name: 'Fabiola Larios',
-        bio: 'Multidisciplinary artist whose work engages visual culture, embodiment, and expanded forms of image-making.',
+        bio: 'Fabiola Larios (b. 1986) is a Mexican interdisciplinary artist based in Miami, currently in residence at Bakehouse Art Complex. Her work explores the aesthetics and politics of surveillance, self-representation, and obsolescence in the digital age. Through installations that fuse e-waste, glitter, vintage electronics, and bedazzled surveillance cameras, Larios critiques how identity is shaped by algorithmic systems and economies of visibility.',
         websiteUrl: 'https://fabiola.io/',
         portrait: {
           imageUrl: null,
