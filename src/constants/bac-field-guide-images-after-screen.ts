@@ -18,6 +18,24 @@ export type FieldGuideReading = {
   pdfUrl: string | null;
   summary: string;
   whyItMatters: string;
+  /** For favicon (Google s2 service resolves from domain) */
+  publisherDomain: string;
+  coverImageUrl: string | null;
+  /** Optional list of alternate cover URLs (rights / sourcing notes) */
+  coverImageUrlOptions: readonly string[];
+  coverImageAlt: string;
+  /** Tailwind classes when no cover image */
+  placeholderClassName: string;
+};
+
+export type FieldGuideHeroStripAsset = {
+  url: string;
+  alt: string;
+};
+
+export type FieldGuideAssetLegalNote = {
+  asset: string;
+  note: string;
 };
 
 export type FieldGuideConcept = {
@@ -25,9 +43,27 @@ export type FieldGuideConcept = {
   definition: string;
 };
 
+/** Wikimedia / press portrait; use null URLs for initials fallback */
+export type FieldGuidePortraitMeta = {
+  imageUrl: string | null;
+  sourcePageUrl: string | null;
+  license: string | null;
+  creditLine: string | null;
+};
+
 export type FieldGuidePerson = {
   name: string;
   bio: string;
+  url: string | null;
+  /** Where they appear in the assigned texts */
+  mentionNote?: string;
+  portrait: FieldGuidePortraitMeta;
+};
+
+export type FieldGuideArtistCoreEntry = {
+  name: string;
+  note: string;
+  portrait: FieldGuidePortraitMeta;
 };
 
 export type FieldGuideLink = {
@@ -112,38 +148,60 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       source: 'e-flux journal',
       year: '2013',
       externalUrl:
-        'https://www.e-flux.com/journal/49/75160/too-much-world-is-the-internet-dead/',
+        'https://www.e-flux.com/journal/49/60004/too-much-world-is-the-internet-dead',
       pdfUrl: null,
       summary:
         'A foundational essay for thinking about the internet not as a separate virtual zone, but as something that has become embedded in physical, political, and spatial life.',
       whyItMatters:
         'This text establishes the broader condition for the session: the image world no longer lives only on screens. It spills into space, infrastructures, bodies, and everyday experience.',
+      publisherDomain: 'e-flux.com',
+      coverImageUrl: null,
+      coverImageUrlOptions: [],
+      coverImageAlt:
+        'No rights-cleared publication-domain cover image confirmed for the e-flux reading; keep gradient fallback.',
+      placeholderClassName:
+        'bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-800 dark:to-slate-950',
     },
     {
       id: 'fontcuberta',
       author: 'Joan Fontcuberta',
       title: 'Redefining Photography and Taming Monsters',
       source: 'Blind Magazine',
-      year: '2026',
-      externalUrl: null,
+      year: '2023',
+      externalUrl:
+        'https://www.blind-magazine.com/news/joan-fontcuberta-redefining-photography-and-taming-monsters/',
       pdfUrl: null,
       summary:
         'A conversation on photography, AI, authorship, memory, monstrosity, and the emergence of a new visual order.',
       whyItMatters:
         'This text helps bring the discussion directly into artistic practice, especially around photography’s transformation under synthetic and algorithmic conditions.',
+      publisherDomain: 'blind-magazine.com',
+      coverImageUrl:
+        'https://www.blind-magazine.com/wp-content/uploads/2023/04/joan-fontcuberta-gastropoda.jpg',
+      coverImageUrlOptions: [],
+      coverImageAlt: 'Joan Fontcuberta, Gastropoda (artwork referenced in Blind Magazine)',
+      placeholderClassName: '',
     },
     {
       id: 'kissick',
       author: 'Dean Kissick',
       title: 'The Vulgar Image',
-      source: 'Spike',
+      source: 'Spike Art Magazine',
       year: 'Summer 2025',
-      externalUrl: null,
+      externalUrl: 'https://spikeartmagazine.com/articles/vulgarity-the-vulgar-image',
       pdfUrl: null,
       summary:
         'A sharp reflection on grotesque, tasteless, memetic, synthetic, and unstable image culture in the age of AI, platform excess, and aesthetic overload.',
       whyItMatters:
         'This text gives language to the current image atmosphere: vulgarity, mutation, bad taste, folklore, monsters, and visual excess.',
+      publisherDomain: 'spikeartmagazine.com',
+      coverImageUrl:
+        'https://cdn.sanity.io/images/syotmk9q/production/2a40ff1af28bf6588460046f631d318e3fdd621d-1600x2000.jpg?auto=format&h=4800&q=70&w=3840',
+      coverImageUrlOptions: [],
+      coverImageAlt:
+        'Truth Terminal by Beeple, 2024. Hero image for Dean Kissick’s “The Vulgar Image” on Spike Art Magazine.',
+      placeholderClassName:
+        'bg-gradient-to-br from-rose-200 to-amber-300 dark:from-rose-950 dark:to-amber-950',
     },
   ] satisfies FieldGuideReading[],
 
@@ -223,34 +281,73 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
   ] satisfies FieldGuideConcept[],
 
   writers: {
-    title: 'Writers and Thinkers in This Field Guide',
+    title: 'Writers and Thinkers Cited in These Readings',
+    intro:
+      'Authors of the assigned texts, plus thinkers explicitly named inside them (not an open bibliography).',
     core: [
       {
         name: 'Hito Steyerl',
         bio: 'Artist and writer whose work examines images, circulation, militarization, networks, and the political life of visual culture.',
+        url: 'https://en.wikipedia.org/wiki/Hito_Steyerl',
+        mentionNote: 'Author, “Too Much World: Is the Internet Dead?” (*e-flux journal*, 2013).',
+        portrait: {
+          imageUrl:
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Hito%20Steyerl%20at%20Berkeley%20Center%20for%20New%20Media.jpg',
+          sourcePageUrl:
+            'https://commons.wikimedia.org/wiki/File:Hito_Steyerl_at_Berkeley_Center_for_New_Media.jpg',
+          license: 'CC BY-SA 2.0',
+          creditLine:
+            'Hito Steyerl at Berkeley Center for New Media, 2016. Photo: Berkeley Center for New Media.',
+        },
       },
       {
         name: 'Joan Fontcuberta',
-        bio: 'Artist, writer, and theorist whose work has long challenged truth claims in photography and now addresses AI and synthetic visual culture.',
+        bio: 'Artist and writer whose practice has long challenged truth claims in photography and now addresses AI and synthetic visual culture.',
+        url: 'https://www.fontcuberta.com/',
+        mentionNote: 'Interviewee, “Redefining Photography and Taming Monsters” (*Blind Magazine*, 2023).',
+        portrait: {
+          imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Joan%20Fontcuberta.jpg',
+          sourcePageUrl: 'https://commons.wikimedia.org/wiki/File:Joan_Fontcuberta.jpg',
+          license: 'CC BY-SA 4.0',
+          creditLine:
+            'Joan Fontcuberta at FotoArtFestival 2007. Photo: Piotr Bieniecki / fototeo.pl.',
+        },
       },
       {
         name: 'Dean Kissick',
-        bio: 'Critic and essayist focused on contemporary image culture, vulgarity, taste, internet folklore, and digital aesthetics.',
+        bio: 'Critic and essayist; contributing editor at Spike. Focus on contemporary image culture, vulgarity, taste, and internet folklore.',
+        url: 'https://spikeartmagazine.com/authors/dean-kissick',
+        mentionNote: 'Author, “The Vulgar Image” (*Spike*, Summer 2025).',
+        portrait: {
+          imageUrl: null,
+          sourcePageUrl: null,
+          license: null,
+          creditLine: 'No clearly free-licensed portrait on Wikimedia Commons; initials fallback.',
+        },
+      },
+      {
+        name: 'Antonio Gramsci',
+        bio: 'Italian Marxist philosopher and political theorist. In the *Blind* interview, Fontcuberta cites him on the “time of monsters”—analog photography’s transition and algorithms as “monstrosities.”',
+        url: 'https://www.marxists.org/archive/gramsci/',
+        mentionNote: 'Quoted in Fontcuberta / *Blind* on the exhibition *Monsters*.',
+        portrait: {
+          imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gramsci.png',
+          sourcePageUrl: 'https://commons.wikimedia.org/wiki/File:Gramsci.png',
+          license: 'Public domain',
+          creditLine: 'Antonio Gramsci, portrait from the early 1920s. Unknown photographer.',
+        },
       },
       {
         name: 'Byung-Chul Han',
-        bio: 'Philosopher of digital life, information overload, and contemporary subjectivity; relevant here through questions of data, exhaustion, and mediation.',
-      },
-    ] satisfies FieldGuidePerson[],
-    relatedTitle: 'Related thinkers',
-    related: [
-      {
-        name: 'Nora N. Khan',
-        bio: 'Critic and writer working on AI art, synthetic media, perception, and the stakes of criticism in computational culture.',
-      },
-      {
-        name: 'Ruby Justice Thelot',
-        bio: 'Writer whose work on the content creator as algorithmic folk artist offers a useful adjacent lens on internet culture and vernacular making.',
+        bio: 'Philosopher of digital life, burnout, and narrative. Kissick quotes him on reality becoming information (*The Crisis of Narration*, 2024) in the context of the “Late Information Age.”',
+        url: 'https://ourworld.unu.edu/en/contributors/byung-chul-han',
+        mentionNote: 'Cited in Kissick, “The Vulgar Image.”',
+        portrait: {
+          imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Byung-Chul%20Han.jpg',
+          sourcePageUrl: 'https://commons.wikimedia.org/wiki/File:Byung-Chul_Han.jpg',
+          license: 'CC BY-SA 4.0',
+          creditLine: 'Byung-Chul Han in 2015. Photo: Actualiité / crop by MRCLD.',
+        },
       },
     ] satisfies FieldGuidePerson[],
   },
@@ -263,32 +360,87 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       {
         name: 'Hito Steyerl',
         note: 'For the political and infrastructural life of images.',
+        portrait: {
+          imageUrl:
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Hito%20Steyerl%20at%20Berkeley%20Center%20for%20New%20Media.jpg',
+          sourcePageUrl:
+            'https://commons.wikimedia.org/wiki/File:Hito_Steyerl_at_Berkeley_Center_for_New_Media.jpg',
+          license: 'CC BY-SA 2.0',
+          creditLine:
+            'Hito Steyerl at Berkeley Center for New Media, 2016. Photo: Berkeley Center for New Media.',
+        },
       },
       {
         name: 'Joan Fontcuberta',
         note: 'For photography, fiction, authorship, and AI-era visual instability.',
+        portrait: {
+          imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Joan%20Fontcuberta.jpg',
+          sourcePageUrl: 'https://commons.wikimedia.org/wiki/File:Joan_Fontcuberta.jpg',
+          license: 'CC BY-SA 4.0',
+          creditLine:
+            'Joan Fontcuberta at FotoArtFestival 2007. Photo: Piotr Bieniecki / fototeo.pl.',
+        },
       },
       {
         name: 'Trevor Paglen',
         note: 'For machine vision, surveillance, invisible systems, and image infrastructures.',
+        portrait: {
+          imageUrl:
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Trevor%20Paglen%20%40%20SXSW%202019%20%2833477109078%29.jpg',
+          sourcePageUrl:
+            'https://commons.wikimedia.org/wiki/File:Trevor_Paglen_%40_SXSW_2019_%2833477109078%29.jpg',
+          license: 'CC BY-SA 2.0',
+          creditLine: 'Trevor Paglen at SXSW 2019. Photo: Ståle Grut / NRKbeta.',
+        },
       },
       {
         name: 'Sondra Perry',
         note: 'For identity, digital representation, interfaces, and image politics.',
+        portrait: {
+          imageUrl:
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Sondra%20Perry%20at%20Seattle%20Art%20Museum%2C%20December%202017.jpg',
+          sourcePageUrl:
+            'https://commons.wikimedia.org/wiki/File:Sondra_Perry_at_Seattle_Art_Museum,_December_2017.jpg',
+          license: 'CC BY-SA 4.0',
+          creditLine: 'Sondra Perry at Seattle Art Museum, 2017. Photo: Halimahart.',
+        },
       },
       {
         name: 'Morehshin Allahyari',
         note: 'For technological critique, digital colonialism, and speculative image-making.',
+        portrait: {
+          imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Morehshin-2021.jpg',
+          sourcePageUrl: 'https://commons.wikimedia.org/wiki/File:Morehshin-2021.jpg',
+          license: 'CC BY-SA 4.0',
+          creditLine: 'Morehshin Allahyari, 2021. Photo: Angiefromspace.',
+        },
       },
       {
         name: 'Holly Herndon & Mat Dryhurst',
         note: 'For questions of AI, authorship, voice, consent, and the artist in computational systems.',
+        portrait: {
+          imageUrl:
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Holly%20Herndon%202024%20%28cropped%29.jpg',
+          sourcePageUrl:
+            'https://commons.wikimedia.org/wiki/File:Holly_Herndon_2024_(cropped).jpg',
+          license: 'CC BY 2.0',
+          creditLine:
+            'Shown: Holly Herndon in Berlin, 2024. Photo: BMEIA / Michael Gruber. No separate Wikimedia portrait verified for Mat Dryhurst; initials reflect the collaboration.',
+        },
       },
       {
         name: 'American Artist',
         note: 'For race, interface, infrastructure, and the social life of computation.',
+        portrait: {
+          imageUrl:
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Portrait%20of%20American%20Artist.jpg',
+          sourcePageUrl:
+            'https://commons.wikimedia.org/wiki/File:Portrait_of_American_Artist.jpg',
+          license: 'CC BY-SA 4.0',
+          creditLine: 'Portrait of American Artist, 2019. Photo: American Artist.',
+        },
       },
-    ],
+    ] satisfies FieldGuideArtistCoreEntry[],
     referencesTitle: 'Reference examples',
     references: [
       {
@@ -371,7 +523,7 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       {
         name: 'Fabiola Larios',
         bio: 'Multidisciplinary artist whose work engages visual culture, embodiment, and expanded forms of image-making.',
-        websiteUrl: null,
+        websiteUrl: 'https://fabiola.io/',
       },
     ] satisfies FieldGuideHost[],
   },
@@ -390,7 +542,45 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         external: true,
       },
       { label: 'Moises Sanabria', href: 'https://moises.tech', external: true },
-      { label: 'Fabiola Larios', href: null },
+      { label: 'Fabiola Larios', href: 'https://fabiola.io/', external: true },
     ] satisfies FieldGuideLink[],
   },
+
+  heroStripAssets: [
+    {
+      url: 'https://www.e-flux.com/favicon.ico',
+      alt: 'e-flux favicon',
+    },
+    {
+      url: 'https://www.blind-magazine.com/favicon.ico',
+      alt: 'Blind Magazine favicon',
+    },
+    {
+      url: 'https://www.spikeartmagazine.com/favicon.ico',
+      alt: 'Spike Art Magazine favicon',
+    },
+  ] satisfies FieldGuideHeroStripAsset[],
+
+  assetLegalNotes: [
+    {
+      asset: 'readings[0].coverImageUrl',
+      note: 'No publication-domain image URL confirmed from e-flux; safest option is to keep the gradient fallback unless you obtain an authorized image or host your own licensed asset.',
+    },
+    {
+      asset: 'readings[2].coverImageUrl',
+      note: 'Safe to hotlink from Spike’s own Sanity CDN because it is the publication’s CMS/CDN asset. Credit line in alt text: “Truth Terminal by Beeple, 2024.”',
+    },
+    {
+      asset: 'heroStripAssets[*]',
+      note: 'These are publication-domain favicon assets. Fine for small UI/logo usage, but not substitutes for branded press-kit logos.',
+    },
+    {
+      asset: 'any_non_publication_domain_image',
+      note: 'Do not hotlink unless you have explicit reuse rights or the image is clearly licensed for reuse. Prefer publication-domain assets, your own hosted PDFs/images, or licensed press-kit materials.',
+    },
+    {
+      asset: 'writers/artists.portrait.imageUrl (Wikimedia Commons)',
+      note: 'Portraits use Commons Special:FilePath URLs; attribution and license are on each file page (linked as “Photo source”). Verify file pages before reuse elsewhere.',
+    },
+  ] satisfies FieldGuideAssetLegalNote[],
 } as const;

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
 import { BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN as C } from '@/constants/bac-field-guide-images-after-screen';
 import { FieldGuideToc } from './FieldGuideToc';
+import { ReadingCard } from './ReadingCard';
+import { PersonPortrait } from './PersonPortrait';
 
 const sectionScroll =
   'scroll-mt-28 sm:scroll-mt-32';
@@ -86,6 +88,49 @@ export default function BacFieldGuideClient() {
             {C.hero.purposeLine}
           </p>
 
+          <div
+            className={`mt-8 flex flex-wrap items-center gap-6 ${
+              isDark ? 'border-white/10' : 'border-black/10'
+            }`}
+            aria-label="Assigned readings — open each publication"
+          >
+            {C.heroStripAssets.map((asset, i) => {
+              const href = C.readings[i]?.externalUrl;
+              const inner = (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- small publication favicons */}
+                  <img
+                    src={asset.url}
+                    alt={asset.alt}
+                    width={36}
+                    height={36}
+                    className={`rounded-md object-contain ${
+                      isDark ? 'bg-white/10 p-1' : 'bg-white p-1 shadow-sm border border-black/5'
+                    }`}
+                  />
+                  <span className={`text-xs font-medium max-w-[140px] leading-tight ${muted}`}>
+                    {C.readings[i]?.source ?? ''}
+                  </span>
+                </>
+              );
+              return href ? (
+                <a
+                  key={asset.url}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 rounded-lg hover:opacity-90 transition-opacity"
+                >
+                  {inner}
+                </a>
+              ) : (
+                <span key={asset.url} className="inline-flex items-center gap-3">
+                  {inner}
+                </span>
+              );
+            })}
+          </div>
+
           <nav
             className={`mt-10 flex flex-wrap gap-2 sm:gap-3`}
             aria-label="Section shortcuts"
@@ -161,64 +206,46 @@ export default function BacFieldGuideClient() {
               <SectionTitle id="readings" isDark={isDark}>
                 Readings
               </SectionTitle>
-              <div className="space-y-12">
+              <p className={`text-sm sm:text-base mb-10 max-w-3xl ${muted}`}>
+                Each card opens the assigned text. Covers: Blind (Fontcuberta artwork), Spike (Beeple hero from Kissick’s essay on Spike’s CDN), e-flux (gradient until a rights-cleared cover is added). Card favicons use a standard domain resolver.
+              </p>
+              <div className="space-y-10">
                 {C.readings.map((r) => (
-                  <article
+                  <ReadingCard
                     key={r.id}
-                    className={`max-w-3xl border-b ${border} pb-12 last:border-0 last:pb-0`}
-                  >
-                    <p className={`text-sm font-medium uppercase tracking-wide mb-1 ${muted}`}>
-                      {r.author}
-                    </p>
-                    <h3
-                      className={`text-lg sm:text-xl font-semibold mb-1 italic ${
-                        isDark ? 'text-white' : 'text-neutral-900'
-                      }`}
-                    >
-                      {r.title}
-                    </h3>
-                    <p className={`text-sm mb-4 ${muted}`}>
-                      {r.source}, {r.year}
-                    </p>
-                    <div className="flex flex-wrap gap-3 mb-6">
-                      {r.externalUrl ? (
-                        <a
-                          href={r.externalUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`text-sm font-medium underline underline-offset-4 ${accentLink}`}
-                        >
-                          Read online
-                        </a>
-                      ) : null}
-                      {r.pdfUrl ? (
-                        <a
-                          href={r.pdfUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`text-sm font-medium underline underline-offset-4 ${accentLink}`}
-                        >
-                          PDF
-                        </a>
-                      ) : null}
-                    </div>
-                    <div className="space-y-3 text-sm sm:text-base leading-relaxed">
-                      <p>
-                        <span className={`font-semibold ${isDark ? 'text-neutral-200' : 'text-neutral-800'}`}>
-                          Summary
-                        </span>
-                        <span className={muted}> — {r.summary}</span>
-                      </p>
-                      <p>
-                        <span className={`font-semibold ${isDark ? 'text-neutral-200' : 'text-neutral-800'}`}>
-                          Why it matters here
-                        </span>
-                        <span className={muted}> — {r.whyItMatters}</span>
-                      </p>
-                    </div>
-                  </article>
+                    reading={r}
+                    isDark={isDark}
+                    border={border}
+                    cardBg={isDark ? 'bg-white/[0.04]' : 'bg-white'}
+                    muted={muted}
+                  />
                 ))}
               </div>
+              <details
+                className={`mt-12 max-w-3xl rounded-md border text-sm ${border} ${
+                  isDark ? 'bg-white/[0.03]' : 'bg-white'
+                }`}
+              >
+                <summary
+                  className={`cursor-pointer list-none px-4 py-3 font-medium ${
+                    isDark ? 'text-neutral-200' : 'text-neutral-800'
+                  } [&::-webkit-details-marker]:hidden`}
+                >
+                  Image and link sourcing notes
+                </summary>
+                <ul
+                  className={`px-4 pb-4 space-y-3 list-none pl-0 border-t ${border} pt-3 ${muted}`}
+                >
+                  {C.assetLegalNotes.map((row) => (
+                    <li key={row.asset}>
+                      <span className={`font-mono text-xs ${isDark ? 'text-neutral-500' : 'text-neutral-500'}`}>
+                        {row.asset}
+                      </span>
+                      <span className="block mt-1 leading-relaxed">{row.note}</span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </section>
 
             <section className={`mb-16 sm:mb-24 pb-16 sm:pb-24 border-b ${border}`}>
@@ -274,28 +301,47 @@ export default function BacFieldGuideClient() {
               <SectionTitle id="writers-and-thinkers" isDark={isDark}>
                 {C.writers.title}
               </SectionTitle>
-              <ul className="space-y-6 max-w-3xl list-none pl-0">
+              <p className={`text-sm sm:text-base mb-8 max-w-3xl ${muted}`}>{C.writers.intro}</p>
+              <ul className="space-y-8 max-w-3xl list-none pl-0">
                 {C.writers.core.map((w) => (
-                  <li key={w.name}>
-                    <span className={`font-semibold ${isDark ? 'text-white' : 'text-neutral-900'}`}>
-                      {w.name}
-                    </span>
-                    <span className={muted}> — {w.bio}</span>
-                  </li>
-                ))}
-              </ul>
-              <h3
-                className={`text-base font-semibold mt-10 mb-4 ${isDark ? 'text-neutral-200' : 'text-neutral-800'}`}
-              >
-                {C.writers.relatedTitle}
-              </h3>
-              <ul className="space-y-4 max-w-3xl list-none pl-0">
-                {C.writers.related.map((w) => (
-                  <li key={w.name}>
-                    <span className={`font-semibold ${isDark ? 'text-white' : 'text-neutral-900'}`}>
-                      {w.name}
-                    </span>
-                    <span className={muted}> — {w.bio}</span>
+                  <li
+                    key={w.name}
+                    className="flex gap-5 sm:gap-6 border-b border-current/10 pb-8 last:border-0 last:pb-0"
+                  >
+                    <PersonPortrait name={w.name} portrait={w.portrait} isDark={isDark} size={64} />
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-2">
+                        {w.url ? (
+                          <a
+                            href={w.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`text-base font-semibold underline underline-offset-4 ${accentLink}`}
+                          >
+                            {w.name}
+                          </a>
+                        ) : (
+                          <span className={`font-semibold ${isDark ? 'text-white' : 'text-neutral-900'}`}>
+                            {w.name}
+                          </span>
+                        )}
+                      </div>
+                      {w.mentionNote ? (
+                        <p
+                          className={`text-xs sm:text-sm mb-2 ${isDark ? 'text-neutral-500' : 'text-neutral-500'}`}
+                        >
+                          {w.mentionNote}
+                        </p>
+                      ) : null}
+                      <p className={`text-sm sm:text-base leading-relaxed ${muted}`}>{w.bio}</p>
+                      {w.portrait.creditLine ? (
+                        <p
+                          className={`text-xs mt-3 leading-relaxed italic ${isDark ? 'text-neutral-500' : 'text-neutral-500'}`}
+                        >
+                          {w.portrait.creditLine}
+                        </p>
+                      ) : null}
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -306,13 +352,25 @@ export default function BacFieldGuideClient() {
                 {C.artists.title}
               </SectionTitle>
               <p className={`text-sm sm:text-base mb-8 max-w-3xl ${muted}`}>{C.artists.intro}</p>
-              <ul className="space-y-5 max-w-3xl list-none pl-0 mb-12">
+              <ul className="space-y-6 max-w-3xl list-none pl-0 mb-12">
                 {C.artists.core.map((a) => (
-                  <li key={a.name}>
-                    <span className={`font-semibold ${isDark ? 'text-white' : 'text-neutral-900'}`}>
-                      {a.name}
-                    </span>
-                    <span className={muted}> — {a.note}</span>
+                  <li key={a.name} className="flex gap-5 sm:gap-6">
+                    <PersonPortrait name={a.name} portrait={a.portrait} isDark={isDark} size={56} />
+                    <div className="min-w-0 flex-1">
+                      <p className="leading-snug">
+                        <span className={`font-semibold ${isDark ? 'text-white' : 'text-neutral-900'}`}>
+                          {a.name}
+                        </span>
+                        <span className={muted}> — {a.note}</span>
+                      </p>
+                      {a.portrait.creditLine ? (
+                        <p
+                          className={`text-xs mt-2 leading-relaxed italic ${isDark ? 'text-neutral-500' : 'text-neutral-500'}`}
+                        >
+                          {a.portrait.creditLine}
+                        </p>
+                      ) : null}
+                    </div>
                   </li>
                 ))}
               </ul>
