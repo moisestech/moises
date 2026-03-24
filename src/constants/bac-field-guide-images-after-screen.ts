@@ -112,7 +112,7 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
     title: 'Images After the Screen: Photography, AI, and the New Visual Order',
     subtitle:
       'A reading group on photography, AI, vulgarity, authorship, and the changing visual condition.',
-    presentersLine: 'Moises Sanabria, Fabiola Larios, and Krys',
+    presentersLine: 'Moises Sanabria, Fabiola Larios, and Krys Ortega',
     organizersLine:
       'With René Morales and the BAC Reading Group at Bakehouse Art Complex.',
     sessionDate: 'March 26, 2026',
@@ -555,8 +555,20 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         },
       },
       {
-        name: 'Krys',
-        bio: 'With the BAC reading group — helps hold space for discussion and community around the texts. (Bio and link can be updated.)',
+        name: 'René Morales',
+        bio: 'René Morales is Senior Curatorial Fellow at Bakehouse Art Complex (from August 2025). Born in Cienfuegos, Cuba, and raised in Miami, he was formerly James W. Alsdorf Chief Curator at the Museum of Contemporary Art Chicago and Director of Curatorial Affairs & Chief Curator at Pérez Art Museum Miami, with more than 25 years of experience and over 50 major exhibitions. At BAC he mentors resident artists and contributes to the organization’s curatorial roadmap and campus redevelopment.',
+        websiteUrl:
+          'https://www.bacfl.org/blog/bakehouse-art-complex-appoints-acclaimed-curator-renmorales-as-senior-curatorial-fellow',
+        portrait: {
+          imageUrl: null,
+          sourcePageUrl: null,
+          license: null,
+          creditLine: null,
+        },
+      },
+      {
+        name: 'Krys Ortega',
+        bio: 'Krys Ortega, Curatorial + Public Programs Manager, is a graduate of Williams College with dual degrees in Art History and Political Theory. At university, Krys interned at Williams College Museum of Art and participated with the Agents for Creative Action (ACA), where she produced a range of exhibitions and public programs. In addition, Krys brings extensive hands-on experience facilitating arts and community programming from their time interning with the Advancement Department at the Whitney Museum of American Art; the Exhibition and Programs Production department at MoMA PS1, New York; as well as a summer workshop program at the Solomon R. Guggenheim Museum, New York. Krys currently lives and works in Miami.',
         websiteUrl: null,
         portrait: {
           imageUrl: null,
@@ -577,13 +589,13 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         external: true,
       },
       {
-        label: 'René Morales',
-        href: 'https://www.pamm.org/about/staff/rene-morales/',
+        label: 'René Morales — Senior Curatorial Fellow, BAC',
+        href: 'https://www.bacfl.org/blog/bakehouse-art-complex-appoints-acclaimed-curator-renmorales-as-senior-curatorial-fellow',
         external: true,
       },
       { label: 'Moises Sanabria', href: 'https://moises.tech', external: true },
       { label: 'Fabiola Larios', href: 'https://fabiola.io/', external: true },
-      { label: 'Krys', href: null },
+      { label: 'Krys Ortega — Curatorial + Public Programs, BAC', href: null },
     ] satisfies FieldGuideLink[],
   },
 
