@@ -2,22 +2,7 @@
 
 import Image from 'next/image';
 import type { FieldGuidePortraitMeta } from '@/constants/bac-field-guide-images-after-screen';
-
-function initialsFromName(name: string): string {
-  const duo = name.split(/\s*&\s*/).map((p) => p.trim()).filter(Boolean);
-  if (duo.length >= 2) {
-    const a = duo[0].match(/\p{L}/u)?.[0] ?? duo[0][0];
-    const b = duo[1].match(/\p{L}/u)?.[0] ?? duo[1][0];
-    return `${a}${b}`.toUpperCase();
-  }
-  const words = name.split(/\s+/).filter(Boolean);
-  if (words.length >= 2) {
-    const a = words[0].match(/\p{L}/u)?.[0] ?? words[0][0];
-    const b = words[1].match(/\p{L}/u)?.[0] ?? words[1][0];
-    return `${a}${b}`.toUpperCase();
-  }
-  return name.slice(0, 2).toUpperCase();
-}
+import { personAvatarPlaceholderUrl } from '@/lib/bac-field-guide-placeholders';
 
 type PersonPortraitProps = {
   name: string;
@@ -27,8 +12,12 @@ type PersonPortraitProps = {
 };
 
 export function PersonPortrait({ name, portrait, isDark, size = 56 }: PersonPortraitProps) {
-  const initial = initialsFromName(name);
   const ring = isDark ? 'ring-1 ring-white/15' : 'ring-1 ring-black/10';
+  const hasPhoto = Boolean(portrait.imageUrl);
+  const src = hasPhoto ? portrait.imageUrl! : personAvatarPlaceholderUrl(name, isDark);
+  const alt = hasPhoto
+    ? portrait.creditLine || name
+    : `Placeholder avatar for ${name} — replace with a licensed photo when available.`;
 
   return (
     <div className="flex flex-col gap-1 shrink-0">
@@ -36,27 +25,16 @@ export function PersonPortrait({ name, portrait, isDark, size = 56 }: PersonPort
         className={`relative overflow-hidden rounded-full ${ring}`}
         style={{ width: size, height: size }}
       >
-        {portrait.imageUrl ? (
-          <Image
-            src={portrait.imageUrl}
-            alt={portrait.creditLine || name}
-            width={size}
-            height={size}
-            className="object-cover w-full h-full"
-            unoptimized
-          />
-        ) : (
-          <span
-            className={`flex h-full w-full items-center justify-center text-sm font-semibold tracking-tight ${
-              isDark ? 'bg-white/10 text-neutral-200' : 'bg-neutral-200 text-neutral-700'
-            }`}
-            aria-hidden
-          >
-            {initial}
-          </span>
-        )}
+        <Image
+          src={src}
+          alt={alt}
+          width={size}
+          height={size}
+          className="object-cover w-full h-full"
+          unoptimized
+        />
       </div>
-      {portrait.sourcePageUrl ? (
+      {portrait.sourcePageUrl && hasPhoto ? (
         <a
           href={portrait.sourcePageUrl}
           target="_blank"
@@ -68,7 +46,7 @@ export function PersonPortrait({ name, portrait, isDark, size = 56 }: PersonPort
           Photo source
         </a>
       ) : null}
-      {portrait.license && portrait.imageUrl ? (
+      {portrait.license && hasPhoto ? (
         <p
           className={`text-[10px] leading-tight max-w-[5.5rem] ${
             isDark ? 'text-neutral-600' : 'text-neutral-500'

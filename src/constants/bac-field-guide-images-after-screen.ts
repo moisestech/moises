@@ -1,6 +1,6 @@
 /**
  * BAC Reading Group — Session Field Guide
- * Content model for /bac/images-after-the-screen (reusable pattern for future sessions).
+ * Content for /bac/images-after-the-screen (one-off session, March 2026).
  */
 
 export type FieldGuideNavItem = {
@@ -24,8 +24,6 @@ export type FieldGuideReading = {
   /** Optional list of alternate cover URLs (rights / sourcing notes) */
   coverImageUrlOptions: readonly string[];
   coverImageAlt: string;
-  /** Tailwind classes when no cover image */
-  placeholderClassName: string;
 };
 
 export type FieldGuideHeroStripAsset = {
@@ -76,6 +74,19 @@ export type FieldGuideHost = {
   name: string;
   bio: string;
   websiteUrl: string | null;
+  /** Use null imageUrl for generated placeholder avatar */
+  portrait: FieldGuidePortraitMeta;
+};
+
+/** Maps each “How the Readings Connect” panel to writers.core[0|1|2] (Steyerl, Fontcuberta, Kissick). */
+export type FieldGuideConnectionCard = {
+  label: string;
+  text: string;
+  writerCoreIndex: 0 | 1 | 2;
+  /** Optional publication or artwork image instead of the writer portrait (e.g. Spike hero for Kissick). */
+  signalImageUrl?: string;
+  signalImageAlt?: string;
+  signalCaption?: string;
 };
 
 export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
@@ -101,12 +112,12 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
     title: 'Images After the Screen: Photography, AI, and the New Visual Order',
     subtitle:
       'A reading group on photography, AI, vulgarity, authorship, and the changing visual condition.',
-    presentersLine: 'Presented by Moises Sanabria and Fabiola Larios',
-    collaborationLine:
-      'In collaboration with René Morales and the BAC Reading Group',
+    presentersLine: 'Moises Sanabria, Fabiola Larios, and Krys',
+    organizersLine:
+      'With René Morales and the BAC Reading Group at Bakehouse Art Complex.',
     sessionDate: 'March 26, 2026',
     purposeLine:
-      'For participants in this BAC session and future reading groups: orient to the texts, support discussion, and document a repeatable format. Next step: follow the suggested reading path, then join with the discussion questions in view.',
+      'A one-off field guide for this session: orient to the texts, support discussion, and keep a clear record of the format. Follow the suggested reading path, then bring the discussion questions to the room.',
   },
 
   overview: {
@@ -126,16 +137,24 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       {
         label: 'Hito Steyerl — Condition',
         text: 'Steyerl provides the macro frame: the internet and image systems no longer stay contained online, but become materially embedded in the world.',
+        writerCoreIndex: 0,
       },
       {
         label: 'Joan Fontcuberta — Practice',
         text: 'Fontcuberta gives the artist- and photography-centered lens: AI, authorship, memory, monstrosity, and the changing visual order.',
+        writerCoreIndex: 1,
       },
       {
         label: 'Dean Kissick — Atmosphere',
         text: 'Kissick brings the discussion into the present through vulgarity, grotesque internet imagery, memetic transformation, image excess, and unstable taste.',
+        writerCoreIndex: 2,
+        signalImageUrl:
+          'https://cdn.sanity.io/images/syotmk9q/production/2a40ff1af28bf6588460046f631d318e3fdd621d-1600x2000.jpg?auto=format&h=720&q=70&w=960',
+        signalImageAlt:
+          'Truth Terminal by Beeple, 2024. Hero image for Dean Kissick’s “The Vulgar Image” on Spike Art Magazine.',
+        signalCaption: 'Spike hero for “The Vulgar Image” — Beeple, 2024.',
       },
-    ],
+    ] satisfies FieldGuideConnectionCard[],
     bridge:
       'Together, these texts move from condition to practice to atmosphere: from the world images now inhabit, to the artist’s role within that transformation, to the strange visual culture emerging around us.',
   },
@@ -155,12 +174,11 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       whyItMatters:
         'This text establishes the broader condition for the session: the image world no longer lives only on screens. It spills into space, infrastructures, bodies, and everyday experience.',
       publisherDomain: 'e-flux.com',
-      coverImageUrl: null,
+      coverImageUrl:
+        'https://images-eflux.b-cdn.net/assets/8303ceee-2e5c-4ce8-94cb-10f0bf1f0995.jpg',
       coverImageUrlOptions: [],
       coverImageAlt:
-        'No rights-cleared publication-domain cover image confirmed for the e-flux reading; keep gradient fallback.',
-      placeholderClassName:
-        'bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-800 dark:to-slate-950',
+        'Feature image from e-flux journal for the assigned text “Too Much World: Is the Internet Dead?” (Hito Steyerl).',
     },
     {
       id: 'fontcuberta',
@@ -180,7 +198,6 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         'https://www.blind-magazine.com/wp-content/uploads/2023/04/joan-fontcuberta-gastropoda.jpg',
       coverImageUrlOptions: [],
       coverImageAlt: 'Joan Fontcuberta, Gastropoda (artwork referenced in Blind Magazine)',
-      placeholderClassName: '',
     },
     {
       id: 'kissick',
@@ -200,8 +217,6 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       coverImageUrlOptions: [],
       coverImageAlt:
         'Truth Terminal by Beeple, 2024. Hero image for Dean Kissick’s “The Vulgar Image” on Spike Art Magazine.',
-      placeholderClassName:
-        'bg-gradient-to-br from-rose-200 to-amber-300 dark:from-rose-950 dark:to-amber-950',
     },
   ] satisfies FieldGuideReading[],
 
@@ -319,10 +334,12 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         url: 'https://spikeartmagazine.com/authors/dean-kissick',
         mentionNote: 'Author, “The Vulgar Image” (*Spike*, Summer 2025).',
         portrait: {
-          imageUrl: null,
-          sourcePageUrl: null,
+          imageUrl:
+            'https://apossible.com/media/pages/interviews/dean-kissick-is-a-writer/9c3dc56052-1771255227/deankissick_by_manuelvazquez3.jpg',
+          sourcePageUrl: 'https://apossible.com/interviews/dean-kissick-is-a-writer',
           license: null,
-          creditLine: 'No clearly free-licensed portrait on Wikimedia Commons; initials fallback.',
+          creditLine:
+            'Dean Kissick, Barbican, London, February 2025. Photo: Manuel Vazquez (A Possible interview).',
         },
       },
       {
@@ -519,11 +536,34 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
         name: 'Moises Sanabria',
         bio: 'Interdisciplinary artist based in Miami. His practice examines how algorithmic environments, platforms, and networked systems shape belief, labor, value, and desire; code and technical systems function as mediums and research methods within that work—not a separate identity from the art.',
         websiteUrl: 'https://moises.tech',
+        portrait: {
+          imageUrl: null,
+          sourcePageUrl: null,
+          license: null,
+          creditLine: null,
+        },
       },
       {
         name: 'Fabiola Larios',
         bio: 'Multidisciplinary artist whose work engages visual culture, embodiment, and expanded forms of image-making.',
         websiteUrl: 'https://fabiola.io/',
+        portrait: {
+          imageUrl: null,
+          sourcePageUrl: null,
+          license: null,
+          creditLine: null,
+        },
+      },
+      {
+        name: 'Krys',
+        bio: 'With the BAC reading group — helps hold space for discussion and community around the texts. (Bio and link can be updated.)',
+        websiteUrl: null,
+        portrait: {
+          imageUrl: null,
+          sourcePageUrl: null,
+          license: null,
+          creditLine: null,
+        },
       },
     ] satisfies FieldGuideHost[],
   },
@@ -543,13 +583,14 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       },
       { label: 'Moises Sanabria', href: 'https://moises.tech', external: true },
       { label: 'Fabiola Larios', href: 'https://fabiola.io/', external: true },
+      { label: 'Krys', href: null },
     ] satisfies FieldGuideLink[],
   },
 
   heroStripAssets: [
     {
-      url: 'https://www.e-flux.com/favicon.ico',
-      alt: 'e-flux favicon',
+      url: 'https://images-eflux.b-cdn.net/assets/8303ceee-2e5c-4ce8-94cb-10f0bf1f0995.jpg',
+      alt: 'e-flux journal feature image for “Too Much World: Is the Internet Dead?” (Hito Steyerl)',
     },
     {
       url: 'https://www.blind-magazine.com/favicon.ico',
@@ -564,15 +605,27 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
   assetLegalNotes: [
     {
       asset: 'readings[0].coverImageUrl',
-      note: 'No publication-domain image URL confirmed from e-flux; safest option is to keep the gradient fallback unless you obtain an authorized image or host your own licensed asset.',
+      note: 'Hotlinked from e-flux’s Bunny CDN (images-eflux.b-cdn.net) — same origin family as e-flux.com; use only while publication permits hotlinking.',
+    },
+    {
+      asset: 'writers.core[2].portrait (Dean Kissick)',
+      note: 'Portrait hosted on A Possible (apossible.com), interview with Dean Kissick — photo credit Manuel Vazquez per file metadata; not a Commons license — verify reuse with A Possible / photographer before republishing elsewhere.',
     },
     {
       asset: 'readings[2].coverImageUrl',
       note: 'Safe to hotlink from Spike’s own Sanity CDN because it is the publication’s CMS/CDN asset. Credit line in alt text: “Truth Terminal by Beeple, 2024.”',
     },
     {
-      asset: 'heroStripAssets[*]',
-      note: 'These are publication-domain favicon assets. Fine for small UI/logo usage, but not substitutes for branded press-kit logos.',
+      asset: 'connections.cards[2].signalImageUrl',
+      note: 'Same Spike Sanity CDN asset as readings[2] cover — panel image signals Kissick’s essay atmosphere; alt/caption credit Beeple, 2024.',
+    },
+    {
+      asset: 'heroStripAssets[0]',
+      note: 'Journal feature image from e-flux Bunny CDN (same asset as readings[0].coverImageUrl); hotlink only while publication permits.',
+    },
+    {
+      asset: 'heroStripAssets[1–2]',
+      note: 'Publication-domain favicons for Blind and Spike — small UI only, not press-kit logos.',
     },
     {
       asset: 'any_non_publication_domain_image',
@@ -581,6 +634,10 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
     {
       asset: 'writers/artists.portrait.imageUrl (Wikimedia Commons)',
       note: 'Portraits use Commons Special:FilePath URLs; attribution and license are on each file page (linked as “Photo source”). Verify file pages before reuse elsewhere.',
+    },
+    {
+      asset: 'placehold.co + ui-avatars.com',
+      note: 'Generated placeholders only (reading covers without art; avatars without a photo URL). Dean Kissick now uses the A Possible portrait; swap if rights require hosting your own file.',
     },
   ] satisfies FieldGuideAssetLegalNote[],
 } as const;

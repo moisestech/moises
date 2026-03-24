@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { BookOpen, ExternalLink } from 'lucide-react';
 import type { FieldGuideReading } from '@/constants/bac-field-guide-images-after-screen';
+import { readingCoverPlaceholderUrl } from '@/lib/bac-field-guide-placeholders';
 
 type ReadingCardProps = {
   reading: FieldGuideReading;
@@ -23,36 +23,28 @@ export function ReadingCard({
   cardBg,
   muted,
 }: ReadingCardProps) {
+  const hasCover = Boolean(r.coverImageUrl);
+  const coverSrc = hasCover
+    ? r.coverImageUrl!
+    : readingCoverPlaceholderUrl(r.source, isDark);
+  const coverAlt = hasCover
+    ? r.coverImageAlt
+    : `Placeholder cover for ${r.source} — replace with a rights-cleared image when available.`;
+
   return (
     <article
       className={`rounded-lg border overflow-hidden ${border} ${cardBg} max-w-4xl`}
     >
       <div className="grid md:grid-cols-[minmax(0,220px)_1fr] lg:grid-cols-[minmax(0,280px)_1fr] gap-0">
-        <div
-          className={`relative aspect-[4/3] md:aspect-auto md:min-h-[200px] ${
-            r.coverImageUrl ? '' : r.placeholderClassName
-          }`}
-        >
-          {r.coverImageUrl ? (
-            <Image
-              src={r.coverImageUrl}
-              alt={r.coverImageAlt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 280px"
-              unoptimized
-            />
-          ) : (
-            <div
-              className={`absolute inset-0 flex items-end p-4 ${
-                isDark ? 'text-white/90' : 'text-black/80'
-              }`}
-            >
-              <span className="text-xs font-semibold tracking-wide uppercase opacity-90">
-                {r.source}
-              </span>
-            </div>
-          )}
+        <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[200px] bg-neutral-100 dark:bg-neutral-900">
+          {/* eslint-disable-next-line @next/next/no-img-element -- hotlinked publication covers; avoids optimizer/host edge cases */}
+          <img
+            src={coverSrc}
+            alt={coverAlt}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         <div className="p-5 sm:p-6 flex flex-col">

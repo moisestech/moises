@@ -1,8 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
 import { BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN as C } from '@/constants/bac-field-guide-images-after-screen';
+import { personAvatarPlaceholderUrl } from '@/lib/bac-field-guide-placeholders';
 import { FieldGuideToc } from './FieldGuideToc';
 import { ReadingCard } from './ReadingCard';
 import { PersonPortrait } from './PersonPortrait';
@@ -56,7 +58,7 @@ export default function BacFieldGuideClient() {
 
   return (
     <main
-      className={`min-h-screen pt-24 sm:pt-32 pb-20 sm:pb-28 transition-colors font-['MoMA_Sans'] ${
+      className={`min-h-screen pt-32 sm:pt-40 md:pt-44 pb-20 sm:pb-28 transition-colors font-['MoMA_Sans'] ${
         isDark ? 'bg-black text-white' : 'bg-[#fafafa] text-black'
       }`}
     >
@@ -77,8 +79,18 @@ export default function BacFieldGuideClient() {
             {C.hero.title}
           </h1>
           <p className={`text-lg sm:text-xl leading-snug mb-6 ${muted}`}>{C.hero.subtitle}</p>
-          <p className={`text-sm sm:text-base ${muted}`}>{C.hero.presentersLine}</p>
-          <p className={`text-sm sm:text-base ${muted}`}>{C.hero.collaborationLine}</p>
+          <p className={`text-sm sm:text-base ${muted}`}>
+            <span className={`font-medium ${isDark ? 'text-neutral-300' : 'text-neutral-800'}`}>
+              Facilitation:{' '}
+            </span>
+            {C.hero.presentersLine}
+          </p>
+          <p className={`text-sm sm:text-base ${muted}`}>
+            <span className={`font-medium ${isDark ? 'text-neutral-300' : 'text-neutral-800'}`}>
+              Partners:{' '}
+            </span>
+            {C.hero.organizersLine}
+          </p>
           <p className={`text-sm sm:text-base mt-4 font-medium ${isDark ? 'text-neutral-200' : 'text-neutral-800'}`}>
             <span className="font-semibold">Session date:</span> {C.hero.sessionDate}
           </p>
@@ -104,7 +116,9 @@ export default function BacFieldGuideClient() {
                     alt={asset.alt}
                     width={36}
                     height={36}
-                    className={`rounded-md object-contain ${
+                    className={`rounded-md ${
+                      i === 0 ? 'object-cover' : 'object-contain'
+                    } ${
                       isDark ? 'bg-white/10 p-1' : 'bg-white p-1 shadow-sm border border-black/5'
                     }`}
                   />
@@ -181,21 +195,69 @@ export default function BacFieldGuideClient() {
                 {C.connections.title}
               </SectionTitle>
               <div className="grid gap-6 sm:grid-cols-3">
-                {C.connections.cards.map((card) => (
-                  <div
-                    key={card.label}
-                    className={`rounded-md border p-5 ${border} ${cardBg}`}
-                  >
-                    <h3
-                      className={`text-sm font-semibold mb-3 leading-snug ${
-                        isDark ? 'text-white' : 'text-neutral-900'
-                      }`}
+                {C.connections.cards.map((card) => {
+                  const writer = C.writers.core[card.writerCoreIndex];
+                  const useSignal = Boolean(card.signalImageUrl);
+                  const panelSrc = useSignal
+                    ? card.signalImageUrl!
+                    : writer.portrait.imageUrl ?? personAvatarPlaceholderUrl(writer.name, isDark);
+                  const panelAlt = useSignal
+                    ? card.signalImageAlt ?? writer.name
+                    : writer.portrait.creditLine
+                      ? `${writer.name}. ${writer.portrait.creditLine}`
+                      : `Portrait of ${writer.name}.`;
+
+                  return (
+                    <div
+                      key={card.label}
+                      className={`rounded-md border overflow-hidden flex flex-col ${border} ${cardBg}`}
                     >
-                      {card.label}
-                    </h3>
-                    <p className={`text-sm leading-relaxed ${muted}`}>{card.text}</p>
-                  </div>
-                ))}
+                      <div
+                        className={`relative aspect-[16/10] w-full shrink-0 ${
+                          isDark ? 'bg-white/[0.06]' : 'bg-black/[0.04]'
+                        }`}
+                      >
+                        <Image
+                          src={panelSrc}
+                          alt={panelAlt}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 33vw"
+                          className="object-cover object-top"
+                          unoptimized
+                        />
+                      </div>
+                      <div className="p-5 flex flex-col flex-1 min-h-0">
+                        <h3
+                          className={`text-sm font-semibold mb-2 leading-snug ${
+                            isDark ? 'text-white' : 'text-neutral-900'
+                          }`}
+                        >
+                          {card.label}
+                        </h3>
+                        {useSignal && card.signalCaption ? (
+                          <p
+                            className={`text-[11px] leading-snug mb-3 ${muted}`}
+                          >
+                            {card.signalCaption}
+                          </p>
+                        ) : null}
+                        <p className={`text-sm leading-relaxed ${muted} flex-1`}>{card.text}</p>
+                        {!useSignal && writer.portrait.sourcePageUrl && writer.portrait.imageUrl ? (
+                          <a
+                            href={writer.portrait.sourcePageUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`text-[11px] font-medium underline underline-offset-2 mt-3 w-fit ${
+                              isDark ? 'text-neutral-500 hover:text-neutral-300' : 'text-neutral-500 hover:text-neutral-800'
+                            }`}
+                          >
+                            Photo source
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
               <p className={`mt-8 text-base leading-relaxed max-w-3xl ${muted}`}>
                 {C.connections.bridge}
@@ -207,7 +269,7 @@ export default function BacFieldGuideClient() {
                 Readings
               </SectionTitle>
               <p className={`text-sm sm:text-base mb-10 max-w-3xl ${muted}`}>
-                Each card opens the assigned text. Covers: Blind (Fontcuberta artwork), Spike (Beeple hero from Kissick’s essay on Spike’s CDN), e-flux (gradient until a rights-cleared cover is added). Card favicons use a standard domain resolver.
+                Each card opens the assigned text. Covers use publication art where we have it (Blind, Spike); otherwise a neutral placeholder until you swap in a licensed image. Avatars for people without a Commons photo use a generated placeholder. Favicons use a standard domain resolver.
               </p>
               <div className="space-y-10">
                 {C.readings.map((r) => (
@@ -447,25 +509,28 @@ export default function BacFieldGuideClient() {
               <SectionTitle id="about-hosts" isDark={isDark}>
                 {C.hosts.title}
               </SectionTitle>
-              <div className="space-y-8 max-w-3xl">
+              <div className="space-y-10 max-w-3xl">
                 {C.hosts.people.map((h) => (
-                  <div key={h.name}>
-                    <p className={`font-semibold mb-2 ${isDark ? 'text-white' : 'text-neutral-900'}`}>
-                      {h.name}
-                    </p>
-                    <p className={`text-sm sm:text-base leading-relaxed ${muted}`}>{h.bio}</p>
-                    {h.websiteUrl ? (
-                      <a
-                        href={h.websiteUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`inline-block mt-2 text-sm font-medium underline underline-offset-4 ${accentLink}`}
-                      >
-                        Website
-                      </a>
-                    ) : (
-                      <p className={`mt-2 text-sm ${muted}`}>Website — link to be added</p>
-                    )}
+                  <div key={h.name} className="flex gap-5 sm:gap-6">
+                    <PersonPortrait name={h.name} portrait={h.portrait} isDark={isDark} size={64} />
+                    <div className="min-w-0 flex-1">
+                      <p className={`font-semibold mb-2 ${isDark ? 'text-white' : 'text-neutral-900'}`}>
+                        {h.name}
+                      </p>
+                      <p className={`text-sm sm:text-base leading-relaxed ${muted}`}>{h.bio}</p>
+                      {h.websiteUrl ? (
+                        <a
+                          href={h.websiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-block mt-2 text-sm font-medium underline underline-offset-4 ${accentLink}`}
+                        >
+                          Website
+                        </a>
+                      ) : (
+                        <p className={`mt-2 text-sm ${muted}`}>Website — add link in constants when ready</p>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
