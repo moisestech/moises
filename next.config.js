@@ -56,6 +56,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'shop.spikeartmagazine.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'commons.wikimedia.org',
         port: '',
         pathname: '/**',

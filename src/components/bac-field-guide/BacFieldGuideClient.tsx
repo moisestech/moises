@@ -58,7 +58,7 @@ export default function BacFieldGuideClient() {
 
   return (
     <main
-      className={`min-h-screen pt-32 sm:pt-40 md:pt-44 pb-20 sm:pb-28 transition-colors font-['MoMA_Sans'] ${
+      className={`min-h-screen pt-[228px] sm:pt-[260px] md:pt-[276px] pb-20 sm:pb-28 transition-colors font-['MoMA_Sans'] ${
         isDark ? 'bg-black text-white' : 'bg-[#fafafa] text-black'
       }`}
     >

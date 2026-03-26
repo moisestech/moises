@@ -612,8 +612,8 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       alt: 'Blind Magazine favicon',
     },
     {
-      url: 'https://www.spikeartmagazine.com/favicon.ico',
-      alt: 'Spike Art Magazine favicon',
+      url: 'https://shop.spikeartmagazine.com/cdn/shop/files/Spike55_Logo.png?v=1690053269&width=600',
+      alt: 'Spike Art Magazine wordmark',
     },
   ] satisfies FieldGuideHeroStripAsset[],
 
@@ -639,8 +639,12 @@ export const BAC_FIELD_GUIDE_IMAGES_AFTER_SCREEN = {
       note: 'Journal feature image from e-flux Bunny CDN (same asset as readings[0].coverImageUrl); hotlink only while publication permits.',
     },
     {
-      asset: 'heroStripAssets[1–2]',
-      note: 'Publication-domain favicons for Blind and Spike — small UI only, not press-kit logos.',
+      asset: 'heroStripAssets[1]',
+      note: 'Blind Magazine favicon from publication domain — small UI only.',
+    },
+    {
+      asset: 'heroStripAssets[2]',
+      note: 'Spike wordmark from Spike’s official Shopify shop CDN (shop.spikeartmagazine.com); use only while the shop permits hotlinking.',
     },
     {
       asset: 'any_non_publication_domain_image',
