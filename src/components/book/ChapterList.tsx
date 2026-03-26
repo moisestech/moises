@@ -10,24 +10,28 @@ interface ChapterListProps {
   chapters: ChapterMetadata[];
   bookTitle: string;
   bookDescription: string;
+  showBookHeader?: boolean;
 }
 
 export function ChapterList({
   chapters,
   bookTitle,
   bookDescription,
+  showBookHeader = true,
 }: ChapterListProps) {
   const isLocalhost = useIsLocalhost();
   const sortedChapters = [...chapters].sort((a, b) => a.order - b.order);
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4 text-black dark:text-white">{bookTitle}</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl">
-          {bookDescription || 'A living book exploring transparency in co-intelligence and the post-AI writing era'}
-        </p>
-      </div>
+      {showBookHeader && (
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold mb-4 text-black dark:text-white">{bookTitle}</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl">
+            {bookDescription || 'A living book exploring transparency in co-intelligence and the post-AI writing era'}
+          </p>
+        </div>
+      )}
 
       {/* Chapter Navigation */}
       <div className="mb-8 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
@@ -61,13 +65,15 @@ export function ChapterList({
             <Link
               key={chapter.slug}
               href={`/research/born-into-the-machine/${chapter.slug}`}
-              className="block p-6 border border-gray-200 dark:border-gray-800 rounded-lg hover:shadow-lg transition-shadow bg-white dark:bg-gray-900"
+              className="block p-6 rounded-lg hover:shadow-lg transition-shadow bg-white dark:bg-gray-900"
             >
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm font-mono text-gray-500 dark:text-gray-400">{String(chapter.order).padStart(2, '0')}</span>
-                    <h2 className="text-2xl font-semibold text-black dark:text-white">{chapter.title || `Chapter ${chapter.order}`}</h2>
+                  <div className="flex items-start gap-4 mb-1">
+                    <span className="flex items-center justify-center min-w-[3ch] aspect-square text-2xl font-semibold font-mono text-black dark:text-white tabular-nums">
+                      {String(chapter.order).padStart(2, '0')}
+                    </span>
+                    <h2 className="text-2xl font-semibold text-black dark:text-white leading-tight">{chapter.title || `Chapter ${chapter.order}`}</h2>
                   </div>
                   {hasSlop && (
                     <div className="flex items-center gap-1 text-xs text-orange-600 dark:text-orange-400 mb-2">

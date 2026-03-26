@@ -142,6 +142,22 @@ export const exhibitions: Exhibitions[] = [
     link: 'https://archive.transmediale.de/festival-2012/exhibition',
   },
   {
+    id: 14,
+    title: 'F*ck Art: Nature & Artifice',
+    date: '2026',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483432/art/moisestech-website/exhibitions/oct_2024_post_masters_low_resolution/oct_2024_post_masters_low_resolution_poster_utzgio.png',
+    location: 'Museum of Sex, 2200 NW 24th Ave., Miami',
+    shortName: 'Museum of Sex Miami',
+    description:
+      'F*ck Art: Nature & Artifice features works by Miami-based artists whose practices examine the city\'s distinctive convergence of subtropical ecology, technology, and sexual undercurrent. The exhibition embraces the blend of the organic and the digital, natural landscapes and engineered environments, flesh and code, intimacy and surveillance. The group show leans into Miami\'s volatility: rising tides, opulent excess, congested flows, feral exuberance, and the interplay between revelation and restraint, all refracted through an abiding fixation on the visible self. Intimate-scale pieces appear within vitrines that evoke archaeological fragments, their sequential arrangement mirroring the rhythm of digital browsing. Miami emerges as a creative force in continual motion, expansive and perpetually transforming. "We are thrilled to introduce F*ck Art to Miami, marking the debut of our dedicated series spotlighting local artists in this vibrant city." — Dan Gluck, CEO, Museum of Sex',
+    tags: ['Erotic Art', 'Miami', 'Local Artists', 'Digital Art', 'Interactive', 'Contemporary Art'],
+    curator: 'Tam Gryn',
+    featured_work: 'Taste the Algorithm',
+    link: 'https://www.museumofsex.com/exhibitions/fck-art-nature-artifice/',
+    support: 'Museum of Sex',
+  },
+  {
     id: 13,
     title: 'Algoritmica Intima: Runtime',
     date: 'June - July 2025',

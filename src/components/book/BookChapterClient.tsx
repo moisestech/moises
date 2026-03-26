@@ -4,6 +4,7 @@ import { BookChapter, ViewMode } from '@/lib/book/types';
 import { ChapterRenderer } from './ChapterRenderer';
 import { AuthorshipLegend } from './AuthorshipLegend';
 import { ViewModeToggle } from './ViewModeToggle';
+import { BornIntoTheMachineHero } from './BornIntoTheMachineHero';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Edit, ArrowLeft } from 'lucide-react';
@@ -28,7 +29,8 @@ export function BookChapterClient({ chapter }: BookChapterClientProps) {
 
   return (
     <div className="min-h-screen bg-white dark:bg-black">
-      <div className="max-w-7xl mx-auto px-4 py-12 pt-44">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11 py-12 pt-24">
+        <BornIntoTheMachineHero title={chapter.title || 'Untitled Chapter'} />
         <div className="mb-8">
           <Link
             href="/research/born-into-the-machine"
@@ -39,7 +41,6 @@ export function BookChapterClient({ chapter }: BookChapterClientProps) {
           </Link>
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-4xl font-bold mb-2 text-black dark:text-white">{chapter.title || 'Untitled Chapter'}</h1>
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 Status: {chapter.status}
               </span>

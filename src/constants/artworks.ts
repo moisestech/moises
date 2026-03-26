@@ -56,6 +56,18 @@ interface Artist {
   };
 }
 
+/** Canon works for Selected Works page — institutional entry point */
+export const SELECTED_WORK_SLUGS: string[] = [
+  'privacy_is_a_luxury',
+  'taste_the_algorithm',
+  'simulation_faith',
+  'price_of_existence',
+  'doomscrolling_treadmill',
+  'smart_shoppers',
+  'vr_hug',
+  'beyond_money',
+];
+
 export const artist: Artist = {
   artist_statement:
     'My work examines what it means to navigate "being chronically online" in an age where digital systems mediate nearly every facet of existence. At the intersection of machine philosophy, digital humanities, and memetics, I explore how technology reshapes our understanding of identity, value, and connection. This inquiry bridges contemporary art and the hyper-accelerated culture of the internet, channeling both humor and critique into conceptual frameworks. Through media such as AI algorithms, physical sculptures, and immersive installations, I create spaces that reflect on the absurdity, beauty, and impact of our entanglement with technology...',
@@ -131,6 +143,42 @@ export const artist: Artist = {
           requirements: ['Spotlighting', 'White gallery walls']
         }
       }
+    },
+    taste_the_algorithm: {
+      title: 'Taste the Algorithm',
+      year: 2026,
+      location: 'F*ck Art: Nature & Artifice, Museum of Sex, Miami',
+      curator: 'Tam Gryn',
+      description:
+        'Taste the Algorithm is a sculpture that explores how algorithmic systems shape desire, preference, and the ways we learn to want. In an age where recommendation engines curate our appetites—from what we watch to what we buy to who we desire—the work interrogates the intimate feedback loop between human taste and machine learning. The piece materializes this relationship, asking viewers to consider how much of what we "like" has been learned from us, refined by us, and fed back to us. Presented in the context of Miami\'s highly sexualized urban landscape, the work connects algorithmic mediation to broader questions of desire, identity, and the body in digital culture.',
+      medium: 'Mixed-media sculpture with video component',
+      materials: [
+        'Sculptural elements',
+        'Video documentation',
+      ],
+      dimensions: 'Variable',
+      role: 'Concept and Fabrication',
+      images: [
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483432/art/moisestech-website/exhibitions/oct_2024_post_masters_low_resolution/oct_2024_post_masters_low_resolution_poster_utzgio.png',
+          caption: 'Taste the Algorithm - Installation view at Museum of Sex. Photo: Mateo SeZa/SeZa Studios. Update with your photos when available.',
+        }
+      ],
+      tags: [
+        'algorithmic art',
+        'sculpture',
+        'desire',
+        'recommendation systems',
+        'digital culture',
+        'Miami',
+        'new media art',
+        'technofetishism',
+      ],
+      interpretation:
+        'The work extends Sanabria\'s ongoing inquiry into how technology mediates human experience. By framing algorithmic influence through the lens of "taste"—a word that bridges sensory pleasure, aesthetic judgment, and cultural preference—the sculpture makes visible the invisible systems that increasingly shape what we want and how we want it.',
+      exhibition: 'F*ck Art: Nature & Artifice',
+      on_view: true,
+      // Add video when available: { type: 'vimeo', id: 'YOUR_VIMEO_ID', url: 'https://vimeo.com/YOUR_VIMEO_ID', title: '...', caption: '...' }
     },
     simulation_faith: {
       title: 'Simulation Faith',

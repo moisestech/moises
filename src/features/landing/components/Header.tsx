@@ -40,6 +40,7 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
     { label: 'Visit', path: '/visit' },
     { label: 'Exhibitions', path: '/exhibitions' },
     { label: 'Events', path: '/events' },
+    { label: 'Selected Works', path: '/selected-works', enabled: true },
     { label: 'Art and Artist', path: '/portfolio', enabled: true },
     { label: 'Bio', path: '/bio', enabled: true },
     { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },

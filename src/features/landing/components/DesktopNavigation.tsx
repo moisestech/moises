@@ -103,11 +103,20 @@ export default function DesktopNavigation({ menuItems, onDropdownOpen }: Desktop
             Exhibitions and events
           </button>
         </li>
+        {/* Selected Works */}
+        <li>
+          <Link
+            href="/selected-works"
+            className={`transition-colors py-2 font-bold ${pathname === '/selected-works' ? (isDark ? 'border-b-4 border-white text-white pb-0' : 'border-b-4 border-black text-black pb-0') : (isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600')}`}
+          >
+            Selected works
+          </Link>
+        </li>
         {/* Art and Artists */}
         <li>
           <Link
             href="/portfolio"
-            className={`transition-colors py-2 font-bold ${isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'}`}
+            className={`transition-colors py-2 font-bold ${pathname === '/portfolio' ? (isDark ? 'border-b-4 border-white text-white pb-0' : 'border-b-4 border-black text-black pb-0') : (isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600')}`}
           >
             Art and artists
           </Link>
@@ -175,6 +184,15 @@ export default function DesktopNavigation({ menuItems, onDropdownOpen }: Desktop
                     >
                       Exhibitions and events
                     </button>
+                  </li>
+                  <li>
+                    <Link
+                      href="/selected-works"
+                      className={`transition-colors py-2 font-bold ${isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'}`}
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Selected works
+                    </Link>
                   </li>
                   <li>
                     <Link

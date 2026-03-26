@@ -212,6 +212,35 @@ export default async function ArtPage({ params }: PageProps) {
               </div>
             )}
 
+            {artwork.title === 'Taste the Algorithm' && (
+              <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <h3 className="text-lg font-semibold mb-4">Press Coverage</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="font-medium text-sm">
+                      <strong>Artburst Miami</strong> - "Local Artists Given the Spotlight in Latest Museum of Sex Exhibit"
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      Featured in F*ck Art: Nature & Artifice at the Museum of Sex, Miami. Written by Douglas Markowitz, March 3, 2026.
+                    </p>
+                    <a 
+                      href="https://www.artburstmiami.com/visual_arts/miami-museum-of-sex-fck-art-nature-and-artifice-exhibition"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline text-sm inline-flex items-center mt-2"
+                    >
+                      Read full article →
+                      <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Video Section */}
             {artwork.video && (
               <div className="mt-16 mb-16">

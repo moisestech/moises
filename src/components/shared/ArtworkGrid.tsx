@@ -5,11 +5,21 @@ import { artist } from '@/constants/artworks';
 interface ArtworkGridProps {
   minYear?: number;
   maxYear?: number;
+  /** When provided, show only these artworks in this order */
+  slugs?: string[];
 }
 
-export default function ArtworkGrid({ minYear, maxYear }: ArtworkGridProps) {
+export default function ArtworkGrid({ minYear, maxYear, slugs }: ArtworkGridProps) {
   // Get artwork entries with their slugs
-  let artworkEntries = Object.entries(artist.artworks);
+  let artworkEntries: [string, typeof artist.artworks[string]][];
+
+  if (slugs?.length) {
+    artworkEntries = slugs
+      .filter((slug) => artist.artworks[slug])
+      .map((slug) => [slug, artist.artworks[slug]]);
+  } else {
+    artworkEntries = Object.entries(artist.artworks);
+  }
 
   // Filter by year range if provided
   if (minYear !== undefined || maxYear !== undefined) {

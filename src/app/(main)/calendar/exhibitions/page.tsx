@@ -15,19 +15,20 @@ export const metadata: Metadata = {
 };
 
 export default function Exhibitions() {
-  // Filter current exhibitions to show specific ones
-  const currentExhibitions = exhibitions.filter(exh => 
-    exh.title === 'Algoritmica Intima: Runtime' || 
-    exh.title === 'Technofetishism: Whip it into Shape'
+  // Filter current exhibitions (on view in 2026)
+  const currentExhibitions = exhibitions.filter(exh =>
+    exh.title === 'F*ck Art: Nature & Artifice'
   );
 
-  // Filter upcoming exhibitions (exclude current ones)
+  // Past exhibitions to exclude from upcoming (ended in 2025)
+  const pastExhibitionTitles = ['Technofetishism: Whip it into Shape', 'Algoritmica Intima: Runtime'];
+
+  // Filter upcoming exhibitions (exclude current and past)
   const upcomingExhibitions = exhibitions.filter(exh => {
     const isCurrent = currentExhibitions.some(current => current.id === exh.id);
-    return !isCurrent && exh.date.includes('2025') && 
-           !exh.date.includes('Jan') && 
-           !exh.date.includes('Feb') && 
-           !exh.date.includes('Mar');
+    const isPast = pastExhibitionTitles.includes(exh.title);
+    return !isCurrent && !isPast && exh.date.includes('2026') &&
+           !exh.date.includes('Jan') && !exh.date.includes('Feb');
   }).slice(0, 3);
 
   // Filter installations and projects from artworks
@@ -85,7 +86,13 @@ export default function Exhibitions() {
         <h2 className="text-4xl font-bold mb-8 ml-11">Current exhibitions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {currentExhibitions.map((exhibition) => (
-            <div key={exhibition.id} className="group">
+            <a
+              key={exhibition.id}
+              href={exhibition.link || '#'}
+              target={exhibition.link?.startsWith('http') ? '_blank' : undefined}
+              rel={exhibition.link?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="group block"
+            >
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-gray-800 mb-4">
                 <Image
                   src={exhibition.imageUrl}
@@ -103,7 +110,7 @@ export default function Exhibitions() {
                 </p>
                 <p className="text-black dark:text-black mb-1 font-bold">{exhibition.date}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
