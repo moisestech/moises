@@ -722,6 +722,76 @@ Beyond infrastructure, The Algorithm is Outside delves into the social and ritua
       gallery: 'The installation creates a cohesive techno-sculptural vocabulary with hacked consumer objects retrofitted with screens and sensors, giving the space a networked concept aesthetic.'
     }
   },
+  broken_acceleration: {
+    title: 'Broken Acceleration',
+    year: 2026,
+    description:
+      'Slowing in the Age of Continuity — a mobile public sculpture: full-size STOP sign on a self-balancing two-wheel base with an asymmetrical aluminum claw arm and visible cable. The work stages civic command against technological acceleration in Miami’s pedestrian spaces.',
+    essay: '',
+    implementation: undefined,
+    budget: undefined,
+    supplemental_materials: [],
+    interactiveContent: [],
+    artistic_intent:
+      'Broken Acceleration asks what it means to stop where everyday life is organized around speed, responsiveness, and continuous adjustment. The STOP sign is treated as shared public language, fused with a balancing mobility platform associated with sensing, prediction, and correction—so “stop” becomes a question rather than a traffic command.',
+    technical_requirements: {
+      power: [],
+      mounting: [],
+      space: { pedestal_size: '', wall_clearance: '', power_access: '' },
+    },
+    components: {
+      structure: { material: '', customization: [] },
+      hardware: { model: '', specifications: [], power_requirements: '' },
+      mounting: { type: [], materials: [] },
+      display: { pedestal: '', lighting: '' },
+    },
+    materials: [],
+    dimensions: '',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
+        caption:
+          'Broken Acceleration — proposed sculpture: STOP sign on self-balancing two-wheel base, aluminum claw arm, visible cable',
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-2_ljoygv.png',
+        caption:
+          'Broken Acceleration — publicly accessible pedestrian context, Miami-Dade (proposed activation site)',
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644703/art/moisestech-website/research/broken-acceleration/broken-acceleration-3_muvj7b.png',
+        caption: 'Broken Acceleration — alternate view: civic object behaving incorrectly, powered balancing state',
+      },
+    ],
+    tags: [
+      'public sculpture',
+      'Miami',
+      'civic',
+      'automation',
+      'mobility',
+      'intervention',
+      'WaveMaker',
+      'pedestrian',
+      'STOP',
+    ],
+    interpretation:
+      'The sculpture appears as a familiar civic object behaving incorrectly: alert, balancing, unable to fully stop. It foregrounds interruption as a social and philosophical act in environments built for continuity and flow.',
+    exhibition: 'Proposed public activations, Miami-Dade — 2026',
+    installation_notes: [],
+    future_iterations: [],
+    on_view: false,
+    enhancedDescriptions: {
+      overview:
+        'Broken Acceleration is a mobile public sculpture that fuses a full-size STOP sign with a self-balancing two-wheel base and a sculptural aluminum claw arm. Presented in free, in-person activations on pedestrian ground, it asks what should stop in a city organized around circulation, logistics, and accelerated change.',
+      essay: '',
+      implementation:
+        'Activations are planned as short “Slowing Sessions” in a plaza, courtyard, or civic edge—never as roadway traffic control—with a soft perimeter, spotter, and clear power-down plan.',
+      budget: '',
+      technical:
+        'Movement is intentionally restrained: powered balancing, subtle orientation shifts, and optional low-speed repositioning within a bounded zone—never full autonomy or intersection use.',
+      gallery: '',
+    },
+  },
   i_will_remember_you: {
     title: 'I Will Remember You',
     year: 2025,
