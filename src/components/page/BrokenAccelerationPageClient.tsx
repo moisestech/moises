@@ -63,15 +63,17 @@ export default function BrokenAccelerationPageClient() {
         </p>
       </header>
 
-      <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden mb-8 bg-gray-100 dark:bg-gray-900">
-        <Image
-          src={hero.url}
-          alt="Broken Acceleration — full-size STOP sign on a self-balancing two-wheel base with asymmetrical aluminum claw arm and visible cable, deadpan outdoor documentation"
-          fill
-          className="object-cover"
-          priority
-          sizes="(max-width: 768px) 100vw, 42rem"
-        />
+      <div className="w-full max-w-md sm:max-w-lg mx-auto mb-8 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900">
+        <div className="relative aspect-[2/3] w-full">
+          <Image
+            src={hero.url}
+            alt="Broken Acceleration — full-size STOP sign on a self-balancing two-wheel base with asymmetrical aluminum claw arm and visible cable, deadpan outdoor documentation"
+            fill
+            className="object-contain"
+            priority
+            sizes="(max-width: 640px) 100vw, 32rem"
+          />
+        </div>
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">{hero.caption}</p>
 
