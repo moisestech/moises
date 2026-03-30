@@ -3,6 +3,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/workshop',
+        destination: '/workshops',
+        permanent: true,
+      },
+      {
         source: '/workshops/learn-ai-without-losing-yourself',
         destination: '/workshop/learn-ai-without-losing-yourself',
         permanent: true,

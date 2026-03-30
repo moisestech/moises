@@ -1,130 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { ChevronDown, Menu, X, ArrowRight, Download, CheckCircle, Star, Rocket, Sparkles, Zap, Target, Heart, User, Award, BookOpen, PlayCircle, Brain, Bot, Code2, MessageSquare, Mail, Globe, Database, Settings, AlertCircle, ChevronRight, Link2, Shield, DollarSign } from "lucide-react";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import { Rocket, Brain, Bot, Code2, MessageSquare, Mail, Globe, Database, Settings, AlertCircle, ChevronRight, Link2, Shield, DollarSign } from "lucide-react";
 import Image from "next/image";
-import WorkflowEditor from "../workshop/WorkflowEditor";
 import AIMarketingCourseOverview from "../workshop/AIMarketingCourseOverview";
 import AIMarketingHeroSection from "../workshop/AIMarketingHeroSection";
 import AIMarketingSetupOpenAI from "../workshop/AIMarketingSetupOpenAI";
 import AIMarketingCreateWorkflow from "../workshop/AIMarketingCreateWorkflow";
 import AIMarketingN8NGetStarted from "../workshop/AIMarketingN8NGetStarted";
 import AIMarketingN8NNodes from "../workshop/AIMarketingN8NNodes";
-import AIMarketingN8NIntroDeepDive from "../workshop/AIMarketingN8NIntroDeepDive";
 import AIMarketingN8NNavigatingEditorUI from "../workshop/AIMarketingN8NNavigatingEditorUI";
 import AIMarketingFlashyTitle from "../workshop/AIMarketingFlashyTitle";
 import AIMarketingNav from "../workshop/AIMarketingNav";
 import AIMarketingN8NKeyboardShortcuts from "../workshop/AIMarketingN8NKeyboardShortcuts";
 import { ART_OF_AI_AGENTS_HERO_IMAGE } from "@/constants/art-of-ai-agents";
-
-// CSS Variables
-const styles = `
-  :root {
-    --bg: #0a0a0f;
-    --fg: #e0e0e0;
-    --accent1: #7f5af0;
-    --accent2: #ff6ac1;
-    --accent3: #42d392;
-  }
-
-  @keyframes glitch {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-2px); }
-    50% { transform: translateX(2px); }
-    75% { transform: translateX(-1px); }
-    100% { transform: translateX(0); }
-  }
-
-  @keyframes gradientBorder {
-    0% { border-image: linear-gradient(45deg, var(--accent1), var(--accent2), var(--accent3)) 1; }
-    50% { border-image: linear-gradient(225deg, var(--accent1), var(--accent2), var(--accent3)) 1; }
-    100% { border-image: linear-gradient(45deg, var(--accent1), var(--accent2), var(--accent3)) 1; }
-  }
-
-  .glitch-text {
-    position: relative;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .glitch-text::before,
-  .glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg);
-  }
-
-  .glitch-text::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--accent1);
-    animation: glitch 0.3s infinite;
-  }
-
-  .glitch-text::after {
-    left: -2px;
-    text-shadow: 2px 0 var(--accent2);
-    animation: glitch 0.3s infinite reverse;
-  }
-
-  .neon-border {
-    border: 1px solid transparent;
-    animation: gradientBorder 4s linear infinite;
-  }
-
-  .neon-gradient {
-    background: linear-gradient(45deg, var(--accent1), var(--accent2));
-    background-size: 200% 200%;
-    animation: gradient 4s ease infinite;
-  }
-
-  @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .noise-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    mix-blend-mode: overlay;
-    opacity: 0.05;
-    pointer-events: none;
-  }
-`;
+import { ArtOfAIAgentsLegacyChrome } from "../workshop/art-of-ai-agents/ArtOfAIAgentsLegacyChrome";
+import { ArtOfAIAgentsWhatYouLearnSection } from "../workshop/art-of-ai-agents/ArtOfAIAgentsWhatYouLearnSection";
 
 // Animation variants
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.5 }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const staggerChildren = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
 };
 
 const hoverScale = {
@@ -144,24 +42,6 @@ const pulse = {
     ease: "easeInOut" as const
   }
 };
-
-// Custom section divider component
-const SectionDivider = ({ className = "" }: { className?: string }) => (
-  <div className={`w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent ${className}`} />
-);
-
-// Navigation items
-const navItems = [
-  { id: "hero", label: "Start" },
-  { id: "overview", label: "Course Overview" },
-  { id: "ui-editor", label: "UI Editor" },
-  { id: "getting-started", label: "Getting Started" },
-  { id: "first-workflow", label: "First Workflow" },
-  { id: "about", label: "About Me" },
-  { id: "resources", label: "Resources" },
-  { id: "impact", label: "Impact" },
-  { id: "cta", label: "Join Now" },
-];
 
 const images = {
   hero: ART_OF_AI_AGENTS_HERO_IMAGE,
@@ -300,52 +180,7 @@ const sections = [
 ];
 
 export default function ArtOfAIAgentsClient() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [countdown, setCountdown] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
   const [reducedMotion, setReducedMotion] = useState(false);
-
-  // Intersection observer for sections
-  const [heroRef, heroInView] = useInView({ threshold: 0.5 });
-  const [aboutRef, aboutInView] = useInView({ threshold: 0.5 });
-  const [resourcesRef, resourcesInView] = useInView({ threshold: 0.5 });
-  const [impactRef, impactInView] = useInView({ threshold: 0.5 });
-  const [ctaRef, ctaInView] = useInView({ threshold: 0.5 });
-
-  // Update active section based on scroll position
-  useEffect(() => {
-    if (heroInView) setActiveSection("hero");
-    else if (aboutInView) setActiveSection("about");
-    else if (resourcesInView) setActiveSection("resources");
-    else if (impactInView) setActiveSection("impact");
-    else if (ctaInView) setActiveSection("cta");
-  }, [heroInView, aboutInView, resourcesInView, impactInView, ctaInView]);
-
-  // Countdown timer
-  useEffect(() => {
-    const endDate = new Date("2024-05-01T00:00:00").getTime();
-
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = endDate - now;
-
-      setCountdown({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -356,27 +191,8 @@ export default function ArtOfAIAgentsClient() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Add your form submission logic here
-    setIsSubmitted(true);
-  };
-
   return (
-    <>
-      <style>{styles}</style>
-      <div className="min-h-screen bg-[#09090b] text-[#e0e0e0] relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#05050a] to-[#0a0a0f]" />
-        <div className="noise-overlay" />
-
+    <ArtOfAIAgentsLegacyChrome variant="full">
         {/* Navigation */}
         <AIMarketingNav />
 
@@ -407,32 +223,7 @@ export default function ArtOfAIAgentsClient() {
           <AIMarketingHeroSection reducedMotion={reducedMotion} />
         </section>
 
-        {/* 2. Getting Started Section */}
-        <motion.div
-          className="max-w-7xl mx-auto px-4 py-16"
-          variants={fadeIn}
-        >
-          <h2 className="text-3xl font-bold mb-8 text-center">What You'll Learn</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              "Automate workflows and business processes in n8n without writing complex code",
-              "Build AI‑powered automation with n8n AI Agents, OpenAI/Gemini integration, and RAG models",
-              "Integrate APIs, Webhooks, and third‑party services for seamless automation",
-              "Deploy, self‑host, and scale n8n workflows using Docker and cloud solutions",
-              "Debug and optimize n8n workflows for production readiness",
-              "Create and monetize AI agents and automation solutions"
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                className="bg-[#0a0a0f]/50 backdrop-blur-sm rounded-xl neon-border p-6"
-                variants={fadeIn}
-                whileHover={reducedMotion ? {} : hoverScale}
-              >
-                <p className="text-[#e0e0e0]/90">{item}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <ArtOfAIAgentsWhatYouLearnSection reducedMotion={reducedMotion} />
 
         {/* 3. First Steps Section */}
         <section id="overview">
@@ -472,7 +263,6 @@ export default function ArtOfAIAgentsClient() {
                 className="bg-[#0a0a0f]/50 backdrop-blur-sm rounded-xl neon-border p-6 relative overflow-hidden"
                 variants={fadeIn}
                 whileHover={reducedMotion ? {} : hoverScale}
-                onClick={() => setActiveSection(section.title)}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#7f5af0]/10 to-[#ff6ac1]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
                 <div className="flex items-center gap-4 mb-4">
@@ -566,7 +356,6 @@ export default function ArtOfAIAgentsClient() {
             </motion.button>
           </div>
         </motion.div>
-      </div>
-    </>
+    </ArtOfAIAgentsLegacyChrome>
   );
 } 

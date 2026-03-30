@@ -73,7 +73,7 @@ export default function TerminalNav({ currentPage }: TerminalNavProps) {
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  Available routes:                                                           │
 │  [1] /session     - Overview and concept                                     │
-│  [2] /workshop    - Build your AI helper                                     │
+│  [2] /workshops   - Workshops hub & programs                                 │
 │  [3] /performance - Live performance interface                               │
 └─────────────────────────────────────────────────────────────────────────────┘`}
         </div>

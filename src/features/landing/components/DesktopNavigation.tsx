@@ -6,6 +6,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { WORKSHOP_NAV_PROGRAMS, WORKSHOP_NAV_SITE } from '@/config/site-navigation';
 
 interface MenuItem {
   label: string;
@@ -17,9 +18,15 @@ interface MenuItem {
 interface DesktopNavigationProps {
   menuItems: MenuItem[];
   onDropdownOpen?: (open: boolean) => void;
+  /** Replaces exhibition mega-nav with compact workshop links */
+  workshopMode?: boolean;
 }
 
-export default function DesktopNavigation({ menuItems, onDropdownOpen }: DesktopNavigationProps) {
+export default function DesktopNavigation({
+  menuItems: _menuItems,
+  onDropdownOpen,
+  workshopMode,
+}: DesktopNavigationProps) {
   const { theme } = useTheme();
   const { toast } = useToast();
   const pathname = usePathname();
@@ -81,6 +88,57 @@ export default function DesktopNavigation({ menuItems, onDropdownOpen }: Desktop
 
   // Close dropdown when clicking overlay
   const handleOverlayClick = () => setDropdownOpen(false);
+
+  if (workshopMode) {
+    const linkClass = (active: boolean) =>
+      `transition-colors py-2 text-sm font-bold tracking-tight lg:text-base ${
+        active
+          ? isDark
+            ? 'border-b-2 border-white text-white'
+            : 'border-b-2 border-black text-black'
+          : isDark
+            ? 'text-white/85 hover:text-white'
+            : 'text-black/80 hover:text-black'
+      }`;
+
+    return (
+      <nav className="relative z-50 flex max-w-full flex-1 items-center" aria-label="Workshop navigation">
+        <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:gap-x-7">
+          {WORKSHOP_NAV_PROGRAMS.map((item) => (
+            <li key={item.path}>
+              {item.external ? (
+                <a
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass(false)}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link href={item.path} className={linkClass(pathname === item.path)}>
+                  {item.label}
+                </Link>
+              )}
+            </li>
+          ))}
+          <li
+            className={`hidden lg:block ${isDark ? 'text-white/25' : 'text-black/25'}`}
+            aria-hidden
+          >
+            |
+          </li>
+          {WORKSHOP_NAV_SITE.map((item) => (
+            <li key={item.path}>
+              <Link href={item.path} className={linkClass(pathname === item.path)}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  }
 
   return (
     <nav className="flex items-center relative z-50">

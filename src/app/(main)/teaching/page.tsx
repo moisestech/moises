@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function TeachingPage() {
-  redirect('/workshop');
+  redirect('/workshops');
 }

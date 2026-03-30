@@ -1,5 +1,5 @@
 /**
- * Shared list for /workshop hub and /workshops index “Explore our workshops” grids.
+ * Shared list for the workshops hub (/workshops) “Explore our workshops” grid (also used by WorkshopClient).
  */
 export interface WorkshopFeature {
   title: string
@@ -9,6 +9,8 @@ export interface WorkshopFeature {
   instructor: string | null
   instructorRole: string | null
   instructorAvatar?: string
+  /** Highlights the card in “Explore our workshops” grids */
+  featured?: boolean
 }
 
 export const WORKSHOP_FEATURES: WorkshopFeature[] = [
@@ -53,6 +55,7 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     disabled: false,
     instructor: null,
     instructorRole: null,
+    featured: true,
   },
   {
     title: 'AI & Art',

@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { ArrowUpRight, Mail, CheckCircle, Building2, Users, Package, Settings, Phone, Instagram } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
+/** Workshop grid data: shared with /workshops index; add entries here only (not inline). */
 import { WORKSHOP_FEATURES } from '@/constants/workshop-features'
 import { track } from '@/lib/analytics'
 
@@ -371,18 +372,20 @@ export default function WorkshopClient() {
 
         {/* Explore our workshops */}
         <motion.section
+          id="explore-workshops"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
+          aria-labelledby="explore-workshops-heading"
         >
-          <h2 className="text-xl font-bold text-white mb-6 text-center">
+          <h2 id="explore-workshops-heading" className="text-xl font-bold text-white mb-6 text-center">
             Explore our workshops
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {WORKSHOP_FEATURES.map((feature, index) => (
               feature.disabled ? (
                 <motion.div
-                  key={index}
+                  key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
@@ -404,7 +407,7 @@ export default function WorkshopClient() {
               ) : (
                 <Link
                   href={feature.link}
-                  key={index}
+                  key={feature.title}
                   target={feature.link.startsWith('http') ? '_blank' : '_self'}
                   rel={feature.link.startsWith('http') ? 'noopener noreferrer' : ''}
                   className="group block"
@@ -416,7 +419,12 @@ export default function WorkshopClient() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
-                    className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/10 hover:border-purple-500/50 transition-all h-full flex flex-col"
+                    className={
+                      'backdrop-blur-md p-6 rounded-xl border transition-all h-full flex flex-col ' +
+                      (feature.featured
+                        ? 'bg-white/[0.12] border-purple-400/50 ring-2 ring-purple-500/30 hover:border-purple-400/80'
+                        : 'bg-white/10 border-white/10 hover:border-purple-500/50')
+                    }
                   >
                     <div className="flex items-start justify-between gap-2 mb-2">
                       <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">

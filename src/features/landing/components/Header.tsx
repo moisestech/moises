@@ -1,21 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useTheme } from '@/contexts/ThemeContext';
+import { isWorkshopNavContext, navigationItemsForPath } from '@/config/site-navigation';
 import HeaderControls from './HeaderControls';
 import MobileMenu from './MobileMenu';
 import DesktopNavigation from './DesktopNavigation';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 
-interface MenuItem {
-  label: string;
-  path: string;
-  enabled?: boolean;
-  external?: boolean;
-}
-
 export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobileMenuToggle: () => void, mobileMenuOpen: boolean }) {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -36,15 +32,7 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
 
   const isDark = theme === 'dark';
 
-  const menuItems: MenuItem[] = [
-    { label: 'Visit', path: '/visit' },
-    { label: 'Exhibitions', path: '/exhibitions' },
-    { label: 'Events', path: '/events' },
-    { label: 'Selected Works', path: '/selected-works', enabled: true },
-    { label: 'Art and Artist', path: '/portfolio', enabled: true },
-    { label: 'Bio', path: '/bio', enabled: true },
-    { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },
-  ];
+  const menuItems = navigationItemsForPath(pathname, 'desktop');
 
   return (
     <>
@@ -96,7 +84,11 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
             isScrolled ? 'fixed top-0 left-0 right-0 border-t' : 'relative'
           }`}>
             <div className="max-w-7xl mx-auto px-11 py-6 flex justify-between items-center">
-              <DesktopNavigation menuItems={menuItems} onDropdownOpen={setDropdownOpen} />
+              <DesktopNavigation
+                menuItems={menuItems}
+                onDropdownOpen={setDropdownOpen}
+                workshopMode={isWorkshopNavContext(pathname)}
+              />
             </div>
           </div>
         </div>

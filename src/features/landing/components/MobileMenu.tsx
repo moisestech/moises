@@ -6,7 +6,7 @@ import { Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
 import ThemeToggle from './ThemeToggle';
-import VisitButton from './VisitButton';
+import { WORKSHOP_NAV_PROGRAMS, WORKSHOP_NAV_SITE } from '@/config/site-navigation';
 
 interface MenuItem {
   label: string;
@@ -19,9 +19,10 @@ interface MobileMenuProps {
   menuItems: MenuItem[];
   isOpen: boolean;
   onToggle: () => void;
+  workshopMode?: boolean;
 }
 
-export default function MobileMenu({ menuItems, isOpen, onToggle }: MobileMenuProps) {
+export default function MobileMenu({ menuItems, isOpen, onToggle, workshopMode }: MobileMenuProps) {
   const { theme } = useTheme();
   const { toast } = useToast();
   const isDark = theme === 'dark';
@@ -86,38 +87,104 @@ export default function MobileMenu({ menuItems, isOpen, onToggle }: MobileMenuPr
         />
         <div className="h-full flex flex-col pt-32 px-8 relative z-10">
           <nav>
-            <ul className="space-y-8">
-              {menuItems.map((item) => (
-                <li key={item.path}>
-                  {item.external ? (
-                    <a
-                      href={item.path}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`text-4xl font-bold transition-colors block ${
-                        isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
-                      }`}
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link
-                      href={item.path}
-                      onClick={(e) =>
-                        item.enabled || item.path === '/bio'
-                          ? undefined
-                          : handleNavClick(e, item.path)
-                      }
-                      className={`text-4xl font-bold transition-colors block ${
-                        isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
+            {workshopMode ? (
+              <div className="space-y-10">
+                <div>
+                  <p
+                    className={`mb-4 text-xs font-semibold uppercase tracking-[0.2em] ${
+                      isDark ? 'text-white/45' : 'text-black/45'
+                    }`}
+                  >
+                    Programs
+                  </p>
+                  <ul className="space-y-5">
+                    {WORKSHOP_NAV_PROGRAMS.map((item) => (
+                      <li key={item.path}>
+                        {item.external ? (
+                          <a
+                            href={item.path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`block text-3xl font-bold transition-colors ${
+                              isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
+                            }`}
+                          >
+                            {item.label}
+                          </a>
+                        ) : (
+                          <Link
+                            href={item.path}
+                            onClick={() => onToggle()}
+                            className={`block text-3xl font-bold transition-colors ${
+                              isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
+                            }`}
+                          >
+                            {item.label}
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p
+                    className={`mb-4 text-xs font-semibold uppercase tracking-[0.2em] ${
+                      isDark ? 'text-white/45' : 'text-black/45'
+                    }`}
+                  >
+                    Site
+                  </p>
+                  <ul className="space-y-5">
+                    {WORKSHOP_NAV_SITE.map((item) => (
+                      <li key={item.path}>
+                        <Link
+                          href={item.path}
+                          onClick={() => onToggle()}
+                          className={`block text-3xl font-bold transition-colors ${
+                            isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <ul className="space-y-8">
+                {menuItems.map((item) => (
+                  <li key={item.path}>
+                    {item.external ? (
+                      <a
+                        href={item.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-4xl font-bold transition-colors block ${
+                          isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
+                        }`}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.path}
+                        onClick={(e) =>
+                          item.enabled || item.path === '/bio'
+                            ? undefined
+                            : handleNavClick(e, item.path)
+                        }
+                        className={`text-4xl font-bold transition-colors block ${
+                          isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
           </nav>
           <div className={`mt-auto mb-8 flex items-center space-x-4 ${isDark ? 'text-white' : 'text-black'}`}>
             <ThemeToggle />

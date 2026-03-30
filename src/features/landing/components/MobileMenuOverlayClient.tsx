@@ -1,20 +1,15 @@
 "use client";
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import MobileMenu from './MobileMenu';
 import Header from './Header';
-
-const menuItems = [
-  { label: 'Visit', path: '/visit' },
-  { label: 'Exhibitions', path: '/exhibitions' },
-  { label: 'Events', path: '/events' },
-  { label: 'Art and Artist', path: '/portfolio', enabled: true },
-  { label: 'Bio', path: '/bio', enabled: true },
-  { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },
-];
+import { isWorkshopNavContext, navigationItemsForPath } from '@/config/site-navigation';
 
 export default function MobileMenuOverlayClient({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuItems = navigationItemsForPath(pathname, 'mobile');
 
   return (
     <>
@@ -26,6 +21,7 @@ export default function MobileMenuOverlayClient({ children }: { children: React.
         menuItems={menuItems}
         isOpen={mobileMenuOpen}
         onToggle={() => setMobileMenuOpen((v) => !v)}
+        workshopMode={isWorkshopNavContext(pathname)}
       />
       {children}
     </>
