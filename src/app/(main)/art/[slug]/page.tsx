@@ -112,7 +112,20 @@ export default async function ArtPage({ params }: PageProps) {
             {artwork.location && (
               <div>
                 <h3 className="text-lg font-bold mb-2">Location</h3>
-                <p>{artwork.location}</p>
+                {artwork.location_url ? (
+                  <p>
+                    <a
+                      href={artwork.location_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-2"
+                    >
+                      {artwork.location}
+                    </a>
+                  </p>
+                ) : (
+                  <p>{artwork.location}</p>
+                )}
               </div>
             )}
             {artwork.curator && (
@@ -314,19 +327,67 @@ export default async function ArtPage({ params }: PageProps) {
           </div>
         )}
 
-        {/* Support Information */}
-        <div className="mt-24 border-t border-gray-200 dark:border-gray-800 pt-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-              Support for this exhibition is provided by the Bakehouse Art
-              Complex and the Miami-Dade County Department of Cultural Affairs.
-              {/* Additional support comes from the State of Florida, Department of State, Division of Arts and Culture, 
-                            the Florida Council on Arts and Culture, and the National Endowment for the Arts. */}
-              {artwork.curator &&
-                ` Special thanks to ${artwork.curator} for the curatorial vision and support.`}
-            </p>
+        {/* Venue / support (only when defined on the artwork) */}
+        {artwork.exhibition_support && (
+          <div className="mt-24 border-t border-gray-200 dark:border-gray-800 pt-16">
+            <div className="max-w-3xl mx-auto text-center space-y-8">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                Venue & support
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                {artwork.exhibition_support.text}
+              </p>
+              {artwork.exhibition_support.sponsors &&
+                artwork.exhibition_support.sponsors.length > 0 && (
+                  <div className="flex flex-wrap items-center justify-center gap-10 pt-2">
+                    {artwork.exhibition_support.sponsors.map((s) => (
+                      <div key={s.name} className="flex flex-col items-center gap-2">
+                        {s.logoUrl ? (
+                          s.href ? (
+                            <a
+                              href={s.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block opacity-90 hover:opacity-100 transition-opacity"
+                            >
+                              <Image
+                                src={s.logoUrl}
+                                alt={s.logoAlt ?? s.name}
+                                width={220}
+                                height={80}
+                                className="h-14 w-auto max-w-[220px] object-contain object-center dark:brightness-0 dark:invert"
+                              />
+                            </a>
+                          ) : (
+                            <Image
+                              src={s.logoUrl}
+                              alt={s.logoAlt ?? s.name}
+                              width={220}
+                              height={80}
+                              className="h-14 w-auto max-w-[220px] object-contain object-center dark:brightness-0 dark:invert"
+                            />
+                          )
+                        ) : s.href ? (
+                          <a
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:underline"
+                          >
+                            {s.name}
+                          </a>
+                        ) : (
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {s.name}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </main>
   );

@@ -1,9 +1,22 @@
 import { InteractiveContent } from './research';
 
+/** Optional venue / funder block for artwork detail footer */
+export interface ArtworkExhibitionSupport {
+  text: string;
+  sponsors?: {
+    name: string;
+    href?: string;
+    logoUrl?: string;
+    logoAlt?: string;
+  }[];
+}
+
 interface Artwork {
   title: string;
   year: number;
   location?: string;
+  /** When set, the Location line links here (e.g. official exhibition page). */
+  location_url?: string;
   curator?: string;
   collaboration?: string;
   description: string;
@@ -25,6 +38,8 @@ interface Artwork {
   tags: string[];
   interpretation?: string;
   exhibition?: string;
+  /** Renders below the page body when present; omit on works without a single venue/funder story. */
+  exhibition_support?: ArtworkExhibitionSupport;
   on_view: boolean;
   interactiveContent?: InteractiveContent[];
   technical_requirements?: {
@@ -391,7 +406,11 @@ export const artist: Artist = {
     baby_agi: {
       title: 'Baby AGI',
       year: 2023,
-      location: 'Swenson Gallery, Breadbytes: Next Generation exhibition',
+      location:
+        'Swenson Gallery, Bakehouse Art Complex, Miami — Breadbytes: Artmaking for the Next Generation (Nov 2023–Feb 2024)',
+      location_url:
+        'https://www.bacfl.org/exhibitions/breadbytes-artmaking-for-the-next-generation',
+      curator: 'Shawn Clybor',
       description: 'Captures the nascent stages of Artificial General Intelligence (AGI), symbolizing the impending paradigm shift towards harmonious coexistence with advanced AI. This ready-made assembly—a smart baby stroller, intricately crafted from PC gaming components and AI-enhanced GPUs—epitomizes the Pre-Natal Genesis of AGI, highlighting the profound influence of such technologies on Generation Alpha, those born amidst the AI revolution. The robotic hands, delicately guiding the stroller, underscore our collective voyage into the AI epoch, while subtly emphasizing humanity\'s pivotal role in shaping AI\'s formative years.',
       description_es:
         'Captura las etapas incipientes de la Inteligencia General Artificial (AGI), simbolizando el cambio de paradigma inminente hacia la coexistencia armoniosa con IA avanzada. Este ensamblaje ready-made—un cochecito inteligente, intrincadamente elaborado con componentes de PC gaming y GPUs mejoradas con IA—epitomiza el Génesis Pre-Natal de AGI, destacando la profunda influencia de tales tecnologías en la Generación Alpha, aquellos nacidos en medio de la revolución de IA. Las manos robóticas, guiando delicadamente el cochecito, subrayan nuestro viaje colectivo hacia la época de IA, mientras enfatizan sutilmente el papel fundamental de la humanidad en dar forma a los años formativos de la IA.',
@@ -425,7 +444,20 @@ export const artist: Artist = {
         'generative art'
       ],
       interpretation: 'A looping generative animation maps the transition from birth to Artificial General Intelligence, questioning the linearity of human development versus synthetic cognition. The work serves as a meditation on accelerationism, questioning what happens when machines not only mimic but complete the arc of human growth faster than we can comprehend. It engages with the idea that Gen Alpha is growing up in a reality fundamentally altered by AI, exploring the cognition gap emerging between generations—a generational digital divide.',
-      exhibition: 'Breadbytes: Next Generation',
+      exhibition: 'Breadbytes: Artmaking for the Next Generation',
+      exhibition_support: {
+        text:
+          'Shown in Breadbytes at Bakehouse Art Complex. Per the host institution, workshops that led to the exhibition received support from the John S. and James L. Knight Foundation, with additional support from Miami-Dade County Department of Cultural Affairs and other partners listed on the exhibition page.',
+        sponsors: [
+          {
+            name: 'Bakehouse Art Complex',
+            href: 'https://www.bacfl.org',
+            logoUrl:
+              'https://images.squarespace-cdn.com/content/v1/53ad8347e4b04c5fb2ec922d/3d6ccf31-c424-42e9-942d-23c69b9fc015/BakehouseLogo.png?format=500w',
+            logoAlt: 'Bakehouse Art Complex',
+          },
+        ],
+      },
       on_view: false,
       video: {
         type: 'vimeo',
