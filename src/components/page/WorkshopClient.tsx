@@ -159,20 +159,27 @@ export default function WorkshopClient() {
     <main
       className={cn(
         'relative flex min-h-screen flex-col items-center overflow-hidden',
-        isDark ? 'bg-black' : 'bg-zinc-100'
+        /* Follows html.dark (same toggle as nav); avoids relying on context alone */
+        'bg-zinc-100 text-zinc-900 dark:bg-black dark:text-white'
       )}
     >
-      <div className={cn('absolute inset-0 z-0', !isDark && 'opacity-[0.32]')}>
+      <div
+        className={cn(
+          'absolute inset-0 z-0 opacity-[0.22] transition-opacity duration-300 dark:opacity-100'
+        )}
+        aria-hidden
+      >
         <WorkshopCanvas />
       </div>
       <div
         className={cn(
           'pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b',
-          isDark ? 'from-black/40 via-transparent to-black/70' : 'from-zinc-100/92 via-zinc-100/80 to-zinc-100'
+          'from-zinc-100/95 via-zinc-100/88 to-zinc-100 dark:from-black/40 dark:via-transparent dark:to-black/70'
         )}
+        aria-hidden
       />
 
-      <div className="relative z-10 w-full max-w-6xl px-4 sm:px-6 lg:px-8 pt-36 sm:pt-44 md:pt-52 pb-12 sm:pb-20">
+      <div className="relative z-10 w-full max-w-6xl px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 md:pt-[200px] pb-12 sm:pb-20">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
