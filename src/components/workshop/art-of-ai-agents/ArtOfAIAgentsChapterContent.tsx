@@ -14,6 +14,7 @@ import AIMarketingN8NKeyboardShortcuts from '@/components/workshop/AIMarketingN8
 import { ART_OF_AI_AGENTS_HERO_IMAGE } from '@/constants/art-of-ai-agents'
 import { ArtOfAIAgentsLegacyChrome } from './ArtOfAIAgentsLegacyChrome'
 import { ArtOfAIAgentsWhatYouLearnSection } from './ArtOfAIAgentsWhatYouLearnSection'
+import { ArtOfAIAgentsOpeningMonologue } from './ArtOfAIAgentsOpeningMonologue'
 
 export function ArtOfAIAgentsChapterContent({ slug }: { slug: string }) {
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -28,12 +29,18 @@ export function ArtOfAIAgentsChapterContent({ slug }: { slug: string }) {
 
   const body = (() => {
     switch (slug) {
+      case 'opening-monologue':
+        return (
+          <section id="opening-monologue" className="py-2" aria-label="Opening monologue script">
+            <ArtOfAIAgentsOpeningMonologue />
+          </section>
+        )
       case 'overview':
         return (
           <>
             <AIMarketingFlashyTitle reducedMotion={reducedMotion} />
             <section className="relative px-4 py-6 sm:py-10" aria-label="Workshop hero image">
-              <div className="relative mx-auto aspect-[16/9] w-full max-w-6xl overflow-hidden rounded-xl border border-white/10 shadow-2xl ring-1 ring-white/5 sm:aspect-[21/9]">
+              <div className="relative mx-auto aspect-[16/9] w-full max-w-6xl overflow-hidden rounded-xl border border-zinc-200/90 shadow-lg ring-1 ring-zinc-200/40 dark:border-white/10 dark:shadow-2xl dark:ring-white/5 sm:aspect-[21/9]">
                 <Image
                   src={ART_OF_AI_AGENTS_HERO_IMAGE}
                   alt="The Art of AI Agents — Locust Projects, The Dill, 2026"
@@ -43,7 +50,7 @@ export function ArtOfAIAgentsChapterContent({ slug }: { slug: string }) {
                   priority
                 />
               </div>
-              <p className="mt-3 text-center text-xs tracking-wide text-[#e0e0e0]/45 sm:text-sm">
+              <p className="mt-3 text-center text-xs tracking-wide text-zinc-500 dark:text-zinc-400 sm:text-sm">
                 Locust Projects · The Dill — 2026
               </p>
             </section>

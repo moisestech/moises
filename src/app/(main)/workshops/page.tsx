@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 const WorkshopHubClient = dynamic(() => import('@/components/page/WorkshopClient'), {
   ssr: false,
   loading: () => (
-    <div className="flex min-h-screen items-center justify-center bg-black text-white text-sm">
+    <div className="flex min-h-screen items-center justify-center bg-zinc-100 text-zinc-500 text-sm dark:bg-black dark:text-zinc-400">
       Loading…
     </div>
   ),

@@ -6,9 +6,9 @@ import { ART_OF_AI_AGENTS_LEGACY_STYLES } from './art-of-ai-agents-legacy-styles
 type Variant = 'full' | 'embedded'
 
 /**
- * Dark “legacy” workshop surface (matches the original one-pager look).
- * - `full`: used on /full with full-viewport gradient + noise
- * - `embedded`: rounded panel for chapter routes inside the theme-aware shell
+ * Workshop surface for The Art of AI Agents.
+ * - `full`: one-pager; always dark aesthetic; inner `dark` scope so `dark:` utilities match the panel even if the site is light.
+ * - `embedded`: chapter routes; follows site theme via `html.dark` (same as global nav).
  */
 export function ArtOfAIAgentsLegacyChrome({
   children,
@@ -21,9 +21,9 @@ export function ArtOfAIAgentsLegacyChrome({
     return (
       <>
         <style>{ART_OF_AI_AGENTS_LEGACY_STYLES}</style>
-        <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#09090b] text-[#e0e0e0]">
+        <div className="art-of-ai-agents-legacy-surface relative overflow-hidden rounded-xl border border-zinc-200/90 bg-zinc-50 text-zinc-900 shadow-sm dark:border-white/10 dark:bg-[#09090b] dark:text-[#e0e0e0]">
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#05050a] to-[#0a0a0f]"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-100 to-zinc-50 dark:from-[#05050a] dark:to-[#0a0a0f]"
             aria-hidden
           />
           <div className="noise-overlay" aria-hidden />
@@ -36,7 +36,7 @@ export function ArtOfAIAgentsLegacyChrome({
   return (
     <>
       <style>{ART_OF_AI_AGENTS_LEGACY_STYLES}</style>
-      <div className="relative min-h-screen bg-[#09090b] text-[#e0e0e0]">
+      <div className="art-of-ai-agents-legacy-surface art-of-ai-agents-legacy-surface--force-dark dark relative min-h-screen bg-[#09090b] text-[#e0e0e0]">
         <div className="absolute inset-0 bg-gradient-to-b from-[#05050a] to-[#0a0a0f]" aria-hidden />
         <div className="noise-overlay" aria-hidden />
         <div className="relative z-[1]">{children}</div>

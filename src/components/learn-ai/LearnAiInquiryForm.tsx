@@ -5,7 +5,7 @@ import { LEARN_AI_EMAIL } from '@/constants/learn-ai-content'
 import { mailtoLearnAi } from '@/lib/learn-ai-mailto'
 
 const fieldClass =
-  'w-full rounded-sm border border-zinc-700 bg-zinc-900/60 px-3 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950'
+  'w-full rounded-sm border border-zinc-300 bg-white px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-600/40 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:border-zinc-700 dark:bg-zinc-900/60 dark:text-zinc-100 dark:placeholder:text-zinc-600 dark:focus-visible:ring-lime-500/40 dark:focus-visible:ring-offset-zinc-950'
 
 export function LearnAiInquiryForm() {
   const [form, setForm] = useState({
@@ -78,13 +78,13 @@ export function LearnAiInquiryForm() {
       <div className="flex flex-col sm:flex-row gap-3 pt-2">
         <button
           type="submit"
-          className="inline-flex justify-center items-center rounded-sm bg-zinc-100 text-zinc-950 px-6 py-3 text-sm font-medium hover:bg-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+          className="inline-flex justify-center items-center rounded-sm bg-zinc-900 text-white px-6 py-3 text-sm font-medium hover:bg-zinc-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white dark:focus-visible:ring-offset-zinc-950"
         >
           Send inquiry
         </button>
         <a
           href={mailtoLearnAi('Request details: Learn AI Without Losing Yourself')}
-          className="inline-flex justify-center items-center rounded-sm border border-zinc-600 text-zinc-200 px-6 py-3 text-sm font-medium hover:bg-zinc-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+          className="inline-flex justify-center items-center rounded-sm border border-zinc-300 text-zinc-800 px-6 py-3 text-sm font-medium hover:bg-zinc-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-900 dark:focus-visible:ring-zinc-500 dark:focus-visible:ring-offset-zinc-950"
         >
           Open email only
         </a>

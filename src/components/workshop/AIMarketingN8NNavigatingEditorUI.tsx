@@ -208,7 +208,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
           initial="hidden"
           whileInView="visible"
         >
-          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#7f5af0]/10 border border-[#7f5af0]/20 mb-6">
+          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-violet-100/70 dark:bg-[#7f5af0]/10 border border-violet-200/80 dark:border-[#7f5af0]/20 mb-6">
             <Layout className="w-4 h-4 text-[#7f5af0]" />
             <span className="text-sm font-medium">Editor UI Guide</span>
           </motion.div>
@@ -222,7 +222,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
           
           <motion.p 
             variants={fadeIn}
-            className="text-xl text-[#e0e0e0]/80 max-w-2xl mx-auto"
+            className="text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto"
           >
             Learn how to navigate and use the n8n Editor interface
           </motion.p>
@@ -239,7 +239,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-6"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-6"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-8 h-8 rounded-full bg-[#7f5af0]/20 flex items-center justify-center">
@@ -247,7 +247,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
                 </div>
                 <h3 className="text-lg font-bold">{item.title}</h3>
               </div>
-              <p className="text-[#e0e0e0]/80 text-sm">{item.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 text-sm">{item.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -263,7 +263,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#ff6ac1]/20 p-6"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-pink-200/90 dark:border-[#ff6ac1]/20 shadow-sm dark:shadow-none p-6"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-8 h-8 rounded-full bg-[#ff6ac1]/20 flex items-center justify-center">
@@ -271,7 +271,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
                 </div>
                 <h3 className="text-lg font-bold">{item.title}</h3>
               </div>
-              <p className="text-[#e0e0e0]/80 text-sm">{item.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 text-sm">{item.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -287,7 +287,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#42d392]/20 p-8"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-emerald-200/90 dark:border-[#42d392]/20 shadow-sm dark:shadow-none p-8"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-[#42d392]/20 flex items-center justify-center">
@@ -296,14 +296,14 @@ export default function AIMarketingN8NNavigatingEditorUI() {
                 <h3 className="text-xl font-bold">{control.title}</h3>
               </div>
 
-              <p className="text-[#e0e0e0]/80 mb-6">{control.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 mb-6">{control.description}</p>
 
               {control.items && (
                 <ul className="space-y-3">
                   {control.items.map((item, itemIndex) => (
                     <li key={itemIndex} className="flex items-start gap-3">
                       <ArrowRight className="w-5 h-5 text-[#42d392] mt-0.5 flex-shrink-0" />
-                      <span className="text-[#e0e0e0]/80">{item}</span>
+                      <span className="text-zinc-600 dark:text-zinc-300">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -323,7 +323,7 @@ export default function AIMarketingN8NNavigatingEditorUI() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-6"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-6"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-8 h-8 rounded-full bg-[#7f5af0]/20 flex items-center justify-center">
@@ -331,10 +331,10 @@ export default function AIMarketingN8NNavigatingEditorUI() {
                 </div>
                 <h3 className="text-lg font-bold">{type.title}</h3>
               </div>
-              <p className="text-[#e0e0e0]/80 text-sm mb-4">{type.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 text-sm mb-4">{type.description}</p>
               <ul className="space-y-2">
                 {type.examples.map((example, exampleIndex) => (
-                  <li key={exampleIndex} className="text-[#e0e0e0]/60 text-sm">
+                  <li key={exampleIndex} className="text-zinc-500 dark:text-zinc-500 text-sm">
                     • {example}
                   </li>
                 ))}

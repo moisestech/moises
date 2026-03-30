@@ -33,16 +33,18 @@ export function ArtOfAIAgentsWhatYouLearnSection({
 }) {
   return (
     <motion.div className="mx-auto max-w-7xl px-4 py-16" variants={fadeIn}>
-      <h2 className="mb-8 text-center text-3xl font-bold">What You&apos;ll Learn</h2>
+      <h2 className="mb-8 text-center text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+        What You&apos;ll Learn
+      </h2>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {BULLETS.map((item, index) => (
           <motion.div
             key={index}
-            className="rounded-xl border border-transparent bg-[#0a0a0f]/50 p-6 backdrop-blur-sm neon-border"
+            className="rounded-xl border border-zinc-200/80 bg-white/90 p-6 shadow-sm backdrop-blur-sm neon-border dark:border-transparent dark:bg-[#0a0a0f]/50 dark:shadow-none"
             variants={fadeIn}
             whileHover={reducedMotion ? {} : hoverScale}
           >
-            <p className="text-[#e0e0e0]/90">{item}</p>
+            <p className="text-zinc-700 dark:text-zinc-300">{item}</p>
           </motion.div>
         ))}
       </div>

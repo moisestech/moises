@@ -69,7 +69,7 @@ const hoverScale = {
 
 const Key = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
   <motion.span
-    className={`inline-flex items-center justify-center px-2 py-1 rounded-md bg-[#1a1a1f] border border-[#7f5af0]/20 text-sm font-mono ${className}`}
+    className={`inline-flex items-center justify-center px-2 py-1 rounded-md bg-zinc-200 dark:bg-[#1a1a1f] border border-zinc-300 dark:border-[#7f5af0]/20 text-sm font-mono ${className}`}
     whileHover={hoverScale}
   >
     {children}
@@ -83,7 +83,7 @@ const ShortcutGroup = ({ title, icon: Icon, shortcuts }: {
 }) => (
   <motion.div
     variants={fadeIn}
-    className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-6"
+    className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-6"
   >
     <div className="flex items-center gap-3 mb-4">
       <div className="w-8 h-8 rounded-full bg-[#7f5af0]/20 flex items-center justify-center">
@@ -101,7 +101,7 @@ const ShortcutGroup = ({ title, icon: Icon, shortcuts }: {
               </span>
             ))}
           </div>
-          <span className="text-[#e0e0e0]/80 text-sm">{shortcut.description}</span>
+          <span className="text-zinc-600 dark:text-zinc-300 text-sm">{shortcut.description}</span>
         </div>
       ))}
     </div>
@@ -167,7 +167,7 @@ export default function AIMarketingN8NKeyboardShortcuts() {
           initial="hidden"
           whileInView="visible"
         >
-          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#7f5af0]/10 border border-[#7f5af0]/20 mb-6">
+          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-violet-100/70 dark:bg-[#7f5af0]/10 border border-violet-200/80 dark:border-[#7f5af0]/20 mb-6">
             <Keyboard className="w-4 h-4 text-[#7f5af0]" />
             <span className="text-sm font-medium">Keyboard Shortcuts</span>
           </motion.div>
@@ -181,7 +181,7 @@ export default function AIMarketingN8NKeyboardShortcuts() {
           
           <motion.p 
             variants={fadeIn}
-            className="text-xl text-[#e0e0e0]/80 max-w-2xl mx-auto"
+            className="text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto"
           >
             Master the n8n Editor with these keyboard shortcuts and controls
           </motion.p>

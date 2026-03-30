@@ -185,7 +185,7 @@ export default function AIMarketingStepModule() {
             {showApiSection ? "OpenAI API Setup" : "Course Overview"}
           </h2>
         </div>
-        <p className="text-xl text-[#e0e0e0]/90 max-w-2xl mx-auto">
+        <p className="text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
           {showApiSection 
             ? "Everything you need to know about setting up your OpenAI API key"
             : "Everything you need to know about getting started with n8n"
@@ -203,7 +203,7 @@ export default function AIMarketingStepModule() {
 
       <div className="relative z-10">
         <motion.div 
-          className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-8 mb-8"
+          className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-8 mb-8"
           variants={fadeIn}
         >
           <div className="flex items-center gap-4 mb-6">
@@ -218,7 +218,7 @@ export default function AIMarketingStepModule() {
             </h3>
           </div>
           
-          <p className="text-[#e0e0e0]/90 text-lg mb-6">
+          <p className="text-zinc-700 dark:text-zinc-300 text-lg mb-6">
             {courseSteps[currentStep].content}
           </p>
 
@@ -227,21 +227,21 @@ export default function AIMarketingStepModule() {
               {courseSteps[currentStep].highlights.map((highlight, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <ChevronRight className="w-5 h-5 text-[#ff6ac1] mt-1 flex-shrink-0" />
-                  <span className="text-[#e0e0e0]/80">{highlight}</span>
+                  <span className="text-zinc-600 dark:text-zinc-300">{highlight}</span>
                 </li>
               ))}
             </ul>
           )}
 
           {courseSteps[currentStep].title === "Getting Your OpenAI API Key" && (
-            <div className="mt-6 p-4 bg-[#0a0a0f] rounded-lg border border-[#7f5af0]/20">
-              <p className="text-[#e0e0e0]/90 mb-4">
+            <div className="mt-6 p-4 bg-zinc-100 dark:bg-[#0a0a0f] rounded-lg border border-zinc-200 dark:border-[#7f5af0]/20">
+              <p className="text-zinc-700 dark:text-zinc-300 mb-4">
                 Quick tip: When you get your API key, it will look something like this:
               </p>
-              <pre className="bg-black/50 p-3 rounded font-mono text-sm overflow-x-auto">
+              <pre className="overflow-x-auto rounded bg-zinc-200 p-3 font-mono text-sm text-zinc-800 dark:bg-black/50 dark:text-zinc-200">
                 sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
               </pre>
-              <p className="text-[#e0e0e0]/70 text-sm mt-2">
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-2">
                 Note: This is just an example format. Never share your actual API key!
               </p>
             </div>
@@ -251,10 +251,10 @@ export default function AIMarketingStepModule() {
         <div className="flex justify-between items-center">
           <motion.button
             onClick={prevStep}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#7f5af0]/20 hover:border-[#7f5af0]/40 transition-colors"
+            className="flex items-center gap-2 rounded-lg border border-zinc-300 px-4 py-2 text-zinc-800 transition-colors hover:border-violet-500 dark:border-[#7f5af0]/20 dark:text-zinc-200 dark:hover:border-[#7f5af0]/40"
             whileHover={hoverScale}
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="h-5 w-5" />
             Previous
           </motion.button>
 
@@ -272,11 +272,11 @@ export default function AIMarketingStepModule() {
 
           <motion.button
             onClick={nextStep}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#7f5af0]/20 hover:border-[#7f5af0]/40 transition-colors"
+            className="flex items-center gap-2 rounded-lg border border-zinc-300 px-4 py-2 text-zinc-800 transition-colors hover:border-violet-500 dark:border-[#7f5af0]/20 dark:text-zinc-200 dark:hover:border-[#7f5af0]/40"
             whileHover={hoverScale}
           >
             Next
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="h-5 w-5" />
           </motion.button>
         </div>
       </div>

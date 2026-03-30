@@ -23,18 +23,17 @@ function Slot({
     <div
       className={cn(
         'rounded-sm border px-4 py-4 sm:px-5 sm:py-5',
-        'border-zinc-800',
-        'bg-zinc-900/30'
+        'border-zinc-200 bg-zinc-50/90 dark:border-zinc-800 dark:bg-zinc-900/30'
       )}
     >
       <div className="flex items-center gap-2 mb-2">
-        <GlyphBracketPair className="opacity-60 scale-90 text-lime-400/45" />
+        <GlyphBracketPair className="opacity-60 scale-90" />
         <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">{label}</p>
       </div>
       <p
         className={cn(
           'text-sm sm:text-base leading-relaxed',
-          filled ? 'text-zinc-200' : 'text-zinc-500 italic'
+          filled ? 'text-zinc-800 dark:text-zinc-200' : 'text-zinc-500 italic'
         )}
       >
         {filled ? value : placeholder}
@@ -48,7 +47,7 @@ export function LearnAiProofBlock() {
     <LearnAiReveal className="max-w-5xl mx-auto px-5 sm:px-6">
       <p className={learnAiSectionEyebrow()}>Proof-ready</p>
       <h2 className={cn(learnAiSectionTitle(), 'mb-3')}>Presence &amp; documentation</h2>
-      <p className="text-sm text-zinc-400 mb-8 max-w-2xl leading-relaxed">
+      <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-8 max-w-2xl leading-relaxed">
         Host lines, quotes, and media can be added as engagements are confirmed — the layout stays finished either way.
       </p>
       <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">

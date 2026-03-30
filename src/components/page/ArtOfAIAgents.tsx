@@ -213,7 +213,7 @@ export default function ArtOfAIAgentsClient() {
               priority
             />
           </div>
-          <p className="text-center text-xs sm:text-sm text-[#e0e0e0]/45 mt-3 tracking-wide">
+          <p className="text-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-3 tracking-wide">
             Locust Projects · The Dill — 2026
           </p>
         </section>
@@ -260,7 +260,7 @@ export default function ArtOfAIAgentsClient() {
             {sections.map((section) => (
               <motion.div
                 key={section.title}
-                className="bg-[#0a0a0f]/50 backdrop-blur-sm rounded-xl neon-border p-6 relative overflow-hidden"
+                className="bg-zinc-100/90 backdrop-blur-sm rounded-xl neon-border p-6 relative overflow-hidden dark:bg-[#0a0a0f]/50"
                 variants={fadeIn}
                 whileHover={reducedMotion ? {} : hoverScale}
               >
@@ -278,12 +278,12 @@ export default function ArtOfAIAgentsClient() {
                   {section.items.map((item) => (
                     <div
                       key={item.title}
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#7f5af0]/10 transition-colors"
+                      className="flex items-start gap-3 p-3 rounded-lg transition-colors hover:bg-violet-100/80 dark:hover:bg-[#7f5af0]/10"
                     >
                       <item.icon className="w-5 h-5 text-[#7f5af0] mt-1" />
                       <div>
                         <h3 className="font-medium">{item.title}</h3>
-                        <p className="text-sm text-[#e0e0e0]/70">{item.description}</p>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400">{item.description}</p>
                       </div>
                     </div>
                   ))}
@@ -325,12 +325,12 @@ export default function ArtOfAIAgentsClient() {
             ].map((faq, index) => (
               <motion.div
                 key={index}
-                className="bg-[#0a0a0f]/50 backdrop-blur-sm rounded-xl neon-border p-6"
+                className="bg-zinc-100/90 backdrop-blur-sm rounded-xl neon-border p-6 dark:bg-[#0a0a0f]/50"
                 variants={fadeIn}
                 whileHover={reducedMotion ? {} : hoverScale}
               >
                 <h3 className="text-xl font-bold mb-4 text-[#7f5af0]">{faq.question}</h3>
-                <p className="text-[#e0e0e0]/80">{faq.answer}</p>
+                <p className="text-zinc-600 dark:text-zinc-300">{faq.answer}</p>
               </motion.div>
             ))}
           </div>
@@ -341,10 +341,10 @@ export default function ArtOfAIAgentsClient() {
           className="max-w-7xl mx-auto px-4 py-16 text-center relative"
           variants={fadeIn}
         >
-          <div className="absolute inset-0 bg-[#0a0a0f]/50 backdrop-blur-sm rounded-xl" />
+          <div className="absolute inset-0 rounded-xl bg-zinc-100/90 backdrop-blur-sm dark:bg-[#0a0a0f]/50" />
           <div className="relative z-10">
             <h2 className="text-3xl font-bold mb-4">Ready to Master n8n?</h2>
-            <p className="text-xl text-[#e0e0e0]/80 mb-8">
+            <p className="text-xl text-zinc-600 dark:text-zinc-300 mb-8">
               Join our workshop on April 24th and transform your automation skills
             </p>
             <motion.button 

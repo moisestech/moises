@@ -17,7 +17,9 @@ export function LearnAiPullQuote({
         className
       )}
     >
-      <p className="text-xl sm:text-2xl md:text-3xl font-light text-zinc-100 leading-snug italic">{children}</p>
+      <p className="text-xl sm:text-2xl md:text-3xl font-light text-zinc-900 dark:text-zinc-100 leading-snug italic">
+        {children}
+      </p>
     </blockquote>
   )
 }

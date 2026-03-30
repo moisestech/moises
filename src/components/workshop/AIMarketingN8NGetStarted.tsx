@@ -99,7 +99,7 @@ export default function AIMarketingN8NGetStarted() {
           initial="hidden"
           whileInView="visible"
         >
-          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#7f5af0]/10 border border-[#7f5af0]/20 mb-6">
+          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-violet-100/70 dark:bg-[#7f5af0]/10 border border-violet-200/80 dark:border-[#7f5af0]/20 mb-6">
             <Rocket className="w-4 h-4 text-[#7f5af0]" />
             <span className="text-sm font-medium">Quick Start Guide</span>
           </motion.div>
@@ -113,7 +113,7 @@ export default function AIMarketingN8NGetStarted() {
           
           <motion.p 
             variants={fadeIn}
-            className="text-xl text-[#e0e0e0]/80 max-w-2xl mx-auto"
+            className="text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto"
           >
             Let's start your automation journey with this beginner-friendly guide
           </motion.p>
@@ -128,7 +128,7 @@ export default function AIMarketingN8NGetStarted() {
               <h3 className="text-xl font-bold">Why Start with n8n?</h3>
               <Star className="w-6 h-6 text-[#ff6ac1]" />
             </div>
-            <p className="text-[#e0e0e0]/90">
+            <p className="text-zinc-700 dark:text-zinc-300">
               n8n makes automation accessible to everyone. You'll be amazed at what you can create!
             </p>
           </motion.div>
@@ -145,7 +145,7 @@ export default function AIMarketingN8NGetStarted() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-8"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-8"
             >
               <div className="flex items-start gap-6">
                 <div className="w-12 h-12 rounded-full bg-[#7f5af0]/20 flex items-center justify-center flex-shrink-0">
@@ -153,33 +153,33 @@ export default function AIMarketingN8NGetStarted() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold mb-2">{step.title}</h3>
-                  <p className="text-[#e0e0e0]/80 mb-6">{step.description}</p>
+                  <p className="text-zinc-600 dark:text-zinc-300 mb-6">{step.description}</p>
                   
                   <div className="space-y-4 mb-6">
                     {step.steps.map((substep, subIndex) => (
                       <div 
                         key={subIndex}
-                        className="flex items-start gap-3 p-4 rounded-lg bg-[#7f5af0]/5 border border-[#7f5af0]/10"
+                        className="flex items-start gap-3 p-4 rounded-lg bg-violet-50 dark:bg-[#7f5af0]/5 border border-violet-100/90 dark:border-[#7f5af0]/10"
                       >
                         <span className="w-6 h-6 rounded-full bg-[#7f5af0]/20 flex items-center justify-center flex-shrink-0">
                           <span className="text-sm font-medium text-[#7f5af0]">{subIndex + 1}</span>
                         </span>
-                        <span className="text-[#e0e0e0]/90">{substep}</span>
+                        <span className="text-zinc-700 dark:text-zinc-300">{substep}</span>
                       </div>
                     ))}
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
                     {/* Pro Tip */}
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-[#ff6ac1]/5 border border-[#ff6ac1]/10">
+                    <div className="flex items-start gap-3 p-4 rounded-lg bg-pink-50 dark:bg-[#ff6ac1]/5 border border-pink-100/90 dark:border-[#ff6ac1]/10">
                       <AlertCircle className="w-5 h-5 text-[#ff6ac1] flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-[#e0e0e0]/80">{step.tip}</p>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-300">{step.tip}</p>
                     </div>
 
                     {/* Motivation */}
-                    <div className="flex items-start gap-3 p-4 rounded-lg bg-[#42d392]/5 border border-[#42d392]/10">
+                    <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-50 dark:bg-[#42d392]/5 border border-emerald-100/90 dark:border-[#42d392]/10">
                       <Sparkles className="w-5 h-5 text-[#42d392] flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-[#e0e0e0]/80">{step.motivation}</p>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-300">{step.motivation}</p>
                     </div>
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export default function AIMarketingN8NGetStarted() {
         {/* Expression Example */}
         <motion.div 
           variants={fadeIn}
-          className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-8 mb-16"
+          className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-8 mb-16"
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 rounded-full bg-[#7f5af0]/20 flex items-center justify-center">
@@ -199,19 +199,19 @@ export default function AIMarketingN8NGetStarted() {
             </div>
             <div>
               <h3 className="text-2xl font-bold">Your First Expression</h3>
-              <p className="text-[#e0e0e0]/80">Create a personalized message using n8n expressions</p>
+              <p className="text-zinc-600 dark:text-zinc-300">Create a personalized message using n8n expressions</p>
             </div>
           </div>
 
-          <div className="bg-black/50 p-6 rounded-lg border border-[#7f5af0]/10 mb-6">
-            <pre className="font-mono text-sm text-[#e0e0e0]/90 overflow-x-auto">
+          <div className="bg-zinc-200 dark:bg-black/50 p-6 rounded-lg border border-[#7f5af0]/10 mb-6">
+            <pre className="font-mono text-sm text-zinc-700 dark:text-zinc-300 overflow-x-auto">
               {expressionExample}
             </pre>
           </div>
 
-          <div className="flex items-start gap-3 p-4 rounded-lg bg-[#7f5af0]/5 border border-[#7f5af0]/10">
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-violet-50 dark:bg-[#7f5af0]/5 border border-violet-100/90 dark:border-[#7f5af0]/10">
             <AlertCircle className="w-5 h-5 text-[#7f5af0] flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-[#e0e0e0]/80">
+            <p className="text-sm text-zinc-600 dark:text-zinc-300">
               Copy this expression into the Message field's expression editor. Don't worry if it seems complex - you'll master expressions in no time!
             </p>
           </div>

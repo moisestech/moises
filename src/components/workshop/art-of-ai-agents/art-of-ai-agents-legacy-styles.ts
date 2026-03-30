@@ -1,11 +1,29 @@
 /** Shared keyframes + utility classes for The Art of AI Agents legacy workshop UI */
 export const ART_OF_AI_AGENTS_LEGACY_STYLES = `
-  :root {
-    --bg: #0a0a0f;
-    --fg: #e0e0e0;
+  .art-of-ai-agents-legacy-surface {
+    --aa-bg: #fafafa;
+    --aa-fg: #18181b;
     --accent1: #7f5af0;
     --accent2: #ff6ac1;
     --accent3: #42d392;
+  }
+
+  html.dark .art-of-ai-agents-legacy-surface:not(.art-of-ai-agents-legacy-surface--force-dark) {
+    --aa-bg: #0a0a0f;
+    --aa-fg: #e0e0e0;
+  }
+
+  .art-of-ai-agents-legacy-surface.art-of-ai-agents-legacy-surface--force-dark {
+    --aa-bg: #0a0a0f;
+    --aa-fg: #e0e0e0;
+  }
+
+  html:not(.dark) .art-of-ai-agents-legacy-surface:not(.art-of-ai-agents-legacy-surface--force-dark) .noise-overlay {
+    opacity: 0.03;
+  }
+
+  .art-of-ai-agents-legacy-surface--force-dark .noise-overlay {
+    opacity: 0.05;
   }
 
   @keyframes glitch {
@@ -35,7 +53,7 @@ export const ART_OF_AI_AGENTS_LEGACY_STYLES = `
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg);
+    background: var(--aa-bg);
   }
 
   .glitch-text::before {

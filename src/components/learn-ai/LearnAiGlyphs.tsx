@@ -74,7 +74,7 @@ export function GlyphStackTiles({ className, 'aria-hidden': ariaHidden = true }:
 export function GlyphArrowRight({ className, 'aria-hidden': ariaHidden = true }: GlyphProps) {
   return (
     <svg
-      className={cn('shrink-0 text-zinc-400', className)}
+      className={cn('shrink-0 text-zinc-500 dark:text-zinc-400', className)}
       width="14"
       height="10"
       viewBox="0 0 14 10"
@@ -209,7 +209,7 @@ export function GlyphAssistantsGrid({ className, 'aria-hidden': ariaHidden = tru
 export function GlyphWritingCursorQuote({ className, 'aria-hidden': ariaHidden = true }: GlyphProps) {
   return (
     <svg
-      className={cn('shrink-0 text-zinc-500', className)}
+      className={cn('shrink-0 text-zinc-500 dark:text-zinc-400', className)}
       width="22"
       height="18"
       viewBox="0 0 22 18"
@@ -233,7 +233,7 @@ export function GlyphWritingCursorQuote({ className, 'aria-hidden': ariaHidden =
 export function GlyphBrainstormBranch({ className, 'aria-hidden': ariaHidden = true }: GlyphProps) {
   return (
     <svg
-      className={cn('shrink-0 text-zinc-500', className)}
+      className={cn('shrink-0 text-zinc-500 dark:text-zinc-400', className)}
       width="22"
       height="20"
       viewBox="0 0 22 20"

@@ -43,15 +43,16 @@ function FormatCard({ duration, kind, desc }: { duration: string; kind: string; 
     <div
       className={cn(
         'h-full rounded-sm border p-5 sm:p-6 transition-all duration-300',
-        'border-zinc-800 bg-zinc-900/25',
-        !reduce && 'hover:-translate-y-0.5 hover:border-lime-500/25 hover:shadow-[0_0_0_1px_rgba(163,230,53,0.08)]'
+        'border-zinc-200 bg-zinc-50/90 dark:border-zinc-800 dark:bg-zinc-900/25',
+        !reduce &&
+          'hover:-translate-y-0.5 hover:border-lime-600/30 hover:shadow-[0_0_0_1px_rgba(101,163,13,0.08)] dark:hover:border-lime-500/25 dark:hover:shadow-[0_0_0_1px_rgba(163,230,53,0.08)]'
       )}
     >
-      <h3 className="text-zinc-100">
-        <span className="font-semibold text-lime-400/90">{duration}</span>{' '}
-        <span className="font-medium text-zinc-300">{kind}</span>
+      <h3 className="text-zinc-900 dark:text-zinc-100">
+        <span className="font-semibold text-lime-700 dark:text-lime-400/90">{duration}</span>{' '}
+        <span className="font-medium text-zinc-600 dark:text-zinc-300">{kind}</span>
       </h3>
-      <p className="mt-3 text-sm text-zinc-400 leading-relaxed">{desc}</p>
+      <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{desc}</p>
     </div>
   )
   if (reduce) return inner
@@ -71,14 +72,16 @@ export default function LearnAiWithoutLosingYourselfPageClient() {
       <div className="space-y-20 sm:space-y-28 pb-28 sm:pb-36 pt-8 sm:pt-12">
         <div className={learnAiAtmosphereNavy()}>
           <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(163,230,53,0.05),transparent)]"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(101,163,13,0.06),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(163,230,53,0.05),transparent)]"
             aria-hidden
           />
           <LearnAiReveal as="section" className="relative py-12 sm:py-16">
             <LearnAiSection className="max-w-3xl">
               <p className={learnAiSectionEyebrow()}>The Problem</p>
-              <div className="space-y-6 text-lg leading-relaxed text-zinc-300">
-                <p className="text-xl sm:text-2xl font-light text-zinc-100 leading-snug">{LEARN_AI_PROBLEM_LEAD}</p>
+              <div className="space-y-6 text-lg leading-relaxed text-zinc-600 dark:text-zinc-300">
+                <p className="text-xl sm:text-2xl font-light text-zinc-900 dark:text-zinc-100 leading-snug">
+                  {LEARN_AI_PROBLEM_LEAD}
+                </p>
                 <p>{LEARN_AI_PROBLEM_SECOND}</p>
               </div>
               <LearnAiPullQuote>{LEARN_AI_QUOTE_ASSISTANCE}</LearnAiPullQuote>
@@ -119,25 +122,25 @@ export default function LearnAiWithoutLosingYourselfPageClient() {
         <LearnAiReveal as="section">
           <LearnAiSection>
             <p className={learnAiSectionEyebrow()}>What makes this different</p>
-            <p className="text-lg text-zinc-300 mb-5 leading-relaxed max-w-2xl">
+            <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-5 leading-relaxed max-w-2xl">
               This is not a generic AI productivity talk. It does not treat AI as magic, and it does not reduce the
               conversation to fear.
             </p>
-            <p className="text-lg text-zinc-300 mb-5 leading-relaxed max-w-2xl">
+            <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-5 leading-relaxed max-w-2xl">
               Instead, it works in the tension between usefulness and discomfort.
             </p>
-            <p className="text-base text-zinc-400 mb-5 leading-relaxed max-w-2xl">
+            <p className="text-base text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed max-w-2xl">
               The session is designed for people who already feel the contradiction:
             </p>
-            <ul className="list-none space-y-2.5 text-zinc-300 mb-8 max-w-2xl">
+            <ul className="list-none space-y-2.5 text-zinc-700 dark:text-zinc-300 mb-8 max-w-2xl">
               {LEARN_AI_DIFFERENTIATION_BULLETS.map((line) => (
                 <li key={line} className="flex gap-3 pl-1">
-                  <GlyphListMark className="text-amber-500/50" />
+                  <GlyphListMark />
                   <span className="min-w-0">{line}</span>
                 </li>
               ))}
             </ul>
-            <p className="text-lg text-zinc-200 leading-relaxed max-w-2xl">
+            <p className="text-lg text-zinc-800 dark:text-zinc-200 leading-relaxed max-w-2xl">
               The point is not purity. The point is awareness, practice, and a more conscious relationship to the tools.
             </p>
           </LearnAiSection>
@@ -161,12 +164,14 @@ export default function LearnAiWithoutLosingYourselfPageClient() {
         <LearnAiReveal as="section">
           <LearnAiSection>
             <p className={learnAiSectionEyebrow()}>Ideal for</p>
-            <p className="text-lg text-zinc-300 leading-relaxed mb-8 max-w-2xl">{LEARN_AI_IDEAL_INTRO}</p>
+            <p className="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8 max-w-2xl">
+              {LEARN_AI_IDEAL_INTRO}
+            </p>
             <ul className="flex flex-wrap gap-2.5">
               {LEARN_AI_IDEAL_VENUES.map((venue) => (
                 <li
                   key={venue}
-                  className="rounded-sm border border-zinc-700 bg-zinc-900/40 px-3 py-2 text-sm text-zinc-300"
+                  className="rounded-sm border border-zinc-200 bg-white/90 px-3 py-2 text-sm text-zinc-700 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/40 dark:text-zinc-300 dark:shadow-none"
                 >
                   {venue}
                 </li>
@@ -182,31 +187,31 @@ export default function LearnAiWithoutLosingYourselfPageClient() {
         <LearnAiReveal as="section">
           <LearnAiSection id="inquiry" className="max-w-2xl scroll-mt-28">
             <h2 className={cn(learnAiSectionTitle(), 'mb-5')}>Bring this to your space</h2>
-            <p className="text-zinc-400 leading-relaxed mb-8">
-              <span className="text-zinc-200 font-medium">Learn AI Without Losing Yourself</span> is available as a talk,
-              workshop, or customized session for institutions, schools, libraries, cultural organizations, and creative
-              communities.
+            <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8">
+              <span className="text-zinc-900 dark:text-zinc-200 font-medium">Learn AI Without Losing Yourself</span> is
+              available as a talk, workshop, or customized session for institutions, schools, libraries, cultural
+              organizations, and creative communities.
             </p>
             <div className="flex flex-wrap gap-3 mb-10">
               <a
                 href={mailtoLearnAi('Bring “Learn AI Without Losing Yourself” to our space')}
-                className="inline-flex justify-center items-center rounded-sm bg-zinc-100 text-zinc-950 px-5 py-2.5 text-sm font-medium hover:bg-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                className="inline-flex justify-center items-center rounded-sm bg-zinc-900 text-white px-5 py-2.5 text-sm font-medium hover:bg-zinc-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white dark:focus-visible:ring-offset-zinc-950"
               >
                 Bring this to your space
               </a>
               <a
                 href={mailtoLearnAi('Custom version: Learn AI Without Losing Yourself')}
-                className="inline-flex justify-center items-center rounded-sm border border-zinc-600 text-zinc-200 px-5 py-2.5 text-sm font-medium hover:bg-zinc-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                className="inline-flex justify-center items-center rounded-sm border border-zinc-300 text-zinc-800 px-5 py-2.5 text-sm font-medium hover:bg-zinc-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-900 dark:focus-visible:ring-zinc-500 dark:focus-visible:ring-offset-zinc-950"
               >
                 Ask about a custom version
               </a>
             </div>
 
-            <p className="text-zinc-500 mb-6 text-sm sm:text-base leading-relaxed">
+            <p className="text-zinc-600 dark:text-zinc-500 mb-6 text-sm sm:text-base leading-relaxed">
               Or send details below — same-day replies when possible. You can also email{' '}
               <a
                 href={`mailto:${LEARN_AI_EMAIL}`}
-                className="text-zinc-200 underline underline-offset-4 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 rounded-sm"
+                className="text-zinc-900 underline underline-offset-4 hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 rounded-sm dark:text-zinc-200 dark:hover:text-white dark:focus-visible:ring-zinc-500"
               >
                 {LEARN_AI_EMAIL}
               </a>

@@ -160,7 +160,7 @@ export default function AIMarketingN8NNodes() {
           initial="hidden"
           whileInView="visible"
         >
-          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#7f5af0]/10 border border-[#7f5af0]/20 mb-6">
+          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-violet-100/70 dark:bg-[#7f5af0]/10 border border-violet-200/80 dark:border-[#7f5af0]/20 mb-6">
             <Box className="w-4 h-4 text-[#7f5af0]" />
             <span className="text-sm font-medium">Understanding Nodes</span>
           </motion.div>
@@ -174,7 +174,7 @@ export default function AIMarketingN8NNodes() {
           
           <motion.p 
             variants={fadeIn}
-            className="text-xl text-[#e0e0e0]/80 max-w-2xl mx-auto"
+            className="text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto"
           >
             Learn how to use nodes to create powerful automations
           </motion.p>
@@ -191,7 +191,7 @@ export default function AIMarketingN8NNodes() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-8"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-8"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-[#7f5af0]/20 flex items-center justify-center">
@@ -200,13 +200,13 @@ export default function AIMarketingN8NNodes() {
                 <h3 className="text-xl font-bold">{type.title}</h3>
               </div>
 
-              <p className="text-[#e0e0e0]/80 mb-6">{type.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 mb-6">{type.description}</p>
 
               <ul className="space-y-3">
                 {type.examples.map((example, exampleIndex) => (
                   <li key={exampleIndex} className="flex items-start gap-3">
                     <ArrowRight className="w-5 h-5 text-[#ff6ac1] mt-0.5 flex-shrink-0" />
-                    <span className="text-[#e0e0e0]/80">{example}</span>
+                    <span className="text-zinc-600 dark:text-zinc-300">{example}</span>
                   </li>
                 ))}
               </ul>
@@ -225,7 +225,7 @@ export default function AIMarketingN8NNodes() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#ff6ac1]/20 p-8"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-pink-200/90 dark:border-[#ff6ac1]/20 shadow-sm dark:shadow-none p-8"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-[#ff6ac1]/20 flex items-center justify-center">
@@ -234,13 +234,13 @@ export default function AIMarketingN8NNodes() {
                 <h3 className="text-xl font-bold">{operation.title}</h3>
               </div>
 
-              <p className="text-[#e0e0e0]/80 mb-6">{operation.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 mb-6">{operation.description}</p>
 
               <ul className="space-y-3">
                 {operation.details.map((detail, detailIndex) => (
                   <li key={detailIndex} className="flex items-start gap-3">
                     <ArrowRight className="w-5 h-5 text-[#ff6ac1] mt-0.5 flex-shrink-0" />
-                    <span className="text-[#e0e0e0]/80">{detail}</span>
+                    <span className="text-zinc-600 dark:text-zinc-300">{detail}</span>
                   </li>
                 ))}
               </ul>
@@ -259,7 +259,7 @@ export default function AIMarketingN8NNodes() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#42d392]/20 p-6"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-emerald-200/90 dark:border-[#42d392]/20 shadow-sm dark:shadow-none p-6"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-8 h-8 rounded-full bg-[#42d392]/20 flex items-center justify-center">
@@ -267,7 +267,7 @@ export default function AIMarketingN8NNodes() {
                 </div>
                 <h3 className="text-lg font-bold">{control.title}</h3>
               </div>
-              <p className="text-[#e0e0e0]/80 text-sm">{control.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 text-sm">{control.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -283,7 +283,7 @@ export default function AIMarketingN8NNodes() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-6"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-6"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-8 h-8 rounded-full bg-[#7f5af0]/20 flex items-center justify-center">
@@ -291,7 +291,7 @@ export default function AIMarketingN8NNodes() {
                 </div>
                 <h3 className="text-lg font-bold">{setting.title}</h3>
               </div>
-              <p className="text-[#e0e0e0]/80 text-sm">{setting.description}</p>
+              <p className="text-zinc-600 dark:text-zinc-300 text-sm">{setting.description}</p>
             </motion.div>
           ))}
         </motion.div>

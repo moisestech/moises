@@ -24,7 +24,7 @@ export function ArtOfAIAgentsChapterNav({ slug }: { slug: string }) {
 
   return (
     <nav
-      className="mt-10 flex flex-col gap-4 border-t pt-8 sm:flex-row sm:items-center sm:justify-between"
+      className="mt-10 flex flex-col gap-4 border-t border-zinc-200 pt-8 dark:border-zinc-800 sm:flex-row sm:items-center sm:justify-between"
       aria-label="Chapter navigation"
     >
       <div>

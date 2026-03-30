@@ -1,6 +1,14 @@
 /**
  * Shared list for the workshops hub (/workshops) “Explore our workshops” grid (also used by WorkshopClient).
  */
+export type WorkshopCardVisual =
+  | 'digital-presence'
+  | 'seo'
+  | 'nonprofit'
+  | 'ai-agents'
+  | 'learn-ai'
+  | 'generic'
+
 export interface WorkshopFeature {
   title: string
   description: string
@@ -11,6 +19,10 @@ export interface WorkshopFeature {
   instructorAvatar?: string
   /** Highlights the card in “Explore our workshops” grids */
   featured?: boolean
+  /** Large icon / hero strip on hub cards */
+  cardVisual: WorkshopCardVisual
+  /** Primary button label */
+  ctaLabel?: string
 }
 
 export const WORKSHOP_FEATURES: WorkshopFeature[] = [
@@ -21,6 +33,8 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     disabled: false,
     instructor: null,
     instructorRole: null,
+    cardVisual: 'digital-presence',
+    ctaLabel: 'Open program',
   },
   {
     title: 'SEO Workshop',
@@ -30,6 +44,8 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     instructor: 'Fabiola Larios',
     instructorRole: 'SEO Workshop Lead',
     instructorAvatar: 'https://ui-avatars.com/api/?name=Fabiola+Larios&background=7c3aed&color=fff&size=64',
+    cardVisual: 'seo',
+    ctaLabel: 'Open workshop',
   },
   {
     title: 'Scale Tech Non-Profits',
@@ -38,6 +54,8 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     disabled: false,
     instructor: null,
     instructorRole: null,
+    cardVisual: 'nonprofit',
+    ctaLabel: 'View programs',
   },
   {
     title: 'The Art of AI Agents',
@@ -46,6 +64,8 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     disabled: false,
     instructor: null,
     instructorRole: null,
+    cardVisual: 'ai-agents',
+    ctaLabel: 'Open workshop hub',
   },
   {
     title: 'Learn AI Without Losing Yourself',
@@ -56,6 +76,8 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     instructor: null,
     instructorRole: null,
     featured: true,
+    cardVisual: 'learn-ai',
+    ctaLabel: 'View workshop',
   },
   {
     title: 'AI & Art',
@@ -64,6 +86,7 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     disabled: true,
     instructor: null,
     instructorRole: null,
+    cardVisual: 'generic',
   },
   {
     title: 'The Art of AI Marketing',
@@ -72,5 +95,6 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     disabled: true,
     instructor: null,
     instructorRole: null,
+    cardVisual: 'generic',
   },
 ]

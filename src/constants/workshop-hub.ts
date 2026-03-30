@@ -15,6 +15,14 @@ export const WORKSHOP_HUB = {
     SUBHEADLINE: "Talk Hub — Automation & partnerships for artists and orgs",
   },
 
+  /** Top-of-page band — specific to practice, not generic “bootcamp” copy */
+  INTRO: {
+    EYEBROW: "Programs & partnerships",
+    TITLE: "Automation, presence, and critical AI — taught from an art practice",
+    LEAD:
+      "Hands-on workshops and custom collaborations for artists, educators, and cultural institutions. Built from Oolite Arts programs and public-room teaching — live, accountable, and institution-shaped — not a passive video funnel.",
+  },
+
   CTA_INSTITUTIONS: {
     TITLE: "Work with me (Institutions)",
     BULLETS: [
@@ -46,21 +54,24 @@ export const WORKSHOP_HUB = {
     {
       label: "Download: AI Agents Packet",
       href: "/workshop/the-art-of-ai-agents",
-      description: "Slides, notes, and resources",
+      description: "Slides, notes, and chapter hub for the n8n / agents workshop.",
+      ctaLabel: "Get the packet",
       external: false,
       icon: "package",
     },
     {
       label: "Example automations",
       href: "/workshop/the-art-of-ai-agents#examples",
-      description: "Coming soon",
+      description: "Workflow patterns and reference builds (section expanding).",
+      ctaLabel: "Browse examples",
       external: false,
       icon: "cog",
     },
     {
       label: "Book a discovery call",
       href: CALENDLY_URL,
-      description: "15-min meet & greet",
+      description: "15 minutes — institutions, partnerships, or custom programs.",
+      ctaLabel: "Schedule",
       external: true,
       icon: "phone",
     },

@@ -14,6 +14,13 @@ export interface ArtOfAiAgentsChapter {
 
 export const ART_OF_AI_AGENTS_CHAPTERS: ArtOfAiAgentsChapter[] = [
   {
+    slug: 'opening-monologue',
+    title: 'Opening monologue (live talk)',
+    description:
+      'Part 1: intro, thanks, context, disclaimer, overview. Part 2: spoken essay — intelligence, offloading, agents, attention, n8n.',
+    legacyHash: 'opening-monologue',
+  },
+  {
     slug: 'overview',
     title: 'Overview & hero',
     description: 'Opening section — positioning, visuals, and how the workshop runs.',

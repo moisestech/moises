@@ -88,7 +88,7 @@ export default function AIMarketingCreateWorkflow() {
           initial="hidden"
           whileInView="visible"
         >
-          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#7f5af0]/10 border border-[#7f5af0]/20 mb-6">
+          <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-violet-100/70 dark:bg-[#7f5af0]/10 border border-violet-200/80 dark:border-[#7f5af0]/20 mb-6">
             <Workflow className="w-4 h-4 text-[#7f5af0]" />
             <span className="text-sm font-medium">Workflow Creation</span>
           </motion.div>
@@ -102,7 +102,7 @@ export default function AIMarketingCreateWorkflow() {
           
           <motion.p 
             variants={fadeIn}
-            className="text-xl text-[#e0e0e0]/80 max-w-2xl mx-auto"
+            className="text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto"
           >
             Learn how to create and manage workflows in n8n, from basic setup to automation
           </motion.p>
@@ -111,7 +111,7 @@ export default function AIMarketingCreateWorkflow() {
         {/* What is a Workflow */}
         <motion.div 
           variants={fadeIn}
-          className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-8 mb-16"
+          className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-8 mb-16"
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 rounded-full bg-[#7f5af0]/20 flex items-center justify-center">
@@ -119,7 +119,7 @@ export default function AIMarketingCreateWorkflow() {
             </div>
             <div>
               <h3 className="text-2xl font-bold">What is a Workflow?</h3>
-              <p className="text-[#e0e0e0]/80">A collection of nodes connected together to automate a process</p>
+              <p className="text-zinc-600 dark:text-zinc-300">A collection of nodes connected together to automate a process</p>
             </div>
           </div>
 
@@ -143,11 +143,11 @@ export default function AIMarketingCreateWorkflow() {
             ].map((feature, index) => (
               <div 
                 key={index}
-                className="p-4 rounded-lg bg-[#7f5af0]/5 border border-[#7f5af0]/10"
+                className="p-4 rounded-lg bg-violet-50 dark:bg-[#7f5af0]/5 border border-violet-100/90 dark:border-[#7f5af0]/10"
               >
                 <feature.icon className="w-6 h-6 text-[#7f5af0] mb-3" />
                 <h4 className="font-medium mb-2">{feature.title}</h4>
-                <p className="text-sm text-[#e0e0e0]/70">{feature.description}</p>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -164,7 +164,7 @@ export default function AIMarketingCreateWorkflow() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#ff6ac1]/20 p-8"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-pink-200/90 dark:border-[#ff6ac1]/20 shadow-sm dark:shadow-none p-8"
             >
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <span className="w-8 h-8 rounded-full bg-[#ff6ac1]/20 flex items-center justify-center">
@@ -177,12 +177,12 @@ export default function AIMarketingCreateWorkflow() {
                 {method.steps.map((step, stepIndex) => (
                   <li 
                     key={stepIndex}
-                    className="flex items-start gap-4 p-4 rounded-lg hover:bg-[#ff6ac1]/5 transition-colors"
+                    className="flex items-start gap-4 p-4 rounded-lg hover:bg-pink-50 dark:hover:bg-[#ff6ac1]/5 transition-colors"
                   >
                     <span className="w-6 h-6 rounded-full bg-[#ff6ac1]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-sm font-medium text-[#ff6ac1]">{stepIndex + 1}</span>
                     </span>
-                    <span className="text-[#e0e0e0]/90">{step}</span>
+                    <span className="text-zinc-700 dark:text-zinc-300">{step}</span>
                   </li>
                 ))}
               </ol>
@@ -201,7 +201,7 @@ export default function AIMarketingCreateWorkflow() {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#42d392]/20 p-8"
+              className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-emerald-200/90 dark:border-[#42d392]/20 shadow-sm dark:shadow-none p-8"
             >
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <span className="w-8 h-8 rounded-full bg-[#42d392]/20 flex items-center justify-center">
@@ -210,20 +210,20 @@ export default function AIMarketingCreateWorkflow() {
                 {mode.title}
               </h3>
               
-              <p className="text-[#e0e0e0]/90 mb-6">{mode.description}</p>
+              <p className="text-zinc-700 dark:text-zinc-300 mb-6">{mode.description}</p>
 
               <ul className="space-y-3 mb-6">
                 {mode.steps.map((step, stepIndex) => (
                   <li key={stepIndex} className="flex items-start gap-3">
                     <ChevronRight className="w-5 h-5 text-[#42d392] mt-0.5 flex-shrink-0" />
-                    <span className="text-[#e0e0e0]/80">{step}</span>
+                    <span className="text-zinc-600 dark:text-zinc-300">{step}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-[#42d392]/5 border border-[#42d392]/10">
+              <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-50 dark:bg-[#42d392]/5 border border-emerald-100/90 dark:border-[#42d392]/10">
                 <AlertCircle className="w-5 h-5 text-[#42d392] flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-[#e0e0e0]/80">{mode.highlight}</p>
+                <p className="text-sm text-zinc-600 dark:text-zinc-300">{mode.highlight}</p>
               </div>
             </motion.div>
           ))}
@@ -232,7 +232,7 @@ export default function AIMarketingCreateWorkflow() {
         {/* Quick Tips */}
         <motion.div 
           variants={fadeIn}
-          className="mt-16 p-8 bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20"
+          className="mt-16 p-8 bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none"
         >
           <h3 className="text-2xl font-bold mb-6">Quick Tips</h3>
           <ul className="grid md:grid-cols-2 gap-6">
@@ -244,10 +244,10 @@ export default function AIMarketingCreateWorkflow() {
             ].map((tip, index) => (
               <li 
                 key={index}
-                className="flex items-start gap-3 p-4 rounded-lg bg-[#7f5af0]/5 border border-[#7f5af0]/10"
+                className="flex items-start gap-3 p-4 rounded-lg bg-violet-50 dark:bg-[#7f5af0]/5 border border-violet-100/90 dark:border-[#7f5af0]/10"
               >
                 <AlertCircle className="w-5 h-5 text-[#7f5af0] flex-shrink-0 mt-0.5" />
-                <span className="text-[#e0e0e0]/80">{tip}</span>
+                <span className="text-zinc-600 dark:text-zinc-300">{tip}</span>
               </li>
             ))}
           </ul>

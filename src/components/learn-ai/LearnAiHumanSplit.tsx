@@ -20,8 +20,8 @@ function ListColumn({
       className={cn(
         'rounded-sm border p-6 sm:p-8 relative overflow-hidden min-h-[280px]',
         warm
-          ? 'border-amber-900/50 bg-gradient-to-br from-amber-950/40 via-zinc-950 to-zinc-950 ring-1 ring-amber-500/10'
-          : 'border-slate-800 bg-gradient-to-br from-slate-950/80 via-zinc-950 to-zinc-950 ring-1 ring-slate-700/30'
+          ? 'border-amber-200/90 bg-gradient-to-br from-amber-50/95 via-zinc-50 to-zinc-50 ring-1 ring-amber-200/60 dark:border-amber-900/50 dark:from-amber-950/40 dark:via-zinc-950 dark:to-zinc-950 dark:ring-amber-500/10'
+          : 'border-slate-200 bg-gradient-to-br from-slate-100/90 via-zinc-50 to-zinc-50 ring-1 ring-slate-200/70 dark:border-slate-800 dark:from-slate-950/80 dark:via-zinc-950 dark:to-zinc-950 dark:ring-slate-700/30'
       )}
     >
       <div
@@ -31,11 +31,11 @@ function ListColumn({
         )}
         aria-hidden
       />
-      <GlyphDotRow className="mb-4 opacity-70 text-lime-400/35" />
+      <GlyphDotRow className="mb-4 opacity-70" />
       <h3
         className={cn(
           'text-sm font-semibold mb-4 tracking-wide uppercase',
-          warm ? 'text-amber-200/90' : 'text-slate-400'
+          warm ? 'text-amber-900/90 dark:text-amber-200/90' : 'text-slate-600 dark:text-slate-400'
         )}
       >
         {title}
@@ -46,12 +46,14 @@ function ListColumn({
             <span
               className={cn(
                 'shrink-0 font-mono text-xs pt-0.5',
-                warm ? 'text-amber-600/70' : 'text-slate-500'
+                warm ? 'text-amber-700/80 dark:text-amber-600/70' : 'text-slate-500 dark:text-slate-500'
               )}
             >
               —
             </span>
-            <span className={warm ? 'text-zinc-200' : 'text-zinc-400'}>{item}</span>
+            <span className={warm ? 'text-zinc-800 dark:text-zinc-200' : 'text-zinc-600 dark:text-zinc-400'}>
+              {item}
+            </span>
           </li>
         ))}
       </ul>
@@ -62,16 +64,16 @@ function ListColumn({
 export function LearnAiHumanSplit() {
   return (
     <LearnAiReveal className="max-w-5xl mx-auto px-5 sm:px-6">
-      <div className="rounded-sm border border-zinc-800 bg-zinc-900/20 p-6 sm:p-10 ring-1 ring-zinc-800/80">
+      <div className="rounded-sm border border-zinc-200 bg-white/70 p-6 sm:p-10 ring-1 ring-zinc-200/80 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/20 dark:ring-zinc-800/80 dark:shadow-none">
         <p className={learnAiSectionEyebrow()}>What should stay human</p>
-        <p className="text-lg text-zinc-300 mb-10 max-w-2xl leading-relaxed">
+        <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-10 max-w-2xl leading-relaxed">
           AI can help with many parts of the process. The challenge is knowing what should remain yours.
         </p>
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           <ListColumn title="Human" items={LEARN_AI_HUMAN_ITEMS} warm />
           <ListColumn title="Automated" items={LEARN_AI_AUTOMATED_ITEMS} warm={false} />
         </div>
-        <p className="mt-10 text-lg text-zinc-200 font-medium leading-relaxed max-w-2xl border-t border-zinc-800 pt-8">
+        <p className="mt-10 text-lg text-zinc-800 dark:text-zinc-200 font-medium leading-relaxed max-w-2xl border-t border-zinc-200 dark:border-zinc-800 pt-8">
           The problem is not automation by itself. The problem begins when we automate the parts of ourselves that
           matter most.
         </p>

@@ -95,9 +95,9 @@ export default function AIMarketingHeroSection({ reducedMotion = false }: { redu
               viewport={{ once: true }}
             >
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
-                <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#7f5af0]/10 border border-[#7f5af0]/20">
+                <motion.div variants={fadeIn} className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-violet-100/70 dark:bg-[#7f5af0]/10 border border-violet-200/80 dark:border-[#7f5af0]/20">
                   <N8NIcon className="w-5 h-5" />
-                  <span className="text-sm font-medium">Master n8n Automation</span>
+                  <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Master n8n Automation</span>
                 </motion.div>
               </div>
               
@@ -112,7 +112,7 @@ export default function AIMarketingHeroSection({ reducedMotion = false }: { redu
               
               <motion.p 
                 variants={fadeIn}
-                className="text-xl text-[#e0e0e0]/80 max-w-2xl mb-8"
+                className="text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mb-8"
               >
                 Learn to automate your work and connect your favorite tools with n8n's visual workflow builder
               </motion.p>
@@ -142,7 +142,7 @@ export default function AIMarketingHeroSection({ reducedMotion = false }: { redu
                 </motion.button>
                 <motion.button
                   whileHover={reducedMotion ? {} : hoverScale}
-                  className="px-8 py-4 rounded-lg font-medium border border-[#7f5af0]/20 hover:border-[#7f5af0]/40 transition-colors"
+                  className="px-8 py-4 rounded-lg font-medium border border-violet-300 text-zinc-800 transition-colors hover:border-violet-500 dark:border-[#7f5af0]/20 dark:text-zinc-100 dark:hover:border-[#7f5af0]/40"
                 >
                   View Curriculum
                 </motion.button>
@@ -168,7 +168,7 @@ export default function AIMarketingHeroSection({ reducedMotion = false }: { redu
               <motion.div
                 key={index}
                 variants={fadeIn}
-                className="bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-[#7f5af0]/20 p-6"
+                className="bg-white/90 dark:bg-[#0a0a0f]/80 backdrop-blur-xl rounded-xl border border-zinc-200/90 dark:border-[#7f5af0]/20 shadow-sm dark:shadow-none p-6"
                 whileHover={reducedMotion ? {} : hoverScale}
               >
                 <div className="flex items-center gap-4 mb-4">
@@ -178,9 +178,9 @@ export default function AIMarketingHeroSection({ reducedMotion = false }: { redu
                   >
                     <Icon className="w-6 h-6 text-[#7f5af0]" />
                   </motion.div>
-                  <h3 className="text-lg font-bold">{feature.title}</h3>
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{feature.title}</h3>
                 </div>
-                <p className="text-[#e0e0e0]/80">{feature.description}</p>
+                <p className="text-zinc-600 dark:text-zinc-300">{feature.description}</p>
               </motion.div>
             );
           })}

@@ -34,15 +34,18 @@ export function LearnAiLearningCard({
     <div
       className={cn(
         'h-full rounded-sm border px-5 py-6 sm:px-6 sm:py-7 transition-all duration-300',
-        'border-zinc-800 bg-zinc-900/30',
-        !reduce && 'hover:-translate-y-0.5 hover:border-lime-500/25 hover:shadow-[0_0_0_1px_rgba(163,230,53,0.1)]'
+        'border-zinc-200 bg-white/90 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/30 dark:shadow-none',
+        !reduce &&
+          'hover:-translate-y-0.5 hover:border-lime-600/30 hover:shadow-[0_0_0_1px_rgba(101,163,13,0.1)] dark:hover:border-lime-500/25 dark:hover:shadow-[0_0_0_1px_rgba(163,230,53,0.1)]'
       )}
     >
       <div className="flex items-start gap-3 mb-3">
-        <G className="mt-0.5 text-zinc-500" />
-        <h3 className="text-zinc-100 font-medium leading-snug">{title}</h3>
+        <G className="mt-0.5 text-zinc-500 dark:text-zinc-500" />
+        <h3 className="text-zinc-900 dark:text-zinc-100 font-medium leading-snug">{title}</h3>
       </div>
-      <p className="text-sm sm:text-base text-zinc-400 leading-relaxed pl-[34px] sm:pl-[38px]">{body}</p>
+      <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed pl-[34px] sm:pl-[38px]">
+        {body}
+      </p>
     </div>
   )
 
