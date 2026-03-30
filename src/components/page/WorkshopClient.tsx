@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { ArrowUpRight, Mail, CheckCircle, Building2, Users, Package, Settings, Phone, Instagram } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
+import { WORKSHOP_FEATURES } from '@/constants/workshop-features'
 import { track } from '@/lib/analytics'
 
 const WorkshopCanvas = dynamic(
@@ -32,58 +33,6 @@ function useUtmUrl(baseUrl: string): string {
   }, [baseUrl])
   return url
 }
-
-const WORKSHOP_FEATURES = [
-  {
-    title: 'Digital Presence',
-    description: 'Build and optimize your online portfolio and website.',
-    link: '/workshop/own-your-digital-presence',
-    disabled: false,
-    instructor: null,
-    instructorRole: null,
-  },
-  {
-    title: 'SEO Workshop',
-    description: 'Get found, get seen, and expand your reach with search engine optimization strategies.',
-    link: 'https://fabiola.io/workshop_seo/index.html',
-    disabled: false,
-    instructor: 'Fabiola Larios',
-    instructorRole: 'SEO Workshop Lead',
-    instructorAvatar: 'https://ui-avatars.com/api/?name=Fabiola+Larios&background=7c3aed&color=fff&size=64',
-  },
-  {
-    title: 'Scale Tech Non-Profits',
-    description: 'Custom software solutions to help your organization and community grow.',
-    link: '/workshop/tech-nonprofit',
-    disabled: false,
-    instructor: null,
-    instructorRole: null,
-  },
-  {
-    title: 'The Art of AI Agents',
-    description: 'Artist task automation—n8n, AI agents, and workflow design.',
-    link: '/workshop/the-art-of-ai-agents',
-    disabled: false,
-    instructor: null,
-    instructorRole: null,
-  },
-  {
-    title: 'AI & Art',
-    description: 'Learn how to integrate AI tools into your creative process.',
-    link: '/workshop/ai-and-the-arts',
-    disabled: true,
-    instructor: null,
-    instructorRole: null,
-  },
-  {
-    title: 'The Art of AI Marketing',
-    description: 'Learn how to stand out in the age of AI-generated content.',
-    link: '/workshop/the-art-of-ai-marketing',
-    disabled: true,
-    instructor: null,
-    instructorRole: null,
-  },
-]
 
 export default function WorkshopClient() {
   const [email, setEmail] = useState('')

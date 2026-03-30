@@ -3,8 +3,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/workshop/learn-ai-without-losing-yourself',
-        destination: '/workshops/learn-ai-without-losing-yourself',
+        source: '/workshops/learn-ai-without-losing-yourself',
+        destination: '/workshop/learn-ai-without-losing-yourself',
         permanent: true,
       },
     ]

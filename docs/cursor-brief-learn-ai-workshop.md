@@ -1,13 +1,13 @@
 # Cursor brief — Learn AI Without Losing Yourself
 
-**Canonical URL:** `/workshops/learn-ai-without-losing-yourself`  
-**Legacy redirect:** `/workshop/learn-ai-without-losing-yourself` → `/workshops/learn-ai-without-losing-yourself` (see `next.config.js`)
+**Canonical URL:** `/workshop/learn-ai-without-losing-yourself`  
+**Legacy redirect:** `/workshops/learn-ai-without-losing-yourself` → `/workshop/learn-ai-without-losing-yourself` (permanent; see `next.config.js`)
 
 ## Implementation map
 
 | Area | Location |
 |------|----------|
-| Page route | `src/app/(main)/workshops/learn-ai-without-losing-yourself/page.tsx` |
+| Page route | `src/app/(main)/workshop/learn-ai-without-losing-yourself/page.tsx` |
 | UI + copy | `src/components/page/LearnAiWithoutLosingYourselfPageClient.tsx` |
 | Hero image URL | `src/constants/learn-ai-workshop.ts` |
 | Workshops index | `src/app/(main)/workshops/page.tsx` |
