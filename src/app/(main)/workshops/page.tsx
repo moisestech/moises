@@ -21,7 +21,7 @@ export default function WorkshopsIndexPage() {
       <ul className="space-y-6 border-t border-gray-200 dark:border-gray-800 pt-10">
         <li>
           <Link
-            href="/workshop/learn-ai-without-losing-yourself"
+            href="/workshops/learn-ai-without-losing-yourself"
             className="group block text-xl font-medium text-gray-900 dark:text-white hover:underline underline-offset-4"
           >
             Learn AI Without Losing Yourself

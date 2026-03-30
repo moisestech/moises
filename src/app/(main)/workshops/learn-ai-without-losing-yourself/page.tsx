@@ -18,12 +18,14 @@ export const metadata: Metadata = {
     'Moises Sanabria',
     'teaching',
     'critical AI',
+    'labor',
+    'workshop performance',
   ],
   openGraph: {
     title,
     description,
     type: 'website',
-    images: [{ url: LEARN_AI_WORKSHOP_HERO_IMAGE, alt: 'Learn AI Without Losing Yourself — workshop hero' }],
+    images: [{ url: LEARN_AI_WORKSHOP_HERO_IMAGE, alt: 'Learn AI Without Losing Yourself — workshop hero artwork' }],
   },
   twitter: {
     card: 'summary_large_image',

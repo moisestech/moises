@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/workshop/learn-ai-without-losing-yourself',
+        destination: '/workshops/learn-ai-without-losing-yourself',
+        permanent: true,
+      },
+    ]
+  },
+
   // Increase static page generation timeout
   staticPageGenerationTimeout: 120,
   

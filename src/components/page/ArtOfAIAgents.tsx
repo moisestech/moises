@@ -18,6 +18,7 @@ import AIMarketingN8NNavigatingEditorUI from "../workshop/AIMarketingN8NNavigati
 import AIMarketingFlashyTitle from "../workshop/AIMarketingFlashyTitle";
 import AIMarketingNav from "../workshop/AIMarketingNav";
 import AIMarketingN8NKeyboardShortcuts from "../workshop/AIMarketingN8NKeyboardShortcuts";
+import { ART_OF_AI_AGENTS_HERO_IMAGE } from "@/constants/art-of-ai-agents";
 
 // CSS Variables
 const styles = `
@@ -162,9 +163,8 @@ const navItems = [
   { id: "cta", label: "Join Now" },
 ];
 
-// Placeholder images - replace with actual images
 const images = {
-  hero: "/images/workshop/ai-marketing/hero.jpg",
+  hero: ART_OF_AI_AGENTS_HERO_IMAGE,
   about: "/images/workshop/ai-marketing/about.jpg",
   resources: "/images/workshop/ai-marketing/resources.jpg",
   impact: "/images/workshop/ai-marketing/impact.jpg",
@@ -382,6 +382,25 @@ export default function ArtOfAIAgentsClient() {
 
         {/* Flashy Title Section */}
         <AIMarketingFlashyTitle reducedMotion={reducedMotion} />
+
+        <section
+          className="relative max-w-6xl mx-auto px-4 py-6 sm:py-10"
+          aria-label="Workshop documentation"
+        >
+          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-xl overflow-hidden border border-white/10 shadow-2xl ring-1 ring-white/5">
+            <Image
+              src={images.hero}
+              alt="The Art of AI Agents — Locust Projects, The Dill, 2026"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 1152px"
+              priority
+            />
+          </div>
+          <p className="text-center text-xs sm:text-sm text-[#e0e0e0]/45 mt-3 tracking-wide">
+            Locust Projects · The Dill — 2026
+          </p>
+        </section>
 
         {/* 1. Overview Section */}
         <section id="hero" className="relative py-24 overflow-hidden">
