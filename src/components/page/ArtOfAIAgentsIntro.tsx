@@ -16,6 +16,17 @@ export default function ArtOfAIAgentsIntro() {
 
   return (
     <div className="mx-auto max-w-3xl">
+      <p className={cn('mb-4 text-sm', theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600')}>
+        <Link
+          href={ART_OF_AI_AGENTS_BASE}
+          className={cn(
+            'font-medium underline-offset-4 hover:underline',
+            theme === 'dark' ? 'text-indigo-300 hover:text-indigo-200' : 'text-indigo-800 hover:text-indigo-700'
+          )}
+        >
+          ← Program overview
+        </Link>
+      </p>
       <p
         className={cn(
           'mb-3 text-xs uppercase tracking-[0.2em]',
@@ -39,8 +50,17 @@ export default function ArtOfAIAgentsIntro() {
         )}
       >
         Artist-facing automation: n8n, AI agents, integrations, and deployment — taught as a workshop, not a product
-        demo. This introduction is the entry point; chapters below split the material into navigable sections while the
-        legacy single-page version remains available during migration.
+        demo. This page is the chapter index; the{' '}
+        <Link
+          href={ART_OF_AI_AGENTS_BASE}
+          className={cn(
+            'font-medium underline-offset-4 hover:underline',
+            theme === 'dark' ? 'text-indigo-300 hover:text-indigo-200' : 'text-indigo-800 hover:text-indigo-700'
+          )}
+        >
+          program overview
+        </Link>{' '}
+        covers formats, outcomes, and booking. The legacy single-page version remains linked below during migration.
       </p>
 
       <div

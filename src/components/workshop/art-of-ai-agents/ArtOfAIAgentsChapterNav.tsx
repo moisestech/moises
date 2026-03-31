@@ -7,6 +7,7 @@ import { useTheme } from '@/contexts/ThemeContext'
 import {
   ART_OF_AI_AGENTS_BASE,
   ART_OF_AI_AGENTS_CHAPTERS,
+  ART_OF_AI_AGENTS_COURSE_HUB,
 } from '@/config/art-of-ai-agents-chapters'
 
 export function ArtOfAIAgentsChapterNav({ slug }: { slug: string }) {
@@ -34,9 +35,9 @@ export function ArtOfAIAgentsChapterNav({ slug }: { slug: string }) {
             <span className="text-left">Previous: {prev.title}</span>
           </Link>
         ) : (
-          <Link href={ART_OF_AI_AGENTS_BASE} className={linkClass}>
+          <Link href={ART_OF_AI_AGENTS_COURSE_HUB} className={linkClass}>
             <ChevronLeft className="h-4 w-4 shrink-0" aria-hidden />
-            Introduction
+            Course materials
           </Link>
         )}
       </div>
@@ -47,8 +48,8 @@ export function ArtOfAIAgentsChapterNav({ slug }: { slug: string }) {
             <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
           </Link>
         ) : (
-          <Link href={ART_OF_AI_AGENTS_BASE} className={linkClass}>
-            Back to introduction
+          <Link href={ART_OF_AI_AGENTS_COURSE_HUB} className={linkClass}>
+            Back to course materials
           </Link>
         )}
       </div>

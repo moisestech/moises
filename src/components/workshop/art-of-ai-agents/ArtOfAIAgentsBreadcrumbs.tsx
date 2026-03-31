@@ -22,7 +22,9 @@ export function ArtOfAIAgentsBreadcrumbs() {
     { label: 'The Art of AI Agents', href: ART_OF_AI_AGENTS_BASE },
   ]
 
-  if (segments[0] === 'chapter' && segments[1]) {
+  if (segments[0] === 'course') {
+    crumbs.push({ label: 'Course materials' })
+  } else if (segments[0] === 'chapter' && segments[1]) {
     const ch = getArtOfAiAgentsChapter(segments[1])
     crumbs.push({ label: ch?.title ?? segments[1] })
   } else if (segments[0] === 'full') {

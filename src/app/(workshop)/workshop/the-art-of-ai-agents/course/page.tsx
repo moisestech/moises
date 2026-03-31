@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import ArtOfAIAgentsIntro from '@/components/page/ArtOfAIAgentsIntro'
 import { ART_OF_AI_AGENTS_HERO_IMAGE } from '@/constants/art-of-ai-agents'
 
-const title = 'The Art of AI Agents | Moises Sanabria'
+const title = 'Workshop materials | The Art of AI Agents | Moises Sanabria'
 const description =
-  'Artist task automation — n8n, AI agents, and workflow design. Introductory hub with chapter navigation; full legacy workshop available.'
+  'Chapter hub for The Art of AI Agents — n8n, AI agents, and workflow materials. Start here after the overview; legacy full-page version linked below.'
 
 export const metadata: Metadata = {
   title,
@@ -22,6 +22,6 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ArtOfAIAgentsPage() {
+export default function ArtOfAIAgentsCourseHubPage() {
   return <ArtOfAIAgentsIntro />
 }

@@ -4,6 +4,8 @@
  */
 export const ART_OF_AI_AGENTS_BASE = '/workshop/the-art-of-ai-agents' as const
 
+export const ART_OF_AI_AGENTS_COURSE_HUB = `${ART_OF_AI_AGENTS_BASE}/course` as const
+
 export interface ArtOfAiAgentsChapter {
   slug: string
   title: string

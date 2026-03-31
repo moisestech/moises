@@ -14,6 +14,7 @@ export const MAIN_SITE_NAV_ITEMS: SiteNavItem[] = [
   { label: 'Exhibitions', path: '/exhibitions' },
   { label: 'Events', path: '/events' },
   { label: 'Selected Works', path: '/selected-works', enabled: true },
+  { label: 'Born in the Machine', path: '/research/born-into-the-machine', enabled: true },
   { label: 'Art and Artist', path: '/portfolio', enabled: true },
   { label: 'Bio', path: '/bio', enabled: true },
   { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },
@@ -24,6 +25,7 @@ export const MAIN_SITE_NAV_ITEMS_MOBILE: SiteNavItem[] = [
   { label: 'Visit', path: '/visit' },
   { label: 'Exhibitions', path: '/exhibitions' },
   { label: 'Events', path: '/events' },
+  { label: 'Born in the Machine', path: '/research/born-into-the-machine', enabled: true },
   { label: 'Art and Artist', path: '/portfolio', enabled: true },
   { label: 'Bio', path: '/bio', enabled: true },
   { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },
@@ -34,7 +36,11 @@ export const WORKSHOP_NAV_PROGRAMS: SiteNavItem[] = [
   { label: 'Hub', path: '/workshops', enabled: true },
   { label: 'Websites', path: '/workshop/own-your-digital-presence', enabled: true },
   { label: 'AI agents', path: '/workshop/the-art-of-ai-agents', enabled: true },
-  { label: 'Learn AI', path: '/workshop/learn-ai-without-losing-yourself', enabled: true },
+  {
+    label: 'Learn AI',
+    path: '/workshop/the-art-of-ai-agents',
+    enabled: true,
+  },
 ]
 
 /** Exit ramp back to the main site */

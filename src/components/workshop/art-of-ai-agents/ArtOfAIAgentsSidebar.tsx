@@ -8,6 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext'
 import {
   ART_OF_AI_AGENTS_BASE,
   ART_OF_AI_AGENTS_CHAPTERS,
+  ART_OF_AI_AGENTS_COURSE_HUB,
 } from '@/config/art-of-ai-agents-chapters'
 
 export function ArtOfAIAgentsSidebar() {
@@ -23,7 +24,8 @@ export function ArtOfAIAgentsSidebar() {
       !active && theme !== 'dark' && 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
     )
 
-  const introActive = pathname === ART_OF_AI_AGENTS_BASE
+  const overviewActive = pathname === ART_OF_AI_AGENTS_BASE || pathname === `${ART_OF_AI_AGENTS_BASE}/`
+  const courseHubActive = pathname === ART_OF_AI_AGENTS_COURSE_HUB
 
   return (
     <div className="flex flex-col gap-8 w-full">
@@ -39,10 +41,14 @@ export function ArtOfAIAgentsSidebar() {
         <nav className="space-y-1">
           <Link
             href={ART_OF_AI_AGENTS_BASE}
-            className={itemClass(introActive)}
+            className={itemClass(overviewActive)}
           >
             <Sparkles className="h-3.5 w-3.5 shrink-0 opacity-80" aria-hidden />
-            Introduction
+            Overview
+          </Link>
+          <Link href={ART_OF_AI_AGENTS_COURSE_HUB} className={itemClass(courseHubActive)}>
+            <BookOpen className="h-3.5 w-3.5 shrink-0 opacity-80" aria-hidden />
+            Course materials
           </Link>
           <Link
             href={`${ART_OF_AI_AGENTS_BASE}/full`}

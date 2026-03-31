@@ -61,8 +61,8 @@ export const WORKSHOP_HUB = {
     },
     {
       label: "Example automations",
-      href: "/workshop/the-art-of-ai-agents#examples",
-      description: "Workflow patterns and reference builds (section expanding).",
+      href: "/workshop/the-art-of-ai-agents/course",
+      description: "Chapter hub — workflow patterns and reference builds as sections expand.",
       ctaLabel: "Browse examples",
       external: false,
       icon: "cog",
