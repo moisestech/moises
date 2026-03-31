@@ -59,23 +59,24 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
   },
   {
     title: 'The Art of AI Agents',
-    description: 'Artist task automation—n8n, AI agents, and workflow design.',
+    description:
+      'Artist task automation—n8n, AI agents, and workflow design. Program overview, formats, booking, and chapter materials.',
     link: '/workshop/the-art-of-ai-agents',
     disabled: false,
     instructor: null,
     instructorRole: null,
+    featured: true,
     cardVisual: 'ai-agents',
-    ctaLabel: 'Open workshop hub',
+    ctaLabel: 'View overview',
   },
   {
     title: 'Learn AI Without Losing Yourself',
     description:
-      'Live workshop-performance on practical AI, burnout culture, and staying human in the loop—writing, research, and creative work without flattening your voice.',
+      'Separate live workshop-performance on practical AI, burnout culture, and staying human in the loop—writing, research, and creative work without flattening your voice.',
     link: '/workshop/learn-ai-without-losing-yourself',
     disabled: false,
     instructor: null,
     instructorRole: null,
-    featured: true,
     cardVisual: 'learn-ai',
     ctaLabel: 'View workshop',
   },

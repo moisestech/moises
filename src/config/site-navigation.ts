@@ -43,8 +43,9 @@ export const WORKSHOP_NAV_PROGRAMS: SiteNavItem[] = [
   },
 ]
 
-/** Exit ramp back to the main site */
+/** Exit ramp back to the main site (research + contact) */
 export const WORKSHOP_NAV_SITE: SiteNavItem[] = [
+  { label: 'Born in the Machine', path: '/research/born-into-the-machine', enabled: true },
   { label: 'Contact', path: '/contact', enabled: true },
   { label: 'Portfolio', path: '/portfolio', enabled: true },
 ]
