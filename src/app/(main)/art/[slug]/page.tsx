@@ -1,5 +1,6 @@
 import { artist } from '@/constants/artworks';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
@@ -90,11 +91,36 @@ export default async function ArtPage({ params }: PageProps) {
           <p className="text-4xl font-bold mt-4 text-black dark:text-white">
             {artwork.year}
           </p>
+          {params.slug === 'digital_divinities' && (
+            <div className="mt-8 max-w-4xl space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black/80 dark:text-white/90">
+                Interactive AI installation
+              </p>
+              <p className="text-xl md:text-2xl font-medium leading-snug text-black dark:text-white">
+                Visitors step into a live generative loop: selfies become mythic, symbolic portraits—built
+                for festivals, museums, and public programs.
+              </p>
+              <p>
+                <Link
+                  href="/art/digital_divinities/project"
+                  className="text-lg font-semibold underline underline-offset-4 decoration-black/40 hover:decoration-black dark:decoration-white/50 dark:hover:decoration-white"
+                >
+                  Exhibition details →
+                </Link>
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Main Image */}
-      <div className="w-full h-[70vh] relative">
+      <div
+        className={`w-full relative ${
+          params.slug === 'digital_divinities'
+            ? 'h-[72vh] min-h-[300px] ring-2 ring-inset ring-black/15 dark:ring-white/20'
+            : 'h-[70vh]'
+        }`}
+      >
         <Image
           src={artwork.images[0].url}
           alt={artwork.images[0].caption || artwork.title}
