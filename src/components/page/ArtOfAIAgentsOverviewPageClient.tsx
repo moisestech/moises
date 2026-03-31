@@ -45,6 +45,7 @@ import {
   learnAiSectionEyebrow,
   learnAiSectionTitle,
 } from '@/components/learn-ai/learn-ai-tokens'
+import { GlitchDisplayHero } from '@/components/common/GlitchDisplayHero'
 import { mailtoLearnAi } from '@/lib/learn-ai-mailto'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
@@ -126,9 +127,15 @@ function OverviewHero() {
           <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-zinc-500 mb-4 sm:mb-5">
             {ART_OF_AI_AGENTS_OVERVIEW_HERO_EYEBROW}
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-5xl xl:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 leading-[1.05] max-w-xl">
+          <GlitchDisplayHero
+            as="h1"
+            variant="large"
+            palette="zinc"
+            className="mt-0 min-h-0 mb-0"
+            containerClassName="max-w-xl mx-0"
+          >
             {ART_OF_AI_AGENTS_OVERVIEW_HERO_TITLE}
-          </h1>
+          </GlitchDisplayHero>
           <p className="mt-5 sm:mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 font-light max-w-xl leading-snug">
             {ART_OF_AI_AGENTS_OVERVIEW_HERO_LEAD}
           </p>

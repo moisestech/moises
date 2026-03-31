@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { ChapterMetadata } from '@/lib/book/types';
 import { BookOpen, Edit, Eye, FileText, AlertTriangle, Tag, Sparkles } from 'lucide-react';
@@ -60,124 +61,150 @@ export function ChapterList({
           const keywords = (chapter as any).keywords || [];
           const topics = (chapter as any).topics || [];
           const keyMoments = (chapter as any).keyMoments || [];
-          
+          const coverImage = chapter.coverImage;
+          const coverAlt =
+            chapter.coverImageAlt ||
+            `Cover image for ${chapter.title || `Chapter ${chapter.order}`}`;
+
           return (
             <Link
               key={chapter.slug}
               href={`/research/born-into-the-machine/${chapter.slug}`}
-              className="block p-6 rounded-lg hover:shadow-lg transition-shadow bg-white dark:bg-gray-900"
+              className="group flex flex-col md:flex-row overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 hover:shadow-lg transition-shadow bg-white dark:bg-gray-900"
             >
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex-1">
-                  <div className="flex items-start gap-4 mb-1">
-                    <span className="flex items-center justify-center min-w-[3ch] aspect-square text-2xl font-semibold font-mono text-black dark:text-white tabular-nums">
+              <div className="relative aspect-[3/4] w-full shrink-0 md:w-[min(42%,220px)] lg:w-[240px] overflow-hidden bg-neutral-100 dark:bg-neutral-900 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-800">
+                {coverImage ? (
+                  <Image
+                    src={coverImage}
+                    alt={coverAlt}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    sizes="(max-width: 768px) 100vw, 240px"
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-neutral-100 to-neutral-200/80 dark:from-neutral-900 dark:to-neutral-950"
+                    aria-hidden
+                  >
+                    <span className="font-mono text-5xl font-semibold tabular-nums text-neutral-400 dark:text-neutral-600">
                       {String(chapter.order).padStart(2, '0')}
                     </span>
-                    <h2 className="text-2xl font-semibold text-black dark:text-white leading-tight">{chapter.title || `Chapter ${chapter.order}`}</h2>
                   </div>
-                  {hasSlop && (
-                    <div className="flex items-center gap-1 text-xs text-orange-600 dark:text-orange-400 mb-2">
-                      <AlertTriangle className="h-3 w-3" />
-                      <span>Contains AI-generated "slop" content</span>
-                    </div>
-                  )}
-                </div>
-                <Badge
-                  variant={chapter.status === 'published' ? 'default' : 'secondary'}
-                >
-                  {chapter.status}
-                </Badge>
+                )}
               </div>
-              
-              {(chapter.description || (chapter as any).context) && (
-                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
-                  {chapter.description || (chapter as any).context}
-                </p>
-              )}
-
-              {/* Keywords */}
-              {keywords.length > 0 && (
-                <div className="mb-3">
-                  <div className="flex items-center gap-1 mb-2">
-                    <Tag className="h-3 w-3 text-gray-400" />
-                    <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Keywords:</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1">
-                    {keywords.slice(0, 8).map((keyword: string, i: number) => (
-                      <span
-                        key={i}
-                        className="px-2 py-0.5 text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded"
-                      >
-                        {keyword}
+              <div className="flex flex-col flex-1 min-w-0 p-6">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1">
+                    <div className="flex items-start gap-4 mb-1">
+                      <span className="flex items-center justify-center min-w-[3ch] aspect-square text-2xl font-semibold font-mono text-black dark:text-white tabular-nums">
+                        {String(chapter.order).padStart(2, '0')}
                       </span>
-                    ))}
-                    {keywords.length > 8 && (
-                      <span className="px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400">
-                        +{keywords.length - 8} more
-                      </span>
+                      <h2 className="text-2xl font-semibold text-black dark:text-white leading-tight">{chapter.title || `Chapter ${chapter.order}`}</h2>
+                    </div>
+                    {hasSlop && (
+                      <div className="flex items-center gap-1 text-xs text-orange-600 dark:text-orange-400 mb-2">
+                        <AlertTriangle className="h-3 w-3" />
+                        <span>Contains AI-generated "slop" content</span>
+                      </div>
                     )}
                   </div>
+                  <Badge
+                    variant={chapter.status === 'published' ? 'default' : 'secondary'}
+                  >
+                    {chapter.status}
+                  </Badge>
                 </div>
-              )}
 
-              {/* Key Topics */}
-              {topics.length > 0 && (
-                <div className="mb-3">
-                  <div className="flex items-center gap-1 mb-2">
-                    <Sparkles className="h-3 w-3 text-gray-400" />
-                    <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Topics:</span>
+                {(chapter.description || (chapter as any).context) && (
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                    {chapter.description || (chapter as any).context}
+                  </p>
+                )}
+
+                {/* Keywords */}
+                {keywords.length > 0 && (
+                  <div className="mb-3">
+                    <div className="flex items-center gap-1 mb-2">
+                      <Tag className="h-3 w-3 text-gray-400" />
+                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Keywords:</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {keywords.slice(0, 8).map((keyword: string, i: number) => (
+                        <span
+                          key={i}
+                          className="px-2 py-0.5 text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded"
+                        >
+                          {keyword}
+                        </span>
+                      ))}
+                      {keywords.length > 8 && (
+                        <span className="px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400">
+                          +{keywords.length - 8} more
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    {topics.slice(0, 3).map((topic: string, i: number) => (
-                      <li key={i} className="flex items-start">
-                        <span className="mr-2">•</span>
-                        <span className="line-clamp-1">{topic}</span>
-                      </li>
-                    ))}
-                    {topics.length > 3 && (
-                      <li className="text-gray-500">+{topics.length - 3} more topics</li>
-                    )}
-                  </ul>
-                </div>
-              )}
+                )}
 
-              {/* Key Moments Preview */}
-              {keyMoments.length > 0 && (
-                <div className="mb-3 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs text-gray-600 dark:text-gray-400">
-                  <div className="font-semibold mb-1">Key Moments:</div>
-                  <div className="line-clamp-2">{keyMoments[0]}</div>
-                </div>
-              )}
+                {/* Key Topics */}
+                {topics.length > 0 && (
+                  <div className="mb-3">
+                    <div className="flex items-center gap-1 mb-2">
+                      <Sparkles className="h-3 w-3 text-gray-400" />
+                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Topics:</span>
+                    </div>
+                    <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                      {topics.slice(0, 3).map((topic: string, i: number) => (
+                        <li key={i} className="flex items-start">
+                          <span className="mr-2">•</span>
+                          <span className="line-clamp-1">{topic}</span>
+                        </li>
+                      ))}
+                      {topics.length > 3 && (
+                        <li className="text-gray-500">+{topics.length - 3} more topics</li>
+                      )}
+                    </ul>
+                  </div>
+                )}
 
-              <div className="flex gap-3 text-sm text-gray-600 dark:text-gray-400 pt-3 border-t border-gray-200 dark:border-gray-800">
-                <Link
-                  href={`/research/born-into-the-machine/${chapter.slug}`}
-                  className="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <Eye className="h-4 w-4" />
-                  Read
-                </Link>
-                {isLocalhost && (
+                {/* Key Moments Preview */}
+                {keyMoments.length > 0 && (
+                  <div className="mb-3 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs text-gray-600 dark:text-gray-400">
+                    <div className="font-semibold mb-1">Key Moments:</div>
+                    <div className="line-clamp-2">{keyMoments[0]}</div>
+                  </div>
+                )}
+
+                <div className="flex gap-3 text-sm text-gray-600 dark:text-gray-400 pt-3 mt-auto border-t border-gray-200 dark:border-gray-800">
                   <Link
-                    href={`/research/born-into-the-machine/${chapter.slug}/edit`}
+                    href={`/research/born-into-the-machine/${chapter.slug}`}
                     className="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <Edit className="h-4 w-4" />
-                    Edit
+                    <Eye className="h-4 w-4" />
+                    Read
                   </Link>
-                )}
-                {hasSlop && (
-                  <Link
-                    href={`/research/born-into-the-machine/${chapter.slug}-preview`}
-                    className="flex items-center gap-1 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <AlertTriangle className="h-4 w-4" />
-                    View Slop
-                  </Link>
-                )}
+                  {isLocalhost && (
+                    <Link
+                      href={`/research/born-into-the-machine/${chapter.slug}/edit`}
+                      className="flex items-center gap-1 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Edit className="h-4 w-4" />
+                      Edit
+                    </Link>
+                  )}
+                  {hasSlop && (
+                    <Link
+                      href={`/research/born-into-the-machine/${chapter.slug}-preview`}
+                      className="flex items-center gap-1 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <AlertTriangle className="h-4 w-4" />
+                      View Slop
+                    </Link>
+                  )}
+                </div>
               </div>
             </Link>
           );

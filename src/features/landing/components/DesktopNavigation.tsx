@@ -6,7 +6,11 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { WORKSHOP_NAV_PROGRAMS, WORKSHOP_NAV_SITE } from '@/config/site-navigation';
+import {
+  WORKSHOP_NAV_PROGRAMS,
+  WORKSHOP_NAV_SITE,
+  isWorkshopProgramLinkActive,
+} from '@/config/site-navigation';
 
 interface MenuItem {
   label: string;
@@ -105,7 +109,7 @@ export default function DesktopNavigation({
       <nav className="relative z-50 flex max-w-full flex-1 items-center" aria-label="Workshop navigation">
         <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:gap-x-7">
           {WORKSHOP_NAV_PROGRAMS.map((item) => (
-            <li key={item.path}>
+            <li key={`${item.label}:${item.path}`}>
               {item.external ? (
                 <a
                   href={item.path}
@@ -116,7 +120,10 @@ export default function DesktopNavigation({
                   {item.label}
                 </a>
               ) : (
-                <Link href={item.path} className={linkClass(pathname === item.path)}>
+                <Link
+                  href={item.path}
+                  className={linkClass(isWorkshopProgramLinkActive(pathname, item.path))}
+                >
                   {item.label}
                 </Link>
               )}
@@ -129,8 +136,11 @@ export default function DesktopNavigation({
             |
           </li>
           {WORKSHOP_NAV_SITE.map((item) => (
-            <li key={item.path}>
-              <Link href={item.path} className={linkClass(pathname === item.path)}>
+            <li key={`${item.label}:${item.path}`}>
+              <Link
+                href={item.path}
+                className={linkClass(isWorkshopProgramLinkActive(pathname, item.path))}
+              >
                 {item.label}
               </Link>
             </li>

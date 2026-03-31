@@ -39,6 +39,9 @@ export interface ChapterMetadata {
   draftSource?: string;
   draftWordCount?: number;
   draftLines?: number;
+  /** Public URL or path (e.g. Cloudinary or /images/...) for chapter cover art; portrait ~3:4 recommended */
+  coverImage?: string;
+  coverImageAlt?: string;
 }
 
 export interface BookMetadata {

@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { GlitchDisplayHero } from '@/components/common/GlitchDisplayHero'
 import { LEARN_AI_WORKSHOP_HERO_IMAGE } from '@/constants/learn-ai-workshop'
 import { mailtoLearnAi } from '@/lib/learn-ai-mailto'
 import { cn } from '@/lib/utils'
@@ -57,9 +58,15 @@ export function LearnAiHero() {
           <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-zinc-500 mb-4 sm:mb-5">
             Workshop · live performance
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-5xl xl:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 leading-[1.05] max-w-xl">
+          <GlitchDisplayHero
+            as="h1"
+            variant="large"
+            palette="zinc"
+            className="mt-0 min-h-0 mb-0"
+            containerClassName="max-w-xl mx-0"
+          >
             Learn AI Without Losing Yourself
-          </h1>
+          </GlitchDisplayHero>
           <p className="mt-5 sm:mt-6 text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 font-light max-w-xl leading-snug">
             A live workshop-performance on practical AI, burnout culture, and staying human in the loop.
           </p>

@@ -91,6 +91,8 @@ export async function readBookMetadata() {
           draftSource: ch.draftSource,
           draftWordCount: ch.draftWordCount,
           draftLines: ch.draftLines,
+          coverImage: ch.coverImage,
+          coverImageAlt: ch.coverImageAlt,
         })),
         created: outline.created || new Date().toISOString(),
         lastModified: outline.lastModified || new Date().toISOString(),

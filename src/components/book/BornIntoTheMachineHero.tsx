@@ -1,32 +1,34 @@
 'use client';
 
-import { useTheme } from '@/contexts/ThemeContext';
-import { GlitchText } from '@/components/common/GlitchText';
+import { GlitchDisplayHero, type GlitchDisplayHeroProps } from '@/components/common/GlitchDisplayHero';
 
-interface BornIntoTheMachineHeroProps {
+export type BornIntoTheMachineHeroProps = {
   title?: string;
-}
+  variant?: GlitchDisplayHeroProps['variant'];
+  palette?: GlitchDisplayHeroProps['palette'];
+  className?: string;
+  containerClassName?: string;
+  titleClassName?: string;
+};
 
-export function BornIntoTheMachineHero({ title = 'Born into the Machine' }: BornIntoTheMachineHeroProps) {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
+/** Book / chapter hero using the shared glitch display treatment. */
+export function BornIntoTheMachineHero({
+  title = 'Born into the Machine',
+  variant = 'massive',
+  palette = 'gray',
+  className,
+  containerClassName,
+  titleClassName,
+}: BornIntoTheMachineHeroProps) {
   return (
-    <section
-      className={`mt-[60px] min-h-[120px] flex flex-col justify-center mb-12 sm:mb-16 ${
-        isDark ? 'text-white' : 'text-gray-900'
-      }`}
+    <GlitchDisplayHero
+      variant={variant}
+      palette={palette}
+      className={className}
+      containerClassName={containerClassName}
+      titleClassName={titleClassName}
     >
-      <div className="w-full max-w-7xl mx-auto">
-        <GlitchText
-          as="h1"
-          className={`text-5xl sm:text-7xl md:text-8xl lg:text-[140px] xl:text-[200px] font-bold tracking-tight leading-[0.9] ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}
-        >
-          {title}
-        </GlitchText>
-      </div>
-    </section>
+      {title}
+    </GlitchDisplayHero>
   );
 }

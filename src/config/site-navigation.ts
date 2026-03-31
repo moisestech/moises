@@ -38,10 +38,24 @@ export const WORKSHOP_NAV_PROGRAMS: SiteNavItem[] = [
   { label: 'AI agents', path: '/workshop/the-art-of-ai-agents', enabled: true },
   {
     label: 'Learn AI',
-    path: '/workshop/the-art-of-ai-agents',
+    path: '/workshop/learn-ai-without-losing-yourself',
     enabled: true,
   },
 ]
+
+/** Active state for workshop header links (exact match or nested under the same program/research tree). */
+export function isWorkshopProgramLinkActive(pathname: string | null, programPath: string): boolean {
+  if (!pathname) return false
+  if (programPath === '/workshops') return pathname === '/workshops'
+  if (pathname === programPath) return true
+  if (programPath.startsWith('/workshop/')) {
+    return pathname.startsWith(`${programPath}/`)
+  }
+  if (programPath.startsWith('/research/')) {
+    return pathname.startsWith(`${programPath}/`)
+  }
+  return false
+}
 
 /** Exit ramp back to the main site (research + contact) */
 export const WORKSHOP_NAV_SITE: SiteNavItem[] = [

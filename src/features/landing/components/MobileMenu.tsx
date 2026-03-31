@@ -99,7 +99,7 @@ export default function MobileMenu({ menuItems, isOpen, onToggle, workshopMode }
                   </p>
                   <ul className="space-y-5">
                     {WORKSHOP_NAV_PROGRAMS.map((item) => (
-                      <li key={item.path}>
+                      <li key={`${item.label}:${item.path}`}>
                         {item.external ? (
                           <a
                             href={item.path}
@@ -136,7 +136,7 @@ export default function MobileMenu({ menuItems, isOpen, onToggle, workshopMode }
                   </p>
                   <ul className="space-y-5">
                     {WORKSHOP_NAV_SITE.map((item) => (
-                      <li key={item.path}>
+                      <li key={`${item.label}:${item.path}`}>
                         <Link
                           href={item.path}
                           onClick={() => onToggle()}
