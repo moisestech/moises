@@ -43,6 +43,12 @@ const RELATED = [
   },
 ] as const
 
+const WAVEMAKER_IMPLEMENTATION_IMAGE =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1775098478/art/moisestech-website/research/broken-acceleration/broken-acceleration-who-will-you-make-it-happen-apr1st-wavemaker-2026_h9fixj.png'
+
+const BITM_WRITING_IMAGE =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1775099574/art/moisestech-website/research/broken-acceleration/broken-acceleration-writing-apr1st-wavemaker-2026_xrg993.png'
+
 export default function BrokenAccelerationPageClient() {
   const item = research.broken_acceleration
   const hero = item.images[0]
@@ -149,6 +155,64 @@ export default function BrokenAccelerationPageClient() {
         </div>
       </section>
 
+      <section className="mb-14" aria-labelledby="broken-acceleration-how-heading">
+        <p className="text-sm uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">
+          Broken Acceleration · Slowing in the Age of Continuity
+        </p>
+        <h2
+          id="broken-acceleration-how-heading"
+          className="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
+        >
+          How will you make it happen?
+        </h2>
+        <div className="w-full max-w-2xl mx-auto mb-8 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 border border-gray-200/80 dark:border-gray-700/80">
+          <div className="relative aspect-[4/3] w-full">
+            <Image
+              src={WAVEMAKER_IMPLEMENTATION_IMAGE}
+              alt="Broken Acceleration — WaveMaker implementation summary: fabrication, public activation, and site strategy"
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 42rem"
+            />
+          </div>
+        </div>
+        <div className="prose prose-lg dark:prose-invert max-w-none">
+          <p>
+            I will realize <em>Broken Acceleration</em> as a disciplined fabrication and public presentation project
+            designed for reliability, safety, and strong visual impact. The sculpture consists of a full-size reflective
+            STOP sign mounted to a self-balancing two-wheel base, plus one asymmetrical aluminum claw arm and a visible
+            cable. The work will remain in a powered balancing state and may include subtle orientation shifts or very
+            low-speed remote repositioning within a bounded pedestrian zone, but it will not depend on full autonomy or
+            theatrical robotic performance.
+          </p>
+          <p>
+            The technical strategy is intentionally lean. The mobility system will be sourced from an off-the-shelf
+            self-balancing platform that supports controlled riderless operation, allowing the sculpture&rsquo;s
+            movement to remain slow, bounded, and easy to supervise. Fabrication will prioritize structural stability and
+            a low center of mass through a custom mounting plate, lightweight pole assembly, robust brackets, and
+            ballast. The claw arm will be built as an aluminum armature with a clamp-like end effector and visible
+            cabling. If testing suggests that a static arm is more reliable than a moving one, the work will remain
+            static without losing its conceptual force.
+          </p>
+          <p>
+            The project is being developed for free public activation in a publicly accessible, nontraditional
+            Miami-Dade site such as a pedestrian plaza, threshold courtyard, or circulation-oriented open area. Current
+            venue outreach is focused on mobility- and community-oriented sites that can host temporary public
+            gatherings without roadway closures. This site strategy keeps the project aligned with WaveMaker&rsquo;s
+            public-access goals while avoiding the heavier permit requirements associated with streets and intersections.
+          </p>
+          <p>
+            Public sharing will take the form of at least one announced Slowing Session: a free in-person activation
+            where the sculpture balances in place, occasionally repositions within a marked perimeter, and functions as a
+            public prompt. Viewers will be invited to respond to a simple question, <em>What should stop here?</em>{' '}
+            through conversation and short written reflections. Each activation will include an operator, a spotter,
+            clear artwork labeling, boundary markers, and an immediate power-down procedure. This scope keeps the work
+            achievable within the grant budget while preserving the conceptual tension between civic instruction,
+            technological acceleration, and the shrinking possibility of pause.
+          </p>
+        </div>
+      </section>
+
       <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden mb-4 bg-gray-100 dark:bg-gray-900">
         <Image
           src={plaza.url}
@@ -200,6 +264,52 @@ export default function BrokenAccelerationPageClient() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="mb-14 border-t border-gray-200 dark:border-gray-700 pt-10" aria-labelledby="broken-acceleration-bitm-heading">
+        <h2
+          id="broken-acceleration-bitm-heading"
+          className="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
+        >
+          From Born into the Machine
+        </h2>
+        <div className="w-full max-w-2xl mx-auto mb-8 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 border border-gray-200/80 dark:border-gray-700/80">
+          <div className="relative aspect-[4/3] w-full">
+            <Image
+              src={BITM_WRITING_IMAGE}
+              alt="Broken Acceleration — excerpt on civic objects, continuity, and Born into the Machine research line"
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 42rem"
+            />
+          </div>
+        </div>
+        <div className="prose prose-lg dark:prose-invert max-w-none">
+          <p>
+            I am interested in public objects that continue to operate even when the world they belong to has changed.
+            The stop sign is one of them. It is a durable symbol of shared civic language, but it now exists inside
+            environments increasingly shaped by automation, prediction, and machine-managed movement. In that sense,{' '}
+            <em>Broken Acceleration</em> is not only about traffic or mobility. It is about a historical shift in how
+            stopping itself is understood.
+          </p>
+          <p>
+            The work imagines a civic object caught between two regimes: one based on collective instruction, and
+            another based on continuous correction. Mounted on a self-balancing base, the sign can only remain upright by
+            staying in motion. Its command is clear, but its condition is contradictory. It asks for interruption while
+            embodying the inability to fully stop.
+          </p>
+          <p>
+            This tension connects to a broader line of thought I&rsquo;ve been developing in{' '}
+            <Link href="/research/born-into-the-machine" className="underline underline-offset-4 hover:no-underline">
+              Born into the Machine
+            </Link>
+            : how human life is reorganized by systems that value continuity, optimization, and responsiveness above
+            pause. I&rsquo;m interested in the point where a familiar object becomes strange enough to reveal the
+            ideology inside it. Here, the stop sign becomes less a directive than a question: what can still be
+            interrupted, and who gets to decide?
+          </p>
+          <p>Art, for me, is not a way to solve that question. It is a way to make its pressure felt in public.</p>
+        </div>
       </section>
 
       <section className="border-t border-gray-200 dark:border-gray-700 pt-10">
