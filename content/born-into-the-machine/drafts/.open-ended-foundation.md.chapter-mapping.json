@@ -1,0 +1,1193 @@
+{
+  "filename": "open-ended-foundation.md",
+  "analyzed": "2025-12-29T00:53:48.578Z",
+  "mapping": {
+    "block-1": {
+      "chapter": null,
+      "confidence": "low",
+      "score": 0
+    },
+    "block-2": {
+      "chapter": {
+        "order": 2,
+        "slug": "specter-capitalist-realism",
+        "title": "The Specter of Capitalist Realism",
+        "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+        "keywords": [
+          "capitalist realism",
+          "mark fisher",
+          "future",
+          "imagination",
+          "depressive hedonia"
+        ],
+        "thinkers": [
+          "Mark Fisher"
+        ],
+        "artworks": [],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 4,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 2,
+            "slug": "specter-capitalist-realism",
+            "title": "The Specter of Capitalist Realism",
+            "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+            "keywords": [
+              "capitalist realism",
+              "mark fisher",
+              "future",
+              "imagination",
+              "depressive hedonia"
+            ],
+            "thinkers": [
+              "Mark Fisher"
+            ],
+            "artworks": [],
+            "status": "draft"
+          },
+          "score": 4
+        },
+        {
+          "chapter": {
+            "order": 5,
+            "slug": "art-language-beyond-words",
+            "title": "Art as a Language Beyond Words",
+            "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+            "keywords": [
+              "art power",
+              "visual",
+              "experiential",
+              "duchamp",
+              "sol lewitt",
+              "nano banana",
+              "sora"
+            ],
+            "thinkers": [
+              "Boris Groys"
+            ],
+            "artworks": [
+              "Duchamp/LeWitt/Nano Banana"
+            ],
+            "status": "draft"
+          },
+          "score": 3
+        },
+        {
+          "chapter": {
+            "order": 4,
+            "slug": "intelligence-infrastructure",
+            "title": "Intelligence as Infrastructure",
+            "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+            "keywords": [
+              "intelligence as commodity",
+              "infrastructure",
+              "utility",
+              "prompt economics",
+              "cognitive",
+              "api",
+              "tokens"
+            ],
+            "thinkers": [
+              "Geoffrey Hinton",
+              "Shoshana Zuboff",
+              "McKenzie Wark"
+            ],
+            "artworks": [
+              "AI24",
+              "Smart Shoppers"
+            ],
+            "status": "draft"
+          },
+          "score": 1
+        }
+      ]
+    },
+    "block-3": {
+      "chapter": {
+        "order": 4,
+        "slug": "intelligence-infrastructure",
+        "title": "Intelligence as Infrastructure",
+        "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+        "keywords": [
+          "intelligence as commodity",
+          "infrastructure",
+          "utility",
+          "prompt economics",
+          "cognitive",
+          "api",
+          "tokens"
+        ],
+        "thinkers": [
+          "Geoffrey Hinton",
+          "Shoshana Zuboff",
+          "McKenzie Wark"
+        ],
+        "artworks": [
+          "AI24",
+          "Smart Shoppers"
+        ],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 17
+    },
+    "block-4": {
+      "chapter": {
+        "order": 3,
+        "slug": "burnout-velocity-change",
+        "title": "Burnout and the Velocity of Change",
+        "context": "Byung-Chul Han's \"Burnout Society\" and how we can use awareness of the system's speed to find autonomy.",
+        "keywords": [
+          "burnout",
+          "velocity",
+          "acceleration",
+          "byung-chul han",
+          "speed",
+          "hinton",
+          "autonomy"
+        ],
+        "thinkers": [
+          "Byung-Chul Han",
+          "Geoffrey Hinton"
+        ],
+        "artworks": [
+          "Doomscrolling Treadmill"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 19,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 3,
+            "slug": "burnout-velocity-change",
+            "title": "Burnout and the Velocity of Change",
+            "context": "Byung-Chul Han's \"Burnout Society\" and how we can use awareness of the system's speed to find autonomy.",
+            "keywords": [
+              "burnout",
+              "velocity",
+              "acceleration",
+              "byung-chul han",
+              "speed",
+              "hinton",
+              "autonomy"
+            ],
+            "thinkers": [
+              "Byung-Chul Han",
+              "Geoffrey Hinton"
+            ],
+            "artworks": [
+              "Doomscrolling Treadmill"
+            ],
+            "status": "draft"
+          },
+          "score": 19
+        },
+        {
+          "chapter": {
+            "order": 4,
+            "slug": "intelligence-infrastructure",
+            "title": "Intelligence as Infrastructure",
+            "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+            "keywords": [
+              "intelligence as commodity",
+              "infrastructure",
+              "utility",
+              "prompt economics",
+              "cognitive",
+              "api",
+              "tokens"
+            ],
+            "thinkers": [
+              "Geoffrey Hinton",
+              "Shoshana Zuboff",
+              "McKenzie Wark"
+            ],
+            "artworks": [
+              "AI24",
+              "Smart Shoppers"
+            ],
+            "status": "draft"
+          },
+          "score": 17
+        },
+        {
+          "chapter": {
+            "order": 6,
+            "slug": "vector-identity-automated-world",
+            "title": "The Vector of Identity in an Automated World",
+            "context": "How full automation and AI shift our sense of identity and what that means for creativity.",
+            "keywords": [
+              "identity",
+              "automation",
+              "vectoral",
+              "miami",
+              "stack",
+              "selfhood",
+              "creativity"
+            ],
+            "thinkers": [
+              "McKenzie Wark",
+              "Ruha Benjamin"
+            ],
+            "artworks": [
+              "Vectoral Miami",
+              "Smart Map"
+            ],
+            "status": "draft"
+          },
+          "score": 10
+        }
+      ]
+    },
+    "block-5": {
+      "chapter": {
+        "order": 4,
+        "slug": "intelligence-infrastructure",
+        "title": "Intelligence as Infrastructure",
+        "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+        "keywords": [
+          "intelligence as commodity",
+          "infrastructure",
+          "utility",
+          "prompt economics",
+          "cognitive",
+          "api",
+          "tokens"
+        ],
+        "thinkers": [
+          "Geoffrey Hinton",
+          "Shoshana Zuboff",
+          "McKenzie Wark"
+        ],
+        "artworks": [
+          "AI24",
+          "Smart Shoppers"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 12,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 4,
+            "slug": "intelligence-infrastructure",
+            "title": "Intelligence as Infrastructure",
+            "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+            "keywords": [
+              "intelligence as commodity",
+              "infrastructure",
+              "utility",
+              "prompt economics",
+              "cognitive",
+              "api",
+              "tokens"
+            ],
+            "thinkers": [
+              "Geoffrey Hinton",
+              "Shoshana Zuboff",
+              "McKenzie Wark"
+            ],
+            "artworks": [
+              "AI24",
+              "Smart Shoppers"
+            ],
+            "status": "draft"
+          },
+          "score": 12
+        },
+        {
+          "chapter": {
+            "order": 3,
+            "slug": "burnout-velocity-change",
+            "title": "Burnout and the Velocity of Change",
+            "context": "Byung-Chul Han's \"Burnout Society\" and how we can use awareness of the system's speed to find autonomy.",
+            "keywords": [
+              "burnout",
+              "velocity",
+              "acceleration",
+              "byung-chul han",
+              "speed",
+              "hinton",
+              "autonomy"
+            ],
+            "thinkers": [
+              "Byung-Chul Han",
+              "Geoffrey Hinton"
+            ],
+            "artworks": [
+              "Doomscrolling Treadmill"
+            ],
+            "status": "draft"
+          },
+          "score": 10
+        },
+        {
+          "chapter": {
+            "order": 9,
+            "slug": "essays-visual-essays",
+            "title": "From Essays to Visual Essays",
+            "context": "The process of translating these ideas into video or podcast form to reach a broader audience.",
+            "keywords": [
+              "video essay",
+              "podcast",
+              "translation",
+              "visual",
+              "audio",
+              "format"
+            ],
+            "thinkers": [],
+            "artworks": [],
+            "status": "draft"
+          },
+          "score": 7
+        }
+      ]
+    },
+    "block-6": {
+      "chapter": {
+        "order": 5,
+        "slug": "art-language-beyond-words",
+        "title": "Art as a Language Beyond Words",
+        "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+        "keywords": [
+          "art power",
+          "visual",
+          "experiential",
+          "duchamp",
+          "sol lewitt",
+          "nano banana",
+          "sora"
+        ],
+        "thinkers": [
+          "Boris Groys"
+        ],
+        "artworks": [
+          "Duchamp/LeWitt/Nano Banana"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 6,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 5,
+            "slug": "art-language-beyond-words",
+            "title": "Art as a Language Beyond Words",
+            "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+            "keywords": [
+              "art power",
+              "visual",
+              "experiential",
+              "duchamp",
+              "sol lewitt",
+              "nano banana",
+              "sora"
+            ],
+            "thinkers": [
+              "Boris Groys"
+            ],
+            "artworks": [
+              "Duchamp/LeWitt/Nano Banana"
+            ],
+            "status": "draft"
+          },
+          "score": 6
+        },
+        {
+          "chapter": {
+            "order": 4,
+            "slug": "intelligence-infrastructure",
+            "title": "Intelligence as Infrastructure",
+            "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+            "keywords": [
+              "intelligence as commodity",
+              "infrastructure",
+              "utility",
+              "prompt economics",
+              "cognitive",
+              "api",
+              "tokens"
+            ],
+            "thinkers": [
+              "Geoffrey Hinton",
+              "Shoshana Zuboff",
+              "McKenzie Wark"
+            ],
+            "artworks": [
+              "AI24",
+              "Smart Shoppers"
+            ],
+            "status": "draft"
+          },
+          "score": 5
+        },
+        {
+          "chapter": {
+            "order": 2,
+            "slug": "specter-capitalist-realism",
+            "title": "The Specter of Capitalist Realism",
+            "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+            "keywords": [
+              "capitalist realism",
+              "mark fisher",
+              "future",
+              "imagination",
+              "depressive hedonia"
+            ],
+            "thinkers": [
+              "Mark Fisher"
+            ],
+            "artworks": [],
+            "status": "draft"
+          },
+          "score": 4
+        }
+      ]
+    },
+    "block-7": {
+      "chapter": {
+        "order": 4,
+        "slug": "intelligence-infrastructure",
+        "title": "Intelligence as Infrastructure",
+        "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+        "keywords": [
+          "intelligence as commodity",
+          "infrastructure",
+          "utility",
+          "prompt economics",
+          "cognitive",
+          "api",
+          "tokens"
+        ],
+        "thinkers": [
+          "Geoffrey Hinton",
+          "Shoshana Zuboff",
+          "McKenzie Wark"
+        ],
+        "artworks": [
+          "AI24",
+          "Smart Shoppers"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 16,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 4,
+            "slug": "intelligence-infrastructure",
+            "title": "Intelligence as Infrastructure",
+            "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+            "keywords": [
+              "intelligence as commodity",
+              "infrastructure",
+              "utility",
+              "prompt economics",
+              "cognitive",
+              "api",
+              "tokens"
+            ],
+            "thinkers": [
+              "Geoffrey Hinton",
+              "Shoshana Zuboff",
+              "McKenzie Wark"
+            ],
+            "artworks": [
+              "AI24",
+              "Smart Shoppers"
+            ],
+            "status": "draft"
+          },
+          "score": 16
+        },
+        {
+          "chapter": {
+            "order": 5,
+            "slug": "art-language-beyond-words",
+            "title": "Art as a Language Beyond Words",
+            "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+            "keywords": [
+              "art power",
+              "visual",
+              "experiential",
+              "duchamp",
+              "sol lewitt",
+              "nano banana",
+              "sora"
+            ],
+            "thinkers": [
+              "Boris Groys"
+            ],
+            "artworks": [
+              "Duchamp/LeWitt/Nano Banana"
+            ],
+            "status": "draft"
+          },
+          "score": 11
+        },
+        {
+          "chapter": {
+            "order": 2,
+            "slug": "specter-capitalist-realism",
+            "title": "The Specter of Capitalist Realism",
+            "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+            "keywords": [
+              "capitalist realism",
+              "mark fisher",
+              "future",
+              "imagination",
+              "depressive hedonia"
+            ],
+            "thinkers": [
+              "Mark Fisher"
+            ],
+            "artworks": [],
+            "status": "draft"
+          },
+          "score": 10
+        }
+      ]
+    },
+    "block-8": {
+      "chapter": {
+        "order": 5,
+        "slug": "art-language-beyond-words",
+        "title": "Art as a Language Beyond Words",
+        "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+        "keywords": [
+          "art power",
+          "visual",
+          "experiential",
+          "duchamp",
+          "sol lewitt",
+          "nano banana",
+          "sora"
+        ],
+        "thinkers": [
+          "Boris Groys"
+        ],
+        "artworks": [
+          "Duchamp/LeWitt/Nano Banana"
+        ],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 12
+    },
+    "block-9": {
+      "chapter": {
+        "order": 5,
+        "slug": "art-language-beyond-words",
+        "title": "Art as a Language Beyond Words",
+        "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+        "keywords": [
+          "art power",
+          "visual",
+          "experiential",
+          "duchamp",
+          "sol lewitt",
+          "nano banana",
+          "sora"
+        ],
+        "thinkers": [
+          "Boris Groys"
+        ],
+        "artworks": [
+          "Duchamp/LeWitt/Nano Banana"
+        ],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 13
+    },
+    "block-10": {
+      "chapter": {
+        "order": 5,
+        "slug": "art-language-beyond-words",
+        "title": "Art as a Language Beyond Words",
+        "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+        "keywords": [
+          "art power",
+          "visual",
+          "experiential",
+          "duchamp",
+          "sol lewitt",
+          "nano banana",
+          "sora"
+        ],
+        "thinkers": [
+          "Boris Groys"
+        ],
+        "artworks": [
+          "Duchamp/LeWitt/Nano Banana"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 12,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 5,
+            "slug": "art-language-beyond-words",
+            "title": "Art as a Language Beyond Words",
+            "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+            "keywords": [
+              "art power",
+              "visual",
+              "experiential",
+              "duchamp",
+              "sol lewitt",
+              "nano banana",
+              "sora"
+            ],
+            "thinkers": [
+              "Boris Groys"
+            ],
+            "artworks": [
+              "Duchamp/LeWitt/Nano Banana"
+            ],
+            "status": "draft"
+          },
+          "score": 12
+        },
+        {
+          "chapter": {
+            "order": 6,
+            "slug": "vector-identity-automated-world",
+            "title": "The Vector of Identity in an Automated World",
+            "context": "How full automation and AI shift our sense of identity and what that means for creativity.",
+            "keywords": [
+              "identity",
+              "automation",
+              "vectoral",
+              "miami",
+              "stack",
+              "selfhood",
+              "creativity"
+            ],
+            "thinkers": [
+              "McKenzie Wark",
+              "Ruha Benjamin"
+            ],
+            "artworks": [
+              "Vectoral Miami",
+              "Smart Map"
+            ],
+            "status": "draft"
+          },
+          "score": 9
+        },
+        {
+          "chapter": {
+            "order": 2,
+            "slug": "specter-capitalist-realism",
+            "title": "The Specter of Capitalist Realism",
+            "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+            "keywords": [
+              "capitalist realism",
+              "mark fisher",
+              "future",
+              "imagination",
+              "depressive hedonia"
+            ],
+            "thinkers": [
+              "Mark Fisher"
+            ],
+            "artworks": [],
+            "status": "draft"
+          },
+          "score": 6
+        }
+      ]
+    },
+    "block-11": {
+      "chapter": {
+        "order": 2,
+        "slug": "specter-capitalist-realism",
+        "title": "The Specter of Capitalist Realism",
+        "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+        "keywords": [
+          "capitalist realism",
+          "mark fisher",
+          "future",
+          "imagination",
+          "depressive hedonia"
+        ],
+        "thinkers": [
+          "Mark Fisher"
+        ],
+        "artworks": [],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 6
+    },
+    "block-12": {
+      "chapter": {
+        "order": 4,
+        "slug": "intelligence-infrastructure",
+        "title": "Intelligence as Infrastructure",
+        "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+        "keywords": [
+          "intelligence as commodity",
+          "infrastructure",
+          "utility",
+          "prompt economics",
+          "cognitive",
+          "api",
+          "tokens"
+        ],
+        "thinkers": [
+          "Geoffrey Hinton",
+          "Shoshana Zuboff",
+          "McKenzie Wark"
+        ],
+        "artworks": [
+          "AI24",
+          "Smart Shoppers"
+        ],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 20
+    },
+    "block-13": {
+      "chapter": {
+        "order": 4,
+        "slug": "intelligence-infrastructure",
+        "title": "Intelligence as Infrastructure",
+        "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+        "keywords": [
+          "intelligence as commodity",
+          "infrastructure",
+          "utility",
+          "prompt economics",
+          "cognitive",
+          "api",
+          "tokens"
+        ],
+        "thinkers": [
+          "Geoffrey Hinton",
+          "Shoshana Zuboff",
+          "McKenzie Wark"
+        ],
+        "artworks": [
+          "AI24",
+          "Smart Shoppers"
+        ],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 20
+    },
+    "block-14": {
+      "chapter": {
+        "order": 9,
+        "slug": "essays-visual-essays",
+        "title": "From Essays to Visual Essays",
+        "context": "The process of translating these ideas into video or podcast form to reach a broader audience.",
+        "keywords": [
+          "video essay",
+          "podcast",
+          "translation",
+          "visual",
+          "audio",
+          "format"
+        ],
+        "thinkers": [],
+        "artworks": [],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 5
+    },
+    "block-15": {
+      "chapter": {
+        "order": 10,
+        "slug": "conclusion-empowerment-chaos",
+        "title": "Conclusion: Empowerment Through the Chaos",
+        "context": "Bringing it all together and leaving the reader with a sense of how to move forward creatively and critically.",
+        "keywords": [
+          "conclusion",
+          "empowerment",
+          "chaos",
+          "forward",
+          "creatively",
+          "critically",
+          "summary"
+        ],
+        "thinkers": [],
+        "artworks": [],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 10
+    },
+    "block-16": {
+      "chapter": {
+        "order": 9,
+        "slug": "essays-visual-essays",
+        "title": "From Essays to Visual Essays",
+        "context": "The process of translating these ideas into video or podcast form to reach a broader audience.",
+        "keywords": [
+          "video essay",
+          "podcast",
+          "translation",
+          "visual",
+          "audio",
+          "format"
+        ],
+        "thinkers": [],
+        "artworks": [],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 7
+    },
+    "block-17": {
+      "chapter": {
+        "order": 5,
+        "slug": "art-language-beyond-words",
+        "title": "Art as a Language Beyond Words",
+        "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+        "keywords": [
+          "art power",
+          "visual",
+          "experiential",
+          "duchamp",
+          "sol lewitt",
+          "nano banana",
+          "sora"
+        ],
+        "thinkers": [
+          "Boris Groys"
+        ],
+        "artworks": [
+          "Duchamp/LeWitt/Nano Banana"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 1,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 5,
+            "slug": "art-language-beyond-words",
+            "title": "Art as a Language Beyond Words",
+            "context": "Drawing on \"Art Power\" and how visual and experiential art can convey what books or language can't.",
+            "keywords": [
+              "art power",
+              "visual",
+              "experiential",
+              "duchamp",
+              "sol lewitt",
+              "nano banana",
+              "sora"
+            ],
+            "thinkers": [
+              "Boris Groys"
+            ],
+            "artworks": [
+              "Duchamp/LeWitt/Nano Banana"
+            ],
+            "status": "draft"
+          },
+          "score": 1
+        },
+        {
+          "chapter": {
+            "order": 9,
+            "slug": "essays-visual-essays",
+            "title": "From Essays to Visual Essays",
+            "context": "The process of translating these ideas into video or podcast form to reach a broader audience.",
+            "keywords": [
+              "video essay",
+              "podcast",
+              "translation",
+              "visual",
+              "audio",
+              "format"
+            ],
+            "thinkers": [],
+            "artworks": [],
+            "status": "draft"
+          },
+          "score": 1
+        }
+      ]
+    },
+    "block-18": {
+      "chapter": {
+        "order": 2,
+        "slug": "specter-capitalist-realism",
+        "title": "The Specter of Capitalist Realism",
+        "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+        "keywords": [
+          "capitalist realism",
+          "mark fisher",
+          "future",
+          "imagination",
+          "depressive hedonia"
+        ],
+        "thinkers": [
+          "Mark Fisher"
+        ],
+        "artworks": [],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 19
+    },
+    "block-19": {
+      "chapter": {
+        "order": 3,
+        "slug": "burnout-velocity-change",
+        "title": "Burnout and the Velocity of Change",
+        "context": "Byung-Chul Han's \"Burnout Society\" and how we can use awareness of the system's speed to find autonomy.",
+        "keywords": [
+          "burnout",
+          "velocity",
+          "acceleration",
+          "byung-chul han",
+          "speed",
+          "hinton",
+          "autonomy"
+        ],
+        "thinkers": [
+          "Byung-Chul Han",
+          "Geoffrey Hinton"
+        ],
+        "artworks": [
+          "Doomscrolling Treadmill"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 22,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 3,
+            "slug": "burnout-velocity-change",
+            "title": "Burnout and the Velocity of Change",
+            "context": "Byung-Chul Han's \"Burnout Society\" and how we can use awareness of the system's speed to find autonomy.",
+            "keywords": [
+              "burnout",
+              "velocity",
+              "acceleration",
+              "byung-chul han",
+              "speed",
+              "hinton",
+              "autonomy"
+            ],
+            "thinkers": [
+              "Byung-Chul Han",
+              "Geoffrey Hinton"
+            ],
+            "artworks": [
+              "Doomscrolling Treadmill"
+            ],
+            "status": "draft"
+          },
+          "score": 22
+        },
+        {
+          "chapter": {
+            "order": 4,
+            "slug": "intelligence-infrastructure",
+            "title": "Intelligence as Infrastructure",
+            "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+            "keywords": [
+              "intelligence as commodity",
+              "infrastructure",
+              "utility",
+              "prompt economics",
+              "cognitive",
+              "api",
+              "tokens"
+            ],
+            "thinkers": [
+              "Geoffrey Hinton",
+              "Shoshana Zuboff",
+              "McKenzie Wark"
+            ],
+            "artworks": [
+              "AI24",
+              "Smart Shoppers"
+            ],
+            "status": "draft"
+          },
+          "score": 22
+        },
+        {
+          "chapter": {
+            "order": 2,
+            "slug": "specter-capitalist-realism",
+            "title": "The Specter of Capitalist Realism",
+            "context": "How Mark Fisher's ideas of capitalist realism frame the world we're in and why imagining a future is so hard.",
+            "keywords": [
+              "capitalist realism",
+              "mark fisher",
+              "future",
+              "imagination",
+              "depressive hedonia"
+            ],
+            "thinkers": [
+              "Mark Fisher"
+            ],
+            "artworks": [],
+            "status": "draft"
+          },
+          "score": 18
+        }
+      ]
+    }
+  },
+  "byChapter": {
+    "introduction-embracing-ai-k-hole": {
+      "blocks": []
+    },
+    "specter-capitalist-realism": {
+      "blocks": [
+        {
+          "blockId": "block-2",
+          "confidence": "medium",
+          "score": 4
+        },
+        {
+          "blockId": "block-11",
+          "confidence": "high",
+          "score": 6
+        },
+        {
+          "blockId": "block-18",
+          "confidence": "high",
+          "score": 19
+        }
+      ]
+    },
+    "burnout-velocity-change": {
+      "blocks": [
+        {
+          "blockId": "block-4",
+          "confidence": "medium",
+          "score": 19
+        },
+        {
+          "blockId": "block-19",
+          "confidence": "medium",
+          "score": 22
+        }
+      ]
+    },
+    "intelligence-infrastructure": {
+      "blocks": [
+        {
+          "blockId": "block-3",
+          "confidence": "high",
+          "score": 17
+        },
+        {
+          "blockId": "block-5",
+          "confidence": "medium",
+          "score": 12
+        },
+        {
+          "blockId": "block-7",
+          "confidence": "medium",
+          "score": 16
+        },
+        {
+          "blockId": "block-12",
+          "confidence": "high",
+          "score": 20
+        },
+        {
+          "blockId": "block-13",
+          "confidence": "high",
+          "score": 20
+        }
+      ]
+    },
+    "art-language-beyond-words": {
+      "blocks": [
+        {
+          "blockId": "block-6",
+          "confidence": "medium",
+          "score": 6
+        },
+        {
+          "blockId": "block-8",
+          "confidence": "high",
+          "score": 12
+        },
+        {
+          "blockId": "block-9",
+          "confidence": "high",
+          "score": 13
+        },
+        {
+          "blockId": "block-10",
+          "confidence": "medium",
+          "score": 12
+        },
+        {
+          "blockId": "block-17",
+          "confidence": "medium",
+          "score": 1
+        }
+      ]
+    },
+    "vector-identity-automated-world": {
+      "blocks": []
+    },
+    "toolkit-autonomy": {
+      "blocks": []
+    },
+    "ai-public-sphere": {
+      "blocks": []
+    },
+    "essays-visual-essays": {
+      "blocks": [
+        {
+          "blockId": "block-14",
+          "confidence": "high",
+          "score": 5
+        },
+        {
+          "blockId": "block-16",
+          "confidence": "high",
+          "score": 7
+        }
+      ]
+    },
+    "conclusion-empowerment-chaos": {
+      "blocks": [
+        {
+          "blockId": "block-15",
+          "confidence": "high",
+          "score": 10
+        }
+      ]
+    },
+    "unmapped": {
+      "blocks": [
+        {
+          "blockId": "block-1",
+          "confidence": "low",
+          "score": 0
+        }
+      ]
+    }
+  }
+}

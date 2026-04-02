@@ -8,22 +8,29 @@ const ease = [0.22, 1, 0.36, 1] as const
 export function LearnAiReveal({
   children,
   className,
+  id,
   as: Tag = 'div',
 }: {
   children: React.ReactNode
   className?: string
+  id?: string
   as?: 'div' | 'section'
 }) {
   const reduce = useReducedMotion() ?? false
 
   if (reduce) {
-    return <Tag className={className}>{children}</Tag>
+    return (
+      <Tag id={id} className={className}>
+        {children}
+      </Tag>
+    )
   }
 
   const MotionTag = Tag === 'section' ? motion.section : motion.div
 
   return (
     <MotionTag
+      id={id}
       className={cn(className)}
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}

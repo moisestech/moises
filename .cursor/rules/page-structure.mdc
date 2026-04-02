@@ -1,0 +1,35 @@
+---
+description: Page structure and institutional purpose guidelines
+alwaysApply: true
+---
+
+# Page Structure
+
+## Core Principle
+
+Every page must have a **clear institutional purpose**. Every major page should answer:
+
+1. What is this page for?
+2. Who is it for?
+3. What should they do next?
+
+## Hierarchy
+
+- **Selected Works** — Carries more authority than Archive. 6–8 strongest works only.
+- **Archive** — Full body of work. Lower hierarchy than Selected Works.
+- **Research** — Must point back to artworks. Not a separate lab or startup identity.
+- **Teaching** — Extension of the practice, not a separate identity.
+- **Homepage** — Should foreground strongest work and conceptual thesis.
+
+## Grant Landing Pages
+
+- Project-specific microsites (e.g., `/eyebeam`, `/grant/knight-foundation`)
+- Function as curated continuations of application emails
+- Not generic portfolio dumps
+- Include: project title, overview, statement, key images, related prior works, contact
+
+## Design Direction
+
+- **Feel:** Research dossier in museum language
+- **Not:** Portfolio dump, consulting page, product pitch
+- **Tone:** Focused, elegant, thesis-driven, selective

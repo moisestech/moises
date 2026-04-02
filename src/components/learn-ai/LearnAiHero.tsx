@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import { GlitchDisplayHero } from '@/components/common/GlitchDisplayHero'
 import { LEARN_AI_WORKSHOP_HERO_IMAGE } from '@/constants/learn-ai-workshop'
@@ -88,6 +89,15 @@ export function LearnAiHero() {
               Request details
             </a>
           </div>
+          <p className="mt-6 text-sm">
+            <Link
+              href="/workshop/learn-ai-without-losing-yourself/lab"
+              className="text-zinc-600 dark:text-zinc-400 underline underline-offset-4 decoration-zinc-400/60 hover:text-zinc-900 dark:hover:text-zinc-200 dark:decoration-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 rounded-sm"
+            >
+              Inside the workshop
+            </Link>
+            <span className="text-zinc-500 dark:text-zinc-600"> — session map, skills, and how the talk is built</span>
+          </p>
         </div>
       </div>
     </header>

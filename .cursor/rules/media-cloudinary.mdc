@@ -1,0 +1,38 @@
+---
+description: Cloudinary media configuration and usage guidelines
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+alwaysApply: false
+---
+
+# Media and Cloudinary
+
+## Configuration
+
+- **Cloud name:** `dck5rzi4h`
+- **Base path:** `art/moisestech-website/`
+- **Asset folders:** `artworks/`, `exhibitions/`, `events/`, `own-your-digital-presence/`, `tech-nonprofit/`
+
+## Data Sources
+
+- Artwork images: `src/constants/artworks.ts`
+- Exhibition images: `src/constants/exhibitions.ts`
+- Eyebeam inquiry: `src/constants/eyebeam-inquiry.ts`
+- Research: `src/constants/research.ts`, `noisy-systems.ts`
+- Workshop images: `src/components/page/OoliteDigitalOverviewPage.tsx`, `TechNonprofitNavOolite.tsx`
+
+## Image URLs
+
+- Format: `https://res.cloudinary.com/dck5rzi4h/image/upload/v{version}/art/moisestech-website/...`
+- Folder pattern: `artworks/{year}_{slug}/` (e.g., `artworks/2025_privacy_mask/`)
+
+## When to Use Cloudinary MCP
+
+- **Asset audit:** Compare Cloudinary assets to URLs in constants; find orphaned or missing assets
+- **Tagging:** Add tags by artwork slug, year, exhibition
+- **Organization:** Move assets into folders, rename for consistency
+- **Transformations:** Generate optimized URLs (w_1200, q_auto, f_auto) for delivery
+
+## Next.js Config
+
+- `next.config.js` already allows `res.cloudinary.com` in `remotePatterns` and `domains`
+- `images.unoptimized: true` is currently set — consider Cloudinary loader for optimization

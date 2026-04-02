@@ -1,0 +1,14 @@
+{
+  "title": "Born into the Machine",
+  "description": "A living book exploring transparency in co-intelligence and the post-AI writing era",
+  "chapters": [
+    {
+      "slug": "introduction",
+      "title": "Introduction",
+      "status": "draft",
+      "order": 1
+    }
+  ],
+  "created": "2025-01-15",
+  "lastModified": "2025-01-15"
+}

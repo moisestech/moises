@@ -1,0 +1,220 @@
+{
+  "filename": "open-ended-development.md",
+  "analyzed": "2025-12-29T00:53:57.981Z",
+  "mapping": {
+    "block-1": {
+      "chapter": {
+        "order": 4,
+        "slug": "intelligence-infrastructure",
+        "title": "Intelligence as Infrastructure",
+        "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+        "keywords": [
+          "intelligence as commodity",
+          "infrastructure",
+          "utility",
+          "prompt economics",
+          "cognitive",
+          "api",
+          "tokens"
+        ],
+        "thinkers": [
+          "Geoffrey Hinton",
+          "Shoshana Zuboff",
+          "McKenzie Wark"
+        ],
+        "artworks": [
+          "AI24",
+          "Smart Shoppers"
+        ],
+        "status": "draft"
+      },
+      "confidence": "medium",
+      "score": 47,
+      "alternatives": [
+        {
+          "chapter": {
+            "order": 4,
+            "slug": "intelligence-infrastructure",
+            "title": "Intelligence as Infrastructure",
+            "context": "How AI becomes a sort of everyday infrastructure and what that means for artists and non-engineers alike.",
+            "keywords": [
+              "intelligence as commodity",
+              "infrastructure",
+              "utility",
+              "prompt economics",
+              "cognitive",
+              "api",
+              "tokens"
+            ],
+            "thinkers": [
+              "Geoffrey Hinton",
+              "Shoshana Zuboff",
+              "McKenzie Wark"
+            ],
+            "artworks": [
+              "AI24",
+              "Smart Shoppers"
+            ],
+            "status": "draft"
+          },
+          "score": 47
+        },
+        {
+          "chapter": {
+            "order": 3,
+            "slug": "burnout-velocity-change",
+            "title": "Burnout and the Velocity of Change",
+            "context": "Byung-Chul Han's \"Burnout Society\" and how we can use awareness of the system's speed to find autonomy.",
+            "keywords": [
+              "burnout",
+              "velocity",
+              "acceleration",
+              "byung-chul han",
+              "speed",
+              "hinton",
+              "autonomy"
+            ],
+            "thinkers": [
+              "Byung-Chul Han",
+              "Geoffrey Hinton"
+            ],
+            "artworks": [
+              "Doomscrolling Treadmill"
+            ],
+            "status": "draft"
+          },
+          "score": 41
+        },
+        {
+          "chapter": {
+            "order": 6,
+            "slug": "vector-identity-automated-world",
+            "title": "The Vector of Identity in an Automated World",
+            "context": "How full automation and AI shift our sense of identity and what that means for creativity.",
+            "keywords": [
+              "identity",
+              "automation",
+              "vectoral",
+              "miami",
+              "stack",
+              "selfhood",
+              "creativity"
+            ],
+            "thinkers": [
+              "McKenzie Wark",
+              "Ruha Benjamin"
+            ],
+            "artworks": [
+              "Vectoral Miami",
+              "Smart Map"
+            ],
+            "status": "draft"
+          },
+          "score": 41
+        }
+      ]
+    },
+    "block-2": {
+      "chapter": {
+        "order": 1,
+        "slug": "introduction-embracing-ai-k-hole",
+        "title": "Introduction: Embracing the AI K-Hole",
+        "context": "Your personal story of that \"Suno moment\" and the idea of being at the edge of a new kind of creativity.",
+        "keywords": [
+          "suno",
+          "ai k-hole",
+          "synthetic flow",
+          "addiction",
+          "dependence",
+          "freedom",
+          "liberation"
+        ],
+        "thinkers": [],
+        "artworks": [
+          "Suno story",
+          "AI k-hole"
+        ],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 18
+    },
+    "block-3": {
+      "chapter": {
+        "order": 1,
+        "slug": "introduction-embracing-ai-k-hole",
+        "title": "Introduction: Embracing the AI K-Hole",
+        "context": "Your personal story of that \"Suno moment\" and the idea of being at the edge of a new kind of creativity.",
+        "keywords": [
+          "suno",
+          "ai k-hole",
+          "synthetic flow",
+          "addiction",
+          "dependence",
+          "freedom",
+          "liberation"
+        ],
+        "thinkers": [],
+        "artworks": [
+          "Suno story",
+          "AI k-hole"
+        ],
+        "status": "draft"
+      },
+      "confidence": "high",
+      "score": 31
+    }
+  },
+  "byChapter": {
+    "introduction-embracing-ai-k-hole": {
+      "blocks": [
+        {
+          "blockId": "block-2",
+          "confidence": "high",
+          "score": 18
+        },
+        {
+          "blockId": "block-3",
+          "confidence": "high",
+          "score": 31
+        }
+      ]
+    },
+    "specter-capitalist-realism": {
+      "blocks": []
+    },
+    "burnout-velocity-change": {
+      "blocks": []
+    },
+    "intelligence-infrastructure": {
+      "blocks": [
+        {
+          "blockId": "block-1",
+          "confidence": "medium",
+          "score": 47
+        }
+      ]
+    },
+    "art-language-beyond-words": {
+      "blocks": []
+    },
+    "vector-identity-automated-world": {
+      "blocks": []
+    },
+    "toolkit-autonomy": {
+      "blocks": []
+    },
+    "ai-public-sphere": {
+      "blocks": []
+    },
+    "essays-visual-essays": {
+      "blocks": []
+    },
+    "conclusion-empowerment-chaos": {
+      "blocks": []
+    },
+    "unmapped": {
+      "blocks": []
+    }
+  }
+}

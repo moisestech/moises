@@ -1,3 +1,4 @@
+import { formatBoxDimensionsInchesLwh } from '@/lib/dimensions';
 import { InteractiveContent } from './research';
 
 /** Optional venue / funder block for artwork detail footer */
@@ -314,7 +315,7 @@ export const artist: Artist = {
         'Paiz shopping cart',
       ],
       medium: 'New Media Installation',
-      dimensions: '107 cm x 51 cm x 91 cm (L x W x H)',
+      dimensions: formatBoxDimensionsInchesLwh(42, 20, 36),
       weight: 'Approximately 15-25 kg',
       images: [
         {

@@ -1,0 +1,25 @@
+{
+  "foam": {
+    "openDailyNote": {
+      "directory": "knowledge-base/daily-notes",
+      "filenameFormat": "YYYY-MM-DD",
+      "titleFormat": "MMMM Do, YYYY",
+      "template": ".foam/templates/daily-note.md"
+    },
+    "graph": {
+      "titleMaxLength": 50,
+      "maxLength": 100,
+      "showOrphans": true,
+      "showAttachments": true,
+      "showTags": true
+    },
+    "completion": {
+      "enabled": true,
+      "includeAliases": true,
+      "includeSnippets": true
+    },
+    "edit": {
+      "linkReferenceDefinitions": "withExtensions"
+    }
+  }
+}

@@ -22,6 +22,10 @@ yarn.lock
 # misc
 .DS_Store
 *.pem
+*.swp
+
+# pnpm content-addressable store (local cache; do not commit)
+.pnpm-store/
 
 # debug
 npm-debug.log*

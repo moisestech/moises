@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatBoxDimensionsInchesLwh } from '@/lib/dimensions';
 
 export default function SmartShoppers() {
   return (
@@ -19,8 +20,8 @@ export default function SmartShoppers() {
             <strong>{`"Smart Shoppers" by Moises Sanabria`}</strong>
           </p>
           <p className="mt-2">
-            <strong>{`Dimensions:`}</strong>
-            {`42" x 20" x 36"`}
+            <strong>{`Dimensions:`}</strong>{' '}
+            {formatBoxDimensionsInchesLwh(42, 20, 36)}
           </p>
           <p className="mt-2">
             <strong>{`Materials:`}</strong>

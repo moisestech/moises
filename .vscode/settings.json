@@ -1,0 +1,25 @@
+{
+  "foam.completion.enabled": true,
+  "foam.completion.includeAliases": true,
+  "foam.completion.includeSnippets": true,
+  "foam.edit.linkReferenceDefinitions": "withExtensions",
+  "foam.edit.linkReferenceDefinitions": "withoutExtensions",
+  "foam.openDailyNote.directory": "knowledge-base/daily-notes",
+  "foam.openDailyNote.filenameFormat": "YYYY-MM-DD",
+  "foam.openDailyNote.titleFormat": "MMMM Do, YYYY",
+  "foam.openDailyNote.template": ".foam/templates/daily-note.md",
+  "foam.graph.titleMaxLength": 50,
+  "foam.graph.maxLength": 100,
+  "foam.graph.showOrphans": true,
+  "foam.graph.showAttachments": true,
+  "foam.graph.showTags": true,
+  "foam.workspacePath": "knowledge-base",
+  "markdown.preview.breaks": true,
+  "markdown.preview.linkify": true,
+  "files.associations": {
+    "*.md": "markdown"
+  },
+  "markdown.extension.toc.levels": "1..6",
+  "markdown.extension.toc.orderedList": false,
+  "markdown.extension.toc.updateOnSave": true
+}
