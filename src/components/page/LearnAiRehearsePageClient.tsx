@@ -72,6 +72,29 @@ function firstBeatIndexForSegment(
   return i === -1 ? 0 : i
 }
 
+function defaultBridgeIn(prev: LearnAiCueBeat | undefined, beat: LearnAiCueBeat): string {
+  if (!prev) {
+    return '[First beat.] Take the room, then run what follows.'
+  }
+  if (prev.id === 'flex-01') {
+    return '[After flex notes.] Return to the main arc with this beat.'
+  }
+  return `From “${prev.slideLabel}” — last takeaway was: ${prev.criticalTakeaway}\n\nStep into “${beat.slideLabel}”.`
+}
+
+function defaultBridgeOut(
+  beat: LearnAiCueBeat,
+  next: LearnAiCueBeat | undefined,
+  phraseIndex: number
+): string {
+  if (!next) {
+    return '[End of cue list.] Close, hold, or use flex timing notes.'
+  }
+  const toolbox =
+    LEARN_AI_TRANSITION_PHRASES[phraseIndex % LEARN_AI_TRANSITION_PHRASES.length]
+  return `${toolbox}\n\nNext: “${next.slideLabel}” — teaching goal: ${next.teachingGoal}`
+}
+
 function RehearsePrintableDoc({ markdown }: { markdown: string }) {
   if (!markdown.trim()) {
     return (
@@ -171,13 +194,39 @@ function SlideVisual({ beat }: { beat: LearnAiCueBeat }) {
   )
 }
 
-function BeatDetail({ beat }: { beat: LearnAiCueBeat }) {
+function BeatDetail({
+  beat,
+  beatIndex,
+  allBeats,
+}: {
+  beat: LearnAiCueBeat
+  beatIndex: number
+  allBeats: readonly LearnAiCueBeat[]
+}) {
   const v2Slide = beat.deckSlideNumber != null ? getLearnAiV2SlidePrompt(beat.deckSlideNumber) : undefined
   const promptDark = beat.slideImagePromptDark ?? v2Slide?.promptDark
   const promptLight = beat.slideImagePromptLight ?? v2Slide?.promptLight
   const promptAlt = v2Slide?.promptAlt
   const slidePurpose = beat.slideVisualPurpose ?? v2Slide?.purpose
   const hasImagePromptDetails = Boolean(promptDark || promptLight || promptAlt || slidePurpose)
+
+  const prev = beatIndex > 0 ? allBeats[beatIndex - 1] : undefined
+  const next = beatIndex < allBeats.length - 1 ? allBeats[beatIndex + 1] : undefined
+
+  const bridgeIn = beat.transitionFromPrior ?? defaultBridgeIn(prev, beat)
+  const bridgeOut = beat.transitionToNext ?? defaultBridgeOut(beat, next, beatIndex)
+  const bridgeInIsScripted = Boolean(beat.transitionFromPrior)
+  const bridgeOutIsScripted = Boolean(beat.transitionToNext)
+
+  const cultureLine =
+    beat.cultureBeat ??
+    'Optional culture sprinkle — see Guide tab (Fruit Love Island, AI-movie plausibility, overworked-assistant meme) if it fits this beat.'
+  const cultureIsScripted = Boolean(beat.cultureBeat)
+
+  const altLine =
+    beat.altJoke ??
+    'No alternate punchline scripted — stay on the main script or improvise from the room.'
+  const altIsScripted = Boolean(beat.altJoke)
 
   return (
     <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
@@ -197,12 +246,20 @@ function BeatDetail({ beat }: { beat: LearnAiCueBeat }) {
         </div>
         <h2 className="text-lg font-medium leading-snug text-zinc-900 dark:text-zinc-100 sm:text-xl">{beat.slideLabel}</h2>
 
-        {beat.skillWord ? (
-          <p className="inline-flex items-center gap-2 rounded-sm border border-lime-700/25 bg-lime-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-lime-900 dark:border-lime-500/30 dark:bg-lime-500/10 dark:text-lime-200">
-            <Sparkles className="h-3.5 w-3.5" aria-hidden />
-            Skill: {beat.skillWord}
-          </p>
-        ) : null}
+        <div className="rounded-sm border border-lime-700/30 bg-lime-500/10 p-4 dark:border-lime-500/25 dark:bg-lime-500/10">
+          <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 text-lime-900 dark:text-lime-200')}>
+            <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            Vocabulary (say out loud)
+          </div>
+          {beat.skillWord ? (
+            <p className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{beat.skillWord}</p>
+          ) : (
+            <p className="text-sm italic text-zinc-600 dark:text-zinc-400">
+              No skill word on this beat yet — add <code className="rounded bg-lime-500/15 px-1">skillWord</code> in the cue sheet
+              when you want a term to name on stage.
+            </p>
+          )}
+        </div>
 
         {beat.onScreenLine ? (
           <div className="rounded-sm border border-zinc-300 bg-zinc-100/90 px-4 py-3 dark:border-zinc-600 dark:bg-zinc-800/60">
@@ -213,20 +270,35 @@ function BeatDetail({ beat }: { beat: LearnAiCueBeat }) {
               </p>
             ) : null}
           </div>
-        ) : null}
+        ) : (
+          <div className="rounded-sm border border-dashed border-zinc-300 bg-zinc-50/80 px-4 py-3 dark:border-zinc-600 dark:bg-zinc-900/30">
+            <p className={cn(learnAiSectionEyebrow(), 'mb-1')}>On-screen line</p>
+            <p className="text-sm italic text-zinc-500 dark:text-zinc-400">No big quote slide for this beat.</p>
+          </div>
+        )}
 
         <div className="space-y-4">
-          {beat.transitionFromPrior ? (
-            <div className="rounded-sm border border-amber-400/70 bg-amber-50/95 p-4 dark:border-amber-700/45 dark:bg-amber-950/35">
-              <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 font-semibold text-amber-950 dark:text-amber-200')}>
-                <ArrowRightLeft className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                Transition — bridge in
-              </div>
-              <p className="font-semibold leading-relaxed text-zinc-900 dark:text-zinc-100 whitespace-pre-wrap">
-                {beat.transitionFromPrior}
-              </p>
+          <div className="rounded-sm border border-amber-400/70 bg-amber-50/95 p-4 dark:border-amber-700/45 dark:bg-amber-950/35">
+            <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 font-semibold text-amber-950 dark:text-amber-200')}>
+              <ArrowRightLeft className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              Transition — bridge in
             </div>
-          ) : null}
+            {!bridgeInIsScripted ? (
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-wide text-amber-800/90 dark:text-amber-300/90">
+                Suggested handoff (edit cue sheet to lock your own line)
+              </p>
+            ) : null}
+            <p
+              className={cn(
+                'leading-relaxed whitespace-pre-wrap',
+                bridgeInIsScripted
+                  ? 'font-semibold text-zinc-900 dark:text-zinc-100'
+                  : 'text-zinc-800 dark:text-zinc-200'
+              )}
+            >
+              {bridgeIn}
+            </p>
+          </div>
 
           <div className="rounded-sm border border-sky-200/90 bg-sky-50/90 p-4 dark:border-sky-900/50 dark:bg-sky-950/35">
             <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2')}>
@@ -244,41 +316,78 @@ function BeatDetail({ beat }: { beat: LearnAiCueBeat }) {
               </div>
               <p className="leading-relaxed text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap">{beat.script}</p>
             </div>
-          ) : null}
-
-          {beat.altJoke ? (
-            <div className="rounded-sm border border-zinc-200/80 border-dashed bg-zinc-50/80 p-4 italic dark:border-zinc-700 dark:bg-zinc-900/30">
-              <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 not-italic')}>
-                <Sparkles className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400/90" aria-hidden />
-                Optional alt line
+          ) : (
+            <div className="rounded-sm border border-dashed border-zinc-300 bg-zinc-50/80 p-4 dark:border-zinc-600 dark:bg-zinc-900/30">
+              <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2')}>
+                <Mic className="h-3.5 w-3.5 text-zinc-600 dark:text-zinc-400" aria-hidden />
+                What you say
               </div>
-              <p className="leading-relaxed text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">{beat.altJoke}</p>
+              <p className="text-sm italic text-zinc-500 dark:text-zinc-400">No scripted lines — timing / hold / flex.</p>
             </div>
-          ) : null}
+          )}
 
-          {beat.cultureBeat ? (
-            <div className="rounded-sm border border-rose-300/80 bg-rose-50/90 p-4 dark:border-rose-900/40 dark:bg-rose-950/30">
-              <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 font-semibold text-rose-950 dark:text-rose-200')}>
-                <Theater className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                Culture beat (optional)
-              </div>
-              <p className="font-medium leading-relaxed text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap">
-                {beat.cultureBeat}
+          <div className="rounded-sm border border-zinc-200/80 border-dashed bg-zinc-50/80 p-4 dark:border-zinc-700 dark:bg-zinc-900/30">
+            <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2')}>
+              <Sparkles className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400/90" aria-hidden />
+              Humor / optional alt line
+            </div>
+            {!altIsScripted ? (
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                Placeholder until you add <code className="rounded bg-zinc-200/80 px-1 dark:bg-zinc-800">altJoke</code>
               </p>
-            </div>
-          ) : null}
+            ) : null}
+            <p
+              className={cn(
+                'leading-relaxed whitespace-pre-wrap',
+                altIsScripted ? 'italic text-zinc-600 dark:text-zinc-400' : 'text-zinc-600 dark:text-zinc-400'
+              )}
+            >
+              {altLine}
+            </p>
+          </div>
 
-          {beat.transitionToNext ? (
-            <div className="rounded-sm border border-amber-400/70 bg-amber-50/95 p-4 dark:border-amber-700/45 dark:bg-amber-950/35">
-              <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 font-semibold text-amber-950 dark:text-amber-200')}>
-                <ArrowRightLeft className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                Transition — bridge out
-              </div>
-              <p className="font-semibold leading-relaxed text-zinc-900 dark:text-zinc-100 whitespace-pre-wrap">
-                {beat.transitionToNext}
-              </p>
+          <div className="rounded-sm border border-rose-300/80 bg-rose-50/90 p-4 dark:border-rose-900/40 dark:bg-rose-950/30">
+            <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 font-semibold text-rose-950 dark:text-rose-200')}>
+              <Theater className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              Culture / meme (optional)
             </div>
-          ) : null}
+            {!cultureIsScripted ? (
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-wide text-rose-900/80 dark:text-rose-300/85">
+                Default prompt — add <code className="rounded bg-rose-200/50 px-1 dark:bg-rose-950/60">cultureBeat</code> for a
+                beat-specific line
+              </p>
+            ) : null}
+            <p
+              className={cn(
+                'leading-relaxed whitespace-pre-wrap',
+                cultureIsScripted ? 'font-medium text-zinc-800 dark:text-zinc-200' : 'text-zinc-700 dark:text-zinc-300'
+              )}
+            >
+              {cultureLine}
+            </p>
+          </div>
+
+          <div className="rounded-sm border border-amber-400/70 bg-amber-50/95 p-4 dark:border-amber-700/45 dark:bg-amber-950/35">
+            <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 font-semibold text-amber-950 dark:text-amber-200')}>
+              <ArrowRightLeft className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              Transition — bridge out
+            </div>
+            {!bridgeOutIsScripted ? (
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-wide text-amber-800/90 dark:text-amber-300/90">
+                Suggested handoff (rotates toolbox line; edit cue sheet for a fixed out-bridge)
+              </p>
+            ) : null}
+            <p
+              className={cn(
+                'leading-relaxed whitespace-pre-wrap',
+                bridgeOutIsScripted
+                  ? 'font-semibold text-zinc-900 dark:text-zinc-100'
+                  : 'text-zinc-800 dark:text-zinc-200'
+              )}
+            >
+              {bridgeOut}
+            </p>
+          </div>
 
           {hasImagePromptDetails ? (
             <details className="rounded-sm border border-zinc-300 bg-zinc-50/80 p-4 dark:border-zinc-600 dark:bg-zinc-900/40">
@@ -328,17 +437,17 @@ function BeatDetail({ beat }: { beat: LearnAiCueBeat }) {
           <div className="rounded-sm border border-violet-200/80 bg-violet-50/80 p-4 dark:border-violet-900/45 dark:bg-violet-950/30">
             <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2')}>
               <GraduationCap className="h-3.5 w-3.5 text-violet-700 dark:text-violet-400" aria-hidden />
-              Teaching goal
+              Learning — what you’re teaching
             </div>
-            <p className="leading-relaxed text-zinc-700 dark:text-zinc-300">{beat.teachingGoal}</p>
+            <p className="font-medium leading-relaxed text-zinc-800 dark:text-zinc-200">{beat.teachingGoal}</p>
           </div>
 
           <div className="rounded-sm border border-lime-700/30 bg-lime-500/10 p-4 dark:border-lime-500/25 dark:bg-lime-500/10">
             <div className={cn(learnAiSectionEyebrow(), 'mb-2 flex items-center gap-2 text-lime-900 dark:text-lime-200')}>
               <Bookmark className="h-3.5 w-3.5" aria-hidden />
-              Critical takeaway
+              Learning — line they should leave with
             </div>
-            <p className="font-medium leading-relaxed text-zinc-900 dark:text-zinc-100">{beat.criticalTakeaway}</p>
+            <p className="font-semibold leading-relaxed text-zinc-900 dark:text-zinc-100">{beat.criticalTakeaway}</p>
           </div>
 
           {beat.notes ? (
@@ -762,7 +871,7 @@ export default function LearnAiRehearsePageClient({ printableMarkdown }: { print
               </div>
             ) : (
               <div className="rounded-sm border border-zinc-200 bg-white/90 p-5 dark:border-zinc-800 dark:bg-zinc-900/35 sm:p-8 print:border-zinc-300 print:shadow-none">
-                <BeatDetail beat={current} />
+                <BeatDetail beat={current} beatIndex={index} allBeats={beats} />
               </div>
             )}
           </main>
