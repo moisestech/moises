@@ -158,3 +158,32 @@
 .artist-name-hover:hover::after {
   transform: scaleX(1);
 }
+
+/* Learn AI /rehearse — print manuscript (hide chrome, force readable body) */
+@media print {
+  .learn-ai-rehearse-hide-print {
+    display: none !important;
+  }
+
+  .learn-ai-rehearse-root {
+    background: white !important;
+    color: #171717 !important;
+    min-height: auto !important;
+  }
+
+  .learn-ai-rehearse-root .learn-ai-rehearse-printable-markdown,
+  .learn-ai-rehearse-root .learn-ai-rehearse-printable-markdown * {
+    color: #171717 !important;
+  }
+
+  .learn-ai-rehearse-root .learn-ai-rehearse-printable-markdown a {
+    text-decoration: underline;
+  }
+
+  .learn-ai-rehearse-printable-markdown h1,
+  .learn-ai-rehearse-printable-markdown h2,
+  .learn-ai-rehearse-printable-markdown h3 {
+    break-inside: avoid;
+    page-break-after: avoid;
+  }
+}

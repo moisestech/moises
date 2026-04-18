@@ -10,6 +10,7 @@ export type LearnAiCueSegment =
   | 'brainstorming'
   | 'synthetic_staff'
   | 'advanced_systems'
+  | 'interpassivity'
   | 'what_stays_human'
   | 'closing'
   | 'flex'
@@ -32,6 +33,20 @@ export type LearnAiCueBeat = {
   onScreenLine?: string
   /** One clarifying sentence after the quote slide. */
   onScreenGloss?: string
+  /** Spoken bridge entering this beat (from the prior idea). */
+  transitionFromPrior?: string
+  /** Spoken bridge exiting this beat (handoff to the next). */
+  transitionToNext?: string
+  /** Optional culture / meme seasoning (not the same as altJoke). */
+  cultureBeat?: string
+  /** v2 deck: editorial intent for the slide visual. */
+  slideVisualPurpose?: string
+  /** Image-generation prompt — dark editorial direction. */
+  slideImagePromptDark?: string
+  /** Image-generation prompt — light-background variant. */
+  slideImagePromptLight?: string
+  /** Aligns this beat with `learn-ai-slide-prompts-v2` slide numbers. */
+  deckSlideNumber?: number
 }
 
 export const LEARN_AI_CUE_SEGMENT_ORDER: readonly LearnAiCueSegment[] = [
@@ -41,6 +56,7 @@ export const LEARN_AI_CUE_SEGMENT_ORDER: readonly LearnAiCueSegment[] = [
   'brainstorming',
   'synthetic_staff',
   'advanced_systems',
+  'interpassivity',
   'what_stays_human',
   'closing',
   'flex',
@@ -52,9 +68,11 @@ export const LEARN_AI_CUE_SEGMENT_LABEL: Record<LearnAiCueSegment, string> = {
   research: 'Segment 2 — Research Without Fake Mastery (10:00–18:00)',
   brainstorming: 'Segment 3 — Brainstorming Without Flattening Creativity (18:00–22:00)',
   synthetic_staff: 'Segment 4 — I Lost My Job and Gained 10 AI Assistants (22:00–27:00)',
-  advanced_systems: 'Advanced Systems — When Help Becomes Infrastructure (27:00–34:00)',
-  what_stays_human: 'What Stays Human (34:00–37:00)',
-  closing: 'Closing (37:00–40:00)',
+  advanced_systems:
+    'Advanced Systems — When Help Becomes Infrastructure (27:00–34:45; Interpassivity beat sits between automation and Part-time job)',
+  interpassivity: 'Interpassivity — when the system performs the response for you (31:36–32:18 · deck slide 46)',
+  what_stays_human: 'What Stays Human (34:42–37:42)',
+  closing: 'Closing (37:42–40:42)',
   flex: 'Flex time / expansion',
 }
 
@@ -427,6 +445,8 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     slideLabel: 'Hallucinations',
     screenAction: 'Advance.',
     script: 'Sometimes the answer is wrong — not cartoonishly wrong — just wrong in complete sentences.\n\n[pause for laugh]\n\nThat is what makes hallucinations dangerous.\n\nPlausible, smooth, organized, cite-shaped, emotionally calm.\n\nIt does not just make things up.\n\nIt makes things up in a tone that suggests you should not interrupt.',
+    cultureBeat:
+      'Optional: tie to AI-in-film debates — technically plausible surface long before it feels legitimate; smooth is not the same as true.',
     altJoke: 'It is not just wrong. It is wrong with excellent formatting.',
     teachingGoal: 'Hallucination tone.',
     criticalTakeaway: 'Plausibility is the trap.',
@@ -560,6 +580,8 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     slideLabel: 'Slop rot + land',
     screenAction: 'Advance.',
     script: 'Slop rot is what happens when repeated exposure to polished sameness lowers your standards slowly enough that you do not notice.\n\n[pause]\n\nThe danger is not that AI gives you no ideas.\n\nThe danger is that it gives you enough ideas to stop waiting for a better one.\n\n[pause]',
+    cultureBeat:
+      'Optional seasoning: something like Fruit Love Island shows how AI output can be obviously ridiculous and still socially magnetic — absurd, synthetic, sticky — a fair read on a lot of AI culture right now.',
     altJoke: 'It is not that the content is awful. It is that your nervous system starts allowing it.',
     teachingGoal: 'Close segment.',
     criticalTakeaway: 'Discernment erodes quietly.',
@@ -710,6 +732,8 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     slideLabel: 'Projects / memory / context',
     screenAction: 'UI tour or slide.',
     script: 'One chat is not enough.\n\nSome work has tone, history, stable preferences, recurring documents, unfinished parts, future versions.\n\nChats, projects, memory, files, context.\n\nOne chat is a task. A project is a container. Memory is for stable truths. Files are anchors.\n\n[pause for laugh]\n\nAt some point you are no longer using AI. You are managing an estate.\n\nMy interior life now has folders.',
+    cultureBeat:
+      'Optional: the “what ChatGPT thinks of me from my prompts” meme — one assistant soaking writing, summarizing, organizing, emotional formatting, existential cleanup; funny because it names the labor sponge.',
     altJoke: 'Apparently my thoughts now need onboarding documents.',
     teachingGoal: 'Containers.',
     criticalTakeaway: 'Context design beats clever one-offs.',
@@ -774,10 +798,42 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     skillWord: 'Automation',
     onScreenLine: 'Automation solves repetition and creates maintenance.',
     onScreenGloss: 'The work does not disappear. It changes shape.',
+    transitionToNext:
+      'So even when the work doesn’t disappear, something else does shift:\n\nthe system starts taking over not only pieces of the task,\nbut pieces of our relationship to the task.\n\n[pause]\n\nAnd that’s where I want to introduce one more concept:\n\ninterpassivity.',
+    deckSlideNumber: 45,
+  },
+  {
+    id: 'adv-interpassivity',
+    timeRange: '31:36–32:18',
+    segment: 'interpassivity',
+    slideLabel: 'Interpassivity',
+    screenAction: 'Advance. Deck v2: slide 46.',
+    script:
+      'And I think there’s one more layer here that matters.\n\nNot just automation.\nNot just assistance.\nNot just speed.\n\nBut interpassivity.\n\nWhich is when the system starts performing the response for you.\n\nIt remembers for you.\nIt reacts for you.\nIt drafts for you.\nIt organizes for you.\nIt creates the feeling that the thing has already been handled.\n\n[pause]\n\nAnd that can feel incredible.\n\nBecause some part of your burden really does get lifted.\n\nBut it also creates a strange question:\n\nif the machine is increasingly doing the remembering, sorting, drafting, and even first-round feeling for me…\n\nwhat part of the process am I still actually inhabiting?\n\n[pause]\n\nThis is not me saying that help is bad.\n\nIt’s me saying that relief has a psychology.\n\nSometimes the system doesn’t just help me do the task.\n\nIt helps me feel like the task has already passed through me.',
+    altJoke:
+      'Interpassivity is when the machine doesn’t just do the homework — it also raises its hand with the confidence I was hoping to borrow.',
+    teachingGoal: 'Name outsourced “response” and relief psychology.',
+    criticalTakeaway:
+      'AI can outsource not only labor, but the sense that labor has already been metabolized.',
+    skillWord: 'Interpassivity',
+    onScreenLine: 'Interpassivity',
+    onScreenGloss:
+      'When the system performs the response for you.\n\n• it remembers for me\n• it reacts for me\n• it drafts for me\n• it organizes for me\n• it “dealt with it” for me',
+    slideVisualPurpose:
+      'Name the deeper move after automation: the machine doesn’t only do tasks — it can perform remembering, reacting, and “handled-ness” on your behalf.',
+    slideImagePromptDark:
+      'Calm organized interface completing emotional and administrative responses on behalf of a human who is physically present but slightly displaced, dark editorial, cinematic realism, subtle interface overlays, premium presentation slide aesthetic, subtle surrealism, not stock photo, no obvious robots',
+    slideImagePromptLight:
+      'Calm organized interface completing emotional and administrative responses on behalf of a human who is physically present but slightly displaced, light background, subtle surrealism, editorial conceptual realism, system performing response for the user, premium presentation aesthetic, not stock photo',
+    transitionToNext:
+      'That layer — when relief can feel like the task already passed through you — sits on top of everything else automation asks of you next.',
+    deckSlideNumber: 46,
+    notes:
+      'Deck v2: insert as slide 46 after automation. If your deck goes straight from Interpassivity to What Should Stay Human (no Part-time job / Environment / buffer slides), move the long bridge currently on adv-12 to the end of this beat and jump to wsh-01.',
   },
   {
     id: 'adv-10',
-    timeRange: '31:36–32:08',
+    timeRange: '32:18–32:50',
     segment: 'advanced_systems',
     slideLabel: 'Part-time job',
     screenAction: 'Advance.',
@@ -788,7 +844,7 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
   },
   {
     id: 'adv-11',
-    timeRange: '32:08–32:42',
+    timeRange: '32:50–33:24',
     segment: 'advanced_systems',
     slideLabel: 'Environment',
     screenAction: 'Advance.',
@@ -799,17 +855,20 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
   },
   {
     id: 'adv-12',
-    timeRange: '32:42–34:00',
+    timeRange: '33:24–34:42',
     segment: 'advanced_systems',
     slideLabel: 'Buffer / tighten',
     screenAction: 'Trim or deepen Airtable/n8n demo here.',
-    script: 'So yes: use prompts, shape the assistant, schedule check-ins, build workflows, generate artifacts — but stay awake to what you are building around yourself.\n\n[pause]\n\nAfter all of that, the most important question becomes very simple:',
+    script:
+      'So yes: use prompts, shape the assistant, schedule check-ins, build workflows, generate artifacts — but stay awake to what you are building around yourself.\n\n[pause]\n\nIf you need to trim for time, this is where you cut or deepen the stack demo.',
     teachingGoal: 'Bridge to values.',
     criticalTakeaway: 'Next: what stays human?',
+    transitionToNext:
+      'So after all the prompts, the systems, the automations, the scheduling, the memory, and now even the outsourced response…\n\n[pause]\n\nthe most important question becomes very simple:\n\nwhat should still belong to a person?',
   },
   {
     id: 'wsh-01',
-    timeRange: '34:00–34:40',
+    timeRange: '34:42–35:22',
     segment: 'what_stays_human',
     slideLabel: 'The question',
     screenAction: 'Advance.',
@@ -817,10 +876,11 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     teachingGoal: 'Moral re-anchor.',
     criticalTakeaway: 'Delegate tasks, not conscience.',
     skillWord: 'Judgment',
+    deckSlideNumber: 47,
   },
   {
     id: 'wsh-02',
-    timeRange: '34:40–35:24',
+    timeRange: '35:22–36:06',
     segment: 'what_stays_human',
     slideLabel: 'Split the work',
     screenAction: 'Advance.',
@@ -831,7 +891,7 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
   },
   {
     id: 'wsh-03',
-    timeRange: '35:24–37:00',
+    timeRange: '36:06–37:42',
     segment: 'what_stays_human',
     slideLabel: 'What not to automate',
     screenAction: 'Advance.',
@@ -842,7 +902,7 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
   },
   {
     id: 'close-01',
-    timeRange: '37:00–37:45',
+    timeRange: '37:42–38:27',
     segment: 'closing',
     slideLabel: 'Not purity',
     screenAction: 'Advance.',
@@ -852,7 +912,7 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
   },
   {
     id: 'close-02',
-    timeRange: '37:45–38:35',
+    timeRange: '38:27–39:17',
     segment: 'closing',
     slideLabel: 'Principles stack',
     screenAction: 'Build bullets on slide.',
@@ -862,10 +922,11 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     skillWord: 'Judgment',
     onScreenLine: 'Use AI for assistance, not surrender.',
     onScreenGloss: 'Let the machine help with labor, not with who you become.',
+    deckSlideNumber: 48,
   },
   {
     id: 'close-03',
-    timeRange: '38:35–39:30',
+    timeRange: '39:17–40:12',
     segment: 'closing',
     slideLabel: 'Evidence you were here',
     screenAction: 'Final slide.',
@@ -874,10 +935,11 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     teachingGoal: 'Final line.',
     criticalTakeaway: 'Presence over polish.',
     skillWord: 'Final choice',
+    deckSlideNumber: 49,
   },
   {
     id: 'close-04',
-    timeRange: '39:30–40:00',
+    timeRange: '40:12–40:42',
     segment: 'closing',
     slideLabel: 'Hold / applause',
     screenAction: 'Hold. Bow if that is your thing.',
@@ -894,6 +956,6 @@ export const LEARN_AI_CUE_SHEET_BEATS: readonly LearnAiCueBeat[] = [
     script: '',
     teachingGoal: 'Budget padding for live room.',
     criticalTakeaway: 'Trim segments for shorter formats; keep opening + formula + two deep segments + closing.',
-    notes: 'Bridge lines between segments: sound professional → know anything; feel informed → still have taste; generate ideas → tool as team; team exists → help as infrastructure.',
+    notes: 'Bridge lines between segments: sound professional → know anything; feel informed → still have taste; generate ideas → tool as team; team exists → help as infrastructure. v2: after automation, interpassivity names outsourced “response”; then land Part-time job / Environment / buffer before What Stays Human unless using a compact deck.',
   },
 ]
