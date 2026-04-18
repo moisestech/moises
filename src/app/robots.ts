@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: ['/'],
-      disallow: ['/search?q=', '/admin/'],
+      disallow: ['/search?q=', '/admin/', '/workshop/learn-ai-without-losing-yourself/rehearse'],
     },
     sitemap: ['https://mosies.tech/sitemap.xml'],
   };

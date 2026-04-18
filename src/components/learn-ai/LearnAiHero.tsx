@@ -89,14 +89,25 @@ export function LearnAiHero() {
               Request details
             </a>
           </div>
-          <p className="mt-6 text-sm">
-            <Link
-              href="/workshop/learn-ai-without-losing-yourself/lab"
-              className="text-zinc-600 dark:text-zinc-400 underline underline-offset-4 decoration-zinc-400/60 hover:text-zinc-900 dark:hover:text-zinc-200 dark:decoration-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 rounded-sm"
-            >
-              Inside the workshop
-            </Link>
-            <span className="text-zinc-500 dark:text-zinc-600"> — session map, skills, and how the talk is built</span>
+          <p className="mt-6 text-sm space-y-2 flex flex-col sm:block sm:space-y-0">
+            <span className="block sm:inline">
+              <Link
+                href="/workshop/learn-ai-without-losing-yourself/lab"
+                className="text-zinc-600 dark:text-zinc-400 underline underline-offset-4 decoration-zinc-400/60 hover:text-zinc-900 dark:hover:text-zinc-200 dark:decoration-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 rounded-sm"
+              >
+                Inside the workshop
+              </Link>
+              <span className="text-zinc-500 dark:text-zinc-600"> — session map, skills, and how the talk is built</span>
+            </span>
+            <span className="block sm:inline sm:before:content-['\00a0\00a0·\00a0\00a0']">
+              <Link
+                href="/workshop/learn-ai-without-losing-yourself/curriculum"
+                className="text-zinc-600 dark:text-zinc-400 underline underline-offset-4 decoration-zinc-400/60 hover:text-zinc-900 dark:hover:text-zinc-200 dark:decoration-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500/50 rounded-sm"
+              >
+                Curriculum outline
+              </Link>
+              <span className="text-zinc-500 dark:text-zinc-600"> — chapters, objectives, and key ideas</span>
+            </span>
           </p>
         </div>
       </div>

@@ -12,6 +12,16 @@ const nextConfig = {
         destination: '/workshop/learn-ai-without-losing-yourself',
         permanent: true,
       },
+      {
+        source: '/workshops/learn-ai-without-losing-yourself/rehearse',
+        destination: '/workshop/learn-ai-without-losing-yourself/rehearse',
+        permanent: true,
+      },
+      {
+        source: '/workshops/learn-ai-without-losing-yourself/curriculum',
+        destination: '/workshop/learn-ai-without-losing-yourself/curriculum',
+        permanent: true,
+      },
     ]
   },
 
