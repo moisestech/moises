@@ -10,7 +10,7 @@ type OpportunityShellProps = {
 function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
   return (
     <nav
-      className="sticky top-[4.5rem] z-30 border-b border-stone-200 bg-stone-50/95 py-2 backdrop-blur supports-[backdrop-filter]:bg-stone-50/85"
+      className="sticky top-16 z-30 border-b border-stone-200 bg-stone-50/95 py-2 backdrop-blur supports-[backdrop-filter]:bg-stone-50/85"
       aria-label="Section navigation"
     >
       <div className="mx-auto flex max-w-5xl items-center gap-1 overflow-x-auto px-4 pb-1 text-sm whitespace-nowrap sm:flex-wrap sm:whitespace-normal">

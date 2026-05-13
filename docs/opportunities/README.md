@@ -9,7 +9,7 @@ Role-specific recruiting dossiers: compact technical briefs you can drop into em
 - **Knight (canonical):** `/technology-product-strategy` — unchanged; see [docs/knight-application/README.md](../knight-application/README.md).
 - **Alias redirect:** `/technology-product-strategy/genai-innovation-lab` → `/opportunities/cvs-genai-engineer` (see `next.config.js`).
 
-## Add a new opportunity
+These routes use a **recruiting-specific site header** (not the main exhibition navigation). See [`src/config/recruiting-navigation.ts`](../../src/config/recruiting-navigation.ts) and [`RecruitingSiteHeader.tsx`](../../src/components/opportunities/RecruitingSiteHeader.tsx). Content begins **150px below** the fixed header bar (total top offset `calc(4rem + 150px)`).
 
 1. **Evidence** — If the page uses shared case studies, add or extend entries in [`src/content/evidence/projects.ts`](../src/content/evidence/projects.ts). Add preview images under `public/images/opportunities/`.
 2. **Tech logos** — Add keys to [`src/content/evidence/tech-logos.ts`](../src/content/evidence/tech-logos.ts) (`id`, `label`, optional `imageSrc` under `/public`). Reference ids from the opportunity config’s `techLogoIds`.

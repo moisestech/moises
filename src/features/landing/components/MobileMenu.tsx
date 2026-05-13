@@ -20,9 +20,17 @@ interface MobileMenuProps {
   isOpen: boolean;
   onToggle: () => void;
   workshopMode?: boolean;
+  /** When true, the floating menu button is omitted (header provides its own toggle). */
+  hidePrimaryMobileToggle?: boolean;
 }
 
-export default function MobileMenu({ menuItems, isOpen, onToggle, workshopMode }: MobileMenuProps) {
+export default function MobileMenu({
+  menuItems,
+  isOpen,
+  onToggle,
+  workshopMode,
+  hidePrimaryMobileToggle,
+}: MobileMenuProps) {
   const { theme } = useTheme();
   const { toast } = useToast();
   const isDark = theme === 'dark';
@@ -49,20 +57,22 @@ export default function MobileMenu({ menuItems, isOpen, onToggle, workshopMode }
 
   return (
     <>
-      {/* Mobile Menu Toggle Button */}
-      <div className="fixed top-6 right-6 z-60 md:hidden">
-        <button
-          onClick={onToggle}
-          className="p-2 z-60 relative"
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
-        >
-          {isOpen ? (
-            <X className="h-8 w-8" color={isDark ? '#fff' : '#000'} />
-          ) : (
-            <Menu className="h-8 w-8" color={isDark ? '#fff' : '#000'} />
-          )}
-        </button>
-      </div>
+      {/* Mobile Menu Toggle Button — hidden when recruiting header supplies its own control */}
+      {!hidePrimaryMobileToggle ? (
+        <div className="fixed top-6 right-6 z-60 md:hidden">
+          <button
+            onClick={onToggle}
+            className="p-2 z-60 relative"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          >
+            {isOpen ? (
+              <X className="h-8 w-8" color={isDark ? '#fff' : '#000'} />
+            ) : (
+              <Menu className="h-8 w-8" color={isDark ? '#fff' : '#000'} />
+            )}
+          </button>
+        </div>
+      ) : null}
 
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 z-50 transition-transform duration-300 transform ${
