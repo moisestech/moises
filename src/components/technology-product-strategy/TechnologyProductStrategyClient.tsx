@@ -4,7 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Mail, Linkedin, FileText, ExternalLink, LayoutGrid, ChevronRight } from 'lucide-react';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
-import { technologyProductStrategy } from '@/content/technologyProductStrategy';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
+import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
+import {
+  ExperienceMatrixRows,
+  getStartupCardAccentClass,
+  MatrixRowIcon,
+} from '@/components/opportunities/ExperienceMatrixSection';
+import { technologyProductStrategy, type SelectedProjectTile } from '@/content/technologyProductStrategy';
 import { track } from '@/lib/analytics';
 import {
   AiMediaStackDiagram,
@@ -12,6 +19,8 @@ import {
   InvestmentLensDiagram,
 } from '@/components/technology-product-strategy/FrameworkDiagrams';
 import { SkillCapabilityChart } from '@/components/technology-product-strategy/SkillCapabilityChart';
+import { isExternalHttpHref, opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
+import { cn } from '@/lib/utils';
 
 function GridImage({
   src,
@@ -39,6 +48,85 @@ function GridImage({
   );
 }
 
+function SelectedProjectGridTile({
+  tile,
+  onTrackCta,
+  inSleekPanel = false,
+}: {
+  tile: SelectedProjectTile;
+  onTrackCta: (kind: string) => void;
+  inSleekPanel?: boolean;
+}) {
+  const frameClass = inSleekPanel
+    ? 'group relative aspect-[4/3] overflow-hidden rounded-xl border border-white/12 bg-stone-950/35 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.65)] backdrop-blur-[2px] transition-all duration-500 hover:border-cyan-300/40 hover:shadow-[0_0_36px_-6px_rgba(34,211,238,0.22),0_16px_48px_-12px_rgba(0,0,0,0.55)]'
+    : 'group relative aspect-[4/3] overflow-hidden rounded-lg border border-stone-200 bg-stone-100 transition-colors hover:border-stone-400';
+
+  const media = (
+    <>
+      <GridImage src={tile.src} alt={tile.alt} local={tile.local} />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-1 p-3 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+        <p className="text-xs leading-snug text-white">{tile.hoverSummary}</p>
+      </div>
+      {tile.href && isExternalHttpHref(tile.href) ? (
+        <span className="pointer-events-none absolute right-2 top-2 rounded bg-black/50 p-1 text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+        </span>
+      ) : null}
+    </>
+  );
+
+  const caption = (
+    <p
+      className={cn(
+        'mt-1.5 text-xs font-semibold leading-snug',
+        inSleekPanel ? 'text-stone-100/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]' : 'text-stone-800',
+      )}
+    >
+      {tile.title}
+    </p>
+  );
+
+  const linkFocus = inSleekPanel
+    ? 'rounded-xl outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-200/80'
+    : 'rounded-lg outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-stone-800';
+
+  if (!tile.href) {
+    return (
+      <div>
+        <div className={frameClass}>{media}</div>
+        {caption}
+      </div>
+    );
+  }
+
+  if (isExternalHttpHref(tile.href)) {
+    return (
+      <a
+        href={tile.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn('block', linkFocus)}
+        onClick={() => onTrackCta(`selected_project:${tile.title}`)}
+      >
+        <div className={frameClass}>{media}</div>
+        {caption}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={tile.href}
+      className={cn('block', linkFocus)}
+      onClick={() => onTrackCta(`selected_project:${tile.title}`)}
+    >
+      <div className={frameClass}>{media}</div>
+      {caption}
+    </Link>
+  );
+}
+
 const TPS_TRACK_SLUG = 'technology-product-strategy';
 
 export default function TechnologyProductStrategyClient() {
@@ -54,24 +142,48 @@ export default function TechnologyProductStrategyClient() {
     track('opportunity_cta_click', { opportunitySlug: TPS_TRACK_SLUG, kind });
   };
 
+  const hasBanner = Boolean(technologyProductStrategy.applicationBanner?.src);
+
   return (
     <OpportunityShell navItems={navItems}>
-      <main className="mx-auto max-w-5xl px-4 pb-24 pt-8 font-['MoMA_Sans'] sm:pt-10">
-        <p className="mb-6 text-center text-xs text-stone-500 sm:text-sm">
-          {technologyProductStrategy.audienceLine}
-        </p>
+      <>
+        <OpportunityApplicationBanner banner={technologyProductStrategy.applicationBanner} />
+        <main
+          className={cn(
+            'mx-auto max-w-5xl px-4 pb-24 font-[\'MoMA_Sans\']',
+            hasBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10',
+          )}
+        >
+        <OpportunityAudienceKeywords data={technologyProductStrategy.audienceKeywords} />
 
         <section id="profile" className="scroll-mt-32">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-            <div>
+            <div className="order-1">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">Profile</p>
+              <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
+                <Image
+                  src={technologyProductStrategy.profile.headshotSrc}
+                  alt={technologyProductStrategy.profile.headshotAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 400px"
+                  priority
+                />
+              </div>
+            </div>
+            <div className="order-2">
               <p className="text-xs font-semibold uppercase tracking-wide text-cyan-800">
-                {technologyProductStrategy.profile.location}
+                {technologyProductStrategy.profile.roleTitle}
               </p>
+              <p className="mt-1 text-xs font-medium text-stone-500">{technologyProductStrategy.profile.location}</p>
               <h1 className="mt-2 font-['MoMA_Sans'] text-3xl font-semibold tracking-tight text-stone-950 sm:text-4xl">
                 {technologyProductStrategy.profile.headline}
               </h1>
               <p className="mt-2 text-lg text-stone-600">{technologyProductStrategy.profile.subtitle}</p>
               <p className="mt-1 text-sm text-stone-500">{technologyProductStrategy.profile.roleLine}</p>
+              {technologyProductStrategy.profile.trustLine ? (
+                <p className="mt-2 text-xs text-stone-500 sm:text-sm">{technologyProductStrategy.profile.trustLine}</p>
+              ) : null}
               <p className="mt-4 text-sm leading-relaxed text-stone-700">{technologyProductStrategy.profile.body}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {technologyProductStrategy.profile.tags.map((tag) => (
@@ -116,40 +228,114 @@ export default function TechnologyProductStrategyClient() {
                   href={ctas.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                  className={opportunitySocialPillClass('linkedin')}
                   onClick={() => trackCta('linkedin')}
                 >
                   <Linkedin className="h-4 w-4 shrink-0" aria-hidden />
                   LinkedIn
                 </a>
-                <Link
-                  href={ctas.portfolio}
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-                >
-                  <LayoutGrid className="h-4 w-4 shrink-0" aria-hidden />
-                  Portfolio
-                </Link>
-                <Link
-                  href={ctas.cv}
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-                >
-                  Web CV
-                </Link>
+                {ctas.portfolio ? (
+                  isExternalHttpHref(ctas.portfolio) ? (
+                    <a
+                      href={ctas.portfolio}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                    >
+                      <LayoutGrid className="h-4 w-4 shrink-0" aria-hidden />
+                      Portfolio
+                    </a>
+                  ) : (
+                    <Link
+                      href={ctas.portfolio}
+                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                    >
+                      <LayoutGrid className="h-4 w-4 shrink-0" aria-hidden />
+                      Portfolio
+                    </Link>
+                  )
+                ) : null}
+                {ctas.cv ? (
+                  isExternalHttpHref(ctas.cv) ? (
+                    <a
+                      href={ctas.cv}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                    >
+                      Web CV
+                    </a>
+                  ) : (
+                    <Link
+                      href={ctas.cv}
+                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                    >
+                      Web CV
+                    </Link>
+                  )
+                ) : null}
               </div>
             </div>
-            <div>
-              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-stone-500">Selected visuals</p>
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                {technologyProductStrategy.heroGrid.map((cell) => (
-                  <div
-                    key={cell.alt}
-                    className="relative aspect-[4/3] overflow-hidden rounded-lg border border-stone-200 bg-stone-100"
-                  >
-                    <GridImage src={cell.src} alt={cell.alt} local={cell.local} />
-                  </div>
-                ))}
+          </div>
+
+          <div className="mt-12 border-t border-stone-200 pt-10">
+          <div className="relative min-h-[min(22rem,70vw)] overflow-hidden rounded-2xl border border-stone-600/35 shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_80px_-12px_rgba(34,211,238,0.14)]">
+            {technologyProductStrategy.applicationBanner?.src ? (
+              <div className="pointer-events-none absolute inset-0">
+                <Image
+                  src={technologyProductStrategy.applicationBanner.src}
+                  alt=""
+                  fill
+                  className="object-cover object-right animate-tps-bg-drift motion-reduce:animate-none"
+                  sizes="(max-width: 1024px) 100vw, 64rem"
+                  aria-hidden
+                />
+              </div>
+            ) : (
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-950 to-black" aria-hidden />
+            )}
+            {/* Left: opaque for type; right: photo visible */}
+            <div
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgb(12,10,9)_0%,rgb(12,10,9)_min(46%,380px),rgba(12,10,9,0.82)_62%,rgba(12,10,9,0.28)_82%,transparent_100%)] sm:bg-[linear-gradient(90deg,rgb(12,10,9)_0%,rgb(12,10,9)_min(38%,360px),rgba(12,10,9,0.75)_58%,rgba(12,10,9,0.18)_78%,transparent_96%)]"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-stone-950/25 sm:to-transparent"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-0 animate-tps-sheen motion-reduce:animate-none opacity-[0.06] mix-blend-overlay sm:opacity-[0.045]"
+              style={{
+                backgroundImage:
+                  'linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.95) 45%, transparent 58%, transparent 100%)',
+                backgroundSize: '220% 100%',
+                backgroundPosition: '120% 50%',
+              }}
+              aria-hidden
+            />
+            <div className="relative z-10 flex flex-col gap-6 p-5 sm:p-7 lg:flex-row lg:items-start lg:gap-8">
+              <div className="max-w-xs shrink-0 lg:pt-1">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-cyan-200/85">
+                  Selected projects
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-stone-300/95 drop-shadow-md sm:text-sm">
+                  Hover for a line of context; click through where linked.
+                </p>
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-3.5">
+                  {technologyProductStrategy.selectedProjects.map((tile) => (
+                    <SelectedProjectGridTile
+                      key={tile.title}
+                      tile={tile}
+                      onTrackCta={trackCta}
+                      inSleekPanel
+                    />
+                  ))}
+                </div>
               </div>
             </div>
+          </div>
           </div>
         </section>
 
@@ -163,23 +349,18 @@ export default function TechnologyProductStrategyClient() {
         <section id="fit" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
           <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Why this background fits the role</h2>
           <p className="mt-3 max-w-3xl text-sm text-stone-600">{technologyProductStrategy.journalismNote}</p>
-          <div className="mt-6 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-stone-100 text-xs font-semibold uppercase tracking-wide text-stone-600">
-                <tr>
-                  <th className="px-4 py-3 sm:w-[42%]">Knight responsibilities (paraphrased)</th>
-                  <th className="px-4 py-3">Relevant experience</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-stone-100">
-                {technologyProductStrategy.strategicFit.map((row) => (
-                  <tr key={row.need} className="align-top">
-                    <td className="px-4 py-3 font-medium text-stone-900">{row.need}</td>
-                    <td className="px-4 py-3 text-stone-700">{row.fit}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-6">
+            <ExperienceMatrixRows
+              headers={{
+                left: 'Knight responsibilities (paraphrased)',
+                right: 'Relevant experience',
+              }}
+              rows={technologyProductStrategy.strategicFit.map((row) => ({
+                primary: row.need,
+                secondary: row.fit,
+                icon: row.icon,
+              }))}
+            />
           </div>
         </section>
 
@@ -187,6 +368,28 @@ export default function TechnologyProductStrategyClient() {
           <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Capabilities map</h2>
           <div className="mt-6 max-w-3xl">
             <SkillCapabilityChart data={skillData} disclaimer={technologyProductStrategy.skillsDisclaimer} />
+          </div>
+          <div className="mt-10">
+            <h3
+              id="core-skills-heading"
+              className="font-[\'MoMA_Sans\'] text-xl font-semibold text-stone-950"
+            >
+              Core skills & experience
+            </h3>
+            <p className="mt-2 max-w-3xl text-sm text-stone-600">
+              Primary lines are domains I own; supporting text is how that shows up in product, media, and
+              institutional contexts.
+            </p>
+            <div className="mt-5">
+              <ExperienceMatrixRows
+                headers={{ left: 'Domain', right: 'Skills & experience' }}
+                rows={technologyProductStrategy.skillsMatrixRows.map((row) => ({
+                  primary: row.category,
+                  secondary: row.skills,
+                  icon: row.icon,
+                }))}
+              />
+            </div>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             <AiMediaStackDiagram />
@@ -272,16 +475,38 @@ export default function TechnologyProductStrategyClient() {
             {technologyProductStrategy.startupBlurb.body}
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {technologyProductStrategy.startupSkillRows.map((row) => (
-              <div key={row.bucket} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-                <h3 className="text-sm font-semibold text-cyan-900">{row.bucket}</h3>
-                <ul className="mt-2 space-y-1 text-xs text-stone-600">
-                  {row.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {technologyProductStrategy.startupSkillRows.map((row, index) => {
+              const accent = getStartupCardAccentClass(index);
+              return (
+                <div
+                  key={row.bucket}
+                  className={cn(
+                    'group rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition-colors duration-200',
+                    accent.row,
+                  )}
+                >
+                  <div className="flex items-start gap-3">
+                    <div
+                      className={cn(
+                        'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors duration-200',
+                        accent.iconWrap,
+                      )}
+                      aria-hidden
+                    >
+                      <MatrixRowIcon icon={row.icon} />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="font-[\'MoMA_Sans\'] text-sm font-bold text-stone-950">{row.bucket}</h3>
+                      <ul className="mt-2 space-y-1 text-xs font-normal leading-snug text-stone-600">
+                        {row.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -394,20 +619,35 @@ export default function TechnologyProductStrategyClient() {
               href={ctas.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              className={opportunitySocialPillClass('linkedin')}
               onClick={() => trackCta('linkedin_footer')}
             >
+              <Linkedin className="h-4 w-4 shrink-0" aria-hidden />
               LinkedIn
             </a>
-            <Link
-              href={ctas.portfolio}
-              className="inline-flex rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-            >
-              Portfolio
-            </Link>
+            {ctas.portfolio ? (
+              isExternalHttpHref(ctas.portfolio) ? (
+                <a
+                  href={ctas.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                >
+                  Portfolio
+                </a>
+              ) : (
+                <Link
+                  href={ctas.portfolio}
+                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                >
+                  Portfolio
+                </Link>
+              )
+            ) : null}
           </div>
         </section>
       </main>
+      </>
     </OpportunityShell>
   );
 }

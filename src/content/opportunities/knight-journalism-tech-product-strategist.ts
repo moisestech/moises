@@ -4,6 +4,7 @@
  * This module documents the opportunity inside the same system types for registries and future mirrors.
  */
 import type { Opportunity } from './types';
+import { technologyProductStrategy } from '@/content/technologyProductStrategy';
 
 export const knightJournalismTechProductStrategistMeta = {
   slug: 'knight-journalism-tech-product-strategist',
@@ -13,11 +14,15 @@ export const knightJournalismTechProductStrategistMeta = {
   program: 'Journalism Program',
 } as const;
 
-/** Draft config: not served from /opportunities/[slug] until promoted to active + registered. */
+/**
+ * Active recruiting entry: `/opportunities/knight-journalism-tech-product-strategist` renders the
+ * full dossier (`TechnologyProductStrategyClient`). Canonical URL for emails remains `/technology-product-strategy`.
+ */
 export const knightJournalismTechProductStrategistOpportunity: Opportunity = {
   slug: knightJournalismTechProductStrategistMeta.slug,
-  status: 'draft',
+  status: 'active',
   variant: 'full-dossier',
+  applicationBanner: technologyProductStrategy.applicationBanner,
   seo: {
     title: 'Technology product strategy for public information | Moises Sanabria',
     description:
@@ -32,7 +37,7 @@ export const knightJournalismTechProductStrategistOpportunity: Opportunity = {
     headline: 'Technology product strategy for public information',
     subheadline: 'AI, media systems, civic technology, startup execution, and public-facing cultural infrastructure.',
     introParagraphs: [
-      'Full dossier content is maintained on the canonical page linked from application materials.',
+      'Full dossier: Knight Journalism Program — technology investments, AI evaluation, and civic information systems.',
     ],
   },
   roleMatchRows: [],

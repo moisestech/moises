@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Download, Mail, Linkedin, Github, Instagram } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
+import { isExternalHttpHref, opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
 
 type ResumeCTAProps = {
   opportunity: Opportunity;
@@ -48,7 +49,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
           href={ctas.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+          className={opportunitySocialPillClass('linkedin')}
           onClick={() => onCta('linkedin')}
         >
           <Linkedin className="h-4 w-4 shrink-0" aria-hidden />
@@ -59,7 +60,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
             href={ctas.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+            className={opportunitySocialPillClass('github')}
             onClick={() => onCta('github')}
           >
             <Github className="h-4 w-4 shrink-0" aria-hidden />
@@ -71,7 +72,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
             href={ctas.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+            className={opportunitySocialPillClass('instagram')}
             onClick={() => onCta('instagram')}
           >
             <Instagram className="h-4 w-4 shrink-0" aria-hidden />
@@ -79,22 +80,46 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
           </a>
         ) : null}
         {ctas.portfolio ? (
-          <Link
-            href={ctas.portfolio}
-            className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-            onClick={() => onCta('portfolio')}
-          >
-            Portfolio
-          </Link>
+          isExternalHttpHref(ctas.portfolio) ? (
+            <a
+              href={ctas.portfolio}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              onClick={() => onCta('portfolio')}
+            >
+              Portfolio
+            </a>
+          ) : (
+            <Link
+              href={ctas.portfolio}
+              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              onClick={() => onCta('portfolio')}
+            >
+              Portfolio
+            </Link>
+          )
         ) : null}
         {ctas.cv ? (
-          <Link
-            href={ctas.cv}
-            className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-            onClick={() => onCta('cv')}
-          >
-            Web CV
-          </Link>
+          isExternalHttpHref(ctas.cv) ? (
+            <a
+              href={ctas.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              onClick={() => onCta('cv')}
+            >
+              Web CV
+            </a>
+          ) : (
+            <Link
+              href={ctas.cv}
+              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              onClick={() => onCta('cv')}
+            >
+              Web CV
+            </Link>
+          )
         ) : null}
       </div>
     </section>

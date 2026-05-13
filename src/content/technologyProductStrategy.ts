@@ -3,6 +3,14 @@
  * URL: /technology-product-strategy
  */
 
+import type {
+  ApplicationBanner,
+  OpportunityAudienceKeywords,
+  SkillsMatrixIconKey,
+  SkillsMatrixRow,
+} from '@/content/opportunities/types';
+import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+
 export type CaseStudy = {
   title: string;
   category: string;
@@ -24,9 +32,40 @@ export type TalkItem = {
   placeholder: boolean;
 };
 
+export type SelectedProjectTile = {
+  title: string;
+  hoverSummary: string;
+  href?: string;
+  src: string;
+  alt: string;
+  local: boolean;
+};
+
 export const technologyProductStrategy = {
   audienceLine:
     'Prepared as supporting material for Knight Foundation’s Journalism Program — Technology Product Strategist (Miami, FL or remote).',
+
+  audienceKeywords: {
+    lead:
+      'Knight Journalism Program — technology investments, AI, and civic information. This dossier is organized around three lenses I bring to the work:',
+    terms: [
+      {
+        label: 'Product & grant judgment',
+        detail:
+          'Hands-on experience shipping software and AI media systems — reading proposals for real product capability, adoption, sustainability, and what happens after funding.',
+      },
+      {
+        label: 'Public information & literacy',
+        detail:
+          'AI24 Live, Digital Culture Center Miami, workshops, and installations that translate complex stacks into legible public experiences and local capacity.',
+      },
+      {
+        label: 'Networks & convenings',
+        detail:
+          'Comfort building relationships across engineers, artists, educators, and institutions — and presenting through talks, programs, and documentation.',
+      },
+    ],
+  } satisfies OpportunityAudienceKeywords,
 
   nav: [
     { id: 'profile', label: 'Profile' },
@@ -45,7 +84,12 @@ export const technologyProductStrategy = {
 
   profile: {
     name: 'Moises Sanabria',
+    roleTitle: 'Technology Product Strategist · Knight Journalism Program',
     location: 'Miami, FL / Remote',
+    trustLine:
+      'Full-stack engineering · AI-assisted media · startup product delivery · public programs · institutional technology systems',
+    headshotSrc: moisesSanabriaHeadshot,
+    headshotAlt: 'Moises Sanabria — professional headshot',
     roleLine:
       'Artist-technologist · Full-stack engineer · AI media strategist · Startup operator',
     headline: 'Technology product strategy for public information',
@@ -74,38 +118,62 @@ export const technologyProductStrategy = {
     cv: '/cv',
   },
 
-  heroGrid: [
+  selectedProjects: [
     {
+      title: 'AI24 Live',
+      hoverSummary:
+        'AI-assisted media and live cultural broadcasting — production stacks, distribution, and public-facing literacy around emerging tools.',
+      href: 'https://ai24.live',
       src: '/images/technology-product-strategy/ai24-placeholder.svg',
-      alt: 'Placeholder visual for AI24 Live — replace with broadcast or interface image',
+      alt: 'AI24 Live — broadcast and interface visual placeholder',
       local: true,
     },
     {
+      title: 'Doom Scrolling Treadmill',
+      hoverSummary:
+        'Performance and installation treating algorithmic feeds as an embodied system — attention, fatigue, and how platforms shape civic perception.',
+      href: '/art/doomscrolling_treadmill',
       src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
-      alt: 'Doom Scrolling Treadmill installation — algorithmic feeds and embodied attention',
+      alt: 'Doom Scrolling Treadmill installation',
       local: false,
     },
     {
+      title: 'Ephemeral Reflections of Digital Divinities',
+      hoverSummary:
+        'Real-time AI installation where the public sees machine perception turned into a shared, participatory experience.',
+      href: '/art/digital_divinities',
       src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
-      alt: 'Ephemeral Reflections of Digital Divinities — real-time AI participation with the public',
+      alt: 'Ephemeral Reflections of Digital Divinities installation',
       local: false,
     },
     {
+      title: 'Smart Shoppers',
+      hoverSummary:
+        'Sculptural critique of cognition and automation inside consumer systems — how interfaces and AI-shaped commerce steer everyday decision-making.',
+      href: '/art/smart_shoppers',
       src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
-      alt: 'Smart Shoppers — cognition, automation, and consumer information systems',
+      alt: 'Smart Shoppers installation',
       local: false,
     },
     {
+      title: 'Digital Culture Center Miami',
+      hoverSummary:
+        'Miami-based digital capacity building — workshops, shared tools, and programs that help artists and organizations adopt AI responsibly.',
+      href: 'https://dcc.miami',
       src: '/images/technology-product-strategy/dcc-placeholder.svg',
-      alt: 'Placeholder for Digital Culture Center Miami — replace with program photography',
+      alt: 'Digital Culture Center Miami — program visual placeholder',
       local: true,
     },
     {
+      title: 'Startup product (confidential)',
+      hoverSummary:
+        'Shipping AI-driven storytelling products — generative pipelines, interfaces, and cross-functional delivery; details discussed under NDA.',
+      href: '#projects',
       src: '/images/technology-product-strategy/startup-placeholder.svg',
-      alt: 'Placeholder for confidential AI product work — use abstract diagram or approved asset',
+      alt: 'Confidential startup product work — placeholder',
       local: true,
     },
-  ] as const,
+  ] satisfies ReadonlyArray<SelectedProjectTile>,
 
   thesis: {
     title: 'The future of journalism is not only content. It is infrastructure.',
@@ -117,28 +185,70 @@ export const technologyProductStrategy = {
     {
       need: 'Evaluate technology and AI proposals',
       fit: 'Hands-on experience building AI workflows, generative media pipelines, automation, and public-facing prototypes across art, media, and product contexts.',
+      icon: 'shield' as SkillsMatrixIconKey,
     },
     {
       need: 'Identify fundable technology opportunities',
       fit: 'Startup and institutional experience from concept and MVP scoping through implementation, documentation, and public adoption.',
+      icon: 'target' as SkillsMatrixIconKey,
     },
     {
       need: 'Understand new forms of media consumption',
       fit: 'Projects including Taste the Algorithm and related work on algorithmic feeds, attention, recommendation systems, and platform-shaped perception (see also Doom Scrolling Treadmill).',
+      icon: 'tv' as SkillsMatrixIconKey,
     },
     {
       need: 'Build networks of technologists, researchers, and creators',
       fit: 'AI24 Live, Digital Culture Center Miami, Oolite Arts / Bakehouse programs, startup teams, and artist–technologist communities across Miami and nationally.',
+      icon: 'users' as SkillsMatrixIconKey,
     },
     {
       need: 'Represent work at convenings',
       fit: 'Public talks, workshops, exhibitions, and institutional programs; comfortable translating complex systems for mixed audiences.',
+      icon: 'presentation' as SkillsMatrixIconKey,
     },
     {
       need: 'Support learning agendas, documentation, and operations',
       fit: 'Guides, curricula, diagrams, product specs, sprint communication, and cultural technology operations that depend on clear documentation.',
+      icon: 'fileText' as SkillsMatrixIconKey,
     },
-  ],
+  ] satisfies ReadonlyArray<{ need: string; fit: string; icon: SkillsMatrixIconKey }>,
+
+  skillsMatrixRows: [
+    {
+      category: 'Product & philanthropy',
+      skills:
+        'Roadmaps, MVP scoping, stakeholder alignment, and how funded work survives after the grant — separating demos from maintainable systems.',
+      icon: 'rocket' as SkillsMatrixIconKey,
+    },
+    {
+      category: 'AI & automation',
+      skills:
+        'Workflow design, generative media pipelines, evaluation of build vs. buy, prompt operations, and risk surfacing for bias, privacy, and trust.',
+      icon: 'sparkles' as SkillsMatrixIconKey,
+    },
+    {
+      category: 'Media & distribution',
+      skills:
+        'Live and on-demand formats, streaming-adjacent tooling, editorial systems, and public-facing literacy content that meets people where they scroll.',
+      icon: 'tv' as SkillsMatrixIconKey,
+    },
+    {
+      category: 'Full-stack engineering',
+      skills: 'React / Next.js, TypeScript, Python, APIs, Supabase and cloud patterns — enough depth to read technical proposals credibly.',
+      icon: 'code2' as SkillsMatrixIconKey,
+    },
+    {
+      category: 'Documentation & learning',
+      skills: 'Guides, curricula, specs, retrospectives, and reporting artifacts that help teams compound learning, not just ship once.',
+      icon: 'fileText' as SkillsMatrixIconKey,
+    },
+    {
+      category: 'Data, measurement & governance',
+      skills: 'Instincts for provenance, evaluation windows, and what “success” should mean at 6–24 months for civic information products.',
+      icon: 'lineChart' as SkillsMatrixIconKey,
+    },
+  ] satisfies SkillsMatrixRow[],
 
   journalismNote:
     'I have not worked as a newsroom reporter; my lens is product, interfaces, AI systems, and how mediated information shapes public life. That complements traditional journalism expertise with implementation depth and consumption-side analysis.',
@@ -168,20 +278,24 @@ export const technologyProductStrategy = {
     {
       bucket: 'Product',
       items: ['Roadmaps', 'MVP scoping', 'UX strategy', 'User flows', 'Specs'],
+      icon: 'rocket' as SkillsMatrixIconKey,
     },
     {
       bucket: 'Engineering',
       items: ['React / Next.js', 'TypeScript', 'Python', 'APIs', 'Cloud / Supabase'],
+      icon: 'code2' as SkillsMatrixIconKey,
     },
     {
       bucket: 'AI / media',
       items: ['Generative pipelines', 'Prompt ops', 'Image/video workflows', 'Streaming'],
+      icon: 'sparkles' as SkillsMatrixIconKey,
     },
     {
       bucket: 'Operations',
       items: ['Sprint rhythm', 'Documentation', 'Stakeholder updates', 'QA'],
+      icon: 'scale' as SkillsMatrixIconKey,
     },
-  ],
+  ] satisfies ReadonlyArray<{ bucket: string; items: string[]; icon: SkillsMatrixIconKey }>,
 
   caseStudies: [
     {
@@ -420,5 +534,10 @@ export const technologyProductStrategy = {
       'For the Technology Product Strategist role, I would bring a hybrid lens: technical enough to evaluate AI and product capabilities, creative enough to stress-test new media formats, and community-oriented enough to ask whether systems serve real publics.',
     preparedFor: 'Knight Foundation — Journalism Program — Technology Product Strategist',
   },
+
+  applicationBanner: {
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1778702939/jobs/banners/tech-strategy-knight-foundation-banner_lctdt0.png',
+    alt: 'Knight Foundation — Technology Product Strategist, Journalism Program — application banner',
+  } satisfies ApplicationBanner,
 };
 

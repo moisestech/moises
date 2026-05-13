@@ -24,8 +24,18 @@ const nextConfig = {
       },
       {
         source: '/technology-product-strategy/genai-innovation-lab',
-        destination: '/opportunities/cvs-genai-engineer',
+        destination: '/opportunities/cvs-senior-genai-engineer',
         permanent: false,
+      },
+      {
+        source: '/opportunities/cvs-genai-engineer',
+        destination: '/opportunities/cvs-senior-genai-engineer',
+        permanent: true,
+      },
+      {
+        source: '/opportunities/senior-genai-engineer',
+        destination: '/opportunities/cvs-senior-genai-engineer',
+        permanent: true,
       },
     ]
   },

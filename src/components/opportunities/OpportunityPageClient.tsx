@@ -1,6 +1,9 @@
 'use client';
 
+import TechnologyProductStrategyClient from '@/components/technology-product-strategy/TechnologyProductStrategyClient';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
+import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { OpportunityHero } from '@/components/opportunities/OpportunityHero';
 import { RoleMatchMatrix } from '@/components/opportunities/RoleMatchMatrix';
 import { CaseStudyGrid } from '@/components/opportunities/CaseStudyGrid';
@@ -10,6 +13,7 @@ import { InnovationProcess } from '@/components/opportunities/InnovationProcess'
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
 
 type OpportunityPageClientProps = {
@@ -17,10 +21,25 @@ type OpportunityPageClientProps = {
 };
 
 export function OpportunityPageClient({ opportunity }: OpportunityPageClientProps) {
+  if (opportunity.variant === 'full-dossier') {
+    return <TechnologyProductStrategyClient />;
+  }
+
+  const hasBanner = Boolean(opportunity.applicationBanner?.src);
+
   return (
     <OpportunityShell navItems={opportunity.navItems}>
-      <main className="mx-auto max-w-5xl px-4 pb-24 pt-8 font-['MoMA_Sans'] sm:pt-10">
-        {opportunity.audienceLine ? (
+      <>
+        <OpportunityApplicationBanner banner={opportunity.applicationBanner} />
+        <main
+          className={cn(
+            'mx-auto max-w-5xl px-4 pb-24 font-[\'MoMA_Sans\']',
+            hasBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10',
+          )}
+        >
+        {opportunity.audienceKeywords?.terms?.length ? (
+          <OpportunityAudienceKeywords data={opportunity.audienceKeywords} />
+        ) : opportunity.audienceLine ? (
           <p className="mb-6 text-center text-xs text-stone-500 sm:text-sm">{opportunity.audienceLine}</p>
         ) : null}
         <OpportunityHero opportunity={opportunity} />
@@ -43,7 +62,8 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           <TechStackLogos opportunity={opportunity} />
         )}
         <ResumeCTA opportunity={opportunity} />
-      </main>
+        </main>
+      </>
     </OpportunityShell>
   );
 }

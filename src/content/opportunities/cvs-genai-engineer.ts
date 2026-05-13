@@ -1,18 +1,37 @@
 import type { Opportunity } from './types';
+import { evidenceProjects } from '@/content/evidence/projects';
 import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
 export const cvsGenaiEngineerOpportunity: Opportunity = {
-  slug: 'cvs-genai-engineer',
+  slug: 'cvs-senior-genai-engineer',
   status: 'active',
   variant: 'compact',
+  applicationBanner: {
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1778695455/jobs/banners/senior-genai-engineer-banner_iljp58.png',
+    alt: 'Senior GenAI Engineer — application banner tailored to this role.',
+  },
   seo: {
     title: 'Senior GenAI Engineer — Moises Sanabria | moises.tech',
     description:
       'GenAI prototypes, LLM systems, agent workflows, and multimodal AI products — compact dossier for innovation lab and senior GenAI engineering roles.',
     indexable: true,
   },
-  audienceLine:
-    'Technical brief for Senior GenAI Engineer / AI innovation lab roles — rapid prototyping, LLM applications, and multimodal systems.',
+  audienceKeywords: {
+    terms: [
+      {
+        label: 'Rapid prototyping',
+        detail: 'From ambiguous briefs to interactive demos and MVPs — Lore Machine, AI24, and internal lab-style builds.',
+      },
+      {
+        label: 'LLM applications',
+        detail: 'Prompt workflows, structured outputs, APIs, evaluation, and product-facing text and tooling.',
+      },
+      {
+        label: 'Multimodal systems',
+        detail: 'Text, image, and media pipelines — narrative-to-visual flows, datasets, and generative media stacks.',
+      },
+    ],
+  },
   company: 'CVS Health (example targeting)',
   roleTitle: 'Senior GenAI Engineer',
   navItems: [
@@ -40,7 +59,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
   roleMatchIntro:
     'Innovation lab GenAI roles need someone who can experiment with emerging tools, evaluate what is real, and ship prototypes. That is how I already work across product, media, and institutional contexts.',
   roleMatchColumnHeaders: {
-    left: 'Typical requirement',
+    left: 'Skill/Experience',
     right: 'Relevant experience',
   },
   roleMatchRows: [
@@ -48,46 +67,91 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
       requirement: 'GenAI prototypes / PoCs / MVPs',
       evidence:
         'Built AI storytelling systems, creative automation tools, and rapid prototypes at Lore Machine, AI24, and related product contexts.',
+      illustration: {
+        src: evidenceProjects['lore-machine'].imageSrc,
+        alt: 'Lore Machine — AI narrative-to-media platform where GenAI prototypes and PoCs shipped to production contexts.',
+        local: evidenceProjects['lore-machine'].imageLocal,
+      },
     },
     {
       requirement: 'LLM applications',
       evidence:
         'Prompt workflows, structured outputs, OpenAI API integration, and text synthesis pipelines for content and tooling.',
+      illustration: {
+        src: evidenceProjects['lore-machine'].imageSrc,
+        alt: 'Lore Machine — LLM-backed workflows turning long-form text into structured creative outputs.',
+        local: evidenceProjects['lore-machine'].imageLocal,
+      },
     },
     {
       requirement: 'Python and TypeScript systems',
       evidence:
         'Full-stack delivery across Next.js/TypeScript products and Python/API-oriented automation and glue systems.',
+      illustration: {
+        src: evidenceProjects['digital-culture-infrastructure'].imageSrc,
+        alt: 'Digital culture infrastructure — full-stack portals, automation, and TypeScript-heavy product surfaces.',
+        local: evidenceProjects['digital-culture-infrastructure'].imageLocal,
+      },
     },
     {
       requirement: 'Hugging Face / open-source AI',
       evidence:
         'Stable Diffusion, ComfyUI, model workflows, and generative image systems in research and product settings.',
+      illustration: {
+        src: evidenceProjects['multimodal-image-systems'].imageSrc,
+        alt: 'Multimodal generative image workflows — open-model stacks, ComfyUI, and Hugging Face–adjacent tooling.',
+        local: evidenceProjects['multimodal-image-systems'].imageLocal,
+      },
     },
     {
       requirement: 'Agentic workflows',
       evidence:
         'n8n automation, AI workflow design, and expanding hands-on orchestration with LangGraph, CrewAI, and OpenAI Agents.',
+      illustration: {
+        src: evidenceProjects.ai24.imageSrc,
+        alt: 'AI24 — applied AI systems, automation strategy, and agent-style teaching and tooling for institutions.',
+        local: evidenceProjects.ai24.imageLocal,
+      },
     },
     {
       requirement: 'Multimodal AI',
       evidence:
         'Text-to-image, narrative-to-visual pipelines, video and image datasets, pose workflows, and AI media systems.',
+      illustration: {
+        src: evidenceProjects['multimodal-image-systems'].imageSrc,
+        alt: 'Multimodal AI — text-to-image pipelines, pose control, and narrative-to-visual generation research.',
+        local: evidenceProjects['multimodal-image-systems'].imageLocal,
+      },
     },
     {
       requirement: 'Cloud deployment',
       evidence:
         'Azure, Vercel, Supabase, Replicate, CI/CD, blob storage, and workers patterns in shipping products.',
+      illustration: {
+        src: evidenceProjects['lore-machine'].imageSrc,
+        alt: 'Lore Machine — cloud-backed media generation with Azure, Vercel, workers, and managed AI APIs.',
+        local: evidenceProjects['lore-machine'].imageLocal,
+      },
     },
     {
       requirement: 'Innovation lab mindset',
       evidence:
         'Artist-technologist practice with experimental prototypes, public talks, workshops, and applied AI research translation.',
+      illustration: {
+        src: evidenceProjects['multimodal-image-systems'].imageSrc,
+        alt: 'Experimental generative media R&D — rapid visual iteration aligned with lab-style discovery work.',
+        local: evidenceProjects['multimodal-image-systems'].imageLocal,
+      },
     },
     {
       requirement: 'AI literacy and teaching',
       evidence:
         'Public AI workshops and multi-session programs on agents, digital presence, and critical AI use — see Teaching section on this page.',
+      illustration: {
+        src: evidenceProjects.ai24.imageSrc,
+        alt: 'AI24 — AI literacy programs, workshops, and LMS-oriented teaching infrastructure.',
+        local: evidenceProjects.ai24.imageLocal,
+      },
     },
   ],
   featuredProjectIds: [
@@ -101,32 +165,38 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     'Selected work includes private startup systems and client-facing prototypes where source cannot be shared. Public summaries and skills tags below reflect what I can discuss.',
   skillsSectionTitle: 'Core technical skills',
   skillsMatrixRows: [
-    { category: 'Languages', skills: 'Python, TypeScript, JavaScript' },
+    { category: 'Languages', skills: 'Python, TypeScript, JavaScript', icon: 'code2' },
     {
       category: 'GenAI / LLMs',
       skills: 'OpenAI API, prompt engineering, structured generation, LLM workflow design',
+      icon: 'sparkles',
     },
     {
       category: 'Agentic systems',
       skills:
         'LangChain-style patterns, n8n automation, tool-based workflows; currently expanding hands-on agent orchestration with LangGraph, CrewAI, and OpenAI Agents',
+      icon: 'workflow',
     },
     {
       category: 'Multimodal AI',
       skills: 'Text-to-image, image datasets, generative media, pose control, character consistency',
+      icon: 'image',
     },
     {
       category: 'AI platforms',
       skills: 'Hugging Face ecosystem, Replicate, ComfyUI, Stable Diffusion workflows',
+      icon: 'boxes',
     },
-    { category: 'Cloud / infra', skills: 'Azure, Vercel, Supabase, blob storage, CI/CD, workers' },
+    { category: 'Cloud / infra', skills: 'Azure, Vercel, Supabase, blob storage, CI/CD, workers', icon: 'cloud' },
     {
       category: 'Product',
       skills: 'Prototyping, MVPs, innovation strategy, technical research translation',
+      icon: 'rocket',
     },
     {
       category: 'Collaboration',
       skills: 'Cross-functional teams, executive communication, workshops, documentation',
+      icon: 'users',
     },
   ],
   processSectionTitle: 'How I work in innovation labs',

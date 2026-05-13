@@ -97,6 +97,15 @@ const config = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
         },
+        /** Technology Product Strategy — selected projects panel */
+        'tps-bg-drift': {
+          '0%, 100%': { transform: 'scale(1.06) translate3d(0, 0, 0)' },
+          '50%': { transform: 'scale(1.12) translate3d(2%, -0.5%, 0)' },
+        },
+        'tps-sheen': {
+          '0%': { backgroundPosition: '120% 50%' },
+          '100%': { backgroundPosition: '-20% 50%' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -104,6 +113,8 @@ const config = {
         slide: 'slide 750ms ease-in-out',
         appear: 'appear 750ms ease-in-out',
         'logo-marquee': 'logo-marquee 50s linear infinite',
+        'tps-bg-drift': 'tps-bg-drift 28s ease-in-out infinite',
+        'tps-sheen': 'tps-sheen 14s ease-in-out infinite alternate',
       },
     },
   },

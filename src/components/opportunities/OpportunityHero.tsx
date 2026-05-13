@@ -5,6 +5,7 @@ import { Download, Mail, FolderKanban, Linkedin, Github, Instagram } from 'lucid
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
+import { opportunitySocialIconClass } from '@/components/opportunities/opportunitySocialStyles';
 
 type OpportunityHeroProps = {
   opportunity: Opportunity;
@@ -75,7 +76,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
               href={ctas.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 hover:text-stone-900"
+              className={opportunitySocialIconClass('linkedin')}
               aria-label="LinkedIn"
               onClick={() => onCta('linkedin_hero')}
             >
@@ -86,7 +87,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
                 href={ctas.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 hover:text-stone-900"
+                className={opportunitySocialIconClass('github')}
                 aria-label="GitHub"
                 onClick={() => onCta('github_hero')}
               >
@@ -98,7 +99,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
                 href={ctas.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 hover:text-stone-900"
+                className={opportunitySocialIconClass('instagram')}
                 aria-label="Instagram"
                 onClick={() => onCta('instagram_hero')}
               >
