@@ -4,13 +4,14 @@ import Image from 'next/image';
 import { Download, Mail, FolderKanban, Linkedin, Github, Instagram } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
+import { TechLogoMarquee } from '@/components/opportunities/TechLogoMarquee';
 
 type OpportunityHeroProps = {
   opportunity: Opportunity;
 };
 
 export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
-  const { hero, ctas, slug } = opportunity;
+  const { hero, ctas, slug, techLogoIds } = opportunity;
 
   const onCta = (kind: string) => {
     track('opportunity_cta_click', { opportunitySlug: slug, kind });
@@ -23,7 +24,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           <p className="text-xs font-semibold uppercase tracking-wide text-cyan-800">
             {opportunity.roleTitle ?? 'Positioning'}
           </p>
-          <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight text-stone-950 sm:text-4xl">
+          <h1 className="mt-2 font-['MoMA_Sans'] text-3xl font-bold tracking-tight text-stone-950 sm:text-4xl">
             {hero.headline}
           </h1>
           <p className="mt-2 text-lg text-stone-600">{hero.subheadline}</p>
@@ -38,7 +39,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
               <a
                 href={ctas.resumePdfPath}
                 download
-                className="inline-flex items-center gap-2 rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-stone-800"
+                className="inline-flex items-center gap-2 rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-stone-800"
                 onClick={() => onCta('resume_pdf')}
               >
                 <Download className="h-4 w-4 shrink-0" aria-hidden />
@@ -48,7 +49,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             {ctas.caseStudiesAnchor ? (
               <a
                 href={ctas.caseStudiesAnchor}
-                className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-semibold text-stone-800 hover:bg-stone-50"
                 onClick={() => onCta('case_studies_anchor')}
               >
                 <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />
@@ -57,7 +58,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             ) : null}
             <a
               href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-semibold text-stone-800 hover:bg-stone-50"
               onClick={() => onCta('email')}
             >
               <Mail className="h-4 w-4 shrink-0" aria-hidden />
@@ -65,7 +66,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             </a>
           </div>
           <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-stone-200/80 pt-5">
-            <span className="w-full text-xs font-medium uppercase tracking-wide text-stone-500 sm:w-auto sm:pr-2">
+            <span className="w-full text-xs font-semibold uppercase tracking-wide text-stone-500 sm:w-auto sm:pr-2">
               Profiles
             </span>
             <a
@@ -107,8 +108,8 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
         <div>
           {hero.headshotSrc ? (
             <>
-              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-stone-500">Profile</p>
-              <div className="relative aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">Profile</p>
+              <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
                 {hero.headshotSrc.endsWith('.svg') ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={hero.headshotSrc} alt={hero.headshotAlt ?? ''} className="h-full w-full object-cover" />
@@ -126,6 +127,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           ) : null}
         </div>
       </div>
+      <TechLogoMarquee techLogoIds={techLogoIds} />
     </section>
   );
 }

@@ -7,7 +7,7 @@ type InnovationProcessProps = {
 export function InnovationProcess({ opportunity }: InnovationProcessProps) {
   return (
     <section id="process" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-      <h2 className="font-serif text-2xl font-semibold text-stone-950">
+      <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">
         {opportunity.processSectionTitle ?? 'Process'}
       </h2>
       {opportunity.processIntro ? (
@@ -32,7 +32,7 @@ export function InnovationProcess({ opportunity }: InnovationProcessProps) {
       {opportunity.innovationLabLead || opportunity.innovationLabBody ? (
         <div className="mt-10 rounded-xl border border-stone-200 bg-stone-100/80 p-5">
           {opportunity.innovationLabSectionTitle ? (
-            <h3 className="font-serif text-lg font-semibold text-stone-950">
+            <h3 className="font-['MoMA_Sans'] text-lg font-semibold text-stone-950">
               {opportunity.innovationLabSectionTitle}
             </h3>
           ) : null}

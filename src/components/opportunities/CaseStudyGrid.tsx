@@ -21,7 +21,7 @@ function CardImage({ src, alt, local }: { src: string; alt: string; local?: bool
 export function CaseStudyGrid({ opportunity }: CaseStudyGridProps) {
   return (
     <section id="case-studies" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-      <h2 className="font-serif text-2xl font-semibold text-stone-950">
+      <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">
         {opportunity.caseStudiesSectionTitle ?? 'Case studies'}
       </h2>
       {opportunity.caseStudiesIntro ? (
@@ -41,7 +41,7 @@ export function CaseStudyGrid({ opportunity }: CaseStudyGridProps) {
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <p className="text-xs font-medium uppercase tracking-wide text-cyan-800">{cs.category}</p>
-                <h3 className="mt-1 font-serif text-lg font-semibold text-stone-950">{cs.title}</h3>
+                <h3 className="mt-1 font-['MoMA_Sans'] text-lg font-semibold text-stone-950">{cs.title}</h3>
                 <p className="mt-2 text-sm text-stone-700">{cs.summary}</p>
                 <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-stone-500">Relevant skills</p>
                 <ul className="mt-1 flex flex-wrap gap-1.5">

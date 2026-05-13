@@ -18,7 +18,7 @@ type OpportunityPageClientProps = {
 export function OpportunityPageClient({ opportunity }: OpportunityPageClientProps) {
   return (
     <OpportunityShell navItems={opportunity.navItems}>
-      <main className="mx-auto max-w-5xl px-4 pb-24 pt-8 sm:pt-10">
+      <main className="mx-auto max-w-5xl px-4 pb-24 pt-8 font-['MoMA_Sans'] sm:pt-10">
         {opportunity.audienceLine ? (
           <p className="mb-6 text-center text-xs text-stone-500 sm:text-sm">{opportunity.audienceLine}</p>
         ) : null}

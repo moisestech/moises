@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="600" viewBox="0 0 480 600" fill="none">
+  <rect width="480" height="600" fill="#fafaf9"/>
+  <rect x="32" y="32" width="416" height="536" rx="24" stroke="#d6d3d1" stroke-width="2" fill="#fff"/>
+  <ellipse cx="240" cy="220" rx="88" ry="100" fill="#e7e5e4"/>
+  <path d="M120 520c40-120 200-120 240 0" fill="#e7e5e4"/>
+  <text x="240" y="560" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#78716c">Portrait placeholder</text>
+</svg>

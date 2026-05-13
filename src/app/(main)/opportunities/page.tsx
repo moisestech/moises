@@ -16,10 +16,10 @@ export default function OpportunitiesIndexPage() {
   const items = listActiveOpportunities();
 
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900">
+    <div className="min-h-screen bg-stone-50 text-stone-900 font-['MoMA_Sans']">
       <main className="mx-auto max-w-3xl px-4 py-16 sm:py-20">
         <p className="text-xs font-semibold uppercase tracking-wide text-cyan-800">Recruiting</p>
-        <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight text-stone-950 sm:text-4xl">
+        <h1 className="mt-2 font-['MoMA_Sans'] text-3xl font-bold tracking-tight text-stone-950 sm:text-4xl">
           Opportunities
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-stone-600">
@@ -36,7 +36,7 @@ export default function OpportunitiesIndexPage() {
                 <p className="text-xs font-medium uppercase tracking-wide text-stone-500">
                   {o.company ?? 'Open role'}
                 </p>
-                <h2 className="mt-1 font-serif text-xl font-semibold text-stone-950">{o.hero.headline}</h2>
+                <h2 className="mt-1 font-['MoMA_Sans'] text-xl font-bold text-stone-950">{o.hero.headline}</h2>
                 <p className="mt-1 text-sm text-stone-600">{o.hero.subheadline}</p>
               </Link>
             </li>

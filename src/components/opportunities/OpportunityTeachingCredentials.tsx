@@ -23,7 +23,7 @@ export function OpportunityTeachingCredentials({ opportunity }: Props) {
         <div>
           <div className="flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-cyan-800" aria-hidden />
-            <h2 className="font-serif text-2xl font-semibold text-stone-950">Teaching and AI programs</h2>
+            <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Teaching and AI programs</h2>
           </div>
           <p className="mt-2 max-w-3xl text-sm text-stone-600">
             Public workshops and curricula — evidence of translating complex AI systems for practitioners and institutions.
@@ -53,7 +53,7 @@ export function OpportunityTeachingCredentials({ opportunity }: Props) {
         <div className={teachingHighlights?.length ? 'mt-14' : ''}>
           <div className="flex items-center gap-2">
             <GraduationCap className="h-5 w-5 text-cyan-800" aria-hidden />
-            <h2 className="font-serif text-2xl font-semibold text-stone-950">Credentials</h2>
+            <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Credentials</h2>
           </div>
           <p className="mt-2 max-w-3xl text-sm text-stone-600">
             Verifiable highlights; full timeline on the web CV.

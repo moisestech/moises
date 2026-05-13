@@ -56,7 +56,7 @@ export default function TechnologyProductStrategyClient() {
 
   return (
     <OpportunityShell navItems={navItems}>
-      <main className="mx-auto max-w-5xl px-4 pb-24 pt-8 sm:pt-10">
+      <main className="mx-auto max-w-5xl px-4 pb-24 pt-8 font-['MoMA_Sans'] sm:pt-10">
         <p className="mb-6 text-center text-xs text-stone-500 sm:text-sm">
           {technologyProductStrategy.audienceLine}
         </p>
@@ -67,7 +67,7 @@ export default function TechnologyProductStrategyClient() {
               <p className="text-xs font-semibold uppercase tracking-wide text-cyan-800">
                 {technologyProductStrategy.profile.location}
               </p>
-              <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight text-stone-950 sm:text-4xl">
+              <h1 className="mt-2 font-['MoMA_Sans'] text-3xl font-semibold tracking-tight text-stone-950 sm:text-4xl">
                 {technologyProductStrategy.profile.headline}
               </h1>
               <p className="mt-2 text-lg text-stone-600">{technologyProductStrategy.profile.subtitle}</p>
@@ -154,14 +154,14 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="thesis" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">{technologyProductStrategy.thesis.title}</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">{technologyProductStrategy.thesis.title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700">
             {technologyProductStrategy.thesis.body}
           </p>
         </section>
 
         <section id="fit" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">Why this background fits the role</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Why this background fits the role</h2>
           <p className="mt-3 max-w-3xl text-sm text-stone-600">{technologyProductStrategy.journalismNote}</p>
           <div className="mt-6 overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
             <table className="w-full text-left text-sm">
@@ -184,7 +184,7 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="skills" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">Capabilities map</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Capabilities map</h2>
           <div className="mt-6 max-w-3xl">
             <SkillCapabilityChart data={skillData} disclaimer={technologyProductStrategy.skillsDisclaimer} />
           </div>
@@ -196,7 +196,7 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="projects" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">Selected case studies</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Selected case studies</h2>
           <p className="mt-2 max-w-3xl text-sm text-stone-600">
             {technologyProductStrategy.relatedWorkNote.text}{' '}
             <Link href={technologyProductStrategy.relatedWorkNote.href} className="font-medium text-cyan-800 underline-offset-2 hover:underline">
@@ -226,7 +226,7 @@ export default function TechnologyProductStrategyClient() {
                 </div>
                 <div className="flex flex-1 flex-col p-4">
                   <p className="text-xs font-medium uppercase tracking-wide text-cyan-800">{cs.category}</p>
-                  <h3 className="mt-1 font-serif text-lg font-semibold text-stone-950">{cs.title}</h3>
+                  <h3 className="mt-1 font-['MoMA_Sans'] text-lg font-semibold text-stone-950">{cs.title}</h3>
                   <p className="mt-2 text-sm text-stone-700">{cs.description}</p>
                   <p className="mt-2 text-xs text-stone-500">
                     <span className="font-semibold text-stone-600">Role:</span> {cs.role}
@@ -267,7 +267,7 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="startup" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">{technologyProductStrategy.startupBlurb.title}</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">{technologyProductStrategy.startupBlurb.title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700">
             {technologyProductStrategy.startupBlurb.body}
           </p>
@@ -286,7 +286,7 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="talks" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">Talks, teaching, and video</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Talks, teaching, and video</h2>
           <p className="mt-2 max-w-3xl text-sm text-stone-600">
             Embed URLs in `technologyProductStrategy.ts` when recordings are available. Convening and translation skills
             are central to this role.
@@ -317,7 +317,7 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="strategy" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">How I evaluate emerging technology projects</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">How I evaluate emerging technology projects</h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {technologyProductStrategy.strategyLens.map((item, i) => (
               <div key={item.title} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
@@ -330,7 +330,7 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="capabilities" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">What I would bring day to day</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">What I would bring day to day</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {technologyProductStrategy.capabilities.map((c) => (
               <div key={c.title} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
@@ -342,20 +342,20 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="metrics" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">Proof points</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Proof points</h2>
           <p className="mt-2 text-xs text-stone-500">{technologyProductStrategy.metrics.disclaimer}</p>
           <dl className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {technologyProductStrategy.metrics.items.map((m) => (
               <div key={m.label} className="rounded-xl border border-stone-200 bg-white p-4 text-center shadow-sm">
                 <dt className="text-xs text-stone-500">{m.label}</dt>
-                <dd className="mt-2 font-serif text-2xl font-semibold text-cyan-900">{m.value}</dd>
+                <dd className="mt-2 font-['MoMA_Sans'] text-2xl font-semibold text-cyan-900">{m.value}</dd>
               </div>
             ))}
           </dl>
         </section>
 
         <section id="context" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">Selected contexts</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Selected contexts</h2>
           <p className="mt-2 text-xs text-stone-500">{technologyProductStrategy.logos.disclaimer}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {technologyProductStrategy.logos.names.map((name) => (
@@ -370,7 +370,7 @@ export default function TechnologyProductStrategyClient() {
         </section>
 
         <section id="contact" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-serif text-2xl font-semibold text-stone-950">{technologyProductStrategy.closing.title}</h2>
+          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">{technologyProductStrategy.closing.title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700">{technologyProductStrategy.closing.body}</p>
           <p className="mt-4 text-xs text-stone-500">{technologyProductStrategy.closing.preparedFor}</p>
           <div className="mt-6 flex flex-wrap gap-3">

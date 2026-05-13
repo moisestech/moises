@@ -12,7 +12,7 @@ export function RoleMatchMatrix({ opportunity }: RoleMatchMatrixProps) {
 
   return (
     <section id="fit" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-      <h2 className="font-serif text-2xl font-semibold text-stone-950">
+      <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">
         {opportunity.roleMatchSectionTitle ?? 'Role fit'}
       </h2>
       {opportunity.roleMatchIntro ? (
