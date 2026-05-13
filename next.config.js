@@ -22,6 +22,11 @@ const nextConfig = {
         destination: '/workshop/learn-ai-without-losing-yourself/curriculum',
         permanent: true,
       },
+      {
+        source: '/technology-product-strategy/genai-innovation-lab',
+        destination: '/opportunities/cvs-genai-engineer',
+        permanent: false,
+      },
     ]
   },
 

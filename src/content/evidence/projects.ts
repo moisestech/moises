@@ -1,0 +1,99 @@
+export type EvidenceProjectId =
+  | 'lore-machine'
+  | 'ai24'
+  | 'multimodal-image-systems'
+  | 'digital-culture-infrastructure';
+
+export type EvidenceProject = {
+  id: EvidenceProjectId;
+  title: string;
+  category: string;
+  summary: string;
+  skillTags: string[];
+  imageSrc: string;
+  imageAlt: string;
+  /** Local file in /public — use img; remote use next/image in consumer */
+  imageLocal?: boolean;
+  href?: string;
+};
+
+export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
+  'lore-machine': {
+    id: 'lore-machine',
+    title: 'Lore Machine — AI narrative-to-media platform',
+    category: 'AI storytelling product',
+    summary:
+      'AI-driven storytelling infrastructure turning scripts, books, and lyrics into structured multimedia outputs. Work included prompt workflows, generative image systems, API integrations, scene-oriented rendering logic, and scalable product-facing AI development.',
+    skillTags: [
+      'LLMs',
+      'PromptOps',
+      'Python',
+      'TypeScript',
+      'Stable Diffusion',
+      'Replicate',
+      'Azure',
+      'Vercel',
+      'Workers',
+    ],
+    imageSrc: '/images/opportunities/lore-machine-preview.svg',
+    imageAlt: 'Placeholder preview for Lore Machine narrative-to-media work',
+    imageLocal: true,
+  },
+  ai24: {
+    id: 'ai24',
+    title: 'AI24 — AI education, tools, and cultural R&D',
+    category: 'AI literacy and platforms',
+    summary:
+      'AI literacy workshops, LMS-oriented architecture, automation strategy, and applied AI systems for artists and institutions — focused on making emerging tools legible, usable, and responsibly deployable.',
+    skillTags: [
+      'AI product strategy',
+      'LMS',
+      'GenAI education',
+      'Automation',
+      'Multimodal workflows',
+      'Research translation',
+    ],
+    imageSrc: '/images/opportunities/ai24-preview.svg',
+    imageAlt: 'Placeholder preview for AI24 education and R&D platform',
+    imageLocal: true,
+  },
+  'multimodal-image-systems': {
+    id: 'multimodal-image-systems',
+    title: 'Multimodal generative image workflows',
+    category: 'Generative media',
+    summary:
+      'AI image pipelines including pose control, character consistency, Stable Diffusion workflows, ComfyUI research, dataset quality, prompt control, and visual generation systems.',
+    skillTags: [
+      'Stable Diffusion',
+      'ComfyUI',
+      'ControlNet / pose',
+      'Datasets',
+      'Visual consistency',
+      'Multimodal AI',
+    ],
+    imageSrc: '/images/opportunities/multimodal-ai-preview.svg',
+    imageAlt: 'Placeholder preview for multimodal generative image workflows',
+    imageLocal: true,
+  },
+  'digital-culture-infrastructure': {
+    id: 'digital-culture-infrastructure',
+    title: 'Digital culture infrastructure systems',
+    category: 'Infra24 / institutional software',
+    summary:
+      'Digital systems for cultural contexts: portals, smart signs, kiosks, automation workflows, and operational prototypes connecting content, users, and public interfaces.',
+    skillTags: [
+      'Systems architecture',
+      'Product strategy',
+      'Automation',
+      'Institutional workflows',
+      'Rapid prototyping',
+    ],
+    imageSrc: '/images/opportunities/dcc-preview.svg',
+    imageAlt: 'Placeholder preview for digital culture infrastructure work',
+    imageLocal: true,
+  },
+};
+
+export function getEvidenceProject(id: string): EvidenceProject | undefined {
+  return evidenceProjects[id as EvidenceProjectId];
+}

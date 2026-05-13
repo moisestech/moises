@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="800" viewBox="0 0 640 800" fill="none">
+  <rect width="640" height="800" fill="#f5f5f4"/>
+  <circle cx="320" cy="280" r="96" stroke="#0e7490" stroke-width="2" fill="#fff"/>
+  <text x="320" y="460" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#44403c">Headshot placeholder</text>
+  <text x="320" y="492" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#78716c">Replace with /public/images/headshot-moises.jpg</text>
+</svg>
