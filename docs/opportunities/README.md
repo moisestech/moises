@@ -11,6 +11,8 @@ Role-specific recruiting dossiers: compact technical briefs you can drop into em
 
 These routes use a **recruiting-specific site header** modeled on the main site: **MoMA Sans**, **text logo**, two-row desktop layout (logo row + links), theme toggle, and no Visit CTA. See [`src/config/recruiting-navigation.ts`](../../src/config/recruiting-navigation.ts) and [`RecruitingSiteHeader.tsx`](../../src/components/opportunities/RecruitingSiteHeader.tsx). Content begins **150px below** the fixed header block (`pt-[calc(10.5rem+150px)]` in [`recruiting-layout.ts`](../../src/config/recruiting-layout.ts)).
 
+## Add a new opportunity
+
 1. **Evidence** — If the page uses shared case studies, add or extend entries in [`src/content/evidence/projects.ts`](../src/content/evidence/projects.ts). Add preview images under `public/images/opportunities/`.
 2. **Tech logos** — Add keys to [`src/content/evidence/tech-logos.ts`](../src/content/evidence/tech-logos.ts) (`id`, `label`, optional `imageSrc` under `/public`). Reference ids from the opportunity config’s `techLogoIds`.
 3. **Config** — Create [`src/content/opportunities/your-slug.ts`](../src/content/opportunities/) exporting an `Opportunity` object with `slug`, `status: 'active'`, `seo`, `variant: 'compact'`, hero, `roleMatchRows`, `featuredProjectIds`, `skillsMatrixRows`, `processSteps`, `ctas`, etc.
@@ -25,7 +27,7 @@ These routes use a **recruiting-specific site header** modeled on the main site:
 
 ## Logos and previews
 
-- **Tech stack row** (`TechStackLogos`) and the **hero logo strip** use SVG tiles in [`public/images/tech-logos/`](../../public/images/tech-logos/) registered in [`src/content/evidence/tech-logos.ts`](../../src/content/evidence/tech-logos.ts). Replace with official marks when your license allows.
+- **Animated logo band** — [`AnimatedLogoBand`](../../src/components/opportunities/AnimatedLogoBand.tsx) + logo URLs in [`recruitingLogoBand.ts`](../../src/content/evidence/recruitingLogoBand.ts). Set `animatedLogoBand` on an `Opportunity` to show the marquee in the hero and again under “Platforms and tools.”
 - **Case study cards** use SVG placeholders in `public/images/opportunities/` until you drop in real screenshots.
 
 ## Teaching, credentials, and social

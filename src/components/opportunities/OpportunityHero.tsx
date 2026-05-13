@@ -4,18 +4,20 @@ import Image from 'next/image';
 import { Download, Mail, FolderKanban, Linkedin, Github, Instagram } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
-import { TechLogoMarquee } from '@/components/opportunities/TechLogoMarquee';
+import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 
 type OpportunityHeroProps = {
   opportunity: Opportunity;
 };
 
 export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
-  const { hero, ctas, slug, techLogoIds } = opportunity;
+  const { hero, ctas, slug, animatedLogoBand } = opportunity;
 
   const onCta = (kind: string) => {
     track('opportunity_cta_click', { opportunitySlug: slug, kind });
   };
+
+  const headshotRemote = hero.headshotSrc?.startsWith('http') ?? false;
 
   return (
     <section id="hero" className="scroll-mt-32">
@@ -110,24 +112,29 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             <>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">Profile</p>
               <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
-                {hero.headshotSrc.endsWith('.svg') ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={hero.headshotSrc} alt={hero.headshotAlt ?? ''} className="h-full w-full object-cover" />
-                ) : (
+                {headshotRemote || !hero.headshotSrc.endsWith('.svg') ? (
                   <Image
                     src={hero.headshotSrc}
                     alt={hero.headshotAlt ?? ''}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 400px"
+                    priority
                   />
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={hero.headshotSrc} alt={hero.headshotAlt ?? ''} className="h-full w-full object-cover" />
                 )}
               </div>
             </>
           ) : null}
         </div>
       </div>
-      <TechLogoMarquee techLogoIds={techLogoIds} />
+      {animatedLogoBand?.length ? (
+        <div className="mt-10">
+          <AnimatedLogoBand logos={animatedLogoBand} bleed ariaLabel="Tools and platform partners" />
+        </div>
+      ) : null}
     </section>
   );
 }

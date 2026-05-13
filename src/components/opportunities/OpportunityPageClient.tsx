@@ -8,6 +8,7 @@ import { OpportunityTeachingCredentials } from '@/components/opportunities/Oppor
 import { SkillsMatrix } from '@/components/opportunities/SkillsMatrix';
 import { InnovationProcess } from '@/components/opportunities/InnovationProcess';
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
+import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import type { Opportunity } from '@/content/opportunities/types';
 
@@ -28,7 +29,19 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
         <OpportunityTeachingCredentials opportunity={opportunity} />
         <SkillsMatrix opportunity={opportunity} />
         <InnovationProcess opportunity={opportunity} />
-        <TechStackLogos opportunity={opportunity} />
+        {opportunity.animatedLogoBand?.length ? (
+          <section className="mt-16" aria-labelledby="platform-logos-heading">
+            <h2
+              id="platform-logos-heading"
+              className="mb-4 font-['MoMA_Sans'] text-xl font-bold text-stone-950"
+            >
+              Platforms and tools
+            </h2>
+            <AnimatedLogoBand logos={opportunity.animatedLogoBand} bleed ariaLabel="Partner and stack logos" />
+          </section>
+        ) : (
+          <TechStackLogos opportunity={opportunity} />
+        )}
         <ResumeCTA opportunity={opportunity} />
       </main>
     </OpportunityShell>

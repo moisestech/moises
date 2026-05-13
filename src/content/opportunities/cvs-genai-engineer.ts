@@ -1,4 +1,5 @@
 import type { Opportunity } from './types';
+import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
 export const cvsGenaiEngineerOpportunity: Opportunity = {
   slug: 'cvs-genai-engineer',
@@ -32,8 +33,8 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     ],
     trustLine:
       '12+ years in full-stack engineering · AI product development · startup systems · multimodal media infrastructure',
-    headshotSrc: '/images/opportunities/moises-portrait-placeholder.svg',
-    headshotAlt: 'Moises Sanabria — portrait placeholder; replace with a professional photograph when ready',
+    headshotSrc: moisesSanabriaHeadshot,
+    headshotAlt: 'Moises Sanabria — professional headshot',
   },
   roleMatchSectionTitle: 'Why this role fits',
   roleMatchIntro:
@@ -203,27 +204,8 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     cv: '/cv',
     caseStudiesAnchor: '#case-studies',
   },
-  techLogoIds: [
-    'openai',
-    'openai-agents',
-    'langchain',
-    'langgraph',
-    'crewai',
-    'huggingface',
-    'python',
-    'typescript',
-    'nextjs',
-    'pytorch',
-    'docker',
-    'postgres',
-    'azure',
-    'vercel',
-    'supabase',
-    'replicate',
-    'n8n',
-    'stable-diffusion',
-    'comfyui',
-  ],
+  animatedLogoBand: genAiRecruitingLogoBand,
+  techLogoIds: [],
   resumeSectionTitle: 'Résumé tailored for Senior GenAI Engineer roles',
   resumeSectionNote:
     'Available for remote W2 contract roles in GenAI, AI product engineering, innovation labs, and multimodal AI systems.',

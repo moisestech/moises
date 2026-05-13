@@ -1,3 +1,5 @@
+import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
+
 export type OpportunityStatus = 'active' | 'draft';
 
 export type OpportunitySeo = {
@@ -96,4 +98,6 @@ export type Opportunity = {
   teachingHighlights?: TeachingHighlight[];
   /** Degrees, certs, or credential lines you can verify — keep truthful */
   certifications?: CertificationItem[];
+  /** Infinite-scroll logo band (e.g. Cloudinary partner marks) */
+  animatedLogoBand?: LogoBandItem[];
 };
