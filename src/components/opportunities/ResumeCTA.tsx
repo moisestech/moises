@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Download, Mail, Linkedin, Github, Instagram } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
+import { CoverLetterCtaLink } from '@/components/opportunities/CoverLetterCtaLink';
 import { isExternalHttpHref, opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
 
 type ResumeCTAProps = {
@@ -37,6 +38,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
             Download résumé PDF
           </a>
         ) : null}
+        <CoverLetterCtaLink ctas={ctas} onClick={() => onCta('cover_letter_footer')} />
         <a
           href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
           className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"

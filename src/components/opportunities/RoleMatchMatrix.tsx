@@ -126,7 +126,7 @@ export function RoleMatchMatrix({ opportunity }: RoleMatchMatrixProps) {
                     type="button"
                     className={cn(
                       'w-full px-3 py-3 text-left transition-colors sm:px-4',
-                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-cyan-700',
+                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-cyan-400',
                       active
                         ? 'bg-cyan-50/80 ring-1 ring-inset ring-cyan-200/80'
                         : 'hover:bg-stone-50/90',
@@ -172,7 +172,7 @@ export function RoleMatchMatrix({ opportunity }: RoleMatchMatrixProps) {
           </div>
           {activeRow ? (
             <div className="border-t border-stone-200 bg-white/95 px-4 py-3 backdrop-blur-sm">
-              <p className="text-xs font-semibold uppercase tracking-wide text-cyan-900">
+              <p className="text-xs font-semibold uppercase tracking-wide text-cyan-500">
                 {activeRow.requirement}
               </p>
               <p className="mt-1 text-sm text-stone-700">{activeRow.evidence}</p>

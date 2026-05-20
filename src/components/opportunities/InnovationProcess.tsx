@@ -19,7 +19,7 @@ export function InnovationProcess({ opportunity }: InnovationProcessProps) {
             key={step.title}
             className="flex gap-4 rounded-xl border border-stone-200 bg-white p-4 shadow-sm"
           >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-900/10 text-xs font-bold text-cyan-900">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-xs font-bold text-cyan-600">
               {i + 1}
             </span>
             <div>
@@ -37,7 +37,7 @@ export function InnovationProcess({ opportunity }: InnovationProcessProps) {
             </h3>
           ) : null}
           {opportunity.innovationLabLead ? (
-            <p className="mt-2 text-sm font-medium text-cyan-900">{opportunity.innovationLabLead}</p>
+            <p className="mt-2 text-sm font-medium text-cyan-600">{opportunity.innovationLabLead}</p>
           ) : null}
           {opportunity.innovationLabBody ? (
             <p className="mt-2 text-sm leading-relaxed text-stone-700">{opportunity.innovationLabBody}</p>

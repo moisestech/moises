@@ -42,6 +42,8 @@ export type OpportunityCtas = {
   /** Direct PDF in /public */
   resumePdfPath?: string;
   resumePrintPath?: string;
+  /** Public cover letter URL (e.g. Google Docs); opens in a new tab when external. */
+  coverLetterUrl?: string;
   coverLetterPrintPath?: string;
   email: string;
   emailSubject?: string;

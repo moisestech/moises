@@ -10,7 +10,7 @@ function Step({ children }: { children: React.ReactNode }) {
 
 function Arrow() {
   return (
-    <div className="flex shrink-0 items-center justify-center text-cyan-700" aria-hidden>
+    <div className="flex shrink-0 items-center justify-center text-cyan-500" aria-hidden>
       →
     </div>
   );
@@ -57,7 +57,7 @@ export function CivicInformationStackDiagram() {
         {layers.map((label) => (
           <div
             key={label}
-            className="rounded-lg border border-cyan-800/20 bg-white px-4 py-2.5 text-center text-sm font-medium text-stone-800"
+            className="rounded-lg border border-cyan-400/25 bg-white px-4 py-2.5 text-center text-sm font-medium text-stone-800"
           >
             {label}
           </div>

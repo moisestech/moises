@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 const focusRing =
-  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700';
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400';
 
 /**
  * Compact icon-only profile control (hero “Profiles” strip).

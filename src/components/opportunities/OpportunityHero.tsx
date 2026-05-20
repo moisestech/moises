@@ -24,7 +24,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
     <section id="hero" className="scroll-mt-32">
       <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-cyan-800">
+          <p className="text-xs font-semibold uppercase tracking-wide text-cyan-500">
             {opportunity.roleTitle ?? 'Positioning'}
           </p>
           <h1 className="mt-2 font-['MoMA_Sans'] text-3xl font-bold tracking-tight text-stone-950 sm:text-4xl">

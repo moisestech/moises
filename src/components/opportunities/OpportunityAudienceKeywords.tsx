@@ -59,11 +59,11 @@ function KeywordControl({
         className={cn(
           'relative mx-0.5 inline-flex min-h-[44px] max-w-full items-center rounded-md px-2 py-2 text-left text-base font-semibold tracking-tight text-stone-900 sm:min-h-0 sm:px-1.5 sm:py-1 sm:text-lg',
           'transition-[transform,box-shadow,color,background-color] duration-200 motion-reduce:transition-none',
-          'hover:-translate-y-0.5 hover:text-cyan-950 motion-reduce:hover:translate-y-0',
-          'hover:bg-gradient-to-b hover:from-cyan-50/90 hover:to-transparent hover:shadow-[0_6px_24px_-8px_rgba(8,145,178,0.45)]',
-          'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700',
+          'hover:-translate-y-0.5 hover:text-cyan-600 motion-reduce:hover:translate-y-0',
+          'hover:bg-gradient-to-b hover:from-cyan-50/90 hover:to-transparent hover:shadow-[0_8px_28px_-6px_rgba(34,211,238,0.45)]',
+          'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
           'active:scale-[0.98] motion-reduce:active:scale-100',
-          "after:pointer-events-none after:absolute after:inset-x-1 after:bottom-1 after:h-[2px] after:origin-center after:scale-x-0 after:rounded-full after:bg-gradient-to-r after:from-cyan-600 after:to-teal-500 after:transition-transform after:duration-300 after:content-['']",
+          "after:pointer-events-none after:absolute after:inset-x-1 after:bottom-1 after:h-[2px] after:origin-center after:scale-x-0 after:rounded-full after:bg-gradient-to-r after:from-cyan-400 after:to-teal-400 after:transition-transform after:duration-300 after:content-['']",
           'hover:after:scale-x-100 focus-visible:after:scale-x-100',
         )}
         aria-describedby={tipId}

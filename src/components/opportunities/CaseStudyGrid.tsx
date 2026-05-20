@@ -40,7 +40,7 @@ export function CaseStudyGrid({ opportunity }: CaseStudyGridProps) {
                 <CardImage src={cs.imageSrc} alt={cs.imageAlt} local={cs.imageLocal} />
               </div>
               <div className="flex flex-1 flex-col p-4">
-                <p className="text-xs font-medium uppercase tracking-wide text-cyan-800">{cs.category}</p>
+                <p className="text-xs font-medium uppercase tracking-wide text-cyan-500">{cs.category}</p>
                 <h3 className="mt-1 font-['MoMA_Sans'] text-lg font-semibold text-stone-950">{cs.title}</h3>
                 <p className="mt-2 text-sm text-stone-700">{cs.summary}</p>
                 <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-stone-500">Relevant skills</p>
@@ -58,7 +58,7 @@ export function CaseStudyGrid({ opportunity }: CaseStudyGridProps) {
                   cs.href.startsWith('/') ? (
                     <Link
                       href={cs.href}
-                      className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-800 underline-offset-2 hover:underline"
+                      className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-500 underline-offset-2 hover:underline"
                     >
                       View context
                       <ChevronRight className="h-3.5 w-3.5" aria-hidden />
@@ -68,7 +68,7 @@ export function CaseStudyGrid({ opportunity }: CaseStudyGridProps) {
                       href={cs.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-800 hover:underline"
+                      className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-500 hover:underline"
                     >
                       View context
                       <ExternalLink className="h-3.5 w-3.5" aria-hidden />

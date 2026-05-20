@@ -84,7 +84,7 @@ function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
               className={cn(
                 'rounded-full border px-3 py-1 transition-colors',
                 active
-                  ? 'border-cyan-800 bg-cyan-50 text-cyan-950 shadow-sm'
+                  ? 'border-cyan-400 bg-cyan-50 text-cyan-700 shadow-sm shadow-cyan-500/10'
                   : 'border-transparent text-stone-600 hover:border-stone-300 hover:bg-white hover:text-stone-900',
               )}
               aria-current={active ? 'true' : undefined}

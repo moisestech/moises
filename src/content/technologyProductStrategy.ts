@@ -46,8 +46,6 @@ export const technologyProductStrategy = {
     'Prepared as supporting material for Knight Foundation’s Journalism Program — Technology Product Strategist (Miami, FL or remote).',
 
   audienceKeywords: {
-    lead:
-      'Knight Journalism Program — technology investments, AI, and civic information. This dossier is organized around three lenses I bring to the work:',
     terms: [
       {
         label: 'Product & grant judgment',
@@ -111,6 +109,8 @@ export const technologyProductStrategy = {
 
   ctas: {
     resumePrintPath: '/technology-product-strategy/print/resume',
+    coverLetterUrl:
+      'https://docs.google.com/document/d/1HFjlWkqUmNL7wNLTidEeQxUL5pFcTT5p4cktePA5Ioc/view?usp=sharing',
     coverLetterPrintPath: '/technology-product-strategy/print/cover-letter',
     email: 'm@moises.tech',
     linkedin: 'https://www.linkedin.com/in/moisesdsanabria',

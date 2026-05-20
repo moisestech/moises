@@ -44,7 +44,7 @@ const ICON_MAP: Record<SkillsMatrixIconKey, LucideIcon> = {
 const ROW_ACCENTS = [
   {
     row: 'hover:border-cyan-500 hover:bg-cyan-50/85',
-    iconWrap: 'bg-stone-100 text-stone-600 group-hover:bg-cyan-100 group-hover:text-cyan-900',
+    iconWrap: 'bg-stone-100 text-stone-600 group-hover:bg-cyan-100 group-hover:text-cyan-600',
   },
   {
     row: 'hover:border-teal-500 hover:bg-teal-50/85',
@@ -76,6 +76,7 @@ export type ExperienceMatrixSectionProps = {
   rows: ExperienceMatrixRow[];
   headers?: { left: string; right: string };
   className?: string;
+  rowsVariant?: 'moma' | 'sans';
 };
 
 export function MatrixRowIcon({ icon }: { icon?: SkillsMatrixIconKey }) {
@@ -86,14 +87,31 @@ export function MatrixRowIcon({ icon }: { icon?: SkillsMatrixIconKey }) {
 export function ExperienceMatrixRows({
   rows,
   headers,
+  variant = 'moma',
 }: {
   rows: ExperienceMatrixRow[];
   headers?: { left: string; right: string };
+  /** `sans` = neutral sans for dense institutional tables (e.g. role fit). */
+  variant?: 'moma' | 'sans';
 }) {
+  const primaryFont =
+    variant === 'sans'
+      ? 'font-sans text-sm font-bold tracking-tight text-stone-950 sm:text-base'
+      : 'font-[\'MoMA_Sans\'] text-sm font-bold leading-snug text-stone-950 sm:text-base';
+  const secondaryFont =
+    variant === 'sans'
+      ? 'font-sans mt-1.5 text-sm font-normal leading-relaxed tracking-tight text-stone-600'
+      : 'mt-1.5 text-sm font-normal leading-relaxed text-stone-600';
+
   return (
     <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
       {headers ? (
-        <div className="hidden border-b border-stone-200 bg-stone-100 text-xs font-semibold uppercase tracking-wide text-stone-600 sm:grid sm:grid-cols-[3rem_minmax(0,0.38fr)_minmax(0,0.62fr)]">
+        <div
+          className={cn(
+            'hidden border-b border-stone-200 bg-stone-100 text-xs font-semibold uppercase tracking-wide text-stone-600 sm:grid sm:grid-cols-[3rem_minmax(0,0.38fr)_minmax(0,0.62fr)]',
+            variant === 'sans' && 'font-sans tracking-tight',
+          )}
+        >
           <div aria-hidden />
           <div className="px-4 py-3">{headers.left}</div>
           <div className="px-4 py-3">{headers.right}</div>
@@ -120,10 +138,8 @@ export function ExperienceMatrixRows({
                   <MatrixRowIcon icon={row.icon} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-[\'MoMA_Sans\'] text-sm font-bold leading-snug text-stone-950 sm:text-base">
-                    {row.primary}
-                  </p>
-                  <p className="mt-1.5 text-sm font-normal leading-relaxed text-stone-600">{row.secondary}</p>
+                  <p className={primaryFont}>{row.primary}</p>
+                  <p className={secondaryFont}>{row.secondary}</p>
                 </div>
               </div>
             </li>
@@ -140,6 +156,7 @@ export function ExperienceMatrixSection({
   rows,
   headers,
   className,
+  rowsVariant = 'moma',
 }: ExperienceMatrixSectionProps) {
   return (
     <div
@@ -152,7 +169,7 @@ export function ExperienceMatrixSection({
         {title}
       </h2>
       <div className="mt-6">
-        <ExperienceMatrixRows rows={rows} headers={headers} />
+        <ExperienceMatrixRows rows={rows} headers={headers} variant={rowsVariant} />
       </div>
     </div>
   );

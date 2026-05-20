@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Mail, Linkedin, FileText, ExternalLink, LayoutGrid, ChevronRight } from 'lucide-react';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
+import { CoverLetterCtaLink } from '@/components/opportunities/CoverLetterCtaLink';
 import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
 import {
   ExperienceMatrixRows,
@@ -172,7 +173,7 @@ export default function TechnologyProductStrategyClient() {
               </div>
             </div>
             <div className="order-2">
-              <p className="text-xs font-semibold uppercase tracking-wide text-cyan-800">
+              <p className="text-xs font-semibold uppercase tracking-wide text-cyan-500">
                 {technologyProductStrategy.profile.roleTitle}
               </p>
               <p className="mt-1 text-xs font-medium text-stone-500">{technologyProductStrategy.profile.location}</p>
@@ -206,16 +207,7 @@ export default function TechnologyProductStrategyClient() {
                   <FileText className="h-4 w-4 shrink-0" aria-hidden />
                   Résumé (print to PDF)
                 </a>
-                <a
-                  href={ctas.coverLetterPrintPath}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-                  onClick={() => trackCta('cover_letter_print')}
-                >
-                  <FileText className="h-4 w-4 shrink-0" aria-hidden />
-                  Cover letter (print to PDF)
-                </a>
+                <CoverLetterCtaLink ctas={ctas} onClick={() => trackCta('cover_letter')} />
                 <a
                   href={`mailto:${ctas.email}`}
                   className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
@@ -346,8 +338,8 @@ export default function TechnologyProductStrategyClient() {
           </p>
         </section>
 
-        <section id="fit" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Why this background fits the role</h2>
+        <section id="fit" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12 font-sans antialiased">
+          <h2 className="text-2xl font-semibold tracking-tight text-stone-950">Why this background fits the role</h2>
           <p className="mt-3 max-w-3xl text-sm text-stone-600">{technologyProductStrategy.journalismNote}</p>
           <div className="mt-6">
             <ExperienceMatrixRows
@@ -360,6 +352,7 @@ export default function TechnologyProductStrategyClient() {
                 secondary: row.fit,
                 icon: row.icon,
               }))}
+              variant="sans"
             />
           </div>
         </section>
@@ -402,7 +395,7 @@ export default function TechnologyProductStrategyClient() {
           <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Selected case studies</h2>
           <p className="mt-2 max-w-3xl text-sm text-stone-600">
             {technologyProductStrategy.relatedWorkNote.text}{' '}
-            <Link href={technologyProductStrategy.relatedWorkNote.href} className="font-medium text-cyan-800 underline-offset-2 hover:underline">
+            <Link href={technologyProductStrategy.relatedWorkNote.href} className="font-medium text-cyan-500 underline-offset-2 hover:underline">
               {technologyProductStrategy.relatedWorkNote.linkLabel}
             </Link>
             .
@@ -428,7 +421,7 @@ export default function TechnologyProductStrategyClient() {
                   )}
                 </div>
                 <div className="flex flex-1 flex-col p-4">
-                  <p className="text-xs font-medium uppercase tracking-wide text-cyan-800">{cs.category}</p>
+                  <p className="text-xs font-medium uppercase tracking-wide text-cyan-500">{cs.category}</p>
                   <h3 className="mt-1 font-['MoMA_Sans'] text-lg font-semibold text-stone-950">{cs.title}</h3>
                   <p className="mt-2 text-sm text-stone-700">{cs.description}</p>
                   <p className="mt-2 text-xs text-stone-500">
@@ -446,7 +439,7 @@ export default function TechnologyProductStrategyClient() {
                     cs.href.startsWith('/') ? (
                       <Link
                         href={cs.href}
-                        className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-800 underline-offset-2 hover:underline"
+                        className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-500 underline-offset-2 hover:underline"
                       >
                         View context
                         <ChevronRight className="h-3.5 w-3.5" aria-hidden />
@@ -456,7 +449,7 @@ export default function TechnologyProductStrategyClient() {
                         href={cs.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-800 hover:underline"
+                        className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-500 hover:underline"
                       >
                         View context
                         <ExternalLink className="h-3.5 w-3.5" aria-hidden />
@@ -546,7 +539,7 @@ export default function TechnologyProductStrategyClient() {
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {technologyProductStrategy.strategyLens.map((item, i) => (
               <div key={item.title} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-                <span className="text-xs font-bold text-cyan-800">{String(i + 1).padStart(2, '0')}</span>
+                <span className="text-xs font-bold text-cyan-500">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="mt-1 font-medium text-stone-900">{item.title}</h3>
                 <p className="mt-1 text-sm text-stone-600">{item.question}</p>
               </div>
@@ -573,7 +566,7 @@ export default function TechnologyProductStrategyClient() {
             {technologyProductStrategy.metrics.items.map((m) => (
               <div key={m.label} className="rounded-xl border border-stone-200 bg-white p-4 text-center shadow-sm">
                 <dt className="text-xs text-stone-500">{m.label}</dt>
-                <dd className="mt-2 font-['MoMA_Sans'] text-2xl font-semibold text-cyan-900">{m.value}</dd>
+                <dd className="mt-2 font-['MoMA_Sans'] text-2xl font-semibold text-cyan-500">{m.value}</dd>
               </div>
             ))}
           </dl>
@@ -615,6 +608,7 @@ export default function TechnologyProductStrategyClient() {
             >
               Résumé (print to PDF)
             </a>
+            <CoverLetterCtaLink ctas={ctas} onClick={() => trackCta('cover_letter_footer')} />
             <a
               href={ctas.linkedin}
               target="_blank"

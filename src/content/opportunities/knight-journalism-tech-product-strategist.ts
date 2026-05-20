@@ -48,6 +48,8 @@ export const knightJournalismTechProductStrategistOpportunity: Opportunity = {
     email: 'm@moises.tech',
     linkedin: 'https://www.linkedin.com/in/moisesdsanabria',
     resumePrintPath: '/technology-product-strategy/print/resume',
+    coverLetterUrl:
+      'https://docs.google.com/document/d/1HFjlWkqUmNL7wNLTidEeQxUL5pFcTT5p4cktePA5Ioc/view?usp=sharing',
     coverLetterPrintPath: '/technology-product-strategy/print/cover-letter',
     portfolio: '/portfolio',
     cv: '/cv',
