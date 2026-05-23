@@ -60,6 +60,10 @@ export type TeachingHighlight = {
   title: string;
   description: string;
   href: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  /** SVG or files under `/public` — use plain `img` */
+  imageLocal?: boolean;
 };
 
 export type CertificationItem = {

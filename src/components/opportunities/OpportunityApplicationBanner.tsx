@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { opp } from '@/components/opportunities/opportunityTheme';
 import type { ApplicationBanner } from '@/content/opportunities/types';
 
 type OpportunityApplicationBannerProps = {
@@ -14,7 +15,6 @@ const defaultFrame =
 
 /**
  * Full-viewport-width banner directly under the fixed recruiting header.
- * Omit `banner` to hide. Use Cloudinary (or /public) URLs per application.
  */
 export function OpportunityApplicationBanner({ banner, className }: OpportunityApplicationBannerProps) {
   if (!banner?.src) return null;
@@ -24,7 +24,8 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
   return (
     <div
       className={cn(
-        'relative left-1/2 mb-8 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden border-b border-stone-200 bg-stone-900/5 shadow-sm',
+        'relative left-1/2 mb-8 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden shadow-sm',
+        opp.bannerBorder,
         className,
       )}
     >

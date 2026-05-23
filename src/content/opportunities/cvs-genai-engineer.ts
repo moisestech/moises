@@ -89,8 +89,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
         'Full-stack delivery across Next.js/TypeScript products and Python/API-oriented automation and glue systems.',
       illustration: {
         src: evidenceProjects['digital-culture-infrastructure'].imageSrc,
-        alt: 'Digital culture infrastructure — full-stack portals, automation, and TypeScript-heavy product surfaces.',
-        local: evidenceProjects['digital-culture-infrastructure'].imageLocal,
+        alt: 'Digital Culture Center Miami — website and institutional digital infrastructure.',
       },
     },
     {
@@ -232,22 +231,34 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     {
       title: 'Teaching hub',
       description: 'Workshops, programs, and how I frame AI for artists, institutions, and the public.',
-      href: '/teaching',
+      href: '/workshops',
+      imageSrc:
+        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg',
+      imageAlt: 'Virtual workshop session — teaching and digital presence programs',
     },
     {
       title: 'The Art of AI Agents',
       description: 'Multi-session workshop on practical agent workflows and tooling.',
       href: '/workshop/the-art-of-ai-agents',
+      imageSrc:
+        'https://res.cloudinary.com/du1ysiumj/image/upload/v1774829074/the-art-of-ai-agents-locust-projects-the-dill-2026_xjb76m.jpg',
+      imageAlt: 'The Art of AI Agents workshop at Locust Projects',
     },
     {
       title: 'Learn AI Without Losing Yourself',
       description: 'Structured curriculum for critical, sustainable AI practice.',
       href: '/workshop/learn-ai-without-losing-yourself',
+      imageSrc:
+        'https://res.cloudinary.com/du1ysiumj/image/upload/v1774826962/learn-ai-without-loosing-yourself-bg-no-text_pz3qno.png',
+      imageAlt: 'Learn AI Without Losing Yourself — workshop visual',
     },
     {
       title: 'Own Your Digital Presence',
       description: 'Website and content strategy intensive including AI-assisted workflows.',
       href: '/workshop/own-your-digital-presence',
+      imageSrc:
+        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743021790/own-your-digital-presence/website-building-workshop-focus_wvkiwk.jpg',
+      imageAlt: 'Own Your Digital Presence — website building workshop',
     },
   ],
   certifications: [
@@ -265,6 +276,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
   ],
   ctas: {
     resumePdfPath: '/resume/moises-sanabria-senior-genai-engineer.pdf',
+    resumePrintPath: '/opportunities/cvs-senior-genai-engineer/print/resume',
     email: 'm@moises.tech',
     emailSubject: 'Senior GenAI Engineer — Moises Sanabria',
     linkedin: 'https://www.linkedin.com/in/moisesdsanabria',

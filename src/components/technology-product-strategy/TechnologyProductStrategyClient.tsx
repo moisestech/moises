@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, Linkedin, FileText, ExternalLink, LayoutGrid, ChevronRight } from 'lucide-react';
+import { Mail, Linkedin, ExternalLink, LayoutGrid, ChevronRight } from 'lucide-react';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { CoverLetterCtaLink } from '@/components/opportunities/CoverLetterCtaLink';
@@ -20,7 +20,9 @@ import {
   InvestmentLensDiagram,
 } from '@/components/technology-product-strategy/FrameworkDiagrams';
 import { SkillCapabilityChart } from '@/components/technology-product-strategy/SkillCapabilityChart';
+import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
 import { isExternalHttpHref, opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
+import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
 function GridImage({
@@ -81,7 +83,7 @@ function SelectedProjectGridTile({
     <p
       className={cn(
         'mt-1.5 text-xs font-semibold leading-snug',
-        inSleekPanel ? 'text-stone-100/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]' : 'text-stone-800',
+        inSleekPanel ? 'text-stone-100/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]' : 'text-stone-800 dark:text-stone-200',
       )}
     >
       {tile.title}
@@ -149,19 +151,14 @@ export default function TechnologyProductStrategyClient() {
     <OpportunityShell navItems={navItems}>
       <>
         <OpportunityApplicationBanner banner={technologyProductStrategy.applicationBanner} />
-        <main
-          className={cn(
-            'mx-auto max-w-5xl px-4 pb-24 font-[\'MoMA_Sans\']',
-            hasBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10',
-          )}
-        >
+        <main className={cn(opp.main, hasBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10')}>
         <OpportunityAudienceKeywords data={technologyProductStrategy.audienceKeywords} />
 
         <section id="profile" className="scroll-mt-32">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
             <div className="order-1">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">Profile</p>
-              <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
+              <p className={`mb-2 ${opp.label}`}>Profile</p>
+              <div className={opp.headshot}>
                 <Image
                   src={technologyProductStrategy.profile.headshotSrc}
                   alt={technologyProductStrategy.profile.headshotAlt}
@@ -173,44 +170,28 @@ export default function TechnologyProductStrategyClient() {
               </div>
             </div>
             <div className="order-2">
-              <p className="text-xs font-semibold uppercase tracking-wide text-cyan-500">
-                {technologyProductStrategy.profile.roleTitle}
-              </p>
-              <p className="mt-1 text-xs font-medium text-stone-500">{technologyProductStrategy.profile.location}</p>
-              <h1 className="mt-2 font-['MoMA_Sans'] text-3xl font-semibold tracking-tight text-stone-950 sm:text-4xl">
-                {technologyProductStrategy.profile.headline}
-              </h1>
-              <p className="mt-2 text-lg text-stone-600">{technologyProductStrategy.profile.subtitle}</p>
-              <p className="mt-1 text-sm text-stone-500">{technologyProductStrategy.profile.roleLine}</p>
+              <p className={opp.accent}>{technologyProductStrategy.profile.roleTitle}</p>
+              <p className={`mt-1 text-xs font-medium ${opp.subtle}`}>{technologyProductStrategy.profile.location}</p>
+              <h1 className={`mt-2 ${opp.h1}`}>{technologyProductStrategy.profile.headline}</h1>
+              <p className={`mt-2 ${opp.bodyLg}`}>{technologyProductStrategy.profile.subtitle}</p>
+              <p className={`mt-1 text-sm ${opp.subtle}`}>{technologyProductStrategy.profile.roleLine}</p>
               {technologyProductStrategy.profile.trustLine ? (
-                <p className="mt-2 text-xs text-stone-500 sm:text-sm">{technologyProductStrategy.profile.trustLine}</p>
+                <p className={`mt-2 text-xs ${opp.subtle} sm:text-sm`}>{technologyProductStrategy.profile.trustLine}</p>
               ) : null}
-              <p className="mt-4 text-sm leading-relaxed text-stone-700">{technologyProductStrategy.profile.body}</p>
+              <p className={`mt-4 ${opp.body}`}>{technologyProductStrategy.profile.body}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {technologyProductStrategy.profile.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-stone-200 bg-white px-3 py-1 text-xs text-stone-700"
-                  >
+                  <span key={tag} className={opp.pillTag}>
                     {tag}
                   </span>
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href={ctas.resumePrintPath}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-stone-800"
-                  onClick={() => trackCta('resume_print')}
-                >
-                  <FileText className="h-4 w-4 shrink-0" aria-hidden />
-                  Résumé (print to PDF)
-                </a>
+                <OpportunityResumeLinks ctas={ctas} onCta={trackCta} variant="hero" />
                 <CoverLetterCtaLink ctas={ctas} onClick={() => trackCta('cover_letter')} />
                 <a
                   href={`mailto:${ctas.email}`}
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                  className={opp.btnSecondaryMedium}
                   onClick={() => trackCta('email')}
                 >
                   <Mail className="h-4 w-4 shrink-0" aria-hidden />
@@ -232,7 +213,7 @@ export default function TechnologyProductStrategyClient() {
                       href={ctas.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                      className={opp.btnSecondaryMedium}
                     >
                       <LayoutGrid className="h-4 w-4 shrink-0" aria-hidden />
                       Portfolio
@@ -240,7 +221,7 @@ export default function TechnologyProductStrategyClient() {
                   ) : (
                     <Link
                       href={ctas.portfolio}
-                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                      className={opp.btnSecondaryMedium}
                     >
                       <LayoutGrid className="h-4 w-4 shrink-0" aria-hidden />
                       Portfolio
@@ -253,14 +234,14 @@ export default function TechnologyProductStrategyClient() {
                       href={ctas.cv}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                      className={opp.btnSecondaryMedium}
                     >
                       Web CV
                     </a>
                   ) : (
                     <Link
                       href={ctas.cv}
-                      className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                      className={opp.btnSecondaryMedium}
                     >
                       Web CV
                     </Link>
@@ -270,7 +251,7 @@ export default function TechnologyProductStrategyClient() {
             </div>
           </div>
 
-          <div className="mt-12 border-t border-stone-200 pt-10">
+          <div className={opp.sectionSm}>
           <div className="relative min-h-[min(22rem,70vw)] overflow-hidden rounded-2xl border border-stone-600/35 shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_80px_-12px_rgba(34,211,238,0.14)]">
             {technologyProductStrategy.applicationBanner?.src ? (
               <div className="pointer-events-none absolute inset-0">
@@ -331,16 +312,16 @@ export default function TechnologyProductStrategyClient() {
           </div>
         </section>
 
-        <section id="thesis" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">{technologyProductStrategy.thesis.title}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700">
+        <section id="thesis" className={opp.section}>
+          <h2 className={opp.h2}>{technologyProductStrategy.thesis.title}</h2>
+          <p className={`mt-3 max-w-3xl ${opp.body}`}>
             {technologyProductStrategy.thesis.body}
           </p>
         </section>
 
-        <section id="fit" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12 font-sans antialiased">
-          <h2 className="text-2xl font-semibold tracking-tight text-stone-950">Why this background fits the role</h2>
-          <p className="mt-3 max-w-3xl text-sm text-stone-600">{technologyProductStrategy.journalismNote}</p>
+        <section id="fit" className={cn(opp.section, 'font-sans antialiased')}>
+          <h2 className="text-2xl font-semibold tracking-tight text-stone-950 dark:text-stone-50">Why this background fits the role</h2>
+          <p className={`mt-3 max-w-3xl ${opp.muted}`}>{technologyProductStrategy.journalismNote}</p>
           <div className="mt-6">
             <ExperienceMatrixRows
               headers={{
@@ -357,19 +338,19 @@ export default function TechnologyProductStrategyClient() {
           </div>
         </section>
 
-        <section id="skills" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Capabilities map</h2>
+        <section id="skills" className={opp.section}>
+          <h2 className={opp.h2}>Capabilities map</h2>
           <div className="mt-6 max-w-3xl">
             <SkillCapabilityChart data={skillData} disclaimer={technologyProductStrategy.skillsDisclaimer} />
           </div>
           <div className="mt-10">
             <h3
               id="core-skills-heading"
-              className="font-[\'MoMA_Sans\'] text-xl font-semibold text-stone-950"
+              className={cn(opp.h2, 'text-xl')}
             >
               Core skills & experience
             </h3>
-            <p className="mt-2 max-w-3xl text-sm text-stone-600">
+            <p className={`mt-2 max-w-3xl ${opp.muted}`}>
               Primary lines are domains I own; supporting text is how that shows up in product, media, and
               institutional contexts.
             </p>
@@ -391,11 +372,11 @@ export default function TechnologyProductStrategyClient() {
           </div>
         </section>
 
-        <section id="projects" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Selected case studies</h2>
-          <p className="mt-2 max-w-3xl text-sm text-stone-600">
+        <section id="projects" className={opp.section}>
+          <h2 className={opp.h2}>Selected case studies</h2>
+          <p className={`mt-2 max-w-3xl ${opp.muted}`}>
             {technologyProductStrategy.relatedWorkNote.text}{' '}
-            <Link href={technologyProductStrategy.relatedWorkNote.href} className="font-medium text-cyan-500 underline-offset-2 hover:underline">
+            <Link href={technologyProductStrategy.relatedWorkNote.href} className={opp.linkAccent}>
               {technologyProductStrategy.relatedWorkNote.linkLabel}
             </Link>
             .
@@ -404,9 +385,9 @@ export default function TechnologyProductStrategyClient() {
             {technologyProductStrategy.caseStudies.map((cs) => (
               <article
                 key={cs.title}
-                className="flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm"
+                className={`flex flex-col ${opp.card}`}
               >
-                <div className="relative aspect-[16/10] border-b border-stone-100 bg-stone-100">
+                <div className={opp.cardMedia}>
                   {cs.imageIsRemote ? (
                     <Image
                       src={cs.imageSrc}
@@ -421,19 +402,19 @@ export default function TechnologyProductStrategyClient() {
                   )}
                 </div>
                 <div className="flex flex-1 flex-col p-4">
-                  <p className="text-xs font-medium uppercase tracking-wide text-cyan-500">{cs.category}</p>
-                  <h3 className="mt-1 font-['MoMA_Sans'] text-lg font-semibold text-stone-950">{cs.title}</h3>
-                  <p className="mt-2 text-sm text-stone-700">{cs.description}</p>
-                  <p className="mt-2 text-xs text-stone-500">
-                    <span className="font-semibold text-stone-600">Role:</span> {cs.role}
+                  <p className={opp.accentCategory}>{cs.category}</p>
+                  <h3 className={`mt-1 ${opp.h3MoMA}`}>{cs.title}</h3>
+                  <p className={`mt-2 ${opp.body}`}>{cs.description}</p>
+                  <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">
+                    <span className="font-semibold text-stone-600 dark:text-stone-400">Role:</span> {cs.role}
                   </p>
-                  <ul className="mt-2 list-inside list-disc text-xs text-stone-600">
+                  <ul className="mt-2 list-inside list-disc text-xs text-stone-600 dark:text-stone-400">
                     {cs.technologyRelevance.map((t) => (
                       <li key={t}>{t}</li>
                     ))}
                   </ul>
-                  <p className="mt-3 border-t border-stone-100 pt-3 text-xs leading-relaxed text-stone-600">
-                    <span className="font-semibold text-stone-700">For this role:</span> {cs.knightRelevance}
+                  <p className="mt-3 border-t border-stone-100 dark:border-stone-800 pt-3 text-xs leading-relaxed text-stone-600 dark:text-stone-400">
+                    <span className="font-semibold text-stone-700 dark:text-stone-300">For this role:</span> {cs.knightRelevance}
                   </p>
                   {cs.href ? (
                     cs.href.startsWith('/') ? (
@@ -462,9 +443,9 @@ export default function TechnologyProductStrategyClient() {
           </div>
         </section>
 
-        <section id="startup" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">{technologyProductStrategy.startupBlurb.title}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700">
+        <section id="startup" className={opp.section}>
+          <h2 className={opp.h2}>{technologyProductStrategy.startupBlurb.title}</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700 dark:text-stone-300">
             {technologyProductStrategy.startupBlurb.body}
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -474,7 +455,7 @@ export default function TechnologyProductStrategyClient() {
                 <div
                   key={row.bucket}
                   className={cn(
-                    'group rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition-colors duration-200',
+                    'group rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-4 shadow-sm transition-colors duration-200',
                     accent.row,
                   )}
                 >
@@ -489,8 +470,8 @@ export default function TechnologyProductStrategyClient() {
                       <MatrixRowIcon icon={row.icon} />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-[\'MoMA_Sans\'] text-sm font-bold text-stone-950">{row.bucket}</h3>
-                      <ul className="mt-2 space-y-1 text-xs font-normal leading-snug text-stone-600">
+                      <h3 className={cn(opp.h3MoMA, 'text-sm')}>{row.bucket}</h3>
+                      <ul className="mt-2 space-y-1 text-xs font-normal leading-snug text-stone-600 dark:text-stone-400">
                         {row.items.map((item) => (
                           <li key={item}>{item}</li>
                         ))}
@@ -503,17 +484,17 @@ export default function TechnologyProductStrategyClient() {
           </div>
         </section>
 
-        <section id="talks" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Talks, teaching, and video</h2>
-          <p className="mt-2 max-w-3xl text-sm text-stone-600">
+        <section id="talks" className={opp.section}>
+          <h2 className={opp.h2}>Talks, teaching, and video</h2>
+          <p className="mt-2 max-w-3xl text-sm text-stone-600 dark:text-stone-400">
             Embed URLs in `technologyProductStrategy.ts` when recordings are available. Convening and translation skills
             are central to this role.
           </p>
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {technologyProductStrategy.talks.map((talk) => (
-              <div key={talk.title} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-                <h3 className="font-medium text-stone-900">{talk.title}</h3>
-                <p className="mt-2 text-sm text-stone-600">{talk.description}</p>
+              <div key={talk.title} className="rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-4 shadow-sm">
+                <h3 className="font-medium text-stone-900 dark:text-stone-100">{talk.title}</h3>
+                <p className="mt-2 text-sm text-stone-600 dark:text-stone-400">{talk.description}</p>
                 {talk.embedUrl ? (
                   <div className="mt-4 aspect-video overflow-hidden rounded-lg bg-black">
                     <iframe
@@ -525,7 +506,7 @@ export default function TechnologyProductStrategyClient() {
                     />
                   </div>
                 ) : (
-                  <div className="mt-4 flex aspect-video items-center justify-center rounded-lg border border-dashed border-stone-300 bg-stone-50 text-xs text-stone-500">
+                  <div className="mt-4 flex aspect-video items-center justify-center rounded-lg border border-dashed border-stone-300 bg-stone-50 text-xs text-stone-500 dark:text-stone-400">
                     {talk.placeholder ? 'Video / embed — add when ready' : null}
                   </div>
                 )}
@@ -534,52 +515,52 @@ export default function TechnologyProductStrategyClient() {
           </div>
         </section>
 
-        <section id="strategy" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">How I evaluate emerging technology projects</h2>
+        <section id="strategy" className={opp.section}>
+          <h2 className={opp.h2}>How I evaluate emerging technology projects</h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {technologyProductStrategy.strategyLens.map((item, i) => (
-              <div key={item.title} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
+              <div key={item.title} className="rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-4 shadow-sm">
                 <span className="text-xs font-bold text-cyan-500">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="mt-1 font-medium text-stone-900">{item.title}</h3>
-                <p className="mt-1 text-sm text-stone-600">{item.question}</p>
+                <h3 className="mt-1 font-medium text-stone-900 dark:text-stone-100">{item.title}</h3>
+                <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">{item.question}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="capabilities" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">What I would bring day to day</h2>
+        <section id="capabilities" className={opp.section}>
+          <h2 className={opp.h2}>What I would bring day to day</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {technologyProductStrategy.capabilities.map((c) => (
-              <div key={c.title} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-                <h3 className="font-medium text-stone-900">{c.title}</h3>
-                <p className="mt-2 text-sm text-stone-600">{c.body}</p>
+              <div key={c.title} className="rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-4 shadow-sm">
+                <h3 className="font-medium text-stone-900 dark:text-stone-100">{c.title}</h3>
+                <p className="mt-2 text-sm text-stone-600 dark:text-stone-400">{c.body}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="metrics" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Proof points</h2>
-          <p className="mt-2 text-xs text-stone-500">{technologyProductStrategy.metrics.disclaimer}</p>
+        <section id="metrics" className={opp.section}>
+          <h2 className={opp.h2}>Proof points</h2>
+          <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">{technologyProductStrategy.metrics.disclaimer}</p>
           <dl className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {technologyProductStrategy.metrics.items.map((m) => (
-              <div key={m.label} className="rounded-xl border border-stone-200 bg-white p-4 text-center shadow-sm">
-                <dt className="text-xs text-stone-500">{m.label}</dt>
+              <div key={m.label} className="rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-4 text-center shadow-sm">
+                <dt className="text-xs text-stone-500 dark:text-stone-400">{m.label}</dt>
                 <dd className="mt-2 font-['MoMA_Sans'] text-2xl font-semibold text-cyan-500">{m.value}</dd>
               </div>
             ))}
           </dl>
         </section>
 
-        <section id="context" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">Selected contexts</h2>
-          <p className="mt-2 text-xs text-stone-500">{technologyProductStrategy.logos.disclaimer}</p>
+        <section id="context" className={opp.section}>
+          <h2 className={opp.h2}>Selected contexts</h2>
+          <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">{technologyProductStrategy.logos.disclaimer}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {technologyProductStrategy.logos.names.map((name) => (
               <span
                 key={name}
-                className="rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-xs font-medium text-stone-700"
+                className="rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-3 py-1.5 text-xs font-medium text-stone-700 dark:text-stone-300"
               >
                 {name}
               </span>
@@ -587,27 +568,19 @@ export default function TechnologyProductStrategyClient() {
           </div>
         </section>
 
-        <section id="contact" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-          <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">{technologyProductStrategy.closing.title}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700">{technologyProductStrategy.closing.body}</p>
-          <p className="mt-4 text-xs text-stone-500">{technologyProductStrategy.closing.preparedFor}</p>
+        <section id="contact" className={opp.section}>
+          <h2 className={opp.h2}>{technologyProductStrategy.closing.title}</h2>
+          <p className={`mt-3 max-w-3xl ${opp.body}`}>{technologyProductStrategy.closing.body}</p>
+          <p className={`mt-4 ${opp.subtle}`}>{technologyProductStrategy.closing.preparedFor}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href={`mailto:${ctas.email}?subject=Technology%20Product%20Strategist%20%E2%80%94%20Moises%20Sanabria`}
-              className="inline-flex rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-stone-800"
+              className={opp.btnPrimary}
               onClick={() => trackCta('email_moises_footer')}
             >
               Email Moises
             </a>
-            <a
-              href={ctas.resumePrintPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-              onClick={() => trackCta('resume_print_footer')}
-            >
-              Résumé (print to PDF)
-            </a>
+            <OpportunityResumeLinks ctas={ctas} onCta={trackCta} variant="footer" />
             <CoverLetterCtaLink ctas={ctas} onClick={() => trackCta('cover_letter_footer')} />
             <a
               href={ctas.linkedin}
@@ -625,15 +598,12 @@ export default function TechnologyProductStrategyClient() {
                   href={ctas.portfolio}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+                  className={opp.btnSecondaryMedium}
                 >
                   Portfolio
                 </a>
               ) : (
-                <Link
-                  href={ctas.portfolio}
-                  className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-                >
+                <Link href={ctas.portfolio} className={opp.btnSecondaryMedium}>
                   Portfolio
                 </Link>
               )

@@ -33,7 +33,7 @@ export function AnimatedLogoBand({
   return (
     <div
       className={cn(
-        'border-y border-stone-200 bg-gradient-to-b from-stone-50 to-white py-4 shadow-inner',
+        'border-y border-stone-200 dark:border-stone-700 bg-gradient-to-b from-stone-50 to-white dark:from-stone-900 dark:to-stone-950 py-4 shadow-inner',
         bleed && 'relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2',
         className,
       )}

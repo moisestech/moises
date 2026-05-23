@@ -17,8 +17,8 @@ These routes use a **recruiting-specific site header** modeled on the main site:
 2. **Tech logos** — Add keys to [`src/content/evidence/tech-logos.ts`](../src/content/evidence/tech-logos.ts) (`id`, `label`, optional `imageSrc` under `/public`). Reference ids from the opportunity config’s `techLogoIds`.
 3. **Config** — Create [`src/content/opportunities/your-slug.ts`](../src/content/opportunities/) exporting an `Opportunity` object with `slug`, `status: 'active'`, `seo`, `variant: 'compact'`, hero, `roleMatchRows`, `featuredProjectIds`, `skillsMatrixRows`, `processSteps`, `ctas`, etc. Optionally add **`applicationBanner`** (`src`, `alt`, optional `aspectClass`) for a full-width banner image (remote URL or path under `/public`).
 4. **Registry** — Register the object in [`src/content/opportunities/registry.ts`](../src/content/opportunities/registry.ts) inside `bySlug`.
-5. **Résumé PDF** — Place the file in `public/resume/` and set `ctas.resumePdfPath` (e.g. `/resume/moises-sanabria-senior-genai-engineer.pdf`).
-6. **Optional redirect** — If you want a second vanity URL, add a `redirects()` entry in `next.config.js`.
+5. **Résumé** — Set `ctas.resumePdfPath` (file in `public/resume/`) and/or `ctas.resumePrintPath` (print route). Shared UI: [`OpportunityResumeLinks.tsx`](../../src/components/opportunities/OpportunityResumeLinks.tsx). Theme tokens: [`opportunityTheme.ts`](../../src/components/opportunities/opportunityTheme.ts).
+7. **Optional redirect** — If you want a second vanity URL, add a `redirects()` entry in `next.config.js`.
 
 ## Knight in this system
 

@@ -14,9 +14,9 @@ export type SkillRow = { name: string; value: number };
 
 export function SkillCapabilityChart({ data, disclaimer }: { data: SkillRow[]; disclaimer: string }) {
   return (
-    <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
-      <h3 className="text-sm font-semibold text-stone-900">Role-relevant strengths (self-assessed)</h3>
-      <p className="mt-1 text-xs text-stone-500">{disclaimer}</p>
+    <div className="rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-4 shadow-sm">
+      <h3 className="text-sm font-semibold text-stone-900 dark:text-stone-100">Role-relevant strengths (self-assessed)</h3>
+      <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">{disclaimer}</p>
       <div className="mt-4 h-72 w-full sm:h-80">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ top: 4, right: 12, left: 4, bottom: 4 }}>

@@ -2,6 +2,7 @@
 
 import { FileText } from 'lucide-react';
 import type { OpportunityCtas } from '@/content/opportunities/types';
+import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
 type CoverLetterCtaLinkProps = {
@@ -22,10 +23,7 @@ export function CoverLetterCtaLink({ ctas, onClick, className }: CoverLetterCtaL
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        'inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50',
-        className
-      )}
+      className={cn(opp.btnSecondaryMedium, className)}
       onClick={onClick}
     >
       <FileText className="h-4 w-4 shrink-0" aria-hidden />

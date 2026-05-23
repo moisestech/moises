@@ -20,6 +20,7 @@ interface Artwork {
   location_url?: string;
   curator?: string;
   collaboration?: string;
+  technical_assistant?: string;
   description: string;
   description_es?: string;
   materials?: string[];
@@ -75,6 +76,7 @@ interface Artist {
 /** Canon works for Selected Works page — institutional entry point */
 export const SELECTED_WORK_SLUGS: string[] = [
   'privacy_is_a_luxury',
+  'digital_divinities',
   'taste_the_algorithm',
   'simulation_faith',
   'price_of_existence',
@@ -521,25 +523,55 @@ export const artist: Artist = {
       on_view: false,
     },
     digital_divinities: {
-      title: 'Ephemeral Reflections of Digital Divinities',
+      title: 'Eternal Reflections of Digital Divinities',
       year: 2023,
       location: 'Lincoln Road, Miami, USA',
       collaboration: 'Fabiola Larios',
+      technical_assistant: 'Andy Cedillo',
       description:
-        'Viewers become muses in real-time, generating new digital divinities that echo ancient mythology through the lens of algorithmic identity. Ephemeral Reflections of Digital Divinities (2023) is a provocative installation that examines the evolution of self-representation from ancient Greek mythology to the digital age. This collaborative piece by Fabiola Larios and Moises Sanabria draws upon the timeless inspiration of the Greek Muses, while simultaneously exploring the impact of social media and digital culture on self-perception. The artwork creates AI-generated muses in real-time, using the viewer\'s photograph as the basis for constructing digital identities.',
+        'Eternal Reflections of Digital Divinities is an interactive AI installation that transforms spectators into artificial muses in real time. The work materializes the internet as ritual, asking how platforms, images, and algorithms shape self-reflection, belief, and networked life.',
       materials: [
-        'Computer Vision Cameras',
-        'Realtime Image Generation Model',
+        'Camera / webcam',
+        'Local GPU workstation',
         'TouchDesigner',
-        'Custom LED Hardware Panel',
-        'Bust Statue'
+        'Python',
+        'Stable Diffusion',
+        'ControlNet',
+        'CableGL',
+        'Display or projection system',
+        'Custom LED hardware panel',
+        'Bust sculpture',
+        'Participant-facing interface',
       ],
-      medium: 'New Media Interactive Installation',
+      medium: 'Interactive AI installation',
+      dimensions: 'Variable',
       images: [
         {
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
-          caption: 'Ephemeral Reflections of Digital Divinities - Interactive installation view'
-        }
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779573363/art/moisestech-website/artworks/2023_digital_divinities/02DigitalDivinities_n4yrg8.png',
+          caption: 'Installation view — Eternal Reflections of Digital Divinities',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779573344/art/moisestech-website/artworks/2023_digital_divinities/02DigitalDivinities-FutureMuses_fpvc0n.jpg',
+          caption: 'Artificial muse — generative portrait output',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779573358/art/moisestech-website/artworks/2023_digital_divinities/02DigitalDivinities-FutureMuses-2_krpuis.jpg',
+          caption: 'Artificial muse — generative portrait output (variant)',
+        },
+      ],
+      links: [
+        {
+          url: 'https://www.futurecommerce.com/posts/ancient-inspiration-and-divine-innovation-a-recap-of-muses',
+          label: 'Future Commerce — Ancient Inspiration and Divine Innovation',
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=4sRDSQY7WZI',
+          label: 'Documentation video (YouTube)',
+        },
+        {
+          url: 'https://www.youtube.com/watch?v=NbT94ooCs54',
+          label: 'Process documentation (YouTube)',
+        },
       ],
       tags: [
         'interactive installation',
@@ -552,10 +584,10 @@ export const artist: Artist = {
         'social media',
         'self-representation',
         'Art Week',
-        'Adobe'
+        'Lumen Prize',
       ],
-      interpretation: 
-        'The installation bridges ancient mythology with contemporary digital culture, exploring how self-representation has evolved from classical ideals to modern digital identities. Through real-time AI generation, it questions the nature of divine inspiration in an age of algorithmic creation.',
+      interpretation:
+        'The installation bridges ancient mythology with contemporary digital culture, exploring how self-representation has evolved from classical ideals to algorithmic muses. Through real-time AI generation, it questions divine inspiration in an age where platforms produce seductive, authoritative versions of identity.',
       exhibition: 'Art Week Miami',
       role: 'Artist, Technical Director, Operations',
       on_view: true,

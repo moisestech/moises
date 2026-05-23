@@ -77,10 +77,10 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
   },
   'digital-culture-infrastructure': {
     id: 'digital-culture-infrastructure',
-    title: 'Digital culture infrastructure systems',
-    category: 'Infra24 / institutional software',
+    title: 'Digital Culture Infra System — DCC Miami',
+    category: 'Digital Culture Center Miami',
     summary:
-      'Digital systems for cultural contexts: portals, smart signs, kiosks, automation workflows, and operational prototypes connecting content, users, and public interfaces.',
+      'Public website and operational stack for Miami’s Digital Culture Center — programs, workshops, and institutional tooling that connect artists and organizations to shared digital capacity.',
     skillTags: [
       'Systems architecture',
       'Product strategy',
@@ -88,9 +88,10 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'Institutional workflows',
       'Rapid prototyping',
     ],
-    imageSrc: '/images/opportunities/dcc-preview.svg',
-    imageAlt: 'Placeholder preview for digital culture infrastructure work',
-    imageLocal: true,
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
+    imageAlt: 'Digital Culture Center Miami website — program and workshop hub screenshot',
+    href: 'https://dcc.miami',
   },
 };
 

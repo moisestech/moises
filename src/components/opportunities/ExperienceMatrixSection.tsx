@@ -19,6 +19,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { opp } from '@/components/opportunities/opportunityTheme';
 import type { SkillsMatrixIconKey } from '@/content/opportunities/types';
 
 const ICON_MAP: Record<SkillsMatrixIconKey, LucideIcon> = {
@@ -43,24 +44,29 @@ const ICON_MAP: Record<SkillsMatrixIconKey, LucideIcon> = {
 
 const ROW_ACCENTS = [
   {
-    row: 'hover:border-cyan-500 hover:bg-cyan-50/85',
-    iconWrap: 'bg-stone-100 text-stone-600 group-hover:bg-cyan-100 group-hover:text-cyan-600',
+    row: 'hover:border-cyan-500 hover:bg-cyan-50/85 dark:hover:bg-cyan-950/40',
+    iconWrap:
+      'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 group-hover:bg-cyan-100 dark:group-hover:bg-cyan-900/50 group-hover:text-cyan-600 dark:group-hover:text-cyan-400',
   },
   {
-    row: 'hover:border-teal-500 hover:bg-teal-50/85',
-    iconWrap: 'bg-stone-100 text-stone-600 group-hover:bg-teal-100 group-hover:text-teal-900',
+    row: 'hover:border-teal-500 hover:bg-teal-50/85 dark:hover:bg-teal-950/35',
+    iconWrap:
+      'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/50 group-hover:text-teal-900 dark:group-hover:text-teal-300',
   },
   {
-    row: 'hover:border-violet-500 hover:bg-violet-50/80',
-    iconWrap: 'bg-stone-100 text-stone-600 group-hover:bg-violet-100 group-hover:text-violet-900',
+    row: 'hover:border-violet-500 hover:bg-violet-50/80 dark:hover:bg-violet-950/35',
+    iconWrap:
+      'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 group-hover:bg-violet-100 dark:group-hover:bg-violet-900/50 group-hover:text-violet-900 dark:group-hover:text-violet-300',
   },
   {
-    row: 'hover:border-amber-500 hover:bg-amber-50/75',
-    iconWrap: 'bg-stone-100 text-stone-600 group-hover:bg-amber-100 group-hover:text-amber-950',
+    row: 'hover:border-amber-500 hover:bg-amber-50/75 dark:hover:bg-amber-950/30',
+    iconWrap:
+      'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 group-hover:bg-amber-100 dark:group-hover:bg-amber-900/40 group-hover:text-amber-950 dark:group-hover:text-amber-200',
   },
   {
-    row: 'hover:border-rose-500 hover:bg-rose-50/80',
-    iconWrap: 'bg-stone-100 text-stone-600 group-hover:bg-rose-100 group-hover:text-rose-900',
+    row: 'hover:border-rose-500 hover:bg-rose-50/80 dark:hover:bg-rose-950/35',
+    iconWrap:
+      'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 group-hover:bg-rose-100 dark:group-hover:bg-rose-900/50 group-hover:text-rose-900 dark:group-hover:text-rose-300',
   },
 ] as const;
 
@@ -96,19 +102,19 @@ export function ExperienceMatrixRows({
 }) {
   const primaryFont =
     variant === 'sans'
-      ? 'font-sans text-sm font-bold tracking-tight text-stone-950 sm:text-base'
-      : 'font-[\'MoMA_Sans\'] text-sm font-bold leading-snug text-stone-950 sm:text-base';
+      ? 'font-sans text-sm font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-base'
+      : opp.matrixPrimary;
   const secondaryFont =
     variant === 'sans'
-      ? 'font-sans mt-1.5 text-sm font-normal leading-relaxed tracking-tight text-stone-600'
-      : 'mt-1.5 text-sm font-normal leading-relaxed text-stone-600';
+      ? 'font-sans mt-1.5 text-sm font-normal leading-relaxed tracking-tight text-stone-600 dark:text-stone-400'
+      : opp.matrixSecondary;
 
   return (
-    <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 shadow-sm">
       {headers ? (
         <div
           className={cn(
-            'hidden border-b border-stone-200 bg-stone-100 text-xs font-semibold uppercase tracking-wide text-stone-600 sm:grid sm:grid-cols-[3rem_minmax(0,0.38fr)_minmax(0,0.62fr)]',
+            'hidden border-b border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 text-xs font-semibold uppercase tracking-wide text-stone-600 dark:text-stone-400 sm:grid sm:grid-cols-[3rem_minmax(0,0.38fr)_minmax(0,0.62fr)]',
             variant === 'sans' && 'font-sans tracking-tight',
           )}
         >
@@ -117,7 +123,7 @@ export function ExperienceMatrixRows({
           <div className="px-4 py-3">{headers.right}</div>
         </div>
       ) : null}
-      <ul className="divide-y divide-stone-100">
+      <ul className="divide-y divide-stone-100 dark:divide-stone-800">
         {rows.map((row, index) => {
           const accent = ROW_ACCENTS[index % ROW_ACCENTS.length];
           return (
@@ -163,9 +169,9 @@ export function ExperienceMatrixSection({
       id={sectionId}
       role="region"
       aria-labelledby={`${sectionId}-heading`}
-      className={cn('scroll-mt-32 mt-16 border-t border-stone-200 pt-12', className)}
+      className={cn(opp.section, className)}
     >
-      <h2 id={`${sectionId}-heading`} className="font-[\'MoMA_Sans\'] text-2xl font-semibold text-stone-950">
+      <h2 id={`${sectionId}-heading`} className={opp.h2}>
         {title}
       </h2>
       <div className="mt-6">

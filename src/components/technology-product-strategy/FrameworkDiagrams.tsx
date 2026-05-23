@@ -2,7 +2,7 @@ import React from 'react';
 
 function Step({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-stone-200 bg-white px-3 py-2 text-center text-xs font-medium text-stone-800 shadow-sm sm:text-sm">
+    <div className="rounded-lg border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-900 px-3 py-2 text-center text-xs font-medium text-stone-800 dark:text-stone-200 shadow-sm sm:text-sm">
       {children}
     </div>
   );
@@ -27,8 +27,8 @@ export function AiMediaStackDiagram() {
     'Learning loop',
   ];
   return (
-    <figure className="rounded-xl border border-stone-200 bg-stone-50/80 p-4">
-      <figcaption className="mb-3 text-sm font-semibold text-stone-900">AI media production stack (schematic)</figcaption>
+    <figure className="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50/80 dark:bg-stone-800/50 p-4">
+      <figcaption className="mb-3 text-sm font-semibold text-stone-900 dark:text-stone-100">AI media production stack (schematic)</figcaption>
       <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2">
         {steps.map((label, i) => (
           <React.Fragment key={label}>
@@ -51,13 +51,13 @@ export function CivicInformationStackDiagram() {
     'Trust + measurement',
   ];
   return (
-    <figure className="rounded-xl border border-stone-200 bg-stone-50/80 p-4">
-      <figcaption className="mb-3 text-sm font-semibold text-stone-900">Civic information stack (schematic)</figcaption>
+    <figure className="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50/80 dark:bg-stone-800/50 p-4">
+      <figcaption className="mb-3 text-sm font-semibold text-stone-900 dark:text-stone-100">Civic information stack (schematic)</figcaption>
       <div className="mx-auto flex max-w-md flex-col gap-2">
         {layers.map((label) => (
           <div
             key={label}
-            className="rounded-lg border border-cyan-400/25 bg-white px-4 py-2.5 text-center text-sm font-medium text-stone-800"
+            className="rounded-lg border border-cyan-400/25 dark:border-cyan-500/30 bg-white dark:bg-stone-900 px-4 py-2.5 text-center text-sm font-medium text-stone-800 dark:text-stone-200"
           >
             {label}
           </div>
@@ -78,13 +78,13 @@ export function InvestmentLensDiagram() {
     'Measurement',
   ];
   return (
-    <figure className="rounded-xl border border-stone-200 bg-stone-50/80 p-4">
-      <figcaption className="mb-3 text-sm font-semibold text-stone-900">Technology investment lens</figcaption>
+    <figure className="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50/80 dark:bg-stone-800/50 p-4">
+      <figcaption className="mb-3 text-sm font-semibold text-stone-900 dark:text-stone-100">Technology investment lens</figcaption>
       <ul className="grid gap-2 sm:grid-cols-2">
         {items.map((label) => (
           <li
             key={label}
-            className="rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm text-stone-800"
+            className="rounded-lg border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-900 px-3 py-2 text-sm text-stone-800 dark:text-stone-200"
           >
             {label}
           </li>

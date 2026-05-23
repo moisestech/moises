@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Metadata } from 'next';
 import PageLayout from '@/components/PageLayout';
 import SpecialThanks from '@/components/SpecialThanks';
@@ -7,6 +6,10 @@ import { LandingPromotedEvent, Footer } from '@/features/landing';
 import LandingCollection from '@/components/LandingCollection';
 import LandingEvents from '@/components/LandingEvents';
 import { Visit360Dialog } from '@/components/ui/Visit360Dialog';
+import HomeHeroSection from '@/components/landing/HomeHeroSection';
+import { getHomeHeroDefaultSlide } from '@/constants/homeHero';
+
+const defaultHero = getHomeHeroDefaultSlide();
 
 export const metadata: Metadata = {
   title: 'Moises Sanabria — New Media Sculpture',
@@ -39,20 +42,22 @@ export const metadata: Metadata = {
     description: 'Miami Venezuelan interdisciplinary artist at Bakehouse Art Complex exploring speculative futures, brainrot theory, and materializing the internet.',
     type: 'website',
     url: 'https://moises.tech',
-    images: [
-      {
-        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Moises Sanabria - Digital Divinities installation at Bakehouse Art Complex Open Studios Spring 2024'
-      }
-    ]
+    images: defaultHero
+      ? [
+          {
+            url: defaultHero.imageUrl,
+            width: 1200,
+            height: 630,
+            alt: defaultHero.imageAlt,
+          },
+        ]
+      : [],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Moises Sanabria — New Media Sculpture',
     description: 'Moises Sanabria is a Venezuelan, Miami interdisciplinary artist at Bakehouse Art Complex creating new media sculptures reflecting on machine philosophy, memetic culture, doomscrolling and brainrot theory, materializing the internet, and networked social-media life.',
-    images: ['https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg']
+    images: defaultHero ? [defaultHero.imageUrl] : [],
   },
   robots: {
     index: true,
@@ -63,20 +68,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <PageLayout>
-      <main className="flex flex-col mt-40 w-full max-w-screen-xl mx-auto">
-        {/* Hero Image */}
-        <div className="relative overflow-hidden">
-          <div className="w-full md:h-[550px] relative">
-            <Image
-              src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg"
-              alt="Moises Sanabria - Digital Divinities installation at Bakehouse Art Complex Open Studios Spring 2024"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </div>
-
+      <HomeHeroSection />
+      <main className="flex flex-col w-full max-w-screen-xl mx-auto">
         <h1 className="display-none sr-only">Moises Sanabria</h1>
 
         {/* Welcome Text */}

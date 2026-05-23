@@ -1,10 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { Download, Mail, FolderKanban, Linkedin, Github, Instagram } from 'lucide-react';
+import { Mail, FolderKanban, Linkedin, Github, Instagram } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
+import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
+import { opp } from '@/components/opportunities/opportunityTheme';
 import { opportunitySocialIconClass } from '@/components/opportunities/opportunitySocialStyles';
 
 type OpportunityHeroProps = {
@@ -24,35 +26,21 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
     <section id="hero" className="scroll-mt-32">
       <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-cyan-500">
-            {opportunity.roleTitle ?? 'Positioning'}
-          </p>
-          <h1 className="mt-2 font-['MoMA_Sans'] text-3xl font-bold tracking-tight text-stone-950 sm:text-4xl">
-            {hero.headline}
-          </h1>
-          <p className="mt-2 text-lg text-stone-600">{hero.subheadline}</p>
-          {hero.trustLine ? <p className="mt-2 text-xs text-stone-500 sm:text-sm">{hero.trustLine}</p> : null}
-          <div className="mt-4 space-y-3 text-sm leading-relaxed text-stone-700">
+          <p className={opp.accent}>{opportunity.roleTitle ?? 'Positioning'}</p>
+          <h1 className={`mt-2 ${opp.h1}`}>{hero.headline}</h1>
+          <p className={`mt-2 ${opp.bodyLg}`}>{hero.subheadline}</p>
+          {hero.trustLine ? <p className={`mt-2 ${opp.subtle} sm:text-sm`}>{hero.trustLine}</p> : null}
+          <div className={`mt-4 space-y-3 ${opp.body}`}>
             {hero.introParagraphs.map((p) => (
               <p key={p.slice(0, 64)}>{p}</p>
             ))}
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            {ctas.resumePdfPath ? (
-              <a
-                href={ctas.resumePdfPath}
-                download
-                className="inline-flex items-center gap-2 rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-stone-800"
-                onClick={() => onCta('resume_pdf')}
-              >
-                <Download className="h-4 w-4 shrink-0" aria-hidden />
-                Download résumé
-              </a>
-            ) : null}
+            <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="hero" />
             {ctas.caseStudiesAnchor ? (
               <a
                 href={ctas.caseStudiesAnchor}
-                className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-semibold text-stone-800 hover:bg-stone-50"
+                className={opp.btnSecondary}
                 onClick={() => onCta('case_studies_anchor')}
               >
                 <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />
@@ -61,17 +49,15 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             ) : null}
             <a
               href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-semibold text-stone-800 hover:bg-stone-50"
+              className={opp.btnSecondary}
               onClick={() => onCta('email')}
             >
               <Mail className="h-4 w-4 shrink-0" aria-hidden />
               Email Moises
             </a>
           </div>
-          <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-stone-200/80 pt-5">
-            <span className="w-full text-xs font-semibold uppercase tracking-wide text-stone-500 sm:w-auto sm:pr-2">
-              Profiles
-            </span>
+          <div className={opp.profilesBorder}>
+            <span className={`w-full sm:w-auto sm:pr-2 ${opp.label}`}>Profiles</span>
             <a
               href={ctas.linkedin}
               target="_blank"
@@ -111,8 +97,8 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
         <div>
           {hero.headshotSrc ? (
             <>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-stone-500">Profile</p>
-              <div className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
+              <p className={`mb-2 ${opp.label}`}>Profile</p>
+              <div className={opp.headshot}>
                 {headshotRemote || !hero.headshotSrc.endsWith('.svg') ? (
                   <Image
                     src={hero.headshotSrc}

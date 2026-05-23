@@ -138,12 +138,12 @@ export const technologyProductStrategy = {
       local: false,
     },
     {
-      title: 'Ephemeral Reflections of Digital Divinities',
+      title: 'Eternal Reflections of Digital Divinities',
       hoverSummary:
         'Real-time AI installation where the public sees machine perception turned into a shared, participatory experience.',
       href: '/art/digital_divinities',
       src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
-      alt: 'Ephemeral Reflections of Digital Divinities installation',
+      alt: 'Eternal Reflections of Digital Divinities installation',
       local: false,
     },
     {
@@ -160,9 +160,9 @@ export const technologyProductStrategy = {
       hoverSummary:
         'Miami-based digital capacity building — workshops, shared tools, and programs that help artists and organizations adopt AI responsibly.',
       href: 'https://dcc.miami',
-      src: '/images/technology-product-strategy/dcc-placeholder.svg',
-      alt: 'Digital Culture Center Miami — program visual placeholder',
-      local: true,
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
+      alt: 'Digital Culture Center Miami website screenshot',
+      local: false,
     },
     {
       title: 'Startup product (confidential)',
@@ -331,13 +331,14 @@ export const technologyProductStrategy = {
       ],
       knightRelevance:
         'Miami-grounded capacity building with parallels to how philanthropy supports local information and cultural infrastructure.',
-      imageSrc: '/images/technology-product-strategy/dcc-placeholder.svg',
-      imageAlt: 'Placeholder for Digital Culture Center Miami',
-      href: '/workshop/ai-and-the-arts',
-      imageIsRemote: false,
+      imageSrc:
+        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
+      imageAlt: 'Digital Culture Center Miami website — program and workshop hub screenshot',
+      href: 'https://dcc.miami',
+      imageIsRemote: true,
     },
     {
-      title: 'Ephemeral Reflections of Digital Divinities',
+      title: 'Eternal Reflections of Digital Divinities',
       category: 'Real-time AI · public participation',
       description:
         'A real-time installation that transforms audience photographs into AI-generated “muses,” making machine perception legible as a shared public experience.',
@@ -352,7 +353,7 @@ export const technologyProductStrategy = {
         'Demonstrates translation of complex AI into accessible participation — relevant to trust, literacy, and responsible public deployment questions.',
       imageSrc:
         'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
-      imageAlt: 'Installation view of Ephemeral Reflections of Digital Divinities',
+      imageAlt: 'Installation view of Eternal Reflections of Digital Divinities',
       href: '/art/digital_divinities',
       imageIsRemote: true,
     },

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { OpportunityNavItem } from '@/content/opportunities/types';
 import { RECRUITING_HEADER_OFFSET } from '@/config/recruiting-layout';
+import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
 type OpportunityShellProps = {
@@ -70,7 +71,7 @@ function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
 
   return (
     <nav
-      className="sticky z-30 border-b border-stone-200 bg-stone-50/95 py-2 backdrop-blur supports-[backdrop-filter]:bg-stone-50/85"
+      className={opp.stickyNav}
       style={{ top: RECRUITING_HEADER_OFFSET }}
       aria-label="Section navigation"
     >
@@ -83,9 +84,7 @@ function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
               href={`#${item.id}`}
               className={cn(
                 'rounded-full border px-3 py-1 transition-colors',
-                active
-                  ? 'border-cyan-400 bg-cyan-50 text-cyan-700 shadow-sm shadow-cyan-500/10'
-                  : 'border-transparent text-stone-600 hover:border-stone-300 hover:bg-white hover:text-stone-900',
+                active ? opp.stickyNavActive : opp.stickyNavIdle,
               )}
               aria-current={active ? 'true' : undefined}
               onClick={(e) => {
@@ -104,7 +103,7 @@ function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
 
 export function OpportunityShell({ navItems, children }: OpportunityShellProps) {
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 font-['MoMA_Sans']">
+    <div className={opp.shell}>
       {navItems?.length ? <StickyMiniNav items={navItems} /> : null}
       {children}
     </div>

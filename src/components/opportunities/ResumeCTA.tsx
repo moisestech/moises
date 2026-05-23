@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { Download, Mail, Linkedin, Github, Instagram } from 'lucide-react';
+import { Mail, Linkedin, Github, Instagram } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { CoverLetterCtaLink } from '@/components/opportunities/CoverLetterCtaLink';
+import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
+import { opp } from '@/components/opportunities/opportunityTheme';
 import { isExternalHttpHref, opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
 
 type ResumeCTAProps = {
@@ -19,29 +21,15 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
   };
 
   return (
-    <section id="resume" className="scroll-mt-32 mt-16 border-t border-stone-200 pt-12">
-      <h2 className="font-['MoMA_Sans'] text-2xl font-semibold text-stone-950">
-        {opportunity.resumeSectionTitle ?? 'Résumé and contact'}
-      </h2>
-      {opportunity.resumeSectionNote ? (
-        <p className="mt-2 max-w-3xl text-sm text-stone-600">{opportunity.resumeSectionNote}</p>
-      ) : null}
+    <section id="resume" className={opp.section}>
+      <h2 className={opp.h2}>{opportunity.resumeSectionTitle ?? 'Résumé and contact'}</h2>
+      {opportunity.resumeSectionNote ? <p className={`mt-2 max-w-3xl ${opp.muted}`}>{opportunity.resumeSectionNote}</p> : null}
       <div className="mt-6 flex flex-wrap gap-3">
-        {ctas.resumePdfPath ? (
-          <a
-            href={ctas.resumePdfPath}
-            download
-            className="inline-flex items-center gap-2 rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-stone-800"
-            onClick={() => onCta('resume_pdf_footer')}
-          >
-            <Download className="h-4 w-4 shrink-0" aria-hidden />
-            Download résumé PDF
-          </a>
-        ) : null}
+        <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="footer" />
         <CoverLetterCtaLink ctas={ctas} onClick={() => onCta('cover_letter_footer')} />
         <a
           href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-          className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+          className={opp.btnSecondaryMedium}
           onClick={() => onCta('email_footer')}
         >
           <Mail className="h-4 w-4 shrink-0" aria-hidden />
@@ -87,17 +75,13 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
               href={ctas.portfolio}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              className={opp.btnSecondaryMedium}
               onClick={() => onCta('portfolio')}
             >
               Portfolio
             </a>
           ) : (
-            <Link
-              href={ctas.portfolio}
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-              onClick={() => onCta('portfolio')}
-            >
+            <Link href={ctas.portfolio} className={opp.btnSecondaryMedium} onClick={() => onCta('portfolio')}>
               Portfolio
             </Link>
           )
@@ -108,17 +92,13 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
               href={ctas.cv}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
+              className={opp.btnSecondaryMedium}
               onClick={() => onCta('cv')}
             >
               Web CV
             </a>
           ) : (
-            <Link
-              href={ctas.cv}
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2.5 text-sm font-medium text-stone-800 hover:bg-stone-50"
-              onClick={() => onCta('cv')}
-            >
+            <Link href={ctas.cv} className={opp.btnSecondaryMedium} onClick={() => onCta('cv')}>
               Web CV
             </Link>
           )
