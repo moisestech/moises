@@ -38,7 +38,7 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
   react: { id: 'react', label: 'React', imageSrc: si('react', '61DAFB') },
   tailwind: { id: 'tailwind', label: 'Tailwind CSS', imageSrc: si('tailwindcss', '06B6D4') },
   github: { id: 'github', label: 'GitHub', imageSrc: si('github'), imageClassName: 'dark:invert' },
-  aws: { id: 'aws', label: 'AWS', imageSrc: si('amazonaws', 'FF9900') },
+  aws: { id: 'aws', label: 'AWS S3', imageSrc: `${jobsCdn}/v1780254939/jobs/Amazon-S3-Logo_mmkpap.png` },
   cloudinary: { id: 'cloudinary', label: 'Cloudinary', imageSrc: si('cloudinary', '3448C5') },
   sam: { id: 'sam', label: 'SAM', imageSrc: si('meta', '0467DF'), imageClassName: 'rounded-sm' },
   iiif: { id: 'iiif', label: 'IIIF', imageSrc: `${jobsCdn}/v1780254871/jobs/iiif-logo_bmvqko.png` },
