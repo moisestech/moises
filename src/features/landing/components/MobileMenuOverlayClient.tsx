@@ -7,7 +7,8 @@ import Header from './Header';
 import { RecruitingSiteHeader } from '@/components/opportunities/RecruitingSiteHeader';
 import { isWorkshopNavContext, navigationItemsForPath } from '@/config/site-navigation';
 import { isRecruitingSitePath, RECRUITING_SITE_NAV_ITEMS } from '@/config/recruiting-navigation';
-import { RECRUITING_MAIN_PADDING_TOP } from '@/config/recruiting-layout';
+import { RECRUITING_MAIN_PADDING_TOP, RECRUITING_PAGE_SURFACE } from '@/config/recruiting-layout';
+import { cn } from '@/lib/utils';
 
 export default function MobileMenuOverlayClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -37,7 +38,11 @@ export default function MobileMenuOverlayClient({ children }: { children: React.
         workshopMode={isWorkshopNavContext(pathname)}
         hidePrimaryMobileToggle={recruiting}
       />
-      {recruiting ? <div className={RECRUITING_MAIN_PADDING_TOP}>{children}</div> : children}
+      {recruiting ? (
+        <div className={cn(RECRUITING_MAIN_PADDING_TOP, RECRUITING_PAGE_SURFACE)}>{children}</div>
+      ) : (
+        children
+      )}
     </>
   );
 }

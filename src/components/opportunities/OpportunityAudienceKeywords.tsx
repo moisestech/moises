@@ -24,7 +24,7 @@ function SeparatorBefore({ index, total }: { index: number; total: number }) {
   if (index === total - 1) {
     return (
       <>
-        <span aria-hidden className="text-stone-400">
+        <span aria-hidden className="text-stone-400 dark:text-stone-500">
           , and{' '}
         </span>
       </>

@@ -12,7 +12,7 @@ function SkillLogoCell({ logoId, label, framing }: { logoId: string; label: stri
 
   return (
     <li className="flex gap-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-3 shadow-sm transition-colors hover:border-cyan-400/30 dark:hover:border-cyan-500/35">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-stone-100 dark:border-stone-800 bg-stone-50 dark:bg-stone-800/80 p-1.5">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 p-1.5 shadow-sm dark:shadow-none">
         {entry.imageSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

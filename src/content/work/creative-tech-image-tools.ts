@@ -11,6 +11,7 @@ export const creativeTechImageTools: WorkSite = {
       'Image-heavy creative platforms: Next.js, Python, Docker, PyTorch, generative pipelines, and institutional media systems. USA-based contractor; paid proposal-phase availability.',
     indexable: false,
   },
+  /** Page-only banner (`creativeTechImageToolsBanner`) — not used on CVS or Knight pages */
   applicationBanner: creativeTechImageToolsBanner,
   roleTitle: 'Creative technology · image systems',
   audienceKeywords: {

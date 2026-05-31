@@ -20,13 +20,15 @@ type WorkPageClientProps = {
 
 export function WorkPageClient({ work }: WorkPageClientProps) {
   const opportunity = workSiteToOpportunity(work);
-  const hasBanner = Boolean(work.applicationBanner?.src);
+  const banner = work.applicationBanner;
 
   return (
     <OpportunityShell navItems={work.navItems}>
-      <>
-        <OpportunityApplicationBanner banner={work.applicationBanner} />
-        <main className={cn(opp.main, hasBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10')}>
+      <div className="flex min-h-full flex-col">
+        {banner?.src ? (
+          <OpportunityApplicationBanner banner={banner} className="mb-6 sm:mb-8" />
+        ) : null}
+        <main className={cn(opp.main, 'flex-1', banner?.src ? 'pt-0' : 'pt-8 sm:pt-10')}>
           {work.audienceKeywords?.terms?.length ? (
             <OpportunityAudienceKeywords data={work.audienceKeywords} />
           ) : null}
@@ -37,7 +39,7 @@ export function WorkPageClient({ work }: WorkPageClientProps) {
           <WorkAboutBlock about={work.about} />
           <ResumeCTA opportunity={opportunity} />
         </main>
-      </>
+      </div>
     </OpportunityShell>
   );
 }

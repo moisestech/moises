@@ -25,13 +25,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-      document.body.style.backgroundColor = savedTheme === 'dark' ? '#000' : '#fff';
+      document.body.style.backgroundColor = savedTheme === 'dark' ? '#0c0a09' : '#fafaf9';
     } else {
       // Check system preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setTheme(prefersDark ? 'dark' : 'light');
       document.documentElement.classList.toggle('dark', prefersDark);
-      document.body.style.backgroundColor = prefersDark ? '#000' : '#fff';
+      document.body.style.backgroundColor = prefersDark ? '#0c0a09' : '#fafaf9';
     }
   }, []);
 
@@ -40,13 +40,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
-    document.body.style.backgroundColor = newTheme === 'dark' ? '#000' : '#fff';
+    document.body.style.backgroundColor = newTheme === 'dark' ? '#0c0a09' : '#fafaf9';
   };
 
   // Prevent flash of wrong theme
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-white dark:bg-black">
+      <div className="min-h-screen bg-stone-50 dark:bg-stone-950">
         {children}
       </div>
     );
@@ -54,7 +54,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'}`}>
+      <div
+        className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-stone-950 text-stone-100' : 'bg-stone-50 text-stone-900'}`}
+      >
         {children}
       </div>
     </ThemeContext.Provider>
