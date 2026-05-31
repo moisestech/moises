@@ -43,6 +43,8 @@ export type ProcessStep = {
 
 export type ProcessDiagram = {
   src: string;
+  /** Optional dark-theme variant (workflow / architecture diagrams). */
+  srcDark?: string;
   alt: string;
   caption?: string;
 };

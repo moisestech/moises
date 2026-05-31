@@ -10,8 +10,13 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import type { ProcessDiagram } from '@/content/opportunities/types';
+import { useTheme } from '@/contexts/ThemeContext';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
+
+function resolveDiagramSrc(diagram: ProcessDiagram, theme: 'light' | 'dark') {
+  return theme === 'dark' && diagram.srcDark ? diagram.srcDark : diagram.src;
+}
 
 type ApproachDiagramGalleryProps = {
   diagrams: ProcessDiagram[];
@@ -19,6 +24,9 @@ type ApproachDiagramGalleryProps = {
 };
 
 function DiagramTile({ diagram }: { diagram: ProcessDiagram }) {
+  const { theme } = useTheme();
+  const imageSrc = resolveDiagramSrc(diagram, theme);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -31,7 +39,8 @@ function DiagramTile({ diagram }: { diagram: ProcessDiagram }) {
         >
           <div className="relative aspect-[16/10] bg-stone-100 dark:bg-stone-800">
             <Image
-              src={diagram.src}
+              key={imageSrc}
+              src={imageSrc}
               alt={diagram.alt}
               fill
               className="object-contain p-2 transition-transform duration-200 group-hover:scale-[1.02]"
@@ -55,7 +64,7 @@ function DiagramTile({ diagram }: { diagram: ProcessDiagram }) {
         <div className="relative max-h-[calc(96vh-4rem)] w-full overflow-auto">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={diagram.src}
+            src={imageSrc}
             alt={diagram.alt}
             className="mx-auto h-auto max-h-[calc(96vh-4rem)] w-full object-contain"
           />

@@ -144,6 +144,8 @@ export const creativeTechImageTools: WorkSite = {
     },
     {
       src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780255275/jobs/diagrams/computer-vision-tech-stack-diagram_b1oc4x.png',
+      srcDark:
+        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780255944/jobs/diagrams/computer-vision-tech-stack-diagram-dark_mwlsoq.png',
       alt: 'Visual workflow diagram for image ingestion, segmentation, IIIF delivery, and review',
       caption: 'Workflow diagram — click to expand',
     },
