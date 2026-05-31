@@ -35,11 +35,9 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'Vercel',
       'Workers',
     ],
-    /** Replace with `jobs/lore-machine-ui-screenshot.png` — see docs/work/creative-tech-banner-prompt.md */
     imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1778695455/jobs/banners/senior-genai-engineer-banner_iljp58.png',
-    imageAlt:
-      'Generative storytelling platform — batch image review and cloud-backed scene workflows (interim until Lore UI screenshot is uploaded)',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780253940/resume/resume-images/lore-machine-home-page_wra1x2.png',
+    imageAlt: 'Lore Machine — generative storytelling platform home page and scene workflow UI',
     href: 'https://www.loremachine.world/',
   },
   ai24: {

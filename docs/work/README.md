@@ -70,4 +70,4 @@ All **16 logos on the page resolve** today:
 
 Banner generation prompt: [`creative-tech-banner-prompt.md`](./creative-tech-banner-prompt.md).
 
-**Still upload:** `jobs/lore-machine-ui-screenshot.png` → update `lore-machine.imageSrc` in `evidence/projects.ts`.
+Lore screenshot lives in `evidence/projects.ts` — shared by work, CVS GenAI, and Knight startup sections.

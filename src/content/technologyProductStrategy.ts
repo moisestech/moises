@@ -10,7 +10,10 @@ import type {
   SkillsMatrixRow,
 } from '@/content/opportunities/types';
 import { knightTechProductStrategistBanner } from '@/content/evidence/applicationBanners';
+import { evidenceProjects } from '@/content/evidence/projects';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+
+const loreMachineEvidence = evidenceProjects['lore-machine'];
 
 export type CaseStudy = {
   title: string;
@@ -169,10 +172,10 @@ export const technologyProductStrategy = {
       title: 'Startup product (confidential)',
       hoverSummary:
         'Shipping AI-driven storytelling products — generative pipelines, interfaces, and cross-functional delivery; details discussed under NDA.',
-      href: '#projects',
-      src: '/images/technology-product-strategy/startup-placeholder.svg',
-      alt: 'Confidential startup product work — placeholder',
-      local: true,
+      href: loreMachineEvidence.href ?? '#projects',
+      src: loreMachineEvidence.imageSrc,
+      alt: loreMachineEvidence.imageAlt,
+      local: false,
     },
   ] satisfies ReadonlyArray<SelectedProjectTile>,
 
@@ -409,9 +412,10 @@ export const technologyProductStrategy = {
       ],
       knightRelevance:
         'Evidence of product judgment and technical depth when evaluating what can ship, scale, and be maintained.',
-      imageSrc: '/images/technology-product-strategy/startup-placeholder.svg',
-      imageAlt: 'Placeholder for confidential startup product work',
-      imageIsRemote: false,
+      imageSrc: loreMachineEvidence.imageSrc,
+      imageAlt: loreMachineEvidence.imageAlt,
+      href: loreMachineEvidence.href,
+      imageIsRemote: true,
     },
   ] satisfies CaseStudy[],
 

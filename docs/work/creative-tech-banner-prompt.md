@@ -54,13 +54,9 @@ neon, cyberpunk, purple gradient, startup pitch deck, stock photo, smiling team,
 
 ---
 
-## Lore Machine case study screenshot (separate asset)
+## Lore Machine screenshot (live)
 
-Upload as `jobs/lore-machine-ui-screenshot.png` and update `lore-machine.imageSrc` in [`src/content/evidence/projects.ts`](../../src/content/evidence/projects.ts).
-
-```text
-Product UI screenshot style (or realistic mock), 16:9. Lore Machine generative storytelling dashboard: left sidebar scenes/chapters, center grid of AI-generated scene images in review state, right panel model settings (Replicate/Azure). Dark-neutral UI, batch selection checkboxes, “generating” spinners on 2 tiles. Clean SaaS layout, not fantasy art. No readable personal data. Stone/cyan accent buttons.
-```
+`v1780253940/resume/resume-images/lore-machine-home-page_wra1x2.png` — canonical URL in [`evidence/projects.ts`](../../src/content/evidence/projects.ts).
 
 ---
 
