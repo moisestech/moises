@@ -23,7 +23,7 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
   langgraph: { id: 'langgraph', label: 'LangGraph', imageSrc: `${jobsCdn}/v1778692505/jobs/lang-graph-logo_g4x6ik.svg` },
   crewai: { id: 'crewai', label: 'CrewAI', imageSrc: `${jobsCdn}/v1778692505/jobs/crew_only_logo_x3lqxj.png` },
   'openai-agents': { id: 'openai-agents', label: 'OpenAI Agents', imageSrc: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png` },
-  azure: { id: 'azure', label: 'Azure', imageSrc: si('microsoftazure', '0078D4') },
+  azure: { id: 'azure', label: 'Azure', imageSrc: `${jobsCdn}/v1780254976/jobs/Microsoft_Azure.svg_tzplre.png` },
   replicate: { id: 'replicate', label: 'Replicate', imageSrc: si('replicate') },
   vercel: { id: 'vercel', label: 'Vercel', imageSrc: si('vercel'), imageClassName: 'dark:invert' },
   supabase: { id: 'supabase', label: 'Supabase', imageSrc: si('supabase', '3FCF8E') },
