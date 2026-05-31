@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
@@ -161,6 +163,9 @@ const nextConfig = {
   
   // Configure webpack for better performance
   webpack: (config) => {
+    // three-render-objects imports three/webgpu; our three build does not export it
+    config.resolve.alias['three/webgpu'] = path.join(__dirname, 'src/lib/empty-module.js');
+
     // Initialize splitChunks if it doesn't exist
     if (!config.optimization.splitChunks) {
       config.optimization.splitChunks = {

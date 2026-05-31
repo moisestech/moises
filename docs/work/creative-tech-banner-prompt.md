@@ -4,7 +4,9 @@ Use this for Midjourney, Flux, Ideogram, or ChatGPT image generation. Upload the
 
 `jobs/banners/creative-tech-image-tools-banner.png`
 
-Then set `USE_DEDICATED_CREATIVE_TECH_BANNER = true` in [`src/content/evidence/applicationBanners.ts`](../../src/content/evidence/applicationBanners.ts).
+Then update `creativeTechImageToolsBanner.src` in [`src/content/evidence/applicationBanners.ts`](../../src/content/evidence/applicationBanners.ts).
+
+**Live asset:** `v1780248505/jobs/banners/ChatGPT_Image_May_31_2026_12_19_46_PM_wu8xw1.png`
 
 ---
 

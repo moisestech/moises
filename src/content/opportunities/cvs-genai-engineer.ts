@@ -1,6 +1,7 @@
 import type { Opportunity } from './types';
 import { seniorGenAiEngineerBanner } from '@/content/evidence/applicationBanners';
 import { evidenceProjects } from '@/content/evidence/projects';
+import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
 export const cvsGenaiEngineerOpportunity: Opportunity = {
@@ -275,18 +276,12 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
       href: '/cv',
     },
   ],
-  ctas: {
+  ctas: recruitingCtas({
+    emailSubject: 'Senior GenAI Engineer — Moises Sanabria',
+    caseStudiesAnchor: '#case-studies',
     resumePdfPath: '/resume/moises-sanabria-senior-genai-engineer.pdf',
     resumePrintPath: '/opportunities/cvs-senior-genai-engineer/print/resume',
-    email: 'm@moises.tech',
-    emailSubject: 'Senior GenAI Engineer — Moises Sanabria',
-    linkedin: 'https://www.linkedin.com/in/moisesdsanabria',
-    github: 'https://github.com/moisestech',
-    instagram: 'https://www.instagram.com/moisesdsanabria',
-    portfolio: '/portfolio',
-    cv: '/cv',
-    caseStudiesAnchor: '#case-studies',
-  },
+  }),
   animatedLogoBand: genAiRecruitingLogoBand,
   techLogoIds: [],
   resumeSectionTitle: 'Résumé tailored for Senior GenAI Engineer roles',

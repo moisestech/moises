@@ -1,3 +1,4 @@
+import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type {
   ApplicationBanner,
   OpportunityAudienceKeywords,
@@ -23,20 +24,8 @@ export type WorkSkillTier = {
   skills: WorkSkillItem[];
 };
 
-/** Optional overrides on shared evidence projects */
-export type WorkCaseStudy = {
-  evidenceId: string;
-  title?: string;
-  category?: string;
-  summary?: string;
-  skillTags?: string[];
-  imageSrc?: string;
-  imageAlt?: string;
-  imageLocal?: boolean;
-  href?: string;
-  /** Link label override (default: View site / View context) */
-  linkLabel?: string;
-};
+/** Optional overrides on shared evidence projects (same shape as `CaseStudyOverride`). */
+export type WorkCaseStudy = CaseStudyOverride;
 
 export type WorkAbout = {
   title: string;

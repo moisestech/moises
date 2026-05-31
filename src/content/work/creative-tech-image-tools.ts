@@ -1,5 +1,6 @@
 import type { WorkSite } from './types';
 import { creativeTechImageToolsBanner } from '@/content/evidence/applicationBanners';
+import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
 export const creativeTechImageTools: WorkSite = {
@@ -177,21 +178,12 @@ export const creativeTechImageTools: WorkSite = {
     { id: 'about', label: 'About' },
     { id: 'resume', label: 'Contact' },
   ],
-  ctas: {
-    email: 'm@moises.tech',
+  ctas: recruitingCtas({
     emailSubject: 'Creative-tech image tools — Moises Sanabria',
-    linkedin: 'https://www.linkedin.com/in/moisesdsanabria',
-    github: 'https://github.com/moisestech',
-    instagram: 'https://www.instagram.com/moisesdsanabria',
-    portfolio: '/portfolio',
-    cv: '/cv',
-    ooliteWork: '/tech-nonprofit/oolite',
-    ooliteWorkLabel: 'Oolite Digital Lab',
-    ooliteOrg: 'https://oolitearts.org',
     caseStudiesAnchor: '#case-studies',
     resumePrintPath: '/opportunities/cvs-senior-genai-engineer/print/resume',
     resumePdfPath: '/resume/moises-sanabria-senior-genai-engineer.pdf',
-  },
+  }),
   resumeSectionTitle: 'Available for paid proposal-phase engagement',
   resumeSectionNote:
     'I can contribute a short technical specification, architecture plan, or time-boxed prototype before the June 9 selection deadline. Full implementation work would be contracted and paid only if the project is awarded.',

@@ -1,3 +1,4 @@
+import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 
 export type ApplicationBanner = {
@@ -145,6 +146,10 @@ export type Opportunity = {
   roleMatchColumnHeaders?: { left: string; right: string };
   roleMatchRows: RoleMatchRow[];
   featuredProjectIds: string[];
+  /** Merged with `featuredProjectIds` in `CaseStudyGrid` (work microsites). */
+  caseStudyOverrides?: CaseStudyOverride[];
+  /** Case study grid columns at `lg` breakpoint; default 2. */
+  caseStudyColumns?: 2 | 3;
   caseStudiesSectionTitle?: string;
   caseStudiesIntro?: string;
   skillsSectionTitle?: string;

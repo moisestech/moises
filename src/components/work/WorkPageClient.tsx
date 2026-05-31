@@ -8,7 +8,7 @@ import { SkillLogoTierGrid } from '@/components/opportunities/SkillLogoTierGrid'
 import { InnovationProcess } from '@/components/opportunities/InnovationProcess';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { WorkAboutBlock } from '@/components/work/WorkAboutBlock';
-import { WorkCaseStudyGrid } from '@/components/work/WorkCaseStudyGrid';
+import { CaseStudyGrid } from '@/components/opportunities/CaseStudyGrid';
 import { workSiteToOpportunity } from '@/content/work/toOpportunity';
 import type { WorkSite } from '@/content/work/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -32,11 +32,7 @@ export function WorkPageClient({ work }: WorkPageClientProps) {
           ) : null}
           <OpportunityHero opportunity={opportunity} />
           <SkillLogoTierGrid tiers={work.skillTiers} />
-          <WorkCaseStudyGrid
-            sectionTitle={work.caseStudiesSectionTitle}
-            intro={work.caseStudiesIntro}
-            caseStudies={work.caseStudies}
-          />
+          <CaseStudyGrid opportunity={opportunity} />
           <InnovationProcess opportunity={opportunity} sectionId="approach" />
           <WorkAboutBlock about={work.about} />
           <ResumeCTA opportunity={opportunity} />

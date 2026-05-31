@@ -14,6 +14,8 @@ export function workSiteToOpportunity(work: WorkSite): Opportunity {
     hero: work.hero,
     roleMatchRows: [],
     featuredProjectIds: work.caseStudies.map((c) => c.evidenceId),
+    caseStudyOverrides: work.caseStudies,
+    caseStudyColumns: 3,
     caseStudiesSectionTitle: work.caseStudiesSectionTitle,
     caseStudiesIntro: work.caseStudiesIntro,
     skillsMatrixRows: [],
