@@ -1,26 +1,38 @@
-import type { Opportunity } from '@/content/opportunities/types';
+import type { Opportunity, ProcessDiagram } from '@/content/opportunities/types';
+import { ApproachDiagramGallery } from '@/components/opportunities/ApproachDiagramGallery';
+import { ProcessStepLogos } from '@/components/opportunities/ProcessStepLogos';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { cn } from '@/lib/utils';
 
 type InnovationProcessProps = {
   opportunity: Opportunity;
   /** Sticky nav anchor; defaults to `process` */
   sectionId?: string;
+  /** Optional architecture diagrams (click to expand full screen). */
+  diagrams?: ProcessDiagram[];
 };
 
-export function InnovationProcess({ opportunity, sectionId = 'process' }: InnovationProcessProps) {
+export function InnovationProcess({ opportunity, sectionId = 'process', diagrams }: InnovationProcessProps) {
   return (
     <section id={sectionId} className={opp.section}>
       <h2 className={opp.h2}>{opportunity.processSectionTitle ?? 'Process'}</h2>
       {opportunity.processIntro ? <p className={`mt-3 max-w-3xl ${opp.body}`}>{opportunity.processIntro}</p> : null}
-      <ol className="mt-8 space-y-4">
+      {diagrams?.length ? (
+        <>
+          <p className={`mt-6 ${opp.label}`}>Architecture overview</p>
+          <ApproachDiagramGallery diagrams={diagrams} className="mt-3" />
+        </>
+      ) : null}
+      <ol className={cn(diagrams?.length ? 'mt-10' : 'mt-8', 'space-y-4')}>
         {opportunity.processSteps.map((step, i) => (
           <li key={step.title} className={`flex gap-4 ${opp.card} p-4`}>
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 dark:bg-cyan-500/20 text-xs font-bold text-cyan-600 dark:text-cyan-400">
               {i + 1}
             </span>
-            <div>
+            <div className="min-w-0 flex-1">
               <h3 className={opp.matrixPrimary}>{step.title}</h3>
               <p className={opp.matrixSecondary}>{step.description}</p>
+              {step.logoIds?.length ? <ProcessStepLogos logoIds={step.logoIds} /> : null}
             </div>
           </li>
         ))}

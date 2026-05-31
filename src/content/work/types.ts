@@ -5,6 +5,7 @@ import type {
   OpportunityCtas,
   OpportunityNavItem,
   OpportunitySeo,
+  ProcessDiagram,
   ProcessStep,
 } from '@/content/opportunities/types';
 
@@ -52,6 +53,7 @@ export type WorkSite = {
   caseStudiesIntro?: string;
   approachSectionTitle: string;
   approachIntro?: string;
+  approachDiagrams?: ProcessDiagram[];
   approachSteps: ProcessStep[];
   about: WorkAbout;
   ctas: OpportunityCtas;

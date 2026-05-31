@@ -35,7 +35,11 @@ export function WorkPageClient({ work }: WorkPageClientProps) {
           <OpportunityHero opportunity={opportunity} />
           <SkillLogoTierGrid tiers={work.skillTiers} />
           <CaseStudyGrid opportunity={opportunity} />
-          <InnovationProcess opportunity={opportunity} sectionId="approach" />
+          <InnovationProcess
+            opportunity={opportunity}
+            sectionId="approach"
+            diagrams={work.approachDiagrams}
+          />
           <WorkAboutBlock about={work.about} />
           <ResumeCTA opportunity={opportunity} />
         </main>

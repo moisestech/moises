@@ -37,6 +37,14 @@ export type RoleMatchRow = {
 export type ProcessStep = {
   title: string;
   description: string;
+  /** Optional stack marks shown under the step (work / dossier approach sections). */
+  logoIds?: string[];
+};
+
+export type ProcessDiagram = {
+  src: string;
+  alt: string;
+  caption?: string;
 };
 
 export type OpportunityCtas = {

@@ -136,31 +136,48 @@ export const creativeTechImageTools: WorkSite = {
   approachSectionTitle: 'How I would approach the project',
   approachIntro:
     'A scalable image-heavy workflow for proposal and implementation phases — from ingestion through review and deployment.',
+  approachDiagrams: [
+    {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780255193/jobs/diagrams/computer-vision-tech-stack_t0ss1h.png',
+      alt: 'Computer vision tech stack — layered architecture from ingestion through deployment',
+      caption: 'Stack view — click to expand',
+    },
+    {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780255275/jobs/diagrams/computer-vision-tech-stack-diagram_b1oc4x.png',
+      alt: 'Visual workflow diagram for image ingestion, segmentation, IIIF delivery, and review',
+      caption: 'Workflow diagram — click to expand',
+    },
+  ],
   approachSteps: [
     {
       title: 'Large-image ingestion',
       description:
         'Upload, validate, store, and prepare image assets without blocking the user interface.',
+      logoIds: ['aws', 'cloudinary'],
     },
     {
       title: 'Segmentation workflow',
       description:
         'Connect a SAM-based Python service to generate masks, review states, and editable segmentation results.',
+      logoIds: ['sam', 'python', 'pytorch', 'docker'],
     },
     {
       title: 'IIIF-compatible delivery',
       description:
         'Serve large visual assets through a format designed for efficient zooming, region requests, and interoperability.',
+      logoIds: ['iiif', 'openseadragon'],
     },
     {
       title: 'Responsive review interface',
       description:
         'Create accessible desktop and mobile tools for inspecting images, adjusting masks, and tracking processing status.',
+      logoIds: ['nextjs', 'react', 'tailwind'],
     },
     {
       title: 'Deployment and monitoring',
       description:
         'Use Dockerized services, clear job states, logs, retries, and cloud storage so the prototype can grow into a maintainable implementation.',
+      logoIds: ['docker', 'vercel', 'github', 'azure'],
     },
   ],
   about: {
