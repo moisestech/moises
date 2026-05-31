@@ -41,7 +41,7 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
   aws: { id: 'aws', label: 'AWS', imageSrc: si('amazonaws', 'FF9900') },
   cloudinary: { id: 'cloudinary', label: 'Cloudinary', imageSrc: si('cloudinary', '3448C5') },
   sam: { id: 'sam', label: 'SAM', imageSrc: si('meta', '0467DF'), imageClassName: 'rounded-sm' },
-  iiif: { id: 'iiif', label: 'IIIF', imageSrc: 'https://iiif.io/img/iiif-logo.png' },
+  iiif: { id: 'iiif', label: 'IIIF', imageSrc: `${jobsCdn}/v1780254871/jobs/iiif-logo_bmvqko.png` },
   openseadragon: { id: 'openseadragon', label: 'OpenSeadragon', imageSrc: `${base}/openseadragon.svg` },
 };
 

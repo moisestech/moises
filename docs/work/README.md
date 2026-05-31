@@ -46,7 +46,7 @@ All **16 logos on the page resolve** today:
 |--------|--------|--------|
 | nextjs, react, python, docker, pytorch | Simple Icons CDN | Production-ready |
 | sam | Simple Icons (`meta`) | SAM = Meta Segment Anything; label stays honest |
-| iiif | iiif.io official PNG | OK |
+| iiif | Cloudinary `jobs/iiif-logo` | OK |
 | openseadragon | `/public/images/tech-logos/openseadragon.svg` | Custom loupe icon |
 | cloudinary, aws, supabase, vercel, replicate, azure, github, tailwind | Simple Icons CDN | OK |
 
