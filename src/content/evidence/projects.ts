@@ -35,9 +35,12 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'Vercel',
       'Workers',
     ],
-    imageSrc: '/images/opportunities/lore-machine-preview.svg',
-    imageAlt: 'Placeholder preview for Lore Machine narrative-to-media work',
-    imageLocal: true,
+    /** Replace with `jobs/lore-machine-ui-screenshot.png` — see docs/work/creative-tech-banner-prompt.md */
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1778695455/jobs/banners/senior-genai-engineer-banner_iljp58.png',
+    imageAlt:
+      'Generative storytelling platform — batch image review and cloud-backed scene workflows (interim until Lore UI screenshot is uploaded)',
+    href: 'https://www.loremachine.world/',
   },
   ai24: {
     id: 'ai24',
@@ -53,9 +56,10 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'Multimodal workflows',
       'Research translation',
     ],
-    imageSrc: '/images/opportunities/ai24-preview.svg',
-    imageAlt: 'Placeholder preview for AI24 education and R&D platform',
-    imageLocal: true,
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg',
+    imageAlt: 'AI24 — AI education and applied systems for artists and institutions',
+    href: 'https://ai24.live',
   },
   'multimodal-image-systems': {
     id: 'multimodal-image-systems',
@@ -71,9 +75,10 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'Visual consistency',
       'Multimodal AI',
     ],
-    imageSrc: '/images/opportunities/multimodal-ai-preview.svg',
-    imageAlt: 'Placeholder preview for multimodal generative image workflows',
-    imageLocal: true,
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
+    imageAlt: 'Generative image research — visual output from practice-based model experimentation',
+    href: '/research/broken-acceleration',
   },
   'digital-culture-infrastructure': {
     id: 'digital-culture-infrastructure',

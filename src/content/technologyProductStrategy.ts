@@ -9,6 +9,7 @@ import type {
   SkillsMatrixIconKey,
   SkillsMatrixRow,
 } from '@/content/opportunities/types';
+import { knightTechProductStrategistBanner } from '@/content/evidence/applicationBanners';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
 export type CaseStudy = {
@@ -537,8 +538,8 @@ export const technologyProductStrategy = {
   },
 
   applicationBanner: {
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1778702939/jobs/banners/tech-strategy-knight-foundation-banner_lctdt0.png',
-    alt: 'Knight Foundation — Technology Product Strategist, Journalism Program — application banner',
+    src: knightTechProductStrategistBanner.src,
+    alt: knightTechProductStrategistBanner.alt,
   } satisfies ApplicationBanner,
 };
 

@@ -1,13 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import { Mail, Linkedin, Github, Instagram } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { CoverLetterCtaLink } from '@/components/opportunities/CoverLetterCtaLink';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
+import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
 import { opp } from '@/components/opportunities/opportunityTheme';
-import { isExternalHttpHref, opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
+import { opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
 
 type ResumeCTAProps = {
   opportunity: Opportunity;
@@ -69,40 +69,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
             Instagram
           </a>
         ) : null}
-        {ctas.portfolio ? (
-          isExternalHttpHref(ctas.portfolio) ? (
-            <a
-              href={ctas.portfolio}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={opp.btnSecondaryMedium}
-              onClick={() => onCta('portfolio')}
-            >
-              Portfolio
-            </a>
-          ) : (
-            <Link href={ctas.portfolio} className={opp.btnSecondaryMedium} onClick={() => onCta('portfolio')}>
-              Portfolio
-            </Link>
-          )
-        ) : null}
-        {ctas.cv ? (
-          isExternalHttpHref(ctas.cv) ? (
-            <a
-              href={ctas.cv}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={opp.btnSecondaryMedium}
-              onClick={() => onCta('cv')}
-            >
-              Web CV
-            </a>
-          ) : (
-            <Link href={ctas.cv} className={opp.btnSecondaryMedium} onClick={() => onCta('cv')}>
-              Web CV
-            </Link>
-          )
-        ) : null}
+        <OpportunitySiteLinks ctas={ctas} onCta={onCta} variant="footer" />
       </div>
     </section>
   );

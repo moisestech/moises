@@ -30,6 +30,12 @@ export type WorkCaseStudy = {
   category?: string;
   summary?: string;
   skillTags?: string[];
+  imageSrc?: string;
+  imageAlt?: string;
+  imageLocal?: boolean;
+  href?: string;
+  /** Link label override (default: View site / View context) */
+  linkLabel?: string;
 };
 
 export type WorkAbout = {

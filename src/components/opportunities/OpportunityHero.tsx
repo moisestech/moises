@@ -6,6 +6,7 @@ import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
+import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { opportunitySocialIconClass } from '@/components/opportunities/opportunitySocialStyles';
 
@@ -55,6 +56,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
               <Mail className="h-4 w-4 shrink-0" aria-hidden />
               Email Moises
             </a>
+            <OpportunitySiteLinks ctas={ctas} onCta={onCta} variant="hero" />
           </div>
           <div className={opp.profilesBorder}>
             <span className={`w-full sm:w-auto sm:pr-2 ${opp.label}`}>Profiles</span>

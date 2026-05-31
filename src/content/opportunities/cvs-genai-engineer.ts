@@ -1,4 +1,5 @@
 import type { Opportunity } from './types';
+import { seniorGenAiEngineerBanner } from '@/content/evidence/applicationBanners';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
@@ -7,7 +8,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
   status: 'active',
   variant: 'compact',
   applicationBanner: {
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1778695455/jobs/banners/senior-genai-engineer-banner_iljp58.png',
+    ...seniorGenAiEngineerBanner,
     alt: 'Senior GenAI Engineer — application banner tailored to this role.',
   },
   seo: {

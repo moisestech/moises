@@ -52,6 +52,12 @@ export type OpportunityCtas = {
   instagram?: string;
   portfolio?: string;
   cv?: string;
+  /** Institutional program work (e.g. Oolite Digital Lab on this site) */
+  ooliteWork?: string;
+  /** Label for `ooliteWork` link; defaults to “Oolite Digital Lab” */
+  ooliteWorkLabel?: string;
+  /** Main institution site (e.g. oolitearts.org) */
+  ooliteOrg?: string;
   /** In-page anchor for “view case studies” */
   caseStudiesAnchor?: string;
 };

@@ -1,4 +1,5 @@
 import type { WorkSite } from './types';
+import { creativeTechImageToolsBanner } from '@/content/evidence/applicationBanners';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
 export const creativeTechImageTools: WorkSite = {
@@ -9,6 +10,7 @@ export const creativeTechImageTools: WorkSite = {
       'Image-heavy creative platforms: Next.js, Python, Docker, PyTorch, generative pipelines, and institutional media systems. USA-based contractor; paid proposal-phase availability.',
     indexable: false,
   },
+  applicationBanner: creativeTechImageToolsBanner,
   roleTitle: 'Creative technology · image systems',
   audienceKeywords: {
     terms: [
@@ -74,6 +76,7 @@ export const creativeTechImageTools: WorkSite = {
         { logoId: 'supabase', label: 'Supabase', framing: 'Database, storage, auth, realtime' },
         { logoId: 'vercel', label: 'Vercel', framing: 'Next.js hosting and deployment' },
         { logoId: 'replicate', label: 'Replicate', framing: 'Hosted model API workflows' },
+        { logoId: 'azure', label: 'Azure', framing: 'Cloud media and worker-backed generation (Lore Machine)' },
         { logoId: 'github', label: 'GitHub', framing: 'Source control and CI/CD' },
         { logoId: 'tailwind', label: 'Tailwind CSS', framing: 'Responsive, accessible UI systems' },
       ],
@@ -85,6 +88,7 @@ export const creativeTechImageTools: WorkSite = {
   caseStudies: [
     {
       evidenceId: 'lore-machine',
+      linkLabel: 'Lore Machine',
       title: 'Lore Machine — AI storytelling platform',
       category: 'AI storytelling product · Founding engineer',
       summary:
@@ -102,6 +106,7 @@ export const creativeTechImageTools: WorkSite = {
     },
     {
       evidenceId: 'multimodal-image-systems',
+      linkLabel: 'Research dossier',
       title: 'Generative image research',
       category: 'PyTorch and Docker-based model workflows',
       summary:
@@ -118,6 +123,7 @@ export const creativeTechImageTools: WorkSite = {
     },
     {
       evidenceId: 'digital-culture-infrastructure',
+      linkLabel: 'dcc.miami',
       title: 'Cultural technology platforms',
       category: 'Creative tools for artists and institutions',
       summary:
@@ -159,7 +165,8 @@ export const creativeTechImageTools: WorkSite = {
     title: 'Engineer, artist, and creative-technology builder',
     paragraphs: [
       'I am a Miami-based full-stack engineer and interdisciplinary artist with 12+ years of React experience. My work focuses on the point where software architecture, image systems, and human-facing creative tools meet.',
-      'I have built platforms for generative storytelling, artist education, cultural organizations, and AI-driven media workflows. My background helps me communicate with engineers, designers, researchers, and nontechnical stakeholders.',
+      'As Technical Director of Digital at Oolite Arts, I help run the Digital Lab — workshops, automation, and artist-facing tools for Miami’s creative community. I have also built platforms for generative storytelling (Lore Machine), cultural infrastructure (DCC Miami), and AI-driven media workflows.',
+      'My background helps me communicate with engineers, designers, researchers, and nontechnical stakeholders.',
     ],
   },
   navItems: [
@@ -175,8 +182,12 @@ export const creativeTechImageTools: WorkSite = {
     emailSubject: 'Creative-tech image tools — Moises Sanabria',
     linkedin: 'https://www.linkedin.com/in/moisesdsanabria',
     github: 'https://github.com/moisestech',
+    instagram: 'https://www.instagram.com/moisesdsanabria',
     portfolio: '/portfolio',
     cv: '/cv',
+    ooliteWork: '/tech-nonprofit/oolite',
+    ooliteWorkLabel: 'Oolite Digital Lab',
+    ooliteOrg: 'https://oolitearts.org',
     caseStudiesAnchor: '#case-studies',
     resumePrintPath: '/opportunities/cvs-senior-genai-engineer/print/resume',
     resumePdfPath: '/resume/moises-sanabria-senior-genai-engineer.pdf',

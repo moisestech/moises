@@ -15,7 +15,11 @@ function SkillLogoCell({ logoId, label, framing }: { logoId: string; label: stri
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-stone-100 dark:border-stone-800 bg-stone-50 dark:bg-stone-800/80 p-1.5">
         {entry.imageSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={entry.imageSrc} alt="" className="h-full w-full object-contain" />
+          <img
+            src={entry.imageSrc}
+            alt=""
+            className={cn('h-full w-full object-contain', entry.imageClassName)}
+          />
         ) : (
           <span className="text-[10px] font-bold uppercase text-stone-500 dark:text-stone-400">{label.slice(0, 4)}</span>
         )}

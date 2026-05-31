@@ -25,10 +25,11 @@ export function WorkCaseStudyGrid({ sectionTitle, intro, caseStudies }: WorkCase
           const category = item.category ?? base.category;
           const summary = item.summary ?? base.summary;
           const skillTags = item.skillTags ?? base.skillTags;
-          const imageSrc = base.imageSrc;
-          const imageAlt = base.imageAlt;
-          const imageLocal = base.imageLocal;
-          const href = base.href;
+          const imageSrc = item.imageSrc ?? base.imageSrc;
+          const imageAlt = item.imageAlt ?? base.imageAlt;
+          const imageLocal = item.imageLocal ?? base.imageLocal;
+          const href = item.href ?? base.href;
+          const linkLabel = item.linkLabel;
 
           return (
             <article key={item.evidenceId} className={`flex flex-col ${opp.card}`}>
@@ -50,7 +51,7 @@ export function WorkCaseStudyGrid({ sectionTitle, intro, caseStudies }: WorkCase
                 {href ? (
                   href.startsWith('/') ? (
                     <Link href={href} className={`mt-4 inline-flex items-center gap-1 text-sm ${opp.linkAccent}`}>
-                      View context
+                      {linkLabel ?? 'View context'}
                       <ChevronRight className="h-3.5 w-3.5" aria-hidden />
                     </Link>
                   ) : (
@@ -60,7 +61,7 @@ export function WorkCaseStudyGrid({ sectionTitle, intro, caseStudies }: WorkCase
                       rel="noopener noreferrer"
                       className={`mt-4 inline-flex items-center gap-1 text-sm ${opp.linkAccent}`}
                     >
-                      View site
+                      {linkLabel ?? 'View site'}
                       <ExternalLink className="h-3.5 w-3.5" aria-hidden />
                     </a>
                   )
