@@ -17,5 +17,7 @@ export function isRecruitingSitePath(pathname: string | null): boolean {
   if (pathname.startsWith('/opportunities/')) return true;
   if (pathname === '/technology-product-strategy') return true;
   if (pathname.startsWith('/technology-product-strategy/')) return true;
+  if (pathname === '/work') return true;
+  if (pathname.startsWith('/work/')) return true;
   return false;
 }

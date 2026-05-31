@@ -3,11 +3,13 @@ import { opp } from '@/components/opportunities/opportunityTheme';
 
 type InnovationProcessProps = {
   opportunity: Opportunity;
+  /** Sticky nav anchor; defaults to `process` */
+  sectionId?: string;
 };
 
-export function InnovationProcess({ opportunity }: InnovationProcessProps) {
+export function InnovationProcess({ opportunity, sectionId = 'process' }: InnovationProcessProps) {
   return (
-    <section id="process" className={opp.section}>
+    <section id={sectionId} className={opp.section}>
       <h2 className={opp.h2}>{opportunity.processSectionTitle ?? 'Process'}</h2>
       {opportunity.processIntro ? <p className={`mt-3 max-w-3xl ${opp.body}`}>{opportunity.processIntro}</p> : null}
       <ol className="mt-8 space-y-4">

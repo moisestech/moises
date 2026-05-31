@@ -27,6 +27,14 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
   docker: { id: 'docker', label: 'Docker', imageSrc: `${base}/docker.svg` },
   postgres: { id: 'postgres', label: 'Postgres', imageSrc: `${base}/postgres.svg` },
   comfyui: { id: 'comfyui', label: 'ComfyUI', imageSrc: `${base}/comfyui.svg` },
+  react: { id: 'react', label: 'React', imageSrc: `${base}/react.svg` },
+  tailwind: { id: 'tailwind', label: 'Tailwind CSS', imageSrc: `${base}/tailwind.svg` },
+  github: { id: 'github', label: 'GitHub', imageSrc: `${base}/github.svg` },
+  aws: { id: 'aws', label: 'AWS', imageSrc: `${base}/aws.svg` },
+  cloudinary: { id: 'cloudinary', label: 'Cloudinary', imageSrc: `${base}/cloudinary.svg` },
+  sam: { id: 'sam', label: 'SAM', imageSrc: `${base}/sam.svg` },
+  iiif: { id: 'iiif', label: 'IIIF', imageSrc: `${base}/iiif.svg` },
+  openseadragon: { id: 'openseadragon', label: 'OpenSeadragon', imageSrc: `${base}/openseadragon.svg` },
 };
 
 export function resolveTechLogos(ids: string[]): TechLogoEntry[] {

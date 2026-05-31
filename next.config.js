@@ -37,6 +37,11 @@ const nextConfig = {
         destination: '/opportunities/cvs-senior-genai-engineer',
         permanent: true,
       },
+      {
+        source: '/opportunities/creative-tech-image-tools',
+        destination: '/work/creative-tech-image-tools',
+        permanent: false,
+      },
     ]
   },
 
