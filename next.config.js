@@ -44,6 +44,11 @@ const nextConfig = {
         destination: '/work/creative-tech-image-tools',
         permanent: false,
       },
+      {
+        source: '/grant/wolfsonian',
+        destination: '/grant/wolfsonian-fellowship',
+        permanent: false,
+      },
     ]
   },
 

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Tech Nonprofit',
   description: 'Empowering nonprofits with technology solutions',
+  metadataBase: new URL('https://moises.tech'),
   keywords:
     'artificial intelligence artist, ai art, ai generated art, art artificial intelligence, ai artist, contemporary art, machine learning art, art gans, meme art, creative ai, creative technology, ai artist',
   alternates: {

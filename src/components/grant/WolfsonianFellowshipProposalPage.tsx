@@ -83,7 +83,7 @@ export default function WolfsonianFellowshipProposalPage() {
       <section id="overview" className="mx-auto w-[min(96vw,1200px)] px-4 pb-14 pt-28 sm:px-8 sm:pt-32">
         <div className="mb-6 flex items-center justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
-            Wolfsonian Fellowship Proposal
+            A Wolfsonian-FIU Creative Fellowship Proposal
           </p>
           <ThemeToggle />
         </div>
@@ -116,12 +116,13 @@ export default function WolfsonianFellowshipProposalPage() {
         </nav>
 
         <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-          Institutional Roles in the Life of an Archive
+          The Archive Dreams in Public
         </h1>
+        <p className="mt-3 text-xl font-medium text-stone-800 dark:text-stone-200">
+          An Agentic Study of Institutional Memory
+        </p>
         <p className="mt-5 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-          A public but unlisted fellowship proposal that combines a polished visual essay with a lightweight
-          interactive layer. This first build emphasizes contemplative navigation, citation logic, and
-          relationship-driven meaning.
+          What happens when an archive begins to interpret itself?
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           {wolfsonianDownloads.map((download) => (
@@ -148,7 +149,7 @@ export default function WolfsonianFellowshipProposalPage() {
               />
             </div>
             <figcaption className="border-t border-stone-200 px-4 py-3 text-sm text-stone-700 dark:border-stone-700 dark:text-stone-300">
-              {bannerImage.caption}
+              {bannerImage.caption} {bannerImage.isPlaceholder ? '(placeholder path pending final local asset)' : ''}
             </figcaption>
           </figure>
         ) : null}
@@ -200,7 +201,8 @@ export default function WolfsonianFellowshipProposalPage() {
             Project image gallery
           </h2>
           <p className="mt-4 max-w-3xl text-sm text-stone-600 dark:text-stone-400 sm:text-base">
-            Key frames for proposal review and institutional presentation contexts.
+            Hero -&gt; Living Painting -&gt; Citation Trail -&gt; Memory Engine -&gt; Synthetic Saturation -&gt;
+            Installation Rendering.
           </p>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {galleryImages.map((image) => (
@@ -219,6 +221,11 @@ export default function WolfsonianFellowshipProposalPage() {
                 </div>
                 <figcaption className="border-t border-stone-200 px-4 py-3 text-sm text-stone-700 dark:border-stone-700 dark:text-stone-300">
                   {image.caption}
+                  {image.isPlaceholder ? (
+                    <span className="mt-1 block text-xs text-stone-500 dark:text-stone-400">
+                      Expected local file: <code>{image.expectedPath}</code>
+                    </span>
+                  ) : null}
                 </figcaption>
               </figure>
             ))}
@@ -321,7 +328,7 @@ export default function WolfsonianFellowshipProposalPage() {
                       return (
                         <span
                           key={connectedRoleId}
-                          className="inline-flex items-center gap-2 border border-sky-500/40 bg-sky-500/10 px-2 py-1 text-xs text-sky-800 motion-safe:animate-[pulse_2s_ease-in-out_infinite] dark:text-sky-300"
+                          className="inline-flex items-center gap-2 border border-sky-500/40 bg-sky-500/10 px-2 py-1 text-xs text-sky-800 motion-safe:animate-[pulse_2s_ease-in-out_infinite] motion-reduce:animate-none dark:text-sky-300"
                         >
                           {activeRole.title} → {connectedRole.title}
                         </span>
