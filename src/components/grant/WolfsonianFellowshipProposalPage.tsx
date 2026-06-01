@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { ThemeToggle } from '@/components/common/ThemeToggle';
 import {
   wolfsonianApiHighlight,
   wolfsonianDownloads,
@@ -12,6 +11,7 @@ import {
   wolfsonianInstitutionalRoles,
   wolfsonianVisualEssaySections,
 } from '@/content/grants/wolfsonian-fellowship';
+import { wolfsonianProposalStatement } from '@/content/grants/wolfsonian-fellowship-statement';
 
 function roleById(roleId: string) {
   return wolfsonianInstitutionalRoles.find((role) => role.id === roleId);
@@ -23,6 +23,7 @@ export default function WolfsonianFellowshipProposalPage() {
   const navItems = useMemo(
     () => [
       { id: 'overview', label: 'Overview' },
+      { id: 'research-statement', label: 'Statement' },
       { id: 'api-highlight', label: 'API' },
       { id: 'visual-essay', label: 'Visual essay' },
       { id: 'gallery', label: 'Gallery' },
@@ -53,7 +54,7 @@ export default function WolfsonianFellowshipProposalPage() {
       for (const id of navIds) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= 190) current = id;
+        if (el.getBoundingClientRect().top <= 220) current = id;
       }
       setActiveSectionId((prev) => (prev === current ? prev : current));
     };
@@ -80,17 +81,14 @@ export default function WolfsonianFellowshipProposalPage() {
 
   return (
     <main className="min-h-screen bg-stone-50 text-stone-900 dark:bg-neutral-950 dark:text-stone-100">
-      <section id="overview" className="mx-auto w-[min(96vw,1200px)] px-4 pb-14 pt-28 sm:px-8 sm:pt-32">
-        <div className="mb-6 flex items-center justify-between gap-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
-            A Wolfsonian-FIU Creative Fellowship Proposal
-          </p>
-          <ThemeToggle />
-        </div>
+      <section id="overview" className="mx-auto w-[min(96vw,1200px)] px-4 pb-14 pt-24 sm:px-8 sm:pt-32">
+        <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
+          A Wolfsonian-FIU Creative Fellowship Proposal
+        </p>
 
         <nav
           aria-label="Wolfsonian section navigation"
-          className="sticky top-20 z-20 mb-8 overflow-x-auto border border-stone-300 bg-white/95 px-3 py-3 backdrop-blur dark:border-stone-700 dark:bg-neutral-900/95"
+          className="sticky top-24 z-40 mb-8 overflow-x-auto border border-stone-300 bg-white/95 px-3 py-3 backdrop-blur md:top-32 dark:border-stone-700 dark:bg-neutral-900/95"
         >
           <div className="flex min-w-max gap-2">
             {navItems.map((item) => (
@@ -156,6 +154,34 @@ export default function WolfsonianFellowshipProposalPage() {
       </section>
 
       <article className="mx-auto w-[min(96vw,1200px)] space-y-16 px-4 pb-20 sm:px-8">
+        <section id="research-statement" aria-labelledby="research-statement-heading" className="scroll-mt-36">
+          <h2
+            id="research-statement-heading"
+            className="border-b border-stone-300 pb-4 text-2xl font-semibold dark:border-stone-700"
+          >
+            Research statement
+          </h2>
+          <div className="mt-8 max-w-3xl space-y-10">
+            {wolfsonianProposalStatement.map((section) => (
+              <div key={section.id}>
+                {section.title ? (
+                  <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">{section.title}</h3>
+                ) : null}
+                <div className={cn('space-y-4', section.title && 'mt-3')}>
+                  {section.paragraphs.map((paragraph) => (
+                    <p
+                      key={paragraph.slice(0, 48)}
+                      className="text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section
           id="api-highlight"
           aria-labelledby="api-highlight-heading"
@@ -232,9 +258,9 @@ export default function WolfsonianFellowshipProposalPage() {
           </div>
         </section>
 
-        <section id="institutional-roles" aria-labelledby="institutional-roles">
+        <section id="institutional-roles" aria-labelledby="institutional-roles-heading" className="scroll-mt-36">
           <h2
-            id="institutional-roles"
+            id="institutional-roles-heading"
             className="border-b border-stone-300 pb-4 text-2xl font-semibold dark:border-stone-700"
           >
             Institutional Roles
