@@ -20,14 +20,17 @@ function roleById(roleId: string) {
 export default function WolfsonianFellowshipProposalPage() {
   const [activeRoleId, setActiveRoleId] = useState(wolfsonianInstitutionalRoles[0]?.id ?? '');
   const [activeSectionId, setActiveSectionId] = useState('overview');
-  const navItems = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'api-highlight', label: 'API' },
-    { id: 'visual-essay', label: 'Visual essay' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'institutional-roles', label: 'Institutional roles' },
-    { id: 'proposal-notes', label: 'Notes' },
-  ];
+  const navItems = useMemo(
+    () => [
+      { id: 'overview', label: 'Overview' },
+      { id: 'api-highlight', label: 'API' },
+      { id: 'visual-essay', label: 'Visual essay' },
+      { id: 'gallery', label: 'Gallery' },
+      { id: 'institutional-roles', label: 'Institutional roles' },
+      { id: 'proposal-notes', label: 'Notes' },
+    ],
+    [],
+  );
   const bannerImage = wolfsonianImages.find((image) => image.role === 'banner');
   const galleryImages = wolfsonianImages.filter((image) => image.role === 'gallery');
   const activeRole = useMemo(
