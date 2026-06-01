@@ -1,11 +1,12 @@
-"use client"
-
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { Toaster } from '@/components/ui/toaster'
+import { metadata } from './metadata'
 import './globals.css'
+
+export { metadata }
 
 const inter = Inter({ subsets: ['latin'] })
 
