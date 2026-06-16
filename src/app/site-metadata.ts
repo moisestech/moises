@@ -1,6 +1,6 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const siteMetadata: Metadata = {
   title: 'Tech Nonprofit',
   description: 'Empowering nonprofits with technology solutions',
   metadataBase: new URL('https://moises.tech'),
@@ -42,4 +42,4 @@ export const metadata: Metadata = {
       },
     ],
   },
-} 
+};

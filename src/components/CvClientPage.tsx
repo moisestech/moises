@@ -1,12 +1,16 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { cvData } from '@/constants/cv';
+import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 import { motion, useInView, useAnimation, Variants } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import EnhancedDescription from '@/components/EnhancedDescription';
 import InteractiveText from '@/components/InteractiveText';
+import CvExhibitionsSection from '@/components/cv/CvExhibitionsSection';
+import type { CVExhibition } from '@/types/cv';
 
 const SectionTitle = ({ children }: { children: React.ReactNode }) => {
   const controls = useAnimation();
@@ -148,10 +152,19 @@ const InteractiveDescription = ({ details, interactiveContent }: {
   );
 };
 
-const CvClientPage = () => {
+const CvClientPage = ({
+  airtableExhibitions,
+  airtableError,
+}: {
+  airtableExhibitions?: Record<string, CVExhibition[]>;
+  airtableError?: string | null;
+}) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const listItemVariants = getListItemVariants(isDark);
+  const hasAirtableExhibitions =
+    airtableExhibitions &&
+    Object.values(airtableExhibitions).some((items) => items.length > 0);
 
   return (
     <div className="max-w-7xl px-11 pt-20 md:pb-6 mx-auto print:py-4 print:px-2">
@@ -227,6 +240,58 @@ const CvClientPage = () => {
         >
           <h1 className="text-3xl font-bold mb-1 print:text-2xl">{cvData.name}</h1>
           <h2 className="text-xl mb-4 print:text-lg print:mb-2">{cvData.title}</h2>
+          <div className="flex flex-col sm:flex-row sm:items-start gap-6 print:gap-4 mb-2">
+            <a
+              href={moisesSanabriaHeadshot}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 print:w-20 print:h-20"
+              title="Download headshot (opens full resolution)"
+            >
+              <Image
+                src={moisesSanabriaHeadshot}
+                alt="Moises Sanabria — professional headshot"
+                fill
+                className="object-cover"
+                sizes="96px"
+              />
+            </a>
+            <div className="text-sm text-gray-700 dark:text-gray-300 space-y-1 print:text-xs">
+              <p>
+                <span className="font-medium text-gray-900 dark:text-white">Website: </span>
+                <Link
+                  href={cvData.contact.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4 hover:text-blue-600 dark:hover:text-[#67e8f9]"
+                >
+                  {cvData.contact.website.replace(/^https?:\/\/(www\.)?/, '')}
+                </Link>
+              </p>
+              <p>
+                <span className="font-medium text-gray-900 dark:text-white">Email: </span>
+                <Link
+                  href={`mailto:${cvData.contact.email}`}
+                  className="underline underline-offset-4 hover:text-blue-600 dark:hover:text-[#67e8f9]"
+                >
+                  {cvData.contact.email}
+                </Link>
+              </p>
+              {cvData.contact.socialMedia.map((social) => (
+                <p key={social.platform}>
+                  <span className="font-medium text-gray-900 dark:text-white">{social.platform}: </span>
+                  <Link
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-4 hover:text-blue-600 dark:hover:text-[#67e8f9]"
+                  >
+                    {social.url.replace(/^https?:\/\/(www\.)?/, '')}
+                  </Link>
+                </p>
+              ))}
+            </div>
+          </div>
         </motion.header>
 
         <FadeInSection>
@@ -352,32 +417,50 @@ const CvClientPage = () => {
 
         <FadeInSection>
           <SectionTitle>Exhibitions</SectionTitle>
-          
-          <h3 className="text-lg font-medium mb-3 pl-2">Collective</h3>
-          <ul className="space-y-3 print:space-y-1 mb-6">
-            {cvData.exhibitions.collective.map((exhibition, index) => (
-              <motion.li 
-                key={index} 
-                custom={index}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                viewport={{ once: true, amount: 0.1 }}
-                variants={listItemVariants}
-                className="flex flex-col sm:flex-row print:flex-row p-2 rounded-md transition-colors"
-              >
-                <div className="w-full sm:w-32 font-medium print:w-24 print:text-xs">{exhibition.year}</div>
-                <div className="flex-1 print:text-xs">
-                  <InteractiveLink 
-                    title={exhibition.title} 
-                    url={exhibition.url} 
-                    interactiveContent={exhibition.interactiveContent}
-                  />
-                  <div className="text-gray-600 dark:text-gray-400">{exhibition.location}</div>
-                </div>
-              </motion.li>
-            ))}
-          </ul>
+
+          {process.env.NODE_ENV === 'development' && airtableError ? (
+            <p className="text-xs text-red-600 mb-2">{airtableError}</p>
+          ) : null}
+
+          {hasAirtableExhibitions ? (
+            <>
+              <h3 className="text-lg font-medium mb-3 pl-2">Selected Exhibitions</h3>
+              <CvExhibitionsSection
+                exhibitionsByYear={airtableExhibitions}
+                listItemVariants={listItemVariants}
+              />
+            </>
+          ) : (
+            <>
+              <h3 className="text-lg font-medium mb-3 pl-2">Collective</h3>
+              <ul className="space-y-3 print:space-y-1 mb-6">
+                {cvData.exhibitions.collective.map((exhibition, index) => (
+                  <motion.li
+                    key={index}
+                    custom={index}
+                    initial="hidden"
+                    whileInView="visible"
+                    whileHover="hover"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={listItemVariants}
+                    className="flex flex-col sm:flex-row print:flex-row p-2 rounded-md transition-colors"
+                  >
+                    <div className="w-full sm:w-32 font-medium print:w-24 print:text-xs">
+                      {exhibition.year}
+                    </div>
+                    <div className="flex-1 print:text-xs">
+                      <InteractiveLink
+                        title={exhibition.title}
+                        url={exhibition.url}
+                        interactiveContent={exhibition.interactiveContent}
+                      />
+                      <div className="text-gray-600 dark:text-gray-400">{exhibition.location}</div>
+                    </div>
+                  </motion.li>
+                ))}
+              </ul>
+            </>
+          )}
           
           <h3 className="text-lg font-medium mb-3 pl-2">Screenings</h3>
           <ul className="space-y-3 print:space-y-1 mb-6">

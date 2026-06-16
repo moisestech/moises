@@ -4,6 +4,8 @@ import Link from 'next/link';
 import YouTubePlayer from '@/components/common/YouTubePlayer';
 import { ArtworkDossierMediaGallery } from '@/components/artwork-dossier/ArtworkDossierMediaGallery';
 import { Paragraphs } from '@/components/artwork-dossier/ArtworkDossierProse';
+import { ArtworkDossierTags } from '@/components/artwork-dossier/ArtworkDossierTags';
+import { ArtworkDossierCredits } from '@/components/artwork-dossier/ArtworkDossierCredits';
 import { artist } from '@/constants/artworks';
 import type { ArtworkDossier } from '@/content/artwork-dossiers/types';
 
@@ -41,20 +43,26 @@ const RECOGNITION_STATUS: Record<ArtworkDossier['recognition'][0]['status'], str
 
 type ArtworkDossierPageProps = {
   dossier: ArtworkDossier;
+  /** Eyebrow above title — e.g. Selected work, Project */
+  kicker?: string;
 };
 
-export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps) {
+export default function ArtworkDossierPage({ dossier, kicker = 'Selected work' }: ArtworkDossierPageProps) {
   const artwork = artist.artworks[dossier.slug];
   if (!artwork) return null;
 
   const mailto = `mailto:${dossier.inquire.email}?${new URLSearchParams({ subject: dossier.inquire.subject }).toString()}`;
 
+  const credits = [
+    ...(artwork.role ? [{ name: 'Moises Sanabria', role: artwork.role }] : [{ name: 'Moises Sanabria', role: 'Artist' }]),
+    ...(artwork.collaboration ? [{ name: artwork.collaboration, role: 'Collaborator' }] : []),
+    ...(artwork.technical_assistant
+      ? [{ name: artwork.technical_assistant, role: 'Technical assistant' }]
+      : []),
+  ];
+
   const metadataRows: { label: string; value: ReactNode }[] = [
     { label: 'Artist', value: 'Moises Sanabria' },
-    { label: 'Collaborator', value: artwork.collaboration ?? '—' },
-    ...(artwork.technical_assistant
-      ? [{ label: 'Technical assistant', value: artwork.technical_assistant }]
-      : []),
     { label: 'Title', value: artwork.title },
     { label: 'Year', value: dossier.yearDisplay },
     { label: 'Medium', value: artwork.medium ?? dossier.category },
@@ -82,7 +90,7 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
       <section className="pt-28 sm:pt-36 md:pt-40" aria-labelledby="dossier-title">
         <div className="mx-auto w-[min(92vw,1400px)] px-4 sm:px-6">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
-            Selected work
+            {kicker}
           </p>
           <h1 id="dossier-title" className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             {artwork.title}
@@ -124,11 +132,27 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
                 <dt className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                   {label}
                 </dt>
-                <dd className="text-sm leading-relaxed sm:text-base">{value}</dd>
+                <dd className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200 sm:text-base">{value}</dd>
               </div>
             ))}
           </dl>
         </section>
+
+        {/* Credits */}
+        <section id="credits" aria-labelledby="credits-heading" className="scroll-mt-36">
+          <SectionTitle id="credits-heading">Credits</SectionTitle>
+          <ArtworkDossierCredits credits={credits} />
+        </section>
+
+        {/* Tags */}
+        {artwork.tags && artwork.tags.length > 0 && (
+          <section id="tags" aria-labelledby="tags-heading" className="scroll-mt-36">
+            <SectionTitle id="tags-heading">Tags</SectionTitle>
+            <div className="mt-6">
+              <ArtworkDossierTags tags={artwork.tags} />
+            </div>
+          </section>
+        )}
 
         {/* Description */}
         <section id="description" aria-labelledby="description-heading" className="scroll-mt-36">
@@ -152,7 +176,7 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
                 <figure key={video.youtubeId}>
                   <YouTubePlayer videoId={video.youtubeId} title={video.title} />
                   <figcaption className="mt-3">
-                    <p className="text-sm font-semibold">{video.title}</p>
+                    <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">{video.title}</p>
                     {video.caption && (
                       <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{video.caption}</p>
                     )}
@@ -181,7 +205,7 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
                   {index + 1}
                 </span>
                 <div>
-                  <h3 className="font-bold">{step.title}</h3>
+                  <h3 className="font-bold text-neutral-900 dark:text-neutral-50">{step.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 sm:text-base">
                     {step.description}
                   </p>
@@ -225,7 +249,7 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
               <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-3">
                 Core components
               </p>
-              <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed sm:text-base">
+              <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-neutral-800 dark:text-neutral-200 sm:text-base">
                 {dossier.technicalComponents.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -238,7 +262,7 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
                 <dt className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                   {layer}
                 </dt>
-                <dd className="text-sm leading-relaxed sm:text-base">{fn}</dd>
+                <dd className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200 sm:text-base">{fn}</dd>
               </div>
             ))}
           </dl>
@@ -251,17 +275,17 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
             <table className="w-full min-w-[32rem] border-collapse text-left text-sm sm:text-base">
               <thead>
                 <tr className="border-b border-black/20 dark:border-white/20">
-                  <th className="py-3 pr-4 font-semibold">Year</th>
-                  <th className="py-3 pr-4 font-semibold">Presentation</th>
-                  <th className="py-3 pr-4 font-semibold">Location</th>
-                  <th className="py-3 font-semibold">Type</th>
+                  <th className="py-3 pr-4 font-semibold text-neutral-900 dark:text-neutral-50">Year</th>
+                  <th className="py-3 pr-4 font-semibold text-neutral-900 dark:text-neutral-50">Presentation</th>
+                  <th className="py-3 pr-4 font-semibold text-neutral-900 dark:text-neutral-50">Location</th>
+                  <th className="py-3 font-semibold text-neutral-900 dark:text-neutral-50">Type</th>
                 </tr>
               </thead>
               <tbody>
                 {dossier.presentations.map((row) => (
                   <tr key={`${row.year}-${row.title}`} className="border-b border-black/10 dark:border-white/10">
-                    <td className="py-4 pr-4 align-top">{row.year}</td>
-                    <td className="py-4 pr-4 align-top font-medium">{row.title}</td>
+                    <td className="py-4 pr-4 align-top text-neutral-900 dark:text-neutral-100">{row.year}</td>
+                    <td className="py-4 pr-4 align-top font-medium text-neutral-900 dark:text-neutral-100">{row.title}</td>
                     <td className="py-4 pr-4 align-top text-neutral-600 dark:text-neutral-400">{row.location}</td>
                     <td className="py-4 align-top capitalize text-neutral-600 dark:text-neutral-400">{row.type}</td>
                   </tr>
@@ -281,7 +305,7 @@ export default function ArtworkDossierPage({ dossier }: ArtworkDossierPageProps)
                   <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                     {item.publication}
                   </p>
-                  <p className="mt-2 font-semibold">{item.title}</p>
+                  <p className="mt-2 font-semibold text-neutral-900 dark:text-neutral-50">{item.title}</p>
                   {item.description && (
                     <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{item.description}</p>
                   )}

@@ -3,10 +3,12 @@ import localFont from 'next/font/local'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { Toaster } from '@/components/ui/toaster'
-import { metadata } from './metadata'
 import './globals.css'
 
-export { metadata }
+import type { Metadata } from 'next';
+import { siteMetadata } from './site-metadata';
+
+export const metadata: Metadata = siteMetadata;
 
 const inter = Inter({ subsets: ['latin'] })
 

@@ -136,6 +136,8 @@ export type SkillsMatrixRow = {
 export type Opportunity = {
   slug: string;
   status: OpportunityStatus;
+  /** When false, hidden from `/opportunities` index but reachable by direct URL. Default: true */
+  listed?: boolean;
   seo: OpportunitySeo;
   variant: OpportunityVariant;
   audienceLine?: string;

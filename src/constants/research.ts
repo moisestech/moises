@@ -722,6 +722,83 @@ Beyond infrastructure, The Algorithm is Outside delves into the social and ritua
       gallery: 'The installation creates a cohesive techno-sculptural vocabulary with hacked consumer objects retrofitted with screens and sensors, giving the space a networked concept aesthetic.'
     }
   },
+  touch_grass_circuit_floor: {
+    title: 'Touch Grass: Circuit Floor',
+    year: 2026,
+    description:
+      'The Ground Is Online — a modular walkable installation built from reclaimed circuit boards sealed beneath illuminated transparent tiles. Temporary public floor sculpture in development for hotel-interior contexts.',
+    essay: '',
+    implementation: undefined,
+    budget: undefined,
+    supplemental_materials: [],
+    interactiveContent: [],
+    artistic_intent:
+      'Online, “touch grass” assumes the physical and digital remain separate. This installation begins from a different premise: obsolete electronic infrastructure becomes literal ground beneath the body.',
+    technical_requirements: {
+      power: ['Low-voltage concealed wiring'],
+      mounting: ['Temporary freestanding modular floor'],
+      space: {
+        pedestal_size: 'Approximately 20 sq. ft. (4 × 5 ft. default grid)',
+        wall_clearance: 'Unobstructed bypass route required',
+        power_access: 'Standard interior outlet',
+      },
+    },
+    components: {
+      structure: {
+        material: 'Reclaimed circuit boards, dark powder-coated aluminum frame (target)',
+        customization: ['12 × 12 in. modular tiles', 'Adaptable rectangular layouts'],
+      },
+      hardware: {
+        model: 'Low-voltage LED edge lighting',
+        specifications: ['Responsive activation under development'],
+        power_requirements: 'Low-voltage interior power',
+      },
+      mounting: { type: ['Freestanding temporary platform'], materials: ['Transparent walkable surface'] },
+      display: { pedestal: 'Modular floor field', lighting: 'Edge illumination (primary)' },
+    },
+    materials: [
+      'Reclaimed circuit boards',
+      'Electronic components',
+      'Transparent walkable surface',
+      'Structural frame',
+      'Low-voltage LED lighting',
+    ],
+    dimensions: 'Approximately 20 sq. ft. (4 × 5 ft. default); 12 × 12 in. modules',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831899/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-3_ugyjht.jpg',
+        caption: 'Touch Grass: Circuit Floor — concept study (in development)',
+      },
+    ],
+    tags: [
+      'installation',
+      'reclaimed electronics',
+      'Miami',
+      'public art',
+      'No Vacancy',
+      'modular',
+      'hotel',
+      'in development',
+    ],
+    interpretation:
+      'The visitor attempts to “touch grass” by stepping onto the remains of computational life — even logging off takes place inside the machine.',
+    exhibition: 'In development — proposed temporary public installation',
+    installation_notes: [
+      'Low-profile transition edge with unobstructed bypass route',
+      'No single-use plastic or polystyrene materials',
+    ],
+    future_iterations: ['Proximity-based activation', 'Cluster-based response', 'Full 20-tile field'],
+    on_view: false,
+    enhancedDescriptions: {
+      overview:
+        'Touch Grass: Circuit Floor is a modular walkable installation giving obsolete electronic infrastructure a physical presence as luminous architectural ground.',
+      essay: '',
+      implementation: 'Temporary freestanding modular floor for publicly accessible hotel interior.',
+      budget: '',
+      technical: 'Edge-lit tiles with responsive lighting under incremental development.',
+      gallery: '',
+    },
+  },
   broken_acceleration: {
     title: 'Broken Acceleration',
     year: 2026,

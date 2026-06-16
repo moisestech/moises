@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1a2b4a"/>
+      <stop offset="1" stop-color="#2d4a7c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <text x="600" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="700" fill="#ffffff">Playwire</text>
+  <text x="600" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" fill="#e85d4c">RAMP · Publisher journey demo</text>
+  <text x="600" y="290" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8">Concept dossier  Moises Sanabria</text>
+</svg>

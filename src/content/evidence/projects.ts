@@ -2,7 +2,8 @@ export type EvidenceProjectId =
   | 'lore-machine'
   | 'ai24'
   | 'multimodal-image-systems'
-  | 'digital-culture-infrastructure';
+  | 'digital-culture-infrastructure'
+  | 'playwire-alumni';
 
 export type EvidenceProject = {
   id: EvidenceProjectId;
@@ -77,6 +78,17 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
     imageAlt: 'Generative image research — visual output from practice-based model experimentation',
     href: '/research/broken-acceleration',
+  },
+  'playwire-alumni': {
+    id: 'playwire-alumni',
+    title: 'Playwire — Data & Solutions (2021–2022)',
+    category: 'Ad tech · publisher systems',
+    summary:
+      'Two years in-house: Solutions Engineer delivering publisher integrations and JS debugging for SaaS onboarding; Data Analyst migrating Kinesis/Athena pipelines to Snowflake, building Tableau auction analytics, and Slack alerting for data reliability.',
+    skillTags: ['Snowflake', 'Tableau', 'AWS Kinesis', 'JavaScript', 'Publisher integrations', 'Slack alerts'],
+    imageSrc: '/images/opportunities/playwire-banner.svg',
+    imageAlt: 'Playwire concept banner — former Data and Solutions team experience',
+    imageLocal: true,
   },
   'digital-culture-infrastructure': {
     id: 'digital-culture-infrastructure',

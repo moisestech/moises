@@ -1,6 +1,29 @@
-import { redirect } from 'next/navigation';
+import type { Metadata } from 'next';
+import ArtworkDossierPage from '@/components/artwork-dossier/ArtworkDossierPage';
+import { artist } from '@/constants/artworks';
+import { DIGITAL_DIVINITIES_DOSSIER } from '@/content/artwork-dossiers/digital-divinities';
 
-/** Legacy project URL — canonical dossier lives at /art/digital_divinities */
-export default function DigitalDivinitiesProjectRedirect() {
-  redirect('/art/digital_divinities');
+const artwork = artist.artworks.digital_divinities;
+
+export const metadata: Metadata = {
+  title: `${artwork.title} — Project — Moises Sanabria`,
+  description: DIGITAL_DIVINITIES_DOSSIER.publicDescription,
+  alternates: { canonical: '/art/digital_divinities' },
+  openGraph: {
+    title: artwork.title,
+    description: DIGITAL_DIVINITIES_DOSSIER.publicDescription,
+    images: artwork.images[0]?.url ? [{ url: artwork.images[0].url, alt: artwork.title }] : [],
+    type: 'article',
+    url: '/art/digital_divinities/project',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: artwork.title,
+    description: DIGITAL_DIVINITIES_DOSSIER.publicDescription,
+    images: artwork.images[0]?.url ? [artwork.images[0].url] : [],
+  },
+};
+
+export default function DigitalDivinitiesProjectPage() {
+  return <ArtworkDossierPage dossier={DIGITAL_DIVINITIES_DOSSIER} kicker="Project" />;
 }
