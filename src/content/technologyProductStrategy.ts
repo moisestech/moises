@@ -128,9 +128,9 @@ export const technologyProductStrategy = {
       hoverSummary:
         'AI-assisted media and live cultural broadcasting — production stacks, distribution, and public-facing literacy around emerging tools.',
       href: 'https://ai24.live',
-      src: '/images/technology-product-strategy/ai24-placeholder.svg',
-      alt: 'AI24 Live — broadcast and interface visual placeholder',
-      local: true,
+      src: evidenceProjects.ai24.imageSrc,
+      alt: evidenceProjects.ai24.imageAlt,
+      local: false,
     },
     {
       title: 'Doom Scrolling Treadmill',
@@ -316,10 +316,10 @@ export const technologyProductStrategy = {
       ],
       knightRelevance:
         'Adjacent to experiments in how communities receive explanatory media, AI literacy, and new distribution formats.',
-      imageSrc: '/images/technology-product-strategy/ai24-placeholder.svg',
-      imageAlt: 'Placeholder for AI24 Live visual',
+      imageSrc: evidenceProjects.ai24.imageSrc,
+      imageAlt: evidenceProjects.ai24.imageAlt,
       href: 'https://ai24.live',
-      imageIsRemote: false,
+      imageIsRemote: true,
     },
     {
       title: 'Digital Culture Center Miami',

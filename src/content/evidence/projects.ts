@@ -1,3 +1,7 @@
+/** Hero screenshot for AI24 — used on opportunity dossiers and job-application case studies. */
+export const AI24_WEBSITE_HERO_IMAGE =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659418/ai24-website-above-the-fold_kbp2ei.png';
+
 export type EvidenceProjectId =
   | 'lore-machine'
   | 'ai24'
@@ -55,9 +59,8 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'Multimodal workflows',
       'Research translation',
     ],
-    imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg',
-    imageAlt: 'AI24 — AI education and applied systems for artists and institutions',
+    imageSrc: AI24_WEBSITE_HERO_IMAGE,
+    imageAlt: 'AI24 website — above-the-fold product and program hub',
     href: 'https://ai24.live',
   },
   'multimodal-image-systems': {
