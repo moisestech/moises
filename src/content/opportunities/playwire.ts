@@ -10,13 +10,13 @@ export const playwireOpportunity: Opportunity = {
   variant: 'compact',
   applicationBanner: {
     src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
-    alt: 'Playwire RAMP publisher journey — concept application dossier',
+    alt: 'Playwire return application dossier',
     aspectClass: 'aspect-[3/1] max-h-[220px]',
   },
   seo: {
     title: 'Playwire return dossier — Moises Sanabria | moises.tech',
     description:
-      'Former Playwire Data & Solutions (2021–2022). Interactive RAMP publisher journey demo, role-fit evidence, and technical dossier for return conversations.',
+      'Former Playwire Data & Solutions (2021–2022). Role-fit evidence and technical dossier for return conversations.',
     indexable: false,
   },
   audienceLine:
@@ -25,7 +25,6 @@ export const playwireOpportunity: Opportunity = {
   roleTitle: 'Data · Solutions · Product Engineering',
   navItems: [
     { id: 'hero', label: 'Overview' },
-    { id: 'publisher-demo', label: 'Demo' },
     { id: 'fit', label: 'Role fit' },
     { id: 'case-studies', label: 'Case studies' },
     { id: 'skills', label: 'Skills' },
@@ -34,10 +33,10 @@ export const playwireOpportunity: Opportunity = {
   ],
   hero: {
     headline: 'Publisher-facing systems — Data, Solutions & Product',
-    subheadline: 'Snowflake pipelines · publisher integrations · Next.js product demos',
+    subheadline: 'Snowflake pipelines · publisher integrations · full-stack product delivery',
     introParagraphs: [
       'I spent two years at Playwire on Solutions Engineering and the Data team — publisher integrations, JavaScript debugging, Kinesis-to-Snowflake pipelines, Tableau auction analytics, and Slack alerting for data reliability.',
-      'Since then I have shipped as a founding engineer at Lore Machine and built institutional stacks through AI24 and DCC Miami. This dossier includes an interactive publisher journey demo grounded in RAMP, PARMM, and Flex Suite — the questions publishers ask before switching stacks.',
+      'Since then I have shipped as a founding engineer at Lore Machine and built institutional stacks through AI24 and DCC Miami — full-stack product work with the same publisher-adjacent focus on transparency, dashboards, and who the user actually is.',
     ],
     trustLine: 'Former Playwire Data + Solutions (2021–2022) · Miami-based · flexible on Data, Solutions, or Product Engineering',
     headshotSrc: moisesSanabriaHeadshot,
@@ -74,7 +73,7 @@ export const playwireOpportunity: Opportunity = {
     {
       requirement: 'Real-time analytics UX',
       evidence:
-        'Interactive RAMP mock dashboard on this page; Lore Machine product work with live generation and API-backed flows.',
+        'Lore Machine product work with live generation, API-backed flows, and real-time publisher-style analytics UX.',
       illustration: {
         src: evidenceProjects['lore-machine'].imageSrc,
         alt: 'Lore Machine — real-time product UI and API flows',
@@ -86,7 +85,7 @@ export const playwireOpportunity: Opportunity = {
         'Two years in-house plus current homework on RAMP Managed/Self-Service, Flex Suite, PARMM, and QPT yield framing.',
       illustration: {
         src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
-        alt: 'RAMP publisher journey concept demo',
+        alt: 'Playwire — ad-tech and publisher systems context',
       },
     },
     {
@@ -150,7 +149,7 @@ export const playwireOpportunity: Opportunity = {
   innovationLabSectionTitle: 'Positioning',
   innovationLabLead: 'Publisher-first systems thinking',
   innovationLabBody:
-    'Playwire’s thesis — transparency, performance, and revenue control for publishers — is the lens I used for this demo. I want to bring data pipeline discipline, solutions delivery habits, and product shipping velocity back to the team building RAMP.',
+    'Playwire’s thesis — transparency, performance, and revenue control for publishers — matches how I already think about data, integrations, and client-facing systems. I want to bring pipeline discipline, solutions delivery habits, and product shipping velocity back to the team building RAMP.',
   ctas: recruitingCtas({
     emailSubject: 'Playwire — Moises Sanabria dossier',
     caseStudiesAnchor: '#case-studies',

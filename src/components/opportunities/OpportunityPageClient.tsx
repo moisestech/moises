@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import TechnologyProductStrategyClient from '@/components/technology-product-strategy/TechnologyProductStrategyClient';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
 import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
@@ -18,11 +17,6 @@ import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
 
-const PublisherJourneyDemo = dynamic(
-  () => import('@/features/playwire-demo/PublisherJourneyDemo').then((m) => m.PublisherJourneyDemo),
-  { ssr: false },
-);
-
 type OpportunityPageClientProps = {
   opportunity: Opportunity;
 };
@@ -33,7 +27,6 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
   }
 
   const hasBanner = Boolean(opportunity.applicationBanner?.src);
-  const isPlaywire = opportunity.slug === 'playwire';
 
   return (
     <OpportunityShell navItems={opportunity.navItems}>
@@ -49,7 +42,6 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             <p className={opp.audienceLine}>{opportunity.audienceLine}</p>
           ) : null}
           <OpportunityHero opportunity={opportunity} />
-          {isPlaywire ? <PublisherJourneyDemo /> : null}
           <RoleMatchMatrix opportunity={opportunity} />
           <CaseStudyGrid opportunity={opportunity} />
           <OpportunityTeachingCredentials opportunity={opportunity} />
