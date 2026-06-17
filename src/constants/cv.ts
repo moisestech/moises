@@ -6,7 +6,6 @@ export const cvData = {
   contact: {
     website: "https://www.moises.tech",
     email: "m@moises.tech",
-    phone: "+9545884680",
     socialMedia: [
       { platform: "Instagram", url: "https://www.instagram.com/moisesdsanabria/" }
     ]

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { CV_SUBNAV_STICKY_TOP } from '@/config/cv-layout';
 
 const views = [
   { href: '/cv/artist', label: 'Artist CV', description: 'Exhibitions, grants, press' },
@@ -17,7 +18,10 @@ export function CvViewSwitcher() {
   return (
     <nav
       aria-label="CV type"
-      className="sticky top-[4.5rem] z-20 -mx-4 border-b border-gray-200 bg-white/95 px-4 py-3 backdrop-blur dark:border-gray-700 dark:bg-gray-950/95 sm:-mx-0 sm:px-0 print:hidden"
+      className={cn(
+        'sticky z-20 -mx-4 border-b border-gray-200 bg-white/95 px-4 py-3 backdrop-blur dark:border-gray-700 dark:bg-gray-950/95 sm:-mx-0 sm:px-0 print:hidden',
+        CV_SUBNAV_STICKY_TOP,
+      )}
     >
       <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="inline-flex rounded-lg border border-gray-200 p-1 dark:border-gray-600">

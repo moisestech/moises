@@ -1,3 +1,5 @@
+import { AI24_WEBSITE_HERO_IMAGE, evidenceProjects, OOLITE_DIGITAL_LAB_IMAGE, OOLITE_DIGITAL_LAB_IMAGE_ALT } from '@/content/evidence/projects';
+
 export interface Experience {
   company: string;
   title: string;
@@ -6,6 +8,8 @@ export interface Experience {
   description: string[];
   technologies?: string[];
   companyUrl?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
 export interface Education {
@@ -34,7 +38,6 @@ export const resumeData = {
   name: 'Moises Sanabria',
   title: 'Full Stack Web AI Engineer',
   location: 'Miami Beach, FL, 33139',
-  phone: '(954) 588-4680',
   email: 'm@moises.tech',
   linkedin: '/in/moisesdsanabria',
   github: 'github.com/moisestech',
@@ -51,6 +54,8 @@ export const resumeData = {
         'Coordinate vendor communication, fabrication/printing workflows, grant documentation, demos, tutorials, and leadership updates across programs and operations.',
       ],
       companyUrl: 'https://oolitearts.org/digital-lab/',
+      imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
+      imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
     },
     {
       company: 'Lore Machine',
@@ -62,6 +67,31 @@ export const resumeData = {
         'Manage third party contractors, project sprints, and reporting timeline and progress to CEO. Bridge leadership gaps between technical, business and marketing.',
       ],
       companyUrl: 'https://loremachine.world/',
+      imageSrc: evidenceProjects['lore-machine'].imageSrc,
+      imageAlt: evidenceProjects['lore-machine'].imageAlt,
+    },
+    {
+      company: 'AI24 Live',
+      title: 'Co-founder & Creative Director',
+      location: 'Miami, FL',
+      period: '2020 – present',
+      description: [
+        'Building a realtime news web-app allowing users to generate artistic illustrations of news articles on desktop and mobile.',
+        'Lead AI literacy workshops, institutional programs, and cultural R&D that translate emerging tools into legible public experiences.',
+      ],
+      technologies: [
+        'NextJS',
+        'Jotai',
+        'Supabase',
+        'React Query',
+        'Tailwind',
+        'Media Stack API',
+        'Together AI',
+        'Helicone Observability',
+      ],
+      companyUrl: 'https://ai24.live',
+      imageSrc: AI24_WEBSITE_HERO_IMAGE,
+      imageAlt: 'AI24 website — above-the-fold product and program hub',
     },
     {
       company: 'Eden Art',
@@ -82,6 +112,7 @@ export const resumeData = {
         'React.Suspense',
         'Styled Components',
       ],
+      companyUrl: 'https://www.eden.art/',
     },
     {
       company: 'Playwire',
@@ -93,6 +124,7 @@ export const resumeData = {
         'Create Business intelligence tools using Tableau to visualize advertising auction bidding data U.S - Internationally to gage our bidding algorithm and performance.',
         'Setup alerting tools connected to Slack for faster monitoring of data consistency and reliability.',
       ],
+      companyUrl: 'https://www.playwire.com/',
     },
     {
       company: 'Playwire',
@@ -103,6 +135,7 @@ export const resumeData = {
         "Technical Solutions team - worked with Business Development and Client-Side teams to determine timeline and deliver publisher solutions into Playwire's SaSS product.",
         'Find solutions with advanced knowledge of JavaScript through a strong understanding of Chrome Dev Tools and JS fundamentals demonstrating Front-End debugging skills without reliance on frameworks.',
       ],
+      companyUrl: 'https://www.playwire.com/',
     },
     {
       company: 'Institute of Contemporary Art, Miami',
@@ -114,6 +147,7 @@ export const resumeData = {
         "Synced the Museum's art collection from SalesForce to Wordpress ticketing functionality, and maintained their SEO.",
         'Tripled the Institutes Youtube Channel subscribership through A.I. driven subtitles, After Effects, and live-streaming for their international music program using OBS.',
       ],
+      companyUrl: 'https://icamiami.org/',
     },
     {
       company: 'Freelance Moises.Tech',

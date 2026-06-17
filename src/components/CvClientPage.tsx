@@ -118,7 +118,7 @@ const CvClientPage = ({
     Object.values(airtableExhibitions).some((items) => items.length > 0);
 
   return (
-    <div className="max-w-7xl px-4 sm:px-6 md:px-11 pt-8 md:pb-6 mx-auto print:py-4 print:px-2">
+    <div className="max-w-7xl px-4 sm:px-6 md:px-11 pt-4 sm:pt-6 md:pb-6 mx-auto print:py-4 print:px-2">
       <style jsx global>{`
         @media print {
           body {
@@ -182,12 +182,12 @@ const CvClientPage = ({
         }
       `}</style>
 
-      <div className="print:flex print:flex-col print:gap-1 mt-8 md:mt-12">
+      <div className="print:flex print:flex-col print:gap-1 mt-4 md:mt-6">
         <motion.header 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8 print:mb-2"
+          className="scroll-mt-40 mb-8 print:mb-2"
         >
           <p className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2 print:hidden">
             Artist CV

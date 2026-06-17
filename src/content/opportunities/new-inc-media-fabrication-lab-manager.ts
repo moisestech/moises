@@ -1,6 +1,6 @@
 import type { Opportunity } from './types';
 import { newIncMediaFabLabBanner } from '@/content/evidence/applicationBanners';
-import { evidenceProjects } from '@/content/evidence/projects';
+import { evidenceProjects, OOLITE_DIGITAL_LAB_IMAGE, OOLITE_DIGITAL_LAB_IMAGE_ALT } from '@/content/evidence/projects';
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 
@@ -142,6 +142,8 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
       skillTags: ['Lab operations', 'Workshops', 'Member support', 'Knight Foundation', 'Institutional workflows'],
       href: 'https://oolitearts.org/digital-lab/',
       linkLabel: 'View Oolite Digital Lab',
+      imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
+      imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
     },
     {
       evidenceId: 'ai24',
@@ -248,9 +250,8 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
       title: 'Oolite Digital Lab',
       description: 'Knight-funded lab — workshops, equipment, and artist-facing technical infrastructure.',
       href: 'https://oolitearts.org/digital-lab/',
-      imageSrc:
-        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg',
-      imageAlt: 'Digital lab workshop session at Oolite Arts',
+      imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
+      imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
     },
     {
       title: 'The Art of AI Agents',
@@ -302,8 +303,6 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
     cv: '/cv/artist',
   }),
   techLogoIds: ['openai', 'pytorch', 'python', 'docker', 'comfyui', 'stable-diffusion', 'replicate'],
-  visibilityNote:
-    'Private application dossier — not linked from main site navigation. Requisition 1063 · Full-time · New York, NY.',
   resumeSectionTitle: 'Contact & CV',
   resumeSectionNote:
     'Based in Miami, FL · Open to discussing relocation for this role · Full CV and exhibition history at moises.tech/cv/artist',

@@ -27,8 +27,8 @@ function CompanyName({ company, url }: { company: string; url?: string }) {
 
 export default function TechnologyCvView() {
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 md:px-11 print:py-4">
-      <header className="mb-6 border-b border-gray-200 pb-6 dark:border-gray-700 print:mb-2">
+    <div className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 sm:pt-10 md:px-11 md:pt-12 print:py-4">
+      <header className="scroll-mt-40 mb-6 border-b border-gray-200 pb-6 dark:border-gray-700 print:mb-2">
         <p className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Technology CV</p>
         <h1 className="mt-2 text-3xl font-bold text-gray-900 dark:text-white print:text-2xl">{resumeData.name}</h1>
         <p className="mt-1 text-xl text-gray-700 dark:text-gray-300 print:text-lg">{technologyCvPrint.titleLine}</p>
@@ -101,23 +101,51 @@ export default function TechnologyCvView() {
         <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{technologyCvPrint.experienceIntro}</p>
         <ul className="space-y-5">
           {resumeData.experience.map((job) => (
-            <li key={`${job.company}-${job.period}`} className="flex flex-col gap-1 sm:flex-row sm:gap-4">
+            <li key={`${job.company}-${job.period}`} className="flex flex-col gap-3 sm:flex-row sm:gap-4">
               <div className="w-full shrink-0 text-sm font-medium text-gray-900 dark:text-gray-100 sm:w-36">
                 {job.period}
               </div>
-              <div className="flex-1 text-sm">
-                <p className="font-semibold text-gray-900 dark:text-white">
-                  {job.title},{' '}
-                  <CompanyName company={job.company} url={job.companyUrl} />
-                </p>
-                <p className="text-gray-500 dark:text-gray-400">{job.location}</p>
-                <ul className="mt-2 list-disc space-y-1 pl-4 text-gray-700 dark:text-gray-300">
-                  {job.description.map((line) => (
-                    <li key={line.slice(0, 48)}>{line}</li>
-                  ))}
-                </ul>
-                {job.technologies?.length ? (
-                  <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">{job.technologies.join(' · ')}</p>
+              <div className="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+                <div className="min-w-0 flex-1 text-sm">
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    {job.title},{' '}
+                    <CompanyName company={job.company} url={job.companyUrl} />
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-400">{job.location}</p>
+                  <ul className="mt-2 list-disc space-y-1 pl-4 text-gray-700 dark:text-gray-300">
+                    {job.description.map((line) => (
+                      <li key={line.slice(0, 48)}>{line}</li>
+                    ))}
+                  </ul>
+                  {job.technologies?.length ? (
+                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">{job.technologies.join(' · ')}</p>
+                  ) : null}
+                </div>
+                {job.imageSrc ? (
+                  job.companyUrl ? (
+                    <a
+                      href={job.companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 sm:w-40 md:w-48 lg:w-52"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={job.imageSrc}
+                        alt={job.imageAlt ?? `${job.company} — ${job.title}`}
+                        className="aspect-[4/3] h-full w-full object-cover object-top"
+                      />
+                    </a>
+                  ) : (
+                    <div className="w-full shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 sm:w-40 md:w-48 lg:w-52">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={job.imageSrc}
+                        alt={job.imageAlt ?? `${job.company} — ${job.title}`}
+                        className="aspect-[4/3] h-full w-full object-cover object-top"
+                      />
+                    </div>
+                  )
                 ) : null}
               </div>
             </li>
