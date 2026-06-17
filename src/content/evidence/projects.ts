@@ -86,9 +86,9 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     summary:
       'Two years in-house: Solutions Engineer delivering publisher integrations and JS debugging for SaaS onboarding; Data Analyst migrating Kinesis/Athena pipelines to Snowflake, building Tableau auction analytics, and Slack alerting for data reliability.',
     skillTags: ['Snowflake', 'Tableau', 'AWS Kinesis', 'JavaScript', 'Publisher integrations', 'Slack alerts'],
-    imageSrc: '/images/opportunities/playwire-banner.svg',
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
     imageAlt: 'Playwire concept banner — former Data and Solutions team experience',
-    imageLocal: true,
   },
   'digital-culture-infrastructure': {
     id: 'digital-culture-infrastructure',

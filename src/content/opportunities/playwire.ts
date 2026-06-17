@@ -9,7 +9,7 @@ export const playwireOpportunity: Opportunity = {
   listed: false,
   variant: 'compact',
   applicationBanner: {
-    src: '/images/opportunities/playwire-banner.svg',
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
     alt: 'Playwire RAMP publisher journey — concept application dossier',
     aspectClass: 'aspect-[3/1] max-h-[220px]',
   },
@@ -85,9 +85,8 @@ export const playwireOpportunity: Opportunity = {
       evidence:
         'Two years in-house plus current homework on RAMP Managed/Self-Service, Flex Suite, PARMM, and QPT yield framing.',
       illustration: {
-        src: '/images/opportunities/playwire-banner.svg',
+        src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
         alt: 'RAMP publisher journey concept demo',
-        local: true,
       },
     },
     {
