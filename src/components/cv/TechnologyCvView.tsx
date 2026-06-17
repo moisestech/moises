@@ -43,14 +43,6 @@ export default function TechnologyCvView() {
             <Image src={moisesSanabriaHeadshot} alt="Moises Sanabria" fill className="object-cover" sizes="96px" />
           </a>
           <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-            {resumeData.phone ? (
-              <p>
-                <span className="font-medium text-gray-900 dark:text-white">Phone: </span>
-                <Link href={`tel:${resumeData.phone.replace(/\D/g, '')}`} className="underline underline-offset-4">
-                  {resumeData.phone}
-                </Link>
-              </p>
-            ) : null}
             <p>
               <span className="font-medium text-gray-900 dark:text-white">Email: </span>
               <Link href={`mailto:${resumeData.email}`} className="underline underline-offset-4">

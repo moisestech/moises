@@ -41,7 +41,6 @@ export default function TechnologyCvPrintPage() {
             <p className="mt-1 text-stone-600">{p.titleLine}</p>
             <p className="mt-1 text-stone-600">{p.location}</p>
             <p className="mt-3 text-stone-700">
-              {resumeData.phone ? `${resumeData.phone} · ` : ''}
               {p.contact.email} · {p.contact.site} · {p.contact.linkedin} · {p.contact.github}
             </p>
           </header>
