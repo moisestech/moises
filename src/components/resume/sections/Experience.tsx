@@ -7,6 +7,22 @@ interface ExperienceProps {
   experiences: ExperienceType[]
 }
 
+function CompanyName({ company, url }: { company: string; url?: string }) {
+  if (url) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline underline-offset-4 hover:text-blue-400"
+      >
+        {company}
+      </a>
+    )
+  }
+  return <>{company}</>
+}
+
 export function Experience({ experiences }: ExperienceProps) {
   return (
     <motion.section
@@ -20,7 +36,7 @@ export function Experience({ experiences }: ExperienceProps) {
       <div className="space-y-12">
         {experiences.map((experience, index) => (
           <motion.div
-            key={experience.company}
+            key={`${experience.company}-${experience.period}`}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
@@ -28,7 +44,9 @@ export function Experience({ experiences }: ExperienceProps) {
           >
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div>
-                <h3 className="text-xl font-semibold text-white">{experience.company}</h3>
+                <h3 className="text-xl font-semibold text-white">
+                  <CompanyName company={experience.company} url={experience.companyUrl} />
+                </h3>
                 <p className="text-gray-300">{experience.title}</p>
               </div>
               <div className="text-gray-400 text-sm">

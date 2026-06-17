@@ -273,7 +273,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
       name: 'Cloud and data-adjacent engineering',
       detail:
         'Hands-on delivery with AWS-oriented stacks (e.g. CloudFront, S3, streaming and analytics pipelines) in museum and product roles — timelines on web CV.',
-      href: '/cv',
+      href: '/cv/tech',
     },
   ],
   ctas: recruitingCtas({

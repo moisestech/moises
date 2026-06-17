@@ -1,10 +1,5 @@
-import ResumeClientPage from './ResumeClientPage';
+import { redirect } from 'next/navigation';
 
-export const metadata = {
-  title: 'Moises Sanabria | Full Stack Web AI Engineer',
-  description: 'Resume and portfolio of Moises Sanabria, full stack web and AI engineer.'
-};
-
-export default function ResumePage() {
-  return <ResumeClientPage />;
+export default function ResumeRedirectPage() {
+  redirect('/cv/tech');
 }

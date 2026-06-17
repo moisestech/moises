@@ -7,7 +7,7 @@ export const moisesRecruitingProfiles = {
   github: 'https://github.com/moisestech',
   instagram: 'https://www.instagram.com/moisesdsanabria',
   portfolio: '/portfolio',
-  cv: '/cv',
+  cv: '/cv/tech',
   ooliteWork: '/tech-nonprofit/oolite',
   ooliteWorkLabel: 'Oolite Digital Lab',
   ooliteOrg: 'https://oolitearts.org',

@@ -47,7 +47,7 @@ export const knightResumePrint = {
   ],
   /** Pulled from site resume; extend dates on web CV if needed */
   experienceIntro:
-    'Selected experience (see moises.tech/cv for fuller exhibition and project history):',
+    'Selected experience (see moises.tech/cv/artist for fuller exhibition and project history):',
 };
 
 export const knightCoverLetterPrint = {

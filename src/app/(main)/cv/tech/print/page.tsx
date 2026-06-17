@@ -1,15 +1,26 @@
 import type { Metadata } from 'next';
-import { knightResumePrint } from '@/content/knightApplicationDocuments';
+import { technologyCvPrint } from '@/content/technologyCvPrint';
 import { resumeData } from '@/constants/resume';
 
 export const metadata: Metadata = {
-  title: 'Résumé (print) | Moises Sanabria — Technology product strategy',
-  description: 'Print-friendly résumé for Knight Foundation Technology Product Strategist application.',
+  title: 'Technology CV (print) | Moises Sanabria',
+  description: 'Print-friendly technology CV for engineering and data roles.',
   robots: { index: false, follow: false },
 };
 
-export default function KnightResumePrintPage() {
-  const p = knightResumePrint;
+function CompanyName({ company, url }: { company: string; url?: string }) {
+  if (url) {
+    return (
+      <a href={url} className="text-stone-900 underline">
+        {company}
+      </a>
+    );
+  }
+  return <>{company}</>;
+}
+
+export default function TechnologyCvPrintPage() {
+  const p = technologyCvPrint;
   return (
     <>
       <style>{`
@@ -22,7 +33,7 @@ export default function KnightResumePrintPage() {
       <div className="min-h-screen bg-white px-6 py-8 text-stone-900 print:px-0 print:py-0">
         <p className="no-print mb-6 text-center text-sm text-stone-500">
           Use your browser&apos;s <strong>Print</strong> dialog → <strong>Save as PDF</strong>. Suggested filename:{' '}
-          <code className="rounded bg-stone-100 px-1">Moises-Sanabria-Technology-Product-Strategist.pdf</code>
+          <code className="rounded bg-stone-100 px-1">{p.suggestedPdfFilename}</code>
         </p>
         <article className="mx-auto max-w-[720px] text-sm leading-relaxed">
           <header className="border-b border-stone-300 pb-4">
@@ -30,7 +41,8 @@ export default function KnightResumePrintPage() {
             <p className="mt-1 text-stone-600">{p.titleLine}</p>
             <p className="mt-1 text-stone-600">{p.location}</p>
             <p className="mt-3 text-stone-700">
-              {p.contact.email} · {p.contact.site} · {p.contact.linkedin}
+              {resumeData.phone ? `${resumeData.phone} · ` : ''}
+              {p.contact.email} · {p.contact.site} · {p.contact.linkedin} · {p.contact.github}
             </p>
           </header>
 
@@ -43,12 +55,12 @@ export default function KnightResumePrintPage() {
             ))}
           </section>
 
-          <section className="mt-6">
-            <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Skills</h2>
+          <section className="mt-5">
+            <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Core skills</h2>
             <div className="mt-2 grid gap-4 sm:grid-cols-3">
               {p.skillGroups.map((g) => (
                 <div key={g.title}>
-                  <h3 className="font-semibold text-stone-900">{g.title}</h3>
+                  <h3 className="font-semibold text-stone-800">{g.title}</h3>
                   <ul className="mt-1 list-disc pl-4 text-stone-700">
                     {g.items.map((item) => (
                       <li key={item}>{item}</li>
@@ -59,49 +71,40 @@ export default function KnightResumePrintPage() {
             </div>
           </section>
 
-          <section className="mt-6">
+          <section className="mt-5">
             <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Experience</h2>
-            <p className="mt-2 text-xs text-stone-500">{p.experienceIntro}</p>
-            <div className="mt-3 space-y-5">
-              {resumeData.experience.map((job, i) => (
-                <div key={`${job.company}-${job.title}-${i}`}>
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-semibold text-stone-900">{job.title}</h3>
-                    <span className="text-xs text-stone-500">{job.period}</span>
-                  </div>
-                  <p className="text-sm text-stone-600">
-                    {job.company} — {job.location}
+            <p className="mt-2 text-stone-600">{p.experienceIntro}</p>
+            <ul className="mt-3 space-y-4">
+              {resumeData.experience.map((job) => (
+                <li key={`${job.company}-${job.period}`}>
+                  <p className="font-semibold text-stone-900">
+                    {job.title} — <CompanyName company={job.company} url={job.companyUrl} />
+                  </p>
+                  <p className="text-stone-600">
+                    {job.location} · {job.period}
                   </p>
                   <ul className="mt-1 list-disc pl-4 text-stone-700">
                     {job.description.map((line) => (
-                      <li key={line}>{line}</li>
+                      <li key={line.slice(0, 48)}>{line}</li>
                     ))}
                   </ul>
-                  {job.technologies?.length ? (
-                    <p className="mt-1 text-xs text-stone-500">Tech: {job.technologies.join(', ')}</p>
-                  ) : null}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
-          <section className="mt-6">
+          <section className="mt-5">
             <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Education</h2>
-            {resumeData.education.map((ed) => (
-              <div key={ed.institution} className="mt-2">
-                <p className="font-semibold text-stone-900">{ed.institution}</p>
-                <p className="text-stone-700">
-                  {ed.degree} ({ed.period}) — {ed.location}
-                </p>
-              </div>
-            ))}
-          </section>
-
-          <section className="mt-6 border-t border-stone-200 pt-4 text-xs text-stone-500">
-            <p>
-              Full exhibition and artwork history: moises.tech/cv/artist — strategic dossier for this role:{' '}
-              {p.contact.site}
-            </p>
+            <ul className="mt-2 space-y-2">
+              {resumeData.education.map((edu) => (
+                <li key={edu.institution}>
+                  <p className="font-semibold text-stone-900">{edu.degree}</p>
+                  <p className="text-stone-600">
+                    {edu.institution} · {edu.location} · {edu.period}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </section>
         </article>
       </div>

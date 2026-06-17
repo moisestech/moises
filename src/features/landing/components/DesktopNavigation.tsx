@@ -201,7 +201,7 @@ export default function DesktopNavigation({
         {/* CV */}
         <li>
           <Link
-            href="/cv"
+            href="/cv/artist"
             className={`transition-colors py-2 font-bold ${isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'}`}
           >
             CV
@@ -280,7 +280,7 @@ export default function DesktopNavigation({
                   </li>
                   <li>
                     <Link
-                      href="/cv"
+                      href="/cv/artist"
                       className={`transition-colors py-2 font-bold ${isDark ? 'text-white hover:text-gray-300' : 'text-black hover:text-gray-600'}`}
                     >
                       CV

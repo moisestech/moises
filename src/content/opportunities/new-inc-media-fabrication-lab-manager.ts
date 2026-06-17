@@ -140,7 +140,7 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
       summary:
         'As Technical Director of Digital at Oolite Arts, I help run the Digital Lab: workshops, equipment access, automation, and production support for Miami artists. The lab is the closest analog to NEW INC’s member-facing facilities—creative practitioners who need technical capacity inside a cultural institution.',
       skillTags: ['Lab operations', 'Workshops', 'Member support', 'Knight Foundation', 'Institutional workflows'],
-      href: '/tech-nonprofit/oolite/lab',
+      href: 'https://oolitearts.org/digital-lab/',
       linkLabel: 'View Oolite Digital Lab',
     },
     {
@@ -247,7 +247,7 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
     {
       title: 'Oolite Digital Lab',
       description: 'Knight-funded lab — workshops, equipment, and artist-facing technical infrastructure.',
-      href: '/tech-nonprofit/oolite/lab',
+      href: 'https://oolitearts.org/digital-lab/',
       imageSrc:
         'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743030298/own-your-digital-presence/website-building-day-1-virtual-session_qk0esh.jpg',
       imageAlt: 'Digital lab workshop session at Oolite Arts',
@@ -291,20 +291,20 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
     {
       name: 'Whitney Museum production',
       detail: 'Installation support for Jared Madere (2015) and Wang Shui (2021–22).',
-      href: '/cv',
+      href: '/cv/artist',
     },
   ],
   ctas: recruitingCtas({
     emailSubject: 'NEW INC Media & Fabrication Lab Manager — Moises Sanabria',
     caseStudiesAnchor: '#case-studies',
-    ooliteWork: '/tech-nonprofit/oolite/lab',
+    ooliteWork: 'https://oolitearts.org/digital-lab/',
     ooliteWorkLabel: 'Oolite Digital Lab',
-    cv: '/cv',
+    cv: '/cv/artist',
   }),
   techLogoIds: ['openai', 'pytorch', 'python', 'docker', 'comfyui', 'stable-diffusion', 'replicate'],
   visibilityNote:
     'Private application dossier — not linked from main site navigation. Requisition 1063 · Full-time · New York, NY.',
   resumeSectionTitle: 'Contact & CV',
   resumeSectionNote:
-    'Based in Miami, FL · Open to discussing relocation for this role · Full CV and exhibition history at moises.tech/cv',
+    'Based in Miami, FL · Open to discussing relocation for this role · Full CV and exhibition history at moises.tech/cv/artist',
 };

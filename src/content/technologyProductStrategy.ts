@@ -119,7 +119,7 @@ export const technologyProductStrategy = {
     email: 'm@moises.tech',
     linkedin: 'https://www.linkedin.com/in/moisesdsanabria',
     portfolio: '/portfolio',
-    cv: '/cv',
+    cv: '/cv/tech',
   },
 
   selectedProjects: [

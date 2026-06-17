@@ -19,6 +19,7 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
   openai: { id: 'openai', label: 'OpenAI', imageSrc: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png` },
   huggingface: { id: 'huggingface', label: 'Hugging Face', imageSrc: si('huggingface', 'FFD21E') },
   python: { id: 'python', label: 'Python', imageSrc: `${jobsCdn}/v1778692505/jobs/python-logo_edccrx.png` },
+  javascript: { id: 'javascript', label: 'JavaScript', imageSrc: si('javascript', 'F7DF1E') },
   langchain: { id: 'langchain', label: 'LangChain', imageSrc: `${jobsCdn}/v1778692506/jobs/LangChain_Logo.svg_n0z55e.png` },
   langgraph: { id: 'langgraph', label: 'LangGraph', imageSrc: `${jobsCdn}/v1778692505/jobs/lang-graph-logo_g4x6ik.svg` },
   crewai: { id: 'crewai', label: 'CrewAI', imageSrc: `${jobsCdn}/v1778692505/jobs/crew_only_logo_x3lqxj.png` },

@@ -81,7 +81,7 @@ export const NOISY_SYSTEMS = {
     links: [
       { label: 'Full bio', href: '/bio' },
       { label: 'Portfolio', href: '/portfolio' },
-      { label: 'CV', href: '/resume' },
+      { label: 'CV', href: '/cv/artist' },
     ],
   },
 
@@ -90,7 +90,7 @@ export const NOISY_SYSTEMS = {
     { label: 'Born into the Machine', href: '/research/born-into-the-machine' },
     { label: 'Full bio', href: '/bio' },
     { label: 'Portfolio', href: '/portfolio' },
-    { label: 'CV', href: '/resume' },
+    { label: 'CV', href: '/cv/artist' },
   ],
 
   processFragments: [

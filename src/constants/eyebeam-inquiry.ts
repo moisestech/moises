@@ -120,7 +120,7 @@ export const EYEBEAM_INQUIRY = {
     closing:
       'For exhibitions, public programs, writing, workshops, or artist-led technology conversations, please get in touch.',
     links: [
-      { label: 'CV', href: '/resume' },
+      { label: 'CV', href: '/cv/artist' },
       { label: 'Full portfolio', href: '/portfolio' },
       { label: 'Contact', href: '/contact' },
     ],

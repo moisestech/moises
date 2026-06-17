@@ -1,43 +1,17 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { cvData } from '@/constants/cv';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
-import { motion, useInView, useAnimation, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import EnhancedDescription from '@/components/EnhancedDescription';
 import InteractiveText from '@/components/InteractiveText';
 import CvExhibitionsSection from '@/components/cv/CvExhibitionsSection';
+import { CvCollapsibleSection } from '@/components/cv/CvCollapsibleSection';
 import type { CVExhibition } from '@/types/cv';
-
-const SectionTitle = ({ children }: { children: React.ReactNode }) => {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible');
-    }
-  }, [controls, isInView]);
-
-  return (
-    <motion.h2 
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-      }}
-      className="text-xl font-semibold border-b border-gray-200 pb-2 mb-4 mt-8 print:text-base print:mt-4"
-    >
-      {children}
-    </motion.h2>
-  );
-};
 
 // Animation variants for list items
 const getListItemVariants = (isDark: boolean): Variants => ({
@@ -57,32 +31,9 @@ const getListItemVariants = (isDark: boolean): Variants => ({
   }
 });
 
-const FadeInSection = ({ children, className }: { children: React.ReactNode, className?: string }) => {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible');
-    }
-  }, [controls, isInView]);
-
-  return (
-    <motion.section
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.1 } }
-      }}
-      className={className}
-    >
-      {children}
-    </motion.section>
-  );
-};
+const FadeInSection = ({ children, className }: { children: React.ReactNode, className?: string }) => (
+  <div className={className}>{children}</div>
+);
 
 // Interactive Link component for CV items
 const InteractiveLink = ({ title, url, interactiveContent }: { 
@@ -167,7 +118,7 @@ const CvClientPage = ({
     Object.values(airtableExhibitions).some((items) => items.length > 0);
 
   return (
-    <div className="max-w-7xl px-11 pt-20 md:pb-6 mx-auto print:py-4 print:px-2">
+    <div className="max-w-7xl px-4 sm:px-6 md:px-11 pt-8 md:pb-6 mx-auto print:py-4 print:px-2">
       <style jsx global>{`
         @media print {
           body {
@@ -231,13 +182,16 @@ const CvClientPage = ({
         }
       `}</style>
 
-      <div className="print:flex print:flex-col print:gap-1 mt-36">
+      <div className="print:flex print:flex-col print:gap-1 mt-8 md:mt-12">
         <motion.header 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-8 print:mb-2"
         >
+          <p className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2 print:hidden">
+            Artist CV
+          </p>
           <h1 className="text-3xl font-bold mb-1 print:text-2xl">{cvData.name}</h1>
           <h2 className="text-xl mb-4 print:text-lg print:mb-2">{cvData.title}</h2>
           <div className="flex flex-col sm:flex-row sm:items-start gap-6 print:gap-4 mb-2">
@@ -294,8 +248,7 @@ const CvClientPage = ({
           </div>
         </motion.header>
 
-        <FadeInSection>
-          <SectionTitle>Education</SectionTitle>
+        <CvCollapsibleSection id="education" title="Education" defaultOpen>
           <ul className="space-y-3 print:space-y-1">
             {cvData.education.map((edu, index) => (
               <motion.li 
@@ -316,10 +269,9 @@ const CvClientPage = ({
               </motion.li>
             ))}
           </ul>
-        </FadeInSection>
+        </CvCollapsibleSection>
 
-        <FadeInSection>
-          <SectionTitle>Professional Experience</SectionTitle>
+        <CvCollapsibleSection id="experience" title="Professional Experience" defaultOpen={false}>
           <ul className="space-y-5 print:space-y-2">
             {cvData.experience.map((exp, index) => (
               <motion.li 
@@ -340,10 +292,9 @@ const CvClientPage = ({
               </motion.li>
             ))}
           </ul>
-        </FadeInSection>
+        </CvCollapsibleSection>
 
-        <FadeInSection>
-          <SectionTitle>Publications</SectionTitle>
+        <CvCollapsibleSection id="publications" title="Publications" defaultOpen={false}>
           <ul className="space-y-3 print:space-y-1">
             {cvData.publications.map((pub, index) => (
               <motion.li 
@@ -371,10 +322,9 @@ const CvClientPage = ({
               </motion.li>
             ))}
           </ul>
-        </FadeInSection>
+        </CvCollapsibleSection>
 
-        <FadeInSection>
-          <SectionTitle>Grants and Awards</SectionTitle>
+        <CvCollapsibleSection id="grants-awards" title="Grants and Awards" defaultOpen={false}>
           <ul className="space-y-3 print:space-y-1">
             {cvData.grants.map((grant, index) => (
               <motion.li 
@@ -413,10 +363,9 @@ const CvClientPage = ({
               </motion.li>
             ))}
           </ul>
-        </FadeInSection>
+        </CvCollapsibleSection>
 
-        <FadeInSection>
-          <SectionTitle>Exhibitions</SectionTitle>
+        <CvCollapsibleSection id="exhibitions" title="Exhibitions" defaultOpen>
 
           {process.env.NODE_ENV === 'development' && airtableError ? (
             <p className="text-xs text-red-600 mb-2">{airtableError}</p>
@@ -513,10 +462,9 @@ const CvClientPage = ({
               </motion.li>
             ))}
           </ul>
-        </FadeInSection>
+        </CvCollapsibleSection>
 
-        <FadeInSection>
-          <SectionTitle>Talks and Lectures</SectionTitle>
+        <CvCollapsibleSection id="talks" title="Talks and Lectures" defaultOpen={false}>
           <ul className="space-y-3 print:space-y-1">
             {cvData.talks.map((talk, index) => (
               <motion.li 
@@ -541,10 +489,9 @@ const CvClientPage = ({
               </motion.li>
             ))}
           </ul>
-        </FadeInSection>
+        </CvCollapsibleSection>
 
-        <FadeInSection>
-          <SectionTitle>Press and Media</SectionTitle>
+        <CvCollapsibleSection id="press" title="Press and Media" defaultOpen={false}>
           {cvData.press.map((pressYear, yearIndex) => (
             <div key={yearIndex} className="mb-8 print:mb-4">
               <h3 className="text-lg font-medium mb-3 pl-2">{pressYear.year}</h3>
@@ -601,19 +548,27 @@ const CvClientPage = ({
               </ul>
             </div>
           ))}
-        </FadeInSection>
+        </CvCollapsibleSection>
       </div>
       
-      <motion.button 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        whileHover={{ scale: 1.05, backgroundColor: isDark ? "#4B5563" : "#333" }}
-        onClick={() => window.print()} 
-        className="mt-10 px-4 py-2 bg-black dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors print:hidden"
-      >
-        Download CV
-      </motion.button>
+      <div className="mt-10 flex flex-wrap gap-3 print:hidden">
+        <motion.button 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          whileHover={{ scale: 1.05, backgroundColor: isDark ? "#4B5563" : "#333" }}
+          onClick={() => window.print()} 
+          className="px-4 py-2 bg-black dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors"
+        >
+          Print artist CV
+        </motion.button>
+        <Link
+          href="/cv/tech"
+          className="inline-flex items-center rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800"
+        >
+          Technology CV (engineering roles)
+        </Link>
+      </div>
     </div>
   );
 };

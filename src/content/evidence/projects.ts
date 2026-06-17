@@ -43,7 +43,7 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     imageSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780253940/resume/resume-images/lore-machine-home-page_wra1x2.png',
     imageAlt: 'Lore Machine — generative storytelling platform home page and scene workflow UI',
-    href: 'https://www.loremachine.world/',
+    href: 'https://loremachine.world/',
   },
   ai24: {
     id: 'ai24',

@@ -153,13 +153,12 @@ export const playwireOpportunity: Opportunity = {
   ctas: recruitingCtas({
     emailSubject: 'Playwire — Moises Sanabria dossier',
     caseStudiesAnchor: '#case-studies',
-    resumePrintPath: '/cv',
-    cv: '/cv',
+    resumePdfPath: '/resume/moises-sanabria-technology-cv.pdf',
+    resumePrintPath: '/cv/tech/print',
+    cv: '/cv/tech',
   }),
   techLogoIds: ['snowflake', 'tableau', 'aws', 'typescript', 'react', 'nextjs', 'python'],
-  visibilityNote:
-    'Private link — not listed on the public opportunities index. Share with Jarrett Abello, HR, or hiring managers only.',
-  resumeSectionTitle: 'Résumé & CV',
+  resumeSectionTitle: 'Technology résumé & CV',
   resumeSectionNote:
-    'Full CV at /cv. Former Playwire roles: Solutions Engineer (2021), Data Analyst (2022). Open to Miami, Boca Raton, or remote.',
+    'Technology CV and PDF at moises.tech/cv/tech — former Playwire Solutions Engineer (2021) and Data Analyst (2022). Artist CV at /cv/artist for exhibitions.',
 };

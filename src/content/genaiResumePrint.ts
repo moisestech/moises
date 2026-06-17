@@ -44,5 +44,5 @@ export const genaiResumePrint = {
     },
   ],
   experienceIntro:
-    'Selected experience (see moises.tech/cv for exhibition and fuller project history):',
+    'Selected experience (see moises.tech/cv/artist for exhibition and fuller project history):',
 };

@@ -52,7 +52,7 @@ export const knightJournalismTechProductStrategistOpportunity: Opportunity = {
       'https://docs.google.com/document/d/1HFjlWkqUmNL7wNLTidEeQxUL5pFcTT5p4cktePA5Ioc/view?usp=sharing',
     coverLetterPrintPath: '/technology-product-strategy/print/cover-letter',
     portfolio: '/portfolio',
-    cv: '/cv',
+    cv: '/cv/tech',
   },
   techLogoIds: [],
 };

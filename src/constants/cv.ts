@@ -50,6 +50,12 @@ export const cvData = {
   ],
   experience: [
     {
+      role: "Technical Director of Digital",
+      employer: "Oolite Arts",
+      period: "September 2025 – 2026",
+      details: "Knight-funded Digital Lab — public programs, artist access, and institutional digital infrastructure supporting Miami's creative community."
+    },
+    {
       role: "Remote Production Assistant",
       employer: "Wang Shui",
       period: "April 2021 – April 2022",

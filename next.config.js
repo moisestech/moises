@@ -49,6 +49,21 @@ const nextConfig = {
         destination: '/grant/wolfsonian-fellowship',
         permanent: false,
       },
+      {
+        source: '/cv/technology',
+        destination: '/cv/tech',
+        permanent: true,
+      },
+      {
+        source: '/cv/technology/print',
+        destination: '/cv/tech/print',
+        permanent: true,
+      },
+      {
+        source: '/resume',
+        destination: '/cv/tech',
+        permanent: true,
+      },
     ]
   },
 

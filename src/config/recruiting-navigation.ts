@@ -5,7 +5,7 @@ export const RECRUITING_SITE_NAV_ITEMS: SiteNavItem[] = [
   { label: 'Home', path: '/', enabled: true },
   { label: 'Opportunities', path: '/opportunities', enabled: true },
   { label: 'Teaching', path: '/teaching', enabled: true },
-  { label: 'Web CV', path: '/cv', enabled: true },
+  { label: 'Web CV', path: '/cv/tech', enabled: true },
   { label: 'Portfolio', path: '/portfolio', enabled: true },
   { label: 'Bio', path: '/bio', enabled: true },
   { label: 'Email', path: 'mailto:m@moises.tech', external: true, enabled: true },
