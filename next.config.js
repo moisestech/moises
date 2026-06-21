@@ -50,6 +50,16 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/grants/wolfsonian-fellowship',
+        destination: '/grant/wolfsonian-fellowship',
+        permanent: false,
+      },
+      {
+        source: '/grant/ssrc-just-tech-2027',
+        destination: '/grant/ssrc-just-tech-fellowship-2027',
+        permanent: false,
+      },
+      {
         source: '/cv/technology',
         destination: '/cv/tech',
         permanent: true,

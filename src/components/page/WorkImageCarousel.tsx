@@ -15,11 +15,18 @@ interface WorkImageCarouselProps {
   images: readonly WorkMediaItem[];
   alt: string;
   className?: string;
+  /** When true, prev/next controls stay visible on touch devices (no hover required). */
+  showControlsOnTouch?: boolean;
 }
 
 const SWIPE_THRESHOLD = 50;
 
-export function WorkImageCarousel({ images, alt, className = '' }: WorkImageCarouselProps) {
+export function WorkImageCarousel({
+  images,
+  alt,
+  className = '',
+  showControlsOnTouch = true,
+}: WorkImageCarouselProps) {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -101,18 +108,26 @@ export function WorkImageCarousel({ images, alt, className = '' }: WorkImageCaro
             <button
               type="button"
               onClick={goPrev}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-all opacity-0 group-hover:opacity-100 md:opacity-60 md:hover:opacity-100"
+              className={`absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white transition-all hover:bg-black/70 ${
+                showControlsOnTouch
+                  ? 'opacity-80 max-md:opacity-90 md:opacity-0 md:group-hover:opacity-60 md:hover:opacity-100'
+                  : 'opacity-0 group-hover:opacity-100 md:opacity-60 md:hover:opacity-100'
+              }`}
               aria-label="Previous image"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               type="button"
               onClick={goNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-all opacity-0 group-hover:opacity-100 md:opacity-60 md:hover:opacity-100"
+              className={`absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white transition-all hover:bg-black/70 ${
+                showControlsOnTouch
+                  ? 'opacity-80 max-md:opacity-90 md:opacity-0 md:group-hover:opacity-60 md:hover:opacity-100'
+                  : 'opacity-0 group-hover:opacity-100 md:opacity-60 md:hover:opacity-100'
+              }`}
               aria-label="Next image"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="h-5 w-5" />
             </button>
           </>
         )}
@@ -126,14 +141,14 @@ export function WorkImageCarousel({ images, alt, className = '' }: WorkImageCaro
               key={index}
               type="button"
               onClick={() => index !== currentIndex && goTo(index, index > currentIndex ? 1 : -1)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 before:block before:h-2 before:w-2 before:rounded-full before:content-[''] ${
                 index === currentIndex
                   ? isDark
-                    ? 'bg-white scale-125'
-                    : 'bg-gray-900 scale-125'
+                    ? 'before:bg-white before:scale-125'
+                    : 'before:bg-gray-900 before:scale-125'
                   : isDark
-                    ? 'bg-white/50 hover:bg-white/75'
-                    : 'bg-gray-500/50 hover:bg-gray-600/75'
+                    ? 'before:bg-white/50 hover:before:bg-white/75'
+                    : 'before:bg-gray-500/50 hover:before:bg-gray-600/75'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
