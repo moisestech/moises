@@ -60,6 +60,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/grants/four-artists-four-seasons',
+        destination: '/grant/four-artists-four-seasons',
+        permanent: false,
+      },
+      {
         source: '/cv/technology',
         destination: '/cv/tech',
         permanent: true,
