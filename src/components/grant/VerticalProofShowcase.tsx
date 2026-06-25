@@ -35,6 +35,7 @@ function ProofMedia({
 }) {
   const youtubeId = item.mediaType === 'youtube' ? extractYouTubeId(item.src) : null;
   const imageSrc = item.poster ?? item.src;
+  const externalHref = item.surveyLink ?? item.href;
 
   if (youtubeId) {
     return (
@@ -47,6 +48,31 @@ function ProofMedia({
           allowFullScreen
         />
       </div>
+    );
+  }
+
+  if (item.mediaType === 'external' && imageSrc && externalHref) {
+    return (
+      <a
+        href={externalHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn('relative block h-full w-full bg-stone-900', className)}
+        aria-label={`Watch ${item.title}`}
+      >
+        <Image
+          src={imageSrc}
+          alt={item.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 90vw, 320px"
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/35 transition-colors hover:bg-black/45">
+          <span className="rounded-full bg-white/95 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-stone-900 shadow-lg">
+            Watch sample
+          </span>
+        </div>
+      </a>
     );
   }
 

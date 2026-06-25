@@ -138,40 +138,60 @@ export const fourArtistsApplicationFacts = [
   { label: 'Season', value: fourArtistsMeta.seasonPageDisplay, note: fourArtistsMeta.seasonPageNote },
 ] as const;
 
-export const fourArtistsBakehouseTrajectory = `I am a Venezuelan-born, Miami-based interdisciplinary artist working at the intersection of art, technology, digital culture, and systems of attention. My practice uses video, sculpture, AI, web-based tools, fabrication, performance, and installation to explore how people live inside technological systems—how platforms, screens, automation, and algorithms shape identity, labor, memory, and public life.
+export const fourArtistsBakehouseTrajectory = `I am a Venezuelan-born, Miami-based interdisciplinary artist working at the intersection of art, technology, digital culture, and systems of attention. My practice uses video, sculpture, AI, web-based tools, fabrication, performance, and installation to explore how people live inside technological systems, how platforms, screens, automation, and algorithms shape identity, labor, memory, and public life.
 
-I have been a Bakehouse artist for several years, and my studio at Bakehouse has become an important space for developing this work in a more embodied and community-facing way. Being at Bakehouse has helped my practice move beyond digital images and online systems into physical installations, public conversations, studio experiments, and relationships with other artists working across many disciplines.
+I have been a Bakehouse artist for several years, and Bakehouse has become an important site for developing my work from screen-based ideas into physical installations, public conversations, and community-facing systems. My trajectory at Bakehouse has increasingly focused on how artists, audiences, and institutions communicate through images, screens, documentation, and digital infrastructure.
 
-The story of my practice at Bakehouse has developed through proximity: being able to witness artists building work over time, seeing how process, materials, deadlines, conversations, and community shape the final artwork. That environment has influenced me to think more deeply about documentation—not only as promotion, but as a way of making artistic labor visible. My current work is increasingly focused on translating process into public-facing forms, whether through short-form video, digital infrastructure, installation, teaching, or artist-support systems.`;
+Recently, I have been building and installing vertical smart sign systems at Bakehouse that promote artists, events, and studio activity through a repeatable screen-based format. I have also worked on digital projects connected to Bakehouse's 40th anniversary, including a 3D model / VR representation of Bakehouse that was translated into reel-based content. These projects connect directly to my interest in short-form storytelling: how a vertical screen, a short video, or a digital sign can make an artist's process more visible to the public.
 
-export const fourArtistsWhyInterested = `I am interested in participating in Four Artists: Four Seasons because I see short-form video as a powerful way to make the creative life of Bakehouse visible without flattening it into simple promotion. Bakehouse is not only a building where artworks are made; it is a living ecosystem of studios, materials, conversations, experiments, exhibitions, deadlines, relationships, and community.
+My background also includes over 11 years of experience with After Effects, video editing, digital storytelling, and interactive media, including a Unity-based Peter Cooper Union game project created for my graduation. At Bakehouse, my practice has developed through the relationship between artistic experimentation and public communication: how to take complex ideas, studio processes, and institutional stories and translate them into accessible visual experiences.`;
 
-As a Bakehouse artist, I would approach this opportunity from the inside. I understand how much of an artist's work happens before the final image or exhibition: the small decisions, failures, studio rituals, material tests, research, installation moments, and informal conversations that shape the work. I am interested in documenting those moments with care and translating them into concise, engaging micro-films.
+export const fourArtistsWhyInterested = `I am interested in participating in Four Artists: Four Seasons because it aligns directly with work I am already doing at Bakehouse: building repeatable systems for making artists, events, and creative processes more visible through vertical screens, short-form video, and digital storytelling.
 
-My practice already combines storytelling, digital production, video editing, AI, 3D modeling, web publishing, audio, livestreaming, and artist documentation. I would bring those skills into a repeatable weekly system that can support Bakehouse's public presence while also contributing to a meaningful visual archive of the artists and community.`;
+I see this opportunity as more than creating isolated social media posts. I would approach it as a 12-week micro-film system: one concise, visually strong video each week that captures a specific artist, process, question, event, or community moment. My goal would be to create content that works on Instagram, TikTok, Facebook, and other public platforms while also contributing to a longer-term visual archive of Bakehouse.
 
-export const fourArtistsStoriesToDocument = `I would be most excited to document the everyday creative life of Bakehouse: the moments where artistic practice, community, and institutional activity overlap. I am interested in stories that show artists in process—not only finished artworks, but the gestures, tools, materials, conversations, and decisions that make the work possible.
+As a Bakehouse artist, I have insider access to the rhythms of the building: the studio work, the installation moments, the conversations, the experiments, and the institutional changes happening around us. I am especially interested in using short videos to connect the current life of the artist community with the future vision of Bakehouse, including the new building, the artist residency ecosystem, and the role of artists in shaping Miami's cultural infrastructure.
 
-Some areas I would be excited to document include studio visits, works in progress, installation moments, exhibition preparation, open studios, artist-to-artist conversations, material experiments, community events, and the ways Bakehouse supports artists at different stages of their practices. I am especially interested in showing the diversity of artistic approaches inside the building: painting, sculpture, performance, photography, digital media, fabrication, research-based work, and socially engaged practices.
+I bring a combination of artistic sensitivity and technical production experience: After Effects, Premiere, Canva, AI tools, 3D modeling, VR, Unity, smart signage, podcasting, livestreaming, and web publishing. For this program, I would use those skills in service of clear, consistent, artist-centered micro-films.`;
 
-I would also be interested in documenting Bakehouse as a cultural infrastructure for Miami: a place where artists are not only producing objects, but building relationships, sharing knowledge, and contributing to the city's creative future.`;
+export const fourArtistsStoriesToDocument = `I would be most excited to document Bakehouse as a living creative ecosystem: artists in their studios, works in progress, material experiments, installation moments, open studios, exhibitions, public programs, and the informal conversations that shape the community.
 
-export const fourArtistsEngagingContent = `I believe engaging social media content combines clarity, rhythm, emotional access, and a strong point of view. A good short-form video should quickly communicate why someone should care, but it should also leave space for curiosity. The strongest content is not just visually polished; it has a human reason to exist.
+I am especially interested in the relationship between the current artist community and the future of Bakehouse. With the new building and larger architectural vision, there is an opportunity to document not only what artists are making now, but what kind of cultural future they imagine for the campus and for Miami. I would be interested in creating short videos that ask artists simple but meaningful questions: What does your studio make possible? What should an artist community provide? What do you hope the future Bakehouse holds? How does your practice speak to the city around it?
 
-For artist-centered content, I think the key is to translate process into story. Viewers respond when they can understand the stakes of a gesture, material, object, question, or studio moment. A 15–30 second video can be successful when it has a clear hook, a visual transformation, a memorable detail, strong pacing, readable captions, and a sense of intimacy or discovery.
+I would also like to document the vertical and public-facing life of the building: smart signs, screens, studio announcements, artist features, event promotion, and the ways digital tools can help connect artists with audiences. Because I have already been working with vertical smart sign systems and artist-facing digital infrastructure at Bakehouse, I see this program as a way to extend that work into weekly social media storytelling.
 
-I also think engaging content should respect the artist and the work. It should not make everything feel like advertising. The goal is to create a bridge between the depth of the studio and the speed of social platforms, so that the content feels accessible, generous, and still true to the complexity of the artwork.`;
+The stories I would prioritize are not only finished artworks, but the processes, systems, and relationships that allow artists to keep making work.`;
+
+export const fourArtistsEngagingContent = `I believe engaging social media content combines a clear story, strong pacing, visual rhythm, and a human reason to keep watching. A good short-form video does not need to explain everything, but it should quickly give the viewer a point of entry: a question, a gesture, a transformation, a material, a face, a voice, or a surprising detail.
+
+For artist-centered content, I think the strongest videos translate process into story. Viewers respond when they can understand what is at stake in an artwork or studio moment, even in 15–30 seconds. This requires more than filming something beautiful; it requires structure: a hook, a sequence, a visual payoff, captions, sound, and a clear sense of why the moment matters.
+
+I also believe consistency is part of engagement. A repeatable format helps audiences know what to expect while still allowing each artist or story to feel distinct. My experience building vertical smart sign systems, reels, digital documentation, and screen-based content has taught me that strong social media content works best when it is both flexible and systematic. It should be easy to recognize, easy to share, and still sensitive to the complexity of the artist's work.
+
+For Bakehouse, engaging content should feel generous, intelligent, and alive. It should invite people into the building's creative ecosystem without reducing the artists to promotion.`;
 
 export const fourArtistsSocialHandlesBlock = `Instagram: ${fourArtistsMeta.socialHandles.instagram}
 YouTube: ${fourArtistsMeta.socialHandles.youtube}
 Website: ${fourArtistsMeta.socialHandles.website}
 Application page: ${fourArtistsMeta.canonicalUrl}`;
 
-export const fourArtistsContentExamplesPlaceholder = `1. [Strongest short-form video / reel link]
-2. [Artist process or studio documentation link]
-3. [Oolite / workshop / digital lab documentation link]
-4. [AI / 3D / fabrication / chroma key example link]
-5. [YouTube / livestream / podcast / public-facing video link]`;
+export const fourArtistsContentExamplesPlaceholder = `1. Romance or Gamification — MOMus, Greece
+https://www.instagram.com/p/DNTYuKUofYG/
+
+2. The Art of AI Agents — Locust Projects, The Dill
+https://www.instagram.com/p/DVG3zMyEZEi/
+
+3. Personal Artist Invitation (AI Lip Sync) — Digital Art Biennial, Antigua Guatemala
+https://www.instagram.com/p/C9DRFnBvIrL/
+
+4. Toy to Resin — Digilab 3D Printing Process
+https://drive.google.com/file/d/1iCE_dECkSQYjomck253PdngRFf1K44NK/view?usp=sharing
+
+5. Bakehouse Current Building VR Walkthrough — 40th Year Promotion
+https://drive.google.com/file/d/1zqAAnLQisBl4vpneiQUKxJQvinfJZwF3/view?usp=sharing
+
+6. TikTok Ban Music Video
+https://www.tiktok.com/t/ZTBoMHNNT/`;
 
 export const fourArtistsRoleInContent = 'All of the above';
 
@@ -205,141 +225,104 @@ export const fourArtistsFitCards: FitCard[] = [
   },
 ];
 
-const INSTAGRAM_PROFILE = fourArtistsMeta.social.instagram;
-
 export const fourArtistsProofItems: ProofItem[] = [
   {
-    id: 'oolite-digital-lab',
-    title: 'Oolite Digital Lab Process',
-    category: 'Artist process documentation',
-    mediaType: 'cloudinary',
-    src: OOLITE_DIGITAL_LAB_IMAGE,
-    poster: OOLITE_DIGITAL_LAB_IMAGE,
-    href: INSTAGRAM_PROFILE,
-    surveyLink: INSTAGRAM_PROFILE,
-    sampleStatus: 'pending',
-    tools: ['Premiere', 'Phone video', 'Captions', 'Process documentation'],
-    role: ['Filming', 'Editing', 'Story development'],
-    proves:
-      'Ability to turn technical artist support into clear short-form educational content inside a working lab.',
-    applicationPriority: true,
-    platformLabel: 'Reels / Stories',
-    captionOverlay: 'Inside the Digital Lab — where artists meet fabrication and code.',
-  },
-  {
-    id: 'resin-3d-workflow',
-    title: 'Resin / 3D Print Workflow',
-    category: 'Fabrication documentation',
-    mediaType: 'image',
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
-    href: INSTAGRAM_PROFILE,
-    surveyLink: INSTAGRAM_PROFILE,
-    sampleStatus: 'pending',
-    tools: ['3D printing', 'Resin', 'Premiere', 'Close-up capture'],
-    role: ['Filming', 'Editing', 'All of the above'],
-    proves: 'Material and tool fluency — process moments that read clearly in 15–30 seconds.',
-    applicationPriority: true,
-    platformLabel: 'TikTok / Reels',
-    captionOverlay: 'Material close-up — tool, gesture, transformation.',
-  },
-  {
-    id: 'workshop-teaching',
-    title: 'Workshop & Teaching Documentation',
-    category: 'Workshop documentation',
-    mediaType: 'cloudinary',
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659418/ai24-website-above-the-fold_kbp2ei.png',
-    href: 'https://ai24.live',
-    surveyLink: 'https://ai24.live',
-    sampleStatus: 'pending',
-    tools: ['Canva', 'Premiere', 'Live instruction capture'],
-    role: ['Filming', 'On-camera host', 'Editing'],
-    proves: 'Public-facing artist education — pacing, clarity, and community engagement.',
-    applicationPriority: true,
-    platformLabel: 'Instagram',
-    captionOverlay: 'Workshop moment — artists learning tools in real time.',
-  },
-  {
-    id: 'ai-chroma-experimental',
-    title: 'AI / Chroma Key Experimental Video',
-    category: 'Experimental digital production',
-    mediaType: 'image',
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
-    href: '/research/broken-acceleration',
-    surveyLink: 'https://moises.tech/research/broken-acceleration',
-    sampleStatus: 'pending',
-    tools: ['After Effects', 'Chroma key', 'AI visuals', 'ComfyUI'],
-    role: ['Story development', 'Editing', 'All of the above'],
-    proves: 'Contemporary visual vocabulary — experimental but controlled, not gimmick-driven.',
-    applicationPriority: true,
-    platformLabel: 'Reels',
-    captionOverlay: 'Digital layer — when the studio meets generative image.',
-  },
-  {
-    id: 'podcast-mic-setup',
-    title: 'Podcast / Interview Setup',
-    category: 'Audio & interview',
-    mediaType: 'image',
-    src: moisesSanabriaHeadshot,
-    href: fourArtistsMeta.social.youtube,
-    surveyLink: fourArtistsMeta.social.youtube,
-    sampleStatus: 'pending',
-    tools: ['Bluetooth mics', 'Premiere', 'Podcast pacing', 'Captions'],
-    role: ['Filming', 'Story development', 'Editing'],
-    proves: 'Clean audio and conversational structure for artist micro-interviews.',
-    applicationPriority: true,
-    platformLabel: 'Stories / Reels',
-    captionOverlay: 'One question — one artist — one studio answer.',
-  },
-  {
-    id: 'livestream-program',
-    title: 'Livestream / Public Program',
-    category: 'Live documentation',
+    id: 'romance-or-gamification-momus',
+    title: 'Romance or Gamification',
+    category: 'Exhibition documentation · MOMus, Greece',
     mediaType: 'external',
-    href: 'https://ai24.live',
+    href: 'https://www.instagram.com/p/DNTYuKUofYG/',
+    surveyLink: 'https://www.instagram.com/p/DNTYuKUofYG/',
+    poster:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
+    sampleStatus: 'ready',
+    tools: ['Premiere', 'After Effects', 'Captions', 'Instagram Reels'],
+    role: ['Filming', 'Editing', 'Story development', 'All of the above'],
+    proves: 'International exhibition storytelling — concise narrative pacing for institutional and social audiences.',
+    applicationPriority: true,
+    platformLabel: 'Instagram Reel',
+    captionOverlay: 'Romance or Gamification — MOMus, Greece',
+  },
+  {
+    id: 'art-of-ai-agents-locust',
+    title: 'The Art of AI Agents',
+    category: 'Public program · Locust Projects, The Dill',
+    mediaType: 'external',
+    href: 'https://www.instagram.com/p/DVG3zMyEZEi/',
+    surveyLink: 'https://www.instagram.com/p/DVG3zMyEZEi/',
     poster: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659418/ai24-website-above-the-fold_kbp2ei.png',
-    tools: ['Livestream', 'OBS', 'Premiere', 'Event capture'],
-    role: ['Filming', 'Technical direction', 'Editing'],
-    proves: 'Real-time audience fluency and event documentation under live conditions.',
-    platformLabel: 'YouTube / Instagram Live',
-    captionOverlay: 'Public program — campus energy in real time.',
+    sampleStatus: 'ready',
+    tools: ['Premiere', 'Canva', 'Live event capture', 'Captions'],
+    role: ['Filming', 'On-camera host', 'Editing', 'All of the above'],
+    proves: 'Miami institutional program documentation — educational pacing with community engagement.',
+    applicationPriority: true,
+    platformLabel: 'Instagram Reel',
+    captionOverlay: 'The Art of AI Agents at Locust Projects',
   },
   {
-    id: 'studio-practice',
-    title: 'Studio Practice / Artwork Process',
-    category: 'Personal artwork',
-    mediaType: 'image',
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
-    tools: ['Phone camera', 'Premiere', 'Narrative editing'],
-    role: ['Filming', 'Editing', 'All of the above'],
-    proves: 'Own artistic practice documented with the same care offered to peer artists.',
-    platformLabel: 'Reels',
-    captionOverlay: 'Work-in-progress — studio as living archive.',
+    id: 'ai-lip-sync-guatemala',
+    title: 'AI Lip Sync Artist Invitation',
+    category: 'AI video · Digital Art Biennial, Antigua Guatemala',
+    mediaType: 'external',
+    href: 'https://www.instagram.com/p/C9DRFnBvIrL/',
+    surveyLink: 'https://www.instagram.com/p/C9DRFnBvIrL/',
+    poster: moisesSanabriaHeadshot,
+    sampleStatus: 'ready',
+    tools: ['AI lip sync', 'After Effects', 'Premiere', 'Vertical export'],
+    role: ['Story development', 'Editing', 'All of the above'],
+    proves: 'Experimental AI storytelling with clear invitation structure — contemporary digital-art voice.',
+    applicationPriority: true,
+    platformLabel: 'Instagram Reel',
+    captionOverlay: 'Personal invitation — Digital Art Biennial, Antigua',
   },
   {
-    id: 'web-infrastructure',
-    title: 'Web / Digital Infrastructure',
-    category: 'Digital storytelling',
-    mediaType: 'github',
-    href: 'https://github.com/moisestech',
-    poster: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
-    tools: ['Next.js', 'Cloudinary', 'Web publishing', 'Archive design'],
-    role: ['Story development', 'All of the above'],
-    proves: 'Builds durable public-facing documentation systems — this application page included.',
-    platformLabel: 'Web archive',
-    captionOverlay: 'Documentation that outlasts the feed — archive as practice.',
-  },
-  {
-    id: 'social-educational',
-    title: 'Social-Ready Educational Clip',
-    category: 'Educational short-form',
-    mediaType: 'cloudinary',
-    src: OOLITE_DIGITAL_LAB_IMAGE,
+    id: 'toy-to-resin-digilab',
+    title: 'Toy to Resin',
+    category: 'Fabrication process · Digilab 3D printing',
+    mediaType: 'external',
+    href: 'https://drive.google.com/file/d/1iCE_dECkSQYjomck253PdngRFf1K44NK/view?usp=sharing',
+    surveyLink: 'https://drive.google.com/file/d/1iCE_dECkSQYjomck253PdngRFf1K44NK/view?usp=sharing',
     poster: OOLITE_DIGITAL_LAB_IMAGE,
-    tools: ['Canva', 'Captions', 'Premiere', 'Vertical export'],
-    role: ['Editing', 'Story development'],
-    proves: 'Caption-forward, platform-native pacing for non-specialist audiences.',
-    platformLabel: 'TikTok / Reels',
-    captionOverlay: 'Quick lesson — one tool, one gesture, one takeaway.',
+    sampleStatus: 'ready',
+    tools: ['3D printing', 'Resin', 'Premiere', 'Process documentation'],
+    role: ['Filming', 'Editing', 'All of the above'],
+    proves: 'Material transformation story — lab workflow translated into short-form educational content.',
+    applicationPriority: true,
+    platformLabel: 'Process reel',
+    captionOverlay: 'Toy to resin — Digilab fabrication workflow',
+  },
+  {
+    id: 'bakehouse-vr-40th',
+    title: 'Bakehouse VR Walkthrough',
+    category: 'Bakehouse · 40th anniversary promotion',
+    mediaType: 'external',
+    href: 'https://drive.google.com/file/d/1zqAAnLQisBl4vpneiQUKxJQvinfJZwF3/view?usp=sharing',
+    surveyLink: 'https://drive.google.com/file/d/1zqAAnLQisBl4vpneiQUKxJQvinfJZwF3/view?usp=sharing',
+    poster: OOLITE_DIGITAL_LAB_IMAGE,
+    sampleStatus: 'ready',
+    tools: ['VR', '3D modeling', 'Unity', 'Premiere', 'Reel export'],
+    role: ['Filming', 'Technical direction', 'Editing', 'All of the above'],
+    proves: 'Direct Bakehouse institutional storytelling — campus vision translated into vertical reel content.',
+    applicationPriority: true,
+    platformLabel: 'Bakehouse / Reel',
+    captionOverlay: 'VR walkthrough — Bakehouse 40th year',
+  },
+  {
+    id: 'tiktok-ban-music-video',
+    title: 'TikTok Ban Music Video',
+    category: 'Music video · TikTok-native pacing',
+    mediaType: 'external',
+    href: 'https://www.tiktok.com/t/ZTBoMHNNT/',
+    surveyLink: 'https://www.tiktok.com/t/ZTBoMHNNT/',
+    poster:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
+    sampleStatus: 'ready',
+    tools: ['CapCut', 'TikTok', 'Premiere', 'Sound design'],
+    role: ['Filming', 'Editing', 'Story development', 'All of the above'],
+    proves: 'Platform-native rhythm and hook-driven editing for TikTok audiences.',
+    applicationPriority: true,
+    platformLabel: 'TikTok',
+    captionOverlay: 'TikTok Ban — music video short-form',
   },
 ];
 
@@ -403,11 +386,8 @@ export const fourArtistsApplicationResponses: ApplicationResponse[] = [
   {
     number: 12,
     title: 'Examples of social media content',
-    body: `Priority samples for the survey (2–5 required). Final direct reel/short URLs pending — see Proof section for interim links.\n\n${fourArtistsContentExamplesPlaceholder}`,
-    copyText: fourArtistsProofItems
-      .filter((item) => item.applicationPriority)
-      .map((item, i) => `${i + 1}. ${item.title} — ${item.surveyLink ?? 'PENDING'}`)
-      .join('\n'),
+    body: `Six published short-form samples — Instagram Reels, TikTok, and process documentation. Submit any five for the survey.\n\n${fourArtistsContentExamplesPlaceholder}`,
+    copyText: fourArtistsContentExamplesPlaceholder,
   },
   {
     number: 13,
@@ -515,7 +495,7 @@ export const fourArtistsSurveyAlignment: SurveyAlignmentItem[] = [
   },
   {
     question: 'Stories to document',
-    answerSummary: 'Artists, materials, studio process, community, exhibitions, fundraising season programming.',
+    answerSummary: 'Living ecosystem, future campus vision, smart signs, artist questions, process over promotion.',
     pageAnchor: 'weekly-plan',
   },
   {
@@ -530,7 +510,7 @@ export const fourArtistsSurveyAlignment: SurveyAlignmentItem[] = [
   },
   {
     question: 'Content examples (2–5)',
-    answerSummary: `${fourArtistsPrioritySampleTitles.join('; ')} — direct reel/short URLs pending; interim profile links on proof cards.`,
+    answerSummary: `${fourArtistsPrioritySampleTitles.join('; ')} — direct reel, TikTok, and process video links on proof cards.`,
     pageAnchor: 'proof',
   },
   {
@@ -599,10 +579,7 @@ export const fourArtistsSurveyFormAnswers: SurveyFormAnswer[] = [
   },
   {
     questionLabel: 'Content examples (2–5 links)',
-    copyText: fourArtistsProofItems
-      .filter((item) => item.applicationPriority)
-      .map((item, i) => `${i + 1}. ${item.title} — ${item.surveyLink ?? 'PENDING'}`)
-      .join('\n'),
+    copyText: fourArtistsContentExamplesPlaceholder,
   },
   {
     questionLabel: 'Role in content creation',
