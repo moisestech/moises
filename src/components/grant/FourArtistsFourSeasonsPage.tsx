@@ -1,14 +1,13 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { grantDossierSectionScrollMarginClass, siteHeaderExpandedPaddingTopClass } from '@/config/site-header-layout';
+import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import {
   DiagramLadder,
   ExpandableText,
-  GrantDossierNav,
   PanelHook,
   SectionGroup,
   StatusPill,
@@ -18,20 +17,22 @@ import {
   grantLinkClass,
   type MajorZone,
 } from '@/components/grant/dossier/GrantDossierUi';
+import { GrantDossierSidebar } from '@/components/grant/dossier/GrantDossierSidebar';
 import { VerticalProofShowcase } from '@/components/grant/VerticalProofShowcase';
 import {
   fourArtistsApplicationFacts,
+  fourArtistsApplicationResponses,
   fourArtistsBakehouseTrajectory,
   fourArtistsFitCards,
   fourArtistsHero,
   fourArtistsMeta,
   fourArtistsNavZones,
+  fourArtistsProductionLogoBand,
   fourArtistsProofItems,
   fourArtistsReadinessMetrics,
   fourArtistsStatement,
   fourArtistsStorytellingPrinciples,
   fourArtistsSurveyAlignment,
-  fourArtistsSurveyFormAnswers,
   fourArtistsToolStack,
   fourArtistsWeeklyPlan,
   fourArtistsWorkflowSteps,
@@ -43,6 +44,8 @@ const navZones: MajorZone[] = fourArtistsNavZones.map((z) => ({
   label: z.label,
   summary: z.summary,
 }));
+
+const programLabel = `${fourArtistsMeta.program} · ${fourArtistsMeta.organization}`;
 
 export default function FourArtistsFourSeasonsPage() {
   const [activeZoneId, setActiveZoneId] = useState(navZones[0]?.id ?? 'overview');
@@ -89,78 +92,64 @@ export default function FourArtistsFourSeasonsPage() {
           siteHeaderExpandedPaddingTopClass,
         )}
       >
-        <div className="lg:grid lg:grid-cols-[11rem_minmax(0,1fr)] lg:gap-10">
-          <div className="lg:pt-2">
-            <GrantDossierNav
-              zones={navZones}
-              activeZoneId={activeZoneId}
-              onNavigate={scrollToSection}
-            />
-          </div>
+        <div className="lg:grid lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,16rem)_minmax(0,1fr)]">
+          <GrantDossierSidebar
+            zones={navZones}
+            activeZoneId={activeZoneId}
+            onNavigate={scrollToSection}
+            portraitSrc={fourArtistsMeta.portraitUrl}
+            portraitAlt={`${fourArtistsMeta.applicant} — professional portrait`}
+            applicantName={fourArtistsMeta.applicant}
+            programLabel={programLabel}
+            socialLinks={{
+              instagram: fourArtistsMeta.social.instagram,
+              youtube: fourArtistsMeta.social.youtube,
+              linkedin: fourArtistsMeta.social.linkedin,
+              website: fourArtistsMeta.social.website,
+              email: fourArtistsMeta.social.email,
+            }}
+          />
 
           <div className="min-w-0">
-            {/* Hero / Overview */}
             <section
               id="overview"
               className={cn(grantDossierSectionScrollMarginClass, 'pb-14 pt-4 sm:pt-6')}
             >
               <p className={dossierTypography.eyebrow}>{fourArtistsHero.eyebrow}</p>
+              <h1 className={cn('mt-6', dossierTypography.h1)}>{fourArtistsHero.headline}</h1>
+              <p className={cn('mt-4', dossierTypography.pullQuote)}>{fourArtistsHero.subheadline}</p>
+              <p className={cn('mt-6 max-w-[62ch]', dossierTypography.body)}>{fourArtistsHero.intro}</p>
 
-              <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,240px)] lg:items-start">
-                <div>
-                  <h1 className={dossierTypography.h1}>{fourArtistsHero.headline}</h1>
-                  <p className={cn('mt-4', dossierTypography.pullQuote)}>{fourArtistsHero.subheadline}</p>
-                  <p className={cn('mt-6 max-w-[62ch]', dossierTypography.body)}>{fourArtistsHero.intro}</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {fourArtistsHero.statusPills.map((pill) => (
+                  <StatusPill key={pill} status={pill} />
+                ))}
+              </div>
 
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {fourArtistsHero.statusPills.map((pill) => (
-                      <StatusPill key={pill} status={pill} />
-                    ))}
-                  </div>
+              <p className={cn('mt-4 max-w-[62ch] font-medium text-stone-800 dark:text-stone-200', dossierTypography.body)}>
+                {fourArtistsMeta.postingTagline}
+              </p>
 
-                  <p className={cn('mt-4 max-w-[62ch] font-medium text-stone-800 dark:text-stone-200', dossierTypography.body)}>
-                    {fourArtistsMeta.postingTagline}
-                  </p>
-
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <button
-                      type="button"
-                      onClick={() => scrollToSection('proof')}
-                      className={grantButtonClass}
-                    >
-                      View proof samples
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => scrollToSection('weekly-plan')}
-                      className={grantButtonClass}
-                    >
-                      View 12-week plan
-                    </button>
-                    <a
-                      href={`mailto:${fourArtistsMeta.social.email}?subject=${encodeURIComponent('Four Artists: Four Seasons — Bakehouse')}`}
-                      className={grantButtonClass}
-                    >
-                      Contact Moises
-                    </a>
-                  </div>
-                </div>
-
-                <figure className={cn('overflow-hidden', grantCardClass)}>
-                  <div className="relative aspect-[4/5] w-full">
-                    <Image
-                      src={fourArtistsMeta.portraitUrl}
-                      alt={`${fourArtistsMeta.applicant} — professional portrait`}
-                      fill
-                      priority
-                      className="object-cover object-top"
-                      sizes="240px"
-                    />
-                  </div>
-                  <figcaption className={cn('border-t border-stone-200 px-4 py-3 dark:border-stone-700', dossierTypography.meta)}>
-                    {fourArtistsMeta.applicant} · Bakehouse resident artist
-                  </figcaption>
-                </figure>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button type="button" onClick={() => scrollToSection('proof')} className={grantButtonClass}>
+                  View proof samples
+                </button>
+                <button type="button" onClick={() => scrollToSection('weekly-plan')} className={grantButtonClass}>
+                  View 12-week plan
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('application-responses')}
+                  className={grantButtonClass}
+                >
+                  Application answers
+                </button>
+                <a
+                  href={`mailto:${fourArtistsMeta.social.email}?subject=${encodeURIComponent('Four Artists: Four Seasons — Bakehouse')}`}
+                  className={grantButtonClass}
+                >
+                  Contact Moises
+                </a>
               </div>
 
               <div className={cn('mt-12 p-5 sm:p-6', grantCardClass)}>
@@ -189,9 +178,11 @@ export default function FourArtistsFourSeasonsPage() {
                 id="trajectory"
                 eyebrow="Context"
                 title="Bakehouse trajectory"
-                summary="Practice inside the building and across Miami’s artist infrastructure."
+                summary="Artistic practice and trajectory inside the building."
               >
-                <p className={cn('max-w-[62ch]', dossierTypography.body)}>{fourArtistsBakehouseTrajectory}</p>
+                <p className={cn('max-w-[62ch] whitespace-pre-line', dossierTypography.body)}>
+                  {fourArtistsBakehouseTrajectory}
+                </p>
               </SectionGroup>
 
               <SectionGroup
@@ -271,6 +262,17 @@ export default function FourArtistsFourSeasonsPage() {
                     </div>
                   ))}
                 </div>
+                {fourArtistsProductionLogoBand.length ? (
+                  <div className="mt-10">
+                    <p className={cn('mb-4', dossierTypography.eyebrow)}>Production platforms</p>
+                    <AnimatedLogoBand
+                      logos={fourArtistsProductionLogoBand}
+                      bleed
+                      ariaLabel="Editing and production platform logos"
+                      className="rounded border border-stone-300 dark:border-stone-700"
+                    />
+                  </div>
+                ) : null}
               </SectionGroup>
 
               <SectionGroup
@@ -295,36 +297,43 @@ export default function FourArtistsFourSeasonsPage() {
                     {fourArtistsMeta.postingTagline}
                   </p>
                   <p className={cn('mt-3', dossierTypography.body)}>{fourArtistsMeta.postingFrequency}</p>
-                  <p className={cn('mt-3', dossierTypography.meta)}>
-                    Survey form choice: {fourArtistsMeta.postingFormChoice}
-                  </p>
                 </div>
               </SectionGroup>
 
               <SectionGroup
-                id="alignment"
+                id="application-responses"
                 eyebrow="Survey"
-                title="Application alignment"
-                summary="SurveyMonkey copy-paste bank — recommended answers and optional notes."
+                title="Application responses"
+                summary="Full answers for SurveyMonkey — Q6 through Q13."
               >
-                <div className="space-y-4">
-                  {fourArtistsSurveyFormAnswers.map((item) => (
-                    <article key={item.questionLabel} className={cn('p-4 sm:p-5', grantCardClass)}>
-                      <p className={dossierTypography.eyebrow}>{item.questionLabel}</p>
-                      {item.multipleChoice ? (
-                        <p className={cn('mt-2 text-sm font-semibold text-stone-900 dark:text-stone-100')}>
-                          Select: {item.multipleChoice}
+                <div className="space-y-6">
+                  {fourArtistsApplicationResponses.map((response) => (
+                    <article key={response.number} className={cn('p-4 sm:p-6', grantCardClass)}>
+                      <p className={dossierTypography.eyebrow}>Question {response.number}</p>
+                      <h3 className={cn('mt-2', dossierTypography.h3)}>{response.title}</h3>
+                      {response.formChoice ? (
+                        <p className={cn('mt-3 text-sm font-semibold text-stone-900 dark:text-stone-100')}>
+                          Select: {response.formChoice}
                         </p>
                       ) : null}
-                      <pre className={cn('mt-3 whitespace-pre-wrap font-sans', dossierTypography.body)}>
-                        {item.copyText}
-                      </pre>
-                      {item.optionalNote ? (
-                        <div className="mt-4 border-t border-stone-200 pt-4 dark:border-stone-700">
-                          <p className={dossierTypography.eyebrow}>Optional note</p>
-                          <p className={cn('mt-2', dossierTypography.body)}>{item.optionalNote}</p>
-                        </div>
-                      ) : null}
+                      <p className={cn('mt-4 max-w-[62ch] whitespace-pre-line', dossierTypography.body)}>
+                        {response.body}
+                      </p>
+                      <ExpandableText
+                        preview="Copy for SurveyMonkey"
+                        label="Show paste block"
+                        defaultOpen={false}
+                      >
+                        <p className="whitespace-pre-line">{response.copyText}</p>
+                        {response.optionalNote ? (
+                          <div className="mt-4 border-t border-stone-200 pt-4 dark:border-stone-700">
+                            <p className={dossierTypography.eyebrow}>Optional note</p>
+                            <p className={cn('mt-2 whitespace-pre-line', dossierTypography.body)}>
+                              {response.optionalNote}
+                            </p>
+                          </div>
+                        ) : null}
+                      </ExpandableText>
                     </article>
                   ))}
                 </div>
@@ -358,7 +367,7 @@ export default function FourArtistsFourSeasonsPage() {
                 id="statement"
                 eyebrow="Statement"
                 title="Application statement"
-                summary="Interest, approach, and commitment."
+                summary="Consolidated interest and approach."
               >
                 <ExpandableText
                   preview={fourArtistsStatement.preview}
@@ -387,6 +396,7 @@ export default function FourArtistsFourSeasonsPage() {
                     <li>Instagram: {fourArtistsMeta.socialHandles.instagram}</li>
                     <li>YouTube: {fourArtistsMeta.socialHandles.youtube}</li>
                     <li>Website: {fourArtistsMeta.socialHandles.website}</li>
+                    <li>Application: {fourArtistsMeta.canonicalUrl}</li>
                     <li>Email: {fourArtistsMeta.socialHandles.email}</li>
                   </ul>
                 </div>
@@ -410,10 +420,7 @@ export default function FourArtistsFourSeasonsPage() {
                   >
                     YouTube
                   </a>
-                  <a
-                    href={`mailto:${fourArtistsMeta.social.email}`}
-                    className={grantButtonClass}
-                  >
+                  <a href={`mailto:${fourArtistsMeta.social.email}`} className={grantButtonClass}>
                     Email
                   </a>
                   <Link href="/bio" className={grantButtonClass}>

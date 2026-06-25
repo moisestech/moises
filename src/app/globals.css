@@ -61,6 +61,11 @@
     --ring: 20 14.3% 4.1%;
 
     --radius: 0.5rem;
+
+    /* Published by `Header` on measure; fallbacks until hydration. */
+    --site-header-height: 5rem;
+    --site-header-expanded-height: 10rem;
+    --grant-dossier-subnav-height: 3.5rem;
   }
 
   :root {
@@ -185,5 +190,20 @@
   .learn-ai-rehearse-printable-markdown h3 {
     break-inside: avoid;
     page-break-after: avoid;
+  }
+}
+
+@keyframes grant-portrait-sheen {
+  from {
+    transform: translateX(-130%) skewX(-14deg);
+  }
+  to {
+    transform: translateX(230%) skewX(-14deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grant-portrait-sheen {
+    animation: none !important;
   }
 }

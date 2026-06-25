@@ -1,5 +1,7 @@
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 import { OOLITE_DIGITAL_LAB_IMAGE } from '@/content/evidence/projects';
+import { techLogoRegistry } from '@/content/evidence/tech-logos';
 
 export type ProofMediaType = 'youtube' | 'cloudinary' | 'image' | 'github' | 'external';
 
@@ -49,6 +51,15 @@ export type SurveyAlignmentItem = {
 export type SurveyFormAnswer = {
   questionLabel: string;
   multipleChoice?: string;
+  optionalNote?: string;
+  copyText: string;
+};
+
+export type ApplicationResponse = {
+  number: number;
+  title: string;
+  body: string;
+  formChoice?: string;
   optionalNote?: string;
   copyText: string;
 };
@@ -127,11 +138,45 @@ export const fourArtistsApplicationFacts = [
   { label: 'Season', value: fourArtistsMeta.seasonPageDisplay, note: fourArtistsMeta.seasonPageNote },
 ] as const;
 
-export const fourArtistsBakehouseTrajectory = `Moises Sanabria is a Miami-based interdisciplinary artist and resident at Bakehouse Art Complex. His practice examines how algorithmic environments, digital platforms, and networked systems shape belief, labor, and identity — staged through sculpture, video, AI systems, and public-facing documentation.
+export const fourArtistsBakehouseTrajectory = `I am a Venezuelan-born, Miami-based interdisciplinary artist working at the intersection of art, technology, digital culture, and systems of attention. My practice uses video, sculpture, AI, web-based tools, fabrication, performance, and installation to explore how people live inside technological systems—how platforms, screens, automation, and algorithms shape identity, labor, memory, and public life.
 
-Alongside his studio practice, he serves as Technical Director of Digital at Oolite Arts, where he supports artists through the Knight-funded Digital Lab: workshops, fabrication workflows, and production guidance. That dual position — artist inside Bakehouse and technical lead supporting Miami artists — gives him daily contact with studio process, community rhythm, and the gap between what artists make and what the public sees.
+I have been a Bakehouse artist for several years, and my studio at Bakehouse has become an important space for developing this work in a more embodied and community-facing way. Being at Bakehouse has helped my practice move beyond digital images and online systems into physical installations, public conversations, studio experiments, and relationships with other artists working across many disciplines.
 
-He co-founded AI24 Live and has exhibited at Transmediale, ICA Miami, Superblue, and other institutions. For Four Artists: Four Seasons, he would bring insider campus access, production fluency, and a weekly system that respects artists while making Bakehouse legible from the inside.`;
+The story of my practice at Bakehouse has developed through proximity: being able to witness artists building work over time, seeing how process, materials, deadlines, conversations, and community shape the final artwork. That environment has influenced me to think more deeply about documentation—not only as promotion, but as a way of making artistic labor visible. My current work is increasingly focused on translating process into public-facing forms, whether through short-form video, digital infrastructure, installation, teaching, or artist-support systems.`;
+
+export const fourArtistsWhyInterested = `I am interested in participating in Four Artists: Four Seasons because I see short-form video as a powerful way to make the creative life of Bakehouse visible without flattening it into simple promotion. Bakehouse is not only a building where artworks are made; it is a living ecosystem of studios, materials, conversations, experiments, exhibitions, deadlines, relationships, and community.
+
+As a Bakehouse artist, I would approach this opportunity from the inside. I understand how much of an artist's work happens before the final image or exhibition: the small decisions, failures, studio rituals, material tests, research, installation moments, and informal conversations that shape the work. I am interested in documenting those moments with care and translating them into concise, engaging micro-films.
+
+My practice already combines storytelling, digital production, video editing, AI, 3D modeling, web publishing, audio, livestreaming, and artist documentation. I would bring those skills into a repeatable weekly system that can support Bakehouse's public presence while also contributing to a meaningful visual archive of the artists and community.`;
+
+export const fourArtistsStoriesToDocument = `I would be most excited to document the everyday creative life of Bakehouse: the moments where artistic practice, community, and institutional activity overlap. I am interested in stories that show artists in process—not only finished artworks, but the gestures, tools, materials, conversations, and decisions that make the work possible.
+
+Some areas I would be excited to document include studio visits, works in progress, installation moments, exhibition preparation, open studios, artist-to-artist conversations, material experiments, community events, and the ways Bakehouse supports artists at different stages of their practices. I am especially interested in showing the diversity of artistic approaches inside the building: painting, sculpture, performance, photography, digital media, fabrication, research-based work, and socially engaged practices.
+
+I would also be interested in documenting Bakehouse as a cultural infrastructure for Miami: a place where artists are not only producing objects, but building relationships, sharing knowledge, and contributing to the city's creative future.`;
+
+export const fourArtistsEngagingContent = `I believe engaging social media content combines clarity, rhythm, emotional access, and a strong point of view. A good short-form video should quickly communicate why someone should care, but it should also leave space for curiosity. The strongest content is not just visually polished; it has a human reason to exist.
+
+For artist-centered content, I think the key is to translate process into story. Viewers respond when they can understand the stakes of a gesture, material, object, question, or studio moment. A 15–30 second video can be successful when it has a clear hook, a visual transformation, a memorable detail, strong pacing, readable captions, and a sense of intimacy or discovery.
+
+I also think engaging content should respect the artist and the work. It should not make everything feel like advertising. The goal is to create a bridge between the depth of the studio and the speed of social platforms, so that the content feels accessible, generous, and still true to the complexity of the artwork.`;
+
+export const fourArtistsSocialHandlesBlock = `Instagram: ${fourArtistsMeta.socialHandles.instagram}
+YouTube: ${fourArtistsMeta.socialHandles.youtube}
+Website: ${fourArtistsMeta.socialHandles.website}
+Application page: ${fourArtistsMeta.canonicalUrl}`;
+
+export const fourArtistsContentExamplesPlaceholder = `1. [Strongest short-form video / reel link]
+2. [Artist process or studio documentation link]
+3. [Oolite / workshop / digital lab documentation link]
+4. [AI / 3D / fabrication / chroma key example link]
+5. [YouTube / livestream / podcast / public-facing video link]`;
+
+export const fourArtistsRoleInContent = 'All of the above';
+
+export const fourArtistsEditingPlatforms =
+  'Adobe Premiere, After Effects, Canva, Instagram Reels, TikTok, CapCut, AI tools, YouTube, Cloudinary, GitHub/web publishing, and related digital production workflows.';
 
 export const fourArtistsFitCards: FitCard[] = [
   {
@@ -298,6 +343,81 @@ export const fourArtistsProofItems: ProofItem[] = [
   },
 ];
 
+const productionLogoIds = [
+  'adobe-premiere',
+  'adobe-after-effects',
+  'canva',
+  'capcut',
+  'instagram',
+  'tiktok',
+  'youtube',
+  'cloudinary',
+  'github',
+] as const;
+
+export const fourArtistsProductionLogoBand: LogoBandItem[] = productionLogoIds.flatMap((id) => {
+  const entry = techLogoRegistry[id];
+  if (!entry?.imageSrc) return [];
+  return [{ src: entry.imageSrc, alt: entry.label, height: id === 'canva' || id === 'capcut' ? 32 : 36 }];
+});
+
+export const fourArtistsApplicationResponses: ApplicationResponse[] = [
+  {
+    number: 6,
+    title: 'Artistic practice + trajectory at Bakehouse',
+    body: fourArtistsBakehouseTrajectory,
+    copyText: fourArtistsBakehouseTrajectory,
+  },
+  {
+    number: 7,
+    title: 'Social media handles',
+    body: fourArtistsSocialHandlesBlock,
+    copyText: fourArtistsSocialHandlesBlock,
+  },
+  {
+    number: 8,
+    title: 'Why are you interested in participating?',
+    body: fourArtistsWhyInterested,
+    copyText: fourArtistsWhyInterested,
+  },
+  {
+    number: 9,
+    title: 'Stories or perspectives you would be excited to document',
+    body: fourArtistsStoriesToDocument,
+    copyText: fourArtistsStoriesToDocument,
+  },
+  {
+    number: 10,
+    title: 'What makes engaging social media content?',
+    body: fourArtistsEngagingContent,
+    copyText: fourArtistsEngagingContent,
+  },
+  {
+    number: 11,
+    title: 'Posting frequency',
+    body: `${fourArtistsMeta.postingTagline}\n\n${fourArtistsMeta.postingFrequency}`,
+    formChoice: fourArtistsMeta.postingFormChoice,
+    optionalNote: fourArtistsMeta.postingFrequency,
+    copyText: fourArtistsMeta.postingFormChoice,
+  },
+  {
+    number: 12,
+    title: 'Examples of social media content',
+    body: `Priority samples for the survey (2–5 required). Final direct reel/short URLs pending — see Proof section for interim links.\n\n${fourArtistsContentExamplesPlaceholder}`,
+    copyText: fourArtistsProofItems
+      .filter((item) => item.applicationPriority)
+      .map((item, i) => `${i + 1}. ${item.title} — ${item.surveyLink ?? 'PENDING'}`)
+      .join('\n'),
+  },
+  {
+    number: 13,
+    title: 'Role in content creation & editing platforms',
+    body: `Role: Filming, editing, on-camera host, and story development — often all of the above within a single weekly micro-film workflow.\n\nEditing platforms: ${fourArtistsEditingPlatforms}`,
+    formChoice: fourArtistsRoleInContent,
+    copyText: `Role: ${fourArtistsRoleInContent}\n\nEditing platforms: ${fourArtistsEditingPlatforms}`,
+  },
+];
+
 export const fourArtistsReadinessMetrics: ReadinessMetric[] = [
   { label: 'Hook clarity', value: 'Strong', note: 'Opens on material, gesture, or question — not logo slates.' },
   { label: 'Caption readiness', value: 'Ready', note: 'Burned-in or platform captions; readable on mute.' },
@@ -457,20 +577,19 @@ export const fourArtistsSurveyFormAnswers: SurveyFormAnswer[] = [
   },
   {
     questionLabel: 'Social media handles',
-    copyText: `Instagram: ${fourArtistsMeta.socialHandles.instagram}\nYouTube: ${fourArtistsMeta.socialHandles.youtube}\nWebsite: ${fourArtistsMeta.socialHandles.website}\nEmail: ${fourArtistsMeta.socialHandles.email}`,
+    copyText: fourArtistsSocialHandlesBlock,
   },
   {
     questionLabel: 'Interest in the opportunity',
-    copyText: fourArtistsStatement.full,
+    copyText: fourArtistsWhyInterested,
   },
   {
     questionLabel: 'Stories you hope to document',
-    copyText:
-      'Artist studio process, materials and tools, work-in-progress moments, community and hallway life, exhibitions and Open Studios, fundraising-season programming, and the daily creative rhythm of Bakehouse — told as weekly 15–30 second micro-films.',
+    copyText: fourArtistsStoriesToDocument,
   },
   {
     questionLabel: 'What makes engaging social content',
-    copyText: fourArtistsStorytellingPrinciples.join('\n\n'),
+    copyText: fourArtistsEngagingContent,
   },
   {
     questionLabel: 'Posting frequency (Q11)',
@@ -487,14 +606,12 @@ export const fourArtistsSurveyFormAnswers: SurveyFormAnswer[] = [
   },
   {
     questionLabel: 'Role in content creation',
-    multipleChoice: 'All of the above',
-    copyText:
-      'Filming, editing, on-camera host, and story development — often all of the above within a single weekly micro-film workflow.',
+    multipleChoice: fourArtistsRoleInContent,
+    copyText: fourArtistsRoleInContent,
   },
   {
     questionLabel: 'Editing platforms',
-    copyText:
-      'Adobe Premiere, After Effects, Canva, CapCut, Instagram Reels, TikTok, and platform-native tools as needed.',
+    copyText: fourArtistsEditingPlatforms,
   },
   {
     questionLabel: '12-week commitment',
@@ -512,7 +629,7 @@ export const fourArtistsNavZones = [
   { id: 'workflow', number: '06', label: 'Workflow', summary: 'Production system' },
   { id: 'tools', number: '07', label: 'Tools', summary: 'Editing and production stack' },
   { id: 'storytelling', number: '08', label: 'Storytelling', summary: 'Principles and posting approach' },
-  { id: 'alignment', number: '09', label: 'Application', summary: 'Survey alignment' },
+  { id: 'application-responses', number: '09', label: 'Application', summary: 'SurveyMonkey answers Q6–Q13' },
   { id: 'statement', number: '10', label: 'Statement', summary: 'Interest and approach' },
   { id: 'contact', number: '11', label: 'Contact', summary: 'Links and next steps' },
 ] as const;
