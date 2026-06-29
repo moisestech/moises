@@ -38,11 +38,11 @@ export default function TechnologyCvView() {
             href={moisesSanabriaHeadshot}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800"
+            className="relative mx-auto h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 sm:mx-0"
           >
             <Image src={moisesSanabriaHeadshot} alt="Moises Sanabria" fill className="object-cover" sizes="96px" />
           </a>
-          <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+          <div className="space-y-1 text-center text-sm text-gray-700 dark:text-gray-300 sm:text-left">
             <p>
               <span className="font-medium text-gray-900 dark:text-white">Email: </span>
               <Link href={`mailto:${resumeData.email}`} className="underline underline-offset-4">
@@ -82,7 +82,7 @@ export default function TechnologyCvView() {
       </header>
 
       <CvCollapsibleSection id="summary" title="Summary" defaultOpen>
-        <div className="space-y-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+        <div className="space-y-4 text-base leading-relaxed text-gray-700 dark:text-gray-300 sm:text-lg sm:leading-8">
           {technologyCvPrint.summary.map((para) => (
             <p key={para.slice(0, 40)}>{para}</p>
           ))}
@@ -91,14 +91,14 @@ export default function TechnologyCvView() {
 
       <CvCollapsibleSection id="experience" title="Professional Experience" defaultOpen>
         <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{technologyCvPrint.experienceIntro}</p>
-        <ul className="space-y-5">
+        <ul className="space-y-8 md:space-y-6">
           {resumeData.experience.map((job) => (
-            <li key={`${job.company}-${job.period}`} className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <div className="w-full shrink-0 text-sm font-medium text-gray-900 dark:text-gray-100 sm:w-36">
+            <li key={`${job.company}-${job.period}`} className="flex flex-col gap-2 md:flex-row md:gap-4">
+              <div className="w-full shrink-0 text-sm font-medium text-gray-900 dark:text-gray-100 md:w-36">
                 {job.period}
               </div>
-              <div className="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
-                <div className="min-w-0 flex-1 text-sm">
+              <div className="flex min-w-0 flex-1 flex-col gap-4 md:flex-row md:items-start md:gap-5">
+                <div className="min-w-0 flex-1 text-sm md:text-base">
                   <p className="font-semibold text-gray-900 dark:text-white">
                     {job.title},{' '}
                     <CompanyName company={job.company} url={job.companyUrl} />
@@ -119,7 +119,7 @@ export default function TechnologyCvView() {
                       href={job.companyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 sm:w-40 md:w-48 lg:w-52"
+                      className="mx-auto block w-full max-w-sm shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 md:mx-0 md:max-w-none md:w-40 lg:w-48 xl:w-52"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -129,7 +129,7 @@ export default function TechnologyCvView() {
                       />
                     </a>
                   ) : (
-                    <div className="w-full shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 sm:w-40 md:w-48 lg:w-52">
+                    <div className="mx-auto w-full max-w-sm shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 md:mx-0 md:max-w-none md:w-40 lg:w-48 xl:w-52">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={job.imageSrc}
@@ -148,8 +148,8 @@ export default function TechnologyCvView() {
       <CvCollapsibleSection id="education" title="Education" defaultOpen={false}>
         <ul className="space-y-3">
           {resumeData.education.map((edu) => (
-            <li key={edu.institution} className="flex flex-col gap-1 text-sm sm:flex-row sm:gap-4">
-              <div className="w-full font-medium sm:w-36">{edu.period}</div>
+            <li key={edu.institution} className="flex flex-col gap-1 text-sm md:flex-row md:gap-4">
+              <div className="w-full font-medium md:w-36">{edu.period}</div>
               <div>
                 <p className="font-medium">{edu.degree}</p>
                 <p className="text-gray-600 dark:text-gray-400">
@@ -198,24 +198,24 @@ export default function TechnologyCvView() {
         </CvCollapsibleSection>
       ) : null}
 
-      <div className="mt-10 flex flex-wrap gap-3 print:hidden">
+      <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap print:hidden">
         <a
           href={technologyCvPdfPath}
           download
-          className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-white"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-white sm:w-auto"
         >
           <Download className="h-4 w-4 shrink-0" aria-hidden />
           Download PDF
         </a>
         <Link
           href="/cv/tech/print"
-          className="inline-flex items-center rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800 sm:w-auto"
         >
           Open print view (Save as PDF)
         </Link>
         <Link
           href="/cv/artist"
-          className="inline-flex items-center rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800 sm:w-auto"
         >
           View artist CV
         </Link>

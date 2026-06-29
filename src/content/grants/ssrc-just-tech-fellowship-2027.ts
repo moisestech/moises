@@ -1,5 +1,9 @@
 import type { WorkMediaItem } from '@/components/page/WorkImageCarousel';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import {
+  OOLITE_DIGITAL_LAB_IMAGE,
+  OOLITE_DIGITAL_LAB_IMAGE_ALT,
+} from '@/content/evidence/projects';
 
 export type SsrcImageRole = 'banner' | 'gallery' | 'engine-study' | 'logo';
 
@@ -68,6 +72,31 @@ export type SsrcApplicationMaterial = {
   notes: string;
 };
 
+export type SsrcOriginalConcept = {
+  id: string;
+  name: string;
+  shortDefinition: string;
+  relatedEngineId: string;
+  originality: 'Original' | 'Adapted' | 'In conversation with';
+  appearsIn: string;
+};
+
+export type SsrcFieldReference = {
+  id: string;
+  title: string;
+  author: string;
+  relevance: string;
+  theme: string;
+  href?: string;
+};
+
+export type SsrcArchiveLink = {
+  label: string;
+  href: string;
+  description: string;
+  status: 'live' | 'coming-soon';
+};
+
 export const ssrcJustTechMeta = {
   fellowshipLabel: 'SSRC Just Tech Fellowship 2027',
   projectTitle: 'Born into the Machine',
@@ -86,12 +115,19 @@ export const ssrcJustTechMeta = {
   /** Full share URL for copy-link button */
   shareUrl: 'https://www.youtube.com/watch?v=PLACEHOLDER',
   portraitUrl: moisesSanabriaHeadshot,
+  social: {
+    linkedin: 'https://www.linkedin.com/in/moisesdsanabria',
+    instagram: 'https://www.instagram.com/moisesdsanabria/',
+    bio: '/bio',
+    bioLabel: 'Bio',
+  },
 } as const;
 
 /** Upload logos to these paths before launch (or swap to Cloudinary URLs in content) */
 export const ssrcLogoAssets = {
   ssrcJustTech: {
     expectedPath: '/grant/ssrc-just-tech-fellowship-2027/logos/ssrc-just-tech.svg',
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1782125045/grants/ssrc-just-tech/ssrc-logo-horizontal_qx1dof.png',
     alt: 'SSRC Just Tech Fellowship',
   },
   oolite: {
@@ -108,37 +144,295 @@ export const ssrcLogoAssets = {
   },
 } as const;
 
-export const ssrcNavItems = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'snapshot', label: 'Snapshot' },
-  { id: 'thesis', label: 'Thesis' },
-  { id: 'why-now', label: 'Why now' },
-  { id: 'project-overview', label: 'Project' },
-  { id: 'questions', label: 'Questions' },
-  { id: 'engines', label: 'Engines' },
-  { id: 'labor-agency', label: 'Labor' },
-  { id: 'public-contribution', label: 'Public' },
-  { id: 'archive', label: 'Archive' },
-  { id: 'video', label: 'Video' },
-  { id: 'practice', label: 'Practice' },
-  { id: 'infrastructure', label: 'Context' },
-  { id: 'work-samples', label: 'Samples' },
-  { id: 'timeline', label: 'Timeline' },
-  { id: 'materials', label: 'Materials' },
-  { id: 'contact', label: 'Contact' },
+export type SsrcMajorZoneIcon =
+  | 'sparkles'
+  | 'lightbulb'
+  | 'layers'
+  | 'globe'
+  | 'library'
+  | 'gallery'
+  | 'clipboard';
+
+export type SsrcMajorZone = {
+  id: string;
+  number: string;
+  label: string;
+  summary: string;
+  icon: SsrcMajorZoneIcon;
+  image: {
+    src: string;
+    alt: string;
+    caption?: string;
+  };
+};
+
+export const ssrcMajorZones: readonly SsrcMajorZone[] = [
+  {
+    id: 'opening',
+    number: '01',
+    label: 'Opening',
+    summary: 'The project in 90 seconds.',
+    icon: 'sparkles',
+    image: {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp',
+      alt: 'Baby AGI — sculptural installation.',
+      caption: 'Baby AGI (2023) — Born into the Machine.',
+    },
+  },
+  {
+    id: 'thesis',
+    number: '02',
+    label: 'Thesis',
+    summary: 'Central claims and research questions.',
+    icon: 'lightbulb',
+    image: {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
+      alt: 'Smart Shoppers — sculpture examining consumer systems and value.',
+      caption: 'Smart Shoppers (2024) — value under networked commerce.',
+    },
+  },
+  {
+    id: 'engines',
+    number: '03',
+    label: 'Engines',
+    summary: 'Five sculptural research chapters.',
+    icon: 'layers',
+    image: {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
+      alt: 'Touch Grass / Doomscrolling Treadmill — durational installation on attention.',
+      caption: 'Doomscrolling Treadmill (2024) — attention as infrastructure.',
+    },
+  },
+  {
+    id: 'public',
+    number: '04',
+    label: 'Public',
+    summary: 'Culture, archive, and civic contribution.',
+    icon: 'globe',
+    image: {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg',
+      alt: 'Digital Divinities at Bakehouse open studios — public program.',
+      caption: 'Digital Divinities — public culture and collective ritual.',
+    },
+  },
+  {
+    id: 'field',
+    number: '05',
+    label: 'Field',
+    summary: 'Original concepts and selected references.',
+    icon: 'library',
+    image: {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
+      alt: 'Born into the Machine research — broken acceleration diagram.',
+      caption: 'Research dossier — concepts in formation.',
+    },
+  },
+  {
+    id: 'evidence',
+    number: '06',
+    label: 'Evidence',
+    summary: 'Work samples and practice context.',
+    icon: 'gallery',
+    image: {
+      src: OOLITE_DIGITAL_LAB_IMAGE,
+      alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
+      caption: 'Oolite Digital Lab — public technology infrastructure.',
+    },
+  },
+  {
+    id: 'application',
+    number: '07',
+    label: 'Application',
+    summary: 'Timeline, materials, and contact.',
+    icon: 'clipboard',
+    image: {
+      src: moisesSanabriaHeadshot,
+      alt: 'Moises Sanabria — applicant portrait.',
+      caption: 'Moises Sanabria — Miami-based interdisciplinary artist.',
+    },
+  },
 ] as const;
 
-/** ~150 words — panel hook for reviewers scanning the dossier */
+/** @deprecated Use ssrcMajorZones for navigation */
+export const ssrcNavItems = ssrcMajorZones.map((z) => ({ id: z.id, label: z.label }));
+
+export const ssrcThesisPullQuote =
+  'When intelligence becomes infrastructure, labor, authorship, attention, and political agency are reorganized.';
+
 export const ssrcReviewerHook = {
   label: 'Project summary',
   text: 'Born into the Machine examines what happens to labor, value, and human agency when intelligence becomes infrastructure. As AI systems make cognitive tasks cheap, fast, and widely available, human value shifts away from simply knowing, producing, or solving and toward judgment, context, embodiment, trust, responsibility, and political agency. Through sculptural engines, public writing, video, and a digital artist-book archive, the project translates debates about AI safety, algorithmic justice, labor, consent, and attention into cultural forms people can see, feel, and discuss. The project argues that AI is not only a technological system; it is becoming a social environment. Before intelligent systems become invisible infrastructure, culture can help people name what is changing, imagine what should be protected, and demand more accountable technological futures.',
 } as const;
 
+/**
+ * Phase 1 content sync: manual copy from Airtable base "Born into the Machine OS".
+ * Tables: Original Concepts, Sculptural Engines, Sources, Quote Bank, Assets, Application Materials.
+ */
+
+export const ssrcOriginalConcepts: SsrcOriginalConcept[] = [
+  {
+    id: 'intelligence-infrastructure',
+    name: 'Intelligence becomes infrastructure',
+    shortDefinition:
+      'AI becomes embedded into everyday platforms, institutions, devices, and workflows — not a tool beside life, but an environment within it.',
+    relatedEngineId: 'intelligence-commodity',
+    originality: 'Original',
+    appearsIn: 'Central thesis, grant proposal, book introduction',
+  },
+  {
+    id: 'sculptural-engines',
+    name: 'Sculptural engines',
+    shortDefinition:
+      'Physical artworks that model how technological systems act on bodies, labor, attention, and public imagination.',
+    relatedEngineId: 'intelligence-commodity',
+    originality: 'Original',
+    appearsIn: 'Artistic method across all five engines',
+  },
+  {
+    id: 'adaptation-tax',
+    name: 'The Adaptation Tax',
+    shortDefinition:
+      'The unpaid or under-recognized labor people perform to learn, verify, translate, and keep up with AI systems.',
+    relatedEngineId: 'adaptation-tax',
+    originality: 'Original',
+    appearsIn: 'Engine chapter 02, personal statement, field notes',
+  },
+  {
+    id: 'attention-engine-concept',
+    name: 'The Attention Engine',
+    shortDefinition:
+      'Platforms and AI systems that capture, redirect, and monetize human attention as economic and political force.',
+    relatedEngineId: 'attention-engine',
+    originality: 'Original',
+    appearsIn: 'Engine chapter 03, prior works (Doomscrolling Treadmill)',
+  },
+  {
+    id: 'agency-gap',
+    name: 'The Agency Gap',
+    shortDefinition:
+      'The distance between AI convenience and meaningful human control, consent, and responsibility.',
+    relatedEngineId: 'agency-gap',
+    originality: 'Original',
+    appearsIn: 'Engine chapter 04, public contribution',
+  },
+  {
+    id: 'right-to-refusal',
+    name: 'The Human Right to Refusal',
+    shortDefinition:
+      'What people should be able to opt out of when automated systems process, score, rank, or act on their behalf.',
+    relatedEngineId: 'right-to-refusal',
+    originality: 'Original',
+    appearsIn: 'Engine chapter 05, field context (algorithmic justice)',
+  },
+];
+
+export const ssrcFieldContext = {
+  title: 'In conversation with',
+  intro:
+    'Born into the Machine is in conversation with artists, researchers, and public-interest technology organizations examining AI power, labor, attention, consent, and public life. Selected references below situate the project; the full bibliography lives in the research archive.',
+  bibliographyTeaser: 'Full bibliography and quote bank — research archive (in development)',
+} as const;
+
+export const ssrcFieldReferences: SsrcFieldReference[] = [
+  {
+    id: 'ajl',
+    title: 'Algorithmic Justice League',
+    author: 'Joy Buolamwini / AJL',
+    relevance: 'AI harms, bias, public awareness — art and research combined',
+    theme: 'Algorithmic justice',
+    href: 'https://www.ajl.org/',
+  },
+  {
+    id: 'ai-now',
+    title: 'AI Now Institute',
+    author: 'AI Now',
+    relevance: 'AI as concentrated power; accountability and governance',
+    theme: 'AI power / accountability',
+    href: 'https://ainowinstitute.org/',
+  },
+  {
+    id: 'data-society',
+    title: 'Data & Society',
+    author: 'Data & Society Research Institute',
+    relevance: 'Social implications of data-centric technologies and automation',
+    theme: 'Tech and society',
+    href: 'https://datasociety.net/',
+  },
+  {
+    id: 'benjamin',
+    title: 'Race After Technology',
+    author: 'Ruha Benjamin',
+    relevance: 'Race, imagination, and technology as social system',
+    theme: 'Race / imagination / justice',
+  },
+  {
+    id: 'noble',
+    title: 'Algorithms of Oppression',
+    author: 'Safiya Umoja Noble',
+    relevance: 'Search, algorithms, race, and structural power',
+    theme: 'Search / algorithms / power',
+  },
+  {
+    id: 'mccarthy',
+    title: 'LAUREN / LAURENOS',
+    author: 'Lauren Lee McCarthy',
+    relevance: 'Automation, surveillance, and algorithmic living',
+    theme: 'Automation / surveillance',
+    href: 'https://lauren-mccarthy.com/',
+  },
+  {
+    id: 'steyerl',
+    title: 'Duty Free Art / image politics',
+    author: 'Hito Steyerl',
+    relevance: 'Images, power, technology, and circulation',
+    theme: 'Images / power / technology',
+  },
+  {
+    id: 'kinder',
+    title: 'AI labor transition research',
+    author: 'Molly Kinder',
+    relevance: 'AI labor disruption, adaptation, and policy',
+    theme: 'AI labor / policy',
+  },
+];
+
+export const ssrcBornIntoMachineArchive = {
+  title: 'Born into the Machine archive',
+  intro:
+    'This grant page is part of a larger research and artist-book structure for Born into the Machine. The project archive gathers original concepts, sculptural engines, field notes, references, quotes, and artworks that will support future essays, exhibitions, talks, and a book-length project.',
+  links: [
+    {
+      label: 'View book archive',
+      href: '/research/born-into-the-machine',
+      description: 'Living artist-book research hub and chapter drafts.',
+      status: 'live',
+    },
+    {
+      label: 'Bibliography',
+      href: '/research/born-into-the-machine/bibliography',
+      description: 'Sources, citations, and field context.',
+      status: 'coming-soon',
+    },
+    {
+      label: 'Sculptural engines',
+      href: '/research/born-into-the-machine/sculptural-engines',
+      description: 'Five research chapters as material arguments.',
+      status: 'coming-soon',
+    },
+    {
+      label: 'Quote bank',
+      href: '/research/born-into-the-machine/quote-bank',
+      description: 'Verified quotes, paraphrases, and reflections.',
+      status: 'coming-soon',
+    },
+  ] satisfies SsrcArchiveLink[],
+} as const;
+
 export const ssrcHeroCtas = [
-  { label: 'Read project thesis', target: 'thesis' },
-  { label: 'View sculptural engines', target: 'engines' },
-  { label: 'Watch introduction', target: 'video' },
-  { label: 'See work samples', target: 'work-samples' },
+  { label: 'Read thesis', target: 'thesis' },
+  { label: 'View engines', target: 'engines' },
+  { label: 'Watch video', target: 'opening' },
+  { label: 'Work samples', target: 'evidence' },
 ] as const;
 
 export const ssrcThesis = {
@@ -462,20 +756,20 @@ export const ssrcWorkSamples: SsrcWorkSample[] = [
     ],
   },
   {
-    id: 'dcc-miami',
-    title: 'DCC.Miami — Digital Culture Infrastructure',
+    id: 'oolite-digital-lab',
+    title: 'Oolite Digital Lab',
     type: 'infrastructure',
-    medium: 'Public website and operational stack for Miami’s Digital Culture Center',
+    medium: 'Knight-funded digital lab — workshops, fabrication, AI, and artist-facing technology',
     description:
-      'Public website and operational stack connecting artists and organizations to shared digital capacity — programs, workshops, and institutional tooling for Miami’s digital culture ecosystem.',
+      'As Technical Director of Digital at Oolite Arts, I help run the Knight-funded Digital Lab: public workshops, equipment access, automation, and production support for Miami artists navigating AI tools, digital fabrication, websites, and emerging technology in real time.',
     relevance:
-      'This work sample demonstrates my public-facing technology practice with artists and cultural organizations. Through platform design, workshops, and digital infrastructure, I support artists in navigating technological change while documenting the social labor required to make these tools accessible.',
-    href: 'https://dcc.miami',
+      'This work sample demonstrates public-facing technology practice with artists and cultural organizations — institutional execution, real community engagement, and the social labor required to make emerging tools accessible.',
+    href: '/tech-nonprofit/oolite',
     images: [
       {
         type: 'image',
-        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
-        caption: 'DCC.Miami — program and workshop hub',
+        url: OOLITE_DIGITAL_LAB_IMAGE,
+        caption: OOLITE_DIGITAL_LAB_IMAGE_ALT,
       },
     ],
   },
@@ -519,7 +813,7 @@ export const ssrcApplicationMaterials: SsrcApplicationMaterial[] = [
   { label: 'Personal statement', status: 'Drafting', notes: 'Practice and philosophy voice' },
   { label: 'Work proposal', status: 'Drafting', notes: '3,000-word max' },
   { label: 'Work sample 1 — Baby AGI', status: 'Select', notes: 'Sculpture / artwork' },
-  { label: 'Work sample 2 — DCC.Miami', status: 'Select', notes: 'Public technology / infrastructure' },
+  { label: 'Work sample 2 — Oolite Digital Lab', status: 'Select', notes: 'Public technology / cultural infrastructure' },
   { label: 'Video', status: 'Needs recording', notes: '2–3 minutes' },
   { label: 'Images', status: 'Needs gathering', notes: 'Past work + proposed studies' },
   { label: 'AI use disclosure', status: 'Drafting', notes: 'Short and transparent' },

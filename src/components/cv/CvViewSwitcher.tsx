@@ -24,7 +24,7 @@ export function CvViewSwitcher() {
       )}
     >
       <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex rounded-lg border border-gray-200 p-1 dark:border-gray-600">
+        <div className="flex w-full flex-col gap-2 sm:inline-flex sm:w-auto sm:flex-row sm:rounded-lg sm:border sm:border-gray-200 sm:p-1 dark:sm:border-gray-600">
           {views.map((view) => {
             const active = view.href === '/cv/tech' ? isTech : !isTech;
             return (
@@ -32,10 +32,10 @@ export function CvViewSwitcher() {
                 key={view.href}
                 href={view.href}
                 className={cn(
-                  'rounded-md px-4 py-2 text-sm font-medium transition',
+                  'rounded-md px-4 py-2.5 text-center text-sm font-medium transition sm:py-2',
                   active
                     ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                    : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white',
+                    : 'border border-gray-200 text-gray-600 hover:text-gray-900 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white sm:border-0',
                 )}
               >
                 {view.label}
@@ -43,7 +43,7 @@ export function CvViewSwitcher() {
             );
           })}
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400">
+        <p className="text-center text-xs text-gray-500 dark:text-gray-400 sm:text-left">
           {isTech
             ? 'For engineering, data, and product roles — PDF available below.'
             : 'For curators, grants, and institutional art contexts.'}

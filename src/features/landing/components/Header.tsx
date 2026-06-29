@@ -1,6 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  SITE_HEADER_EXPANDED_HEIGHT_VAR,
+  SITE_HEADER_HEIGHT_VAR,
+  SITE_HEADER_SCROLL_THRESHOLD_PX,
+} from '@/config/site-header-layout';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/contexts/ThemeContext';
 import { isWorkshopNavContext, navigationItemsForPath } from '@/config/site-navigation';
@@ -16,17 +21,55 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+      setIsScrolled(window.scrollY > SITE_HEADER_SCROLL_THRESHOLD_PX);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const el = headerRef.current;
+    if (!el) return;
+
+    const syncHeights = () => {
+      const height = Math.round(el.getBoundingClientRect().height);
+      if (height <= 0) return;
+
+      document.documentElement.style.setProperty(SITE_HEADER_HEIGHT_VAR, `${height}px`);
+
+      const scrolled = window.scrollY > SITE_HEADER_SCROLL_THRESHOLD_PX;
+      if (!scrolled) {
+        document.documentElement.style.setProperty(SITE_HEADER_EXPANDED_HEIGHT_VAR, `${height}px`);
+      }
+    };
+
+    syncHeights();
+
+    const ro = new ResizeObserver(syncHeights);
+    ro.observe(el);
+
+    window.addEventListener('scroll', syncHeights, { passive: true });
+    window.addEventListener('resize', syncHeights);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('scroll', syncHeights);
+      window.removeEventListener('resize', syncHeights);
+    };
+  }, [mounted, isScrolled]);
 
   if (!mounted) return null;
 
@@ -37,6 +80,7 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
   return (
     <>
       <header
+        ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-colors font-['MoMA_Sans'] ${
           isDark 
             ? 'bg-black text-white border-black' 

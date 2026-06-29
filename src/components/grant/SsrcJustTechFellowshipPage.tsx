@@ -1,22 +1,45 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { WorkImageCarousel } from '@/components/page/WorkImageCarousel';
 import {
+  ConceptCard,
+  DiagramLadder,
+  EngineAccordion,
+  ExpandableText,
+  PanelHook,
+  PracticeEvidenceTabs,
+  ReferenceCard,
+  SectionGroup,
+  StatusPill,
+  ThesisCard,
+  dossierTypography,
+  grantButtonClass,
+  grantCardClass,
+  grantLinkClass,
+} from '@/components/grant/dossier/GrantDossierUi';
+import {
+  GrantSectionHero,
+  GrantSectionPagerFooter,
+  GrantSectionPagerNav,
+  siteHeaderExpandedPaddingTopClass,
+} from '@/components/grant/dossier/GrantSectionPager';
+import { getSsrcZoneAccent } from '@/config/ssrc-zone-accents';
+import {
   ssrcApplicationMaterials,
-  ssrcArchivePreview,
+  ssrcBornIntoMachineArchive,
   ssrcContact,
   ssrcEngineChapters,
+  ssrcFieldContext,
+  ssrcFieldReferences,
   ssrcHeroCtas,
-  ssrcImages,
   ssrcInfrastructureCards,
   ssrcJustTechMeta,
   ssrcLaborAgency,
-  ssrcLogoAssets,
-  ssrcNavItems,
+  ssrcMajorZones,
+  ssrcOriginalConcepts,
   ssrcOutcomes2027,
   ssrcPracticeEvidence,
   ssrcProjectOverview,
@@ -25,124 +48,68 @@ import {
   ssrcReviewerHook,
   ssrcSculpturalEnginesIntro,
   ssrcThesis,
+  ssrcThesisPullQuote,
   ssrcTimeline,
   ssrcVideoIntro,
   ssrcWhyNow,
   ssrcWorkSamples,
 } from '@/content/grants/ssrc-just-tech-fellowship-2027';
 
-const sectionScrollClass = 'scroll-mt-[10.5rem] sm:scroll-mt-36 md:scroll-mt-40';
+const snapshotFacts = [
+  { label: 'Grant', value: 'SSRC Just Tech Fellowship' },
+  { label: 'Project', value: ssrcJustTechMeta.projectTitle },
+  { label: 'Deadline', value: ssrcJustTechMeta.deadline },
+  { label: 'Status', value: ssrcJustTechMeta.status },
+] as const;
 
-const grantButtonClass =
-  'inline-flex min-h-11 items-center justify-center border border-stone-800 px-4 py-2.5 text-sm font-medium text-stone-900 transition hover:bg-stone-900 hover:text-white dark:border-stone-200 dark:text-stone-100 dark:hover:bg-stone-100 dark:hover:text-black';
+function ResearchQuestionsBlock() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? ssrcResearchQuestions : ssrcResearchQuestions.slice(0, 3);
 
-const grantCardClass =
-  'border border-stone-300 bg-white dark:border-stone-700 dark:bg-neutral-900';
-
-const grantLinkClass =
-  'font-medium text-stone-900 underline underline-offset-2 transition hover:opacity-80 dark:text-stone-100';
-
-function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h2
-      id={`${id}-heading`}
-      className="border-b border-stone-300 pb-4 text-xl font-semibold text-stone-900 sm:text-2xl dark:border-stone-700 dark:text-stone-100"
-    >
-      {children}
-    </h2>
-  );
-}
-
-function LabelValueCards({ rows }: { rows: readonly (readonly [string, string])[] }) {
-  return (
-    <dl className="mt-8 space-y-3 md:hidden">
-      {rows.map(([label, value]) => (
-        <div key={label} className={cn(grantCardClass, 'p-4')}>
-          <dt className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-            {label}
-          </dt>
-          <dd className="mt-1 text-sm text-stone-800 dark:text-stone-200">{value}</dd>
+    <div className={grantCardClass}>
+      <ul className="divide-y divide-stone-200 dark:divide-stone-700">
+        {visible.map((question) => (
+          <li key={question} className={cn('px-5 py-4 sm:px-6', dossierTypography.body)}>
+            {question}
+          </li>
+        ))}
+      </ul>
+      {ssrcResearchQuestions.length > 3 ? (
+        <div className="border-t border-stone-200 px-5 py-3 dark:border-stone-700">
+          <button type="button" onClick={() => setShowAll((v) => !v)} className={cn('min-h-11 text-sm', grantLinkClass)}>
+            {showAll ? 'Show fewer questions' : `Show all ${ssrcResearchQuestions.length} questions`}
+          </button>
         </div>
-      ))}
-    </dl>
+      ) : null}
+    </div>
   );
-}
-
-function statusColor(status: string) {
-  switch (status) {
-    case 'Ready':
-      return 'text-emerald-700 dark:text-emerald-400';
-    case 'Drafting':
-    case 'Needs edit':
-      return 'text-amber-700 dark:text-amber-400';
-    default:
-      return 'text-stone-600 dark:text-stone-400';
-  }
 }
 
 export default function SsrcJustTechFellowshipPage() {
-  const [activeSectionId, setActiveSectionId] = useState('overview');
+  const [activeZoneId, setActiveZoneId] = useState<string>(ssrcMajorZones[0]?.id ?? 'opening');
   const [copiedLink, setCopiedLink] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
-  const navIds = useMemo(() => ssrcNavItems.map((item) => item.id), []);
-  const bannerImage = ssrcImages.find((image) => image.role === 'banner');
+  const activeZone = ssrcMajorZones.find((zone) => zone.id === activeZoneId) ?? ssrcMajorZones[0];
+  const activeAccent = getSsrcZoneAccent(activeZoneId);
 
-  const snapshotRows = useMemo(
-    () =>
-      [
-        ['Grant', 'SSRC Just Tech Fellowship'],
-        ['Year', '2027'],
-        ['Applicant', ssrcJustTechMeta.applicant],
-        ['Project', ssrcJustTechMeta.projectTitle],
-        ['Format', ssrcJustTechMeta.format],
-        ['Fellowship period', ssrcJustTechMeta.fellowshipPeriod],
-        ['Deadline', ssrcJustTechMeta.deadline],
-        ['Status', ssrcJustTechMeta.status],
-      ] as const,
-    [],
-  );
-
-  const getScrollThreshold = useCallback(() => {
-    const headerOffset = window.innerWidth >= 768 ? 128 : 96;
-    const navHeight = navRef.current?.getBoundingClientRect().height ?? 52;
-    return headerOffset + navHeight + 12;
+  const goToZone = useCallback((id: string) => {
+    setActiveZoneId(id);
+    window.history.replaceState(null, '', `#${id}`);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'instant' : 'smooth' });
   }, []);
 
   useEffect(() => {
-    const hash = window.location.hash.replace(/^#/, '');
-    if (hash && (navIds as readonly string[]).includes(hash)) {
-      setActiveSectionId(hash);
-    }
-  }, [navIds]);
-
-  useEffect(() => {
-    const updateActiveSection = () => {
-      const threshold = getScrollThreshold();
-      let current = navIds[0] ?? 'overview';
-      for (const id of navIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top <= threshold) current = id;
+    const syncFromHash = () => {
+      const hash = window.location.hash.replace(/^#/, '');
+      const ids = ssrcMajorZones.map((z) => z.id);
+      if (hash && ids.includes(hash as (typeof ids)[number])) {
+        setActiveZoneId(hash);
       }
-      setActiveSectionId((prev) => (prev === current ? prev : current));
     };
-
-    updateActiveSection();
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
-    window.addEventListener('resize', updateActiveSection);
-    return () => {
-      window.removeEventListener('scroll', updateActiveSection);
-      window.removeEventListener('resize', updateActiveSection);
-    };
-  }, [getScrollThreshold, navIds]);
-
-  const scrollToSection = useCallback((id: string) => {
-    const target = document.getElementById(id);
-    if (!target) return;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    target.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
-    window.history.replaceState(null, '', `#${id}`);
-    setActiveSectionId(id);
+    syncFromHash();
+    window.addEventListener('hashchange', syncFromHash);
+    return () => window.removeEventListener('hashchange', syncFromHash);
   }, []);
 
   const copyShareLink = useCallback(async () => {
@@ -159,651 +126,430 @@ export default function SsrcJustTechFellowshipPage() {
     }
   }, []);
 
+  const renderPracticeWork = useCallback(
+    (work: (typeof ssrcPracticeEvidence.categories)[number]['works'][number]) => {
+      const workHref = 'href' in work ? work.href : work.slug ? `/art/${work.slug}` : undefined;
+      const content = (
+        <>
+          <p className="font-medium text-stone-900 dark:text-stone-100">{work.title}</p>
+          <p className={cn('mt-1', dossierTypography.meta)}>{work.note}</p>
+        </>
+      );
+      if (!workHref) return content;
+      return (
+        <Link
+          href={workHref}
+          className="block transition hover:opacity-80"
+          {...(workHref.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {content}
+          <span className={cn('mt-1 inline-block text-xs', grantLinkClass)}>View →</span>
+        </Link>
+      );
+    },
+    [],
+  );
+
   return (
     <main className="min-h-screen bg-stone-50 text-stone-900 dark:bg-neutral-950 dark:text-stone-100">
-      <section id="overview" className="mx-auto w-[min(96vw,1200px)] px-4 pb-14 pt-20 sm:px-8 sm:pt-32">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-stone-500 sm:tracking-[0.2em] dark:text-stone-400">
-          {ssrcJustTechMeta.fellowshipLabel}
-        </p>
-
-        <div className="relative">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-stone-50 to-transparent dark:from-neutral-950 sm:hidden"
+      <div className={cn('mx-auto w-[min(96vw,1200px)] px-4 pb-20 sm:px-8', siteHeaderExpandedPaddingTopClass)}>
+        <div className="lg:grid lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,16rem)_minmax(0,1fr)]">
+          <GrantSectionPagerNav
+            zones={ssrcMajorZones}
+            activeZoneId={activeZoneId}
+            onSelect={goToZone}
+            portraitSrc={ssrcJustTechMeta.portraitUrl}
+            portraitAlt="Moises Sanabria — applicant portrait"
+            applicantName={ssrcJustTechMeta.applicant}
+            fellowshipLabel={ssrcJustTechMeta.fellowshipLabel}
           />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-stone-50 to-transparent dark:from-neutral-950 sm:hidden"
-          />
-          <nav
-            ref={navRef}
-            aria-label="SSRC Just Tech section navigation"
-            className="sticky top-20 z-40 mb-8 overflow-x-auto overscroll-x-contain border border-stone-300 bg-white/95 px-2 py-2 backdrop-blur sm:top-24 sm:px-3 sm:py-3 md:top-32 dark:border-stone-700 dark:bg-neutral-900/95 [-webkit-overflow-scrolling:touch]"
-          >
-            <div className="flex min-w-max snap-x snap-mandatory gap-2 px-1">
-              {ssrcNavItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={cn(
-                    'snap-start whitespace-nowrap rounded-full border px-3 py-2.5 text-xs font-medium uppercase tracking-wide transition sm:px-3 sm:py-1',
-                    activeSectionId === item.id
-                      ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-black'
-                      : 'border-stone-300 text-stone-700 hover:border-stone-600 dark:border-stone-600 dark:text-stone-300 dark:hover:border-stone-300',
-                  )}
-                  aria-current={activeSectionId === item.id ? 'true' : undefined}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    scrollToSection(item.id);
-                  }}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </nav>
-        </div>
 
-        <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl md:text-5xl dark:text-stone-100">
-          {ssrcJustTechMeta.projectTitle}
-        </h1>
-        <p className="mt-3 text-lg font-medium text-stone-800 sm:text-xl dark:text-stone-200">
-          {ssrcJustTechMeta.subtitle}
-        </p>
-        <p className="mt-5 max-w-3xl text-xl font-medium leading-snug text-stone-800 sm:mt-6 sm:text-2xl md:text-3xl dark:text-stone-200">
-          {ssrcJustTechMeta.centralQuestion}
-        </p>
-
-        <aside
-          className={cn(
-            'mt-6 max-w-3xl border-l-4 border-stone-800 p-5 sm:mt-8 sm:p-6 dark:border-stone-200',
-            grantCardClass,
-          )}
-          aria-labelledby="reviewer-hook-label"
-        >
-          <p
-            id="reviewer-hook-label"
-            className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400"
-          >
-            {ssrcReviewerHook.label}
-          </p>
-          <p className="mt-3 text-base leading-relaxed text-stone-800 sm:text-lg dark:text-stone-200">
-            {ssrcReviewerHook.text}
-          </p>
-        </aside>
-
-        <p className="mt-5 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-          {ssrcJustTechMeta.heroIntro}
-        </p>
-        <p className="mt-3 text-sm text-stone-600 dark:text-stone-400">
-          Applicant: {ssrcJustTechMeta.applicant}
-        </p>
-
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          {ssrcHeroCtas.map((cta) => (
-            <button
-              key={cta.target}
-              type="button"
-              onClick={() => scrollToSection(cta.target)}
-              className={grantButtonClass}
-            >
-              {cta.label}
-            </button>
-          ))}
-        </div>
-
-        {bannerImage ? (
-          <figure className={cn('mt-8 overflow-hidden sm:mt-10', grantCardClass)}>
-            <div className="relative aspect-[4/3] w-full sm:aspect-[16/8]">
-              <Image
-                src={bannerImage.src}
-                alt={bannerImage.alt}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 1200px"
-              />
-            </div>
-            <figcaption className="border-t border-stone-200 px-4 py-3 text-sm text-stone-700 dark:border-stone-700 dark:text-stone-300">
-              {bannerImage.caption}
-            </figcaption>
-          </figure>
-        ) : null}
-      </section>
-
-      <article className="mx-auto w-[min(96vw,1200px)] space-y-16 px-4 pb-20 sm:px-8">
-        <section id="snapshot" aria-labelledby="snapshot-heading" className={sectionScrollClass}>
-          <SectionHeading id="snapshot">Grant snapshot</SectionHeading>
-          <LabelValueCards rows={snapshotRows} />
-          <div className={cn('mt-8 hidden overflow-x-auto md:block', grantCardClass)}>
-            <table className="w-full min-w-[480px] text-left text-sm">
-              <tbody>
-                {snapshotRows.map(([label, value]) => (
-                  <tr key={label} className="border-b border-stone-200 last:border-0 dark:border-stone-700">
-                    <th className="w-40 px-4 py-3 font-semibold text-stone-600 dark:text-stone-400">{label}</th>
-                    <td className="px-4 py-3 text-stone-800 dark:text-stone-200">{value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-4 break-all text-xs text-stone-500 dark:text-stone-400">
-            Fellowship logo: upload to{' '}
-            <code className="rounded bg-stone-200/80 px-1 py-0.5 text-stone-700 dark:bg-stone-800 dark:text-stone-300">
-              {ssrcLogoAssets.ssrcJustTech.expectedPath}
-            </code>
-          </p>
-        </section>
-
-        <section id="thesis" aria-labelledby="thesis-heading" className={sectionScrollClass}>
-          <SectionHeading id="thesis">Central thesis</SectionHeading>
-          <div className="mt-8 max-w-3xl space-y-4">
-            {ssrcThesis.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 48)}
-                className="text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg"
+          {activeZone ? (
+            <div key={activeZoneId} className={cn(activeAccent.navMarker, 'pl-4 sm:pl-6 lg:pl-8')}>
+              <SectionGroup
+                paginated
+                id={activeZone.id}
+                eyebrow={activeZone.number}
+                title={activeZone.label}
+                summary={activeZone.summary}
+                accentEyebrowClass={activeAccent.eyebrow}
+                accentBorderClass={cn('border-b-2', activeAccent.sectionBorder)}
               >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <div className={cn('mt-10 p-6', grantCardClass)}>
-            <p className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-              Culture to law
-            </p>
-            <ol className="mt-4 space-y-2">
-              {ssrcThesis.cultureToLaw.map((step, index) => (
-                <li key={step} className="flex gap-3 text-sm text-stone-700 dark:text-stone-300 sm:text-base">
-                  <span className="font-semibold text-stone-500 dark:text-stone-400">{index + 1}.</span>
-                  {step}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+                <GrantSectionHero zone={activeZone} />
 
-        <section id="why-now" aria-labelledby="why-now-heading" className={sectionScrollClass}>
-          <SectionHeading id="why-now">Why this project now</SectionHeading>
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcWhyNow.intro}
-          </p>
-          <ul className="mt-6 max-w-3xl space-y-2">
-            {ssrcWhyNow.shifts.map((shift) => (
-              <li key={shift} className="flex gap-2 text-sm text-stone-700 dark:text-stone-300 sm:text-base">
-                <span aria-hidden className="text-stone-400">
-                  —
-                </span>
-                {shift}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcWhyNow.closing}
-          </p>
-        </section>
-
-        <section id="project-overview" aria-labelledby="project-overview-heading" className={sectionScrollClass}>
-          <SectionHeading id="project-overview">Project overview</SectionHeading>
-          <div className="mt-8 max-w-3xl space-y-4">
-            <p className="text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-              {ssrcProjectOverview.summary}
-            </p>
-            <p className="text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-              {ssrcProjectOverview.detail}
-            </p>
-          </div>
-        </section>
-
-        <section id="questions" aria-labelledby="questions-heading" className={sectionScrollClass}>
-          <SectionHeading id="questions">Core research questions</SectionHeading>
-          <ul className="mt-8 max-w-3xl space-y-4">
-            {ssrcResearchQuestions.map((question) => (
-              <li
-                key={question}
-                className="border-l-2 border-stone-400 pl-4 text-base leading-relaxed text-stone-700 dark:border-stone-600 dark:text-stone-300 sm:text-lg"
-              >
-                {question}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section id="engines" aria-labelledby="engines-heading" className={sectionScrollClass}>
-          <SectionHeading id="engines">{ssrcSculpturalEnginesIntro.title}</SectionHeading>
-          <div className="mt-8 max-w-3xl space-y-4">
-            {ssrcSculpturalEnginesIntro.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 48)}
-                className="text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-            {ssrcEngineChapters.map((chapter) => (
-              <article key={chapter.id} className={cn('overflow-hidden', grantCardClass)}>
-                <figure>
-                  <div className="relative aspect-[4/3] w-full bg-stone-200 dark:bg-stone-800">
-                    <Image
-                      src={chapter.studyImage.src}
-                      alt={chapter.studyImage.alt}
-                      fill
-                      className="object-cover opacity-60"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    {chapter.studyImage.isPlaceholder ? (
-                      <div className="absolute inset-0 flex items-center justify-center bg-stone-900/40 px-4 text-center">
-                        <p className="text-sm font-medium text-white">{chapter.studyImage.caption}</p>
-                      </div>
-                    ) : null}
-                  </div>
-                  <figcaption className="border-t border-stone-200 px-4 py-2 text-xs text-stone-600 dark:border-stone-700 dark:text-stone-400">
-                    {chapter.studyImage.caption}
-                  </figcaption>
-                </figure>
-                <div className="p-4 sm:p-5">
-                  <h3 className="text-base font-semibold text-stone-900 sm:text-lg dark:text-stone-100">{chapter.title}</h3>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                    {chapter.focus}
+                {activeZoneId === 'opening' ? (
+                  <>
+              <div className={dossierTypography.prose}>
+                  <p className={dossierTypography.eyebrow}>{ssrcJustTechMeta.fellowshipLabel}</p>
+                  <h1 className={cn('mt-3', dossierTypography.h1)}>{ssrcJustTechMeta.projectTitle}</h1>
+                  <p className={cn('mt-3 font-medium text-stone-800 dark:text-stone-200', dossierTypography.body)}>
+                    {ssrcJustTechMeta.subtitle}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-stone-700 dark:text-stone-300">{chapter.body}</p>
-                  <ul className="mt-4 space-y-1">
-                    {chapter.politicalQuestions.map((q) => (
-                      <li key={q} className="text-sm text-stone-600 dark:text-stone-400">
-                        {q}
-                      </li>
+                  <p className={cn('mt-5', dossierTypography.pullQuote)}>{ssrcJustTechMeta.centralQuestion}</p>
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    {ssrcHeroCtas.map((cta) => (
+                      <button key={cta.target} type="button" onClick={() => goToZone(cta.target)} className={grantButtonClass}>
+                        {cta.label}
+                      </button>
                     ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="labor-agency" aria-labelledby="labor-agency-heading" className={sectionScrollClass}>
-          <SectionHeading id="labor-agency">Labor, value, and agency</SectionHeading>
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcLaborAgency.intro}
-          </p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            <div className={cn('p-5', grantCardClass)}>
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                Prior labor value
-              </h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {ssrcLaborAgency.oldLaborValue.map((item) => (
-                  <li
-                    key={item}
-                    className="border border-stone-300 px-2 py-1 text-xs text-stone-800 dark:border-stone-600 dark:text-stone-200"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={cn('p-5', grantCardClass)}>
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                Emerging labor value
-              </h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {ssrcLaborAgency.newLaborValue.map((item) => (
-                  <li
-                    key={item}
-                    className="border border-stone-800 bg-stone-900 px-2 py-1 text-xs text-white dark:border-stone-200 dark:bg-stone-100 dark:text-black"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section id="public-contribution" aria-labelledby="public-contribution-heading" className={sectionScrollClass}>
-          <SectionHeading id="public-contribution">Public contribution</SectionHeading>
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcPublicContribution.intro}
-          </p>
-          <ul className="mt-6 max-w-3xl space-y-2">
-            {ssrcPublicContribution.outputs.map((output) => (
-              <li key={output} className="flex gap-2 text-sm text-stone-700 dark:text-stone-300 sm:text-base">
-                <span aria-hidden className="text-stone-400">
-                  •
-                </span>
-                {output}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcPublicContribution.bridge}
-          </p>
-        </section>
-
-        <section id="archive" aria-labelledby="archive-heading" className={sectionScrollClass}>
-          <SectionHeading id="archive">Website / artist-book archive</SectionHeading>
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcArchivePreview.intro}
-          </p>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcArchivePreview.detail}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {ssrcArchivePreview.modules.map((mod) => (
-              <span
-                key={mod}
-                className="border border-stone-300 px-3 py-1.5 font-mono text-xs text-stone-700 dark:border-stone-600 dark:text-stone-300"
-              >
-                {mod}
-              </span>
-            ))}
-          </div>
-          <p className="mt-6">
-            <Link href={ssrcArchivePreview.researchHref} className={grantButtonClass}>
-              Explore Born into the Machine research →
-            </Link>
-          </p>
-        </section>
-
-        <section id="video" aria-labelledby="video-heading" className={sectionScrollClass}>
-          <SectionHeading id="video">Video introduction</SectionHeading>
-          <p className="mt-4 text-sm text-stone-600 dark:text-stone-400">{ssrcVideoIntro.placeholderNote}</p>
-          <h3 className="mt-6 text-base font-semibold text-stone-900 sm:text-lg dark:text-stone-100">
-            {ssrcVideoIntro.title}
-          </h3>
-          <p className="text-sm text-stone-600 dark:text-stone-400">{ssrcVideoIntro.subtitle}</p>
-
-          {ssrcJustTechMeta.youtubeVideoId ? (
-            <div className="mt-6 aspect-video overflow-hidden border border-stone-300 dark:border-stone-700">
-              <iframe
-                title={ssrcVideoIntro.title}
-                src={`https://www.youtube.com/embed/${ssrcJustTechMeta.youtubeVideoId}`}
-                className="h-full w-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          ) : (
-            <div className="mt-6 flex aspect-video items-center justify-center border border-dashed border-stone-400 bg-stone-100 dark:border-stone-600 dark:bg-neutral-900">
-              <p className="max-w-md px-6 text-center text-sm text-stone-600 dark:text-stone-400">
-                YouTube embed will appear here once{' '}
-                <code className="text-stone-800 dark:text-stone-200">youtubeVideoId</code> is set in the content
-                module.
-              </p>
-            </div>
-          )}
-
-          <div className="mt-4 flex flex-wrap gap-3">
-            <button type="button" onClick={copyShareLink} className={grantButtonClass}>
-              {copiedLink ? 'Link copied' : 'Copy video share link'}
-            </button>
-          </div>
-
-          <details className={cn('mt-8', grantCardClass)}>
-            <summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-stone-900 dark:text-stone-100">
-              Full transcript
-            </summary>
-            <div className="border-t border-stone-200 px-4 py-4 dark:border-stone-700">
-              {ssrcVideoIntro.transcript.split('\n\n').map((block) => (
-                <p
-                  key={block.slice(0, 40)}
-                  className="mb-4 text-sm leading-relaxed text-stone-700 last:mb-0 dark:text-stone-300"
-                >
-                  {block}
-                </p>
-              ))}
-            </div>
-          </details>
-        </section>
-
-        <section id="practice" aria-labelledby="practice-heading" className={sectionScrollClass}>
-          <SectionHeading id="practice">Practice evidence</SectionHeading>
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-            {ssrcPracticeEvidence.intro}
-          </p>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {ssrcPracticeEvidence.categories.map((category) => (
-              <div key={category.id} className={cn('p-5', grantCardClass)}>
-                <h3 className="text-base font-semibold text-stone-900 dark:text-stone-100">{category.title}</h3>
-                <ul className="mt-4 space-y-4">
-                  {category.works.map((work) => {
-                    const workHref = 'href' in work ? work.href : work.slug ? `/art/${work.slug}` : undefined;
-                    const content = (
-                      <>
-                        <p className="font-medium text-stone-900 dark:text-stone-100">{work.title}</p>
-                        <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">{work.note}</p>
-                      </>
-                    );
-                    return (
-                      <li key={`${category.id}-${work.title}`}>
-                        {workHref ? (
-                          <Link
-                            href={workHref}
-                            className="block transition hover:opacity-80"
-                            {...(workHref.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                          >
-                            {content}
-                            <span className={cn('mt-1 inline-block text-xs', grantLinkClass)}>View →</span>
-                          </Link>
-                        ) : (
-                          content
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
+                  </div>
+                  <p className={cn('mt-4', dossierTypography.meta)}>Applicant: {ssrcJustTechMeta.applicant}</p>
               </div>
-            ))}
-          </div>
-        </section>
 
-        <section id="infrastructure" aria-labelledby="infrastructure-heading" className={sectionScrollClass}>
-          <SectionHeading id="infrastructure">Related infrastructure</SectionHeading>
-          <p className="mt-8 max-w-3xl text-sm text-stone-600 dark:text-stone-400 sm:text-base">
-            These initiatives are not the fellowship project itself. They are evidence of a broader practice committed
-            to public technology, artist education, and cultural infrastructure.
-          </p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {ssrcInfrastructureCards.map((card) => (
-              <article key={card.id} className={cn('flex flex-col p-5', grantCardClass)}>
-                {card.logoSrc ? (
-                  <div className="relative mb-4 h-10 w-full">
-                    <Image src={card.logoSrc} alt={card.logoAlt} fill className="object-contain object-left" />
+              <div className="mt-10">
+                <PanelHook label={ssrcReviewerHook.label} text={ssrcReviewerHook.text} />
+              </div>
+
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {snapshotFacts.map((fact) => (
+                  <div key={fact.label} className={cn('p-4', grantCardClass)}>
+                    <p className={dossierTypography.eyebrow}>{fact.label}</p>
+                    <p className={cn('mt-2 text-sm font-medium text-stone-900 dark:text-stone-100')}>{fact.value}</p>
+                  </div>
+                ))}
+              </div>
+              <p className={cn('mt-3', dossierTypography.meta)}>Format: {ssrcJustTechMeta.format}</p>
+
+              <div className="mt-10">
+                <p className={dossierTypography.eyebrow}>Watch — 3-minute introduction</p>
+                <h3 className={cn('mt-2', dossierTypography.h3)}>{ssrcVideoIntro.title}</h3>
+                <p className={cn('mt-1', dossierTypography.meta)}>{ssrcVideoIntro.subtitle}</p>
+                {ssrcJustTechMeta.youtubeVideoId ? (
+                  <div className="mt-4 aspect-video overflow-hidden border border-stone-300 dark:border-stone-700">
+                    <iframe
+                      title={ssrcVideoIntro.title}
+                      src={`https://www.youtube.com/embed/${ssrcJustTechMeta.youtubeVideoId}`}
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
                   </div>
                 ) : (
-                  <p className="mb-4 break-all text-xs text-stone-500 dark:text-stone-400">
-                    Logo pending:{' '}
-                    <code className="rounded bg-stone-200/80 px-1 py-0.5 text-stone-700 dark:bg-stone-800 dark:text-stone-300">
-                      {card.logoExpectedPath}
-                    </code>
-                  </p>
+                  <div className="mt-4 flex aspect-video items-center justify-center border border-dashed border-stone-400 bg-stone-100 dark:border-stone-600 dark:bg-neutral-900">
+                    <p className={cn('max-w-md px-6 text-center', dossierTypography.meta)}>{ssrcVideoIntro.placeholderNote}</p>
+                  </div>
                 )}
-                <h3 className="text-base font-semibold text-stone-900 dark:text-stone-100">{card.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-stone-700 dark:text-stone-300">
-                  {card.description}
-                </p>
-                <a
-                  href={card.href}
-                  target={card.href.startsWith('http') ? '_blank' : undefined}
-                  rel={card.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={cn('mt-4 text-sm', grantLinkClass)}
-                >
-                  Learn more →
-                </a>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="work-samples" aria-labelledby="work-samples-heading" className={sectionScrollClass}>
-          <SectionHeading id="work-samples">Work samples</SectionHeading>
-          <p className="mt-4 max-w-3xl text-sm text-stone-600 dark:text-stone-400 sm:text-base">
-            Two official application work samples: sculptural practice and public technology infrastructure.
-          </p>
-          <div className="mt-10 space-y-16">
-            {ssrcWorkSamples.map((sample, index) => {
-              const href = sample.slug ? `/art/${sample.slug}` : sample.href;
-              return (
-                <article key={sample.id} className="space-y-6">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                    Work sample {index + 1} — {sample.type === 'artwork' ? 'Artwork' : 'Infrastructure'}
-                  </p>
-                  <div className={cn('overflow-hidden', grantCardClass)}>
-                    <WorkImageCarousel
-                      images={sample.images}
-                      alt={sample.title}
-                      className="rounded-none"
-                      showControlsOnTouch
-                    />
+                <div className="mt-4">
+                  <button type="button" onClick={copyShareLink} className={grantButtonClass}>
+                    {copiedLink ? 'Link copied' : 'Copy video share link'}
+                  </button>
+                </div>
+                <details className={cn('mt-6', grantCardClass)}>
+                  <summary className={cn('cursor-pointer px-4 py-3 font-semibold text-stone-900 dark:text-stone-100', dossierTypography.meta)}>
+                    Full transcript
+                  </summary>
+                  <div className="border-t border-stone-200 px-4 py-4 dark:border-stone-700">
+                    {ssrcVideoIntro.transcript.split('\n\n').map((block) => (
+                      <p key={block.slice(0, 40)} className={cn('mb-4 last:mb-0', dossierTypography.body)}>
+                        {block}
+                      </p>
+                    ))}
                   </div>
-                  <div>
-                    {href ? (
-                      <Link
-                        href={href}
-                        className="text-lg font-semibold text-stone-900 hover:underline sm:text-xl dark:text-stone-100"
-                        {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                      >
-                        {sample.title}
+                </details>
+              </div>
+                  </>
+                ) : null}
+
+                {activeZoneId === 'thesis' ? (
+                  <>
+              <ThesisCard claim={ssrcThesisPullQuote} />
+
+              <div className="mt-8">
+                <ExpandableText preview={ssrcThesis.paragraphs[0] ?? ''} label="Read full thesis">
+                  {ssrcThesis.paragraphs.slice(1).map((paragraph) => (
+                    <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                  ))}
+                </ExpandableText>
+              </div>
+
+              <div className="mt-8">
+                <p className={dossierTypography.eyebrow}>In one sentence</p>
+                <p className={cn('mt-2', dossierTypography.body)}>{ssrcProjectOverview.summary}</p>
+              </div>
+
+              <div className="mt-8">
+                <ExpandableText preview={ssrcWhyNow.intro} label="Read why this project now">
+                  <ul className="space-y-2">
+                    {ssrcWhyNow.shifts.map((shift) => (
+                      <li key={shift}>— {shift}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-4">{ssrcWhyNow.closing}</p>
+                  <p className="mt-4">{ssrcProjectOverview.detail}</p>
+                </ExpandableText>
+              </div>
+
+              <div className="mt-8">
+                <p className={dossierTypography.eyebrow}>Core research questions</p>
+                <div className="mt-4">
+                  <ResearchQuestionsBlock />
+                </div>
+              </div>
+                  </>
+                ) : null}
+
+                {activeZoneId === 'engines' ? (
+                  <>
+              <p className={cn(dossierTypography.body, dossierTypography.prose)}>
+                {ssrcSculpturalEnginesIntro.paragraphs[0]}
+              </p>
+              <div className="mt-8">
+                <EngineAccordion engines={ssrcEngineChapters} />
+              </div>
+
+              <div className="mt-10">
+                <p className={dossierTypography.eyebrow}>Labor, value, and agency</p>
+                <p className={cn('mt-2', dossierTypography.body, dossierTypography.prose)}>{ssrcLaborAgency.intro}</p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div className={cn('p-5', grantCardClass)}>
+                    <p className={dossierTypography.eyebrow}>Prior labor value</p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      {ssrcLaborAgency.oldLaborValue.map((item) => (
+                        <li key={item} className="border border-stone-300 px-2 py-1 text-xs text-stone-800 dark:border-stone-600 dark:text-stone-200">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className={cn('p-5', grantCardClass)}>
+                    <p className={dossierTypography.eyebrow}>Emerging labor value</p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      {ssrcLaborAgency.newLaborValue.map((item) => (
+                        <li
+                          key={item}
+                          className="border border-stone-800 bg-stone-900 px-2 py-1 text-xs text-white dark:border-stone-200 dark:bg-stone-100 dark:text-black"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+                  </>
+                ) : null}
+
+                {activeZoneId === 'public' ? (
+                  <>
+              <p className={cn(dossierTypography.body, dossierTypography.prose)}>{ssrcPublicContribution.intro}</p>
+              <ul className={cn('mt-6 space-y-2', dossierTypography.body, dossierTypography.prose)}>
+                {ssrcPublicContribution.outputs.slice(0, 4).map((output) => (
+                  <li key={output}>• {output}</li>
+                ))}
+              </ul>
+
+              <details className={cn('mt-4', grantCardClass)}>
+                <summary className={cn('cursor-pointer px-4 py-3 font-medium text-stone-900 dark:text-stone-100', dossierTypography.meta)}>
+                  Full public contribution list
+                </summary>
+                <ul className={cn('space-y-2 border-t border-stone-200 px-4 py-4 dark:border-stone-700', dossierTypography.body)}>
+                  {ssrcPublicContribution.outputs.map((output) => (
+                    <li key={output}>• {output}</li>
+                  ))}
+                </ul>
+              </details>
+
+              <div className="mt-8">
+                <p className={dossierTypography.eyebrow}>Culture to law</p>
+                <div className="mt-4">
+                  <DiagramLadder steps={ssrcThesis.cultureToLaw} />
+                </div>
+                <p className={cn('mt-6', dossierTypography.body, dossierTypography.prose)}>{ssrcPublicContribution.bridge}</p>
+              </div>
+                  </>
+                ) : null}
+
+                {activeZoneId === 'field' ? (
+                  <>
+              <div>
+                <p className={dossierTypography.eyebrow}>Original concepts developed in this project</p>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  {ssrcOriginalConcepts.map((concept) => {
+                    const engine = ssrcEngineChapters.find((e) => e.id === concept.relatedEngineId);
+                    return (
+                      <ConceptCard
+                        key={concept.id}
+                        concept={concept}
+                        engineTitle={engine?.title}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-12">
+                <p className={dossierTypography.eyebrow}>{ssrcFieldContext.title}</p>
+                <p className={cn('mt-3', dossierTypography.body, dossierTypography.prose)}>{ssrcFieldContext.intro}</p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {ssrcFieldReferences.map((reference) => (
+                    <ReferenceCard key={reference.id} reference={reference} />
+                  ))}
+                </div>
+                <p className={cn('mt-6', dossierTypography.meta)}>{ssrcFieldContext.bibliographyTeaser}</p>
+              </div>
+
+              <div className="mt-12">
+                <p className={dossierTypography.eyebrow}>{ssrcBornIntoMachineArchive.title}</p>
+                <p className={cn('mt-3', dossierTypography.body, dossierTypography.prose)}>
+                  {ssrcBornIntoMachineArchive.intro}
+                </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {ssrcBornIntoMachineArchive.links.map((link) => (
+                    <article key={link.href} className={cn('flex flex-col p-4 sm:p-5', grantCardClass)}>
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="text-base font-semibold text-stone-900 dark:text-stone-100">{link.label}</h3>
+                        {link.status === 'coming-soon' ? (
+                          <span className="rounded-full bg-stone-200 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-stone-600 dark:bg-stone-800 dark:text-stone-400">
+                            Coming soon
+                          </span>
+                        ) : null}
+                      </div>
+                      <p className={cn('mt-2 flex-1', dossierTypography.meta)}>{link.description}</p>
+                      <Link href={link.href} className={cn('mt-4 text-sm', grantLinkClass)}>
+                        {link.status === 'live' ? 'Open archive →' : 'Preview route →'}
                       </Link>
-                    ) : (
-                      <h3 className="text-lg font-semibold text-stone-900 sm:text-xl dark:text-stone-100">{sample.title}</h3>
-                    )}
-                    <p className="mt-2 text-sm text-stone-600 dark:text-stone-400">{sample.medium}</p>
-                    <p className="mt-4 text-base leading-relaxed text-stone-700 dark:text-stone-300">
-                      {sample.description}
-                    </p>
-                    <p className="mt-4 text-sm italic text-stone-600 dark:text-stone-400">
-                      <strong>Relevance:</strong> {sample.relevance}
-                    </p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
+                    </article>
+                  ))}
+                </div>
+              </div>
+                  </>
+                ) : null}
 
-        <section id="timeline" aria-labelledby="timeline-heading" className={sectionScrollClass}>
-          <SectionHeading id="timeline">2027 fellowship timeline</SectionHeading>
-          <div className="mt-8 space-y-4 md:hidden">
-            {ssrcTimeline.map((row) => (
-              <article key={row.quarter} className={cn('p-4', grantCardClass)}>
-                <h3 className="text-sm font-semibold text-stone-900 dark:text-stone-100">{row.quarter}</h3>
-                <p className="mt-2 text-sm text-stone-700 dark:text-stone-300">
-                  <span className="font-medium text-stone-500 dark:text-stone-400">Focus: </span>
-                  {row.focus}
-                </p>
-                <p className="mt-2 text-sm text-stone-600 dark:text-stone-400">
-                  <span className="font-medium text-stone-500 dark:text-stone-400">Outputs: </span>
-                  {row.outputs.join(' · ')}
-                </p>
-              </article>
-            ))}
-          </div>
-          <div className={cn('mt-8 hidden overflow-x-auto md:block', grantCardClass)}>
-            <table className="w-full min-w-[560px] text-left text-sm">
-              <thead>
-                <tr className="border-b border-stone-200 dark:border-stone-700">
-                  <th className="px-4 py-3 font-semibold text-stone-900 dark:text-stone-100">Quarter</th>
-                  <th className="px-4 py-3 font-semibold text-stone-900 dark:text-stone-100">Focus</th>
-                  <th className="px-4 py-3 font-semibold text-stone-900 dark:text-stone-100">Outputs</th>
-                </tr>
-              </thead>
-              <tbody>
+                {activeZoneId === 'evidence' ? (
+                  <>
+              <p className={cn(dossierTypography.meta, dossierTypography.prose)}>
+                Selected to demonstrate sculptural practice (Baby AGI) and public technology infrastructure (Oolite Digital Lab). DCC.Miami appears under related infrastructure as future-facing cultural platform work.
+              </p>
+
+              <div className="mt-8 space-y-12">
+                {ssrcWorkSamples.map((sample, index) => {
+                  const href = sample.slug ? `/art/${sample.slug}` : sample.href;
+                  return (
+                    <article key={sample.id} className={cn('overflow-hidden', grantCardClass)}>
+                      <p className={cn('border-b border-stone-200 px-5 py-3 dark:border-stone-700', dossierTypography.eyebrow)}>
+                        Work sample {String(index + 1).padStart(2, '0')} — {sample.type === 'artwork' ? 'Artwork' : 'Infrastructure'}
+                      </p>
+                      <div className="p-4 sm:p-5">
+                        <WorkImageCarousel images={sample.images} alt={sample.title} className="rounded-none" showControlsOnTouch />
+                        <div className="mt-5">
+                          {href ? (
+                            <Link
+                              href={href}
+                              className={cn(dossierTypography.h3, 'hover:underline')}
+                              {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                            >
+                              {sample.title}
+                            </Link>
+                          ) : (
+                            <h3 className={dossierTypography.h3}>{sample.title}</h3>
+                          )}
+                          <p className={cn('mt-2', dossierTypography.meta)}>{sample.medium}</p>
+                          <p className={cn('mt-4', dossierTypography.body)}>{sample.description}</p>
+                          <p className={cn('mt-4 italic', dossierTypography.meta)}>
+                            <strong>Why it matters:</strong> {sample.relevance}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+
+              <div className="mt-12">
+                <p className={dossierTypography.eyebrow}>Practice evidence</p>
+                <div className="mt-4">
+                  <PracticeEvidenceTabs categories={ssrcPracticeEvidence.categories} renderWorkLink={renderPracticeWork} />
+                </div>
+              </div>
+
+              <details className={cn('mt-10', grantCardClass)}>
+                <summary className={cn('cursor-pointer px-4 py-3 font-medium text-stone-900 dark:text-stone-100', dossierTypography.meta)}>
+                  Related infrastructure — Oolite, DCC, Infra24
+                </summary>
+                <div className="grid gap-4 border-t border-stone-200 p-4 sm:grid-cols-3 dark:border-stone-700">
+                  {ssrcInfrastructureCards.map((card) => (
+                    <article key={card.id} className="p-3">
+                      <h3 className="text-sm font-semibold text-stone-900 dark:text-stone-100">{card.title}</h3>
+                      <p className={cn('mt-2', dossierTypography.meta)}>{card.description}</p>
+                      <a
+                        href={card.href}
+                        target={card.href.startsWith('http') ? '_blank' : undefined}
+                        rel={card.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className={cn('mt-3 inline-block text-sm', grantLinkClass)}
+                      >
+                        Learn more →
+                      </a>
+                    </article>
+                  ))}
+                </div>
+              </details>
+                  </>
+                ) : null}
+
+                {activeZoneId === 'application' ? (
+                  <>
+              <div className="-mx-4 flex gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-4">
                 {ssrcTimeline.map((row) => (
-                  <tr key={row.quarter} className="border-b border-stone-200 last:border-0 dark:border-stone-700">
-                    <td className="px-4 py-3 font-medium text-stone-800 dark:text-stone-200">{row.quarter}</td>
-                    <td className="px-4 py-3 text-stone-700 dark:text-stone-300">{row.focus}</td>
-                    <td className="px-4 py-3 text-stone-600 dark:text-stone-400">{row.outputs.join(' · ')}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className={cn('mt-8 p-5', grantCardClass)}>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-              Proposed outcomes by end of 2027
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {ssrcOutcomes2027.map((outcome) => (
-                <li key={outcome} className="text-sm text-stone-700 dark:text-stone-300">
-                  {outcome}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section id="materials" aria-labelledby="materials-heading" className={sectionScrollClass}>
-          <SectionHeading id="materials">Application materials</SectionHeading>
-          <p className="mt-4 max-w-3xl text-sm text-stone-600 dark:text-stone-400">
-            Required materials for the SSRC Just Tech Fellowship submission.
-          </p>
-          <div className="mt-8 space-y-3 md:hidden">
-            {ssrcApplicationMaterials.map((item) => (
-              <article key={item.label} className={cn('p-4', grantCardClass)}>
-                <h3 className="text-sm font-semibold text-stone-900 dark:text-stone-100">{item.label}</h3>
-                <p className={cn('mt-2 text-sm font-medium', statusColor(item.status))}>{item.status}</p>
-                <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">{item.notes}</p>
-              </article>
-            ))}
-          </div>
-          <div className={cn('mt-8 hidden overflow-x-auto md:block', grantCardClass)}>
-            <table className="w-full min-w-[480px] text-left text-sm">
-              <thead>
-                <tr className="border-b border-stone-200 dark:border-stone-700">
-                  <th className="px-4 py-3 font-semibold text-stone-900 dark:text-stone-100">Material</th>
-                  <th className="px-4 py-3 font-semibold text-stone-900 dark:text-stone-100">Status</th>
-                  <th className="px-4 py-3 font-semibold text-stone-900 dark:text-stone-100">Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ssrcApplicationMaterials.map((item) => (
-                  <tr key={item.label} className="border-b border-stone-200 last:border-0 dark:border-stone-700">
-                    <td className="px-4 py-3 font-medium text-stone-800 dark:text-stone-200">{item.label}</td>
-                    <td className={cn('px-4 py-3 font-medium', statusColor(item.status))}>{item.status}</td>
-                    <td className="px-4 py-3 text-stone-600 dark:text-stone-400">{item.notes}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section id="contact" aria-labelledby="contact-heading" className={sectionScrollClass}>
-          <SectionHeading id="contact">Contact</SectionHeading>
-          <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-start">
-            <div className="relative h-32 w-32 shrink-0 overflow-hidden border border-stone-300 dark:border-stone-700">
-              <Image
-                src={ssrcJustTechMeta.portraitUrl}
-                alt="Moises Sanabria"
-                fill
-                className="object-cover"
-                sizes="128px"
-              />
-            </div>
-            <div className="max-w-3xl">
-              <p className="text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-                {ssrcContact.bio}
-              </p>
-              <p className="mt-4">
-                <a href={`mailto:${ssrcContact.email}`} className={cn('text-sm', grantLinkClass)}>
-                  {ssrcContact.email}
-                </a>
-              </p>
-              <div className="mt-6 flex flex-wrap gap-4">
-                {ssrcContact.links.map((link) => (
-                  <Link key={link.label} href={link.href} className={cn('text-sm', grantLinkClass)}>
-                    {link.label}
-                  </Link>
+                  <article key={row.quarter} className={cn('min-w-[16rem] shrink-0 p-4 sm:min-w-0', grantCardClass)}>
+                    <p className={dossierTypography.eyebrow}>{row.quarter}</p>
+                    <p className={cn('mt-2 text-sm font-medium text-stone-900 dark:text-stone-100')}>{row.focus}</p>
+                    <p className={cn('mt-2', dossierTypography.meta)}>{row.outputs.join(' · ')}</p>
+                  </article>
                 ))}
               </div>
-              <p className="mt-8 text-base leading-relaxed text-stone-600 dark:text-stone-400">
-                {ssrcContact.closing}
-              </p>
+
+              <details className={cn('mt-8', grantCardClass)}>
+                <summary className={cn('cursor-pointer px-4 py-3 font-semibold text-stone-900 dark:text-stone-100', dossierTypography.meta)}>
+                  Application dashboard — submission materials
+                </summary>
+                <div className="space-y-3 border-t border-stone-200 p-4 dark:border-stone-700">
+                  {ssrcApplicationMaterials.map((item) => (
+                    <div key={item.label} className="flex flex-col gap-2 border-b border-stone-100 pb-3 last:border-0 dark:border-stone-800 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{item.label}</p>
+                        <p className={dossierTypography.meta}>{item.notes}</p>
+                      </div>
+                      <StatusPill status={item.status} />
+                    </div>
+                  ))}
+                </div>
+              </details>
+
+              <div className={cn('mt-8 p-5', grantCardClass)}>
+                <p className={dossierTypography.eyebrow}>Proposed outcomes by end of 2027</p>
+                <ul className={cn('mt-4 space-y-2', dossierTypography.body)}>
+                  {ssrcOutcomes2027.map((outcome) => (
+                    <li key={outcome}>{outcome}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-12 border-t border-stone-300 pt-10 dark:border-stone-700">
+                <div className={dossierTypography.prose}>
+                  <p className={dossierTypography.eyebrow}>Contact</p>
+                  <p className={cn('mt-3', dossierTypography.body)}>{ssrcContact.bio}</p>
+                  <a href={`mailto:${ssrcContact.email}`} className={cn('mt-4 inline-block text-sm', grantLinkClass)}>
+                    {ssrcContact.email}
+                  </a>
+                  <div className="mt-6 flex flex-wrap gap-4">
+                    {ssrcContact.links.map((link) => (
+                      <Link key={link.label} href={link.href} className={cn('text-sm', grantLinkClass)}>
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                  <p className={cn('mt-6', dossierTypography.meta)}>{ssrcContact.closing}</p>
+                </div>
+              </div>
+                  </>
+                ) : null}
+
+                <GrantSectionPagerFooter zones={ssrcMajorZones} activeZoneId={activeZoneId} onSelect={goToZone} />
+              </SectionGroup>
             </div>
-          </div>
-        </section>
-      </article>
+          ) : null}
+        </div>
+      </div>
     </main>
   );
 }

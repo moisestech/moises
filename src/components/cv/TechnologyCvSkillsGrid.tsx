@@ -52,7 +52,7 @@ function TechPill({ label }: { label: string }) {
 
 export function TechnologyCvSkillsGrid({ skills }: TechnologyCvSkillsGridProps) {
   return (
-    <ul className="grid gap-4 sm:grid-cols-2">
+    <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {skills.map((skill) => (
         <li
           key={skill.name}
