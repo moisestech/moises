@@ -28,6 +28,18 @@ export const ssrcZoneAccentById: Record<string, SsrcZoneAccent> = {
     heroCaptionBorder: 'border-l-4 border-amber-600 dark:border-amber-400',
     progressDot: 'bg-amber-600 dark:bg-amber-400',
   },
+  answers: {
+    navActive: 'bg-rose-900/95 dark:bg-rose-200',
+    navActiveText: 'text-white dark:text-rose-950',
+    navMarker: 'border-l-4 border-rose-600 dark:border-rose-400',
+    navTopMarker: 'border-t-4 border-rose-600 dark:border-rose-400',
+    iconActive: 'border-rose-200/40 bg-rose-800/50 text-rose-50 dark:border-rose-900/30 dark:bg-rose-950/15 dark:text-rose-950',
+    iconIdle: 'border-rose-200 bg-rose-50/90 text-rose-900 dark:border-rose-800 dark:bg-rose-950/50 dark:text-rose-200',
+    sectionBorder: 'border-rose-800/70 dark:border-rose-400/60',
+    eyebrow: 'text-rose-900 dark:text-rose-300',
+    heroCaptionBorder: 'border-l-4 border-rose-700 dark:border-rose-400',
+    progressDot: 'bg-rose-700 dark:bg-rose-400',
+  },
   thesis: {
     navActive: 'bg-red-900/95 dark:bg-red-200',
     navActiveText: 'text-white dark:text-red-950',

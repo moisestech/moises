@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ClipboardList,
+  FileText,
   Globe,
   Images,
   Instagram,
@@ -30,6 +31,7 @@ import { dossierTypography, grantButtonClass, grantCardClass } from '@/component
 
 const zoneIconMap: Record<SsrcMajorZoneIcon, LucideIcon> = {
   sparkles: Sparkles,
+  'file-text': FileText,
   lightbulb: Lightbulb,
   layers: Layers,
   globe: Globe,

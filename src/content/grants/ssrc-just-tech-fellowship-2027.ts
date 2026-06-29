@@ -34,6 +34,8 @@ export type SsrcWorkSample = {
   relevance: string;
   slug?: string;
   href?: string;
+  pdfPath?: string;
+  roleNote?: string;
   images: readonly WorkMediaItem[];
 };
 
@@ -146,6 +148,7 @@ export const ssrcLogoAssets = {
 
 export type SsrcMajorZoneIcon =
   | 'sparkles'
+  | 'file-text'
   | 'lightbulb'
   | 'layers'
   | 'globe'
@@ -180,8 +183,20 @@ export const ssrcMajorZones: readonly SsrcMajorZone[] = [
     },
   },
   {
-    id: 'thesis',
+    id: 'answers',
     number: '02',
+    label: 'Application Answers',
+    summary: 'Core SSRC application responses in one place.',
+    icon: 'file-text',
+    image: {
+      src: moisesSanabriaHeadshot,
+      alt: 'Moises Sanabria — applicant portrait.',
+      caption: 'Application dossier — formal responses and PDF slots.',
+    },
+  },
+  {
+    id: 'thesis',
+    number: '03',
     label: 'Thesis',
     summary: 'Central claims and research questions.',
     icon: 'lightbulb',
@@ -193,7 +208,7 @@ export const ssrcMajorZones: readonly SsrcMajorZone[] = [
   },
   {
     id: 'engines',
-    number: '03',
+    number: '04',
     label: 'Engines',
     summary: 'Five sculptural research chapters.',
     icon: 'layers',
@@ -205,8 +220,8 @@ export const ssrcMajorZones: readonly SsrcMajorZone[] = [
   },
   {
     id: 'public',
-    number: '04',
-    label: 'Public',
+    number: '05',
+    label: 'Public Contribution',
     summary: 'Culture, archive, and civic contribution.',
     icon: 'globe',
     image: {
@@ -217,9 +232,9 @@ export const ssrcMajorZones: readonly SsrcMajorZone[] = [
   },
   {
     id: 'field',
-    number: '05',
-    label: 'Field',
-    summary: 'Original concepts and selected references.',
+    number: '06',
+    label: 'Field Context',
+    summary: 'Original concepts, bibliography, and archive links.',
     icon: 'library',
     image: {
       src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
@@ -229,7 +244,7 @@ export const ssrcMajorZones: readonly SsrcMajorZone[] = [
   },
   {
     id: 'evidence',
-    number: '06',
+    number: '07',
     label: 'Evidence',
     summary: 'Work samples and practice context.',
     icon: 'gallery',
@@ -241,9 +256,9 @@ export const ssrcMajorZones: readonly SsrcMajorZone[] = [
   },
   {
     id: 'application',
-    number: '07',
-    label: 'Application',
-    summary: 'Timeline, materials, and contact.',
+    number: '08',
+    label: 'Application Materials',
+    summary: 'Submission tracker, timeline, and contact.',
     icon: 'clipboard',
     image: {
       src: moisesSanabriaHeadshot,
@@ -429,11 +444,279 @@ export const ssrcBornIntoMachineArchive = {
 } as const;
 
 export const ssrcHeroCtas = [
+  { label: 'Application answers', target: 'answers' },
   { label: 'Read thesis', target: 'thesis' },
   { label: 'View engines', target: 'engines' },
-  { label: 'Watch video', target: 'opening' },
   { label: 'Work samples', target: 'evidence' },
 ] as const;
+
+const SSRC_GRANT_BASE = '/grant/ssrc-just-tech-fellowship-2027';
+
+export type SsrcApplicationAnswerCard = {
+  id: string;
+  label: string;
+  prompt: string;
+  preview: string;
+  zoneTarget: string;
+  pdfPath?: string;
+};
+
+export const ssrcApplicationAnswersIntro =
+  'This section gathers the core application responses for the 2027 SSRC Just Tech Fellowship in one place. The full page expands on these answers through project chapters, work samples, references, and supporting materials.';
+
+export const ssrcApplicationAnswerCards: SsrcApplicationAnswerCard[] = [
+  {
+    id: 'project-summary',
+    label: 'Project Summary',
+    prompt: 'What is the proposed project?',
+    preview:
+      'Born into the Machine examines labor, value, attention, authorship, and human agency when intelligence becomes infrastructure — through sculptural engines, writing, video, and a digital artist-book archive.',
+    zoneTarget: 'opening',
+  },
+  {
+    id: 'personal-statement',
+    label: 'Personal Statement',
+    prompt: 'Who is the applicant, what is their practice, and why are they positioned to do this work?',
+    preview:
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and full-stack AI/web engineer. His technical background is one of the materials of the work — not separate from his artistic practice.',
+    zoneTarget: 'answers',
+    pdfPath: `${SSRC_GRANT_BASE}/moises-sanabria-personal-statement.pdf`,
+  },
+  {
+    id: 'work-proposal',
+    label: 'Work Proposal',
+    prompt: 'What will the applicant do during the fellowship year?',
+    preview:
+      'During the fellowship year, Born into the Machine develops through five sculptural engines, public writing, video, a digital archive, and public talks or workshops.',
+    zoneTarget: 'answers',
+    pdfPath: `${SSRC_GRANT_BASE}/moises-sanabria-work-proposal-born-into-the-machine.pdf`,
+  },
+  {
+    id: 'engagement',
+    label: 'Engagement with Technology',
+    prompt: 'How does the project substantively engage technology?',
+    preview:
+      'Technology is subject, method, material, and public question — from AI systems as social environments to monitors, phones, dashboards, and everyday devices as sculptural material.',
+    zoneTarget: 'answers',
+  },
+  {
+    id: 'approach',
+    label: 'Approach and Contribution',
+    prompt: 'What is the project’s method and original contribution?',
+    preview:
+      'The method is sculptural engines — physical artworks modeling how systems act on bodies, attention, labor, and public imagination — with original terms including the Adaptation Tax, Agency Gap, and Human Right to Refusal.',
+    zoneTarget: 'field',
+  },
+  {
+    id: 'feasibility',
+    label: 'Feasibility',
+    prompt: 'Can this project be realistically completed during the fellowship year?',
+    preview:
+      'The project is ambitious but modular — advancing through quarterly writing, prototypes, public documentation, and focused sculptural works rather than a single large production.',
+    zoneTarget: 'application',
+  },
+  {
+    id: 'public-contribution',
+    label: 'Public Contribution',
+    prompt: 'How will this project contribute to public understanding of technology and society?',
+    preview:
+      'Culture gives people metaphors; metaphors shape understanding; understanding creates pressure on institutions, policy, and law. The project makes AI’s social consequences legible through sculpture, writing, and public programming.',
+    zoneTarget: 'public',
+  },
+  {
+    id: 'work-samples',
+    label: 'Work Samples',
+    prompt: 'What prior work demonstrates the applicant’s ability to execute this project?',
+    preview:
+      'Baby AGI demonstrates sculptural logic for machine life and technological inheritance. Oolite Digital Lab demonstrates public-facing technology practice with artists and cultural workers.',
+    zoneTarget: 'evidence',
+  },
+  {
+    id: 'ai-disclosure',
+    label: 'AI Use Disclosure',
+    prompt: 'How did the applicant use AI in preparing the application and project materials?',
+    preview:
+      'AI-assisted tools supported brainstorming, outlining, editing, and research organization. All claims, structure, and final language were manually reviewed and verified.',
+    zoneTarget: 'application',
+  },
+  {
+    id: 'supporting-materials',
+    label: 'Supporting Materials',
+    prompt: 'Where can reviewers find CV, video, PDFs, and the larger project structure?',
+    preview:
+      'This page is the supporting project dossier. PDF slots, CV, video introduction, and future Born into the Machine archive routes are tracked in Application Materials.',
+    zoneTarget: 'application',
+  },
+];
+
+export const ssrcPersonalStatement = {
+  label: 'Personal Statement',
+  prompt: 'Who is the applicant, what is their practice, and why are they positioned to do this work?',
+  summary:
+    'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and full-stack AI/web engineer whose work investigates how emerging technologies reshape attention, labor, belief, identity, and public life. His practice moves between sculpture, digital systems, public workshops, and cultural infrastructure. His technical background is not separate from his artistic practice — it is one of the materials of the work.',
+  fullParagraphs: [
+    'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and full-stack AI/web engineer whose work investigates how emerging technologies reshape attention, labor, belief, identity, and public life. His practice moves between sculpture, digital systems, public workshops, and cultural infrastructure.',
+    'His technical background is not separate from his artistic practice. It is one of the materials of the work. As an artist and technologist, he understands how interfaces, databases, automations, prompts, and public-facing systems shape behavior. As an artist, he is interested in how those systems feel, what metaphors they create, and what kinds of human value they reorganize.',
+    'The proposed project grows from his position as an artist, engineer, educator, immigrant, and cultural worker in Miami. His own life is not the entire subject of the project, but it is an important lens for understanding how people are being asked to adapt to intelligent systems they did not choose.',
+    'Across prior work — including Baby AGI, simulation and faith installations, doomscrolling durational works, and public digital lab infrastructure — he has developed a sculptural method for making algorithmic environments legible as cultural and political questions.',
+    'Born into the Machine extends that method into a fellowship-year project examining labor, attention, agency, and refusal when intelligence becomes infrastructure.',
+  ],
+  pdfPath: `${SSRC_GRANT_BASE}/moises-sanabria-personal-statement.pdf`,
+} as const;
+
+export const ssrcWorkProposal = {
+  label: 'Full Work Proposal',
+  prompt: 'What will the applicant do during the fellowship year?',
+  summary:
+    'During the fellowship year, Born into the Machine will be developed through sculptural engines, public writing, video, a digital artist-book archive, and public-facing talks or workshops. Five engines guide production: The Intelligence Commodity, The Adaptation Tax, The Attention Engine, The Agency Gap, and The Human Right to Refusal.',
+  sections: [
+    {
+      id: 'concept',
+      label: 'Concept Description',
+      prompt: 'What is the central idea of the project?',
+      answer:
+        'Born into the Machine examines what happens when AI systems make cognitive tasks cheap, fast, and widely available. As intelligence becomes automated, platform-distributed, and embedded into everyday systems, the value of human work shifts. The project asks what remains valuable when machines can write, summarize, code, translate, design, generate images, produce plans, and assist with decisions. It argues that human value increasingly centers on judgment, context, embodiment, trust, authorship, responsibility, and the right to refuse. The project treats AI not only as a technological system, but as a social environment.',
+    },
+    {
+      id: 'engagement',
+      label: 'Engagement with Technology',
+      prompt: 'How does the project substantively engage technology?',
+      answer:
+        'The project engages technology as subject, method, material, and public question. As subject, it examines how AI systems reorganize work, authorship, decision-making, attention, and public life. As method, it draws on Moises Sanabria’s hybrid background as an interdisciplinary artist and full-stack AI/web engineer. As material, it works with monitors, phones, laptops, receipt printers, projectors, dashboards, smart devices, cameras, forms, office chairs, cables, mounts, brackets, carts, signs, and screens. As a public question, it connects cultural production to technology governance by asking how art can create metaphors, images, and shared experiences that make AI’s social consequences visible.',
+    },
+    {
+      id: 'approach',
+      label: 'Approach and Contribution',
+      prompt: 'What is the project’s method and original contribution?',
+      answer:
+        'The project’s method is the development of sculptural engines: physical artworks that model how technological systems act on bodies, attention, labor, and public imagination. The project contributes an original sculptural and cultural vocabulary for understanding AI as lived infrastructure. Its key working terms include: intelligence becomes infrastructure; Sculptural Engines; The Adaptation Tax; The Attention Engine; The Agency Gap; and The Human Right to Refusal.',
+    },
+    {
+      id: 'feasibility',
+      label: 'Feasibility',
+      prompt: 'Can this project be realistically completed during the fellowship year?',
+      answer:
+        'The project is ambitious but modular. It does not depend on a single large production. It can advance through writing, prototypes, public documentation, and a small number of focused sculptural works. Q1 refines research framework and material plans; Q2 produces sculptural studies and video; Q3 develops public writing and hosts a talk or workshop; Q4 refines works, updates the archive, and presents the project publicly. Expected outcomes include 1–2 completed sculptural works or advanced prototypes, 3–5 sculptural studies, a digital artist-book archive, short video introduction, public essays, one or two public talks, and final presentation documentation.',
+    },
+    {
+      id: 'field-context',
+      label: 'Field Context',
+      prompt: 'Who is this project in conversation with?',
+      answer:
+        'Born into the Machine is an original artist-led project in conversation with artists, researchers, organizations, and public-interest technology groups examining AI power, labor, attention, surveillance, consent, and public life — including Algorithmic Justice League, AI Now Institute, Data & Society, DAIR Institute, and artists and writers such as Kate Crawford, Ruha Benjamin, Safiya Umoja Noble, Hito Steyerl, Trevor Paglen, Stephanie Dinkins, and Lynn Hershman Leeson.',
+    },
+    {
+      id: 'public-contribution',
+      label: 'Public Contribution',
+      prompt: 'How will this project contribute to public understanding of technology and society?',
+      answer:
+        'The public contribution of Born into the Machine is to build cultural language around AI before its systems become invisible, inevitable, or politically untouchable. Culture gives people metaphors; metaphors shape public understanding; public understanding creates pressure; pressure shapes institutions; institutions shape policy and law; law shapes what machines are allowed to do. The project will make AI’s social consequences legible through sculpture, writing, video, public programming, and a digital archive.',
+    },
+  ],
+  pdfPath: `${SSRC_GRANT_BASE}/moises-sanabria-work-proposal-born-into-the-machine.pdf`,
+} as const;
+
+export const ssrcAiUseDisclosure = {
+  label: 'AI Use Disclosure',
+  prompt: 'How did the applicant use AI in preparing the application and project materials?',
+  text: 'I used AI-assisted tools for brainstorming, outlining, editing, image studies, code support, and organizing research during the development of this application and project page. I manually reviewed, revised, and verified the project’s claims, structure, and final language. The artistic concept, research questions, project framework, sculptural direction, and submitted materials reflect my own original work, experience, and voice.',
+} as const;
+
+export const ssrcSupportingProjectPage = {
+  label: 'Supporting Project Page',
+  prompt: 'Where can reviewers see the larger project structure?',
+  summary:
+    'This page is the supporting project dossier for the SSRC Just Tech Fellowship application. It includes the project thesis, application answers, sculptural engines, work samples, public contribution, field context, and the developing book/archive structure.',
+  primaryUrl: 'https://moises.tech/grant/ssrc-just-tech-fellowship-2027',
+  shortUrl: 'https://moises.tech/grant/ssrc-just-tech-2027',
+  archiveLinks: [
+    { label: 'Born into the Machine archive', href: '/research/born-into-the-machine', status: 'coming-soon' as const },
+    { label: 'Bibliography', href: '/research/born-into-the-machine/bibliography', status: 'coming-soon' as const },
+    { label: 'Quote bank', href: '/research/born-into-the-machine/quote-bank', status: 'coming-soon' as const },
+    { label: 'Sculptural engines', href: '/research/born-into-the-machine/sculptural-engines', status: 'coming-soon' as const },
+  ],
+} as const;
+
+export type SsrcApplicationMaterialRow = {
+  id: string;
+  label: string;
+  requirement: string;
+  status: 'Ready' | 'Drafting' | 'Needs edit' | 'Select' | 'Needs recording' | 'Needs gathering' | 'Drafted' | 'Pending PDF';
+  notes: string;
+  pdfPath?: string;
+  zoneTarget?: string;
+  inlineText?: boolean;
+};
+
+export const ssrcApplicationMaterialsDashboard: SsrcApplicationMaterialRow[] = [
+  {
+    id: 'work-proposal',
+    label: 'Work Proposal',
+    requirement: 'Maximum 3,000 words',
+    status: 'Drafting',
+    notes: 'Full text on Application Answers; PDF upload when final',
+    pdfPath: `${SSRC_GRANT_BASE}/moises-sanabria-work-proposal-born-into-the-machine.pdf`,
+    zoneTarget: 'answers',
+  },
+  {
+    id: 'personal-statement',
+    label: 'Personal Statement',
+    requirement: 'Up to 1,000 words or 5-minute video',
+    status: 'Drafting',
+    notes: 'Summary and full text on Application Answers',
+    pdfPath: `${SSRC_GRANT_BASE}/moises-sanabria-personal-statement.pdf`,
+    zoneTarget: 'answers',
+  },
+  {
+    id: 'cv',
+    label: 'CV',
+    requirement: 'Up to 2 pages',
+    status: 'Needs edit',
+    notes: 'Two-page CV focused on art practice, exhibitions, talks, and public technology work',
+    pdfPath: `${SSRC_GRANT_BASE}/moises-sanabria-cv.pdf`,
+  },
+  {
+    id: 'work-sample-1',
+    label: 'Work Sample 1 — Baby AGI',
+    requirement: 'Work sample and description',
+    status: 'Pending PDF',
+    notes: 'Sculpture / artwork — visible in Evidence',
+    pdfPath: `${SSRC_GRANT_BASE}/work-sample-01-baby-agi.pdf`,
+    zoneTarget: 'evidence',
+  },
+  {
+    id: 'work-sample-2',
+    label: 'Work Sample 2 — Public Technology Infrastructure',
+    requirement: 'Work sample and description',
+    status: 'Pending PDF',
+    notes: 'Oolite Digital Lab / DCC.Miami — visible in Evidence',
+    pdfPath: `${SSRC_GRANT_BASE}/work-sample-02-public-technology-infrastructure.pdf`,
+    zoneTarget: 'evidence',
+  },
+  {
+    id: 'ai-disclosure',
+    label: 'AI Use Disclosure',
+    requirement: 'Short disclosure',
+    status: 'Drafted',
+    notes: 'Visible on this page below the dashboard',
+    inlineText: true,
+  },
+  {
+    id: 'video',
+    label: 'Video Introduction',
+    requirement: 'Optional / supporting (2–3 minutes)',
+    status: 'Needs recording',
+    notes: 'Placeholder in Opening; set youtubeVideoId when ready',
+    zoneTarget: 'opening',
+  },
+  {
+    id: 'images',
+    label: 'Image Dossier',
+    requirement: 'Supporting images',
+    status: 'Needs gathering',
+    notes: 'Baby AGI, Simulation Faith, Doomscrolling Treadmill, Digital Lab/DCC, studio, engine studies',
+  },
+];
 
 export const ssrcThesis = {
   paragraphs: [
@@ -742,6 +1025,8 @@ export const ssrcWorkSamples: SsrcWorkSample[] = [
     relevance:
       'This work sample demonstrates my sculptural approach to algorithmic life, machine belief, and technological mediation. The project uses familiar digital objects and bodily references to make invisible systems physically encounterable.',
     slug: 'baby_agi',
+    pdfPath: `${SSRC_GRANT_BASE}/work-sample-01-baby-agi.pdf`,
+    roleNote: 'Artist — concept, fabrication, installation, and documentation',
     images: [
       {
         type: 'video',
@@ -765,6 +1050,8 @@ export const ssrcWorkSamples: SsrcWorkSample[] = [
     relevance:
       'This work sample demonstrates public-facing technology practice with artists and cultural organizations — institutional execution, real community engagement, and the social labor required to make emerging tools accessible.',
     href: '/tech-nonprofit/oolite',
+    pdfPath: `${SSRC_GRANT_BASE}/work-sample-02-public-technology-infrastructure.pdf`,
+    roleNote: 'Technical Director of Digital — lab development, workshops, AI education, and artist-facing infrastructure',
     images: [
       {
         type: 'image',

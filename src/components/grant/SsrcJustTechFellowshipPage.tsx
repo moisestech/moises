@@ -13,7 +13,6 @@ import {
   PracticeEvidenceTabs,
   ReferenceCard,
   SectionGroup,
-  StatusPill,
   ThesisCard,
   dossierTypography,
   grantButtonClass,
@@ -26,9 +25,16 @@ import {
   GrantSectionPagerNav,
   siteHeaderExpandedPaddingTopClass,
 } from '@/components/grant/dossier/GrantSectionPager';
+import {
+  AiUseDisclosureBlock,
+  ApplicationAnswersIndex,
+  ApplicationMaterialsDashboard,
+  PersonalStatementSection,
+  SupportingProjectPageBlock,
+  WorkProposalAccordion,
+} from '@/components/grant/dossier/SsrcApplicationVisibility';
 import { getSsrcZoneAccent } from '@/config/ssrc-zone-accents';
 import {
-  ssrcApplicationMaterials,
   ssrcBornIntoMachineArchive,
   ssrcContact,
   ssrcEngineChapters,
@@ -250,6 +256,14 @@ export default function SsrcJustTechFellowshipPage() {
                   </>
                 ) : null}
 
+                {activeZoneId === 'answers' ? (
+                  <>
+                    <ApplicationAnswersIndex onNavigate={goToZone} />
+                    <PersonalStatementSection />
+                    <WorkProposalAccordion />
+                  </>
+                ) : null}
+
                 {activeZoneId === 'thesis' ? (
                   <>
               <ThesisCard claim={ssrcThesisPullQuote} />
@@ -377,7 +391,7 @@ export default function SsrcJustTechFellowshipPage() {
                 </div>
               </div>
 
-              <div className="mt-12">
+              <div id="field-context" className="mt-12">
                 <p className={dossierTypography.eyebrow}>{ssrcFieldContext.title}</p>
                 <p className={cn('mt-3', dossierTypography.body, dossierTypography.prose)}>{ssrcFieldContext.intro}</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -448,6 +462,20 @@ export default function SsrcJustTechFellowshipPage() {
                           <p className={cn('mt-4 italic', dossierTypography.meta)}>
                             <strong>Why it matters:</strong> {sample.relevance}
                           </p>
+                          {sample.roleNote ? (
+                            <p className={cn('mt-2', dossierTypography.meta)}>
+                              <strong>Moises&apos;s role:</strong> {sample.roleNote}
+                            </p>
+                          ) : null}
+                          {sample.pdfPath ? (
+                            <p className={cn('mt-3', dossierTypography.meta)}>
+                              PDF:{' '}
+                              <Link href={sample.pdfPath} className={grantLinkClass}>
+                                Download work sample PDF
+                              </Link>{' '}
+                              (upload when final)
+                            </p>
+                          ) : null}
                         </div>
                       </div>
                     </article>
@@ -488,7 +516,20 @@ export default function SsrcJustTechFellowshipPage() {
 
                 {activeZoneId === 'application' ? (
                   <>
-              <div className="-mx-4 flex gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+              <p className={cn(dossierTypography.body, dossierTypography.prose)}>
+                Submission tracker for the SSRC Just Tech Fellowship application. PDF slots are ready for upload; drafted text is visible on Application Answers and below.
+              </p>
+
+              <div className="mt-8">
+                <ApplicationMaterialsDashboard onNavigate={goToZone} />
+              </div>
+
+              <AiUseDisclosureBlock />
+              <SupportingProjectPageBlock />
+
+              <div className="mt-12">
+                <p className={dossierTypography.eyebrow}>Fellowship year timeline</p>
+                <div className="-mx-4 mt-4 flex gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-4">
                 {ssrcTimeline.map((row) => (
                   <article key={row.quarter} className={cn('min-w-[16rem] shrink-0 p-4 sm:min-w-0', grantCardClass)}>
                     <p className={dossierTypography.eyebrow}>{row.quarter}</p>
@@ -496,24 +537,8 @@ export default function SsrcJustTechFellowshipPage() {
                     <p className={cn('mt-2', dossierTypography.meta)}>{row.outputs.join(' · ')}</p>
                   </article>
                 ))}
-              </div>
-
-              <details className={cn('mt-8', grantCardClass)}>
-                <summary className={cn('cursor-pointer px-4 py-3 font-semibold text-stone-900 dark:text-stone-100', dossierTypography.meta)}>
-                  Application dashboard — submission materials
-                </summary>
-                <div className="space-y-3 border-t border-stone-200 p-4 dark:border-stone-700">
-                  {ssrcApplicationMaterials.map((item) => (
-                    <div key={item.label} className="flex flex-col gap-2 border-b border-stone-100 pb-3 last:border-0 dark:border-stone-800 sm:flex-row sm:items-center sm:justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{item.label}</p>
-                        <p className={dossierTypography.meta}>{item.notes}</p>
-                      </div>
-                      <StatusPill status={item.status} />
-                    </div>
-                  ))}
                 </div>
-              </details>
+              </div>
 
               <div className={cn('mt-8 p-5', grantCardClass)}>
                 <p className={dossierTypography.eyebrow}>Proposed outcomes by end of 2027</p>
