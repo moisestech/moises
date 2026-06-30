@@ -45,6 +45,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/opportunities/wolfsonian',
+        destination: '/grant/wolfsonian-fellowship',
+        permanent: false,
+      },
+      {
         source: '/grant/wolfsonian',
         destination: '/grant/wolfsonian-fellowship',
         permanent: false,

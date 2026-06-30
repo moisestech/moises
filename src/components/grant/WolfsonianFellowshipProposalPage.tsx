@@ -1,42 +1,39 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
-  wolfsonianApiHighlight,
-  wolfsonianDownloads,
-  wolfsonianImages,
-  wolfsonianInstitutionalRoles,
-  wolfsonianVisualEssaySections,
-} from '@/content/grants/wolfsonian-fellowship';
-import { wolfsonianProposalStatement } from '@/content/grants/wolfsonian-fellowship-statement';
-
-function roleById(roleId: string) {
-  return wolfsonianInstitutionalRoles.find((role) => role.id === roleId);
-}
+  grantDossierSectionScrollMarginClass,
+  readGrantDossierScrollThresholdPx,
+  siteHeaderExpandedPaddingTopClass,
+} from '@/config/site-header-layout';
+import {
+  getWolfsonianAccent,
+  wolfsonianPresentationPathIds,
+} from '@/config/wolfsonian-section-theme';
+import { dossierTypography } from '@/components/grant/dossier/GrantDossierUi';
+import { wolfsonianStoryBlocks } from '@/content/grants/wolfsonian-fellowship';
+import { WolfsonianStoryBlockView } from '@/components/grant/wolfsonian/WolfsonianStoryBlock';
 
 export default function WolfsonianFellowshipProposalPage() {
-  const [activeRoleId, setActiveRoleId] = useState(wolfsonianInstitutionalRoles[0]?.id ?? '');
-  const [activeSectionId, setActiveSectionId] = useState('overview');
+  const [activeSectionId, setActiveSectionId] = useState(wolfsonianStoryBlocks[0]?.id ?? 'hero');
+
   const navItems = useMemo(
-    () => [
-      { id: 'overview', label: 'Overview' },
-      { id: 'research-statement', label: 'Statement' },
-      { id: 'api-highlight', label: 'API' },
-      { id: 'visual-essay', label: 'Visual essay' },
-      { id: 'gallery', label: 'Gallery' },
-      { id: 'institutional-roles', label: 'Institutional roles' },
-      { id: 'proposal-notes', label: 'Notes' },
-    ],
+    () =>
+      wolfsonianStoryBlocks.map((block) => ({
+        id: block.id,
+        label: block.navLabel,
+      })),
     [],
   );
-  const bannerImage = wolfsonianImages.find((image) => image.role === 'banner');
-  const galleryImages = wolfsonianImages.filter((image) => image.role === 'gallery');
-  const activeRole = useMemo(
-    () => wolfsonianInstitutionalRoles.find((role) => role.id === activeRoleId) ?? wolfsonianInstitutionalRoles[0],
-    [activeRoleId],
+
+  const presentationPathLabels = useMemo(
+    () =>
+      wolfsonianPresentationPathIds
+        .map((id) => navItems.find((item) => item.id === id)?.label)
+        .filter(Boolean)
+        .join(' · '),
+    [navItems],
   );
 
   const navIds = useMemo(() => navItems.map((item) => item.id), [navItems]);
@@ -49,12 +46,24 @@ export default function WolfsonianFellowshipProposalPage() {
   }, [navIds]);
 
   useEffect(() => {
+    const updateScrollOffset = () => {
+      const threshold = readGrantDossierScrollThresholdPx();
+      document.documentElement.style.setProperty('--wolfsonian-scroll-offset', `${threshold}px`);
+    };
+
+    updateScrollOffset();
+    window.addEventListener('resize', updateScrollOffset);
+    return () => window.removeEventListener('resize', updateScrollOffset);
+  }, []);
+
+  useEffect(() => {
     const updateActiveSection = () => {
-      let current = navIds[0] ?? 'overview';
+      const threshold = readGrantDossierScrollThresholdPx();
+      let current = navIds[0] ?? 'hero';
       for (const id of navIds) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= 220) current = id;
+        if (el.getBoundingClientRect().top <= threshold) current = id;
       }
       setActiveSectionId((prev) => (prev === current ? prev : current));
     };
@@ -77,318 +86,73 @@ export default function WolfsonianFellowshipProposalPage() {
     setActiveSectionId(id);
   }, []);
 
-  if (!activeRole) return null;
+  const activeAccent = getWolfsonianAccent(activeSectionId);
 
   return (
-    <main className="min-h-screen bg-stone-50 text-stone-900 dark:bg-neutral-950 dark:text-stone-100">
-      <section id="overview" className="mx-auto w-[min(96vw,1200px)] px-4 pb-14 pt-24 sm:px-8 sm:pt-32">
-        <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
-          A Wolfsonian-FIU Creative Fellowship Proposal
-        </p>
-
+    <main
+      className={cn(
+        'min-h-screen bg-stone-50 text-stone-900 dark:bg-neutral-950 dark:text-stone-100',
+        siteHeaderExpandedPaddingTopClass,
+      )}
+    >
+      <div className="mx-auto w-[min(96vw,1200px)] px-4 pb-20 sm:px-8">
         <nav
+          data-grant-dossier-sticky-nav
           aria-label="Wolfsonian section navigation"
-          className="sticky top-24 z-40 mb-8 overflow-x-auto border border-stone-300 bg-white/95 px-3 py-3 backdrop-blur md:top-32 dark:border-stone-700 dark:bg-neutral-900/95"
+          className={cn(
+            'sticky z-40 mb-10 overflow-x-auto border bg-white/95 px-3 py-3 backdrop-blur dark:bg-neutral-900/95',
+            'top-[var(--site-header-height,5rem)] transition-[top] duration-300 ease-in-out',
+            activeAccent.mediaBorder,
+          )}
         >
+          <p className={cn('mb-2 hidden text-[0.65rem] uppercase tracking-[0.15em] md:block', activeAccent.eyebrow)}>
+            Presentation path — {presentationPathLabels}
+          </p>
           <div className="flex min-w-max gap-2">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={cn(
-                  'rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-wide transition',
-                  activeSectionId === item.id
-                    ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-black'
-                    : 'border-stone-300 hover:border-stone-600 dark:border-stone-600 dark:hover:border-stone-300',
-                )}
-                aria-current={activeSectionId === item.id ? 'true' : undefined}
-                onClick={(event) => {
-                  event.preventDefault();
-                  scrollToSection(item.id);
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const accent = getWolfsonianAccent(item.id);
+              const isActive = activeSectionId === item.id;
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={cn(
+                    'relative rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                    isActive
+                      ? cn(accent.navActive, accent.navActiveText)
+                      : accent.navIdle,
+                  )}
+                  aria-current={isActive ? 'true' : undefined}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    scrollToSection(item.id);
+                  }}
+                >
+                  {item.label}
+                  {isActive ? (
+                    <span
+                      className={cn('absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full', accent.progressDot)}
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                </a>
+              );
+            })}
           </div>
         </nav>
 
-        <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl">
-          The Archive Dreams in Public
-        </h1>
-        <p className="mt-3 text-xl font-medium text-stone-800 dark:text-stone-200">
-          An Agentic Study of Institutional Memory
-        </p>
-        <p className="mt-5 max-w-3xl text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg">
-          What happens when an archive begins to interpret itself?
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          {wolfsonianDownloads.map((download) => (
-            <Link
-              key={download.href}
-              href={download.href}
-              className="inline-flex items-center justify-center border border-stone-800 px-4 py-2 text-sm font-medium transition hover:bg-stone-900 hover:text-white dark:border-stone-200 dark:hover:bg-stone-100 dark:hover:text-black"
-            >
-              {download.label}
-            </Link>
+        <article className={cn('space-y-20 sm:space-y-28', grantDossierSectionScrollMarginClass)}>
+          {wolfsonianStoryBlocks.map((block, index) => (
+            <WolfsonianStoryBlockView key={block.id} block={block} isHero={index === 0} />
           ))}
-        </div>
+        </article>
 
-        {bannerImage ? (
-          <figure className="mt-10 overflow-hidden border border-stone-300 bg-white dark:border-stone-700 dark:bg-neutral-900">
-            <div className="relative aspect-[16/8] w-full">
-              <Image
-                src={bannerImage.src}
-                alt={bannerImage.alt}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 1200px"
-              />
-            </div>
-            <figcaption className="border-t border-stone-200 px-4 py-3 text-sm text-stone-700 dark:border-stone-700 dark:text-stone-300">
-              {bannerImage.caption} {bannerImage.isPlaceholder ? '(placeholder path pending final local asset)' : ''}
-            </figcaption>
-          </figure>
-        ) : null}
-      </section>
-
-      <article className="mx-auto w-[min(96vw,1200px)] space-y-16 px-4 pb-20 sm:px-8">
-        <section id="research-statement" aria-labelledby="research-statement-heading" className="scroll-mt-36">
-          <h2
-            id="research-statement-heading"
-            className="border-b border-stone-300 pb-4 text-2xl font-semibold dark:border-stone-700"
-          >
-            Research statement
-          </h2>
-          <div className="mt-8 max-w-3xl space-y-10">
-            {wolfsonianProposalStatement.map((section) => (
-              <div key={section.id}>
-                {section.title ? (
-                  <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">{section.title}</h3>
-                ) : null}
-                <div className={cn('space-y-4', section.title && 'mt-3')}>
-                  {section.paragraphs.map((paragraph) => (
-                    <p
-                      key={paragraph.slice(0, 48)}
-                      className="text-base leading-relaxed text-stone-700 dark:text-stone-300 sm:text-lg"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section
-          id="api-highlight"
-          aria-labelledby="api-highlight-heading"
-          className="border border-sky-400/50 bg-sky-50 p-6 dark:bg-sky-950/30"
-        >
-          <h2 id="api-highlight-heading" className="text-xl font-semibold">
-            Highlighted research infrastructure
-          </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-stone-700 dark:text-stone-300 sm:text-base">
-            {wolfsonianApiHighlight.summary}
+        <footer className={cn('mt-16 border-t border-stone-300 pt-8 dark:border-stone-700', dossierTypography.meta)}>
+          <p>
+            The Archive Dreams in Public — Wolfsonian-FIU Creative Fellowship proposal by Moises Sanabria.
           </p>
-          <p className="mt-4">
-            <a
-              href={wolfsonianApiHighlight.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center border border-sky-700 px-4 py-2 text-sm font-semibold text-sky-900 transition hover:bg-sky-100 dark:border-sky-300 dark:text-sky-200 dark:hover:bg-sky-900/50"
-            >
-              Explore the Wolfsonian API
-            </a>
-          </p>
-        </section>
-
-        <section id="visual-essay" aria-labelledby="visual-essay-heading">
-          <h2 id="visual-essay-heading" className="border-b border-stone-300 pb-4 text-2xl font-semibold dark:border-stone-700">
-            Visual essay
-          </h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {wolfsonianVisualEssaySections.map((entry) => (
-              <div
-                key={entry.title}
-                className="border border-stone-300 bg-white p-5 dark:border-stone-700 dark:bg-neutral-900"
-              >
-                <h3 className="text-base font-semibold">{entry.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone-700 dark:text-stone-300">{entry.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="gallery" aria-labelledby="gallery-heading">
-          <h2 id="gallery-heading" className="border-b border-stone-300 pb-4 text-2xl font-semibold dark:border-stone-700">
-            Project image gallery
-          </h2>
-          <p className="mt-4 max-w-3xl text-sm text-stone-600 dark:text-stone-400 sm:text-base">
-            Hero -&gt; Living Painting -&gt; Citation Trail -&gt; Memory Engine -&gt; Synthetic Saturation -&gt;
-            Installation Rendering.
-          </p>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {galleryImages.map((image) => (
-              <figure
-                key={image.src}
-                className="overflow-hidden border border-stone-300 bg-white dark:border-stone-700 dark:bg-neutral-900"
-              >
-                <div className="relative aspect-[4/3] w-full">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition duration-500 hover:scale-[1.02]"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <figcaption className="border-t border-stone-200 px-4 py-3 text-sm text-stone-700 dark:border-stone-700 dark:text-stone-300">
-                  {image.caption}
-                  {image.isPlaceholder ? (
-                    <span className="mt-1 block text-xs text-stone-500 dark:text-stone-400">
-                      Expected local file: <code>{image.expectedPath}</code>
-                    </span>
-                  ) : null}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
-        <section id="institutional-roles" aria-labelledby="institutional-roles-heading" className="scroll-mt-36">
-          <h2
-            id="institutional-roles-heading"
-            className="border-b border-stone-300 pb-4 text-2xl font-semibold dark:border-stone-700"
-          >
-            Institutional Roles
-          </h2>
-          <p className="mt-4 max-w-3xl text-sm text-stone-600 dark:text-stone-400 sm:text-base">
-            Hover, focus, or select a role to activate its relationships. The network remains calm by default and
-            becomes more active only on interaction.
-          </p>
-
-          <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
-            <div className="border border-stone-300 bg-white p-3 dark:border-stone-700 dark:bg-neutral-900">
-              <ul className="space-y-2" role="list">
-                {wolfsonianInstitutionalRoles.map((role) => {
-                  const active = role.id === activeRole.id;
-                  return (
-                    <li key={role.id}>
-                      <button
-                        type="button"
-                        onMouseEnter={() => setActiveRoleId(role.id)}
-                        onFocus={() => setActiveRoleId(role.id)}
-                        onClick={() => setActiveRoleId(role.id)}
-                        className={cn(
-                          'w-full border px-4 py-3 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500',
-                          active
-                            ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-black'
-                            : 'border-stone-300 bg-white hover:border-stone-500 dark:border-stone-700 dark:bg-neutral-900 dark:hover:border-stone-400',
-                        )}
-                        aria-current={active ? 'true' : undefined}
-                      >
-                        <p className="text-sm font-semibold">{role.title}</p>
-                        <p
-                          className={cn(
-                            'mt-1 text-sm',
-                            active ? 'text-stone-100 dark:text-stone-900' : 'text-stone-600 dark:text-stone-400',
-                          )}
-                        >
-                          {role.description}
-                        </p>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            <div className="space-y-4">
-              <div className="relative overflow-hidden border border-stone-300 bg-white p-5 dark:border-stone-700 dark:bg-neutral-900">
-                <h3 className="text-lg font-semibold">{activeRole.title}</h3>
-                <p className="mt-2 text-sm text-stone-700 dark:text-stone-300">{activeRole.description}</p>
-
-                <div className="mt-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                    Related themes
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {activeRole.themes.map((theme) => (
-                      <span
-                        key={theme}
-                        className="border border-stone-400/60 px-2 py-1 text-xs dark:border-stone-500"
-                      >
-                        {theme}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                    Connected archive objects
-                  </p>
-                  <ul className="mt-2 grid gap-2 sm:grid-cols-2">
-                    {activeRole.archiveObjects.map((objectName) => (
-                      <li
-                        key={objectName}
-                        className="border border-stone-300 bg-stone-50 px-3 py-2 text-sm motion-safe:animate-pulse dark:border-stone-700 dark:bg-neutral-950"
-                      >
-                        {objectName}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-5 border-t border-stone-200 pt-4 dark:border-stone-700">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                    Relationship paths
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {activeRole.connectedRoleIds.map((connectedRoleId) => {
-                      const connectedRole = roleById(connectedRoleId);
-                      if (!connectedRole) return null;
-                      return (
-                        <span
-                          key={connectedRoleId}
-                          className="inline-flex items-center gap-2 border border-sky-500/40 bg-sky-500/10 px-2 py-1 text-xs text-sky-800 motion-safe:animate-[pulse_2s_ease-in-out_infinite] motion-reduce:animate-none dark:text-sky-300"
-                        >
-                          {activeRole.title} → {connectedRole.title}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              <aside className="border border-stone-300 bg-white p-5 dark:border-stone-700 dark:bg-neutral-900">
-                <p className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                  Source logic
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-stone-700 dark:text-stone-300">{activeRole.sourceLogic}</p>
-              </aside>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="proposal-notes"
-          aria-labelledby="proposal-notes-heading"
-          className="border border-stone-300 bg-white p-6 dark:border-stone-700 dark:bg-neutral-900"
-        >
-          <h2 id="proposal-notes-heading" className="text-xl font-semibold">
-            Access and flow notes
-          </h2>
-          <ul className="mt-4 space-y-2 text-sm text-stone-700 dark:text-stone-300">
-            <li>Public URL with unlisted SEO posture for fellowship circulation.</li>
-            <li>No quiz and no personal-data form requirements.</li>
-            <li>Interaction supports keyboard focus and reduced-motion preferences.</li>
-          </ul>
-        </section>
-      </article>
+        </footer>
+      </div>
     </main>
   );
 }

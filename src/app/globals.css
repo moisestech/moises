@@ -193,6 +193,18 @@
   }
 }
 
+@keyframes wolfsonian-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(12px, -8px);
+    opacity: 1;
+  }
+}
+
 @keyframes grant-portrait-sheen {
   from {
     transform: translateX(-130%) skewX(-14deg);
