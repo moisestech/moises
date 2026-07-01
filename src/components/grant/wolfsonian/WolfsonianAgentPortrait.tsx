@@ -39,7 +39,8 @@ export function WolfsonianAgentPortrait({
   const colorClass = agentColorMap[role.color ?? 'stone'] ?? agentColorMap.stone;
   const sizeClass =
     size === 'sm' ? 'h-12 w-12 text-xs' : size === 'lg' ? 'h-24 w-24 text-lg' : 'h-16 w-16 text-sm';
-  const showImage = role.portraitExpectedPath && !imageError;
+  const showImage = (role.portraitSrc || role.portraitExpectedPath) && !imageError;
+  const imageSrc = role.portraitSrc ?? role.portraitExpectedPath;
 
   return (
     <div
@@ -51,12 +52,12 @@ export function WolfsonianAgentPortrait({
       )}
       aria-hidden="true"
     >
-      {showImage ? (
+      {showImage && imageSrc ? (
         <Image
-          src={role.portraitExpectedPath!}
+          src={imageSrc}
           alt=""
           fill
-          className="object-cover"
+          className="object-contain p-0.5"
           onError={() => setImageError(true)}
           sizes="96px"
         />

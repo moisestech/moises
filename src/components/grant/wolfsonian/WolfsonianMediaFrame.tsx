@@ -43,7 +43,7 @@ export function WolfsonianMediaFrame({
         fill
         priority={isHero}
         className={cn(
-          'object-cover transition duration-500 motion-reduce:transition-none',
+          'object-contain bg-stone-100 transition duration-500 motion-reduce:transition-none dark:bg-neutral-950',
           effect === 'zoom' && 'scale-[1.02]',
         )}
         sizes={isHero ? '(max-width: 768px) 100vw, 1200px' : '(max-width: 768px) 100vw, 50vw'}

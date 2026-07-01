@@ -106,6 +106,11 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
           <WolfsonianPsychographicMap variant="typology" />
         </div>
       ) : null}
+      {block.id === 'why-wolfsonian' ? (
+        <div className="mt-6">
+          <WolfsonianPsychographicMap variant="typology" />
+        </div>
+      ) : null}
       {block.id === 'designed-belief' ? (
         <div className="mt-6">
           <WolfsonianPsychographicMap variant="pressures" onPressureActivate={handlePressureActivate} />
@@ -159,6 +164,7 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
           {textColumn}
           {imageColumn}
           {interactiveColumn()}
+          {block.id === 'related-works' ? <WolfsonianWorkEvidence /> : null}
           {block.id === 'society-inside-archive' ? (
             <WolfsonianRoleExplorer activeKeyword={activeKeyword} />
           ) : null}

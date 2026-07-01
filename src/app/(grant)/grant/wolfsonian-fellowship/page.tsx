@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780282283/art/moisestech-website/research/wolfsonian-fellowship/wolfsonian-4_ugeyy1.png',
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1782901428/grants/wolfsonian/sections/01-premise-archive-dreams_qzh8vg.png',
         alt: 'The Archive Dreams in Public',
       },
     ],
