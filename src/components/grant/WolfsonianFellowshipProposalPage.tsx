@@ -100,7 +100,7 @@ export default function WolfsonianFellowshipProposalPage() {
           data-grant-dossier-sticky-nav
           aria-label="Wolfsonian section navigation"
           className={cn(
-            'sticky z-40 mb-10 overflow-x-auto border bg-white/95 px-3 py-3 backdrop-blur dark:bg-neutral-900/95',
+            'sticky z-40 mb-10 border bg-white/95 px-3 py-3 backdrop-blur dark:bg-neutral-900/95',
             'top-[var(--site-header-height,5rem)] transition-[top] duration-300 ease-in-out',
             activeAccent.mediaBorder,
           )}
@@ -108,36 +108,47 @@ export default function WolfsonianFellowshipProposalPage() {
           <p className={cn('mb-2 hidden text-[0.65rem] uppercase tracking-[0.15em] md:block', activeAccent.eyebrow)}>
             Presentation path — {presentationPathLabels}
           </p>
-          <div className="flex min-w-max gap-2">
-            {navItems.map((item) => {
-              const accent = getWolfsonianAccent(item.id);
-              const isActive = activeSectionId === item.id;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={cn(
-                    'relative rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
-                    isActive
-                      ? cn(accent.navActive, accent.navActiveText)
-                      : accent.navIdle,
-                  )}
-                  aria-current={isActive ? 'true' : undefined}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    scrollToSection(item.id);
-                  }}
-                >
-                  {item.label}
-                  {isActive ? (
-                    <span
-                      className={cn('absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full', accent.progressDot)}
-                      aria-hidden="true"
-                    />
-                  ) : null}
-                </a>
-              );
-            })}
+          <div className="relative">
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white/95 to-transparent dark:from-neutral-900/95 lg:hidden"
+              aria-hidden="true"
+            />
+            <div className="-mx-1 overflow-x-auto px-1 pb-0.5">
+              <div className="flex min-w-max gap-2">
+                {navItems.map((item) => {
+                  const accent = getWolfsonianAccent(item.id);
+                  const isActive = activeSectionId === item.id;
+                  return (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className={cn(
+                        'relative inline-flex min-h-11 items-center rounded-full border px-3 py-2.5 text-xs font-medium uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                        isActive
+                          ? cn(accent.navActive, accent.navActiveText)
+                          : accent.navIdle,
+                      )}
+                      aria-current={isActive ? 'true' : undefined}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        scrollToSection(item.id);
+                      }}
+                    >
+                      {item.label}
+                      {isActive ? (
+                        <span
+                          className={cn(
+                            'absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full',
+                            accent.progressDot,
+                          )}
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </nav>
 

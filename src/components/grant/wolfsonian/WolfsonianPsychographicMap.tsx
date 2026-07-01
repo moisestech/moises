@@ -8,6 +8,7 @@ import {
   wolfsonianPsychographicPressures,
 } from '@/content/grants/wolfsonian-fellowship';
 import { getWolfsonianAccent } from '@/config/wolfsonian-section-theme';
+import { WolfsonianInteractHint } from './WolfsonianInteractHint';
 
 type PsychographicMapProps = {
   variant: 'typology' | 'pressures';
@@ -53,7 +54,10 @@ function ObjectTypologyMap() {
         </p>
       ) : (
         <p className="mt-4 text-sm text-stone-500 dark:text-stone-400">
-          Hover an object type to reveal its ideological keyword.
+          <WolfsonianInteractHint
+            touch="Tap an object type to reveal its ideological keyword."
+            hover="Hover an object type to reveal its ideological keyword."
+          />
         </p>
       )}
     </div>
@@ -114,7 +118,10 @@ function PressureMap({ onPressureActivate }: { onPressureActivate?: (word: strin
         </div>
       ) : (
         <p className="mt-4 text-sm text-stone-500 dark:text-stone-400">
-          Hover a pressure word to see its description and connected object categories.
+          <WolfsonianInteractHint
+            touch="Tap a pressure word to see its description and connected object categories."
+            hover="Hover a pressure word to see its description and connected object categories."
+          />
         </p>
       )}
       <p className={cn('mt-4 border-l-2 pl-3 text-xs italic', accent.paragraphActiveBorder, 'text-stone-600 dark:text-stone-400')}>

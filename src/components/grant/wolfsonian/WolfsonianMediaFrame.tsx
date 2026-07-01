@@ -33,7 +33,12 @@ export function WolfsonianMediaFrame({
 }: WolfsonianMediaFrameProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const effect = imageEffect ?? 'none';
-  const aspectClass = image.aspect === 'portrait' ? 'aspect-[3/4]' : isHero ? 'aspect-[16/8]' : 'aspect-[4/3]';
+  const aspectClass =
+    image.aspect === 'portrait'
+      ? 'aspect-[4/5] sm:aspect-[3/4]'
+      : isHero
+        ? 'aspect-[3/2] sm:aspect-[16/8]'
+        : 'aspect-[5/4] sm:aspect-[4/3]';
 
   const frame = (
     <div className={cn('relative w-full overflow-hidden', aspectClass)}>
@@ -84,6 +89,11 @@ export function WolfsonianMediaFrame({
       )}
       <figcaption className="border-t border-stone-200 px-4 py-3 text-sm text-stone-700 dark:border-stone-700 dark:text-stone-300">
         {image.caption}
+        {enableLightbox ? (
+          <span className="mt-1 block text-xs text-stone-500 [@media(hover:hover)]:hidden dark:text-stone-400">
+            Tap image to enlarge
+          </span>
+        ) : null}
         {process.env.NODE_ENV === 'development' && image.sectionAssetPath ? (
           <span className="mt-1 block text-xs text-stone-400">Expected: {image.sectionAssetPath}</span>
         ) : null}

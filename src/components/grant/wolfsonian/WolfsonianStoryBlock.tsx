@@ -18,6 +18,7 @@ import { WolfsonianDownloadCards } from './WolfsonianDownloadCards';
 import { WolfsonianPsychographicMap } from './WolfsonianPsychographicMap';
 import { WolfsonianMediaFrame } from './WolfsonianMediaFrame';
 import { WolfsonianStoryParagraphs, type ParagraphActivation } from './WolfsonianStoryParagraph';
+import { WolfsonianInteractHint } from './WolfsonianInteractHint';
 
 type WolfsonianStoryBlockProps = {
   block: WolfsonianStoryBlock;
@@ -83,7 +84,14 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
       />
       {block.aside ? (
         <p className={cn('mt-4 border-l-2 pl-4', accent.paragraphActiveBorder, dossierTypography.meta)}>
-          {block.aside}
+          {block.id === 'society-inside-archive' ? (
+            <WolfsonianInteractHint
+              touch="Tap a role below to trace its relationships across the institutional network."
+              hover={block.aside}
+            />
+          ) : (
+            block.aside
+          )}
         </p>
       ) : null}
       {block.goals ? (
@@ -102,11 +110,6 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
         </ol>
       ) : null}
       {block.media?.type === 'interactive' && block.media.component === 'psychographic' ? (
-        <div className="mt-6">
-          <WolfsonianPsychographicMap variant="typology" />
-        </div>
-      ) : null}
-      {block.id === 'why-wolfsonian' ? (
         <div className="mt-6">
           <WolfsonianPsychographicMap variant="typology" />
         </div>
@@ -146,6 +149,13 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
     }
   };
 
+  const whyWolfsonianTypology =
+    block.id === 'why-wolfsonian' ? (
+      <div className="mt-6">
+        <WolfsonianPsychographicMap variant="typology" />
+      </div>
+    ) : null;
+
   const layout = block.layout ?? 'stack';
 
   return (
@@ -163,8 +173,9 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
         <div className="space-y-8">
           {textColumn}
           {imageColumn}
+          {whyWolfsonianTypology}
           {interactiveColumn()}
-          {block.id === 'related-works' ? <WolfsonianWorkEvidence /> : null}
+          {block.id === 'related-works' ? <WolfsonianWorkEvidence collapsibleOnMobile /> : null}
           {block.id === 'society-inside-archive' ? (
             <WolfsonianRoleExplorer activeKeyword={activeKeyword} />
           ) : null}

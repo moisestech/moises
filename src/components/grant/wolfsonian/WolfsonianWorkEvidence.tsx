@@ -5,12 +5,18 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { wolfsonianRelatedWorks } from '@/content/grants/wolfsonian-fellowship';
+import { grantButtonClass } from '@/components/grant/dossier/GrantDossierUi';
 
-export function WolfsonianWorkEvidence() {
+type WolfsonianWorkEvidenceProps = {
+  collapsibleOnMobile?: boolean;
+};
+
+export function WolfsonianWorkEvidence({ collapsibleOnMobile = false }: WolfsonianWorkEvidenceProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
-  return (
-    <div className="mt-6 grid gap-6 md:grid-cols-2">
+  const grid = (
+    <div className={cn('grid gap-6 md:grid-cols-2', collapsibleOnMobile ? 'mt-4 lg:mt-6' : 'mt-6')}>
       {wolfsonianRelatedWorks.map((work) => {
         const hovered = hoveredId === work.id;
         return (
@@ -59,6 +65,22 @@ export function WolfsonianWorkEvidence() {
           </Link>
         );
       })}
+    </div>
+  );
+
+  if (!collapsibleOnMobile) return grid;
+
+  return (
+    <div className="mt-6 lg:mt-6">
+      <button
+        type="button"
+        className={cn(grantButtonClass, 'w-full lg:hidden')}
+        aria-expanded={expanded}
+        onClick={() => setExpanded((prev) => !prev)}
+      >
+        {expanded ? 'Hide individual works' : `View ${wolfsonianRelatedWorks.length} individual works`}
+      </button>
+      <div className={cn(!expanded && 'hidden', 'lg:block')}>{grid}</div>
     </div>
   );
 }
