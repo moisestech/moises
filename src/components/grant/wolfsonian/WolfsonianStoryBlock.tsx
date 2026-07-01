@@ -149,14 +149,26 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
     }
   };
 
+  const layout = block.layout ?? 'stack';
+  const splitLayout = (layout === 'textLeft' || layout === 'textRight') && Boolean(imageColumn);
+
   const whyWolfsonianTypology =
     block.id === 'why-wolfsonian' ? (
-      <div className="mt-6">
+      <div className={cn(splitLayout && 'mt-8')}>
         <WolfsonianPsychographicMap variant="typology" />
       </div>
     ) : null;
 
-  const layout = block.layout ?? 'stack';
+  const sectionBelowGrid = (
+    <>
+      {whyWolfsonianTypology}
+      {interactiveColumn()}
+      {block.id === 'related-works' ? <WolfsonianWorkEvidence collapsibleOnMobile /> : null}
+      {block.id === 'society-inside-archive' ? (
+        <WolfsonianRoleExplorer activeKeyword={activeKeyword} />
+      ) : null}
+    </>
+  );
 
   return (
     <LearnAiReveal
@@ -169,34 +181,26 @@ export function WolfsonianStoryBlockView({ block, isHero = false }: WolfsonianSt
         accent.sectionGradient,
       )}
     >
-      {layout === 'stack' ? (
+      {splitLayout ? (
+        <>
+          <div
+            className={cn(
+              'grid items-start gap-8 md:grid-cols-2 md:gap-12 [&>*]:min-w-0',
+              layout === 'textRight' && 'md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1',
+            )}
+          >
+            {textColumn}
+            {imageColumn}
+          </div>
+          {sectionBelowGrid}
+        </>
+      ) : (
         <div className="space-y-8">
           {textColumn}
           {imageColumn}
-          {whyWolfsonianTypology}
-          {interactiveColumn()}
-          {block.id === 'related-works' ? <WolfsonianWorkEvidence collapsibleOnMobile /> : null}
-          {block.id === 'society-inside-archive' ? (
-            <WolfsonianRoleExplorer activeKeyword={activeKeyword} />
-          ) : null}
-        </div>
-      ) : (
-        <div
-          className={cn(
-            imageColumn ? 'grid items-start gap-8 lg:grid-cols-2 lg:gap-12' : 'space-y-6',
-            imageColumn && layout === 'textRight' && 'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1',
-          )}
-        >
-          {textColumn}
-          {imageColumn}
+          {sectionBelowGrid}
         </div>
       )}
-      {layout !== 'stack' && block.id === 'society-inside-archive' ? (
-        <WolfsonianRoleExplorer activeKeyword={activeKeyword} />
-      ) : null}
-      {layout !== 'stack' && block.media?.type === 'interactive' && block.media.component === 'works' ? (
-        <div className="mt-8">{interactiveColumn()}</div>
-      ) : null}
     </LearnAiReveal>
   );
 }
