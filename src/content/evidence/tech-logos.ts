@@ -16,6 +16,16 @@ function si(slug: string, color?: string): string {
 }
 
 export const techLogoRegistry: Record<string, TechLogoEntry> = {
+  anthropic: {
+    id: 'anthropic',
+    label: 'Claude',
+    imageSrc: `${jobsCdn}/v1783032752/jobs/claude_logo_2023_wihocz.png`,
+  },
+  airtable: {
+    id: 'airtable',
+    label: 'Airtable',
+    imageSrc: `${jobsCdn}/v1783032752/jobs/airtable_logo_xserwf.png`,
+  },
   openai: { id: 'openai', label: 'OpenAI', imageSrc: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png` },
   huggingface: { id: 'huggingface', label: 'Hugging Face', imageSrc: si('huggingface', 'FFD21E') },
   python: { id: 'python', label: 'Python', imageSrc: `${jobsCdn}/v1778692505/jobs/python-logo_edccrx.png` },

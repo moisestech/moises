@@ -4,95 +4,204 @@ import {
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
 } from '@/content/evidence/projects';
+import { moisesRecruitingProfiles } from '@/content/evidence/recruitingDefaults';
+import { aiEngineeringVisuals, proofProjectImageSrc } from '@/content/ai-engineering/visualAssets';
 
-export type StackGroup = {
-  area: string;
-  tools: string;
+export type StackMatchRow = {
+  platform: string;
+  proofAngle: string;
 };
 
 export type ProofProject = {
   slug: string;
   title: string;
-  whatItIs: string;
-  whatIBuilt: string;
+  problem: string;
+  systemBuilt: string;
   stack: string[];
+  users: string;
+  outcome: string;
   whyItMatters: string;
-  href: string;
+  href?: string;
   imageSrc: string;
   imageAlt: string;
-  external?: boolean;
 };
 
 export type DownloadAsset = {
   label: string;
   path: string;
   available: boolean;
-  /** Fallback link when file is not yet available */
   fallbackPath?: string;
   fallbackLabel?: string;
 };
 
+export type ProcessStep = {
+  title: string;
+  description: string;
+};
+
+const SITE_ORIGIN = 'https://moises.tech';
+
+/** Paste into Gmail recruiter replies */
+export const recruiterLinksBlock = `AI Engineering: ${SITE_ORIGIN}/ai-engineering
+Career Packet: ${SITE_ORIGIN}/career-packet
+Resume: ${SITE_ORIGIN}/cv/tech
+Resume (PDF): ${SITE_ORIGIN}/resume/moises-sanabria-senior-genai-engineer.pdf
+Portfolio: ${SITE_ORIGIN}`;
+
+export const recruiterEmailFooter = `—
+Moises Sanabria · Full-Stack AI Systems Builder
+${SITE_ORIGIN}/career-packet · ${SITE_ORIGIN}/ai-engineering
+m@moises.tech · Miami / Remote`;
+
 export const aiEngineeringPacket = {
   seo: {
-    title: 'AI Engineering — Moises Sanabria | moises.tech',
+    title: 'Full-Stack AI Systems Builder — Moises Sanabria | moises.tech',
     description:
-      'Full-stack AI systems builder: agentic workflows, automation, Next.js, TypeScript, Supabase, Airtable, n8n, and LLM tooling. Recruiter packet for applied AI and product engineering roles.',
+      'Claude Code · agentic systems · Next.js · Supabase · Airtable · n8n. Practical AI workflows, automation, and production prototypes for organizations that need a solo builder who can scope and ship.',
+    ogImage: aiEngineeringVisuals.ogImage,
   },
+  careerPacketOgImage: aiEngineeringVisuals.careerPacketOgImage,
   hero: {
-    headline:
-      'Full-stack AI systems builder working across agentic workflows, automation, and creative technical infrastructure.',
+    headline: 'Full-Stack AI Systems Builder',
+    headlineStack: 'Claude Code · Next.js · Supabase · Airtable · Automation Workflows',
     subheadline:
-      'I build applied AI tools, workflow systems, and production-ready prototypes using Next.js, TypeScript, Supabase, Airtable, n8n, Claude/OpenAI workflows, and modern deployment stacks.',
+      'I design and ship practical AI systems that connect LLM workflows, databases, automations, and usable interfaces for real organizations.',
+    primaryQuestion:
+      'Can this person build agentic AI tools in production, fast, with modern full-stack infrastructure?',
+  },
+  recruiterSnapshot: [
+    { label: 'Role lane', value: 'Full-Stack AI Engineer / Agentic Systems Builder' },
+    { label: 'Location', value: 'Miami / Remote' },
+    { label: 'Work modes', value: 'Contract, W2, full-time, consulting' },
+    {
+      label: 'Core stack',
+      value: 'Claude, OpenAI, Next.js, React, TypeScript, Supabase, Airtable, n8n, Vercel',
+    },
+    { label: 'Strength', value: 'Solo builder who can scope, prototype, and ship' },
+    {
+      label: 'Differentiator',
+      value: 'Artist-engineer with strong stakeholder communication and product judgment',
+    },
+  ],
+  agenticFit: {
+    title: 'Claude Code / Agentic AI Systems fit',
+    intro: 'Current market fit for roles requiring agentic tooling, solo engineering, and fast POC delivery.',
+    items: [
+      'Claude / OpenAI workflows and production AI prototypes',
+      'Next.js / React / TypeScript product interfaces',
+      'Supabase data layer and Vercel deployments',
+      'Airtable CRM and workflow operating systems',
+      'n8n automation pipelines and routing logic',
+      'Solo scoping and prototype delivery (POC in a week)',
+      'Non-technical stakeholder communication',
+      'GitHub engineering workflow and documentation',
+    ],
   },
   bestFitRoles: [
     'AI Engineer',
     'Full-Stack AI Engineer',
-    'Applied AI Engineer',
     'Agentic AI Developer',
+    'Claude Code Engineer',
+    'Applied AI Engineer',
     'AI Product Engineer',
     'Automation Engineer',
-    'Creative Technologist',
-    'Technical Director, Digital Systems',
   ],
-  bestFitNote:
-    'Best fit: small teams, ambiguous builds, AI workflow/product systems, automation-heavy teams, creative tools, internal tools, and teams needing strong technical communication with non-technical stakeholders.',
-  stackGroups: [
-    { area: 'Frontend', tools: 'Next.js, React, TypeScript' },
-    { area: 'Backend/Data', tools: 'Supabase, PostgreSQL, APIs' },
-    { area: 'AI', tools: 'Claude, OpenAI, Gemini, LLM workflows, agentic systems' },
-    { area: 'Automation', tools: 'n8n, Airtable, Make-style workflows' },
-    { area: 'Deployment', tools: 'Vercel, GitHub' },
-    { area: 'Product/Ops', tools: 'CRM design, dashboards, documentation, workflow architecture' },
+  stackMatch: [
     {
-      area: 'Creative Tech',
-      tools: 'projection, 3D scanning, resin printing, signage systems, digital lab infrastructure',
+      platform: 'Claude Code / Claude Desktop',
+      proofAngle: 'AI coding workflows, agentic build sessions, rapid prototyping in Cursor and Claude',
     },
-  ] satisfies StackGroup[],
+    {
+      platform: 'OpenAI / LLM workflows',
+      proofAngle: 'Prompt systems, structured outputs, automation, and production-facing prototypes',
+    },
+    {
+      platform: 'Next.js / React / TypeScript',
+      proofAngle: 'AI24, Infra24, product interfaces, and recruiter-facing site systems',
+    },
+    {
+      platform: 'Supabase',
+      proofAngle: 'App backends, auth/data layer, and full-stack prototypes',
+    },
+    {
+      platform: 'Airtable',
+      proofAngle: 'Life OS, recruiter graph, operational CRM, and decision-layer workflows',
+    },
+    {
+      platform: 'n8n / automation',
+      proofAngle: 'Gmail routing, labels, workflow automation, and system orchestration',
+    },
+    {
+      platform: 'Vercel / GitHub',
+      proofAngle: 'Deployed web apps, CI/CD patterns, and engineering documentation',
+    },
+  ] satisfies StackMatchRow[],
+  shortBio:
+    'Moises Sanabria is a Miami-based full-stack AI systems builder who ships agentic workflows, automation systems, and production-ready prototypes using Claude, Next.js, Supabase, Airtable, and n8n.',
+  technicalSummary150:
+    'Full-stack AI systems builder across Claude/OpenAI workflows, Next.js, TypeScript, Supabase, Airtable, and n8n. Ships agentic tools, CRM-style operating systems, and deployed prototypes for organizations that need one engineer who can scope with non-technical stakeholders and deliver quickly. Background includes founding engineer work at Lore Machine, AI24 infrastructure, Infra24 smart signage, and Oolite Digital Lab technical direction.',
   recruiterBlurb:
-    'Moises Sanabria is a Miami-based artist-engineer and full-stack AI systems builder. He works across Next.js, TypeScript, Supabase, Airtable, n8n, and LLM workflows, with experience building applied AI tools, automation systems, and creative technical infrastructure. He is especially strong in ambiguous roles that require both technical execution and product/scoping judgment.',
+    'Moises Sanabria is a Miami-based full-stack AI systems builder. He works across Claude Code, Next.js, TypeScript, Supabase, Airtable, and n8n to ship agentic workflows, automation systems, and production-ready prototypes. He is especially strong as a solo builder in ambiguous roles that require technical execution, workflow design, and clear communication with non-technical stakeholders.',
+  howIWork: {
+    lead: 'I can sit with a non-technical stakeholder, identify the real workflow, cut scope, define the first useful version, and ship a working prototype quickly.',
+    steps: [
+      {
+        title: 'Scope the workflow',
+        description: 'Clarify the decision, user, and what “done” looks like for v1.',
+      },
+      {
+        title: 'Map data and decisions',
+        description: 'Define tables, automations, LLM touchpoints, and failure modes.',
+      },
+      {
+        title: 'Build prototype',
+        description: 'Ship the smallest useful version in Next.js, APIs, or agentic tooling.',
+      },
+      {
+        title: 'Connect automations',
+        description: 'Wire n8n, Airtable, webhooks, and notification paths.',
+      },
+      {
+        title: 'Test with real users',
+        description: 'Validate with stakeholders before over-building.',
+      },
+      {
+        title: 'Deploy and document',
+        description: 'Vercel deploy, handoff docs, and a path the org can maintain.',
+      },
+    ] satisfies ProcessStep[],
+  },
   proofProjects: [
     {
-      slug: 'lore-machine',
-      title: 'Lore Machine',
-      whatItIs: 'AI narrative-to-media platform turning scripts, books, and lyrics into structured multimedia outputs.',
-      whatIBuilt:
-        'Founding engineer / Chief Prompt Officer: frontend web app, authentication, design systems, data API transactions, prompt workflows, generative image pipelines, and contractor/sprint coordination in a 3-person engineering team.',
-      stack: ['TypeScript', 'Next.js', 'Vercel', 'LLMs', 'Stable Diffusion', 'Replicate', 'Azure'],
+      slug: 'life-os',
+      title: 'Life OS / Recruiter Graph',
+      problem:
+        'Recruiting signals, follow-ups, and opportunity tracking were scattered across Gmail, LinkedIn, and ad-hoc notes — hard to act on quickly.',
+      systemBuilt:
+        'Airtable-backed operating system with Gmail automation (n8n), recruiter labeling, duplicate-risk tracking, Life OS Actions, and decision workflows that turn inbox noise into prioritized next steps.',
+      stack: ['Airtable', 'n8n', 'Gmail API', 'Claude', 'Workflow design', 'CRM architecture'],
+      users: 'Personal ops layer; recruiter pipeline and opportunity triage',
+      outcome:
+        'Faster recruiter response, cleaner archive batches, and a repeatable system for capturing fit, risk, and follow-up state.',
       whyItMatters:
-        'Demonstrates production AI product engineering, agentic creative workflows, and startup-speed delivery with non-technical leadership stakeholders.',
-      href: '/projects/lore-machine',
-      imageSrc: evidenceProjects['lore-machine'].imageSrc,
-      imageAlt: evidenceProjects['lore-machine'].imageAlt,
+        'Direct proof of Airtable CRM design, automation pipelines, and agentic-adjacent workflow systems — the same stack many Claude Code / agentic engineering roles require.',
+      imageSrc: proofProjectImageSrc(
+        'life-os',
+        aiEngineeringVisuals.proofImageFallbacks['life-os'],
+      ),
+      imageAlt: 'Life OS and recruiter graph — AI workflow and career systems architecture',
     },
     {
       slug: 'ai24',
       title: 'AI24',
-      whatItIs: 'AI education, tools, and cultural R&D platform for artists and institutions.',
-      whatIBuilt:
-        'Full-stack AI infrastructure, workshop programs, LMS-oriented architecture, automation strategy, and applied AI systems that make emerging tools legible and deployable.',
-      stack: ['Next.js', 'TypeScript', 'GenAI education', 'Automation', 'Multimodal workflows'],
-      whyItMatters:
-        'Shows end-to-end AI systems ownership — product, workflows, institutional delivery, and research translation into usable tools.',
+      problem:
+        'Artists and institutions needed legible paths into emerging AI tools without losing critical judgment or operational clarity.',
+      systemBuilt:
+        'Full-stack AI infrastructure: workshop programs, LMS-oriented architecture, automation strategy, and applied AI product systems deployed on modern web stack.',
+      stack: ['Next.js', 'TypeScript', 'Supabase', 'Vercel', 'GenAI education', 'Automation'],
+      users: 'Artists, institutions, workshop cohorts',
+      outcome: 'Public programs, product hub, and repeatable AI literacy delivery',
+      whyItMatters: 'End-to-end full-stack AI systems ownership — product, workflows, and deployment.',
       href: '/projects/ai24',
       imageSrc: AI24_WEBSITE_HERO_IMAGE,
       imageAlt: 'AI24 website — above-the-fold product and program hub',
@@ -100,60 +209,96 @@ export const aiEngineeringPacket = {
     {
       slug: 'infra24',
       title: 'Infra24 / Smart Sign',
-      whatItIs:
-        'Public display and digital infrastructure exploring how screens, signage, and civic systems shape attention.',
-      whatIBuilt:
-        'Deployed smart signage systems: CMS-driven content, Raspberry Pi hardware, venue integrations, and automation for community-facing digital displays.',
-      stack: ['Raspberry Pi', 'CMS', 'Signage systems', 'Automation', 'Hardware deployment'],
+      problem:
+        'Cultural venues needed community-facing digital displays that non-technical staff could update without engineering support.',
+      systemBuilt:
+        'CMS-driven smart signage: Raspberry Pi deployment, content feeds, venue integrations, and automation for bilingual public displays.',
+      stack: ['Raspberry Pi', 'CMS', 'Next.js', 'Signage systems', 'Automation'],
+      users: 'Venue staff, community audiences, program coordinators',
+      outcome: 'Deployed signage systems with operable content workflows',
       whyItMatters:
-        'Proof of real-world systems engineering beyond the browser — hardware, ops, and content workflows in production contexts.',
+        'Real-world deployed infrastructure beyond the browser — ops, hardware-adjacent systems, and stakeholder-facing tooling.',
       href: '/projects/infra24',
-      imageSrc:
-        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
+      imageSrc: proofProjectImageSrc('infra24', aiEngineeringVisuals.proofImageFallbacks.infra24),
       imageAlt: 'Smart signage and digital infrastructure deployment',
     },
     {
       slug: 'oolite-digital-lab',
       title: 'Oolite Digital Lab',
-      whatItIs:
-        'Technical direction for a Miami arts institution digital lab — artist access, equipment, programs, and public-facing infrastructure.',
-      whatIBuilt:
-        'Lab operations support, AI/media literacy programs, booking pathways, signage, documentation, vendor coordination, fabrication workflows, and leadership reporting.',
-      stack: ['Technical direction', 'Documentation', 'Digital fabrication', 'AI literacy', 'Stakeholder support'],
+      problem:
+        'An arts institution needed unified digital lab operations, artist access pathways, and public-facing program infrastructure.',
+      systemBuilt:
+        'Technical direction for lab ops, booking pathways, signage, AI/media literacy programs, documentation, vendor coordination, and leadership reporting.',
+      stack: ['Technical direction', 'Airtable-adjacent ops', 'Documentation', 'AI literacy', 'Signage'],
+      users: 'Artists, lab staff, institutional leadership',
+      outcome: 'Operational digital lab systems and stakeholder-ready program delivery',
       whyItMatters:
-        'Demonstrates technical leadership with non-engineering stakeholders, institutional systems, and education-adjacent product judgment.',
+        'Technical leadership with non-engineering stakeholders — the “only engineer in the room” pattern.',
       href: '/projects/oolite-digital-lab',
       imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
       imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
     },
+    {
+      slug: 'lore-machine',
+      title: 'Lore Machine',
+      problem:
+        'Long-form narrative needed to become structured, visual, production-ready media without a large engineering team.',
+      systemBuilt:
+        'Founding engineer / Chief Prompt Officer: frontend app, auth, APIs, prompt workflows, generative image pipelines, and sprint coordination in a 3-person startup team.',
+      stack: ['TypeScript', 'Next.js', 'Vercel', 'LLMs', 'Stable Diffusion', 'Replicate', 'Azure'],
+      users: 'Writers, media teams, startup leadership',
+      outcome: 'Production AI storytelling platform shipped to market contexts',
+      whyItMatters: 'Founding engineer proof — agentic creative workflows at startup speed.',
+      href: '/projects/lore-machine',
+      imageSrc: evidenceProjects['lore-machine'].imageSrc,
+      imageAlt: evidenceProjects['lore-machine'].imageAlt,
+    },
   ] satisfies ProofProject[],
+  careerPacketIntro:
+    'This packet summarizes my background as a full-stack AI systems builder with experience across LLM workflows, product prototypes, automation systems, and stakeholder-facing technical infrastructure.',
   availability: {
     summary:
-      'Open to full-time, contract-to-hire, and selective consulting roles in applied AI, full-stack AI engineering, automation, and creative technical systems.',
+      'Open to full-time, contract-to-hire, W2 remote contract, and selective consulting in applied AI, agentic systems, and automation-heavy builds.',
     email: 'm@moises.tech',
     location: 'Miami, FL / Remote-friendly',
+    linkedin: moisesRecruitingProfiles.linkedin,
+    github: moisesRecruitingProfiles.github,
   },
   downloads: {
     resumePdf: {
       label: 'Download Resume (PDF)',
+      path: '/resume/moises-sanabria-senior-genai-engineer.pdf',
+      available: true,
+    },
+    resumePdfAlt: {
+      label: 'Technology CV (PDF)',
       path: '/downloads/Moises_Sanabria_AI_Engineer_Resume.pdf',
       available: true,
     },
+    resumePrint: {
+      label: 'Print Resume',
+      path: '/opportunities/cvs-senior-genai-engineer/print/resume',
+      available: true,
+    },
     resumeDocx: {
-      label: 'Download Resume (DOCX)',
+      label: 'Resume (DOCX)',
       path: '/downloads/Moises_Sanabria_AI_Engineer_Resume.docx',
       available: false,
-      fallbackPath: '/cv/tech/print',
+      fallbackPath: '/opportunities/cvs-senior-genai-engineer/print/resume',
       fallbackLabel: 'Print to PDF',
     },
     portfolioPacket: {
-      label: 'Portfolio Packet (PDF)',
+      label: 'AI Engineering one-pager (PDF)',
       path: '/downloads/Moises_Sanabria_AI_Engineering_Portfolio_Packet.pdf',
       available: false,
       fallbackPath: '/ai-engineering',
-      fallbackLabel: 'View AI Engineering packet',
+      fallbackLabel: 'View AI Engineering page',
     },
   } satisfies Record<string, DownloadAsset>,
   resumeWebPath: '/cv/tech',
+  careerPacketPath: '/career-packet',
+  fullDossierPath: '/opportunities/cvs-senior-genai-engineer',
   email: 'm@moises.tech',
+  recruiterLinksBlock,
+  recruiterEmailFooter,
 } as const;
