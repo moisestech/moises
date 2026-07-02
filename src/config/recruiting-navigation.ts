@@ -3,6 +3,7 @@ import type { SiteNavItem } from '@/config/site-navigation';
 /** Desktop + mobile menu for recruiting / professional dossier pages (not the main exhibition nav). */
 export const RECRUITING_SITE_NAV_ITEMS: SiteNavItem[] = [
   { label: 'Home', path: '/', enabled: true },
+  { label: 'AI Engineering', path: '/ai-engineering', enabled: true },
   { label: 'Opportunities', path: '/opportunities', enabled: true },
   { label: 'Teaching', path: '/teaching', enabled: true },
   { label: 'Web CV', path: '/cv/tech', enabled: true },
@@ -19,5 +20,8 @@ export function isRecruitingSitePath(pathname: string | null): boolean {
   if (pathname.startsWith('/technology-product-strategy/')) return true;
   if (pathname === '/work') return true;
   if (pathname.startsWith('/work/')) return true;
+  if (pathname === '/ai-engineering') return true;
+  if (pathname === '/career-packet') return true;
+  if (pathname.startsWith('/projects/')) return true;
   return false;
 }
