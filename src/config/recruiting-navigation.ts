@@ -4,8 +4,7 @@ import type { SiteNavItem } from '@/config/site-navigation';
 export const RECRUITING_SITE_NAV_ITEMS: SiteNavItem[] = [
   { label: 'Home', path: '/', enabled: true },
   { label: 'AI Engineering', path: '/ai-engineering', enabled: true },
-  { label: 'Opportunities', path: '/opportunities', enabled: true },
-  { label: 'Teaching', path: '/teaching', enabled: true },
+  { label: 'Career Packet', path: '/career-packet', enabled: true },
   { label: 'Web CV', path: '/cv/tech', enabled: true },
   { label: 'Portfolio', path: '/portfolio', enabled: true },
   { label: 'Bio', path: '/bio', enabled: true },
