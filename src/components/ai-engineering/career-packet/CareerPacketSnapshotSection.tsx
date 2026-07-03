@@ -29,9 +29,10 @@ export function CareerPacketSnapshotSection({ accent, sectionId = 'snapshot' }: 
         <div className={cn(opp.tableWrap, accent.mediaBorder)}>
           <div
             className={cn(
-              'hidden border-b border-stone-200 bg-stone-100 text-xs font-semibold uppercase tracking-wide text-stone-600 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-400 sm:grid sm:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)]',
+              'hidden border-b border-stone-200 bg-stone-100 text-xs font-semibold uppercase tracking-wide text-stone-600 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-400 sm:grid sm:grid-cols-[7.5rem_minmax(6.5rem,9rem)_minmax(0,1fr)] sm:gap-x-4',
             )}
           >
+            <div className="px-4 py-3" aria-hidden />
             <div className="px-4 py-3">Field</div>
             <div className="px-4 py-3">Details</div>
           </div>
@@ -54,19 +55,20 @@ export function CareerPacketSnapshotSection({ accent, sectionId = 'snapshot' }: 
                     onFocus={() => setActiveId(row.id)}
                     onClick={() => setActiveId(row.id)}
                   >
-                    <div className="flex flex-col gap-3 sm:grid sm:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] sm:items-start sm:gap-4">
-                      <div className="flex items-start gap-2">
+                    <div className="grid grid-cols-[3.5rem_minmax(0,1fr)] items-start gap-x-3 text-left sm:grid-cols-[7.5rem_minmax(6.5rem,9rem)_minmax(0,1fr)] sm:gap-x-4 sm:gap-y-0">
+                      <div className="row-span-2 w-full max-w-[3.5rem] shrink-0 sm:row-span-1 sm:max-w-[7.5rem] sm:w-[7.5rem]">
                         {row.techLogoIds?.length ? (
                           <CareerPacketTechLogoStrip
                             logoIds={row.techLogoIds.slice(0, 3)}
                             accent={accent}
                             active={active}
-                            className="sm:flex-col"
                           />
-                        ) : null}
-                        <p className={opp.matrixPrimary}>{row.label}</p>
+                        ) : (
+                          <span className="block h-8" aria-hidden />
+                        )}
                       </div>
-                      <p className={cn(opp.matrixSecondary, 'mt-0')}>{row.value}</p>
+                      <p className={cn(opp.matrixPrimary, 'text-left')}>{row.label}</p>
+                      <p className={cn(opp.matrixSecondary, 'mt-0 text-left')}>{row.value}</p>
                     </div>
                   </button>
                 </li>
