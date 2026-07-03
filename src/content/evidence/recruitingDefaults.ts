@@ -8,7 +8,7 @@ export const moisesRecruitingProfiles = {
   instagram: 'https://www.instagram.com/moisesdsanabria',
   portfolio: '/portfolio',
   cv: '/cv/tech',
-  ooliteWork: '/tech-nonprofit/oolite',
+  ooliteWork: 'https://oolitearts.org/digital-lab/',
   ooliteWorkLabel: 'Oolite Digital Lab',
   ooliteOrg: 'https://oolitearts.org',
 } as const satisfies Partial<OpportunityCtas>;

@@ -158,11 +158,9 @@ export const careerPacketDossier: Opportunity = {
   applicationBanner: aiEngineeringVisuals.careerPacketHeroBanner,
   navItems: [
     { id: 'hero', label: 'Overview' },
-    { id: 'links', label: 'Links' },
     { id: 'fit', label: 'Role fit' },
     { id: 'snapshot', label: 'Snapshot' },
     { id: 'materials', label: 'Materials' },
-    { id: 'resume', label: 'Contact' },
   ],
   hero: {
     headline: 'AI Engineering Career Packet',
@@ -179,4 +177,12 @@ export const careerPacketDossier: Opportunity = {
     evidence: item,
   })),
   resumeSectionTitle: 'Contact and next steps',
+  ctas: recruitingCtas({
+    emailSubject: 'AI Engineering Career Packet — Moises Sanabria',
+    caseStudiesAnchor: '#proof',
+    resumePdfPath: p.downloads.resumePdf.path,
+    resumePrintPath: p.downloads.resumePrint.path,
+    portfolio: undefined,
+    ooliteOrg: undefined,
+  }),
 };

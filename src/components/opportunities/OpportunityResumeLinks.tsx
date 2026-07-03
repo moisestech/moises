@@ -26,21 +26,35 @@ export function OpportunityResumeLinks({
   const { resumePdfPath, resumePrintPath } = ctas;
   if (!resumePdfPath && !resumePrintPath) return null;
 
+  const pdfExternal = Boolean(resumePdfPath?.startsWith('http'));
   const primaryClass = variant === 'hero' ? opp.btnPrimary : cn(opp.btnPrimary, 'font-medium');
   const secondaryClass = variant === 'hero' ? opp.btnSecondary : opp.btnSecondaryMedium;
 
   return (
     <div className={cn('flex flex-wrap gap-3', className)}>
       {resumePdfPath ? (
-        <a
-          href={resumePdfPath}
-          download
-          className={primaryClass}
-          onClick={() => onCta(variant === 'hero' ? 'resume_pdf' : 'resume_pdf_footer')}
-        >
-          <Download className="h-4 w-4 shrink-0" aria-hidden />
-          Download résumé (PDF)
-        </a>
+        pdfExternal ? (
+          <a
+            href={resumePdfPath}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={primaryClass}
+            onClick={() => onCta(variant === 'hero' ? 'resume_pdf' : 'resume_pdf_footer')}
+          >
+            <Download className="h-4 w-4 shrink-0" aria-hidden />
+            Download résumé (PDF)
+          </a>
+        ) : (
+          <a
+            href={resumePdfPath}
+            download
+            className={primaryClass}
+            onClick={() => onCta(variant === 'hero' ? 'resume_pdf' : 'resume_pdf_footer')}
+          >
+            <Download className="h-4 w-4 shrink-0" aria-hidden />
+            Download résumé (PDF)
+          </a>
+        )
       ) : null}
       {resumePrintPath ? (
         <Link

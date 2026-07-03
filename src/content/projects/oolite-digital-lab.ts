@@ -27,6 +27,6 @@ export const ooliteDigitalLabProject: ProjectDossier = {
     'Demonstrates technical leadership with non-engineering stakeholders, institutional systems design, and the judgment to translate emerging technology into practical artist-facing tools.',
   imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
   imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
-  externalHref: '/tech-nonprofit/oolite',
-  externalLabel: 'Oolite microsite',
+  externalHref: 'https://oolitearts.org/digital-lab/',
+  externalLabel: 'Oolite Digital Lab',
 };

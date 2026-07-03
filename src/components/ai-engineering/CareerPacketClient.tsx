@@ -2,13 +2,12 @@
 
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
-import { Download, ExternalLink, FileText, Mail, Briefcase, Github, Linkedin } from 'lucide-react';
-import { CopyBlurbButton } from '@/components/ai-engineering/CopyBlurbButton';
-import { CareerPacketKeywordText } from '@/components/ai-engineering/career-packet/CareerPacketKeywordText';
+import { Download, FileText, Mail, Briefcase, Github } from 'lucide-react';
+import { CareerPacketFitSection } from '@/components/ai-engineering/career-packet/CareerPacketFitSection';
 import { CareerPacketParagraph } from '@/components/ai-engineering/career-packet/CareerPacketParagraph';
 import { CareerPacketPortrait } from '@/components/ai-engineering/career-packet/CareerPacketPortrait';
 import { CareerPacketSection } from '@/components/ai-engineering/career-packet/CareerPacketSection';
-import { RecruiterSnapshotSection } from '@/components/ai-engineering/RecruiterSnapshotSection';
+import { CareerPacketSnapshotSection } from '@/components/ai-engineering/career-packet/CareerPacketSnapshotSection';
 import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
@@ -17,10 +16,7 @@ import { opp } from '@/components/opportunities/opportunityTheme';
 import { getCareerPacketAccent } from '@/config/career-packet-section-theme';
 import { careerPacketDossier } from '@/content/ai-engineering/dossier';
 import { aiEngineeringPacket } from '@/content/ai-engineering/packet';
-import {
-  careerPacketSectionHighlights,
-  fitItemHighlights,
-} from '@/content/ai-engineering/career-packet-keywords';
+import { careerPacketSectionHighlights } from '@/content/ai-engineering/career-packet-keywords';
 import { aiEngineeringVisuals } from '@/content/ai-engineering/visualAssets';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
@@ -45,11 +41,9 @@ export function CareerPacketClient() {
   }, []);
 
   const heroAccent = getCareerPacketAccent('hero');
-  const linksAccent = getCareerPacketAccent('links');
   const fitAccent = getCareerPacketAccent('fit');
   const snapshotAccent = getCareerPacketAccent('snapshot');
   const materialsAccent = getCareerPacketAccent('materials');
-  const resumeAccent = getCareerPacketAccent('resume');
 
   const portraitGlow = activeParagraphKey?.startsWith('hero-') || Boolean(activeKeyword);
 
@@ -95,6 +89,16 @@ export function CareerPacketClient() {
                     <FileText className="h-4 w-4 shrink-0" aria-hidden />
                     View Resume
                   </Link>
+                  <a
+                    href={p.downloads.resumePdf.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={opp.btnSecondary}
+                    onClick={() => trackCta('resume_pdf')}
+                  >
+                    <Download className="h-4 w-4 shrink-0" aria-hidden />
+                    Download Resume
+                  </a>
                   <a href={`mailto:${p.email}`} className={opp.btnSecondary} onClick={() => trackCta('email')}>
                     <Mail className="h-4 w-4 shrink-0" aria-hidden />
                     Email
@@ -115,77 +119,19 @@ export function CareerPacketClient() {
             </div>
           </CareerPacketSection>
 
-          <CareerPacketSection id="links" accent={linksAccent}>
-            <h2 className={opp.h2}>Send-ready recruiter links</h2>
-            <p className={`mt-2 max-w-3xl ${opp.muted}`}>Paste this block into Gmail replies.</p>
-            <div className={cn(opp.callout, linksAccent.mediaBorder, 'mt-4 max-w-3xl transition duration-300', linksAccent.cardHover)}>
-              <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed text-stone-700 dark:text-stone-300">
-                {p.recruiterLinksBlock}
-              </pre>
-              <CopyBlurbButton text={p.recruiterLinksBlock} className="mt-3" onCopy={() => trackCta('copy_links')} />
-            </div>
-            <blockquote className={cn(opp.callout, linksAccent.mediaBorder, 'mt-6 max-w-3xl transition duration-300', linksAccent.cardHover)}>
-              <p className={cn(opp.label, linksAccent.eyebrow)}>Recruiter blurb</p>
-              <CareerPacketParagraph
-                text={p.recruiterBlurb}
-                paragraphKey="links-blurb"
-                highlights={careerPacketSectionHighlights.links}
-                accent={linksAccent}
-                activeParagraphKey={activeParagraphKey}
-                activeKeyword={activeKeyword}
-                onParagraphActivate={handleParagraphActivate}
-                onKeywordActivate={handleKeywordActivate}
-                className="mt-2 border-l-0 px-0"
-              />
-            </blockquote>
-            <CopyBlurbButton text={p.recruiterBlurb} onCopy={() => trackCta('copy_blurb')} />
-          </CareerPacketSection>
-
           <CareerPacketSection id="fit" accent={fitAccent}>
-            <h2 className={opp.h2}>{p.agenticFit.title}</h2>
-            <CareerPacketParagraph
-              text={p.agenticFit.intro}
-              paragraphKey="fit-intro"
-              highlights={careerPacketSectionHighlights.fit}
-              accent={fitAccent}
-              activeParagraphKey={activeParagraphKey}
-              activeKeyword={activeKeyword}
-              onParagraphActivate={handleParagraphActivate}
-              onKeywordActivate={handleKeywordActivate}
-              className={`mt-2 max-w-3xl ${opp.muted} border-l-0 px-0`}
-            />
-            <ul className="mt-4 grid gap-2 sm:grid-cols-2" role="list">
-              {p.agenticFit.items.map((item, index) => (
-                <li
-                  key={item}
-                  className={cn(
-                    opp.card,
-                    fitAccent.mediaBorder,
-                    'border-l-2 border-transparent p-3 text-sm transition duration-300',
-                    fitAccent.cardHover,
-                    activeParagraphKey === `fit-${index}` && fitAccent.paragraphActiveBg,
-                    activeParagraphKey === `fit-${index}` && fitAccent.paragraphActiveBorder,
-                  )}
-                  onMouseEnter={() => handleParagraphActivate(`fit-${index}`)}
-                  onMouseLeave={() => handleParagraphActivate(null)}
-                  onFocus={() => handleParagraphActivate(`fit-${index}`)}
-                  onBlur={() => handleParagraphActivate(null)}
-                  tabIndex={0}
-                >
-                  <CareerPacketKeywordText
-                    text={item}
-                    highlights={fitItemHighlights(item)}
-                    accent={fitAccent}
-                    activeKeyword={activeKeyword}
-                    onKeywordActivate={handleKeywordActivate}
-                  />
-                </li>
-              ))}
-            </ul>
+            <CareerPacketFitSection title={p.agenticFit.title} intro={p.agenticFit.intro} accent={fitAccent} />
           </CareerPacketSection>
 
-          <div className={cn('-mx-4 border-t px-4 sm:-mx-6 sm:px-6', snapshotAccent.sectionBorder, 'bg-gradient-to-b', snapshotAccent.sectionGradient)}>
-            <RecruiterSnapshotSection rows={[...p.recruiterSnapshot]} sectionId="snapshot" />
+          <div
+            className={cn(
+              '-mx-4 border-t px-4 sm:-mx-6 sm:px-6',
+              snapshotAccent.sectionBorder,
+              'bg-gradient-to-b',
+              snapshotAccent.sectionGradient,
+            )}
+          >
+            <CareerPacketSnapshotSection accent={snapshotAccent} />
           </div>
 
           <CareerPacketSection id="materials" accent={materialsAccent}>
@@ -214,10 +160,9 @@ export function CareerPacketClient() {
                 {
                   href: p.downloads.resumePdf.path,
                   label: p.downloads.resumePdf.label,
-                  desc: 'GenAI-tailored PDF',
+                  desc: 'PDF resume for forwarding',
                   icon: Download,
-                  external: false,
-                  download: true,
+                  external: true,
                   kind: 'resume_pdf',
                 },
                 {
@@ -237,14 +182,6 @@ export function CareerPacketClient() {
                   kind: 'ai_engineering',
                 },
                 {
-                  href: p.fullDossierPath,
-                  label: 'GenAI engineering dossier',
-                  desc: 'Role-match matrix and teaching',
-                  icon: ExternalLink,
-                  external: false,
-                  kind: 'full_dossier',
-                },
-                {
                   href: p.availability.github,
                   label: 'GitHub',
                   desc: 'github.com/moisestech — code and engineering history',
@@ -257,15 +194,28 @@ export function CareerPacketClient() {
                 const className = cn(
                   opp.indexCard,
                   materialsAccent.mediaBorder,
-                  'flex h-full flex-col p-5 transition duration-300',
+                  'group flex h-full transition duration-300',
                   materialsAccent.cardHover,
                 );
                 const inner = (
-                  <>
-                    <Icon className={cn('h-5 w-5', materialsAccent.eyebrow)} aria-hidden />
-                    <span className={cn(opp.matrixPrimary, 'mt-3')}>{item.label}</span>
-                    <p className={cn(opp.muted, 'mt-1')}>{item.desc}</p>
-                  </>
+                  <div className="flex h-full min-h-[5.5rem] items-center gap-4 p-5 text-left">
+                    <div
+                      className={cn(
+                        'flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border transition duration-300 motion-reduce:transition-none',
+                        materialsAccent.mediaBorder,
+                        'bg-gradient-to-br from-amber-50/90 via-white to-amber-50/40 dark:from-amber-950/50 dark:via-stone-900 dark:to-amber-950/20',
+                        'shadow-sm',
+                        '[@media(hover:hover)]:group-hover:scale-105 [@media(hover:hover)]:group-hover:shadow-md',
+                      )}
+                      aria-hidden
+                    >
+                      <Icon className={cn('h-8 w-8', materialsAccent.eyebrow)} />
+                    </div>
+                    <div className="min-w-0 flex-1 text-left">
+                      <span className={cn(opp.matrixPrimary, 'block text-left')}>{item.label}</span>
+                      <p className={cn(opp.muted, 'mt-1.5 text-left leading-snug')}>{item.desc}</p>
+                    </div>
+                  </div>
                 );
                 if ('download' in item && item.download) {
                   return (
@@ -276,7 +226,7 @@ export function CareerPacketClient() {
                     </li>
                   );
                 }
-                if ('external' in item && item.external) {
+                if (item.external) {
                   return (
                     <li key={item.href}>
                       <a
@@ -303,16 +253,39 @@ export function CareerPacketClient() {
             <div className="mt-8 flex flex-wrap gap-2">
               {p.proofProjects
                 .filter((proj) => proj.href)
-                .map((proj) => (
-                  <Link
-                    key={proj.slug}
-                    href={proj.href!}
-                    className={cn(opp.pillTag, materialsAccent.chipIdle, 'transition duration-300', materialsAccent.cardHover)}
-                    onClick={() => trackCta(`project_${proj.slug}`)}
-                  >
-                    {proj.title}
-                  </Link>
-                ))}
+                .map((proj) => {
+                  const external = proj.href!.startsWith('http');
+                  const className = cn(
+                    opp.pillTag,
+                    materialsAccent.chipIdle,
+                    'transition duration-300',
+                    materialsAccent.cardHover,
+                  );
+                  if (external) {
+                    return (
+                      <a
+                        key={proj.slug}
+                        href={proj.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={className}
+                        onClick={() => trackCta(`project_${proj.slug}`)}
+                      >
+                        {proj.title}
+                      </a>
+                    );
+                  }
+                  return (
+                    <Link
+                      key={proj.slug}
+                      href={proj.href!}
+                      className={className}
+                      onClick={() => trackCta(`project_${proj.slug}`)}
+                    >
+                      {proj.title}
+                    </Link>
+                  );
+                })}
               <Link
                 href="/ai-engineering#proof-life-os"
                 className={cn(opp.pillTag, materialsAccent.chipIdle, 'transition duration-300', materialsAccent.cardHover)}
@@ -321,37 +294,6 @@ export function CareerPacketClient() {
                 Life OS / Recruiter Graph
               </Link>
             </div>
-          </CareerPacketSection>
-
-          <CareerPacketSection id="resume" accent={resumeAccent} className="!mt-12 !pt-10">
-            <h2 className={opp.h2}>Email footer</h2>
-            <div className={cn(opp.callout, resumeAccent.mediaBorder, 'mt-4 max-w-3xl transition duration-300', resumeAccent.cardHover)}>
-              <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed text-stone-700 dark:text-stone-300">
-                {p.recruiterEmailFooter}
-              </pre>
-              <CopyBlurbButton text={p.recruiterEmailFooter} className="mt-3" onCopy={() => trackCta('copy_footer')} />
-            </div>
-            <ul className={cn(opp.body, 'mt-6 space-y-2')}>
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 shrink-0 text-stone-500" aria-hidden />
-                <a href={`mailto:${p.email}`} className={opp.linkAccent}>
-                  {p.email}
-                </a>
-              </li>
-              <li>{p.availability.location}</li>
-              <li className="flex items-center gap-2">
-                <Linkedin className="h-4 w-4 shrink-0 text-stone-500" aria-hidden />
-                <a href={p.availability.linkedin} target="_blank" rel="noopener noreferrer" className={opp.linkAccent}>
-                  LinkedIn
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Github className="h-4 w-4 shrink-0 text-stone-500" aria-hidden />
-                <a href={p.availability.github} target="_blank" rel="noopener noreferrer" className={opp.linkAccent}>
-                  GitHub
-                </a>
-              </li>
-            </ul>
           </CareerPacketSection>
 
           <ResumeCTA opportunity={dossier} />

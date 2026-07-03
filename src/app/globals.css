@@ -292,11 +292,17 @@
 
   .career-packet-portrait--glow,
   .career-packet-portrait:has(.group:hover),
-  .career-packet-portrait:has(.group:focus-within) {
+  .career-packet-portrait:has(.group:focus-within),
+  .career-packet-skill-panel:has(.group:hover) {
     box-shadow:
       0 0 0 1px rgba(var(--cp-glow-rgb), 0.35),
       0 0 32px rgba(var(--cp-glow-rgb), 0.24),
       0 0 56px rgba(var(--cp-glow-rgb), 0.1);
+  }
+
+  .career-packet-skill-panel:has(.group:hover) .career-packet-portrait-glow {
+    opacity: 1;
+    animation: career-packet-portrait-glow 2.8s ease-in-out infinite;
   }
 }
 

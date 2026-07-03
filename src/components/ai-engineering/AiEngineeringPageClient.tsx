@@ -25,7 +25,7 @@ function trackCta(kind: string) {
 
 export function AiEngineeringPageClient() {
   const dossier = aiEngineeringDossier;
-  const { proofProjects, recruiterSnapshot, recruiterBlurb, recruiterLinksBlock, careerPacketPath, fullDossierPath } =
+  const { proofProjects, recruiterSnapshot, recruiterBlurb, recruiterLinksBlock, careerPacketPath } =
     aiEngineeringPacket;
 
   return (
@@ -54,10 +54,6 @@ export function AiEngineeringPageClient() {
               Copy-ready blurb and links for Gmail replies. Full forwardable hub at{' '}
               <Link href={careerPacketPath} className={opp.linkAccent} onClick={() => trackCta('career_packet')}>
                 /career-packet
-              </Link>
-              . Deeper role dossier:{' '}
-              <Link href={fullDossierPath} className={opp.linkAccent} onClick={() => trackCta('full_dossier')}>
-                GenAI engineering dossier
               </Link>
               .
             </p>

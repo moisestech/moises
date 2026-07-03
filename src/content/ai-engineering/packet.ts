@@ -41,11 +41,16 @@ export type ProcessStep = {
 
 const SITE_ORIGIN = 'https://moises.tech';
 
+/** Google Drive — primary recruiter resume PDF */
+export const RESUME_PDF_GOOGLE_DRIVE_ID = '1XfqTrXGnUM3visTffEtVmX_5b1_A0OCK';
+export const resumePdfDriveViewUrl = `https://drive.google.com/file/d/${RESUME_PDF_GOOGLE_DRIVE_ID}/view?usp=sharing`;
+export const resumePdfDriveDownloadUrl = `https://drive.google.com/uc?export=download&id=${RESUME_PDF_GOOGLE_DRIVE_ID}`;
+
 /** Paste into Gmail recruiter replies */
 export const recruiterLinksBlock = `AI Engineering: ${SITE_ORIGIN}/ai-engineering
 Career Packet: ${SITE_ORIGIN}/career-packet
 Resume: ${SITE_ORIGIN}/cv/tech
-Resume (PDF): ${SITE_ORIGIN}/resume/moises-sanabria-senior-genai-engineer.pdf
+Resume (PDF): ${resumePdfDriveViewUrl}
 GitHub: https://github.com/moisestech`;
 
 export const recruiterEmailFooter = `—
@@ -234,7 +239,7 @@ export const aiEngineeringPacket = {
       outcome: 'Operational digital lab systems and stakeholder-ready program delivery',
       whyItMatters:
         'Technical leadership with non-engineering stakeholders — the “only engineer in the room” pattern.',
-      href: '/projects/oolite-digital-lab',
+      href: 'https://oolitearts.org/digital-lab/',
       imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
       imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
     },
@@ -267,7 +272,7 @@ export const aiEngineeringPacket = {
   downloads: {
     resumePdf: {
       label: 'Download Resume (PDF)',
-      path: '/resume/moises-sanabria-senior-genai-engineer.pdf',
+      path: resumePdfDriveViewUrl,
       available: true,
     },
     resumePdfAlt: {
@@ -297,7 +302,6 @@ export const aiEngineeringPacket = {
   } satisfies Record<string, DownloadAsset>,
   resumeWebPath: '/cv/tech',
   careerPacketPath: '/career-packet',
-  fullDossierPath: '/opportunities/cvs-senior-genai-engineer',
   email: 'm@moises.tech',
   recruiterLinksBlock,
   recruiterEmailFooter,
