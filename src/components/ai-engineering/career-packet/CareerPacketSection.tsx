@@ -22,8 +22,8 @@ export function CareerPacketSection({
     <section
       id={id}
       className={cn(
-        'scroll-mt-32 -mx-4 border-t px-4 pt-12 sm:-mx-6 sm:px-6',
-        !isFirst && 'mt-16',
+        'scroll-mt-32 -mx-4 border-t px-4 pt-8 sm:-mx-6 sm:px-6 md:pt-12',
+        !isFirst && 'mt-10 md:mt-16',
         accent.sectionBorder,
         'bg-gradient-to-b',
         accent.sectionGradient,

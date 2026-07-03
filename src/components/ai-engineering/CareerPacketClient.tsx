@@ -10,6 +10,7 @@ import { CareerPacketSection } from '@/components/ai-engineering/career-packet/C
 import { CareerPacketSnapshotSection } from '@/components/ai-engineering/career-packet/CareerPacketSnapshotSection';
 import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
+import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -48,17 +49,21 @@ export function CareerPacketClient() {
   const portraitGlow = activeParagraphKey?.startsWith('hero-') || Boolean(activeKeyword);
 
   return (
-    <OpportunityShell navItems={dossier.navItems} getSectionNavAccent={getCareerPacketAccent}>
+    <OpportunityShell
+      navItems={dossier.navItems}
+      getSectionNavAccent={getCareerPacketAccent}
+      stickyNavTopClassName="top-[4.75rem] md:top-[8.4rem]"
+    >
       <>
         <OpportunityApplicationBanner banner={dossier.applicationBanner} />
-        <main className={cn(opp.main, 'pt-4 sm:pt-6')}>
+        <main className={cn(opp.main, 'overflow-x-clip pt-4 sm:pt-6')}>
           {dossier.audienceKeywords?.terms?.length ? (
             <OpportunityAudienceKeywords data={dossier.audienceKeywords} />
           ) : null}
 
           <CareerPacketSection id="hero" accent={heroAccent} isFirst>
-            <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-              <div>
+            <div className="grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-10">
+              <div className="order-2 lg:order-1">
                 <p className={cn('text-xs font-semibold uppercase tracking-wide', heroAccent.eyebrow)}>
                   Career packet · Forward to recruiters
                 </p>
@@ -80,12 +85,12 @@ export function CareerPacketClient() {
                     />
                   ))}
                 </div>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/ai-engineering" className={opp.btnPrimary} onClick={() => trackCta('ai_engineering')}>
+                <div className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:flex lg:flex-wrap lg:gap-3">
+                  <Link href="/ai-engineering" className={cn(opp.btnPrimary, 'justify-center')} onClick={() => trackCta('ai_engineering')}>
                     <Briefcase className="h-4 w-4 shrink-0" aria-hidden />
                     AI Engineering page
                   </Link>
-                  <Link href={p.resumeWebPath} className={opp.btnSecondary} onClick={() => trackCta('resume_web')}>
+                  <Link href={p.resumeWebPath} className={cn(opp.btnSecondary, 'justify-center')} onClick={() => trackCta('resume_web')}>
                     <FileText className="h-4 w-4 shrink-0" aria-hidden />
                     View Resume
                   </Link>
@@ -93,19 +98,19 @@ export function CareerPacketClient() {
                     href={p.downloads.resumePdf.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={opp.btnSecondary}
+                    className={cn(opp.btnSecondary, 'justify-center')}
                     onClick={() => trackCta('resume_pdf')}
                   >
                     <Download className="h-4 w-4 shrink-0" aria-hidden />
                     Download Resume
                   </a>
-                  <a href={`mailto:${p.email}`} className={opp.btnSecondary} onClick={() => trackCta('email')}>
+                  <a href={`mailto:${p.email}`} className={cn(opp.btnSecondary, 'justify-center')} onClick={() => trackCta('email')}>
                     <Mail className="h-4 w-4 shrink-0" aria-hidden />
                     Email
                   </a>
                 </div>
               </div>
-              <div>
+              <div className="order-1 mx-auto w-full max-w-xs lg:order-2 lg:max-w-none">
                 <p className={cn(opp.label, heroAccent.eyebrow)}>Profile</p>
                 <CareerPacketPortrait
                   src={aiEngineeringVisuals.headshot.src}
@@ -134,6 +139,24 @@ export function CareerPacketClient() {
             <CareerPacketSnapshotSection accent={snapshotAccent} />
           </div>
 
+          {dossier.animatedLogoBand?.length ? (
+            <section className="mt-10 scroll-mt-32 md:mt-16" aria-labelledby="career-packet-platform-logos-heading">
+              <h2 id="career-packet-platform-logos-heading" className={opp.h2}>
+                Platforms and tools
+              </h2>
+              <p className={`mt-2 max-w-3xl ${opp.muted}`}>
+                Core stack across agentic AI, full-stack product, and automation workflows.
+              </p>
+              <div className="mt-6">
+                <AnimatedLogoBand
+                  logos={dossier.animatedLogoBand}
+                  bleed
+                  ariaLabel="Technology and platform stack"
+                />
+              </div>
+            </section>
+          ) : null}
+
           <CareerPacketSection id="materials" accent={materialsAccent}>
             <h2 className={opp.h2}>Resume &amp; materials</h2>
             <CareerPacketParagraph
@@ -147,7 +170,7 @@ export function CareerPacketClient() {
               onKeywordActivate={handleKeywordActivate}
               className={`mt-2 max-w-3xl ${opp.muted} border-l-0 px-0`}
             />
-            <ul className="mt-6 grid gap-4 sm:grid-cols-2" role="list">
+            <ul className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2" role="list">
               {[
                 {
                   href: p.resumeWebPath,

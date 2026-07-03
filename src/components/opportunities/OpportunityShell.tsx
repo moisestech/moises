@@ -1,8 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { OpportunityNavItem } from '@/content/opportunities/types';
-import { RECRUITING_HEADER_OFFSET } from '@/config/recruiting-layout';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
@@ -17,6 +16,10 @@ type OpportunityShellProps = {
   children: React.ReactNode;
   navItems?: OpportunityNavItem[];
   getSectionNavAccent?: (sectionId: string) => OpportunitySectionNavAccent | undefined;
+  /** Tailwind top classes for sticky subnav (e.g. career-packet mobile header). */
+  stickyNavTopClassName?: string;
+  /** Fixed scroll-spy offset; omit to measure sticky nav bottom when `stickyNavTopClassName` is set. */
+  sectionSpyOffsetPx?: number;
 };
 
 /** Viewport offset from top: sections whose top is above this line count as “passed” for scroll-spy (header + sticky mini-nav). */
@@ -25,10 +28,17 @@ const SECTION_SPY_OFFSET_PX = 186;
 function StickyMiniNav({
   items,
   getSectionNavAccent,
+  stickyNavTopClassName,
+  sectionSpyOffsetPx,
 }: {
   items: OpportunityNavItem[];
   getSectionNavAccent?: (sectionId: string) => OpportunitySectionNavAccent | undefined;
+  stickyNavTopClassName?: string;
+  sectionSpyOffsetPx?: number;
 }) {
+  const navRef = useRef<HTMLElement>(null);
+  const [measuredSpyOffset, setMeasuredSpyOffset] = useState(SECTION_SPY_OFFSET_PX);
+  const spyOffset = sectionSpyOffsetPx ?? measuredSpyOffset;
   const ids = useMemo(() => items.map((i) => i.id), [items]);
   const idsKey = ids.join('|');
 
@@ -52,6 +62,19 @@ function StickyMiniNav({
   }, [ids, idsKey]);
 
   useEffect(() => {
+    if (sectionSpyOffsetPx != null || !stickyNavTopClassName) return;
+
+    const measure = () => {
+      if (!navRef.current) return;
+      setMeasuredSpyOffset(Math.round(navRef.current.getBoundingClientRect().bottom + 8));
+    };
+
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [sectionSpyOffsetPx, stickyNavTopClassName]);
+
+  useEffect(() => {
     if (!ids.length) return;
 
     const computeActive = () => {
@@ -59,7 +82,7 @@ function StickyMiniNav({
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= SECTION_SPY_OFFSET_PX) current = id;
+        if (el.getBoundingClientRect().top <= spyOffset) current = id;
       }
       setActiveId((prev) => (prev === current ? prev : current));
     };
@@ -71,7 +94,7 @@ function StickyMiniNav({
       window.removeEventListener('scroll', computeActive);
       window.removeEventListener('resize', computeActive);
     };
-  }, [ids, idsKey]);
+  }, [ids, idsKey, spyOffset]);
 
   const scrollToSection = useCallback((id: string) => {
     const el = document.getElementById(id);
@@ -85,11 +108,12 @@ function StickyMiniNav({
 
   return (
     <nav
+      ref={navRef}
       className={cn(
         opp.stickyNav,
         getSectionNavAccent?.(activeId)?.mediaBorder,
+        stickyNavTopClassName ?? 'top-[8.4rem]',
       )}
-      style={{ top: RECRUITING_HEADER_OFFSET }}
       aria-label="Section navigation"
     >
       <div className="mx-auto flex max-w-5xl items-center gap-1 overflow-x-auto px-4 pb-1 text-sm whitespace-nowrap sm:flex-wrap sm:whitespace-normal">
@@ -125,11 +149,22 @@ function StickyMiniNav({
   );
 }
 
-export function OpportunityShell({ navItems, children, getSectionNavAccent }: OpportunityShellProps) {
+export function OpportunityShell({
+  navItems,
+  children,
+  getSectionNavAccent,
+  stickyNavTopClassName,
+  sectionSpyOffsetPx,
+}: OpportunityShellProps) {
   return (
     <div className={opp.shell}>
       {navItems?.length ? (
-        <StickyMiniNav items={navItems} getSectionNavAccent={getSectionNavAccent} />
+        <StickyMiniNav
+          items={navItems}
+          getSectionNavAccent={getSectionNavAccent}
+          stickyNavTopClassName={stickyNavTopClassName}
+          sectionSpyOffsetPx={sectionSpyOffsetPx}
+        />
       ) : null}
       {children}
     </div>

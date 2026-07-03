@@ -58,7 +58,10 @@ function KeywordSpan({ keyword, accent, activeKeyword, onKeywordActivate }: Keyw
         onMouseLeave={handleDeactivate}
         onFocus={handleActivate}
         onBlur={handleDeactivate}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen((prev) => !prev);
+        }}
       >
         {keyword.term}
       </button>

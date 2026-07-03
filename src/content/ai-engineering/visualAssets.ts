@@ -1,6 +1,6 @@
 import type { ApplicationBanner } from '@/content/opportunities/types';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
-import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 import { techLogoRegistry } from '@/content/evidence/tech-logos';
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
@@ -67,6 +67,44 @@ function logoBandItem(id: string, height = 36): LogoBandItem | null {
   return { src: entry.imageSrc, alt: entry.label, height };
 }
 
+function dedupeLogoBand(items: LogoBandItem[]): LogoBandItem[] {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const key = item.alt.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+const coreLogoBandIds = [
+  'anthropic',
+  'openai',
+  'langgraph',
+  'langchain',
+  'crewai',
+  'python',
+  'huggingface',
+  'nextjs',
+  'typescript',
+  'react',
+  'supabase',
+  'postgres',
+  'airtable',
+  'n8n',
+  'vercel',
+  'github',
+] as const;
+
+const coreLogoBand = dedupeLogoBand(
+  coreLogoBandIds.map((id) => logoBandItem(id)).filter((item): item is LogoBandItem => item !== null),
+);
+
+/** GenAI opportunity extras (vector DBs, FastAPI) merged without duplicating core stack marks. */
+const genAiLogoBandExtras = genAiRecruitingLogoBand.filter((item) =>
+  ['Weaviate', 'Pinecone', 'FastAPI'].includes(item.alt),
+);
+
 export const aiEngineeringVisuals = {
   heroBanner: aiEngineeringHeroBanner,
   careerPacketHeroBanner,
@@ -85,20 +123,9 @@ export const aiEngineeringVisuals = {
     'vercel',
     'github',
   ],
-  logoBand: [
-    'anthropic',
-    'openai',
-    'nextjs',
-    'typescript',
-    'supabase',
-    'airtable',
-    'n8n',
-    'vercel',
-    'github',
-    'langgraph',
-  ]
-    .map((id) => logoBandItem(id))
-    .filter((item): item is LogoBandItem => item !== null),
+  logoBand: coreLogoBand,
+  /** Full rolling strip for `/career-packet` — core stack plus GenAI vector / API marks. */
+  careerPacketLogoBand: dedupeLogoBand([...coreLogoBand, ...genAiLogoBandExtras]),
   ogImage: useLocalRecruitingAssets
     ? absoluteAsset(recruitingImageFiles.ogAiEngineering)
     : recruiterCloudinaryAssets.ogAiEngineering,

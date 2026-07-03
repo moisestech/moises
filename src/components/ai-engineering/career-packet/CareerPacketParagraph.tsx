@@ -33,6 +33,14 @@ export function CareerPacketParagraph({
   const handleActivate = () => onParagraphActivate?.(paragraphKey);
   const handleDeactivate = () => onParagraphActivate?.(null);
 
+  const handleClick = () => {
+    if (isActive) {
+      handleDeactivate();
+    } else {
+      handleActivate();
+    }
+  };
+
   return (
     <p
       className={cn(
@@ -45,6 +53,7 @@ export function CareerPacketParagraph({
       onMouseLeave={handleDeactivate}
       onFocus={handleActivate}
       onBlur={handleDeactivate}
+      onClick={handleClick}
       tabIndex={0}
       data-paragraph-key={paragraphKey}
     >

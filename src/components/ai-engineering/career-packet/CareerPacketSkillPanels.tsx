@@ -70,6 +70,7 @@ type CareerPacketIllustrationPanelProps = {
   panelKey: string;
   /** Portrait crops for recruiter snapshot banners; default landscape for role-fit. */
   orientation?: 'landscape' | 'portrait';
+  density?: 'default' | 'compact';
 };
 
 export function CareerPacketIllustrationPanel({
@@ -80,13 +81,19 @@ export function CareerPacketIllustrationPanel({
   accent,
   panelKey,
   orientation = 'landscape',
+  density = 'default',
 }: CareerPacketIllustrationPanelProps) {
   const resolvedSrc = resolveCareerPacketIllustration(illustration.src, illustration.local);
   const remote = resolvedSrc.startsWith('http');
+  const isCompact = density === 'compact';
   const frameClass =
     orientation === 'portrait'
-      ? 'aspect-[3/4] max-h-[min(56vh,540px)] w-full'
-      : 'aspect-[4/3] w-full';
+      ? isCompact
+        ? 'aspect-[3/4] max-h-[min(36vh,280px)] w-full md:max-h-[min(40vh,360px)]'
+        : 'aspect-[3/4] max-h-[min(56vh,540px)] w-full'
+      : isCompact
+        ? 'aspect-[4/3] max-h-[min(36vh,280px)] w-full md:max-h-[min(40vh,360px)]'
+        : 'aspect-[4/3] w-full';
   const imageClass =
     orientation === 'portrait'
       ? 'object-contain object-center'
@@ -139,9 +146,21 @@ export function CareerPacketIllustrationPanel({
           </div>
         ) : null}
       </div>
-      <div className="border-t border-stone-200 bg-white/95 px-4 py-3 backdrop-blur-sm dark:border-stone-700 dark:bg-stone-900/95">
+      <div
+        className={cn(
+          'border-t border-stone-200 bg-white/95 backdrop-blur-sm dark:border-stone-700 dark:bg-stone-900/95',
+          isCompact ? 'px-3 py-2' : 'px-4 py-3',
+        )}
+      >
         <p className={cn('text-xs font-semibold uppercase tracking-wide', accent.eyebrow)}>{title}</p>
-        <p className={cn('mt-1 text-sm text-stone-600 dark:text-stone-400')}>{caption}</p>
+        <p
+          className={cn(
+            'mt-1 text-stone-600 dark:text-stone-400',
+            isCompact ? 'line-clamp-2 text-xs' : 'text-sm',
+          )}
+        >
+          {caption}
+        </p>
       </div>
     </div>
   );
