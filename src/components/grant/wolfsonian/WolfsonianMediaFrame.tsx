@@ -33,15 +33,20 @@ export function WolfsonianMediaFrame({
 }: WolfsonianMediaFrameProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const effect = imageEffect ?? 'none';
-  const aspectClass =
-    image.aspect === 'portrait'
+  const aspectClass = isHero
+    ? 'aspect-[3/4] sm:aspect-[2/3]'
+    : image.aspect === 'portrait'
       ? 'aspect-[4/5] sm:aspect-[3/4]'
-      : isHero
-        ? 'aspect-[3/2] sm:aspect-[16/8]'
-        : 'aspect-[5/4] sm:aspect-[4/3]';
+      : 'aspect-[5/4] sm:aspect-[4/3]';
 
   const frame = (
-    <div className={cn('relative w-full overflow-hidden', aspectClass)}>
+    <div
+      className={cn(
+        'relative w-full overflow-hidden',
+        aspectClass,
+        isHero && 'wolfsonian-hero-frame',
+      )}
+    >
       <Image
         src={image.src}
         alt={image.alt}
@@ -50,6 +55,8 @@ export function WolfsonianMediaFrame({
         className={cn(
           'object-contain bg-stone-100 transition duration-500 motion-reduce:transition-none dark:bg-neutral-950',
           effect === 'zoom' && 'scale-[1.02]',
+          isHero &&
+            '[@media(hover:hover)]:group-hover:scale-[1.015] [@media(hover:hover)]:group-hover:brightness-105',
         )}
         sizes={isHero ? '(max-width: 768px) 100vw, 1200px' : '(max-width: 768px) 100vw, 50vw'}
       />
@@ -59,6 +66,7 @@ export function WolfsonianMediaFrame({
         activeKeyword={activeKeyword}
         citationStep={citationStep}
         showNetwork={isHero}
+        isHero={isHero}
       />
       {hotspots.map((hotspot) => (
         <span
@@ -74,7 +82,13 @@ export function WolfsonianMediaFrame({
   );
 
   return (
-    <figure className={cn('overflow-hidden border bg-white dark:bg-neutral-900', accent.mediaBorder)}>
+    <figure
+      className={cn(
+        'overflow-hidden border bg-white dark:bg-neutral-900',
+        accent.mediaBorder,
+        isHero && 'md:max-w-md md:justify-self-end wolfsonian-hero-figure',
+      )}
+    >
       {enableLightbox ? (
         <button
           type="button"

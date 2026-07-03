@@ -184,7 +184,7 @@ export const wolfsonianImages: WolfsonianImage[] = [
     alt: 'The Archive Dreams in Public — archive as a living memory system with agents, objects, and network lines.',
     caption: 'The Archive Dreams in Public',
     role: 'banner',
-    aspect: 'landscape',
+    aspect: 'portrait',
   },
   {
     id: 'why-wolfsonian',

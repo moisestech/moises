@@ -11,6 +11,7 @@ type WolfsonianMediaOverlaysProps = {
   activeKeyword?: string | null;
   citationStep?: string | null;
   showNetwork?: boolean;
+  isHero?: boolean;
 };
 
 export function WolfsonianMediaOverlays({
@@ -19,11 +20,19 @@ export function WolfsonianMediaOverlays({
   activeKeyword,
   citationStep,
   showNetwork,
+  isHero = false,
 }: WolfsonianMediaOverlaysProps) {
   const activeEffect = effect ?? 'none';
 
   return (
     <>
+      {isHero ? (
+        <div className="wolfsonian-hero-glow-overlay pointer-events-none absolute inset-0 z-[1]" aria-hidden="true">
+          <div className={cn('absolute inset-0 bg-gradient-to-t opacity-80', accent.mediaOverlay)} />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(20,184,166,0.45),transparent_62%)] dark:bg-[radial-gradient(ellipse_at_50%_35%,rgba(45,212,191,0.35),transparent_62%)]" />
+        </div>
+      ) : null}
+
       <div
         className={cn(
           'pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 motion-reduce:transition-none',
@@ -34,7 +43,12 @@ export function WolfsonianMediaOverlays({
       />
 
       {(activeEffect === 'network' || showNetwork) ? (
-        <div className="pointer-events-none absolute inset-0 text-stone-900 dark:text-stone-100">
+        <div
+          className={cn(
+            'pointer-events-none absolute inset-0 z-[2] text-stone-900 transition-opacity duration-700 dark:text-stone-100',
+            isHero && 'opacity-75 [@media(hover:hover)]:group-hover:opacity-100',
+          )}
+        >
           <WolfsonianHeroNetwork />
         </div>
       ) : null}
