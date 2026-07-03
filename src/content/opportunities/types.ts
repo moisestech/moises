@@ -3,6 +3,8 @@ import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 
 export type ApplicationBanner = {
   src: string;
+  /** Optional wider crop shown from the `sm` breakpoint up. */
+  srcWide?: string;
   alt: string;
   /**
    * Optional Tailwind classes for the image frame (width is always full-bleed).

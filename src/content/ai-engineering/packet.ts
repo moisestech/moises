@@ -46,7 +46,7 @@ export const recruiterLinksBlock = `AI Engineering: ${SITE_ORIGIN}/ai-engineerin
 Career Packet: ${SITE_ORIGIN}/career-packet
 Resume: ${SITE_ORIGIN}/cv/tech
 Resume (PDF): ${SITE_ORIGIN}/resume/moises-sanabria-senior-genai-engineer.pdf
-Portfolio: ${SITE_ORIGIN}`;
+GitHub: https://github.com/moisestech`;
 
 export const recruiterEmailFooter = `—
 Moises Sanabria · Full-Stack AI Systems Builder

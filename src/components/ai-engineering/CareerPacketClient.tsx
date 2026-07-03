@@ -156,12 +156,12 @@ export function CareerPacketClient() {
                   kind: 'full_dossier',
                 },
                 {
-                  href: '/',
-                  label: 'Portfolio',
-                  desc: 'Selected works',
-                  icon: ExternalLink,
-                  external: false,
-                  kind: 'portfolio',
+                  href: p.availability.github,
+                  label: 'GitHub',
+                  desc: 'github.com/moisestech — code and engineering history',
+                  icon: Github,
+                  external: true,
+                  kind: 'github',
                 },
               ].map((item) => {
                 const Icon = item.icon;
@@ -177,6 +177,21 @@ export function CareerPacketClient() {
                   return (
                     <li key={item.href}>
                       <a href={item.href} download className={className} onClick={() => trackCta(item.kind)}>
+                        {inner}
+                      </a>
+                    </li>
+                  );
+                }
+                if ('external' in item && item.external) {
+                  return (
+                    <li key={item.href}>
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={className}
+                        onClick={() => trackCta(item.kind)}
+                      >
                         {inner}
                       </a>
                     </li>

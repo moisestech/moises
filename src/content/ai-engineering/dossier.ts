@@ -144,7 +144,7 @@ export const aiEngineeringDossier: Opportunity = {
     caseStudiesAnchor: '#proof',
     resumePdfPath: p.downloads.resumePdf.path,
     resumePrintPath: p.downloads.resumePrint.path,
-    portfolio: '/ai-engineering',
+    portfolio: undefined,
   }),
   animatedLogoBand: aiEngineeringVisuals.logoBand,
   techLogoIds: [...aiEngineeringVisuals.techLogoIds],
