@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { techLogoRegistry } from '@/content/evidence/tech-logos';
+import { techLogoRegistry, resolveTechLogoSrc } from '@/content/evidence/tech-logos';
 import type { CareerPacketSectionAccent } from '@/config/career-packet-section-theme';
 import { resolveCareerPacketIllustration } from '@/content/ai-engineering/career-packet-visuals';
 
@@ -30,7 +30,8 @@ export function CareerPacketTechLogoStrip({
     <div className={cn('flex flex-wrap gap-1.5', className)} aria-hidden>
       {logoIds.map((id) => {
         const entry = techLogoRegistry[id];
-        if (!entry?.imageSrc) return null;
+        const imageSrc = resolveTechLogoSrc(entry, 'square');
+        if (!imageSrc) return null;
         return (
           <span
             key={id}
@@ -46,9 +47,9 @@ export function CareerPacketTechLogoStrip({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={entry.imageSrc}
+              src={imageSrc}
               alt=""
-              className={cn('object-contain', img, entry.imageClassName)}
+              className={cn('object-contain', img, entry?.imageClassName)}
             />
           </span>
         );

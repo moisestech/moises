@@ -261,6 +261,12 @@ export const aiEngineeringPacket = {
   ] satisfies ProofProject[],
   careerPacketIntro:
     'This packet summarizes my background as a full-stack AI systems builder with experience across LLM workflows, product prototypes, automation systems, and stakeholder-facing technical infrastructure.',
+  careerPacketSeo: {
+    title: 'AI Engineering Career Packet — Moises Sanabria',
+    description:
+      'Forwardable recruiter packet — full-stack AI systems builder. Claude Code, agentic workflows, Next.js, Supabase, Airtable, n8n. Miami / Remote.',
+    ogImageAlt: 'Moises Sanabria — AI Engineering Career Packet for recruiters',
+  },
   availability: {
     summary:
       'Open to full-time, contract-to-hire, W2 remote contract, and selective consulting in applied AI, agentic systems, and automation-heavy builds.',

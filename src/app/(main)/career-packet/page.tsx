@@ -2,29 +2,36 @@ import type { Metadata } from 'next';
 import { CareerPacketClient } from '@/components/ai-engineering/CareerPacketClient';
 import { aiEngineeringPacket } from '@/content/ai-engineering/packet';
 
+const SITE = 'https://moises.tech';
+const p = aiEngineeringPacket;
+const seo = p.careerPacketSeo;
+
 export const metadata: Metadata = {
-  title: 'AI Engineering Career Packet — Moises Sanabria',
-  description: aiEngineeringPacket.careerPacketIntro,
+  title: seo.title,
+  description: seo.description,
   robots: { index: false, follow: true },
+  alternates: { canonical: `${SITE}/career-packet` },
   openGraph: {
-    title: 'AI Engineering Career Packet — Moises Sanabria',
-    description: aiEngineeringPacket.careerPacketIntro,
+    title: seo.title,
+    description: seo.description,
     type: 'website',
-    url: 'https://moises.tech/career-packet',
+    url: `${SITE}/career-packet`,
+    siteName: 'Moises Sanabria',
+    locale: 'en_US',
     images: [
       {
-        url: aiEngineeringPacket.careerPacketOgImage,
+        url: p.careerPacketOgImage,
         width: 1200,
         height: 630,
-        alt: 'Moises Sanabria — AI Engineering Career Packet',
+        alt: seo.ogImageAlt,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Engineering Career Packet — Moises Sanabria',
-    description: aiEngineeringPacket.careerPacketIntro,
-    images: [aiEngineeringPacket.careerPacketOgImage],
+    title: seo.title,
+    description: seo.description,
+    images: [p.careerPacketOgImage],
   },
 };
 

@@ -1,13 +1,16 @@
 import type { ApplicationBanner } from '@/content/opportunities/types';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
-import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
-import { techLogoRegistry } from '@/content/evidence/tech-logos';
+import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import { resolveTechLogoSrc, techLogoRegistry } from '@/content/evidence/tech-logos';
+import { CAREER_PACKET_OG_SPEC } from '@/content/ai-engineering/career-packet-assets';
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
 /** Recruiter packet art — Cloudinary `jobs/recruiter/` */
 export const recruiterCloudinaryAssets = {
   ogAiEngineering: `${CDN}/v1783034176/jobs/recruiter/ai-engineering-og-card-moises-name-text-heavy_c67fvt.png`,
+  /** Swap URL after uploading `career-packet-og-card.png` per CAREER_PACKET_OG_SPEC */
+  ogCareerPacket: `${CDN}/v1783034176/jobs/recruiter/ai-engineering-og-card-moises-name-text-heavy_c67fvt.png`,
   heroBanners: {
     iconSystemBalancedExtraWide: `${CDN}/v1783079170/jobs/banners/ai-engineering-hero-banner-icon-system-balanced-extra-wide_lry0u5.png`,
     iconSystemBalancedWide: `${CDN}/v1783078476/jobs/banners/ai-engineering-hero-banner-icon-system-balanced-wide_pdutnx.png`,
@@ -63,8 +66,9 @@ function absoluteAsset(path: string) {
 
 function logoBandItem(id: string, height = 36): LogoBandItem | null {
   const entry = techLogoRegistry[id];
-  if (!entry?.imageSrc) return null;
-  return { src: entry.imageSrc, alt: entry.label, height };
+  const src = resolveTechLogoSrc(entry, 'horizontal');
+  if (!src) return null;
+  return { src, alt: entry?.label ?? id, height };
 }
 
 function dedupeLogoBand(items: LogoBandItem[]): LogoBandItem[] {
@@ -94,15 +98,13 @@ const coreLogoBandIds = [
   'n8n',
   'vercel',
   'github',
+  'weaviate',
+  'pinecone',
+  'fastapi',
 ] as const;
 
 const coreLogoBand = dedupeLogoBand(
   coreLogoBandIds.map((id) => logoBandItem(id)).filter((item): item is LogoBandItem => item !== null),
-);
-
-/** GenAI opportunity extras (vector DBs, FastAPI) merged without duplicating core stack marks. */
-const genAiLogoBandExtras = genAiRecruitingLogoBand.filter((item) =>
-  ['Weaviate', 'Pinecone', 'FastAPI'].includes(item.alt),
 );
 
 export const aiEngineeringVisuals = {
@@ -124,14 +126,15 @@ export const aiEngineeringVisuals = {
     'github',
   ],
   logoBand: coreLogoBand,
-  /** Full rolling strip for `/career-packet` — core stack plus GenAI vector / API marks. */
-  careerPacketLogoBand: dedupeLogoBand([...coreLogoBand, ...genAiLogoBandExtras]),
+  /** Full rolling strip for `/career-packet` */
+  careerPacketLogoBand: coreLogoBand,
+  careerPacketOgSpec: CAREER_PACKET_OG_SPEC,
   ogImage: useLocalRecruitingAssets
     ? absoluteAsset(recruitingImageFiles.ogAiEngineering)
     : recruiterCloudinaryAssets.ogAiEngineering,
   careerPacketOgImage: useLocalRecruitingAssets
     ? absoluteAsset(recruitingImageFiles.ogCareerPacket)
-    : recruiterCloudinaryAssets.ogAiEngineering,
+    : recruiterCloudinaryAssets.ogCareerPacket,
   proofImageFallbacks: {
     'life-os':
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
