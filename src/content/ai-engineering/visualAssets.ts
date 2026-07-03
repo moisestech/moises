@@ -18,13 +18,20 @@ export const recruiterCloudinaryAssets = {
   },
 } as const;
 
-/** Primary hero under recruiting header — swap key in `heroBanners` to A/B test. */
-export const aiEngineeringHeroBannerSrc = recruiterCloudinaryAssets.heroBanners.iconSystemBalanced;
+/** Primary hero under recruiting header — left text + flowchart for recruiter scan. */
+export const aiEngineeringHeroBannerSrc = recruiterCloudinaryAssets.heroBanners.leftTextFlowchart;
 
 export const aiEngineeringHeroBanner: ApplicationBanner = {
   src: aiEngineeringHeroBannerSrc,
   alt: 'Full-stack AI systems builder — Claude Code, Next.js, Supabase, Airtable, and automation workflows',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+};
+
+/** Career packet — logo row variant (pairs with animated stack band below). */
+export const careerPacketHeroBanner: ApplicationBanner = {
+  src: recruiterCloudinaryAssets.heroBanners.networkLogoRow,
+  alt: 'AI Engineering career packet — stack logos and recruiter-forwardable summary',
+  aspectClass: aiEngineeringHeroBanner.aspectClass,
 };
 
 /** Drop custom assets here — swap `useLocalRecruitingAssets` to true once files are committed locally. */
@@ -55,6 +62,7 @@ function logoBandItem(id: string, height = 36): LogoBandItem | null {
 
 export const aiEngineeringVisuals = {
   heroBanner: aiEngineeringHeroBanner,
+  careerPacketHeroBanner,
   headshot: {
     src: moisesSanabriaHeadshot,
     alt: 'Moises Sanabria — professional headshot',

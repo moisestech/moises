@@ -155,6 +155,7 @@ export const aiEngineeringDossier: Opportunity = {
 export const careerPacketDossier: Opportunity = {
   ...aiEngineeringDossier,
   slug: 'career-packet',
+  applicationBanner: aiEngineeringVisuals.careerPacketHeroBanner,
   navItems: [
     { id: 'hero', label: 'Overview' },
     { id: 'links', label: 'Links' },
