@@ -5,6 +5,8 @@ export type ApplicationBanner = {
   src: string;
   /** Optional wider crop shown from the `sm` breakpoint up. */
   srcWide?: string;
+  /** Optional extra-wide crop shown from the `lg` breakpoint up. */
+  srcExtraWide?: string;
   alt: string;
   /**
    * Optional Tailwind classes for the image frame (width is always full-bleed).

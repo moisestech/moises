@@ -205,6 +205,109 @@
   }
 }
 
+@keyframes wolfsonian-hero-glow {
+  0%,
+  100% {
+    filter: brightness(1);
+    opacity: 0.55;
+  }
+  50% {
+    filter: brightness(1.12);
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) {
+  .wolfsonian-hero-glow-overlay {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .group:hover .wolfsonian-hero-glow-overlay,
+  .group:focus-within .wolfsonian-hero-glow-overlay {
+    opacity: 1;
+    animation: wolfsonian-hero-glow 2.8s ease-in-out infinite;
+  }
+
+  .wolfsonian-hero-figure {
+    transition:
+      box-shadow 0.7s ease,
+      border-color 0.7s ease;
+  }
+
+  .wolfsonian-hero-figure:has(.group:hover),
+  .wolfsonian-hero-figure:has(.group:focus-within) {
+    box-shadow:
+      0 0 0 1px rgba(20, 184, 166, 0.35),
+      0 0 32px rgba(20, 184, 166, 0.28),
+      0 0 64px rgba(245, 158, 11, 0.12);
+    border-color: rgba(20, 184, 166, 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .wolfsonian-hero-glow-overlay,
+  .group:focus-within .wolfsonian-hero-glow-overlay {
+    animation: none;
+    opacity: 0.65;
+  }
+
+  .wolfsonian-hero-figure:has(.group:hover),
+  .wolfsonian-hero-figure:has(.group:focus-within) {
+    box-shadow: 0 0 24px rgba(20, 184, 166, 0.22);
+  }
+}
+
+@keyframes career-packet-portrait-glow {
+  0%,
+  100% {
+    filter: brightness(1);
+    opacity: 0.5;
+  }
+  50% {
+    filter: brightness(1.1);
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) {
+  .career-packet-portrait-glow {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .career-packet-portrait--glow .career-packet-portrait-glow,
+  .career-packet-portrait .group:hover ~ .career-packet-portrait-glow,
+  .career-packet-portrait:has(.group:hover) .career-packet-portrait-glow,
+  .career-packet-portrait:has(.group:focus-within) .career-packet-portrait-glow {
+    opacity: 1;
+    animation: career-packet-portrait-glow 2.8s ease-in-out infinite;
+  }
+
+  .career-packet-portrait {
+    transition:
+      box-shadow 0.7s ease,
+      border-color 0.7s ease;
+  }
+
+  .career-packet-portrait--glow,
+  .career-packet-portrait:has(.group:hover),
+  .career-packet-portrait:has(.group:focus-within) {
+    box-shadow:
+      0 0 0 1px rgba(var(--cp-glow-rgb), 0.35),
+      0 0 32px rgba(var(--cp-glow-rgb), 0.24),
+      0 0 56px rgba(var(--cp-glow-rgb), 0.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .career-packet-portrait--glow .career-packet-portrait-glow,
+  .career-packet-portrait:has(.group:hover) .career-packet-portrait-glow {
+    animation: none;
+    opacity: 0.65;
+  }
+}
+
 @keyframes grant-portrait-sheen {
   from {
     transform: translateX(-130%) skewX(-14deg);

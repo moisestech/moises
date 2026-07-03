@@ -6,15 +6,29 @@ import { RECRUITING_HEADER_OFFSET } from '@/config/recruiting-layout';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
+export type OpportunitySectionNavAccent = {
+  navActive: string;
+  navActiveText: string;
+  navIdle: string;
+  mediaBorder?: string;
+};
+
 type OpportunityShellProps = {
   children: React.ReactNode;
   navItems?: OpportunityNavItem[];
+  getSectionNavAccent?: (sectionId: string) => OpportunitySectionNavAccent | undefined;
 };
 
 /** Viewport offset from top: sections whose top is above this line count as “passed” for scroll-spy (header + sticky mini-nav). */
 const SECTION_SPY_OFFSET_PX = 186;
 
-function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
+function StickyMiniNav({
+  items,
+  getSectionNavAccent,
+}: {
+  items: OpportunityNavItem[];
+  getSectionNavAccent?: (sectionId: string) => OpportunitySectionNavAccent | undefined;
+}) {
   const ids = useMemo(() => items.map((i) => i.id), [items]);
   const idsKey = ids.join('|');
 
@@ -71,12 +85,16 @@ function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
 
   return (
     <nav
-      className={opp.stickyNav}
+      className={cn(
+        opp.stickyNav,
+        getSectionNavAccent?.(activeId)?.mediaBorder,
+      )}
       style={{ top: RECRUITING_HEADER_OFFSET }}
       aria-label="Section navigation"
     >
       <div className="mx-auto flex max-w-5xl items-center gap-1 overflow-x-auto px-4 pb-1 text-sm whitespace-nowrap sm:flex-wrap sm:whitespace-normal">
         {items.map((item) => {
+          const accent = getSectionNavAccent?.(item.id);
           const active = activeId === item.id;
           return (
             <a
@@ -84,7 +102,13 @@ function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
               href={`#${item.id}`}
               className={cn(
                 'rounded-full border px-3 py-1 transition-colors',
-                active ? opp.stickyNavActive : opp.stickyNavIdle,
+                active && accent
+                  ? cn(accent.navActive, accent.navActiveText)
+                  : active
+                    ? opp.stickyNavActive
+                    : accent
+                      ? cn(accent.navIdle, 'text-stone-600 dark:text-stone-400')
+                      : opp.stickyNavIdle,
               )}
               aria-current={active ? 'true' : undefined}
               onClick={(e) => {
@@ -101,10 +125,12 @@ function StickyMiniNav({ items }: { items: OpportunityNavItem[] }) {
   );
 }
 
-export function OpportunityShell({ navItems, children }: OpportunityShellProps) {
+export function OpportunityShell({ navItems, children, getSectionNavAccent }: OpportunityShellProps) {
   return (
     <div className={opp.shell}>
-      {navItems?.length ? <StickyMiniNav items={navItems} /> : null}
+      {navItems?.length ? (
+        <StickyMiniNav items={navItems} getSectionNavAccent={getSectionNavAccent} />
+      ) : null}
       {children}
     </div>
   );

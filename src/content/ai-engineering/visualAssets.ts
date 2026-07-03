@@ -9,6 +9,7 @@ const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 export const recruiterCloudinaryAssets = {
   ogAiEngineering: `${CDN}/v1783034176/jobs/recruiter/ai-engineering-og-card-moises-name-text-heavy_c67fvt.png`,
   heroBanners: {
+    iconSystemBalancedExtraWide: `${CDN}/v1783079170/jobs/banners/ai-engineering-hero-banner-icon-system-balanced-extra-wide_lry0u5.png`,
     iconSystemBalancedWide: `${CDN}/v1783078476/jobs/banners/ai-engineering-hero-banner-icon-system-balanced-wide_pdutnx.png`,
     iconSystemBalanced: `${CDN}/v1783034175/jobs/recruiter/ai-engineering-hero-banner-icon-system-balanced_jnzy97.png`,
     visualNoText: `${CDN}/v1783034175/jobs/recruiter/ai-engineering-hero-banner-visual-no-text-final_ga7guu.png`,
@@ -25,14 +26,17 @@ export const aiEngineeringHeroBannerSrc = recruiterCloudinaryAssets.heroBanners.
 export const aiEngineeringHeroBanner: ApplicationBanner = {
   src: aiEngineeringHeroBannerSrc,
   srcWide: recruiterCloudinaryAssets.heroBanners.iconSystemBalancedWide,
+  srcExtraWide: recruiterCloudinaryAssets.heroBanners.iconSystemBalancedExtraWide,
   alt: 'Full-stack AI systems builder — Claude Code, Next.js, Supabase, Airtable, and automation workflows',
-  aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+  aspectClass:
+    'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)] lg:aspect-[3/1] lg:max-h-[min(38vh,400px)]',
 };
 
-/** Career packet — logo row on mobile; balanced wide banner from sm up. */
+/** Career packet — logo row on mobile; balanced wide from sm; extra-wide from lg. */
 export const careerPacketHeroBanner: ApplicationBanner = {
   src: recruiterCloudinaryAssets.heroBanners.networkLogoRow,
   srcWide: recruiterCloudinaryAssets.heroBanners.iconSystemBalancedWide,
+  srcExtraWide: recruiterCloudinaryAssets.heroBanners.iconSystemBalancedExtraWide,
   alt: 'AI Engineering career packet — stack logos and recruiter-forwardable summary',
   aspectClass: aiEngineeringHeroBanner.aspectClass,
 };

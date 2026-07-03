@@ -31,7 +31,43 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
       )}
     >
       <div className={cn(defaultFrame, banner.aspectClass)}>
-        {banner.srcWide ? (
+        {banner.srcExtraWide && banner.srcWide ? (
+          <>
+            {remote || !banner.src.endsWith('.svg') ? (
+              <Image
+                src={banner.src}
+                alt={banner.alt}
+                fill
+                className="object-cover object-top sm:hidden"
+                sizes="100vw"
+                priority
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={banner.src}
+                alt={banner.alt}
+                className="h-full w-full object-cover object-top sm:hidden"
+              />
+            )}
+            <Image
+              src={banner.srcWide}
+              alt={banner.alt}
+              fill
+              className="hidden object-cover object-top sm:block lg:hidden"
+              sizes="100vw"
+              priority
+            />
+            <Image
+              src={banner.srcExtraWide}
+              alt={banner.alt}
+              fill
+              className="hidden object-cover object-top lg:block"
+              sizes="100vw"
+              priority
+            />
+          </>
+        ) : banner.srcWide ? (
           <>
             {remote || !banner.src.endsWith('.svg') ? (
               <Image
