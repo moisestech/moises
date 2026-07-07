@@ -85,6 +85,11 @@ export const bornIntoTheMachineDeeperLinks = [
     description: 'Stance, method, and vocabulary for human–AI co-writing in the project.',
   },
   {
+    label: '365 Post-AI Readymades',
+    href: '/projects/born-into-the-machine/365-post-ai-readymades',
+    description: 'Daily symbolic archive of speculative sculptures, institutional images, and skipped objects.',
+  },
+  {
     label: 'Sculptural engines',
     href: '/research/born-into-the-machine/sculptural-engines',
     description:
