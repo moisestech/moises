@@ -14,7 +14,7 @@ export const MAIN_SITE_NAV_ITEMS: SiteNavItem[] = [
   { label: 'Exhibitions', path: '/exhibitions' },
   { label: 'Events', path: '/events' },
   { label: 'Selected Works', path: '/selected-works', enabled: true },
-  { label: 'Born in the Machine', path: '/research/born-into-the-machine', enabled: true },
+  { label: 'Born into the Machine', path: '/research/born-into-the-machine', enabled: true },
   { label: 'Art and Artist', path: '/portfolio', enabled: true },
   { label: 'Bio', path: '/bio', enabled: true },
   { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },
@@ -25,7 +25,7 @@ export const MAIN_SITE_NAV_ITEMS_MOBILE: SiteNavItem[] = [
   { label: 'Visit', path: '/visit' },
   { label: 'Exhibitions', path: '/exhibitions' },
   { label: 'Events', path: '/events' },
-  { label: 'Born in the Machine', path: '/research/born-into-the-machine', enabled: true },
+  { label: 'Born into the Machine', path: '/research/born-into-the-machine', enabled: true },
   { label: 'Art and Artist', path: '/portfolio', enabled: true },
   { label: 'Bio', path: '/bio', enabled: true },
   { label: 'Store', path: 'https://www.artsy.net/artist/moises-sanabria', external: true },
@@ -59,7 +59,7 @@ export function isWorkshopProgramLinkActive(pathname: string | null, programPath
 
 /** Exit ramp back to the main site (research + contact) */
 export const WORKSHOP_NAV_SITE: SiteNavItem[] = [
-  { label: 'Born in the Machine', path: '/research/born-into-the-machine', enabled: true },
+  { label: 'Born into the Machine', path: '/research/born-into-the-machine', enabled: true },
   { label: 'Contact', path: '/contact', enabled: true },
   { label: 'Portfolio', path: '/portfolio', enabled: true },
 ]

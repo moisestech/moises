@@ -32,7 +32,7 @@ export function BornIntoTheMachineArchivePlaceholder({ title, description }: Arc
             href="/research/born-into-the-machine"
             className="inline-flex min-h-11 items-center border border-stone-800 px-4 py-2 text-sm font-medium hover:bg-stone-900 hover:text-white dark:border-stone-200 dark:hover:bg-stone-100 dark:hover:text-black"
           >
-            ← Book archive
+            ← Born into the Machine
           </Link>
           <Link
             href="/grant/ssrc-just-tech-fellowship-2027"

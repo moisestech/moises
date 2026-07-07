@@ -1,23 +1,49 @@
-import { readBookMetadata } from '@/lib/book/parser.server';
-import { ChapterList } from '@/components/book/ChapterList';
-import { AuthorshipLegend } from '@/components/book/AuthorshipLegend';
-import { BornIntoTheMachineHero } from '@/components/book/BornIntoTheMachineHero';
+import type { Metadata } from 'next';
+import { BornIntoTheMachineSprintPage } from '@/components/research/BornIntoTheMachineSprintPage';
+import {
+  bornIntoTheMachineSprintHeroImage,
+  bornIntoTheMachineSprintSeo,
+} from '@/content/research/born-into-the-machine-sprint';
 
-export default async function BornIntoTheMachinePage() {
-  const metadata = await readBookMetadata();
+const SITE = 'https://moises.tech';
 
-  return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11 py-12 pt-24">
-        <BornIntoTheMachineHero />
-        <AuthorshipLegend collapsible={false} />
-        <ChapterList
-          chapters={metadata.chapters}
-          bookTitle={metadata.title}
-          bookDescription={metadata.description}
-          showBookHeader={false}
-        />
-      </div>
-    </div>
-  );
+export const metadata: Metadata = {
+  title: bornIntoTheMachineSprintSeo.title,
+  description: bornIntoTheMachineSprintSeo.description,
+  keywords: [
+    'Born into the Machine',
+    'AI Sprint',
+    'Miami art',
+    'No Vacancy',
+    'public art',
+    'grant writing',
+    'Moises Sanabria',
+    'Idea Center',
+    'Miami Dade College',
+  ],
+  alternates: { canonical: `${SITE}/research/born-into-the-machine` },
+  openGraph: {
+    title: bornIntoTheMachineSprintSeo.title,
+    description: bornIntoTheMachineSprintSeo.description,
+    type: 'website',
+    url: `${SITE}/research/born-into-the-machine`,
+    siteName: 'Moises Sanabria',
+    locale: 'en_US',
+    images: [
+      {
+        url: bornIntoTheMachineSprintHeroImage,
+        alt: bornIntoTheMachineSprintSeo.ogImageAlt,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: bornIntoTheMachineSprintSeo.title,
+    description: bornIntoTheMachineSprintSeo.description,
+    images: [bornIntoTheMachineSprintHeroImage],
+  },
+};
+
+export default function BornIntoTheMachinePage() {
+  return <BornIntoTheMachineSprintPage />;
 }
