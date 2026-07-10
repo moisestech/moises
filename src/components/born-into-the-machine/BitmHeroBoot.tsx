@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 export function BitmHeroBoot() {
   const ref = useRef<HTMLElement>(null);
   useBitmChapterObserver('boot', ref);
-  const { reducedMotion } = useBitm();
+  const { reducedMotion, showSecondaryChrome } = useBitm();
 
   const [phase, setPhase] = useState<'cursor' | 'init' | 'title' | 'stable'>(
     reducedMotion ? 'stable' : 'cursor',
@@ -41,12 +41,24 @@ export function BitmHeroBoot() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const heroImage = (
+    <BitmImageStateToggle
+      photoSrc={bitmAssets.hero.poster}
+      alt="Baby AGI sculpture — hero visual for Born into the Machine"
+      caption="Scanned silhouette — photograph, point cloud, wireframe"
+    />
+  );
+
   return (
     <section
       id="boot"
       ref={ref}
       className="relative mb-16 scroll-mt-44 border-b border-[#dedede] pb-16 dark:border-neutral-800 md:mb-20 md:pb-20 md:scroll-mt-52"
     >
+      <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#ff5c00]">
+        {bitmPage.eyebrow}
+      </p>
+
       <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           {phase !== 'stable' && phase !== 'title' ? (
@@ -73,13 +85,19 @@ export function BitmHeroBoot() {
             {bitmPage.title}
           </motion.h1>
 
-          <p className="mt-4 text-xl font-medium text-[#777777] dark:text-neutral-400 sm:text-2xl">
+          <p className="mt-4 text-xl font-medium text-[#111111] dark:text-neutral-100 sm:text-2xl">
             {bitmPage.subtitle}
+          </p>
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[#777777] sm:text-xs">
+            {bitmPage.secondaryDescriptor}
+          </p>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-[#777777] dark:text-neutral-400">
+            {bitmPage.supportingLine}
           </p>
 
           <dl className="mt-8 grid gap-2 sm:grid-cols-2">
             {bitmPage.heroMetadata.map((m) => (
-              <div key={m.key} className="font-mono text-[10px] uppercase tracking-[0.14em]">
+              <div key={m.key} className="font-mono text-[10px] uppercase tracking-[0.14em] sm:text-[11px]">
                 <dt className="text-[#777777]">{m.key}</dt>
                 <dd className="text-[#111111] dark:text-neutral-200">{m.value}</dd>
               </div>
@@ -99,16 +117,18 @@ export function BitmHeroBoot() {
           </div>
         </div>
 
-        <BitmCursorLens
-          caption="Baby AGI — point cloud / wireframe alternates"
-          className="relative aspect-[4/5] overflow-hidden border border-[#dedede] dark:border-neutral-700"
-        >
-          <BitmImageStateToggle
-            photoSrc={bitmAssets.hero.poster}
-            alt="Baby AGI sculpture — hero visual for Born into the Machine"
-            caption="Scanned silhouette — photograph, point cloud, wireframe"
-          />
-        </BitmCursorLens>
+        {showSecondaryChrome ? (
+          <BitmCursorLens
+            caption="Baby AGI — point cloud / wireframe alternates"
+            className="relative aspect-[4/5] overflow-hidden border border-[#dedede] dark:border-neutral-700"
+          >
+            {heroImage}
+          </BitmCursorLens>
+        ) : (
+          <div className="relative aspect-[4/5] overflow-hidden border border-[#dedede] dark:border-neutral-700">
+            {heroImage}
+          </div>
+        )}
       </div>
 
       <BitmLaborReveal chapterId="boot" />

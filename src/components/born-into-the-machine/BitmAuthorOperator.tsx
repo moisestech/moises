@@ -23,7 +23,7 @@ export function BitmAuthorOperator() {
     >
       <BitmSectionHeader
         eyebrow="Chapter 08"
-        title="Author / Operator"
+        title="Author / Operator / Collaborators"
         iconKey="human-machine"
         accent={accent}
       />
@@ -35,13 +35,16 @@ export function BitmAuthorOperator() {
         <div className="relative aspect-square max-w-[200px] overflow-hidden border border-[#c4c4c4]/50">
           <Image
             src={bitmAssets.portraits.secondary}
-            alt="Moises Sanabria — secondary studio portrait"
+            alt="Moises Sanabria — studio portrait, Bakehouse Studio 43"
             fill
             className="object-cover"
             sizes="200px"
           />
         </div>
         <div>
+          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[#777777]">
+            Bakehouse Art Complex · Studio 43 · Miami
+          </p>
           <div className="flex flex-wrap gap-3">
             {bitmPage.ctas.map((cta) => (
               <Link
@@ -53,6 +56,10 @@ export function BitmAuthorOperator() {
               </Link>
             ))}
           </div>
+          <p className="mt-6 text-sm text-[#777777] dark:text-neutral-400">
+            Collaborators are credited on individual case studies. Fields marked partial or needed
+            await verification before publication.
+          </p>
 
           <div className="mt-10">
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[#777777]">

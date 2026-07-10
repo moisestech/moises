@@ -1,8 +1,12 @@
 import { moisesSanabriaHeadshot, moisesSanabriaPortraitFull } from '@/content/evidence/recruitingLogoBand';
+import { OOLITE_DIGITAL_LAB_IMAGE } from '@/content/evidence/projects';
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
 export const bitmPublicBase = '/born-into-the-machine';
+
+export const STUDIO_43_PANORAMA_EMBED =
+  'https://momento360.com/e/u/a338f042352a4550b3e12a6ccc29f98b?utm_campaign=embed&utm_source=other&heading=128.94&pitch=-17.74&field-of-view=75&size=medium&display-plan=true';
 
 export const bitmAssets = {
   hero: {
@@ -20,10 +24,14 @@ export const bitmAssets = {
     cutout: `${bitmPublicBase}/portraits/portrait-moises-cutout.webp`,
     poseSvg: `${bitmPublicBase}/portraits/portrait-moises-pose.svg`,
   },
+  studio43: {
+    panoramaEmbedUrl: STUDIO_43_PANORAMA_EMBED,
+    flatPhoto: { status: 'needed' as const, url: null },
+  },
   studio: {
-    workstation: `${CDN}/v1775099574/art/moisestech-website/research/broken-acceleration/broken-acceleration-writing-apr1st-wavemaker-2026_xrg993.png`,
-    workshop: `${CDN}/v1779573363/art/moisestech-website/artworks/2023_digital_divinities/02DigitalDivinities_n4yrg8.png`,
-    fabrication: `${CDN}/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp`,
+    openStudios: `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`,
+    breadbytes: `${CDN}/v1739483633/art/moisestech-website/exhibitions/dec_2023_bakehouse_breadbytes/exhibition_shot_2_nbx7ky.jpg`,
+    ooliteLab: OOLITE_DIGITAL_LAB_IMAGE,
     installation: `${CDN}/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg`,
   },
   textures: {

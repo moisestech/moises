@@ -1,12 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
-import Image from 'next/image';
 import { bitmPage } from '@/content/born-into-the-machine/bitm-page';
-import { bitmAssets } from '@/content/born-into-the-machine/bitm-assets';
 import { getBitmChapterAccent } from '@/config/born-into-the-machine-theme';
 import { BitmSectionHeader } from '@/components/born-into-the-machine/BitmSectionHeader';
 import { BitmStudioInfrastructureDiagram } from '@/components/born-into-the-machine/BitmStudioInfrastructureDiagram';
+import { BitmPublicDocumentationCarousel } from '@/components/born-into-the-machine/BitmPublicDocumentationCarousel';
+import { BitmInstitutionBanner } from '@/components/born-into-the-machine/BitmInstitutionBanner';
 import { BitmLaborReveal } from '@/components/born-into-the-machine/BitmLaborReveal';
 import { useBitmChapterObserver } from '@/components/born-into-the-machine/BitmContext';
 
@@ -33,26 +33,9 @@ export function BitmPublicInfrastructure() {
 
       <BitmStudioInfrastructureDiagram />
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        <div className="relative aspect-video overflow-hidden border border-[#dedede] dark:border-neutral-700">
-          <Image
-            src={bitmAssets.studio.workshop}
-            alt="Workshop and public program — Digital Divinities installation"
-            fill
-            className="object-cover"
-            sizes="50vw"
-          />
-        </div>
-        <div className="relative aspect-video overflow-hidden border border-[#dedede] dark:border-neutral-700">
-          <Image
-            src={bitmAssets.studio.installation}
-            alt="Public installation — Doomscrolling Treadmill at festival"
-            fill
-            className="object-cover"
-            sizes="50vw"
-          />
-        </div>
-      </div>
+      <BitmInstitutionBanner />
+
+      <BitmPublicDocumentationCarousel />
 
       <BitmLaborReveal chapterId="public" />
     </section>

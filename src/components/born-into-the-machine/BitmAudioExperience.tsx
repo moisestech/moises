@@ -3,10 +3,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import { bitmAssets } from '@/content/born-into-the-machine/bitm-assets';
+import { bitmMediaConfig } from '@/config/born-into-the-machine-theme';
 import { useBitm } from '@/components/born-into-the-machine/BitmContext';
 import { cn } from '@/lib/utils';
 
 export function BitmAudioExperience({ className }: { className?: string }) {
+  if (bitmMediaConfig.audioExperienceStatus === 'planned') {
+    return null;
+  }
+
+  return <BitmAudioExperienceActive className={className} />;
+}
+
+function BitmAudioExperienceActive({ className }: { className?: string }) {
   const { audioEnabled, setAudioEnabled } = useBitm();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [transcript, setTranscript] = useState<string | null>(null);
@@ -54,11 +63,6 @@ export function BitmAudioExperience({ className }: { className?: string }) {
         {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
         Listen to the Machine
       </button>
-      {!audioAvailable && audioEnabled ? (
-        <p className="mt-2 border border-[#dedede] bg-white/95 p-2 text-[10px] text-[#777777] dark:border-neutral-700 dark:bg-neutral-900">
-          Audio file pending — transcript available below.
-        </p>
-      ) : null}
       {audioEnabled && transcript ? (
         <pre className="mt-2 max-h-32 overflow-auto border border-[#dedede] bg-white/95 p-2 text-[9px] leading-relaxed text-[#777777] dark:border-neutral-700 dark:bg-neutral-900">
           {transcript}

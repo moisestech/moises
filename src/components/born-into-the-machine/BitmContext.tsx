@@ -2,6 +2,8 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { BitmChapterId } from '@/config/born-into-the-machine-theme';
+import { bitmMediaConfig } from '@/config/born-into-the-machine-theme';
+import { bitmDefaultTraceCaseStudyId } from '@/content/born-into-the-machine/bitm-pipeline-traces';
 
 type BitmContextValue = {
   activeChapterId: BitmChapterId;
@@ -11,6 +13,11 @@ type BitmContextValue = {
   reducedMotion: boolean;
   audioEnabled: boolean;
   setAudioEnabled: (v: boolean) => void;
+  isMobile: boolean;
+  interactionIntensity: 'experimental' | 'restrained';
+  activeTraceCaseStudyId: string;
+  setActiveTraceCaseStudyId: (id: string) => void;
+  showSecondaryChrome: boolean;
 };
 
 const BitmContext = createContext<BitmContextValue | null>(null);
@@ -20,14 +27,31 @@ export function BitmProvider({ children }: { children: React.ReactNode }) {
   const [showLabor, setShowLabor] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeTraceCaseStudyId, setActiveTraceCaseStudyId] = useState(bitmDefaultTraceCaseStudyId);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
+    const updateMotion = () => setReducedMotion(mq.matches);
+    updateMotion();
+    mq.addEventListener('change', updateMotion);
+
+    const mqMobile = window.matchMedia('(max-width: 767px)');
+    const updateMobile = () => setIsMobile(mqMobile.matches);
+    updateMobile();
+    mqMobile.addEventListener('change', updateMobile);
+
+    return () => {
+      mq.removeEventListener('change', updateMotion);
+      mqMobile.removeEventListener('change', updateMobile);
+    };
   }, []);
+
+  const interactionIntensity = isMobile
+    ? bitmMediaConfig.mobileInteractionIntensity
+    : bitmMediaConfig.interactionIntensity;
+
+  const showSecondaryChrome = interactionIntensity === 'experimental' && !isMobile;
 
   const value = useMemo(
     () => ({
@@ -38,8 +62,22 @@ export function BitmProvider({ children }: { children: React.ReactNode }) {
       reducedMotion,
       audioEnabled,
       setAudioEnabled,
+      isMobile,
+      interactionIntensity,
+      activeTraceCaseStudyId,
+      setActiveTraceCaseStudyId,
+      showSecondaryChrome,
     }),
-    [activeChapterId, showLabor, reducedMotion, audioEnabled],
+    [
+      activeChapterId,
+      showLabor,
+      reducedMotion,
+      audioEnabled,
+      isMobile,
+      interactionIntensity,
+      activeTraceCaseStudyId,
+      showSecondaryChrome,
+    ],
   );
 
   return <BitmContext.Provider value={value}>{children}</BitmContext.Provider>;

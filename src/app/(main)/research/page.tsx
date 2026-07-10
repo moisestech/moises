@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { research } from '@/constants/research';
 import {
   bornIntoTheMachineSprint,
-  bornIntoTheMachineSprintHeroImage,
+  ideaCenterLogos,
+  ideaCenterProgram,
 } from '@/content/research/born-into-the-machine-sprint';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -50,21 +51,22 @@ export default function ResearchIndexPage() {
 
       <div className="mb-12">
         <Link
-          href="/research/born-into-the-machine"
+          href="/research/born-into-the-machine/sprint"
           className="block group border-2 border-[#ff5c00]/25 dark:border-[#ff5c00]/30 rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200 md:flex"
         >
-          <div className="relative aspect-[16/9] md:aspect-auto md:w-2/5 md:min-h-[220px] shrink-0">
+          <div className="relative aspect-[16/9] md:aspect-auto md:w-2/5 md:min-h-[220px] shrink-0 bg-white flex items-center justify-center p-6">
             <Image
-              src={bornIntoTheMachineSprintHeroImage}
-              alt={bornIntoTheMachineSprint.subtitle}
-              fill
-              className="object-cover"
+              src={ideaCenterLogos.horizontal}
+              alt={`${ideaCenterProgram.name} — ${ideaCenterProgram.program}`}
+              width={400}
+              height={100}
+              className="object-contain max-h-full w-full"
               priority
             />
           </div>
           <div className="px-6 py-6 md:py-8 flex flex-col justify-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#ff5c00] mb-2">
-              Featured · {bornIntoTheMachineSprint.year}
+              {ideaCenterProgram.program} · {bornIntoTheMachineSprint.year}
             </p>
             <h2 className="text-2xl font-bold mb-2 group-hover:text-[#ff5c00] transition-colors">
               {bornIntoTheMachineSprint.title}

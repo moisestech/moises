@@ -150,6 +150,16 @@ export function getBitmChapterAccent(id: BitmChapterId): BitmChapterAccent {
   return bitmChapterAccents[id];
 }
 
+export type BitmInteractionIntensity = 'experimental' | 'restrained';
+export type BitmMediaStatus = 'planned' | 'ready';
+
+export const bitmMediaConfig = {
+  heroVideoStatus: 'planned' as BitmMediaStatus,
+  audioExperienceStatus: 'planned' as BitmMediaStatus,
+  interactionIntensity: 'experimental' as BitmInteractionIntensity,
+  mobileInteractionIntensity: 'restrained' as BitmInteractionIntensity,
+} as const;
+
 export const bitmChapterIconMap: Record<BitmChapterId, BitmConceptualIconKey> = {
   boot: 'birth-boot',
   thesis: 'human-machine',

@@ -10,6 +10,7 @@ export function BitmShowLaborToggle({ className }: { className?: string }) {
     <button
       type="button"
       onClick={() => setShowLabor(!showLabor)}
+      title="Reveal the material, technical, financial, collaborative, and institutional work sustaining each project."
       className={cn(
         'font-mono text-[10px] uppercase tracking-[0.16em] transition-colors',
         showLabor
