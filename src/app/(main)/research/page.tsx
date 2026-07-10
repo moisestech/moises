@@ -51,7 +51,7 @@ export default function ResearchIndexPage() {
       <div className="mb-12">
         <Link
           href="/research/born-into-the-machine"
-          className="block group border-2 border-violet-200 dark:border-violet-800/60 rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200 md:flex"
+          className="block group border-2 border-[#ff5c00]/25 dark:border-[#ff5c00]/30 rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200 md:flex"
         >
           <div className="relative aspect-[16/9] md:aspect-auto md:w-2/5 md:min-h-[220px] shrink-0">
             <Image
@@ -63,13 +63,13 @@ export default function ResearchIndexPage() {
             />
           </div>
           <div className="px-6 py-6 md:py-8 flex flex-col justify-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-2">
-              Featured · AI Sprint {bornIntoTheMachineSprint.year}
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#ff5c00] mb-2">
+              Featured · {bornIntoTheMachineSprint.year}
             </p>
-            <h2 className="text-2xl font-bold mb-2 group-hover:text-violet-700 dark:group-hover:text-violet-300 transition-colors">
+            <h2 className="text-2xl font-bold mb-2 group-hover:text-[#ff5c00] transition-colors">
               {bornIntoTheMachineSprint.title}
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{bornIntoTheMachineSprint.lede}</p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{bornIntoTheMachineSprint.subtitle}</p>
           </div>
         </Link>
       </div>

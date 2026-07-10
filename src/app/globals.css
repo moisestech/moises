@@ -328,3 +328,18 @@
     animation: none !important;
   }
 }
+
+@keyframes bitm-chrome-tilt {
+  0% {
+    transform: perspective(200px) rotateY(-8deg) rotateX(2deg);
+  }
+  100% {
+    transform: perspective(200px) rotateY(8deg) rotateX(-2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[bitm-chrome-tilt_6s_ease-in-out_infinite_alternate\] {
+    animation: none !important;
+  }
+}

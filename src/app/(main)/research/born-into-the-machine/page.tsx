@@ -1,49 +1,45 @@
 import type { Metadata } from 'next';
-import { BornIntoTheMachineSprintPage } from '@/components/research/BornIntoTheMachineSprintPage';
-import {
-  bornIntoTheMachineSprintHeroImage,
-  bornIntoTheMachineSprintSeo,
-} from '@/content/research/born-into-the-machine-sprint';
+import { BitmPageClient } from '@/components/born-into-the-machine/BitmPageClient';
+import { bitmSeo } from '@/content/born-into-the-machine/bitm-page';
 
 const SITE = 'https://moises.tech';
 
 export const metadata: Metadata = {
-  title: bornIntoTheMachineSprintSeo.title,
-  description: bornIntoTheMachineSprintSeo.description,
+  title: bitmSeo.title,
+  description: bitmSeo.description,
   keywords: [
     'Born into the Machine',
-    'AI Sprint',
-    'Miami art',
-    'No Vacancy',
+    'AI studio infrastructure',
     'public art',
-    'grant writing',
+    'Miami art',
     'Moises Sanabria',
-    'Idea Center',
-    'Miami Dade College',
+    'sculpture',
+    'generative AI',
+    'museum practice',
   ],
   alternates: { canonical: `${SITE}/research/born-into-the-machine` },
   openGraph: {
-    title: bornIntoTheMachineSprintSeo.title,
-    description: bornIntoTheMachineSprintSeo.description,
+    title: bitmSeo.title,
+    description: bitmSeo.description,
     type: 'website',
     url: `${SITE}/research/born-into-the-machine`,
     siteName: 'Moises Sanabria',
     locale: 'en_US',
     images: [
       {
-        url: bornIntoTheMachineSprintHeroImage,
-        alt: bornIntoTheMachineSprintSeo.ogImageAlt,
+        url: bitmSeo.ogImage,
+        alt: bitmSeo.ogImageAlt,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: bornIntoTheMachineSprintSeo.title,
-    description: bornIntoTheMachineSprintSeo.description,
-    images: [bornIntoTheMachineSprintHeroImage],
+    title: bitmSeo.title,
+    description: bitmSeo.description,
+    images: [bitmSeo.ogImage],
   },
 };
 
 export default function BornIntoTheMachinePage() {
-  return <BornIntoTheMachineSprintPage />;
+  return <BitmPageClient />;
 }
