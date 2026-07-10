@@ -84,6 +84,11 @@ const nextConfig = {
         destination: '/cv/tech',
         permanent: true,
       },
+      {
+        source: '/projects/born-into-the-machine/365-post-ai-readymades',
+        destination: '/research/born-into-the-machine/365-post-ai-readymades',
+        permanent: true,
+      },
     ]
   },
 

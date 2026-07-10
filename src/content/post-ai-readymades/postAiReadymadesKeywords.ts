@@ -54,6 +54,12 @@ export const readymadesKeywordLibrary: Record<string, ReadymadesKeyword> = {
     description:
       'Whether an image can pass as institutional documentation—catalogue, grant, museum wall—before the physical work exists.',
   },
+  'feedback loop': {
+    term: 'feedback loop',
+    label: 'Studio method',
+    description:
+      'Taste, machine vision, budget, and display conditions tested in sequence until the image crosses the plausibility threshold.',
+  },
   'Born Into the Machine': {
     term: 'Born Into the Machine',
     label: 'Parent project',
@@ -87,7 +93,7 @@ export const readymadesKeywordLibrary: Record<string, ReadymadesKeyword> = {
 
 export const readymadesSectionHighlights: Record<string, (string | ReadymadesKeyword)[]> = {
   hero: ['post-AI readymade', 'IG Story', 'Born Into the Machine'],
-  method: ['object relation', 'sculptural plausibility engine', 'white cube believability', 'plausibility'],
+  method: ['object relation', 'sculptural plausibility engine', 'feedback loop', 'white cube believability', 'plausibility'],
   ritual: ['IG Story', 'Airtable archive', 'missing labor'],
   skipped: ['skipped object', 'readymade', 'plausibility'],
   parent: ['Born Into the Machine', 'missing labor', 'attention economy'],

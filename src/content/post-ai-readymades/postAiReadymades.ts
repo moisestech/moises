@@ -42,12 +42,30 @@ export const postAiReadymadesPage = {
   parentLabel: 'Born Into the Machine',
   title: '365 Post-AI Readymades',
   subtitle: 'A symbolic daily archive of speculative sculptures, institutional images, and skipped objects.',
+  subtitleSharp:
+    'One IG Story at a time, the object becomes believable before it becomes physical.',
   status: 'Daily archive · in development',
   year: 2026,
   heroStatement:
     '365 Post-AI Readymades is the studio method of Born Into the Machine: a symbolic archive of daily selections where speculative objects move between image, IG Story, institutional display, missing labor, and possible sculpture.',
+  catalogueAnswers: [
+    {
+      question: 'What is this?',
+      answer:
+        'A symbolic 365-entry archive of post-AI readymade studies—vertical artifacts between image, Story, and possible sculpture.',
+    },
+    {
+      question: 'How does it work?',
+      answer: 'One selected vertical image / IG Story becomes an official archive entry each day.',
+    },
+    {
+      question: 'Why does it matter?',
+      answer:
+        'Sculpture, labor, institution, image, feed, and plausibility collapse into one compressed public artifact.',
+    },
+  ],
   projectStatement: [
-    'This project treats image generation as a sculptural plausibility engine. Each study begins as an object relation, passes through a machine-assisted feedback loop, and becomes a vertical image that may be posted, archived, built, or left suspended.',
+    '365 Post-AI Readymades treats image generation as a sculptural plausibility engine. Each study begins as an object relation, passes through a feedback loop of taste, machine vision, budget, and white cube believability, and becomes a vertical image that may be posted, archived, built, or left suspended.',
     'The physical object is not erased. It is delayed, simulated, compressed, or made unnecessary for a moment. The archive tracks that threshold: when an image feels raw enough, cheap enough, and believable enough to almost become real.',
   ],
   ritualLine: 'Instagram is the flash. Airtable is the archive. The website is the public memory.',

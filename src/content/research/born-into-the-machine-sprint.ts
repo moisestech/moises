@@ -86,7 +86,7 @@ export const bornIntoTheMachineDeeperLinks = [
   },
   {
     label: '365 Post-AI Readymades',
-    href: '/projects/born-into-the-machine/365-post-ai-readymades',
+    href: '/research/born-into-the-machine/365-post-ai-readymades',
     description: 'Daily symbolic archive of speculative sculptures, institutional images, and skipped objects.',
   },
   {
