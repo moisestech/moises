@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, type ReactNode } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type CvCollapsibleSectionProps = {
   id: string;
   title: string;
+  icon?: LucideIcon;
   defaultOpen?: boolean;
   children: ReactNode;
   className?: string;
@@ -15,6 +16,7 @@ type CvCollapsibleSectionProps = {
 export function CvCollapsibleSection({
   id,
   title,
+  icon: Icon,
   defaultOpen = true,
   children,
   className,
@@ -22,7 +24,7 @@ export function CvCollapsibleSection({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <section id={id} className={cn('scroll-mt-28 border-b border-gray-200 dark:border-gray-700', className)}>
+    <section id={id} className={cn('scroll-mt-28 border-b border-stone-200 dark:border-stone-700', className)}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -30,10 +32,15 @@ export function CvCollapsibleSection({
         aria-expanded={open}
         aria-controls={`${id}-panel`}
       >
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white print:text-base">{title}</h2>
+        <h2 className="flex items-center gap-2 text-xl font-semibold text-stone-900 dark:text-stone-50 print:text-base">
+          {Icon ? (
+            <Icon className="h-5 w-5 shrink-0 text-cyan-700 dark:text-cyan-300" aria-hidden />
+          ) : null}
+          {title}
+        </h2>
         <ChevronDown
           className={cn(
-            'h-5 w-5 shrink-0 text-gray-500 transition-transform print:hidden',
+            'h-5 w-5 shrink-0 text-stone-500 transition-transform dark:text-stone-400 print:hidden',
             open && 'rotate-180',
           )}
           aria-hidden
