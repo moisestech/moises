@@ -6,7 +6,7 @@ import { Menu } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Logo } from '@/features/landing';
 import HeaderControls from '@/features/landing/components/HeaderControls';
-import { RECRUITING_SITE_NAV_ITEMS } from '@/config/recruiting-navigation';
+import { recruitingNavItemsForPath } from '@/config/recruiting-navigation';
 
 type RecruitingSiteHeaderProps = {
   onMobileMenuToggle: () => void;
@@ -15,6 +15,7 @@ type RecruitingSiteHeaderProps = {
 
 export function RecruitingSiteHeader({ onMobileMenuToggle, mobileMenuOpen }: RecruitingSiteHeaderProps) {
   const pathname = usePathname();
+  const navItems = recruitingNavItemsForPath(pathname);
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -62,7 +63,7 @@ export function RecruitingSiteHeader({ onMobileMenuToggle, mobileMenuOpen }: Rec
         <div className="max-w-7xl mx-auto px-11 py-5">
           <nav aria-label="Professional site">
             <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xl lg:gap-x-8">
-              {RECRUITING_SITE_NAV_ITEMS.map((item) => {
+              {navItems.map((item) => {
                 const active =
                   !item.external &&
                   (pathname === item.path ||

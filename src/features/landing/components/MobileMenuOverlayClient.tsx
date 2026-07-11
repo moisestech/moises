@@ -6,16 +6,21 @@ import MobileMenu from './MobileMenu';
 import Header from './Header';
 import { RecruitingSiteHeader } from '@/components/opportunities/RecruitingSiteHeader';
 import { isWorkshopNavContext, navigationItemsForPath } from '@/config/site-navigation';
-import { isRecruitingSitePath, RECRUITING_SITE_NAV_ITEMS } from '@/config/recruiting-navigation';
+import {
+  isRecruitingSitePath,
+  recruitingNavItemsForPath,
+  usesRecruitingHeader,
+} from '@/config/recruiting-navigation';
 import { RECRUITING_MAIN_PADDING_TOP, RECRUITING_PAGE_SURFACE } from '@/config/recruiting-layout';
 import { cn } from '@/lib/utils';
 
 export default function MobileMenuOverlayClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const recruiting = isRecruitingSitePath(pathname);
+  const recruiting = usesRecruitingHeader(pathname);
+  const recruitingSurface = isRecruitingSitePath(pathname);
   const menuItems = recruiting
-    ? RECRUITING_SITE_NAV_ITEMS
+    ? recruitingNavItemsForPath(pathname)
     : navigationItemsForPath(pathname, 'mobile');
 
   return (
@@ -38,7 +43,7 @@ export default function MobileMenuOverlayClient({ children }: { children: React.
         workshopMode={isWorkshopNavContext(pathname)}
         hidePrimaryMobileToggle={recruiting}
       />
-      {recruiting ? (
+      {recruitingSurface ? (
         <div className={cn(RECRUITING_MAIN_PADDING_TOP, RECRUITING_PAGE_SURFACE)}>{children}</div>
       ) : (
         children

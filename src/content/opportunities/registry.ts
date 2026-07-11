@@ -1,6 +1,7 @@
 import type { Opportunity } from './types';
 import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
 import { knightJournalismTechProductStrategistOpportunity } from './knight-journalism-tech-product-strategist';
+import { netflixFullStackEngineerOpportunity } from './netflix-full-stack-engineer';
 import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fabrication-lab-manager';
 import { playwireOpportunity } from './playwire';
 
@@ -8,6 +9,7 @@ const bySlug: Record<string, Opportunity> = {
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:
     knightJournalismTechProductStrategistOpportunity,
+  [netflixFullStackEngineerOpportunity.slug]: netflixFullStackEngineerOpportunity,
   [newIncMediaFabricationLabManagerOpportunity.slug]: newIncMediaFabricationLabManagerOpportunity,
   [playwireOpportunity.slug]: playwireOpportunity,
 };

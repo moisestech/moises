@@ -41,7 +41,7 @@ export default function TechnologyCvPrintPage() {
             <p className="mt-1 text-stone-600">{p.titleLine}</p>
             <p className="mt-1 text-stone-600">{p.location}</p>
             <p className="mt-3 text-stone-700">
-              {p.contact.email} · {p.contact.site} · {p.contact.linkedin} · {p.contact.github}
+              {p.contact.phone} · {p.contact.email} · {p.contact.linkedin} · {p.contact.github}
             </p>
           </header>
 
@@ -55,8 +55,23 @@ export default function TechnologyCvPrintPage() {
           </section>
 
           <section className="mt-5">
+            <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Education</h2>
+            <ul className="mt-2 space-y-2">
+              {resumeData.education.map((edu) => (
+                <li key={edu.institution}>
+                  <p className="font-semibold text-stone-900">{edu.degree}</p>
+                  <p className="text-stone-600">
+                    {edu.institution} · {edu.location} · {edu.period}
+                  </p>
+                  {edu.note ? <p className="mt-1 text-stone-600">{edu.note}</p> : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="mt-5">
             <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Core skills</h2>
-            <div className="mt-2 grid gap-4 sm:grid-cols-3">
+            <div className="mt-2 grid gap-4 sm:grid-cols-2">
               {p.skillGroups.map((g) => (
                 <div key={g.title}>
                   <h3 className="font-semibold text-stone-800">{g.title}</h3>
@@ -72,7 +87,6 @@ export default function TechnologyCvPrintPage() {
 
           <section className="mt-5">
             <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Experience</h2>
-            <p className="mt-2 text-stone-600">{p.experienceIntro}</p>
             <ul className="mt-3 space-y-4">
               {resumeData.experience.map((job) => (
                 <li key={`${job.company}-${job.period}`}>
@@ -93,14 +107,15 @@ export default function TechnologyCvPrintPage() {
           </section>
 
           <section className="mt-5">
-            <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Education</h2>
-            <ul className="mt-2 space-y-2">
-              {resumeData.education.map((edu) => (
-                <li key={edu.institution}>
-                  <p className="font-semibold text-stone-900">{edu.degree}</p>
-                  <p className="text-stone-600">
-                    {edu.institution} · {edu.location} · {edu.period}
+            <h2 className="text-xs font-bold uppercase tracking-wide text-stone-500">Projects</h2>
+            <ul className="mt-2 space-y-3">
+              {resumeData.projects.map((project) => (
+                <li key={project.name}>
+                  <p className="font-semibold text-stone-900">
+                    {project.name}
+                    {project.period ? ` (${project.period})` : ''}
                   </p>
+                  <p className="mt-1 text-stone-700">{project.description}</p>
                 </li>
               ))}
             </ul>

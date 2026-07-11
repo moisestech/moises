@@ -13,7 +13,7 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Sparkles,
+  Phone,
   User,
   Wrench,
 } from 'lucide-react';
@@ -45,10 +45,10 @@ export default function TechnologyCvView() {
           Technology CV
         </p>
         <h1 className="mt-2 text-3xl font-bold print:text-2xl">{resumeData.name}</h1>
-        <p className={cn('mt-1 text-xl print:text-lg', technologyCvText.secondary)}>{technologyCvPrint.titleLine}</p>
+        <p className={cn('mt-1 text-xl print:text-lg', technologyCvText.secondary)}>{resumeData.title}</p>
         <p className={cn('mt-1 flex items-center gap-1.5 text-sm', technologyCvText.muted)}>
           <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden />
-          {technologyCvPrint.location}
+          {resumeData.location}
         </p>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start">
           <a
@@ -61,17 +61,17 @@ export default function TechnologyCvView() {
           </a>
           <div className={cn('space-y-2 text-center text-sm sm:text-left', technologyCvText.secondary)}>
             <p className="flex items-center justify-center gap-2 sm:justify-start">
+              <Phone className="h-4 w-4 shrink-0 text-cyan-700 dark:text-cyan-300" aria-hidden />
+              <span className="font-medium text-stone-900 dark:text-stone-50">Phone: </span>
+              <a href={`tel:${resumeData.phone.replace(/\D/g, '')}`} className={technologyCvText.link}>
+                {resumeData.phone}
+              </a>
+            </p>
+            <p className="flex items-center justify-center gap-2 sm:justify-start">
               <Mail className="h-4 w-4 shrink-0 text-cyan-700 dark:text-cyan-300" aria-hidden />
               <span className="font-medium text-stone-900 dark:text-stone-50">Email: </span>
               <Link href={`mailto:${resumeData.email}`} className={technologyCvText.link}>
                 {resumeData.email}
-              </Link>
-            </p>
-            <p className="flex items-center justify-center gap-2 sm:justify-start">
-              <ExternalLink className="h-4 w-4 shrink-0 text-cyan-700 dark:text-cyan-300" aria-hidden />
-              <span className="font-medium text-stone-900 dark:text-stone-50">Site: </span>
-              <Link href="https://moises.tech" className={technologyCvText.link}>
-                moises.tech
               </Link>
             </p>
             <p className="flex items-center justify-center gap-2 sm:justify-start">
@@ -121,11 +121,7 @@ export default function TechnologyCvView() {
         </div>
       </CvCollapsibleSection>
 
-      <CvCollapsibleSection id="experience" title="Professional Experience" icon={Briefcase} defaultOpen>
-        <TechnologyCvExperienceSection />
-      </CvCollapsibleSection>
-
-      <CvCollapsibleSection id="education" title="Education" icon={GraduationCap} defaultOpen={false}>
+      <CvCollapsibleSection id="education" title="Education" icon={GraduationCap} defaultOpen>
         <ul className="space-y-3">
           {resumeData.education.map((edu) => (
             <li key={edu.institution} className="flex flex-col gap-1 text-sm md:flex-row md:gap-4">
@@ -135,6 +131,7 @@ export default function TechnologyCvView() {
                 <p className={technologyCvText.secondary}>
                   {edu.institution}, {edu.location}
                 </p>
+                {edu.note ? <p className={cn('mt-1 text-sm', technologyCvText.muted)}>{edu.note}</p> : null}
               </div>
             </li>
           ))}
@@ -143,6 +140,10 @@ export default function TechnologyCvView() {
 
       <CvCollapsibleSection id="skills" title="Technical Skills" icon={Wrench} defaultOpen={false}>
         <TechnologyCvSkillsGrid skills={resumeData.skills} />
+      </CvCollapsibleSection>
+
+      <CvCollapsibleSection id="experience" title="Professional Experience" icon={Briefcase} defaultOpen>
+        <TechnologyCvExperienceSection />
       </CvCollapsibleSection>
 
       {resumeData.projects.length > 0 ? (
@@ -163,6 +164,9 @@ export default function TechnologyCvView() {
                   ) : (
                     project.name
                   )}
+                  {project.period ? (
+                    <span className={cn('ml-2 font-normal', technologyCvText.muted)}>({project.period})</span>
+                  ) : null}
                 </p>
                 <p className={cn('mt-1', technologyCvText.secondary)}>{project.description}</p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
@@ -173,16 +177,6 @@ export default function TechnologyCvView() {
               </li>
             ))}
           </ul>
-        </CvCollapsibleSection>
-      ) : null}
-
-      {resumeData.interests.length > 0 ? (
-        <CvCollapsibleSection id="interests" title="Interests" icon={Sparkles} defaultOpen={false}>
-          <div className="flex flex-wrap gap-1.5">
-            {resumeData.interests.map((interest) => (
-              <TechnologyCvTechPill key={interest} label={interest} />
-            ))}
-          </div>
         </CvCollapsibleSection>
       ) : null}
 

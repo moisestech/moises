@@ -28,7 +28,9 @@ export function Skills({ skills }: SkillsProps) {
           >
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-white">{skill.name}</h3>
-              <span className="text-sm text-gray-400">{skill.years} years</span>
+              {skill.years != null ? (
+                <span className="text-sm text-gray-400">{skill.years} years</span>
+              ) : null}
             </div>
             
             {skill.technologies && (

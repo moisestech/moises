@@ -70,6 +70,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/cv/netflix',
+        destination: '/opportunities/netflix-full-stack-engineer-ai-insights',
+        permanent: false,
+      },
+      {
         source: '/cv/technology',
         destination: '/cv/tech',
         permanent: true,

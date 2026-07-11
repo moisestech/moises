@@ -62,7 +62,11 @@ export function TechnologyCvSkillsGrid({ skills }: TechnologyCvSkillsGridProps) 
           <div className="min-w-0 flex-1">
             <p className="font-semibold text-stone-900 dark:text-stone-50">
               {skill.name}
-              <span className="ml-2 font-normal text-stone-500 dark:text-stone-400">({skill.years}+ yrs)</span>
+              {skill.years != null ? (
+                <span className="ml-2 font-normal text-stone-500 dark:text-stone-400">
+                  ({skill.years}+ yrs)
+                </span>
+              ) : null}
             </p>
             {skill.technologies?.length ? (
               <div className="mt-2 flex flex-wrap gap-1.5">

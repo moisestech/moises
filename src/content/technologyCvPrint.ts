@@ -7,43 +7,53 @@ export const technologyCvPdfPath = '/resume/moises-sanabria-technology-cv.pdf';
 
 export const technologyCvPrint = {
   headline: 'Moises Sanabria',
-  titleLine: 'Full Stack Web AI Engineer · Data & publisher systems · AI product',
-  location: 'Miami Beach, FL — remote-friendly',
+  titleLine: 'Full-Stack AI Engineer',
+  location: 'Miami Beach, FL 33139',
   contact: {
+    phone: '(954) 588-4680',
     email: 'm@moises.tech',
     site: 'https://moises.tech/cv/tech',
     linkedin: 'https://www.linkedin.com/in/moisesdsanabria',
     github: 'https://github.com/moisestech',
   },
   summary: [
-    'Miami-based engineer and artist-technologist with 12+ years building web applications, data pipelines, and AI product systems. Former Playwire Solutions Engineer and Data Analyst (2021–2022): publisher integrations, Kinesis-to-Snowflake pipelines, Tableau auction analytics, and Slack alerting.',
-    'Since Playwire: founding engineer at Lore Machine (real-time AI storytelling on Vercel), Technical Director of Digital at Oolite Arts, and institutional stacks through AI24 and DCC Miami — hands-on delivery across TypeScript, React, Next.js, Python, AWS, and Snowflake.',
+    'Full-stack engineer who ships applied AI products end-to-end — from founding-engineer product work to client-facing solutions engineering — with current focus on AI-native, agent-orchestrated development workflows.',
   ],
   skillGroups: [
     {
-      title: 'Data & ad tech',
+      title: 'Core Languages & Frontend',
       items: [
-        'Snowflake, SQL, Tableau, AWS Kinesis/Athena',
-        'ETL pipelines, BI dashboards, Slack alerting',
-        'Publisher integrations, auction performance analysis',
+        'JavaScript (Node.js, React, Next.js), TypeScript, HTML5/CSS3',
+        'Tailwind, Jotai, XState, Shadcn',
       ],
     },
     {
-      title: 'Engineering',
+      title: 'AI / GenAI Product',
       items: [
-        'TypeScript, JavaScript, Python, React, Next.js',
-        'API design, real-time UX, Chrome DevTools debugging',
-        'Vercel, CI/CD, GraphQL, Supabase',
+        'Applied GenAI integration, Replicate',
+        'Real-time AI image/media pipelines, prompt engineering',
       ],
     },
     {
-      title: 'AI product',
+      title: 'AI-Native Development & Agentic Workflows',
+      items: ['Cursor, Claude Code, multi-tool agent orchestration'],
+    },
+    {
+      title: 'Backend / Data',
       items: [
-        'OpenAI API, LLM workflows, generative media pipelines',
-        'Rapid prototyping, MVPs, technical client communication',
+        'Python, SQL (MySQL, Snowflake, Athena), GraphQL',
+        'Supabase, Auth0, Row-Level Security',
       ],
+    },
+    {
+      title: 'Cloud / Infra',
+      items: ['AWS (Amplify, CloudFront, S3, Kinesis, Glue ETL, SageMaker)', 'Docker'],
+    },
+    {
+      title: 'Practice',
+      items: ['Unix, Git, solutions engineering, technical education/translation'],
     },
   ],
-  experienceIntro: 'Selected professional experience (artist CV and exhibitions at moises.tech/cv/artist):',
+  experienceIntro: 'Selected professional experience:',
   suggestedPdfFilename: 'Moises-Sanabria-Technology-CV.pdf',
 } as const;
