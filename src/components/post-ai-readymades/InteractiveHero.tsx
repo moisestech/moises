@@ -1,26 +1,38 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BookOpen } from 'lucide-react';
 import { postAiReadymadesPage } from '@/content/post-ai-readymades/postAiReadymades';
 import { readymadesAccent } from '@/config/post-ai-readymades-theme';
 import { readymadesSectionHighlights } from '@/content/post-ai-readymades/postAiReadymadesKeywords';
 import { StoryFrame } from '@/components/post-ai-readymades/StoryFrame';
 import { StatusChip } from '@/components/post-ai-readymades/StatusChip';
-import { postAiReadymadesStudies } from '@/content/post-ai-readymades/postAiReadymades';
+import {
+  postAiReadymadesStudies,
+  type Study,
+} from '@/content/post-ai-readymades/postAiReadymades';
 import { ReadymadesStoryParagraph } from '@/components/post-ai-readymades/ReadymadesStoryParagraph';
 import { CatalogueAnswerCard } from '@/components/post-ai-readymades/CatalogueAnswerCard';
 import { cn } from '@/lib/utils';
 
+function pickRandomStudy(): Study {
+  const index = Math.floor(Math.random() * postAiReadymadesStudies.length);
+  return postAiReadymadesStudies[index] ?? postAiReadymadesStudies[0];
+}
+
 export function InteractiveHero() {
   const project = postAiReadymadesPage;
-  const featuredStudy = postAiReadymadesStudies[0];
   const accent = readymadesAccent;
   const highlights = readymadesSectionHighlights.hero;
 
+  const [featuredStudy, setFeaturedStudy] = useState<Study>(postAiReadymadesStudies[0]);
   const [activeParagraphKey, setActiveParagraphKey] = useState<string | null>(null);
   const [activeKeyword, setActiveKeyword] = useState<string | null>(null);
   const [frameHovered, setFrameHovered] = useState(false);
+
+  useEffect(() => {
+    setFeaturedStudy(pickRandomStudy());
+  }, []);
 
   const handleParagraphActivate = useCallback((key: string | null) => {
     setActiveParagraphKey(key);
