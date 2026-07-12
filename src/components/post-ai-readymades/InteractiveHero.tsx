@@ -79,8 +79,8 @@ export function InteractiveHero() {
               <StoryFrame
                 imageUrl={featuredStudy.imageUrl}
                 alt={`${featuredStudy.title} — study ${featuredStudy.number}`}
-                label="Study 001 / Placeholder"
-                statusLabel="Daily Selection"
+                label={featuredStudy.title}
+                statusLabel={featuredStudy.status}
                 hovered={frameHovered}
                 priority
               />

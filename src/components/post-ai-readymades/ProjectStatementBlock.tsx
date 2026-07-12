@@ -10,7 +10,7 @@ import { FileText } from 'lucide-react';
 import { ReadymadesSectionHeader } from '@/components/post-ai-readymades/ReadymadesSectionHeader';
 import { readymadesGalleryImages } from '@/content/post-ai-readymades/postAiReadymadesStory';
 
-const statementImageIds = ['study-001', 'study-004', 'study-005'] as const;
+const statementImageIds = ['study-001', 'study-002', 'study-003'] as const;
 
 export function ProjectStatementBlock() {
   const { projectStatement } = postAiReadymadesPage;

@@ -41,10 +41,13 @@ function FeaturedNarrativeEntry({ studyId, relevance, conceptualTag }: FeaturedN
       </div>
       <div className="flex flex-col justify-center p-6">
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#777777] dark:text-neutral-400">
-          Study {study.number} · {study.objectFamily}
+          Study {study.number}
+          {study.objectFamily ? ` · ${study.objectFamily}` : ''}
         </p>
         <h3 className="mt-2 text-xl font-semibold tracking-tight text-[#111111] dark:text-white">{study.title}</h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#777777] dark:text-neutral-300">{study.shortDescription}</p>
+        {study.shortDescription ? (
+          <p className="mt-3 text-sm leading-relaxed text-[#777777] dark:text-neutral-300">{study.shortDescription}</p>
+        ) : null}
         <p className="mt-4 text-sm italic leading-relaxed text-[#555555] dark:text-neutral-400">
           <span className="font-medium not-italic text-[#111111] dark:text-neutral-200">Relevance:</span> {relevance}
         </p>
@@ -66,6 +69,8 @@ export function ReadymadesFeaturedNarratives({
 }: {
   items: readonly { studyId: string; relevance: string; conceptualTag: string }[];
 }) {
+  if (items.length === 0) return null;
+
   return (
     <section className="mb-16 border-b border-[#dedede] pb-16 dark:border-neutral-800 md:mb-20 md:pb-20">
       <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-[#777777] dark:text-neutral-400">

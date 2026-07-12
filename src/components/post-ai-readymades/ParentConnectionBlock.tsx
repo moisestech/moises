@@ -25,7 +25,7 @@ export function ParentConnectionBlock() {
     setActiveKeyword(term);
   }, []);
 
-  const activeImageId = activeParagraphKey === 'parent-1' ? 'study-006' : 'bitm-writing';
+  const activeImageId = activeParagraphKey === 'parent-1' ? 'study-009' : 'bitm-writing';
 
   return (
     <section className="border-t border-[#dedede] pt-10 dark:border-neutral-800">

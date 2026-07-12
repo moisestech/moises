@@ -64,19 +64,33 @@ export function StudyDetail({ study, onClose }: StudyDetailProps) {
                 <StatusChip status={study.status} />
               </DialogHeader>
 
-              <p className="mb-8 text-base leading-relaxed text-[#111111] dark:text-neutral-200">
-                {study.shortDescription}
-              </p>
+              {study.shortDescription ? (
+                <p className="mb-8 text-base leading-relaxed text-[#111111] dark:text-neutral-200">
+                  {study.shortDescription}
+                </p>
+              ) : null}
 
               <dl>
-                <DetailRow label="Year" value={study.year} />
+                {study.year ? <DetailRow label="Year" value={study.year} /> : null}
+                {study.medium ? <DetailRow label="Medium" value={study.medium} /> : null}
+                {study.materials ? <DetailRow label="Materials" value={study.materials} /> : null}
+                {study.dimensions ? <DetailRow label="Dimensions" value={study.dimensions} /> : null}
+                {study.location ? <DetailRow label="Location" value={study.location} /> : null}
                 <DetailRow label="Series" value={study.series} />
                 <DetailRow label="Parent project" value={study.parentProject} />
-                <DetailRow label="Object family" value={study.objectFamily} />
-                <DetailList label="Primary objects" values={study.primaryObjects} />
-                <DetailRow label="Image / object balance" value={study.imageObjectBalance} />
-                <DetailList label="Missing labor type" values={study.missingLaborType} />
-                <DetailList label="Rawness source" values={study.rawnessSource} />
+                {study.objectFamily ? <DetailRow label="Object family" value={study.objectFamily} /> : null}
+                {study.primaryObjects?.length ? (
+                  <DetailList label="Primary objects" values={study.primaryObjects} />
+                ) : null}
+                {study.imageObjectBalance ? (
+                  <DetailRow label="Image / object balance" value={study.imageObjectBalance} />
+                ) : null}
+                {study.missingLaborType?.length ? (
+                  <DetailList label="Missing labor type" values={study.missingLaborType} />
+                ) : null}
+                {study.rawnessSource?.length ? (
+                  <DetailList label="Rawness source" values={study.rawnessSource} />
+                ) : null}
                 <DetailRow label="Public status" value={study.status} />
               </dl>
 

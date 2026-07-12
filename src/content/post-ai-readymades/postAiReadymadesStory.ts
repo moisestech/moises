@@ -27,74 +27,29 @@ export type ReadymadesStorySection = {
 
 const studyImage = (id: string) => postAiReadymadesStudies.find((s) => s.id === id)?.imageUrl;
 
+function studyGalleryEntry(number: string): ReadymadesGalleryImage {
+  const study = postAiReadymadesStudies.find((s) => s.id === number);
+  return {
+    id: `study-${number}`,
+    src: study?.imageUrl ?? '',
+    alt: study?.title ?? `Study ${number}`,
+    caption: `Study ${number} · 365 Post-AI Readymades · Daily Selection`,
+    studyNumber: number,
+    aspect: 'story',
+  };
+}
+
+const studyGalleryImages = Object.fromEntries(
+  postAiReadymadesStudies.map((study) => [`study-${study.number}`, studyGalleryEntry(study.number)]),
+) as Record<string, ReadymadesGalleryImage>;
+
 export const readymadesGalleryImages: Record<string, ReadymadesGalleryImage> = {
-  'study-001': {
-    id: 'study-001',
-    src: '',
-    alt: 'Power Strip Pietà — vertical study placeholder',
-    caption: 'Study 001 · Power Strip Pietà · Daily Selection',
-    studyNumber: '001',
-    aspect: 'story',
-  },
-  'study-003': {
-    id: 'study-003',
-    src: studyImage('003') ?? '',
-    alt: 'Doomscrolling Treadmill',
-    caption: 'Study 003 · Doomscrolling Treadmill · Attention as infrastructure',
-    studyNumber: '003',
-    aspect: 'story',
-  },
-  'study-004': {
-    id: 'study-004',
-    src: studyImage('004') ?? '',
-    alt: 'Simulation Faith',
-    caption: 'Study 004 · Simulation Faith · Techno-spiritual object',
-    studyNumber: '004',
-    aspect: 'story',
-  },
-  'study-005': {
-    id: 'study-005',
-    src: studyImage('005') ?? '',
-    alt: 'Baby AGI',
-    caption: 'Study 005 · Baby AGI · AI childhood / birth / care',
-    studyNumber: '005',
-    aspect: 'story',
-  },
-  'study-006': {
-    id: 'study-006',
-    src: studyImage('006') ?? '',
-    alt: 'Privacy is a Luxury',
-    caption: 'Study 006 · Privacy is a Luxury · Corporate anonymity',
-    studyNumber: '006',
-    aspect: 'story',
-  },
-  'study-007': {
-    id: 'study-007',
-    src: studyImage('007') ?? '',
-    alt: 'Price of Existence',
-    caption: 'Study 007 · Price of Existence · Migrant / material memory',
-    studyNumber: '007',
-    aspect: 'story',
-  },
+  ...studyGalleryImages,
   'bitm-writing': {
     id: 'bitm-writing',
     src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1775099574/art/moisestech-website/research/broken-acceleration/broken-acceleration-writing-apr1st-wavemaker-2026_xrg993.png',
     alt: 'Born Into the Machine — research writing',
     caption: 'Born Into the Machine · parent thesis and research archive',
-    aspect: 'landscape',
-  },
-  'smart-shoppers': {
-    id: 'smart-shoppers',
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
-    alt: 'Smart Shoppers',
-    caption: 'Related work · cognition staged as something to wheel through the market',
-    aspect: 'landscape',
-  },
-  'doom-marathon': {
-    id: 'doom-marathon',
-    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743116742/art/moisestech-website/artworks/2024_doomscrolling_marathon/moises-sanabria-doomscrolling-marathon-proyecto-aparadores-cdmx-2024_jilui4.png',
-    alt: 'Doomscrolling Marathon installation',
-    caption: 'Doomscrolling Marathon · durational feed culture made physical',
     aspect: 'landscape',
   },
 };
@@ -115,13 +70,13 @@ export const readymadesStorySections: ReadymadesStorySection[] = [
       },
       {
         key: 'method-1',
-        text: 'Each study starts as an object relation—not a prompt in isolation, but a tension between things already in the world: plugs and bodies, POS terminals and prayer, strollers and GPUs. The sculptural plausibility engine asks whether the relation can survive institutional display.',
-        imageId: 'study-005',
+        text: 'Each study starts as an object relation—not a prompt in isolation, but a tension between things already in the world. The sculptural plausibility engine asks whether the relation can survive institutional display.',
+        imageId: 'study-002',
       },
       {
         key: 'method-2',
         text: 'The loop is taste, machine vision, budget, and white cube believability. When plausibility crosses a threshold, the image is posted, archived, reviewed, or left suspended—sometimes never built at all.',
-        imageId: 'study-004',
+        imageId: 'study-003',
       },
     ],
   },
@@ -130,18 +85,18 @@ export const readymadesStorySections: ReadymadesStorySection[] = [
     eyebrow: 'Daily ritual',
     title: 'Flash, archive, public memory',
     layout: 'textRight',
-    defaultImageId: 'study-003',
+    defaultImageId: 'study-004',
     highlightKey: 'ritual',
     paragraphs: [
       {
         key: 'ritual-0',
         text: 'Instagram is the flash: the object’s first public appearance in vertical format—fast, legible, and deliberately ephemeral. The IG Story is not documentation after the fact; it is often the debut.',
-        imageId: 'study-003',
+        imageId: 'study-004',
       },
       {
         key: 'ritual-1',
         text: 'The Airtable archive is the private memory: study number, object family, missing labor, rawness source, and review status. What the feed forgets in twenty-four hours, the archive keeps for the sixty-day review.',
-        imageId: 'study-006',
+        imageId: 'study-005',
       },
       {
         key: 'ritual-2',
@@ -155,23 +110,23 @@ export const readymadesStorySections: ReadymadesStorySection[] = [
     eyebrow: 'Essay anchor',
     title: 'The Skipped Object',
     layout: 'textLeft',
-    defaultImageId: 'study-007',
+    defaultImageId: 'study-006',
     highlightKey: 'skipped',
     paragraphs: [
       {
         key: 'skipped-0',
         text: 'Traditionally, a sculpture moves from idea to sketch to fabrication to installation to documentation. In 365 Post-AI Readymades, that sequence collapses. The skipped object appears first as plausible documentation—often before it exists.',
-        imageId: 'study-007',
+        imageId: 'study-006',
       },
       {
         key: 'skipped-1',
         text: 'The readymade updated for the model: selection replaces making, but not entirely. The question is not whether the object is fake. The question is whether the image has already performed enough of the object’s cultural work.',
-        imageId: 'smart-shoppers',
+        imageId: 'study-007',
       },
       {
         key: 'skipped-2',
         text: 'Some studies remain content-only. Others become website candidates, physical build candidates, or glossary terms inside Born Into the Machine. The archive tracks that decision rather than hiding it.',
-        imageId: 'doom-marathon',
+        imageId: 'study-008',
       },
     ],
   },
@@ -191,12 +146,12 @@ export const readymadesStorySections: ReadymadesStorySection[] = [
       {
         key: 'parent-1',
         text: 'The project asks how taste, labor, identity, and sculpture change when missing labor is constant: verifying, correcting, translating, and staging machine output for institutions that still speak in object language.',
-        imageId: 'study-006',
+        imageId: 'study-009',
       },
       {
         key: 'parent-2',
-        text: 'Existing works anchor the archive—Doomscrolling Treadmill, Simulation Faith, Baby AGI—while new studies test whether the attention economy and techno-spiritual objects can enter the same catalogue rhythm.',
-        imageId: 'study-004',
+        text: 'Each daily selection tests whether a speculative object can enter institutional catalogue rhythm—image first, metadata later, physical build only when the archive demands it.',
+        imageId: 'study-010',
       },
     ],
   },
@@ -209,29 +164,17 @@ export const readymadesHeroParagraphs = [
 
 export const readymadesGalleryStripIds = [
   'study-001',
+  'study-002',
   'study-003',
   'study-004',
   'study-005',
   'study-006',
   'study-007',
-  'smart-shoppers',
-  'doom-marathon',
+  'study-008',
+  'bitm-writing',
 ] as const;
 
-export const readymadesFeaturedNarratives = [
-  {
-    studyId: '003',
-    relevance: 'A body walks in place while the feed keeps moving—an attention-economy device that predates the daily archive but anchors it.',
-    conceptualTag: 'Feed as treadmill · body as capture surface',
-  },
-  {
-    studyId: '004',
-    relevance: 'Sacred iconography enters the headset—techno-spiritual plausibility before fabrication.',
-    conceptualTag: 'Synthetic belief · infant iconography',
-  },
-  {
-    studyId: '005',
-    relevance: 'A gaming PC becomes a stroller—AI childhood staged as ready-made assembly.',
-    conceptualTag: 'Pre-natal AGI · care as hardware',
-  },
-] as const;
+export const readymadesFeaturedNarratives = [] as const;
+
+// Keep studyImage helper available for any future gallery wiring.
+void studyImage;

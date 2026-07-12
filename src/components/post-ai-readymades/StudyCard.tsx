@@ -12,6 +12,20 @@ type StudyCardProps = {
   onSelect: (study: Study) => void;
 };
 
+function StudyTombstone({ study }: { study: Study }) {
+  const lines = [study.year, study.medium, study.materials, study.dimensions, study.location].filter(
+    Boolean,
+  ) as string[];
+
+  if (lines.length === 0) return null;
+
+  return (
+    <p className="font-mono text-[10px] uppercase tracking-[0.14em] leading-relaxed text-[#777777] dark:text-neutral-500">
+      {lines.join(' · ')}
+    </p>
+  );
+}
+
 export function StudyCard({ study, onSelect }: StudyCardProps) {
   const [hovered, setHovered] = useState(false);
 
@@ -34,18 +48,32 @@ export function StudyCard({ study, onSelect }: StudyCardProps) {
           alt={`${study.title} — study ${study.number}`}
           hovered={hovered}
         />
-        <div
-          className={cn(
-            'absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-4 pt-12 transition-opacity duration-300',
-            hovered ? 'opacity-100' : 'opacity-0',
-          )}
-        >
-          <p className="text-xs leading-relaxed text-white/95">{study.shortDescription}</p>
-          <span className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-200">
-            Open study
-            <ArrowRight className="h-3 w-3" aria-hidden />
-          </span>
-        </div>
+        {study.shortDescription ? (
+          <div
+            className={cn(
+              'absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-4 pt-12 transition-opacity duration-300',
+              hovered ? 'opacity-100' : 'opacity-0',
+            )}
+          >
+            <p className="text-xs leading-relaxed text-white/95">{study.shortDescription}</p>
+            <span className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-200">
+              Open study
+              <ArrowRight className="h-3 w-3" aria-hidden />
+            </span>
+          </div>
+        ) : (
+          <div
+            className={cn(
+              'absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-4 pt-12 transition-opacity duration-300',
+              hovered ? 'opacity-100' : 'opacity-0',
+            )}
+          >
+            <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.14em] text-emerald-200">
+              Open study
+              <ArrowRight className="h-3 w-3" aria-hidden />
+            </span>
+          </div>
+        )}
       </div>
       <div className="space-y-3 border-t border-[#dedede] bg-gradient-to-b from-white to-[#faf8f4] p-4 dark:border-neutral-700 dark:from-neutral-950 dark:to-neutral-900">
         <div className="flex items-start justify-between gap-3">
@@ -58,10 +86,15 @@ export function StudyCard({ study, onSelect }: StudyCardProps) {
           {study.title}
           {study.artworkSlug ? <ExternalLink className="h-3.5 w-3.5 opacity-40" aria-hidden /> : null}
         </h3>
-        <p className="text-sm leading-relaxed text-[#777777] dark:text-neutral-300">{study.shortDescription}</p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#777777] dark:text-neutral-500">
-          Object family: {study.objectFamily}
-        </p>
+        <StudyTombstone study={study} />
+        {study.shortDescription ? (
+          <p className="text-sm leading-relaxed text-[#777777] dark:text-neutral-300">{study.shortDescription}</p>
+        ) : null}
+        {study.objectFamily ? (
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#777777] dark:text-neutral-500">
+            Object family: {study.objectFamily}
+          </p>
+        ) : null}
       </div>
     </button>
   );
