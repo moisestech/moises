@@ -2,6 +2,7 @@ import type { Opportunity } from './types';
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import { technologyCvPdfPath } from '@/content/technologyCvPrint';
 
 export const playwireOpportunity: Opportunity = {
   slug: 'playwire',
@@ -169,7 +170,7 @@ export const playwireOpportunity: Opportunity = {
   ctas: recruitingCtas({
     emailSubject: 'Playwire — Moises Sanabria dossier',
     caseStudiesAnchor: '#case-studies',
-    resumePdfPath: '/resume/moises-sanabria-technology-cv.pdf',
+    resumePdfPath: technologyCvPdfPath,
     resumePrintPath: '/cv/tech/print',
     cv: '/cv/tech',
   }),

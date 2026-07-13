@@ -1,9 +1,13 @@
 /**
  * Print-to-PDF technology CV — data, solutions, and full-stack product roles.
  * Open `/cv/tech/print` → Print → Save as PDF.
+ * Official downloadable PDF lives on Google Drive (canonical recruiter résumé).
  */
 
-export const technologyCvPdfPath = '/resume/moises-sanabria-technology-cv.pdf';
+import { resumePdfDriveViewUrl } from '@/content/ai-engineering/packet';
+
+/** Official technology résumé PDF (Google Drive). */
+export const technologyCvPdfPath = resumePdfDriveViewUrl;
 
 export const technologyCvPrint = {
   headline: 'Moises Sanabria',

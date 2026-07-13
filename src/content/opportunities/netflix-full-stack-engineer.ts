@@ -2,6 +2,7 @@ import type { Opportunity } from './types';
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import { technologyCvPdfPath } from '@/content/technologyCvPrint';
 
 export const netflixFullStackEngineerOpportunity: Opportunity = {
   slug: 'netflix-full-stack-engineer-ai-insights',
@@ -177,7 +178,7 @@ export const netflixFullStackEngineerOpportunity: Opportunity = {
   ctas: recruitingCtas({
     emailSubject: 'Netflix Full-Stack Engineer 5, AI Insights & Visualizations — Moises Sanabria',
     caseStudiesAnchor: '#case-studies',
-    resumePdfPath: '/resume/moises-sanabria-technology-cv.pdf',
+    resumePdfPath: technologyCvPdfPath,
     resumePrintPath: '/cv/tech/print',
     cv: '/cv/tech',
   }),

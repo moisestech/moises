@@ -42,9 +42,9 @@ export type ProcessStep = {
 
 const SITE_ORIGIN = 'https://moises.tech';
 
-/** Google Drive — primary recruiter resume PDF */
-export const RESUME_PDF_GOOGLE_DRIVE_ID = '1XfqTrXGnUM3visTffEtVmX_5b1_A0OCK';
-export const resumePdfDriveViewUrl = `https://drive.google.com/file/d/${RESUME_PDF_GOOGLE_DRIVE_ID}/view?usp=sharing`;
+/** Google Drive — primary / official recruiter resume PDF */
+export const RESUME_PDF_GOOGLE_DRIVE_ID = '1fwmhQG6xW7wG9DtqLzYqde3VnrYLWGPH';
+export const resumePdfDriveViewUrl = `https://drive.google.com/file/d/${RESUME_PDF_GOOGLE_DRIVE_ID}/view?usp=drive_link`;
 export const resumePdfDriveDownloadUrl = `https://drive.google.com/uc?export=download&id=${RESUME_PDF_GOOGLE_DRIVE_ID}`;
 
 /** Paste into Gmail recruiter replies */

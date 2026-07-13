@@ -183,7 +183,8 @@ export default function TechnologyCvView() {
       <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap print:hidden">
         <a
           href={technologyCvPdfPath}
-          download
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-stone-800 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-white sm:w-auto"
         >
           <Download className="h-4 w-4 shrink-0" aria-hidden />

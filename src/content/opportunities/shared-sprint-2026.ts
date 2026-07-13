@@ -1,6 +1,7 @@
 import type { OpportunityNavItem, ProcessStep, TeachingHighlight } from './types';
 import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
+import { technologyCvPdfPath } from '@/content/technologyCvPrint';
 
 /** Shared sections for July 2026 application sprint dossiers */
 export const sprint2026Headshot = moisesSanabriaHeadshot;
@@ -60,7 +61,7 @@ export function sprint2026Ctas(roleLabel: string) {
   return recruitingCtas({
     emailSubject: `${roleLabel} — Moises Sanabria`,
     caseStudiesAnchor: '#case-studies',
-    resumePdfPath: '/resume/moises-sanabria-technology-cv.pdf',
+    resumePdfPath: technologyCvPdfPath,
     resumePrintPath: '/cv/tech/print',
   });
 }
