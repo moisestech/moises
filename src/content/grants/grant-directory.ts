@@ -13,6 +13,39 @@ export type GrantDirectoryEntry = {
 
 const grantDirectoryEntries: GrantDirectoryEntry[] = [
   {
+    id: 'no-vacancy-2026',
+    title: 'No Vacancy Miami Beach 2026',
+    organization: 'City of Miami Beach Cultural Affairs',
+    route: '/grant/no-vacancy-2026',
+    updatedAt: '2026-07-12',
+    deadline: '2026-07-16',
+    status: 'active',
+    summary:
+      'Dual proposal packet: Volver a Valer (migrating value) and Touch Grass: Circuit Floor for temporary hotel installation.',
+  },
+  {
+    id: 'no-vacancy-2026-volver-a-valer',
+    title: 'Volver a Valer — A Study in Migrating Value',
+    organization: 'City of Miami Beach Cultural Affairs',
+    route: '/grant/no-vacancy-2026/volver-a-valer',
+    updatedAt: '2026-07-12',
+    deadline: '2026-07-16',
+    status: 'active',
+    parentId: 'no-vacancy-2026',
+    summary: 'Primary candidate: hotel waiting/check-in environment as a field of migrating value.',
+  },
+  {
+    id: 'no-vacancy-2026-touch-grass',
+    title: 'Touch Grass: Circuit Floor',
+    organization: 'City of Miami Beach Cultural Affairs',
+    route: '/grant/no-vacancy-2026/touch-grass',
+    updatedAt: '2026-07-12',
+    deadline: '2026-07-16',
+    status: 'active',
+    parentId: 'no-vacancy-2026',
+    summary: 'Alternate: modular walkable floor of reclaimed circuit boards for hotel interiors.',
+  },
+  {
     id: 'four-artists-four-seasons',
     title: 'Four Artists: Four Seasons',
     organization: 'Bakehouse Art Complex',

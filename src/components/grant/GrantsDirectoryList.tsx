@@ -43,7 +43,7 @@ function GrantRow({ entry }: { entry: GrantDirectoryEntry }) {
             ) : null}
             {isChild ? (
               <span className="text-[10px] font-semibold uppercase tracking-wide text-stone-400">
-                Knight section
+                Proposal option
               </span>
             ) : null}
           </div>

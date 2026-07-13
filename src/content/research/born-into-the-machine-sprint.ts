@@ -31,7 +31,7 @@ export const bornIntoTheMachineSprint = {
     'I am not approaching AI only as a prompt or image-generation tool. I am using the sprint to build a reusable AI studio system that helps organize research, clarify language, prepare grants, develop outreach, and translate concepts into public or physical work.',
   noVacancy: {
     title: 'Current application target',
-    body: 'No Vacancy Miami Beach is the urgent application target. I want to use the AI Sprint to develop a public-facing installation proposal that extends Born into the Machine into Miami Beach, hotel space, AI-era public culture, and physical/screen-based artwork.',
+    body: 'No Vacancy Miami Beach is the urgent application target (deadline July 16, 2026). Dual public proposals are live: Volver a Valer (primary candidate — migrating value in hotel space) and Touch Grass: Circuit Floor (alternate modular floor installation).',
   },
   sprintGoals: [
     'Build a context-rich AI project around Born into the Machine',
@@ -86,7 +86,8 @@ export const bornIntoTheMachineSprintLinks = [
   { label: 'Teaching', href: '/teaching' },
   { label: 'Research index', href: '/research' },
   { label: 'Selected works', href: '/selected-works' },
-  { label: 'No Vacancy proposal', href: '/research/touch-grass-circuit-floor' },
+  { label: 'No Vacancy 2026 packet', href: '/grant/no-vacancy-2026' },
+  { label: 'Volver a Valer proposal', href: '/grant/no-vacancy-2026/volver-a-valer' },
 ] as const;
 
 export const bornIntoTheMachineDeeperLinks = [

@@ -24,7 +24,10 @@ export const noVacancy2026Meta = {
   deadline: 'Thursday, July 16, 2026, 5:00 pm EST',
   submittableUrl: 'http://cityofmiamibeach.submittable.com/submit',
   stipend: '$10,000 all-inclusive per selected artist',
-  researchPageUrl: 'https://moises.tech/research/touch-grass-circuit-floor',
+  researchPageUrl: 'https://moises.tech/grant/no-vacancy-2026/volver-a-valer',
+  hubPageUrl: 'https://moises.tech/grant/no-vacancy-2026',
+  touchGrassGrantUrl: 'https://moises.tech/grant/no-vacancy-2026/touch-grass',
+  touchGrassResearchUrl: 'https://moises.tech/research/touch-grass-circuit-floor',
   website: cvData.contact.website,
   email: cvData.contact.email,
   instagram: cvData.contact.socialMedia[0]?.url ?? 'https://www.instagram.com/moisesdsanabria/',
@@ -52,15 +55,15 @@ My work asks how platform logic, attention economies, and digital labor rewrite 
 
 I fabricate and install my own work, from modular electronics to full-scale sculptural assemblies. I am interested in artworks that make complexity felt first—in the gut—and parsed intellectually second. That friction between digital infrastructure and lived emotion is where my practice lives.`;
 
-/** Paste into Submittable Project Statement field */
+/** Paste into Submittable Project Statement field — primary proposal: Volver a Valer */
 export const noVacancyProjectStatement = {
   interestAndApproach: `No Vacancy offers a rare context: Miami Beach hotels as temporary public galleries during Art Week, when the city’s hospitality architecture becomes a stage for contemporary art. I am drawn to this program because it places work inside spaces of transit, leisure, and spectacle—where visitors already negotiate desire, consumption, and image—while keeping the work free and accessible to the public.
 
-For this application I propose Touch Grass: Circuit Floor, a modular walkable installation built from reclaimed circuit boards sealed beneath illuminated transparent tiles. The title carries an internet-native command to leave the screen and return to reality. The sculpture inverts that premise: obsolete motherboards and electronic fragments become literal ground beneath the visitor’s feet. Even the attempt to “touch grass” happens inside the machine.
+For this application I propose Volver a Valer: A Study in Migrating Value. A hotel waiting or check-in environment is transformed into a field of money, receipts, reflective surfaces, and objects associated with movement and exchange. Venezuelan bolívares form the primary material; remittance receipts, U.S. currency fragments, hotel pricing, and shipping labels broaden the work toward Latin American migration experienced as systems—not as a pan-Latin collage of national symbols.
 
-The installation is conceived as approximately 20 square feet of reconfigurable modules—twelve-inch tiles in a default 4 × 5 grid—that can adapt to lobby, lounge, or corridor conditions once a hotel site is assigned. Each tile combines reclaimed circuitry, low-voltage edge lighting, and a transparent walkable surface within a low-profile dark frame. Responsive lighting is part of the intended experience but is being developed incrementally; the work is designed to remain visually complete as a softly illuminated floor even without active sensors. Materials align with Miami Beach sustainability requirements: no single-use plastic, expanded polystyrene, or polystyrene products.`,
+From a distance the installation reads as abundance. At closer range that abundance destabilizes: currencies do not hold equal value, receipts describe care and labor, and the hotel’s own prices become part of the artwork. Visitors encounter themselves reflected in an oil-black surface. The hopeful layer: currency can collapse without collapsing the value of the people who carried it. Full proposal: https://moises.tech/grant/no-vacancy-2026/volver-a-valer`,
 
-  idealSiteConditions: `Ideal placement is a publicly accessible interior area with warm indirect lighting—a lobby nook, lounge edge, or transitional corridor—where the modular field can sit as a temporary freestanding platform without blocking required circulation. A default 4 × 5 ft. configuration or a 2 × 10 ft. strip along a wall both work well. The sculpture includes a low-profile transition edge and maintains an unobstructed bypass route so no visitor is required to walk across the artwork to move through the hotel. Final layout will be determined collaboratively with Cultural Affairs staff and the assigned property.`,
+  idealSiteConditions: `Ideal placement is a publicly accessible waiting alcove, check-in adjacent wall, or lounge edge where a partial wrap or long currency field can occupy enough architecture to read as an environment—not a tabletop object—without blocking required circulation. The work includes a clear bypass route and mechanically fastened modular panels designed for temporary installation. Final layout will be determined collaboratively with Cultural Affairs staff and the assigned property.`,
 } as const;
 
 export const noVacancyWorkSamples: NoVacancyWorkSample[] = [
