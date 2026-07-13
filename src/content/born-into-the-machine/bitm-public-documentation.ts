@@ -19,6 +19,7 @@ export type BitmPublicDocSlide = {
   imageUrl?: string;
   imageStatus?: 'ready' | 'needed';
   alt: string;
+  href?: string;
 };
 
 export const bitmPublicDocumentationSlides: BitmPublicDocSlide[] = [
@@ -26,17 +27,28 @@ export const bitmPublicDocumentationSlides: BitmPublicDocSlide[] = [
     id: 'open-studios-2024',
     category: 'open-studio',
     title: 'Bakehouse Open Studios',
-    caption: 'Spring 2024 — public studio access and workshop context.',
-    imageUrl: bitmAssets.studio.openStudios,
-    alt: 'Bakehouse open studios with Moises Sanabria and Fabiola Larios',
+    caption: 'Studio 43 documentation — interim photograph pending dedicated flat panorama.',
+    imageUrl: bitmAssets.studio43.flatPhoto.url,
+    alt: bitmAssets.studio43.flatPhoto.alt,
   },
   {
     id: 'breadbytes-2023',
     category: 'install',
     title: 'Breadbytes Exhibition',
-    caption: 'Dec 2023 — institutional install at Bakehouse Art Complex.',
+    caption: 'Artmaking for the Next Generation — Baby AGI / From Cradle to AGI at Bakehouse.',
     imageUrl: bitmAssets.studio.breadbytes,
     alt: 'Breadbytes exhibition installation shot at Bakehouse',
+    href: 'https://www.bacfl.org/exhibitions/breadbytes-artmaking-for-the-next-generation',
+  },
+  {
+    id: 'continuum-munag-2024',
+    category: 'install',
+    title: 'CONTINUUM at MUNAG',
+    caption:
+      'National Museum of Art of Guatemala — Smart Shoppers and The Price of Existence with Bakehouse peers.',
+    imageUrl: `${CDN}/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg`,
+    alt: 'Smart Shoppers — CONTINUUM exhibition context',
+    href: 'https://www.bacfl.org/blog/csiu59p0euqb6bnpyojclicd6bjjiw',
   },
   {
     id: 'oolite-lab',
@@ -53,14 +65,6 @@ export const bitmPublicDocumentationSlides: BitmPublicDocSlide[] = [
     caption: 'Chroma Art Film Festival — public festival install.',
     imageUrl: bitmAssets.studio.installation,
     alt: 'Doomscrolling Treadmill stations at Touch Grass festival',
-  },
-  {
-    id: 'workshop-needed',
-    category: 'workshop',
-    title: 'Workshop Documentation',
-    caption: 'Public workshop and teaching program — additional documentation being indexed.',
-    imageStatus: 'needed',
-    alt: 'Workshop documentation placeholder',
   },
   {
     id: 'collab-install-needed',

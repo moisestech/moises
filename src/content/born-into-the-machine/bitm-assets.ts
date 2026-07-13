@@ -8,6 +8,11 @@ export const bitmPublicBase = '/born-into-the-machine';
 export const STUDIO_43_PANORAMA_EMBED =
   'https://momento360.com/e/u/a338f042352a4550b3e12a6ccc29f98b?utm_campaign=embed&utm_source=other&heading=128.94&pitch=-17.74&field-of-view=75&size=medium&display-plan=true';
 
+// NEXT MEDIA SPRINT:
+// 1. Dedicated flat Studio 43 panorama for image-positioned hotspots (current flatPhoto is interim open-studios documentation)
+// 2. Hero video loop + studio-machine audio
+// 3. Hotspot close-ups: resin printer, GPU bench, cables, maquette
+
 export const bitmAssets = {
   hero: {
     poster: `${CDN}/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp`,
@@ -26,7 +31,12 @@ export const bitmAssets = {
   },
   studio43: {
     panoramaEmbedUrl: STUDIO_43_PANORAMA_EMBED,
-    flatPhoto: { status: 'needed' as const, url: null },
+    flatPhoto: {
+      status: 'placeholder' as const,
+      url: `${CDN}/v1783907488/art/moisestech-website/studio/moises-sanabria-open-studios-red-world-eye-2024_zdyayj.jpg`,
+      alt: 'Moises Sanabria studio at Bakehouse Art Complex during open studios — interim Studio 43 documentation',
+      note: 'Interim open-studios photograph. Dedicated flat Studio 43 panorama for image hotspots still planned.',
+    },
   },
   studio: {
     openStudios: `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`,

@@ -9,6 +9,7 @@ import { BitmCredits } from '@/components/born-into-the-machine/BitmCredits';
 import { BitmArchivePresentation } from '@/components/born-into-the-machine/BitmArchivePresentation';
 import { BitmPhotographicSequence } from '@/components/born-into-the-machine/BitmPhotographicSequence';
 import { BitmCaseStudyCardImage } from '@/components/born-into-the-machine/BitmCaseStudyCardImage';
+import { BitmCasePressLinks } from '@/components/born-into-the-machine/BitmCasePressLinks';
 
 export function BitmCaseStudyCard({ study }: { study: BitmCaseStudy }) {
   return (
@@ -37,6 +38,7 @@ export function BitmCaseStudyCard({ study }: { study: BitmCaseStudy }) {
           <BitmPhotographicSequence steps={study.photoSequence} title={study.title} />
         ) : null}
         <BitmInfoBlock study={study} />
+        <BitmCasePressLinks slug={study.slug} />
         {study.credits ? <BitmCredits credits={study.credits} /> : null}
       </div>
     </article>

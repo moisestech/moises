@@ -22,12 +22,12 @@ export const exhibitions: Exhibitions[] = [
     date: 'July - September 2024',
     imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg',
     location: 'MUNAG & CFCE, Antigua Guatemala',
-    description: 'A groundbreaking exhibition showcasing digital art and new media from eight countries, exploring the evolution of artistic expression through technology. The exhibition features works that challenge traditional boundaries and demonstrate how artists use digital tools to create meaningful connections between past, present, and future.',
+    description: 'A groundbreaking exhibition showcasing digital art and new media from eight countries, exploring the evolution of artistic expression through technology. The exhibition features works that challenge traditional boundaries and demonstrate how artists use digital tools to create meaningful connections between past, present, and future. Bakehouse artists Fabiola Larios, Moises Sanabria, and Leo Castañeda participated.',
     tags: ["Digital Art", "New Media", "International", "Technology", "Contemporary Art"],
     curator: 'Waseem A. Syed',
     featured_work: 'Smart Shoppers & The Price of Existence',
-    link: 'https://fundacionpaiz.org.gt/continuum-una-exposicion-sobre-futuros-y-tradiciones-mutantes/',
-    partners: ['Fundación Paiz para la Educación y la Cultura'],
+    link: 'https://www.bacfl.org/blog/csiu59p0euqb6bnpyojclicd6bjjiw',
+    partners: ['Fundación Paiz para la Educación y la Cultura', 'Bakehouse Art Complex'],
     support: 'Fundación Paiz para la Educación y la Cultura'
   },
   {

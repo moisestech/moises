@@ -17,8 +17,17 @@ export const bitmInstitutions: BitmInstitution[] = [
     id: 'bakehouse',
     name: 'Bakehouse Art Complex',
     relationship: 'studio',
-    caption: 'Studio 43 — primary production environment and residency context.',
-    imageUrl: `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`,
+    caption:
+      'Studio 43 — primary production environment; Breadbytes and CONTINUUM cohort host.',
+    imageUrl: `${CDN}/v1783907488/art/moisestech-website/studio/moises-sanabria-open-studios-red-world-eye-2024_zdyayj.jpg`,
+  },
+  {
+    id: 'munag',
+    name: 'MUNAG — National Museum of Art of Guatemala',
+    relationship: 'exhibition',
+    caption:
+      'CONTINUUM — Smart Shoppers and The Price of Existence with Fabiola Larios and Leo Castañeda.',
+    imageUrl: `${CDN}/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg`,
   },
   {
     id: 'oolite',

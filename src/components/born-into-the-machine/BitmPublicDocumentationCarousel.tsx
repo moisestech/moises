@@ -73,6 +73,16 @@ export function BitmPublicDocumentationCarousel() {
       <div className="p-4">
         <h3 className="font-semibold text-[#111111] dark:text-neutral-100">{slide.title}</h3>
         <p className="mt-1 text-sm text-[#777777] dark:text-neutral-400">{slide.caption}</p>
+        {slide.href ? (
+          <a
+            href={slide.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff5c00] hover:underline"
+          >
+            Institutional documentation ↗
+          </a>
+        ) : null}
       </div>
 
       <div className="flex items-center justify-between border-t border-[#dedede] px-4 py-2 dark:border-neutral-700">

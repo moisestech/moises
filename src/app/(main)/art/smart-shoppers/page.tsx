@@ -36,23 +36,46 @@ export default function SmartShoppers() {
           </p>
           
           {/* Press Coverage */}
-          <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <h3 className="text-lg font-semibold mb-3">Press Coverage</h3>
-            <div className="text-sm">
-              <p className="mb-2">
-                <strong>eP Investiga</strong> - "Continuum, una mirada a los avances en la expresión artística"
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 mb-3">
-                Featured in the CONTINUUM exhibition at MUNAG, Antigua Guatemala, organized by Fundación Paiz para la Educación y la Cultura.
-              </p>
-              <a 
-                href="https://epinvestiga.com/dominical/continuum-una-mirada-a-los-avances-en-la-expresion-artistica/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 underline text-sm"
-              >
-                Read full article →
-              </a>
+          <div className="mt-8 space-y-4">
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <h3 className="text-lg font-semibold mb-3">Press & Exhibition Context</h3>
+              <div className="text-sm space-y-4">
+                <div>
+                  <p className="mb-1">
+                    <strong>Bakehouse Art Complex</strong> — CONTINUUM at MUNAG
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">
+                    Bakehouse artists Fabiola Larios, Moises Sanabria, and Leo Castañeda in CONTINUUM
+                    at the National Museum of Art of Guatemala. Related works: Smart Shoppers and
+                    The Price of Existence.
+                  </p>
+                  <a
+                    href="https://www.bacfl.org/blog/csiu59p0euqb6bnpyojclicd6bjjiw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline text-sm"
+                  >
+                    Read Bakehouse announcement →
+                  </a>
+                </div>
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                  <p className="mb-1">
+                    <strong>eP Investiga</strong> — &quot;Continuum, una mirada a los avances en la expresión artística&quot;
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">
+                    Featured in CONTINUUM at MUNAG, Antigua Guatemala, organized by Fundación Paiz
+                    para la Educación y la Cultura.
+                  </p>
+                  <a
+                    href="https://epinvestiga.com/dominical/continuum-una-mirada-a-los-avances-en-la-expresion-artistica/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline text-sm"
+                  >
+                    Read full article →
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
