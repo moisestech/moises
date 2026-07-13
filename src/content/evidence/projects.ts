@@ -9,12 +9,16 @@ export const OOLITE_DIGITAL_LAB_IMAGE =
 export const OOLITE_DIGITAL_LAB_IMAGE_ALT =
   'Oolite Arts Digital Lab — computer vision and production workspace';
 
+import { automationProjectSpecs } from '@/content/evidence/automationProjects';
+
 export type EvidenceProjectId =
   | 'lore-machine'
   | 'ai24'
   | 'multimodal-image-systems'
   | 'digital-culture-infrastructure'
-  | 'playwire-alumni';
+  | 'playwire-alumni'
+  | 'n8n-gmail-intelligence'
+  | 'bookleggers-commerce-automation';
 
 export type EvidenceProject = {
   id: EvidenceProjectId;
@@ -117,6 +121,25 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
     imageAlt: 'Digital Culture Center Miami website — program and workshop hub screenshot',
     href: 'https://dcc.miami',
+  },
+  'n8n-gmail-intelligence': {
+    id: 'n8n-gmail-intelligence',
+    title: automationProjectSpecs['n8n-gmail-intelligence'].title,
+    category: automationProjectSpecs['n8n-gmail-intelligence'].category,
+    summary: automationProjectSpecs['n8n-gmail-intelligence'].summary,
+    skillTags: [...automationProjectSpecs['n8n-gmail-intelligence'].skillTags],
+    imageSrc: automationProjectSpecs['n8n-gmail-intelligence'].imageSrc,
+    imageAlt: automationProjectSpecs['n8n-gmail-intelligence'].imageAlt,
+    imageLocal: automationProjectSpecs['n8n-gmail-intelligence'].imageLocal,
+  },
+  'bookleggers-commerce-automation': {
+    id: 'bookleggers-commerce-automation',
+    title: automationProjectSpecs['bookleggers-commerce-automation'].title,
+    category: automationProjectSpecs['bookleggers-commerce-automation'].category,
+    summary: automationProjectSpecs['bookleggers-commerce-automation'].summary,
+    skillTags: [...automationProjectSpecs['bookleggers-commerce-automation'].skillTags],
+    imageSrc: automationProjectSpecs['bookleggers-commerce-automation'].imageSrc,
+    imageAlt: automationProjectSpecs['bookleggers-commerce-automation'].imageAlt,
   },
 };
 

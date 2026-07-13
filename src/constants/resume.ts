@@ -174,7 +174,7 @@ export const resumeData = {
     },
     {
       name: 'AI-Native Development & Agentic Workflows',
-      technologies: ['Cursor', 'Claude Code', 'Multi-tool agent orchestration'],
+      technologies: ['Cursor', 'Claude Code', 'n8n', 'Make.com', 'Multi-tool agent orchestration'],
     },
     {
       name: 'Backend / Data',
@@ -199,11 +199,25 @@ export const resumeData = {
 
   projects: [
     {
+      name: 'n8n Gmail Intelligence Agent',
+      period: '2026',
+      description:
+        'Production n8n workflow with an AI Agent node that classifies incoming Gmail, applies structured label routing, and syncs recruiter/opportunity signals into Airtable for pipeline triage.',
+      technologies: ['n8n', 'Gmail API', 'AI Agent node', 'Airtable', 'LLM routing'],
+    },
+    {
+      name: 'Bookleggers — Square · Airtable · Make automation',
+      period: '2026',
+      description:
+        'Live Make.com scenario connecting Square point-of-sale transactions to Airtable — giving Bookleggers Library staff sales and inventory visibility without manual spreadsheet handoffs.',
+      technologies: ['Make.com', 'Airtable', 'Square', 'Commerce ops'],
+    },
+    {
       name: 'Multi-Agent Career & Productivity System',
       period: '2026',
       description:
-        'Architected and operate a multi-agent AI orchestration system coordinating Claude, Airtable, and Gmail to run live application-pipeline tracking, task management, and recruiter-relationship workflows — hands-on practice in agent orchestration, tool-use design, and human-in-the-loop system architecture.',
-      technologies: ['Claude', 'Airtable', 'Gmail', 'Agent orchestration'],
+        'Architected and operate a multi-agent AI orchestration system coordinating Claude, n8n, Airtable, and Gmail to run live application-pipeline tracking, task management, and recruiter-relationship workflows — hands-on practice in agent orchestration, tool-use design, and human-in-the-loop system architecture.',
+      technologies: ['Claude', 'n8n', 'Airtable', 'Gmail', 'Agent orchestration'],
     },
     {
       name: 'AI24 News',

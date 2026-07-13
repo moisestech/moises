@@ -36,7 +36,7 @@ export const technologyCvPrint = {
     },
     {
       title: 'AI-Native Development & Agentic Workflows',
-      items: ['Cursor, Claude Code, multi-tool agent orchestration'],
+      items: ['Cursor, Claude Code, n8n, Make.com, multi-tool agent orchestration'],
     },
     {
       title: 'Backend / Data',

@@ -1,14 +1,26 @@
 import type { Opportunity } from './types';
+import { blueAcornAgenticAiOpportunity } from './blue-acorn-ici-agentic-ai-integration-engineer';
+import { corestoryAiEngineerOpportunity } from './corestory-ai-engineer';
 import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
+import { deepgramSolutionsArchitectOpportunity } from './deepgram-solutions-architect';
+import { endorLabsSolutionsArchitectOpportunity } from './endor-labs-solutions-architect';
+import { harveyAutomationEngineerOpportunity } from './harvey-automation-engineer-customer-education';
 import { knightJournalismTechProductStrategistOpportunity } from './knight-journalism-tech-product-strategist';
+import { neogovStaffAgenticAiOpportunity } from './neogov-staff-agentic-ai-developer';
 import { netflixFullStackEngineerOpportunity } from './netflix-full-stack-engineer';
 import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fabrication-lab-manager';
 import { playwireOpportunity } from './playwire';
 
 const bySlug: Record<string, Opportunity> = {
+  [blueAcornAgenticAiOpportunity.slug]: blueAcornAgenticAiOpportunity,
+  [corestoryAiEngineerOpportunity.slug]: corestoryAiEngineerOpportunity,
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
+  [deepgramSolutionsArchitectOpportunity.slug]: deepgramSolutionsArchitectOpportunity,
+  [endorLabsSolutionsArchitectOpportunity.slug]: endorLabsSolutionsArchitectOpportunity,
+  [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:
     knightJournalismTechProductStrategistOpportunity,
+  [neogovStaffAgenticAiOpportunity.slug]: neogovStaffAgenticAiOpportunity,
   [netflixFullStackEngineerOpportunity.slug]: netflixFullStackEngineerOpportunity,
   [newIncMediaFabricationLabManagerOpportunity.slug]: newIncMediaFabricationLabManagerOpportunity,
   [playwireOpportunity.slug]: playwireOpportunity,

@@ -49,11 +49,11 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     headline: 'Senior GenAI Engineer',
     subheadline: 'LLM systems · Agent workflows · Multimodal prototypes · AI product strategy',
     introParagraphs: [
-      'I am a Miami-based engineer, artist-technologist, and product strategist with 12+ years building web systems, creative AI tools, and experimental GenAI workflows. My work sits at the intersection of software engineering, multimodal AI, product prototyping, and applied research.',
-      'I have contributed to AI storytelling platforms, prompt workflows, generative image systems, cloud-based media pipelines, automation tools, and educational AI infrastructure for artists and institutions. For Senior GenAI Engineer roles, I bring hands-on engineering, product intuition, visual systems thinking, and a track record of turning ambiguous ideas into demos and MVPs.',
+      'Full-stack engineer who ships applied AI products end-to-end — from founding-engineer product work at Lore Machine to client-facing solutions engineering and production automation (n8n Gmail intelligence, Make + Square + Airtable ops).',
+      'For Senior GenAI Engineer roles I bring hands-on LLM workflow design, multimodal prototyping, production n8n agent nodes, and a track record of turning ambiguous ideas into demos and MVPs — with honest boundaries around unconfirmed production RAG/vector depth.',
     ],
     trustLine:
-      '12+ years in full-stack engineering · AI product development · startup systems · multimodal media infrastructure',
+      'Full-Stack AI Engineer · Lore Machine founding engineer · production n8n + Airtable automation · multimodal media infrastructure',
     headshotSrc: moisesSanabriaHeadshot,
     headshotAlt: 'Moises Sanabria — professional headshot',
   },
@@ -107,11 +107,11 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     {
       requirement: 'Agentic workflows',
       evidence:
-        'n8n automation, AI workflow design, and expanding hands-on orchestration with LangGraph, CrewAI, and OpenAI Agents.',
+        'Production n8n Gmail AI Agent (classification, label routing, Airtable sync); multi-agent career orchestration with Claude + n8n + Airtable; The Art of AI Agents workshop curriculum.',
       illustration: {
-        src: evidenceProjects.ai24.imageSrc,
-        alt: 'AI24 — applied AI systems, automation strategy, and agent-style teaching and tooling for institutions.',
-        local: evidenceProjects.ai24.imageLocal,
+        src: evidenceProjects['n8n-gmail-intelligence'].imageSrc,
+        alt: 'n8n Gmail intelligence — production AI Agent node and Airtable sync',
+        local: evidenceProjects['n8n-gmail-intelligence'].imageLocal,
       },
     },
     {
@@ -157,9 +157,10 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
   ],
   featuredProjectIds: [
     'lore-machine',
+    'n8n-gmail-intelligence',
     'ai24',
     'multimodal-image-systems',
-    'digital-culture-infrastructure',
+    'bookleggers-commerce-automation',
   ],
   caseStudiesSectionTitle: 'Featured case studies',
   caseStudiesIntro:
@@ -175,7 +176,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     {
       category: 'Agentic systems',
       skills:
-        'LangChain-style patterns, n8n automation, tool-based workflows; currently expanding hands-on agent orchestration with LangGraph, CrewAI, and OpenAI Agents',
+        'Production n8n AI Agent nodes, Airtable sync, tool-based workflows, Claude multi-agent orchestration',
       icon: 'workflow',
     },
     {
@@ -265,8 +266,8 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
   ],
   certifications: [
     {
-      name: 'Cooper Union — B.S. Fine Arts & Creative Technology',
-      detail: 'Undergraduate work at the intersection of art, engineering, and computation.',
+      name: 'Cooper Union — Bachelor of Fine Arts (BFA)',
+      detail: 'One of three Cooper Union schools (Art, Architecture, Engineering) sharing a unified core curriculum.',
       href: 'https://cooper.edu',
     },
     {

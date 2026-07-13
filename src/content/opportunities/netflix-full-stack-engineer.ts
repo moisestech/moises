@@ -36,7 +36,7 @@ export const netflixFullStackEngineerOpportunity: Opportunity = {
     subheadline: 'Applied AI platforms · visualization-adjacent BI · agent-orchestrated workflows',
     introParagraphs: [
       'This dossier is a tailored reach application for Netflix’s Full-Stack Engineer 5, AI Insights & Visualizations role. It maps my existing full-stack and applied-AI product work to the role’s emphasis on internal platforms, AI tooling, and visualization — framed honestly as a stretch application, not an inflated one.',
-      'Strongest alignment: founding-engineer delivery on Lore Machine (real-time generative platform on Vercel), Playwire data pipelines and Tableau BI, and current applied-AI infrastructure work at Oolite Arts. Gaps requiring evidence confirmation are flagged explicitly in the role-fit section below.',
+      'Strongest alignment: founding-engineer delivery on Lore Machine, Playwire data pipelines and Tableau BI, production n8n Gmail intelligence (AI Agent + Airtable), and live Make + Square + Airtable ops for Bookleggers Library. Gaps requiring evidence confirmation are flagged below.',
     ],
     trustLine:
       'Full-Stack AI Engineer · Miami-based · honest stretch application — gaps flagged where evidence is pending',
@@ -74,11 +74,11 @@ export const netflixFullStackEngineerOpportunity: Opportunity = {
     {
       requirement: 'Internal tooling & platform engineering',
       evidence:
-        '[GAP — NEEDS EVIDENCE] Netflix-scale internal platform experience not yet documented here. Multi-Agent Career & Productivity System (2026) demonstrates agent-orchestrated tooling design in a personal pipeline context; production internal-platform depth still needs confirmation.',
+        'Production n8n Gmail intelligence workflow (AI Agent classification, label routing, Airtable sync) and live Make + Square + Airtable commerce automation for Bookleggers Library — internal-ops tooling patterns at nonprofit scale. [GAP: Netflix-scale internal platform depth still needs role-specific evidence.]',
       illustration: {
-        src: evidenceProjects.ai24.imageSrc,
-        alt: 'AI24 — applied AI systems and automation context',
-        local: evidenceProjects.ai24.imageLocal,
+        src: evidenceProjects['n8n-gmail-intelligence'].imageSrc,
+        alt: 'n8n — production internal ops automation',
+        local: evidenceProjects['n8n-gmail-intelligence'].imageLocal,
       },
     },
     {
@@ -102,7 +102,13 @@ export const netflixFullStackEngineerOpportunity: Opportunity = {
       },
     },
   ],
-  featuredProjectIds: ['lore-machine', 'playwire-alumni', 'ai24'],
+  featuredProjectIds: [
+    'lore-machine',
+    'playwire-alumni',
+    'n8n-gmail-intelligence',
+    'bookleggers-commerce-automation',
+    'ai24',
+  ],
   caseStudiesSectionTitle: 'Selected work',
   caseStudiesIntro:
     'Public and former-employer-adjacent work mapped to this role. Gaps above should be closed with role-specific evidence before submission.',
@@ -125,7 +131,7 @@ export const netflixFullStackEngineerOpportunity: Opportunity = {
     },
     {
       category: 'Agentic workflows',
-      skills: 'Cursor, Claude Code, multi-tool agent orchestration, human-in-the-loop design',
+      skills: 'Production n8n AI Agent, Make.com, Airtable ops sync, multi-tool orchestration',
       icon: 'workflow',
     },
     {

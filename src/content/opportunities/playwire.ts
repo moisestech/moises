@@ -80,6 +80,16 @@ export const playwireOpportunity: Opportunity = {
       },
     },
     {
+      requirement: 'Client-facing solutions delivery',
+      evidence:
+        'Solutions Engineer: publisher scoping and JS debugging; post-Playwire client automation — live Make + Square + Airtable sync for Bookleggers Library nonprofit ops.',
+      illustration: {
+        src: evidenceProjects['bookleggers-commerce-automation'].imageSrc,
+        alt: 'Bookleggers — Square to Airtable commerce automation',
+        local: evidenceProjects['bookleggers-commerce-automation'].imageLocal,
+      },
+    },
+    {
       requirement: 'Ad-tech domain knowledge',
       evidence:
         'Two years in-house plus current homework on RAMP Managed/Self-Service, Flex Suite, PARMM, and QPT yield framing.',
@@ -108,7 +118,13 @@ export const playwireOpportunity: Opportunity = {
       },
     },
   ],
-  featuredProjectIds: ['playwire-alumni', 'lore-machine', 'digital-culture-infrastructure', 'ai24'],
+  featuredProjectIds: [
+    'playwire-alumni',
+    'lore-machine',
+    'bookleggers-commerce-automation',
+    'n8n-gmail-intelligence',
+    'digital-culture-infrastructure',
+  ],
   caseStudiesSectionTitle: 'Selected work',
   caseStudiesIntro:
     'Playwire experience is described without proprietary screenshots. Public product and institutional work below reflects skills transferable to RAMP.',

@@ -103,20 +103,36 @@ export const aiEngineeringDossier: Opportunity = {
       requirement: 'n8n / automation',
       evidence: p.stackMatch[5].proofAngle,
       illustration: {
-        src: aiEngineeringVisuals.proofImageFallbacks['life-os'],
-        alt: 'Automation and workflow systems',
+        src: evidenceProjects['n8n-gmail-intelligence'].imageSrc,
+        alt: evidenceProjects['n8n-gmail-intelligence'].imageAlt,
+        local: evidenceProjects['n8n-gmail-intelligence'].imageLocal,
+      },
+    },
+    {
+      requirement: 'Make.com / client ops',
+      evidence: p.stackMatch[6].proofAngle,
+      illustration: {
+        src: evidenceProjects['bookleggers-commerce-automation'].imageSrc,
+        alt: evidenceProjects['bookleggers-commerce-automation'].imageAlt,
+        local: evidenceProjects['bookleggers-commerce-automation'].imageLocal,
       },
     },
     {
       requirement: 'Vercel / GitHub',
-      evidence: p.stackMatch[6].proofAngle,
+      evidence: p.stackMatch[7].proofAngle,
       illustration: {
         src: evidenceProjects['lore-machine'].imageSrc,
         alt: 'Production deployment and engineering workflow',
       },
     },
   ],
-  featuredProjectIds: ['lore-machine', 'ai24', 'digital-culture-infrastructure'],
+  featuredProjectIds: [
+    'n8n-gmail-intelligence',
+    'bookleggers-commerce-automation',
+    'lore-machine',
+    'ai24',
+    'digital-culture-infrastructure',
+  ],
   caseStudyOverrides: [],
   caseStudiesSectionTitle: 'Proof projects',
   caseStudiesIntro:
@@ -125,7 +141,7 @@ export const aiEngineeringDossier: Opportunity = {
   skillsMatrixRows: [
     { category: 'Agentic / LLM', skills: 'Claude Code, OpenAI API, prompt workflows, tool orchestration, structured outputs', icon: 'sparkles' },
     { category: 'Full-stack', skills: 'Next.js, React, TypeScript, Supabase, PostgreSQL, APIs', icon: 'code2' },
-    { category: 'Automation / ops', skills: 'Airtable CRM systems, n8n pipelines, Gmail routing, workflow architecture', icon: 'workflow' },
+    { category: 'Automation / ops', skills: 'Airtable CRM, n8n (production Gmail AI Agent), Make.com, Square → Airtable sync', icon: 'workflow' },
     { category: 'Deployment', skills: 'Vercel, GitHub, CI/CD, documentation, stakeholder handoff', icon: 'cloud' },
     { category: 'Product judgment', skills: 'Solo scoping, POC delivery, non-technical communication, v1 cutting', icon: 'users' },
     { category: 'AI product', skills: 'GenAI prototypes, multimodal pipelines, institutional tooling', icon: 'rocket' },

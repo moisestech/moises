@@ -4,6 +4,7 @@ import {
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
 } from '@/content/evidence/projects';
+import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import { moisesRecruitingProfiles } from '@/content/evidence/recruitingDefaults';
 import { aiEngineeringVisuals, proofProjectImageSrc } from '@/content/ai-engineering/visualAssets';
 
@@ -134,7 +135,11 @@ export const aiEngineeringPacket = {
     },
     {
       platform: 'n8n / automation',
-      proofAngle: 'Gmail routing, labels, workflow automation, and system orchestration',
+      proofAngle: 'Production Gmail AI Agent routing, label taxonomy, Airtable sync, and workflow orchestration',
+    },
+    {
+      platform: 'Make.com / client ops',
+      proofAngle: 'Live Square → Airtable commerce sync for Bookleggers Library nonprofit operations',
     },
     {
       platform: 'Vercel / GitHub',
@@ -142,9 +147,9 @@ export const aiEngineeringPacket = {
     },
   ] satisfies StackMatchRow[],
   shortBio:
-    'Moises Sanabria is a Miami-based full-stack AI systems builder who ships agentic workflows, automation systems, and production-ready prototypes using Claude, Next.js, Supabase, Airtable, and n8n.',
+    'Moises Sanabria is a Miami-based full-stack AI systems builder who ships agentic workflows, production n8n automation, client ops integrations (Make, Square, Airtable), and production-ready prototypes using Claude, Next.js, Supabase, and Airtable.',
   technicalSummary150:
-    'Full-stack AI systems builder across Claude/OpenAI workflows, Next.js, TypeScript, Supabase, Airtable, and n8n. Ships agentic tools, CRM-style operating systems, and deployed prototypes for organizations that need one engineer who can scope with non-technical stakeholders and deliver quickly. Background includes founding engineer work at Lore Machine, AI24 infrastructure, Infra24 smart signage, and Oolite Digital Lab technical direction.',
+    'Full-stack AI systems builder across Claude/OpenAI workflows, Next.js, TypeScript, Supabase, Airtable, n8n, and Make.com. Ships agentic tools, production Gmail automation, client commerce sync (Square → Airtable), CRM-style operating systems, and deployed prototypes. Background includes founding engineer work at Lore Machine, AI24 infrastructure, Infra24 smart signage, and Oolite Digital Lab technical direction.',
   recruiterBlurb:
     'Moises Sanabria is a Miami-based full-stack AI systems builder. He works across Claude Code, Next.js, TypeScript, Supabase, Airtable, and n8n to ship agentic workflows, automation systems, and production-ready prototypes. He is especially strong as a solo builder in ambiguous roles that require technical execution, workflow design, and clear communication with non-technical stakeholders.',
   howIWork: {
@@ -183,7 +188,7 @@ export const aiEngineeringPacket = {
       problem:
         'Recruiting signals, follow-ups, and opportunity tracking were scattered across Gmail, LinkedIn, and ad-hoc notes — hard to act on quickly.',
       systemBuilt:
-        'Airtable-backed operating system with Gmail automation (n8n), recruiter labeling, duplicate-risk tracking, Life OS Actions, and decision workflows that turn inbox noise into prioritized next steps.',
+        'Airtable-backed operating system with production n8n Gmail automation (AI Agent node for classification and label routing), recruiter labeling, duplicate-risk tracking, Life OS Actions, and decision workflows that turn inbox noise into prioritized next steps.',
       stack: ['Airtable', 'n8n', 'Gmail API', 'Claude', 'Workflow design', 'CRM architecture'],
       users: 'Personal ops layer; recruiter pipeline and opportunity triage',
       outcome:
@@ -195,6 +200,35 @@ export const aiEngineeringPacket = {
         aiEngineeringVisuals.proofImageFallbacks['life-os'],
       ),
       imageAlt: 'Life OS and recruiter graph — AI workflow and career systems architecture',
+    },
+    {
+      slug: 'n8n-gmail-intelligence',
+      title: automationProjectSpecs['n8n-gmail-intelligence'].title,
+      problem:
+        'High-volume Gmail (recruiters, opportunities, noise) required structured triage without manual sorting every morning.',
+      systemBuilt: automationProjectSpecs['n8n-gmail-intelligence'].summary,
+      stack: automationProjectSpecs['n8n-gmail-intelligence'].skillTags,
+      users: 'Personal ops; recruiter and opportunity pipeline',
+      outcome:
+        'Production workflow: AI Agent classification, label routing, and Airtable sync for actionable pipeline state.',
+      whyItMatters:
+        'Direct proof of n8n + LLM agent nodes in production — the automation stack many applied AI and agentic engineering roles require.',
+      imageSrc: automationProjectSpecs['n8n-gmail-intelligence'].imageSrc,
+      imageAlt: automationProjectSpecs['n8n-gmail-intelligence'].imageAlt,
+    },
+    {
+      slug: 'bookleggers-commerce-automation',
+      title: automationProjectSpecs['bookleggers-commerce-automation'].title,
+      problem:
+        'Bookleggers Library staff needed Square POS sales visibility in Airtable without manual exports or spreadsheet drift.',
+      systemBuilt: automationProjectSpecs['bookleggers-commerce-automation'].summary,
+      stack: automationProjectSpecs['bookleggers-commerce-automation'].skillTags,
+      users: 'Bookleggers Library staff; nonprofit bookstore operations',
+      outcome: 'Live Make.com scenario syncing Square transactions into Airtable for sales and inventory logging.',
+      whyItMatters:
+        'Client-facing automation delivery for a real organization — scoping, integration design, and ops tooling non-engineers can use.',
+      imageSrc: automationProjectSpecs['bookleggers-commerce-automation'].imageSrc,
+      imageAlt: automationProjectSpecs['bookleggers-commerce-automation'].imageAlt,
     },
     {
       slug: 'ai24',

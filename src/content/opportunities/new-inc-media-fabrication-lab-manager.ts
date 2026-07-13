@@ -128,10 +128,15 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
     {
       requirement: 'Autonomous ownership, process improvement, problem-solving',
       evidence:
-        'Built lab workflows, workshop curricula, and artist-facing automation from ambiguous briefs; default mode is document the fix, teach the workaround, and update the system so the issue does not recur.',
+        'Built lab workflows, workshop curricula (including n8n AI Agent teaching), and artist-facing automation from ambiguous briefs; production n8n Gmail intelligence and client Make + Square + Airtable sync for nonprofit ops.',
     },
   ],
-  featuredProjectIds: ['digital-culture-infrastructure', 'ai24', 'multimodal-image-systems'],
+  featuredProjectIds: [
+    'digital-culture-infrastructure',
+    'ai24',
+    'multimodal-image-systems',
+    'n8n-gmail-intelligence',
+  ],
   caseStudyOverrides: [
     {
       evidenceId: 'digital-culture-infrastructure',
