@@ -13,6 +13,51 @@ export type GrantDirectoryEntry = {
 
 const grantDirectoryEntries: GrantDirectoryEntry[] = [
   {
+    id: 'pioneer-works-residency-2027',
+    title: 'Pioneer Works Visual Arts Residency 2027',
+    organization: 'Pioneer Works',
+    route: '/grant/pioneer-works-residency-2027',
+    updatedAt: '2026-07-13',
+    deadline: '2026-07-13',
+    status: 'draft',
+    summary:
+      'MACHINE SENTENCES — five-month studio investigation; physical grammar for machine interpretation at Pioneer Works.',
+  },
+  {
+    id: 'pioneer-works-residency-2027-machine-sentences',
+    title: 'MACHINE SENTENCES',
+    organization: 'Pioneer Works',
+    route: '/grant/pioneer-works-residency-2027/machine-sentences',
+    updatedAt: '2026-07-13',
+    deadline: '2026-07-13',
+    status: 'draft',
+    parentId: 'pioneer-works-residency-2027',
+    summary:
+      'A model organism for language — Machine Sentence No. 1 as central full-scale sculpture within a five-month residency.',
+  },
+  {
+    id: 'modal-gray-area-2026',
+    title: 'Modal × Gray Area 2026',
+    organization: 'Modal and Gray Area',
+    route: '/grant/modal-gray-area-2026',
+    updatedAt: '2026-07-13',
+    deadline: '2026-07-15',
+    status: 'active',
+    summary:
+      'MACHINE SENTENCE NO. 1 — inference sculpture for Gray Area October 2026; Modal compute + production support.',
+  },
+  {
+    id: 'modal-gray-area-2026-machine-sentence',
+    title: 'MACHINE SENTENCE NO. 1',
+    organization: 'Modal and Gray Area',
+    route: '/grant/modal-gray-area-2026/machine-sentence-no-1',
+    updatedAt: '2026-07-13',
+    deadline: '2026-07-15',
+    status: 'active',
+    parentId: 'modal-gray-area-2026',
+    summary: 'Latent Monument — cubic screen grammar, authored states, Modal body-score prototype.',
+  },
+  {
     id: 'no-vacancy-2026',
     title: 'No Vacancy Miami Beach 2026',
     organization: 'City of Miami Beach Cultural Affairs',

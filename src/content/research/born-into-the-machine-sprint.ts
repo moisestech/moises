@@ -88,6 +88,8 @@ export const bornIntoTheMachineSprintLinks = [
   { label: 'Selected works', href: '/selected-works' },
   { label: 'No Vacancy 2026 packet', href: '/grant/no-vacancy-2026' },
   { label: 'Volver a Valer proposal', href: '/grant/no-vacancy-2026/volver-a-valer' },
+  { label: 'Modal × Gray Area 2026', href: '/grant/modal-gray-area-2026' },
+  { label: 'Machine Sentence No. 1', href: '/grant/modal-gray-area-2026/machine-sentence-no-1' },
 ] as const;
 
 export const bornIntoTheMachineDeeperLinks = [
