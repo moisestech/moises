@@ -1,5 +1,6 @@
 import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
+import type { EvidenceStatus, SystemsDossier } from '@/content/opportunities/systemsDossier';
 
 export type ApplicationBanner = {
   src: string;
@@ -35,6 +36,8 @@ export type RoleMatchIllustration = {
 export type RoleMatchRow = {
   requirement: string;
   evidence: string;
+  /** Transparent evidence label for systems-dossier / EvidenceMatrix pages. */
+  status?: EvidenceStatus;
   illustration?: RoleMatchIllustration;
 };
 
@@ -109,7 +112,7 @@ export type OpportunityAudienceKeywords = {
   terms: OpportunityAudienceKeyword[];
 };
 
-export type OpportunityVariant = 'compact' | 'full-dossier';
+export type OpportunityVariant = 'compact' | 'full-dossier' | 'systems-dossier';
 
 export type SkillsMatrixIconKey =
   | 'code2'
@@ -149,6 +152,28 @@ export type Opportunity = {
   audienceKeywords?: OpportunityAudienceKeywords;
   company?: string;
   roleTitle?: string;
+  /** Hero eyebrow (e.g. “Application for Affirm”). */
+  heroEyebrow?: string;
+  /** Compact role metadata under the headline (location · team). */
+  heroRoleMeta?: string;
+  /** Candidate name shown in the text hero. */
+  candidateName?: string;
+  /** Short positioning line above intro paragraphs. */
+  candidatePositioning?: string;
+  /** Restrained metadata chips under hero CTAs. */
+  heroMetaChips?: string[];
+  /** Primary in-page scroll CTA (label + hash). */
+  heroPrimaryCta?: { label: string; href: string };
+  /** Secondary in-page scroll CTA. */
+  heroSecondaryCta?: { label: string; href: string };
+  /**
+   * Optional company mark (light theme). Cloudinary or `/public` path.
+   * Pair with `companyLogoSrcDark` when dark-theme artwork differs.
+   */
+  companyLogoSrc?: string;
+  /** Dark-theme company mark. Falls back to `companyLogoSrc` when omitted. */
+  companyLogoSrcDark?: string;
+  companyLogoAlt?: string;
   hero: {
     headline: string;
     subheadline: string;
@@ -157,6 +182,8 @@ export type Opportunity = {
     headshotSrc?: string;
     headshotAlt?: string;
   };
+  /** Systems engineering application sections (architecture, trust, 30/60/90, etc.). */
+  systemsDossier?: SystemsDossier;
   roleMatchSectionTitle?: string;
   roleMatchIntro?: string;
   roleMatchColumnHeaders?: { left: string; right: string };

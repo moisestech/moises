@@ -13,6 +13,7 @@ import { InnovationProcess } from '@/components/opportunities/InnovationProcess'
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
@@ -24,6 +25,10 @@ type OpportunityPageClientProps = {
 export function OpportunityPageClient({ opportunity }: OpportunityPageClientProps) {
   if (opportunity.variant === 'full-dossier') {
     return <TechnologyProductStrategyClient />;
+  }
+
+  if (opportunity.variant === 'systems-dossier') {
+    return <SystemsOpportunityClient opportunity={opportunity} />;
   }
 
   const hasBanner = Boolean(opportunity.applicationBanner?.src);

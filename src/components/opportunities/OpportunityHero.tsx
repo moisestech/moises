@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, FolderKanban, Linkedin, Github, Instagram } from 'lucide-react';
+import { Mail, FolderKanban, Linkedin, Github, Instagram, ArrowDown } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
@@ -22,23 +22,64 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
   };
 
   const headshotRemote = hero.headshotSrc?.startsWith('http') ?? false;
+  const eyebrow = opportunity.heroEyebrow ?? opportunity.roleTitle ?? 'Positioning';
+  const showSystemsHero =
+    opportunity.variant === 'systems-dossier' ||
+    Boolean(opportunity.candidatePositioning || opportunity.heroPrimaryCta);
 
   return (
     <section id="hero" className="scroll-mt-32">
       <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
-          <p className={opp.accent}>{opportunity.roleTitle ?? 'Positioning'}</p>
+          <p className={opp.accent}>{eyebrow}</p>
           <h1 className={`mt-2 ${opp.h1}`}>{hero.headline}</h1>
-          <p className={`mt-2 ${opp.bodyLg}`}>{hero.subheadline}</p>
-          {hero.trustLine ? <p className={`mt-2 ${opp.subtle} sm:text-sm`}>{hero.trustLine}</p> : null}
+          {opportunity.heroRoleMeta ? (
+            <p className={`mt-2 ${opp.bodyLg}`}>{opportunity.heroRoleMeta}</p>
+          ) : (
+            <p className={`mt-2 ${opp.bodyLg}`}>{hero.subheadline}</p>
+          )}
+          {opportunity.candidateName ? (
+            <p className={`mt-3 text-base font-semibold text-stone-900 dark:text-stone-100`}>
+              {opportunity.candidateName}
+            </p>
+          ) : null}
+          {opportunity.candidatePositioning ? (
+            <p className={`mt-2 text-base leading-relaxed text-stone-800 dark:text-stone-200`}>
+              {opportunity.candidatePositioning}
+            </p>
+          ) : null}
+          {hero.trustLine && !opportunity.candidateName ? (
+            <p className={`mt-2 ${opp.subtle} sm:text-sm`}>{hero.trustLine}</p>
+          ) : null}
           <div className={`mt-4 space-y-3 ${opp.body}`}>
             {hero.introParagraphs.map((p) => (
               <p key={p.slice(0, 64)}>{p}</p>
             ))}
           </div>
+
           <div className="mt-6 flex flex-wrap gap-3">
-            <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="hero" />
-            {ctas.caseStudiesAnchor ? (
+            {opportunity.heroPrimaryCta ? (
+              <a
+                href={opportunity.heroPrimaryCta.href}
+                className={opp.btnPrimary}
+                onClick={() => onCta('hero_primary_scroll')}
+              >
+                <ArrowDown className="h-4 w-4 shrink-0" aria-hidden />
+                {opportunity.heroPrimaryCta.label}
+              </a>
+            ) : (
+              <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="hero" />
+            )}
+            {opportunity.heroSecondaryCta ? (
+              <a
+                href={opportunity.heroSecondaryCta.href}
+                className={opp.btnSecondary}
+                onClick={() => onCta('hero_secondary_scroll')}
+              >
+                <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />
+                {opportunity.heroSecondaryCta.label}
+              </a>
+            ) : ctas.caseStudiesAnchor ? (
               <a
                 href={ctas.caseStudiesAnchor}
                 className={opp.btnSecondary}
@@ -48,16 +89,30 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
                 View case studies
               </a>
             ) : null}
-            <a
-              href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-              className={opp.btnSecondary}
-              onClick={() => onCta('email')}
-            >
-              <Mail className="h-4 w-4 shrink-0" aria-hidden />
-              Email Moises
-            </a>
+            {showSystemsHero ? <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="hero" /> : null}
+            {!showSystemsHero ? (
+              <a
+                href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
+                className={opp.btnSecondary}
+                onClick={() => onCta('email')}
+              >
+                <Mail className="h-4 w-4 shrink-0" aria-hidden />
+                Email Moises
+              </a>
+            ) : null}
             <OpportunitySiteLinks ctas={ctas} onCta={onCta} variant="hero" />
           </div>
+
+          {opportunity.heroMetaChips?.length ? (
+            <ul className="mt-5 flex flex-wrap gap-2" aria-label="Role focus">
+              {opportunity.heroMetaChips.map((chip) => (
+                <li key={chip} className={opp.pillTag}>
+                  {chip}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
           <div className={opp.profilesBorder}>
             <span className={`w-full sm:w-auto sm:pr-2 ${opp.label}`}>Profiles</span>
             <a
@@ -97,6 +152,32 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           </div>
         </div>
         <div>
+          {opportunity.companyLogoSrc ? (
+            <div className="mb-6">
+              <p className={`mb-2 ${opp.label}`}>Company</p>
+              <div className="relative h-10 w-auto max-w-[200px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={opportunity.companyLogoSrc}
+                  alt={opportunity.companyLogoAlt ?? opportunity.company ?? 'Company logo'}
+                  className={
+                    opportunity.companyLogoSrcDark
+                      ? 'h-10 w-auto max-w-[200px] object-contain object-left dark:hidden'
+                      : 'h-10 w-auto max-w-[200px] object-contain object-left'
+                  }
+                />
+                {opportunity.companyLogoSrcDark ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={opportunity.companyLogoSrcDark}
+                    alt=""
+                    aria-hidden
+                    className="hidden h-10 w-auto max-w-[200px] object-contain object-left dark:block"
+                  />
+                ) : null}
+              </div>
+            </div>
+          ) : null}
           {hero.headshotSrc ? (
             <>
               <p className={`mb-2 ${opp.label}`}>Profile</p>

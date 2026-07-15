@@ -26,3 +26,13 @@ export const creativeTechImageToolsBanner: ApplicationBanner = {
   alt: 'Creative image tools — segmentation, large assets, IIIF delivery, and review interfaces',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
+
+/**
+ * Affirm — AI Solutions Engineer.
+ * Index / OG listing asset only. The systems-dossier page uses a text hero (no full-bleed banner).
+ */
+export const affirmAiSolutionsEngineerBanner: ApplicationBanner = {
+  src: `${cdn}/v1784090736/jobs/banners/job-opportunity-affirm-banner_wyd0cj.png`,
+  alt: 'Affirm — AI Solutions Engineer application listing banner',
+  aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+};

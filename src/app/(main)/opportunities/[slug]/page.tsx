@@ -16,14 +16,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const { seo } = opportunity;
   const robots = seo.indexable === false ? { index: false as const, follow: true } : undefined;
+  // Prefer a real local asset when available. Do not invent absolute / relative canonicals here —
+  // Next metadataBase (https://moises.tech) resolves path-only canonicals.
+  const canonical = `/opportunities/${opportunity.slug}`;
   return {
     title: seo.title,
     description: seo.description,
     robots,
+    alternates: { canonical },
     openGraph: {
       title: seo.title,
       description: seo.description,
       type: 'website',
+      url: canonical,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo.title,
+      description: seo.description,
     },
   };
 }
