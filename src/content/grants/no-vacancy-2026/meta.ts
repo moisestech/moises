@@ -1,6 +1,7 @@
 /**
  * No Vacancy Miami Beach 2026 — shared program metadata.
  * Public grant hub: /grant/no-vacancy-2026
+ * Official proposal: Volver a Valer only.
  */
 
 export const noVacancyGrantMeta = {
@@ -32,25 +33,16 @@ export const noVacancyGrantMeta = {
   ],
 } as const;
 
+/** Sole official proposal card for the hub */
 export const noVacancyProposalCards = [
   {
     slug: 'volver-a-valer',
     title: 'Volver a Valer',
-    subtitle: 'A Study in Migrating Value',
+    subtitle: 'The Value We Carry',
     thesis:
-      'A hotel waiting environment transformed into a field of money, receipts, and reflective surfaces — Venezuelan in entry point, Latin American in resonance.',
-    status: 'Primary candidate',
+      'A site-fitted printed currency floor and two or three freestanding sculptures examining how money, labor, memory, care, and identity are transformed through migration.',
+    status: 'Official proposal',
     href: noVacancyGrantMeta.volverRoute,
-    gesture: 'Partially wrapped waiting / check-in environment',
-  },
-  {
-    slug: 'touch-grass',
-    title: 'Touch Grass: Circuit Floor',
-    subtitle: 'The Ground Is Online',
-    thesis:
-      'A modular walkable floor of reclaimed circuit boards — obsolete electronics as luminous ground in hotel circulation space.',
-    status: 'Alternate proposal',
-    href: noVacancyGrantMeta.touchGrassRoute,
-    gesture: 'Modular illuminated floor field (~20 sq. ft.)',
+    gesture: 'Printed currency floor + Market Rate + Soft Currency (+ optional Carry-On)',
   },
 ] as const;

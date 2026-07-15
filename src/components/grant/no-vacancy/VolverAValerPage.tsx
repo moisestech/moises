@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { HotelStudySelector } from '@/components/grant/no-vacancy/HotelStudySelector';
 import {
   NvBudgetTable,
-  NvExperienceBeats,
   NvPageChrome,
   NvPlaceholderFigure,
   NvRelatedWorks,
@@ -11,15 +10,22 @@ import {
 } from '@/components/grant/no-vacancy/NoVacancyUi';
 import { noVacancyArtistBioShort } from '@/content/grants/no-vacancy-2026/shared';
 import {
+  toGrantMedia,
+  volverMedia,
+  volverMediaDisclosure,
+} from '@/content/grants/no-vacancy-2026/volver-a-valer-media';
+import {
   volverAValer,
   volverBudget,
+  volverBudgetNote,
   volverBudgetTotal,
-  volverClosing,
+  volverClosingMedia,
+  volverClosingQuestion,
+  volverCurrencyArchive,
   volverFabrication,
-  volverHero,
+  volverHeroMedia,
   volverHotelStudies,
-  volverLatinResonance,
-  volverMaterials,
+  volverInstallationSystem,
   volverPrototypes,
   volverRelatedWorks,
   volverValueTransformations,
@@ -28,91 +34,131 @@ import {
 
 export function VolverAValerPage() {
   const p = volverAValer;
+  const system = volverInstallationSystem;
 
   return (
     <NvPageChrome>
       <article>
-        <header className="mb-10 sm:mb-14">
+        <header className="mb-8 sm:mb-10">
           <p className="text-sm uppercase tracking-widest text-stone-500 mb-3">{p.status}</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-2">{p.title}</h1>
-          <p className="text-xl sm:text-2xl text-stone-600 dark:text-stone-400 font-medium mb-4">
+          <p className="text-xl sm:text-2xl text-stone-600 dark:text-stone-400 font-medium mb-6">
             {p.subtitle}
           </p>
-          <p className="text-sm text-stone-500 mb-2">
-            A proposed site-specific installation for No Vacancy, Miami Beach 2026.
-          </p>
-          <ul className="flex flex-wrap gap-2 mt-4">
-            {p.metadata.map((item) => (
-              <li
-                key={item}
-                className="text-[10px] uppercase tracking-wide border border-stone-400 dark:border-stone-600 px-2 py-1 text-stone-600 dark:text-stone-400"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
         </header>
 
-        <div className="mb-12">
-          <NvPlaceholderFigure media={volverHero} aspectClass="aspect-[16/10]" priority />
+        <div className="mb-6">
+          <NvPlaceholderFigure media={volverHeroMedia} aspectClass="aspect-[16/10]" priority />
+          <p className="mt-2 text-xs text-stone-500 leading-relaxed">{volverMediaDisclosure}</p>
         </div>
 
-        <p className="text-2xl sm:text-3xl font-medium leading-snug tracking-tight text-stone-900 dark:text-stone-100 mb-12 border-l-2 border-stone-900 dark:border-stone-100 pl-4 sm:pl-6">
-          {p.thesis}
+        <p className="text-base sm:text-lg text-stone-700 dark:text-stone-300 leading-relaxed mb-10">
+          {p.oneSentenceForm}
         </p>
 
-        <NvSection title="Three-beat experience">
-          <NvExperienceBeats beats={p.experienceBeats} />
-        </NvSection>
+        <p className="text-2xl sm:text-3xl font-medium leading-snug tracking-tight text-stone-900 dark:text-stone-100 mb-4 border-l-2 border-stone-900 dark:border-stone-100 pl-4 sm:pl-6">
+          {p.thesis}
+        </p>
+        <p className="text-stone-600 dark:text-stone-400 leading-relaxed mb-14 sm:mb-16 max-w-2xl">
+          {p.criticalDistinction}
+        </p>
 
-        <NvSection title="Concept">
-          <div className="prose prose-stone dark:prose-invert max-w-none whitespace-pre-line leading-relaxed">
-            {p.conceptStatement}
-          </div>
-          <p className="mt-6 text-stone-700 dark:text-stone-300 leading-relaxed">{p.lede}</p>
-          {p.hookParagraphs.map((para) => (
-            <p key={para.slice(0, 40)} className="mt-4 text-stone-700 dark:text-stone-300 leading-relaxed">
-              {para}
-            </p>
-          ))}
-          <div className="mt-8 grid sm:grid-cols-3 gap-4 text-sm">
-            <div className="border border-stone-200 dark:border-stone-700 p-4">
-              <p className="text-xs uppercase tracking-wide text-stone-500 mb-1">Primary gesture</p>
-              <p className="font-medium">{p.spatialGesture.primary}</p>
-            </div>
-            <div className="border border-stone-200 dark:border-stone-700 p-4">
-              <p className="text-xs uppercase tracking-wide text-stone-500 mb-1">Secondary form</p>
-              <p className="font-medium">{p.spatialGesture.secondary}</p>
-            </div>
-            <div className="border border-stone-200 dark:border-stone-700 p-4">
-              <p className="text-xs uppercase tracking-wide text-stone-500 mb-1">Endpoint</p>
-              <p className="font-medium">{p.spatialGesture.endpoint}</p>
-            </div>
-          </div>
-        </NvSection>
-
-        <NvSection title="Material vocabulary">
-          <p className="text-stone-600 dark:text-stone-400 mb-8 text-sm leading-relaxed">
-            Broader material is organized through systems — not national symbols — so Venezuela remains the
-            core without becoming a pan-Latin collage.
-          </p>
-          <ul className="grid sm:grid-cols-2 gap-8">
-            {volverMaterials.map((item) => (
-              <li key={item.title}>
-                <NvPlaceholderFigure media={item.media} aspectClass="aspect-[4/3]" />
-                <h3 className="mt-3 font-semibold text-stone-900 dark:text-stone-100">{item.title}</h3>
-                <p className="text-sm text-stone-600 dark:text-stone-400 mt-1">{item.role}</p>
+        <NvSection title="Installation system">
+          <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-8">{p.systemOverview}</p>
+          <ul className="grid sm:grid-cols-3 gap-4 text-sm mb-10">
+            {system.adaptationRules.map((rule) => (
+              <li key={rule.scale} className="border border-stone-200 dark:border-stone-700 p-4">
+                <p className="text-xs uppercase tracking-wide text-stone-500 mb-2">{rule.scale}</p>
+                <ul className="list-disc pl-4 space-y-1 text-stone-700 dark:text-stone-300">
+                  {rule.elements.map((el) => (
+                    <li key={el}>{el}</li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>
         </NvSection>
 
-        <NvSection title="Site-adaptation studies">
+        <NvSection title={system.floor.title} id="common-tender">
+          <p className="text-xs uppercase tracking-widest text-stone-500 mb-3">{system.floor.role}</p>
+          <div className="mb-6">
+            <NvPlaceholderFigure media={toGrantMedia(volverMedia.currencyFloorOverview)} />
+          </div>
+          <div className="prose prose-stone dark:prose-invert max-w-none whitespace-pre-line leading-relaxed mb-6">
+            {system.floor.body}
+          </div>
+          <p className="text-sm text-stone-600 dark:text-stone-400 mb-6">
+            Public material term: <span className="font-medium">{system.floor.publicMaterialTerm}</span>.{' '}
+            {system.floor.substrateNote}
+          </p>
+          <NvPlaceholderFigure media={toGrantMedia(volverMedia.currencyFloorDetail)} aspectClass="aspect-[4/3]" />
+        </NvSection>
+
+        {system.sculptures.map((sculpture) => {
+          const overview =
+            sculpture.id === 'market-rate'
+              ? volverMedia.marketRateOverview
+              : sculpture.id === 'soft-currency'
+                ? volverMedia.softCurrencyOverview
+                : volverMedia.carryOnOverview;
+          const detail =
+            sculpture.id === 'market-rate'
+              ? volverMedia.marketRateDetail
+              : sculpture.id === 'soft-currency'
+                ? volverMedia.softCurrencyDetail
+                : null;
+
+          return (
+            <NvSection key={sculpture.id} title={sculpture.title} id={sculpture.id}>
+              <p className="text-xs uppercase tracking-widest text-stone-500 mb-3">
+                {sculpture.role}
+                {sculpture.optional ? ' · optional for large sites' : ''}
+              </p>
+              <NvPlaceholderFigure media={toGrantMedia(overview)} />
+              <div className="prose prose-stone dark:prose-invert max-w-none whitespace-pre-line leading-relaxed mt-6 mb-6">
+                {sculpture.body}
+              </div>
+              {detail ? (
+                <NvPlaceholderFigure media={toGrantMedia(detail)} aspectClass="aspect-[4/3]" />
+              ) : null}
+            </NvSection>
+          );
+        })}
+
+        <NvSection title="Visitor journey">
+          <NvVisitorJourney steps={volverVisitorJourney.map((s) => s.title.toUpperCase())} />
+          <p className="mt-4 mb-8 text-sm text-stone-500 italic">{p.emotionalSequence}</p>
+          <div className="grid gap-8 sm:grid-cols-2">
+            {volverVisitorJourney.map((beat) => (
+              <div key={beat.number} className="border-t-2 border-stone-900 dark:border-stone-100 pt-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-stone-500 mb-2">{beat.number}</p>
+                <h3 className="text-xl font-semibold text-stone-900 dark:text-stone-100 mb-2">
+                  {beat.title}
+                </h3>
+                <p className="text-stone-600 dark:text-stone-400 leading-relaxed text-sm sm:text-base">
+                  {beat.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </NvSection>
+
+        <NvSection title="Hotel adaptations & 360 studies">
           <HotelStudySelector studies={volverHotelStudies} />
         </NvSection>
 
-        <NvSection title="Visitor journey">
-          <NvVisitorJourney steps={volverVisitorJourney} />
+        <NvSection title={volverCurrencyArchive.heading}>
+          <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-6">
+            {volverCurrencyArchive.intro}
+          </p>
+          <ul className="list-disc pl-5 space-y-2 text-stone-700 dark:text-stone-300 mb-6">
+            {volverCurrencyArchive.principles.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+            {volverCurrencyArchive.walkingPathNote}
+          </p>
         </NvSection>
 
         <NvSection title="How does collapsed value become valuable again?">
@@ -134,34 +180,9 @@ export function VolverAValerPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-stone-700 dark:text-stone-300 leading-relaxed italic">
-            The work does not claim that art repairs economic collapse. It asks why art, hotels, currencies,
-            and nations all depend on systems of belief to produce value.
-          </p>
         </NvSection>
 
-        <NvSection title={volverLatinResonance.heading}>
-          <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-8">
-            {volverLatinResonance.body}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 sm:items-stretch">
-            {volverLatinResonance.flows.map((flow, i) => (
-              <div key={flow.stage} className="flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="flex-1 border border-stone-800 dark:border-stone-200 p-4 text-center">
-                  <p className="text-xs uppercase tracking-widest mb-2">{flow.stage}</p>
-                  <p className="text-sm text-stone-600 dark:text-stone-400">{flow.items}</p>
-                </div>
-                {i < volverLatinResonance.flows.length - 1 ? (
-                  <span className="text-stone-400 text-center sm:px-1" aria-hidden>
-                    ↕
-                  </span>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        </NvSection>
-
-        <NvSection title="Sustainability and fabrication">
+        <NvSection title="Fabrication, sustainability, and safety">
           <ul className="list-disc pl-5 space-y-2 text-stone-700 dark:text-stone-300">
             {volverFabrication.map((item) => (
               <li key={item}>{item}</li>
@@ -169,29 +190,43 @@ export function VolverAValerPage() {
           </ul>
         </NvSection>
 
-        <NvSection title="Prototype and testing">
-          <ul className="list-disc pl-5 space-y-2 text-stone-700 dark:text-stone-300">
+        <NvSection title="Prototype plan">
+          <ul className="list-disc pl-5 space-y-2 text-stone-700 dark:text-stone-300 mb-8">
             {volverPrototypes.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
+          <div className="grid sm:grid-cols-3 gap-6">
+            <NvPlaceholderFigure media={toGrantMedia(volverMedia.prototypeFloor)} aspectClass="aspect-square" />
+            <NvPlaceholderFigure media={toGrantMedia(volverMedia.prototypeWeave)} aspectClass="aspect-square" />
+            <NvPlaceholderFigure media={toGrantMedia(volverMedia.prototypeMirror)} aspectClass="aspect-square" />
+          </div>
         </NvSection>
 
         <NvSection title="Budget">
-          <p className="text-sm text-stone-500 mb-4">
-            Draft within the $10,000 all-inclusive stipend — subject to site assignment and fabrication review.
-          </p>
+          <p className="text-sm text-stone-500 mb-4">{volverBudgetNote}</p>
           <NvBudgetTable lines={volverBudget} total={volverBudgetTotal} />
+          <p className="mt-4 text-sm text-stone-500">
+            Timeline: site survey after selection · prototype and fabrication within the five-week hotel window ·
+            documentation and teardown for reuse or edition.
+          </p>
         </NvSection>
 
-        <NvSection title="Artist context">
-          <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-8">{noVacancyArtistBioShort}</p>
-          <NvRelatedWorks works={volverRelatedWorks} />
+        <NvSection title="From Price of Existence to hospitality">
+          <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-8">
+            {noVacancyArtistBioShort} Price of Existence established bolívares as sculptural material around a
+            body. Volver a Valer keeps that material authority while moving into hotel architecture, migration,
+            and a floor-and-sculpture system that can stand independent of any single property.
+          </p>
+          <NvPlaceholderFigure media={toGrantMedia(volverMedia.priceOfExistenceRelated)} />
+          <div className="mt-10">
+            <NvRelatedWorks works={volverRelatedWorks} />
+          </div>
         </NvSection>
 
         <NvSection>
-          <NvPlaceholderFigure media={volverClosing} />
-          <p className="mt-8 text-2xl font-medium tracking-tight">{'What survives when value does not?'}</p>
+          <NvPlaceholderFigure media={volverClosingMedia} />
+          <p className="mt-8 text-2xl font-medium tracking-tight">{volverClosingQuestion}</p>
           <p className="mt-4 text-sm text-stone-500">
             Moises Sanabria · Miami, Florida · No Vacancy 2026 proposal
           </p>
@@ -201,8 +236,8 @@ export function VolverAValerPage() {
           <Link href="/grant/no-vacancy-2026" className="underline underline-offset-4">
             ← Application packet
           </Link>
-          <Link href="/grant/no-vacancy-2026/touch-grass" className="underline underline-offset-4">
-            Alternate: Touch Grass
+          <Link href="/research/touch-grass-circuit-floor" className="underline underline-offset-4">
+            Related research: Touch Grass
           </Link>
           <Link href="/contact" className="underline underline-offset-4">
             Contact

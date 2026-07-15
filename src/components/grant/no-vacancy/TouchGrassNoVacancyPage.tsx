@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { HotelStudySelector } from '@/components/grant/no-vacancy/HotelStudySelector';
+import { LegacyHotelStudySelector } from '@/components/grant/no-vacancy/LegacyHotelStudySelector';
 import {
   NvBudgetTable,
   NvExperienceBeats,
@@ -80,7 +80,7 @@ export function TouchGrassNoVacancyPage() {
         </NvSection>
 
         <NvSection title="Site-adaptation studies">
-          <HotelStudySelector studies={touchGrassNvHotels} />
+          <LegacyHotelStudySelector studies={touchGrassNvHotels} />
         </NvSection>
 
         <NvSection title="Sustainability and fabrication">
@@ -121,7 +121,7 @@ export function TouchGrassNoVacancyPage() {
           <NvPlaceholderFigure media={touchGrassNvClosing} />
           <p className="mt-8 text-2xl font-medium tracking-tight">The ground is online.</p>
           <p className="mt-4 text-sm text-stone-500">
-            Moises Sanabria · Miami, Florida · No Vacancy 2026 proposal
+            Moises Sanabria · Miami, Florida · Archived research path (not the official application)
           </p>
         </NvSection>
 
@@ -130,7 +130,7 @@ export function TouchGrassNoVacancyPage() {
             ← Application packet
           </Link>
           <Link href="/grant/no-vacancy-2026/volver-a-valer" className="underline underline-offset-4">
-            Alternate: Volver a Valer
+            Official proposal: Volver a Valer
           </Link>
           <Link href={p.researchRoute} className="underline underline-offset-4">
             Research dossier
