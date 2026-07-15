@@ -47,14 +47,14 @@ export const modalGrayAreaWorkSamples = [
     year: 2022,
     image: `${CDN}/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg`,
     slug: 'ai_everydays',
-    blurb: 'Repetition and synthetic accumulation as conceptual engine. [PLACEHOLDER pairing — swap to dedicated AI Everydays still if available]',
+    blurb: 'Repetition and synthetic accumulation as conceptual engine for machine image labor.',
   },
 ] as const;
 
 export const modalGrayAreaHubSeo = {
-  title: 'Modal × Gray Area 2026 — Machine Sentence No. 1 | Moises Sanabria',
+  title: 'Modal × Gray Area 2026 Proposal — Moises Sanabria',
   description:
-    'Application packet for Modal × Gray Area 2026: MACHINE SENTENCE NO. 1 — a self-standing inference sculpture from Born into the Machine. Deadline July 15, 2026.',
+    'Application packet for MACHINE SENTENCE NO. 1 — a proposed self-standing cubic inference sculpture for Modal × Gray Area, October 2026.',
 } as const;
 
 /** Unverified / application-stage notes for reviewers */

@@ -2,7 +2,7 @@
  * MACHINE SENTENCE NO. 1 — Latent Monument
  * Full editorial content for Modal × Gray Area 2026
  */
-import type { GrantBudgetLine, GrantPlaceholderMedia, GrantRelatedWork } from '@/components/grant/shared/GrantProposalUi';
+import type { GrantBudgetLine, GrantRelatedWork } from '@/components/grant/shared/GrantProposalUi';
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
@@ -27,17 +27,6 @@ export type BodyScore = {
   model?: string;
   latencyMs?: number;
   mode: 'mock' | 'modal';
-};
-
-export type ContextStudy = {
-  id: string;
-  title: string;
-  strategicRole: string;
-  description: string;
-  establishing: GrantPlaceholderMedia;
-  visitorOrSecondary: GrantPlaceholderMedia;
-  detail: GrantPlaceholderMedia;
-  notes: string[];
 };
 
 export const machineSentence = {
@@ -80,13 +69,6 @@ Temporally, the work moves through reflex (1–3 seconds), metabolization (20–
     { label: 'Void', value: 'Tapered inaccessible central space = latent space made consequential' },
   ],
 } as const;
-
-export const machineSentenceHero: GrantPlaceholderMedia = {
-  label: '[PLACEHOLDER] Hero — Latent Monument establishing silhouette',
-  caption:
-    'Full-viewport: raw aluminum cubic armature, black housings, mixed screens, central void, one human for scale. Digital study until fabrication.',
-  alt: 'Placeholder hero for Machine Sentence No. 1 cubic inference sculpture',
-};
 
 export const machineSentenceTemporal = [
   {
@@ -159,90 +141,6 @@ export const machineSentenceStates: {
     title: 'Fault Line',
     physical: 'Asymmetric break across clusters — misalignment held as form',
     tone: 'Broken grammar, partial reconstruction',
-  },
-];
-
-export const machineSentenceContextStudies: ContextStudy[] = [
-  {
-    id: 'gray-area',
-    title: 'Gray Area — Active State',
-    strategicRole: 'Exhibition encounter',
-    description:
-      'Dark industrial context. Screens illuminated. Visitor present for scale. Cabling and infrastructure legible. Spatial silhouette reads as monument, not interface.',
-    establishing: {
-      label: '[PLACEHOLDER] Gray Area — Image A Establishing View',
-      caption: 'Dark venue · illuminated sculpture · one visitor · bypass clear. Concept study — not surveyed site photo.',
-      alt: 'Placeholder Gray Area establishing view of Machine Sentence No. 1',
-    },
-    visitorOrSecondary: {
-      label: '[PLACEHOLDER] Gray Area — Image B Visitor Encounter',
-      caption: 'Person offering a sentence; sculpture in Witness or Aperture; reflex beginning.',
-      alt: 'Placeholder visitor encounter at Gray Area',
-    },
-    detail: {
-      label: '[PLACEHOLDER] Gray Area — Image C Material Detail',
-      caption: 'Black housing, aluminum lattice joint, cable route, screen edge texture.',
-      alt: 'Placeholder material detail active state',
-    },
-    notes: [
-      'Context study — Gray Area floor plan not yet surveyed',
-      'Screens illuminated; latent void readable',
-      'Works during normal circulation without blocking egress',
-    ],
-  },
-  {
-    id: 'white-cube',
-    title: 'White Cube — Sculptural State',
-    strategicRole: 'Formal autonomy',
-    description:
-      'Neutral institutional room. Prove the object survives beyond Gray Area: active and powered-off states both read as sculpture.',
-    establishing: {
-      label: '[PLACEHOLDER] White Cube — Active establishing',
-      caption: 'Generous empty space · full silhouette · soft ambient light.',
-      alt: 'Placeholder white-cube active establishing view',
-    },
-    visitorOrSecondary: {
-      label: '[PLACEHOLDER] White Cube — Powered off / rest',
-      caption: 'Screens dark; aluminum and black housings carry the form. Sculpture remains meaningful while inactive.',
-      alt: 'Placeholder white-cube powered-off state',
-    },
-    detail: {
-      label: '[PLACEHOLDER] White Cube — Frontal void view',
-      caption: 'Central inaccessible void emphasized; mixed screen proportions visible.',
-      alt: 'Placeholder frontal latent-void view',
-    },
-    notes: [
-      'Demonstrates formal autonomy beyond event tech',
-      'Inactive state is a requirement of the proposal',
-      'No hotel / venue claim — universal institutional room',
-    ],
-  },
-  {
-    id: 'anatomy',
-    title: 'Anatomy — Fabrication State',
-    strategicRole: 'Technical credibility',
-    description:
-      'Exploded or sectional study: screen module, pivot, lattice, enclosure, weighted base, controller, safety layer, cable routing.',
-    establishing: {
-      label: '[PLACEHOLDER] Anatomy — Exploded establishing',
-      caption: 'Exploded cubic armature with callouts. Not a purchasing diagram.',
-      alt: 'Placeholder exploded fabrication anatomy',
-    },
-    visitorOrSecondary: {
-      label: '[PLACEHOLDER] Anatomy — Cluster / pivot assembly',
-      caption: 'One articulated cluster: screens, housing, pivot joint, motor axis.',
-      alt: 'Placeholder pivot and cluster assembly',
-    },
-    detail: {
-      label: '[PLACEHOLDER] Anatomy — Base / controller / safety',
-      caption: 'Weighted base: compute, controller, amplifiers, power, organized cable loom.',
-      alt: 'Placeholder base and control-system detail',
-    },
-    notes: [
-      'Procurement only after written selection confirmation',
-      'Three axes preferred over six independent motors',
-      'Replaceable screens and motors as design rule',
-    ],
   },
 ];
 
@@ -386,13 +284,6 @@ export const machineSentenceRelated: GrantRelatedWork[] = [
   },
 ];
 
-export const machineSentenceClosing: GrantPlaceholderMedia = {
-  label: '[PLACEHOLDER] Closing — three mutation states comparison',
-  caption:
-    'Same armature in Cube / Aperture / Fault Line — proves mutation is physical, not only image change. Most important application image suite item.',
-  alt: 'Placeholder comparison of three physical configurations of Machine Sentence No. 1',
-};
-
 export const machineSentenceProjectStatement = {
   interestAndApproach: `Modal × Gray Area asks what intentional inference can unlock when AI is treated as infrastructure rather than automation or slop. I propose MACHINE SENTENCE NO. 1 — a self-standing cubic inference sculpture from the Born into the Machine research line.
 
@@ -403,9 +294,9 @@ Modal hosts the intentional inference path and future visual skin. The minimum v
 } as const;
 
 export const machineSentenceSeo = {
-  title: 'MACHINE SENTENCE NO. 1 — Modal × Gray Area 2026 | Moises Sanabria',
+  title: 'Machine Sentence No. 1 — Moises Sanabria',
   description:
-    'Proposed self-standing inference sculpture for Modal × Gray Area 2026: screens, lattice, and latent void transform language into temporary machine posture.',
+    'A proposal for a self-standing cubic inference sculpture that translates human language into temporary physical states, distributed imagery, and a central latent void.',
 } as const;
 
 export const machineSentenceSuggestedInput = 'I remember something that never happened.';

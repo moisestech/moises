@@ -10,6 +10,12 @@ import { MutationReadout } from './MutationReadout';
 type Phase = 'idle' | 'reflex' | 'metabolization' | 'rest';
 type Mode = 'mock' | 'live';
 
+const EXAMPLES = [
+  'I remember something that never happened.',
+  'I trust the machine until it recognizes me.',
+  'Some thoughts become smaller when I explain them.',
+] as const;
+
 const INITIAL = scoreSentenceMock(machineSentenceSuggestedInput);
 
 export function MachineSentencePrototype() {
@@ -59,18 +65,32 @@ export function MachineSentencePrototype() {
 
   return (
     <div className="border border-neutral-800 bg-neutral-950 text-stone-100 overflow-hidden">
-      <div className="px-4 sm:px-5 py-4 border-b border-neutral-800 flex flex-wrap gap-3 items-center justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-widest text-neutral-400">Interactive prototype</p>
-          <p className="text-sm text-neutral-300 mt-1">Digital movement study. Physical sculpture proposed.</p>
+      <div className="px-4 sm:px-5 py-4 border-b border-neutral-800">
+        <p className="text-xs uppercase tracking-widest text-neutral-400">Digital movement study</p>
+        <p className="text-sm text-neutral-400 mt-1 leading-relaxed">
+          This prototype maps language into a digital sculptural state. It does not represent completed physical
+          hardware.
+        </p>
+      </div>
+
+      <div className="p-4 sm:p-6 flex flex-col items-center">
+        <div className="w-full max-w-lg min-h-[420px] sm:min-h-[520px] flex items-center">
+          <LatentMonumentFigure score={score} phase={phase} className="w-full" />
         </div>
-        <div className="flex gap-2 text-xs">
+        <p className="mt-3 text-[11px] text-neutral-500 text-center max-w-md leading-relaxed">
+          Exhibition timing: Reflex 1–3s · Metabolization 20–45s · Rest 30–90s (accelerated here). The model does
+          not understand emotion, consciousness, or true intent.
+        </p>
+      </div>
+
+      <div className="px-4 sm:px-5 pb-5 space-y-4 border-t border-neutral-800 pt-5">
+        <div className="flex flex-wrap gap-2 text-xs">
           {(['mock', 'live'] as Mode[]).map((m) => (
             <button
               key={m}
               type="button"
               onClick={() => setMode(m)}
-              className={`px-3 py-1.5 border uppercase tracking-wide ${
+              className={`px-3 py-1.5 border uppercase tracking-wide min-h-9 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3be8c] ${
                 mode === m
                   ? 'border-[#a3be8c] text-[#a3be8c]'
                   : 'border-neutral-600 text-neutral-400 hover:border-neutral-400'
@@ -79,43 +99,49 @@ export function MachineSentencePrototype() {
               {m === 'mock' ? 'Mock' : 'API / Modal'}
             </button>
           ))}
+          <span className="text-neutral-500 self-center capitalize ml-auto">Phase: {phase}</span>
         </div>
-      </div>
 
-      <div className="grid lg:grid-cols-2 gap-0">
-        <div className="p-4 sm:p-5 border-b lg:border-b-0 lg:border-r border-neutral-800">
-          <LatentMonumentFigure score={score} phase={phase} />
-          <p className="mt-3 text-[11px] text-neutral-500 leading-relaxed">
-            Web timings are accelerated. Exhibition intent: Reflex 1–3s · Metabolization 20–45s · Rest 30–90s.
-            The model does not understand emotion, consciousness, or true intent.
-          </p>
+        <label className="block">
+          <span className="text-xs uppercase tracking-widest text-neutral-400">Offer the sculpture one sentence.</span>
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows={2}
+            maxLength={500}
+            className="mt-2 w-full bg-neutral-900 border border-neutral-700 px-3 py-2 text-sm text-stone-100 focus:outline-none focus:border-[#a3be8c]"
+          />
+        </label>
+
+        <div className="flex flex-wrap gap-2">
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex}
+              type="button"
+              onClick={() => setText(ex)}
+              className="text-[11px] text-left text-neutral-400 border border-neutral-700 px-2 py-1.5 hover:border-neutral-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3be8c]"
+            >
+              {ex}
+            </button>
+          ))}
         </div>
-        <div className="p-4 sm:p-5 space-y-4">
-          <label className="block">
-            <span className="text-xs uppercase tracking-widest text-neutral-400">Offer the sculpture a sentence.</span>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              rows={3}
-              maxLength={500}
-              className="mt-2 w-full bg-neutral-900 border border-neutral-700 px-3 py-2 text-sm text-stone-100 focus:outline-none focus:border-[#a3be8c]"
-            />
-          </label>
-          <button
-            type="button"
-            onClick={runScore}
-            disabled={pending || !text.trim()}
-            className="w-full min-h-11 bg-[#a3be8c] text-neutral-950 font-semibold text-sm hover:bg-[#b5cda0] disabled:opacity-50"
-          >
-            {pending ? 'Interpreting…' : phase === 'idle' ? 'Submit sentence' : 'Offer another sentence'}
-          </button>
-          {error ? <p className="text-sm text-amber-300">{error} — fell back to mock.</p> : null}
-          <p className="text-xs text-neutral-500 capitalize">
-            Phase: {phase}
-            {phase === 'rest' ? ' — examine the resulting body' : ''}
+
+        <button
+          type="button"
+          onClick={runScore}
+          disabled={pending || !text.trim()}
+          className="w-full min-h-11 bg-[#a3be8c] text-neutral-950 font-semibold text-sm hover:bg-[#b5cda0] disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3be8c]"
+        >
+          {pending ? 'Interpreting…' : 'Infer a body'}
+        </button>
+
+        {error ? (
+          <p className="text-sm text-amber-300" role="status">
+            {error} — fell back to mock.
           </p>
-          <MutationReadout score={score} />
-        </div>
+        ) : null}
+
+        <MutationReadout score={score} />
       </div>
     </div>
   );
