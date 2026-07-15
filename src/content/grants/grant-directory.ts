@@ -17,8 +17,8 @@ const grantDirectoryEntries: GrantDirectoryEntry[] = [
     title: 'Pioneer Works Visual Arts Residency 2027',
     organization: 'Pioneer Works',
     route: '/grant/pioneer-works-residency-2027',
-    updatedAt: '2026-07-13',
-    deadline: '2026-07-13',
+    updatedAt: '2026-07-15',
+    deadline: '2026-07-17',
     status: 'draft',
     summary:
       'MACHINE SENTENCES — five-month studio investigation; physical grammar for machine interpretation at Pioneer Works.',
@@ -28,8 +28,8 @@ const grantDirectoryEntries: GrantDirectoryEntry[] = [
     title: 'MACHINE SENTENCES',
     organization: 'Pioneer Works',
     route: '/grant/pioneer-works-residency-2027/machine-sentences',
-    updatedAt: '2026-07-13',
-    deadline: '2026-07-13',
+    updatedAt: '2026-07-15',
+    deadline: '2026-07-17',
     status: 'draft',
     parentId: 'pioneer-works-residency-2027',
     summary:

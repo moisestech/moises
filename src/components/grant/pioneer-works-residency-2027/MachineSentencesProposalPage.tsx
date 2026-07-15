@@ -13,8 +13,10 @@ import { MachineSentenceGrammar } from '@/components/grant/pioneer-works-residen
 import { PioneerWorksStudioPlan } from '@/components/grant/pioneer-works-residency-2027/PioneerWorksStudioPlan';
 import { PublicEncounter } from '@/components/grant/pioneer-works-residency-2027/PublicEncounter';
 import { ResidencyTimeline } from '@/components/grant/pioneer-works-residency-2027/ResidencyTimeline';
+import { RiskRegister } from '@/components/grant/pioneer-works-residency-2027/RiskRegister';
 import { ScopeLadder } from '@/components/grant/pioneer-works-residency-2027/ScopeLadder';
 import { SecondSundaysChapters } from '@/components/grant/pioneer-works-residency-2027/SecondSundaysChapters';
+import { TemporalChoreography } from '@/components/grant/pioneer-works-residency-2027/TemporalChoreography';
 import { UnverifiedClaims } from '@/components/grant/pioneer-works-residency-2027/UnverifiedClaims';
 import { WorkSampleIndex } from '@/components/grant/pioneer-works-residency-2027/WorkSampleIndex';
 import { pioneerWorksMeta } from '@/content/grants/pioneer-works-residency-2027/meta';
@@ -35,9 +37,10 @@ import {
 
 export function MachineSentencesProposalPage() {
   const p = machineSentences;
-  const proposalSamples = proposalWorkSampleOrder
+  const proposalSamples = [...proposalWorkSampleOrder]
     .map((id) => pioneerWorksWorkSamples.find((s) => s.id === id))
-    .filter((s): s is (typeof pioneerWorksWorkSamples)[number] => Boolean(s));
+    .filter((s): s is (typeof pioneerWorksWorkSamples)[number] => Boolean(s))
+    .map((s, i) => ({ ...s, applicationOrder: i + 1 }));
 
   return (
     <GrantPageChrome
@@ -52,7 +55,7 @@ export function MachineSentencesProposalPage() {
           <p className="text-xl sm:text-2xl text-stone-600 dark:text-stone-400 font-medium mb-2">
             {p.subtitle}
           </p>
-          <p className="text-sm text-stone-500 mb-4">Central work: {p.centralWork}</p>
+          <p className="text-sm text-stone-500 mb-4">Anchor work: {p.centralWork}</p>
           <ul className="flex flex-wrap gap-2">
             {p.metadata.map((item) => (
               <li
@@ -69,11 +72,19 @@ export function MachineSentencesProposalPage() {
           <GrantPlaceholderFigure media={machineSentencesHero} priority />
         </div>
 
-        <p className="text-2xl sm:text-3xl font-medium leading-snug tracking-tight text-stone-900 dark:text-stone-100 mb-12 border-l-2 border-stone-900 dark:border-stone-100 pl-4 sm:pl-6">
+        <p className="text-2xl sm:text-3xl font-medium leading-snug tracking-tight text-stone-900 dark:text-stone-100 mb-6 border-l-2 border-stone-900 dark:border-stone-100 pl-4 sm:pl-6">
           {p.oneSentencePitch}
         </p>
 
-        <GrantSection title="Why this requires a five-month physical studio">
+        <GrantSection title="Project thesis">
+          <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-6">{p.projectStatement}</p>
+          <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-4">{p.thesis}</p>
+          <div className="prose prose-stone dark:prose-invert max-w-none whitespace-pre-line text-sm leading-relaxed">
+            {p.coreDistinction}
+          </div>
+        </GrantSection>
+
+        <GrantSection title="Why this requires five months">
           <div className="prose prose-stone dark:prose-invert max-w-none whitespace-pre-line leading-relaxed">
             {p.whyStudio}
           </div>
@@ -82,13 +93,10 @@ export function MachineSentencesProposalPage() {
           </div>
         </GrantSection>
 
-        <GrantSection title="Machine Sentences series">
+        <GrantSection title="Machine Sentences as a body of work">
           <p className="text-stone-700 dark:text-stone-300 leading-relaxed whitespace-pre-line">
             {p.seriesOverview}
           </p>
-          <div className="mt-6 prose prose-stone dark:prose-invert max-w-none whitespace-pre-line text-sm leading-relaxed">
-            {p.coreDistinction}
-          </div>
         </GrantSection>
 
         <GrantSection title="Machine Sentence No. 1">
@@ -109,18 +117,24 @@ export function MachineSentencesProposalPage() {
           <AuthoredStatesGrid />
         </GrantSection>
 
-        <GrantSection title="Five-month timeline">
+        <GrantSection title="Five-month development plan">
           <ResidencyTimeline />
           <div className="mt-8">
             <GrantPlaceholderFigure media={machineSentencesPlaceholders.fiveMonthEvolution} />
           </div>
         </GrantSection>
 
-        <GrantSection title="Studio plan">
-          <PioneerWorksStudioPlan />
+        <GrantSection title="Public-facing studio strategy">
+          <p className="text-stone-700 dark:text-stone-300 leading-relaxed whitespace-pre-line">
+            {p.publicStudioStrategy}
+          </p>
           <div className="mt-8">
             <GrantPlaceholderFigure media={machineSentencesPlaceholders.glassVisitorView} />
           </div>
+        </GrantSection>
+
+        <GrantSection title="Conceptual 20 × 11-foot studio plan">
+          <PioneerWorksStudioPlan />
         </GrantSection>
 
         <GrantSection title="Second Sundays chapters">
@@ -130,11 +144,15 @@ export function MachineSentencesProposalPage() {
           </div>
         </GrantSection>
 
-        <GrantSection title="Public encounter">
+        <GrantSection title="Visitor encounter">
           <PublicEncounter />
         </GrantSection>
 
-        <GrantSection title="AI and deterministic control">
+        <GrantSection title="Temporal choreography">
+          <TemporalChoreography />
+        </GrantSection>
+
+        <GrantSection title="AI interpretation and deterministic control">
           <p className="text-stone-700 dark:text-stone-300 leading-relaxed whitespace-pre-line mb-8">
             {p.aiControl}
           </p>
@@ -182,10 +200,7 @@ export function MachineSentencesProposalPage() {
               {machineSentencesModalLink.body}
             </p>
             <div className="flex flex-wrap gap-4 text-sm">
-              <Link
-                href={machineSentencesModalLink.hubHref}
-                className="underline underline-offset-4"
-              >
+              <Link href={machineSentencesModalLink.hubHref} className="underline underline-offset-4">
                 Modal × Gray Area hub
               </Link>
               <Link
@@ -204,13 +219,17 @@ export function MachineSentencesProposalPage() {
 
         <GrantSection title="Work samples">
           <p className="text-sm text-stone-500 mb-6">
-            Proposal-page order places Machine Sentence No. 1 first. Form upload order remains the
+            Proposal narrative order places Machine Sentence No. 1 first. Form upload order remains the
             safer established-work sequence on the application hub.
           </p>
           <WorkSampleIndex samples={proposalSamples} />
         </GrantSection>
 
-        <GrantSection title="Closing">
+        <GrantSection title="Risks and unresolved questions">
+          <RiskRegister />
+        </GrantSection>
+
+        <GrantSection title="Closing statement">
           <p className="text-stone-700 dark:text-stone-300 leading-relaxed whitespace-pre-line">
             {p.closing}
           </p>
@@ -219,7 +238,7 @@ export function MachineSentencesProposalPage() {
           </div>
         </GrantSection>
 
-        <GrantSection title="Contact and application">
+        <GrantSection title="Contact and application links">
           <ul className="space-y-3 text-sm text-stone-700 dark:text-stone-300">
             <li>
               <Link href={pioneerWorksMeta.hubRoute} className="underline underline-offset-4">
@@ -235,6 +254,7 @@ export function MachineSentencesProposalPage() {
               >
                 Official application — pioneerworks.org/residency
               </a>
+              <span className="text-stone-500"> (portal openness unverified)</span>
             </li>
             <li>
               <Link href="/contact" className="underline underline-offset-4">

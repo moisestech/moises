@@ -12,7 +12,7 @@ export function SecondSundaysChapters() {
   return (
     <div className="space-y-6">
       <p className="text-stone-700 dark:text-stone-300 leading-relaxed">
-        Each open studio is framed as a monthly chapter. Public feedback changes rules and
+        Each open studio is framed as a monthly chapter. Public feedback changes artistic rules and
         constraints — not simply the appearance of generative output.
       </p>
       <div
@@ -29,7 +29,7 @@ export function SecondSundaysChapters() {
               role="tab"
               aria-selected={selected}
               onClick={() => setActiveId(chapter.id)}
-              className={`min-h-11 shrink-0 px-3 py-2 text-xs font-semibold uppercase tracking-wide border transition-colors ${
+              className={`min-h-11 shrink-0 px-3 py-2 text-xs font-semibold uppercase tracking-wide border transition-colors motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900 ${
                 selected
                   ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900'
                   : 'border-stone-400 text-stone-700 dark:border-stone-600 dark:text-stone-300'
@@ -40,10 +40,39 @@ export function SecondSundaysChapters() {
           );
         })}
       </div>
-      <div className="border-l-2 border-[#8b3a2a] pl-4 sm:pl-6" role="tabpanel">
-        <p className="text-xs uppercase tracking-widest text-stone-500 mb-1">Chapter {active.number}</p>
-        <h3 className="text-xl font-semibold mb-3">{active.title}</h3>
-        <p className="text-stone-700 dark:text-stone-300 leading-relaxed">{active.body}</p>
+      <div
+        className="border-l-2 border-[#8b3a2a] pl-4 sm:pl-6 space-y-4"
+        role="tabpanel"
+        aria-label={`Chapter ${active.number}: ${active.title}`}
+      >
+        <div>
+          <p className="text-xs uppercase tracking-widest text-stone-500 mb-1">
+            Chapter {active.number}
+          </p>
+          <h3 className="text-xl font-semibold">{active.title}</h3>
+        </div>
+        <dl className="space-y-3 text-sm">
+          <div>
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">What visitors encounter</dt>
+            <dd className="mt-1 text-stone-700 dark:text-stone-300">{active.encounter}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">What may change</dt>
+            <dd className="mt-1 text-stone-700 dark:text-stone-300">{active.mayChange}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">What cannot change</dt>
+            <dd className="mt-1 text-stone-700 dark:text-stone-300">{active.cannotChange}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">What is discarded</dt>
+            <dd className="mt-1 text-stone-700 dark:text-stone-300">{active.discarded}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">How feedback works</dt>
+            <dd className="mt-1 text-stone-700 dark:text-stone-300">{active.feedbackRule}</dd>
+          </div>
+        </dl>
       </div>
     </div>
   );

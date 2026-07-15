@@ -8,9 +8,11 @@ function statusLabel(sample: WorkSampleAsset): string {
 }
 
 export function WorkSampleIndex({ samples }: { samples: readonly WorkSampleAsset[] }) {
+  const ordered = [...samples].sort((a, b) => a.applicationOrder - b.applicationOrder);
+
   return (
     <ul className="space-y-6">
-      {samples.map((sample, index) => (
+      {ordered.map((sample) => (
         <li
           key={sample.id}
           className="grid sm:grid-cols-[7rem_1fr] gap-4 border-b border-stone-200 dark:border-stone-800 pb-6 last:border-0"
@@ -34,11 +36,10 @@ export function WorkSampleIndex({ samples }: { samples: readonly WorkSampleAsset
           </div>
           <div>
             <p className="text-[10px] uppercase tracking-widest text-stone-500 mb-1">
-              Sample {index + 1}
+              Sample {sample.applicationOrder}
             </p>
             <h3 className="font-semibold text-stone-900 dark:text-stone-100">
-              {sample.title}{' '}
-              <span className="text-stone-500 font-normal">({sample.year})</span>
+              {sample.title} <span className="text-stone-500 font-normal">({sample.year})</span>
             </h3>
             <p className="text-xs text-stone-500 mt-1">{sample.medium}</p>
             <p className="text-xs text-stone-500">{sample.dimensions}</p>
@@ -49,7 +50,7 @@ export function WorkSampleIndex({ samples }: { samples: readonly WorkSampleAsset
               {sample.context}
             </p>
             <p className="mt-2 text-[11px] uppercase tracking-wide text-[#6b4f3a]">
-              {statusLabel(sample)} · file size {sample.fileSizeVerification}
+              {statusLabel(sample)} · factual {sample.factualVerification}
             </p>
           </div>
         </li>

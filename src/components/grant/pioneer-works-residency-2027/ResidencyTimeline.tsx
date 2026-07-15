@@ -19,7 +19,7 @@ export function ResidencyTimeline() {
               key={month.id}
               type="button"
               onClick={() => setActiveId(month.id)}
-              className={`min-h-11 px-3 py-2 text-xs font-semibold uppercase tracking-wide border transition-colors ${
+              className={`min-h-11 px-3 py-2 text-xs font-semibold uppercase tracking-wide border transition-colors motion-reduce:transition-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900 ${
                 selected
                   ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900'
                   : 'border-stone-400 text-stone-700 dark:border-stone-600 dark:text-stone-300 hover:border-stone-800'

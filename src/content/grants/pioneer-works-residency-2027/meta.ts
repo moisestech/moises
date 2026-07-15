@@ -13,9 +13,14 @@ export const pioneerWorksMeta = {
   awardNote:
     '$5,000 residency award — not presented as a dedicated fabrication budget',
   studioNote: 'Approximately 20 × 11 ft glass-fronted studio (published approximate dimensions)',
-  deadline: 'Monday, July 13, 2026, 11:59 PM EST',
-  deadlineIso: '2026-07-13',
-  applicationStatus: 'Proposal and work in progress',
+  /** Artist-supplied deadline from application pack — verify before treating as open */
+  deadline: 'Friday, July 17, 2026 at 11:59 PM ET',
+  deadlineIso: '2026-07-17',
+  deadlineIsoFull: '2026-07-17T23:59:00-04:00',
+  deadlineVerification: 'conflicting-public-information' as const,
+  deadlineWarning:
+    'Deadline requires manual verification. Artist-supplied form text lists Friday, July 17, 2026 at 11:59 PM ET. Pioneer Works public residency pages have listed July 13 and may show the portal as closed. Do not claim the portal is open. No live countdown until verified.',
+  applicationStatus: 'Proposal and work in progress · dossier remains useful if archived',
   applyUrl: 'https://pioneerworks.org/residency',
   callPageUrl: 'https://pioneerworks.org/residency/visual-arts',
   faqUrl: 'https://pioneerworks.org/residency/faq',
@@ -38,8 +43,8 @@ export const pioneerWorksProposalCard = {
   title: 'MACHINE SENTENCES',
   subtitle: 'A model organism for language',
   thesis:
-    'A five-month studio investigation in which human language becomes physical orientation, fragmented imagery, mechanical posture, and a family of screen-based sculptural objects.',
+    'A five-month studio investigation in which human language becomes physical orientation, fragmented imagery, sound, mechanical posture, and a family of screen-based sculptural objects.',
   status: 'Primary residency proposal',
   href: pioneerWorksMeta.proposalRoute,
-  centralWork: 'Machine Sentence No. 1',
+  centralWork: 'MACHINE SENTENCE NO. 1',
 } as const;
