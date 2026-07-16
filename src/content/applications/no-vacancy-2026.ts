@@ -26,8 +26,6 @@ export const noVacancy2026Meta = {
   stipend: '$10,000 all-inclusive per selected artist',
   researchPageUrl: 'https://moises.tech/grant/no-vacancy-2026/volver-a-valer',
   hubPageUrl: 'https://moises.tech/grant/no-vacancy-2026',
-  touchGrassGrantUrl: 'https://moises.tech/grant/no-vacancy-2026/touch-grass',
-  touchGrassResearchUrl: 'https://moises.tech/research/touch-grass-circuit-floor',
   website: cvData.contact.website,
   email: cvData.contact.email,
   instagram: cvData.contact.socialMedia[0]?.url ?? 'https://www.instagram.com/moisesdsanabria/',

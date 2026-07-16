@@ -73,24 +73,12 @@ const grantDirectoryEntries: GrantDirectoryEntry[] = [
     title: 'Volver a Valer — The Value We Carry',
     organization: 'City of Miami Beach Cultural Affairs',
     route: '/grant/no-vacancy-2026/volver-a-valer',
-    updatedAt: '2026-07-15',
+    updatedAt: '2026-07-16',
     deadline: '2026-07-16',
     status: 'active',
     parentId: 'no-vacancy-2026',
     summary:
       'Printed Latin American currency floor + Market Rate + Soft Currency (+ optional Carry-On).',
-  },
-  {
-    id: 'no-vacancy-2026-touch-grass',
-    title: 'Touch Grass: Circuit Floor',
-    organization: 'City of Miami Beach Cultural Affairs',
-    route: '/grant/no-vacancy-2026/touch-grass',
-    updatedAt: '2026-07-15',
-    deadline: '2026-07-16',
-    status: 'archive',
-    parentId: 'no-vacancy-2026',
-    summary:
-      'Archived alternate / research: modular walkable floor of reclaimed circuit boards. Not the official No Vacancy application.',
   },
   {
     id: 'four-artists-four-seasons',

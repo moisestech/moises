@@ -2,7 +2,7 @@
  * Volver a Valer: The Value We Carry
  * Official No Vacancy Miami Beach 2026 proposal content.
  */
-import type { GrantBudgetLine, GrantPlaceholderMedia, GrantRelatedWork } from '@/components/grant/shared/GrantProposalUi';
+import type { GrantBudgetLine, GrantRelatedWork } from '@/components/grant/shared/GrantProposalUi';
 import {
   toGrantMedia,
   volverMedia,
@@ -13,24 +13,6 @@ import {
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
 export type NvBudgetLine = GrantBudgetLine;
-export type NvPlaceholderMedia = GrantPlaceholderMedia;
-
-/** @deprecated Touch Grass hotel studies — legacy shape for archived alternate */
-export type NvHotelStudy = {
-  id: string;
-  hotelName: string;
-  strategicRole: string;
-  locationType: string;
-  beforeImage: NvPlaceholderMedia;
-  establishingView: NvPlaceholderMedia;
-  visitorExperience: NvPlaceholderMedia;
-  materialDetail: NvPlaceholderMedia;
-  installationElements: string[];
-  siteAdvantages: string[];
-  constraints: string[];
-  adaptationNotes: string[];
-  whyThisLocation: string;
-};
 
 export type NvHotelAdaptation = {
   id: VolverHotelId;

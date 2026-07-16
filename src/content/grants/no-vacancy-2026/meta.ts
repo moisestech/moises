@@ -15,8 +15,6 @@ export const noVacancyGrantMeta = {
   submittableUrl: 'http://cityofmiamibeach.submittable.com/submit',
   hubRoute: '/grant/no-vacancy-2026',
   volverRoute: '/grant/no-vacancy-2026/volver-a-valer',
-  touchGrassRoute: '/grant/no-vacancy-2026/touch-grass',
-  researchTouchGrassRoute: '/research/touch-grass-circuit-floor',
   contacts: [
     {
       name: 'Danielle Bender',

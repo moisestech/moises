@@ -236,9 +236,6 @@ export function VolverAValerPage() {
           <Link href="/grant/no-vacancy-2026" className="underline underline-offset-4">
             ← Application packet
           </Link>
-          <Link href="/research/touch-grass-circuit-floor" className="underline underline-offset-4">
-            Related research: Touch Grass
-          </Link>
           <Link href="/contact" className="underline underline-offset-4">
             Contact
           </Link>

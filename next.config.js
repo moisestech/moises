@@ -5,6 +5,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/grant/no-vacancy-2026/touch-grass',
+        destination: '/research/touch-grass-circuit-floor',
+        permanent: true,
+      },
+      {
         source: '/workshop',
         destination: '/workshops',
         permanent: true,

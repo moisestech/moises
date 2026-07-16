@@ -148,12 +148,6 @@ export function NoVacancyHubPage() {
         </section>
 
         <footer className="border-t border-stone-200 dark:border-stone-700 pt-8 text-sm text-stone-500">
-          <p className="mb-3">
-            Related research (not this application):{' '}
-            <Link href={meta.researchTouchGrassRoute} className="underline underline-offset-4">
-              Touch Grass Circuit Floor
-            </Link>
-          </p>
           <p>Moises Sanabria · Miami, Florida · {meta.year}</p>
           <div className="mt-4 flex flex-wrap gap-4">
             <Link href="/grants" className="underline underline-offset-4">
