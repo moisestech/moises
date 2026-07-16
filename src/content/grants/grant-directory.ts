@@ -62,7 +62,7 @@ const grantDirectoryEntries: GrantDirectoryEntry[] = [
     title: 'No Vacancy Miami Beach 2026',
     organization: 'City of Miami Beach Cultural Affairs',
     route: '/grant/no-vacancy-2026',
-    updatedAt: '2026-07-15',
+    updatedAt: '2026-07-16',
     deadline: '2026-07-16',
     status: 'active',
     summary:
