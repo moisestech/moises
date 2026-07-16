@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
+import type { InferenceScore } from '@/content/grants/modal-gray-area-2026/incomplete-containment-of-a-model';
 import {
   MAX_SENTENCE_LENGTH,
   MIN_SENTENCE_LENGTH,
-  normalizeBodyScore,
+  normalizeInferenceScore,
   scoreSentenceMock,
 } from '@/lib/grant/machine-sentence-score';
-import type { BodyScore } from '@/content/grants/modal-gray-area-2026/machine-sentence-no-1';
 
 export const runtime = 'nodejs';
 
@@ -54,19 +54,19 @@ export async function POST(request: Request) {
           mode: 'mock',
           model: `modal-fallback-http-${res.status}`,
           latencyMs: Date.now() - started,
-        } satisfies BodyScore);
+        } satisfies InferenceScore);
       }
-      const data = (await res.json()) as Partial<BodyScore>;
+      const data = (await res.json()) as Partial<InferenceScore>;
       // Strip any illegal fields if present
       const { ...safe } = data as Record<string, unknown>;
       delete safe.motorCommands;
       delete safe.motors;
       delete safe.axes;
-      const normalized = normalizeBodyScore(safe as Partial<BodyScore>, 'modal');
+      const normalized = normalizeInferenceScore(safe as Partial<InferenceScore>, 'modal');
       return NextResponse.json({
         ...normalized,
         latencyMs: normalized.latencyMs ?? Date.now() - started,
-      } satisfies BodyScore);
+      } satisfies InferenceScore);
     } catch {
       const fallback = scoreSentenceMock(trimmed);
       return NextResponse.json({
@@ -74,9 +74,9 @@ export async function POST(request: Request) {
         mode: 'mock',
         model: 'modal-fallback-network',
         latencyMs: Date.now() - started,
-      } satisfies BodyScore);
+      } satisfies InferenceScore);
     }
   }
 
-  return NextResponse.json(scoreSentenceMock(trimmed) satisfies BodyScore);
+  return NextResponse.json(scoreSentenceMock(trimmed) satisfies InferenceScore);
 }

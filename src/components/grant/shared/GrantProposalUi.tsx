@@ -46,15 +46,17 @@ export function GrantPlaceholderFigure({
   media,
   aspectClass = 'aspect-[16/10]',
   priority = false,
+  className = '',
 }: {
   media: GrantPlaceholderMedia;
   aspectClass?: string;
   priority?: boolean;
+  className?: string;
 }) {
   const isPlaceholder = !media.src || media.label.startsWith('[PLACEHOLDER]');
 
   return (
-    <figure className="w-full">
+    <figure className={`w-full ${className}`}>
       <p className="text-xs font-semibold uppercase tracking-wide text-amber-800 dark:text-amber-200/90 mb-2">
         {media.label}
       </p>

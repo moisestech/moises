@@ -1,26 +1,24 @@
-import { ProposalFigure } from './ProposalFigure';
-import { machineSentenceMedia } from '@/content/grants/modal-gray-area-2026/machine-sentence-media';
+import { GrantPlaceholderFigure } from '@/components/grant/shared/GrantProposalUi';
+import { incompleteContainmentPlaceholders } from '@/content/grants/modal-gray-area-2026/incomplete-containment-media';
 
 export const fabricationCalloutItems = [
-  { n: 1, label: 'Raw-aluminum armature' },
-  { n: 2, label: 'Integrated ballast base' },
-  { n: 3, label: 'Large portrait display' },
-  { n: 4, label: 'Medium landscape display' },
-  { n: 5, label: 'Small near-square display' },
-  { n: 6, label: 'Narrow vertical display' },
-  { n: 7, label: 'Articulated screen cluster' },
-  { n: 8, label: 'Pivot motor and encoder' },
-  { n: 9, label: 'Civic-industrial enclosure' },
-  { n: 10, label: 'Cable circulation' },
-  { n: 11, label: 'Local controller' },
-  { n: 12, label: 'Microphone input' },
-  { n: 13, label: 'Central latent void' },
+  { n: 1, label: 'White civic-industrial outer shell' },
+  { n: 2, label: 'Weighted self-standing base' },
+  { n: 3, label: 'Black aperture panels and linked shutters' },
+  { n: 4, label: 'Single actuator or gearmotor with soft limits' },
+  { n: 5, label: 'Static flat display' },
+  { n: 6, label: 'Curved PETG or polycarbonate diffusion membrane' },
+  { n: 7, label: 'Directional microphone' },
+  { n: 8, label: 'Thermal receipt printer' },
+  { n: 9, label: 'Local deterministic controller' },
+  { n: 10, label: 'Power, switches, emergency stop' },
+  { n: 11, label: 'Rear service access and cable routing' },
 ] as const;
 
 export function FabricationCallouts() {
   return (
     <div className="space-y-10">
-      <ProposalFigure media={machineSentenceMedia.explodedAnatomy} />
+      <GrantPlaceholderFigure media={incompleteContainmentPlaceholders.explodedMechanism} aspectClass="aspect-[4/5]" />
       <ol className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
         {fabricationCalloutItems.map((item) => (
           <li key={item.n} className="flex gap-3 text-stone-700 dark:text-stone-300">
@@ -33,23 +31,21 @@ export function FabricationCallouts() {
       </ol>
 
       <div className="grid sm:grid-cols-2 gap-8 items-start">
-        <ProposalFigure media={machineSentenceMedia.rearInfrastructure} />
+        <GrantPlaceholderFigure media={incompleteContainmentPlaceholders.rearFabrication} aspectClass="aspect-[4/5]" />
         <div className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed space-y-3">
           <p>
-            The proposed sculpture separates its structural, computational, and moving systems. The outer
-            aluminum cube provides a stable armature. Three articulated clusters carry seven displays of
-            different proportions. Local controllers, motor drivers, power distribution, and ballast remain
-            accessible inside the base.
+            The listening structure separates civic-facing enclosure from serviceable internals. The outer body
+            remains formally legible when inactive. One linked two-shutter aperture, one static display behind a
+            curved membrane, and a thermal printer bay remain accessible from the rear.
           </p>
           <p>
-            The final screen count, enclosure material, motor selection, and exact dimensions will be confirmed
-            through engineering tests and the available production budget. The minimum version remains a complete
-            sculpture even if the preferred seven-screen configuration must be reduced.
+            Final materials, actuator selection, and exact dimensions will be confirmed through engineering tests
+            and vendor quotes. The minimum version is a complete artwork — not a fragment awaiting stretch funding.
           </p>
         </div>
       </div>
 
-      <ProposalFigure media={machineSentenceMedia.mechanicalDetail} />
+      <GrantPlaceholderFigure media={incompleteContainmentPlaceholders.curvedMembrane} aspectClass="aspect-[4/3]" />
     </div>
   );
 }

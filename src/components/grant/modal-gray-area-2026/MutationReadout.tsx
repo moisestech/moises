@@ -1,18 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import type { BodyScore } from '@/content/grants/modal-gray-area-2026/machine-sentence-no-1';
+import type { InferenceScore } from '@/content/grants/modal-gray-area-2026/incomplete-containment-of-a-model';
 
-const FIELDS: { key: keyof BodyScore; label: string }[] = [
-  { key: 'openness', label: 'Openness' },
-  { key: 'coherence', label: 'Coherence' },
-  { key: 'attention', label: 'Attention' },
-  { key: 'contradiction', label: 'Contradiction' },
-  { key: 'compression', label: 'Compression' },
-  { key: 'organicMachine', label: 'Organic / machine' },
+const FIELDS: { key: keyof InferenceScore; label: string }[] = [
+  { key: 'retention', label: 'Retention' },
+  { key: 'transformation', label: 'Transformation' },
+  { key: 'ambiguity', label: 'Ambiguity' },
+  { key: 'certainty', label: 'Certainty' },
+  { key: 'unresolved', label: 'Unresolved' },
 ];
 
-export function MutationReadout({ score }: { score: BodyScore }) {
+export function MutationReadout({ score }: { score: InferenceScore }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,8 +22,8 @@ export function MutationReadout({ score }: { score: BodyScore }) {
         className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left min-h-11 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#a3be8c]"
         aria-expanded={open}
       >
-        <span className="text-xs uppercase tracking-widest text-neutral-400">Body score</span>
-        <span className="text-sm font-medium capitalize text-[#a3be8c]">{score.state.replace('_', ' ')}</span>
+        <span className="text-xs uppercase tracking-widest text-neutral-400">Inference values</span>
+        <span className="text-sm font-medium capitalize text-[#a3be8c]">{score.state}</span>
         <span className="text-neutral-500 text-sm" aria-hidden>
           {open ? '−' : '+'}
         </span>
@@ -39,6 +38,7 @@ export function MutationReadout({ score }: { score: BodyScore }) {
           <ul className="space-y-3">
             {FIELDS.map(({ key, label }) => {
               const value = Number(score[key]);
+              if (Number.isNaN(value)) return null;
               return (
                 <li key={key}>
                   <div className="flex justify-between text-xs mb-1 text-neutral-300">

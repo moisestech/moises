@@ -1,17 +1,13 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { modalGrayAreaMeta, modalGrayAreaProposalCard } from '@/content/grants/modal-gray-area-2026/meta';
 import { modalGrayAreaArtistBio, modalGrayAreaWorkSamples } from '@/content/grants/modal-gray-area-2026/shared';
-import {
-  machineSentenceMedia,
-  machineSentenceMediaDisclosure,
-} from '@/content/grants/modal-gray-area-2026/machine-sentence-media';
-import { ProposalFigure } from './ProposalFigure';
+import { incompleteContainmentMediaDisclosure, incompleteContainmentPlaceholders } from '@/content/grants/modal-gray-area-2026/incomplete-containment-media';
+import { GrantPlaceholderFigure } from '@/components/grant/shared/GrantProposalUi';
 
 export function ModalGrayAreaHubPage() {
   const meta = modalGrayAreaMeta;
   const card = modalGrayAreaProposalCard;
-  const hero = machineSentenceMedia.grayAreaActive;
 
   return (
     <div className="min-h-screen bg-[#f3f1eb] text-stone-900 dark:bg-neutral-950 dark:text-stone-100">
@@ -20,7 +16,7 @@ export function ModalGrayAreaHubPage() {
           <p className="text-sm uppercase tracking-widest text-stone-500 mb-3">Modal × Gray Area — 2026</p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">{meta.shortName}</h1>
           <p className="text-lg text-stone-600 dark:text-stone-400 leading-relaxed">
-            A public application packet for a new AI-infrastructure sculpture proposed for Gray Area, San
+            A public application packet for a civic-forensic listening structure proposed for Gray Area, San
             Francisco, October 2026.
           </p>
         </header>
@@ -44,17 +40,16 @@ export function ModalGrayAreaHubPage() {
           </div>
         </dl>
 
-        <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-8">
-          {card.thesis}
-        </p>
+        <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-8">{card.thesis}</p>
 
         <div className="mb-3">
-          <ProposalFigure media={hero} priority />
+          <GrantPlaceholderFigure media={incompleteContainmentPlaceholders.heroFrontal} priority aspectClass="aspect-[16/10]" />
         </div>
-        <p className="text-xs text-stone-500 mb-10 leading-relaxed">{machineSentenceMediaDisclosure}</p>
+        <p className="text-xs text-stone-500 mb-10 leading-relaxed">{incompleteContainmentMediaDisclosure}</p>
 
         <p className="text-2xl sm:text-3xl font-medium leading-snug tracking-tight mb-8 border-l-2 border-stone-900 dark:border-stone-100 pl-4">
-          The sculpture does not illustrate what you say. It becomes a machine sentence.
+          The enclosure makes the model visible while revealing how little visibility guarantees accountability or
+          control.
         </p>
 
         <Link
@@ -74,7 +69,7 @@ export function ModalGrayAreaHubPage() {
         <section className="mb-14">
           <h2 className="text-xl font-semibold mb-6">Selected prior works</h2>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {modalGrayAreaWorkSamples.slice(0, 6).map((sample) => (
+            {modalGrayAreaWorkSamples.map((sample) => (
               <li key={sample.slug}>
                 <Link href={`/art/${sample.slug}`} className="group block">
                   <div className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-900 mb-2">
