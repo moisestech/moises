@@ -62,6 +62,12 @@ const CLOSING_NIGHT =
   `${CDN}/v1784258053/grants/no-vacancy-2026/volver-a-valer__closing__full-installation-night-v01_bszmqo.png`;
 const CLOSING_REFLECTION =
   `${CDN}/v1784258051/grants/no-vacancy-2026/volver-a-valer__closing__exchange-reflection-v01_wg12gz.png`;
+const CADILLAC_RENDER =
+  `${CDN}/v1784290791/grants/no-vacancy-2026/volver-a-valer__cadillac__proposed-render-v01_pc0oby.png`;
+const BETSY_RENDER =
+  `${CDN}/v1784290791/grants/no-vacancy-2026/volver-a-valer__betsy__proposed-render-v01_usuvdz.png`;
+const CASA_FAENA_RENDER =
+  `${CDN}/v1784290792/grants/no-vacancy-2026/volver-a-valer__casa-faena__proposed-render-v01_fwly8q.png`;
 
 function placeholder(
   partial: Omit<VolverMediaAsset, 'placeholder' | 'label'> & { label?: string },
@@ -203,13 +209,14 @@ export const volverMedia = {
     caption: 'Cadillac — 360 site-adaptation study (pending capture).',
     label: 'Concept rendering — Cadillac — panorama',
   }),
-  cadillacRender: placeholder({
+  cadillacRender: conceptStudy({
     id: 'cadillacRender',
     kind: 'render',
     hotelId: 'cadillac',
+    src: CADILLAC_RENDER,
     alt: 'Proposed full installation in a bright resort lobby typology.',
     caption: 'Cadillac adaptation — full installation with largest floor field.',
-    label: 'Concept rendering — Cadillac — proposed render',
+    label: 'Concept study — Cadillac — proposed render',
   }),
   betsyPanorama: placeholder({
     id: 'betsyPanorama',
@@ -219,13 +226,14 @@ export const volverMedia = {
     caption: 'The Betsy — 360 site-adaptation study (pending capture).',
     label: 'Concept rendering — Betsy — panorama',
   }),
-  betsyRender: placeholder({
+  betsyRender: conceptStudy({
     id: 'betsyRender',
     kind: 'render',
     hotelId: 'betsy',
+    src: BETSY_RENDER,
     alt: 'Proposed restrained installation prioritizing El Cuentachiste and Casa de Cambio.',
     caption: 'Betsy adaptation — restrained architectural version.',
-    label: 'Concept rendering — Betsy — proposed render',
+    label: 'Concept study — Betsy — proposed render',
   }),
   casaFaenaPanorama: placeholder({
     id: 'casaFaenaPanorama',
@@ -235,13 +243,14 @@ export const volverMedia = {
     caption: 'Casa Faena — 360 site-adaptation study (pending capture).',
     label: 'Concept rendering — Casa Faena — panorama',
   }),
-  casaFaenaRender: placeholder({
+  casaFaenaRender: conceptStudy({
     id: 'casaFaenaRender',
     kind: 'render',
     hotelId: 'casa-faena',
+    src: CASA_FAENA_RENDER,
     alt: 'Proposed intimate installation prioritizing Harina de Otro Costal and Casa de Cambio.',
     caption: 'Casa Faena adaptation — intimate and culturally embodied.',
-    label: 'Concept rendering — Casa Faena — proposed render',
+    label: 'Concept study — Casa Faena — proposed render',
   }),
   prototypeFloorSample: placeholder({
     id: 'prototypeFloorSample',
