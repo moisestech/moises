@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { grantPageTopPaddingClass } from '@/config/site-header-layout';
+
 /** Shared media placeholder for grant proposal dossiers */
 export type GrantPlaceholderMedia = {
   label: string;
@@ -224,7 +226,7 @@ export function GrantPageChrome({
 }) {
   return (
     <div className={`min-h-screen text-stone-900 dark:text-stone-100 ${bgClassName}`}>
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 pt-28 sm:pt-32 pb-20 sm:pb-28">
+      <div className={`mx-auto max-w-3xl px-4 sm:px-6 ${grantPageTopPaddingClass} pb-20 sm:pb-28`}>
         <nav className="mb-8">
           <Link
             href={backHref}

@@ -49,7 +49,7 @@ const CASA_FRONT =
 const CASA_SCREEN =
   `${CDN}/v1784258047/grants/no-vacancy-2026/volver-a-valer__casa-de-cambio__screen-detail-v01_fulqq8.png`;
 const CUENTACHISTE_OVERVIEW =
-  `${CDN}/v1784253418/grants/no-vacancy-2026/volver-a-valer__el-cuentachiste__sculpture-overview-v01_hb17hd.jpg`;
+  `${CDN}/v1784292163/grants/no-vacancy-2026/volver-a-valer__el-cuentachiste__landscape-overview-v01_lndhsp.png`;
 const CUENTACHISTE_DETAIL_V01 =
   `${CDN}/v1784258054/grants/no-vacancy-2026/volver-a-valer__el-cuentachiste__material-detail-v01_gjjzpt.png`;
 const CUENTACHISTE_DETAIL_V02 =
