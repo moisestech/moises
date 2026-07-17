@@ -6,6 +6,12 @@ import { toGrantMedia } from '@/content/grants/no-vacancy-2026/volver-a-valer-me
 import { NvPlaceholderFigure } from '@/components/grant/no-vacancy/NoVacancyUi';
 import { GrantPanoramaViewer } from '@/components/grant/shared/GrantPanoramaViewer';
 
+const configLabel: Record<NvHotelAdaptation['configuration'], string> = {
+  full: 'Full (floor + El Cuentachiste + Harina de Otro Costal + Casa de Cambio)',
+  compact: 'Compact (floor + El Cuentachiste + Casa de Cambio)',
+  intimate: 'Intimate (floor + Harina de Otro Costal + Casa de Cambio)',
+};
+
 export function HotelStudySelector({ studies }: { studies: NvHotelAdaptation[] }) {
   const [activeId, setActiveId] = useState(studies[0]?.id ?? '');
   const active = studies.find((s) => s.id === activeId) ?? studies[0];
@@ -27,10 +33,10 @@ export function HotelStudySelector({ studies }: { studies: NvHotelAdaptation[] }
               aria-controls={`hotel-panel-${study.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActiveId(study.id)}
-              className={`min-h-11 px-4 py-2 text-sm font-medium border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-stone-800 ${
+              className={`min-h-11 px-4 py-2 text-sm font-medium border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-stone-800 dark:focus-visible:outline-stone-200 ${
                 selected
                   ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-black'
-                  : 'border-stone-300 text-stone-700 hover:border-stone-500 dark:border-stone-600 dark:text-stone-300'
+                  : 'border-stone-300 text-stone-700 hover:border-stone-500 dark:border-stone-600 dark:text-stone-300 dark:hover:border-stone-400'
               }`}
             >
               {study.hotelName}
@@ -46,14 +52,14 @@ export function HotelStudySelector({ studies }: { studies: NvHotelAdaptation[] }
         className="space-y-8"
       >
         <div>
-          <p className="text-xs uppercase tracking-widest text-stone-500 mb-1">{active.strategicRole}</p>
+          <p className="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-1">{active.strategicRole}</p>
           <h3 className="text-xl font-semibold text-stone-900 dark:text-stone-100">{active.hotelName}</h3>
-          <p className="text-sm text-stone-500 mt-1">{active.locationType}</p>
+          <p className="text-sm text-stone-500 dark:text-stone-400 mt-1">{active.locationType}</p>
           <p className="mt-2 text-xs uppercase tracking-wide text-stone-600 dark:text-stone-400">
-            Configuration: {active.configuration === 'large' ? 'Large (includes optional Carry-On)' : 'Compact (floor + two cores)'}
+            Configuration: {configLabel[active.configuration]}
           </p>
           <p className="mt-4 text-stone-700 dark:text-stone-300 leading-relaxed">{active.whyThisLocation}</p>
-          <p className="mt-3 text-xs text-stone-500">
+          <p className="mt-3 text-xs text-stone-500 dark:text-stone-400">
             Site-adaptation study based on recurring No Vacancy hotel typologies — not a claim that this
             property is confirmed for 2026.
           </p>
@@ -69,10 +75,6 @@ export function HotelStudySelector({ studies }: { studies: NvHotelAdaptation[] }
         />
 
         <NvPlaceholderFigure media={toGrantMedia(active.proposedRender)} />
-        <div className="grid sm:grid-cols-2 gap-8">
-          <NvPlaceholderFigure media={toGrantMedia(active.floorDetail)} aspectClass="aspect-[4/3]" />
-          <NvPlaceholderFigure media={toGrantMedia(active.sculptureDetail)} aspectClass="aspect-[4/3]" />
-        </div>
 
         <div className="grid sm:grid-cols-2 gap-8">
           <div>
@@ -84,7 +86,7 @@ export function HotelStudySelector({ studies }: { studies: NvHotelAdaptation[] }
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="mt-3 text-xs text-stone-500">{active.dimensionsNote}</p>
+            <p className="mt-3 text-xs text-stone-500 dark:text-stone-400">{active.dimensionsNote}</p>
           </div>
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wide text-stone-900 dark:text-stone-100 mb-2">

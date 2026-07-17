@@ -78,7 +78,7 @@ const grantDirectoryEntries: GrantDirectoryEntry[] = [
     status: 'active',
     parentId: 'no-vacancy-2026',
     summary:
-      'Printed Latin American currency floor + Market Rate + Soft Currency (+ optional Carry-On).',
+      'Printed currency floor + El Cuentachiste, Harina de Otro Costal, Casa de Cambio.',
   },
   {
     id: 'four-artists-four-seasons',

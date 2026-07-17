@@ -42,7 +42,7 @@ function GrantRow({ entry }: { entry: GrantDirectoryEntry }) {
               </span>
             ) : null}
             {isChild ? (
-              <span className="text-[10px] font-semibold uppercase tracking-wide text-stone-400">
+              <span className="text-[10px] font-semibold uppercase tracking-wide text-stone-400 dark:text-stone-500">
                 Proposal option
               </span>
             ) : null}

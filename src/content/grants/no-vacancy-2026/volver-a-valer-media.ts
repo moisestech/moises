@@ -35,79 +35,165 @@ const POE_FULL =
 const POE_DETAIL =
   `${CDN}/v1737831890/art/moisestech-website/price_of_existence_detail_uuw5yf.jpg`;
 
+/** Uploaded concept studies (hotel install not fabricated) */
+const HERO_FULL =
+  `${CDN}/v1784253420/grants/no-vacancy-2026/volver-a-valer__hero__full-installation-concept-v01_bhrwzy.png`;
+const FLOOR_BOUNDED =
+  `${CDN}/v1784258053/grants/no-vacancy-2026/volver-a-valer__common-tender__bounded-floor-overview-v01_gvgssh.png`;
+const FLOOR_DETAIL_V01 =
+  `${CDN}/v1784258051/grants/no-vacancy-2026/volver-a-valer__common-tender__floor-detail-v01_yflf5y.png`;
+const FLOOR_DETAIL_V02 =
+  `${CDN}/v1784258052/grants/no-vacancy-2026/volver-a-valer__common-tender__floor-detail-v02_oeecq5.png`;
+const CASA_FRONT =
+  `${CDN}/v1784253419/grants/no-vacancy-2026/volver-a-valer__casa-de-cambio__front-overview-v01_rj7oyw.png`;
+const CASA_SCREEN =
+  `${CDN}/v1784258047/grants/no-vacancy-2026/volver-a-valer__casa-de-cambio__screen-detail-v01_fulqq8.png`;
+const CUENTACHISTE_OVERVIEW =
+  `${CDN}/v1784253418/grants/no-vacancy-2026/volver-a-valer__el-cuentachiste__sculpture-overview-v01_hb17hd.jpg`;
+const CUENTACHISTE_DETAIL_V01 =
+  `${CDN}/v1784258054/grants/no-vacancy-2026/volver-a-valer__el-cuentachiste__material-detail-v01_gjjzpt.png`;
+const CUENTACHISTE_DETAIL_V02 =
+  `${CDN}/v1784258050/grants/no-vacancy-2026/volver-a-valer__el-cuentachiste__material-detail-v02_ntfnxs.png`;
+const HARINA_OVERVIEW =
+  `${CDN}/v1784253418/grants/no-vacancy-2026/volver-a-valer__harina-de-otro-costal__sculpture-overview-v01_taonfz.jpg`;
+const HARINA_DETAIL =
+  `${CDN}/v1784258052/grants/no-vacancy-2026/volver-a-valer__harina-de-otro-costal__material-detail-v01_tr8etg.png`;
+const CLOSING_NIGHT =
+  `${CDN}/v1784258053/grants/no-vacancy-2026/volver-a-valer__closing__full-installation-night-v01_bszmqo.png`;
+const CLOSING_REFLECTION =
+  `${CDN}/v1784258051/grants/no-vacancy-2026/volver-a-valer__closing__exchange-reflection-v01_wg12gz.png`;
+
 function placeholder(
   partial: Omit<VolverMediaAsset, 'placeholder' | 'label'> & { label?: string },
 ): VolverMediaAsset {
   return {
     ...partial,
     placeholder: true,
-    label: partial.label ?? `[PLACEHOLDER] ${partial.id}`,
+    label: partial.label ?? `Concept rendering — ${partial.id}`,
+  };
+}
+
+function conceptStudy(
+  partial: Omit<VolverMediaAsset, 'placeholder'> & { src: string },
+): VolverMediaAsset {
+  return {
+    ...partial,
+    placeholder: false,
   };
 }
 
 export const volverMediaDisclosure =
-  'Concept proposal visuals. The hotel installation has not been fabricated or installed.';
+  'Concept studies for the proposal. The hotel installation has not been fabricated or installed.';
 
 export const volverMedia = {
-  hero: placeholder({
+  hero: conceptStudy({
     id: 'hero',
     kind: 'hero',
-    alt: 'Proposed hotel installation: printed currency floor with freestanding sculptures Market Rate and Soft Currency.',
+    src: HERO_FULL,
+    alt: 'Proposed hotel installation: printed currency floor with El Cuentachiste, Harina de Otro Costal, and Casa de Cambio.',
     caption:
-      'Proposal hero — currency floor as primary field; Soft Currency silhouette; Market Rate as dark anchor. Replace with final render.',
-    label: '[PLACEHOLDER] Hero — Common Tender floor + core sculptures',
-    width: 1672,
-    height: 941,
+      'Proposal hero — Common Tender floor with life-size figures and Casa de Cambio (concept study).',
+    label: 'Concept study — Hero — full installation',
+    width: 1122,
+    height: 1402,
   }),
-  currencyFloorOverview: placeholder({
+  currencyFloorOverview: conceptStudy({
     id: 'currencyFloorOverview',
     kind: 'render',
-    alt: 'Proposed site-fitted printed floor resembling a luxury carpet from a distance, composed of Latin American currency fields and documents.',
-    caption: 'Common Tender — floor field overview (proposal study).',
-    label: '[PLACEHOLDER] Common Tender — floor overview',
+    src: FLOOR_BOUNDED,
+    alt: 'Proposed removable laminated currency floor resembling a luxury carpet from a distance.',
+    caption: 'Common Tender — bounded floor overview. Entry study kept in the reveal slot.',
+    label: 'Concept study — Common Tender — floor overview',
   }),
-  currencyFloorDetail: placeholder({
+  currencyFloorDetail: conceptStudy({
     id: 'currencyFloorDetail',
     kind: 'floor-detail',
-    alt: 'Close study of guilloche patterns, serial numbers, remittance fragments, and abstracted bill details in the proposed floor composition.',
+    src: FLOOR_DETAIL_V02,
+    alt: 'Close study of selected currencies, remittance fragments, serial numbers, and security patterns at believable note scale.',
     caption:
-      'Floor detail — abstracted security patterns and document fragments on the walking path; full readable notes concentrated at edges.',
-    label: '[PLACEHOLDER] Common Tender — floor detail',
+      'Common Tender — floor detail. Notes at believable scale; current or restricted notes cropped, overlapped, or abstracted.',
+    label: 'Concept study — Common Tender — floor detail',
   }),
-  marketRateOverview: placeholder({
-    id: 'marketRateOverview',
+  cuentachisteOverview: conceptStudy({
+    id: 'cuentachisteOverview',
     kind: 'render',
-    alt: 'Proposed freestanding oil-black mirrored monolith derived from hotel check-in proportions.',
-    caption: 'Market Rate — freestanding monolith overview.',
-    label: '[PLACEHOLDER] Market Rate — overview',
+    src: CUENTACHISTE_OVERVIEW,
+    alt: 'Faceless figure covered with currency, seated on a white molded-plastic chair, holding a coffee cup and domino.',
+    caption: 'El Cuentachiste — sculpture overview. Humor as survival intelligence; no facial expression, no costume.',
+    label: 'Concept study — El Cuentachiste — overview',
   }),
-  marketRateDetail: placeholder({
-    id: 'marketRateDetail',
+  cuentachisteDetail: conceptStudy({
+    id: 'cuentachisteDetail',
     kind: 'sculpture-detail',
-    alt: 'Detail of sparse hotel-style valuation plaques on the Market Rate monolith.',
-    caption: 'Market Rate — plaque and mirror finish detail.',
-    label: '[PLACEHOLDER] Market Rate — detail',
+    src: CUENTACHISTE_DETAIL_V01,
+    alt: 'Detail of currency textile skin, secured cup and domino on El Cuentachiste.',
+    caption: 'El Cuentachiste — material and prop detail.',
+    label: 'Concept study — El Cuentachiste — detail',
   }),
-  softCurrencyOverview: placeholder({
-    id: 'softCurrencyOverview',
+  harinaOverview: conceptStudy({
+    id: 'harinaOverview',
     kind: 'render',
-    alt: 'Proposed freestanding chinchorro-like woven sculpture in a minimal metal frame.',
-    caption: 'Soft Currency — woven textile overview.',
-    label: '[PLACEHOLDER] Soft Currency — overview',
+    src: HARINA_OVERVIEW,
+    alt: 'Faceless figure covered with yellow corn-flour packaging, seated in a chinchorro on a freestanding steel stand, holding a cuatro.',
+    caption:
+      'Harina de Otro Costal (working title) — sculpture overview. Explicit Venezuelan anchor; freestanding stand, no ceiling attachment.',
+    label: 'Concept study — Harina de Otro Costal — overview',
   }),
-  softCurrencyDetail: placeholder({
-    id: 'softCurrencyDetail',
+  harinaDetail: conceptStudy({
+    id: 'harinaDetail',
     kind: 'sculpture-detail',
-    alt: 'Close view of obsolete bills, receipts, and fiber woven into Soft Currency.',
-    caption: 'Soft Currency — weave and frame detail.',
-    label: '[PLACEHOLDER] Soft Currency — detail',
+    src: HARINA_DETAIL,
+    alt: 'Detail of corn-flour packaging skin, hammock weave, and secured cuatro.',
+    caption: 'Harina de Otro Costal — packaging, hammock, and instrument detail.',
+    label: 'Concept study — Harina de Otro Costal — detail',
   }),
-  carryOnOverview: placeholder({
-    id: 'carryOnOverview',
+  casaDeCambioFront: conceptStudy({
+    id: 'casaDeCambioFront',
     kind: 'render',
-    alt: 'Optional hotel luggage cart sculpture carrying clear archival containers of documents and currency.',
-    caption: 'Carry-On — optional third sculpture for large sites.',
-    label: '[PLACEHOLDER] Carry-On — overview',
+    src: CASA_FRONT,
+    alt: 'Compact black airport-style currency-exchange kiosk with acrylic transaction window and digital rate board.',
+    caption:
+      'Casa de Cambio — front overview. Offline rate board; occasional HOME / MEMORY / LABOR / FAMILY / FUTURE interruptions.',
+    label: 'Concept study — Casa de Cambio — front view',
+  }),
+  casaDeCambioScreen: conceptStudy({
+    id: 'casaDeCambioScreen',
+    kind: 'sculpture-detail',
+    src: CASA_SCREEN,
+    alt: 'Close view of the Casa de Cambio digital rate board with currency buy/sell columns.',
+    caption: 'Casa de Cambio — screen typography study. Local media; no live API.',
+    label: 'Concept study — Casa de Cambio — screen detail',
+  }),
+  revealFloorPattern: conceptStudy({
+    id: 'revealFloorPattern',
+    kind: 'floor-detail',
+    src: FLOOR_DETAIL_V01,
+    alt: 'Alternate Common Tender floor pattern and note-scale study.',
+    caption: 'Reveal — Common Tender floor detail (v01). Primary detail frame uses v02.',
+    label: 'Concept study — Reveal — Common Tender',
+  }),
+  revealCuentachisteIcon: conceptStudy({
+    id: 'revealCuentachisteIcon',
+    kind: 'sculpture-detail',
+    src: CUENTACHISTE_DETAIL_V02,
+    alt: 'Alternate material detail for El Cuentachiste — currency skin and props.',
+    caption: 'Reveal — El Cuentachiste material detail (v02).',
+    label: 'Concept study — Reveal — El Cuentachiste',
+  }),
+  revealHarinaIcon: placeholder({
+    id: 'revealHarinaIcon',
+    kind: 'sculpture-detail',
+    alt: 'Alternate reveal still for Harina de Otro Costal — chinchorro/cuatro icon study.',
+    caption: 'Reveal slot — Harina de Otro Costal. Replace with your icon or material still.',
+    label: 'Concept rendering — Reveal — Harina de Otro Costal',
+  }),
+  revealCasaIcon: conceptStudy({
+    id: 'revealCasaIcon',
+    kind: 'sculpture-detail',
+    src: CLOSING_REFLECTION,
+    alt: 'Casa de Cambio exchange reflection on the currency floor.',
+    caption: 'Reveal — Casa de Cambio exchange reflection.',
+    label: 'Concept study — Reveal — Casa de Cambio',
   }),
   cadillacPanorama: placeholder({
     id: 'cadillacPanorama',
@@ -115,31 +201,15 @@ export const volverMedia = {
     hotelId: 'cadillac',
     alt: 'Equirectangular study of Cadillac Hotel typology for Volver a Valer site adaptation.',
     caption: 'Cadillac — 360 site-adaptation study (pending capture).',
-    label: '[PLACEHOLDER] Cadillac — panorama',
+    label: 'Concept rendering — Cadillac — panorama',
   }),
   cadillacRender: placeholder({
     id: 'cadillacRender',
     kind: 'render',
     hotelId: 'cadillac',
-    alt: 'Proposed expansive installation in a bright resort lobby typology.',
-    caption: 'Cadillac adaptation — long currency floor with optional Carry-On.',
-    label: '[PLACEHOLDER] Cadillac — proposed render',
-  }),
-  cadillacFloorDetail: placeholder({
-    id: 'cadillacFloorDetail',
-    kind: 'floor-detail',
-    hotelId: 'cadillac',
-    alt: 'Floor detail for Cadillac site study.',
-    caption: 'Cadillac — floor field detail.',
-    label: '[PLACEHOLDER] Cadillac — floor detail',
-  }),
-  cadillacSculptureDetail: placeholder({
-    id: 'cadillacSculptureDetail',
-    kind: 'sculpture-detail',
-    hotelId: 'cadillac',
-    alt: 'Sculpture placement detail for Cadillac site study.',
-    caption: 'Cadillac — sculpture arrangement detail.',
-    label: '[PLACEHOLDER] Cadillac — sculpture detail',
+    alt: 'Proposed full installation in a bright resort lobby typology.',
+    caption: 'Cadillac adaptation — full installation with largest floor field.',
+    label: 'Concept rendering — Cadillac — proposed render',
   }),
   betsyPanorama: placeholder({
     id: 'betsyPanorama',
@@ -147,31 +217,15 @@ export const volverMedia = {
     hotelId: 'betsy',
     alt: 'Equirectangular study of The Betsy Hotel typology for Volver a Valer.',
     caption: 'The Betsy — 360 site-adaptation study (pending capture).',
-    label: '[PLACEHOLDER] Betsy — panorama',
+    label: 'Concept rendering — Betsy — panorama',
   }),
   betsyRender: placeholder({
     id: 'betsyRender',
     kind: 'render',
     hotelId: 'betsy',
-    alt: 'Proposed restrained installation adapted to refined check-in architecture.',
-    caption: 'Betsy adaptation — Market Rate dominant; Soft Currency as counterpoint.',
-    label: '[PLACEHOLDER] Betsy — proposed render',
-  }),
-  betsyFloorDetail: placeholder({
-    id: 'betsyFloorDetail',
-    kind: 'floor-detail',
-    hotelId: 'betsy',
-    alt: 'Floor detail for Betsy site study.',
-    caption: 'Betsy — floor field detail.',
-    label: '[PLACEHOLDER] Betsy — floor detail',
-  }),
-  betsySculptureDetail: placeholder({
-    id: 'betsySculptureDetail',
-    kind: 'sculpture-detail',
-    hotelId: 'betsy',
-    alt: 'Sculpture detail for Betsy site study.',
-    caption: 'Betsy — sculpture detail.',
-    label: '[PLACEHOLDER] Betsy — sculpture detail',
+    alt: 'Proposed restrained installation prioritizing El Cuentachiste and Casa de Cambio.',
+    caption: 'Betsy adaptation — restrained architectural version.',
+    label: 'Concept rendering — Betsy — proposed render',
   }),
   casaFaenaPanorama: placeholder({
     id: 'casaFaenaPanorama',
@@ -179,59 +233,44 @@ export const volverMedia = {
     hotelId: 'casa-faena',
     alt: 'Equirectangular study of Casa Faena typology for Volver a Valer.',
     caption: 'Casa Faena — 360 site-adaptation study (pending capture).',
-    label: '[PLACEHOLDER] Casa Faena — panorama',
+    label: 'Concept rendering — Casa Faena — panorama',
   }),
   casaFaenaRender: placeholder({
     id: 'casaFaenaRender',
     kind: 'render',
     hotelId: 'casa-faena',
-    alt: 'Proposed intimate installation with Soft Currency as hero object.',
-    caption: 'Casa Faena adaptation — smaller field; Soft Currency hero.',
-    label: '[PLACEHOLDER] Casa Faena — proposed render',
+    alt: 'Proposed intimate installation prioritizing Harina de Otro Costal and Casa de Cambio.',
+    caption: 'Casa Faena adaptation — intimate and culturally embodied.',
+    label: 'Concept rendering — Casa Faena — proposed render',
   }),
-  casaFaenaFloorDetail: placeholder({
-    id: 'casaFaenaFloorDetail',
-    kind: 'floor-detail',
-    hotelId: 'casa-faena',
-    alt: 'Floor detail for Casa Faena site study.',
-    caption: 'Casa Faena — floor field detail.',
-    label: '[PLACEHOLDER] Casa Faena — floor detail',
-  }),
-  casaFaenaSculptureDetail: placeholder({
-    id: 'casaFaenaSculptureDetail',
-    kind: 'sculpture-detail',
-    hotelId: 'casa-faena',
-    alt: 'Sculpture detail for Casa Faena site study.',
-    caption: 'Casa Faena — Soft Currency emphasis.',
-    label: '[PLACEHOLDER] Casa Faena — sculpture detail',
-  }),
-  prototypeFloor: placeholder({
-    id: 'prototypeFloor',
+  prototypeFloorSample: placeholder({
+    id: 'prototypeFloorSample',
     kind: 'prototype',
-    alt: 'Prototype module of the printed currency floor system.',
-    caption: 'Prototype — printed floor module and non-slip tests.',
-    label: '[PLACEHOLDER] Prototype — floor module',
+    alt: '24 by 36 inch printed floor sample for scale, color, glare, slip, and removal testing.',
+    caption: 'Prototype — floor sample (24 × 36 in.).',
+    label: 'Concept rendering — Prototype — floor sample',
   }),
-  prototypeWeave: placeholder({
-    id: 'prototypeWeave',
+  prototypeKioskMockup: placeholder({
+    id: 'prototypeKioskMockup',
     kind: 'prototype',
-    alt: 'Prototype weave sample for Soft Currency.',
-    caption: 'Prototype — Soft Currency weave sample.',
-    label: '[PLACEHOLDER] Prototype — weave sample',
+    alt: 'Full-scale cardboard mockup of Casa de Cambio kiosk proportions.',
+    caption: 'Prototype — Casa de Cambio cardboard mockup.',
+    label: 'Concept rendering — Prototype — kiosk mockup',
   }),
-  prototypeMirror: placeholder({
-    id: 'prototypeMirror',
+  prototypeScreen: placeholder({
+    id: 'prototypeScreen',
     kind: 'prototype',
-    alt: 'Prototype oil-black or smoked-mirror finish sample for Market Rate.',
-    caption: 'Prototype — Market Rate finish sample.',
-    label: '[PLACEHOLDER] Prototype — mirror finish',
+    alt: 'Screen typography and motion test for the offline rate board.',
+    caption: 'Prototype — rate-board typography and motion test.',
+    label: 'Concept rendering — Prototype — screen test',
   }),
-  closing: placeholder({
+  closing: conceptStudy({
     id: 'closing',
     kind: 'render',
-    alt: 'Closing proposal image of the currency floor and reflective Market Rate encounter.',
-    caption: 'Closing proposal study — revaluation beat.',
-    label: '[PLACEHOLDER] Closing — floor + Market Rate',
+    src: CLOSING_NIGHT,
+    alt: 'Closing proposal view of the full Volver a Valer installation at night on the currency floor.',
+    caption: 'Closing — full installation night view. Exchange reflection used in Casa de Cambio reveal.',
+    label: 'Concept study — Closing — night installation',
   }),
   priceOfExistenceRelated: {
     id: 'priceOfExistenceRelated',
@@ -258,13 +297,12 @@ export const volverMedia = {
 
 export type VolverMediaKey = keyof typeof volverMedia;
 
-/** OG uses first non-placeholder proposal render when available; else omitted at page layer */
+/** OG prefers hero, then Casa de Cambio front, when a real render lands */
 export const volverOgImage = (() => {
-  const candidates = [volverMedia.hero, volverMedia.cadillacRender, volverMedia.currencyFloorOverview];
+  const candidates = [volverMedia.hero, volverMedia.casaDeCambioFront, volverMedia.currencyFloorOverview];
   return candidates.find((m) => !m.placeholder && m.src) ?? null;
 })();
 
-/** Convert media asset to GrantPlaceholderFigure shape */
 export function toGrantMedia(asset: VolverMediaAsset) {
   return {
     label: asset.label,

@@ -53,7 +53,11 @@ export function GrantPlaceholderFigure({
   priority?: boolean;
   className?: string;
 }) {
-  const isPlaceholder = !media.src || media.label.startsWith('[PLACEHOLDER]');
+  const isEmptySlot = !media.src || media.label.startsWith('[PLACEHOLDER]');
+  const isConceptStudy =
+    Boolean(media.src) &&
+    (media.label.toLowerCase().startsWith('concept study') ||
+      media.label.toLowerCase().startsWith('concept rendering'));
 
   return (
     <figure className={`w-full ${className}`}>
@@ -63,7 +67,7 @@ export function GrantPlaceholderFigure({
       {media.src ? (
         <div
           className={`relative w-full ${aspectClass} overflow-hidden bg-stone-200 dark:bg-stone-900 ${
-            isPlaceholder ? 'ring-1 ring-amber-300/80 dark:ring-amber-700/50' : ''
+            isEmptySlot || isConceptStudy ? 'ring-1 ring-amber-300/80 dark:ring-amber-700/50' : ''
           }`}
         >
           <Image
@@ -74,9 +78,13 @@ export function GrantPlaceholderFigure({
             priority={priority}
             sizes="(max-width: 768px) 100vw, 56rem"
           />
-          {isPlaceholder ? (
+          {isConceptStudy ? (
             <div className="absolute top-3 left-3 rounded bg-black/75 px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-white">
-              Placeholder — replace
+              Concept study
+            </div>
+          ) : isEmptySlot ? (
+            <div className="absolute top-3 left-3 rounded bg-black/75 px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-white">
+              Concept rendering
             </div>
           ) : null}
         </div>
@@ -140,7 +148,7 @@ export function GrantExperienceBeats({
     <div className="grid gap-8 sm:grid-cols-3">
       {beats.map((beat) => (
         <div key={beat.number} className="border-t-2 border-stone-900 dark:border-stone-100 pt-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-stone-500 mb-2">{beat.number}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400 mb-2">{beat.number}</p>
           <h3 className="text-xl font-semibold text-stone-900 dark:text-stone-100 mb-2">{beat.title}</h3>
           <p className="text-stone-600 dark:text-stone-400 leading-relaxed text-sm sm:text-base">
             {beat.body}
@@ -192,7 +200,7 @@ export function GrantRelatedWorks({ works }: { works: readonly GrantRelatedWork[
             </div>
             <div>
               <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100 group-hover:underline">
-                {work.title} <span className="text-stone-500 font-normal">({work.year})</span>
+                {work.title} <span className="text-stone-500 dark:text-stone-400 font-normal">({work.year})</span>
               </h3>
               <p className="text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">{work.blurb}</p>
             </div>
