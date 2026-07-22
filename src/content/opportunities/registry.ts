@@ -11,6 +11,7 @@ import { neogovStaffAgenticAiOpportunity } from './neogov-staff-agentic-ai-devel
 import { netflixFullStackEngineerOpportunity } from './netflix-full-stack-engineer';
 import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fabrication-lab-manager';
 import { playwireOpportunity } from './playwire';
+import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
@@ -19,6 +20,7 @@ const bySlug: Record<string, Opportunity> = {
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
   [deepgramSolutionsArchitectOpportunity.slug]: deepgramSolutionsArchitectOpportunity,
   [endorLabsSolutionsArchitectOpportunity.slug]: endorLabsSolutionsArchitectOpportunity,
+  [forwardDeployedAiEngineerOpportunity.slug]: forwardDeployedAiEngineerOpportunity,
   [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:
     knightJournalismTechProductStrategistOpportunity,

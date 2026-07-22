@@ -4,6 +4,7 @@ import { ChevronRight, ExternalLink } from 'lucide-react';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import {
+  DELIVERY_STATUS_LABELS,
   EVIDENCE_STATUS_LABELS,
   type SystemsCaseStudy,
 } from '@/content/opportunities/systemsDossier';
@@ -50,6 +51,9 @@ export function SystemsCaseStudyGrid({
             <div className={opp.cardPad}>
               <div className="flex flex-wrap items-center gap-2">
                 <p className={opp.accentCategory}>{study.category}</p>
+                {study.deliveryStatus ? (
+                  <span className={opp.pill}>{DELIVERY_STATUS_LABELS[study.deliveryStatus]}</span>
+                ) : null}
                 <span className={opp.pill}>{EVIDENCE_STATUS_LABELS[study.evidenceStatus]}</span>
               </div>
               <h3 className={cn(opp.matrixPrimary, 'mt-1')}>{study.title}</h3>

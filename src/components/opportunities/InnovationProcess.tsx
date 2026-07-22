@@ -10,9 +10,16 @@ type InnovationProcessProps = {
   sectionId?: string;
   /** Optional architecture diagrams (click to expand full screen). */
   diagrams?: ProcessDiagram[];
+  /** `horizontal` = row on md+, stack on mobile. Default `stack`. */
+  layout?: 'stack' | 'horizontal';
 };
 
-export function InnovationProcess({ opportunity, sectionId = 'process', diagrams }: InnovationProcessProps) {
+export function InnovationProcess({
+  opportunity,
+  sectionId = 'process',
+  diagrams,
+  layout = 'stack',
+}: InnovationProcessProps) {
   return (
     <section id={sectionId} className={opp.section}>
       <h2 className={opp.h2}>{opportunity.processSectionTitle ?? 'Process'}</h2>
@@ -23,11 +30,24 @@ export function InnovationProcess({ opportunity, sectionId = 'process', diagrams
           <ApproachDiagramGallery diagrams={diagrams} className="mt-3" />
         </>
       ) : null}
-      <ol className={cn(diagrams?.length ? 'mt-10' : 'mt-8', 'space-y-4')}>
+      <ol
+        className={cn(
+          diagrams?.length ? 'mt-10' : 'mt-8',
+          layout === 'horizontal'
+            ? 'grid gap-4 md:grid-cols-5'
+            : 'space-y-4',
+        )}
+      >
         {opportunity.processSteps.map((step, i) => (
-          <li key={step.title} className={`flex gap-4 ${opp.card} p-4`}>
+          <li
+            key={step.title}
+            className={cn(
+              `flex gap-4 ${opp.card} p-4`,
+              layout === 'horizontal' && 'flex-col md:gap-3',
+            )}
+          >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 dark:bg-cyan-500/20 text-xs font-bold text-cyan-600 dark:text-cyan-400">
-              {i + 1}
+              {String(i + 1).padStart(2, '0')}
             </span>
             <div className="min-w-0 flex-1">
               <h3 className={opp.matrixPrimary}>{step.title}</h3>

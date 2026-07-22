@@ -1,0 +1,110 @@
+'use client';
+
+import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
+import { OpportunityHero } from '@/components/opportunities/OpportunityHero';
+import { RoleApplicationBar } from '@/components/opportunities/RoleApplicationBar';
+import { FitPillars } from '@/components/opportunities/FitPillars';
+import { SystemsCaseStudyGrid } from '@/components/opportunities/SystemsCaseStudyGrid';
+import { InnovationProcess } from '@/components/opportunities/InnovationProcess';
+import { CapabilityMap } from '@/components/opportunities/CapabilityMap';
+import { CreativeProductionSection } from '@/components/opportunities/CreativeProductionSection';
+import { ClientFacingSection } from '@/components/opportunities/ClientFacingSection';
+import { PrinciplesSection } from '@/components/opportunities/PrinciplesSection';
+import { ExperienceSnapshot } from '@/components/opportunities/ExperienceSnapshot';
+import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { opp } from '@/components/opportunities/opportunityTheme';
+import { cn } from '@/lib/utils';
+import type { Opportunity } from '@/content/opportunities/types';
+
+type RolePortfolioClientProps = {
+  opportunity: Opportunity;
+};
+
+/**
+ * Role-specific portfolio composer for forward-deployed / creative AI engineer dossiers.
+ * Data-driven via `opportunity.rolePortfolio` — supports full-bleed banners unlike systems-dossier.
+ */
+export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
+  const dossier = opportunity.rolePortfolio;
+  const hasBanner = Boolean(opportunity.applicationBanner?.src);
+
+  if (!dossier) {
+    return (
+      <OpportunityShell navItems={opportunity.navItems}>
+        <main className={cn(opp.main, 'pt-8 sm:pt-10')}>
+          <p className={opp.body}>Role portfolio content is missing for this opportunity.</p>
+        </main>
+      </OpportunityShell>
+    );
+  }
+
+  const capabilityMap =
+    dossier.currentlyExtending?.length && !dossier.capabilityMap.currentlyExtending
+      ? { ...dossier.capabilityMap, currentlyExtending: dossier.currentlyExtending }
+      : dossier.capabilityMap;
+
+  return (
+    <OpportunityShell navItems={opportunity.navItems}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:shadow dark:focus:bg-stone-900"
+      >
+        Skip to content
+      </a>
+
+      <RoleApplicationBar opportunity={opportunity} />
+      <OpportunityApplicationBanner banner={opportunity.applicationBanner} />
+
+      <main
+        id="main-content"
+        className={cn(opp.main, hasBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10')}
+      >
+        <OpportunityHero opportunity={opportunity} />
+
+        <FitPillars
+          title={dossier.fitSectionTitle}
+          intro={dossier.fitIntro}
+          pillars={dossier.fitPillars}
+          sectionId="fit"
+        />
+
+        <SystemsCaseStudyGrid
+          title={dossier.caseStudiesTitle}
+          intro={dossier.caseStudiesIntro}
+          studies={dossier.caseStudies}
+          sectionId="work"
+        />
+
+        <InnovationProcess opportunity={opportunity} sectionId="process" layout="horizontal" />
+
+        <CapabilityMap data={capabilityMap} sectionId="capabilities" />
+
+        <CreativeProductionSection data={dossier.creative} sectionId="creative" />
+
+        <ClientFacingSection data={dossier.clientFacing} sectionId="client" />
+
+        <PrinciplesSection
+          title={dossier.principlesTitle}
+          principles={dossier.principles}
+          sectionId="principles"
+        />
+
+        <ExperienceSnapshot
+          title={dossier.experienceTitle}
+          intro={dossier.experienceIntro}
+          items={dossier.experience}
+          sectionId="experience"
+        />
+
+        <section id="contact" className={opp.section} aria-labelledby="contact-heading">
+          <h2 id="contact-heading" className="sr-only">
+            Contact
+          </h2>
+          <ResumeCTA opportunity={opportunity} />
+          <p className={`mt-4 max-w-3xl ${opp.subtle}`}>{dossier.availabilityNote}</p>
+        </section>
+      </main>
+    </OpportunityShell>
+  );
+}

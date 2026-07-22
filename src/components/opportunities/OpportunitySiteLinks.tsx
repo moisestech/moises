@@ -49,6 +49,9 @@ export function OpportunitySiteLinks({ ctas, onCta, variant = 'footer', classNam
   const suffix = variant === 'hero' ? '_hero' : '_footer';
 
   const items: { href: string; label: string; icon: typeof FileText; kind: string }[] = [];
+  if (ctas.careerPacket) {
+    items.push({ href: ctas.careerPacket, label: 'Career packet', icon: FolderKanban, kind: 'career_packet' });
+  }
   if (ctas.cv) items.push({ href: ctas.cv, label: 'Web CV', icon: FileText, kind: 'cv' });
   if (ctas.portfolio) items.push({ href: ctas.portfolio, label: 'Portfolio', icon: FolderKanban, kind: 'portfolio' });
   if (ctas.ooliteWork) {

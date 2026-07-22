@@ -33,6 +33,13 @@ export function CapabilityMap({ data, sectionId = 'capabilities' }: CapabilityMa
         ))}
       </div>
 
+      {data.currentlyExtending?.length ? (
+        <p className={`mt-6 max-w-3xl ${opp.subtle}`}>
+          <span className="font-semibold text-stone-500 dark:text-stone-400">Currently extending: </span>
+          {data.currentlyExtending.join(' · ')}
+        </p>
+      ) : null}
+
       <p className={cn(opp.callout, 'mt-8', opp.body)}>{data.closingStatement}</p>
     </section>
   );
