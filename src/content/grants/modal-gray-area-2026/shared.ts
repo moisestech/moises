@@ -58,7 +58,7 @@ export const modalGrayAreaHubSeo = {
 /** Unverified / application-stage notes for reviewers */
 export const modalGrayAreaUnverifiedClaims = [
   'Physical listening structure has not been fabricated or exhibited.',
-  'Production-realistic concept placeholders replace superseded kinetic-screen renderings.',
+  'Proposal images are production-realistic concept renderings; kinetic-screen studies are archived as superseded.',
   'Actuator, membrane material, and exact dimensions remain subject to fabrication review after selection.',
   'Modal endpoint deployment is optional for the web prototype; mock mode is submission-complete.',
   'Exhibition floor plan and Gray Area sightlines are not yet surveyed — context studies are conceptual.',

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { MachineSentencePage } from '@/components/grant/modal-gray-area-2026/MachineSentencePage';
 import { modalGrayAreaMeta } from '@/content/grants/modal-gray-area-2026/meta';
 import { incompleteContainmentSeo } from '@/content/grants/modal-gray-area-2026/incomplete-containment-of-a-model';
+import { incompleteContainmentOgImage } from '@/content/grants/modal-gray-area-2026/incomplete-containment-media';
 
 const SITE = 'https://moises.tech';
 
@@ -24,11 +25,20 @@ export const metadata: Metadata = {
     type: 'website',
     url: `${SITE}${modalGrayAreaMeta.proposalRoute}`,
     siteName: 'Moises Sanabria',
+    images: [
+      {
+        url: `${SITE}${incompleteContainmentOgImage.src}`,
+        width: incompleteContainmentOgImage.width,
+        height: incompleteContainmentOgImage.height,
+        alt: incompleteContainmentOgImage.alt,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: incompleteContainmentSeo.title,
     description: incompleteContainmentSeo.description,
+    images: [`${SITE}${incompleteContainmentOgImage.src}`],
   },
 };
 
