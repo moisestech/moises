@@ -29,6 +29,16 @@ export const EVIDENCE_STATUS_LABELS: Record<EvidenceStatus, string> = {
   todo: 'TODO: verify evidence',
 };
 
+/** Shipment status for role-portfolio / systems case studies — distinct from evidence strength. */
+export type DeliveryStatus = 'deployed' | 'prototype' | 'research' | 'in-development';
+
+export const DELIVERY_STATUS_LABELS: Record<DeliveryStatus, string> = {
+  deployed: 'Deployed',
+  prototype: 'Prototype',
+  research: 'Research',
+  'in-development': 'In Development',
+};
+
 export type ArchitectureNode = {
   id: string;
   label: string;
@@ -113,6 +123,8 @@ export type CapabilityMapData = {
   subtitle?: string;
   groups: CapabilityGroup[];
   closingStatement: string;
+  /** Adjacent tools shown as extending — not established expertise. */
+  currentlyExtending?: string[];
 };
 
 export type PlanPhase = {
@@ -162,6 +174,8 @@ export type SystemsCaseStudy = {
   imageAlt: string;
   imageLocal?: boolean;
   evidenceStatus: EvidenceStatus;
+  /** Optional shipment status pill (Deployed / Prototype / Research / In Development). */
+  deliveryStatus?: DeliveryStatus;
 };
 
 export type WhyCompanyBlock = {

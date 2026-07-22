@@ -25,6 +25,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
   const eyebrow = opportunity.heroEyebrow ?? opportunity.roleTitle ?? 'Positioning';
   const showSystemsHero =
     opportunity.variant === 'systems-dossier' ||
+    opportunity.variant === 'role-portfolio' ||
     Boolean(opportunity.candidatePositioning || opportunity.heroPrimaryCta);
 
   return (

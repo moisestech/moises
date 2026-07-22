@@ -1,6 +1,7 @@
 import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 import type { EvidenceStatus, SystemsDossier } from '@/content/opportunities/systemsDossier';
+import type { RolePortfolioDossier } from '@/content/opportunities/rolePortfolio';
 
 export type ApplicationBanner = {
   src: string;
@@ -78,6 +79,8 @@ export type OpportunityCtas = {
   ooliteOrg?: string;
   /** In-page anchor for “view case studies” */
   caseStudiesAnchor?: string;
+  /** Career packet path (e.g. `/career-packet`) */
+  careerPacket?: string;
 };
 
 export type TeachingHighlight = {
@@ -112,7 +115,7 @@ export type OpportunityAudienceKeywords = {
   terms: OpportunityAudienceKeyword[];
 };
 
-export type OpportunityVariant = 'compact' | 'full-dossier' | 'systems-dossier';
+export type OpportunityVariant = 'compact' | 'full-dossier' | 'systems-dossier' | 'role-portfolio';
 
 export type SkillsMatrixIconKey =
   | 'code2'
@@ -184,6 +187,8 @@ export type Opportunity = {
   };
   /** Systems engineering application sections (architecture, trust, 30/60/90, etc.). */
   systemsDossier?: SystemsDossier;
+  /** Creative / forward-deployed role portfolio sections (no Affirm-shaped architecture panels). */
+  rolePortfolio?: RolePortfolioDossier;
   roleMatchSectionTitle?: string;
   roleMatchIntro?: string;
   roleMatchColumnHeaders?: { left: string; right: string };

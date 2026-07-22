@@ -94,6 +94,11 @@ const nextConfig = {
         destination: '/research/born-into-the-machine/365-post-ai-readymades',
         permanent: true,
       },
+      {
+        source: '/roles/forward-deployed-ai-engineer',
+        destination: '/opportunities/forward-deployed-ai-engineer',
+        permanent: false,
+      },
     ]
   },
 

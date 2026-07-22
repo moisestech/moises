@@ -14,6 +14,7 @@ import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
+import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
@@ -29,6 +30,10 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
   if (opportunity.variant === 'systems-dossier') {
     return <SystemsOpportunityClient opportunity={opportunity} />;
+  }
+
+  if (opportunity.variant === 'role-portfolio') {
+    return <RolePortfolioClient opportunity={opportunity} />;
   }
 
   const hasBanner = Boolean(opportunity.applicationBanner?.src);

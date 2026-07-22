@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Prefer a real local asset when available. Do not invent absolute / relative canonicals here —
   // Next metadataBase (https://moises.tech) resolves path-only canonicals.
   const canonical = `/opportunities/${opportunity.slug}`;
+  const ogImage = opportunity.applicationBanner?.src;
   return {
     title: seo.title,
     description: seo.description,
@@ -29,11 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: seo.description,
       type: 'website',
       url: canonical,
+      ...(ogImage ? { images: [{ url: ogImage, alt: opportunity.applicationBanner?.alt }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: seo.title,
       description: seo.description,
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   };
 }
