@@ -7,6 +7,7 @@ import type { Opportunity } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
+import { OpportunityRichText } from '@/components/opportunities/OpportunityRichText';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { opportunitySocialIconClass } from '@/components/opportunities/opportunitySocialStyles';
 
@@ -54,7 +55,9 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           ) : null}
           <div className={`mt-4 space-y-3 ${opp.body}`}>
             {hero.introParagraphs.map((p) => (
-              <p key={p.slice(0, 64)}>{p}</p>
+              <p key={p.slice(0, 64)}>
+                <OpportunityRichText text={p} />
+              </p>
             ))}
           </div>
 

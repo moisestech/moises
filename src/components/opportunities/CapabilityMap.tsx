@@ -1,4 +1,5 @@
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { OpportunityRichText } from '@/components/opportunities/OpportunityRichText';
 import type { CapabilityMapData } from '@/content/opportunities/systemsDossier';
 import { cn } from '@/lib/utils';
 
@@ -19,16 +20,22 @@ export function CapabilityMap({ data, sectionId = 'capabilities' }: CapabilityMa
         {data.groups.map((group) => (
           <div key={group.id} className={cn(opp.card, 'p-5')}>
             <h3 className={opp.h3MoMA}>{group.title}</h3>
-            <ul className="mt-3 space-y-1.5">
-              {group.items.map((item) => (
-                <li key={item} className={opp.body}>
-                  <span className="mr-2 text-stone-400" aria-hidden>
-                    ·
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            {group.items.length === 1 ? (
+              <p className={`mt-3 ${opp.body}`}>
+                <OpportunityRichText text={group.items[0]} />
+              </p>
+            ) : (
+              <ul className="mt-3 space-y-1.5">
+                {group.items.map((item) => (
+                  <li key={item.slice(0, 48)} className={opp.body}>
+                    <span className="mr-2 text-stone-400" aria-hidden>
+                      ·
+                    </span>
+                    <OpportunityRichText text={item} />
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         ))}
       </div>
@@ -40,7 +47,11 @@ export function CapabilityMap({ data, sectionId = 'capabilities' }: CapabilityMa
         </p>
       ) : null}
 
-      <p className={cn(opp.callout, 'mt-8', opp.body)}>{data.closingStatement}</p>
+      {data.closingStatement ? (
+        <p className={cn(opp.callout, 'mt-8', opp.body)}>
+          <OpportunityRichText text={data.closingStatement} />
+        </p>
+      ) : null}
     </section>
   );
 }

@@ -12,6 +12,10 @@ import { CreativeProductionSection } from '@/components/opportunities/CreativePr
 import { ClientFacingSection } from '@/components/opportunities/ClientFacingSection';
 import { PrinciplesSection } from '@/components/opportunities/PrinciplesSection';
 import { ExperienceSnapshot } from '@/components/opportunities/ExperienceSnapshot';
+import { ProfessionalExperienceSection } from '@/components/opportunities/ProfessionalExperienceSection';
+import { SelectedProjectSection } from '@/components/opportunities/SelectedProjectSection';
+import { EducationContinuingSection } from '@/components/opportunities/EducationContinuingSection';
+import { SelectedTechnologiesSection } from '@/components/opportunities/SelectedTechnologiesSection';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -62,40 +66,82 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
       >
         <OpportunityHero opportunity={opportunity} />
 
-        <FitPillars
-          title={dossier.fitSectionTitle}
-          intro={dossier.fitIntro}
-          pillars={dossier.fitPillars}
-          sectionId="fit"
-        />
-
-        <SystemsCaseStudyGrid
-          title={dossier.caseStudiesTitle}
-          intro={dossier.caseStudiesIntro}
-          studies={dossier.caseStudies}
-          sectionId="work"
-        />
-
-        <InnovationProcess opportunity={opportunity} sectionId="process" layout="horizontal" />
+        {dossier.fitPillars?.length && dossier.fitSectionTitle ? (
+          <FitPillars
+            title={dossier.fitSectionTitle}
+            intro={dossier.fitIntro}
+            pillars={dossier.fitPillars}
+            sectionId="fit"
+          />
+        ) : null}
 
         <CapabilityMap data={capabilityMap} sectionId="capabilities" />
 
-        <CreativeProductionSection data={dossier.creative} sectionId="creative" />
+        {dossier.experienceRoles?.length ? (
+          <ProfessionalExperienceSection
+            title={dossier.experienceRolesTitle ?? 'Professional Experience'}
+            intro={dossier.experienceRolesIntro}
+            roles={dossier.experienceRoles}
+            sectionId="experience"
+          />
+        ) : dossier.experience?.length ? (
+          <ExperienceSnapshot
+            title={dossier.experienceTitle ?? 'Experience'}
+            intro={dossier.experienceIntro}
+            items={dossier.experience}
+            sectionId="experience"
+          />
+        ) : null}
 
-        <ClientFacingSection data={dossier.clientFacing} sectionId="client" />
+        {dossier.selectedProject ? (
+          <SelectedProjectSection project={dossier.selectedProject} sectionId="selected-project" />
+        ) : null}
 
-        <PrinciplesSection
-          title={dossier.principlesTitle}
-          principles={dossier.principles}
-          sectionId="principles"
-        />
+        {dossier.education?.length ? (
+          <EducationContinuingSection
+            educationTitle={dossier.educationTitle ?? 'Education'}
+            education={dossier.education}
+            continuing={dossier.continuingDevelopment}
+            sectionId="education"
+          />
+        ) : null}
 
-        <ExperienceSnapshot
-          title={dossier.experienceTitle}
-          intro={dossier.experienceIntro}
-          items={dossier.experience}
-          sectionId="experience"
-        />
+        {dossier.technologies?.length ? (
+          <SelectedTechnologiesSection
+            title={dossier.technologiesTitle ?? 'Selected Technologies'}
+            groups={dossier.technologies}
+            sectionId="technologies"
+          />
+        ) : null}
+
+        {dossier.caseStudies?.length ? (
+          <SystemsCaseStudyGrid
+            title={dossier.caseStudiesTitle ?? 'Selected systems'}
+            intro={dossier.caseStudiesIntro}
+            studies={dossier.caseStudies}
+            sectionId="work"
+          />
+        ) : null}
+
+        {dossier.creative ? (
+          <CreativeProductionSection data={dossier.creative} sectionId="creative" />
+        ) : null}
+
+        {dossier.clientFacing ? (
+          <ClientFacingSection data={dossier.clientFacing} sectionId="client" />
+        ) : null}
+
+        {dossier.principles?.length && dossier.principlesTitle ? (
+          <PrinciplesSection
+            title={dossier.principlesTitle}
+            principles={dossier.principles}
+            sectionId="principles"
+          />
+        ) : null}
+
+        {opportunity.processSteps?.length ? (
+          <InnovationProcess opportunity={opportunity} sectionId="process" layout="horizontal" />
+        ) : null}
 
         <section id="contact" className={opp.section} aria-labelledby="contact-heading">
           <h2 id="contact-heading" className="sr-only">
