@@ -21,7 +21,7 @@ import { sprint2026Ctas, sprint2026TeachingHighlights } from './shared-sprint-20
 export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
   slug: 'wpp-hex-creative-innovation-lead-acd',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   applicationBanner: wppHexCreativeInnovationLeadBanner,
   seo: {

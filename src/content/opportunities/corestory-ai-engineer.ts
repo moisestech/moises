@@ -15,7 +15,7 @@ import {
 export const corestoryAiEngineerOpportunity: Opportunity = {
   slug: 'corestory-ai-engineer',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   seo: {
     title: 'AI Engineer — CoreStory · Moises Sanabria',

@@ -42,7 +42,7 @@ export const deepgramAppEngLogoBand: LogoBandItem[] = [
 export const deepgramSolutionsArchitectOpportunity: Opportunity = {
   slug: 'deepgram-solutions-architect',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   seo: {
     title: 'Solutions Architect (Applied Engineer) — Deepgram · Moises Sanabria',

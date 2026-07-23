@@ -14,7 +14,7 @@ import {
 export const endorLabsSolutionsArchitectOpportunity: Opportunity = {
   slug: 'endor-labs-solutions-architect',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   seo: {
     title: 'Solutions Architect — Endor Labs · Moises Sanabria',

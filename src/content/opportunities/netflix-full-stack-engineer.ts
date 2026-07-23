@@ -7,7 +7,7 @@ import { technologyCvPdfPath } from '@/content/technologyCvPrint';
 export const netflixFullStackEngineerOpportunity: Opportunity = {
   slug: 'netflix-full-stack-engineer-ai-insights',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   applicationBanner: {
     src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',

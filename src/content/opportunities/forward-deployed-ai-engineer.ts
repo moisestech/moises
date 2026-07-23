@@ -213,7 +213,7 @@ const rolePortfolio: RolePortfolioDossier = {
 export const forwardDeployedAiEngineerOpportunity: Opportunity = {
   slug: 'forward-deployed-ai-engineer',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'role-portfolio',
   applicationBanner: forwardDeployedAiEngineerBanner,
   seo: {

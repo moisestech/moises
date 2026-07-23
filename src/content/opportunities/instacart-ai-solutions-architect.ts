@@ -14,7 +14,7 @@ import {
 export const instacartAiSolutionsArchitectOpportunity: Opportunity = {
   slug: 'instacart-ai-solutions-architect',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   seo: {
     title: 'AI Solutions Architect — Instacart · Moises Sanabria',

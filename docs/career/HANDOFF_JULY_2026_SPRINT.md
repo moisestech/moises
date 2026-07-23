@@ -21,27 +21,30 @@
 
 | Seq | Role | Slug | Listed | Indexable | Due |
 |----:|------|------|--------|-----------|-----|
-| 1 | Deepgram — Solutions Architect (Applied Engineer) | `deepgram-solutions-architect` | false | false | Jul 23 — **JD refreshed** (support-focused AppEng) |
+| 1 | Deepgram — Solutions Architect (Applied Engineer) | `deepgram-solutions-architect` | **true** | false | Jul 23 — AppEng JD |
 | 2 | Harvey — Automation Engineer, Customer Education | `harvey-automation-engineer-customer-education` | **true** | **true** | Jul 13 |
 | 3 | Endor Labs — Solutions Architect | `endor-labs-solutions-architect` | false | false | Jul 14 |
 | 4 | Blue Acorn iCi — Agentic AI Integration Engineer | `blue-acorn-ici-agentic-ai-integration-engineer` | **true** | **true** | Jul 15 |
 | 5 | NEOGOV — Staff Agentic AI Developer | `neogov-staff-agentic-ai-developer` | **true** | **true** | Jul 16 |
 | 6 | CoreStory — AI Engineer | `corestory-ai-engineer` | false | false | Jul 17 — **blocked** |
 
-### Ready-to-apply batch (Jul 23 — private dossiers)
+### Ready-to-apply batch (Jul 23 — now listed on `/opportunities`)
 
 | Role | Slug | Listed | Indexable |
 |------|------|--------|-----------|
-| **WPP HEX — Creative Innovation Lead / ACD** | `wpp-hex-creative-innovation-lead-acd` | false | false |
-| Instacart — AI Solutions Architect | `instacart-ai-solutions-architect` | false | false |
-| Talkiatry — Senior AI Engineer | `talkiatry-senior-ai-engineer` | false | false |
-| Render — Solutions Engineer | `render-solutions-engineer` | false | false |
+| **WPP HEX — Creative Innovation Lead / ACD** | `wpp-hex-creative-innovation-lead-acd` | **true** | false |
+| Deepgram — SA (Applied Engineer) | `deepgram-solutions-architect` | **true** | false |
+| Instacart — AI Solutions Architect | `instacart-ai-solutions-architect` | **true** | false |
+| Talkiatry — Senior AI Engineer | `talkiatry-senior-ai-engineer` | **true** | false |
+| Render — Solutions Engineer | `render-solutions-engineer` | **true** | false |
 
-**Priority order:** WPP (flagship creative-tech) → Render → Instacart → Talkiatry (selective).
+Also listed for index visibility: Endor Labs, CoreStory, FDAE, Netflix, Playwire (still `indexable: false` where set).
+
+**Priority order:** WPP → Deepgram → Render → Instacart → Talkiatry (selective).
 
 Held out: Deloitte Healthcare (location unconfirmed — McLean, VA).
 
-Routes: `https://www.moises.tech/opportunities/[slug]`
+Routes: `https://www.moises.tech/opportunities/[slug]` · Index: `https://www.moises.tech/opportunities`
 
 ---
 

@@ -14,7 +14,7 @@ import {
 export const renderSolutionsEngineerOpportunity: Opportunity = {
   slug: 'render-solutions-engineer',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   seo: {
     title: 'Solutions Engineer — Render · Moises Sanabria',

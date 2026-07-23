@@ -14,7 +14,7 @@ import {
 export const talkiatrySeniorAiEngineerOpportunity: Opportunity = {
   slug: 'talkiatry-senior-ai-engineer',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   seo: {
     title: 'Senior AI Engineer — Talkiatry · Moises Sanabria',
