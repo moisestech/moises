@@ -38,10 +38,10 @@ export const affirmAiSolutionsEngineerBanner: ApplicationBanner = {
 
 /**
  * Forward Deployed AI Engineer — Creative Technologist.
- * Local 21:9 editorial workstation banner (left negative space for headline).
+ * Cloudinary 21:9 editorial workstation banner (left negative space for headline).
  */
 export const forwardDeployedAiEngineerBanner: ApplicationBanner = {
-  src: '/images/opportunities/forward-deployed-ai-engineer-banner.png',
+  src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1784825148/jobs/banners/forward-deployed-engineer-creative-technologist_lcsizn.png',
   alt: 'Creative technology workbench — modular workstation connecting generative media tools, fabrication prototypes, and production workflows',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
