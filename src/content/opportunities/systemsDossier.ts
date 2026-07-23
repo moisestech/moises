@@ -188,14 +188,140 @@ export type GapStatement = {
   body: string;
 };
 
+/** Optional editorial positioning block (systems → environments narrative). */
+export type PositioningStatementData = {
+  title: string;
+  paragraphs: string[];
+  annotation?: string;
+};
+
+/** Qualitative evaluation signal for AgentUniverseExplorer / EvaluationScorecard. */
+export type AgentEvalSignal = {
+  id: string;
+  label: string;
+  /** Deterministic illustrative label (e.g. Strong, Partial, At risk) — not a benchmark score. */
+  status: string;
+  explanation?: string;
+};
+
+export type AgentEnvironmentState = {
+  objective: string;
+  knownFacts: string[];
+  assumptions: string[];
+  openQuestions: string[];
+  availableTools: string[];
+  restrictedActions: string[];
+  memoryState: string;
+  lastObservation: string;
+  proposedNextAction: string;
+};
+
+export type AgentTimelineStepOverride = {
+  narrative?: string;
+  state?: Partial<AgentEnvironmentState>;
+  evaluations?: AgentEvalSignal[];
+};
+
+export type AgentTimelineStep = {
+  id: string;
+  label: string;
+  eventType: string;
+  narrative: string;
+  state: AgentEnvironmentState;
+  evaluations: AgentEvalSignal[];
+  /** Per-interruption deterministic overrides keyed by interruption id. */
+  interruptionOverrides?: Record<string, AgentTimelineStepOverride>;
+};
+
+export type AgentInterruptionOption = {
+  id: string;
+  label: string;
+  description: string;
+};
+
+export type AgentUniverseData = {
+  prototypeLabel: string;
+  title: string;
+  intro: string;
+  scenarioTitle: string;
+  scenarioSummary: string;
+  disclaimer: string;
+  researchNote: string;
+  interruptions: AgentInterruptionOption[];
+  /** null = baseline trajectory with no injected failure. */
+  defaultInterruptionId: string | null;
+  timeline: AgentTimelineStep[];
+};
+
+export type EvaluationPhilosophyItem = {
+  id: string;
+  title: string;
+  body: string;
+};
+
+export type EvaluationPhilosophyData = {
+  title: string;
+  intro?: string;
+  items: EvaluationPhilosophyItem[];
+};
+
+export type FailureTaxonomyItem = {
+  id: string;
+  name: string;
+  symptom: string;
+  hiddenRisk: string;
+  intervention: string;
+  evaluationSignal: string;
+};
+
+export type FailureTaxonomyData = {
+  title: string;
+  intro?: string;
+  items: FailureTaxonomyItem[];
+};
+
+export type ResearchQuestionsData = {
+  title: string;
+  intro?: string;
+  questions: string[];
+};
+
+export type CulturalPerspectiveItem = {
+  id: string;
+  title: string;
+  researchQuestion: string;
+  relevance: string;
+  href?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  imageLocal?: boolean;
+};
+
+export type CulturalPerspectiveData = {
+  title: string;
+  intro: string;
+  items: CulturalPerspectiveItem[];
+};
+
 export type SystemsDossier = {
   fitSectionTitle: string;
   fitIntro?: string;
   fitPillars: FitPillar[];
+  /** Optional narrative bridge before fit pillars (applications → environments). */
+  positioningStatement?: PositioningStatementData;
   architecture: ArchitectureFlowData;
-  permissions: PermissionScenarioData;
-  reliability: ReliabilityPanelData;
-  translation: TranslationPanelData;
+  /** Affirm-style permission demo — omit when unused. */
+  permissions?: PermissionScenarioData;
+  /** Affirm-style reliability panel — omit when unused. */
+  reliability?: ReliabilityPanelData;
+  /** Affirm-style translation panel — omit when unused. */
+  translation?: TranslationPanelData;
+  /** Interactive agent-environment evaluation lab (research prototype). */
+  agentUniverse?: AgentUniverseData;
+  evaluationPhilosophy?: EvaluationPhilosophyData;
+  failureTaxonomy?: FailureTaxonomyData;
+  researchQuestions?: ResearchQuestionsData;
+  culturalPerspective?: CulturalPerspectiveData;
   capabilityMap: CapabilityMapData;
   plan: ThirtySixtyNinetyData;
   caseStudiesTitle: string;

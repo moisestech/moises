@@ -1,5 +1,6 @@
 import type { Opportunity } from './types';
 import { affirmAiSolutionsEngineerOpportunity } from './affirm-ai-solutions-engineer';
+import { anthropicResearchEngineerUniversesOpportunity } from './anthropic-research-engineer-universes';
 import { blueAcornAgenticAiOpportunity } from './blue-acorn-ici-agentic-ai-integration-engineer';
 import { corestoryAiEngineerOpportunity } from './corestory-ai-engineer';
 import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
@@ -19,6 +20,8 @@ import { wppHexCreativeInnovationLeadOpportunity } from './wpp-hex-creative-inno
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
+  [anthropicResearchEngineerUniversesOpportunity.slug]:
+    anthropicResearchEngineerUniversesOpportunity,
   [blueAcornAgenticAiOpportunity.slug]: blueAcornAgenticAiOpportunity,
   [corestoryAiEngineerOpportunity.slug]: corestoryAiEngineerOpportunity,
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
