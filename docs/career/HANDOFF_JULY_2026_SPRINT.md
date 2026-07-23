@@ -21,7 +21,7 @@
 
 | Seq | Role | Slug | Listed | Indexable | Due |
 |----:|------|------|--------|-----------|-----|
-| 1 | Deepgram — Solutions Architect | `deepgram-solutions-architect` | false | false | Jul 12 |
+| 1 | Deepgram — Solutions Architect (Applied Engineer) | `deepgram-solutions-architect` | false | false | Jul 23 — **JD refreshed** (support-focused AppEng) |
 | 2 | Harvey — Automation Engineer, Customer Education | `harvey-automation-engineer-customer-education` | **true** | **true** | Jul 13 |
 | 3 | Endor Labs — Solutions Architect | `endor-labs-solutions-architect` | false | false | Jul 14 |
 | 4 | Blue Acorn iCi — Agentic AI Integration Engineer | `blue-acorn-ici-agentic-ai-integration-engineer` | **true** | **true** | Jul 15 |
