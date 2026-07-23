@@ -6,12 +6,16 @@ import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
 import { deepgramSolutionsArchitectOpportunity } from './deepgram-solutions-architect';
 import { endorLabsSolutionsArchitectOpportunity } from './endor-labs-solutions-architect';
 import { harveyAutomationEngineerOpportunity } from './harvey-automation-engineer-customer-education';
+import { instacartAiSolutionsArchitectOpportunity } from './instacart-ai-solutions-architect';
 import { knightJournalismTechProductStrategistOpportunity } from './knight-journalism-tech-product-strategist';
 import { neogovStaffAgenticAiOpportunity } from './neogov-staff-agentic-ai-developer';
 import { netflixFullStackEngineerOpportunity } from './netflix-full-stack-engineer';
 import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fabrication-lab-manager';
 import { playwireOpportunity } from './playwire';
 import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
+import { renderSolutionsEngineerOpportunity } from './render-solutions-engineer';
+import { talkiatrySeniorAiEngineerOpportunity } from './talkiatry-senior-ai-engineer';
+import { wppHexCreativeInnovationLeadOpportunity } from './wpp-hex-creative-innovation-lead-acd';
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
@@ -22,12 +26,16 @@ const bySlug: Record<string, Opportunity> = {
   [endorLabsSolutionsArchitectOpportunity.slug]: endorLabsSolutionsArchitectOpportunity,
   [forwardDeployedAiEngineerOpportunity.slug]: forwardDeployedAiEngineerOpportunity,
   [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
+  [instacartAiSolutionsArchitectOpportunity.slug]: instacartAiSolutionsArchitectOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:
     knightJournalismTechProductStrategistOpportunity,
   [neogovStaffAgenticAiOpportunity.slug]: neogovStaffAgenticAiOpportunity,
   [netflixFullStackEngineerOpportunity.slug]: netflixFullStackEngineerOpportunity,
   [newIncMediaFabricationLabManagerOpportunity.slug]: newIncMediaFabricationLabManagerOpportunity,
   [playwireOpportunity.slug]: playwireOpportunity,
+  [renderSolutionsEngineerOpportunity.slug]: renderSolutionsEngineerOpportunity,
+  [talkiatrySeniorAiEngineerOpportunity.slug]: talkiatrySeniorAiEngineerOpportunity,
+  [wppHexCreativeInnovationLeadOpportunity.slug]: wppHexCreativeInnovationLeadOpportunity,
 };
 
 export function getOpportunity(slug: string): Opportunity | undefined {

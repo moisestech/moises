@@ -28,6 +28,19 @@
 | 5 | NEOGOV — Staff Agentic AI Developer | `neogov-staff-agentic-ai-developer` | **true** | **true** | Jul 16 |
 | 6 | CoreStory — AI Engineer | `corestory-ai-engineer` | false | false | Jul 17 — **blocked** |
 
+### Ready-to-apply batch (Jul 23 — private dossiers)
+
+| Role | Slug | Listed | Indexable |
+|------|------|--------|-----------|
+| **WPP HEX — Creative Innovation Lead / ACD** | `wpp-hex-creative-innovation-lead-acd` | false | false |
+| Instacart — AI Solutions Architect | `instacart-ai-solutions-architect` | false | false |
+| Talkiatry — Senior AI Engineer | `talkiatry-senior-ai-engineer` | false | false |
+| Render — Solutions Engineer | `render-solutions-engineer` | false | false |
+
+**Priority order:** WPP (flagship creative-tech) → Render → Instacart → Talkiatry (selective).
+
+Held out: Deloitte Healthcare (location unconfirmed — McLean, VA).
+
 Routes: `https://www.moises.tech/opportunities/[slug]`
 
 ---

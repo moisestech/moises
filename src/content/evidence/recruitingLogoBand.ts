@@ -88,3 +88,25 @@ export const affirmCompanyLogos = {
   dark: `${jobsCdn}/v1784121432/jobs/application-logos/affirm-logo-type-dark-theme-horizontal_yofxgl.avif`,
   alt: 'Affirm',
 } as const;
+
+/**
+ * WPP HEX — creative-tech ecosystem marks (not partnerships or certifications).
+ * Platforms named in the Creative Innovation Lead / ACD JD + verified stack.
+ */
+export const wppHexCreativeTechLogoBand: LogoBandItem[] = [
+  { src: 'https://cdn.simpleicons.org/adobe/FF0000', alt: 'Adobe', height: 36 },
+  { src: 'https://cdn.simpleicons.org/google/4285F4', alt: 'Google', height: 36 },
+  { src: 'https://cdn.simpleicons.org/nvidia/76B900', alt: 'NVIDIA', height: 36 },
+  { src: 'https://cdn.simpleicons.org/figma/F24E1E', alt: 'Figma', height: 36 },
+  { src: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png`, alt: 'OpenAI', height: 36 },
+];
+
+/**
+ * Neutral wordmark placeholders for WPP Production hero.
+ * TODO: replace with official light/dark marks under Cloudinary or /public.
+ */
+export const wppProductionCompanyLogos = {
+  light: '/images/opportunities/placeholders/wpp-production-logo-light.svg',
+  dark: '/images/opportunities/placeholders/wpp-production-logo-dark.svg',
+  alt: 'WPP Production',
+} as const;

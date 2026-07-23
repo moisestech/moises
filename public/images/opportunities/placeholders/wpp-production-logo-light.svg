@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" role="img" aria-label="WPP Production placeholder logo">
+  <!-- TODO: replace with official WPP Production wordmark (light theme) -->
+  <rect width="220" height="48" rx="4" fill="#f5f5f4"/>
+  <text x="16" y="30" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#1c1917" letter-spacing="0.04em">WPP PRODUCTION</text>
+</svg>
