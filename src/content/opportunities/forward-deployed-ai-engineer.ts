@@ -223,6 +223,7 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
     indexable: false,
   },
   visibilityNote: 'Role-specific portfolio · Forward Deployed AI Engineer',
+  company: 'Forward Deployed AI',
   audienceKeywords: {
     lead: 'Prepared for',
     terms: [
