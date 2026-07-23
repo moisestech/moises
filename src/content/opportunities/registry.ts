@@ -50,7 +50,21 @@ export function listOpportunities(): Opportunity[] {
 }
 
 export function listActiveOpportunities(): Opportunity[] {
-  return listOpportunities().filter((o) => o.status === 'active' && o.listed !== false);
+  return listOpportunities()
+    .filter((o) => o.status === 'active' && o.listed !== false)
+    .sort((a, b) => {
+      const companyCmp = (a.company ?? a.roleTitle ?? a.slug).localeCompare(
+        b.company ?? b.roleTitle ?? b.slug,
+        undefined,
+        { sensitivity: 'base' },
+      );
+      if (companyCmp !== 0) return companyCmp;
+      return (a.roleTitle ?? a.hero.headline).localeCompare(
+        b.roleTitle ?? b.hero.headline,
+        undefined,
+        { sensitivity: 'base' },
+      );
+    });
 }
 
 /** For `generateStaticParams` — all active slugs including unlisted private dossiers. */

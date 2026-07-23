@@ -7,6 +7,7 @@ import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evide
 export const cvsGenaiEngineerOpportunity: Opportunity = {
   slug: 'cvs-senior-genai-engineer',
   status: 'active',
+  listed: true,
   variant: 'compact',
   applicationBanner: {
     ...seniorGenAiEngineerBanner,
