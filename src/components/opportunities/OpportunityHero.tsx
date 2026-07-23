@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { Mail, FolderKanban, Linkedin, Github, Instagram, ArrowDown } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
@@ -8,6 +7,7 @@ import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
 import { OpportunityRichText } from '@/components/opportunities/OpportunityRichText';
+import { OpportunityProfileImage } from '@/components/opportunities/OpportunityProfileImage';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { opportunitySocialIconClass } from '@/components/opportunities/opportunitySocialStyles';
 
@@ -22,7 +22,6 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
     track('opportunity_cta_click', { opportunitySlug: slug, kind });
   };
 
-  const headshotRemote = hero.headshotSrc?.startsWith('http') ?? false;
   const eyebrow = opportunity.heroEyebrow ?? opportunity.roleTitle ?? 'Positioning';
   const showSystemsHero =
     opportunity.variant === 'systems-dossier' ||
@@ -185,21 +184,11 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           {hero.headshotSrc ? (
             <>
               <p className={`mb-2 ${opp.label}`}>Profile</p>
-              <div className={opp.headshot}>
-                {headshotRemote || !hero.headshotSrc.endsWith('.svg') ? (
-                  <Image
-                    src={hero.headshotSrc}
-                    alt={hero.headshotAlt ?? ''}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 400px"
-                    priority
-                  />
-                ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={hero.headshotSrc} alt={hero.headshotAlt ?? ''} className="h-full w-full object-cover" />
-                )}
-              </div>
+              <OpportunityProfileImage
+                src={hero.headshotSrc}
+                alt={hero.headshotAlt ?? ''}
+                priority
+              />
             </>
           ) : null}
         </div>

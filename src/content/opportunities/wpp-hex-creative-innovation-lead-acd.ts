@@ -16,8 +16,7 @@ import { sprint2026Ctas, sprint2026TeachingHighlights } from './shared-sprint-20
  * WPP Production — Creative Innovation Lead / ACD (HEX Studio).
  * Fit 77/100 conditional pursue · Miami → NYC relocate · private dossier.
  *
- * TODO assets: swap `wppProductionCompanyLogos` + `wppHexCreativeInnovationLeadBanner`
- * for official / editorial Cloudinary art (do not imply Moises worked inside WPP/HEX).
+ * TODO assets: swap `wppProductionCompanyLogos` for official light/dark wordmarks when available.
  */
 export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
   slug: 'wpp-hex-creative-innovation-lead-acd',
@@ -43,7 +42,10 @@ export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
   heroMetaChips: [
     'Miami → New York',
     'Open to relocate',
-    'Available for hybrid work',
+    'Hybrid ready',
+    'Fine art + creative tech',
+    'Mentors Creative Technologists',
+    'Brief → prototype → adoption',
   ],
   heroPrimaryCta: { label: 'View selected work', href: '#case-studies' },
   heroSecondaryCta: { label: 'Discuss creative technology leadership', href: '#resume' },
@@ -61,6 +63,10 @@ export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
       {
         label: 'Craft + emerging tools',
         detail: 'Generative media, immersive and physical production, art direction, mentoring.',
+      },
+      {
+        label: 'Cultural fluency',
+        detail: 'Venezuelan-American perspective across art, technology, and emerging media culture.',
       },
     ],
   },
@@ -251,6 +257,17 @@ export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
     'Five contexts that map to HEX: generative product, institutional creative-tech leadership, mentorship and enablement, commercial technology, and craft-led prototyping.',
   caseStudyColumns: 2,
   teachingHighlights: sprint2026TeachingHighlights,
+  certifications: [
+    {
+      name: 'Cooper Union',
+      detail: 'BFA — fine-art foundation for craft judgment and cultural literacy',
+    },
+    {
+      name: 'Oolite Arts — Technical Director of Digital',
+      detail: 'Knight-funded Digital Lab operations, workshops, and artist production support',
+      href: 'https://oolitearts.org/digital-lab/',
+    },
+  ],
   skillsSectionTitle: 'Creative-technology capabilities',
   skillsMatrixRows: [
     {
@@ -275,7 +292,7 @@ export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
     },
     {
       category: 'Platforms',
-      skills: 'Adobe Creative Cloud, Figma, OpenAI, generative-image tools, Google/NVIDIA-adjacent creative stacks',
+      skills: 'Adobe Creative Cloud, After Effects, Figma, OpenAI, React/Next.js, generative-image tools',
       icon: 'layers',
     },
   ],
@@ -286,22 +303,27 @@ export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
     {
       title: 'Interpret the cultural and business brief',
       description: 'Clarify audience, constraints, craft ambition, and what “done” means for clients and partners.',
+      logoIds: ['figma'],
     },
     {
       title: 'Identify the technological opportunity',
       description: 'Map which emerging tools actually unlock the story — without forcing tech for its own sake.',
+      logoIds: ['openai', 'python'],
     },
     {
       title: 'Prototype the experience quickly',
       description: 'Ship the smallest convincing proof across software, generative media, or physical production.',
+      logoIds: ['nextjs', 'react', 'adobe-after-effects'],
     },
     {
       title: 'Evaluate craft, feasibility, and audience value',
       description: 'Raise the quality bar: presentation, execution detail, and whether the idea earns attention.',
+      logoIds: ['adobe-after-effects', 'figma'],
     },
     {
       title: 'Build a repeatable production workflow',
       description: 'Turn a one-off experiment into a maintainable path others can run.',
+      logoIds: ['typescript', 'vercel'],
     },
     {
       title: 'Teach collaborators or client teams to use it',
@@ -318,7 +340,17 @@ export const wppHexCreativeInnovationLeadOpportunity: Opportunity = {
     'My leadership experience was developed through creative-technology products, institutional programs, interdisciplinary production teams, and education rather than through a conventional agency ACD track. I bring the technology fluency, creative judgment, mentoring practice, and cultural perspective HEX requires, while recognizing that WPP-scale multinational campaign ownership would be a new level of responsibility. I am currently based in Miami and prepared to relocate to New York for the approximately four-day hybrid schedule.',
   ctas: sprint2026Ctas('WPP HEX Creative Innovation Lead / ACD'),
   animatedLogoBand: wppHexCreativeTechLogoBand,
-  techLogoIds: [],
+  techLogoIds: [
+    'adobe-after-effects',
+    'openai',
+    'react',
+    'nextjs',
+    'typescript',
+    'python',
+    'vercel',
+    'comfyui',
+    'huggingface',
+  ],
   resumeSectionTitle: 'Application',
   resumeSectionNote:
     'Miami → New York · Open to relocate · Available for hybrid work. Lead with creative technology, craft, and mentorship — not automation engineering.',

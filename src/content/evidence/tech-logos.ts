@@ -111,6 +111,8 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
     'adobeaftereffects',
     '9999FF',
   ),
+  adobe: simpleIconEntry('adobe', 'Adobe', 'adobe', 'FF0000'),
+  figma: simpleIconEntry('figma', 'Figma', 'figma', 'F24E1E'),
   canva: simpleIconEntry('canva', 'Canva', 'canva', '00C4CC'),
   capcut: simpleIconEntry('capcut', 'CapCut', 'capcut', '000000', 'dark:invert'),
   tiktok: simpleIconEntry('tiktok', 'TikTok', 'tiktok'),

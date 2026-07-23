@@ -48,11 +48,10 @@ export const forwardDeployedAiEngineerBanner: ApplicationBanner = {
 
 /**
  * WPP Production — Creative Innovation Lead / ACD (HEX Studio).
- * Placeholder studio banner only — does not depict WPP/HEX interiors.
- * TODO: replace with Cloudinary editorial crop (craft + screens + prototypes).
+ * Editorial Cloudinary banner (creative-tech studio direction — not WPP/HEX interiors).
  */
 export const wppHexCreativeInnovationLeadBanner: ApplicationBanner = {
-  src: '/images/opportunities/placeholders/wpp-hex-creative-innovation-lead-banner.svg',
-  alt: 'Creative technology studio — screens, prototypes, materials, and collaborative critique (placeholder)',
+  src: `${cdn}/v1784837130/jobs/banners/hex-creative-innovation-lead_mkzbme.png`,
+  alt: 'Creative Innovation Lead — generative craft, prototypes, and collaborative creative-technology production',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };

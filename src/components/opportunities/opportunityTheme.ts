@@ -41,7 +41,7 @@ export const opp = {
     'inline-flex items-center gap-2 rounded-lg border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-900 px-4 py-2.5 text-sm font-medium text-stone-800 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-800',
   linkAccent: 'font-medium text-cyan-500 dark:text-cyan-400 underline-offset-2 hover:underline',
   headshot:
-    'relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800',
+    'relative aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 [transform-style:preserve-3d]',
   profilesBorder:
     'mt-5 flex flex-wrap items-center gap-2 border-t border-stone-200/80 dark:border-stone-700/80 pt-5',
   divide: 'divide-stone-100 dark:divide-stone-800',
