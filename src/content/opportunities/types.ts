@@ -1,6 +1,6 @@
 import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
-import type { EvidenceStatus, SystemsDossier } from '@/content/opportunities/systemsDossier';
+import type { EvidenceStatus, SystemsDossier, ThirtySixtyNinetyData } from '@/content/opportunities/systemsDossier';
 import type { RolePortfolioDossier } from '@/content/opportunities/rolePortfolio';
 
 export type ApplicationBanner = {
@@ -24,6 +24,8 @@ export type OpportunitySeo = {
   description: string;
   /** When false, page sets robots noindex (draft private links). */
   indexable?: boolean;
+  /** Optional meta keywords for recruiter-facing dossiers. */
+  keywords?: string[];
 };
 
 /** Optional visual for the role-fit matrix — shown in the storytelling panel when the row is hovered or focused. */
@@ -223,4 +225,9 @@ export type Opportunity = {
   animatedLogoBand?: LogoBandItem[];
   /** Full-bleed image under the recruiting header — swap per employer / application */
   applicationBanner?: ApplicationBanner;
+  /**
+   * Optional 30/60/90 plan for compact dossiers (systems-dossier uses systemsDossier.plan).
+   * When set, OpportunityPageClient renders ThirtySixtyNinetyPlan.
+   */
+  plan?: ThirtySixtyNinetyData;
 };

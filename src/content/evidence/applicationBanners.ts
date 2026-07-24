@@ -55,3 +55,14 @@ export const wppHexCreativeInnovationLeadBanner: ApplicationBanner = {
   alt: 'Creative Innovation Lead — generative craft, prototypes, and collaborative creative-technology production',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
+
+/**
+ * Banesco USA — AI Developer.
+ * Local SVG placeholder until wide Cloudinary editorial banner is ready.
+ * Calm fintech direction — no fake Banesco logo or banking UI.
+ */
+export const banescoAiDeveloperBanner: ApplicationBanner = {
+  src: '/images/opportunities/placeholders/banesco-ai-developer-banner.svg',
+  alt: 'Banesco USA AI Developer — placeholder banner for applied AI, cloud data systems, and bilingual delivery',
+  aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+};

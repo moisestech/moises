@@ -13,6 +13,7 @@ import { InnovationProcess } from '@/components/opportunities/InnovationProcess'
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { ThirtySixtyNinetyPlan } from '@/components/opportunities/ThirtySixtyNinetyPlan';
 import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
 import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -67,6 +68,7 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           ) : (
             <TechStackLogos opportunity={opportunity} />
           )}
+          {opportunity.plan ? <ThirtySixtyNinetyPlan data={opportunity.plan} sectionId="plan" /> : null}
           <ResumeCTA opportunity={opportunity} />
         </main>
       </>
