@@ -68,11 +68,11 @@ export const banescoAiDeveloperBanner: ApplicationBanner = {
 
 /**
  * CoreStory — AI Engineer.
- * Local SVG placeholder until wide Cloudinary editorial banner is ready.
- * Legacy-code → retrieval → narrative intelligence direction — no fake CoreStory product UI.
+ * Editorial Cloudinary banner (legacy code → retrieval → narrative intelligence).
+ * No fake CoreStory product UI.
  */
 export const corestoryAiEngineerBanner: ApplicationBanner = {
-  src: '/images/opportunities/placeholders/corestory-ai-engineer-banner.svg',
-  alt: 'CoreStory AI Engineer — placeholder banner for LLM systems, retrieval, and narrative intelligence',
+  src: `${cdn}/v1785208741/jobs/banners/corestory-ai-engineer-banner_pa23tj.png`,
+  alt: 'CoreStory AI Engineer — LLM systems, retrieval, and narrative intelligence from legacy complexity',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
