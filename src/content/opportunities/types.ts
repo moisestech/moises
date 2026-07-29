@@ -2,6 +2,7 @@ import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 import type { EvidenceStatus, SystemsDossier, ThirtySixtyNinetyData } from '@/content/opportunities/systemsDossier';
 import type { RolePortfolioDossier } from '@/content/opportunities/rolePortfolio';
+import type { SystemPipelineCaseStudyData } from '@/content/evidence/systemPipeline';
 
 export type ApplicationBanner = {
   src: string;
@@ -230,4 +231,9 @@ export type Opportunity = {
    * When set, OpportunityPageClient renders ThirtySixtyNinetyPlan.
    */
   plan?: ThirtySixtyNinetyData;
+  /**
+   * Optional multi-stage system pipeline case study (e.g. Lore Machine walkthrough).
+   * When set, OpportunityPageClient renders SystemPipelineCaseStudy after role fit.
+   */
+  systemPipeline?: SystemPipelineCaseStudyData;
 };

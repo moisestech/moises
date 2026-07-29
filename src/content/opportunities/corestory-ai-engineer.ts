@@ -4,6 +4,7 @@ import { corestoryAiEngineerBanner } from '@/content/evidence/applicationBanners
 import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import { productionAiAutomationPack } from '@/content/evidence/productionAiAutomationPack';
+import { loreMachinePipelineCondensed } from '@/content/evidence/loreMachineSystemPipeline';
 import {
   sprint2026Ctas,
   sprint2026Headshot,
@@ -97,7 +98,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
   heroRoleMeta: 'LLM systems · retrieval · agents · narrative intelligence',
   candidateName: 'Moises Sanabria',
   candidatePositioning:
-    'I build LLM-powered products and agentic workflows where retrieval, grounding, and explainability matter as much as generation.',
+    'I build AI-native products that turn complex source material and model behavior into structured, inspectable systems.',
   heroMetaChips: [
     'LLM integration',
     'Retrieval & embeddings',
@@ -108,14 +109,14 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     'SaaS / early-stage delivery',
     'Remote-ready',
   ],
-  heroPrimaryCta: { label: 'Review AI evidence', href: '#case-studies' },
+  heroPrimaryCta: { label: 'Inspect Lore Machine system', href: '#system-pipeline' },
   heroSecondaryCta: { label: 'Download Résumé', href: '#resume' },
   audienceKeywords: {
     lead: 'Prepared for CoreStory AI, product, and infrastructure evaluators.',
     terms: [
       {
-        label: 'Narrative from systems',
-        detail: 'Experience turning model behavior into usable product workflows — not demos only.',
+        label: 'Inspectable AI products',
+        detail: 'Lore Machine: narrative → scene → model ops → media → human revision as one production system.',
       },
       {
         label: 'Retrieval with limits',
@@ -134,7 +135,8 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
   navItems: [
     { id: 'hero', label: 'Overview' },
     { id: 'fit', label: 'Role fit' },
-    { id: 'case-studies', label: 'Evidence' },
+    { id: 'system-pipeline', label: 'Lore Machine' },
+    { id: 'case-studies', label: 'Other evidence' },
     { id: 'skills', label: 'Stack' },
     { id: 'process', label: 'How I work' },
     { id: 'plan', label: '90 days' },
@@ -144,9 +146,9 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     headline: 'LLM systems, retrieval, and agents that make legacy complexity explainable.',
     subheadline: 'AI Engineer · CoreStory · Remote-first',
     introParagraphs: [
-      'I am a full-stack and applied-AI engineer who builds products where large language models, retrieval, and conversational workflows have to work together under real production constraints.',
-      'CoreStory’s mission — surfacing business logic and technical insight from legacy systems — maps to work I already do: translating opaque system behavior into grounded, reviewable narratives that teams can trust enough to act on.',
-      `My strongest confirmed evidence is generative AI product engineering (Lore Machine), production agentic automation (n8n / Airtable), and retrieval-system design as a local prototype (${infra24.title}: ${infra24.buildState}). I do not claim production ownership of LlamaIndex, LangChain, Pinecone, or Weaviate — those are intentional platform ramps on top of transferable retrieval and agent patterns.`,
+      'I build AI-native products that turn complex source material and model behavior into structured, inspectable systems. At Lore Machine, I helped transform long-form narrative input into a production creator workflow spanning AI orchestration, media generation, application state, and human revision.',
+      'CoreStory applies a related systems problem to legacy software: revealing structure, relationships, and operational meaning that are otherwise difficult to access. That is structurally relevant experience — not a claim that the two platforms used the same architecture.',
+      `Secondary evidence includes production agentic automation (n8n / Airtable) and retrieval-system design as a local prototype (${infra24.title}: ${infra24.buildState}). I do not claim production ownership of LlamaIndex, LangChain, Pinecone, or Weaviate — those are intentional platform ramps.`,
       verifierBoundaryNote,
     ],
     trustLine:
@@ -154,6 +156,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     headshotSrc: sprint2026Headshot,
     headshotAlt: 'Moises Sanabria',
   },
+  systemPipeline: loreMachinePipelineCondensed,
   roleMatchSectionTitle: 'Role fit — CoreStory AI Engineer',
   roleMatchIntro:
     'Statuses are honest labels, not match percentages: Demonstrated, Strongly transferable, Prototype, Developing, Gap acknowledged.',
@@ -165,7 +168,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     {
       requirement: 'LLM-powered systems (RAG, chat agents, summarizers)',
       evidence:
-        '[Demonstrated / transferable] Lore Machine generative product systems; AI24 News (real-time generative app); agent chat/tool-calling workflows; Institutional Memory Agent design for grounded Q&A and summarization-style answers (prototype).',
+        '[Demonstrated / transferable] Lore Machine generative production system (see system walkthrough): frontend, auth, AI/data APIs, prompt-facing workflows, media generation interfaces, and human revision loops. Also AI24 News and agent tool-calling workflows. Institutional Memory Agent for grounded Q&A remains a prototype — separate from Lore Machine.',
       illustration: {
         src: evidenceProjects['lore-machine'].imageSrc,
         alt: evidenceProjects['lore-machine'].imageAlt,
@@ -175,7 +178,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     {
       requirement: 'LlamaIndex, LangChain, or similar orchestration',
       evidence:
-        '[Developing / Gap acknowledged] Hands-on orchestration today is through product APIs, prompt/context systems, n8n AI Agent nodes, and custom TypeScript retrieval flows — not claimed production LlamaIndex/LangChain ownership. Conceptual patterns transfer; framework fluency is a first-ramp priority.',
+        '[Developing / Gap acknowledged] Hands-on orchestration today is through product APIs, prompt/context systems, n8n AI Agent nodes, and custom TypeScript retrieval flows — not claimed production LlamaIndex/LangChain ownership. Lore Machine proves product-level prompt/model orchestration, not framework ownership.',
       illustration: {
         src: evidenceProjects['n8n-gmail-intelligence'].imageSrc,
         alt: 'Agent orchestration via production n8n AI Agent workflows',
@@ -260,33 +263,22 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     },
   ],
   featuredProjectIds: [
-    'lore-machine',
     'digital-culture-infrastructure',
     'n8n-gmail-intelligence',
     'ai24',
     'playwire-alumni',
   ],
   caseStudyColumns: 2,
-  caseStudiesSectionTitle: 'Evidence for CoreStory’s AI engine',
+  caseStudiesSectionTitle: 'Additional evidence',
   caseStudiesIntro:
-    'Focused on LLM products, retrieval design, agentic workflows, and production delivery. Institutional Memory Agent remains a local prototype — not production LangChain/Pinecone.',
+    'Secondary to the Lore Machine system walkthrough above: retrieval prototype (not production LangChain/Pinecone), agentic production automation, AI24 product work, and Playwire production systems.',
   caseStudyOverrides: [
-    {
-      evidenceId: 'lore-machine',
-      title: 'Lore Machine — generative systems as product',
-      category: 'LLM product engineering',
-      summary:
-        'Founding-engineer ownership of a real-time generative storytelling platform: frontend, authentication, AI/data API integrations, prompt and context systems, and production deployment. Directly relevant to integrating LLMs into a cohesive platform where model behavior must stay usable, inspectable, and shippable.',
-      skillTags: ['LLMs', 'PromptOps', 'TypeScript', 'APIs', 'Auth', 'Vercel', 'Startup delivery'],
-      href: evidenceProjects['lore-machine'].href,
-      linkLabel: 'View Lore Machine',
-    },
     {
       evidenceId: 'digital-culture-infrastructure',
       title: 'Institutional Memory Agent — retrieval prototype',
       category: 'RAG design · Prototype',
       summary:
-        `Designed a retrieval-augmented Q&A path for institutional knowledge: document ingestion, OpenAI embeddings, Supabase pgvector, hybrid keyword/semantic ranking, grounding controls, golden-set evaluation concepts, and human approval before public outputs. Build state: ${infra24.buildState}. Not a claim of production LlamaIndex/LangChain or managed vector-DB ownership — it is the transferable architecture for CoreStory-style grounded narrative answers.`,
+        `Designed a retrieval-augmented Q&A path for institutional knowledge: document ingestion, OpenAI embeddings, Supabase pgvector, hybrid keyword/semantic ranking, grounding controls, golden-set evaluation concepts, and human approval before public outputs. Build state: ${infra24.buildState}. Not a claim of production LlamaIndex/LangChain or managed vector-DB ownership — transferable architecture for grounded answers, separate from Lore Machine product engineering.`,
       skillTags: ['Embeddings', 'pgvector', 'Hybrid retrieval', 'Grounding', 'Evaluation', 'Prototype'],
       imageSrc: evidenceProjects['digital-culture-infrastructure'].imageSrc,
       imageAlt: 'Institutional systems context for retrieval-agent prototyping',
@@ -298,7 +290,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
       title: 'Production agentic workflow with human review',
       category: 'Agentic systems · Tool calling',
       summary:
-        `${automationProjectSpecs['n8n-gmail-intelligence'].summary} Shows chat-agent-adjacent tool calling, structured outputs, and approval-aware automation — the operational layer CoreStory needs around model calls, not only the model itself.`,
+        `${automationProjectSpecs['n8n-gmail-intelligence'].summary} Shows chat-agent-adjacent tool calling, structured outputs, and approval-aware automation — the operational layer around model calls, not only the model itself.`,
       skillTags: ['n8n', 'AI Agent', 'Tool calling', 'Airtable', 'HITL', 'Production ops'],
       imageSrc: automationProjectSpecs['n8n-gmail-intelligence'].imageSrc,
       imageAlt: automationProjectSpecs['n8n-gmail-intelligence'].imageAlt,
@@ -309,7 +301,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
       title: 'AI24 News — integrated LLM application',
       category: 'Applied generative AI',
       summary:
-        'Real-time AI-native application combining external data, generative illustration, frontend state, database infrastructure, and observability. Evidence of coordinating model calls, data, and UX as one system — aligned with CoreStory’s need to productionize AI features, not leave them as notebooks.',
+        'Real-time AI-native application combining external data, generative illustration, frontend state, database infrastructure, and observability. Evidence of coordinating model calls, data, and UX as one system.',
       skillTags: ['Next.js', 'LLM APIs', 'Observability', 'Supabase', 'Product AI'],
       href: 'https://ai24.live',
       linkLabel: 'View AI24',
@@ -319,7 +311,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
       title: 'Playwire — production systems under operational load',
       category: 'Scale · debugging · cloud adjacency',
       summary:
-        'Solutions and data engineering in production: integrations, AWS data paths (Kinesis/Athena → Snowflake), monitoring, and stakeholder delivery. Supports CoreStory’s need for engineers who can collaborate with backend/DevOps on latency, cost, and reliability around AI services.',
+        'Solutions and data engineering in production: integrations, AWS data paths (Kinesis/Athena → Snowflake), monitoring, and stakeholder delivery. Supports collaboration with backend/DevOps on latency, cost, and reliability around AI services.',
       skillTags: ['AWS', 'Snowflake', 'SQL', 'Monitoring', 'Solutions engineering'],
     },
   ],
@@ -380,9 +372,9 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     },
   ],
   innovationLabSectionTitle: 'Why CoreStory',
-  innovationLabLead: 'Unlocking intelligence inside systems people already depend on',
+  innovationLabLead: 'I have already helped turn ambiguous source material into a coherent production application',
   innovationLabBody:
-    'CoreStory sits at a problem I care about: enterprises fail expensive modernization efforts when the logic trapped in legacy systems stays opaque. Building AI that retrieves, explains, and narrates that logic — accurately enough to reduce risk — is closer to my applied systems work than generic chatbot demos. I would bring production product engineering, agentic workflow discipline, and retrieval-design judgment, while being direct about the framework and managed-vector gaps I would close inside your stack.',
+    'I have already helped turn ambiguous source material, model operations, and asynchronous AI output into a coherent production application. CoreStory is a different domain, but it requires the same ability to make complex intelligence structured, inspectable, and useful. I would bring that Lore Machine product-engineering depth plus agentic workflow discipline, while being direct about framework and managed-vector gaps I would close inside your stack.',
   plan: corestoryPlan,
   ctas: sprint2026Ctas('CoreStory AI Engineer'),
   animatedLogoBand: sprint2026LogoBand,

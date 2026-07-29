@@ -1,24 +1,36 @@
 import type { ProjectDossier } from './types';
 import { evidenceProjects } from '@/content/evidence/projects';
+import { loreMachinePipelineFull } from '@/content/evidence/loreMachineSystemPipeline';
 
 export const loreMachineProject: ProjectDossier = {
   slug: 'lore-machine',
   seo: {
-    title: 'Lore Machine — AI Product Engineering | Moises Sanabria',
+    title: 'Lore Machine — From Narrative to Generative Production System | Moises Sanabria',
     description:
-      'Founding engineer / Chief Prompt Officer on an AI narrative-to-media platform: prompt workflows, generative image systems, and production Next.js delivery.',
+      'Founding-engineer system walkthrough: how Lore Machine turned unstructured narrative into an editable generative production application — frontend, auth, AI/data APIs, and human revision.',
   },
   title: 'Lore Machine',
-  category: 'AI storytelling product',
+  category: 'AI storytelling product · system case study',
   whatItIs:
-    'AI narrative-to-media platform turning scripts, books, and lyrics into structured multimedia outputs — a production creative AI product used by writers and media teams.',
+    'A real-time generative image-storytelling platform that turns scripts, books, and lyrics into structured multimedia outputs — connecting narrative input, scene development, model operations, media generation, and human revision in one creator-facing application.',
   whatIBuilt:
-    'As founding engineer and Chief Prompt Officer, I built the frontend web application, authentication, design systems, and data API transactions for a real-time AI image storytelling platform on Vercel. I managed prompt workflows, generative image pipelines, third-party contractor coordination, sprint reporting, and leadership communication across technical, business, and marketing stakeholders.',
-  stack: ['TypeScript', 'Next.js', 'Vercel', 'LLMs', 'Stable Diffusion', 'Replicate', 'Azure', 'Python'],
+    'As a founding engineer, I owned the frontend web application, authentication, and AI/data API integrations from early prototype through production on Vercel. I designed prompt-facing product workflows, helped make asynchronous generation state legible, built creator review/revision loops, coordinated contractors and sprints, and translated between engineering, business, and marketing stakeholders.',
+  stack: [
+    'TypeScript',
+    'Next.js',
+    'Vercel',
+    'LLMs',
+    'PromptOps',
+    'Stable Diffusion',
+    'Replicate',
+    'Azure',
+    'Python',
+  ],
   whyItMatters:
-    'Demonstrates production AI product engineering in a startup context — agentic creative workflows, multimodal pipelines, and the ability to ship POCs to production with a small engineering team.',
+    'Shows production AI product engineering: turning ambiguous source material and probabilistic model behavior into an inspectable application with human control — structurally relevant to platforms that must make complex intelligence usable, without claiming RAG or legacy-code analysis.',
   imageSrc: evidenceProjects['lore-machine'].imageSrc,
   imageAlt: evidenceProjects['lore-machine'].imageAlt,
   externalHref: 'https://loremachine.world/',
   externalLabel: 'loremachine.world',
+  systemPipeline: loreMachinePipelineFull,
 };

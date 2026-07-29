@@ -14,6 +14,7 @@ import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { ThirtySixtyNinetyPlan } from '@/components/opportunities/ThirtySixtyNinetyPlan';
+import { SystemPipelineCaseStudy } from '@/components/opportunities/SystemPipelineCaseStudy';
 import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
 import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -54,6 +55,13 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           ) : null}
           <OpportunityHero opportunity={opportunity} />
           <RoleMatchMatrix opportunity={opportunity} />
+          {opportunity.systemPipeline ? (
+            <SystemPipelineCaseStudy
+              data={opportunity.systemPipeline}
+              sectionId="system-pipeline"
+              variant="condensed"
+            />
+          ) : null}
           <CaseStudyGrid opportunity={opportunity} />
           <OpportunityTeachingCredentials opportunity={opportunity} />
           <SkillsMatrix opportunity={opportunity} />
