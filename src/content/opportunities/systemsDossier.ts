@@ -67,6 +67,8 @@ export type ArchitectureFlowData = {
   stages: ArchitectureStage[];
   scenarios: ArchitectureScenario[];
   syntheticLabel: string;
+  /** Label above scenario buttons. Default: “Example questions”. */
+  scenariosLabel?: string;
 };
 
 export type PermissionPersona = {
@@ -125,6 +127,8 @@ export type CapabilityMapData = {
   closingStatement: string;
   /** Adjacent tools shown as extending — not established expertise. */
   currentlyExtending?: string[];
+  /** Heading for the currentlyExtending list. Default: “Currently extending”. */
+  currentlyExtendingTitle?: string;
 };
 
 export type PlanPhase = {
@@ -186,6 +190,9 @@ export type WhyCompanyBlock = {
 export type GapStatement = {
   title: string;
   body: string;
+  /** Optional risk-reducer bullets shown under the gap body. */
+  riskReducers?: string[];
+  riskReducersTitle?: string;
 };
 
 /** Optional editorial positioning block (systems → environments narrative). */

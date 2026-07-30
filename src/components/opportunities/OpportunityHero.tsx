@@ -4,6 +4,7 @@ import { Mail, FolderKanban, Linkedin, Github, Instagram, ArrowDown } from 'luci
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
+import { CoverLetterCtaLink } from '@/components/opportunities/CoverLetterCtaLink';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
 import { OpportunityRichText } from '@/components/opportunities/OpportunityRichText';
@@ -93,6 +94,13 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
               </a>
             ) : null}
             {showSystemsHero ? <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="hero" /> : null}
+            {showSystemsHero ? (
+              <CoverLetterCtaLink
+                ctas={ctas}
+                className={opp.btnSecondary}
+                onClick={() => onCta('cover_letter_hero')}
+              />
+            ) : null}
             {!showSystemsHero ? (
               <a
                 href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}

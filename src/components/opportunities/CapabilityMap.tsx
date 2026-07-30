@@ -41,10 +41,16 @@ export function CapabilityMap({ data, sectionId = 'capabilities' }: CapabilityMa
       </div>
 
       {data.currentlyExtending?.length ? (
-        <p className={`mt-6 max-w-3xl ${opp.subtle}`}>
-          <span className="font-semibold text-stone-500 dark:text-stone-400">Currently extending: </span>
-          {data.currentlyExtending.join(' · ')}
-        </p>
+        <div className="mt-6 max-w-3xl rounded-xl border border-amber-200/80 bg-amber-50/60 p-4 dark:border-amber-900/60 dark:bg-amber-950/30">
+          <h3 className={opp.h3MoMA}>
+            {data.currentlyExtendingTitle ?? 'Currently extending'}
+          </h3>
+          <ul className={`mt-3 list-disc space-y-1.5 pl-5 ${opp.body}`}>
+            {data.currentlyExtending.map((item) => (
+              <li key={item.slice(0, 48)}>{item}</li>
+            ))}
+          </ul>
+        </div>
       ) : null}
 
       {data.closingStatement ? (

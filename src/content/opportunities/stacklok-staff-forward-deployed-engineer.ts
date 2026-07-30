@@ -19,10 +19,10 @@ const stacklokLogoBand = [
   { src: 'https://cdn.simpleicons.org/react/61DAFB', alt: 'React', height: 36 },
   { src: 'https://cdn.simpleicons.org/nextdotjs', alt: 'Next.js', height: 36 },
   { src: 'https://cdn.simpleicons.org/python/3776AB', alt: 'Python', height: 36 },
-  { src: 'https://cdn.simpleicons.org/amazonaws/232F3E', alt: 'AWS', height: 36 },
   { src: 'https://cdn.simpleicons.org/docker/2496ED', alt: 'Docker', height: 36 },
   { src: 'https://cdn.simpleicons.org/vercel', alt: 'Vercel', height: 36 },
   { src: 'https://cdn.simpleicons.org/n8n/EA4B71', alt: 'n8n', height: 36 },
+  { src: 'https://cdn.simpleicons.org/snowflake/29B5E8', alt: 'Snowflake', height: 36 },
   { src: 'https://cdn.simpleicons.org/github', alt: 'GitHub', height: 36 },
 ];
 
@@ -72,6 +72,7 @@ const systemsDossier: SystemsDossier = {
     disclaimer:
       'Candidate working method only. Not based on private knowledge of Stacklok’s playbooks, ToolHive internals, or customer accounts.',
     syntheticLabel: 'Illustrative engagement model — synthetic scenario labels.',
+    scenariosLabel: 'Engagement scenarios',
     stages: [
       {
         id: 'discover',
@@ -238,6 +239,7 @@ const systemsDossier: SystemsDossier = {
       'Cloud-native observability stacks',
       'Go for platform engineering',
     ],
+    currentlyExtendingTitle: 'Currently deepening',
     closingStatement:
       'AI should accelerate engineering judgment, not replace it. My job in the field is to leave systems that are operable, inspectable, and reusable.',
   },
@@ -312,8 +314,8 @@ const systemsDossier: SystemsDossier = {
       roleConnection:
         'Direct evidence of AI-first engineering, ambiguous startup delivery, and turning field/product feedback into working systems — adjacent to forward deployed enterprise AI work.',
       skillTags: evidenceProjects['lore-machine'].skillTags,
-      href: evidenceProjects['lore-machine'].href,
-      linkLabel: 'loremachine.world',
+      href: '/projects/lore-machine',
+      linkLabel: 'Full Lore Machine case study',
       imageSrc: evidenceProjects['lore-machine'].imageSrc,
       imageAlt: evidenceProjects['lore-machine'].imageAlt,
       evidenceStatus: 'demonstrated',
@@ -410,7 +412,17 @@ const systemsDossier: SystemsDossier = {
   },
   gapStatement: {
     title: 'Where I would ramp fastest',
-    body: 'My deepest experience is in applied AI systems, production applications, data workflows, and customer-facing delivery. Stacklok’s deepest Kubernetes platform requirements — particularly operators, CRDs, Go controllers, Helm, and GitOps — are areas I would approach as an intensive technical ramp rather than overstate. My record is one of entering unfamiliar systems, developing the necessary depth quickly, and turning that learning into reliable implementation and documentation. What reduces ramp risk: production engineering judgment, cloud and container foundations, strong debugging habits, AI-assisted learning, comfort working directly with users, documentation discipline, and high ownership in ambiguous environments.',
+    body: 'My deepest experience is in applied AI systems, production applications, data workflows, and customer-facing delivery. Stacklok’s deepest Kubernetes platform requirements — particularly operators, CRDs, Go controllers, Helm, and GitOps — are areas I would approach as an intensive technical ramp rather than overstate. My record is one of entering unfamiliar systems, developing the necessary depth quickly, and turning that learning into reliable implementation and documentation.',
+    riskReducersTitle: 'What reduces ramp risk',
+    riskReducers: [
+      'Production engineering judgment under incomplete specs',
+      'Cloud and container foundations (not claimed operator/CRD expertise)',
+      'Strong debugging habits across application and data systems',
+      'AI-assisted learning and development with human review gates',
+      'Comfort working directly with users and stakeholders',
+      'Documentation discipline and systems thinking',
+      'High ownership in ambiguous environments',
+    ],
   },
   roleReference: {
     title: 'Role reference',
@@ -600,6 +612,9 @@ export const stacklokStaffForwardDeployedEngineerOpportunity: Opportunity = {
   processSectionTitle: 'AI-assisted engineering',
   processIntro:
     'AI should accelerate engineering judgment, not replace it. These are concrete daily practices — planning, generation with review, debugging support, documentation, and approval gates — not a claim that models own production decisions.',
+  innovationLabLead: 'AI should accelerate engineering judgment, not replace it.',
+  innovationLabBody:
+    'In forward deployed work that matters especially: assistants can speed orientation and drafting, but permissions, customer trust, and production failure modes stay human-owned.',
   processSteps: [
     {
       title: 'Implementation planning',

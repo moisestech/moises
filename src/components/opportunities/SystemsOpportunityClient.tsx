@@ -39,7 +39,7 @@ type SystemsOpportunityClientProps = {
  * Data-driven via `opportunity.systemsDossier` — not Affirm-specific.
  * When `agentUniverse` is present, uses the research-engineering section order
  * (positioning → lab → evidence → architecture → transition).
- * Does not render full-bleed application banners (text hero only).
+ * Full-bleed banners render only when `applicationBanner.showOnPage` is true.
  */
 export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClientProps) {
   const dossier = opportunity.systemsDossier;
@@ -101,6 +101,18 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
       >
         {dossier.gapStatement.body}
       </p>
+      {dossier.gapStatement.riskReducers?.length ? (
+        <div className="mt-5 max-w-3xl">
+          <h3 className={opp.h3MoMA}>
+            {dossier.gapStatement.riskReducersTitle ?? 'What reduces ramp risk'}
+          </h3>
+          <ul className={`mt-3 list-disc space-y-1.5 pl-5 ${opp.body}`}>
+            {dossier.gapStatement.riskReducers.map((item) => (
+              <li key={item.slice(0, 48)}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </section>
   );
 

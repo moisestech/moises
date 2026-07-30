@@ -36,7 +36,7 @@ export function SystemArchitectureFlow({
 
       <div className="mt-6" role="group" aria-labelledby={`${groupId}-scenarios`}>
         <p id={`${groupId}-scenarios`} className={opp.label}>
-          Example questions
+          {data.scenariosLabel ?? 'Example questions'}
         </p>
         <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           {data.scenarios.map((s) => {
