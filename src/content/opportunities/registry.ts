@@ -16,6 +16,7 @@ import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fab
 import { playwireOpportunity } from './playwire';
 import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
 import { renderSolutionsEngineerOpportunity } from './render-solutions-engineer';
+import { stacklokStaffForwardDeployedEngineerOpportunity } from './stacklok-staff-forward-deployed-engineer';
 import { talkiatrySeniorAiEngineerOpportunity } from './talkiatry-senior-ai-engineer';
 import { wppHexCreativeInnovationLeadOpportunity } from './wpp-hex-creative-innovation-lead-acd';
 
@@ -39,6 +40,8 @@ const bySlug: Record<string, Opportunity> = {
   [newIncMediaFabricationLabManagerOpportunity.slug]: newIncMediaFabricationLabManagerOpportunity,
   [playwireOpportunity.slug]: playwireOpportunity,
   [renderSolutionsEngineerOpportunity.slug]: renderSolutionsEngineerOpportunity,
+  [stacklokStaffForwardDeployedEngineerOpportunity.slug]:
+    stacklokStaffForwardDeployedEngineerOpportunity,
   [talkiatrySeniorAiEngineerOpportunity.slug]: talkiatrySeniorAiEngineerOpportunity,
   [wppHexCreativeInnovationLeadOpportunity.slug]: wppHexCreativeInnovationLeadOpportunity,
 };

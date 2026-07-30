@@ -2,9 +2,11 @@
 
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
 import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { OpportunityHero } from '@/components/opportunities/OpportunityHero';
 import { PositioningStatement } from '@/components/opportunities/PositioningStatement';
 import { NestedEnvironmentDiagram } from '@/components/opportunities/NestedEnvironmentDiagram';
+import { EnterpriseAiDeploymentDiagram } from '@/components/opportunities/EnterpriseAiDeploymentDiagram';
 import { FitPillars } from '@/components/opportunities/FitPillars';
 import { AgentUniverseExplorer } from '@/components/opportunities/AgentUniverseExplorer';
 import { EvaluationPhilosophy } from '@/components/opportunities/EvaluationPhilosophy';
@@ -26,6 +28,7 @@ import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
+import Link from 'next/link';
 
 type SystemsOpportunityClientProps = {
   opportunity: Opportunity;
@@ -51,8 +54,14 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
   }
 
   const isResearchDossier = Boolean(dossier.agentUniverse);
-  const architectureSectionId = isResearchDossier ? 'architecture' : 'systems-demo';
+  const architectureSectionId =
+    dossier.architectureSectionId ?? (isResearchDossier ? 'architecture' : 'systems-demo');
   const transitionSectionId = isResearchDossier ? 'transition' : 'gap';
+  const showHeroDiagram =
+    dossier.heroDiagram ?? (isResearchDossier ? 'nested-environment' : undefined);
+  const showPageBanner = Boolean(
+    opportunity.applicationBanner?.src && opportunity.applicationBanner.showOnPage,
+  );
 
   const evidenceMatrix = (
     <EvidenceMatrix
@@ -62,10 +71,14 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
       columnHeaders={{
         left: opportunity.roleMatchColumnHeaders?.left ?? 'Requirement',
         right: opportunity.roleMatchColumnHeaders?.right ?? 'Evidence to present',
-        status: 'Status',
+        status: opportunity.roleMatchColumnHeaders?.status ?? 'Status',
       }}
       sectionId="evidence"
     />
+  );
+
+  const architectureFlow = (
+    <SystemArchitectureFlow data={dossier.architecture} sectionId={architectureSectionId} />
   );
 
   const gapSection = (
@@ -99,7 +112,13 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
       >
         Skip to content
       </a>
-      <main id="main-content" className={cn(opp.main, 'pt-8 sm:pt-10')}>
+      {showPageBanner ? (
+        <OpportunityApplicationBanner banner={opportunity.applicationBanner} />
+      ) : null}
+      <main
+        id="main-content"
+        className={cn(opp.main, showPageBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10')}
+      >
         {opportunity.visibilityNote ? (
           <p className="mb-4 text-center text-xs text-stone-500 dark:text-stone-400">
             {opportunity.visibilityNote}
@@ -111,14 +130,19 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
 
         <OpportunityHero opportunity={opportunity} />
 
-        {isResearchDossier ? (
+        {showHeroDiagram === 'nested-environment' ? (
           <div className="mt-10">
             <NestedEnvironmentDiagram />
           </div>
         ) : null}
+        {showHeroDiagram === 'enterprise-ai-deployment' ? (
+          <div className="mt-10">
+            <EnterpriseAiDeploymentDiagram />
+          </div>
+        ) : null}
 
         {dossier.positioningStatement ? (
-          <PositioningStatement data={dossier.positioningStatement} sectionId="position" />
+          <PositioningStatement data={dossier.positioningStatement} sectionId="why" />
         ) : null}
 
         <FitPillars
@@ -143,7 +167,7 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
               studies={dossier.caseStudies}
               sectionId="work"
             />
-            <SystemArchitectureFlow data={dossier.architecture} sectionId={architectureSectionId} />
+            {architectureFlow}
             {dossier.failureTaxonomy ? (
               <FailureTaxonomy data={dossier.failureTaxonomy} />
             ) : null}
@@ -170,36 +194,59 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
           </>
         ) : (
           <>
-            <SystemArchitectureFlow data={dossier.architecture} sectionId={architectureSectionId} />
-            {dossier.permissions ? (
+            {dossier.evidenceBeforeArchitecture ? (
+              <>
+                {evidenceMatrix}
+                <SystemsCaseStudyGrid
+                  title={dossier.caseStudiesTitle}
+                  intro={dossier.caseStudiesIntro}
+                  studies={dossier.caseStudies}
+                  sectionId="work"
+                />
+                {architectureFlow}
+              </>
+            ) : (
+              <>
+                {architectureFlow}
+                {dossier.permissions ? (
+                  <PermissionScenario data={dossier.permissions} sectionId="permissions" />
+                ) : null}
+                {dossier.reliability ? (
+                  <ReliabilityControlPanel data={dossier.reliability} sectionId="reliability" />
+                ) : null}
+                {evidenceMatrix}
+                <SystemsCaseStudyGrid
+                  title={dossier.caseStudiesTitle}
+                  intro={dossier.caseStudiesIntro}
+                  studies={dossier.caseStudies}
+                  sectionId="work"
+                />
+              </>
+            )}
+            {dossier.evidenceBeforeArchitecture && dossier.permissions ? (
               <PermissionScenario data={dossier.permissions} sectionId="permissions" />
             ) : null}
-            {dossier.reliability ? (
+            {dossier.evidenceBeforeArchitecture && dossier.reliability ? (
               <ReliabilityControlPanel data={dossier.reliability} sectionId="reliability" />
             ) : null}
-            {evidenceMatrix}
-            <SystemsCaseStudyGrid
-              title={dossier.caseStudiesTitle}
-              intro={dossier.caseStudiesIntro}
-              studies={dossier.caseStudies}
-              sectionId="work"
-            />
             {dossier.translation ? (
               <TranslationPanel data={dossier.translation} sectionId="translation" />
             ) : null}
             <CapabilityMap data={dossier.capabilityMap} sectionId="capabilities" />
             <InnovationProcess opportunity={opportunity} sectionId="approach" />
             <ThirtySixtyNinetyPlan data={dossier.plan} sectionId="plan" />
-            <section id="why" className={opp.section} aria-labelledby="why-heading">
-              <h2 id="why-heading" className={opp.h2}>
-                {dossier.whyCompany.title}
-              </h2>
-              <div className={`mt-4 max-w-3xl space-y-4 ${opp.body}`}>
-                {dossier.whyCompany.paragraphs.map((p) => (
-                  <p key={p.slice(0, 48)}>{p}</p>
-                ))}
-              </div>
-            </section>
+            {!dossier.positioningStatement ? (
+              <section id="why" className={opp.section} aria-labelledby="why-heading">
+                <h2 id="why-heading" className={opp.h2}>
+                  {dossier.whyCompany.title}
+                </h2>
+                <div className={`mt-4 max-w-3xl space-y-4 ${opp.body}`}>
+                  {dossier.whyCompany.paragraphs.map((p) => (
+                    <p key={p.slice(0, 48)}>{p}</p>
+                  ))}
+                </div>
+              </section>
+            ) : null}
             {gapSection}
           </>
         )}
@@ -215,6 +262,11 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
             Contact
           </h2>
           <ResumeCTA opportunity={opportunity} />
+          <p className={`mt-4 ${opp.muted}`}>
+            <Link href="/opportunities" className={opp.linkAccent}>
+              Return to opportunities
+            </Link>
+          </p>
         </section>
       </main>
     </OpportunityShell>

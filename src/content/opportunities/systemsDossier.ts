@@ -309,6 +309,19 @@ export type SystemsDossier = {
   fitPillars: FitPillar[];
   /** Optional narrative bridge before fit pillars (applications → environments). */
   positioningStatement?: PositioningStatementData;
+  /**
+   * Optional hero diagram after OpportunityHero.
+   * `nested-environment` is used by research dossiers; `enterprise-ai-deployment` is a
+   * restrained field-to-platform SVG for forward-deployed / infrastructure roles.
+   */
+  heroDiagram?: 'nested-environment' | 'enterprise-ai-deployment';
+  /**
+   * When true, evidence matrix renders before the architecture flow
+   * (role-fit before operating-model walkthrough). Default Affirm order keeps architecture first.
+   */
+  evidenceBeforeArchitecture?: boolean;
+  /** Sticky-nav / hash id for the architecture section. Default: `systems-demo` (research: `architecture`). */
+  architectureSectionId?: string;
   architecture: ArchitectureFlowData;
   /** Affirm-style permission demo — omit when unused. */
   permissions?: PermissionScenarioData;

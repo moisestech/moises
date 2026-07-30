@@ -11,18 +11,27 @@ type CoverLetterCtaLinkProps = {
   className?: string;
 };
 
-/** Cover letter — public Google Doc when `coverLetterUrl` is set, else print-to-PDF page. */
+/** Cover letter — public Google Doc or PDF when `coverLetterUrl` is set, else print-to-PDF page. */
 export function CoverLetterCtaLink({ ctas, onClick, className }: CoverLetterCtaLinkProps) {
   const href = ctas.coverLetterUrl ?? ctas.coverLetterPrintPath;
   if (!href) return null;
 
-  const label = ctas.coverLetterUrl ? 'Cover letter' : 'Cover letter (print to PDF)';
+  const isExternal = /^https?:\/\//i.test(href);
+  const isLocalPdf = !isExternal && href.toLowerCase().endsWith('.pdf');
+  const label = ctas.coverLetterUrl
+    ? isLocalPdf
+      ? 'Download cover letter'
+      : 'Cover letter'
+    : 'Cover letter (print to PDF)';
 
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(isExternal
+        ? { target: '_blank', rel: 'noopener noreferrer' }
+        : isLocalPdf
+          ? { download: href.split('/').pop() }
+          : { target: '_blank', rel: 'noopener noreferrer' })}
       className={cn(opp.btnSecondaryMedium, className)}
       onClick={onClick}
     >

@@ -16,6 +16,11 @@ export type ApplicationBanner = {
    * Default: wide cinematic crop. Example: `aspect-[3/1] max-h-[280px]`
    */
   aspectClass?: string;
+  /**
+   * When true, systems-dossier pages render the full-bleed banner (compact / role-portfolio
+   * always render when `applicationBanner` is set). Use for OG-only assets on Affirm-style pages.
+   */
+  showOnPage?: boolean;
 };
 
 export type OpportunityStatus = 'active' | 'draft';
@@ -194,7 +199,7 @@ export type Opportunity = {
   rolePortfolio?: RolePortfolioDossier;
   roleMatchSectionTitle?: string;
   roleMatchIntro?: string;
-  roleMatchColumnHeaders?: { left: string; right: string };
+  roleMatchColumnHeaders?: { left: string; right: string; status?: string };
   roleMatchRows: RoleMatchRow[];
   featuredProjectIds: string[];
   /** Merged with `featuredProjectIds` in `CaseStudyGrid` (work microsites). */

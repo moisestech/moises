@@ -76,3 +76,14 @@ export const corestoryAiEngineerBanner: ApplicationBanner = {
   alt: 'CoreStory AI Engineer — LLM systems, retrieval, and narrative intelligence from legacy complexity',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
+
+/**
+ * Stacklok — Staff Forward Deployed Engineer.
+ * Cloudinary editorial banner (enterprise AI deployment / field-to-platform — filename typo preserved on CDN).
+ */
+export const stacklokStaffForwardDeployedEngineerBanner: ApplicationBanner = {
+  src: `${cdn}/v1785454236/jobs/banners/forward-deploiyed-engineer-stacklok_mdpzpp.png`,
+  alt: 'Stacklok Staff Forward Deployed Engineer — enterprise AI deployment, secure agent connectivity, and field-to-platform delivery',
+  aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+  showOnPage: true,
+};
