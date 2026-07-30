@@ -11,7 +11,8 @@ import {
 } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 
-const STACKLOK_COVER_LETTER_PDF = '/downloads/Moises_Sanabria_Stacklok_Cover_Letter.pdf';
+const STACKLOK_COVER_LETTER_URL =
+  'https://drive.google.com/file/d/1Q9UxrNq2vVouGFclUJvGTZP0QAAYbnJl/view?usp=sharing';
 
 const stacklokLogoBand = [
   { src: 'https://cdn.simpleicons.org/typescript/3178C6', alt: 'TypeScript', height: 36 },
@@ -649,7 +650,7 @@ export const stacklokStaffForwardDeployedEngineerOpportunity: Opportunity = {
     caseStudiesAnchor: '#work',
     resumePdfPath: technologyCvPdfPath,
     resumePrintPath: '/cv/tech/print',
-    coverLetterUrl: STACKLOK_COVER_LETTER_PDF,
+    coverLetterUrl: STACKLOK_COVER_LETTER_URL,
     coverLetterPrintPath: '/opportunities/stacklok-staff-forward-deployed-engineer/print/cover-letter',
     cv: '/cv/tech',
     portfolio: '/portfolio',
