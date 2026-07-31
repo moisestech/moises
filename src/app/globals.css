@@ -193,6 +193,21 @@
   }
 }
 
+/* AI24 company page — print / PDF-friendly */
+@media print {
+  .ai24-company-page {
+    background: white !important;
+    color: #111 !important;
+  }
+
+  .ai24-company-page h1,
+  .ai24-company-page h2,
+  .ai24-company-page h3,
+  .ai24-company-page article {
+    break-inside: avoid;
+  }
+}
+
 @keyframes wolfsonian-drift {
   0%,
   100% {
