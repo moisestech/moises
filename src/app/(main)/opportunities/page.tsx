@@ -6,7 +6,7 @@ import { opp } from '@/components/opportunities/opportunityTheme';
 
 const title = 'Opportunities | Moises Sanabria';
 const description =
-  'Role-specific technical briefs — GenAI engineering, Knight Journalism technology strategy, product dossiers, and related recruiting pages.';
+  'Role-specific application dossiers — Stacklok, CoreStory, Affirm, Deepgram, WPP HEX, FDAE, and other recruiting briefs sorted A–Z by company.';
 
 export const metadata: Metadata = {
   title,
