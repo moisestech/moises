@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import type { Study } from '@/content/post-ai-readymades/postAiReadymades';
+import { studyTombstoneDate } from '@/content/post-ai-readymades/postAiReadymades';
 import {
   Dialog,
   DialogContent,
@@ -39,6 +40,8 @@ function DetailList({ label, values }: { label: string; values: string[] }) {
 }
 
 export function StudyDetail({ study, onClose }: StudyDetailProps) {
+  const dateLabel = study ? studyTombstoneDate(study) : undefined;
+
   return (
     <Dialog open={study !== null} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto border-[#dedede] bg-[#f7f5f0] p-0 dark:border-neutral-700 dark:bg-neutral-950">
@@ -70,8 +73,14 @@ export function StudyDetail({ study, onClose }: StudyDetailProps) {
                 </p>
               ) : null}
 
+              {study.researchNotes ? (
+                <p className="mb-8 text-base leading-relaxed text-[#555555] dark:text-neutral-300">
+                  {study.researchNotes}
+                </p>
+              ) : null}
+
               <dl>
-                {study.year ? <DetailRow label="Year" value={study.year} /> : null}
+                {dateLabel ? <DetailRow label="Date" value={dateLabel} /> : null}
                 {study.medium ? <DetailRow label="Medium" value={study.medium} /> : null}
                 {study.materials ? <DetailRow label="Materials" value={study.materials} /> : null}
                 {study.dimensions ? <DetailRow label="Dimensions" value={study.dimensions} /> : null}
@@ -81,6 +90,9 @@ export function StudyDetail({ study, onClose }: StudyDetailProps) {
                 {study.objectFamily ? <DetailRow label="Object family" value={study.objectFamily} /> : null}
                 {study.primaryObjects?.length ? (
                   <DetailList label="Primary objects" values={study.primaryObjects} />
+                ) : null}
+                {study.researchTags?.length ? (
+                  <DetailList label="Research tags" values={study.researchTags} />
                 ) : null}
                 {study.imageObjectBalance ? (
                   <DetailRow label="Image / object balance" value={study.imageObjectBalance} />
