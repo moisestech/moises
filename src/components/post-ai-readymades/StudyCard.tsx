@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import type { Study } from '@/content/post-ai-readymades/postAiReadymades';
+import { studyTombstoneDate } from '@/content/post-ai-readymades/postAiReadymades';
 import { StoryFrame } from '@/components/post-ai-readymades/StoryFrame';
 import { StatusChip } from '@/components/post-ai-readymades/StatusChip';
 import { cn } from '@/lib/utils';
@@ -13,9 +14,13 @@ type StudyCardProps = {
 };
 
 function StudyTombstone({ study }: { study: Study }) {
-  const lines = [study.year, study.medium, study.materials, study.dimensions, study.location].filter(
-    Boolean,
-  ) as string[];
+  const lines = [
+    studyTombstoneDate(study),
+    study.medium,
+    study.materials,
+    study.dimensions,
+    study.location,
+  ].filter(Boolean) as string[];
 
   if (lines.length === 0) return null;
 

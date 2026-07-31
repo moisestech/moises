@@ -16,6 +16,8 @@ export type Study = {
   id: string;
   number: string;
   title: string;
+  /** ISO date `YYYY-MM-DD` when known; preferred over year for tombstone display. */
+  date?: string;
   year?: string;
   parentProject: 'Born Into the Machine';
   series: '365 Post-AI Readymades';
@@ -27,9 +29,36 @@ export type Study = {
   dimensions?: string;
   materials?: string;
   location?: string;
+  /** Longer catalogue / research note for exploring the work further. */
+  researchNotes?: string;
+  /** Freeform tags for later filtering (object family, theme, material, etc.). */
+  researchTags?: string[];
   artworkSlug?: string;
   storyUrl?: string;
   status: StudyStatus;
+  imageObjectBalance?: ImageObjectBalance;
+  missingLaborType?: string[];
+  rawnessSource?: string[];
+};
+
+/** Seed entry: image required; date + tombstone/research fields optional and fillable later. */
+export type StudySeed = {
+  imageUrl: string;
+  date?: string;
+  year?: string;
+  title?: string;
+  status?: StudyStatus;
+  objectFamily?: string;
+  primaryObjects?: string[];
+  shortDescription?: string;
+  medium?: string;
+  dimensions?: string;
+  materials?: string;
+  location?: string;
+  researchNotes?: string;
+  researchTags?: string[];
+  artworkSlug?: string;
+  storyUrl?: string;
   imageObjectBalance?: ImageObjectBalance;
   missingLaborType?: string[];
   rawnessSource?: string[];
@@ -42,42 +71,117 @@ export type ObjectFamily = {
   studyCount: number;
 };
 
-const STUDY_IMAGE_URLS = [
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824746/art/moisestech-website/research/post-ai-readymades/1070F0C0-1C3C-4E11-8D69-8997B91E7CED_qc2bta.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824745/art/moisestech-website/research/post-ai-readymades/0BE2D665-D24E-461B-B7F5-B1DABC28C714_b7uhvd.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824745/art/moisestech-website/research/post-ai-readymades/2461026D-E34E-4371-B472-C17088BEC5E4_he425j.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824744/art/moisestech-website/research/post-ai-readymades/FAEFE59B-4227-4F97-A16F-4B69B738C58A_zm5oti.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824743/art/moisestech-website/research/post-ai-readymades/06ACF6F0-59E6-4EB2-A1F3-DB9789607E2E_cqbd8q.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824742/art/moisestech-website/research/post-ai-readymades/BFBD2AC5-3BFA-49EC-9BD8-0A72495BDFAD_vsfwxg.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824742/art/moisestech-website/research/post-ai-readymades/87104727-787B-4000-AC18-D77BD253944F_kxn3ji.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824742/art/moisestech-website/research/post-ai-readymades/AE155651-EFB5-44F9-B46B-8D16AB56AC55_g1su6n.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824741/art/moisestech-website/research/post-ai-readymades/70207A04-7270-4BE2-8658-C9B6972004FF_xne6bp.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824739/art/moisestech-website/research/post-ai-readymades/C7FFD60D-C86C-4D36-AC66-81072E2F1C7E_m13dzl.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/A742ACF4-D4DD-43E9-B211-4CB44D431959_gdtgrj.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/F2C0E5F6-1793-4A09-A528-BCE2B7E6B391_vxijmx.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/562694C9-77F5-4DEB-B509-69BD1B349F48_xmwuxa.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/3DB76547-EEB5-4434-87D3-65A4B490798F_gmawjz.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/85F6D550-1584-4E61-95E6-C7B65437CDF2_fglnce.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824735/art/moisestech-website/research/post-ai-readymades/D4884857-5209-4051-946C-A06CF26FBBC2_cng7vy.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824734/art/moisestech-website/research/post-ai-readymades/B1C0A2C4-5829-4502-9BEC-77BB32F9B74F_rmwtni.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824734/art/moisestech-website/research/post-ai-readymades/46B07EB1-B8FC-45FC-99CB-33D67ADA5DB9_arpivs.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824734/art/moisestech-website/research/post-ai-readymades/E3DC55EE-B745-424D-9EDE-407693994EA4_yrn7lo.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824733/art/moisestech-website/research/post-ai-readymades/A08A37E3-F81E-41EA-9ED9-8296DE2F411E_jsgaif.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824731/art/moisestech-website/research/post-ai-readymades/7B5A23F4-6579-4E1E-A15E-497D0C3388A6_uybcmk.png',
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824730/art/moisestech-website/research/post-ai-readymades/ED43EA83-E4E7-4BCD-AFBB-A257F1A4B3D0_bampcz.png',
-] as const;
+/** Format ISO `YYYY-MM-DD` for tombstone display, e.g. `31 Jul 2026`. */
+export function formatStudyDate(date: string): string {
+  const parsed = new Date(`${date}T12:00:00`);
+  if (Number.isNaN(parsed.getTime())) return date;
+  return parsed.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+}
 
-function makeStudy(index: number, imageUrl: string): Study {
+/** Prefer precise date; fall back to year. */
+export function studyTombstoneDate(study: Pick<Study, 'date' | 'year'>): string | undefined {
+  if (study.date) return formatStudyDate(study.date);
+  return study.year;
+}
+
+const STUDY_SEEDS: StudySeed[] = [
+  // Batch 1 — early archive (precise dates TBD)
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824746/art/moisestech-website/research/post-ai-readymades/1070F0C0-1C3C-4E11-8D69-8997B91E7CED_qc2bta.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824745/art/moisestech-website/research/post-ai-readymades/0BE2D665-D24E-461B-B7F5-B1DABC28C714_b7uhvd.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824745/art/moisestech-website/research/post-ai-readymades/2461026D-E34E-4371-B472-C17088BEC5E4_he425j.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824744/art/moisestech-website/research/post-ai-readymades/FAEFE59B-4227-4F97-A16F-4B69B738C58A_zm5oti.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824743/art/moisestech-website/research/post-ai-readymades/06ACF6F0-59E6-4EB2-A1F3-DB9789607E2E_cqbd8q.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824742/art/moisestech-website/research/post-ai-readymades/BFBD2AC5-3BFA-49EC-9BD8-0A72495BDFAD_vsfwxg.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824742/art/moisestech-website/research/post-ai-readymades/87104727-787B-4000-AC18-D77BD253944F_kxn3ji.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824742/art/moisestech-website/research/post-ai-readymades/AE155651-EFB5-44F9-B46B-8D16AB56AC55_g1su6n.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824741/art/moisestech-website/research/post-ai-readymades/70207A04-7270-4BE2-8658-C9B6972004FF_xne6bp.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824739/art/moisestech-website/research/post-ai-readymades/C7FFD60D-C86C-4D36-AC66-81072E2F1C7E_m13dzl.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/A742ACF4-D4DD-43E9-B211-4CB44D431959_gdtgrj.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/F2C0E5F6-1793-4A09-A528-BCE2B7E6B391_vxijmx.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/562694C9-77F5-4DEB-B509-69BD1B349F48_xmwuxa.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/3DB76547-EEB5-4434-87D3-65A4B490798F_gmawjz.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824738/art/moisestech-website/research/post-ai-readymades/85F6D550-1584-4E61-95E6-C7B65437CDF2_fglnce.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824735/art/moisestech-website/research/post-ai-readymades/D4884857-5209-4051-946C-A06CF26FBBC2_cng7vy.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824734/art/moisestech-website/research/post-ai-readymades/B1C0A2C4-5829-4502-9BEC-77BB32F9B74F_rmwtni.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824734/art/moisestech-website/research/post-ai-readymades/46B07EB1-B8FC-45FC-99CB-33D67ADA5DB9_arpivs.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824734/art/moisestech-website/research/post-ai-readymades/E3DC55EE-B745-424D-9EDE-407693994EA4_yrn7lo.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824733/art/moisestech-website/research/post-ai-readymades/A08A37E3-F81E-41EA-9ED9-8296DE2F411E_jsgaif.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824731/art/moisestech-website/research/post-ai-readymades/7B5A23F4-6579-4E1E-A15E-497D0C3388A6_uybcmk.png' },
+  { imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1783824730/art/moisestech-website/research/post-ai-readymades/ED43EA83-E4E7-4BCD-AFBB-A257F1A4B3D0_bampcz.png' },
+  // Batch 2 — 31 Jul 2026
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524909/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_03_00_10_PM_fefab6.png',
+    date: '2026-07-31',
+  },
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524907/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_02_59_24_PM_z7l9l9.png',
+    date: '2026-07-31',
+  },
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524906/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_02_58_57_PM_zfvmze.png',
+    date: '2026-07-31',
+  },
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524905/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_02_58_50_PM_xq0rsr.png',
+    date: '2026-07-31',
+  },
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524903/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_03_00_16_PM_oyxk1g.png',
+    date: '2026-07-31',
+  },
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524902/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_02_58_27_PM_ra9101.png',
+    date: '2026-07-31',
+  },
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524901/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_02_59_06_PM_hp0dzf.png',
+    date: '2026-07-31',
+  },
+  {
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524899/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_02_58_44_PM_wpblgm.png',
+    date: '2026-07-31',
+  },
+];
+
+function makeStudy(index: number, seed: StudySeed): Study {
   const number = String(index + 1).padStart(3, '0');
+  const yearFromDate = seed.date?.slice(0, 4);
   return {
     id: number,
     number,
-    title: `Study ${number}`,
-    year: '2026',
+    title: seed.title ?? `Study ${number}`,
+    date: seed.date,
+    year: seed.year ?? yearFromDate ?? '2026',
     parentProject: 'Born Into the Machine',
     series: '365 Post-AI Readymades',
-    imageUrl,
-    status: 'Daily Selection',
+    imageUrl: seed.imageUrl,
+    status: seed.status ?? 'Daily Selection',
+    objectFamily: seed.objectFamily,
+    primaryObjects: seed.primaryObjects,
+    shortDescription: seed.shortDescription,
+    medium: seed.medium,
+    dimensions: seed.dimensions,
+    materials: seed.materials,
+    location: seed.location,
+    researchNotes: seed.researchNotes,
+    researchTags: seed.researchTags,
+    artworkSlug: seed.artworkSlug,
+    storyUrl: seed.storyUrl,
+    imageObjectBalance: seed.imageObjectBalance,
+    missingLaborType: seed.missingLaborType,
+    rawnessSource: seed.rawnessSource,
   };
 }
 
@@ -132,7 +236,7 @@ export const postAiReadymadesPage = {
     title: 'First 60-Day Review',
     intro:
       'After sixty selected studies, the archive will be reviewed for website candidates, physical build candidates, content-only works, book/glossary terms, object families, and recurring materials.',
-    entriesArchived: 22,
+    entriesArchived: 30,
     totalEntries: 365,
     firstReviewAt: 60,
     websitePrototypeTarget: '12–20 selected studies',
@@ -154,8 +258,8 @@ export const postAiReadymadesPage = {
   },
 } as const;
 
-export const postAiReadymadesStudies: Study[] = STUDY_IMAGE_URLS.map((imageUrl, index) =>
-  makeStudy(index, imageUrl),
+export const postAiReadymadesStudies: Study[] = STUDY_SEEDS.map((seed, index) =>
+  makeStudy(index, seed),
 );
 
 export const postAiReadymadesObjectFamilies: ObjectFamily[] = [
