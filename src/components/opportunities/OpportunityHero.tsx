@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, FolderKanban, Linkedin, Github, Instagram, ArrowDown } from 'lucide-react';
+import { Mail, FolderKanban, Linkedin, Github, Instagram, ArrowDown, Calendar } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
@@ -9,7 +9,10 @@ import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityRe
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
 import { OpportunityRichText } from '@/components/opportunities/OpportunityRichText';
 import { opp } from '@/components/opportunities/opportunityTheme';
-import { opportunitySocialIconClass } from '@/components/opportunities/opportunitySocialStyles';
+import {
+  isExternalHttpHref,
+  opportunitySocialIconClass,
+} from '@/components/opportunities/opportunitySocialStyles';
 
 type OpportunityHeroProps = {
   opportunity: Opportunity;
@@ -66,9 +69,22 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
               <a
                 href={opportunity.heroPrimaryCta.href}
                 className={opp.btnPrimary}
-                onClick={() => onCta('hero_primary_scroll')}
+                {...(isExternalHttpHref(opportunity.heroPrimaryCta.href)
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+                onClick={() =>
+                  onCta(
+                    isExternalHttpHref(opportunity.heroPrimaryCta!.href)
+                      ? 'hero_primary_external'
+                      : 'hero_primary_scroll',
+                  )
+                }
               >
-                <ArrowDown className="h-4 w-4 shrink-0" aria-hidden />
+                {isExternalHttpHref(opportunity.heroPrimaryCta.href) ? (
+                  <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+                ) : (
+                  <ArrowDown className="h-4 w-4 shrink-0" aria-hidden />
+                )}
                 {opportunity.heroPrimaryCta.label}
               </a>
             ) : (
@@ -78,6 +94,9 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
               <a
                 href={opportunity.heroSecondaryCta.href}
                 className={opp.btnSecondary}
+                {...(isExternalHttpHref(opportunity.heroSecondaryCta.href)
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
                 onClick={() => onCta('hero_secondary_scroll')}
               >
                 <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />

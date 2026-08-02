@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FileText, FolderKanban, Building2 } from 'lucide-react';
+import { FileText, FolderKanban, Building2, Calendar } from 'lucide-react';
 import type { OpportunityCtas } from '@/content/opportunities/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { isExternalHttpHref } from '@/components/opportunities/opportunitySocialStyles';
@@ -43,12 +43,22 @@ function SiteLink({
   );
 }
 
-/** Portfolio, web CV, and Oolite program work — shared across hero and contact footer. */
+/** Portfolio, web CV, schedule, and Oolite program work — shared across hero and contact footer. */
 export function OpportunitySiteLinks({ ctas, onCta, variant = 'footer', className }: OpportunitySiteLinksProps) {
   const btnClass = variant === 'hero' ? opp.btnSecondary : opp.btnSecondaryMedium;
   const suffix = variant === 'hero' ? '_hero' : '_footer';
 
-  const items: { href: string; label: string; icon: typeof FileText; kind: string }[] = [];
+  const items: { href: string; label: string; icon: typeof FileText; kind: string; emphasize?: boolean }[] =
+    [];
+  if (ctas.scheduleUrl && variant === 'footer') {
+    items.push({
+      href: ctas.scheduleUrl,
+      label: ctas.scheduleLabel ?? 'Schedule intro',
+      icon: Calendar,
+      kind: 'schedule',
+      emphasize: true,
+    });
+  }
   if (ctas.careerPacket) {
     items.push({ href: ctas.careerPacket, label: 'Career packet', icon: FolderKanban, kind: 'career_packet' });
   }
@@ -81,7 +91,7 @@ export function OpportunitySiteLinks({ ctas, onCta, variant = 'footer', classNam
           href={item.href}
           label={item.label}
           icon={item.icon}
-          className={btnClass}
+          className={item.emphasize ? opp.btnPrimary : btnClass}
           onClick={() => onCta(`${item.kind}${suffix}`)}
         />
       ))}

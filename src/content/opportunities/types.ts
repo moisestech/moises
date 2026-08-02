@@ -81,6 +81,10 @@ export type OpportunityCtas = {
   caseStudiesAnchor?: string;
   /** Career packet path (e.g. `/career-packet`) */
   careerPacket?: string;
+  /** External scheduler (e.g. Algora intro with a recruiter). */
+  scheduleUrl?: string;
+  /** Button label for `scheduleUrl`; defaults to “Schedule intro”. */
+  scheduleLabel?: string;
 };
 
 export type TeachingHighlight = {

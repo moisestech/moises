@@ -75,6 +75,16 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/cv/air-space',
+        destination: '/opportunities/air-space-intelligence-full-stack-engineer',
+        permanent: false,
+      },
+      {
+        source: '/algora/air-space-intelligence',
+        destination: '/opportunities/air-space-intelligence-full-stack-engineer',
+        permanent: false,
+      },
+      {
         source: '/cv/technology',
         destination: '/cv/tech',
         permanent: true,

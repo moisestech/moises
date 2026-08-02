@@ -134,6 +134,10 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
     'FastAPI',
     `${jobsCdn}/v1778692505/jobs/FastAPI_logo.svg_qrodn7.png`,
   ),
+  mapbox: simpleIconEntry('mapbox', 'Mapbox', 'mapbox', '4264FB'),
+  kubernetes: simpleIconEntry('kubernetes', 'Kubernetes', 'kubernetes', '326CE5'),
+  terraform: simpleIconEntry('terraform', 'Terraform', 'terraform', '844FBA'),
+  redux: simpleIconEntry('redux', 'Redux', 'redux', '764ABC'),
 };
 
 export function resolveTechLogoSrc(
