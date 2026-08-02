@@ -116,7 +116,7 @@ function StickyMiniNav({
       )}
       aria-label="Section navigation"
     >
-      <div className="mx-auto flex max-w-5xl items-center gap-1 overflow-x-auto px-4 pb-1 text-sm whitespace-nowrap sm:flex-wrap sm:whitespace-normal">
+      <div className="mx-auto flex max-w-5xl items-center gap-1.5 overflow-x-auto px-3 pb-1.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-1 sm:px-4 sm:pb-1 sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
         {items.map((item) => {
           const accent = getSectionNavAccent?.(item.id);
           const active = activeId === item.id;
@@ -125,7 +125,7 @@ function StickyMiniNav({
               key={item.id}
               href={`#${item.id}`}
               className={cn(
-                'rounded-full border px-3 py-1 transition-colors',
+                'inline-flex min-h-10 shrink-0 items-center rounded-full border px-3.5 py-2 text-sm transition-colors sm:min-h-0 sm:px-3 sm:py-1',
                 active && accent
                   ? cn(accent.navActive, accent.navActiveText)
                   : active

@@ -13,6 +13,7 @@ import {
   isExternalHttpHref,
   opportunitySocialIconClass,
 } from '@/components/opportunities/opportunitySocialStyles';
+import { cn } from '@/lib/utils';
 
 type OpportunityHeroProps = {
   opportunity: Opportunity;
@@ -64,11 +65,11 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             ))}
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
             {opportunity.heroPrimaryCta ? (
               <a
                 href={opportunity.heroPrimaryCta.href}
-                className={opp.btnPrimary}
+                className={cn(opp.btnPrimary, 'min-h-11 w-full justify-center sm:w-auto')}
                 {...(isExternalHttpHref(opportunity.heroPrimaryCta.href)
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
@@ -93,7 +94,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             {opportunity.heroSecondaryCta ? (
               <a
                 href={opportunity.heroSecondaryCta.href}
-                className={opp.btnSecondary}
+                className={cn(opp.btnSecondary, 'min-h-11 w-full justify-center sm:w-auto')}
                 {...(isExternalHttpHref(opportunity.heroSecondaryCta.href)
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
@@ -105,7 +106,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             ) : ctas.caseStudiesAnchor ? (
               <a
                 href={ctas.caseStudiesAnchor}
-                className={opp.btnSecondary}
+                className={cn(opp.btnSecondary, 'min-h-11 w-full justify-center sm:w-auto')}
                 onClick={() => onCta('case_studies_anchor')}
               >
                 <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />
@@ -116,20 +117,20 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             {!showSystemsHero ? (
               <a
                 href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-                className={opp.btnSecondary}
+                className={cn(opp.btnSecondary, 'min-h-11 w-full justify-center sm:w-auto')}
                 onClick={() => onCta('email')}
               >
                 <Mail className="h-4 w-4 shrink-0" aria-hidden />
                 Email Moises
               </a>
             ) : null}
-            <OpportunitySiteLinks ctas={ctas} onCta={onCta} variant="hero" />
+            <OpportunitySiteLinks ctas={ctas} onCta={onCta} variant="hero" className="w-full sm:w-auto" />
           </div>
 
           {opportunity.heroMetaChips?.length ? (
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Role focus">
               {opportunity.heroMetaChips.map((chip) => (
-                <li key={chip} className={opp.pillTag}>
+                <li key={chip} className={cn(opp.pillTag, 'max-w-full break-words')}>
                   {chip}
                 </li>
               ))}

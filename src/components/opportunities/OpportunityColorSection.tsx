@@ -1,0 +1,35 @@
+import { cn } from '@/lib/utils';
+import {
+  getOpportunityCompactAccent,
+  type OpportunityCompactSectionAccent,
+} from '@/config/opportunity-compact-section-theme';
+
+type OpportunityColorSectionProps = {
+  sectionId: string;
+  children: React.ReactNode;
+  className?: string;
+  /** Optional override when accent is already resolved by the parent. */
+  accent?: OpportunityCompactSectionAccent;
+};
+
+/** Colored rail + soft wash so compact dossier sections read as categorized on mobile and desktop. */
+export function OpportunityColorSection({
+  sectionId,
+  children,
+  className,
+  accent: accentProp,
+}: OpportunityColorSectionProps) {
+  const accent = accentProp ?? getOpportunityCompactAccent(sectionId);
+  return (
+    <div
+      className={cn(
+        'scroll-mt-32 rounded-r-xl border-l-4 pl-3 sm:pl-5',
+        accent.rail,
+        accent.softBg,
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}

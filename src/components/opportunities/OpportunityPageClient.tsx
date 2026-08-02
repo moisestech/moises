@@ -5,6 +5,7 @@ import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
 import { OpportunityAudienceKeywords } from '@/components/opportunities/OpportunityAudienceKeywords';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { OpportunityHero } from '@/components/opportunities/OpportunityHero';
+import { OpportunityColorSection } from '@/components/opportunities/OpportunityColorSection';
 import { RoleMatchMatrix } from '@/components/opportunities/RoleMatchMatrix';
 import { CaseStudyGrid } from '@/components/opportunities/CaseStudyGrid';
 import { OpportunityTeachingCredentials } from '@/components/opportunities/OpportunityTeachingCredentials';
@@ -15,6 +16,7 @@ import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
 import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
@@ -39,26 +41,55 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
   const hasBanner = Boolean(opportunity.applicationBanner?.src);
 
   return (
-    <OpportunityShell navItems={opportunity.navItems}>
+    <OpportunityShell
+      navItems={opportunity.navItems}
+      getSectionNavAccent={getOpportunityCompactAccent}
+      stickyNavTopClassName="top-[4.75rem] md:top-[8.4rem]"
+    >
       <>
         <OpportunityApplicationBanner banner={opportunity.applicationBanner} />
-        <main className={cn(opp.main, hasBanner ? 'pt-4 sm:pt-6' : 'pt-8 sm:pt-10')}>
+        <main
+          className={cn(
+            opp.main,
+            'overflow-x-clip',
+            hasBanner ? 'pt-3 sm:pt-6' : 'pt-6 sm:pt-10',
+          )}
+        >
           {opportunity.visibilityNote ? (
-            <p className="mb-4 text-center text-xs text-stone-500 dark:text-stone-400">{opportunity.visibilityNote}</p>
+            <p className="mb-3 px-1 text-center text-[11px] leading-relaxed text-stone-500 dark:text-stone-400 sm:mb-4 sm:text-xs">
+              {opportunity.visibilityNote}
+            </p>
           ) : null}
           {opportunity.audienceKeywords?.terms?.length ? (
             <OpportunityAudienceKeywords data={opportunity.audienceKeywords} />
           ) : opportunity.audienceLine ? (
             <p className={opp.audienceLine}>{opportunity.audienceLine}</p>
           ) : null}
-          <OpportunityHero opportunity={opportunity} />
-          <RoleMatchMatrix opportunity={opportunity} />
-          <CaseStudyGrid opportunity={opportunity} />
+
+          <OpportunityColorSection sectionId="hero" className="mt-2 sm:mt-4">
+            <OpportunityHero opportunity={opportunity} />
+          </OpportunityColorSection>
+
+          <OpportunityColorSection sectionId="fit" className="mt-10 sm:mt-14">
+            <RoleMatchMatrix opportunity={opportunity} framed />
+          </OpportunityColorSection>
+
+          <OpportunityColorSection sectionId="case-studies" className="mt-10 sm:mt-14">
+            <CaseStudyGrid opportunity={opportunity} framed />
+          </OpportunityColorSection>
+
           <OpportunityTeachingCredentials opportunity={opportunity} />
-          <SkillsMatrix opportunity={opportunity} />
-          <InnovationProcess opportunity={opportunity} />
+
+          <OpportunityColorSection sectionId="skills" className="mt-10 sm:mt-14">
+            <SkillsMatrix opportunity={opportunity} framed />
+          </OpportunityColorSection>
+
+          <OpportunityColorSection sectionId="process" className="mt-10 sm:mt-14">
+            <InnovationProcess opportunity={opportunity} framed />
+          </OpportunityColorSection>
+
           {opportunity.animatedLogoBand?.length ? (
-            <section className="mt-16" aria-labelledby="platform-logos-heading">
+            <section className="mt-12 sm:mt-16" aria-labelledby="platform-logos-heading">
               <h2 id="platform-logos-heading" className={`mb-4 ${opp.h2Bold}`}>
                 Platforms and tools
               </h2>
@@ -67,7 +98,10 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           ) : (
             <TechStackLogos opportunity={opportunity} />
           )}
-          <ResumeCTA opportunity={opportunity} />
+
+          <OpportunityColorSection sectionId="resume" className="mt-10 sm:mt-14">
+            <ResumeCTA opportunity={opportunity} framed />
+          </OpportunityColorSection>
         </main>
       </>
     </OpportunityShell>

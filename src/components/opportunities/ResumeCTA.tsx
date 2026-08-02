@@ -8,12 +8,14 @@ import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityRe
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { opportunitySocialPillClass } from '@/components/opportunities/opportunitySocialStyles';
+import { cn } from '@/lib/utils';
 
 type ResumeCTAProps = {
   opportunity: Opportunity;
+  framed?: boolean;
 };
 
-export function ResumeCTA({ opportunity }: ResumeCTAProps) {
+export function ResumeCTA({ opportunity, framed = false }: ResumeCTAProps) {
   const { ctas, slug } = opportunity;
 
   const onCta = (kind: string) => {
@@ -21,15 +23,15 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
   };
 
   return (
-    <section id="resume" className={opp.section}>
+    <section id="resume" className={framed ? 'scroll-mt-32' : opp.section}>
       <h2 className={opp.h2}>{opportunity.resumeSectionTitle ?? 'Résumé and contact'}</h2>
       {opportunity.resumeSectionNote ? <p className={`mt-2 max-w-3xl ${opp.muted}`}>{opportunity.resumeSectionNote}</p> : null}
-      <div className="mt-6 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="footer" />
         <CoverLetterCtaLink ctas={ctas} onClick={() => onCta('cover_letter_footer')} />
         <a
           href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-          className={opp.btnSecondaryMedium}
+          className={cn(opp.btnSecondaryMedium, 'min-h-11 justify-center')}
           onClick={() => onCta('email_footer')}
         >
           <Mail className="h-4 w-4 shrink-0" aria-hidden />
@@ -39,7 +41,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
           href={ctas.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className={opportunitySocialPillClass('linkedin')}
+          className={cn(opportunitySocialPillClass('linkedin'), 'min-h-11 justify-center')}
           onClick={() => onCta('linkedin')}
         >
           <Linkedin className="h-4 w-4 shrink-0" aria-hidden />
@@ -50,7 +52,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
             href={ctas.github}
             target="_blank"
             rel="noopener noreferrer"
-            className={opportunitySocialPillClass('github')}
+            className={cn(opportunitySocialPillClass('github'), 'min-h-11 justify-center')}
             onClick={() => onCta('github')}
           >
             <Github className="h-4 w-4 shrink-0" aria-hidden />
@@ -62,7 +64,7 @@ export function ResumeCTA({ opportunity }: ResumeCTAProps) {
             href={ctas.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className={opportunitySocialPillClass('instagram')}
+            className={cn(opportunitySocialPillClass('instagram'), 'min-h-11 justify-center')}
             onClick={() => onCta('instagram')}
           >
             <Instagram className="h-4 w-4 shrink-0" aria-hidden />

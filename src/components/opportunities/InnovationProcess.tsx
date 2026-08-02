@@ -12,6 +12,7 @@ type InnovationProcessProps = {
   diagrams?: ProcessDiagram[];
   /** `horizontal` = row on md+, stack on mobile. Default `stack`. */
   layout?: 'stack' | 'horizontal';
+  framed?: boolean;
 };
 
 export function InnovationProcess({
@@ -19,9 +20,10 @@ export function InnovationProcess({
   sectionId = 'process',
   diagrams,
   layout = 'stack',
+  framed = false,
 }: InnovationProcessProps) {
   return (
-    <section id={sectionId} className={opp.section}>
+    <section id={sectionId} className={framed ? 'scroll-mt-32' : opp.section}>
       <h2 className={opp.h2}>{opportunity.processSectionTitle ?? 'Process'}</h2>
       {opportunity.processIntro ? <p className={`mt-3 max-w-3xl ${opp.body}`}>{opportunity.processIntro}</p> : null}
       {diagrams?.length ? (
