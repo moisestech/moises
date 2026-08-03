@@ -72,7 +72,7 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     ],
     imageSrc: AI24_WEBSITE_HERO_IMAGE,
     imageAlt: 'AI24 website — above-the-fold product and program hub',
-    href: 'https://ai24.live',
+    href: '/ai24',
   },
   'multimodal-image-systems': {
     id: 'multimodal-image-systems',

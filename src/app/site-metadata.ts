@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 
 export const siteMetadata: Metadata = {
-  title: 'Tech Nonprofit',
-  description: 'Empowering nonprofits with technology solutions',
+  title: 'Moises Sanabria',
+  description:
+    'Miami-based interdisciplinary artist materializing the internet through sculpture, installation, machine learning, and networked systems.',
   metadataBase: new URL('https://moises.tech'),
   keywords:
-    'artificial intelligence artist, ai art, ai generated art, art artificial intelligence, ai artist, contemporary art, machine learning art, art gans, meme art, creative ai, creative technology, ai artist',
+    'artificial intelligence artist, ai art, ai generated art, art artificial intelligence, ai artist, contemporary art, machine learning art, art gans, meme art, creative ai, creative technology, ai artist, Moises Sanabria, AI24',
   alternates: {
     types: {
       'application/rss+xml': 'https://moises.tech/rss.xml',
