@@ -49,6 +49,10 @@ export function ComfyCommandPalette() {
       el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
+    if (href.startsWith('http') || href.startsWith('mailto:')) {
+      window.open(href, href.startsWith('mailto:') ? '_self' : '_blank', 'noopener,noreferrer');
+      return;
+    }
     window.location.href = href;
   };
 

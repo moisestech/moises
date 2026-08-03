@@ -3,6 +3,45 @@ import { resumePdfDriveViewUrl } from '@/content/ai-engineering/packet';
 
 const lore = evidenceProjects['lore-machine'];
 
+/** Canonical Output Provenance Explorer links — use everywhere. */
+export const provenanceLinks = {
+  demo: 'https://comfyui-output-provenance.vercel.app',
+  repo: 'https://github.com/moisestech/comfyui-output-provenance',
+  docs: 'https://github.com/moisestech/comfyui-output-provenance/blob/main/docs/README.md',
+  roadmap: 'https://github.com/moisestech/comfyui-output-provenance/blob/main/docs/ROADMAP.md',
+  architecture:
+    'https://github.com/moisestech/comfyui-output-provenance/blob/main/docs/ARCHITECTURE.md',
+  testing: 'https://github.com/moisestech/comfyui-output-provenance/blob/main/docs/TESTING.md',
+  performance:
+    'https://github.com/moisestech/comfyui-output-provenance/blob/main/docs/PERFORMANCE.md',
+  evidence:
+    'https://github.com/moisestech/comfyui-output-provenance/blob/main/docs/PORTFOLIO_EVIDENCE.md',
+  mark: 'https://raw.githubusercontent.com/moisestech/comfyui-output-provenance/main/docs/assets/provenance-mark.svg',
+  heroSvg:
+    'https://raw.githubusercontent.com/moisestech/comfyui-output-provenance/main/docs/assets/readme-hero.svg',
+} as const;
+
+/** Creative-software dark UI tokens aligned with apps/demo. */
+export const provenanceBrand = {
+  surface: '#11110f',
+  surfaceElevated: '#191916',
+  canvas: '#0c0c0b',
+  text: '#f4f1e8',
+  textMuted: '#aaa79d',
+  border: '#3b3a34',
+  accent: '#f0c94b',
+  accentSubtle: '#2a2618',
+  focus: '#9cc8ff',
+  node: '#25241f',
+  nodeActive: '#332f1d',
+  edge: '#858276',
+  done: '#22c55e',
+  active: '#f0c94b',
+  next: '#3b82f6',
+  later: '#64748b',
+  blocked: '#ef4444',
+} as const;
+
 export type CredibilityItem = {
   id: string;
   label: string;
@@ -52,6 +91,16 @@ export type ProvenanceOutput = {
   state?: 'ok' | 'empty' | 'error';
 };
 
+export type MilestoneStatus = 'done' | 'active' | 'next' | 'later';
+
+export type MilestoneRow = {
+  id: string;
+  theme: string;
+  progress: string;
+  status: MilestoneStatus;
+  detail: string;
+};
+
 /** Proof-first content for Comfy MTS Frontend work-sample page. */
 export const comfyWorkSample = {
   hero: {
@@ -60,30 +109,165 @@ export const comfyWorkSample = {
       'Building visual AI interfaces with the control of an engineer and the instincts of a working artist.',
     support:
       'I’m a founding frontend engineer and creative technologist who helped build Lore Machine, a production visual-AI platform incorporating ComfyUI-powered image workflows. I specialize in turning complex generative systems into interfaces creators can understand, control, and trust.',
-    primaryCta: { label: 'View ComfyUI Experience', href: '#comfyui-experience' },
+    primaryCta: { label: 'Open live demo', href: provenanceLinks.demo },
     secondaryCtas: [
-      { label: 'GitHub', href: 'https://github.com/moisestech' },
+      { label: 'View repository', href: provenanceLinks.repo },
       { label: 'Download Résumé', href: resumePdfDriveViewUrl },
-      { label: 'Contact Me', href: 'mailto:m@moises.tech?subject=Comfy%20%E2%80%94%20MTS%20Frontend%20%E2%80%94%20Moises%20Sanabria' },
+      {
+        label: 'Contact Me',
+        href: 'mailto:m@moises.tech?subject=Comfy%20%E2%80%94%20MTS%20Frontend%20%E2%80%94%20Moises%20Sanabria',
+      },
     ],
+    tertiaryCta: { label: 'Lore × ComfyUI case study', href: '#comfyui-experience' },
     statusLine: 'Miami-based · Open to relocating to San Francisco',
     atmosphereSrc: '/images/opportunities/comfy-mts-hero-atmosphere.png',
-    /** Fallback atmospheric crop (existing staff banner) until cinematic asset is finalized. */
     atmosphereFallbackSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785764243/jobs/banners/comfy-ui-frontend-staff-banner_ciekv7.png',
   },
   credibility: [
     { id: 'lore', label: 'Lore Machine', value: 'Founding frontend engineer' },
-    { id: 'comfyui', label: 'ComfyUI', value: 'Production workflow experience' },
+    { id: 'comfyui', label: 'ComfyUI', value: 'Production workflow collaboration' },
     { id: 'years', label: 'Product delivery', value: '8+ years shipping interactive systems' },
     { id: 'perspective', label: 'Perspective', value: 'Engineer + practicing artist' },
   ] satisfies CredibilityItem[],
   techBadges: [
+    { id: 'mark', label: 'Provenance', src: provenanceLinks.mark },
     { id: 'comfyui', label: 'ComfyUI', src: '/images/tech-logos/comfyui.svg' },
     { id: 'vue', label: 'Vue.js', src: '/images/tech-logos/vue.svg' },
     { id: 'typescript', label: 'TypeScript', src: '/images/tech-logos/typescript.svg' },
     { id: 'vite', label: 'Vite', src: '/images/tech-logos/vite.svg' },
   ],
+  product: {
+    sectionId: 'work-sample',
+    eyebrow: 'Unofficial ComfyUI project',
+    title: 'Output Provenance Explorer',
+    subtitle: 'Trace an output back to the workflow decisions that produced it.',
+    statusChip: 'Architecture foundation',
+    statusLine: 'Live demo · Milestone 0 complete · Milestone 1 next',
+    definition:
+      'An unofficial ComfyUI frontend experiment + portfolio engineering sample: a standalone Vue demo (and future sidebar extension) that reconnects a selected generated output to the nodes, parameters, and workflow path that produced it.',
+    blurb90:
+      'ComfyUI makes generation logic visible, but large histories can separate creative review from the path that produced a result. This unofficial project tests a provenance layer: select an output, see the upstream dependency path, and inspect parameters in a GPU-free standalone demo. The repo is a pnpm monorepo (demo, pure core, UI, extension adapter) with Zod validation, graph traversal tests, CI, and a public Vercel deploy. It demonstrates transfer into Comfy’s Vue conventions from a React/Next production background, without overclaiming extension readiness or sole Comfy infrastructure ownership at Lore Machine.',
+    disclaimer: 'Unofficial project. Not affiliated with or endorsed by Comfy Org.',
+    ctas: [
+      { label: 'Open live demo', href: provenanceLinks.demo, primary: true },
+      { label: 'View repository', href: provenanceLinks.repo, primary: false },
+      { label: 'Docs & roadmap', href: provenanceLinks.docs, primary: false },
+    ],
+    docLinks: [
+      { label: 'Docs hub', href: provenanceLinks.docs },
+      { label: 'Roadmap', href: provenanceLinks.roadmap },
+      { label: 'Architecture', href: provenanceLinks.architecture },
+      { label: 'Testing / QA', href: provenanceLinks.testing },
+      { label: 'Performance', href: provenanceLinks.performance },
+      { label: 'Evidence map', href: provenanceLinks.evidence },
+    ],
+    panels: [
+      { id: 'runs', label: 'Runs and outputs', job: 'Select generation / output' },
+      { id: 'graph', label: 'Provenance graph', job: 'Highlight upstream path + text summary' },
+      { id: 'inspector', label: 'Output inspector', job: 'Parameters + warnings' },
+    ],
+    goals: [
+      'Trace selected output → upstream path',
+      'Inspect generation parameters (prompt, model, seed, steps, …)',
+      'Compare two outputs (roadmap — not in live Vue demo yet)',
+      'Jump to source node when host supports it (extension — later)',
+      'Surface incomplete metadata honestly',
+      'Stay keyboard-reachable and demoable without GPU/Comfy',
+    ],
+    nonGoals: [
+      'Replace Comfy canvas',
+      'Prompt library / model manager',
+      'Reimplement execution history',
+      'Interpret every custom node',
+      'Edit workflows in the standalone demo',
+      'Fake production-ready extension',
+    ],
+    milestones: [
+      {
+        id: 'M0',
+        theme: 'Foundation',
+        progress: '~100%',
+        status: 'done',
+        detail: 'Monorepo, parser, trace, demo shell, CI, docs',
+      },
+      {
+        id: 'M1',
+        theme: 'Domain',
+        progress: '~15%',
+        status: 'next',
+        detail: 'Real fixtures, history/API parsers, indexes, params',
+      },
+      {
+        id: 'M2',
+        theme: 'Reviewer demo',
+        progress: '~20%',
+        status: 'later',
+        detail: 'Gallery, states, deeper inspector',
+      },
+      {
+        id: 'M3',
+        theme: 'Compare + quality',
+        progress: '~10%',
+        status: 'later',
+        detail: 'Diff, a11y, Storybook, measured perf',
+      },
+      {
+        id: 'M4',
+        theme: 'Extension',
+        progress: '~10%',
+        status: 'later',
+        detail: 'Sidebar, adapters, installable bundle',
+      },
+      {
+        id: 'M5',
+        theme: 'Release',
+        progress: '~15%',
+        status: 'later',
+        detail: 'Interviews, screenshots, social card, tag',
+      },
+    ] satisfies MilestoneRow[],
+    categorySnapshot: [
+      {
+        category: 'Architecture',
+        done: 'Boundaries, Zod v1, trace, ADRs, adapter stubs',
+        left: 'History/API parsers, adjacency indexes, Pinia stores, diff',
+      },
+      {
+        category: 'UI',
+        done: 'Three-panel shell, i18n, tokens, hosted demo',
+        left: 'Multi-run gallery, compare, full state matrix',
+      },
+      {
+        category: 'QA',
+        done: '4 unit tests, 1 Playwright journey, CI green',
+        left: 'Component tests, axe, contract suite, journey 2–7',
+      },
+      {
+        category: 'Performance',
+        done: 'Strategy + budgets documented',
+        left: 'Large fixtures + published measurements',
+      },
+      {
+        category: 'Host',
+        done: 'Package boundary',
+        left: 'Real sidebar + history routes',
+      },
+    ],
+    stack: [
+      { layer: 'UI', choice: 'Vue 3.5 Composition API + <script setup>' },
+      { layer: 'State', choice: 'Pinia (roots present; full stores still next)' },
+      { layer: 'Build', choice: 'Vite 8, pnpm 11, Node ≥ 22' },
+      { layer: 'Style', choice: 'Tailwind 4 semantic tokens' },
+      { layer: 'Domain', choice: 'Zod 4 boundary → canonical model' },
+      { layer: 'Tests', choice: 'Vitest (unit), Playwright (e2e)' },
+      { layer: 'License', choice: 'GPL-3.0-or-later' },
+    ],
+    qaHonesty:
+      '4 unit tests (parse + trace) and CI green (format, lint, typecheck, unit, build, Playwright). Performance budgets are documented targets only — no published Lighthouse / latency claims yet.',
+    architectureRule:
+      'Host data enters unknown → validated once → canonical model → graph/UI. Never invent Comfy APIs.',
+  },
   caseStudy: {
     sectionId: 'comfyui-experience',
     title: 'Lore Machine × ComfyUI',
@@ -91,7 +275,7 @@ export const comfyWorkSample = {
     challenge:
       'Transform long-form written narratives into coherent, editable visual sequences through a production creative-AI interface — without forcing creators to operate raw model tooling.',
     roleLead:
-      'Founding engineer on a three-person team. Owned major portions of the customer-facing frontend while collaborating with Martin on the ComfyUI pipeline connection.',
+      'At Lore Machine, owned customer-facing product layers around generation and review; collaborated on ComfyUI-powered workflows; was not the sole architect of underlying ComfyUI graph infrastructure.',
     roleBullets: [
       'Owned major portions of the customer-facing frontend',
       'Translated complex generation infrastructure into usable product workflows',
@@ -148,7 +332,7 @@ export const comfyWorkSample = {
     decisions: [
       'Expose generation status and retry as product states — not hidden polish.',
       'Hide raw graph complexity by default; reveal control when creators need it.',
-      'Keep frontend ownership honest: React/Next product UI, not Vue/LiteGraph claims.',
+      'Keep frontend ownership honest: React/Next product UI at Lore; Vue transfer via the provenance monorepo.',
     ],
     evidence: {
       imageSrc: lore.imageSrc,
@@ -166,7 +350,7 @@ export const comfyWorkSample = {
         id: 'core-fe',
         title: 'Core frontend architecture',
         summary: 'TypeScript product surfaces, auth, state, and API-bound UI.',
-        evidenceIds: ['lore-fe', 'api-states'],
+        evidenceIds: ['lore-fe', 'api-states', 'provenance'],
       },
       {
         id: 'complex-ux',
@@ -178,13 +362,13 @@ export const comfyWorkSample = {
         id: 'rapid-proto',
         title: 'Rapid prototyping',
         summary: 'Founding-engineer speed from ambiguous brief to shipped interface.',
-        evidenceIds: ['lore-fe', 'ai24'],
+        evidenceIds: ['lore-fe', 'provenance'],
       },
       {
         id: 'perf',
         title: 'Performance & maintainability',
-        summary: 'Production Vercel delivery, typed surfaces, honest ramp into Vue tests.',
-        evidenceIds: ['lore-fe', 'ramp'],
+        summary: 'Typed monorepo, CI, documented perf budgets (targets only).',
+        evidenceIds: ['provenance', 'ramp'],
       },
       {
         id: 'xfn',
@@ -201,7 +385,7 @@ export const comfyWorkSample = {
       {
         id: 'visual',
         title: 'Visual quality & accessibility',
-        summary: 'Artist-engineer judgment; keyboardable demos; reduced-motion support.',
+        summary: 'Artist-engineer judgment; demoable without GPU; a11y still deepening.',
         evidenceIds: ['provenance', 'review-ux'],
       },
       {
@@ -239,8 +423,9 @@ export const comfyWorkSample = {
       {
         id: 'provenance',
         label: 'Output Provenance Explorer',
-        detail: 'Interactive mock of inspectable workflow ↔ output linking.',
-        href: '#provenance-explorer',
+        detail:
+          'Live Vue monorepo + hosted demo tracing output → upstream path; foundation slice with CI and docs.',
+        href: provenanceLinks.demo,
       },
       {
         id: 'ai24',
@@ -250,8 +435,8 @@ export const comfyWorkSample = {
       },
       {
         id: 'ramp',
-        label: 'Honest Vue / LiteGraph ramp',
-        detail: 'Coming soon proof track — not overclaimed expertise.',
+        label: 'Honest Vue ramp',
+        detail: 'Deliberate Vue 3.5 transfer — not a rewrite of React/Next history.',
         href: '#ramp',
       },
     ] satisfies RoleFitEvidence[],
@@ -263,45 +448,57 @@ export const comfyWorkSample = {
       'TypeScript correctness and tests before asking for review.',
       'Loading, empty, error, and partial-success are product work.',
       'Prototype as exploration informed by creators — not “adopt my feature.”',
-      'Vue / LiteGraph proof via example repo and PRs — never overclaim the stack transfer.',
+      'Host data enters unknown → validated once → canonical model → graph/UI.',
     ],
   },
   ramp: {
     title: 'Honest ramp areas',
     intro:
-      'Comfy’s stack is Vue 3, TypeScript, Pinia, PrimeVue, Vitest, Playwright, Electron, LiteGraph. Production depth here is React/Next creative-AI product engineering plus ComfyUI pipeline architecture with Martin. The items below are active growth — not claimed expertise.',
+      'Deepest production frontend experience is React and Next.js. This project uses Vue 3.5 deliberately to transfer into Comfy’s current frontend conventions — not to rewrite that history.',
+    loreBoundary:
+      'At Lore Machine, owned customer-facing product layers around generation and review; collaborated on ComfyUI-powered workflows; was not the sole architect of underlying ComfyUI graph infrastructure.',
   },
   first30: {
-    title: 'First ~10 days of proof',
+    title: 'Proof sprint — status',
     steps: [
       {
-        title: 'Repository fluency',
-        description:
-          'Run ComfyUI_frontend locally. Read CONTRIBUTING. Trace one Vue feature → store → tests. Identify 2–3 candidate issues.',
-      },
-      {
-        title: 'Product discovery',
-        description:
-          'Interview expert ComfyUI users. Capture repeated pain. Write the product rationale before coding.',
-      },
-      {
         title: 'Prototype / example repo',
-        description:
-          'Ship a Vue/TypeScript example with empty/loading/error paths and Playwright coverage.',
-      },
-      {
-        title: 'Open-source proof',
-        description:
-          'Open a focused PR with reproduction steps, screenshots, and implementation rationale.',
+        description: `Done — Vue 3.5 + TypeScript monorepo with Zod parse, graph trace, CI, and docs. ${provenanceLinks.repo}`,
+        status: 'done' as const,
       },
       {
         title: 'Application package',
+        description: `Done — live demo, docs hub, architecture, roadmap, and this page linked. ${provenanceLinks.demo}`,
+        status: 'done' as const,
+      },
+      {
+        title: 'Repository fluency (ComfyUI_frontend)',
         description:
-          'Demo recording, live links on this page, GitHub + résumé + contact.',
+          'Next — run ComfyUI_frontend locally, trace Vue feature → store → tests, identify focused PR candidates.',
+        status: 'next' as const,
+      },
+      {
+        title: 'Product discovery',
+        description: 'Open — interview expert ComfyUI users; capture repeated pain for Milestone 1 fixtures.',
+        status: 'open' as const,
+      },
+      {
+        title: 'Open-source proof',
+        description: 'Open — focused PR to Comfy-Org/ComfyUI_frontend (not claimed yet).',
+        status: 'open' as const,
       },
     ],
   },
   selectedWork: [
+    {
+      id: 'provenance',
+      title: 'Output Provenance Explorer',
+      detail: 'Vue 3.5 monorepo · live demo · M0 foundation',
+      imageSrc: provenanceLinks.heroSvg,
+      imageAlt: 'Architecture preview diagram for Output Provenance Explorer',
+      href: provenanceLinks.demo,
+      imageLocal: false,
+    },
     {
       id: 'lore',
       title: lore.title,
@@ -310,20 +507,18 @@ export const comfyWorkSample = {
       imageAlt: lore.imageAlt,
       href: lore.href,
     },
-    {
-      id: 'ai24',
-      title: evidenceProjects.ai24.title,
-      detail: 'Creative AI pipeline with human review before publish',
-      imageSrc: evidenceProjects.ai24.imageSrc,
-      imageAlt: evidenceProjects.ai24.imageAlt,
-      href: evidenceProjects.ai24.href,
-    },
   ],
   commandItems: [
     { id: 'comfy', label: 'View ComfyUI experience', href: '#comfyui-experience' },
-    { id: 'lore', label: 'View Lore Machine case study', href: '#comfyui-experience' },
-    { id: 'provenance', label: 'Open Output Provenance Explorer', href: '#provenance-explorer' },
-    { id: 'github', label: 'Open GitHub', href: 'https://github.com/moisestech' },
+    { id: 'demo', label: 'Open live Provenance demo', href: provenanceLinks.demo },
+    { id: 'repo', label: 'View repository', href: provenanceLinks.repo },
+    { id: 'docs', label: 'Docs hub / architecture', href: provenanceLinks.docs },
+    { id: 'roadmap', label: 'Roadmap (done vs left)', href: provenanceLinks.roadmap },
+    {
+      id: 'illustration',
+      label: 'In-page explorer (illustration)',
+      href: '#provenance-explorer',
+    },
     { id: 'resume', label: 'Download résumé', href: resumePdfDriveViewUrl },
     {
       id: 'contact',
@@ -337,28 +532,29 @@ export const comfyWorkSample = {
       target: '#hero',
       label: 'Hero',
       notes: [
-        'HTML typography over atmospheric image — no baked-in generated text',
-        'Center scrim for contrast; left-aligned on mobile',
-        'Decorative image uses empty alt; meaning in headings',
+        'Primary CTA opens the live Vue demo — not the in-page illustration',
+        'HTML typography over atmospheric image',
+        'Disclaimer: unofficial ComfyUI project',
+      ],
+    },
+    {
+      id: 'product',
+      target: '#work-sample',
+      label: 'Work sample',
+      notes: [
+        'Product proof = Vercel demo + GitHub monorepo',
+        'M0 done / M1 next — extension not installable yet',
+        'Compare mode exists only as illustration on this page',
       ],
     },
     {
       id: 'provenance',
       target: '#provenance-explorer',
-      label: 'Provenance explorer',
+      label: 'In-page explorer',
       notes: [
-        'Client-only mock data — no backend',
-        'Keyboard prev/next + focus styles',
+        'React illustration only — not the Vue product',
+        'Keyboard prev/next for scanning',
         'prefers-reduced-motion disables path pulses',
-      ],
-    },
-    {
-      id: 'fit',
-      target: '#role-fit',
-      label: 'Role-fit map',
-      notes: [
-        'Evidence remains visible without hover',
-        'Focus/hover only highlights relationships',
       ],
     },
   ],
@@ -385,7 +581,7 @@ export const provenanceDemo = {
     {
       id: 'out-a',
       title: 'Sequence frame A',
-      thumbTone: 'from-amber-700/80 via-stone-800 to-stone-950',
+      thumbTone: 'from-[#332f1d] via-[#191916] to-[#0c0c0b]',
       seed: 1048291,
       steps: 28,
       model: 'sdxl-base (mock)',
@@ -397,7 +593,7 @@ export const provenanceDemo = {
     {
       id: 'out-b',
       title: 'Sequence frame B',
-      thumbTone: 'from-cyan-800/70 via-slate-800 to-stone-950',
+      thumbTone: 'from-[#25241f] via-[#191916] to-[#0c0c0b]',
       seed: 881204,
       steps: 32,
       model: 'sdxl-base (mock)',
@@ -409,7 +605,7 @@ export const provenanceDemo = {
     {
       id: 'out-c',
       title: 'Material study',
-      thumbTone: 'from-stone-600 via-stone-800 to-black',
+      thumbTone: 'from-[#3b3a34] via-[#191916] to-[#0c0c0b]',
       seed: 552019,
       steps: 24,
       model: 'sdxl-base (mock)',
@@ -421,7 +617,7 @@ export const provenanceDemo = {
     {
       id: 'out-empty',
       title: 'Empty slot',
-      thumbTone: 'from-stone-900 to-stone-950',
+      thumbTone: 'from-[#11110f] to-[#0c0c0b]',
       seed: 0,
       steps: 0,
       model: '—',
@@ -433,7 +629,7 @@ export const provenanceDemo = {
     {
       id: 'out-err',
       title: 'Failed run',
-      thumbTone: 'from-red-950 via-stone-900 to-black',
+      thumbTone: 'from-[#3f1d1d] via-[#191916] to-[#0c0c0b]',
       seed: 991002,
       steps: 12,
       model: 'sdxl-base (mock)',

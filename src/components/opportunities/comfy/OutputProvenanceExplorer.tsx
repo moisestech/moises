@@ -81,18 +81,36 @@ export function OutputProvenanceExplorer() {
       aria-labelledby={headingId}
     >
       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-yellow-700 dark:text-yellow-400">
-        Interactive proof · static mock data
+        Illustration on this page · React mock
       </p>
       <h2
         id={headingId}
         className="mt-2 text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-3xl"
       >
-        Output Provenance Explorer
+        In-page explorer (illustration)
       </h2>
       <p className="mt-2 max-w-3xl text-sm leading-relaxed text-stone-600 dark:text-stone-400 sm:text-base">
-        A contained frontend demonstration: select a generated output to highlight its source nodes,
-        inspect metadata, compare two frames, and jump to the producing path. No backend — typed mock
-        data only. Use ← → when this section is in view.
+        This embedded control is a <strong className="font-semibold text-stone-800 dark:text-stone-200">React
+        illustration</strong> for the application page — not the Vue product. Product proof lives in the{' '}
+        <a
+          href="https://comfyui-output-provenance.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-cyan-600 underline-offset-2 hover:underline dark:text-cyan-400"
+        >
+          live Vue demo
+        </a>{' '}
+        and{' '}
+        <a
+          href="https://github.com/moisestech/comfyui-output-provenance"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-cyan-600 underline-offset-2 hover:underline dark:text-cyan-400"
+        >
+          repository
+        </a>
+        . Compare mode here is mock-only and is <em>not</em> in the Vue demo yet. Use ← → when this section is
+        in view.
       </p>
 
       <div className="mt-8 overflow-hidden rounded-2xl border border-stone-300 bg-stone-950 text-stone-100 shadow-sm dark:border-stone-700">
@@ -332,7 +350,7 @@ function GraphCanvas({
             <path
               d={`M ${ac.x} ${ac.y} C ${(ac.x + bc.x) / 2} ${ac.y}, ${(ac.x + bc.x) / 2} ${bc.y}, ${bc.x} ${bc.y}`}
               fill="none"
-              stroke={active ? '#facc15' : '#44403c'}
+              stroke={active ? '#f0c94b' : '#858276'}
               strokeWidth={active ? 0.55 : 0.35}
               opacity={active ? 1 : 0.55}
               className={cn(!reduceMotion && active && 'origin-center')}
@@ -356,8 +374,8 @@ function GraphCanvas({
               width={14}
               height={10}
               rx={1.4}
-              fill={active ? '#1c1917' : '#0c0a09'}
-              stroke={flash ? '#22d3ee' : active ? '#facc15' : '#57534e'}
+              fill={active ? '#332f1d' : '#25241f'}
+              stroke={flash ? '#9cc8ff' : active ? '#f0c94b' : '#3b3a34'}
               strokeWidth={flash ? 0.7 : 0.4}
             />
             <text
