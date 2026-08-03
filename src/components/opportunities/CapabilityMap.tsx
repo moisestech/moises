@@ -6,11 +6,16 @@ import { cn } from '@/lib/utils';
 type CapabilityMapProps = {
   data: CapabilityMapData;
   sectionId?: string;
+  className?: string;
 };
 
-export function CapabilityMap({ data, sectionId = 'capabilities' }: CapabilityMapProps) {
+export function CapabilityMap({ data, sectionId = 'capabilities', className }: CapabilityMapProps) {
   return (
-    <section id={sectionId} className={opp.section} aria-labelledby={`${sectionId}-heading`}>
+    <section
+      id={sectionId}
+      className={cn(opp.section, className)}
+      aria-labelledby={`${sectionId}-heading`}
+    >
       <h2 id={`${sectionId}-heading`} className={opp.h2}>
         {data.title}
       </h2>

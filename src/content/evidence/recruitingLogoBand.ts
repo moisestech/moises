@@ -88,3 +88,24 @@ export const affirmCompanyLogos = {
   dark: `${jobsCdn}/v1784121432/jobs/application-logos/affirm-logo-type-dark-theme-horizontal_yofxgl.avif`,
   alt: 'Affirm',
 } as const;
+
+/** Comfy MTS Frontend — verified stack marks + Vue (growth) without claiming LiteGraph mastery. */
+export const comfyFrontendSkillLogoBand: LogoBandItem[] = [
+  { src: '/images/tech-logos/comfyui.svg', alt: 'ComfyUI', height: 36 },
+  { src: 'https://cdn.simpleicons.org/vuedotjs/4FC08D', alt: 'Vue.js', height: 36 },
+  { src: 'https://cdn.simpleicons.org/typescript/3178C6', alt: 'TypeScript', height: 36 },
+  { src: 'https://cdn.simpleicons.org/react/61DAFB', alt: 'React', height: 36 },
+  { src: 'https://cdn.simpleicons.org/nextdotjs', alt: 'Next.js', height: 36 },
+  { src: 'https://cdn.simpleicons.org/tailwindcss/06B6D4', alt: 'Tailwind CSS', height: 36 },
+  { src: 'https://cdn.simpleicons.org/vercel', alt: 'Vercel', height: 36 },
+  { src: 'https://cdn.simpleicons.org/github', alt: 'GitHub', height: 36 },
+  { src: 'https://cdn.simpleicons.org/playwright/2EAD33', alt: 'Playwright', height: 36 },
+  { src: 'https://cdn.simpleicons.org/vitest/6E9F18', alt: 'Vitest', height: 36 },
+];
+
+/** Comfy wordmark placeholder until official brand assets are licensed. */
+export const comfyCompanyLogos = {
+  light: '/images/tech-logos/comfyui.svg',
+  dark: '/images/tech-logos/comfyui.svg',
+  alt: 'Comfy / ComfyUI',
+} as const;

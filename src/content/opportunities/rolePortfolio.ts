@@ -74,6 +74,11 @@ export type RolePortfolioSelectedProject = {
   subtitle: string;
   deliveryStatus: DeliveryStatus;
   bullets: string[];
+  imageSrc?: string;
+  imageAlt?: string;
+  imageLocal?: boolean;
+  href?: string;
+  linkLabel?: string;
 };
 
 /** Application-evidence checklist for roles that need visible proof (OSS PR, demo, interviews). */
@@ -86,6 +91,9 @@ export type RolePortfolioEvidenceItem = {
   body: string;
   href?: string;
   linkLabel?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  imageLocal?: boolean;
 };
 
 export type RolePortfolioEvidenceRoadmap = {
@@ -93,6 +101,9 @@ export type RolePortfolioEvidenceRoadmap = {
   intro?: string;
   items: RolePortfolioEvidenceItem[];
 };
+
+/** Category for Coming soon visual placeholders (color-coded cards). */
+export type RolePortfolioComingSoonKind = 'repo' | 'cert' | 'skill' | 'demo' | 'research';
 
 /** Visual “Coming soon” cards for proof still shipping (repos, certs, skill gaps). */
 export type RolePortfolioComingSoonItem = {
@@ -103,6 +114,11 @@ export type RolePortfolioComingSoonItem = {
   linkLabel?: string;
   /** Defaults to “Coming soon”. */
   badge?: string;
+  /** Drives placeholder color + label when `imageSrc` is absent. */
+  kind?: RolePortfolioComingSoonKind;
+  imageSrc?: string;
+  imageAlt?: string;
+  imageLocal?: boolean;
 };
 
 export type RolePortfolioComingSoonBlock = {

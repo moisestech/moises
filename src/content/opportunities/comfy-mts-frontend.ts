@@ -1,10 +1,17 @@
 import type { Opportunity } from './types';
 import type { RolePortfolioDossier } from './rolePortfolio';
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
-import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import {
+  comfyCompanyLogos,
+  comfyFrontendSkillLogoBand,
+  moisesSanabriaHeadshot,
+} from '@/content/evidence/recruitingLogoBand';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { resumePdfDriveViewUrl } from '@/content/ai-engineering/packet';
 import { comfyMtsFrontendBanner } from '@/content/evidence/applicationBanners';
+
+const lore = evidenceProjects['lore-machine'];
+const ai24 = evidenceProjects.ai24;
 
 /**
  * Comfy — Member of Technical Staff, Frontend
@@ -57,8 +64,10 @@ const rolePortfolio: RolePortfolioDossier = {
         title: 'Lore Machine × ComfyUI connection (with Martin)',
         status: 'ready',
         body: 'Production generative-image path ran on **ComfyUI**. Collaborated with **Martin** on building and architecture of that connection — frontend/product ownership on Moises’s side, joint systems work on how workflows entered the product.',
-        href: evidenceProjects['lore-machine'].href,
+        href: lore.href,
         linkLabel: 'Lore Machine',
+        imageSrc: lore.imageSrc,
+        imageAlt: lore.imageAlt,
       },
       {
         id: 'example-repo',
@@ -91,37 +100,43 @@ const rolePortfolio: RolePortfolioDossier = {
   comingSoon: {
     title: 'Coming soon — proof still shipping',
     intro:
-      'Places I’m strengthening for this role. Not claimed as established expertise. Links and badges update when artifacts are ready.',
+      'Color-coded placeholders for areas I’m strengthening. Not claimed as established expertise. Swap in screenshots, cert badges, and repo links as they ship.',
     items: [
       {
         id: 'vue-example-repo',
+        kind: 'repo',
         title: 'Vue / ComfyUI example repository',
         body: 'Public example repo for Vue 3 Composition API + TypeScript patterns relevant to ComfyUI_frontend. **I do not claim Vue/LiteGraph production ownership** — this is the honest proof vehicle.',
         linkLabel: 'Repo (coming soon)',
       },
       {
         id: 'vue-certificate',
+        kind: 'cert',
         title: 'Vue.js certificate',
         body: 'Optional Mid-Level Vue.js certification — visual placeholder only. Ranked below a focused OSS PR and working prototype; will not lead the application.',
         badge: 'Coming soon',
       },
       {
         id: 'comfyui-frontend-fluency',
+        kind: 'skill',
         title: 'ComfyUI_frontend day-to-day fluency',
         body: 'Deeper Vue 3, Pinia, PrimeVue, LiteGraph node-canvas interactions, Vitest/Playwright patterns, and Electron-specific frontend behavior inside their repo.',
       },
       {
         id: 'playwright-vitest',
+        kind: 'skill',
         title: 'Vitest + Playwright against Comfy patterns',
         body: 'Component and e2e tests matching ComfyUI_frontend conventions — loading/empty/error paths, keyboard flows, and workflow-artifact fixtures.',
       },
       {
         id: 'expert-interviews',
+        kind: 'research',
         title: 'Creator / expert discovery notes',
         body: 'Interview themes from working ComfyUI users — large-workflow pain, review/debug friction, output↔graph disconnects — feeding the prototype brief.',
       },
       {
         id: 'demo-video',
+        kind: 'demo',
         title: 'Two-minute product demo',
         body: 'Screen recording of the Vue prototype (or accepted PR) with architecture callouts for hiring review.',
       },
@@ -217,6 +232,10 @@ const rolePortfolio: RolePortfolioDossier = {
     title: 'Lore Machine × ComfyUI — generative-image connection (with Martin)',
     subtitle: 'Founding-engineer case study · ComfyUI-backed creative-AI product',
     deliveryStatus: 'deployed',
+    imageSrc: lore.imageSrc,
+    imageAlt: lore.imageAlt,
+    href: lore.href,
+    linkLabel: 'Open Lore Machine',
     bullets: [
       '**Problem:** turn long-form stories into sequences of generated visual scenes without requiring creators to operate raw model tooling.',
       '**ComfyUI:** generative-image work in the product **ran on ComfyUI**.',
@@ -227,6 +246,60 @@ const rolePortfolio: RolePortfolioDossier = {
     ],
   },
   selectedProjectSectionTitle: 'Selected case study',
+  caseStudiesTitle: 'Related creative-AI product surfaces',
+  caseStudiesIntro:
+    'Adjacent shipped interfaces that show creator-facing generative product craft. Placeholders remain honest where Vue/ComfyUI_frontend proof is still shipping.',
+  caseStudies: [
+    {
+      id: 'lore-machine',
+      title: lore.title,
+      category: lore.category,
+      ambiguity: 'Narrative → illustrated scene sequences without exposing raw model tooling.',
+      stakeholders: 'Founding team, creators, nontechnical narrative authors.',
+      ownership: 'Frontend, auth, API integrations, prompt workflows; ComfyUI connection architecture with Martin.',
+      systemBuilt: 'Real-time generative storytelling product on Vercel with ComfyUI-backed image path.',
+      production: 'Shipped production product used by creators.',
+      outcome: 'Creators could iterate stories into visual sequences with reviewable generation flows.',
+      roleConnection: 'Direct ComfyUI production experience + creator UI ownership for Comfy MTS Frontend.',
+      skillTags: lore.skillTags,
+      href: lore.href,
+      linkLabel: 'Lore Machine',
+      imageSrc: lore.imageSrc,
+      imageAlt: lore.imageAlt,
+      evidenceStatus: 'demonstrated',
+      deliveryStatus: 'deployed',
+    },
+    {
+      id: 'ai24',
+      title: ai24.title,
+      category: ai24.category,
+      ambiguity: 'Make generative pipelines reviewable before publication.',
+      stakeholders: 'Editors, illustrators, product users.',
+      ownership: 'Creative AI engineering — content pipeline, review loops, responsive delivery.',
+      systemBuilt: 'AI-driven news application with generative illustration pipeline.',
+      production: 'Live product surfaces and editorial review flows.',
+      outcome: 'Human-correctable AI content before publish.',
+      roleConnection: 'Transferable creator-review UX and TypeScript product craft.',
+      skillTags: ai24.skillTags,
+      href: ai24.href,
+      linkLabel: 'AI24',
+      imageSrc: ai24.imageSrc,
+      imageAlt: ai24.imageAlt,
+      evidenceStatus: 'transferable',
+      deliveryStatus: 'deployed',
+    },
+  ],
+  creative: {
+    title: 'Creator-facing generative production',
+    lead: 'Interfaces that keep generative complexity operable — status, iteration, and review — without pretending the model always succeeds.',
+    points: [
+      'Hide vs expose workflow depth based on the creator’s actual job in the moment.',
+      'Treat loading, empty, error, and partial-success as product surfaces, not polish.',
+      'Collaborate across engineering and creative tooling (ComfyUI path with Martin at Lore Machine).',
+    ],
+    imageSrc: lore.imageSrc,
+    imageAlt: lore.imageAlt,
+  },
   principlesTitle: 'How I would ship inside ComfyUI_frontend',
   principles: [
     { id: 'focused', text: 'One focused PR — not an unsolicited redesign.' },
@@ -308,14 +381,21 @@ export const comfyMtsFrontendOpportunity: Opportunity = {
     { id: 'fit', label: 'Role fit' },
     { id: 'evidence', label: 'Evidence' },
     { id: 'coming-soon', label: 'Coming soon' },
+    { id: 'skills', label: 'Skills' },
     { id: 'capabilities', label: 'Capabilities' },
     { id: 'experience', label: 'Experience' },
     { id: 'selected-project', label: 'Lore Machine' },
+    { id: 'work', label: 'Work' },
     { id: 'technologies', label: 'Stack' },
     { id: 'principles', label: 'How I ship' },
-    { id: 'process', label: '30-day plan' },
+    { id: 'process', label: 'Sprint' },
     { id: 'contact', label: 'Contact' },
   ],
+  companyLogoSrc: comfyCompanyLogos.light,
+  companyLogoSrcDark: comfyCompanyLogos.dark,
+  companyLogoAlt: comfyCompanyLogos.alt,
+  animatedLogoBand: comfyFrontendSkillLogoBand,
+  skillsSectionTitle: 'Skills map — established vs Coming soon',
   hero: {
     headline: 'I build interfaces for generative creative systems — including ComfyUI-backed ones.',
     subheadline:
@@ -393,7 +473,7 @@ export const comfyMtsFrontendOpportunity: Opportunity = {
     emailSubject: 'Comfy — Member of Technical Staff, Frontend — Moises Sanabria',
     github: 'https://github.com/moisestech',
   }),
-  techLogoIds: ['comfyui', 'vue', 'typescript', 'react', 'nextjs'],
+  techLogoIds: ['comfyui', 'vue', 'typescript', 'react', 'nextjs', 'tailwind', 'github'],
   resumeSectionTitle: 'Ready to review the evidence as it ships?',
   resumeSectionNote:
     'GitHub, Drive résumé, career packet, and email below. Coming soon cards update as the Vue example repo, certificates, and ComfyUI_frontend proof land.',
