@@ -14,6 +14,7 @@ import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fab
 import { playwireOpportunity } from './playwire';
 import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
 import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
+import { floraFoundingDataEngineerOpportunity } from './flora-founding-data-engineer';
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
@@ -25,6 +26,7 @@ const bySlug: Record<string, Opportunity> = {
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
   [deepgramSolutionsArchitectOpportunity.slug]: deepgramSolutionsArchitectOpportunity,
   [endorLabsSolutionsArchitectOpportunity.slug]: endorLabsSolutionsArchitectOpportunity,
+  [floraFoundingDataEngineerOpportunity.slug]: floraFoundingDataEngineerOpportunity,
   [forwardDeployedAiEngineerOpportunity.slug]: forwardDeployedAiEngineerOpportunity,
   [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:

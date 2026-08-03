@@ -56,3 +56,14 @@ export const comfyMtsFrontendBanner: ApplicationBanner = {
   aspectClass:
     'aspect-[16/9] min-h-[140px] max-h-[min(36vh,320px)] sm:aspect-[21/9] sm:min-h-[150px] sm:max-h-[min(40vh,400px)] md:aspect-[2.6/1] md:max-h-[min(42vh,440px)]',
 };
+
+/**
+ * FLORA — Founding Data Engineer.
+ * Data/product career-direction editorial (warehouse + creative systems atmosphere).
+ */
+export const floraFoundingDataEngineerBanner: ApplicationBanner = {
+  src: `${cdn}/v1781659236/product-ai-data-career-direction_ofgnrk.png`,
+  alt: 'FLORA Founding Data Engineer — data pipelines, product metrics, and creative systems atmosphere',
+  aspectClass:
+    'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+};

@@ -114,6 +114,11 @@ const nextConfig = {
         destination: '/opportunities/comfy-mts-frontend',
         permanent: false,
       },
+      {
+        source: '/roles/flora-founding-data-engineer',
+        destination: '/opportunities/flora-founding-data-engineer',
+        permanent: false,
+      },
     ]
   },
 

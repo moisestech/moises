@@ -105,6 +105,7 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
   aws: logoEntry('aws', 'AWS', `${jobsCdn}/v1780254939/jobs/Amazon-S3-Logo_mmkpap.png`),
   snowflake: simpleIconEntry('snowflake', 'Snowflake', 'snowflake', '29B5E8'),
   tableau: simpleIconEntry('tableau', 'Tableau', 'tableau', 'E97627'),
+  posthog: simpleIconEntry('posthog', 'PostHog', 'posthog', 'F54E00'),
   cloudinary: simpleIconEntry('cloudinary', 'Cloudinary', 'cloudinary', '3448C5'),
   'adobe-premiere': simpleIconEntry('adobe-premiere', 'Adobe Premiere', 'adobepremierepro', '9999FF'),
   'adobe-after-effects': simpleIconEntry(
