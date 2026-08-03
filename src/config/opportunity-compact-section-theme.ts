@@ -162,6 +162,13 @@ const byId: Record<string, OpportunityCompactSectionAccent> = {
   work: caseStudies,
   education: skills,
   creative: caseStudies,
+  credibility: fit,
+  'comfyui-experience': selectedProject,
+  'provenance-explorer': evidence,
+  'selected-work': caseStudies,
+  'role-fit': fit,
+  engineering: principles,
+  ramp: comingSoon,
 };
 
 export function getOpportunityCompactAccent(sectionId: string): OpportunityCompactSectionAccent {

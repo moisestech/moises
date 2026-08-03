@@ -48,11 +48,11 @@ export const forwardDeployedAiEngineerBanner: ApplicationBanner = {
 
 /**
  * Comfy — Member of Technical Staff, Frontend.
- * Dedicated ComfyUI frontend staff editorial banner.
+ * Atmospheric work-sample hero (typography overlaid in HTML — image is decorative).
  */
 export const comfyMtsFrontendBanner: ApplicationBanner = {
-  src: `${cdn}/v1785764243/jobs/banners/comfy-ui-frontend-staff-banner_ciekv7.png`,
-  alt: 'Comfy — Member of Technical Staff, Frontend — ComfyUI node graph and frontend product workbench banner',
+  src: '/images/opportunities/comfy-mts-hero-atmosphere.png',
+  alt: '',
   aspectClass:
     'aspect-[16/9] min-h-[140px] max-h-[min(36vh,320px)] sm:aspect-[21/9] sm:min-h-[150px] sm:max-h-[min(40vh,400px)] md:aspect-[2.6/1] md:max-h-[min(42vh,440px)]',
 };
