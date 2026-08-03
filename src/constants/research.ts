@@ -1218,5 +1218,105 @@ The work transforms an abstract policy debate into a fragile, glowing body that 
       technical: "The technical requirements for I Will Remember You are designed to ensure reliable operation while maintaining the work's safety and accessibility features. The installation combines edge AI computing with traditional glass artistry, creating a system that operates completely offline with sub-15W power consumption. Each component is carefully selected for durability, transparency, and ease of maintenance.",
       gallery: "The gallery showcases conceptual renderings and technical diagrams of I Will Remember You, demonstrating the work's sophisticated integration of art and technology. Each image highlights different aspects of the installation, from the hand-blown glass head to the visible internal components and interaction flow. The documentation emphasizes both the aesthetic beauty and technical innovation of the piece."
     }
-  }
+  },
+  weight_of_the_cloud: {
+    title: 'The Weight of the Cloud',
+    year: 2026,
+    description:
+      'Moises Sanabria + Fabiola Larios — a four-foot modular sculpture of obsolete electronics, structural metal, and embedded light. The work gives the cloud a body and asks what digital infrastructure weighs once its previous bodies are no longer useful.',
+    essay: '',
+    implementation: undefined,
+    budget: undefined,
+    supplemental_materials: [],
+    interactiveContent: [],
+    artistic_intent:
+      'The sculpture treats e-waste not only as environmental residue, but as the abandoned physical body of memory, labor, attention, surveillance, and outsourced cognition. Recycling is its material condition; its deeper subject is the continuous production and abandonment of technological bodies.',
+    technical_requirements: {
+      power: [
+        'Concealed low-voltage controller, fuse, and cable management',
+        'Diffused 24V illuminated void',
+      ],
+      mounting: ['Freestanding modular cube with load-bearing internal frame'],
+      space: {
+        pedestal_size: '48 × 48 × 48 in footprint',
+        wall_clearance: 'Gallery circulation around freestanding cube',
+        power_access: 'Standard interior outlet for low-voltage system',
+      },
+    },
+    components: {
+      structure: {
+        material: 'Welded steel or 80/20 aluminum extrusion',
+        customization: [
+          'Six removable mesh-backed e-waste panels',
+          'One removable service panel',
+        ],
+      },
+      hardware: {
+        model: '24V diffused light core + distributed low-voltage network lights',
+        specifications: [
+          'Electronics do not carry structural load',
+          'Concealed power and controller',
+        ],
+        power_requirements: 'Low-voltage interior power',
+      },
+      mounting: {
+        type: ['Freestanding modular cube', 'On-site assembly preferred'],
+        materials: ['Structural metal frame', 'Mesh-backed panels'],
+      },
+      display: {
+        pedestal: 'Floor-standing 48 in cube',
+        lighting: 'Illuminated central void + distributed signal lights',
+      },
+    },
+    materials: [
+      'Obsolete electronics',
+      'Structural metal',
+      'Embedded light',
+      'Control system',
+      'Mesh-backed panels',
+    ],
+    dimensions: '48 × 48 × 48 in (122 × 122 × 122 cm)',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785768535/art/moisestech-website/artworks/2026_weight_of_the_cloud/iteration-04-wide-gallery_eishvd.png',
+        caption: 'The Weight of the Cloud — wide gallery study, sculpture in development',
+      },
+    ],
+    tags: [
+      'sculpture',
+      'e-waste',
+      'collaboration',
+      'Fabiola Larios',
+      'Miami',
+      'modular',
+      'in development',
+      'research',
+    ],
+    interpretation:
+      'What does the cloud weigh once its previous bodies are no longer useful?',
+    exhibition: 'In development — ideally constructed and assembled on site',
+    installation_notes: [
+      'Host institution may contribute obsolete equipment',
+      'Installation period can function as open studio or durational assembly',
+      'All surface electronics decommissioned before fastening',
+    ],
+    future_iterations: [
+      'Monolith silhouette',
+      'Residual Core illuminated void',
+      'Material Density surface specificity',
+      'Restrained Distributed Signal lighting',
+    ],
+    on_view: false,
+    enhancedDescriptions: {
+      overview:
+        'The Weight of the Cloud compresses obsolete electronics into a four-foot cube whose disciplined geometry contrasts with unstable technological matter embedded across its surface.',
+      essay: '',
+      implementation:
+        'Modular on-site assembly with load-bearing frame and removable e-waste panels.',
+      budget: '',
+      technical:
+        'Steel or aluminum frame, six mesh-backed panels, 24V light core, concealed power access.',
+      gallery: '',
+    },
+  },
 };

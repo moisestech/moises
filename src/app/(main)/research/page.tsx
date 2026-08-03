@@ -85,6 +85,7 @@ export default function ResearchIndexPage() {
               slug === 'echo_economies' ? '/research/locust-echo-economies' :
               slug === 'broken_acceleration' ? '/research/broken-acceleration' :
               slug === 'touch_grass_circuit_floor' ? '/research/touch-grass-circuit-floor' :
+              slug === 'weight_of_the_cloud' ? '/research/weight-of-the-cloud' :
               `/research/${slug}`
             }
             className="block group border rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200"

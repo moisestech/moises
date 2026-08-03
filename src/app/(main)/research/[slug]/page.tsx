@@ -2,6 +2,7 @@ import { research } from '@/constants/research'
 import ResearchPageClient from '@/components/page/ResearchPageClient'
 import BrokenAccelerationPageClient from '@/components/page/BrokenAccelerationPageClient'
 import TouchGrassCircuitFloorClient from '@/components/research/TouchGrassCircuitFloorClient'
+import WeightOfTheCloudClient from '@/components/research/WeightOfTheCloudClient'
 import { notFound } from 'next/navigation'
 
 /** Pretty URLs use kebab-case; keys in `research` use snake_case. */
@@ -10,6 +11,7 @@ const RESEARCH_SLUG_TO_KEY: Record<string, string> = {
   'the-value-and-future-of-the-image': 'value_of_the_image',
   'locust-echo-economies': 'echo_economies',
   'touch-grass-circuit-floor': 'touch_grass_circuit_floor',
+  'weight-of-the-cloud': 'weight_of_the_cloud',
 }
 
 function resolveResearchKey(slug: string): string {
@@ -31,6 +33,10 @@ export default function ResearchPage({ params }: ResearchPageProps) {
 
   if (key === 'touch_grass_circuit_floor') {
     return <TouchGrassCircuitFloorClient />
+  }
+
+  if (key === 'weight_of_the_cloud') {
+    return <WeightOfTheCloudClient />
   }
 
   const item = research[key]
