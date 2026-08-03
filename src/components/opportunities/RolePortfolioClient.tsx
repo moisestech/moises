@@ -14,8 +14,11 @@ import { PrinciplesSection } from '@/components/opportunities/PrinciplesSection'
 import { ExperienceSnapshot } from '@/components/opportunities/ExperienceSnapshot';
 import { ProfessionalExperienceSection } from '@/components/opportunities/ProfessionalExperienceSection';
 import { SelectedProjectSection } from '@/components/opportunities/SelectedProjectSection';
+import { EvidenceRoadmapSection } from '@/components/opportunities/EvidenceRoadmapSection';
+import { ComingSoonSection } from '@/components/opportunities/ComingSoonSection';
 import { EducationContinuingSection } from '@/components/opportunities/EducationContinuingSection';
 import { SelectedTechnologiesSection } from '@/components/opportunities/SelectedTechnologiesSection';
+import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -75,6 +78,16 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
           />
         ) : null}
 
+        {dossier.evidenceRoadmap ? (
+          <EvidenceRoadmapSection data={dossier.evidenceRoadmap} sectionId="evidence" />
+        ) : null}
+
+        {dossier.comingSoon ? (
+          <ComingSoonSection data={dossier.comingSoon} sectionId="coming-soon" />
+        ) : null}
+
+        {opportunity.techLogoIds?.length ? <TechStackLogos opportunity={opportunity} /> : null}
+
         <CapabilityMap data={capabilityMap} sectionId="capabilities" />
 
         {dossier.experienceRoles?.length ? (
@@ -94,7 +107,11 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
         ) : null}
 
         {dossier.selectedProject ? (
-          <SelectedProjectSection project={dossier.selectedProject} sectionId="selected-project" />
+          <SelectedProjectSection
+            project={dossier.selectedProject}
+            sectionId="selected-project"
+            sectionTitle={dossier.selectedProjectSectionTitle ?? 'Selected AI Project'}
+          />
         ) : null}
 
         {dossier.education?.length ? (

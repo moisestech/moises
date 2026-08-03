@@ -13,12 +13,14 @@ import { netflixFullStackEngineerOpportunity } from './netflix-full-stack-engine
 import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fabrication-lab-manager';
 import { playwireOpportunity } from './playwire';
 import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
+import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
   [airSpaceIntelligenceFullStackEngineerOpportunity.slug]:
     airSpaceIntelligenceFullStackEngineerOpportunity,
   [blueAcornAgenticAiOpportunity.slug]: blueAcornAgenticAiOpportunity,
+  [comfyMtsFrontendOpportunity.slug]: comfyMtsFrontendOpportunity,
   [corestoryAiEngineerOpportunity.slug]: corestoryAiEngineerOpportunity,
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
   [deepgramSolutionsArchitectOpportunity.slug]: deepgramSolutionsArchitectOpportunity,

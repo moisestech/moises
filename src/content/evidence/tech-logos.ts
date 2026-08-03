@@ -97,6 +97,7 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
   docker: simpleIconEntry('docker', 'Docker', 'docker', '2496ED'),
   postgres: simpleIconEntry('postgres', 'Postgres', 'postgresql', '4169E1'),
   comfyui: logoEntry('comfyui', 'ComfyUI', `${base}/comfyui.svg`),
+  vue: simpleIconEntry('vue', 'Vue.js', 'vuedotjs', '4FC08D'),
   react: simpleIconEntry('react', 'React', 'react', '61DAFB'),
   tailwind: simpleIconEntry('tailwind', 'Tailwind CSS', 'tailwindcss', '06B6D4'),
   github: simpleIconEntry('github', 'GitHub', 'github', undefined, 'dark:invert'),

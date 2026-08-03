@@ -41,9 +41,11 @@ export function SelectedProjectSection({
             </li>
           ))}
         </ul>
-        <p className={`mt-5 ${opp.subtle}`}>
-          Prototype / built locally — not claimed as a verified-live public production demo.
-        </p>
+        {status === 'prototype' || status === 'research' || status === 'in-development' ? (
+          <p className={`mt-5 ${opp.subtle}`}>
+            Status reflects shipment honesty — not claimed as a verified-live public production demo unless labeled Deployed.
+          </p>
+        ) : null}
       </article>
     </section>
   );

@@ -45,3 +45,13 @@ export const forwardDeployedAiEngineerBanner: ApplicationBanner = {
   alt: 'Creative technology workbench — modular workstation connecting generative media tools, fabrication prototypes, and production workflows',
   aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
+
+/**
+ * Comfy — Member of Technical Staff, Frontend.
+ * Reuses generative-image / creative-tech editorial banner until a Comfy-specific crop is uploaded.
+ */
+export const comfyMtsFrontendBanner: ApplicationBanner = {
+  src: `${cdn}/v1780248505/jobs/banners/ChatGPT_Image_May_31_2026_12_19_46_PM_wu8xw1.png`,
+  alt: 'Generative image workflows — review interfaces, pipelines, and creative production tooling',
+  aspectClass: 'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+};

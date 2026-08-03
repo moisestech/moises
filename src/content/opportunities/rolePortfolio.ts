@@ -76,6 +76,41 @@ export type RolePortfolioSelectedProject = {
   bullets: string[];
 };
 
+/** Application-evidence checklist for roles that need visible proof (OSS PR, demo, interviews). */
+export type RolePortfolioEvidenceItemStatus = 'ready' | 'in-progress' | 'todo';
+
+export type RolePortfolioEvidenceItem = {
+  id: string;
+  title: string;
+  status: RolePortfolioEvidenceItemStatus;
+  body: string;
+  href?: string;
+  linkLabel?: string;
+};
+
+export type RolePortfolioEvidenceRoadmap = {
+  title: string;
+  intro?: string;
+  items: RolePortfolioEvidenceItem[];
+};
+
+/** Visual “Coming soon” cards for proof still shipping (repos, certs, skill gaps). */
+export type RolePortfolioComingSoonItem = {
+  id: string;
+  title: string;
+  body: string;
+  href?: string;
+  linkLabel?: string;
+  /** Defaults to “Coming soon”. */
+  badge?: string;
+};
+
+export type RolePortfolioComingSoonBlock = {
+  title: string;
+  intro?: string;
+  items: RolePortfolioComingSoonItem[];
+};
+
 export type RolePortfolioDossier = {
   /** Optional role-match pillars; omit to skip FitPillars section. */
   fitSectionTitle?: string;
@@ -101,6 +136,10 @@ export type RolePortfolioDossier = {
   experienceRolesIntro?: string;
   experienceRoles?: RolePortfolioExperienceRole[];
   selectedProject?: RolePortfolioSelectedProject;
+  /** Override heading for selected project section (default: Selected AI Project). */
+  selectedProjectSectionTitle?: string;
+  evidenceRoadmap?: RolePortfolioEvidenceRoadmap;
+  comingSoon?: RolePortfolioComingSoonBlock;
   educationTitle?: string;
   education?: RolePortfolioEducationItem[];
   continuingDevelopment?: RolePortfolioContinuingBlock;

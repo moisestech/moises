@@ -109,6 +109,11 @@ const nextConfig = {
         destination: '/opportunities/forward-deployed-ai-engineer',
         permanent: false,
       },
+      {
+        source: '/roles/comfy-mts-frontend',
+        destination: '/opportunities/comfy-mts-frontend',
+        permanent: false,
+      },
     ]
   },
 
