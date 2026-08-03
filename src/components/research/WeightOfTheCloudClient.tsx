@@ -125,7 +125,6 @@ function IterationPicker() {
               type="button"
               role="tab"
               aria-selected={selected}
-              aria-pressed={selected}
               id={`iteration-tab-${iteration.id}`}
               aria-controls="iteration-panel"
               onClick={() => setActiveId(iteration.id)}
