@@ -23,7 +23,7 @@ export function OpportunityColorSection({
   return (
     <div
       className={cn(
-        'scroll-mt-32 rounded-r-xl border-l-4 pl-3 sm:pl-5',
+        'scroll-mt-28 rounded-r-lg border-l-[3px] pl-2.5 sm:scroll-mt-32 sm:rounded-r-xl sm:border-l-4 sm:pl-4 md:pl-5',
         accent.rail,
         accent.softBg,
         className,

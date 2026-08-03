@@ -56,8 +56,8 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
       ? { ...dossier.capabilityMap, currentlyExtending: dossier.currentlyExtending }
       : dossier.capabilityMap;
 
-  const sectionClass = 'mt-10 sm:mt-14';
-  const framed = '!mt-0 !border-0 !pt-0 scroll-mt-32';
+  const sectionClass = 'mt-8 sm:mt-10 md:mt-14';
+  const framed = '!mt-0 !border-0 !pt-0 scroll-mt-28 sm:scroll-mt-32';
 
   return (
     <OpportunityShell

@@ -58,7 +58,7 @@ export function EvidenceRoadmapSection({
         {data.items.map((item, index) => (
           <li key={item.id} className={cn(opp.card, 'overflow-hidden p-0 sm:flex')}>
             {item.imageSrc ? (
-              <div className="relative aspect-[16/10] shrink-0 bg-stone-100 dark:bg-stone-800 sm:aspect-auto sm:w-44 sm:min-h-[7.5rem]">
+              <div className="relative aspect-[16/9] shrink-0 bg-stone-100 dark:bg-stone-800 sm:aspect-auto sm:w-40 sm:min-h-[7rem] md:w-44 md:min-h-[7.5rem]">
                 {item.imageLocal || !item.imageSrc.startsWith('http') ? (
                   <OpportunityCardImage src={item.imageSrc} alt={item.imageAlt ?? item.title} local />
                 ) : (
@@ -74,18 +74,18 @@ export function EvidenceRoadmapSection({
             ) : (
               <div
                 className={cn(
-                  'flex aspect-[16/10] shrink-0 items-center justify-center sm:aspect-auto sm:w-44 sm:min-h-[7.5rem]',
+                  'flex aspect-[5/2] shrink-0 items-center justify-center sm:aspect-auto sm:w-40 sm:min-h-[7rem] md:w-44 md:min-h-[7.5rem]',
                   STATUS_DOT[item.status],
                 )}
                 aria-hidden
               >
-                <span className="text-2xl font-bold tabular-nums opacity-80">
+                <span className="text-xl font-bold tabular-nums opacity-80 sm:text-2xl">
                   {String(index + 1).padStart(2, '0')}
                 </span>
               </div>
             )}
 
-            <div className="flex-1 p-5">
+            <div className="flex-1 p-4 sm:p-5">
               <div className="flex flex-wrap items-center gap-2">
                 {!item.imageSrc ? null : (
                   <span
@@ -97,10 +97,10 @@ export function EvidenceRoadmapSection({
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 )}
-                <h3 className={opp.matrixPrimary}>{item.title}</h3>
+                <h3 className={cn(opp.matrixPrimary, 'min-w-0 flex-1 break-words')}>{item.title}</h3>
                 <span
                   className={cn(
-                    'inline-flex w-fit rounded-md border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide',
+                    'inline-flex w-fit shrink-0 rounded-md border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide',
                     STATUS_PILL[item.status],
                   )}
                 >

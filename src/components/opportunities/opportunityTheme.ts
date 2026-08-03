@@ -4,11 +4,11 @@
  */
 export const opp = {
   shell: "min-h-screen bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100 font-['MoMA_Sans']",
-  main: "mx-auto max-w-5xl px-4 pb-24 font-['MoMA_Sans']",
+  main: "mx-auto max-w-5xl px-3 pb-20 font-['MoMA_Sans'] sm:px-4 sm:pb-24",
   section: 'scroll-mt-32 mt-16 border-t border-stone-200 dark:border-stone-700 pt-12',
   sectionSm: 'mt-12 border-t border-stone-200 dark:border-stone-700 pt-10',
-  h1: "font-['MoMA_Sans'] text-3xl font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-4xl",
-  h2: "font-['MoMA_Sans'] text-2xl font-semibold text-stone-950 dark:text-stone-50",
+  h1: "font-['MoMA_Sans'] text-[1.65rem] font-bold leading-tight tracking-tight text-stone-950 dark:text-stone-50 sm:text-3xl md:text-4xl",
+  h2: "font-['MoMA_Sans'] text-xl font-semibold text-stone-950 dark:text-stone-50 sm:text-2xl",
   h2Bold: "font-['MoMA_Sans'] text-xl font-bold text-stone-950 dark:text-stone-50",
   /** Row / card titles — matches Core Technical Skills matrix primary line */
   matrixPrimary:
@@ -41,7 +41,7 @@ export const opp = {
     'inline-flex items-center gap-2 rounded-lg border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-900 px-4 py-2.5 text-sm font-medium text-stone-800 dark:text-stone-100 hover:bg-stone-50 dark:hover:bg-stone-800',
   linkAccent: 'font-medium text-cyan-500 dark:text-cyan-400 underline-offset-2 hover:underline',
   headshot:
-    'relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800',
+    'relative mx-auto aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 sm:max-w-md',
   profilesBorder:
     'mt-5 flex flex-wrap items-center gap-2 border-t border-stone-200/80 dark:border-stone-700/80 pt-5',
   divide: 'divide-stone-100 dark:divide-stone-800',

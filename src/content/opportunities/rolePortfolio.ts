@@ -119,6 +119,11 @@ export type RolePortfolioComingSoonItem = {
   imageSrc?: string;
   imageAlt?: string;
   imageLocal?: boolean;
+  /** Certificate / license face fields (used when `kind === 'cert'`). */
+  certIssuer?: string;
+  certCredential?: string;
+  certHolder?: string;
+  certId?: string;
 };
 
 export type RolePortfolioComingSoonBlock = {

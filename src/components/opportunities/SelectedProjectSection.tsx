@@ -33,7 +33,7 @@ export function SelectedProjectSection({
 
       <article className={cn(opp.card, 'mt-8 overflow-hidden p-0')}>
         {project.imageSrc ? (
-          <div className="relative aspect-[21/9] min-h-[140px] bg-stone-100 dark:bg-stone-800 sm:min-h-[180px]">
+          <div className="relative aspect-[16/9] min-h-[120px] bg-stone-100 dark:bg-stone-800 sm:aspect-[21/9] sm:min-h-[160px] md:min-h-[180px]">
             {project.imageLocal || !project.imageSrc.startsWith('http') ? (
               <OpportunityCardImage src={project.imageSrc} alt={project.imageAlt ?? project.title} local />
             ) : (
@@ -48,9 +48,9 @@ export function SelectedProjectSection({
           </div>
         ) : null}
 
-        <div className="p-5 sm:p-6">
+        <div className="p-4 sm:p-5 md:p-6">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-lg font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-xl">
+            <h3 className="min-w-0 text-base font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-lg md:text-xl">
               {project.title}
             </h3>
             <span

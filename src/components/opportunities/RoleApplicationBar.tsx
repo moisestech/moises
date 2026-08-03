@@ -27,10 +27,10 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
       className="border-b border-stone-200 dark:border-stone-800 bg-stone-100/80 dark:bg-stone-900/60"
       aria-label="Role application context"
     >
-      <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-5xl flex-col gap-2.5 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-4 sm:py-3">
         <div className="min-w-0 space-y-1">
           {visibilityNote ? (
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-cyan-600 dark:text-cyan-400">
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-cyan-600 dark:text-cyan-400 sm:text-[11px]">
               {visibilityNote}
             </p>
           ) : null}
@@ -39,7 +39,7 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
               <p className="text-sm font-semibold text-stone-900 dark:text-stone-100">{candidateName}</p>
             ) : null}
             {heroMetaChips?.length ? (
-              <ul className="flex flex-wrap gap-x-2 gap-y-1 text-xs text-stone-600 dark:text-stone-400" aria-label="Availability">
+              <ul className="flex flex-wrap gap-x-2 gap-y-1 text-[11px] text-stone-600 dark:text-stone-400 sm:text-xs" aria-label="Availability">
                 {heroMetaChips.map((chip) => (
                   <li key={chip} className="after:ml-2 after:text-stone-300 after:content-['·'] last:after:content-none dark:after:text-stone-600">
                     {chip}
@@ -53,7 +53,7 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
         <div className="flex flex-wrap gap-2">
           <a
             href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-            className={cn(opp.btnSecondaryMedium, 'px-3 py-1.5 text-xs')}
+            className={cn(opp.btnSecondaryMedium, 'min-h-10 px-3 py-2 text-xs sm:min-h-0 sm:py-1.5')}
             onClick={() => onCta('email_bar')}
           >
             <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -63,7 +63,7 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
             href={ctas.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(opp.btnSecondaryMedium, 'px-3 py-1.5 text-xs')}
+            className={cn(opp.btnSecondaryMedium, 'min-h-10 px-3 py-2 text-xs sm:min-h-0 sm:py-1.5')}
             onClick={() => onCta('linkedin_bar')}
           >
             <Linkedin className="h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -73,7 +73,7 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
             <a
               href={resumePdf}
               {...(pdfExternal ? { target: '_blank', rel: 'noopener noreferrer' } : { download: true })}
-              className={cn(opp.btnSecondaryMedium, 'px-3 py-1.5 text-xs')}
+              className={cn(opp.btnSecondaryMedium, 'min-h-10 px-3 py-2 text-xs sm:min-h-0 sm:py-1.5')}
               onClick={() => onCta('resume_bar')}
             >
               <Download className="h-3.5 w-3.5 shrink-0" aria-hidden />
