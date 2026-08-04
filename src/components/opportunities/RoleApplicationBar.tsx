@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, Linkedin, Download } from 'lucide-react';
+import { Mail, Linkedin, Download, ExternalLink } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -17,6 +17,8 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
   const { ctas, slug, visibilityNote, candidateName, heroMetaChips } = opportunity;
   const resumePdf = ctas.resumePdfPath;
   const pdfExternal = Boolean(resumePdf?.startsWith('http'));
+  const applyUrl = ctas.scheduleUrl;
+  const applyLabel = ctas.scheduleLabel ?? 'Apply';
 
   const onCta = (kind: string) => {
     track('opportunity_cta_click', { opportunitySlug: slug, kind });
@@ -24,7 +26,7 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
 
   return (
     <header
-      className="border-b border-stone-200 dark:border-stone-800 bg-stone-100/80 dark:bg-stone-900/60"
+      className="border-b border-stone-200 bg-stone-100/80 dark:border-stone-800 dark:bg-stone-900/60"
       aria-label="Role application context"
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-2.5 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-4 sm:py-3">
@@ -39,9 +41,15 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
               <p className="text-sm font-semibold text-stone-900 dark:text-stone-100">{candidateName}</p>
             ) : null}
             {heroMetaChips?.length ? (
-              <ul className="flex flex-wrap gap-x-2 gap-y-1 text-[11px] text-stone-600 dark:text-stone-400 sm:text-xs" aria-label="Availability">
+              <ul
+                className="flex flex-wrap gap-x-2 gap-y-1 text-[11px] text-stone-600 dark:text-stone-400 sm:text-xs"
+                aria-label="Availability"
+              >
                 {heroMetaChips.map((chip) => (
-                  <li key={chip} className="after:ml-2 after:text-stone-300 after:content-['·'] last:after:content-none dark:after:text-stone-600">
+                  <li
+                    key={chip}
+                    className="after:ml-2 after:text-stone-300 after:content-['·'] last:after:content-none dark:after:text-stone-600"
+                  >
                     {chip}
                   </li>
                 ))}
@@ -51,6 +59,21 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
         </div>
 
         <div className="flex flex-wrap gap-2">
+          {applyUrl ? (
+            <a
+              href={applyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                opp.btnPrimary,
+                'min-h-10 px-3 py-2 text-xs sm:min-h-0 sm:py-1.5 sm:text-xs',
+              )}
+              onClick={() => onCta('apply_bar')}
+            >
+              <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              {applyLabel}
+            </a>
+          ) : null}
           <a
             href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
             className={cn(opp.btnSecondaryMedium, 'min-h-10 px-3 py-2 text-xs sm:min-h-0 sm:py-1.5')}

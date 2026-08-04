@@ -208,6 +208,7 @@ const byId: Record<string, OpportunityCompactSectionAccent> = {
   leadership,
   pov,
   stack: technologies,
+  'data-model': process,
 };
 
 export function getOpportunityCompactAccent(sectionId: string): OpportunityCompactSectionAccent {

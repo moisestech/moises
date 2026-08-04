@@ -4,6 +4,7 @@
  */
 
 import type {
+  ArchitectureFlowData,
   CapabilityMapData,
   DeliveryStatus,
   FitPillar,
@@ -137,6 +138,13 @@ export type RolePortfolioDossier = {
   fitSectionTitle?: string;
   fitIntro?: string;
   fitPillars?: FitPillar[];
+  /**
+   * Optional interactive architecture / decision-path panel
+   * (reuses Affirm `SystemArchitectureFlow` with cyan accent on role-portfolio pages).
+   */
+  architecture?: ArchitectureFlowData;
+  /** Sticky-nav / section id for `architecture` (default: `data-model`). */
+  architectureSectionId?: string;
   /** Optional legacy case-study grid; omit when using selectedProject + experienceRoles. */
   caseStudiesTitle?: string;
   caseStudiesIntro?: string;
