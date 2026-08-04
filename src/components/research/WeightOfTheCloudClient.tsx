@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import WeightOfTheCloudDiagram from '@/components/research/WeightOfTheCloudDiagram';
 import {
   weightOfTheCloud,
+  weightOfTheCloudAllReferenceImages,
   weightOfTheCloudDefaultIterationId,
   weightOfTheCloudFabricationSequence,
   weightOfTheCloudHeroMedia,
@@ -14,6 +15,8 @@ import {
   weightOfTheCloudNav,
   weightOfTheCloudReferenceImages,
   weightOfTheCloudReferenceIntro,
+  weightOfTheCloudSculptureReferenceIntro,
+  weightOfTheCloudSculptureReferences,
   weightOfTheCloudTechnicalSpecs,
   type ResearchMedia,
 } from '@/content/research/weight-of-the-cloud';
@@ -282,51 +285,90 @@ function ReferenceLightbox({
   );
 }
 
+function ReferenceThumb({
+  media,
+  onOpen,
+}: {
+  media: ResearchMedia;
+  onOpen: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className="group w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 rounded-xl"
+      aria-label={`Enlarge ${media.caption ?? media.alt}`}
+    >
+      <figure>
+        <MediaLabel label={media.label} />
+        <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-700 group-hover:ring-gray-400 dark:group-hover:ring-gray-500 transition">
+          <Image
+            src={media.src}
+            alt={media.alt}
+            fill
+            className="object-cover transition duration-300 group-hover:scale-[1.02]"
+            sizes="(max-width: 640px) 100vw, 21rem"
+          />
+          <span className="absolute bottom-3 right-3 rounded-md bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition group-hover:opacity-100">
+            Enlarge
+          </span>
+        </div>
+        {media.caption ? (
+          <figcaption className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            {media.caption}
+          </figcaption>
+        ) : null}
+      </figure>
+    </button>
+  );
+}
+
 function ReferenceGallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const allImages = weightOfTheCloudAllReferenceImages;
+
+  const openAt = (src: string) => {
+    const index = allImages.findIndex((image) => image.src === src);
+    if (index >= 0) setLightboxIndex(index);
+  };
 
   return (
-    <div>
-      <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-        {weightOfTheCloudReferenceIntro}
-      </p>
-      <ul className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-        {weightOfTheCloudReferenceImages.map((media, index) => (
-          <li key={media.src}>
-            <button
-              type="button"
-              onClick={() => setLightboxIndex(index)}
-              className="group w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 rounded-xl"
-              aria-label={`Enlarge ${media.caption ?? media.alt}`}
-            >
-              <figure>
-                <MediaLabel label={media.label} />
-                <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-700 group-hover:ring-gray-400 dark:group-hover:ring-gray-500 transition">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    className="object-cover transition duration-300 group-hover:scale-[1.02]"
-                    sizes="(max-width: 640px) 100vw, 21rem"
-                  />
-                  <span className="absolute bottom-3 right-3 rounded-md bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition group-hover:opacity-100">
-                    Enlarge
-                  </span>
-                </div>
-                {media.caption ? (
-                  <figcaption className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                    {media.caption}
-                  </figcaption>
-                ) : null}
-              </figure>
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className="space-y-12">
+      <div>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+          Sculpture references
+        </h3>
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+          {weightOfTheCloudSculptureReferenceIntro}
+        </p>
+        <ul className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+          {weightOfTheCloudSculptureReferences.map((media) => (
+            <li key={media.src}>
+              <ReferenceThumb media={media} onOpen={() => openAt(media.src)} />
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+          Fallback project references
+        </h3>
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+          {weightOfTheCloudReferenceIntro}
+        </p>
+        <ul className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+          {weightOfTheCloudReferenceImages.map((media) => (
+            <li key={media.src}>
+              <ReferenceThumb media={media} onOpen={() => openAt(media.src)} />
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {lightboxIndex !== null ? (
         <ReferenceLightbox
-          images={weightOfTheCloudReferenceImages}
+          images={allImages}
           index={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
           onNavigate={setLightboxIndex}
@@ -438,7 +480,7 @@ export default function WeightOfTheCloudClient() {
         aria-labelledby="references-heading"
       >
         <h2 id="references-heading" className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-          Related reference studies
+          Reference studies
         </h2>
         <ReferenceGallery />
       </section>

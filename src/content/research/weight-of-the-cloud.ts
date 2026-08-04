@@ -224,6 +224,30 @@ export const weightOfTheCloudIndexImage = {
 };
 
 /**
+ * Material / process references for The Weight of the Cloud sculpture itself
+ * (Moises Sanabria + Fabiola Larios).
+ */
+export const weightOfTheCloudSculptureReferenceIntro =
+  'Process and material references for The Weight of the Cloud — e-waste assembly studies that inform the primary sculpture direction.';
+
+export const weightOfTheCloudSculptureReferences: ResearchMedia[] = [
+  {
+    src: `${CLOUDINARY_BASE}/v1785860547/art/moisestech-website/artworks/2026_weight_of_the_cloud/moises-fabiola-ewaste-sculpture-reference-image-project-a6_ym1ytt.webp`,
+    alt: 'The Weight of the Cloud — e-waste sculpture reference study A6 by Moises Sanabria and Fabiola Larios',
+    caption: 'Sculpture reference A6 — Moises Sanabria + Fabiola Larios',
+    label: 'Sculpture reference',
+    orientation: 'landscape',
+  },
+  {
+    src: `${CLOUDINARY_BASE}/v1785860546/art/moisestech-website/artworks/2026_weight_of_the_cloud/moises-fabiola-ewaste-sculpture-reference-image-project-a5_gjpfln.webp`,
+    alt: 'The Weight of the Cloud — e-waste sculpture reference study A5 by Moises Sanabria and Fabiola Larios',
+    caption: 'Sculpture reference A5 — Moises Sanabria + Fabiola Larios',
+    label: 'Sculpture reference',
+    orientation: 'landscape',
+  },
+];
+
+/**
  * Related fallback / reference studies from a parallel Fabiola Larios project —
  * not Weight of the Cloud iterations, but adjacent material research.
  */
@@ -235,14 +259,20 @@ export const weightOfTheCloudReferenceImages: ResearchMedia[] = [
     src: `${CLOUDINARY_BASE}/v1785771360/art/moisestech-website/artworks/2026_weight_of_the_cloud/reference-image-project-fabiola-fallback/fabiola-reference-image-project-b1_dzzmpa.png`,
     alt: 'Fabiola Larios reference study B1 — fallback material project adjacent to The Weight of the Cloud',
     caption: 'Reference study B1 — Fabiola Larios fallback project',
-    label: 'Reference study',
+    label: 'Fallback reference',
     orientation: 'landscape',
   },
   {
     src: `${CLOUDINARY_BASE}/v1785771356/art/moisestech-website/artworks/2026_weight_of_the_cloud/reference-image-project-fabiola-fallback/fabiola-reference-image-project-b2_ksw0xf.png`,
     alt: 'Fabiola Larios reference study B2 — fallback material project adjacent to The Weight of the Cloud',
     caption: 'Reference study B2 — Fabiola Larios fallback project',
-    label: 'Reference study',
+    label: 'Fallback reference',
     orientation: 'landscape',
   },
+];
+
+/** Combined pool for lightbox carousel navigation across both reference groups. */
+export const weightOfTheCloudAllReferenceImages: ResearchMedia[] = [
+  ...weightOfTheCloudSculptureReferences,
+  ...weightOfTheCloudReferenceImages,
 ];
