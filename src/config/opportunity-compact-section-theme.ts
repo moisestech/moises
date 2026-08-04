@@ -170,6 +170,11 @@ const byId: Record<string, OpportunityCompactSectionAccent> = {
   'role-fit': fit,
   engineering: principles,
   ramp: comingSoon,
+  campaign: selectedProject,
+  workflow: process,
+  leadership: fit,
+  pov: caseStudies,
+  stack: technologies,
 };
 
 export function getOpportunityCompactAccent(sectionId: string): OpportunityCompactSectionAccent {

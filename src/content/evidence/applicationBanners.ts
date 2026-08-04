@@ -67,3 +67,14 @@ export const floraFoundingDataEngineerBanner: ApplicationBanner = {
   aspectClass:
     'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
+
+/**
+ * WMX — Senior Art Director, Creative + AI Expertise.
+ * Dedicated application banner (not a WMX brand asset).
+ */
+export const wmxSeniorArtDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785859691/jobs/banners/senior-art-director-ai-driven-desgin-leader-banner_pweexz.png`,
+  alt: 'Senior Art Director — AI-driven design leadership application banner for Moises Sanabria',
+  aspectClass:
+    'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+};

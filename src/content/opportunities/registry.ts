@@ -15,6 +15,7 @@ import { playwireOpportunity } from './playwire';
 import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
 import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
 import { floraFoundingDataEngineerOpportunity } from './flora-founding-data-engineer';
+import { wmxSeniorArtDirectorAiOpportunity } from './wmx-senior-art-director-ai';
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
@@ -35,6 +36,7 @@ const bySlug: Record<string, Opportunity> = {
   [netflixFullStackEngineerOpportunity.slug]: netflixFullStackEngineerOpportunity,
   [newIncMediaFabricationLabManagerOpportunity.slug]: newIncMediaFabricationLabManagerOpportunity,
   [playwireOpportunity.slug]: playwireOpportunity,
+  [wmxSeniorArtDirectorAiOpportunity.slug]: wmxSeniorArtDirectorAiOpportunity,
 };
 
 export function getOpportunity(slug: string): Opportunity | undefined {
