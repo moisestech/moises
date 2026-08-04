@@ -105,7 +105,7 @@ export const AI24_STUDIO = {
       id: 'oolite-digital-lab',
       title: 'Oolite Arts Digital Lab',
       status: 'DEPLOYED' as ProjectStatus,
-      href: '/projects/oolite-digital-lab',
+      href: '/oolite-arts',
       image: {
         src: OOLITE_DIGITAL_LAB_IMAGE,
         alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
