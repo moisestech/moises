@@ -10,6 +10,7 @@ import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportuni
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  miamiLightCampaignSpecimens,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
 } from './creativeAgencyShared';
@@ -30,6 +31,8 @@ const creativeAgency = buildCreativeAgencyDossier({
     conceptTitle: 'Working concept — culturally sharp, brand-safe AI craft',
     conceptBody:
       'A self-initiated campaign system showing how a strong visual idea moves from exploration to channel rollout with critique gates—built to demonstrate Ogilvy-adjacent creative discipline, not to claim Ogilvy client work.',
+    eyebrow: 'Self-Initiated Brand-Safe AI Campaign Study',
+    specimens: miamiLightCampaignSpecimens,
   }),
   alignmentTitle: 'Role alignment',
   alignmentIntro:

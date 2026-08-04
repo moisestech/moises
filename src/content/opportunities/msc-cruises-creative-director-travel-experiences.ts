@@ -1,12 +1,16 @@
 /**
  * MSC Cruises — Creative Director, Travel & Experiences (Hybrid, Miami)
  * /opportunities/msc-cruises-creative-director-travel-experiences
+ *
+ * Differentiation: guest-journey / destination trust / hospitality touchpoints.
+ * Not an AI-systems leadership page — lead with place, experience, and channel craft.
  */
 
 import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportunity';
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  miamiLightCampaignSpecimens,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
 } from './creativeAgencyShared';
@@ -16,23 +20,27 @@ import { mscCruisesCreativeDirectorBanner } from '@/content/evidence/application
 const ROLE_TITLE = 'Creative Director — Travel & Experiences';
 const COMPANY = 'MSC Cruises';
 const lore = evidenceProjects['lore-machine'];
+const bakehouse =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg';
 
 const creativeAgency = buildCreativeAgencyDossier({
   capabilitiesIntro:
-    'Capabilities for travel and experience creative direction: destination storytelling, multi-channel brand systems, and AI-accelerated production under hospitality-grade brand control.',
+    'Capabilities for travel and experience creative direction: destination storytelling, guest-journey clarity across channels, and production systems that keep hospitality brand trust intact when AI accelerates asset volume.',
   caseStudiesIntro:
-    'Prior work is adjacent to travel/hospitality through Miami cultural and venue-sited projects—not MSC cruise campaigns. Gaps stay labeled.',
+    'Evidence is adjacent to travel and hospitality through Miami cultural venues, spatial screens, and editorial systems—not MSC cruise campaigns. The channel study below is the commercial bridge.',
   campaign: buildCampaignSystem({
-    conceptTitle: 'Working concept — voyage as sensory brand territory',
+    conceptTitle: 'Working concept — Embarkation light',
     conceptBody:
-      'A self-initiated travel and experiences campaign system: master image, landing, social ratios, email, display, presentation, and print placeholders—built to close the hospitality channel-system gap for this MSC Creative Director seat.',
+      'A self-initiated voyage campaign system built around one sensory idea: the hour when water, skyline, and arrival anticipation share the same color temperature. Master still sets the territory; landing, social, email, display, deck, and print adapt hierarchy for guest journeys—never MSC trademarks, never claimed as MSC work.',
     intro:
-      'MSC needs travel and experience storytelling at brand scale. This self-initiated study is the portfolio bridge—clearly labeled, not claimed as MSC work.',
+      'MSC needs experience storytelling that holds from destination dream to onboard decision. This labeled study shows channel discipline for Travel & Experiences creative direction.',
+    eyebrow: 'Self-Initiated Voyage Campaign Study',
+    specimens: miamiLightCampaignSpecimens,
   }),
-  alignmentTitle: 'Role alignment',
+  alignmentTitle: 'Role alignment — Travel & Experiences',
   alignmentIntro:
-    'Travel & Experiences creative direction mapped to demonstrated systems and an honest hospitality campaign gap addressed via the channel study.',
-  ctaHeadline: 'Let’s design travel experiences that feel authored—not generated.',
+    'Mapped to destination creative direction and Miami hybrid leadership. Cruise campaign metrics and MSC employment are not claimed.',
+  ctaHeadline: 'Let’s make travel creative that guests trust before they board.',
 });
 
 export const mscCruisesCreativeDirectorTravelExperiencesOpportunity =
@@ -42,21 +50,22 @@ export const mscCruisesCreativeDirectorTravelExperiencesOpportunity =
     roleTitle: ROLE_TITLE,
     seoTitle: 'Moises Sanabria — MSC Cruises · Creative Director, Travel & Experiences',
     seoDescription:
-      'Private application dossier for MSC Cruises Creative Director Travel & Experiences (Hybrid, Miami) — destination storytelling, AI craft, channel systems.',
+      'Private application dossier for MSC Cruises Creative Director Travel & Experiences (Hybrid, Miami) — destination storytelling, guest journeys, channel systems.',
     banner: mscCruisesCreativeDirectorBanner,
-    heroEyebrow: 'APPLICATION DOSSIER · MIAMI HYBRID · MSC CRUISES',
-    headline: 'Travel creative that earns trust at every touchpoint.',
+    heroEyebrow: 'APPLICATION DOSSIER · MIAMI HYBRID · TRAVEL & EXPERIENCES',
+    headline: 'Destination stories that stay clear from dream to decision.',
     subheadline: `${ROLE_TITLE} · Hybrid, Miami · Selected work for MSC Cruises`,
     introParagraphs: [
-      'I’m a Miami-based interdisciplinary artist and design technologist. I build visual systems for places, experiences, and audiences—leading concept through channel adaptation with AI as acceleration under human brand control. This dossier is prepared for MSC Cruises’ Travel & Experiences creative direction seat.',
+      'I’m a Miami-based interdisciplinary artist and design technologist applying for MSC Cruises’ Creative Director — Travel & Experiences seat. My work builds visual systems for places and audiences: spatial brand touchpoints, editorial identity, and multi-channel adaptation under human review.',
+      'I do not claim cruise hospitality campaign results. What I do bring is Miami hybrid readiness, destination-adjacent storytelling, and a repeatable method for turning one visual idea into landing, social, email, display, presentation, and print—without losing brand control when AI accelerates production.',
     ],
-    trustLine: 'Miami hybrid · Bakehouse / cultural venues · AI24 · Lore Machine',
+    trustLine: 'Miami hybrid · Bakehouse venue screens · Oolite · AI24 editorial systems',
     heroMetaChips: [
       'Miami hybrid',
-      'Travel & experiences',
-      'Brand systems',
-      'AI under review',
+      'Guest-journey storytelling',
+      'Destination brand systems',
       'Multi-channel craft',
+      'AI under human review',
     ],
     audienceTerms: [
       {
@@ -64,12 +73,12 @@ export const mscCruisesCreativeDirectorTravelExperiencesOpportunity =
         detail: 'Travel & Experiences creative leadership — hybrid Miami.',
       },
       {
-        label: 'Creative Director',
-        detail: 'Concept, brand voice, experience storytelling across channels.',
+        label: 'Guest journey',
+        detail: 'Clarity from aspiration to booking to onboard experience.',
       },
       {
-        label: 'Hospitality gap',
-        detail: 'Addressed via self-initiated campaign system—not invented cruise metrics.',
+        label: 'Honest gap',
+        detail: 'No MSC cruise campaign metrics—channel study is the bridge.',
       },
     ],
     creativeAgency,
@@ -78,31 +87,37 @@ export const mscCruisesCreativeDirectorTravelExperiencesOpportunity =
       {
         requirement: 'Travel / experience storytelling',
         evidence:
-          'Miami cultural and venue-sited work (Bakehouse SmartSign, institutional programs). Cruise hospitality campaigns not claimed—channel study is the bridge.',
+          'Miami venue and cultural storytelling (Bakehouse SmartSign formats, open-studio / public-facing screens). Cruise campaigns not claimed—voyage channel study included.',
         status: 'transferable',
+        illustration: {
+          src: bakehouse,
+          alt: 'Bakehouse Art Complex — public-facing cultural and venue context in Miami',
+        },
       },
       {
-        requirement: 'Creative direction & brand systems',
+        requirement: 'Multi-channel brand systems',
         evidence:
-          'Editorial and product visual systems (AI24, Lore Machine); spatial-to-digital brand touchpoints at Bakehouse.',
+          'Editorial and product systems (AI24, Lore Machine) plus spatial-to-digital touchpoints—same discipline as travel channel rollout.',
         status: 'demonstrated',
         illustration: { src: lore.imageSrc, alt: lore.imageAlt },
       },
       {
-        requirement: 'Miami hybrid leadership',
+        requirement: 'Miami hybrid creative leadership',
         evidence:
-          'Miami-based; Oolite Digital Lab technical direction; comfortable hybrid institutional collaboration.',
+          'Based in Miami; Oolite Digital Lab technical direction; hybrid collaboration with institutional partners.',
         status: 'demonstrated',
         illustration: { src: OOLITE_DIGITAL_LAB_IMAGE, alt: OOLITE_DIGITAL_LAB_IMAGE_ALT },
       },
       {
-        requirement: 'Hospitality campaign results',
+        requirement: 'Hospitality / cruise campaign results',
         evidence:
-          'TODO / not claimed. Self-initiated travel campaign system included with placeholders for finished specimens.',
+          'Not claimed. Self-initiated Embarkation light campaign study holds the specimens—labeled, not invented MSC outcomes.',
         status: 'todo',
       },
     ],
     emailSubject: 'MSC Cruises — Creative Director Travel & Experiences — Moises Sanabria',
     availabilityNote:
       'Miami-based · hybrid-ready · available for MSC Cruises Creative Director — Travel & Experiences.',
+    processIntro:
+      'Travel creative must support guest journeys and brand trust. Operating motion: brief the destination emotion, lock constraints, explore under direction, finish in production tools, adapt channels, QA for accessibility and hospitality clarity.',
   });

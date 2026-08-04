@@ -10,6 +10,7 @@ import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportuni
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  miamiLightCampaignSpecimens,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
 } from './creativeAgencyShared';
@@ -32,6 +33,7 @@ export const wmxCreativeAgency = buildCreativeAgencyDossier({
       'A hospitality / destination campaign system that treats Miami as a sensory brand territory: heat, waterline, night commerce, and cultural density—without resorting to postcard cliché. Master image establishes the territory; channel adaptations protect typography, crop logic, and CTA hierarchy across social, email, display, presentation, and print.',
     intro:
       'WMX serves travel, tourism, hospitality, entertainment, and nonprofit clients. This section is a clearly labeled self-initiated Miami-oriented campaign study—not a WMX client engagement.',
+    specimens: miamiLightCampaignSpecimens,
   }),
   alignmentTitle: 'Role alignment',
   alignmentIntro:

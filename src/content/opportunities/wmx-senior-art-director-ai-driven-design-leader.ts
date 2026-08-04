@@ -2,12 +2,18 @@
  * WMX — Senior Art Director, AI-Driven Design Leader
  * /opportunities/wmx-senior-art-director-ai-driven-design-leader
  * Company: https://www.wearewmx.com/
+ *
+ * Differentiation vs MSC Travel & Experiences: lead with AI production systems,
+ * mentorship, and review gates—not guest-journey / destination storytelling.
+ * Differentiation vs WMX Creative + AI: leadership of generative workflows and
+ * team critique, not primarily hospitality channel craft.
  */
 
 import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportunity';
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  miamiLightCampaignSpecimens,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
 } from './creativeAgencyShared';
@@ -21,20 +27,22 @@ const multimodal = evidenceProjects['multimodal-image-systems'];
 
 const creativeAgency = buildCreativeAgencyDossier({
   capabilitiesIntro:
-    'Capabilities framed for an AI-driven design leadership seat: visual judgment first, generative acceleration second, brand control always.',
+    'Capabilities for an AI-driven design leadership seat: critique standards, generative pipeline design, mentorship under review gates, and production finish that keeps brand taste intact when volume rises.',
   caseStudiesIntro:
-    'Selected systems that show how AI enters a design practice without replacing direction, critique, or production craft.',
+    'Selected systems that show how AI enters a design practice as a directed production engine—not as unsupervised output. Delivery status is labeled; unfinished artifacts stay TODO.',
   campaign: buildCampaignSystem({
-    conceptTitle: 'Working concept — Miami as design system, not postcard',
+    eyebrow: 'Self-Initiated AI Production System Study',
+    conceptTitle: 'Working concept — Review-gated generative territory',
     conceptBody:
-      'A travel and hospitality campaign study built as a controlled visual system: one territory, many channels, human-reviewed AI exploration, Adobe finishing.',
+      'One visual territory produced under leadership discipline: brief constraints first, generative exploration second, Adobe finish third, channel crops last. The master still and early social crops are study specimens—proof of a review gate, not a travel campaign pitch.',
     intro:
-      'Self-initiated study for WMX’s AI-driven design leadership framing—travel and hospitality adjacent, clearly labeled as non-client work.',
+      'This dossier leads with how AI production is directed and reviewed. The channel study is evidence of a controlled pipeline—not a hospitality guest-journey case (see the MSC Travel & Experiences dossier for that framing).',
+    specimens: miamiLightCampaignSpecimens,
   }),
-  alignmentTitle: 'Role alignment',
+  alignmentTitle: 'Role alignment — AI-Driven Design Leader',
   alignmentIntro:
-    'Mapped to AI-driven design leadership: systems thinking, generative fluency, and the discipline to keep brand taste intact.',
-  ctaHeadline: 'Let’s lead AI-augmented design with a human eye.',
+    'Mapped to generative design leadership: systems thinking, mentorship, and the discipline to keep brand taste intact when AI accelerates volume. Not framed as cruise/hospitality CD tenure.',
+  ctaHeadline: 'Let’s lead AI-augmented design with critique, mentorship, and a human eye.',
 });
 
 export const wmxAiDrivenDesignLeaderOpportunity = createCreativeAgencyOpportunity({
@@ -43,21 +51,23 @@ export const wmxAiDrivenDesignLeaderOpportunity = createCreativeAgencyOpportunit
   roleTitle: ROLE_TITLE,
   seoTitle: 'Moises Sanabria — WMX · Senior Art Director, AI-Driven Design Leader',
   seoDescription:
-    'Application dossier for WMX Senior Art Director — AI-Driven Design Leader. Human-directed generative workflows, brand systems, and Miami hybrid fit.',
+    'Application dossier for WMX Senior Art Director — AI-Driven Design Leader. Review-gated generative workflows, mentorship, brand systems, Miami hybrid.',
   banner: wmxAiDrivenDesignLeaderBanner,
-  heroEyebrow: 'APPLICATION DOSSIER · MIAMI · WMX',
-  headline: 'AI-driven design with human accountability.',
+  heroEyebrow: 'APPLICATION DOSSIER · AI DESIGN LEADERSHIP · MIAMI',
+  headline: 'Lead the AI production system—not just the prompt.',
   subheadline: `${ROLE_TITLE} · Selected work for WMX`,
   introParagraphs: [
-    'I’m a Miami-based interdisciplinary artist and design technologist who builds visual systems where generative tools accelerate exploration while humans keep taste, consistency, and brand safety. This dossier is prepared for WMX’s AI-Driven Design Leader framing.',
+    'I’m a Miami-based interdisciplinary artist and design technologist applying for WMX’s AI-Driven Design Leader framing. I build visual production systems where generative tools accelerate exploration while humans own taste, critique, consistency, and brand safety.',
+    'This page is about leadership of the pipeline—briefing constraints, reviewing generative drafts, mentoring craft standards, and finishing in Adobe/Figma—not about inventing agency tenure or hospitality campaign metrics. Companion dossier: Creative + AI Expertise (channel craft under the same thesis).',
   ],
   trustLine: 'Lore Machine · Oolite Arts · AI24 · Bakehouse · Miami hybrid',
   heroMetaChips: [
-    'Miami hybrid',
     'AI design leadership',
+    'Review gates',
+    'Creative mentorship',
     'Brand systems',
     'Adobe + Figma production',
-    'Creative mentorship',
+    'Miami hybrid',
   ],
   audienceTerms: [
     {
@@ -66,11 +76,11 @@ export const wmxAiDrivenDesignLeaderOpportunity = createCreativeAgencyOpportunit
     },
     {
       label: 'AI-Driven Design Leader',
-      detail: 'Art direction that integrates generative tools into controlled production.',
+      detail: 'Own generative workflows, critique standards, and team craft—not unsupervised AI dumps.',
     },
     {
-      label: 'wearewmx.com',
-      detail: 'Companion dossier to the Creative + AI Expertise listing.',
+      label: 'Companion dossier',
+      detail: 'Creative + AI Expertise listing focuses channel craft; this page focuses leadership systems.',
     },
   ],
   creativeAgency,
@@ -79,21 +89,21 @@ export const wmxAiDrivenDesignLeaderOpportunity = createCreativeAgencyOpportunit
     {
       requirement: 'AI-driven visual direction',
       evidence:
-        'Lore Machine prompt operations as art direction; AI24 human-in-the-loop editorial illustration; multimodal research pipelines.',
+        'Lore Machine prompt operations as art direction; AI24 human-in-the-loop editorial illustration; multimodal research pipelines with explicit review.',
       status: 'demonstrated',
       illustration: { src: lore.imageSrc, alt: lore.imageAlt },
     },
     {
-      requirement: 'Design leadership',
+      requirement: 'Design leadership & mentorship',
       evidence:
-        'Oolite Digital Lab technical direction; founding creative-technical leadership at Lore Machine and AI24; workshops and artist mentorship.',
+        'Oolite Digital Lab technical direction; founding creative-technical leadership at Lore Machine and AI24; workshops and artist mentorship—critique culture, not title inflation.',
       status: 'demonstrated',
       illustration: { src: OOLITE_DIGITAL_LAB_IMAGE, alt: OOLITE_DIGITAL_LAB_IMAGE_ALT },
     },
     {
-      requirement: 'Brand-controlled production',
+      requirement: 'Review-gated production systems',
       evidence:
-        'Constraint-first generative workflows; Adobe compositing; campaign channel study with explicit placeholders for unfinished specimens.',
+        'Constraint-first generative workflows; Adobe compositing; campaign study with Ready vs Placeholder labels so unfinished work is never oversold.',
       status: 'demonstrated',
       illustration: {
         src: multimodal.imageSrc,
@@ -102,12 +112,14 @@ export const wmxAiDrivenDesignLeaderOpportunity = createCreativeAgencyOpportunit
       },
     },
     {
-      requirement: 'Miami hybrid readiness',
-      evidence: 'Miami-based practice with institutional and cultural partners; available for hybrid schedule.',
-      status: 'demonstrated',
+      requirement: 'Conventional agency ACD tenure / WMX employment',
+      evidence: 'Not claimed. Dossier shows transferable leadership of AI-augmented craft from institutional and product contexts.',
+      status: 'todo',
     },
   ],
   emailSubject: 'WMX — Senior Art Director (AI-Driven Design Leader) — Moises Sanabria',
   availabilityNote:
     'Miami-based · hybrid-ready · available for WMX Senior Art Director — AI-Driven Design Leader.',
+  processIntro:
+    'AI design leadership operating motion: lock brand constraints, brief exploration bounds, run generative drafts under critique, select and composite in Adobe, adapt channels, QA for consistency and accessibility—mentor the team through the same gates.',
 });

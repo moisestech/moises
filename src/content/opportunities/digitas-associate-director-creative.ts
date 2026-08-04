@@ -9,6 +9,7 @@ import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportuni
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  miamiLightCampaignSpecimens,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
 } from './creativeAgencyShared';
@@ -29,6 +30,7 @@ const creativeAgency = buildCreativeAgencyDossier({
     conceptTitle: 'Working concept — data-aware brand storytelling',
     conceptBody:
       'A self-initiated multi-channel campaign system emphasizing clarity, performance-minded hierarchy, and AI exploration under critique—adjacent to Digitas’ digital creative culture.',
+    specimens: miamiLightCampaignSpecimens,
   }),
   alignmentTitle: 'Role alignment',
   alignmentIntro:

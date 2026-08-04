@@ -7,6 +7,7 @@ import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportuni
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  miamiLightCampaignSpecimens,
 } from './creativeAgencyShared';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { morleyArtDirectorBanner } from '@/content/evidence/applicationBanners';
@@ -25,6 +26,7 @@ const creativeAgency = buildCreativeAgencyDossier({
     conceptTitle: 'Working concept — Florida light, commercial clarity',
     conceptBody:
       'A self-initiated campaign system oriented to Florida audiences: clear hierarchy, strong stills, and channel adaptations that stay on-brand across social, web, email, and print placeholders.',
+    specimens: miamiLightCampaignSpecimens,
   }),
   alignmentTitle: 'Role alignment',
   alignmentIntro:

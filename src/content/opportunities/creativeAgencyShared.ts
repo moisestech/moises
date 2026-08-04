@@ -352,7 +352,7 @@ export const sharedPointOfView: PointOfViewBlock = {
     {
       id: 'smart-shoppers',
       title: 'Smart Shoppers',
-      href: '/art/smart_shoppers',
+      href: '/art/smart-shoppers',
       imageSrc: `${CDN}/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg`,
       imageAlt: 'Smart Shoppers — 3D-printed sculpture with integrated electronics',
     },
@@ -373,7 +373,7 @@ export const sharedPointOfView: PointOfViewBlock = {
     {
       id: 'digital-divinities',
       title: 'Digital Divinities',
-      href: '/art',
+      href: '/art/digital_divinities',
       imageSrc: `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`,
       imageAlt: 'Digital Divinities — Bakehouse Art Complex open studios',
     },
@@ -398,9 +398,104 @@ export function buildCampaignSystem(args: {
   conceptTitle: string;
   conceptBody: string;
   intro?: string;
+  eyebrow?: string;
+  /** When provided, marks matching formats Ready with the specimen image. */
+  specimens?: Partial<
+    Record<
+      | 'master'
+      | 'landing'
+      | 'social-1-1'
+      | 'social-4-5'
+      | 'story-9-16'
+      | 'email'
+      | 'banner'
+      | 'deck'
+      | 'print',
+      { src: string; alt: string; local?: boolean; note?: string }
+    >
+  >;
 }): CampaignSystemBlock {
+  const specimens = args.specimens ?? {};
+  const formats: CampaignSystemBlock['formats'] = [
+    {
+      id: 'master',
+      label: 'Master campaign image',
+      aspectClass: 'aspect-[16/9]',
+      description: 'Hero still establishing visual territory, lighting, and brand color temperature.',
+      placeholderNote: 'TODO: Produce master art-directed still (Adobe-composited from AI exploration).',
+    },
+    {
+      id: 'landing',
+      label: 'Landing-page hero',
+      aspectClass: 'aspect-[16/9]',
+      description: 'Web hero with headline hierarchy, trust line, and primary CTA placement.',
+      placeholderNote: 'TODO: Responsive landing hero mock (Figma + HTML/CSS specimen).',
+    },
+    {
+      id: 'social-1-1',
+      label: '1:1 social',
+      aspectClass: 'aspect-square',
+      description: 'Feed crop preserving subject and type safe areas.',
+      placeholderNote: 'TODO: 1080×1080 social crop.',
+    },
+    {
+      id: 'social-4-5',
+      label: '4:5 social',
+      aspectClass: 'aspect-[4/5]',
+      description: 'Vertical feed crop with adjusted focal point.',
+      placeholderNote: 'TODO: 1080×1350 social crop.',
+    },
+    {
+      id: 'story-9-16',
+      label: '9:16 story',
+      aspectClass: 'aspect-[9/16]',
+      description: 'Full-bleed story with motion-safe title lockup.',
+      placeholderNote: 'TODO: 1080×1920 story frame (+ optional motion loop).',
+    },
+    {
+      id: 'email',
+      label: 'Responsive HTML email',
+      aspectClass: 'aspect-[3/4]',
+      description: 'Email-safe layout: hero, scannable body, CTA—mobile-first.',
+      placeholderNote: 'TODO: Small HTML email specimen (responsive).',
+    },
+    {
+      id: 'banner',
+      label: 'HTML5 display banner',
+      aspectClass: 'aspect-[16/9]',
+      description: 'Animated display unit with brand-safe loop and weight budget.',
+      placeholderNote: 'TODO: HTML5 banner specimen (300×250 / 728×90 variants).',
+    },
+    {
+      id: 'deck',
+      label: 'Presentation slide',
+      aspectClass: 'aspect-[16/9]',
+      description: 'Client-presentation frame with concept narrative and channel map.',
+      placeholderNote: 'TODO: Keynote/Figma presentation slide.',
+    },
+    {
+      id: 'print',
+      label: 'Print placement',
+      aspectClass: 'aspect-[4/5]',
+      description: 'Print crop with bleed, safe type, and production notes.',
+      placeholderNote: 'TODO: Print placement mock (poster or magazine).',
+    },
+  ].map((format) => {
+    const specimen = specimens[format.id as keyof typeof specimens];
+    if (!specimen) return format;
+    return {
+      ...format,
+      imageSrc: specimen.src,
+      imageAlt: specimen.alt,
+      imageLocal: specimen.local,
+      placeholderNote:
+        specimen.note ??
+        'Self-initiated study specimen — crop adaptation of the master still. Not a client campaign.',
+    };
+  });
+
   return {
-    eyebrow: 'Self-Initiated Travel Campaign System Study',
+    eyebrow: args.eyebrow ?? 'Self-Initiated Travel Campaign System Study',
     title: 'From one idea to many channels',
     intro:
       args.intro ??
@@ -408,74 +503,32 @@ export function buildCampaignSystem(args: {
     conceptTitle: args.conceptTitle,
     conceptBody: args.conceptBody,
     disclaimer:
-      'Self-initiated study for application evidence. Not a client project for this employer. Specimens below are placeholders until production assets are finished—do not present unfinished work as shipped campaigns.',
-    formats: [
-      {
-        id: 'master',
-        label: 'Master campaign image',
-        aspectClass: 'aspect-[16/9]',
-        description: 'Hero still establishing visual territory, lighting, and brand color temperature.',
-        placeholderNote: 'TODO: Produce master art-directed still (Adobe-composited from AI exploration).',
-      },
-      {
-        id: 'landing',
-        label: 'Landing-page hero',
-        aspectClass: 'aspect-[16/9]',
-        description: 'Web hero with headline hierarchy, trust line, and primary CTA placement.',
-        placeholderNote: 'TODO: Responsive landing hero mock (Figma + HTML/CSS specimen).',
-      },
-      {
-        id: 'social-1-1',
-        label: '1:1 social',
-        aspectClass: 'aspect-square',
-        description: 'Feed crop preserving subject and type safe areas.',
-        placeholderNote: 'TODO: 1080×1080 social crop.',
-      },
-      {
-        id: 'social-4-5',
-        label: '4:5 social',
-        aspectClass: 'aspect-[4/5]',
-        description: 'Vertical feed crop with adjusted focal point.',
-        placeholderNote: 'TODO: 1080×1350 social crop.',
-      },
-      {
-        id: 'story-9-16',
-        label: '9:16 story',
-        aspectClass: 'aspect-[9/16]',
-        description: 'Full-bleed story with motion-safe title lockup.',
-        placeholderNote: 'TODO: 1080×1920 story frame (+ optional motion loop).',
-      },
-      {
-        id: 'email',
-        label: 'Responsive HTML email',
-        aspectClass: 'aspect-[3/4]',
-        description: 'Email-safe layout: hero, scannable body, CTA—mobile-first.',
-        placeholderNote: 'TODO: Small HTML email specimen (responsive).',
-      },
-      {
-        id: 'banner',
-        label: 'HTML5 display banner',
-        aspectClass: 'aspect-[16/9]',
-        description: 'Animated display unit with brand-safe loop and weight budget.',
-        placeholderNote: 'TODO: HTML5 banner specimen (300×250 / 728×90 variants).',
-      },
-      {
-        id: 'deck',
-        label: 'Presentation slide',
-        aspectClass: 'aspect-[16/9]',
-        description: 'Client-presentation frame with concept narrative and channel map.',
-        placeholderNote: 'TODO: Keynote/Figma presentation slide.',
-      },
-      {
-        id: 'print',
-        label: 'Print placement',
-        aspectClass: 'aspect-[4/5]',
-        description: 'Print crop with bleed, safe type, and production notes.',
-        placeholderNote: 'TODO: Print placement mock (poster or magazine).',
-      },
-    ],
+      'Self-initiated study for application evidence. Not a client project for this employer. Formats marked Ready use study specimens; remaining formats stay labeled Placeholder until finished.',
+    formats,
   };
 }
+
+/** Shared Miami light master + crop adaptations for travel/hospitality campaign studies. */
+export const miamiLightCampaignSpecimens = {
+  master: {
+    src: '/images/opportunities/campaign-study/miami-light-campaign-master.png',
+    alt: 'Self-initiated Miami light campaign master — dusk waterline study still',
+    local: true,
+    note: 'Study master still — self-initiated, not a client campaign.',
+  },
+  'social-1-1': {
+    src: '/images/opportunities/campaign-study/miami-light-campaign-master.png',
+    alt: 'Miami light campaign — 1:1 social crop of master still',
+    local: true,
+    note: '1:1 crop of master study still — typography lockup pending.',
+  },
+  'social-4-5': {
+    src: '/images/opportunities/campaign-study/miami-light-campaign-master.png',
+    alt: 'Miami light campaign — 4:5 social crop of master still',
+    local: true,
+    note: '4:5 crop of master study still — typography lockup pending.',
+  },
+} as const;
 
 export function buildCreativeAgencyDossier(args: {
   capabilitiesIntro: string;

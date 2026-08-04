@@ -10,6 +10,7 @@ import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportuni
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  miamiLightCampaignSpecimens,
 } from './creativeAgencyShared';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { razorfishJuniorArtDirectorBanner } from '@/content/evidence/applicationBanners';
@@ -28,6 +29,7 @@ const creativeAgency = buildCreativeAgencyDossier({
     conceptTitle: 'Working concept — digital-first brand system study',
     conceptBody:
       'A self-initiated multi-channel study showing how one idea becomes social, web, email, display, and print-ready frames—useful proof for a Razorfish digital creative culture.',
+    specimens: miamiLightCampaignSpecimens,
   }),
   alignmentTitle: 'Role alignment',
   alignmentIntro:
