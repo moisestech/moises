@@ -89,7 +89,7 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
             <DossierSectionNav
               items={opportunity.navItems.filter((item) => item.id !== 'hero')}
               title="Dossier map"
-              intro="Jump to any section. Amber labels mark placeholders and unfinished specimens—nothing pending is presented as shipped client work."
+              intro="Tap any section to jump. Sticky nav at the top stays in sync as you scroll. Amber labels mark placeholders—nothing unfinished is presented as shipped client work."
             />
           </div>
         ) : null}

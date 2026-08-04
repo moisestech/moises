@@ -2,8 +2,10 @@
 
 import { useId, useState } from 'react';
 import Image from 'next/image';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { AssetPlaceholder } from '@/components/opportunities/creative-agency/AssetPlaceholder';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import type { HumanAiWorkflowBlock } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
 
@@ -19,6 +21,7 @@ export function HumanAiWorkflow({
   className,
 }: HumanAiWorkflowProps) {
   const baseId = useId();
+  const accent = getOpportunityCompactAccent(sectionId);
   const [activeStep, setActiveStep] = useState(0);
   const step = data.steps[activeStep];
   const { beforeAfter } = data;
@@ -29,13 +32,76 @@ export function HumanAiWorkflow({
       className={cn(opp.section, className)}
       aria-labelledby={`${sectionId}-heading`}
     >
-      <h2 id={`${sectionId}-heading`} className={opp.h2}>
+      <p className={cn('text-xs font-semibold uppercase tracking-wide', accent.eyebrow)}>
+        Interactive process
+      </p>
+      <h2 id={`${sectionId}-heading`} className={`mt-2 ${opp.h2}`}>
         {data.title}
       </h2>
       <p className={`mt-2 max-w-3xl ${opp.muted}`}>{data.intro}</p>
 
-      <p className={`mt-8 ${opp.label}`}>Process steps — select to inspect</p>
-      <ol className="mt-3 flex gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mt-8 flex items-center justify-between gap-3">
+        <p className={cn('text-xs font-semibold uppercase tracking-wide', accent.eyebrow)}>
+          Process steps — select to inspect
+        </p>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            className={cn(opp.btnSecondary, 'min-h-10 px-2.5')}
+            aria-label="Previous step"
+            disabled={activeStep === 0}
+            onClick={() => setActiveStep((n) => Math.max(0, n - 1))}
+          >
+            <ChevronLeft className="h-4 w-4" aria-hidden />
+          </button>
+          <button
+            type="button"
+            className={cn(opp.btnSecondary, 'min-h-10 px-2.5')}
+            aria-label="Next step"
+            disabled={activeStep >= data.steps.length - 1}
+            onClick={() => setActiveStep((n) => Math.min(data.steps.length - 1, n + 1))}
+          >
+            <ChevronRight className="h-4 w-4" aria-hidden />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile: vertical selectable list */}
+      <ol className="mt-3 grid gap-2 md:hidden">
+        {data.steps.map((s, index) => {
+          const selected = index === activeStep;
+          return (
+            <li key={s.id}>
+              <button
+                type="button"
+                id={`${baseId}-step-m-${s.id}`}
+                aria-current={selected ? 'step' : undefined}
+                aria-controls={`${baseId}-detail`}
+                className={cn(
+                  'flex w-full min-h-12 items-start gap-3 rounded-lg border px-3 py-3 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500',
+                  selected
+                    ? cn(accent.navActive, accent.navActiveText)
+                    : cn(accent.navIdle, 'bg-white dark:bg-stone-900'),
+                )}
+                onClick={() => setActiveStep(index)}
+              >
+                <span
+                  className={cn(
+                    'mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold',
+                    selected ? 'border-white/40' : accent.eyebrow,
+                  )}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="text-sm font-semibold leading-snug">{s.title}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+
+      {/* Tablet/desktop: horizontal snap scroller */}
+      <ol className="mt-3 hidden gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] md:flex [&::-webkit-scrollbar]:hidden">
         {data.steps.map((s, index) => {
           const selected = index === activeStep;
           return (
@@ -46,19 +112,17 @@ export function HumanAiWorkflow({
                 aria-current={selected ? 'step' : undefined}
                 aria-controls={`${baseId}-detail`}
                 className={cn(
-                  'flex max-w-[10.5rem] flex-col rounded-lg border px-3 py-2.5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 motion-reduce:transition-none',
+                  'flex w-[9.5rem] flex-col rounded-lg border px-3 py-2.5 text-left transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 motion-reduce:transition-none lg:w-[10.5rem]',
                   selected
-                    ? 'border-cyan-500 bg-cyan-50 dark:border-cyan-400 dark:bg-cyan-950/40'
-                    : 'border-stone-300 bg-white hover:border-stone-400 dark:border-stone-600 dark:bg-stone-900',
+                    ? cn(accent.navActive, accent.navActiveText)
+                    : cn(accent.navIdle, 'bg-white dark:bg-stone-900'),
                 )}
                 onClick={() => setActiveStep(index)}
               >
-                <span className={opp.subtle}>
+                <span className={cn('text-[10px] font-semibold uppercase tracking-wide', selected ? 'opacity-80' : opp.subtle)}>
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className="mt-1 text-xs font-semibold leading-snug text-stone-900 dark:text-stone-100">
-                  {s.title}
-                </span>
+                <span className="mt-1 text-xs font-semibold leading-snug">{s.title}</span>
               </button>
             </li>
           );
@@ -69,12 +133,12 @@ export function HumanAiWorkflow({
         <div
           id={`${baseId}-detail`}
           role="region"
-          aria-labelledby={`${baseId}-step-${step.id}`}
-          className={cn(opp.card, 'mt-4 p-5')}
+          aria-label={step.title}
+          className={cn(opp.card, 'mt-4 border-l-[3px] p-5', accent.rail, accent.softBg)}
         >
           <h3 className={opp.h3MoMA}>{step.title}</h3>
           <p className={`mt-2 ${opp.body}`}>{step.description}</p>
-          <p className={`mt-3 ${opp.subtle}`}>
+          <p className={`mt-3 hidden text-xs leading-relaxed text-stone-500 dark:text-stone-400 lg:block`}>
             {data.steps.map((s) => s.title).join(' → ')}
           </p>
         </div>

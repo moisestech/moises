@@ -104,7 +104,12 @@ export type CertificationItem = {
   href?: string;
 };
 
-export type OpportunityNavItem = { id: string; label: string };
+export type OpportunityNavItem = {
+  id: string;
+  label: string;
+  /** Shorter label for sticky nav on narrow screens. */
+  shortLabel?: string;
+};
 
 /** Single hoverable term in the audience keyword strip (opportunity hero lead-in). */
 export type OpportunityAudienceKeyword = {

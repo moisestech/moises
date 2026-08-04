@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import type { PointOfViewBlock } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
 
@@ -15,24 +16,29 @@ export function PointOfViewGallery({
   sectionId = 'pov',
   className,
 }: PointOfViewGalleryProps) {
+  const accent = getOpportunityCompactAccent(sectionId);
+
   return (
     <section
       id={sectionId}
       className={cn(opp.section, className)}
       aria-labelledby={`${sectionId}-heading`}
     >
-      <h2 id={`${sectionId}-heading`} className={opp.h2}>
+      <p className={cn('text-xs font-semibold uppercase tracking-wide', accent.eyebrow)}>
+        Artistic practice
+      </p>
+      <h2 id={`${sectionId}-heading`} className={`mt-2 ${opp.h2}`}>
         {data.title}
       </h2>
       <p className={`mt-2 max-w-3xl ${opp.muted}`}>{data.intro}</p>
 
-      <blockquote className={cn(opp.callout, 'mt-6')}>
-        <p className="font-['MoMA_Sans'] text-lg font-semibold leading-snug text-stone-950 dark:text-stone-50 sm:text-xl">
+      <blockquote className={cn(opp.callout, 'mt-6 border-l-[3px]', accent.rail, accent.softBg)}>
+        <p className="font-['MoMA_Sans'] text-base font-semibold leading-snug text-stone-950 dark:text-stone-50 sm:text-lg md:text-xl">
           “{data.pullQuote}”
         </p>
       </blockquote>
 
-      <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+      <ul className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-4">
         {data.items.map((item) => {
           const card = (
             <>
@@ -46,8 +52,8 @@ export function PointOfViewGallery({
                   loading="lazy"
                 />
               </div>
-              <div className="border-t border-stone-100 px-3 py-2.5 dark:border-stone-800">
-                <span className={opp.matrixPrimary}>{item.title}</span>
+              <div className="border-t border-stone-100 px-2.5 py-2 dark:border-stone-800 sm:px-3 sm:py-2.5">
+                <span className={cn(opp.matrixPrimary, 'text-xs sm:text-sm')}>{item.title}</span>
               </div>
             </>
           );

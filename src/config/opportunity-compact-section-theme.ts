@@ -144,6 +144,39 @@ const principles: OpportunityCompactSectionAccent = {
   softBg: 'bg-gradient-to-br from-stone-500/8 via-transparent to-transparent',
 };
 
+/** Creative-agency: campaign channel system */
+const campaign: OpportunityCompactSectionAccent = {
+  navActive: 'border-rose-700 bg-rose-800/95 dark:border-rose-300 dark:bg-rose-200',
+  navActiveText: 'text-white dark:text-rose-950',
+  navIdle: 'border-stone-300 hover:border-rose-600 dark:border-stone-600 dark:hover:border-rose-400',
+  mediaBorder: 'border-b-rose-600/40 dark:border-b-rose-400/35',
+  rail: 'border-l-rose-600 dark:border-l-rose-400',
+  eyebrow: 'text-rose-800 dark:text-rose-300',
+  softBg: 'bg-gradient-to-br from-rose-500/8 via-transparent to-transparent',
+};
+
+/** Creative-agency: leadership */
+const leadership: OpportunityCompactSectionAccent = {
+  navActive: 'border-indigo-700 bg-indigo-800/95 dark:border-indigo-300 dark:bg-indigo-200',
+  navActiveText: 'text-white dark:text-indigo-950',
+  navIdle: 'border-stone-300 hover:border-indigo-600 dark:border-stone-600 dark:hover:border-indigo-400',
+  mediaBorder: 'border-b-indigo-600/40 dark:border-b-indigo-400/35',
+  rail: 'border-l-indigo-600 dark:border-l-indigo-400',
+  eyebrow: 'text-indigo-800 dark:text-indigo-300',
+  softBg: 'bg-gradient-to-br from-indigo-500/8 via-transparent to-transparent',
+};
+
+/** Creative-agency: point of view */
+const pov: OpportunityCompactSectionAccent = {
+  navActive: 'border-fuchsia-700 bg-fuchsia-800/95 dark:border-fuchsia-300 dark:bg-fuchsia-200',
+  navActiveText: 'text-white dark:text-fuchsia-950',
+  navIdle: 'border-stone-300 hover:border-fuchsia-600 dark:border-stone-600 dark:hover:border-fuchsia-400',
+  mediaBorder: 'border-b-fuchsia-600/40 dark:border-b-fuchsia-400/35',
+  rail: 'border-l-fuchsia-600 dark:border-l-fuchsia-400',
+  eyebrow: 'text-fuchsia-800 dark:text-fuchsia-300',
+  softBg: 'bg-gradient-to-br from-fuchsia-500/8 via-transparent to-transparent',
+};
+
 const byId: Record<string, OpportunityCompactSectionAccent> = {
   hero,
   fit,
@@ -170,10 +203,10 @@ const byId: Record<string, OpportunityCompactSectionAccent> = {
   'role-fit': fit,
   engineering: principles,
   ramp: comingSoon,
-  campaign: selectedProject,
+  campaign,
   workflow: process,
-  leadership: fit,
-  pov: caseStudies,
+  leadership,
+  pov,
   stack: technologies,
 };
 

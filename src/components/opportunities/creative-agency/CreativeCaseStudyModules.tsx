@@ -4,7 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
+import { scrollToDossierSection } from '@/components/opportunities/creative-agency/scrollToDossierSection';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { DELIVERY_STATUS_LABELS } from '@/content/opportunities/systemsDossier';
 import type { CreativeCaseStudyModule } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
@@ -47,30 +49,43 @@ export function CreativeCaseStudyModules({
   sectionId = 'case-studies',
   className,
 }: CreativeCaseStudyModulesProps) {
+  const accent = getOpportunityCompactAccent(sectionId);
+
   return (
     <section
       id={sectionId}
       className={cn(opp.section, className)}
       aria-labelledby={`${sectionId}-heading`}
     >
-      <h2 id={`${sectionId}-heading`} className={opp.h2}>
+      <p className={cn('text-xs font-semibold uppercase tracking-wide', accent.eyebrow)}>
+        Selected evidence
+      </p>
+      <h2 id={`${sectionId}-heading`} className={`mt-2 ${opp.h2}`}>
         {title}
       </h2>
       <p className={`mt-2 max-w-3xl ${opp.muted}`}>{intro}</p>
 
       <nav className="mt-6" aria-label="Case study jump links">
-        <p className={opp.label}>Jump to a case study</p>
-        <ol className="mt-2 flex flex-wrap gap-2">
+        <p className={cn('text-xs font-semibold uppercase tracking-wide', accent.eyebrow)}>
+          Jump to a case study
+        </p>
+        <ol className="mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
           {studies.map((study, index) => (
-            <li key={study.id}>
+            <li key={study.id} className="shrink-0 snap-start">
               <a
                 href={`#${study.id}`}
                 className={cn(
-                  opp.pillTag,
-                  'inline-flex min-h-10 items-center gap-1.5 font-medium transition hover:border-cyan-400/50 hover:bg-cyan-50/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 dark:hover:bg-cyan-950/30',
+                  'inline-flex min-h-11 items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500',
+                  accent.navIdle,
+                  'bg-white dark:bg-stone-900',
+                  accent.eyebrow,
                 )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToDossierSection(study.id);
+                }}
               >
-                <span className="tabular-nums text-stone-400">{String(index + 1).padStart(2, '0')}</span>
+                <span className="tabular-nums opacity-70">{String(index + 1).padStart(2, '0')}</span>
                 {study.title.split(' — ')[0] ?? study.title}
               </a>
             </li>
@@ -78,16 +93,18 @@ export function CreativeCaseStudyModules({
         </ol>
       </nav>
 
-      <div className="mt-10 space-y-14">
+      <div className="mt-10 space-y-10 sm:space-y-14">
         {studies.map((study) => (
           <article key={study.id} className="scroll-mt-32" id={study.id}>
-            <div className={cn(opp.card, 'overflow-hidden')}>
-              <div className="relative aspect-[16/9] w-full bg-stone-100 dark:bg-stone-800 sm:aspect-[2/1]">
+            <div className={cn(opp.card, 'overflow-hidden border-l-[3px]', accent.rail)}>
+              <div className="relative aspect-[16/10] w-full bg-stone-100 dark:bg-stone-800 sm:aspect-[16/9] md:aspect-[2/1]">
                 <CaseMedia src={study.imageSrc} alt={study.imageAlt} local={study.imageLocal} />
               </div>
-              <div className="p-5 sm:p-7">
+              <div className="p-4 sm:p-6 md:p-7">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className={opp.accentCategory}>{study.category}</p>
+                  <p className={cn('text-xs font-medium uppercase tracking-wide', accent.eyebrow)}>
+                    {study.category}
+                  </p>
                   <span className={opp.pill}>{DELIVERY_STATUS_LABELS[study.deliveryStatus]}</span>
                 </div>
                 <h3 className={`mt-2 ${opp.h3MoMA}`}>{study.title}</h3>
@@ -190,7 +207,10 @@ export function CreativeCaseStudyModules({
                   <div className="mt-5">
                     <Link
                       href={study.href}
-                      className={cn(opp.linkAccent, 'inline-flex items-center gap-1 text-sm')}
+                      className={cn(
+                        opp.linkAccent,
+                        'inline-flex min-h-11 items-center gap-1 text-sm sm:min-h-0',
+                      )}
                       {...(study.href.startsWith('http')
                         ? { target: '_blank', rel: 'noopener noreferrer' }
                         : {})}

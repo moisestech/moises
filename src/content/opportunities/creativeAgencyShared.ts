@@ -23,16 +23,16 @@ import {
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
 export const creativeAgencyNavItems: OpportunityNavItem[] = [
-  { id: 'hero', label: 'Overview' },
-  { id: 'capabilities', label: 'What I bring' },
-  { id: 'case-studies', label: 'Case studies' },
-  { id: 'campaign', label: 'Campaign system' },
-  { id: 'workflow', label: 'Workflow' },
-  { id: 'leadership', label: 'Leadership' },
-  { id: 'pov', label: 'Point of view' },
-  { id: 'fit', label: 'Role alignment' },
-  { id: 'stack', label: 'Production stack' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'hero', label: 'Overview', shortLabel: 'Overview' },
+  { id: 'capabilities', label: 'What I bring', shortLabel: 'Capabilities' },
+  { id: 'case-studies', label: 'Case studies', shortLabel: 'Cases' },
+  { id: 'campaign', label: 'Campaign system', shortLabel: 'Campaign' },
+  { id: 'workflow', label: 'Workflow', shortLabel: 'Workflow' },
+  { id: 'leadership', label: 'Leadership', shortLabel: 'Lead' },
+  { id: 'pov', label: 'Point of view', shortLabel: 'POV' },
+  { id: 'fit', label: 'Role alignment', shortLabel: 'Fit' },
+  { id: 'stack', label: 'Production stack', shortLabel: 'Stack' },
+  { id: 'contact', label: 'Contact', shortLabel: 'Contact' },
 ];
 
 export const creativeAgencySkillsMatrix: SkillsMatrixRow[] = [
