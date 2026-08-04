@@ -68,13 +68,60 @@ export const floraFoundingDataEngineerBanner: ApplicationBanner = {
     'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
 };
 
+const creativeBannerAspect =
+  'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]';
+
+/** Ogilvy — Senior AI-Driven Creative Director. */
+export const ogilvySeniorAiDrivenCreativeDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862416/jobs/banners/senior-ai-driven-creative-director-banner_y1mof7.png`,
+  alt: 'Ogilvy — Senior AI-Driven Creative Director application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Morley — Art Director (Remote, Florida). */
+export const morleyArtDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862415/jobs/banners/art-director-morley-banner_b5ridm.png`,
+  alt: 'Morley — Art Director application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** MSC Cruises — Creative Director, Travel & Experiences. */
+export const mscCruisesCreativeDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862415/jobs/banners/creative-director-msc-cruises-banner_whtcx8.png`,
+  alt: 'MSC Cruises — Creative Director Travel & Experiences application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Razorfish / Publicis Groupe — Junior Art Director. */
+export const razorfishJuniorArtDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862413/jobs/banners/junior-art-director-razorfish-banner_jt9yyi.png`,
+  alt: 'Razorfish — Junior Art Director application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Digitas — Associate Director, Creative. */
+export const digitasAssociateDirectorCreativeBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862413/jobs/banners/associate-director-creative-digitas-banner_to4ylc.png`,
+  alt: 'Digitas — Associate Director Creative application banner',
+  aspectClass: creativeBannerAspect,
+};
+
 /**
  * WMX — Senior Art Director, Creative + AI Expertise.
  * Dedicated application banner (not a WMX brand asset).
  */
 export const wmxSeniorArtDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862412/jobs/banners/senior-art-director-wmx-creative-ai-expertise-banner_axmv4k.png`,
+  alt: 'WMX — Senior Art Director Creative + AI Expertise application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/**
+ * WMX — Senior Art Director, AI-Driven Design Leader.
+ * Companion listing / alternate title framing at wearewmx.com.
+ */
+export const wmxAiDrivenDesignLeaderBanner: ApplicationBanner = {
   src: `${cdn}/v1785859691/jobs/banners/senior-art-director-ai-driven-desgin-leader-banner_pweexz.png`,
-  alt: 'Senior Art Director — AI-driven design leadership application banner for Moises Sanabria',
-  aspectClass:
-    'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+  alt: 'WMX — Senior Art Director AI-Driven Design Leader application banner',
+  aspectClass: creativeBannerAspect,
 };

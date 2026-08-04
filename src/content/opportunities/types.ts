@@ -2,6 +2,7 @@ import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 import type { EvidenceStatus, SystemsDossier } from '@/content/opportunities/systemsDossier';
 import type { RolePortfolioDossier } from '@/content/opportunities/rolePortfolio';
+import type { CreativeAgencyDossier } from '@/content/opportunities/creativeAgencyDossier';
 
 export type ApplicationBanner = {
   src: string;
@@ -193,6 +194,8 @@ export type Opportunity = {
   systemsDossier?: SystemsDossier;
   /** Creative / forward-deployed role portfolio sections (no Affirm-shaped architecture panels). */
   rolePortfolio?: RolePortfolioDossier;
+  /** Art-direction / creative-director dossier sections (campaign system, AI workflow, POV). */
+  creativeAgency?: CreativeAgencyDossier;
   roleMatchSectionTitle?: string;
   roleMatchIntro?: string;
   roleMatchColumnHeaders?: { left: string; right: string };

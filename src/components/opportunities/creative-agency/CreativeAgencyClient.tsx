@@ -10,36 +10,35 @@ import { FitPillars } from '@/components/opportunities/FitPillars';
 import { RoleMatchMatrix } from '@/components/opportunities/RoleMatchMatrix';
 import { CapabilityMap } from '@/components/opportunities/CapabilityMap';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
-import { CreativeCaseStudyModules } from '@/components/opportunities/wmx/CreativeCaseStudyModules';
-import { CampaignChannelSystem } from '@/components/opportunities/wmx/CampaignChannelSystem';
-import { HumanAiWorkflow } from '@/components/opportunities/wmx/HumanAiWorkflow';
-import { LeadershipInPractice } from '@/components/opportunities/wmx/LeadershipInPractice';
-import { PointOfViewGallery } from '@/components/opportunities/wmx/PointOfViewGallery';
-import { DossierSectionNav } from '@/components/opportunities/wmx/DossierSectionNav';
+import { CreativeCaseStudyModules } from '@/components/opportunities/creative-agency/CreativeCaseStudyModules';
+import { CampaignChannelSystem } from '@/components/opportunities/creative-agency/CampaignChannelSystem';
+import { HumanAiWorkflow } from '@/components/opportunities/creative-agency/HumanAiWorkflow';
+import { LeadershipInPractice } from '@/components/opportunities/creative-agency/LeadershipInPractice';
+import { PointOfViewGallery } from '@/components/opportunities/creative-agency/PointOfViewGallery';
+import { DossierSectionNav } from '@/components/opportunities/creative-agency/DossierSectionNav';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
-import { wmxCreativeAgency } from '@/content/opportunities/wmx-senior-art-director-ai';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
 
-type WmxArtDirectorClientProps = {
+type CreativeAgencyClientProps = {
   opportunity: Opportunity;
 };
 
 /**
- * WMX Senior Art Director — Creative + AI Expertise application dossier.
- * Reuses opportunity shell, hero, role-match matrix, capability map, and CTAs.
+ * Shared creative-agency application dossier composer
+ * (art direction / creative director roles with campaign + AI workflow sections).
  */
-export function WmxArtDirectorClient({ opportunity }: WmxArtDirectorClientProps) {
+export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps) {
   const dossier = opportunity.rolePortfolio;
+  const agency = opportunity.creativeAgency;
   const hasBanner = Boolean(opportunity.applicationBanner?.src);
-  const agency = wmxCreativeAgency;
 
-  if (!dossier) {
+  if (!dossier || !agency) {
     return (
       <OpportunityShell navItems={opportunity.navItems}>
         <main className={cn(opp.main, 'pt-8 sm:pt-10')}>
-          <p className={opp.body}>Role portfolio content is missing for this opportunity.</p>
+          <p className={opp.body}>Creative agency dossier content is missing for this opportunity.</p>
         </main>
       </OpportunityShell>
     );

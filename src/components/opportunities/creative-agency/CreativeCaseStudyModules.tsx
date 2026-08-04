@@ -6,7 +6,7 @@ import { ExternalLink } from 'lucide-react';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { DELIVERY_STATUS_LABELS } from '@/content/opportunities/systemsDossier';
-import type { CreativeCaseStudyModule } from '@/content/opportunities/wmxCreativeDossier';
+import type { CreativeCaseStudyModule } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
 
 type CreativeCaseStudyModulesProps = {

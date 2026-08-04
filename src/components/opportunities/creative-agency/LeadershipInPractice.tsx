@@ -1,5 +1,5 @@
 import { opp } from '@/components/opportunities/opportunityTheme';
-import type { LeadershipBlock } from '@/content/opportunities/wmxCreativeDossier';
+import type { LeadershipBlock } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
 
 type LeadershipInPracticeProps = {

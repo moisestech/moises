@@ -2,9 +2,9 @@
 
 import { useId, useState } from 'react';
 import Image from 'next/image';
-import { AssetPlaceholder } from '@/components/opportunities/wmx/AssetPlaceholder';
+import { AssetPlaceholder } from '@/components/opportunities/creative-agency/AssetPlaceholder';
 import { opp } from '@/components/opportunities/opportunityTheme';
-import type { HumanAiWorkflowBlock } from '@/content/opportunities/wmxCreativeDossier';
+import type { HumanAiWorkflowBlock } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
 
 type HumanAiWorkflowProps = {

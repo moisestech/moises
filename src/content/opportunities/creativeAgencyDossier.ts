@@ -1,6 +1,6 @@
 /**
  * Creative-agency dossier shapes for WMX Senior Art Director — Creative + AI Expertise.
- * Used by `/opportunities/wmx-senior-art-director-ai` only.
+ * Shared creative-agency opportunity dossier shapes.
  */
 
 import type { DeliveryStatus, FitPillar } from '@/content/opportunities/systemsDossier';

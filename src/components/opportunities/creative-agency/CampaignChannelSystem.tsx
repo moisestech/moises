@@ -3,7 +3,7 @@
 import { useId, useState } from 'react';
 import Image from 'next/image';
 import { opp } from '@/components/opportunities/opportunityTheme';
-import type { CampaignSystemBlock } from '@/content/opportunities/wmxCreativeDossier';
+import type { CampaignSystemBlock } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
 
 type CampaignChannelSystemProps = {

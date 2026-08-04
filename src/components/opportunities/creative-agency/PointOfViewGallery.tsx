@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { opp } from '@/components/opportunities/opportunityTheme';
-import type { PointOfViewBlock } from '@/content/opportunities/wmxCreativeDossier';
+import type { PointOfViewBlock } from '@/content/opportunities/creativeAgencyDossier';
 import { cn } from '@/lib/utils';
 
 type PointOfViewGalleryProps = {
