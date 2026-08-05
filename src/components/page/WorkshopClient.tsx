@@ -25,6 +25,7 @@ import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
 import { WORKSHOP_FEATURES, type WorkshopCardVisual } from '@/constants/workshop-features'
+import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings'
 import { track } from '@/lib/analytics'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
@@ -293,6 +294,70 @@ export default function WorkshopClient() {
             )}
           </div>
         </motion.div>
+
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mb-10 sm:mb-16"
+          aria-labelledby="institutional-offerings-heading"
+        >
+          <div className="mb-6 sm:mb-8 text-center max-w-2xl mx-auto">
+            <p
+              className={cn(
+                'text-[11px] font-semibold uppercase tracking-[0.18em] mb-2',
+                isDark ? 'text-purple-300/90' : 'text-violet-700'
+              )}
+            >
+              {institutionalWorkshopOfferings.intro.eyebrow}
+            </p>
+            <h2
+              id="institutional-offerings-heading"
+              className={cn('text-xl sm:text-2xl font-bold', heading)}
+            >
+              {institutionalWorkshopOfferings.intro.title}
+            </h2>
+            <p className={cn('mt-2 text-sm sm:text-base leading-relaxed', bodyMuted)}>
+              {institutionalWorkshopOfferings.intro.lead}
+            </p>
+            <a
+              href={calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('cta_institutions_click', { source: 'workshops_offerings_calendly' })}
+              className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-5 py-2.5 text-sm font-medium text-white"
+            >
+              <Phone className="h-4 w-4" aria-hidden />
+              {institutionalWorkshopOfferings.intro.calendlyLabel}
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </a>
+          </div>
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {institutionalWorkshopOfferings.offerings.map((offering) => (
+              <li key={offering.id} className={cn(cardBase)}>
+                <h3 className={cn('text-base sm:text-lg font-bold leading-snug', heading)}>
+                  {offering.title}
+                </h3>
+                <p className={cn('mt-3 text-xs sm:text-sm leading-relaxed flex-1', bodyMuted)}>
+                  {offering.body}
+                </p>
+                <p className={cn('mt-3 text-[11px] uppercase tracking-wide', bodyMuted)}>
+                  Fits: {offering.fits}
+                </p>
+                <Link
+                  href={offering.relatedHref}
+                  className={cn(
+                    'mt-4 inline-flex items-center gap-1 text-sm font-semibold',
+                    isDark ? 'text-cyan-300' : 'text-violet-700'
+                  )}
+                >
+                  {offering.relatedLabel}
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.section>
 
         <motion.section
           initial={{ opacity: 0, y: 20 }}

@@ -10,9 +10,9 @@ const WorkshopHubClient = dynamic(() => import('@/components/page/WorkshopClient
   ),
 })
 
-const title = 'Art & Technology Workshops | Talk Hub — Moises Sanabria & Fabiola Larios'
+const title = 'Art & Technology Workshops — Bookable Institutional Offerings | Moises Sanabria'
 const description =
-  'Automation workshop + partnerships. Artist task automation, institutional consulting, and workshops by Moises Sanabria (Technical Director of Digital, Oolite Arts) and Fabiola Larios.'
+  'Three bookable offerings: Vibe Coding and Digital Presence, AI and Automation for the Artist Studio, and Creative Technology Prototyping—plus deeper workshop programs from Oolite Arts practice.'
 
 export const metadata: Metadata = {
   title,
