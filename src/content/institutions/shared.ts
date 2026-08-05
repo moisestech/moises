@@ -11,6 +11,46 @@ export const INSTITUTIONAL_EMAIL = 'm@moises.tech';
 export const INSTITUTIONAL_AVAILABILITY =
   'My year-long contract as Technical Director of Digital at Oolite Arts concludes September 17.';
 
+/** Artist-owned cultural-technology practice operating as DCC Miami. */
+export const DCC_MIAMI = {
+  name: 'DCC Miami',
+  fullName: 'Digital Culture Center Miami',
+  href: 'https://dcc.miami',
+  label: 'Artist-owned practice',
+} as const;
+
+/**
+ * Public seat pricing aligned with current Oolite Arts Digital Lab workshops
+ * (Artist Websites / Vibe Coding / Resin — publicly listed at $45 / ~3hr).
+ */
+export const PILOT_PRICING = {
+  sourceNote:
+    'Aligned with current Oolite Arts Digital Lab public workshop pricing ($45 / participant / ~3 hours).',
+  sourceUrl: 'https://oolitearts.org/event/artist-websites-for-beginners/',
+  seat: {
+    amount: 45,
+    display: '$45',
+    unit: 'per participant / ~3 hours',
+    capacityTypical: '8–10 participants',
+  },
+  hostedFlat: {
+    min: 360,
+    max: 450,
+    display: '$360–$450',
+    unit: 'flat institutional host rate for one 3-hour session (8–10 seats)',
+    mathNote: 'Same economics as $45 × 8–10 seats; institution hosts the cohort.',
+  },
+  twoPart: {
+    min: 720,
+    max: 900,
+    display: '$720–$900',
+    unit: 'two-part pilot (2 × 3 hours) for 8–10 seats',
+    mathNote: 'Double the single-session flat range; toolkit can be scoped separately.',
+  },
+  calendlyLabel: 'Book a planning call',
+  calendlyHref: INSTITUTIONAL_CALENDLY_URL,
+} as const;
+
 export type InstitutionalLane = {
   id: string;
   title: string;

@@ -56,6 +56,43 @@ export function BakehousePageClient() {
         </InstContainer>
       </header>
 
+      <section
+        id="thesis"
+        className="scroll-mt-24 border-b border-neutral-200 py-12 sm:py-16"
+        aria-labelledby="thesis-heading"
+      >
+        <InstContainer>
+          <InstSectionLabel>{B.thesis.eyebrow}</InstSectionLabel>
+          <h2 id="thesis-heading" className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
+            {B.thesis.title}
+          </h2>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+            {B.thesis.body}
+          </p>
+          <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+            {B.thesis.points.map((point) => (
+              <li
+                key={point}
+                className="border-l-2 border-neutral-950 bg-white/70 py-2.5 pl-3 text-sm leading-relaxed text-neutral-800"
+              >
+                {point}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-sm text-neutral-600">
+            Artist-owned practice:{' '}
+            <a
+              href={B.thesis.dcc.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline underline-offset-4"
+            >
+              {B.thesis.dcc.fullName} ({B.thesis.dcc.name})
+            </a>
+          </p>
+        </InstContainer>
+      </section>
+
       <div className="space-y-0">
         {B.buckets.map((bucket) => (
           <section
@@ -110,7 +147,7 @@ export function BakehousePageClient() {
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">
             {B.ask.body}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <InstPrimaryCta
               href={B.ask.primaryCta.href}
               label={B.ask.primaryCta.label}
@@ -118,6 +155,11 @@ export function BakehousePageClient() {
               onClick={() => track('cta_institutions_click', { source: 'bakehouse_ask' })}
             />
             <InstSecondaryCta href={B.ask.secondaryCta.href} label={B.ask.secondaryCta.label} />
+            <InstSecondaryCta
+              href={B.ask.tertiaryCta.href}
+              label={B.ask.tertiaryCta.label}
+              external={B.ask.tertiaryCta.external}
+            />
           </div>
         </InstContainer>
       </section>
@@ -127,9 +169,20 @@ export function BakehousePageClient() {
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
             {B.related.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="font-medium underline-offset-4 hover:underline">
-                  {item.label}
-                </Link>
+                {'external' in item && item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium underline-offset-4 hover:underline"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link href={item.href} className="font-medium underline-offset-4 hover:underline">
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

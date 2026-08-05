@@ -26,6 +26,7 @@ import { motion } from 'framer-motion'
 import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
 import { WORKSHOP_FEATURES, type WorkshopCardVisual } from '@/constants/workshop-features'
 import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings'
+import { PilotPricingBand } from '@/components/institutions/PilotPricingBand'
 import { track } from '@/lib/analytics'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
@@ -332,12 +333,17 @@ export default function WorkshopClient() {
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </a>
           </div>
+          <PilotPricingBand tone="hub" className="mb-6 sm:mb-8" source="workshops_pricing" />
           <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {institutionalWorkshopOfferings.offerings.map((offering) => (
               <li key={offering.id} className={cn(cardBase)}>
                 <h3 className={cn('text-base sm:text-lg font-bold leading-snug', heading)}>
                   {offering.title}
                 </h3>
+                <p className={cn('mt-2 text-[11px] font-semibold uppercase tracking-wide', accentIcon)}>
+                  {offering.duration}
+                </p>
+                <p className={cn('mt-1 text-sm font-semibold', heading)}>{offering.priceLabel}</p>
                 <p className={cn('mt-3 text-xs sm:text-sm leading-relaxed flex-1', bodyMuted)}>
                   {offering.body}
                 </p>

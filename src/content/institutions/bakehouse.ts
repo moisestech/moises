@@ -1,9 +1,11 @@
 /**
  * /bakehouse — institutional digital systems page for Bakehouse Art Complex.
  * Clearly separate shipped work, proposed work, and future opportunity.
+ * Ask: part-time embedded (negotiable) via artist-owned practice DCC Miami.
  */
 
 import {
+  DCC_MIAMI,
   INSTITUTIONAL_AVAILABILITY,
   INSTITUTIONAL_CALENDLY_URL,
   type PlaceholderAsset,
@@ -14,16 +16,16 @@ const BAKEHOUSE_IMAGE = `${CDN}/v1717960571/art/moisestech-website/digitaldivini
 
 export const bakehousePage = {
   meta: {
-    title: 'Bakehouse Art Complex — Digital Systems | Moises Sanabria',
+    title: 'Bakehouse Art Complex — Digital Lab Systems | Moises Sanabria · DCC Miami',
     description:
-      'SmartSigns and kiosk infrastructure shipped at Bakehouse Art Complex; Artist Portal proposed on Assembly; a connected institutional communication system as the next layer.',
+      'SmartSigns and kiosk infrastructure shipped at Bakehouse; Artist Portal proposed on Assembly; part-time embedded digital leadership through artist-owned practice DCC Miami.',
     url: 'https://moises.tech/bakehouse',
   },
   hero: {
-    eyebrow: 'Bakehouse Art Complex',
-    headline: 'Digital systems that make an artist building legible.',
+    eyebrow: 'Bakehouse Art Complex · DCC Miami',
+    headline: 'An artist-owned Digital Lab model—inside the building artists already use.',
     lead:
-      'Screens, workflows, and artist-facing infrastructure—so studios, events, and public life stay connected without turning artists into systems administrators.',
+      'We already proved the lab model at Oolite: tools, workshops, documentation, and artist support as one system. At Bakehouse, the next step is standing up that same coherence—screens, portal, programming, and ops—through DCC Miami, an artist-owned practice, in a part-time embedded partnership.',
     availability: INSTITUTIONAL_AVAILABILITY,
     image: {
       src: BAKEHOUSE_IMAGE,
@@ -32,12 +34,24 @@ export const bakehousePage = {
       note: 'Production SmartSign installation photos pending; this image is contextual Bakehouse work.',
     } satisfies PlaceholderAsset & { src: string; alt: string },
   },
+  thesis: {
+    eyebrow: 'Why this ask',
+    title: 'Not another isolated project—an artist-owned lab practice',
+    body: `The goal is to promote and extend the Digital Lab approach we built and operated: artist-facing technology that institutions can trust. ${DCC_MIAMI.fullName} (${DCC_MIAMI.name}) is the artist-owned name for that practice—partnering with Bakehouse on part-time embedded digital leadership, negotiable in scope and schedule.`,
+    points: [
+      'Proof first: SmartSigns / Anthias already shipping in the building',
+      'Next layer: Artist Portal on Assembly for content governance',
+      'Operating model: DCC Miami as artist-owned practice + Bakehouse as host institution',
+      'Engagement: part-time embedded / fractional—negotiable, not a generic staff IT hire',
+    ],
+    dcc: DCC_MIAMI,
+  },
   buckets: [
     {
       id: 'shipped',
       status: 'Shipped',
       title: 'SmartSigns, kiosks, and display infrastructure',
-      body: 'Vertical smart-sign systems and Raspberry Pi / Anthias-based display workflows that promote artists, events, and studio activity through a repeatable screen format. Handoff of Anthias/SmartSigns operations is in progress.',
+      body: 'Vertical smart-sign systems and Raspberry Pi / Anthias-based display workflows that promote artists, events, and studio activity through a repeatable screen format. Handoff of Anthias/SmartSigns operations is in progress—completion is the trust gate for the leadership conversation.',
       items: [
         'Artist and event promotion on vertical screens',
         'Raspberry Pi / Anthias display stack',
@@ -76,38 +90,44 @@ export const bakehousePage = {
     {
       id: 'future',
       status: 'Future opportunity',
-      title: 'A connected institutional communication system',
-      body: 'The next layer is not another isolated tool. It is coherence: SmartSigns, Artist Portal, artist communications, digital programming, and technical infrastructure operating as one system under embedded digital leadership.',
+      title: 'Bakehouse Digital Lab — connected communications + programming',
+      body: 'Coherence under part-time embedded leadership via DCC Miami: SmartSigns, Artist Portal, artist communications, digital programming, and technical infrastructure as one artist-centered system—the same class of work as the Oolite Digital Lab, adapted to Bakehouse.',
       items: [
         'Shared content model across screens, portal, and programming',
-        'Clear roles for staff, artists, and contractors',
+        'Clear roles for Bakehouse staff, artists, and DCC Miami',
         'Documentation and handoff so the system survives turnover',
-        '6–12 month embedded / fractional digital leadership option',
+        'Part-time embedded engagement—scope and schedule negotiable',
       ],
       placeholders: [
         {
           label: 'System map diagram',
-          note: 'One diagram: screens ↔ Assembly portal ↔ programming ↔ ops.',
+          note: 'One diagram: screens ↔ Assembly portal ↔ programming ↔ DCC Miami ops.',
         },
       ] satisfies PlaceholderAsset[],
     },
   ],
   ask: {
     title: 'Conversation for Bakehouse leadership',
-    body: 'Rather than proposing another isolated project, the useful next step is an embedded part-time role or six-to-twelve-month engagement focused on digital strategy, artist technology, and institutional systems.',
+    body: `Rather than proposing another isolated tool, I’d like to discuss a part-time embedded partnership—negotiable—between Bakehouse and ${DCC_MIAMI.name}: digital strategy, artist technology, and institutional systems that promote a Digital Lab culture artists already recognize from Oolite.`,
     primaryCta: {
       label: 'Schedule 30 minutes',
       href: INSTITUTIONAL_CALENDLY_URL,
       external: true,
     },
     secondaryCta: {
-      label: 'Related Oolite proof',
+      label: 'Oolite Digital Lab proof',
       href: '/oolite-arts',
+    },
+    tertiaryCta: {
+      label: `${DCC_MIAMI.name} site`,
+      href: DCC_MIAMI.href,
+      external: true,
     },
   },
   related: [
     { label: 'Institutions hub', href: '/institutions' },
     { label: 'SmartSign service page', href: '/services/smartsign' },
     { label: 'Oolite Arts case study', href: '/oolite-arts' },
+    { label: DCC_MIAMI.name, href: DCC_MIAMI.href, external: true },
   ],
 } as const;
