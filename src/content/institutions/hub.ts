@@ -325,11 +325,12 @@ export const institutionsHub = {
     },
     {
       id: 'dcc',
-      name: 'Digital Culture Center Miami',
+      name: 'Digital Culture Center Miami (DCC Miami)',
       location: 'Miami, FL',
       relationship: 'platform',
-      relationshipLabel: ORG_RELATIONSHIP_LABELS.platform,
-      summary: 'Institutional website and digital infrastructure for cultural programming.',
+      relationshipLabel: 'Artist-owned practice · Platform',
+      summary:
+        'Artist-owned cultural-technology practice—institutional platforms and the operating name for embedded Digital Lab partnerships (including the Bakehouse conversation).',
       href: 'https://dcc.miami',
       external: true,
       imageSrc: DCC.imageSrc,

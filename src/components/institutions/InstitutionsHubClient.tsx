@@ -18,6 +18,7 @@ import {
   InstSecondaryCta,
   InstSectionLabel,
 } from '@/components/institutions/InstitutionalUi';
+import { ProposePilotBand } from '@/components/institutions/PilotPricingBand';
 import { cn } from '@/lib/utils';
 
 const H = institutionsHub;
@@ -239,6 +240,10 @@ export function InstitutionsHubClient() {
           </dl>
         </InstContainer>
       </header>
+
+      <InstContainer className="py-8 sm:py-10">
+        <ProposePilotBand />
+      </InstContainer>
 
       <nav
         className="sticky top-0 z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
