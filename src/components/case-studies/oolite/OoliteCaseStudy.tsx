@@ -510,6 +510,17 @@ export default function OoliteCaseStudy() {
           <p className="font-mono text-xs text-neutral-500">
             Last updated {C.credits.lastUpdated} · {C.credits.phaseNote}
           </p>
+          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-black/10 pt-8 text-sm">
+            <Link href="/institutions" className="font-medium underline underline-offset-4">
+              Institutions hub
+            </Link>
+            <Link href="/bakehouse" className="font-medium underline underline-offset-4">
+              Bakehouse digital systems
+            </Link>
+            <Link href="/workshops" className="font-medium underline underline-offset-4">
+              Bookable workshops
+            </Link>
+          </div>
         </div>
       </section>
     </main>

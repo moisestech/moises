@@ -18,20 +18,20 @@ export const WORKSHOP_HUB = {
   /** Top-of-page band — specific to practice, not generic “bootcamp” copy */
   INTRO: {
     EYEBROW: "Programs & partnerships",
-    TITLE: "Automation, presence, and critical AI — taught from an art practice",
+    TITLE: "Automation, presence, and creative technology — taught from an art practice",
     LEAD:
-      "Hands-on workshops and custom collaborations for artists, educators, and cultural institutions. Built from Oolite Arts programs and public-room teaching — live, accountable, and institution-shaped — not a passive video funnel.",
+      "Three bookable institutional offerings plus deeper workshop programs. Built from Oolite Arts Digital Lab work and public teaching — live, accountable, and institution-shaped.",
   },
 
   CTA_INSTITUTIONS: {
     TITLE: "Work with me (Institutions)",
     BULLETS: [
-      "Automation audits & workflow design",
-      "Institutional memory systems",
-      "Custom agents for your org",
+      "Embedded digital / creative-technology leadership",
+      "Paid workshop pilots for artist communities",
+      "Platforms, kiosks, and institutional workflows",
     ],
-    BUTTON_LABEL: "Schedule a discovery call",
-    LINK: "/contact",
+    BUTTON_LABEL: "Start an institutional conversation",
+    LINK: "/institutions",
   },
 
   CTA_WORKSHOP: {
