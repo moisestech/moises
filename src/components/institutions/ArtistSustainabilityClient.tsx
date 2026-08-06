@@ -8,6 +8,7 @@ import { artistSustainabilityPage } from '@/content/institutions/artistSustainab
 import { track } from '@/lib/analytics';
 import {
   InstContainer,
+  InstFamilyNav,
   InstPageShell,
   InstSectionLabel,
 } from '@/components/institutions/InstitutionalUi';
@@ -60,9 +61,10 @@ export function ArtistSustainabilityClient() {
       <p className="border-b border-amber-200 bg-amber-50 px-4 py-2 text-center text-[11px] leading-relaxed text-amber-950 sm:text-xs">
         {P.visibilityNote}
       </p>
+      <InstFamilyNav className="sticky top-0 z-40" />
 
       <nav
-        className="sticky top-0 z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
+        className="sticky top-[41px] z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
         aria-label="Section navigation"
       >
         <InstContainer className="flex gap-1.5 overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
