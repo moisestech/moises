@@ -109,3 +109,15 @@ export const comfyCompanyLogos = {
   dark: '/images/tech-logos/comfyui.svg',
   alt: 'Comfy / ComfyUI',
 } as const;
+
+/** FLORA Founding Data Engineer — warehouse / BI / product analytics marks (verified literacy only). */
+export const floraDataEngineerSkillLogoBand: LogoBandItem[] = [
+  { src: 'https://cdn.simpleicons.org/snowflake/29B5E8', alt: 'Snowflake', height: 36 },
+  { src: 'https://cdn.simpleicons.org/tableau/E97627', alt: 'Tableau', height: 36 },
+  { src: 'https://cdn.simpleicons.org/posthog/F54E00', alt: 'PostHog', height: 36 },
+  { src: `${jobsCdn}/v1778692505/jobs/python-logo_edccrx.png`, alt: 'Python', height: 40 },
+  { src: 'https://cdn.simpleicons.org/typescript/3178C6', alt: 'TypeScript', height: 36 },
+  { src: 'https://cdn.simpleicons.org/postgresql/4169E1', alt: 'PostgreSQL', height: 36 },
+  { src: 'https://cdn.simpleicons.org/amazonaws/FF9900', alt: 'AWS', height: 36 },
+  { src: 'https://cdn.simpleicons.org/github', alt: 'GitHub', height: 36 },
+];

@@ -7,6 +7,7 @@ import { OpportunityHero } from '@/components/opportunities/OpportunityHero';
 import { OpportunityColorSection } from '@/components/opportunities/OpportunityColorSection';
 import { RoleApplicationBar } from '@/components/opportunities/RoleApplicationBar';
 import { FitPillars } from '@/components/opportunities/FitPillars';
+import { SystemArchitectureFlow } from '@/components/opportunities/SystemArchitectureFlow';
 import { SystemsCaseStudyGrid } from '@/components/opportunities/SystemsCaseStudyGrid';
 import { InnovationProcess } from '@/components/opportunities/InnovationProcess';
 import { CapabilityMap } from '@/components/opportunities/CapabilityMap';
@@ -22,6 +23,7 @@ import { EducationContinuingSection } from '@/components/opportunities/Education
 import { SelectedTechnologiesSection } from '@/components/opportunities/SelectedTechnologiesSection';
 import { SkillsMatrix } from '@/components/opportunities/SkillsMatrix';
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
+import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -108,6 +110,20 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
           </OpportunityColorSection>
         ) : null}
 
+        {dossier.architecture ? (
+          <OpportunityColorSection
+            sectionId={dossier.architectureSectionId ?? 'data-model'}
+            className={sectionClass}
+          >
+            <SystemArchitectureFlow
+              data={dossier.architecture}
+              sectionId={dossier.architectureSectionId ?? 'data-model'}
+              className={framed}
+              accent="cyan"
+            />
+          </OpportunityColorSection>
+        ) : null}
+
         {dossier.evidenceRoadmap ? (
           <OpportunityColorSection sectionId="evidence" className={sectionClass}>
             <EvidenceRoadmapSection
@@ -136,6 +152,16 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
 
         {!opportunity.animatedLogoBand?.length && opportunity.techLogoIds?.length ? (
           <TechStackLogos opportunity={opportunity} />
+        ) : null}
+
+        {opportunity.animatedLogoBand?.length ? (
+          <div className="mt-6 sm:mt-8">
+            <AnimatedLogoBand
+              logos={opportunity.animatedLogoBand}
+              bleed
+              ariaLabel="Data and product stack"
+            />
+          </div>
         ) : null}
 
         <OpportunityColorSection sectionId="capabilities" className={sectionClass}>

@@ -98,9 +98,19 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
                 {...(isExternalHttpHref(opportunity.heroSecondaryCta.href)
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
-                onClick={() => onCta('hero_secondary_scroll')}
+                onClick={() =>
+                  onCta(
+                    isExternalHttpHref(opportunity.heroSecondaryCta!.href)
+                      ? 'hero_secondary_external'
+                      : 'hero_secondary_scroll',
+                  )
+                }
               >
-                <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />
+                {isExternalHttpHref(opportunity.heroSecondaryCta.href) ? (
+                  <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+                ) : (
+                  <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />
+                )}
                 {opportunity.heroSecondaryCta.label}
               </a>
             ) : ctas.caseStudiesAnchor ? (

@@ -17,6 +17,7 @@ import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
 import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
 import { ComfyWorkSampleClient } from '@/components/opportunities/comfy/ComfyWorkSampleClient';
+import { CreativeAgencyClient } from '@/components/opportunities/creative-agency/CreativeAgencyClient';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -37,6 +38,10 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
   if (opportunity.slug === 'comfy-mts-frontend') {
     return <ComfyWorkSampleClient opportunity={opportunity} />;
+  }
+
+  if (opportunity.creativeAgency) {
+    return <CreativeAgencyClient opportunity={opportunity} />;
   }
 
   if (opportunity.variant === 'role-portfolio') {

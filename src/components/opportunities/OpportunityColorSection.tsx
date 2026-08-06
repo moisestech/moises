@@ -28,6 +28,7 @@ export function OpportunityColorSection({
         accent.softBg,
         className,
       )}
+      data-section={sectionId}
     >
       {children}
     </div>

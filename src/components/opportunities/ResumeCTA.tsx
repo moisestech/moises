@@ -13,9 +13,11 @@ import { cn } from '@/lib/utils';
 type ResumeCTAProps = {
   opportunity: Opportunity;
   framed?: boolean;
+  /** Override section element id (default: resume). Use `contact` when the sticky nav targets #contact. */
+  sectionId?: string;
 };
 
-export function ResumeCTA({ opportunity, framed = false }: ResumeCTAProps) {
+export function ResumeCTA({ opportunity, framed = false, sectionId = 'resume' }: ResumeCTAProps) {
   const { ctas, slug } = opportunity;
 
   const onCta = (kind: string) => {
@@ -23,7 +25,7 @@ export function ResumeCTA({ opportunity, framed = false }: ResumeCTAProps) {
   };
 
   return (
-    <section id="resume" className={framed ? 'scroll-mt-32' : opp.section}>
+    <section id={sectionId} className={framed ? 'scroll-mt-32' : opp.section}>
       <h2 className={opp.h2}>{opportunity.resumeSectionTitle ?? 'Résumé and contact'}</h2>
       {opportunity.resumeSectionNote ? <p className={`mt-2 max-w-3xl ${opp.muted}`}>{opportunity.resumeSectionNote}</p> : null}
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

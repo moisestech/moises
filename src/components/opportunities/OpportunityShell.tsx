@@ -37,6 +37,8 @@ function StickyMiniNav({
   sectionSpyOffsetPx?: number;
 }) {
   const navRef = useRef<HTMLElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const [measuredSpyOffset, setMeasuredSpyOffset] = useState(SECTION_SPY_OFFSET_PX);
   const spyOffset = sectionSpyOffsetPx ?? measuredSpyOffset;
   const ids = useMemo(() => items.map((i) => i.id), [items]);
@@ -57,8 +59,8 @@ function StickyMiniNav({
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     requestAnimationFrame(() => {
       el.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
-      setActiveId(raw);
     });
+    setActiveId(raw);
   }, [ids, idsKey]);
 
   useEffect(() => {
@@ -96,6 +98,18 @@ function StickyMiniNav({
     };
   }, [ids, idsKey, spyOffset]);
 
+  useEffect(() => {
+    const node = itemRefs.current[activeId];
+    const scroller = scrollerRef.current;
+    if (!node || !scroller) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    node.scrollIntoView({
+      behavior: reduceMotion ? 'instant' : 'smooth',
+      inline: 'center',
+      block: 'nearest',
+    });
+  }, [activeId]);
+
   const scrollToSection = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -116,16 +130,23 @@ function StickyMiniNav({
       )}
       aria-label="Section navigation"
     >
-      <div className="mx-auto flex max-w-5xl items-center gap-1.5 overflow-x-auto px-3 pb-1.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-1 sm:px-4 sm:pb-1 sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
+      <div
+        ref={scrollerRef}
+        className="mx-auto flex max-w-5xl snap-x snap-mandatory items-center gap-1.5 overflow-x-auto px-3 pb-1.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-1.5 sm:px-4 sm:pb-1 md:flex-wrap md:overflow-visible md:snap-none [&::-webkit-scrollbar]:hidden"
+      >
         {items.map((item) => {
           const accent = getSectionNavAccent?.(item.id);
           const active = activeId === item.id;
+          const short = item.shortLabel ?? item.label;
           return (
             <a
               key={item.id}
+              ref={(el) => {
+                itemRefs.current[item.id] = el;
+              }}
               href={`#${item.id}`}
               className={cn(
-                'inline-flex min-h-10 shrink-0 items-center rounded-full border px-3.5 py-2 text-sm transition-colors sm:min-h-0 sm:px-3 sm:py-1',
+                'inline-flex min-h-11 shrink-0 snap-start items-center rounded-full border px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 sm:min-h-9 sm:px-3 sm:py-1.5 md:min-h-0',
                 active && accent
                   ? cn(accent.navActive, accent.navActiveText)
                   : active
@@ -140,7 +161,8 @@ function StickyMiniNav({
                 scrollToSection(item.id);
               }}
             >
-              {item.label}
+              <span className="md:hidden">{short}</span>
+              <span className="hidden md:inline">{item.label}</span>
             </a>
           );
         })}
