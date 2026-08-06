@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { OOLITE_ARTS_CASE_STUDY } from '@/content/oolite-arts/case-study';
+import { InstFamilyNav } from '@/components/institutions/InstitutionalUi';
 import { AssetNeeded } from './AssetNeeded';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { LabSystemMap } from './LabSystemMap';
@@ -120,6 +121,7 @@ function ClassArchive() {
 export default function OoliteCaseStudy() {
   return (
     <main className="min-h-screen bg-[#F7F8FA] text-black pt-24 sm:pt-28">
+      <InstFamilyNav active="oolite-arts" className="sticky top-0 z-40 max-w-none [&_div]:max-w-7xl" />
       {/* Disclaimer strip */}
       <div className="border-y border-black/10 bg-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11 py-3">

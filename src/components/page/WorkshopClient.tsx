@@ -27,6 +27,7 @@ import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
 import { WORKSHOP_FEATURES, type WorkshopCardVisual } from '@/constants/workshop-features'
 import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings'
 import { PilotPricingBand } from '@/components/institutions/PilotPricingBand'
+import { InstFamilyNav } from '@/components/institutions/InstitutionalUi'
 import { track } from '@/lib/analytics'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
@@ -181,7 +182,18 @@ export default function WorkshopClient() {
         aria-hidden
       />
 
-      <div className="relative z-10 w-full max-w-6xl px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 md:pt-[200px] pb-12 sm:pb-20">
+      <div className="relative z-20 w-full pt-20 sm:pt-24">
+        <InstFamilyNav
+          active="workshops"
+          tone={isDark ? 'hub' : 'dossier'}
+          className={cn(
+            '[&_div]:max-w-6xl',
+            isDark ? 'bg-black/70' : 'bg-zinc-100/95',
+          )}
+        />
+      </div>
+
+      <div className="relative z-10 w-full max-w-6xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 md:pt-16 pb-12 sm:pb-20">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

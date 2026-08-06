@@ -13,15 +13,34 @@ import {
 import { track } from '@/lib/analytics';
 import {
   InstContainer,
+  InstFamilyNav,
+  InstLaneIcon,
   InstPageShell,
   InstPrimaryCta,
+  InstReveal,
   InstSecondaryCta,
   InstSectionLabel,
+  INST_ACCENT,
 } from '@/components/institutions/InstitutionalUi';
 import { ProposePilotBand } from '@/components/institutions/PilotPricingBand';
 import { cn } from '@/lib/utils';
 
 const H = institutionsHub;
+
+const SECTION_ACCENT = {
+  practice: 'teal',
+  'case-studies': 'ink',
+  organizations: 'ocean',
+  engage: 'copper',
+} as const;
+
+const KIND_ACCENT: Record<InstitutionCaseStudy['kind'], keyof typeof INST_ACCENT> = {
+  systems: 'teal',
+  program: 'ocean',
+  exhibition: 'rose',
+  platform: 'copper',
+  workshop: 'sky',
+};
 
 const ORG_FILTERS: Array<{ id: 'all' | OrgRelationship; label: string }> = [
   { id: 'all', label: 'All' },
@@ -45,6 +64,7 @@ function scrollToId(id: string) {
 }
 
 function CaseStudyCard({ study, large }: { study: InstitutionCaseStudy; large?: boolean }) {
+  const accent = KIND_ACCENT[study.kind];
   const inner = (
     <>
       <div className={cn('relative overflow-hidden bg-neutral-200', large ? 'aspect-[16/9]' : 'aspect-[16/10]')}>
@@ -55,10 +75,18 @@ function CaseStudyCard({ study, large }: { study: InstitutionCaseStudy; large?: 
           className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           sizes={large ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
         />
+        <span
+          className={cn(
+            'absolute left-3 top-3 border px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] backdrop-blur-sm',
+            INST_ACCENT[accent].chipActive,
+          )}
+        >
+          {study.kindLabel}
+        </span>
       </div>
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
-          {study.kindLabel} · {study.org}
+          {study.org}
         </p>
         <h3 className="mt-2 font-['MoMA_Sans'] text-lg font-semibold leading-snug sm:text-xl">
           {study.title}
@@ -76,8 +104,11 @@ function CaseStudyCard({ study, large }: { study: InstitutionCaseStudy; large?: 
     </>
   );
 
-  const className =
-    'group flex h-full flex-col border border-neutral-200 bg-white transition hover:border-neutral-400 hover:shadow-sm';
+  const className = cn(
+    'group flex h-full flex-col border border-neutral-200 bg-white transition hover:shadow-sm',
+    'hover:ring-2',
+    INST_ACCENT[accent].ring,
+  );
 
   if (study.external) {
     return (
@@ -195,6 +226,7 @@ export function InstitutionsHubClient() {
 
   return (
     <InstPageShell>
+      <InstFamilyNav active="institutions" className="sticky top-0 z-40" />
       <header className="border-b border-neutral-200 bg-[#f7f6f3]">
         <InstContainer className="py-14 sm:py-20 md:py-24">
           <InstSectionLabel>{H.hero.eyebrow}</InstSectionLabel>
@@ -246,21 +278,21 @@ export function InstitutionsHubClient() {
       </InstContainer>
 
       <nav
-        className="sticky top-0 z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
+        className="sticky top-[45px] z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
         aria-label="Page sections"
       >
         <InstContainer className="flex gap-1.5 overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {H.nav.map((item) => {
             const active = activeNav === item.id;
+            const accentKey = SECTION_ACCENT[item.id as keyof typeof SECTION_ACCENT] ?? 'ink';
+            const accent = INST_ACCENT[accentKey];
             return (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 className={cn(
-                  'shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition',
-                  active
-                    ? 'border-neutral-950 bg-neutral-950 text-white'
-                    : 'border-neutral-300 bg-white text-neutral-700 hover:border-neutral-500',
+                  'shrink-0 border px-3 py-1.5 text-xs font-medium transition',
+                  active ? accent.chipActive : accent.chip,
                 )}
                 onClick={(e) => {
                   e.preventDefault();
@@ -277,60 +309,83 @@ export function InstitutionsHubClient() {
 
       <section
         id="practice"
-        className="scroll-mt-24 border-b border-neutral-200 py-14 sm:py-16"
+        className="scroll-mt-28 border-b border-neutral-200 py-14 sm:py-16"
         aria-labelledby="lanes-heading"
       >
         <InstContainer>
-          <InstSectionLabel>What I build with institutions</InstSectionLabel>
-          <h2 id="lanes-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
-            Four lanes of institutional practice
-          </h2>
+          <InstReveal>
+            <InstSectionLabel accent="teal">What I build with institutions</InstSectionLabel>
+            <h2 id="lanes-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
+              Four lanes of institutional practice
+            </h2>
+          </InstReveal>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-            {H.lanes.map((lane, index) => (
-              <li
-                key={lane.id}
-                className="border border-neutral-200 bg-white p-5 transition hover:border-neutral-400 sm:p-6"
-              >
-                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-neutral-500">
-                  {String(index + 1).padStart(2, '0')}
-                </p>
-                <h3 className="mt-3 font-['MoMA_Sans'] text-lg font-semibold leading-snug">
-                  {lane.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-700">{lane.body}</p>
-                <Link
-                  href={lane.href}
-                  className="mt-5 inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold text-neutral-950 underline-offset-4 hover:underline"
-                >
-                  {lane.linkLabel}
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-                </Link>
-              </li>
-            ))}
+            {H.lanes.map((lane, index) => {
+              const accentKey = lane.accent ?? 'ink';
+              const accent = INST_ACCENT[accentKey];
+              return (
+                <InstReveal key={lane.id} delay={0.05 * index}>
+                  <li
+                    className={cn(
+                      'h-full border border-neutral-200 bg-white p-5 transition sm:p-6',
+                      'hover:ring-2',
+                      accent.ring,
+                    )}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      {lane.icon ? (
+                        <InstLaneIcon name={lane.icon} accent={accentKey} />
+                      ) : null}
+                      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-neutral-500">
+                        {String(index + 1).padStart(2, '0')}
+                      </p>
+                    </div>
+                    <h3 className="mt-4 font-['MoMA_Sans'] text-lg font-semibold leading-snug">
+                      {lane.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-neutral-700">{lane.body}</p>
+                    <Link
+                      href={lane.href}
+                      className={cn(
+                        'mt-5 inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold underline-offset-4 hover:underline',
+                        accent.text,
+                      )}
+                    >
+                      {lane.linkLabel}
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                    </Link>
+                  </li>
+                </InstReveal>
+              );
+            })}
           </ul>
         </InstContainer>
       </section>
 
       <section
         id="case-studies"
-        className="scroll-mt-24 border-b border-neutral-200 py-14 sm:py-16"
+        className="scroll-mt-28 border-b border-neutral-200 py-14 sm:py-16"
         aria-labelledby="case-studies-heading"
       >
         <InstContainer>
-          <InstSectionLabel>Evidence</InstSectionLabel>
-          <h2 id="case-studies-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
-            Case studies
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-            Flagship systems and programs first, then exhibition and festival proof. Each card links to a
-            dedicated page or archive on this site.
-          </p>
+          <InstReveal>
+            <InstSectionLabel>Evidence</InstSectionLabel>
+            <h2 id="case-studies-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
+              Case studies
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+              Flagship systems and programs first, then exhibition and festival proof. Each card links to a
+              dedicated page or archive on this site.
+            </p>
+          </InstReveal>
 
           <ul className="mt-10 grid gap-6 md:grid-cols-2">
-            {featured.map((study) => (
-              <li key={study.id}>
-                <CaseStudyCard study={study} large />
-              </li>
+            {featured.map((study, i) => (
+              <InstReveal key={study.id} delay={0.04 * i}>
+                <li>
+                  <CaseStudyCard study={study} large />
+                </li>
+              </InstReveal>
             ))}
           </ul>
 
@@ -338,10 +393,12 @@ export function InstitutionsHubClient() {
             More institutional evidence
           </h3>
           <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {moreStudies.map((study) => (
-              <li key={study.id}>
-                <CaseStudyCard study={study} />
-              </li>
+            {moreStudies.map((study, i) => (
+              <InstReveal key={study.id} delay={0.03 * i}>
+                <li>
+                  <CaseStudyCard study={study} />
+                </li>
+              </InstReveal>
             ))}
           </ul>
         </InstContainer>
@@ -349,17 +406,19 @@ export function InstitutionsHubClient() {
 
       <section
         id="organizations"
-        className="scroll-mt-24 border-b border-neutral-200 py-14 sm:py-16"
+        className="scroll-mt-28 border-b border-neutral-200 py-14 sm:py-16"
         aria-labelledby="orgs-heading"
       >
         <InstContainer>
-          <InstSectionLabel>Directory</InstSectionLabel>
-          <h2 id="orgs-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
-            Organizations worked with
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-            {H.organizations.length} verified institutions — filter by relationship type.
-          </p>
+          <InstReveal>
+            <InstSectionLabel accent="ocean">Directory</InstSectionLabel>
+            <h2 id="orgs-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
+              Organizations worked with
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+              {H.organizations.length} verified institutions — filter by relationship type.
+            </p>
+          </InstReveal>
 
           <div
             className="mt-6 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -375,9 +434,9 @@ export function InstitutionsHubClient() {
                   aria-pressed={active}
                   onClick={() => setOrgFilter(filter.id)}
                   className={cn(
-                    'shrink-0 rounded-full border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] transition',
+                    'shrink-0 border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] transition',
                     active
-                      ? 'border-neutral-950 bg-neutral-950 text-white'
+                      ? INST_ACCENT.ocean.chipActive
                       : 'border-neutral-300 bg-white text-neutral-700 hover:border-neutral-500',
                   )}
                 >
@@ -388,10 +447,12 @@ export function InstitutionsHubClient() {
           </div>
 
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredOrgs.map((org) => (
-              <li key={org.id}>
-                <OrgCard org={org} />
-              </li>
+            {filteredOrgs.map((org, i) => (
+              <InstReveal key={org.id} delay={Math.min(0.03 * i, 0.24)}>
+                <li>
+                  <OrgCard org={org} />
+                </li>
+              </InstReveal>
             ))}
           </ul>
 
@@ -399,33 +460,35 @@ export function InstitutionsHubClient() {
         </InstContainer>
       </section>
 
-      <section id="engage" className="scroll-mt-24 py-14 sm:py-16" aria-labelledby="next-heading">
+      <section id="engage" className="scroll-mt-28 py-14 sm:py-16" aria-labelledby="next-heading">
         <InstContainer>
-          <InstSectionLabel>Engagements</InstSectionLabel>
-          <h2 id="next-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
-            {H.nextSteps.title}
-          </h2>
-          <ul className="mt-8 space-y-3">
-            {H.nextSteps.items.map((item) => (
-              <li
-                key={item}
-                className="border-l-2 border-neutral-950 bg-white/60 py-3 pl-4 text-sm leading-relaxed text-neutral-800 sm:text-base"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <InstPrimaryCta
-              href={H.hero.primaryCta.href}
-              label={H.hero.primaryCta.label}
-              external
-              onClick={() =>
-                track('cta_institutions_click', { source: 'institutions_footer' })
-              }
-            />
-            <InstSecondaryCta href="/oolite-arts" label="Start with Oolite proof" />
-          </div>
+          <InstReveal>
+            <InstSectionLabel accent="copper">Engagements</InstSectionLabel>
+            <h2 id="next-heading" className="font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">
+              {H.nextSteps.title}
+            </h2>
+            <ul className="mt-8 space-y-3">
+              {H.nextSteps.items.map((item) => (
+                <li
+                  key={item}
+                  className="border-l-2 border-amber-700 bg-amber-50/60 py-3 pl-4 text-sm leading-relaxed text-neutral-800 sm:text-base"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <InstPrimaryCta
+                href={H.hero.primaryCta.href}
+                label={H.hero.primaryCta.label}
+                external
+                onClick={() =>
+                  track('cta_institutions_click', { source: 'institutions_footer' })
+                }
+              />
+              <InstSecondaryCta href="/oolite-arts" label="Start with Oolite proof" />
+            </div>
+          </InstReveal>
         </InstContainer>
       </section>
     </InstPageShell>

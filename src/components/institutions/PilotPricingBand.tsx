@@ -7,6 +7,7 @@ import { track } from '@/lib/analytics';
 import {
   InstPrimaryCta,
   InstSectionLabel,
+  INST_ACCENT,
 } from '@/components/institutions/InstitutionalUi';
 import { cn } from '@/lib/utils';
 
@@ -77,38 +78,42 @@ export function PilotPricingBand({
       </a>
 
       <ul className="mt-6 grid gap-3 sm:grid-cols-3">
-        {pricing.packages.map((pkg) => (
-          <li
-            key={pkg.id}
-            className={cn(
-              'border p-4',
-              dark ? 'border-white/15 bg-black/20' : 'border-neutral-200 bg-[#f7f6f3]',
-            )}
-          >
-            <p
+        {pricing.packages.map((pkg, index) => {
+          const accents = ['ocean', 'teal', 'copper'] as const;
+          const accent = INST_ACCENT[accents[index] ?? 'ink'];
+          return (
+            <li
+              key={pkg.id}
               className={cn(
-                'font-mono text-[10px] uppercase tracking-[0.14em]',
-                dark ? 'text-white/50' : 'text-neutral-500',
+                'border p-4 transition',
+                dark ? 'border-white/15 bg-black/20' : cn('bg-[#f7f6f3]', accent.ring, 'ring-1'),
               )}
             >
-              {pkg.label}
-            </p>
-            <p
-              className={cn(
-                "mt-2 font-['MoMA_Sans'] text-2xl font-semibold",
-                dark ? 'text-white' : 'text-neutral-950',
-              )}
-            >
-              {pkg.price}
-            </p>
-            <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-white/70' : 'text-neutral-600')}>
-              {pkg.detail}
-            </p>
-            <p className={cn('mt-2 text-xs leading-relaxed', dark ? 'text-white/55' : 'text-neutral-500')}>
-              {pkg.note}
-            </p>
-          </li>
-        ))}
+              <p
+                className={cn(
+                  'font-mono text-[10px] uppercase tracking-[0.14em]',
+                  dark ? 'text-white/50' : accent.text,
+                )}
+              >
+                {pkg.label}
+              </p>
+              <p
+                className={cn(
+                  "mt-2 font-['MoMA_Sans'] text-2xl font-semibold",
+                  dark ? 'text-white' : 'text-neutral-950',
+                )}
+              >
+                {pkg.price}
+              </p>
+              <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-white/70' : 'text-neutral-600')}>
+                {pkg.detail}
+              </p>
+              <p className={cn('mt-2 text-xs leading-relaxed', dark ? 'text-white/55' : 'text-neutral-500')}>
+                {pkg.note}
+              </p>
+            </li>
+          );
+        })}
       </ul>
 
       {showCta ? (

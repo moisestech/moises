@@ -11,6 +11,48 @@ export const INSTITUTIONAL_EMAIL = 'm@moises.tech';
 export const INSTITUTIONAL_AVAILABILITY =
   'My year-long contract as Technical Director of Digital at Oolite Arts concludes September 17.';
 
+/**
+ * Cross-page nav for the institutional outreach family.
+ * Keep YoungArts (/artist-sustainability) out — private application supplement.
+ *
+ * Colors are accent tokens for nav chips + section markers (not full page themes).
+ */
+export const INSTITUTIONAL_FAMILY_NAV = [
+  {
+    href: '/institutions',
+    label: 'Hub',
+    match: 'institutions',
+    short: 'Overview',
+    accent: 'ink',
+  },
+  {
+    href: '/oolite-arts',
+    label: 'Oolite',
+    match: 'oolite-arts',
+    short: 'Proof',
+    accent: 'teal',
+  },
+  {
+    href: '/bakehouse',
+    label: 'Bakehouse',
+    match: 'bakehouse',
+    short: 'Systems',
+    accent: 'copper',
+  },
+  {
+    href: '/workshops',
+    label: 'Workshops',
+    match: 'workshops',
+    short: 'Pilots',
+    accent: 'ocean',
+  },
+] as const;
+
+export type InstitutionalFamilyMatch =
+  (typeof INSTITUTIONAL_FAMILY_NAV)[number]['match'];
+
+export type InstitutionalAccent = (typeof INSTITUTIONAL_FAMILY_NAV)[number]['accent'];
+
 /** Artist-owned cultural-technology practice operating as DCC Miami. */
 export const DCC_MIAMI = {
   name: 'DCC Miami',
@@ -57,6 +99,9 @@ export type InstitutionalLane = {
   body: string;
   href: string;
   linkLabel: string;
+  /** Lucide icon key resolved in UI. */
+  icon?: 'leadership' | 'programs' | 'platforms' | 'prototypes';
+  accent?: InstitutionalAccent | 'rose' | 'sky';
 };
 
 export type PlaceholderAsset = {

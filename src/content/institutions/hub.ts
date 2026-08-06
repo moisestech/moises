@@ -115,6 +115,8 @@ export const institutionsHub = {
       body: 'Fractional or term-based roles that connect labs, screens, documentation, and artist support into one coherent institutional system—not isolated projects.',
       href: '/oolite-arts',
       linkLabel: 'Oolite Arts case study',
+      icon: 'leadership',
+      accent: 'teal',
     },
     {
       id: 'artist-pd',
@@ -122,6 +124,8 @@ export const institutionsHub = {
       body: 'Workshops, mentorship infrastructure, and career-stage resources designed for artists—operations, capacity, and craft together.',
       href: '/workshops',
       linkLabel: 'Bookable workshops',
+      icon: 'programs',
+      accent: 'ocean',
     },
     {
       id: 'platforms',
@@ -129,6 +133,8 @@ export const institutionsHub = {
       body: 'SmartSigns, kiosk infrastructure, content systems, and proposed artist portals that make buildings and programs legible.',
       href: '/bakehouse',
       linkLabel: 'Bakehouse digital systems',
+      icon: 'platforms',
+      accent: 'copper',
     },
     {
       id: 'prototypes',
@@ -136,6 +142,8 @@ export const institutionsHub = {
       body: 'Fabrication workflows, public installations, and educational toolkits that move from lab experiment to shared institutional capacity.',
       href: '/ai24',
       linkLabel: 'AI24 studio',
+      icon: 'prototypes',
+      accent: 'ink',
     },
   ] satisfies InstitutionalLane[],
   caseStudies: [
@@ -483,18 +491,19 @@ export const institutionsHub = {
       name: 'New World School of the Arts',
       location: 'Miami, FL',
       relationship: 'education',
-      relationshipLabel: 'Education',
-      summary: 'Formative Miami arts education (2009–2011).',
-      href: '/bio',
+      relationshipLabel: 'Education · Alumni',
+      summary:
+        'Alum (2009–2011). Natural fit for guest workshops, visiting artist sessions, and creative-technology curriculum with Visual Arts.',
+      href: '/workshops',
     },
   ] satisfies InstitutionOrg[],
   nextSteps: {
     title: 'How to work together',
     items: [
       'Embedded / fractional digital leadership (6–12 months)',
-      'Paid workshop pilots and curriculum collaboration',
+      'Paid workshop pilots and curriculum collaboration (college, high school, and cultural orgs)',
       'Artist-facing platforms and institutional workflows',
-      'Creative-technology programming and production support',
+      'Creative-technology programming, visiting artist sessions, and production support',
     ],
   },
   honestyNote:
