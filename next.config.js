@@ -150,6 +150,17 @@ const nextConfig = {
         destination: '/opportunities/flora-founding-data-engineer',
         permanent: false,
       },
+      {
+        // Listing title sometimes reads Creative Editor; canonical slug is Creative Director.
+        source: '/opportunities/ogilvy-senior-ai-driven-creative-editor',
+        destination: '/opportunities/ogilvy-senior-ai-driven-creative-director',
+        permanent: false,
+      },
+      {
+        source: '/infra24',
+        destination: '/projects/infra24',
+        permanent: false,
+      },
     ]
   },
 

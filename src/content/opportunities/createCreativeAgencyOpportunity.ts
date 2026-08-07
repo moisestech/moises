@@ -13,6 +13,7 @@ import {
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 import { resumePdfDriveViewUrl } from '@/content/ai-engineering/packet';
+import { creativeProofPack } from './packs';
 
 export type CreativeAgencyOpportunityConfig = {
   slug: string;
@@ -35,6 +36,8 @@ export type CreativeAgencyOpportunityConfig = {
   availabilityNote: string;
   resumeSectionNote?: string;
   processIntro?: string;
+  applicationStatus?: Opportunity['applicationStatus'];
+  navItems?: Opportunity['navItems'];
 };
 
 export function createCreativeAgencyOpportunity(
@@ -46,6 +49,8 @@ export function createCreativeAgencyOpportunity(
     status: 'active',
     listed: false,
     variant: 'role-portfolio',
+    family: 'creative-agency',
+    applicationStatus: config.applicationStatus ?? 'ready',
     applicationBanner: config.banner,
     seo: {
       title: config.seoTitle,
@@ -65,7 +70,7 @@ export function createCreativeAgencyOpportunity(
     heroMetaChips: config.heroMetaChips,
     heroPrimaryCta: { label: 'View Selected Work', href: '#case-studies' },
     heroSecondaryCta: { label: 'Contact Moises', href: '#contact' },
-    navItems: creativeAgencyNavItems,
+    navItems: config.navItems ?? creativeAgencyNavItems,
     hero: {
       headline: config.headline,
       subheadline: config.subheadline,
@@ -83,12 +88,7 @@ export function createCreativeAgencyOpportunity(
       right: 'Evidence',
     },
     roleMatchRows: config.roleMatchRows,
-    featuredProjectIds: [
-      'lore-machine',
-      'ai24',
-      'multimodal-image-systems',
-      'digital-culture-infrastructure',
-    ],
+    featuredProjectIds: [...creativeProofPack.featuredProjectIds],
     skillsMatrixRows: creativeAgencySkillsMatrix,
     processSectionTitle: `How I would work at ${config.company}`,
     processIntro:
@@ -107,5 +107,6 @@ export function createCreativeAgencyOpportunity(
     resumeSectionNote:
       config.resumeSectionNote ??
       `Download résumé, email Moises, or connect on LinkedIn. This dossier is prepared specifically for ${config.company}’s ${config.roleTitle} role.`,
+    capabilitiesHref: '/capabilities#design-creative-technology',
   };
 }

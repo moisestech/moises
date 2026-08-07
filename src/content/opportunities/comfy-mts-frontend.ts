@@ -350,6 +350,7 @@ export const comfyMtsFrontendOpportunity: Opportunity = {
   listed: false,
   variant: 'role-portfolio',
   applicationBanner: comfyMtsFrontendBanner,
+  capabilitiesHref: '/capabilities#design-creative-technology',
   seo: {
     title: 'Moises Sanabria — Comfy · Member of Technical Staff, Frontend',
     description:

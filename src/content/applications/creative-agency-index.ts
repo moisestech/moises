@@ -46,4 +46,10 @@ export const creativeAgencyApplicationIndex = [
     slug: 'digitas-associate-director-creative',
     path: '/opportunities/digitas-associate-director-creative',
   },
+  {
+    company: 'WPP HEX',
+    role: 'Creative Innovation Lead / ACD',
+    slug: 'wpp-hex-creative-innovation-lead-acd',
+    path: '/opportunities/wpp-hex-creative-innovation-lead-acd',
+  },
 ] as const;

@@ -19,6 +19,7 @@ export const aiSolutionsArchitectOpportunity: Opportunity = {
   status: 'active',
   listed: true,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#software-engineering',
   seo: {
     title: 'AI Solutions Architect — Moises Sanabria | moises.tech',
     description:

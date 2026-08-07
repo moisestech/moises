@@ -18,6 +18,7 @@ import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOppo
 import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
 import { ComfyWorkSampleClient } from '@/components/opportunities/comfy/ComfyWorkSampleClient';
 import { CreativeAgencyClient } from '@/components/opportunities/creative-agency/CreativeAgencyClient';
+import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -92,6 +93,9 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
           <OpportunityColorSection sectionId="skills" className="mt-10 sm:mt-14">
             <SkillsMatrix opportunity={opportunity} framed />
+            {opportunity.capabilitiesHref ? (
+              <CapabilitiesDeepLink href={opportunity.capabilitiesHref} className="mt-6" />
+            ) : null}
           </OpportunityColorSection>
 
           <OpportunityColorSection sectionId="process" className="mt-10 sm:mt-14">

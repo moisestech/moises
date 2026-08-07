@@ -1,4 +1,5 @@
 import type { ApplicationBanner } from '@/content/opportunities/types';
+import { OOLITE_DIGITAL_LAB_IMAGE } from '@/content/oolite-arts/media';
 
 const cdn = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
@@ -71,10 +72,10 @@ export const floraFoundingDataEngineerBanner: ApplicationBanner = {
 const creativeBannerAspect =
   'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]';
 
-/** Ogilvy — Senior AI-Driven Creative Director. */
+/** Ogilvy — Creative Editor / AI (banner asset may still read Creative Director). */
 export const ogilvySeniorAiDrivenCreativeDirectorBanner: ApplicationBanner = {
   src: `${cdn}/v1785862416/jobs/banners/senior-ai-driven-creative-director-banner_y1mof7.png`,
-  alt: 'Ogilvy — Senior AI-Driven Creative Director application banner',
+  alt: 'Ogilvy — Creative Editor / AI application banner',
   aspectClass: creativeBannerAspect,
 };
 
@@ -123,5 +124,33 @@ export const wmxSeniorArtDirectorBanner: ApplicationBanner = {
 export const wmxAiDrivenDesignLeaderBanner: ApplicationBanner = {
   src: `${cdn}/v1785859691/jobs/banners/senior-art-director-ai-driven-desgin-leader-banner_pweexz.png`,
   alt: 'WMX — Senior Art Director AI-Driven Design Leader application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Alpha Drive AI — Full Stack Engineer. */
+export const alphaDriveAiFullStackBanner: ApplicationBanner = {
+  src: `${cdn}/v1781659418/ai24-website-above-the-fold_kbp2ei.png`,
+  alt: 'Alpha Drive AI — Full Stack Engineer application banner (product/engineering atmosphere)',
+  aspectClass: creativeBannerAspect,
+};
+
+/** WPP HEX — Creative Innovation Lead / ACD. */
+export const wppHexCreativeInnovationLeadBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862416/jobs/banners/senior-ai-driven-creative-director-banner_y1mof7.png`,
+  alt: 'WPP HEX — Creative Innovation Lead / ACD application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Onassis ONX — Senior Manager of Artistic Development. */
+export const onxArtisticDevelopmentBanner: ApplicationBanner = {
+  src: OOLITE_DIGITAL_LAB_IMAGE,
+  alt: 'ONX — Senior Manager of Artistic Development application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Stacklok — Staff Forward Deployed Engineer. */
+export const stacklokStaffFdeBanner: ApplicationBanner = {
+  src: `${cdn}/v1780248505/jobs/banners/ChatGPT_Image_May_31_2026_12_19_46_PM_wu8xw1.png`,
+  alt: 'Stacklok — Staff Forward Deployed Engineer application banner',
   aspectClass: creativeBannerAspect,
 };

@@ -25,6 +25,7 @@ import { SkillsMatrix } from '@/components/opportunities/SkillsMatrix';
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -147,7 +148,17 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
         {opportunity.skillsMatrixRows?.length ? (
           <OpportunityColorSection sectionId="skills" className={sectionClass}>
             <SkillsMatrix opportunity={opportunity} framed />
+            {opportunity.capabilitiesHref ? (
+              <CapabilitiesDeepLink
+                href={opportunity.capabilitiesHref}
+                className="mt-6"
+              />
+            ) : null}
           </OpportunityColorSection>
+        ) : opportunity.capabilitiesHref ? (
+          <div className={sectionClass}>
+            <CapabilitiesDeepLink href={opportunity.capabilitiesHref} />
+          </div>
         ) : null}
 
         {!opportunity.animatedLogoBand?.length && opportunity.techLogoIds?.length ? (

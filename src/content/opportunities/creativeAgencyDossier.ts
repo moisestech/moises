@@ -108,6 +108,29 @@ export type PointOfViewBlock = {
   items: PointOfViewItem[];
 };
 
+export type MotionClip = {
+  id: string;
+  title: string;
+  roleLabel: string;
+  /** What you did: animation, edit, composite, keyframes, etc. */
+  contribution: string;
+  /** Poster / still — required. */
+  posterSrc: string;
+  posterAlt: string;
+  posterLocal?: boolean;
+  /** Optional hosted video URL (Cloudinary / Mux / Vimeo). */
+  videoSrc?: string;
+  /** Honest note when clip is pending upload. */
+  placeholderNote?: string;
+};
+
+export type MotionSection = {
+  title: string;
+  intro: string;
+  toolsLine: string;
+  clips: MotionClip[];
+};
+
 export type CreativeAgencyDossier = {
   capabilitiesTitle: string;
   capabilitiesIntro?: string;
@@ -117,6 +140,8 @@ export type CreativeAgencyDossier = {
   caseStudies: CreativeCaseStudyModule[];
   campaign: CampaignSystemBlock;
   workflow: HumanAiWorkflowBlock;
+  /** Optional — rendered when present (e.g. Morley Motion & Animation). */
+  motionSection?: MotionSection;
   leadership: LeadershipBlock;
   pointOfView: PointOfViewBlock;
   alignmentTitle: string;

@@ -13,6 +13,7 @@ import { SkillsMatrix } from '@/components/opportunities/SkillsMatrix';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { ProofProjectsGrid } from '@/components/ai-engineering/ProofProjectsGrid';
 import { RecruiterSnapshotSection } from '@/components/ai-engineering/RecruiterSnapshotSection';
+import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { aiEngineeringDossier } from '@/content/ai-engineering/dossier';
 import { aiEngineeringPacket } from '@/content/ai-engineering/packet';
@@ -40,6 +41,11 @@ export function AiEngineeringPageClient() {
           <RecruiterSnapshotSection rows={[...recruiterSnapshot]} />
           <RoleMatchMatrix opportunity={dossier} />
           <SkillsMatrix opportunity={dossier} />
+          <CapabilitiesDeepLink
+            href="/capabilities#ai-engineering"
+            className="mt-6"
+            note="Canonical skills map for AI Engineering and adjacent pillars. This page keeps role narrative and proof projects."
+          />
           <ProofProjectsGrid
             projects={[...proofProjects]}
             intro={dossier.caseStudiesIntro}

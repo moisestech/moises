@@ -143,7 +143,7 @@ export const sharedCreativeCaseStudies: CreativeCaseStudyModule[] = [
     category: 'Institutional · creative technology program',
     deliveryStatus: 'deployed',
     context:
-      'Technical Director of Digital at Oolite Arts, co-developing the Knight-supported Digital Lab with Fabiola Larios—turning space, tools, curriculum, documentation, and sustained artist support into an accessible creative-technology program.',
+      'Co-developed the Knight-supported Digital Lab at Oolite Arts with Director of Digital Lab Fabiola Larios (Moises as Technical Director of Digital)—turning space, tools, curriculum, documentation, and sustained artist support into an accessible creative-technology program.',
     challenge:
       'Make advanced tools usable for Miami artists without requiring them to become engineers—equipment, workshops, open hours, and one-on-one support as one connected program.',
     role: 'Technical direction and co-development: production systems, workshop pedagogy, equipment and vendor coordination, documentation, mentorship, and artist-facing UX for complex technology.',
@@ -537,6 +537,7 @@ export function buildCreativeAgencyDossier(args: {
   alignmentTitle: string;
   alignmentIntro: string;
   ctaHeadline: string;
+  motionSection?: CreativeAgencyDossier['motionSection'];
 }): CreativeAgencyDossier {
   return {
     capabilitiesTitle: 'What I bring',
@@ -547,6 +548,7 @@ export function buildCreativeAgencyDossier(args: {
     caseStudies: sharedCreativeCaseStudies,
     campaign: args.campaign,
     workflow: sharedCreativeWorkflow,
+    motionSection: args.motionSection,
     leadership: sharedCreativeLeadership,
     pointOfView: sharedPointOfView,
     alignmentTitle: args.alignmentTitle,

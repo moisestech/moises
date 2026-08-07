@@ -20,6 +20,16 @@ export type ApplicationBanner = {
 
 export type OpportunityStatus = 'active' | 'draft';
 
+/** Pipeline hygiene for private dossiers — independent of `status` (active/draft for routing). */
+export type OpportunityApplicationStatus = 'draft' | 'ready' | 'submitted' | 'archived';
+
+export type OpportunityFamilyHint =
+  | 'creative-agency'
+  | 'compact'
+  | 'role-portfolio'
+  | 'systems'
+  | 'full';
+
 export type OpportunitySeo = {
   title: string;
   description: string;
@@ -158,6 +168,10 @@ export type Opportunity = {
   status: OpportunityStatus;
   /** When false, hidden from `/opportunities` index but reachable by direct URL. Default: true */
   listed?: boolean;
+  /** Pipeline status for tracker / maintenance (optional). */
+  applicationStatus?: OpportunityApplicationStatus;
+  /** Optional explicit family hint; otherwise derived from variant + creativeAgency. */
+  family?: OpportunityFamilyHint;
   seo: OpportunitySeo;
   variant: OpportunityVariant;
   audienceLine?: string;
@@ -235,4 +249,9 @@ export type Opportunity = {
   animatedLogoBand?: LogoBandItem[];
   /** Full-bleed image under the recruiting header — swap per employer / application */
   applicationBanner?: ApplicationBanner;
+  /**
+   * Deep-link to the canonical Technical Proof Engine
+   * (e.g. `/capabilities#ai-engineering`). Renders a shared strip near Skills.
+   */
+  capabilitiesHref?: string;
 };

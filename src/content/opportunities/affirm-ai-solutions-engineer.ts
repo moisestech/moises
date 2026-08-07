@@ -599,6 +599,7 @@ export const affirmAiSolutionsEngineerOpportunity: Opportunity = {
   status: 'active',
   listed: true,
   variant: 'systems-dossier',
+  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'Moises Sanabria — AI Solutions Engineer Application for Affirm',
     description:

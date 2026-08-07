@@ -15,7 +15,9 @@ import { CampaignChannelSystem } from '@/components/opportunities/creative-agenc
 import { HumanAiWorkflow } from '@/components/opportunities/creative-agency/HumanAiWorkflow';
 import { LeadershipInPractice } from '@/components/opportunities/creative-agency/LeadershipInPractice';
 import { PointOfViewGallery } from '@/components/opportunities/creative-agency/PointOfViewGallery';
+import { MotionAndAnimationSection } from '@/components/opportunities/creative-agency/MotionAndAnimationSection';
 import { DossierSectionNav } from '@/components/opportunities/creative-agency/DossierSectionNav';
+import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -122,6 +124,16 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
           <HumanAiWorkflow data={agency.workflow} sectionId="workflow" className={framed} />
         </OpportunityColorSection>
 
+        {agency.motionSection ? (
+          <OpportunityColorSection sectionId="motion" className={sectionClass}>
+            <MotionAndAnimationSection
+              data={agency.motionSection}
+              sectionId="motion"
+              className={framed}
+            />
+          </OpportunityColorSection>
+        ) : null}
+
         <OpportunityColorSection sectionId="leadership" className={sectionClass}>
           <LeadershipInPractice
             data={agency.leadership}
@@ -140,6 +152,9 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
 
         <OpportunityColorSection sectionId="stack" className={sectionClass}>
           <CapabilityMap data={dossier.capabilityMap} sectionId="stack" className={framed} />
+          {opportunity.capabilitiesHref ? (
+            <CapabilitiesDeepLink href={opportunity.capabilitiesHref} className="mt-6" />
+          ) : null}
         </OpportunityColorSection>
 
         <OpportunityColorSection sectionId="contact" className={sectionClass}>

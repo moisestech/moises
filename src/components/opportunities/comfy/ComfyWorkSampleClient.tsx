@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { OpportunityShell } from '@/components/opportunities/OpportunityShell';
 import { ComingSoonSection } from '@/components/opportunities/ComingSoonSection';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { ComfyProofHero, ComfyCredibilityBar } from '@/components/opportunities/comfy/ComfyProofHero';
 import { LoreComfyCaseStudy } from '@/components/opportunities/comfy/LoreComfyCaseStudy';
 import { ProvenanceProductSection } from '@/components/opportunities/comfy/ProvenanceProductSection';
@@ -229,6 +230,13 @@ export function ComfyWorkSampleClient({ opportunity }: ComfyWorkSampleClientProp
           id="contact"
           className="scroll-mt-28 border-t border-stone-200 py-12 dark:border-stone-800 sm:scroll-mt-32 sm:py-16"
         >
+          {opportunity.capabilitiesHref ? (
+            <CapabilitiesDeepLink
+              href={opportunity.capabilitiesHref}
+              className="mb-8"
+              note="Creative technology and adjacent pillars live on the shared capabilities map. This page keeps the Comfy work sample."
+            />
+          ) : null}
           <ResumeCTA opportunity={opportunity} />
           {dossier?.availabilityNote ? (
             <p className={`mt-4 max-w-3xl ${opp.subtle}`}>{dossier.availabilityNote}</p>

@@ -16,6 +16,7 @@ import { ThirtySixtyNinetyPlan } from '@/components/opportunities/ThirtySixtyNin
 import { RoleReferenceAccordion } from '@/components/opportunities/RoleReferenceAccordion';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
+import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
@@ -96,6 +97,9 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
         <TranslationPanel data={dossier.translation} sectionId="translation" />
 
         <CapabilityMap data={dossier.capabilityMap} sectionId="capabilities" />
+        {opportunity.capabilitiesHref ? (
+          <CapabilitiesDeepLink href={opportunity.capabilitiesHref} className="mt-6" />
+        ) : null}
 
         <InnovationProcess opportunity={opportunity} sectionId="approach" />
 

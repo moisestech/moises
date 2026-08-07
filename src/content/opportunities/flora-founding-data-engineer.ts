@@ -451,6 +451,7 @@ export const floraFoundingDataEngineerOpportunity: Opportunity = {
   variant: 'role-portfolio',
   applicationBanner: floraFoundingDataEngineerBanner,
   animatedLogoBand: floraDataEngineerSkillLogoBand,
+  capabilitiesHref: '/capabilities#data-infrastructure',
   seo: {
     title: 'Moises Sanabria — FLORA · Founding Data Engineer',
     description:

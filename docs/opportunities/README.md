@@ -22,6 +22,8 @@ Classify every new role before writing a page. Personalization = thin config (he
 
 **Evidence packs** (pick subsets): [`src/content/opportunities/packs/`](../../src/content/opportunities/packs/)
 
+**Canonical skills map:** [`/capabilities`](../../docs/capabilities/README.md) — Technical Proof Engine. New applications deep-link with `capabilitiesHref` instead of copying full skills matrices. Source: [`src/content/capabilities/`](../../src/content/capabilities/).
+
 **Application tracker** (status + slug + priority): [`src/content/applications/opportunityTracker.ts`](../../src/content/applications/opportunityTracker.ts)
 
 ## Public role archetypes (Airtable Inbox clusters)

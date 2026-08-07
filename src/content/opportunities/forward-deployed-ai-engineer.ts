@@ -216,6 +216,7 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
   listed: true,
   variant: 'role-portfolio',
   applicationBanner: forwardDeployedAiEngineerBanner,
+  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'Moises Sanabria — Creative Technologist · Forward Deployed AI Engineer',
     description:
