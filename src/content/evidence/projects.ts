@@ -2,12 +2,11 @@
 export const AI24_WEBSITE_HERO_IMAGE =
   'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659418/ai24-website-above-the-fold_kbp2ei.png';
 
-/** Oolite Arts Digital Lab — production workspace and member programs. */
-export const OOLITE_DIGITAL_LAB_IMAGE =
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781710428/oolite-arts/oolite-arts-computer-vision-digilab-room-upscale-cyan-1030x579_whqmlg.webp';
-
-export const OOLITE_DIGITAL_LAB_IMAGE_ALT =
-  'Oolite Arts Digital Lab — computer vision and production workspace';
+/** Oolite Arts Digital Lab — production workspace. Source of truth: `@/content/oolite-arts/media`. */
+export {
+  OOLITE_DIGITAL_LAB_IMAGE,
+  OOLITE_DIGITAL_LAB_IMAGE_ALT,
+} from '@/content/oolite-arts/media';
 
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 
