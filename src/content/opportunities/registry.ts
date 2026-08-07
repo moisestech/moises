@@ -1,6 +1,7 @@
 import type { Opportunity } from './types';
 import { affirmAiSolutionsEngineerOpportunity } from './affirm-ai-solutions-engineer';
 import { airSpaceIntelligenceFullStackEngineerOpportunity } from './air-space-intelligence-full-stack-engineer';
+import { aiSolutionsArchitectOpportunity } from './ai-solutions-architect';
 import { blueAcornAgenticAiOpportunity } from './blue-acorn-ici-agentic-ai-integration-engineer';
 import { corestoryAiEngineerOpportunity } from './corestory-ai-engineer';
 import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
@@ -27,6 +28,7 @@ const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
   [airSpaceIntelligenceFullStackEngineerOpportunity.slug]:
     airSpaceIntelligenceFullStackEngineerOpportunity,
+  [aiSolutionsArchitectOpportunity.slug]: aiSolutionsArchitectOpportunity,
   [blueAcornAgenticAiOpportunity.slug]: blueAcornAgenticAiOpportunity,
   [comfyMtsFrontendOpportunity.slug]: comfyMtsFrontendOpportunity,
   [corestoryAiEngineerOpportunity.slug]: corestoryAiEngineerOpportunity,
