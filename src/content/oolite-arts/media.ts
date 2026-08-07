@@ -251,6 +251,27 @@ export const digilabMedia = {
     cloudinaryId: 'oolite-arts/preview-inkjet-printing-digilab-oolite_wo2wtp',
     usedOn: ['/oolite-arts#offerings'],
   },
+
+  'portrait.moises': {
+    id: 'portrait.moises',
+    name: 'Moises Sanabria — Oolite Arts portrait',
+    src: `${CDN_DCK}/v1786124933/oolite-arts/moises-portrait-oolite-arts_xetxca.jpg`,
+    alt: 'Moises Sanabria — Technical Director of Digital, Oolite Arts Digital Lab',
+    category: 'headshot',
+    cloudinaryId: 'oolite-arts/moises-portrait-oolite-arts_xetxca',
+    credit: 'Oolite Arts',
+    usedOn: ['/oolite-arts#credits', '/artist-infrastructure#oolite-proof'],
+  },
+  'portrait.fabiola': {
+    id: 'portrait.fabiola',
+    name: 'Fabiola Larios — Oolite Arts portrait',
+    src: `${CDN_DCK}/v1786124931/oolite-arts/fabiola-portrait-oolite-arts_cqg32x.jpg`,
+    alt: 'Fabiola Larios — Director of Digital Lab, Oolite Arts',
+    category: 'headshot',
+    cloudinaryId: 'oolite-arts/fabiola-portrait-oolite-arts_cqg32x',
+    credit: 'Oolite Arts',
+    usedOn: ['/oolite-arts#credits'],
+  },
 } as const satisfies Record<string, DigilabMediaAsset>;
 
 export type DigilabMediaId = keyof typeof digilabMedia;

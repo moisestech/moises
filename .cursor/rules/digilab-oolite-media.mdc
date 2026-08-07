@@ -1,0 +1,68 @@
+---
+description: Digilab / Oolite Arts media registry workflow — update photos, map pages, plan 360 and video
+globs:
+  - src/content/oolite-arts/**
+  - src/components/case-studies/oolite/**
+  - src/content/institutions/artistInfrastructure.ts
+  - src/components/institutions/ArtistInfrastructureClient.tsx
+  - src/app/(main)/oolite-arts/**
+  - src/app/(main)/artist-infrastructure/**
+  - docs/oolite-digilab-media-workflow.md
+alwaysApply: false
+---
+
+# Digilab / Oolite Arts media workflow
+
+## Source of truth
+
+- **Registry:** `src/content/oolite-arts/media.ts`
+- **Case study content:** `src/content/oolite-arts/case-study.ts` (imports by media id)
+- **Case study UI:** `src/components/case-studies/oolite/OoliteCaseStudy.tsx`
+- **Outreach proof:** `src/content/institutions/artistInfrastructure.ts` → `/artist-infrastructure`
+- **Shared constant:** `OOLITE_DIGITAL_LAB_IMAGE` re-exported from the registry via `src/content/evidence/projects.ts`
+
+Never hardcode Digilab Cloudinary URLs in pages. Add a stable id in the registry, then reference `digilabAsset('id')` or a named export.
+
+## Stable ids
+
+Format: `category.slug` — e.g. `digilab.entrance`, `workshop.seo-banner`, `service.inkjet`, `portrait.moises`, `docs.vibe-apr25-35`.
+
+Each asset must keep:
+
+- `id`, `name`, `src`, `alt`, `category`, `cloudinaryId`
+- `usedOn` — routes/slots that consume it (so URL swaps stay auditable)
+
+When Cloudinary version hashes change, **update `src` only**. Do not rename ids if pages already depend on them.
+
+## Story framing (do not invert)
+
+1. **Fabiola Larios** — Director of Digital Lab (lead credit)
+2. **Moises Sanabria** — Technical Director of Digital
+3. Digilab `preview-*` services = developed at Oolite, **now offered independently**
+4. Class cards = **workshop banners** + **documentary** stills underneath
+5. People photos from close circle are publishable unless marked otherwise
+
+## Adding new stills (checklist)
+
+1. Add entry to `digilabMedia` with stable id + `usedOn`
+2. Wire into `case-study.ts` slot (hero, gallery, class, offering, credits, docs)
+3. Confirm UI renders the slot in `OoliteCaseStudy.tsx` (or artist-infrastructure gallery)
+4. If the asset is the shared room hero, keep `digilab.room-cyan` as `OOLITE_DIGITAL_LAB_IMAGE`
+5. Update `usedOn` if you add or remove a page
+
+## Primary routes
+
+| Route | Role |
+|---|---|
+| `/oolite-arts` | Canonical Digilab case study |
+| `/artist-infrastructure` | Outreach proof + gallery |
+| `/tech-nonprofit/oolite/*` | Program / lab systems surfaces |
+| Shared proof | resume, institutions hub, opportunities, grants — usually via `OOLITE_DIGITAL_LAB_IMAGE` |
+
+## Next phases (do not invent assets)
+
+1. **360 components** — equirectangular / walkthrough viewer on `/oolite-arts` hero or lab gallery; register media as `digilab.360-*` stills first, then `video.*` / `pano.*` entries
+2. **Video** — workshop / process clips in the same registry (`category: 'video'` when added); prefer poster stills that already have ids
+3. **Headshots** — `portrait.*` ids on credits and outreach
+
+See `docs/oolite-digilab-media-workflow.md` for the longer handoff prompt and roadmap.

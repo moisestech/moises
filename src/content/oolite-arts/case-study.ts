@@ -62,10 +62,20 @@ export const OOLITE_ARTS_CASE_STUDY = {
       {
         name: 'Fabiola Larios',
         role: 'Director of Digital Lab · direction and co-development',
+        portraitId: 'portrait.fabiola' as const,
+        portrait: {
+          src: digilabAsset('portrait.fabiola').src,
+          alt: digilabAsset('portrait.fabiola').alt,
+        },
       },
       {
         name: 'Moises Sanabria',
         role: 'Technical Director of Digital · technical direction and co-development',
+        portraitId: 'portrait.moises' as const,
+        portrait: {
+          src: digilabAsset('portrait.moises').src,
+          alt: digilabAsset('portrait.moises').alt,
+        },
       },
     ],
     collaboration:
@@ -776,11 +786,21 @@ export const OOLITE_ARTS_CASE_STUDY = {
         name: 'Fabiola Larios',
         role: 'Director of Digital Lab · direction and co-development',
         website: 'https://fabiola.io',
+        portraitId: 'portrait.fabiola' as const,
+        portrait: {
+          src: digilabAsset('portrait.fabiola').src,
+          alt: digilabAsset('portrait.fabiola').alt,
+        },
       },
       {
         name: 'Moises Sanabria',
         role: 'Technical Director of Digital · technical direction and co-development',
         website: 'https://moises.tech',
+        portraitId: 'portrait.moises' as const,
+        portrait: {
+          src: digilabAsset('portrait.moises').src,
+          alt: digilabAsset('portrait.moises').alt,
+        },
       },
     ],
     collective:

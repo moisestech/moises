@@ -239,11 +239,24 @@ export default function OoliteCaseStudy() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-black/10 pt-8 mb-8">
           {C.overview.credits.map((c) => (
-            <div key={c.name}>
-              <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-1">
-                {c.role}
-              </p>
-              <p className="font-['MoMA_Sans'] text-xl font-bold">{c.name}</p>
+            <div key={c.name} className="flex gap-4 items-start">
+              {'portrait' in c && c.portrait && (
+                <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden bg-neutral-200">
+                  <Image
+                    src={c.portrait.src}
+                    alt={c.portrait.alt}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
+                </div>
+              )}
+              <div>
+                <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-1">
+                  {c.role}
+                </p>
+                <p className="font-['MoMA_Sans'] text-xl font-bold">{c.name}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -699,19 +712,32 @@ export default function OoliteCaseStudy() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
             {C.credits.roles.map((r) => (
-              <div key={r.name}>
-                <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-1">
-                  {r.role}
-                </p>
-                <p className="font-['MoMA_Sans'] text-xl font-bold mb-1">{r.name}</p>
-                <a
-                  href={r.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm underline underline-offset-2 text-neutral-600"
-                >
-                  {r.website.replace(/^https?:\/\//, '')}
-                </a>
+              <div key={r.name} className="flex gap-4 items-start">
+                {'portrait' in r && r.portrait && (
+                  <div className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden bg-neutral-200">
+                    <Image
+                      src={r.portrait.src}
+                      alt={r.portrait.alt}
+                      fill
+                      className="object-cover"
+                      sizes="112px"
+                    />
+                  </div>
+                )}
+                <div>
+                  <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-1">
+                    {r.role}
+                  </p>
+                  <p className="font-['MoMA_Sans'] text-xl font-bold mb-1">{r.name}</p>
+                  <a
+                    href={r.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm underline underline-offset-2 text-neutral-600"
+                  >
+                    {r.website.replace(/^https?:\/\//, '')}
+                  </a>
+                </div>
               </div>
             ))}
           </div>

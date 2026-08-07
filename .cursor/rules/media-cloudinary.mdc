@@ -19,6 +19,7 @@ alwaysApply: false
 - Eyebeam inquiry: `src/constants/eyebeam-inquiry.ts`
 - Research: `src/constants/research.ts`, `noisy-systems.ts`
 - Workshop images: `src/components/page/OoliteDigitalOverviewPage.tsx`, `TechNonprofitNavOolite.tsx`
+- **Oolite Digilab photography:** `src/content/oolite-arts/media.ts` (stable ids — see `.cursor/rules/digilab-oolite-media.mdc` and `docs/oolite-digilab-media-workflow.md`)
 
 ## Image URLs
 
