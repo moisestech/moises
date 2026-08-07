@@ -90,16 +90,17 @@ export const institutionsHub = {
     eyebrow: 'Institutional practice',
     headline: 'I build artist-centered digital systems, programs, and experiences.',
     lead:
-      'A practice connecting programming, technology, infrastructure, and institutional operations—so artists can make work without becoming IT staff. Below: verified organizations and case studies from that work.',
+      'Directory of verified organizations and case studies. For a single outreach link covering workshops, lab proof, and engagement formats, start at Creative infrastructure for artists.',
     availability: INSTITUTIONAL_AVAILABILITY,
     primaryCta: {
-      label: 'Start an institutional conversation',
-      href: INSTITUTIONAL_CALENDLY_URL,
-      external: true,
+      label: 'Creative infrastructure overview',
+      href: '/artist-infrastructure',
+      external: false,
     },
     secondaryCta: {
-      label: 'Email Moises',
-      href: 'mailto:m@moises.tech?subject=Institutional%20conversation%20%E2%80%94%20Moises%20Sanabria',
+      label: 'Start a planning call',
+      href: INSTITUTIONAL_CALENDLY_URL,
+      external: true,
     },
   },
   nav: [
@@ -292,7 +293,7 @@ export const institutionsHub = {
       relationship: 'lab',
       relationshipLabel: ORG_RELATIONSHIP_LABELS.lab,
       summary:
-        'Technical Director of Digital — Knight-supported Digital Lab: workshops, fabrication, documentation, and artist support.',
+        'With Director of Digital Lab Fabiola Larios; Technical Director of Digital Moises Sanabria — Knight-supported Digital Lab: workshops, fabrication, documentation, and artist support.',
       href: '/oolite-arts',
       imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
       imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,

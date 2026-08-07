@@ -248,7 +248,11 @@ export function InstitutionsHubClient() {
                 track('cta_institutions_click', { source: 'institutions_hero' })
               }
             />
-            <InstSecondaryCta href={H.hero.secondaryCta.href} label={H.hero.secondaryCta.label} />
+            <InstSecondaryCta
+              href={H.hero.secondaryCta.href}
+              label={H.hero.secondaryCta.label}
+              external={H.hero.secondaryCta.external}
+            />
           </div>
           <dl className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-neutral-200 pt-8">
             <div>
@@ -481,7 +485,6 @@ export function InstitutionsHubClient() {
               <InstPrimaryCta
                 href={H.hero.primaryCta.href}
                 label={H.hero.primaryCta.label}
-                external
                 onClick={() =>
                   track('cta_institutions_click', { source: 'institutions_footer' })
                 }

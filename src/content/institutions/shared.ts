@@ -19,10 +19,10 @@ export const INSTITUTIONAL_AVAILABILITY =
  */
 export const INSTITUTIONAL_FAMILY_NAV = [
   {
-    href: '/institutions',
-    label: 'Hub',
-    match: 'institutions',
-    short: 'Overview',
+    href: '/artist-infrastructure',
+    label: 'Offer',
+    match: 'artist-infrastructure',
+    short: 'Primary',
     accent: 'ink',
   },
   {
@@ -45,6 +45,13 @@ export const INSTITUTIONAL_FAMILY_NAV = [
     match: 'workshops',
     short: 'Pilots',
     accent: 'ocean',
+  },
+  {
+    href: '/institutions',
+    label: 'Hub',
+    match: 'institutions',
+    short: 'Directory',
+    accent: 'rose',
   },
 ] as const;
 
