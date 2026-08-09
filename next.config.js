@@ -141,6 +141,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/art-director',
+        destination: '/career-packet',
+        permanent: false,
+      },
+      {
         source: '/roles/comfy-mts-frontend',
         destination: '/opportunities/comfy-mts-frontend',
         permanent: false,

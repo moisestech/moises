@@ -39,7 +39,7 @@ function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  el.scrollIntoView({ behavior: reduce ? 'instant' : 'smooth', block: 'start' });
+  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   window.history.replaceState(null, '', `#${id}`);
 }
 
@@ -134,6 +134,19 @@ export function ArtistInfrastructureClient() {
               </InstReveal>
             ))}
           </ul>
+          <InstReveal delay={0.12}>
+            <p className="mt-8 text-sm text-neutral-600">
+              Full public catalog (Presence, AI Literacy, Creative Coding, Systems + Archive):{' '}
+              <a
+                href="/workshops#catalog"
+                className="font-medium text-neutral-950 underline underline-offset-4"
+                onClick={() => track('artist_infrastructure_workshops_catalog', {})}
+              >
+                /workshops#catalog
+              </a>
+              . Ready landings include SEO, writing, documentation, vibe coding, and AI literacy.
+            </p>
+          </InstReveal>
         </section>
 
         <section

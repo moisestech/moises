@@ -51,7 +51,7 @@ export function ArtistSustainabilityClient() {
     const el = document.getElementById(id);
     if (!el) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    el.scrollIntoView({ behavior: reduce ? 'instant' : 'smooth', block: 'start' });
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
     window.history.replaceState(null, '', `#${id}`);
     setActiveId(id);
   };

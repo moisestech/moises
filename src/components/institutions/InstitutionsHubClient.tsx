@@ -59,26 +59,29 @@ function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  el.scrollIntoView({ behavior: reduce ? 'instant' : 'smooth', block: 'start' });
+  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   window.history.replaceState(null, '', `#${id}`);
 }
 
 function CaseStudyCard({ study, large }: { study: InstitutionCaseStudy; large?: boolean }) {
-  const accent = KIND_ACCENT[study.kind];
+  const accentKey = KIND_ACCENT[study.kind] ?? 'ink'
+  const accent = INST_ACCENT[accentKey]
   const inner = (
     <>
       <div className={cn('relative overflow-hidden bg-neutral-200', large ? 'aspect-[16/9]' : 'aspect-[16/10]')}>
-        <Image
-          src={study.imageSrc}
-          alt={study.imageAlt}
-          fill
-          className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-          sizes={large ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
-        />
+        {study.imageSrc ? (
+          <Image
+            src={study.imageSrc}
+            alt={study.imageAlt || study.title}
+            fill
+            className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            sizes={large ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
+          />
+        ) : null}
         <span
           className={cn(
             'absolute left-3 top-3 border px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] backdrop-blur-sm',
-            INST_ACCENT[accent].chipActive,
+            accent.chipActive,
           )}
         >
           {study.kindLabel}
@@ -107,7 +110,7 @@ function CaseStudyCard({ study, large }: { study: InstitutionCaseStudy; large?: 
   const className = cn(
     'group flex h-full flex-col border border-neutral-200 bg-white transition hover:shadow-sm',
     'hover:ring-2',
-    INST_ACCENT[accent].ring,
+    accent.ring,
   );
 
   if (study.external) {
