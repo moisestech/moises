@@ -1,0 +1,618 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowUpRight, CheckCircle2, Lightbulb, Sparkles } from 'lucide-react';
+import {
+  INST_ACCENT,
+  InstPlaceholder,
+  InstPrimaryCta,
+  InstReveal,
+  InstSecondaryCta,
+  InstSectionLabel,
+} from '@/components/institutions/InstitutionalUi';
+import type { DeliveryStatus, InstMedia } from '@/content/institutions/artistInfrastructure';
+import { cn } from '@/lib/utils';
+
+export function CreditCaption({
+  caption,
+  credit,
+  date,
+  className,
+}: {
+  caption?: string;
+  credit?: string;
+  date?: string;
+  className?: string;
+}) {
+  if (!caption && !credit && !date) return null;
+  return (
+    <figcaption
+      className={cn(
+        'mt-2 text-left text-xs leading-relaxed text-neutral-600',
+        className,
+      )}
+    >
+      {caption ? <span>{caption}</span> : null}
+      {(credit || date) && (
+        <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
+          {[credit, date].filter(Boolean).join(' · ')}
+        </span>
+      )}
+    </figcaption>
+  );
+}
+
+export function DeliveryStatusBadge({ status }: { status: DeliveryStatus }) {
+  const map = {
+    shipped: {
+      label: 'Shipped',
+      className: INST_ACCENT.emerald.chipActive,
+      Icon: CheckCircle2,
+    },
+    prototype: {
+      label: 'Prototype',
+      className: INST_ACCENT.sky.chipActive,
+      Icon: Lightbulb,
+    },
+    proposed: {
+      label: 'Proposed',
+      className: INST_ACCENT.copper.chipActive,
+      Icon: Sparkles,
+    },
+  } as const;
+  const { label, className, Icon } = map[status];
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center gap-1.5 border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em]',
+        className,
+      )}
+    >
+      <Icon className="h-3 w-3" aria-hidden />
+      {label}
+    </span>
+  );
+}
+
+function MediaFrame({
+  media,
+  priority,
+  aspect = 'aspect-[16/9]',
+}: {
+  media: InstMedia;
+  priority?: boolean;
+  aspect?: string;
+}) {
+  return (
+    <figure>
+      <div className={cn('relative w-full overflow-hidden bg-neutral-200', aspect)}>
+        <Image
+          src={media.src}
+          alt={media.alt}
+          fill
+          priority={priority}
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 960px"
+        />
+      </div>
+      <CreditCaption
+        caption={media.caption}
+        credit={media.credit}
+        date={media.date}
+      />
+    </figure>
+  );
+}
+
+export function InstitutionalHero({
+  kicker,
+  headline,
+  subhead,
+  primaryCta,
+  secondaryCta,
+  image,
+  imageNote,
+}: {
+  kicker: string;
+  headline: string;
+  subhead: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string; external?: boolean };
+  image: InstMedia;
+  imageNote?: string;
+}) {
+  return (
+    <header className="border-b border-neutral-200">
+      <div className="mx-auto grid w-full max-w-5xl gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-10 lg:px-8">
+        <InstReveal>
+          <InstSectionLabel accent="ink">{kicker}</InstSectionLabel>
+          <h1
+            className="mt-2 font-[MoMA_Sans] text-4xl font-semibold leading-[1.05] tracking-tight text-neutral-950 sm:text-5xl lg:text-[3.35rem]"
+          >
+            {headline}
+          </h1>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-700 sm:text-lg">
+            {subhead}
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <InstPrimaryCta href={primaryCta.href} label={primaryCta.label} />
+            <InstSecondaryCta
+              href={secondaryCta.href}
+              label={secondaryCta.label}
+              external={secondaryCta.external}
+            />
+          </div>
+        </InstReveal>
+        <InstReveal delay={0.08} className="min-w-0">
+          <MediaFrame media={image} priority aspect="aspect-[4/3] sm:aspect-[16/10]" />
+          {imageNote ? (
+            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
+              {imageNote}
+            </p>
+          ) : null}
+        </InstReveal>
+      </div>
+    </header>
+  );
+}
+
+export function PositioningTriad({
+  eyebrow,
+  title,
+  lead,
+  cards,
+}: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  cards: readonly {
+    id: string;
+    title: string;
+    body: string;
+    accent: keyof typeof INST_ACCENT;
+  }[];
+}) {
+  return (
+    <section id="positioning" className="scroll-mt-28 py-12 sm:py-16">
+      <InstReveal>
+        <InstSectionLabel accent="ink">{eyebrow}</InstSectionLabel>
+        <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+          {lead}
+        </p>
+      </InstReveal>
+      <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+        {cards.map((card, i) => (
+          <InstReveal key={card.id} delay={0.05 * i}>
+            <li
+              className={cn(
+                'border border-neutral-200 bg-white p-5 sm:p-6',
+                INST_ACCENT[card.accent].ring,
+                'ring-1 ring-inset',
+              )}
+            >
+              <span
+                className={cn('mb-4 block h-1 w-8', INST_ACCENT[card.accent].bar)}
+                aria-hidden
+              />
+              <h3 className="text-lg font-semibold tracking-tight">{card.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{card.body}</p>
+            </li>
+          </InstReveal>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function CurriculumModuleCard({
+  module,
+}: {
+  module: {
+    id: string;
+    title: string;
+    promise: string;
+    audience: string;
+    formats: readonly string[];
+    artifact: string;
+    takeHome: string;
+    equipment: string;
+    options: readonly string[];
+    href: string;
+  };
+}) {
+  const rows = [
+    { label: 'Audience', value: module.audience },
+    { label: 'Formats', value: module.formats.join(' · ') },
+    { label: 'What they make', value: module.artifact },
+    { label: 'Take home', value: module.takeHome },
+    { label: 'Equipment', value: module.equipment },
+    { label: 'Options', value: module.options.join(' · ') },
+  ];
+
+  return (
+    <article className="flex h-full flex-col border border-neutral-200 bg-white p-5 sm:p-6">
+      <h3 className="text-lg font-semibold leading-snug tracking-tight sm:text-xl">
+        {module.title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-neutral-600">{module.promise}</p>
+      <dl className="mt-5 space-y-3 border-t border-neutral-100 pt-4">
+        {rows.map((row) => (
+          <div key={row.label}>
+            <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
+              {row.label}
+            </dt>
+            <dd className="mt-1 text-sm leading-relaxed text-neutral-800">{row.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <Link
+        href={module.href}
+        className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-950 underline-offset-4 hover:underline"
+      >
+        Open related page
+        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+      </Link>
+    </article>
+  );
+}
+
+export function CaseStudyIntro({
+  eyebrow,
+  title,
+  lead,
+  credit,
+  href,
+  hrefLabel,
+  points,
+}: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  credit?: string;
+  href: string;
+  hrefLabel: string;
+  points?: readonly string[];
+}) {
+  return (
+    <div>
+      <InstSectionLabel accent="teal">{eyebrow}</InstSectionLabel>
+      <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+        {title}
+      </h2>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+        {lead}
+      </p>
+      {credit ? (
+        <p className="mt-4 max-w-2xl border-l-2 border-teal-700 pl-4 text-sm leading-relaxed text-neutral-700">
+          {credit}
+        </p>
+      ) : null}
+      {points?.length ? (
+        <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+          {points.map((point) => (
+            <li
+              key={point}
+              className="flex items-start gap-2 text-sm text-neutral-700"
+            >
+              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-teal-700" aria-hidden />
+              {point}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      <Link
+        href={href}
+        className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-950 underline-offset-4 hover:underline"
+      >
+        {hrefLabel}
+        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+      </Link>
+    </div>
+  );
+}
+
+export function CaseStudyGallery({
+  items,
+  neededNote,
+}: {
+  items: readonly InstMedia[];
+  neededNote?: string;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        {items.map((item) => (
+          <MediaFrame
+            key={item.src}
+            media={item}
+            aspect={item.category === 'wide' ? 'aspect-[16/10]' : 'aspect-[4/3]'}
+          />
+        ))}
+      </div>
+      {neededNote ? (
+        <InstPlaceholder label="Additional photography needed" note={neededNote} />
+      ) : null}
+    </div>
+  );
+}
+
+export function ProofStrip({
+  eyebrow,
+  title,
+  lead,
+  children,
+}: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section id="supporting-proof" className="scroll-mt-28 py-12 sm:py-16">
+      <InstReveal>
+        <InstSectionLabel accent="copper">{eyebrow}</InstSectionLabel>
+        <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+          {lead}
+        </p>
+      </InstReveal>
+      <div className="mt-8 grid gap-4 md:grid-cols-2">{children}</div>
+    </section>
+  );
+}
+
+export function SupportingProofCard({
+  title,
+  org,
+  body,
+  status,
+  statusNote,
+  href,
+  secondaryHref,
+  secondaryLabel,
+  image,
+}: {
+  title: string;
+  org: string;
+  body: string;
+  status: DeliveryStatus;
+  statusNote?: string;
+  href: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  image: InstMedia;
+}) {
+  return (
+    <article className="overflow-hidden border border-neutral-200 bg-white">
+      <div className="relative aspect-[16/10] bg-neutral-200">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 480px"
+        />
+      </div>
+      <div className="p-5 sm:p-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <DeliveryStatusBadge status={status} />
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
+            {org}
+          </span>
+        </div>
+        <h3 className="mt-3 text-lg font-semibold tracking-tight">{title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-neutral-600">{body}</p>
+        {statusNote ? (
+          <p className="mt-2 text-xs leading-relaxed text-neutral-500">{statusNote}</p>
+        ) : null}
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link
+            href={href}
+            className="inline-flex items-center gap-1 text-sm font-semibold underline-offset-4 hover:underline"
+          >
+            Open
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+          </Link>
+          {secondaryHref && secondaryLabel ? (
+            <Link
+              href={secondaryHref}
+              className="inline-flex items-center gap-1 text-sm font-medium text-neutral-600 underline-offset-4 hover:underline"
+            >
+              {secondaryLabel}
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function PracticeProjectStrip({
+  eyebrow,
+  title,
+  lead,
+  href,
+  hrefLabel,
+  projects,
+}: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  href: string;
+  hrefLabel: string;
+  projects: readonly {
+    id: string;
+    title: string;
+    body: string;
+    href: string;
+    image: InstMedia;
+  }[];
+}) {
+  return (
+    <section id="practice" className="scroll-mt-28 py-12 sm:py-16">
+      <InstReveal>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <InstSectionLabel accent="rose">{eyebrow}</InstSectionLabel>
+            <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+              {title}
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+              {lead}
+            </p>
+          </div>
+          <Link
+            href={href}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold underline-offset-4 hover:underline"
+          >
+            {hrefLabel}
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+          </Link>
+        </div>
+      </InstReveal>
+      <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+        {projects.map((project, i) => (
+          <InstReveal key={project.id} delay={0.05 * i}>
+            <li>
+              <Link
+                href={project.href}
+                className="group block overflow-hidden border border-neutral-200 bg-white transition hover:border-neutral-400"
+              >
+                <div className="relative aspect-[4/3] bg-neutral-200">
+                  <Image
+                    src={project.image.src}
+                    alt={project.image.alt}
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                    sizes="(max-width: 768px) 100vw, 320px"
+                  />
+                </div>
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-semibold tracking-tight">{project.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
+                    {project.body}
+                  </p>
+                </div>
+              </Link>
+            </li>
+          </InstReveal>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function EngagementFormatCards({
+  eyebrow,
+  title,
+  availability,
+  formats,
+}: {
+  eyebrow: string;
+  title: string;
+  availability: string;
+  formats: readonly { id: string; title: string; body: string }[];
+}) {
+  return (
+    <section id="engagement" className="scroll-mt-28 py-12 sm:py-16">
+      <InstReveal>
+        <InstSectionLabel accent="ocean">{eyebrow}</InstSectionLabel>
+        <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm font-medium leading-relaxed text-neutral-800 sm:text-base">
+          {availability}
+        </p>
+      </InstReveal>
+      <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+        {formats.map((format, i) => (
+          <InstReveal key={format.id} delay={0.05 * i}>
+            <li className="border border-neutral-200 bg-white p-5 sm:p-6">
+              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-sky-800">
+                0{i + 1}
+              </p>
+              <h3 className="mt-2 text-lg font-semibold tracking-tight">{format.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{format.body}</p>
+            </li>
+          </InstReveal>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function InstitutionalCTA({
+  eyebrow,
+  title,
+  lead,
+  email,
+  emailSubject,
+  calendlyHref,
+  calendlyLabel,
+  secondaryLinks,
+}: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  email: string;
+  emailSubject: string;
+  calendlyHref: string;
+  calendlyLabel: string;
+  secondaryLinks?: readonly { label: string; href: string }[];
+}) {
+  return (
+    <section
+      id="contact"
+      className="scroll-mt-28 border-t border-neutral-200 bg-neutral-950 py-12 text-white sm:py-16"
+    >
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <InstReveal>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">
+            {eyebrow}
+          </p>
+          <h2 className="mt-3 font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+            {title}
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
+            {lead}
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              href={calendlyHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center justify-center gap-2 bg-white px-5 py-2.5 text-sm font-semibold text-neutral-950 transition hover:bg-neutral-200"
+            >
+              {calendlyLabel}
+              <ArrowUpRight className="h-3.5 w-3.5 opacity-70" aria-hidden />
+            </a>
+            <a
+              href={`mailto:${email}?subject=${encodeURIComponent(emailSubject)}`}
+              className="inline-flex min-h-11 items-center justify-center border border-white/30 px-5 py-2.5 text-sm font-medium text-white transition hover:border-white"
+            >
+              Email {email}
+            </a>
+          </div>
+          {secondaryLinks?.length ? (
+            <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-white/15 pt-6 text-sm text-white/70">
+              {secondaryLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-white">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </InstReveal>
+      </div>
+    </section>
+  );
+}

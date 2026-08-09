@@ -49,6 +49,8 @@ export const resumePdfDriveDownloadUrl = `https://drive.google.com/uc?export=dow
 
 /** Paste into Gmail recruiter replies */
 export const recruiterLinksBlock = `AI Engineering: ${SITE_ORIGIN}/ai-engineering
+Forward Deployed: ${SITE_ORIGIN}/forward-deployed-engineer
+Solutions Architect: ${SITE_ORIGIN}/ai-solutions-architect
 Career Packet: ${SITE_ORIGIN}/career-packet
 Resume: ${SITE_ORIGIN}/cv/tech
 Resume (PDF): ${resumePdfDriveViewUrl}

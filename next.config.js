@@ -105,8 +105,44 @@ const nextConfig = {
         permanent: true,
       },
       {
+        // Public archetype aliases — short send URLs for Airtable job clusters
+        source: '/ai-engineer',
+        destination: '/ai-engineering',
+        permanent: false,
+      },
+      {
+        source: '/forward-deployed-engineer',
+        destination: '/opportunities/forward-deployed-ai-engineer',
+        permanent: false,
+      },
+      {
+        source: '/ai-solutions-architect',
+        destination: '/opportunities/ai-solutions-architect',
+        permanent: false,
+      },
+      {
+        source: '/roles/ai-engineer',
+        destination: '/ai-engineering',
+        permanent: false,
+      },
+      {
+        source: '/roles/forward-deployed-engineer',
+        destination: '/opportunities/forward-deployed-ai-engineer',
+        permanent: false,
+      },
+      {
         source: '/roles/forward-deployed-ai-engineer',
         destination: '/opportunities/forward-deployed-ai-engineer',
+        permanent: false,
+      },
+      {
+        source: '/roles/ai-solutions-architect',
+        destination: '/opportunities/ai-solutions-architect',
+        permanent: false,
+      },
+      {
+        source: '/art-director',
+        destination: '/career-packet',
         permanent: false,
       },
       {
@@ -117,6 +153,17 @@ const nextConfig = {
       {
         source: '/roles/flora-founding-data-engineer',
         destination: '/opportunities/flora-founding-data-engineer',
+        permanent: false,
+      },
+      {
+        // Listing title sometimes reads Creative Editor; canonical slug is Creative Director.
+        source: '/opportunities/ogilvy-senior-ai-driven-creative-editor',
+        destination: '/opportunities/ogilvy-senior-ai-driven-creative-director',
+        permanent: false,
+      },
+      {
+        source: '/infra24',
+        destination: '/projects/infra24',
         permanent: false,
       },
     ]

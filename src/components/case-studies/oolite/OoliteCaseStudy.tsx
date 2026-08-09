@@ -1,9 +1,13 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { OOLITE_ARTS_CASE_STUDY } from '@/content/oolite-arts/case-study';
+import {
+  digilabAsset,
+  digilabHeroParallaxLayers,
+} from '@/content/oolite-arts/media';
 import { InstFamilyNav } from '@/components/institutions/InstitutionalUi';
 import { AssetNeeded } from './AssetNeeded';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
@@ -17,6 +21,75 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     <p className="font-mono text-[11px] sm:text-xs tracking-[0.18em] uppercase text-neutral-500 mb-3">
       {children}
     </p>
+  );
+}
+
+function DigilabHeroParallax() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    setOffset({ x, y });
+  };
+
+  const onLeave = () => setOffset({ x: 0, y: 0 });
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="relative aspect-[16/9] sm:aspect-[21/9] max-h-[70vh] bg-neutral-300 overflow-hidden"
+    >
+      {digilabHeroParallaxLayers.map((layer, i) => {
+        const asset = digilabAsset(layer.id);
+        const tx = offset.x * layer.depth * 48;
+        const ty = offset.y * layer.depth * 32;
+        const scale = 1.1 + layer.depth * 0.35;
+        return (
+          <div
+            key={layer.id}
+            className="absolute inset-[-6%] transition-transform duration-300 ease-out will-change-transform"
+            style={{
+              transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`,
+              opacity: i === 0 ? 1 : i === 1 ? 0.38 : 0.28,
+              zIndex: i,
+            }}
+          >
+            <Image
+              src={asset.src}
+              alt={i === 0 ? C.overview.heroImage.alt : ''}
+              fill
+              priority={i === 0}
+              className="object-cover"
+              sizes="100vw"
+              aria-hidden={i > 0}
+            />
+          </div>
+        );
+      })}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/20 z-10 pointer-events-none" />
+      <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-10 lg:p-14 max-w-7xl mx-auto w-full z-20">
+        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-white/80 mb-3">
+          Oolite Arts Digital Lab · Miami Beach · {C.overview.period}
+        </p>
+        <h1 className="font-['MoMA_Sans'] text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95] max-w-4xl mb-4">
+          {C.overview.title}
+        </h1>
+        <p className="text-white/90 text-base sm:text-xl max-w-2xl mb-2">
+          {C.overview.supportingLine}
+        </p>
+        <p className="font-mono text-[10px] text-white/60 tracking-wide">
+          Hover to shift space · layered Digilab photography
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -77,7 +150,24 @@ function ClassArchive() {
                   </div>
                 )}
               </div>
-              {cls.needed && <AssetNeeded asset={cls.needed} />}
+              {'documentary' in cls && cls.documentary.length > 0 && (
+                <div className="grid grid-cols-2 gap-2">
+                  {cls.documentary.map((shot) => (
+                    <div
+                      key={shot.mediaId ?? shot.src}
+                      className="relative aspect-[4/3] bg-neutral-200 overflow-hidden"
+                    >
+                      <Image
+                        src={shot.src}
+                        alt={shot.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 16vw"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="lg:col-span-8">
               <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-2">
@@ -133,34 +223,7 @@ export default function OoliteCaseStudy() {
 
       {/* Hero */}
       <section className="relative">
-        <div className="relative aspect-[16/9] sm:aspect-[21/9] max-h-[70vh] bg-neutral-300 overflow-hidden">
-          <Image
-            src={C.overview.heroImage.src}
-            alt={C.overview.heroImage.alt}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/20" />
-          <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-10 lg:p-14 max-w-7xl mx-auto w-full">
-            <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-white/80 mb-3">
-              Oolite Arts Digital Lab · Miami Beach · {C.overview.period}
-            </p>
-            <h1 className="font-['MoMA_Sans'] text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95] max-w-4xl mb-4">
-              {C.overview.title}
-            </h1>
-            <p className="text-white/90 text-base sm:text-xl max-w-2xl mb-2">
-              {C.overview.supportingLine}
-            </p>
-            <p className="font-mono text-[10px] text-white/60 tracking-wide">
-              Phase 1 · Static hero · 360° immersive view pending
-            </p>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11 py-4">
-          <AssetNeeded asset={C.overview.neededHero360} />
-        </div>
+        <DigilabHeroParallax />
       </section>
 
       {/* Opening + credits */}
@@ -176,11 +239,24 @@ export default function OoliteCaseStudy() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-black/10 pt-8 mb-8">
           {C.overview.credits.map((c) => (
-            <div key={c.name}>
-              <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-1">
-                {c.role}
-              </p>
-              <p className="font-['MoMA_Sans'] text-xl font-bold">{c.name}</p>
+            <div key={c.name} className="flex gap-4 items-start">
+              {'portrait' in c && c.portrait && (
+                <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden bg-neutral-200">
+                  <Image
+                    src={c.portrait.src}
+                    alt={c.portrait.alt}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
+                </div>
+              )}
+              <div>
+                <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-1">
+                  {c.role}
+                </p>
+                <p className="font-['MoMA_Sans'] text-xl font-bold">{c.name}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -199,8 +275,46 @@ export default function OoliteCaseStudy() {
         </p>
       </section>
 
+      {/* Lab gallery */}
+      <section id="lab-gallery" className="border-t border-black/10 bg-white py-14 sm:py-20">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
+          <SectionLabel>Space</SectionLabel>
+          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+            Digital Lab photography
+          </h2>
+          <p className="text-neutral-700 max-w-2xl mb-10">
+            Entrance, room, stations, and fabrication — named assets from the Digilab media registry.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {C.labGallery.map((img, i) => (
+              <figure
+                key={img.mediaId}
+                className={`relative overflow-hidden bg-neutral-200 ${
+                  i === 0 ? 'sm:col-span-2 lg:col-span-2 aspect-[16/10]' : 'aspect-[4/3]'
+                }`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes={i === 0 ? '(max-width: 1024px) 100vw, 66vw' : '(max-width: 1024px) 50vw, 33vw'}
+                />
+                {img.caption && (
+                  <figcaption className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-3 pt-8">
+                    <p className="font-mono text-[10px] tracking-[0.08em] text-white/90">
+                      {img.caption}
+                    </p>
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Narrative arc */}
-      <section className="border-t border-black/10 bg-white py-14 sm:py-20">
+      <section className="border-t border-black/10 bg-[#F7F8FA] py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
           <SectionLabel>Narrative arc</SectionLabel>
           <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-4 max-w-3xl">
@@ -222,7 +336,7 @@ export default function OoliteCaseStudy() {
             {C.institutionalQuestion.statements.map((s) => (
               <li
                 key={s}
-                className="font-mono text-[11px] sm:text-xs tracking-[0.08em] uppercase border border-black/15 bg-[#F7F8FA] px-3 py-2"
+                className="font-mono text-[11px] sm:text-xs tracking-[0.08em] uppercase border border-black/15 bg-white px-3 py-2"
               >
                 {s}
               </li>
@@ -277,6 +391,30 @@ export default function OoliteCaseStudy() {
             {C.resinWorkflow.title}
           </h2>
           <p className="text-neutral-700 max-w-2xl mb-8">{C.resinWorkflow.lead}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-10">
+            <div className="relative lg:col-span-7 aspect-[16/10] bg-neutral-200 overflow-hidden">
+              <Image
+                src={C.resinWorkflow.image.src}
+                alt={C.resinWorkflow.image.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 58vw"
+              />
+            </div>
+            <div className="lg:col-span-5 grid grid-cols-2 lg:grid-cols-1 gap-3">
+              {C.resinWorkflow.supportingImages.map((img) => (
+                <div key={img.mediaId} className="relative aspect-[16/10] bg-neutral-200 overflow-hidden">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
           <ol className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-8">
             {C.resinWorkflow.steps.map((step, i) => (
               <li
@@ -290,7 +428,7 @@ export default function OoliteCaseStudy() {
               </li>
             ))}
           </ol>
-          <div className="mb-6">
+          <div>
             <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-3">
               Institutional knowledge required
             </p>
@@ -305,7 +443,6 @@ export default function OoliteCaseStudy() {
               ))}
             </ul>
           </div>
-          <AssetNeeded asset={C.resinWorkflow.needed} />
         </div>
       </section>
 
@@ -317,28 +454,131 @@ export default function OoliteCaseStudy() {
             Featured Digital Lab workshops
           </h2>
           <p className="text-neutral-700 max-w-2xl mb-8">
-            Records grounded in Oolite Arts public class pages. Photo galleries expand as assets arrive.
+            Class cards use workshop banners; documentary stills sit underneath where available.
           </p>
           <ClassArchive />
         </div>
       </section>
 
+      {/* Offerings */}
+      <section id="offerings" className="border-t border-black/10 py-14 sm:py-20">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
+          <SectionLabel>Now offered</SectionLabel>
+          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+            {C.offerings.title}
+          </h2>
+          <p className="text-neutral-700 max-w-2xl mb-2">{C.offerings.lead}</p>
+          <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-10">
+            {C.offerings.originNote}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {C.offerings.items.map((item) => (
+              <article key={item.id} className="border border-black/10 bg-white overflow-hidden">
+                <div className="relative aspect-[16/10] bg-neutral-200">
+                  <Image
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="p-5">
+                  <h3 className="font-['MoMA_Sans'] text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm text-neutral-700 leading-relaxed">{item.body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10">
+            <Link
+              href="/artist-infrastructure#contact"
+              className="inline-flex items-center bg-black text-white px-5 py-3 text-sm font-medium hover:bg-[#E10600] transition-colors"
+            >
+              Discuss an offering →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How artists accessed it */}
+      <section id="access" className="border-t border-black/10 bg-white py-14 sm:py-20">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
+          <SectionLabel>Access</SectionLabel>
+          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+            {C.artistAccess.title}
+          </h2>
+          <p className="text-neutral-700 max-w-2xl mb-8">{C.artistAccess.lead}</p>
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            {C.artistAccess.pathways.map((p) => (
+              <li key={p.title} className="border border-black/10 bg-[#F7F8FA] p-5 sm:p-6">
+                <h3 className="font-['MoMA_Sans'] text-lg font-bold mb-2">{p.title}</h3>
+                <p className="text-sm text-neutral-700 leading-relaxed">{p.body}</p>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={C.artistAccess.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm underline underline-offset-2"
+          >
+            {C.artistAccess.sourceLabel}
+          </a>
+        </div>
+      </section>
+
+      {/* Documentation */}
+      <section id="documentation" className="border-t border-black/10 py-14 sm:py-20">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
+          <SectionLabel>Documentation</SectionLabel>
+          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+            {C.documentationResources.title}
+          </h2>
+          <p className="text-neutral-700 max-w-2xl mb-8">{C.documentationResources.lead}</p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
+            {C.documentationResources.items.map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-2 text-sm text-neutral-800 border border-black/10 px-4 py-3 bg-white"
+              >
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-black" aria-hidden />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {C.documentationResources.documentary.map((img) => (
+              <div key={img.mediaId} className="relative aspect-[4/3] bg-neutral-200 overflow-hidden">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Artist support */}
-      <section id="artists" className="border-t border-black/10 py-14 sm:py-20">
+      <section id="artists" className="border-t border-black/10 bg-white py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
           <SectionLabel>Helping artists</SectionLabel>
           <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
             Need → obstacle → support → result
           </h2>
           <p className="text-neutral-700 max-w-2xl mb-10">
-            Phase 1 shows support patterns drawn from public curriculum—not named artists.
-            Consented mini case studies will replace these archetypes.
+            Support patterns drawn from public curriculum—not named artists.
+            Consented mini case studies can replace these archetypes over time.
           </p>
           <div className="space-y-8">
             {C.artistStories.map((story) => (
               <article
                 key={story.id}
-                className="border border-black/10 bg-white p-6 sm:p-8"
+                className="border border-black/10 bg-[#F7F8FA] p-6 sm:p-8"
               >
                 <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#E10600] mb-3">
                   {story.anonymizedLabel}
@@ -468,33 +708,41 @@ export default function OoliteCaseStudy() {
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
           <SectionLabel>Credits and archive notes</SectionLabel>
           <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-8">
-            Attribution
+            Credits
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
             {C.credits.roles.map((r) => (
-              <div key={r.name}>
-                <p className="font-['MoMA_Sans'] text-xl font-bold">{r.name}</p>
-                <p className="text-sm text-neutral-600 mt-1 mb-2">{r.role}</p>
-                <a
-                  href={r.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-xs tracking-[0.1em] uppercase underline underline-offset-4"
-                >
-                  {r.website.replace(/^https?:\/\//, '')} →
-                </a>
+              <div key={r.name} className="flex gap-4 items-start">
+                {'portrait' in r && r.portrait && (
+                  <div className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden bg-neutral-200">
+                    <Image
+                      src={r.portrait.src}
+                      alt={r.portrait.alt}
+                      fill
+                      className="object-cover"
+                      sizes="112px"
+                    />
+                  </div>
+                )}
+                <div>
+                  <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-1">
+                    {r.role}
+                  </p>
+                  <p className="font-['MoMA_Sans'] text-xl font-bold mb-1">{r.name}</p>
+                  <a
+                    href={r.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm underline underline-offset-2 text-neutral-600"
+                  >
+                    {r.website.replace(/^https?:\/\//, '')}
+                  </a>
+                </div>
               </div>
             ))}
           </div>
-          <p className="text-sm text-neutral-700 mb-2">
-            Developed in collaboration with: {C.credits.collective}
-          </p>
+          <p className="text-sm text-neutral-600 mb-2">{C.credits.collective}</p>
           <p className="text-sm text-neutral-600 mb-6">{C.credits.funderNote}</p>
-          <p className="text-sm text-neutral-600 mb-8 max-w-3xl">{C.overview.disclaimer}</p>
-
-          <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-neutral-500 mb-3">
-            Sources
-          </p>
           <ul className="space-y-2 mb-8">
             {C.credits.sources.map((s) => (
               <li key={s.href}>
@@ -502,27 +750,16 @@ export default function OoliteCaseStudy() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm underline underline-offset-2 hover:text-neutral-600"
+                  className="text-sm underline underline-offset-2"
                 >
                   {s.label}
                 </a>
               </li>
             ))}
           </ul>
-          <p className="font-mono text-xs text-neutral-500">
-            Last updated {C.credits.lastUpdated} · {C.credits.phaseNote}
+          <p className="font-mono text-[11px] tracking-[0.08em] text-neutral-500">
+            Updated {C.credits.lastUpdated} · {C.credits.phaseNote}
           </p>
-          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-black/10 pt-8 text-sm">
-            <Link href="/institutions" className="font-medium underline underline-offset-4">
-              Institutions hub
-            </Link>
-            <Link href="/bakehouse" className="font-medium underline underline-offset-4">
-              Bakehouse digital systems
-            </Link>
-            <Link href="/workshops" className="font-medium underline underline-offset-4">
-              Bookable workshops
-            </Link>
-          </div>
         </div>
       </section>
     </main>

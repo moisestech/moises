@@ -1,40 +1,68 @@
 import type { Opportunity } from './types';
 import { affirmAiSolutionsEngineerOpportunity } from './affirm-ai-solutions-engineer';
 import { airSpaceIntelligenceFullStackEngineerOpportunity } from './air-space-intelligence-full-stack-engineer';
+import { aiSolutionsArchitectOpportunity } from './ai-solutions-architect';
+import { alphaDriveAiFullStackEngineerOpportunity } from './alpha-drive-ai-full-stack-engineer';
 import { blueAcornAgenticAiOpportunity } from './blue-acorn-ici-agentic-ai-integration-engineer';
 import { corestoryAiEngineerOpportunity } from './corestory-ai-engineer';
 import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
 import { deepgramSolutionsArchitectOpportunity } from './deepgram-solutions-architect';
+import { digitasAssociateDirectorCreativeOpportunity } from './digitas-associate-director-creative';
 import { endorLabsSolutionsArchitectOpportunity } from './endor-labs-solutions-architect';
 import { harveyAutomationEngineerOpportunity } from './harvey-automation-engineer-customer-education';
 import { knightJournalismTechProductStrategistOpportunity } from './knight-journalism-tech-product-strategist';
+import { morleyArtDirectorFloridaOpportunity } from './morley-art-director-florida';
+import { mscCruisesCreativeDirectorTravelExperiencesOpportunity } from './msc-cruises-creative-director-travel-experiences';
 import { neogovStaffAgenticAiOpportunity } from './neogov-staff-agentic-ai-developer';
 import { netflixFullStackEngineerOpportunity } from './netflix-full-stack-engineer';
 import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fabrication-lab-manager';
+import { ogilvySeniorAiDrivenCreativeDirectorOpportunity } from './ogilvy-senior-ai-driven-creative-director';
+import { onxSeniorManagerArtisticDevelopmentOpportunity } from './onx-senior-manager-artistic-development';
 import { playwireOpportunity } from './playwire';
 import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
 import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
 import { floraFoundingDataEngineerOpportunity } from './flora-founding-data-engineer';
+import { razorfishJuniorArtDirectorOpportunity } from './razorfish-junior-art-director';
+import { stacklokStaffForwardDeployedEngineerOpportunity } from './stacklok-staff-forward-deployed-engineer';
+import { wmxAiDrivenDesignLeaderOpportunity } from './wmx-senior-art-director-ai-driven-design-leader';
+import { wmxSeniorArtDirectorAiOpportunity } from './wmx-senior-art-director-ai';
+import { wppHexCreativeInnovationLeadAcdOpportunity } from './wpp-hex-creative-innovation-lead-acd';
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
   [airSpaceIntelligenceFullStackEngineerOpportunity.slug]:
     airSpaceIntelligenceFullStackEngineerOpportunity,
+  [aiSolutionsArchitectOpportunity.slug]: aiSolutionsArchitectOpportunity,
+  [alphaDriveAiFullStackEngineerOpportunity.slug]: alphaDriveAiFullStackEngineerOpportunity,
   [blueAcornAgenticAiOpportunity.slug]: blueAcornAgenticAiOpportunity,
   [comfyMtsFrontendOpportunity.slug]: comfyMtsFrontendOpportunity,
   [corestoryAiEngineerOpportunity.slug]: corestoryAiEngineerOpportunity,
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
   [deepgramSolutionsArchitectOpportunity.slug]: deepgramSolutionsArchitectOpportunity,
+  [digitasAssociateDirectorCreativeOpportunity.slug]: digitasAssociateDirectorCreativeOpportunity,
   [endorLabsSolutionsArchitectOpportunity.slug]: endorLabsSolutionsArchitectOpportunity,
   [floraFoundingDataEngineerOpportunity.slug]: floraFoundingDataEngineerOpportunity,
   [forwardDeployedAiEngineerOpportunity.slug]: forwardDeployedAiEngineerOpportunity,
   [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:
     knightJournalismTechProductStrategistOpportunity,
+  [morleyArtDirectorFloridaOpportunity.slug]: morleyArtDirectorFloridaOpportunity,
+  [mscCruisesCreativeDirectorTravelExperiencesOpportunity.slug]:
+    mscCruisesCreativeDirectorTravelExperiencesOpportunity,
   [neogovStaffAgenticAiOpportunity.slug]: neogovStaffAgenticAiOpportunity,
   [netflixFullStackEngineerOpportunity.slug]: netflixFullStackEngineerOpportunity,
   [newIncMediaFabricationLabManagerOpportunity.slug]: newIncMediaFabricationLabManagerOpportunity,
+  [ogilvySeniorAiDrivenCreativeDirectorOpportunity.slug]:
+    ogilvySeniorAiDrivenCreativeDirectorOpportunity,
+  [onxSeniorManagerArtisticDevelopmentOpportunity.slug]:
+    onxSeniorManagerArtisticDevelopmentOpportunity,
   [playwireOpportunity.slug]: playwireOpportunity,
+  [razorfishJuniorArtDirectorOpportunity.slug]: razorfishJuniorArtDirectorOpportunity,
+  [stacklokStaffForwardDeployedEngineerOpportunity.slug]:
+    stacklokStaffForwardDeployedEngineerOpportunity,
+  [wmxAiDrivenDesignLeaderOpportunity.slug]: wmxAiDrivenDesignLeaderOpportunity,
+  [wmxSeniorArtDirectorAiOpportunity.slug]: wmxSeniorArtDirectorAiOpportunity,
+  [wppHexCreativeInnovationLeadAcdOpportunity.slug]: wppHexCreativeInnovationLeadAcdOpportunity,
 };
 
 export function getOpportunity(slug: string): Opportunity | undefined {

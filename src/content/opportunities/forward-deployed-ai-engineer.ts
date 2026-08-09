@@ -213,16 +213,18 @@ const rolePortfolio: RolePortfolioDossier = {
 export const forwardDeployedAiEngineerOpportunity: Opportunity = {
   slug: 'forward-deployed-ai-engineer',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'role-portfolio',
   applicationBanner: forwardDeployedAiEngineerBanner,
+  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'Moises Sanabria — Creative Technologist · Forward Deployed AI Engineer',
     description:
       'Creative Technologist and full-stack AI engineer — Lore Machine founding engineer, generative-AI systems, creative production, and client-facing delivery.',
-    indexable: false,
+    indexable: true,
   },
-  visibilityNote: 'Role-specific portfolio · Forward Deployed AI Engineer',
+  visibilityNote:
+    'Public role archetype for Forward Deployed / client-facing AI engineer clusters. Employer overlays (e.g. Stacklok) stay private.',
   audienceKeywords: {
     lead: 'Prepared for',
     terms: [

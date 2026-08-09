@@ -346,32 +346,98 @@ export default function WorkshopClient() {
             </a>
           </div>
           <PilotPricingBand tone="hub" className="mb-6 sm:mb-8" source="workshops_pricing" />
-          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-5 lg:grid-cols-3">
             {institutionalWorkshopOfferings.offerings.map((offering) => (
-              <li key={offering.id} className={cn(cardBase)}>
+              <li
+                key={offering.id}
+                id={offering.id}
+                className={cn(
+                  cardBase,
+                  'scroll-mt-28',
+                  !isDark && 'rounded-none border-neutral-200 bg-white shadow-none'
+                )}
+              >
                 <h3 className={cn('text-base sm:text-lg font-bold leading-snug', heading)}>
                   {offering.title}
                 </h3>
-                <p className={cn('mt-2 text-[11px] font-semibold uppercase tracking-wide', accentIcon)}>
-                  {offering.duration}
+                <p className={cn('mt-2 text-sm leading-relaxed font-medium', heading)}>
+                  {offering.promise}
+                </p>
+                <p className={cn('mt-3 text-[11px] font-semibold uppercase tracking-wide', accentIcon)}>
+                  {offering.duration} · {offering.capacity}
                 </p>
                 <p className={cn('mt-1 text-sm font-semibold', heading)}>{offering.priceLabel}</p>
-                <p className={cn('mt-3 text-xs sm:text-sm leading-relaxed flex-1', bodyMuted)}>
+                <p className={cn('mt-3 text-xs sm:text-sm leading-relaxed', bodyMuted)}>
                   {offering.body}
                 </p>
+                <dl className={cn('mt-4 space-y-2.5 border-t pt-3 text-xs sm:text-sm', isDark ? 'border-white/10' : 'border-neutral-100')}>
+                  <div>
+                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Audience</dt>
+                    <dd className={cn('mt-0.5 leading-relaxed', heading)}>{offering.audience}</dd>
+                  </div>
+                  <div>
+                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>They make</dt>
+                    <dd className={cn('mt-0.5 leading-relaxed', heading)}>{offering.artifact}</dd>
+                  </div>
+                  <div>
+                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Outcomes</dt>
+                    <dd className={cn('mt-0.5 leading-relaxed', bodyMuted)}>
+                      {offering.outcomes.join(' · ')}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Formats</dt>
+                    <dd className={cn('mt-0.5 leading-relaxed', heading)}>
+                      {offering.formats.join(' · ')}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Setup</dt>
+                    <dd className={cn('mt-0.5 leading-relaxed', bodyMuted)}>{offering.setup}</dd>
+                  </div>
+                </dl>
                 <p className={cn('mt-3 text-[11px] uppercase tracking-wide', bodyMuted)}>
                   Fits: {offering.fits}
                 </p>
-                <Link
-                  href={offering.relatedHref}
-                  className={cn(
-                    'mt-4 inline-flex items-center gap-1 text-sm font-semibold',
-                    isDark ? 'text-cyan-300' : 'text-violet-700'
-                  )}
-                >
-                  {offering.relatedLabel}
-                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                </Link>
+                <div className="mt-4 flex flex-col gap-2">
+                  <a
+                    href={offering.inquiryHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      'inline-flex min-h-10 items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold',
+                      isDark
+                        ? 'bg-white/15 text-white hover:bg-white/20'
+                        : 'bg-neutral-950 text-white hover:bg-neutral-800'
+                    )}
+                    onClick={() =>
+                      track('workshop_offering_inquire', { id: offering.id, source: 'workshops' })
+                    }
+                  >
+                    {offering.inquiryLabel}
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  </a>
+                  <Link
+                    href={offering.toolkitHref}
+                    className={cn(
+                      'inline-flex items-center gap-1 text-sm font-semibold',
+                      isDark ? 'text-cyan-300' : 'text-neutral-800'
+                    )}
+                  >
+                    {offering.toolkitLabel}
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  </Link>
+                  <Link
+                    href={offering.relatedHref}
+                    className={cn(
+                      'inline-flex items-center gap-1 text-sm',
+                      isDark ? 'text-white/70' : 'text-neutral-600'
+                    )}
+                  >
+                    {offering.relatedLabel}
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  </Link>
+                </div>
               </li>
             ))}
           </ul>

@@ -1,4 +1,5 @@
 import type { ApplicationBanner } from '@/content/opportunities/types';
+import { OOLITE_DIGITAL_LAB_IMAGE } from '@/content/oolite-arts/media';
 
 const cdn = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
@@ -65,5 +66,91 @@ export const floraFoundingDataEngineerBanner: ApplicationBanner = {
   src: `${cdn}/v1781659236/product-ai-data-career-direction_ofgnrk.png`,
   alt: 'FLORA Founding Data Engineer — data pipelines, product metrics, and creative systems atmosphere',
   aspectClass:
-    'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]',
+    'aspect-[16/9] min-h-[140px] max-h-[min(36vh,320px)] sm:aspect-[21/9] sm:min-h-[150px] sm:max-h-[min(40vh,400px)] md:aspect-[2.6/1] md:max-h-[min(42vh,440px)]',
+};
+
+const creativeBannerAspect =
+  'aspect-[21/9] min-h-[128px] max-h-[min(44vh,460px)] sm:aspect-[2.5/1] sm:max-h-[min(40vh,420px)]';
+
+/** Ogilvy — Creative Editor / AI (banner asset may still read Creative Director). */
+export const ogilvySeniorAiDrivenCreativeDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862416/jobs/banners/senior-ai-driven-creative-director-banner_y1mof7.png`,
+  alt: 'Ogilvy — Creative Editor / AI application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Morley — Art Director (Remote, Florida). */
+export const morleyArtDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862415/jobs/banners/art-director-morley-banner_b5ridm.png`,
+  alt: 'Morley — Art Director application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** MSC Cruises — Creative Director, Travel & Experiences. */
+export const mscCruisesCreativeDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862415/jobs/banners/creative-director-msc-cruises-banner_whtcx8.png`,
+  alt: 'MSC Cruises — Creative Director Travel & Experiences application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Razorfish / Publicis Groupe — Junior Art Director. */
+export const razorfishJuniorArtDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862413/jobs/banners/junior-art-director-razorfish-banner_jt9yyi.png`,
+  alt: 'Razorfish — Junior Art Director application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Digitas — Associate Director, Creative. */
+export const digitasAssociateDirectorCreativeBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862413/jobs/banners/associate-director-creative-digitas-banner_to4ylc.png`,
+  alt: 'Digitas — Associate Director Creative application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/**
+ * WMX — Senior Art Director, Creative + AI Expertise.
+ * Dedicated application banner (not a WMX brand asset).
+ */
+export const wmxSeniorArtDirectorBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862412/jobs/banners/senior-art-director-wmx-creative-ai-expertise-banner_axmv4k.png`,
+  alt: 'WMX — Senior Art Director Creative + AI Expertise application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/**
+ * WMX — Senior Art Director, AI-Driven Design Leader.
+ * Companion listing / alternate title framing at wearewmx.com.
+ */
+export const wmxAiDrivenDesignLeaderBanner: ApplicationBanner = {
+  src: `${cdn}/v1785859691/jobs/banners/senior-art-director-ai-driven-desgin-leader-banner_pweexz.png`,
+  alt: 'WMX — Senior Art Director AI-Driven Design Leader application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Alpha Drive AI — Full Stack Engineer. */
+export const alphaDriveAiFullStackBanner: ApplicationBanner = {
+  src: `${cdn}/v1781659418/ai24-website-above-the-fold_kbp2ei.png`,
+  alt: 'Alpha Drive AI — Full Stack Engineer application banner (product/engineering atmosphere)',
+  aspectClass: creativeBannerAspect,
+};
+
+/** WPP HEX — Creative Innovation Lead / ACD. */
+export const wppHexCreativeInnovationLeadBanner: ApplicationBanner = {
+  src: `${cdn}/v1785862416/jobs/banners/senior-ai-driven-creative-director-banner_y1mof7.png`,
+  alt: 'WPP HEX — Creative Innovation Lead / ACD application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Onassis ONX — Senior Manager of Artistic Development. */
+export const onxArtisticDevelopmentBanner: ApplicationBanner = {
+  src: OOLITE_DIGITAL_LAB_IMAGE,
+  alt: 'ONX — Senior Manager of Artistic Development application banner',
+  aspectClass: creativeBannerAspect,
+};
+
+/** Stacklok — Staff Forward Deployed Engineer. */
+export const stacklokStaffFdeBanner: ApplicationBanner = {
+  src: `${cdn}/v1780248505/jobs/banners/ChatGPT_Image_May_31_2026_12_19_46_PM_wu8xw1.png`,
+  alt: 'Stacklok — Staff Forward Deployed Engineer application banner',
+  aspectClass: creativeBannerAspect,
 };

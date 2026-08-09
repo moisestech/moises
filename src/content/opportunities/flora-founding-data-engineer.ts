@@ -1,8 +1,12 @@
 import type { Opportunity } from './types';
 import type { RolePortfolioDossier } from './rolePortfolio';
+import type { ArchitectureFlowData } from './systemsDossier';
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { evidenceProjects } from '@/content/evidence/projects';
-import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
+import {
+  floraDataEngineerSkillLogoBand,
+  moisesSanabriaHeadshot,
+} from '@/content/evidence/recruitingLogoBand';
 import { resumePdfDriveViewUrl } from '@/content/ai-engineering/packet';
 import { floraFoundingDataEngineerBanner } from '@/content/evidence/applicationBanners';
 
@@ -31,6 +35,140 @@ const playwire = evidenceProjects['playwire-alumni'];
 const lore = evidenceProjects['lore-machine'];
 const ai24 = evidenceProjects.ai24;
 
+/**
+ * Interactive founding data model — proposed decision paths for FLORA product questions.
+ * Not a claim of access to FLORA telemetry or warehouse.
+ */
+const floraDataArchitecture: ArchitectureFlowData = {
+  title: 'Founding data model — capture → decisions',
+  subtitle:
+    'How I would wire FLORA’s first data function: PostHog capture, typed contracts with Growth Engineering, warehouse + transforms, metrics that matter, and BI that changes meetings.',
+  disclaimer:
+    'Proposed implementation model only. Not affiliated with or endorsed by FLORA. Not a claim of access to FLORA systems or production telemetry.',
+  syntheticLabel: 'All metric names and event properties below are illustrative.',
+  stages: [
+    {
+      id: 'capture',
+      title: 'Capture',
+      nodes: [
+        { id: 'ph-events', label: 'PostHog events' },
+        { id: 'props', label: 'Property hygiene' },
+        { id: 'client', label: 'Client / canvas actions' },
+        { id: 'server', label: 'Server / generation jobs' },
+        { id: 'identity', label: 'Identity & sessions' },
+      ],
+    },
+    {
+      id: 'contract',
+      title: 'Tracking contract',
+      nodes: [
+        { id: 'taxonomy', label: 'Event taxonomy' },
+        { id: 'typed', label: 'Typed schemas (TS)' },
+        { id: 'growth-pr', label: 'Growth eng PRs' },
+        { id: 'naming', label: 'Naming conventions' },
+        { id: 'checklist', label: 'Instrumentation checklist' },
+      ],
+    },
+    {
+      id: 'warehouse',
+      title: 'Warehouse & pipelines',
+      nodes: [
+        { id: 'sync', label: 'PostHog warehouse sync' },
+        { id: 'snowflake', label: 'Snowflake / peer eval' },
+        { id: 'ingest', label: 'Ingestion' },
+        { id: 'transforms', label: 'Transforms / SQL' },
+        { id: 'freshness', label: 'Freshness checks' },
+      ],
+    },
+    {
+      id: 'metrics',
+      title: 'Metrics that matter',
+      nodes: [
+        { id: 'activation', label: 'Activation moments' },
+        { id: 'power', label: 'Power-user signals' },
+        { id: 'quality', label: 'Engagement quality' },
+        { id: 'anti-vanity', label: 'Anti-vanity filters' },
+        { id: 'defs', label: 'Metric definitions' },
+      ],
+    },
+    {
+      id: 'bi',
+      title: 'BI & decisions',
+      nodes: [
+        { id: 'exec', label: 'Executive dashboards' },
+        { id: 'product', label: 'Product / growth views' },
+        { id: 'alerts', label: 'Slack / reliability alerts' },
+        { id: 'framing', label: 'Stakeholder framing' },
+        { id: 'cadence', label: 'Operating cadence' },
+      ],
+    },
+  ],
+  scenarios: [
+    {
+      id: 'activation',
+      question: 'What counts as activation on an infinite canvas?',
+      stageIds: ['capture', 'contract', 'metrics', 'bi'],
+      nodeIds: [
+        'ph-events',
+        'client',
+        'taxonomy',
+        'typed',
+        'activation',
+        'anti-vanity',
+        'defs',
+        'product',
+        'framing',
+      ],
+      summary:
+        'Define the first meaningful creative outcome (not a vanity click) → encode it in the event contract → measure activation cohorts → put the definition on an executive view everyone argues from.',
+    },
+    {
+      id: 'power-users',
+      question: 'Who are the power users — and what do they do differently?',
+      stageIds: ['capture', 'warehouse', 'metrics', 'bi'],
+      nodeIds: [
+        'ph-events',
+        'props',
+        'identity',
+        'sync',
+        'transforms',
+        'power',
+        'quality',
+        'product',
+        'exec',
+      ],
+      summary:
+        'Session + generation depth from PostHog → warehouse cohorts → power-user signals (repeat craft loops, not raw volume) → growth and product dashboards that surface who to learn from.',
+    },
+    {
+      id: 'engagement-quality',
+      question: 'Is engagement quality rising — or just noise?',
+      stageIds: ['capture', 'contract', 'metrics', 'bi'],
+      nodeIds: [
+        'client',
+        'server',
+        'props',
+        'naming',
+        'quality',
+        'anti-vanity',
+        'defs',
+        'product',
+        'alerts',
+      ],
+      summary:
+        'Separate generation review / craft loops from empty churn → lock property standards → quality metrics with clear owners → alerts when quality drifts while vanity volume looks fine.',
+    },
+    {
+      id: 'vendor',
+      question: 'Which warehouse and BI stack should we bet on?',
+      stageIds: ['warehouse', 'bi', 'metrics'],
+      nodeIds: ['sync', 'snowflake', 'ingest', 'freshness', 'exec', 'cadence', 'defs'],
+      summary:
+        'Evaluate Snowflake / BigQuery / peers against PostHog sync, cost, and ops burden → pick boring operable paths → document metric ownership and refresh SLAs so the bet holds as the creative OS scales.',
+    },
+  ],
+};
+
 const rolePortfolio: RolePortfolioDossier = {
   fitSectionTitle: 'What FLORA is hiring for',
   fitIntro:
@@ -52,6 +190,8 @@ const rolePortfolio: RolePortfolioDossier = {
       body: 'I design the event contract; engineers instrument against it. Daily TypeScript/React product engineering makes that partnership natural.',
     },
   ],
+  architecture: floraDataArchitecture,
+  architectureSectionId: 'data-model',
   evidenceRoadmap: {
     title: 'Evidence they can review today',
     intro:
@@ -228,7 +368,8 @@ const rolePortfolio: RolePortfolioDossier = {
       'Strongest demonstrated spine: **Snowflake + Tableau + SQL pipelines at Playwire**, plus **TypeScript product collaboration**. Deep PostHog, dbt, and public BI samples are active Coming soon work — not vocabulary to hide behind.',
   },
   experienceRolesTitle: 'Relevant experience',
-  experienceRolesIntro: 'Data spine first, then founding product work that transfers into FLORA’s TypeScript + creative-OS context.',
+  experienceRolesIntro:
+    'Data spine first, then founding product work that transfers into FLORA’s TypeScript + creative-OS context.',
   experienceRoles: [
     {
       id: 'playwire',
@@ -309,6 +450,8 @@ export const floraFoundingDataEngineerOpportunity: Opportunity = {
   listed: false,
   variant: 'role-portfolio',
   applicationBanner: floraFoundingDataEngineerBanner,
+  animatedLogoBand: floraDataEngineerSkillLogoBand,
+  capabilitiesHref: '/capabilities#data-infrastructure',
   seo: {
     title: 'Moises Sanabria — FLORA · Founding Data Engineer',
     description:
@@ -338,6 +481,7 @@ export const floraFoundingDataEngineerOpportunity: Opportunity = {
   company: COMPANY,
   roleTitle: ROLE_TITLE,
   heroEyebrow: `${COMPANY} · ${ROLE_TITLE}`,
+  heroRoleMeta: 'New York City · Full-time · On-site · Engineering · $170K–$240K + equity',
   candidateName: 'Moises Sanabria',
   candidatePositioning:
     'Data engineer who has stood up pipelines and BI from scratch — and ships TypeScript product with growth-minded engineers',
@@ -347,17 +491,18 @@ export const floraFoundingDataEngineerOpportunity: Opportunity = {
     'Snowflake · Tableau · SQL',
     'Private application dossier',
   ],
-  heroPrimaryCta: { label: 'View evidence', href: '#evidence' },
+  heroPrimaryCta: { label: 'Explore data model', href: '#data-model' },
   heroSecondaryCta: { label: 'Apply on Ashby', href: ASHBY_URL },
   navItems: [
     { id: 'hero', label: 'Overview' },
     { id: 'fit', label: 'Role fit' },
+    { id: 'data-model', label: 'Data model', shortLabel: 'Model' },
     { id: 'evidence', label: 'Evidence' },
-    { id: 'coming-soon', label: 'Coming soon' },
+    { id: 'coming-soon', label: 'Coming soon', shortLabel: 'Soon' },
     { id: 'skills', label: 'Skills' },
-    { id: 'capabilities', label: 'Capabilities' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'process', label: 'First 90 days' },
+    { id: 'capabilities', label: 'Capabilities', shortLabel: 'Caps' },
+    { id: 'experience', label: 'Experience', shortLabel: 'Exp' },
+    { id: 'process', label: 'First 90 days', shortLabel: '90d' },
     { id: 'contact', label: 'Contact' },
   ],
   hero: {
@@ -412,7 +557,7 @@ export const floraFoundingDataEngineerOpportunity: Opportunity = {
   ],
   processSectionTitle: 'First ~90 days as founding data hire',
   processIntro:
-    'A realistic founding sequence aligned with FLORA’s stated work: audit → model → warehouse → metrics → BI. Vendor choices included.',
+    'A realistic founding sequence aligned with FLORA’s stated work: audit → model → warehouse → metrics → BI. Vendor choices included. Tap or hover a step to focus.',
   processSteps: [
     {
       title: 'Audit PostHog + product questions',
@@ -452,6 +597,8 @@ export const floraFoundingDataEngineerOpportunity: Opportunity = {
     caseStudiesAnchor: '#evidence',
     emailSubject: 'FLORA — Founding Data Engineer — Moises Sanabria',
     github: 'https://github.com/moisestech',
+    scheduleUrl: ASHBY_URL,
+    scheduleLabel: 'Apply on Ashby',
   }),
   techLogoIds: ['snowflake', 'tableau', 'posthog', 'python', 'typescript', 'postgres', 'aws'],
   resumeSectionTitle: 'Ready to talk about FLORA’s data function?',

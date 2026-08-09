@@ -4,9 +4,13 @@
  */
 
 import {
+  digilabAsset,
+  digilabLabGalleryIds,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
-} from '@/content/evidence/projects';
+  VIBE_CODE_NET_ART_BANNER,
+  VIBE_CODE_NET_ART_BANNER_ALT,
+} from '@/content/oolite-arts/media';
 
 export type AssetStatus = 'ready' | 'needed' | 'placeholder';
 export type PermissionStatus =
@@ -14,13 +18,22 @@ export type PermissionStatus =
   | 'unknown'
   | 'anonymized'
   | 'archetype-from-public-curriculum'
-  | 'public-source';
+  | 'public-source'
+  | 'close-circle';
 
 export type NeededAsset = {
   name: string;
   preferred: string;
   folder: string;
   record: string;
+};
+
+export type CaseStudyImage = {
+  src: string;
+  alt: string;
+  status?: AssetStatus;
+  mediaId?: string;
+  caption?: string;
 };
 
 export const OOLITE_ARTS_CASE_STUDY = {
@@ -48,15 +61,25 @@ export const OOLITE_ARTS_CASE_STUDY = {
     credits: [
       {
         name: 'Fabiola Larios',
-        role: 'Digital Lab direction and co-development',
+        role: 'Director of Digital Lab · direction and co-development',
+        portraitId: 'portrait.fabiola' as const,
+        portrait: {
+          src: digilabAsset('portrait.fabiola').src,
+          alt: digilabAsset('portrait.fabiola').alt,
+        },
       },
       {
         name: 'Moises Sanabria',
-        role: 'Technical direction and co-development',
+        role: 'Technical Director of Digital · technical direction and co-development',
+        portraitId: 'portrait.moises' as const,
+        portrait: {
+          src: digilabAsset('portrait.moises').src,
+          alt: digilabAsset('portrait.moises').alt,
+        },
       },
     ],
     collaboration:
-      'In collaboration with Oolite staff, instructors, participating artists, and community learners.',
+      'Developed with Director of Digital Lab Fabiola Larios; Moises Sanabria as Technical Director of Digital; with Oolite staff, participating artists, and institutional partners.',
     disclaimer:
       'This independent case study documents work developed at Oolite Arts in collaboration with staff, artists, and participants. It is not an official Oolite Arts publication.',
     publicLab: {
@@ -69,16 +92,22 @@ export const OOLITE_ARTS_CASE_STUDY = {
     heroImage: {
       src: OOLITE_DIGITAL_LAB_IMAGE,
       alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
-      status: 'placeholder' as AssetStatus,
-      note: 'Production hero pending dedicated finished-lab photography.',
+      status: 'ready' as AssetStatus,
+      mediaId: 'digilab.room-cyan',
+      note: 'Hover parallax layers entrance + 360 stills over the production room hero.',
     },
-    neededHero360: {
-      name: 'Finished Digital Lab 360° panorama or walkthrough',
-      preferred: 'Equirectangular 2:1, 5.7K+ master; WebP/AVIF poster',
-      folder: 'public/oolite/360/',
-      record: 'assets.hero-360-01',
-    } satisfies NeededAsset,
   },
+
+  labGallery: digilabLabGalleryIds.map((id) => {
+    const a = digilabAsset(id);
+    return {
+      src: a.src,
+      alt: a.alt,
+      mediaId: a.id,
+      caption: a.caption ?? a.name,
+      status: 'ready' as AssetStatus,
+    };
+  }),
 
   institutionalQuestion: {
     title: 'What does it take to make advanced technology genuinely useful to artists?',
@@ -179,6 +208,24 @@ export const OOLITE_ARTS_CASE_STUDY = {
     title: '3D Resin Printing: From File to Object',
     lead:
       'Do not present the printer as spectacle alone. Show the institutional knowledge required to make it useful.',
+    image: {
+      src: digilabAsset('workshop.resin-2026').src,
+      alt: digilabAsset('workshop.resin-2026').alt,
+      mediaId: 'workshop.resin-2026',
+      status: 'ready' as AssetStatus,
+    },
+    supportingImages: [
+      {
+        src: digilabAsset('digilab.360-pcs-printer').src,
+        alt: digilabAsset('digilab.360-pcs-printer').alt,
+        mediaId: 'digilab.360-pcs-printer',
+      },
+      {
+        src: digilabAsset('digilab.360-faby-printer').src,
+        alt: digilabAsset('digilab.360-faby-printer').alt,
+        mediaId: 'digilab.360-faby-printer',
+      },
+    ],
     steps: [
       { id: 'concept', label: 'Artist concept or source image' },
       { id: 'model', label: 'Digital model readiness' },
@@ -196,12 +243,6 @@ export const OOLITE_ARTS_CASE_STUDY = {
       'Artist consultation',
       'Finishing and hand-off',
     ],
-    needed: {
-      name: 'Resin process clips + Draco-compressed GLB models',
-      preferred: '3–6 clips (10–30s); GLB under 10 MB; turntable photos',
-      folder: 'public/oolite/resin/',
-      record: 'resinWorkflow',
-    } satisfies NeededAsset,
   },
 
   classes: [
@@ -210,7 +251,7 @@ export const OOLITE_ARTS_CASE_STUDY = {
       title: 'Artist Website for Beginners',
       dateLabel: 'Saturday, June 13, 2026 · 10 a.m.–1 p.m.',
       dateISO: '2026-06-13',
-      topics: ['artist-websites', 'creative-coding', 'net-art'],
+      topics: ['artist-websites', 'creative-coding', 'net-art', 'vibe-coding'],
       audience: ['public', 'beginners'],
       level: 'Beginners',
       format: 'One-day workshop',
@@ -233,16 +274,37 @@ export const OOLITE_ARTS_CASE_STUDY = {
       sourceUrl: 'https://oolitearts.org/event/artist-website-for-beginners/',
       sourceStatus: 'public-page-confirmed' as const,
       image: {
-        src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1782568215/dccmiami/workshops/vibe-coding-net-art/banners/02_beginner-artist-website-workflow_vibe-coding-digilab-oolite_m934yj.png',
-        alt: 'Beginner artist website workflow — Digilab Oolite workshop banner',
+        src: VIBE_CODE_NET_ART_BANNER,
+        alt: VIBE_CODE_NET_ART_BANNER_ALT,
         status: 'ready' as AssetStatus,
+        mediaId: 'workshop.vibe-code-net-art',
       },
-      needed: {
-        name: 'Class photos (wide, detail, instructors, outcomes)',
-        preferred: '5–10 images, 2400px+ long edge, captioned',
-        folder: 'public/oolite/classes/artist-website-beginners/',
-        record: 'classes.artist-website-beginners',
-      } satisfies NeededAsset,
+      documentary: [
+        {
+          src: digilabAsset('workshop.art-tech-coding').src,
+          alt: digilabAsset('workshop.art-tech-coding').alt,
+          mediaId: 'workshop.art-tech-coding',
+          permissionStatus: 'close-circle' as PermissionStatus,
+        },
+        {
+          src: digilabAsset('docs.vibe-apr25-35').src,
+          alt: digilabAsset('docs.vibe-apr25-35').alt,
+          mediaId: 'docs.vibe-apr25-35',
+          permissionStatus: 'close-circle' as PermissionStatus,
+        },
+        {
+          src: digilabAsset('docs.vibe-apr25-29').src,
+          alt: digilabAsset('docs.vibe-apr25-29').alt,
+          mediaId: 'docs.vibe-apr25-29',
+          permissionStatus: 'close-circle' as PermissionStatus,
+        },
+        {
+          src: digilabAsset('docs.vibe-apr25-39').src,
+          alt: digilabAsset('docs.vibe-apr25-39').alt,
+          mediaId: 'docs.vibe-apr25-39',
+          permissionStatus: 'close-circle' as PermissionStatus,
+        },
+      ],
     },
     {
       id: 'intro-resin-printing',
@@ -270,13 +332,26 @@ export const OOLITE_ARTS_CASE_STUDY = {
       tools: ['Resin 3D printer', 'Wash/cure station', 'Slicing software'],
       sourceUrl: 'https://oolitearts.org/event/intro-to-3d-resin-printing-for-artists/',
       sourceStatus: 'public-page-confirmed' as const,
-      image: null,
-      needed: {
-        name: 'Resin class photos + process documentation',
-        preferred: '5–10 images; safety-aware framing; no unconsented faces',
-        folder: 'public/oolite/classes/intro-resin-printing/',
-        record: 'classes.intro-resin-printing',
-      } satisfies NeededAsset,
+      image: {
+        src: digilabAsset('workshop.resin-2026').src,
+        alt: digilabAsset('workshop.resin-2026').alt,
+        status: 'ready' as AssetStatus,
+        mediaId: 'workshop.resin-2026',
+      },
+      documentary: [
+        {
+          src: digilabAsset('digilab.360-pcs-printer').src,
+          alt: digilabAsset('digilab.360-pcs-printer').alt,
+          mediaId: 'digilab.360-pcs-printer',
+          permissionStatus: 'public-source' as PermissionStatus,
+        },
+        {
+          src: digilabAsset('digilab.360-faby-printer').src,
+          alt: digilabAsset('digilab.360-faby-printer').alt,
+          mediaId: 'digilab.360-faby-printer',
+          permissionStatus: 'public-source' as PermissionStatus,
+        },
+      ],
     },
     {
       id: 'artist-websites-aug',
@@ -299,15 +374,169 @@ export const OOLITE_ARTS_CASE_STUDY = {
       tools: ['Web publishing platforms'],
       sourceUrl: 'https://oolitearts.org/art-classes/',
       sourceStatus: 'public-listing-confirmed' as const,
-      image: null,
-      needed: {
-        name: 'Class detail page confirmation + photos',
-        preferred: 'Link to event page when published; 5–10 photos',
-        folder: 'public/oolite/classes/artist-websites-aug/',
-        record: 'classes.artist-websites-aug',
-      } satisfies NeededAsset,
+      image: {
+        src: digilabAsset('workshop.artist-websites-cover').src,
+        alt: digilabAsset('workshop.artist-websites-cover').alt,
+        status: 'ready' as AssetStatus,
+        mediaId: 'workshop.artist-websites-cover',
+      },
+      documentary: [] as CaseStudyImage[],
+    },
+    {
+      id: 'seo-for-artists',
+      title: 'SEO for Artists',
+      dateLabel: 'Digital Lab workshop · course offering',
+      dateISO: null,
+      topics: ['seo', 'artist-websites', 'publishing'],
+      audience: ['public', 'artists'],
+      level: 'All levels',
+      format: 'Workshop / course',
+      durationMinutes: null,
+      capacity: null,
+      age: '15+',
+      language: 'English',
+      location: 'Oolite Arts Digital Lab programming',
+      instructors: ['Fabiola Larios', 'Moises Sanabria'],
+      summary:
+        'A Digital Lab course on artist discoverability—how search, metadata, and publishing habits help artists make their work findable without turning the studio into a marketing department.',
+      learningOutcomes: [
+        'Understand how search engines and platforms surface artist pages and projects.',
+        'Apply practical metadata, titling, and structure habits to an artist site or project page.',
+        'Leave with a checklist for keeping a site discoverable as work evolves.',
+      ],
+      tools: ['Artist websites', 'Search / metadata practices'],
+      sourceUrl: 'https://oolitearts.org/art-classes/',
+      sourceStatus: 'program-offering' as const,
+      image: {
+        src: digilabAsset('workshop.seo-banner').src,
+        alt: digilabAsset('workshop.seo-banner').alt,
+        status: 'ready' as AssetStatus,
+        mediaId: 'workshop.seo-banner',
+      },
+      documentary: [] as CaseStudyImage[],
     },
   ],
+
+  /** Services prototyped at Oolite Digilab — now offered as independent artist support */
+  offerings: {
+    title: 'Artist support offerings',
+    lead:
+      'These formats were developed inside the Oolite Digital Lab. They are now offered as independent consultations and workshops for artists and institutions.',
+    originNote: 'Developed at Oolite Digilab · offered independently',
+    items: [
+      {
+        id: '3d-consulting',
+        title: '3D consulting',
+        body: 'File readiness, print planning, and fabrication pathway advice for sculpture, installation, and prototyping.',
+        mediaId: 'service.3d-consulting' as const,
+        image: {
+          src: digilabAsset('service.3d-consulting').src,
+          alt: digilabAsset('service.3d-consulting').alt,
+        },
+      },
+      {
+        id: '360-photo',
+        title: '360° photography',
+        body: 'Spatial documentation for studios, exhibitions, and institutional spaces.',
+        mediaId: 'service.360-photo' as const,
+        image: {
+          src: digilabAsset('service.360-photo').src,
+          alt: digilabAsset('service.360-photo').alt,
+        },
+      },
+      {
+        id: 'virtual-studio-visit',
+        title: '1:1 virtual studio visit',
+        body: 'Remote critique and technical walkthrough for a live project.',
+        mediaId: 'service.virtual-studio-visit' as const,
+        image: {
+          src: digilabAsset('service.virtual-studio-visit').src,
+          alt: digilabAsset('service.virtual-studio-visit').alt,
+        },
+      },
+      {
+        id: 'studio-visit',
+        title: '1:1 studio visit',
+        body: 'In-person support for equipment, workflow, or project troubleshooting.',
+        mediaId: 'service.studio-visit' as const,
+        image: {
+          src: digilabAsset('service.studio-visit').src,
+          alt: digilabAsset('service.studio-visit').alt,
+        },
+      },
+      {
+        id: 'vr-consulting',
+        title: 'VR consulting',
+        body: 'Orientation and project planning for immersive / VR-adjacent artist work.',
+        mediaId: 'service.vr-consulting' as const,
+        image: {
+          src: digilabAsset('service.vr-consulting').src,
+          alt: digilabAsset('service.vr-consulting').alt,
+        },
+      },
+      {
+        id: 'inkjet',
+        title: 'Inkjet printing',
+        body: 'Print consultation for artist editions, documentation, and exhibition output.',
+        mediaId: 'service.inkjet' as const,
+        image: {
+          src: digilabAsset('service.inkjet').src,
+          alt: digilabAsset('service.inkjet').alt,
+        },
+      },
+    ],
+  },
+  artistAccess: {
+    title: 'How artists accessed the lab',
+    lead:
+      'Access was designed as a program—not a locked room of machines. Public open hours, fee-based workshops, and resident pathways connected teaching to independent use.',
+    pathways: [
+      {
+        title: 'Open lab hours',
+        body: 'Published Tuesday and Thursday access (10 a.m.–5 p.m.) for supervised and independent work within Digital Lab capacity.',
+      },
+      {
+        title: 'Public workshops',
+        body: 'Fee-based classes with clear outcomes—creative publishing / vibe coding and resin fabrication among them—so first contact produces an artifact.',
+      },
+      {
+        title: 'Consultation and return visits',
+        body: 'Intake, troubleshooting, and hand-off documentation so workshop knowledge survives into open-lab practice.',
+      },
+    ],
+    sourceUrl: 'https://oolitearts.org/event/digilab/',
+    sourceLabel: 'Oolite Arts — Digital Lab',
+  },
+
+  documentationResources: {
+    title: 'Documentation and reusable resources',
+    lead:
+      'Equipment guides, curriculum templates, safety framing, and booking/communications patterns turn one-off workshops into institutional memory.',
+    items: [
+      'Equipment readiness and safety procedures',
+      'Curriculum outlines with learning outcomes',
+      'Artist intake and troubleshooting patterns',
+      'Scheduling and open-lab communications',
+      'Follow-up consultation framing',
+    ],
+    documentary: [
+      {
+        src: digilabAsset('docs.vibe-apr25-29').src,
+        alt: digilabAsset('docs.vibe-apr25-29').alt,
+        mediaId: 'docs.vibe-apr25-29',
+      },
+      {
+        src: digilabAsset('docs.vibe-apr25-35').src,
+        alt: digilabAsset('docs.vibe-apr25-35').alt,
+        mediaId: 'docs.vibe-apr25-35',
+      },
+      {
+        src: digilabAsset('docs.vibe-apr25-39').src,
+        alt: digilabAsset('docs.vibe-apr25-39').alt,
+        mediaId: 'docs.vibe-apr25-39',
+      },
+    ],
+  },
 
   artistStories: [
     {
@@ -516,10 +745,10 @@ export const OOLITE_ARTS_CASE_STUDY = {
       headline:
         'Building a digital lab, artist-technology program, AI initiative, or creative learning platform?',
       buttons: [
-        { label: 'Discuss an institutional project', href: '/contact' },
+        { label: 'Creative infrastructure overview', href: '/artist-infrastructure' },
+        { label: 'Discuss an institutional project', href: '/artist-infrastructure#contact' },
         { label: 'View AI24', href: '/ai24' },
         { label: 'View teaching', href: '/workshops' },
-        { label: 'Project inquiry', href: '/ai24#work-with-us' },
       ],
     },
   },
@@ -547,7 +776,7 @@ export const OOLITE_ARTS_CASE_STUDY = {
     },
     {
       title: 'The next application',
-      body: 'This methodology can be adapted for museums, residencies, universities, nonprofits, and creative companies.',
+      body: 'This methodology can be adapted for museums, residencies, universities, nonprofits, and creative companies—see the creative infrastructure overview for how it packages as teaching and systems work.',
     },
   ],
 
@@ -557,11 +786,21 @@ export const OOLITE_ARTS_CASE_STUDY = {
         name: 'Fabiola Larios',
         role: 'Director of Digital Lab · direction and co-development',
         website: 'https://fabiola.io',
+        portraitId: 'portrait.fabiola' as const,
+        portrait: {
+          src: digilabAsset('portrait.fabiola').src,
+          alt: digilabAsset('portrait.fabiola').alt,
+        },
       },
       {
         name: 'Moises Sanabria',
-        role: 'Technical Director · technical direction and co-development',
+        role: 'Technical Director of Digital · technical direction and co-development',
         website: 'https://moises.tech',
+        portraitId: 'portrait.moises' as const,
+        portrait: {
+          src: digilabAsset('portrait.moises').src,
+          alt: digilabAsset('portrait.moises').alt,
+        },
       },
     ],
     collective:
@@ -586,8 +825,8 @@ export const OOLITE_ARTS_CASE_STUDY = {
         href: 'https://oolitearts.org/art-classes/',
       },
     ],
-    lastUpdated: '2026-08-04',
+    lastUpdated: '2026-08-07',
     phaseNote:
-      'Phase 1 case study. Phase 2 will add 360° viewer, synchronized before/after video, filterable class database, interactive resin models, and community mosaic when assets are ready.',
+      'Case study media registry live. Hero uses layered parallax; class cards include banners + documentary stills; Digilab service offerings listed as independent formats developed at Oolite.',
   },
 } as const;

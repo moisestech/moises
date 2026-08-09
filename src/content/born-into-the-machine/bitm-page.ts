@@ -70,6 +70,12 @@ export const bitmPage = {
 
   deeperLinks: [
     {
+      label: 'The Internet Is Other AI',
+      href: '/research/the-internet-is-other-ai',
+      description:
+        'Browser-native multi-agent artwork: interpret, predict, circulate, materialize—with human refusal and a compounding local constitution.',
+    },
+    {
       label: 'AI Sprint — The Idea Center',
       href: '/research/born-into-the-machine/sprint',
       description: 'Sprint-facing page for the AI Sprint for Artists at Miami Dade College.',

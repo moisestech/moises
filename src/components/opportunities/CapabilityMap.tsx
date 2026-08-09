@@ -1,6 +1,7 @@
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { OpportunityRichText } from '@/components/opportunities/OpportunityRichText';
 import type { CapabilityMapData } from '@/content/opportunities/systemsDossier';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { cn } from '@/lib/utils';
 
 type CapabilityMapProps = {
@@ -10,20 +11,25 @@ type CapabilityMapProps = {
 };
 
 export function CapabilityMap({ data, sectionId = 'capabilities', className }: CapabilityMapProps) {
+  const accent = getOpportunityCompactAccent(sectionId);
+
   return (
     <section
       id={sectionId}
       className={cn(opp.section, className)}
       aria-labelledby={`${sectionId}-heading`}
     >
-      <h2 id={`${sectionId}-heading`} className={opp.h2}>
+      <p className={cn('text-xs font-semibold uppercase tracking-wide', accent.eyebrow)}>
+        Production tools
+      </p>
+      <h2 id={`${sectionId}-heading`} className={`mt-2 ${opp.h2}`}>
         {data.title}
       </h2>
       {data.subtitle ? <p className={`mt-2 max-w-3xl ${opp.muted}`}>{data.subtitle}</p> : null}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+      <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4">
         {data.groups.map((group) => (
-          <div key={group.id} className={cn(opp.card, 'p-5')}>
+          <div key={group.id} className={cn(opp.card, 'border-l-[3px] p-4 sm:p-5', accent.rail, accent.softBg)}>
             <h3 className={opp.h3MoMA}>{group.title}</h3>
             {group.items.length === 1 ? (
               <p className={`mt-3 ${opp.body}`}>

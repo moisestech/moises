@@ -1,3 +1,11 @@
+/**
+ * CoreStory — AI Engineer (strengthened Lore / product alignment)
+ * /opportunities/corestory-ai-engineer
+ *
+ * Listing: https://job-boards.greenhouse.io/corestory/jobs/4984207007
+ * RAG/vector claims stay gated until Infra24 verified live — but Lore LLM product + automation are submit-ready angles.
+ */
+
 import type { Opportunity } from './types';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
@@ -10,81 +18,129 @@ import {
   sprint2026ProcessSteps,
   verifierBoundaryNote,
 } from './shared-sprint-2026';
+import { engineeringEvidencePack } from './packs';
 
-/** Sprint seq 6 · Due Jul 17 · Blocked by evidence until Infra24 verified live */
 export const corestoryAiEngineerOpportunity: Opportunity = {
   slug: 'corestory-ai-engineer',
   status: 'active',
   listed: false,
+  family: 'compact',
+  applicationStatus: 'ready',
   variant: 'compact',
   seo: {
     title: 'AI Engineer — CoreStory · Moises Sanabria',
     description:
-      'Agentic AI and integration engineering — blocked for RAG/vector claims until Infra24 Memory Agent is verified live.',
+      'Private CoreStory AI Engineer dossier — Lore Machine LLM product engineering, agentic automation, and honest RAG evidence gates.',
     indexable: false,
   },
   visibilityNote:
-    'BLOCKED BY EVIDENCE — CoreStory likely requires RAG/vector depth. Infra24 Memory Agent is built locally, not verified live. Do not submit until deploy + eval green + verifier sign-off.',
+    'Private application dossier · CoreStory · AI Engineer. RAG/vector claims remain gated until Infra24 is verified live; Lore product + automation evidence is confirmed.',
   company: 'CoreStory',
   roleTitle: 'AI Engineer',
   audienceKeywords: {
     terms: [
-      { label: 'Agentic automation', detail: 'Confirmed: n8n production workflow + Airtable routing.' },
-      { label: 'RAG / vector', detail: 'PROHIBITED until Infra24 verified live — see productionAiAutomationPack.infra24MemoryAgent.' },
-      { label: 'Product engineering', detail: 'Lore Machine founding engineer; full-stack TypeScript delivery.' },
+      {
+        label: 'LLM product engineering',
+        detail: 'Confirmed: Lore Machine founding engineer — prompts, multimodal APIs, TypeScript delivery.',
+      },
+      {
+        label: 'Agentic automation',
+        detail: 'Confirmed: n8n production workflow + Airtable routing.',
+      },
+      {
+        label: 'RAG / vector',
+        detail:
+          'Gated until Infra24 Memory Agent verified live — see productionAiAutomationPack.infra24MemoryAgent.',
+      },
     ],
   },
   navItems: sprint2026NavItems,
   hero: {
-    headline: 'AI Engineer',
-    subheadline: 'Agentic automation confirmed · RAG evidence blocked pending verified-live Infra24 demo',
+    headline: 'AI engineer for narrative systems and agentic workflows',
+    subheadline:
+      'Lore Machine LLM product engineering confirmed · RAG depth labeled until Infra24 verified live',
     introParagraphs: [
-      'Full-Stack AI Engineer with confirmed production automation (n8n, Make, Airtable) and founding-engineer GenAI product work (Lore Machine). CoreStory alignment on RAG/vector/orchestration requires Infra24 Memory Agent to reach verified-live state before this dossier is submission-ready.',
+      'CoreStory sits at the intersection of stories, structured knowledge, and AI systems. My strongest alignment is Lore Machine: founding-engineer work turning narrative into structured multimedia through prompt systems, generative APIs, and TypeScript/Next.js delivery—plus production agentic automation (n8n, Make, Airtable).',
+      'Where CoreStory requires production RAG/vector depth, Infra24 Memory Agent remains a verified-live gate—not a silent claim. That honesty keeps the dossier usable for apply conversations without overselling.',
       verifierBoundaryNote,
       `Infra24 build state: ${productionAiAutomationPack.infra24MemoryAgent.buildState}.`,
     ],
-    trustLine: 'Hold submit until evidence gate clears · recruiter follow-up scheduled separately',
+    trustLine: 'Lore Machine founding engineer · production automation confirmed · RAG claims gated',
     headshotSrc: sprint2026Headshot,
     headshotAlt: 'Moises Sanabria',
   },
   roleMatchSectionTitle: 'Role fit (with evidence gates)',
-  roleMatchIntro: 'Green = confirmed. Red = blocked until Infra24 deploy + live verification.',
+  roleMatchIntro:
+    'Lead with Lore LLM product + automation. Treat RAG/vector as a clear ramp with a named evidence gate—not a fake production claim.',
   roleMatchRows: [
+    {
+      requirement: 'LLM / narrative product engineering',
+      evidence:
+        'Lore Machine founding engineer — prompt workflows, generative media APIs, scene-oriented rendering, Vercel production on a three-person team.',
+      status: 'demonstrated',
+      illustration: {
+        src: evidenceProjects['lore-machine'].imageSrc,
+        alt: 'Lore Machine',
+        local: evidenceProjects['lore-machine'].imageLocal,
+      },
+    },
     {
       requirement: 'Agentic workflow automation',
       evidence: automationProjectSpecs['n8n-gmail-intelligence'].evidenceLine,
-      illustration: { src: evidenceProjects['n8n-gmail-intelligence'].imageSrc, alt: 'n8n', local: true },
+      status: 'demonstrated',
+      illustration: {
+        src: evidenceProjects['n8n-gmail-intelligence'].imageSrc,
+        alt: 'n8n',
+        local: true,
+      },
     },
     {
-      requirement: 'LLM product engineering',
-      evidence: 'Lore Machine founding engineer — prompt workflows, generative media APIs, Vercel production.',
-      illustration: { src: evidenceProjects['lore-machine'].imageSrc, alt: 'Lore Machine', local: evidenceProjects['lore-machine'].imageLocal },
+      requirement: 'Full-stack TypeScript delivery',
+      evidence:
+        'AI24 and Lore: Next.js/React product surfaces, APIs, auth, and human-review publishing pipelines.',
+      status: 'demonstrated',
+      illustration: {
+        src: evidenceProjects.ai24.imageSrc,
+        alt: evidenceProjects.ai24.imageAlt,
+      },
     },
     {
       requirement: 'RAG / retrieval systems',
-      evidence: `[BLOCKED] ${productionAiAutomationPack.infra24MemoryAgent.buildState} — deploy Infra24, run eval green, verify live URL before claiming.`,
-      illustration: { src: evidenceProjects['digital-culture-infrastructure'].imageSrc, alt: 'DCC infra' },
+      evidence: `[GATED] ${productionAiAutomationPack.infra24MemoryAgent.buildState} — deploy Infra24, run eval green, verify live URL before claiming production RAG.`,
+      status: 'todo',
+      illustration: {
+        src: evidenceProjects['digital-culture-infrastructure'].imageSrc,
+        alt: 'DCC infra',
+      },
+    },
+  ],
+  featuredProjectIds: [...engineeringEvidencePack.fullStackAiDefault],
+  skillsMatrixRows: [
+    {
+      category: 'Confirmed',
+      skills: 'LLM product workflows, TypeScript, Next.js, n8n, Airtable, Make, prompt systems',
+      icon: 'workflow',
     },
     {
-      requirement: 'Vector database production',
-      evidence: '[BLOCKED] pgvector work exists in Infra24 repo locally — prohibited in public claims until verified live.',
-      illustration: { src: evidenceProjects['digital-culture-infrastructure'].imageSrc, alt: 'Infra24 context' },
+      category: 'Gated',
+      skills: 'Production RAG, pgvector Memory Agent — pending verified-live Infra24',
+      icon: 'shield',
+    },
+    {
+      category: 'Ramp plan',
+      skills: 'Deploy infra24 → sync embeddings → eval green → update dossier → apply with RAG claims',
+      icon: 'target',
     },
   ],
-  featuredProjectIds: ['n8n-gmail-intelligence', 'lore-machine', 'ai24'],
-  skillsMatrixRows: [
-    { category: 'Confirmed', skills: 'n8n, Airtable, Make, TypeScript, Next.js, LLM workflows', icon: 'workflow' },
-    { category: 'Blocked', skills: 'RAG, pgvector, institutional Memory Agent — pending verified-live Infra24', icon: 'shield' },
-    { category: 'Gap plan', skills: 'Deploy infra24 → sync embeddings → eval green → update dossier → reverifier', icon: 'target' },
-  ],
   processSteps: sprint2026ProcessSteps,
-  innovationLabSectionTitle: 'Evidence gate',
-  innovationLabLead: 'Do not submit yet',
+  innovationLabSectionTitle: 'Evidence posture',
+  innovationLabLead: 'Apply with Lore + automation; keep RAG honest',
   innovationLabBody:
-    'Closing the Infra24 verified-live gate unlocks CoreStory RAG claims and likely moves this role from blocked to pursue-with-conditions.',
+    'CoreStory can be pursued on confirmed LLM product and agentic automation evidence. Closing the Infra24 verified-live gate upgrades RAG claims from gated to demonstrated—without rewriting the rest of the dossier.',
   ctas: sprint2026Ctas('CoreStory AI Engineer'),
   animatedLogoBand: sprint2026LogoBand,
   techLogoIds: [],
-  resumeSectionTitle: 'Résumé — hold until RAG evidence live',
-  resumeSectionNote: 'Use automation-first bullets only until Infra24 verifier clears.',
+  resumeSectionTitle: 'Résumé — CoreStory AI Engineer',
+  resumeSectionNote:
+    'Lead with Lore Machine and automation. Keep RAG bullets conditional until Infra24 verifier clears.',
 };

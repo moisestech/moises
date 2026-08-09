@@ -119,6 +119,7 @@ export const INST_ACCENT: Record<
 };
 
 const FAMILY_ICONS: Record<InstitutionalFamilyMatch, LucideIcon> = {
+  'artist-infrastructure': Network,
   institutions: LayoutGrid,
   'oolite-arts': FlaskConical,
   bakehouse: MonitorSmartphone,
