@@ -105,21 +105,23 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
   const hasBanner = Boolean(data.banner?.src);
 
   return (
-    <OpportunityShell
-      navItems={data.navItems}
-      getSectionNavAccent={getOpportunityCompactAccent}
-      stickyNavTopClassName="top-[4.5rem] md:top-[5.25rem]"
-      sectionSpyOffsetPx={160}
-    >
+    <>
+      {/* Banner above sticky section nav so the flagship art is the first content plane. */}
       {data.banner ? <OpportunityApplicationBanner banner={data.banner} className="mb-0" /> : null}
 
-      <main
-        className={cn(
-          opp.main,
-          'overflow-x-clip',
-          hasBanner ? 'pt-6 sm:pt-8' : 'pt-8 sm:pt-10',
-        )}
+      <OpportunityShell
+        navItems={data.navItems}
+        getSectionNavAccent={getOpportunityCompactAccent}
+        stickyNavTopClassName="top-[4.5rem] md:top-[5.25rem]"
+        sectionSpyOffsetPx={160}
       >
+        <main
+          className={cn(
+            opp.main,
+            'overflow-x-clip',
+            hasBanner ? 'pt-6 sm:pt-8' : 'pt-8 sm:pt-10',
+          )}
+        >
         <OpportunityColorSection sectionId="overview" className="!mt-0 scroll-mt-28 sm:scroll-mt-32">
           <section id="overview">
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(220px,320px)] lg:items-start">
@@ -476,7 +478,8 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
             ))}
           </ul>
         </section>
-      </main>
-    </OpportunityShell>
+        </main>
+      </OpportunityShell>
+    </>
   );
 }

@@ -117,11 +117,20 @@ export const ogilvySeniorAiDrivenCreativeDirectorBanner = defineApplicationBanne
   intrinsicRatio: CREATIVE_AGENCY_BANNER_RATIO,
 });
 
+/**
+ * Public hiring flagships — measured 2172×724 (~3:1).
+ * Height tracks viewport width so the collage spans edge-to-edge (shared opportunity
+ * strip is shorter and left a large empty gray band on desktop).
+ */
+const FLAGSHIP_BANNER_FRAME =
+  '!h-[min(calc(100vw/3),52vh,640px)] sm:!h-[min(calc(100vw/3),52vh,640px)] md:!h-[min(calc(100vw/3),52vh,640px)] lg:!h-[min(calc(100vw/3),52vh,640px)] xl:!h-[min(calc(100vw/3),52vh,640px)] w-full';
+
 /** Public hiring flagship — `/creative-ai` (measured 2172×724). */
 export const creativeAiFlagshipBanner = defineApplicationBanner({
   src: `${cdn}/v1786380608/jobs/banners/creative-ai-moises-tech-banner_qtiy2f.png`,
   alt: 'Creative AI — Moises Sanabria hiring flagship banner',
   intrinsicRatio: 2172 / 724,
+  frameClass: FLAGSHIP_BANNER_FRAME,
 });
 
 /** Public hiring flagship — `/creative-strategist` (measured 2172×724). */
@@ -129,6 +138,7 @@ export const creativeStrategistFlagshipBanner = defineApplicationBanner({
   src: `${cdn}/v1786380606/jobs/banners/creative-strategist-moises-tech-banner_ptxn5d.png`,
   alt: 'Creative Strategist — Moises Sanabria hiring flagship banner',
   intrinsicRatio: 2172 / 724,
+  frameClass: FLAGSHIP_BANNER_FRAME,
 });
 
 /** Morley — Art Director (Remote, Florida). */
