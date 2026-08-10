@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowUpRight,
+  Building2,
+  CalendarDays,
   CheckCircle2,
   ChevronDown,
   Code2,
@@ -12,8 +14,11 @@ import {
   FileText,
   FlaskConical,
   GraduationCap,
+  ImageIcon,
   Layers,
   Lightbulb,
+  Mail,
+  MapPin,
   Network,
   Palette,
   Presentation,
@@ -21,6 +26,7 @@ import {
   SlidersHorizontal,
   Sparkles,
   Users,
+  Video,
   Workflow,
   type LucideIcon,
 } from 'lucide-react';
@@ -50,11 +56,23 @@ const INST_ICON: Record<string, LucideIcon> = {
   users: Users,
   rocket: Rocket,
   flask: FlaskConical,
+  image: ImageIcon,
+  mail: Mail,
+  building: Building2,
+  map: MapPin,
+  calendar: CalendarDays,
+  video: Video,
 };
 
 function InstBigIcon({ name, className }: { name?: string; className?: string }) {
   const Icon = (name && INST_ICON[name]) || Sparkles;
-  return <Icon className={cn('h-7 w-7 sm:h-8 sm:w-8', className)} aria-hidden />;
+  return <Icon className={cn('h-8 w-8 sm:h-10 sm:w-10', className)} aria-hidden />;
+}
+
+/** Compact icon for sticky section chips. */
+export function InstNavIcon({ name, className }: { name?: string; className?: string }) {
+  const Icon = (name && INST_ICON[name]) || Sparkles;
+  return <Icon className={cn('h-3.5 w-3.5', className)} aria-hidden />;
 }
 
 export function CreditCaption({
@@ -232,7 +250,13 @@ export function ContextProofStrip({
   items,
 }: {
   eyebrow: string;
-  items: readonly { id: string; label: string; body: string }[];
+  items: readonly {
+    id: string;
+    label: string;
+    body: string;
+    icon?: string;
+    accent?: keyof typeof INST_ACCENT;
+  }[];
 }) {
   return (
     <section
@@ -248,18 +272,50 @@ export function ContextProofStrip({
           <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
             {eyebrow}
           </p>
-          <ul className="mt-4 grid gap-4 sm:grid-cols-3">
-            {items.map((item) => (
-              <li
-                key={item.id}
-                className="border-l-2 border-neutral-900/80 pl-4"
-              >
-                <p className="text-sm font-semibold tracking-tight text-neutral-950">
-                  {item.label}
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-neutral-600">{item.body}</p>
-              </li>
-            ))}
+          <ul className="mt-5 grid gap-4 sm:grid-cols-3">
+            {items.map((item, i) => {
+              const accent = item.accent ?? (['teal', 'ocean', 'copper'] as const)[i % 3]!;
+              return (
+                <li
+                  key={item.id}
+                  className={cn(
+                    'group relative overflow-hidden border border-neutral-200 bg-white p-4 transition duration-300',
+                    'hover:-translate-y-1 hover:shadow-lg active:scale-[0.99]',
+                    'motion-reduce:hover:translate-y-0',
+                    INST_ACCENT[accent].ring,
+                    'ring-1 ring-inset',
+                  )}
+                >
+                  <div
+                    className={cn(
+                      'pointer-events-none absolute inset-0 bg-gradient-to-br opacity-80',
+                      INST_ACCENT[accent].soft,
+                    )}
+                    aria-hidden
+                  />
+                  <span
+                    className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100 motion-reduce:hidden"
+                    aria-hidden
+                  />
+                  <div className="relative z-10 flex items-start gap-3">
+                    <span
+                      className={cn(
+                        'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-md transition duration-300 group-hover:scale-110',
+                        INST_ACCENT[accent].iconBg,
+                      )}
+                    >
+                      <InstBigIcon name={item.icon} className="h-7 w-7 sm:h-8 sm:w-8" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold tracking-tight text-neutral-950">
+                        {item.label}
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-neutral-600">{item.body}</p>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </InstReveal>
       </div>
@@ -327,7 +383,7 @@ export function PositioningTriad({
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/55 to-transparent" />
                   <span
                     className={cn(
-                      'absolute bottom-3 left-3 flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg transition group-hover:scale-110',
+                      'absolute bottom-3 left-3 flex h-16 w-16 items-center justify-center rounded-2xl shadow-lg transition group-hover:scale-110',
                       INST_ACCENT[card.accent].iconBg,
                     )}
                   >
@@ -338,7 +394,7 @@ export function PositioningTriad({
                 <div className="relative p-5 pb-0 sm:p-6 sm:pb-0">
                   <span
                     className={cn(
-                      'flex h-14 w-14 items-center justify-center rounded-2xl shadow-md transition group-hover:scale-110',
+                      'flex h-16 w-16 items-center justify-center rounded-2xl shadow-md transition group-hover:scale-110',
                       INST_ACCENT[card.accent].iconBg,
                     )}
                   >
@@ -420,7 +476,7 @@ export function CurriculumModuleCard({
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/55 to-transparent" />
           <span
             className={cn(
-              'absolute bottom-3 left-3 flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg',
+              'absolute bottom-3 left-3 flex h-16 w-16 items-center justify-center rounded-2xl shadow-lg',
               INST_ACCENT[accent].iconBg,
             )}
           >
@@ -522,10 +578,12 @@ export function CaseStudyIntro({
           {points.map((point) => (
             <li
               key={point}
-              className="flex items-start gap-2 text-sm text-neutral-700"
+              className="group flex items-start gap-2.5 rounded-lg border border-transparent bg-gradient-to-br from-teal-50/60 to-transparent p-2.5 text-sm text-neutral-700 transition hover:border-teal-200 hover:shadow-sm"
             >
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-teal-700" aria-hidden />
-              {point}
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-700 text-white shadow-sm transition group-hover:scale-110">
+                <CheckCircle2 className="h-4 w-4" aria-hidden />
+              </span>
+              <span className="pt-1">{point}</span>
             </li>
           ))}
         </ul>
@@ -680,6 +738,8 @@ export function PracticeProjectStrip({
     body: string;
     href: string;
     image: InstMedia;
+    icon?: string;
+    accent?: keyof typeof INST_ACCENT;
   }[];
 }) {
   return (
@@ -700,37 +760,59 @@ export function PracticeProjectStrip({
             className="inline-flex items-center gap-1.5 text-sm font-semibold underline-offset-4 hover:underline"
           >
             {hrefLabel}
-            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
       </InstReveal>
       <ul className="mt-8 grid gap-4 sm:grid-cols-3">
-        {projects.map((project, i) => (
-          <InstReveal key={project.id} delay={0.05 * i}>
-            <li>
-              <Link
-                href={project.href}
-                className="group block overflow-hidden border border-neutral-200 bg-white transition hover:border-neutral-400"
-              >
-                <div className="relative aspect-[4/3] bg-neutral-200">
-                  <Image
-                    src={project.image.src}
-                    alt={project.image.alt}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                    sizes="(max-width: 768px) 100vw, 320px"
-                  />
-                </div>
-                <div className="p-4 sm:p-5">
-                  <h3 className="font-semibold tracking-tight">{project.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
-                    {project.body}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          </InstReveal>
-        ))}
+        {projects.map((project, i) => {
+          const accent = project.accent ?? (['rose', 'ink', 'teal'] as const)[i % 3]!;
+          return (
+            <InstReveal key={project.id} delay={0.05 * i}>
+              <li>
+                <Link
+                  href={project.href}
+                  className={cn(
+                    'group relative block overflow-hidden border border-neutral-200 bg-white transition duration-300',
+                    'hover:-translate-y-1.5 hover:shadow-xl active:scale-[0.99]',
+                    'motion-reduce:hover:translate-y-0',
+                    INST_ACCENT[accent].ring,
+                    'ring-1 ring-inset',
+                  )}
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200">
+                    <Image
+                      src={project.image.src}
+                      alt={project.image.alt}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-[1.06] motion-reduce:group-hover:scale-100"
+                      sizes="(max-width: 768px) 100vw, 320px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/55 via-transparent to-transparent" />
+                    <span
+                      className={cn(
+                        'absolute bottom-3 left-3 flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg transition group-hover:scale-110',
+                        INST_ACCENT[accent].iconBg,
+                      )}
+                    >
+                      <InstBigIcon name={project.icon ?? 'sparkles'} className="h-7 w-7" />
+                    </span>
+                    <span
+                      className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100 motion-reduce:hidden"
+                      aria-hidden
+                    />
+                  </div>
+                  <div className="relative p-4 sm:p-5">
+                    <h3 className="font-semibold tracking-tight">{project.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
+                      {project.body}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            </InstReveal>
+          );
+        })}
       </ul>
     </section>
   );
@@ -777,7 +859,7 @@ export function EngagementFormatCards({
                   )}
                   onClick={() => setOpenId(open ? null : format.id)}
                 >
-                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-sky-700 text-white shadow-md transition group-hover:scale-110">
+                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-sky-700 text-white shadow-md transition group-hover:scale-110">
                     <InstBigIcon name={format.icon} />
                   </span>
                   <span className="min-w-0 flex-1">
@@ -846,7 +928,7 @@ export function EngagementProcess({
               key={step.id}
               className="group relative flex flex-1 flex-col border border-neutral-200 bg-gradient-to-br from-teal-50/80 via-white to-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-5 motion-reduce:hover:translate-y-0"
             >
-              <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-700 text-white shadow-md transition group-hover:scale-110">
+              <span className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-700 text-white shadow-md transition group-hover:scale-110">
                 <InstBigIcon name={step.icon} />
               </span>
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-teal-800">
@@ -874,7 +956,7 @@ export function MediaNeededStrip({
   eyebrow: string;
   title: string;
   lead: string;
-  items: readonly { id: string; title: string; note: string; status?: string }[];
+  items: readonly { id: string; title: string; note: string; status?: string; icon?: string }[];
 }) {
   return (
     <section id="media-needed" className="scroll-mt-28 border-t border-neutral-200 py-12 sm:py-16">
@@ -890,7 +972,10 @@ export function MediaNeededStrip({
       <ul className="mt-8 grid gap-4 md:grid-cols-3">
         {items.map((item, i) => (
           <InstReveal key={item.id} delay={0.05 * i}>
-            <li className="flex h-full flex-col border border-dashed border-amber-400/70 bg-gradient-to-br from-amber-50/90 to-white p-5 transition hover:-translate-y-1 hover:shadow-md">
+            <li className="group flex h-full flex-col border border-dashed border-amber-400/70 bg-gradient-to-br from-amber-50/90 to-white p-5 transition duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.99]">
+              <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-700 text-white shadow-md transition group-hover:scale-110">
+                <InstBigIcon name={item.icon ?? 'video'} className="h-7 w-7" />
+              </span>
               <span className="inline-flex w-fit rounded-full border border-amber-500/50 bg-amber-100 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-amber-950">
                 Slot open
               </span>
