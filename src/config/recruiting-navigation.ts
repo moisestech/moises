@@ -6,6 +6,8 @@ export const RECRUITING_SITE_NAV_ITEMS: SiteNavItem[] = [
   { label: 'Home', path: '/', enabled: true },
   { label: 'Capabilities', path: '/capabilities', enabled: true },
   { label: 'AI Engineering', path: '/ai-engineering', enabled: true },
+  { label: 'Forward-Deployed', path: '/forward-deployed', enabled: true },
+  { label: 'Creative AI', path: '/creative-ai', enabled: true },
   { label: 'Career Packet', path: '/career-packet', enabled: true },
   { label: 'Web CV', path: '/cv/tech', enabled: true },
   { label: 'GitHub', path: 'https://github.com/moisestech', external: true, enabled: true },
@@ -45,6 +47,8 @@ export function isRecruitingSitePath(pathname: string | null): boolean {
   if (pathname === '/ai-engineering') return true;
   if (pathname === '/capabilities') return true;
   if (pathname === '/career-packet') return true;
+  if (pathname === '/forward-deployed') return true;
+  if (pathname === '/creative-ai') return true;
   if (pathname.startsWith('/projects/')) return true;
   return false;
 }

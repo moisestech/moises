@@ -394,11 +394,47 @@ export const sharedPointOfView: PointOfViewBlock = {
   ],
 };
 
+export function withoutCaseTodos(
+  study: CreativeCaseStudyModule,
+  extras?: Partial<CreativeCaseStudyModule>,
+): CreativeCaseStudyModule {
+  const { todos: _omit, ...rest } = study;
+  return { ...rest, ...extras, todos: undefined };
+}
+
+/** Submission-ready creative cases: no Bakehouse TODO wall, no amber asset checklists. */
+export const submissionCreativeCaseStudies: CreativeCaseStudyModule[] = [
+  withoutCaseTodos(sharedCreativeCaseStudies[0]!, {
+    outputs: [
+      'Shipped creator-facing generative storytelling product (Vercel)',
+      'Prompt systems and multimodal pipelines under human review',
+      'Frontend delivery, auth, and API integrations on a three-person team',
+    ],
+  }),
+  withoutCaseTodos(sharedCreativeCaseStudies[1]!, {
+    outputs: [
+      'Public workshops and artist support at Oolite Arts Digital Lab',
+      'Curriculum and documentation that make emerging tools operable',
+      'Critique culture as an enablement practice—not tool demos alone',
+    ],
+  }),
+  withoutCaseTodos(sharedCreativeCaseStudies[2]!, {
+    outputs: [
+      'Editorial illustration system with human review before publish',
+      'AI literacy programs for artists and institutions',
+      'Product hub connecting workshops, tools, and publishing habits',
+    ],
+  }),
+];
+
 export function buildCampaignSystem(args: {
   conceptTitle: string;
   conceptBody: string;
   intro?: string;
   eyebrow?: string;
+  disclaimer?: string;
+  /** Drop formats that still lack specimens (no Placeholder tiles for recruiters). */
+  readyOnly?: boolean;
   /** When provided, marks matching formats Ready with the specimen image. */
   specimens?: Partial<
     Record<
@@ -416,7 +452,7 @@ export function buildCampaignSystem(args: {
   >;
 }): CampaignSystemBlock {
   const specimens = args.specimens ?? {};
-  const formats: CampaignSystemBlock['formats'] = [
+  let formats: CampaignSystemBlock['formats'] = [
     {
       id: 'master',
       label: 'Master campaign image',
@@ -494,6 +530,10 @@ export function buildCampaignSystem(args: {
     };
   });
 
+  if (args.readyOnly) {
+    formats = formats.filter((f) => Boolean(f.imageSrc));
+  }
+
   return {
     eyebrow: args.eyebrow ?? 'Self-Initiated Travel Campaign System Study',
     title: 'From one idea to many channels',
@@ -503,6 +543,7 @@ export function buildCampaignSystem(args: {
     conceptTitle: args.conceptTitle,
     conceptBody: args.conceptBody,
     disclaimer:
+      args.disclaimer ??
       'Self-initiated study for application evidence. Not a client project for this employer. Formats marked Ready use study specimens; remaining formats stay labeled Placeholder until finished.',
     formats,
   };
@@ -537,6 +578,8 @@ export function buildCreativeAgencyDossier(args: {
   alignmentTitle: string;
   alignmentIntro: string;
   ctaHeadline: string;
+  caseStudies?: CreativeCaseStudyModule[];
+  workflow?: HumanAiWorkflowBlock;
   motionSection?: CreativeAgencyDossier['motionSection'];
 }): CreativeAgencyDossier {
   return {
@@ -545,9 +588,9 @@ export function buildCreativeAgencyDossier(args: {
     capabilities: creativeCapabilityPillars,
     caseStudiesTitle: 'Selected case studies',
     caseStudiesIntro: args.caseStudiesIntro,
-    caseStudies: sharedCreativeCaseStudies,
+    caseStudies: args.caseStudies ?? sharedCreativeCaseStudies,
     campaign: args.campaign,
-    workflow: sharedCreativeWorkflow,
+    workflow: args.workflow ?? sharedCreativeWorkflow,
     motionSection: args.motionSection,
     leadership: sharedCreativeLeadership,
     pointOfView: sharedPointOfView,
@@ -556,6 +599,16 @@ export function buildCreativeAgencyDossier(args: {
     ctaHeadline: args.ctaHeadline,
   };
 }
+
+/** Workflow copy without amber TODO for before/after stills (submission surfaces). */
+export const submissionCreativeWorkflow: HumanAiWorkflowBlock = {
+  ...sharedCreativeWorkflow,
+  beforeAfter: {
+    beforeLabel: sharedCreativeWorkflow.beforeAfter.beforeLabel,
+    afterLabel: sharedCreativeWorkflow.beforeAfter.afterLabel,
+    note: sharedCreativeWorkflow.beforeAfter.note,
+  },
+};
 
 export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfolioDossier {
   return {

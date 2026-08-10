@@ -1,0 +1,30 @@
+[
+  {
+    "document": "digital-lab-program-guidelines.pdf",
+    "page": "04",
+    "confidence": 0.91,
+    "excerpt": "Workshop capacity should remain at eight participants for resin printing safety.",
+    "keywords": ["capacity", "workshop", "eight", "resin"]
+  },
+  {
+    "document": "program-budget-policy.md",
+    "page": "1",
+    "confidence": 0.88,
+    "excerpt": "Pilot programs must stay within the approved $2,000 materials and facilitation envelope.",
+    "keywords": ["budget", "2000", "pilot"]
+  },
+  {
+    "document": "equipment-inventory.csv",
+    "page": null,
+    "confidence": 0.84,
+    "excerpt": "2× resin printers, 4× workstations, 1× SmartSign player reserved for lobby.",
+    "keywords": ["equipment", "printer", "smartsign"]
+  },
+  {
+    "document": "staff-capacity-notes.md",
+    "page": "2",
+    "confidence": 0.8,
+    "excerpt": "Technical Director available Tue/Thu open hours; Director of Digital Lab leads curriculum.",
+    "keywords": ["staff", "capacity", "tuesday", "thursday"]
+  }
+]

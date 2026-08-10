@@ -1,0 +1,14 @@
+{
+  "scenario": "creative-program",
+  "tools": [
+    "search_documents",
+    "check_calendar",
+    "calculate_budget",
+    "manage_actions"
+  ],
+  "defaults": {
+    "max_budget": 2000,
+    "weeks": 6,
+    "capacity": 8
+  }
+}

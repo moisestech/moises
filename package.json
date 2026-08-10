@@ -9,7 +9,9 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "deploy": "npx vercel@latest --prod",
-    "deploy:preview": "npx vercel@latest"
+    "deploy:preview": "npx vercel@latest",
+    "life-os:discover": "npx tsx scripts/life-os-discover.ts",
+    "life-os:list": "npx tsx scripts/life-os-discover.ts list"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",

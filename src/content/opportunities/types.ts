@@ -220,6 +220,11 @@ export type Opportunity = {
   roleMatchColumnHeaders?: { left: string; right: string };
   roleMatchRows: RoleMatchRow[];
   featuredProjectIds: string[];
+  /**
+   * When set, case-study grid prefers flagship recipe ranking
+   * (`opportunityEvidenceRecipes` in evidence/flagships.ts).
+   */
+  evidenceRecipe?: keyof typeof import('@/content/evidence/flagships').opportunityEvidenceRecipes;
   /** Merged with `featuredProjectIds` in `CaseStudyGrid` (work microsites). */
   caseStudyOverrides?: CaseStudyOverride[];
   /** Case study grid columns at `lg` breakpoint; default 2. */

@@ -85,6 +85,7 @@ export const stacklokStaffForwardDeployedEngineerOpportunity: Opportunity = {
   family: 'role-portfolio',
   applicationStatus: 'ready',
   variant: 'role-portfolio',
+  capabilitiesHref: '/capabilities#devops-deployment',
   applicationBanner: stacklokStaffFdeBanner,
   seo: {
     title: 'Stacklok — Staff Forward Deployed Engineer — Moises Sanabria',
@@ -175,6 +176,10 @@ export const stacklokStaffForwardDeployedEngineerOpportunity: Opportunity = {
     },
   ],
   featuredProjectIds: [...engineeringEvidencePack.solutionsArchitectDefault],
+  evidenceRecipe: 'forward-deployed-default',
+  caseStudiesSectionTitle: 'Proof ranking for Stacklok FDE',
+  caseStudiesIntro:
+    'PRIMARY Forward-Deployed Systems · SmartSigns · automation · Agentic Ops (Building). Same flagships, FDE ordering.',
   skillsMatrixRows: [
     {
       category: 'Delivery',

@@ -31,21 +31,38 @@ Certifications are modeled in draft data but **not rendered** until statuses are
 
 Set `capabilitiesHref` on an [`Opportunity`](../../src/content/opportunities/types.ts) (e.g. `/capabilities#data-infrastructure`). Clients render [`CapabilitiesDeepLink`](../../src/components/capabilities/CapabilitiesDeepLink.tsx).
 
+### Enforcement (quality bar)
+
+- **Default:** every new or polished opportunity sets `capabilitiesHref` to the matching pillar hash.
+- **Allowed:** a **short** role-specific `skillsMatrixRows` block only when the role needs a few hiring-manager lines that `/capabilities` does not cover.
+- **Forbidden:** re-authoring a full six-pillar skills matrix on the dossier. Skills status changes happen only in [`skills.ts`](../../src/content/capabilities/skills.ts).
+- Compact engineering / SA / FDE pages missing `capabilitiesHref` are tracked as a cleanup item in [`docs/site-health.md`](../site-health.md) and the [opportunities inventory](../opportunities/README.md#inventory--readiness).
+
 Focus pages wired today:
 
 - `/ai-engineering` → `#ai-engineering`
+- `/forward-deployed` → flagship lifecycle (FDE send)
+- `/creative-ai` → `#design-creative-technology` (Creative Technologist / AD send)
+- `/projects/agentic-ops` → Building shell for RAG / MCP / agents (not Proven until gates)
 - Affirm systems dossier → `#ai-engineering`
-- Forward Deployed → `#devops-deployment`
+- Forward Deployed overlay → `#devops-deployment`
 - AI Solutions Architect → `#software-engineering`
 - FLORA Founding DE → `#data-infrastructure`
 - Comfy MTS Frontend → `#design-creative-technology`
 - Creative-agency factory → `#design-creative-technology`
+- Compact engineering overlays (Air Space, Alpha Drive, CoreStory, Netflix, Playwire, …) → pillar hashes set in pass 2
+- NEW INC / ONX → `#design-creative-technology`
+- Stacklok Staff FDE → `#devops-deployment`
+
+## Flagship evidence registry
+
+[`src/content/evidence/flagships.ts`](../../src/content/evidence/flagships.ts) ranks the same proofs per role via `rankEvidenceForRole` / `evidenceRecipe`. Do not invent standalone MCP/RAG demos — they live inside Agentic Ops.
 
 ## New employer applications (process)
 
-1. Pick public archetype send URL ([`roleArchetypes.ts`](../../src/content/applications/roleArchetypes.ts)).
+1. Pick public archetype send URL ([`roleArchetypes.ts`](../../src/content/applications/roleArchetypes.ts)) — prefer `/forward-deployed`, `/creative-ai`, or `/ai-engineering`.
 2. Add a **thin** private overlay (hero, role-match, banner) — not a forked skills matrix.
-3. Set `capabilitiesHref` to the matching pillar hash.
+3. Set `capabilitiesHref` + optional `evidenceRecipe` (corestory / wpp-hex / unit8 / okta / forward-deployed-default).
 4. Keep interactive proof (Comfy / Flora / Affirm architecture) on the dossier; shared skills live on `/capabilities`.
 
 ## Credibility rules

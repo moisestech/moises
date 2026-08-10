@@ -1,4 +1,10 @@
 import { getEvidenceProject } from './projects';
+import {
+  flagshipEvidence,
+  rankEvidenceForOpportunity,
+  type FlagshipEvidenceId,
+  opportunityEvidenceRecipes,
+} from './flagships';
 
 /** Per-role copy/image/link overrides on shared evidence projects. */
 export type CaseStudyOverride = {
@@ -25,6 +31,7 @@ export type ResolvedCaseStudyCard = {
   imageLocal?: boolean;
   href?: string;
   linkLabel?: string;
+  tier?: 'primary' | 'secondary' | 'supporting';
 };
 
 export function resolveCaseStudyCards(
@@ -52,4 +59,48 @@ export function resolveCaseStudyCards(
     });
   }
   return cards;
+}
+
+/** Resolve flagship registry entries into case-study cards. */
+export function resolveFlagshipCaseStudyCards(
+  ids: FlagshipEvidenceId[],
+  options?: { includeBuilding?: boolean },
+): ResolvedCaseStudyCard[] {
+  const cards: ResolvedCaseStudyCard[] = [];
+  for (const id of ids) {
+    const base = flagshipEvidence[id];
+    if (!base) continue;
+    if (base.status === 'planned') continue;
+    if (!base.claimable && !options?.includeBuilding) continue;
+    cards.push({
+      id: base.id,
+      title: base.title,
+      category: base.subtitle,
+      summary: base.summary,
+      skillTags: base.skills.slice(0, 8),
+      imageSrc: base.imageSrc,
+      imageAlt: base.imageAlt,
+      href: base.href,
+      linkLabel: base.status === 'building' ? 'View (Building)' : 'View flagship',
+    });
+  }
+  return cards;
+}
+
+export function resolveRecipeCaseStudyCards(
+  recipeKey: keyof typeof opportunityEvidenceRecipes,
+  options?: { includeBuilding?: boolean },
+): ResolvedCaseStudyCard[] {
+  return rankEvidenceForOpportunity(recipeKey, options).map((e) => ({
+    id: e.id,
+    title: e.title,
+    category: `${e.tier.toUpperCase()} · ${e.subtitle}`,
+    summary: e.summary,
+    skillTags: e.skills.slice(0, 8),
+    imageSrc: e.imageSrc,
+    imageAlt: e.imageAlt,
+    href: e.href,
+    linkLabel: e.status === 'building' ? 'View (Building)' : 'View proof',
+    tier: e.tier,
+  }));
 }

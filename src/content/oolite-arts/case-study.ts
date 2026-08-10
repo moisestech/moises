@@ -643,7 +643,7 @@ export const OOLITE_ARTS_CASE_STUDY = {
 
   metrics: {
     asOfNote:
-      'Only publicly confirmed program facts are shown as numbers. Additional impact metrics will appear when verified against program records.',
+      'Only publicly confirmed program facts are shown as numbers. Artists supported, consultations, classes designed, and workflow counts remain null until verified against program records — do not invent Digilab KPIs.',
     items: [
       {
         id: 'lab-hours',

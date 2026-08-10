@@ -112,7 +112,7 @@ const nextConfig = {
       },
       {
         source: '/forward-deployed-engineer',
-        destination: '/opportunities/forward-deployed-ai-engineer',
+        destination: '/forward-deployed',
         permanent: false,
       },
       {
@@ -127,12 +127,12 @@ const nextConfig = {
       },
       {
         source: '/roles/forward-deployed-engineer',
-        destination: '/opportunities/forward-deployed-ai-engineer',
+        destination: '/forward-deployed',
         permanent: false,
       },
       {
         source: '/roles/forward-deployed-ai-engineer',
-        destination: '/opportunities/forward-deployed-ai-engineer',
+        destination: '/forward-deployed',
         permanent: false,
       },
       {
@@ -141,8 +141,23 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/creative-technologist',
+        destination: '/creative-ai',
+        permanent: false,
+      },
+      {
+        source: '/roles/creative-technologist',
+        destination: '/creative-ai',
+        permanent: false,
+      },
+      {
         source: '/art-director',
-        destination: '/career-packet',
+        destination: '/creative-ai',
+        permanent: false,
+      },
+      {
+        source: '/agentic-ops',
+        destination: '/projects/agentic-ops',
         permanent: false,
       },
       {
