@@ -5,7 +5,7 @@ Living audit of page families, source-of-truth paths, opportunity readiness, and
 
 Cursor rule: [`.cursor/rules/site-health.mdc`](../.cursor/rules/site-health.mdc)
 
-Last audit: **2026-08-07** · Last progress update: **2026-08-09 (Three flagship proofs)**
+Last audit: **2026-08-07** · Last progress update: **2026-08-10 (LIFE OS read + flagship deploy gap)**
 
 ---
 
@@ -20,16 +20,22 @@ Use this table to resume work. Update when a pass ships.
 | Workshops catalog | 2026-08-07 | CSV → `catalog.ts`; Ready grid on `/workshops#catalog` | Hub shows 8 Ready offers |
 | **C→A pass 2** | 2026-08-07 | AI SA banner; caps hrefs; tracker sync | Tracker complete; archetype banner |
 | **Workshops SEO** | 2026-08-07 | Thin landings for 7 Ready slugs at `/workshop/[slug]`; outcomes/whyNow in catalog; cross-links from artist-infrastructure + Digilab classes; SEO feature card points in-site | Indexable landings for SEO/writing/docs/AI/vibe/studio/copyright |
-| **Three flagships** | 2026-08-09 | Evidence registry v2; `/forward-deployed`, `/creative-ai`, `/projects/agentic-ops`; homepage hire door; sitemap/robots; recipe-ranked dossiers | Hiring spine = three flagships; skill-demand over dossier count |
+| **Three flagships** | 2026-08-09 | Evidence registry v2; `/forward-deployed`, `/creative-ai`, `/projects/agentic-ops`; homepage hire door; sitemap/robots; recipe-ranked dossiers | Code on branch; **must merge to `main` for production** |
+| **LIFE OS read** | 2026-08-10 | Inbox/Actions/Projects/Opportunities readers + `/api/life-os` | Local reads verified; PAT in `.env.local` only |
+
+### Production incident — `/creative-ai` 404
+
+**Cause:** Flagship pages live on `cursor/miami-institutional-outreach` (`dec3ca0`+) but were **not on `origin/main`**. Production deploys from `main`, so `https://www.moises.tech/creative-ai` 404s even though the page exists in the branch.
+
+**Fix:** Merge flagship commits to `main` and confirm production deploy. Until then use Ogilvy dossier or preview URL.
 
 ### Next recommended passes (ordered)
 
-1. Finish **agentic-ops** application-ready gates (demo replay, MCP, RAG, evals, CI) in sibling repo.
-2. Digilab verified KPI nulls + SmartSigns install photos when cleared.
-3. Migrate remaining opportunity dossiers to `evidenceRecipe` weights.
-4. Digilab 360 / video.
-5. Optional: richer workshop landings (hero images from Digilab media registry).
-
+1. **Merge flagships to `main`** so `/creative-ai`, `/forward-deployed`, `/projects/agentic-ops` are live.
+2. Set Vercel `AIRTABLE_LIFE_OS_API_KEY` + `LIFE_OS_READ_TOKEN` (never commit PAT).
+3. Map LIFE OS Opportunities → dossier tracker.
+4. Finish **agentic-ops** application-ready gates in sibling repo.
+5. Digilab verified KPI nulls + SmartSigns install photos when cleared.
 ## Honest verdict
 
 The site has **two institutional doors** and **three hiring flagships**. Conversion lifts come from deepening those proofs — not from more thin `/opportunities/*` pages.
@@ -65,6 +71,7 @@ Standalone MCP demo, RAG demo, FastAPI demo, pgvector demo, Claude demo, OAuth d
 | **Hiring flagship — FDE** | `/forward-deployed` | `/opportunities/forward-deployed-ai-engineer` overlay | Recruiters, FDE roles |
 | **Hiring flagship — Creative AI** | `/creative-ai` | `/creative-technologist` alias | Creative Tech / AD / innovation |
 | Hiring / recruiting skills | `/capabilities` | `/ai-engineering`, `/career-packet` | Recruiters, hiring managers |
+| **LIFE OS (ops)** | Airtable base `apprswzWnLrHBwFcx` via [`src/lib/life-os`](../src/lib/life-os/) | `GET /api/life-os?table=inbox` (token) | Agents / application PM — see [`docs/life-os.md`](./life-os.md) |
 | Employer dossiers | private `/opportunities/[slug]` | Index only for intentional public listings | Application threads |
 | Teaching / workshops | `/workshops` | `/workshop/[slug]` deep programs, Digilab `#classes` | Artists, institutions, SEO for teaching proof |
 | Grants | `/grant/...` | Knight archive | Panels — project-specific |
