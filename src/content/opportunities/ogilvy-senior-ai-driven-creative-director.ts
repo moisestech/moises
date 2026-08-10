@@ -40,14 +40,16 @@ const GENERATIVE_LANDSCAPE_STILL =
 
 const ALL_STUDIOS_EVERYTHING_YT = 'XuSwUBULiQs';
 const ALL_STUDIOS_POSTER = `https://i.ytimg.com/vi/${ALL_STUDIOS_EVERYTHING_YT}/hqdefault.jpg`;
+const LINDEMANN_ICH_WEISS_ES_NICHT_YT = 'obY4c9aqUqs';
+const LINDEMANN_POSTER = `https://i.ytimg.com/vi/${LINDEMANN_ICH_WEISS_ES_NICHT_YT}/hqdefault.jpg`;
 const POST_AI_READYMADES_HREF = '/research/born-into-the-machine/post-ai-readymades';
 
 const ogilvyMotionSection: MotionSection = {
   title: 'Motion, edit & viral craft',
   intro:
-    'Editorial and motion proof for a Creative Editor/AI seat: culture-native video that earns attention, then production systems that keep taste and brand intact under AI acceleration.',
+    'Editorial and motion proof for a Creative Editor/AI seat: culture-native video that earns attention, then production systems that keep taste and brand intact under AI acceleration — including pre-hype GAN music-video programming.',
   toolsLine:
-    'YouTube · Premiere · After Effects · generative stills → edit · platform-native pacing · human review before publish',
+    'YouTube · Premiere · After Effects · GANs / StyleGAN · Python face-swap pipelines · generative stills → edit · human review before publish',
   clips: [
     {
       id: 'all-studios-everything',
@@ -59,6 +61,19 @@ const ogilvyMotionSection: MotionSection = {
       posterAlt: 'All Studios Everything — YouTube thumbnail',
       youtubeId: ALL_STUDIOS_EVERYTHING_YT,
       featured: true,
+    },
+    {
+      id: 'lindemann-ich-weiss-es-nicht',
+      title: 'Lindemann — Ich weiss es nicht (GAN music video)',
+      roleLabel: 'Programming · Deep face swaps · Python · ~113k likes · ~2019',
+      contribution:
+        'Official Lindemann / Universal GAN music video years before the current AI hype. Credited programming on a StyleGAN-class pipeline; Moises specifically owned deep face-swap work in Python (team: Selam X / Daylight Filmproduktion). Honest collaborative credit for an agency Creative Editor/AI conversation about production systems under taste.',
+      posterSrc: LINDEMANN_POSTER,
+      posterAlt: 'Lindemann — Ich weiss es nicht — official GAN music video still',
+      youtubeId: LINDEMANN_ICH_WEISS_ES_NICHT_YT,
+      featured: true,
+      href: `https://www.youtube.com/watch?v=${LINDEMANN_ICH_WEISS_ES_NICHT_YT}`,
+      linkLabel: 'Watch on YouTube',
     },
     {
       id: 'generative-to-edit',

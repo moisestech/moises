@@ -78,7 +78,7 @@ export function FitPillars({
             <li
               key={pillar.id}
               className={cn(
-                'group relative overflow-hidden rounded-xl border border-stone-200 bg-white',
+                'group relative flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white',
                 'shadow-sm transition duration-300 ease-out',
                 'hover:-translate-y-1.5 hover:shadow-xl hover:shadow-stone-900/12',
                 'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
@@ -136,41 +136,32 @@ export function FitPillars({
                   aria-hidden
                 />
 
-                {/* Floating icon badge on media */}
-                <span
-                  className={cn(
-                    'absolute bottom-3 left-3 z-10 flex h-11 w-11 items-center justify-center rounded-xl border border-white/40 bg-white/90 shadow-lg backdrop-blur-sm',
-                    'transition duration-300 group-hover:scale-110 group-hover:shadow-xl',
-                    'motion-reduce:group-hover:scale-100',
-                    'dark:border-white/10 dark:bg-stone-950/85',
-                    accent.eyebrow,
-                  )}
-                >
-                  <MatrixRowIcon icon={icon} className="h-[1.15rem] w-[1.15rem]" />
-                </span>
-
                 <span className="absolute right-3 top-3 z-10 rounded-full border border-white/30 bg-stone-950/45 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
                   {String(index + 1).padStart(2, '0')}
                 </span>
               </div>
 
-              <div className="relative z-10 p-4 sm:p-5">
-                <div className="flex items-start gap-3">
+              <div className="relative z-10 flex flex-1 flex-col p-4 sm:p-5">
+                <h3 className={opp.h3MoMA}>{pillar.title}</h3>
+                <p className={`mt-2 ${opp.body}`}>{pillar.body}</p>
+
+                {/* Single icon — footer only (no duplicate on media / title) */}
+                <div className="mt-auto flex items-center justify-between gap-3 border-t border-stone-200/80 pt-4 dark:border-stone-700/80">
                   <span
                     className={cn(
-                      'mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border shadow-sm',
+                      'flex h-10 w-10 items-center justify-center rounded-xl border shadow-sm',
                       'bg-white/95 transition duration-300 group-hover:scale-105 dark:bg-stone-900/95',
                       'motion-reduce:group-hover:scale-100',
                       accent.navIdle,
                       accent.eyebrow,
                     )}
+                    aria-hidden
                   >
-                    <MatrixRowIcon icon={icon} className="h-4 w-4" />
+                    <MatrixRowIcon icon={icon} className="h-[1.1rem] w-[1.1rem]" />
                   </span>
-                  <div className="min-w-0">
-                    <h3 className={opp.h3MoMA}>{pillar.title}</h3>
-                    <p className={`mt-2 ${opp.body}`}>{pillar.body}</p>
-                  </div>
+                  <span className={cn('text-[10px] font-semibold uppercase tracking-[0.14em]', accent.eyebrow)}>
+                    Capability
+                  </span>
                 </div>
               </div>
             </li>

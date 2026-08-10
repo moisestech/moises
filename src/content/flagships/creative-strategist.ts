@@ -93,15 +93,17 @@ export const creativeStrategistFlagship = {
   },
   futureCases: {
     id: 'future-cases',
-    title: 'Future client production cases',
-    body: 'Reserved slots. Rammstein face-recognition documentation (~2020) pending video attach.',
+    title: 'Client production cases',
+    body: 'Lindemann GAN deep face-swap programming is live (Motion & GAN). Other slots stay planned until assets clear.',
     slots: [
       {
         id: 'rammstein-face',
-        title: 'Rammstein — face recognition effect (~2020)',
-        note: 'Face-recognition / deep-media effect from ~2020. Video pending—do not treat as live client proof until attached.',
-        imageSrc: 'https://i.ytimg.com/vi/Rln1Q5-vGMM/hqdefault.jpg',
-        imageAlt: 'Placeholder — AI face/video workflow still until Rammstein clip is attached',
+        title: 'Lindemann — Ich weiss es nicht (GAN · deep face swaps)',
+        note: 'Official StyleGAN music video (~2019, ~113k likes). Credited programming; Moises owned deep face-swap work in Python. See Motion & GAN sections.',
+        imageSrc: 'https://i.ytimg.com/vi/obY4c9aqUqs/hqdefault.jpg',
+        imageAlt: 'Lindemann — Ich weiss es nicht — official GAN music video still',
+        youtubeId: 'obY4c9aqUqs',
+        status: 'live' as const,
       },
     ],
   },

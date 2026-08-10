@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { CreativeLayersSection } from '@/components/flagships/CreativeLayersSection';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { CapabilityMap } from '@/components/opportunities/CapabilityMap';
@@ -16,7 +17,6 @@ import { HumanAiWorkflow } from '@/components/opportunities/creative-agency/Huma
 import { MotionAndAnimationSection } from '@/components/opportunities/creative-agency/MotionAndAnimationSection';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
-import { flagshipEvidence } from '@/content/evidence/flagships';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 import type {
   CreativeCaseStudyModule,
@@ -24,7 +24,7 @@ import type {
   MotionSection,
 } from '@/content/opportunities/creativeAgencyDossier';
 import type { CapabilityMapData, FitPillar } from '@/content/opportunities/systemsDossier';
-import type { ApplicationBanner, OpportunityNavItem } from '@/content/opportunities/types';
+import type { ApplicationBanner, OpportunityNavItem, SkillsMatrixIconKey } from '@/content/opportunities/types';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 
@@ -59,6 +59,10 @@ export type CreativeSystemsFlagshipData = {
     title: string;
     body: string;
     caseIds: string[];
+    icon?: SkillsMatrixIconKey;
+    imageSrc?: string;
+    imageAlt?: string;
+    outcome?: string;
   }>;
   evidenceCases?: Array<{
     id: string;
@@ -81,7 +85,15 @@ export type CreativeSystemsFlagshipData = {
     id: string;
     title: string;
     body: string;
-    slots: Array<{ id: string; title: string; note: string; imageSrc?: string; imageAlt?: string }>;
+    slots: Array<{
+      id: string;
+      title: string;
+      note: string;
+      imageSrc?: string;
+      imageAlt?: string;
+      youtubeId?: string;
+      status?: 'live' | 'planned' | 'pending';
+    }>;
   };
   relatedFlagships: Array<{
     id: string;
@@ -105,7 +117,7 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
   const hasBanner = Boolean(data.banner?.src);
 
   return (
-    <>
+    <div className="pt-[170px]">
       {/* Banner above sticky section nav so the flagship art is the first content plane. */}
       {data.banner ? <OpportunityApplicationBanner banner={data.banner} className="mb-0" /> : null}
 
@@ -227,49 +239,7 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
           <>
             <DossierSectionBreak />
             <OpportunityColorSection sectionId="layers" className={sectionClass}>
-              <section id="layers" className={framed} aria-labelledby="layers-heading">
-                <h2 id="layers-heading" className={opp.h2}>
-                  Three layers
-                </h2>
-                <p className={cn(opp.muted, 'mt-2 max-w-3xl')}>
-                  Direction, production systems, and interfaces — one practice, three ownership surfaces.
-                </p>
-                <div className="mt-8 space-y-6">
-                  {data.layers.map((layer, i) => (
-                    <article key={layer.id} className={opp.callout}>
-                      <p className={opp.accent}>
-                        {String(i + 1).padStart(2, '0')} · {layer.title}
-                      </p>
-                      <p className={cn(opp.body, 'mt-2')}>{layer.body}</p>
-                      <ul className="mt-3 flex flex-wrap gap-2" role="list">
-                        {layer.caseIds.map((id) => {
-                          const ev = flagshipEvidence[id as keyof typeof flagshipEvidence];
-                          if (!ev || !ev.claimable) return null;
-                          const external = ev.href.startsWith('http');
-                          return (
-                            <li key={id}>
-                              {external ? (
-                                <a
-                                  href={ev.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className={opp.pillTag}
-                                >
-                                  {ev.title}
-                                </a>
-                              ) : (
-                                <Link href={ev.href} className={opp.pillTag}>
-                                  {ev.title}
-                                </Link>
-                              )}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </article>
-                  ))}
-                </div>
-              </section>
+              <CreativeLayersSection layers={data.layers} sectionId="layers" className={framed} />
             </OpportunityColorSection>
           </>
         ) : null}
@@ -419,39 +389,68 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
                 </h2>
                 <p className={cn(opp.body, 'mt-2 max-w-3xl')}>{data.futureCases.body}</p>
                 <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
-                  {data.futureCases.slots.map((slot, index) => (
-                    <li
-                      key={slot.id}
-                      className={cn(
-                        opp.card,
-                        'group overflow-hidden border-l-[3px] p-0 transition duration-300',
-                        'hover:-translate-y-1 hover:shadow-lg',
-                        'motion-reduce:hover:translate-y-0',
-                        getOpportunityCompactAccent('coming-soon').rail,
-                      )}
-                    >
-                      {slot.imageSrc ? (
-                        <div className="relative aspect-[16/10] overflow-hidden bg-stone-100 dark:bg-stone-900">
-                          <Image
-                            src={slot.imageSrc}
-                            alt={slot.imageAlt ?? ''}
-                            fill
-                            className="object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
-                            sizes="400px"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 to-transparent" />
+                  {data.futureCases.slots.map((slot, index) => {
+                    const live = slot.status === 'live' || Boolean(slot.youtubeId);
+                    const href = slot.youtubeId
+                      ? `https://www.youtube.com/watch?v=${slot.youtubeId}`
+                      : undefined;
+                    const card = (
+                      <>
+                        {slot.imageSrc ? (
+                          <div className="relative aspect-[16/10] overflow-hidden bg-stone-100 dark:bg-stone-900">
+                            <Image
+                              src={slot.imageSrc}
+                              alt={slot.imageAlt ?? ''}
+                              fill
+                              className="object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+                              sizes="400px"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 to-transparent" />
+                          </div>
+                        ) : null}
+                        <div className="p-4">
+                          <p className={opp.accent}>
+                            {live ? 'Live evidence' : 'Planned'} ·{' '}
+                            {String(index + 1).padStart(2, '0')}
+                          </p>
+                          <h3 className={cn(opp.h3, 'mt-1')}>{slot.title}</h3>
+                          <p className={cn(opp.subtle, 'mt-2')}>{slot.note}</p>
+                          {href ? (
+                            <span className={cn(opp.linkAccent, 'mt-3 inline-flex text-xs')}>
+                              Watch on YouTube <ExternalLink className="ml-1 h-3 w-3" aria-hidden />
+                            </span>
+                          ) : null}
                         </div>
-                      ) : null}
-                      <div className="p-4">
-                        <p className={opp.accent}>
-                          {slot.id === 'rammstein-face' ? 'Video pending' : 'Planned'} ·{' '}
-                          {String(index + 1).padStart(2, '0')}
-                        </p>
-                        <h3 className={cn(opp.h3, 'mt-1')}>{slot.title}</h3>
-                        <p className={cn(opp.subtle, 'mt-2')}>{slot.note}</p>
-                      </div>
-                    </li>
-                  ))}
+                      </>
+                    );
+                    return (
+                      <li
+                        key={slot.id}
+                        className={cn(
+                          opp.card,
+                          'group overflow-hidden border-l-[3px] p-0 transition duration-300',
+                          'hover:-translate-y-1 hover:shadow-lg',
+                          'motion-reduce:hover:translate-y-0',
+                          live
+                            ? 'border-l-emerald-600 dark:border-l-emerald-400'
+                            : getOpportunityCompactAccent('coming-soon').rail,
+                        )}
+                      >
+                        {href ? (
+                          <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block"
+                          >
+                            {card}
+                          </a>
+                        ) : (
+                          card
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </section>
             </OpportunityColorSection>
@@ -480,6 +479,6 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
         </section>
         </main>
       </OpportunityShell>
-    </>
+    </div>
   );
 }
