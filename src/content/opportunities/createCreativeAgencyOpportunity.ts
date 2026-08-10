@@ -38,6 +38,8 @@ export type CreativeAgencyOpportunityConfig = {
   processIntro?: string;
   applicationStatus?: Opportunity['applicationStatus'];
   navItems?: Opportunity['navItems'];
+  evidenceRecipe?: Opportunity['evidenceRecipe'];
+  caseStudiesIntro?: string;
 };
 
 export function createCreativeAgencyOpportunity(
@@ -89,6 +91,8 @@ export function createCreativeAgencyOpportunity(
     },
     roleMatchRows: config.roleMatchRows,
     featuredProjectIds: [...creativeProofPack.featuredProjectIds],
+    evidenceRecipe: config.evidenceRecipe,
+    caseStudiesIntro: config.caseStudiesIntro,
     skillsMatrixRows: creativeAgencySkillsMatrix,
     processSectionTitle: `How I would work at ${config.company}`,
     processIntro:
@@ -98,7 +102,7 @@ export function createCreativeAgencyOpportunity(
     ctas: recruitingCtas({
       resumePdfPath: resumePdfDriveViewUrl,
       resumePrintPath: '/cv/tech/print',
-      careerPacket: '/career-packet',
+      careerPacket: '/creative-ai',
       caseStudiesAnchor: '#case-studies',
       emailSubject: config.emailSubject,
     }),

@@ -1,0 +1,72 @@
+{
+  "id": "run-demo-0182",
+  "brief": "Prepare a six-week creative technology program under a $2,000 budget.",
+  "status": "awaiting_approval",
+  "plan": [
+    "Extract requirements from brief",
+    "search_documents for guidelines and capacity",
+    "check_calendar for six-week windows",
+    "calculate_budget against max envelope",
+    "Request approval before manage_actions"
+  ],
+  "events": [
+    { "kind": "status", "message": "✓ Brief analyzed", "tool": null, "sources": [] },
+    { "kind": "status", "message": "✓ 6 requirements extracted", "tool": null, "sources": [] },
+    { "kind": "tool", "message": "→ search_documents", "tool": "search_documents", "sources": [] },
+    {
+      "kind": "tool_result",
+      "message": "4 relevant documents retrieved",
+      "tool": "search_documents",
+      "sources": [
+        {
+          "document": "digital-lab-program-guidelines.pdf",
+          "page": "04",
+          "confidence": 0.91,
+          "excerpt": "Workshop capacity should remain at eight participants for resin printing safety."
+        }
+      ]
+    },
+    { "kind": "tool", "message": "→ check_calendar", "tool": "check_calendar", "sources": [] },
+    {
+      "kind": "tool_result",
+      "message": "3 candidate dates found",
+      "tool": "check_calendar",
+      "sources": []
+    },
+    { "kind": "tool", "message": "→ calculate_budget", "tool": "calculate_budget", "sources": [] },
+    {
+      "kind": "tool_result",
+      "message": "Estimated total: $1,742",
+      "tool": "calculate_budget",
+      "sources": []
+    },
+    {
+      "kind": "approval",
+      "message": "! Approval required",
+      "tool": null,
+      "sources": []
+    }
+  ],
+  "pending_write": {
+    "name": "manage_actions",
+    "arguments": {
+      "action": "create",
+      "tasks": [
+        { "title": "Confirm workshop capacity (8)", "owner": "TD" },
+        { "title": "Lock Tue/Thu schedule block", "owner": "Director" },
+        { "title": "Finalize materials PO under $2,000", "owner": "Ops" },
+        { "title": "Publish bilingual program brief", "owner": "Comms" },
+        { "title": "Reserve SmartSign lobby slot", "owner": "Facilities" },
+        { "title": "Draft week-1 orientation", "owner": "Curriculum" },
+        { "title": "Safety checklist for resin", "owner": "Lab" },
+        { "title": "Enrollment form + waitlist", "owner": "Ops" },
+        { "title": "Facilitator confirmation emails", "owner": "TD" },
+        { "title": "Budget actuals tracker", "owner": "Ops" },
+        { "title": "Midpoint critique session", "owner": "Director" },
+        { "title": "Handoff documentation pack", "owner": "TD" }
+      ]
+    }
+  },
+  "artifact": null,
+  "cost_tokens": 1840
+}

@@ -43,6 +43,10 @@ export const wppHexCreativeInnovationLeadAcdOpportunity = createCreativeAgencyOp
   slug: 'wpp-hex-creative-innovation-lead-acd',
   company: COMPANY,
   roleTitle: ROLE_TITLE,
+  evidenceRecipe: 'wpp-hex',
+  caseStudiesIntro:
+    'PRIMARY Creative AI · SECONDARY Forward-Deployed · SUPPORTING Agentic Ops (Building). Same three flagships, agency ordering.',
+
   seoTitle: 'Moises Sanabria — WPP HEX · Creative Innovation Lead / ACD',
   seoDescription:
     'Private application dossier for WPP HEX Creative Innovation Lead / ACD — AI-native craft, critique culture, and creative leadership.',

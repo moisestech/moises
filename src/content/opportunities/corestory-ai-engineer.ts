@@ -3,13 +3,12 @@
  * /opportunities/corestory-ai-engineer
  *
  * Listing: https://job-boards.greenhouse.io/corestory/jobs/4984207007
- * RAG/vector claims stay gated until Infra24 verified live — but Lore LLM product + automation are submit-ready angles.
+ * RAG/vector claims stay gated until Agentic Ops verified live — Lore LLM product + automation are submit-ready.
  */
 
 import type { Opportunity } from './types';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
-import { productionAiAutomationPack } from '@/content/evidence/productionAiAutomationPack';
 import {
   sprint2026Ctas,
   sprint2026Headshot,
@@ -27,6 +26,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
   family: 'compact',
   applicationStatus: 'ready',
   variant: 'compact',
+  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'AI Engineer — CoreStory · Moises Sanabria',
     description:
@@ -50,7 +50,7 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
       {
         label: 'RAG / vector',
         detail:
-          'Gated until Infra24 Memory Agent verified live — see productionAiAutomationPack.infra24MemoryAgent.',
+          'Gated until Agentic Ops demo + evals verified live — see /projects/agentic-ops (Building).',
       },
     ],
   },
@@ -58,20 +58,19 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
   hero: {
     headline: 'AI engineer for narrative systems and agentic workflows',
     subheadline:
-      'Lore Machine LLM product engineering confirmed · RAG depth labeled until Infra24 verified live',
+      'Lore Machine LLM product engineering confirmed · RAG depth labeled until Agentic Ops verified live',
     introParagraphs: [
-      'CoreStory sits at the intersection of stories, structured knowledge, and AI systems. My strongest alignment is Lore Machine: founding-engineer work turning narrative into structured multimedia through prompt systems, generative APIs, and TypeScript/Next.js delivery—plus production agentic automation (n8n, Make, Airtable).',
-      'Where CoreStory requires production RAG/vector depth, Infra24 Memory Agent remains a verified-live gate—not a silent claim. That honesty keeps the dossier usable for apply conversations without overselling.',
+      'CoreStory sits at the intersection of stories, structured knowledge, and AI systems. Primary proof: Agentic Ops (Building) + Lore Machine founding-engineer work turning narrative into structured multimedia — plus production agentic automation (n8n, Make, Airtable). Forward-deployed systems support the delivery story.',
+      'Where CoreStory requires production RAG/vector depth, Agentic Ops remains a verified-live gate—not a silent claim. That honesty keeps the dossier usable for apply conversations without overselling.',
       verifierBoundaryNote,
-      `Infra24 build state: ${productionAiAutomationPack.infra24MemoryAgent.buildState}.`,
     ],
-    trustLine: 'Lore Machine founding engineer · production automation confirmed · RAG claims gated',
+    trustLine: 'Lore Machine founding engineer · production automation confirmed · RAG claims gated via Agentic Ops',
     headshotSrc: sprint2026Headshot,
     headshotAlt: 'Moises Sanabria',
   },
   roleMatchSectionTitle: 'Role fit (with evidence gates)',
   roleMatchIntro:
-    'Lead with Lore LLM product + automation. Treat RAG/vector as a clear ramp with a named evidence gate—not a fake production claim.',
+    'PRIMARY Agentic Ops · SECONDARY Lore · SUPPORTING Forward-Deployed. Treat RAG/vector as a clear ramp with a named evidence gate—not a fake production claim.',
   roleMatchRows: [
     {
       requirement: 'LLM / narrative product engineering',
@@ -106,7 +105,8 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     },
     {
       requirement: 'RAG / retrieval systems',
-      evidence: `[GATED] ${productionAiAutomationPack.infra24MemoryAgent.buildState} — deploy Infra24, run eval green, verify live URL before claiming production RAG.`,
+      evidence:
+        '[GATED] Agentic Ops Building — public demo + eval regression required before claiming production RAG. Case: /projects/agentic-ops.',
       status: 'todo',
       illustration: {
         src: evidenceProjects['digital-culture-infrastructure'].imageSrc,
@@ -114,7 +114,11 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
       },
     },
   ],
+  evidenceRecipe: 'corestory',
   featuredProjectIds: [...engineeringEvidencePack.fullStackAiDefault],
+  caseStudiesSectionTitle: 'Proof ranking for CoreStory',
+  caseStudiesIntro:
+    'Same three flagships as every application — reordered for this role. Agentic Ops stays Building until demo + evals clear.',
   skillsMatrixRows: [
     {
       category: 'Confirmed',
@@ -123,12 +127,12 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
     },
     {
       category: 'Gated',
-      skills: 'Production RAG, pgvector Memory Agent — pending verified-live Infra24',
+      skills: 'Production RAG, MCP, agent orchestrator — pending Agentic Ops verified-live gates',
       icon: 'shield',
     },
     {
       category: 'Ramp plan',
-      skills: 'Deploy infra24 → sync embeddings → eval green → update dossier → apply with RAG claims',
+      skills: 'Ship Agentic Ops demo → eval green → update dossier → apply with RAG claims',
       icon: 'target',
     },
   ],
@@ -136,11 +140,11 @@ export const corestoryAiEngineerOpportunity: Opportunity = {
   innovationLabSectionTitle: 'Evidence posture',
   innovationLabLead: 'Apply with Lore + automation; keep RAG honest',
   innovationLabBody:
-    'CoreStory can be pursued on confirmed LLM product and agentic automation evidence. Closing the Infra24 verified-live gate upgrades RAG claims from gated to demonstrated—without rewriting the rest of the dossier.',
+    'CoreStory can be pursued on confirmed LLM product and agentic automation evidence. Closing the Agentic Ops verified-live gate upgrades RAG claims from gated to demonstrated—without rewriting the rest of the dossier.',
   ctas: sprint2026Ctas('CoreStory AI Engineer'),
   animatedLogoBand: sprint2026LogoBand,
   techLogoIds: [],
   resumeSectionTitle: 'Résumé — CoreStory AI Engineer',
   resumeSectionNote:
-    'Lead with Lore Machine and automation. Keep RAG bullets conditional until Infra24 verifier clears.',
+    'Lead with Lore Machine and automation. Keep RAG bullets conditional until Agentic Ops verifier clears.',
 };

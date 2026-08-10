@@ -49,7 +49,9 @@ export const resumePdfDriveDownloadUrl = `https://drive.google.com/uc?export=dow
 
 /** Paste into Gmail recruiter replies */
 export const recruiterLinksBlock = `AI Engineering: ${SITE_ORIGIN}/ai-engineering
-Forward Deployed: ${SITE_ORIGIN}/forward-deployed-engineer
+Agentic Ops: ${SITE_ORIGIN}/projects/agentic-ops
+Forward Deployed: ${SITE_ORIGIN}/forward-deployed
+Creative AI: ${SITE_ORIGIN}/creative-ai
 Solutions Architect: ${SITE_ORIGIN}/ai-solutions-architect
 Career Packet: ${SITE_ORIGIN}/career-packet
 Resume: ${SITE_ORIGIN}/cv/tech
@@ -184,6 +186,23 @@ export const aiEngineeringPacket = {
     ] satisfies ProcessStep[],
   },
   proofProjects: [
+    {
+      slug: 'agentic-ops',
+      title: 'Agentic Ops',
+      problem:
+        'Organizations need auditable multi-tool agents for real workflows — planning, retrieval, budgeting, and task execution — without chatbot theater or unverifiable demos.',
+      systemBuilt:
+        'Flagship runtime architecture: planner → MCP tools (documents, calendar, budget, actions) → pgvector retrieval → human approval → execute. Deterministic demo replay planned for recruiters. Status: Building until application-ready gates clear.',
+      stack: ['Python', 'FastAPI', 'TypeScript', 'Next.js', 'MCP', 'Postgres', 'pgvector', 'Evals', 'Docker'],
+      users: 'Institutional program ops; AI engineering hiring managers',
+      outcome:
+        'Public case shell live at /projects/agentic-ops. RAG/MCP/agent claims stay Building — not Proven — until demo + evals ship.',
+      whyItMatters:
+        'Highest-leverage AI engineering proof: one repo covering orchestration, MCP, RAG, HITL, evals, and security-adjacent tool permissions without a zoo of toy demos.',
+      href: '/projects/agentic-ops',
+      imageSrc: AI24_WEBSITE_HERO_IMAGE,
+      imageAlt: 'Agentic Ops — organizational multi-tool agent runtime',
+    },
     {
       slug: 'life-os',
       title: 'Life OS / Recruiter Graph',

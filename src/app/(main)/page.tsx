@@ -7,6 +7,7 @@ import LandingCollection from '@/components/LandingCollection';
 import LandingEvents from '@/components/LandingEvents';
 import { Visit360Dialog } from '@/components/ui/Visit360Dialog';
 import HomeHeroSection from '@/components/landing/HomeHeroSection';
+import { HomeHireDoor } from '@/components/flagships/HomeHireDoor';
 import { getHomeHeroDefaultSlide } from '@/constants/homeHero';
 
 const defaultHero = getHomeHeroDefaultSlide();
@@ -65,9 +66,38 @@ export const metadata: Metadata = {
   }
 };
 
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Moises Sanabria',
+  url: 'https://moises.tech',
+  jobTitle: 'Interdisciplinary artist · Full-Stack AI Systems Builder',
+  email: 'mailto:m@moises.tech',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Miami',
+    addressRegion: 'FL',
+    addressCountry: 'US',
+  },
+  sameAs: [
+    'https://github.com/moisestech',
+    'https://www.linkedin.com/in/moisesdsanabria',
+  ],
+  knowsAbout: [
+    'New media sculpture',
+    'Creative AI',
+    'Forward-deployed AI engineering',
+    'Agentic systems',
+  ],
+};
+
 export default function Home() {
   return (
     <PageLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <HomeHeroSection />
       <main className="flex flex-col w-full max-w-screen-xl mx-auto">
         <h1 className="display-none sr-only">Moises Sanabria</h1>
@@ -101,6 +131,8 @@ export default function Home() {
         <div className="w-full px-6 pb-16">
           <div className="h-1 bg-black dark:bg-white w-full max-w-7xl mx-auto"></div>
         </div>
+
+        <HomeHireDoor />
 
         {/* Landing Exhibitions */}
         <LandingExhibitions />

@@ -4,6 +4,8 @@
  *
  * Institutional / arts lanes (Knight, NEW INC, Oolite, Bakehouse) are NOT these pages —
  * use `/institutions`, `/oolite-arts`, `/technology-product-strategy`, etc.
+ *
+ * Hiring spine flagships: /projects/agentic-ops · /forward-deployed · /creative-ai
  */
 
 export type RoleArchetypeId =
@@ -32,23 +34,23 @@ export const roleArchetypes: RoleArchetype[] = [
     label: 'AI Engineer',
     sendUrl: 'https://moises.tech/ai-engineering',
     aliasUrls: ['https://moises.tech/ai-engineer', 'https://moises.tech/roles/ai-engineer'],
-    coversApprox: '~15 Inbox jobs (AI / full-stack / agentic engineer cluster)',
+    coversApprox: 'AI / full-stack / agentic engineer cluster (skill-demand pattern, not dossier count)',
     status: 'live',
     notes:
-      'Already live public packet. Highest leverage. Prefer /ai-engineering in emails; /ai-engineer aliases to it after deploy. Shared skills map: /capabilities#ai-engineering.',
+      'Public packet. Prefer /ai-engineering; Agentic Ops case shell: /projects/agentic-ops (Building). Shared skills: /capabilities#ai-engineering.',
   },
   {
     id: 'forward-deployed-engineer',
     label: 'Forward Deployed Engineer',
-    sendUrl: 'https://moises.tech/opportunities/forward-deployed-ai-engineer',
+    sendUrl: 'https://moises.tech/forward-deployed',
     aliasUrls: [
       'https://moises.tech/forward-deployed-engineer',
       'https://moises.tech/roles/forward-deployed-engineer',
     ],
-    coversApprox: '~8 Inbox jobs (FDE / client-facing / creative technologist delivery)',
-    status: 'built-pending-deploy',
+    coversApprox: 'FDE / client-facing / creative technologist delivery cluster',
+    status: 'live',
     notes:
-      'Dossier already existed (was private/noindex). Now listed + indexable; short alias redirects after deploy. Shared skills map: /capabilities.',
+      'Canonical flagship is /forward-deployed (lifecycle cases). Role overlay: /opportunities/forward-deployed-ai-engineer. Shared skills: /capabilities.',
   },
   {
     id: 'ai-solutions-architect',
@@ -58,20 +60,24 @@ export const roleArchetypes: RoleArchetype[] = [
       'https://moises.tech/ai-solutions-architect',
       'https://moises.tech/roles/ai-solutions-architect',
     ],
-    coversApprox: '~6 Inbox jobs (SA / customer-facing technical / pre-sales adjacent)',
+    coversApprox: 'SA / customer-facing technical / pre-sales adjacent',
     status: 'built-pending-deploy',
     notes:
-      'New public archetype. Employer pages (Deepgram, Endor) remain private overlays when needed. Shared skills map: /capabilities.',
+      'Public archetype. Employer pages remain private overlays when needed. Shared skills map: /capabilities.',
   },
   {
     id: 'creative',
-    label: 'Creative / art direction',
-    sendUrl: 'https://moises.tech/career-packet',
-    aliasUrls: [],
-    coversApprox: 'Agency AD/ACD/creative director cluster (prefer employer dossier when built)',
+    label: 'Creative / Creative Technologist',
+    sendUrl: 'https://moises.tech/creative-ai',
+    aliasUrls: [
+      'https://moises.tech/creative-technologist',
+      'https://moises.tech/roles/creative-technologist',
+      'https://moises.tech/art-director',
+    ],
+    coversApprox: 'Agency AD/ACD + creative technologist / Creative AI leadership cluster',
     status: 'live',
     notes:
-      'No single public creative archetype yet — use employer dossiers (Morley, Digitas, WMX, Ogilvy) or career packet as fallback. Creative tech skills: /capabilities#design-creative-technology.',
+      'Canonical flagship is /creative-ai. Employer dossiers (Morley, Digitas, WMX, Ogilvy) remain private overlays. Skills: /capabilities#design-creative-technology.',
   },
   {
     id: 'institutional',
@@ -83,14 +89,14 @@ export const roleArchetypes: RoleArchetype[] = [
     ],
     coversApprox: 'Knight Foundation, NEW INC / New Museum, DCC-adjacent',
     status: 'use-existing-institutional',
-    notes: 'Keep out of the three corporate archetype pages — separate career lane.',
+    notes: 'Keep out of the corporate archetype pages — separate career lane.',
   },
   {
     id: 'other',
     label: 'Other / one-off',
     sendUrl: 'https://moises.tech/career-packet',
     aliasUrls: [],
-    coversApprox: 'Roles that do not map cleanly to the three engineering archetypes',
+    coversApprox: 'Roles that do not map cleanly to the three engineering / creative flagships',
     status: 'live',
     notes: 'Use career packet + tech CV; build a private dossier only if the role warrants it.',
   },

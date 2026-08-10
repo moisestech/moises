@@ -279,6 +279,10 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
   rolePortfolio,
   roleMatchRows: [],
   featuredProjectIds: ['lore-machine', 'ai24'],
+  evidenceRecipe: 'forward-deployed-default',
+  caseStudiesSectionTitle: 'Flagship proof for forward-deployed roles',
+  caseStudiesIntro:
+    'Canonical lifecycle flagship: /forward-deployed. Nested cases ranked for FDE delivery — SmartSigns, automation, Agentic Ops (Building).',
   skillsMatrixRows: [
     {
       category: 'Creative AI & Production',

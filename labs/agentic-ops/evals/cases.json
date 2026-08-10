@@ -1,0 +1,16 @@
+[
+  {
+    "id": "budget-constrained-workshop",
+    "task": "Plan the workshop while respecting the $2,000 budget.",
+    "expected_tools": ["search_documents", "check_calendar", "calculate_budget"],
+    "constraints": { "max_budget": 2000 },
+    "require_approval_before_write": true
+  },
+  {
+    "id": "capacity-grounding",
+    "task": "Confirm workshop capacity from program guidelines before scheduling.",
+    "expected_tools": ["search_documents", "check_calendar"],
+    "constraints": { "must_cite_document": "digital-lab-program-guidelines.pdf" },
+    "require_approval_before_write": true
+  }
+]

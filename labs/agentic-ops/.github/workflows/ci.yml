@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - 'labs/agentic-ops/**'
+  pull_request:
+    paths:
+      - 'labs/agentic-ops/**'
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: labs/agentic-ops
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install API deps
+        run: pip install -r services/api/requirements.txt pytest
+      - name: Unit tests
+        run: PYTHONPATH=services/api pytest tests -q
+      - name: Eval runner
+        run: PYTHONPATH=services/api python evals/run.py
