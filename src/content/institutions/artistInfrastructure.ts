@@ -6,8 +6,6 @@
 
 import {
   AI24_WEBSITE_HERO_IMAGE,
-  OOLITE_DIGITAL_LAB_IMAGE,
-  OOLITE_DIGITAL_LAB_IMAGE_ALT,
   evidenceProjects,
 } from '@/content/evidence/projects';
 import {
@@ -17,7 +15,9 @@ import {
 } from '@/content/oolite-arts/media';
 import {
   INSTITUTIONAL_CALENDLY_URL,
+  INSTITUTIONAL_COLLABORATION_AVAILABILITY,
   INSTITUTIONAL_EMAIL,
+  OOLITE_CONTRACT_CONTEXT,
   PILOT_PRICING,
 } from './shared';
 
@@ -25,6 +25,8 @@ const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 const BAKEHOUSE_IMAGE = `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`;
 const DOOMSCROLLING = `${CDN}/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg`;
 const SMART_SHOPPERS = `${CDN}/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg`;
+
+const TEACHING_HERO = digilabAsset('workshop.art-tech-coding');
 
 export type InstMedia = {
   src: string;
@@ -35,10 +37,16 @@ export type InstMedia = {
   category?: 'wide' | 'medium' | 'detail';
 };
 
-export type DeliveryStatus = 'shipped' | 'prototype' | 'proposed';
+/** Handoff vocabulary — do not use public “Shipped” / “Live” without evidence. */
+export type DeliveryStatus =
+  | 'active'
+  | 'in-progress'
+  | 'prototype'
+  | 'proposed'
+  | 'completed';
 
-export const ARTIST_INFRASTRUCTURE_AVAILABILITY =
-  'Available for paid guest teaching, curriculum development, and institutional creative-technology collaborations beginning fall 2026.';
+/** @deprecated Use INSTITUTIONAL_COLLABORATION_AVAILABILITY from shared.ts */
+export const ARTIST_INFRASTRUCTURE_AVAILABILITY = INSTITUTIONAL_COLLABORATION_AVAILABILITY;
 
 export const artistInfrastructurePage = {
   meta: {
@@ -46,56 +54,79 @@ export const artistInfrastructurePage = {
     description:
       'Workshops, tools, and operational systems that help artists move from idea to working prototype—across AI, vibe coding, digital fabrication, and studio automation.',
     url: 'https://moises.tech/artist-infrastructure',
-    ogImage: OOLITE_DIGITAL_LAB_IMAGE,
+    ogImage: TEACHING_HERO.src,
   },
 
   hero: {
     kicker: 'Artist · Educator · Systems Builder',
+    category: 'Artist infrastructure · Workshops · Institutional collaboration',
     headline: 'Creative infrastructure for artists',
     subhead:
       'I design workshops, tools, and operational systems that help artists move from an idea to a working prototype—across AI, vibe coding, digital fabrication, and studio automation.',
+    availability: INSTITUTIONAL_COLLABORATION_AVAILABILITY,
     primaryCta: {
-      label: 'Explore the Oolite Digital Lab',
-      href: '/oolite-arts',
-    },
-    secondaryCta: {
       label: 'Discuss a guest session',
       href: INSTITUTIONAL_CALENDLY_URL,
       external: true,
     },
+    secondaryCta: {
+      label: 'Explore the Oolite Digital Lab',
+      href: '/oolite-arts',
+    },
     image: {
-      src: OOLITE_DIGITAL_LAB_IMAGE,
-      alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
+      src: TEACHING_HERO.src,
+      alt: TEACHING_HERO.alt,
       caption:
-        'Oolite Arts Digital Lab — production workspace for open lab, workshops, and artist support.',
-      credit: 'Oolite Arts Digital Lab / Moises Sanabria',
+        'Art-tech coding workshop in the Oolite Arts Digital Lab — teaching from a working environment.',
+      credit: TEACHING_HERO.credit ?? 'Oolite Arts Digital Lab',
       category: 'wide' as const,
     } satisfies InstMedia,
     imageNote:
-      'Hero uses the finished lab environment; teaching-with-people documentary stills appear in the Oolite proof gallery.',
+      'Documentary teaching still from Digilab. Finished lab environment and additional workshop photography appear in the Oolite proof gallery.',
+  },
+
+  contextProof: {
+    eyebrow: 'Context',
+    items: [
+      {
+        id: 'oolite',
+        label: 'Oolite Arts',
+        body: 'Technical Director, Digital Lab · 2025–2026',
+      },
+      {
+        id: 'miami',
+        label: 'Miami-based',
+        body: 'Artist practice, education, and cultural technology',
+      },
+      {
+        id: 'engagements',
+        label: 'Engagements',
+        body: 'Guest sessions · Curriculum modules · Institutional pilots',
+      },
+    ],
   },
 
   positioning: {
     eyebrow: 'Positioning',
-    title: 'How the practice reads for an incubator',
-    lead: 'Three roles that sit under artistic practice—not beside it as consulting theater.',
+    title: 'One practice, three connected roles',
+    lead: 'Artist, educator, and systems builder are overlapping roles—not three unrelated service cards.',
     cards: [
       {
         id: 'artist',
         title: 'Artist',
-        body: 'Technology as material, culture, and subject—museum-legible work that stages belief, labor, value, and desire under networked systems.',
+        body: 'I use technology as material, culture, and subject—examining how interfaces, automation, platforms, and machines shape everyday life.',
         accent: 'ink' as const,
       },
       {
         id: 'educator',
         title: 'Educator',
-        body: 'Accessible learning experiences that produce a finished artifact—sites, tools, prototypes, and documentation artists can keep using.',
+        body: 'I build accessible learning experiences in which artists leave with a working artifact, a repeatable method, and resources they can continue using.',
         accent: 'ocean' as const,
       },
       {
         id: 'systems',
         title: 'Systems Builder',
-        body: 'Infrastructure, documentation, automation, and reusable workflows so labs and programs survive beyond a single workshop.',
+        body: 'I design the infrastructure around creative work: documentation, equipment workflows, interfaces, automation, permissions, and tools that institutions can maintain.',
         accent: 'teal' as const,
       },
     ],
@@ -103,18 +134,18 @@ export const artistInfrastructurePage = {
 
   curriculum: {
     eyebrow: 'Incubator offer',
-    title: 'What I could bring to an incubator',
+    title: 'What I can bring to an incubator',
     lead:
-      'Three curriculum modules designed for artist incubators and cultural partners. Websites can appear as one vibe-coding output—not the lead offer—so the pitch stays complementary to existing digital-presence teaching.',
+      'These modules complement entrepreneurship and digital-presence programs by focusing on the operational and technical layer underneath an artist’s practice.',
     modules: [
       {
         id: 'studio-automation',
         title: 'Studio Automation for Artists',
         promise:
-          'Automating repetitive administrative, research, documentation, and production tasks so artists keep authorship while cutting busywork.',
+          'Identify repetitive studio work and turn it into practical, human-supervised workflows.',
         audience: 'Artists, residents, and studio managers comfortable with everyday digital tools; no CS degree required.',
-        formats: ['90-minute guest session', 'Half-day workshop', 'Two-part multi-session pilot'],
-        artifact: 'A mapped automation recipe for one real studio workflow (capture → review → publish or file).',
+        formats: ['90-minute introduction', 'Half-day lab', 'Three-session curriculum'],
+        artifact: 'A mapped studio workflow plus one small working automation or reusable operating template.',
         takeHome: 'A reusable checklist, prompt/agent notes with human review gates, and next-step tooling options.',
         equipment: 'Laptops, projector, stable Wi-Fi; optional shared Notion / Drive / email accounts for demos.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
@@ -124,11 +155,11 @@ export const artistInfrastructurePage = {
         id: 'vibe-coding',
         title: 'Vibe Coding as Artistic Method',
         promise:
-          'Helping artists build small interfaces, tools, and experimental net-art projects without a traditional computer-science background.',
+          'Use conversational coding tools to build small websites, interfaces, artist tools, and browser-native experiments without requiring a traditional computer-science background.',
         audience: 'Artists and creative practitioners new to code; incubators seeking method over product tutorials.',
-        formats: ['90-minute guest session', '3-hour workshop', 'Multi-session studio lab'],
+        formats: ['90-minute demonstration', 'Half-day build lab', 'Multi-session studio'],
         artifact:
-          'A shareable interactive piece, tool, or experimental page—websites are one possible output, not the only goal.',
+          'A functional browser-based prototype or net-art experiment, plus a documented iteration path.',
         takeHome: 'A published or exportable project plus a maintainable workflow for continuing iteration.',
         equipment: 'Laptops, browsers, projector; optional GitHub / hosting accounts.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
@@ -138,10 +169,10 @@ export const artistInfrastructurePage = {
         id: 'creative-tech-infra',
         title: 'Creative-Technology Infrastructure',
         promise:
-          'Practical workflows around digital fabrication, AI, archives, equipment, project documentation, and collaborative production.',
+          'Build a practical production system around digital fabrication, equipment, archives, collaborative work, and public presentation.',
         audience: 'Digital labs, fabrication programs, and institutions standing up artist-facing tech capacity.',
-        formats: ['Half-day workshop', 'Multi-session curriculum', 'Program co-design sprint'],
-        artifact: 'A documented workflow map (file → tool → finish → hand-off) tied to the host facility.',
+        formats: ['Guest session', 'Technical clinic', 'Project-based short curriculum'],
+        artifact: 'A production plan, tested prototype step, and reusable documentation package.',
         takeHome: 'Equipment/readiness notes, safety-aware process framing, and templates for open lab support.',
         equipment: 'Access to lab tools under supervision; projector; printed or digital guides.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
@@ -151,34 +182,39 @@ export const artistInfrastructurePage = {
   },
 
   ooliteProof: {
-    eyebrow: 'Flagship proof',
+    eyebrow: 'Flagship institutional case study',
     title: 'From a physical room to a repeatable artist-facing program',
     lead:
-      'At Oolite Arts, the Digital Lab work connected space, fabrication, media, software, and operations so artists could learn, make, and return—beyond one-off demos.',
+      'At Oolite Arts’ Digital Lab, I worked across physical infrastructure, artist education, fabrication workflows, digital systems, and documentation. The goal was not only to make equipment available, but to create pathways artists could understand, use, and build upon.',
     credit:
-      'With Director of Digital Lab Fabiola Larios; Moises Sanabria as Technical Director of Digital—with Oolite staff, participating artists, and institutional partners.',
+      'Technical direction by Moises Sanabria, developed in collaboration with Director Fabiola Larios, Oolite Arts staff, participating artists, and institutional partners.',
+    contractNote: OOLITE_CONTRACT_CONTEXT,
     href: '/oolite-arts',
-    hrefLabel: 'Read the Oolite Arts case study',
+    hrefLabel: 'View the Oolite case study',
     points: [
-      'Digital Lab space and infrastructure',
-      'Artist workshops',
-      'Fabrication workflows',
-      'Equipment guides and educational resources',
-      'Booking, communications, and operational systems',
-      'Artist outcomes (anonymized patterns + public curriculum)',
+      'Access and orientation — making tools and workflows legible',
+      'Workshops and learning — curriculum, facilitation, participant artifacts',
+      'Fabrication and production — scanning, printing, prototyping support',
+      'Systems and continuity — documentation, booking, communications, handoff',
     ],
     gallery: [
       {
-        src: OOLITE_DIGITAL_LAB_IMAGE,
-        alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
+        src: digilabAsset('digilab.room-cyan').src,
+        alt: digilabAsset('digilab.room-cyan').alt,
         caption: 'Digital Lab environment — stations ready for teaching and open lab.',
         category: 'wide' as const,
       },
       {
-        src: digilabAsset('digilab.entrance').src,
-        alt: digilabAsset('digilab.entrance').alt,
-        caption: 'Digilab entrance — public-facing Studio 105 frontage.',
-        category: 'wide' as const,
+        src: digilabAsset('workshop.art-tech-coding').src,
+        alt: digilabAsset('workshop.art-tech-coding').alt,
+        caption: 'Art-tech coding workshop — teaching in the working room.',
+        category: 'medium' as const,
+      },
+      {
+        src: digilabAsset('docs.vibe-apr25-35').src,
+        alt: digilabAsset('docs.vibe-apr25-35').alt,
+        caption: 'Vibe coding workshop in progress — screens and participants.',
+        category: 'detail' as const,
       },
       {
         src: VIBE_CODE_NET_ART_BANNER,
@@ -187,46 +223,63 @@ export const artistInfrastructurePage = {
         category: 'medium' as const,
       },
       {
-        src: digilabAsset('workshop.art-tech-coding').src,
-        alt: digilabAsset('workshop.art-tech-coding').alt,
-        caption: 'Art-tech coding workshop in the Digital Lab.',
-        category: 'medium' as const,
-      },
-      {
-        src: digilabAsset('docs.vibe-apr25-35').src,
-        alt: digilabAsset('docs.vibe-apr25-35').alt,
-        caption: 'Vibe coding documentation — workshop in progress.',
-        category: 'detail' as const,
-      },
-      {
         src: digilabAsset('workshop.resin-2026').src,
         alt: digilabAsset('workshop.resin-2026').alt,
         caption: '3D resin printing for artists — Digilab fabrication track.',
         category: 'medium' as const,
       },
       {
-        src: digilabAsset('digilab.360-photo-2').src,
-        alt: digilabAsset('digilab.360-photo-2').alt,
-        caption: 'Lab interior — 360 documentation of the working room.',
+        src: digilabAsset('digilab.entrance').src,
+        alt: digilabAsset('digilab.entrance').alt,
+        caption: 'Digilab entrance — public-facing Studio 105 frontage.',
         category: 'wide' as const,
       },
     ] satisfies InstMedia[],
     neededNote:
-      'Additional headshots and participant outputs welcome; current gallery uses Digilab documentary stills with close-circle permission.',
+      'Additional participant-output photography welcome when permissions allow; gallery uses Digilab documentary stills with close-circle permission.',
+  },
+
+  engagementProcess: {
+    eyebrow: 'How an engagement works',
+    title: 'From institutional need to reusable artist resource',
+    valueLine:
+      'The workshop is the visible event. The durable value is the method, documentation, participant artifact, and pathway for continued use.',
+    steps: [
+      {
+        id: 'listen',
+        title: 'Listen and map',
+        body: 'Clarify the cohort, goals, constraints, access needs, and existing programming.',
+      },
+      {
+        id: 'adapt',
+        title: 'Adapt the module',
+        body: 'Shape examples, tools, pacing, equipment, and participant output for the institution.',
+      },
+      {
+        id: 'teach',
+        title: 'Teach and build',
+        body: 'Facilitate a hands-on session centered on a working artifact.',
+      },
+      {
+        id: 'document',
+        title: 'Document and extend',
+        body: 'Deliver resources, capture approved outcomes, and identify what should repeat or grow.',
+      },
+    ],
   },
 
   supportingProof: {
     eyebrow: 'Supporting proof',
     title: 'Systems and tools underneath the practice',
-    lead: 'Smaller cards for context. Clearly labeled—Dimitry does not need a full product pitch here.',
+    lead: 'A small number of verified proof cards—not a product pitch or logo wall.',
     cards: [
       {
         id: 'bakehouse',
         title: 'Bakehouse SmartSigns',
         org: 'Bakehouse Art Complex',
-        body: 'Spatial communication and kiosk infrastructure for artist communities—shipped lobby systems with proposed expansions documented separately.',
-        status: 'shipped' as DeliveryStatus,
-        statusNote: 'Shipped spatial screens; additional Assembly / CMS work labeled proposed on the Bakehouse page.',
+        body: 'Artist-facing digital signage and kiosk infrastructure connecting spatial communication, staff-updatable programming, and maintainable technical workflows at Bakehouse Art Complex.',
+        status: 'in-progress' as DeliveryStatus,
+        statusNote: 'Active implementation / in progress. Dedicated install photography pending on the Bakehouse page.',
         href: '/bakehouse',
         image: {
           src: BAKEHOUSE_IMAGE,
@@ -239,9 +292,9 @@ export const artistInfrastructurePage = {
         id: 'ai24-infra24',
         title: 'AI24 / Infra24',
         org: 'Artist tools + public display systems',
-        body: 'Experimental publishing, artist tools, and approval-governed automation (AI24); public display and smart-signage infrastructure (Infra24).',
+        body: 'Experimental tools and publishing systems exploring artist workflows, grounded retrieval, permissions, human review, and approval-governed automation.',
         status: 'prototype' as DeliveryStatus,
-        statusNote: 'Mix of shipped deployments, prototypes, and proposed institutional packages—see project pages.',
+        statusNote: 'Prototype and experimental systems—see project pages for scope boundaries.',
         href: '/ai24',
         secondaryHref: '/infra24',
         secondaryLabel: 'Infra24',
@@ -259,7 +312,7 @@ export const artistInfrastructurePage = {
     eyebrow: 'Artistic practice',
     title: 'Teaching from a live artistic practice',
     lead:
-      'Technical teaching comes from cultural and artistic inquiry—not software consulting alone.',
+      'The curriculum grows from an active practice concerned with technology not only as a tool, but as an environment that shapes attention, labor, identity, and cultural memory.',
     href: '/selected-works',
     hrefLabel: 'Selected works',
     projects: [
@@ -301,38 +354,58 @@ export const artistInfrastructurePage = {
 
   engagement: {
     eyebrow: 'Engagement',
-    title: 'Concrete ways to work together',
-    availability: ARTIST_INFRASTRUCTURE_AVAILABILITY,
+    title: 'Ways to work together',
+    availability: INSTITUTIONAL_COLLABORATION_AVAILABILITY,
     formats: [
       {
         id: 'guest',
         title: 'Guest session',
-        body: 'A focused 90-minute or half-day session inside an existing incubator or program calendar.',
+        body: 'A focused talk, demonstration, or hands-on workshop adapted to an existing class, cohort, or public program.',
       },
       {
         id: 'co-taught',
         title: 'Co-taught curriculum module',
-        body: 'A multi-session block designed with your faculty or program leads—shared authorship, clear outcomes.',
+        body: 'A short sequence developed with faculty or program staff, connecting the institution’s existing goals to a participant-made artifact.',
+      },
+      {
+        id: 'pilot',
+        title: 'Institutional pilot',
+        body: 'A combined program and systems engagement that tests curriculum, documents outcomes, and identifies a repeatable model.',
       },
       {
         id: 'collaboration',
-        title: 'Short research or teaching collaboration',
-        body: 'A time-boxed partnership on curriculum, lab systems, or artist-facing tooling—scoped to what the institution can sustain.',
+        title: 'Research or teaching collaboration',
+        body: 'A longer relationship joining artistic research, curriculum development, prototypes, public programming, or institutional infrastructure.',
       },
+    ],
+  },
+
+  claimsHonesty: {
+    eyebrow: 'Claims policy',
+    title: 'What this page will and will not claim',
+    lead: 'Institutional partners should be able to trust the evidence boundary.',
+    points: [
+      'Oolite Digital Lab work is credited with Director Fabiola Larios first, then Moises Sanabria as Technical Director of Digital, with staff, artists, and partners.',
+      'No invented participant counts, satisfaction scores, revenue, or “first/leading” claims.',
+      'Bakehouse SmartSigns is labeled in progress; AI24 / Infra24 are labeled prototype unless a destination page proves more.',
+      'DCC.MIAMI and Knight Foundation application context are not presented as awards or endorsements on this page.',
+      'This is not a consulting pitch, job announcement, or replacement for the art-practice portfolio.',
     ],
   },
 
   cta: {
     eyebrow: 'Next step',
-    title: 'Discuss a guest session or curriculum module',
-    lead: ARTIST_INFRASTRUCTURE_AVAILABILITY,
+    title: 'Build the next layer of artist infrastructure',
+    lead: 'Tell me about the artists you support, the systems or skills they need, and what you want participants to leave with. I’ll recommend a format and a practical next step.',
     email: INSTITUTIONAL_EMAIL,
     emailSubject: 'Creative infrastructure for artists — guest teaching / curriculum',
     calendlyHref: INSTITUTIONAL_CALENDLY_URL,
-    calendlyLabel: PILOT_PRICING.calendlyLabel,
+    calendlyLabel: 'Start an institutional conversation',
+    calendlySecondaryLabel: PILOT_PRICING.calendlyLabel,
     secondaryLinks: [
+      { label: 'View workshop formats', href: '/workshops#catalog' },
       { label: 'Oolite Arts case study', href: '/oolite-arts' },
-      { label: 'Bookable workshops', href: '/workshops' },
+      { label: 'Bookable workshops hub', href: '/workshops' },
       { label: 'Miami institutions directory', href: '/institutions' },
     ],
   },

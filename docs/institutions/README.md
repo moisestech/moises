@@ -53,8 +53,9 @@ Next phases: layout polish → 360 viewer → video entries in the same registry
 
 ## Availability and pricing
 
-- **Availability** must live in one place: [`shared.ts`](../../src/content/institutions/shared.ts). Today hub/Bakehouse/YoungArts and artist-infrastructure can disagree (contract end vs fall 2026) — unify before the next outreach send.
-- **Pilot pricing** mirrors Digilab rates via `PILOT_PRICING` + [`workshopsOfferings.ts`](../../src/content/institutions/workshopsOfferings.ts). Keep Bakehouse ask / hub propose-pilot / workshops on that source.
+- **Collaboration offer line:** `INSTITUTIONAL_COLLABORATION_AVAILABILITY` in [`shared.ts`](../../src/content/institutions/shared.ts) (fall 2026 paid guest teaching / curriculum / pilots). Used by `/artist-infrastructure` hero, engagement, and CTA. `INSTITUTIONAL_AVAILABILITY` aliases this.
+- **Oolite contract context:** `OOLITE_CONTRACT_CONTEXT` (Sept 17, 2026) — case-study framing only, not a competing hero availability line.
+- **Pilot pricing** mirrors Digilab public seat rates via `PILOT_PRICING` + [`workshopsOfferings.ts`](../../src/content/institutions/workshopsOfferings.ts) for workshops/hub. Do **not** present `$45` as an institutional teaching fee on `/artist-infrastructure`.
 
 ## Key content files
 
@@ -71,5 +72,5 @@ Next phases: layout polish → 360 viewer → video entries in the same registry
 
 - Workshops visual language still diverges from the institutional dossier system
 - Bakehouse SmartSign / systems photography still placeholder-heavy
-- Double sticky nav (family + section chips) can feel dense on first viewport
+- DCC.MIAMI public section deferred on `/artist-infrastructure` (insufficient documentary proof)
 - Museum of Sex hub card image mismatch (transmediale poster) — fix when touching hub media

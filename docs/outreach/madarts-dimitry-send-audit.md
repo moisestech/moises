@@ -45,7 +45,7 @@
 
 | # | URL | Why |
 |---|-----|-----|
-| 1 | https://moises.tech/artist-infrastructure | Primary offer — workshops, systems, engagement formats. Page already notes Dimitry does not need a full product pitch. |
+| 1 | https://moises.tech/artist-infrastructure | Primary offer — workshops, systems, engagement formats. No named personal aside; reusable institutional conversion page. |
 | 2 | https://moises.tech/oolite-arts | Digilab proof (credits: Fabiola first, then Moises). |
 | 3 | https://moises.tech/institutions | Verified org + case-study directory. |
 | 4 | https://moises.tech/workshops | Pilots he can route or co-host. |
@@ -72,7 +72,7 @@
 |---------|--------|-------|
 | `/research/the-algorithm-is-outside` | Ready for Soft send | Diagram + scaffolds added; video TBD |
 | `/research` | Ready | Lists BITM + all `research` registry projects |
-| `/artist-infrastructure` | Ready | Primary Dimitry door |
+| `/artist-infrastructure` | Ready | Primary Dimitry door — handoff polish: inverted CTAs, context strip, process, claims honesty, fall 2026 availability SoT; DCC section deferred |
 | `/oolite-arts` | Ready | Digilab proof |
 | `/creative-ai` | Ready for creative samples | Banner, GAN pillars, YouTube audit clips, Rammstein stub (video pending) |
 | `/creative-strategist` | Ready for MadArts-adjacent creative | MadArts banner; same evidence spine |
