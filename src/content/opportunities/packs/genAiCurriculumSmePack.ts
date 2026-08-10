@@ -5,6 +5,8 @@
 
 import type { EvidenceProjectId } from '@/content/evidence/projects';
 import type {
+  ApplicationAnswer,
+  CertificationItem,
   ProcessStep,
   RoleMatchRow,
   SkillsMatrixRow,
@@ -185,3 +187,63 @@ export const genAiCurriculumSmeEvidenceLine =
 
 export const genAiCurriculumSmeVerifierNote =
   'Strict verifier: no production RAG, vector DB, or LangChain/LangGraph builder claims until verified live. Confirmed evidence is curriculum delivery, production n8n agents, and GenAI product work (Lore Machine).';
+
+export const genAiCurriculumSmeCertifications: CertificationItem[] = [
+  {
+    name: 'Cooper Union — Bachelor of Fine Arts (BFA)',
+    detail: 'Studio practice + systems thinking foundation for teaching technical content to creative practitioners.',
+    href: 'https://cooper.edu',
+  },
+  {
+    name: 'Public GenAI / agent curricula',
+    detail:
+      'The Art of AI Agents, Learn AI Without Losing Yourself, Own Your Digital Presence — multi-session programs with labs and handouts.',
+    href: '/workshop/the-art-of-ai-agents',
+  },
+  {
+    name: 'Institutional Digilab teaching',
+    detail: 'Oolite Arts Digital Lab facilitation — artist-facing AI and creative-tech workshops.',
+    href: '/oolite-arts',
+  },
+];
+
+/**
+ * Honest screening answers for Hurix-style GenAI SME forms.
+ * Uncheck RAG / LangChain / LangGraph / vector DB unless verified live.
+ */
+export const genAiCurriculumSmeApplicationAnswers: ApplicationAnswer[] = [
+  {
+    question:
+      'How many years of hands-on experience do you have in Software Engineering, AI/ML, or Generative AI?',
+    answer:
+      '10+ years across software, creative-tech product, and AI-adjacent systems; multi-year hands-on Generative AI through Lore Machine (founding engineer), production LLM agent automations (n8n), and public GenAI teaching programs.',
+  },
+  {
+    question: 'Which Generative AI technologies and frameworks have you worked with?',
+    answer:
+      'Confirmed: Large Language Models (LLMs), Prompt Engineering, AI Agents, Python, TypeScript. Production agent workflows via n8n AI Agent nodes + OpenAI/Anthropic APIs. Do not select RAG, LangChain, LangGraph, or vector databases unless a verified production build is attached to this packet.',
+  },
+  {
+    question: 'Which AI platforms and cloud services have you used?',
+    answer:
+      'OpenAI API, Anthropic Claude, Google Gemini, plus AWS-oriented delivery in museum/product stacks (CloudFront, S3, streaming/analytics). Azure OpenAI / Vertex / Hugging Face: familiarity from teaching and evaluation, not claimed as daily production ownership here.',
+  },
+  {
+    question:
+      'Have you built and deployed production-grade Generative AI applications or solutions using LLMs?',
+    answer:
+      'Yes — Lore Machine GenAI product engineering; production n8n Gmail intelligence with an AI Agent node, Airtable routing, and human review gates. Evidence and screenshots live on this dossier and /workshop/the-art-of-ai-agents.',
+  },
+  {
+    question:
+      'Have you developed or reviewed technical training content, eLearning courses, coding labs, or instructional materials related to AI / ML / Generative AI?',
+    answer:
+      'Yes — multi-session public curricula (Art of AI Agents, Learn AI Without Losing Yourself), chapter materials, labs, diagrams, and Digilab institutional teaching. Materials are already structured for instructional designers and video production handoff.',
+  },
+  {
+    question:
+      'Are you comfortable recording professional screencasts, talking-head videos, and green-screen presentations? Share LinkedIn, GitHub, portfolio, or published courses.',
+    answer:
+      'Yes — comfortable with screencasts and talking-head teaching from live workshop delivery. LinkedIn: linkedin.com/in/moisesdsanabria · GitHub: github.com/moisestech · Portfolio: moises.tech · Courses: moises.tech/workshop/the-art-of-ai-agents and moises.tech/workshops.',
+  },
+];

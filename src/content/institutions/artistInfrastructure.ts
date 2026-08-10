@@ -16,17 +16,23 @@ import {
   VIBE_CODE_NET_ART_BANNER_ALT,
 } from '@/content/oolite-arts/media';
 import {
-  ART_OF_AI_AGENTS_EMAIL_SORTER_HREF,
+  ART_OF_AI_AGENTS_HERO,
   ART_OF_AI_AGENTS_SCREENSHOTS,
   ART_OF_AI_AGENTS_WORKSHOP_HREF,
   N8N_LOGO,
 } from '@/constants/art-of-ai-agents';
 import {
-  AI_PRODUCTION_HUMAN_REVIEW_PIPELINE,
   ARTIST_INFRASTRUCTURE_BANNER_WIDE,
   CREATIVE_DIRECTION_SPATIAL_INTERFACE,
+  POSITIONING_ARTIST,
+  POSITIONING_EDUCATOR,
+  POSITIONING_SYSTEMS,
   SOFTWARE_INTERFACES_CREATOR_TOOL,
 } from './artistInfrastructureMedia';
+import {
+  QUICKBOOKS_AUTOMATION_COVER,
+  QUICKBOOKS_AUTOMATION_WORKSHOP_HREF,
+} from '@/content/workshops/quickbooksAutomation';
 import {
   INSTITUTIONAL_CALENDLY_URL,
   INSTITUTIONAL_COLLABORATION_AVAILABILITY,
@@ -107,24 +113,27 @@ export const artistInfrastructurePage = {
   mediaNeeded: {
     eyebrow: 'Media attached',
     title: 'Workshop and banner assets on this page',
-    lead: 'Wide Creative Infrastructure banner, Locust n8n screenshots, and three-layer creative systems stills are live. Idea Center QuickBooks documentation remains the open slot.',
+    lead: 'Wide banner, Locust n8n photography, Email Inbox Organizer diagrams, and QuickBooks Automation slides are live.',
     items: [
       {
         id: 'locust-automation',
-        title: 'Locust Projects — Email Inbox Organizer',
-        note: 'n8n Email Inbox Organizer diagram + Artist Task Automation slides attached — handout at /workshop/the-art-of-ai-agents/share.',
+        title: 'Locust Projects — Art of AI Agents / n8n',
+        note: 'Documentary still from Locust Projects + Email Inbox Organizer diagram and Artist Task Automation slides.',
         status: 'attached' as const,
         icon: 'video' as const,
-        href: ART_OF_AI_AGENTS_EMAIL_SORTER_HREF,
-        imageSrc: ART_OF_AI_AGENTS_SCREENSHOTS[0].src,
-        imageAlt: ART_OF_AI_AGENTS_SCREENSHOTS[0].alt,
+        href: ART_OF_AI_AGENTS_WORKSHOP_HREF,
+        imageSrc: ART_OF_AI_AGENTS_HERO.src,
+        imageAlt: ART_OF_AI_AGENTS_HERO.alt,
       },
       {
         id: 'idea-center-quickbooks',
-        title: 'Idea Center — QuickBooks workshop',
-        note: 'Recent QuickBooks / studio-ops workshop documentation. Fits Studio Automation for Artists.',
-        status: 'needed' as const,
+        title: 'QuickBooks Automation for Artists',
+        note: 'Three workshop slides attached — studio bookkeeping, automation, and human review gates.',
+        status: 'attached' as const,
         icon: 'workflow' as const,
+        href: QUICKBOOKS_AUTOMATION_WORKSHOP_HREF,
+        imageSrc: QUICKBOOKS_AUTOMATION_COVER.src,
+        imageAlt: QUICKBOOKS_AUTOMATION_COVER.alt,
       },
       {
         id: 'custom-banner',
@@ -161,8 +170,54 @@ export const artistInfrastructurePage = {
       credit: TEACHING_HERO.credit ?? 'Oolite Arts Digital Lab',
       category: 'wide' as const,
     } satisfies InstMedia,
-    imageNote:
-      'Documentary teaching still from Digilab. Finished lab environment and additional workshop photography appear in the Oolite proof gallery.',
+    imageNote: 'Browse photos — each slide links to a section below.',
+    carousel: [
+      {
+        src: TEACHING_HERO.src,
+        alt: TEACHING_HERO.alt,
+        caption: 'Digilab teaching — artists leave with a working method',
+        credit: TEACHING_HERO.credit ?? 'Oolite Arts Digital Lab',
+        sectionId: 'curriculum',
+        sectionLabel: 'View curriculum',
+      },
+      {
+        src: ART_OF_AI_AGENTS_HERO.src,
+        alt: ART_OF_AI_AGENTS_HERO.alt,
+        caption: ART_OF_AI_AGENTS_HERO.caption,
+        credit: ART_OF_AI_AGENTS_HERO.credit,
+        sectionId: 'curriculum',
+        sectionLabel: 'Studio automation · n8n',
+      },
+      {
+        src: QUICKBOOKS_AUTOMATION_COVER.src,
+        alt: QUICKBOOKS_AUTOMATION_COVER.alt,
+        caption: QUICKBOOKS_AUTOMATION_COVER.caption,
+        sectionId: 'curriculum',
+        sectionLabel: 'QuickBooks automation',
+      },
+      {
+        src: digilabAsset('digilab.room-cyan').src,
+        alt: digilabAsset('digilab.room-cyan').alt,
+        caption: 'Oolite Digital Lab — institutional creative-technology infrastructure',
+        credit: 'Oolite Arts Digital Lab',
+        sectionId: 'oolite-proof',
+        sectionLabel: 'Oolite case study',
+      },
+      {
+        src: POSITIONING_ARTIST.src,
+        alt: POSITIONING_ARTIST.alt,
+        caption: 'Practice — technology as material and culture',
+        sectionId: 'practice',
+        sectionLabel: 'Artistic practice',
+      },
+      {
+        src: ART_OF_AI_AGENTS_SCREENSHOTS[0].src,
+        alt: ART_OF_AI_AGENTS_SCREENSHOTS[0].alt,
+        caption: ART_OF_AI_AGENTS_SCREENSHOTS[0].caption,
+        sectionId: 'supporting-proof',
+        sectionLabel: 'Supporting proof',
+      },
+    ],
   },
 
   contextProof: {
@@ -204,8 +259,8 @@ export const artistInfrastructurePage = {
         accent: 'ink' as const,
         icon: 'palette' as const,
         image: {
-          src: CREATIVE_DIRECTION_SPATIAL_INTERFACE.src,
-          alt: CREATIVE_DIRECTION_SPATIAL_INTERFACE.alt,
+          src: POSITIONING_ARTIST.src,
+          alt: POSITIONING_ARTIST.alt,
         },
       },
       {
@@ -215,8 +270,8 @@ export const artistInfrastructurePage = {
         accent: 'ocean' as const,
         icon: 'graduation' as const,
         image: {
-          src: SOFTWARE_INTERFACES_CREATOR_TOOL.src,
-          alt: SOFTWARE_INTERFACES_CREATOR_TOOL.alt,
+          src: POSITIONING_EDUCATOR.src,
+          alt: POSITIONING_EDUCATOR.alt,
         },
       },
       {
@@ -226,8 +281,8 @@ export const artistInfrastructurePage = {
         accent: 'teal' as const,
         icon: 'network' as const,
         image: {
-          src: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.src,
-          alt: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.alt,
+          src: POSITIONING_SYSTEMS.src,
+          alt: POSITIONING_SYSTEMS.alt,
         },
       },
     ],
@@ -243,7 +298,7 @@ export const artistInfrastructurePage = {
         id: 'studio-automation',
         title: 'Studio Automation for Artists',
         promise:
-          'Identify repetitive studio work and turn it into practical, human-supervised workflows.',
+          'Identify repetitive studio work and turn it into practical, human-supervised workflows — including n8n agent labs from The Art of AI Agents.',
         audience:
           'Artists, residents, and studio managers comfortable with everyday digital tools; no CS degree required.',
         formats: ['90-minute introduction', 'Half-day lab', 'Three-session curriculum'],
@@ -258,8 +313,28 @@ export const artistInfrastructurePage = {
         accent: 'ocean' as const,
         icon: 'workflow' as const,
         image: {
-          src: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.src,
-          alt: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.alt,
+          src: ART_OF_AI_AGENTS_HERO.src,
+          alt: ART_OF_AI_AGENTS_HERO.alt,
+        },
+      },
+      {
+        id: 'quickbooks-automation',
+        title: 'QuickBooks Automation for Artists',
+        promise:
+          'Make studio bookkeeping legible — invoices, expenses, and categories with light automation and clear human review.',
+        audience:
+          'Artists and studio managers who already touch QuickBooks (or should) and need a maintainable operating template.',
+        formats: ['90-minute introduction', 'Half-day lab'],
+        artifact: 'A cleaned category map plus a simple bookkeeping runbook for ongoing use.',
+        takeHome: 'Templates for invoices/expenses hygiene and a checklist of what stays human-approved.',
+        equipment: 'Laptops, projector, QuickBooks Online demo account or screenshots.',
+        options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
+        href: QUICKBOOKS_AUTOMATION_WORKSHOP_HREF,
+        accent: 'copper' as const,
+        icon: 'workflow' as const,
+        image: {
+          src: QUICKBOOKS_AUTOMATION_COVER.src,
+          alt: QUICKBOOKS_AUTOMATION_COVER.alt,
         },
       },
       {
@@ -298,7 +373,7 @@ export const artistInfrastructurePage = {
         equipment: 'Access to lab tools under supervision; projector; printed or digital guides.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
         href: '/oolite-arts',
-        accent: 'copper' as const,
+        accent: 'ink' as const,
         icon: 'layers' as const,
         image: {
           src: CREATIVE_DIRECTION_SPATIAL_INTERFACE.src,
@@ -411,11 +486,11 @@ export const artistInfrastructurePage = {
         body: 'Artist Task Automation + Email Inbox Organizer — n8n AI agents with public chapter materials, handout prompts, and workflow screenshots.',
         status: 'completed' as DeliveryStatus,
         statusNote: 'Diagram + slides live at /workshop/the-art-of-ai-agents and /share.',
-        href: ART_OF_AI_AGENTS_EMAIL_SORTER_HREF,
+        href: ART_OF_AI_AGENTS_WORKSHOP_HREF,
         image: {
-          src: ART_OF_AI_AGENTS_SCREENSHOTS[0].src,
-          alt: ART_OF_AI_AGENTS_SCREENSHOTS[0].alt,
-          caption: 'n8n Email Inbox Organizer — Locust workshop workflow diagram.',
+          src: ART_OF_AI_AGENTS_HERO.src,
+          alt: ART_OF_AI_AGENTS_HERO.alt,
+          caption: ART_OF_AI_AGENTS_HERO.caption,
           category: 'medium' as const,
         } satisfies InstMedia,
       },
@@ -546,6 +621,8 @@ export const artistInfrastructurePage = {
     calendlyLabel: 'Start an institutional conversation',
     calendlySecondaryLabel: PILOT_PRICING.calendlyLabel,
     secondaryLinks: [
+      { label: 'QuickBooks Automation for Artists', href: '/workshop/quickbooks-automation-for-artists' },
+      { label: 'The Art of AI Agents', href: '/workshop/the-art-of-ai-agents' },
       { label: 'View workshop formats', href: '/workshops#catalog' },
       { label: 'Oolite Arts case study', href: '/oolite-arts' },
       { label: 'Bookable workshops hub', href: '/workshops' },

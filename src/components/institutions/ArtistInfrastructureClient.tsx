@@ -123,6 +123,7 @@ export function ArtistInfrastructureClient() {
         secondaryCta={P.hero.secondaryCta}
         image={P.hero.image}
         imageNote={P.hero.imageNote}
+        carousel={P.hero.carousel}
       />
 
       <ContextProofStrip eyebrow={P.contextProof.eyebrow} items={P.contextProof.items} />
@@ -156,7 +157,7 @@ export function ArtistInfrastructureClient() {
               {P.curriculum.lead}
             </p>
           </InstReveal>
-          <ul className="mt-8 grid gap-4 lg:grid-cols-3">
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {P.curriculum.modules.map((module, i) => (
               <InstReveal key={module.id} delay={0.05 * i}>
                 <li className="h-full">
@@ -167,7 +168,27 @@ export function ArtistInfrastructureClient() {
           </ul>
           <InstReveal delay={0.12}>
             <p className="mt-8 text-sm text-neutral-600">
-              Full public catalog (Presence, AI Literacy, Creative Coding, Systems + Archive):{' '}
+              Featured workshop landings:{' '}
+              <a
+                href="/workshop/the-art-of-ai-agents"
+                className="font-medium text-neutral-950 underline underline-offset-4"
+                onClick={() => track('artist_infrastructure_workshop_link', { slug: 'the-art-of-ai-agents' })}
+              >
+                The Art of AI Agents
+              </a>
+              {' · '}
+              <a
+                href="/workshop/quickbooks-automation-for-artists"
+                className="font-medium text-neutral-950 underline underline-offset-4"
+                onClick={() =>
+                  track('artist_infrastructure_workshop_link', {
+                    slug: 'quickbooks-automation-for-artists',
+                  })
+                }
+              >
+                QuickBooks Automation for Artists
+              </a>
+              . Full catalog:{' '}
               <a
                 href="/workshops#catalog"
                 className="font-medium text-neutral-950 underline underline-offset-4"
@@ -175,7 +196,7 @@ export function ArtistInfrastructureClient() {
               >
                 /workshops#catalog
               </a>
-              . Ready landings include SEO, writing, documentation, vibe coding, and AI literacy.
+              .
             </p>
           </InstReveal>
         </section>

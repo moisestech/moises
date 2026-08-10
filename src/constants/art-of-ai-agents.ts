@@ -1,6 +1,13 @@
-/** Hero / banner for The Art of AI Agents workshop page */
+/** Hero / banner for The Art of AI Agents workshop page — Locust Projects, The Dill 2026 */
 export const ART_OF_AI_AGENTS_HERO_IMAGE =
-  'https://res.cloudinary.com/du1ysiumj/image/upload/v1774829074/the-art-of-ai-agents-locust-projects-the-dill-2026_xjb76m.jpg'
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786389637/dccmiami/workshops/the-art-of-ai-agents/the-art-of-ai-agents-locust-projects-the-dill-2026_abkuj1.jpg'
+
+export const ART_OF_AI_AGENTS_HERO = {
+  src: ART_OF_AI_AGENTS_HERO_IMAGE,
+  alt: 'The Art of AI Agents workshop — Locust Projects, The Dill, 2026',
+  caption: 'The Art of AI Agents — Locust Projects · The Dill · 2026',
+  credit: 'Locust Projects',
+} as const
 
 /** Canonical n8n mark for workshop + automation surfaces */
 export const N8N_LOGO = {

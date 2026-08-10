@@ -132,6 +132,12 @@ export type CertificationItem = {
   href?: string;
 };
 
+/** Employer application-form Q&A (compact dossiers). */
+export type ApplicationAnswer = {
+  question: string;
+  answer: string;
+};
+
 export type OpportunityNavItem = {
   id: string;
   label: string;
@@ -272,6 +278,10 @@ export type Opportunity = {
   teachingHighlights?: TeachingHighlight[];
   /** Degrees, certs, or credential lines you can verify — keep truthful */
   certifications?: CertificationItem[];
+  /** Application-form answers (e.g. Hurix SME screening questions) */
+  applicationAnswersSectionTitle?: string;
+  applicationAnswersIntro?: string;
+  applicationAnswers?: ApplicationAnswer[];
   /** Infinite-scroll logo band (e.g. Cloudinary partner marks) */
   animatedLogoBand?: LogoBandItem[];
   /** Full-bleed image under the recruiting header — swap per employer / application */

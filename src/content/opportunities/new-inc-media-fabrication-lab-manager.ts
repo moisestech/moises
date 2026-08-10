@@ -1,3 +1,4 @@
+import { ART_OF_AI_AGENTS_HERO_IMAGE } from '@/constants/art-of-ai-agents';
 import type { Opportunity } from './types';
 import { newIncMediaFabLabBanner } from '@/content/evidence/applicationBanners';
 import { evidenceProjects, OOLITE_DIGITAL_LAB_IMAGE, OOLITE_DIGITAL_LAB_IMAGE_ALT } from '@/content/evidence/projects';
@@ -108,7 +109,7 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
       evidence:
         'Knight-funded Digital Lab infrastructure at Oolite; studio inventory for electronics, 3D printing, and display hardware; preventive troubleshooting and SOP-style documentation for repeat workflows.',
       illustration: {
-        src: 'https://res.cloudinary.com/du1ysiumj/image/upload/v1774829074/the-art-of-ai-agents-locust-projects-the-dill-2026_xjb76m.jpg',
+        src: ART_OF_AI_AGENTS_HERO_IMAGE,
         alt: 'The Art of AI Agents workshop — live lab-style teaching environment with equipment and member support.',
       },
     },
@@ -263,8 +264,7 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
       title: 'The Art of AI Agents',
       description: 'Multi-session workshop on practical agent workflows — lab-style teaching for artists.',
       href: '/workshop/the-art-of-ai-agents',
-      imageSrc:
-        'https://res.cloudinary.com/du1ysiumj/image/upload/v1774829074/the-art-of-ai-agents-locust-projects-the-dill-2026_xjb76m.jpg',
+      imageSrc: ART_OF_AI_AGENTS_HERO_IMAGE,
       imageAlt: 'The Art of AI Agents workshop at Locust Projects',
     },
     {

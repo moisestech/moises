@@ -456,6 +456,32 @@ export const workshopCatalog: WorkshopCatalogEntry[] = [
     href: "/workshop/designing-a-sustainable-digital-practice",
     sortOrder: 24,
   },
+  {
+    slug: 'quickbooks-automation-for-artists',
+    title: 'QuickBooks Automation for Artists',
+    publicTitle: 'QuickBooks Automation for Artists',
+    track: 'Systems + Archive' as WorkshopCatalogTrack,
+    status: 'ready',
+    level: 'Beginner–Intermediate',
+    duration: '2–3 hours',
+    subtitle:
+      'Turn studio bookkeeping into a readable, human-supervised workflow — invoices, expenses, and categories without drowning in spreadsheets.',
+    hook: 'Make QuickBooks usable for an artist studio — with AI-assisted routing and clear human review gates.',
+    shortDescription:
+      'This workshop helps artists and studio managers map their money workflows, set up practical QuickBooks categories, and introduce light automation so invoices and expenses stay legible. The goal is not to become an accountant overnight — it is to leave with a maintainable operating template and review habits that fit a working practice. Part of Creative Infrastructure for Artists.',
+    whyNow:
+      'Artists lose hours and clarity when bookkeeping stays ad hoc. Automation only helps when categories, review gates, and documentation are designed for how studios actually work — not for corporate finance teams.',
+    learningOutcomes: [
+      'Map the studio money workflow (invoices, expenses, reimbursements, sales)',
+      'Set up or clean a practical QuickBooks category structure',
+      'Identify what can be automated vs what must stay human-approved',
+      'Draft a simple runbook for ongoing bookkeeping hygiene',
+      'Leave with templates that survive after the workshop',
+    ],
+    featured: true,
+    href: '/workshop/quickbooks-automation-for-artists',
+    sortOrder: 7,
+  },
 ] as const;
 
 export function getWorkshopBySlug(slug: string) {
