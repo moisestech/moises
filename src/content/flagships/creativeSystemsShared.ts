@@ -43,6 +43,8 @@ const AI_HERO_MANIFESTO_YT = 'WBC0KxCwWIo';
 const DIGITAL_DIVINITIES_YT = 'XpE6swmnkxk';
 const WEBSITE_NOT_FOUND_YT = '67By5afHB0I';
 const AI24_OOLITE_YT = 'fQUgo2vBXUI';
+/** Lindemann — Ich weiss es nicht (GAN music video, ~2019). Moises: deep face-swap programming. */
+export const LINDEMANN_ICH_WEISS_ES_NICHT_YT = 'obY4c9aqUqs';
 
 export { creativeAiFlagshipBanner, creativeStrategistFlagshipBanner, creativeTechImageToolsBanner };
 
@@ -77,6 +79,14 @@ export const creativeSystemsStack = buildCreativeRolePortfolio(
 
 /** GAN / machine-learning art pillars — Beyond Money + related ML stills. */
 export const creativeGanPillars: FitPillar[] = [
+  {
+    id: 'lindemann-gan',
+    title: 'Lindemann — Ich weiss es nicht',
+    body: 'Official GAN music video (~2019, ~113k likes) before the current AI wave. Credited programming; Moises owned deep face-swap pipelines in Python on a StyleGAN-based production (Selam X / Daylight). Team credit, not a solo claim.',
+    icon: 'tv',
+    imageSrc: ytPoster(LINDEMANN_ICH_WEISS_ES_NICHT_YT),
+    imageAlt: 'Lindemann — Ich weiss es nicht — GAN music video still',
+  },
   {
     id: 'beyond-money',
     title: 'Beyond Money',
@@ -136,6 +146,19 @@ export const creativeSystemsMotion: MotionSection = {
       posterAlt: 'All Studios Everything — YouTube thumbnail',
       youtubeId: ALL_STUDIOS_EVERYTHING_YT,
       featured: true,
+    },
+    {
+      id: 'lindemann-ich-weiss-es-nicht',
+      title: 'Lindemann — Ich weiss es nicht (GAN music video)',
+      roleLabel: 'Programming · Deep face swaps · Python · ~113k likes · ~2019',
+      contribution:
+        'Official Lindemann / Universal music video generated with StyleGAN-class pipelines years before the current AI hype. Credited programming (with Jens Wischnewsky, Christian Hassler, Maximilian Kreis, Vadim Epstein); Moises specifically owned deep face-swap work in Python. Creative Direction Sebastian Zimmerhackl; Directed by Lukas Rudig; Produced by Selam X / Daylight Filmproduktion. Honest team credit—not a solo claim.',
+      posterSrc: ytPoster(LINDEMANN_ICH_WEISS_ES_NICHT_YT),
+      posterAlt: 'Lindemann — Ich weiss es nicht — official GAN music video still',
+      youtubeId: LINDEMANN_ICH_WEISS_ES_NICHT_YT,
+      featured: true,
+      href: `https://www.youtube.com/watch?v=${LINDEMANN_ICH_WEISS_ES_NICHT_YT}`,
+      linkLabel: 'Watch on YouTube',
     },
     {
       id: 'beyond-money',
