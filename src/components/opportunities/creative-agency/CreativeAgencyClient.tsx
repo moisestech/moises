@@ -20,6 +20,7 @@ import { LeadershipInPractice } from '@/components/opportunities/creative-agency
 import { PointOfViewGallery } from '@/components/opportunities/creative-agency/PointOfViewGallery';
 import { MotionAndAnimationSection } from '@/components/opportunities/creative-agency/MotionAndAnimationSection';
 import { DossierSectionNav } from '@/components/opportunities/creative-agency/DossierSectionNav';
+import { DossierSectionBreak } from '@/components/opportunities/creative-agency/DossierSectionBreak';
 import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -51,7 +52,7 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
     );
   }
 
-  const sectionClass = 'mt-12 sm:mt-14 md:mt-20';
+  const sectionClass = 'mt-16 sm:mt-20 md:mt-24';
   const framed = '!mt-0 !border-0 !pt-0 scroll-mt-28 sm:scroll-mt-32';
 
   return (
@@ -92,13 +93,13 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
         </OpportunityColorSection>
 
         {opportunity.roleReference ? (
-          <div className="mt-8 sm:mt-10">
+          <div className="mt-10 sm:mt-12">
             <RoleReferenceAccordion data={opportunity.roleReference} />
           </div>
         ) : null}
 
         {opportunity.navItems?.length ? (
-          <div className="mt-8 sm:mt-10">
+          <div className="mt-10 sm:mt-12">
             <DossierSectionNav
               items={opportunity.navItems.filter((item) => item.id !== 'hero')}
               title="Dossier map"
@@ -106,6 +107,8 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
             />
           </div>
         ) : null}
+
+        <DossierSectionBreak className="mt-10 sm:mt-12" />
 
         <OpportunityColorSection sectionId="capabilities" className={sectionClass}>
           <FitPillars
@@ -118,11 +121,15 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
         </OpportunityColorSection>
 
         {hasSkills ? (
-          <OpportunityColorSection sectionId="skills" className={sectionClass}>
-            <SkillsMatrix opportunity={opportunity} framed />
-          </OpportunityColorSection>
+          <>
+            <DossierSectionBreak />
+            <OpportunityColorSection sectionId="skills" className={sectionClass}>
+              <SkillsMatrix opportunity={opportunity} framed />
+            </OpportunityColorSection>
+          </>
         ) : null}
 
+        <DossierSectionBreak />
         <OpportunityColorSection sectionId="case-studies" className={sectionClass}>
           <CreativeCaseStudyModules
             title={agency.caseStudiesTitle}
@@ -133,30 +140,44 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
           />
         </OpportunityColorSection>
 
+        <DossierSectionBreak />
         <OpportunityColorSection sectionId="campaign" className={sectionClass}>
           <CampaignChannelSystem data={agency.campaign} sectionId="campaign" className={framed} />
         </OpportunityColorSection>
 
+        <DossierSectionBreak />
         <OpportunityColorSection sectionId="workflow" className={sectionClass}>
           <HumanAiWorkflow data={agency.workflow} sectionId="workflow" className={framed} />
         </OpportunityColorSection>
 
         {agency.motionSection ? (
-          <OpportunityColorSection sectionId="motion" className={sectionClass}>
-            <MotionAndAnimationSection
-              data={agency.motionSection}
-              sectionId="motion"
-              className={framed}
-            />
-          </OpportunityColorSection>
+          <>
+            <DossierSectionBreak />
+            <OpportunityColorSection sectionId="motion" className={sectionClass}>
+              <MotionAndAnimationSection
+                data={agency.motionSection}
+                sectionId="motion"
+                className={framed}
+              />
+            </OpportunityColorSection>
+          </>
         ) : null}
 
         {hasProcess ? (
-          <OpportunityColorSection sectionId="process" className={sectionClass}>
-            <InnovationProcess opportunity={opportunity} sectionId="process" framed layout="horizontal" />
-          </OpportunityColorSection>
+          <>
+            <DossierSectionBreak />
+            <OpportunityColorSection sectionId="process" className={sectionClass}>
+              <InnovationProcess
+                opportunity={opportunity}
+                sectionId="process"
+                framed
+                layout="horizontal"
+              />
+            </OpportunityColorSection>
+          </>
         ) : null}
 
+        <DossierSectionBreak />
         <OpportunityColorSection sectionId="leadership" className={sectionClass}>
           <LeadershipInPractice
             data={agency.leadership}
@@ -165,14 +186,17 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
           />
         </OpportunityColorSection>
 
+        <DossierSectionBreak />
         <OpportunityColorSection sectionId="pov" className={sectionClass}>
           <PointOfViewGallery data={agency.pointOfView} sectionId="pov" className={framed} />
         </OpportunityColorSection>
 
+        <DossierSectionBreak />
         <OpportunityColorSection sectionId="fit" className={sectionClass}>
           <RoleMatchMatrix opportunity={opportunity} framed />
         </OpportunityColorSection>
 
+        <DossierSectionBreak />
         <OpportunityColorSection sectionId="stack" className={sectionClass}>
           <CapabilityMap data={dossier.capabilityMap} sectionId="stack" className={framed} />
           {opportunity.capabilitiesHref ? (
@@ -180,7 +204,8 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
           ) : null}
         </OpportunityColorSection>
 
-        <OpportunityColorSection sectionId="contact" className={sectionClass}>
+        <DossierSectionBreak />
+        <OpportunityColorSection sectionId="contact" className={cn(sectionClass, 'mb-10 sm:mb-14')}>
           <ResumeCTA opportunity={opportunity} framed sectionId="contact" />
           <p className={`mt-4 max-w-3xl ${opp.subtle}`}>{dossier.availabilityNote}</p>
         </OpportunityColorSection>

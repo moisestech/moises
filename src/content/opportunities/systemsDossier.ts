@@ -116,6 +116,8 @@ export type CapabilityGroup = {
   id: string;
   title: string;
   items: string[];
+  /** Optional tech logo ids from `techLogoRegistry` for interactive stack cards. */
+  logoIds?: string[];
 };
 
 export type CapabilityMapData = {

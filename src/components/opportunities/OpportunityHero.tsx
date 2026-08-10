@@ -215,20 +215,47 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           {hero.headshotSrc ? (
             <>
               <p className={`mb-2 ${opp.label}`}>Profile</p>
-              <div className={opp.headshot}>
-                {headshotRemote || !hero.headshotSrc.endsWith('.svg') ? (
-                  <Image
-                    src={hero.headshotSrc}
-                    alt={hero.headshotAlt ?? ''}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 400px"
-                    priority
-                  />
-                ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={hero.headshotSrc} alt={hero.headshotAlt ?? ''} className="h-full w-full object-cover" />
+              <div
+                className={cn(
+                  opp.headshot,
+                  'group/portrait relative border-0 bg-transparent [perspective:1200px]',
                 )}
+              >
+                <div
+                  className={cn(
+                    'relative h-full w-full overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-none transition-[transform,box-shadow] duration-500 ease-out motion-safe:transform-gpu motion-safe:will-change-transform dark:border-stone-700 dark:bg-stone-800',
+                    'motion-safe:group-hover/portrait:shadow-[0_22px_48px_-18px_rgba(0,0,0,0.45)] motion-safe:group-hover/portrait:[transform:rotateY(-7deg)_rotateX(5deg)_scale(1.045)]',
+                    '[transform-style:preserve-3d]',
+                  )}
+                >
+                  {headshotRemote || !hero.headshotSrc.endsWith('.svg') ? (
+                    <Image
+                      src={hero.headshotSrc}
+                      alt={hero.headshotAlt ?? ''}
+                      fill
+                      className="object-cover transition duration-500 motion-safe:group-hover/portrait:scale-[1.06]"
+                      sizes="(max-width: 1024px) 100vw, 400px"
+                      priority
+                    />
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={hero.headshotSrc}
+                      alt={hero.headshotAlt ?? ''}
+                      className="h-full w-full object-cover transition duration-500 motion-safe:group-hover/portrait:scale-[1.06]"
+                    />
+                  )}
+                  <span
+                    className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-300 motion-safe:group-hover/portrait:opacity-100"
+                    aria-hidden
+                  >
+                    <span className="grant-portrait-sheen absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/45 to-transparent motion-safe:group-hover/portrait:animate-[grant-portrait-sheen_0.85s_ease-in-out]" />
+                  </span>
+                  <span
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-stone-900/10 via-transparent to-white/10 opacity-0 transition-opacity duration-500 motion-safe:group-hover/portrait:opacity-100"
+                    aria-hidden
+                  />
+                </div>
               </div>
             </>
           ) : null}
