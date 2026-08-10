@@ -146,6 +146,10 @@ Source of truth: [`roleArchetypes.ts`](../../src/content/applications/roleArchet
 
 These routes use a **recruiting-specific site header** modeled on the main site: **MoMA Sans**, **text logo**, two-row desktop layout (logo row + links), theme toggle, and no Visit CTA. See [`src/config/recruiting-navigation.ts`](../../src/config/recruiting-navigation.ts) and [`RecruitingSiteHeader.tsx`](../../src/components/opportunities/RecruitingSiteHeader.tsx). Main content clears the fixed header via `RECRUITING_MAIN_PADDING_TOP` in [`recruiting-layout.ts`](../../src/config/recruiting-layout.ts) (`pt-[8.4rem]`). Optionally set **`applicationBanner`** on an `Opportunity` (or on the Knight [`technologyProductStrategy`](../../src/content/technologyProductStrategy.ts) object) to show a **full-bleed image** directly under the header — useful for employer-specific hero art. Implemented by [`OpportunityApplicationBanner.tsx`](../../src/components/opportunities/OpportunityApplicationBanner.tsx).
 
+### Application banner presentation
+
+Default is **height-locked `contain-blur`**: shared strip heights, sharp art fills **full height** via `intrinsicRatio`, blurred cover of the same image fills the sides. See the full pattern + audit (Morley / Ogilvy / CVS) in [`application-banners.md`](./application-banners.md). Set `presentation: 'cover'` only for cinematic assets designed to survive edge crop.
+
 ## Add a new opportunity
 
 1. **Classify** — Use the family decision tree above; add/update a row in [`opportunityTracker.ts`](../../src/content/applications/opportunityTracker.ts).

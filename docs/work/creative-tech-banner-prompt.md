@@ -38,11 +38,19 @@ neon, cyberpunk, purple gradient, startup pitch deck, stock photo, smiling team,
 
 | Field | Value |
 |-------|--------|
-| Aspect ratio | **21:9** (matches `OpportunityApplicationBanner` default crop) |
-| Safe crop | Keep key UI + artwork in **center 70%** (full-bleed banner uses `object-cover object-top`) |
+| Aspect ratio | Prefer **3:1** (creative dossiers) or **~21:9 / 2.33** (gen-AI) |
+| Presentation | Site default is **contain-blur** — full art visible at strip height; sides blur-fill |
+| Safe area | Keep critical UI + type in the **full** frame (not only center 70% for cover crop) |
 | Min width | **2400px** wide (scales down cleanly on mobile) |
 | Format | PNG or high-quality WebP |
+| Registry | Set `intrinsicRatio` via `defineApplicationBanner` in `applicationBanners.ts` |
 | Alt text (site) | `Creative image tools — segmentation, large assets, IIIF delivery, and review interfaces` |
+
+Full banner system docs: [`docs/opportunities/application-banners.md`](../opportunities/application-banners.md).
+
+### Legacy cover note
+
+Older prompts assumed `object-cover` full-bleed. That mode is now an opt-in (`presentation: 'cover'`) only. Do not generate text-heavy banners that require cropping to look correct.
 
 ---
 

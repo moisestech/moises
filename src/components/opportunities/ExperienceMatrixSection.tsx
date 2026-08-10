@@ -85,9 +85,15 @@ export type ExperienceMatrixSectionProps = {
   rowsVariant?: 'moma' | 'sans';
 };
 
-export function MatrixRowIcon({ icon }: { icon?: SkillsMatrixIconKey }) {
+export function MatrixRowIcon({
+  icon,
+  className,
+}: {
+  icon?: SkillsMatrixIconKey;
+  className?: string;
+}) {
   const Icon = icon ? ICON_MAP[icon] : Layers;
-  return <Icon className="h-5 w-5 shrink-0" aria-hidden />;
+  return <Icon className={cn('h-5 w-5 shrink-0', className)} aria-hidden />;
 }
 
 export function ExperienceMatrixRows({

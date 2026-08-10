@@ -34,8 +34,13 @@ const lore = evidenceProjects['lore-machine'];
 const ai24 = evidenceProjects.ai24;
 const multimodal = evidenceProjects['multimodal-image-systems'];
 
+/** Landscape generative still (~1.79) — fits motion card better than portrait BA-1. */
+const GENERATIVE_LANDSCAPE_STILL =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-2_ljoygv.png';
+
 const ALL_STUDIOS_EVERYTHING_YT = 'XuSwUBULiQs';
 const ALL_STUDIOS_POSTER = `https://i.ytimg.com/vi/${ALL_STUDIOS_EVERYTHING_YT}/hqdefault.jpg`;
+const POST_AI_READYMADES_HREF = '/research/born-into-the-machine/post-ai-readymades';
 
 const ogilvyMotionSection: MotionSection = {
   title: 'Motion, edit & viral craft',
@@ -60,9 +65,12 @@ const ogilvyMotionSection: MotionSection = {
       title: 'Generative still → editorial cut',
       roleLabel: 'AI exploration · Edit · Compositing',
       contribution:
-        'Controlled generative exploration refined into editorial pacing—human direction at every gate so AI expands options without owning the final cut.',
-      posterSrc: multimodal.imageSrc,
-      posterAlt: multimodal.imageAlt,
+        'Controlled generative exploration refined into editorial pacing—human direction at every gate so AI expands options without owning the final cut. Continues in the Post-AI Readymades research archive.',
+      posterSrc: GENERATIVE_LANDSCAPE_STILL,
+      posterAlt:
+        'Landscape generative still from Broken Acceleration research — source material for editorial cut',
+      href: POST_AI_READYMADES_HREF,
+      linkLabel: 'Open Post-AI Readymades',
     },
     {
       id: 'ai24-editorial-pipeline',
@@ -177,10 +185,10 @@ const creativeAgency = buildCreativeAgencyDossier({
 
 const ogilvyNavItems = [
   ...creativeAgencyNavItems.slice(0, 2),
-  { id: 'skills', label: 'Skills & tools', shortLabel: 'Skills' },
+  { id: 'skills', label: 'Skills & tools', shortLabel: 'Skills', icon: 'cpu' as const },
   ...creativeAgencyNavItems.slice(2, 5),
-  { id: 'motion', label: 'Motion & YouTube', shortLabel: 'Motion' },
-  { id: 'process', label: 'How I’d work', shortLabel: 'Process' },
+  { id: 'motion', label: 'Motion & YouTube', shortLabel: 'Motion', icon: 'tv' as const },
+  { id: 'process', label: 'How I’d work', shortLabel: 'Process', icon: 'workflow' as const },
   ...creativeAgencyNavItems.slice(5),
 ];
 

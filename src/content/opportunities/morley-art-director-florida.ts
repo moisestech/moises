@@ -98,7 +98,7 @@ const creativeAgency = buildCreativeAgencyDossier({
 
 const morleyNavItems = [
   ...creativeAgencyNavItems.slice(0, 5),
-  { id: 'motion', label: 'Motion & Animation', shortLabel: 'Motion' },
+  { id: 'motion', label: 'Motion & Animation', shortLabel: 'Motion', icon: 'tv' as const },
   ...creativeAgencyNavItems.slice(5),
 ];
 

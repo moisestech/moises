@@ -14,11 +14,19 @@ export interface InteractiveContent {
   };
 }
 
+export interface ResearchPitchStep {
+  id: string;
+  title: string;
+  body: string;
+}
+
 export interface ResearchItem {
   title: string;
   year: number;
   description: string;
   essay?: string;
+  /** Optional sequential pitch beats (Ignite / grant-panel narrative). */
+  pitchSteps?: ResearchPitchStep[];
   implementation?: {
     timeline: string;
     locations: string[];
@@ -325,333 +333,419 @@ export const research: { [key: string]: ResearchItem } = {
   the_algorithm_is_outside: {
     title: 'The Algorithm is Outside',
     year: 2025,
-    description: "The Algorithm is Outside, an art project by Moises Sanabria, interrogates how machine intelligence permeates daily life, public space, and collective behavior. This work can be framed within contemporary machine philosophy and critical theory that question the blurring of human and technological realms.",
-    essay: `The Algorithm is Outside, an art project by Moises Sanabria, interrogates how machine intelligence permeates daily life, public space, and collective behavior. This work can be framed within contemporary machine philosophy and critical theory that question the blurring of human and technological realms. Philosopher Bernard Stiegler asserts that technology (technics) is not external to humanity but an essential part of it – an exteriorisation of memory and thought that fundamentally shapes human experience.
+    description:
+      'The Algorithm is Outside is an outdoor public-art installation that translates the logic of the smartphone feed into a dense scaffold structure in public space. Modular scaffolding, visible cabling, mounted displays, and phone-like vertical interfaces stage the city as an algorithmic environment — maps, alerts, delivery platforms, surveillance, climate dashboards, and social-media performance made architectural.',
+    essay: `Rather than representing artificial intelligence as an invisible cloud or an image on a screen, The Algorithm is Outside externalizes it as temporary civic infrastructure. The scaffold becomes a public nervous system: part construction site, part notification center, part media facade, part control room. It asks what happens when the feed leaves the phone and becomes architectural.
 
-Similarly, Yuk Hui emphasizes that modern algorithms are more than tools; they inhabit a technical milieu that co-constitutes our thinking and culture. In this view, the "algorithm outside" is literally an externalized mind, a cognitive architecture in the public domain that we continuously interact with and "permanently negotiate" as it changes us.
+The work extends Sanabria's broader practice of treating AI, memes, interactive systems, and sculptural readymades as a shared vocabulary for understanding networked life. It draws on critiques of platform capitalism, attention economies, and technological mediation, while grounding those abstractions in everyday urban interfaces. The public is not asked to enter a simulation; the work argues that the simulation is already distributed across the sidewalk, the app, the delivery route, the building advertisement, and the notification.
 
-AI, Infrastructure, and Everyday Life as Technological Habitat
-As algorithms migrate from laboratories into infrastructure and public space, theorists warn of new power dynamics. Shoshana Zuboff's notion of surveillance capitalism details how ubiquitous AI and data capture turn daily life into a raw material for profit, "exploiting human nature" just as industrial capitalism once exploited nature. The algorithmic systems that govern social media feeds, smart city sensors, or navigation maps now actively shape our movements and choices.
-
-Digital Behavior and Collective Rituals in the Public Sphere
-Beyond infrastructure, The Algorithm is Outside delves into the social and ritualistic dimensions of our entanglement with AI. Byung-Chul Han laments the "disappearance of rituals" in hyper-digital society – the erosion of shared temporal structures and communal practices that ground meaning. In place of traditional rituals, we witness the rise of algorithmically mediated behaviors: the swipes, likes, and navigation routes that millions perform in unison, guided by the gentle coercion of code.`,
+Philosophically, the piece sits beside Bernard Stiegler's claim that technics exteriorises memory and thought, and Yuk Hui's insistence that algorithms inhabit a technical milieu that co-constitutes culture. Shoshana Zuboff's surveillance capitalism names the economic extraction that turns daily life into raw material; Byung-Chul Han's disappearance of rituals names the erosion of shared temporal structures that algorithmically mediated digital rituals replace.`,
+    pitchSteps: [
+      {
+        id: 'summary',
+        title: 'Project summary',
+        body: 'An outdoor public-art installation that turns the smartphone feed into temporary civic infrastructure — a dense scaffold of screens, cables, and phone-like interfaces in Miami public space.',
+      },
+      {
+        id: 'artwork',
+        title: 'Artwork description',
+        body: 'A tall, mobile scaffold unit with caster wheels, pipe rails, cross-bracing, open gaps, cable depth, and approximately ten to twelve display surfaces. Empty squares are preserved so viewers see the material guts of the system: wiring, mounts, batteries, HDMI units, routers, and cable bundles. Screen content combines rideshare arrivals, delivery updates, map routes, notification stacks, weather and flood alerts, QR access portals, and development advertisements — bright, contemporary, and documentary rather than dystopian.',
+      },
+      {
+        id: 'framework',
+        title: 'Conceptual framework',
+        body: 'The scaffold stages platform capitalism and attention economies as lived urban interfaces. Machine intelligence is not a black box on a phone; it is temporary architecture the public walks around and looks through.',
+      },
+      {
+        id: 'deployment',
+        title: 'Public deployment',
+        body: 'Intended for Miami outdoor or semi-public cultural contexts — waterfront promenades, arts districts, cultural plazas, art-week activations, and institutional courtyards. Candidate sites include Bayfront Park, the Wynwood Walls area, South Pointe Park, North Beach Bandshell, and Little Haiti Cultural Complex, subject to permitting, power, circulation, and safety review.',
+      },
+      {
+        id: 'technical',
+        title: 'Technical rider',
+        body: 'Modular galvanized scaffold or scaffold-like truss with cross-bracing, casters, stabilizers, and ballast. Approximately 10–12 weather-protected displays; HDMI/media playback; rechargeable battery and/or site power; visible but secured cabling; daily power, screen, cable, and weather checks. Minimum 3 ft clearance for public interaction.',
+      },
+      {
+        id: 'budget',
+        title: 'Budget',
+        body: 'Preliminary project total $6,000 — modular scaffold unit, installation specialist, documentation, local logistics, electric chargers / battery infrastructure, and contingency / insurance. Artist fee is included within fabrication/production unless a call requires a separate line.',
+      },
+    ],
     implementation: {
-      timeline: "Starting in September 2025",
+      timeline: 'Ignite 2027 Artist Open Call proposal — outdoor activation pending site approval and permitting',
       locations: [
-        "Urban Parks: Bayfront Park, Maurice A. Ferré Park",
-        "Community Spaces: Wynwood Walls area, Little Haiti Cultural Complex",
-        "Beachfront Locations: South Pointe Park, North Beach Bandshell"
+        'Waterfront / civic: Bayfront Park',
+        'Arts district: Wynwood Walls area',
+        'Beachfront: South Pointe Park; North Beach Bandshell',
+        'Community: Little Haiti Cultural Complex',
       ],
-      technical_setup: "The installation will be constructed using accessible 'Pro-Jax' scaffold systems, either 12' or 18' units with guardrails and outriggers, to securely hold six vertically-mounted screens. An industrial engineer will audit the scaffolding to ensure structural integrity, portability, and rapid installation, enabling two people to fully assemble the structure in less than one hour.",
+      technical_setup:
+        "Tall mobile scaffold unit with caster wheels, pipe rails, cross-bracing, and approximately ten to twelve weather-protected displays (mixed vertical phone-like monitors and smaller horizontals). Screen count may adjust for power, budget, and safety. Visible cable bundles, mounting brackets, batteries, HDMI/control units, routers, power strips, and outdoor chargers remain part of the sculptural language. Minimum 3 ft clearance for public interaction; wheels locked and structure stabilized on site.",
       collaborations: [
-        "Installation Specialist: Ensuring structural safety and ease of assembly",
-        "Documentation Team: Professional videographers and photographers",
-        "Local Organizations: Community arts groups and neighborhood associations"
+        'Installation specialist: scaffold assembly, rigging, monitor mounting, cable management, safety check',
+        'Documentation / videographer: photo and video for public installation and archive',
+        'Venue / site team: permitting, power, weather and high-wind plan, insurance review',
       ],
-      documentation: "High-quality video and photography documentation will be integral, creating an interactive online archive and promoting dialogue around digital and physical community interactions.",
-      relevant_experience: "Previous projects, including 'Google Gradients' (2015) and 'Doomscrolling Marathon' (2024), demonstrate Sanabria's ability to effectively transform complex digital phenomena into engaging physical installations."
+      documentation:
+        'High-quality photo and video documentation for public presentation, archive, and institutional reporting. Content can operate silently unless the site permits audio.',
+      relevant_experience:
+        "Prior works including Google Gradients (2015) and Doomscrolling Marathon (2024) show Sanabria translating networked phenomena into physical installations. The practice treats AI, livestreams, interactive systems, and sculptural readymades as one vocabulary.",
     },
     budget: {
       items: [
-        { name: "Scaffold unit", amount: 2179 },
-        { name: "Installation Specialist", amount: 1500 },
-        { name: "Documentation & Videographer", amount: 500 },
-        { name: "Travel and Logistics", amount: 500 },
-        { name: "Electric chargers", amount: 821 },
-        { name: "Contingency/Insurance", amount: 500 }
+        { name: 'Modular scaffold unit', amount: 2179 },
+        { name: 'Installation specialist', amount: 1500 },
+        { name: 'Documentation / videographer', amount: 500 },
+        { name: 'Travel and local logistics', amount: 500 },
+        { name: 'Electric chargers / battery infrastructure', amount: 821 },
+        { name: 'Contingency / insurance', amount: 500 },
       ],
-      total: 6000
+      total: 6000,
     },
     supplemental_materials: [
       {
-        title: "Internet Scaffold Assembly Guide",
+        title: 'Internet Scaffold Assembly Guide',
         content: [
-          "Frame Assembly: Illustration of assembling the Pro-Jax scaffold unit",
-          "Securing Scaffold: Image showing how to firmly secure outriggers and guard rails",
-          "TV Mounting: Illustration detailing the attachment of mounting brackets",
-          "Cable Management: Depiction of neatly routing HDMI and power cables",
-          "Battery Setup: Illustration showing placement of rechargeable battery units",
-          "Activation: Final image of completed assembly with all TVs powered on",
-          "Safety Notice: Important: Consult installation specialist for assembly audit prior to public activation."
-        ]
-      }
+          'Frame assembly: modular scaffold or scaffold-like truss with cross-bracing',
+          'Securing scaffold: outriggers, guard rails, casters locked, ballast or anchoring per site',
+          'Display mounting: brackets for ~10–12 weather-protected screens',
+          'Cable management: visible but secured HDMI and power routing',
+          'Battery / charger setup: rechargeable packs and outdoor-rated chargers',
+          'Activation: looping media sequences; daily power, screen, cable, and weather checks',
+          'Safety: no exposed live wiring; 3 ft clearance; site-specific permitting and insurance',
+        ],
+      },
     ],
     interactiveContent: [
       {
         type: 'highlight',
-        text: 'machine philosophy',
+        text: 'smartphone feed',
         content: {
-          text: 'Contemporary philosophical framework examining the relationship between human consciousness and technological systems, particularly how machines extend and transform human capabilities.',
-          link: {
-            url: 'https://www.e-flux.com/journal/86/161887/cosmotechnics-as-cosmopolitics/',
-            label: 'Read more on e-flux'
-          }
-        }
+          text: 'The continuous stream of notifications, maps, ads, and social posts that organizes attention on personal devices — here made architectural.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'civic infrastructure',
+        content: {
+          text: 'Temporary public structure that treats the algorithm as shared urban equipment rather than a private screen.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'public nervous system',
+        content: {
+          text: 'Metaphor for the scaffold as construction site, notification center, media facade, and control room at once.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'platform capitalism',
+        content: {
+          text: 'Economic order in which platform companies mediate labor, attention, logistics, and social life for extraction and prediction.',
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'attention economies',
+        content: {
+          text: 'Systems that compete to capture, measure, and monetize human attention through feeds, alerts, and interface design.',
+        },
       },
       {
         type: 'highlight',
         text: 'Bernard Stiegler',
         content: {
-          text: 'French philosopher who argues that technology (technics) is not external to humanity but an essential part of it – an exteriorisation of memory and thought that fundamentally shapes human experience.',
+          text: 'French philosopher who argues that technology (technics) is an exteriorisation of memory and thought that shapes human experience.',
           link: {
             url: 'https://en.wikipedia.org/wiki/Bernard_Stiegler',
-            label: 'Learn more about Stiegler'
-          }
-        }
+            label: 'Learn more about Stiegler',
+          },
+        },
       },
       {
         type: 'highlight',
         text: 'Yuk Hui',
         content: {
-          text: 'Philosopher who emphasizes that modern algorithms are more than tools; they inhabit a technical milieu that co-constitutes our thinking and culture.',
+          text: 'Philosopher who emphasizes that modern algorithms inhabit a technical milieu that co-constitutes thinking and culture.',
           link: {
             url: 'https://www.e-flux.com/journal/86/161887/cosmotechnics-as-cosmopolitics/',
-            label: 'Read Hui\'s work'
-          }
-        }
+            label: "Read Hui's work",
+          },
+        },
       },
       {
         type: 'highlight',
         text: 'surveillance capitalism',
         content: {
-          text: 'A new economic order that claims human experience as free raw material for hidden commercial practices of extraction, prediction, and sales.',
+          text: 'Economic order that claims human experience as free raw material for hidden commercial practices of extraction, prediction, and sales.',
           link: {
             url: 'https://en.wikipedia.org/wiki/Surveillance_capitalism',
-            label: 'Learn more on Wikipedia'
-          }
-        }
+            label: 'Learn more on Wikipedia',
+          },
+        },
       },
       {
         type: 'highlight',
         text: 'Shoshana Zuboff',
         content: {
-          text: 'Professor and author who coined the term "surveillance capitalism" and details how ubiquitous AI and data capture turn daily life into a raw material for profit.',
+          text: 'Author who coined surveillance capitalism and describes how ubiquitous data capture turns daily life into raw material for profit.',
           link: {
             url: 'https://en.wikipedia.org/wiki/Shoshana_Zuboff',
-            label: 'Learn more about Zuboff'
-          }
-        }
+            label: 'Learn more about Zuboff',
+          },
+        },
       },
       {
         type: 'highlight',
         text: 'Byung-Chul Han',
         content: {
-          text: 'Philosopher who discusses the "disappearance of rituals" in hyper-digital society and the erosion of shared temporal structures.',
-          link: {
-            url: 'https://english.elpais.com/',
-            label: 'Read Han\'s analysis'
-          }
-        }
+          text: 'Philosopher who discusses the disappearance of rituals in hyper-digital society and the erosion of shared temporal structures.',
+        },
       },
       {
         type: 'highlight',
         text: 'digital rituals',
         content: {
-          text: 'The emergence of algorithmically mediated behaviors that replace traditional communal practices, creating new forms of collective experience.',
-          link: {
-            url: 'https://english.elpais.com/',
-            label: 'Read more about digital rituals'
-          }
-        }
+          text: 'Algorithmically mediated behaviors — swipes, likes, routes, waits — that replace traditional communal practices.',
+        },
       },
       {
         type: 'highlight',
-        text: 'Pro-Jax scaffold systems',
+        text: 'modular scaffolding',
         content: {
-          text: 'Industrial-grade scaffold systems used for the installation, providing a modular and portable infrastructure for public display.',
+          text: 'Galvanized scaffold or scaffold-like truss with cross-bracing, casters, and stabilizers used as the primary sculptural structure.',
           image: {
-            src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596908/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image3-2025_wtttsq.png',
-            alt: 'Pro-Jax scaffold system in use'
-          }
-        }
-      },
-      {
-        type: 'highlight',
-        text: 'Google Gradients',
-        content: {
-          text: 'Previous project by Moises Sanabria (2015) that demonstrated effective transformation of digital phenomena into physical installations.',
-          link: {
-            url: 'https://moises.tech/artworks/google-gradients',
-            label: 'View Google Gradients'
-          }
-        }
-      },
-      {
-        type: 'highlight',
-        text: 'Doomscrolling Marathon',
-        content: {
-          text: 'Recent project by Moises Sanabria (2024) exploring digital behaviors and collective experiences.',
-          link: {
-            url: 'https://moises.tech/artworks/doomscrolling-marathon',
-            label: 'View Doomscrolling Marathon'
-          }
-        }
+            src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596886/art/moisestech-website/research/the-algorithm-is-outside/the-algorithm-is-outside-internet-scaffolds_a1qf9n.png',
+            alt: 'Internet scaffolds — modular scaffold staging for The Algorithm is Outside',
+          },
+        },
       },
       {
         type: 'highlight',
         text: 'Bayfront Park',
         content: {
-          text: 'One of the key installation locations in Miami, representing the intersection of public space and digital infrastructure.',
+          text: 'Miami waterfront civic site proposed for outdoor presentation, subject to permitting and safety review.',
           image: {
             src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596908/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image3-2025_wtttsq.png',
-            alt: 'Installation at Bayfront Park'
-          }
-        }
+            alt: 'Conceptual rendering — Bayfront Park context',
+          },
+        },
       },
       {
         type: 'highlight',
         text: 'Wynwood Walls',
         content: {
-          text: 'Community space where the installation will be displayed, highlighting the intersection of art, technology, and public engagement.',
+          text: 'Arts-district context for temporary activation among murals, plazas, and pedestrian flow.',
           image: {
             src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596909/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image1-2025_lqf7zs.png',
-            alt: 'Installation at Wynwood Walls'
-          }
-        }
-      }
+            alt: 'Conceptual rendering — Wynwood Walls area',
+          },
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'South Pointe Park',
+        content: {
+          text: 'Beachfront Miami site typology for outdoor cultural presentation.',
+          image: {
+            src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596910/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image2-2025_t9y9ur.png',
+            alt: 'Conceptual rendering — South Pointe Park',
+          },
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'North Beach Bandshell',
+        content: {
+          text: 'Outdoor institutional / performance courtyard typology for temporary installation.',
+          image: {
+            src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596910/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image4-2025_nbriyb.png',
+            alt: 'Conceptual rendering — North Beach Bandshell',
+          },
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'Google Gradients',
+        content: {
+          text: 'Earlier Sanabria project (2015) translating digital phenomena into physical installation form.',
+          link: {
+            url: 'https://moises.tech/artworks/google-gradients',
+            label: 'View Google Gradients',
+          },
+        },
+      },
+      {
+        type: 'highlight',
+        text: 'Doomscrolling Marathon',
+        content: {
+          text: '2024 work exploring digital behaviors and collective experience through physical staging.',
+          link: {
+            url: 'https://moises.tech/artworks/doomscrolling-marathon',
+            label: 'View Doomscrolling Marathon',
+          },
+        },
+      },
     ],
-    artistic_intent: "To make visible the invisible workings of AI in public space, treating the algorithm as an embodied actor in our shared environment rather than a black-box confined to screens. The project aims to transform the algorithm from an occult mechanism of control into an object of communal inquiry and ritual.",
+    artistic_intent:
+      'To externalize the feed as temporary civic infrastructure — making machine intelligence walkable, look-through, and discussable in public space rather than confining it to private screens. The piece should feel bright and documentary: a familiar urban object whose logic becomes strange through accumulation.',
     technical_requirements: {
       power: [
-        'Rechargeable battery packs for mobile units',
-        'Outdoor electric chargers',
-        'HDMI control units for content management',
-        'Backup power systems for continuous operation'
+        'Rechargeable battery packs and/or site power',
+        'Outdoor-rated chargers and cable covers',
+        'Power strips, surge protection, and backup power',
+        'Daily charging plan for continuous operation',
       ],
       mounting: [
-        'Pro-Jax scaffold systems (12\' or 18\' units)',
-        'Guardrails and outriggers',
-        'TV mounting brackets',
-        'Cable management system'
+        'Modular galvanized scaffold or scaffold-like truss with cross-bracing',
+        'Caster wheels, stabilizers, ballast or anchoring as site-approved',
+        'Display mounts for ~10–12 weather-protected screens',
+        'Visible but secured cable management',
       ],
       space: {
-        pedestal_size: 'Variable based on scaffold unit',
-        wall_clearance: 'Minimum 3 feet for public interaction',
-        power_access: 'Requires proximity to power source or battery charging station'
+        pedestal_size: 'Variable based on scaffold footprint',
+        wall_clearance: 'Minimum 3 feet for public interaction and circulation',
+        power_access: 'Battery and/or proximity to site power with outdoor charging plan',
       },
       interactive_elements: [
-        'Six vertically-mounted screens',
-        'QR code submission system',
-        'Content curation interface',
-        'Documentation equipment'
-      ]
+        'Approximately 10–12 mixed vertical and horizontal displays',
+        'Looping app-like and civic-data screen content',
+        'QR-code access portals as onscreen / printed graphics',
+        'Documentation equipment for archive',
+      ],
     },
     components: {
       structure: {
-        material: 'Industrial-grade scaffold components',
+        material: 'Galvanized scaffold / scaffold-like truss components',
         customization: [
-          'Screen mounting system',
-          'Cable routing channels',
-          'Weather protection elements'
-        ]
+          'Cross-bracing and open gaps for look-through depth',
+          'Caster mobility with lockable wheels',
+          'Weather protection and cable routing as sculptural elements',
+        ],
       },
       hardware: {
-        model: 'Pro-Jax scaffold system',
+        model: 'Modular outdoor scaffold system',
         specifications: [
           'Portable and modular design',
-          'Safety-certified components',
-          'Weather-resistant materials',
-          'Quick-assembly system'
+          'Stabilizers and site-approved ballast or anchoring',
+          'Weather-resistant display housings where required',
+          'Quick assembly with specialist oversight',
         ],
-        power_requirements: 'Multiple power options (battery/AC)'
+        power_requirements: 'Battery and/or AC with outdoor-rated charging',
       },
       mounting: {
-        type: [
-          'Scaffold frame',
-          'Screen brackets',
-          'Cable management'
-        ],
+        type: ['Scaffold frame', 'Screen brackets', 'Cable management'],
         materials: [
           'Steel scaffold components',
           'Aluminum mounting hardware',
-          'Weather-resistant cables'
-        ]
+          'Weather-resistant cables and protective ramps',
+        ],
       },
       display: {
         pedestal: 'Scaffold base with integrated power management',
-        lighting: 'Ambient lighting for evening visibility'
-      }
+        lighting: 'Screen brightness for outdoor visibility; ambient site light at dusk',
+      },
     },
     materials: [
-      'Pro-Jax scaffold system',
-      'Six TV screens',
-      'Mounting brackets',
-      'Power management system',
-      'HDMI control units',
+      'Modular scaffold / truss system',
+      'Approximately 10–12 weather-protected displays',
+      'Mounting brackets and clamps',
+      'Batteries, chargers, power strips, surge protection',
+      'HDMI / media playback units',
+      'Routers or network hardware as sculptural components',
       'Documentation equipment',
-      'Safety equipment',
-      'Transportation materials'
+      'Safety equipment and cable covers',
     ],
-    dimensions: 'Variable based on scaffold unit (12\' or 18\')',
+    dimensions: 'Variable outdoor scaffold footprint; minimum 3 ft public clearance',
     images: [
       {
-        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596908/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image3-2025_wtttsq.png',
-        caption: 'Conceptual rendering of the installation in Bayfront Park, Miami'
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786379754/art/moisestech-website/research/the-algorithm-is-outside/the-algorithm-is-outside-large-scale-1_y3h4ha.png',
+        caption:
+          'Large-scale visualization — public scaffold with exposed cables and phone-like vertical interfaces',
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786379751/art/moisestech-website/research/the-algorithm-is-outside/the-algorithm-is-outside-large-scale-2_cjc08b.png',
+        caption:
+          'Large-scale visualization — dense scaffold media facade in public space',
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596886/art/moisestech-website/research/the-algorithm-is-outside/the-algorithm-is-outside-internet-scaffolds_a1qf9n.png',
+        caption:
+          'Internet scaffolds — modular scaffold system staging the algorithm as public infrastructure',
       },
       {
         url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596909/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image1-2025_lqf7zs.png',
-        caption: 'Conceptual rendering of the installation in Wynwood Walls area'
+        caption: 'Conceptual rendering — Wynwood Walls area',
       },
       {
         url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596910/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image2-2025_t9y9ur.png',
-        caption: 'Conceptual rendering of the installation in South Pointe Park'
+        caption: 'Conceptual rendering — South Pointe Park',
+      },
+      {
+        url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596908/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image3-2025_wtttsq.png',
+        caption: 'Conceptual rendering — Bayfront Park, Miami',
       },
       {
         url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743596910/art/moisestech-website/research/the-algorithm-is-outside/WaveMaker-NewProject-MoisesSanabria-TheAlgorithmIsOutside-Image4-2025_nbriyb.png',
-        caption: 'Conceptual rendering of the installation in North Beach Bandshell'
-      }
+        caption: 'Conceptual rendering — North Beach Bandshell',
+      },
+      {
+        url: '/images/research/the-algorithm-is-outside/taste-the-algorithm-diagram.jpg',
+        caption:
+          'Taste the Algorithm — diagram relating infinite generative outputs to editorial taste and public ritual',
+      },
     ],
     tags: [
       'public art',
       'digital infrastructure',
-      'surveillance capitalism',
-      'machine philosophy',
-      'interactive installation',
-      'social media',
-      'urban intervention',
-      'community engagement',
-      'digital culture',
-      'critical theory',
       'scaffold installation',
-      'public space',
+      'attention economies',
+      'platform capitalism',
+      'machine philosophy',
+      'urban intervention',
+      'Ignite 2027',
+      'Miami',
+      'civic media',
       'AI art',
-      'urban technology',
-      'social practice'
+      'public space',
     ],
-    interpretation: "The project examines how algorithms have become embedded in our physical environment, transforming public space into a technological habitat. Through its public installation format, it makes visible the invisible forces that shape our daily lives and collective behaviors.",
-    exhibition: 'Multiple public locations in Miami, 2025',
+    interpretation:
+      'The work argues that algorithmic mediation is already distributed across sidewalks, apps, delivery routes, advertisements, and notifications. By densifying that logic into a walkable scaffold, it makes the feed available for communal looking and critique.',
+    exhibition: 'Proposed outdoor / semi-public Miami sites — Ignite 2027 Artist Open Call',
     installation_notes: [
-      'Requires professional installation audit',
-      'Regular power management monitoring',
-      'Weather protection measures',
-      'Safety protocol implementation',
-      'Community engagement coordination',
-      'Scaffold assembly verification',
-      'Screen calibration and testing',
-      'Power system maintenance',
-      'Documentation setup'
+      'Professional installation audit required before public activation',
+      'Wheels locked; structure stabilized; ballast or anchoring per site',
+      'No exposed live wiring; cables secured; sharp edges covered',
+      'Minimum 3 ft clearance for public interaction',
+      'Daily power, screen, cable, and weather checks',
+      'Rain and high-wind plan confirmed with venue/site team',
+      'Screen count may adjust for power, budget, and safety',
     ],
     future_iterations: [
-      'Expanded location network',
-      'Enhanced interactive features',
-      'Community content curation platform',
-      'Documentation archive development',
-      'Mobile app integration',
-      'Additional screen configurations',
-      'Advanced weather protection',
-      'Solar power integration',
-      'Extended battery life systems'
+      'Site-specific fabrication after engineering review',
+      'Expanded screen configurations and battery runtime',
+      'Cleaner 1–3 minute documentation edit',
+      'Additional Miami cultural courtyards and art-week activations',
     ],
     on_view: false,
     enhancedDescriptions: {
-      overview: "The Algorithm is Outside explores the intersection of digital infrastructure and public space. Through its conceptual framework and physical manifestation, the project examines how algorithms shape our collective behavior and transform urban environments into technological habitats. The installation's modular design allows for flexible deployment across various public locations, creating a network of algorithmic interventions that make visible the invisible forces shaping our daily lives.",
-      essay: "This critical examination of algorithmic influence in public space draws from contemporary machine philosophy and critical theory. The project's theoretical framework engages with key concepts in surveillance capitalism, digital culture, and the evolving relationship between human consciousness and technological systems. Through its public installation format, the work creates a space for communal inquiry into the ways algorithms mediate our experience of urban environments.",
-      implementation: "The project's implementation strategy focuses on creating a scalable, modular system that can be deployed across multiple public locations in Miami. Each installation site is carefully selected to maximize public engagement and create meaningful interactions with the surrounding urban context. The technical setup combines industrial-grade scaffolding with digital displays, creating a temporary infrastructure that transforms public space into a site of algorithmic intervention.",
-      budget: "The project's budget is structured to support both the physical infrastructure and the digital components of the installation. Key investments include the scaffold system, display technology, and power management solutions. The budget also accounts for professional installation, documentation, and contingency funds to ensure successful deployment across multiple locations.",
-      technical: "The technical requirements for The Algorithm is Outside are designed to ensure reliable operation in various outdoor conditions. The installation combines industrial-grade scaffolding with weather-resistant digital displays and power management systems. Each component is carefully selected for durability, ease of installation, and maintenance in public spaces.",
-      gallery: "The gallery showcases conceptual renderings of The Algorithm is Outside in various public locations throughout Miami. Each image represents a different site-specific installation, demonstrating how the work adapts to and transforms different urban contexts. The renderings highlight the project's modular design and its potential to create meaningful interactions between digital infrastructure and public space."
+      overview:
+        'The Algorithm is Outside translates the smartphone feed into temporary civic infrastructure: a dense outdoor scaffold of screens, cables, and phone-like interfaces. It stages the city as an algorithmic environment — maps, alerts, logistics, surveillance, and social performance made architectural — and asks what happens when the feed leaves the phone.',
+      essay:
+        'The essay frames the scaffold as a public nervous system and situates the work within machine philosophy, platform capitalism, attention economies, and the replacement of shared rituals by algorithmically mediated digital rituals. It argues the simulation is already outdoors.',
+      implementation:
+        'Proposed Miami outdoor activations (Bayfront Park, Wynwood Walls area, South Pointe Park, North Beach Bandshell, Little Haiti Cultural Complex) subject to permitting, power, circulation, and safety. Assembly requires an installation specialist; documentation is planned for archive and reporting.',
+      budget:
+        'Preliminary total $6,000: modular scaffold unit ($2,179), installation specialist ($1,500), documentation ($500), travel/logistics ($500), electric chargers / battery infrastructure ($821), contingency / insurance ($500). Artist fee is included within fabrication/production unless a call requires a separate fixed fee. Final screen count, battery runtime, and weatherproofing should be confirmed with site and installer before production.',
+      technical:
+        'Technical rider covers modular scaffold structure, ~10–12 weather-protected displays, media control, power, cabling, materials, software/media loops, daily operations, safety, and weather plans. Outdoor-rated equipment or housings recommended.',
+      gallery:
+        'Large-scale visualizations, internet-scaffold study, WaveMaker site renderings for Miami contexts, and the Taste the Algorithm research diagram. Preliminary studies for scale, mood, screen language, and public context — final fabrication adjusts to site, hardware, and engineering review.',
     },
   },
+
   value_of_the_image: {
     title: 'Value of the Image / Valor de la Imagen',
     year: 2024,

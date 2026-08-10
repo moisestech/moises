@@ -359,12 +359,13 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     subtitle: 'Pose control, consistency, ComfyUI research',
     summary:
       'Practice-based generative pipelines: ControlNet, character consistency, dataset quality, prompt control.',
-    href: '/research/broken-acceleration',
+    href: '/art/beyond_money',
     imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
-    imageAlt: 'Multimodal generative image research',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1752671997/art/moisestech-website/artworks/2021_beyond_money/moises-sanabria-beyond-money-1_2021_deslxp.png',
+    imageAlt:
+      'Beyond Money — landscape still from GAN banknote model (generative image workflow)',
     categories: ['creative-ai', 'generative-media'],
-    skills: ['stable-diffusion', 'comfyui', 'controlnet'],
+    skills: ['stable-diffusion', 'comfyui', 'controlnet', 'gans'],
     roles: ['creative-technologist', 'creative', 'ai-engineer'],
     strength: strength({
       technicalDepth: 4,

@@ -45,10 +45,15 @@ export function CreditCaption({
 
 export function DeliveryStatusBadge({ status }: { status: DeliveryStatus }) {
   const map = {
-    shipped: {
-      label: 'Shipped',
+    active: {
+      label: 'Active',
       className: INST_ACCENT.emerald.chipActive,
       Icon: CheckCircle2,
+    },
+    'in-progress': {
+      label: 'In progress',
+      className: INST_ACCENT.ocean.chipActive,
+      Icon: Sparkles,
     },
     prototype: {
       label: 'Prototype',
@@ -59,6 +64,11 @@ export function DeliveryStatusBadge({ status }: { status: DeliveryStatus }) {
       label: 'Proposed',
       className: INST_ACCENT.copper.chipActive,
       Icon: Sparkles,
+    },
+    completed: {
+      label: 'Completed',
+      className: INST_ACCENT.teal.chipActive,
+      Icon: CheckCircle2,
     },
   } as const;
   const { label, className, Icon } = map[status];
@@ -109,6 +119,7 @@ export function InstitutionalHero({
   kicker,
   headline,
   subhead,
+  availability,
   primaryCta,
   secondaryCta,
   image,
@@ -117,13 +128,14 @@ export function InstitutionalHero({
   kicker: string;
   headline: string;
   subhead: string;
-  primaryCta: { label: string; href: string };
+  availability?: string;
+  primaryCta: { label: string; href: string; external?: boolean };
   secondaryCta: { label: string; href: string; external?: boolean };
   image: InstMedia;
   imageNote?: string;
 }) {
   return (
-    <header className="border-b border-neutral-200">
+    <header id="hero" className="scroll-mt-28 border-b border-neutral-200">
       <div className="mx-auto grid w-full max-w-5xl gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-10 lg:px-8">
         <InstReveal>
           <InstSectionLabel accent="ink">{kicker}</InstSectionLabel>
@@ -135,8 +147,17 @@ export function InstitutionalHero({
           <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-700 sm:text-lg">
             {subhead}
           </p>
+          {availability ? (
+            <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-neutral-800">
+              {availability}
+            </p>
+          ) : null}
           <div className="mt-7 flex flex-wrap gap-3">
-            <InstPrimaryCta href={primaryCta.href} label={primaryCta.label} />
+            <InstPrimaryCta
+              href={primaryCta.href}
+              label={primaryCta.label}
+              external={primaryCta.external}
+            />
             <InstSecondaryCta
               href={secondaryCta.href}
               label={secondaryCta.label}
@@ -154,6 +175,46 @@ export function InstitutionalHero({
         </InstReveal>
       </div>
     </header>
+  );
+}
+
+export function ContextProofStrip({
+  eyebrow,
+  items,
+}: {
+  eyebrow: string;
+  items: readonly { id: string; label: string; body: string }[];
+}) {
+  return (
+    <section
+      id="context"
+      className="scroll-mt-28 border-b border-neutral-200 bg-[#f7f6f3] py-8 sm:py-10"
+      aria-labelledby="context-proof-heading"
+    >
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <InstReveal>
+          <h2 id="context-proof-heading" className="sr-only">
+            {eyebrow}
+          </h2>
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
+            {eyebrow}
+          </p>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-3">
+            {items.map((item) => (
+              <li
+                key={item.id}
+                className="border-l-2 border-neutral-900/80 pl-4"
+              >
+                <p className="text-sm font-semibold tracking-tight text-neutral-950">
+                  {item.label}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-neutral-600">{item.body}</p>
+              </li>
+            ))}
+          </ul>
+        </InstReveal>
+      </div>
+    </section>
   );
 }
 
@@ -265,6 +326,7 @@ export function CaseStudyIntro({
   title,
   lead,
   credit,
+  contractNote,
   href,
   hrefLabel,
   points,
@@ -273,6 +335,7 @@ export function CaseStudyIntro({
   title: string;
   lead: string;
   credit?: string;
+  contractNote?: string;
   href: string;
   hrefLabel: string;
   points?: readonly string[];
@@ -289,6 +352,11 @@ export function CaseStudyIntro({
       {credit ? (
         <p className="mt-4 max-w-2xl border-l-2 border-teal-700 pl-4 text-sm leading-relaxed text-neutral-700">
           {credit}
+        </p>
+      ) : null}
+      {contractNote ? (
+        <p className="mt-3 max-w-2xl font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
+          {contractNote}
         </p>
       ) : null}
       {points?.length ? (
@@ -531,12 +599,12 @@ export function EngagementFormatCards({
           {availability}
         </p>
       </InstReveal>
-      <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {formats.map((format, i) => (
           <InstReveal key={format.id} delay={0.05 * i}>
             <li className="border border-neutral-200 bg-white p-5 sm:p-6">
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-sky-800">
-                0{i + 1}
+                {String(i + 1).padStart(2, '0')}
               </p>
               <h3 className="mt-2 text-lg font-semibold tracking-tight">{format.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-neutral-600">{format.body}</p>
@@ -544,6 +612,102 @@ export function EngagementFormatCards({
           </InstReveal>
         ))}
       </ul>
+    </section>
+  );
+}
+
+export function EngagementProcess({
+  eyebrow,
+  title,
+  valueLine,
+  steps,
+}: {
+  eyebrow: string;
+  title: string;
+  valueLine: string;
+  steps: readonly { id: string; title: string; body: string }[];
+}) {
+  return (
+    <section id="process" className="scroll-mt-28 py-12 sm:py-16">
+      <InstReveal>
+        <InstSectionLabel accent="teal">{eyebrow}</InstSectionLabel>
+        <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+          {valueLine}
+        </p>
+      </InstReveal>
+
+      {/* Lightweight process graphic — readable without motion */}
+      <div className="mt-8 overflow-x-auto">
+        <ol
+          className="flex min-w-[36rem] items-stretch gap-0 sm:min-w-0 sm:grid sm:grid-cols-4"
+          aria-label="Engagement process"
+        >
+          {steps.map((step, i) => (
+            <li key={step.id} className="relative flex flex-1 flex-col border border-neutral-200 bg-white p-4 sm:p-5">
+              {i < steps.length - 1 ? (
+                <span
+                  className="pointer-events-none absolute -right-3 top-1/2 z-10 hidden h-px w-6 -translate-y-1/2 bg-neutral-400 sm:block"
+                  aria-hidden
+                />
+              ) : null}
+              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-teal-800">
+                {String(i + 1).padStart(2, '0')}
+              </p>
+              <h3 className="mt-2 text-base font-semibold tracking-tight">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
+        Artist need → workshop / prototype → working artifact → documentation / system → continued use
+      </p>
+    </section>
+  );
+}
+
+export function ClaimsHonesty({
+  eyebrow,
+  title,
+  lead,
+  points,
+}: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  points: readonly string[];
+}) {
+  return (
+    <section
+      id="claims"
+      className="scroll-mt-28 border-t border-neutral-200 py-12 sm:py-16"
+      aria-labelledby="claims-heading"
+    >
+      <InstReveal>
+        <InstSectionLabel accent="ink">{eyebrow}</InstSectionLabel>
+        <h2
+          id="claims-heading"
+          className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl"
+        >
+          {title}
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+          {lead}
+        </p>
+        <ul className="mt-6 max-w-3xl space-y-3">
+          {points.map((point) => (
+            <li
+              key={point.slice(0, 48)}
+              className="flex items-start gap-3 border-l-2 border-neutral-300 pl-4 text-sm leading-relaxed text-neutral-700"
+            >
+              {point}
+            </li>
+          ))}
+        </ul>
+      </InstReveal>
     </section>
   );
 }

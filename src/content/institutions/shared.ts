@@ -8,8 +8,26 @@ export const INSTITUTIONAL_CALENDLY_URL =
 
 export const INSTITUTIONAL_EMAIL = 'm@moises.tech';
 
-export const INSTITUTIONAL_AVAILABILITY =
-  'My year-long contract as Technical Director of Digital at Oolite Arts concludes September 17.';
+/**
+ * Public collaboration offer line — single source for artist-infrastructure hero,
+ * engagement, and CTA. Do not invent metrics or institutional fees here.
+ */
+export const INSTITUTIONAL_COLLABORATION_AVAILABILITY =
+  'Available for paid guest teaching, curriculum development, and institutional creative-technology collaborations beginning fall 2026.';
+
+/**
+ * Oolite case-study context only — not a competing hero availability line.
+ * Year-long Technical Director of Digital engagement concludes September 17, 2026.
+ */
+export const OOLITE_CONTRACT_CONTEXT =
+  'Year-long engagement as Technical Director of Digital at Oolite Arts concludes September 17, 2026.';
+
+/**
+ * @deprecated Prefer INSTITUTIONAL_COLLABORATION_AVAILABILITY for offer pages,
+ * or OOLITE_CONTRACT_CONTEXT for Oolite-specific framing.
+ * Kept as alias so hub/Bakehouse/YoungArts can migrate without a hard break.
+ */
+export const INSTITUTIONAL_AVAILABILITY = INSTITUTIONAL_COLLABORATION_AVAILABILITY;
 
 /**
  * Cross-page nav for the institutional outreach family.
@@ -71,6 +89,7 @@ export const DCC_MIAMI = {
 /**
  * Public seat pricing aligned with current Oolite Arts Digital Lab workshops
  * (Artist Websites / Vibe Coding / Resin — publicly listed at $45 / ~3hr).
+ * Do not present these as institutional teaching fees on /artist-infrastructure.
  */
 export const PILOT_PRICING = {
   sourceNote:

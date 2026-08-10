@@ -14,8 +14,11 @@ import {
 import {
   CaseStudyGallery,
   CaseStudyIntro,
+  ClaimsHonesty,
+  ContextProofStrip,
   CurriculumModuleCard,
   EngagementFormatCards,
+  EngagementProcess,
   InstitutionalCTA,
   InstitutionalHero,
   PositioningTriad,
@@ -29,9 +32,11 @@ const SECTION_NAV = [
   { id: 'positioning', label: 'Positioning', accent: 'ink' as const },
   { id: 'curriculum', label: 'Curriculum', accent: 'ocean' as const },
   { id: 'oolite-proof', label: 'Oolite', accent: 'teal' as const },
+  { id: 'process', label: 'Process', accent: 'teal' as const },
   { id: 'supporting-proof', label: 'Proof', accent: 'copper' as const },
   { id: 'practice', label: 'Practice', accent: 'rose' as const },
   { id: 'engagement', label: 'Engage', accent: 'ocean' as const },
+  { id: 'claims', label: 'Claims', accent: 'ink' as const },
   { id: 'contact', label: 'Contact', accent: 'ink' as const },
 ] as const;
 
@@ -67,8 +72,9 @@ export function ArtistInfrastructureClient() {
     <InstPageShell>
       <InstFamilyNav active="artist-infrastructure" className="sticky top-0 z-40" />
 
+      {/* Non-sticky section jump — avoids double sticky crowding the first viewport */}
       <nav
-        className="sticky top-[45px] z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
+        className="border-b border-neutral-200 bg-[#f7f6f3]"
         aria-label="Page sections"
       >
         <InstContainer className="flex gap-1.5 overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -101,11 +107,14 @@ export function ArtistInfrastructureClient() {
         kicker={P.hero.kicker}
         headline={P.hero.headline}
         subhead={P.hero.subhead}
+        availability={P.hero.availability}
         primaryCta={P.hero.primaryCta}
         secondaryCta={P.hero.secondaryCta}
         image={P.hero.image}
         imageNote={P.hero.imageNote}
       />
+
+      <ContextProofStrip eyebrow={P.contextProof.eyebrow} items={P.contextProof.items} />
 
       <InstContainer>
         <PositioningTriad
@@ -160,6 +169,7 @@ export function ArtistInfrastructureClient() {
                 title={P.ooliteProof.title}
                 lead={P.ooliteProof.lead}
                 credit={P.ooliteProof.credit}
+                contractNote={P.ooliteProof.contractNote}
                 href={P.ooliteProof.href}
                 hrefLabel={P.ooliteProof.hrefLabel}
                 points={P.ooliteProof.points}
@@ -173,6 +183,13 @@ export function ArtistInfrastructureClient() {
             </InstReveal>
           </div>
         </section>
+
+        <EngagementProcess
+          eyebrow={P.engagementProcess.eyebrow}
+          title={P.engagementProcess.title}
+          valueLine={P.engagementProcess.valueLine}
+          steps={P.engagementProcess.steps}
+        />
 
         <ProofStrip
           eyebrow={P.supportingProof.eyebrow}
@@ -209,6 +226,13 @@ export function ArtistInfrastructureClient() {
           title={P.engagement.title}
           availability={P.engagement.availability}
           formats={P.engagement.formats}
+        />
+
+        <ClaimsHonesty
+          eyebrow={P.claimsHonesty.eyebrow}
+          title={P.claimsHonesty.title}
+          lead={P.claimsHonesty.lead}
+          points={P.claimsHonesty.points}
         />
       </InstContainer>
 

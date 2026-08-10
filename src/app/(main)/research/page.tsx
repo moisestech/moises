@@ -17,7 +17,7 @@ const SITE = 'https://moises.tech';
 export const metadata: Metadata = {
   title: 'Research — Moises Sanabria',
   description:
-    'BORN INTO THE MACHINE and related practice-based research: computation as an inherited environment shaping attention, labor, value, belief, and agency.',
+    'Practice-based research: Born into the Machine, The Algorithm is Outside, and related dossiers on computation as an inherited environment.',
   alternates: { canonical: `${SITE}/research` },
   openGraph: {
     title: 'Research — Moises Sanabria',
@@ -30,16 +30,33 @@ export const metadata: Metadata = {
   },
 };
 
+/** Pretty kebab URLs for snake_case research keys. */
 function researchHref(slug: string) {
   if (slug === 'value_of_the_image') return '/research/the-value-and-future-of-the-image';
   if (slug === 'echo_economies') return '/research/locust-echo-economies';
   if (slug === 'broken_acceleration') return '/research/broken-acceleration';
   if (slug === 'touch_grass_circuit_floor') return '/research/touch-grass-circuit-floor';
   if (slug === 'weight_of_the_cloud') return '/research/weight-of-the-cloud';
+  if (slug === 'the_algorithm_is_outside') return '/research/the-algorithm-is-outside';
+  if (slug === 'privacy_is_a_luxury') return '/research/privacy-is-a-luxury';
+  if (slug === 'i_will_remember_you') return '/research/i-will-remember-you';
   return `/research/${slug}`;
 }
 
+const BITM_CARD = {
+  href: '/research/born-into-the-machine',
+  title: 'Born into the Machine',
+  description:
+    'Long-form framework: computation as an inherited environment shaping attention, labor, value, belief, and agency.',
+  image:
+    'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-2_ljoygv.png',
+  imageAlt: 'Born into the Machine — research atmosphere still',
+  status: 'Framework',
+};
+
 export default function ResearchIndexPage() {
+  const projects = Object.entries(research);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <header className="mb-12 max-w-3xl">
@@ -47,14 +64,14 @@ export default function ResearchIndexPage() {
           Research
         </p>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-          BORN INTO THE MACHINE
+          Practice-based research
         </h1>
         <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">
-          Research into computation as an inherited environment shaping attention,
-          labor, value, belief, and agency.
+          Computation as an inherited environment — dossiers, public installations, and
+          frameworks for curators, residencies, and institutional partners.
         </p>
         <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-300">
-          The long-form framework lives at{' '}
+          The long-form series is{' '}
           <Link
             href="/research/born-into-the-machine"
             className="underline underline-offset-4 hover:no-underline"
@@ -65,7 +82,7 @@ export default function ResearchIndexPage() {
           <Link href="/noisy-systems" className="underline underline-offset-4 hover:no-underline">
             Noisy Systems
           </Link>
-          . Additional research dossiers appear below.
+          . All research projects are listed below.
         </p>
       </header>
 
@@ -108,12 +125,11 @@ export default function ResearchIndexPage() {
         </Link>
       </section>
 
-      {/* Space for future research projects — no invented entries */}
-      <p className="mb-12 text-sm text-gray-500 dark:text-gray-400 font-mono uppercase tracking-widest">
-        {projectMeta.researchSeries} · further projects will appear here
+      <p className="mb-8 text-sm text-gray-500 dark:text-gray-400 font-mono uppercase tracking-widest">
+        {projectMeta.researchSeries} · {projects.length + 1} dossiers on this index
       </p>
 
-      {/* Existing program banner */}
+      {/* Idea Center sprint */}
       <div className="mb-12">
         <Link
           href="/research/born-into-the-machine/sprint"
@@ -142,14 +158,41 @@ export default function ResearchIndexPage() {
         </Link>
       </div>
 
+      <h2 className="text-xl font-bold tracking-tight mb-6">All research projects</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {Object.entries(research).map(([slug, item]) => (
+        {/* Framework card — not in `research` registry */}
+        <Link
+          href={BITM_CARD.href}
+          className="block group border rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200"
+        >
+          <div className="relative aspect-[4/3] mb-4">
+            <Image
+              src={BITM_CARD.image}
+              alt={BITM_CARD.imageAlt}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="px-4 pb-4">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1">
+              {BITM_CARD.status}
+            </p>
+            <h2 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {BITM_CARD.title}
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">
+              {BITM_CARD.description}
+            </p>
+          </div>
+        </Link>
+
+        {projects.map(([slug, item]) => (
           <Link
             key={slug}
             href={researchHref(slug)}
             className="block group border rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200"
           >
-            <div className="relative aspect-[4/3] mb-4">
+            <div className="relative aspect-[4/3] mb-4 bg-stone-100 dark:bg-stone-900">
               <Image
                 src={item.images && item.images.length > 0 ? item.images[0].url : '/placeholder.jpg'}
                 alt={
@@ -162,6 +205,11 @@ export default function ResearchIndexPage() {
               />
             </div>
             <div className="px-4 pb-4">
+              {item.year ? (
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1">
+                  {item.year}
+                </p>
+              ) : null}
               <h2 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {item.title}
               </h2>

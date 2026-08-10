@@ -105,6 +105,34 @@ export default function ResearchPageClient({ item }: ResearchPageClientProps) {
 
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-8">
+          {item.pitchSteps && item.pitchSteps.length > 0 ? (
+            <Card className="p-6">
+              <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                <Zap className="h-5 w-5 text-amber-500" />
+                Sequential pitch
+              </h3>
+              <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+                Six beats from summary to budget — hover highlighted terms in the copy below for
+                definitions.
+              </p>
+              <ol className="space-y-5" role="list">
+                {item.pitchSteps.map((step, index) => (
+                  <li
+                    key={step.id}
+                    className="relative border-l-2 border-indigo-500/40 pl-5 dark:border-indigo-400/40"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-300 mb-1">
+                      {String(index + 1).padStart(2, '0')} · {step.title}
+                    </p>
+                    <EnhancedDescription
+                      description={step.body}
+                      interactiveContent={item.interactiveContent}
+                    />
+                  </li>
+                ))}
+              </ol>
+            </Card>
+          ) : null}
           <Card className="p-6">
             <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <Info className="h-5 w-5 text-blue-500" />

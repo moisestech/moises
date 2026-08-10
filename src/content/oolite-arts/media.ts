@@ -165,6 +165,7 @@ export const digilabMedia = {
     credit: 'Oolite Arts Digital Lab',
     usedOn: [
       '/oolite-arts#classes.artist-website-beginners.documentary',
+      '/artist-infrastructure#hero',
       '/artist-infrastructure#oolite-proof',
     ],
   },

@@ -88,9 +88,10 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
       'Multimodal AI',
     ],
     imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-1_a1ry99.png',
-    imageAlt: 'Generative image research — visual output from practice-based model experimentation',
-    href: '/research/broken-acceleration',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1752671997/art/moisestech-website/artworks/2021_beyond_money/moises-sanabria-beyond-money-1_2021_deslxp.png',
+    imageAlt:
+      'Beyond Money — landscape still from GAN banknote model (Moises Sanabria generative image workflow)',
+    href: '/art/beyond_money',
   },
   'playwire-alumni': {
     id: 'playwire-alumni',
