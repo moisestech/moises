@@ -123,7 +123,7 @@ export const ogilvySeniorAiDrivenCreativeDirectorBanner = defineApplicationBanne
  * strip is shorter and left a large empty gray band on desktop).
  */
 const FLAGSHIP_BANNER_FRAME =
-  '!h-[min(calc(100vw/3),52vh,640px)] sm:!h-[min(calc(100vw/3),52vh,640px)] md:!h-[min(calc(100vw/3),52vh,640px)] lg:!h-[min(calc(100vw/3),52vh,640px)] xl:!h-[min(calc(100vw/3),52vh,640px)] w-full';
+  '!h-[min(calc(100vw/3),640px)] sm:!h-[min(calc(100vw/3),640px)] md:!h-[min(calc(100vw/3),640px)] lg:!h-[min(calc(100vw/3),640px)] xl:!h-[min(calc(100vw/3),640px)] w-full';
 
 /** Public hiring flagship — `/creative-ai` (measured 2172×724). */
 export const creativeAiFlagshipBanner = defineApplicationBanner({
