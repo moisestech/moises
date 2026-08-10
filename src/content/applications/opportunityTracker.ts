@@ -240,7 +240,7 @@ export const opportunityTracker: ApplicationTrack[] = [
   // —— Still to apply (priority order) ——
   {
     id: 'ogilvy-creative-editor-ai',
-    company: 'Ogilvy',
+    company: 'DAVID / Ogilvy',
     role: 'Creative Editor/AI',
     status: 'to_apply',
     priority: 1,
@@ -248,7 +248,8 @@ export const opportunityTracker: ApplicationTrack[] = [
     slug: 'ogilvy-senior-ai-driven-creative-director',
     aliasSlug: 'ogilvy-senior-ai-driven-creative-editor',
     employerUrl: 'https://www.linkedin.com/jobs/view/creative-editor-ai-at-ogilvy-4400258835',
-    notes: 'Canonical slug is creative-director; editor URL redirects. Next application.',
+    notes:
+      'DAVID Agency (WPP/Ogilvy) · Miami · posted 08/04/2026. Dossier embeds All Studios Everything (18M+). Need official DAVID/Ogilvy/WPP logos if available.',
   },
   {
     id: 'alpha-drive-full-stack',
@@ -437,6 +438,68 @@ export const opportunityTracker: ApplicationTrack[] = [
     status: 'hold',
     family: 'none',
     employerUrl: 'https://www.newmuseum.org/work-with-us/',
+  },
+
+  // —— Registry sync (pages exist; keep tracker complete) ——
+  {
+    id: 'affirm-ai-solutions-engineer',
+    company: 'Affirm',
+    role: 'AI Solutions Engineer',
+    status: 'to_apply',
+    family: 'systems',
+    slug: 'affirm-ai-solutions-engineer',
+    archetype: 'ai-solutions-architect',
+    notes: 'Systems dossier live; listed archetype-adjacent.',
+  },
+  {
+    id: 'flora-founding-data-engineer',
+    company: 'FLORA',
+    role: 'Founding Data Engineer',
+    status: 'to_apply',
+    family: 'role-portfolio',
+    slug: 'flora-founding-data-engineer',
+    archetype: 'ai-engineer',
+    notes: 'Private role-portfolio with honest Coming soon gaps.',
+  },
+  {
+    id: 'knight-journalism-tech-product-strategist',
+    company: 'Knight Foundation',
+    role: 'Technology Product Strategist, Journalism',
+    status: 'earlier',
+    family: 'full',
+    slug: 'knight-journalism-tech-product-strategist',
+    archetype: 'institutional',
+    notes: 'Canonical dossier at /technology-product-strategy.',
+  },
+  {
+    id: 'new-inc-media-fabrication-lab-manager',
+    company: 'NEW INC',
+    role: 'Media and Fabrication Lab Manager',
+    status: 'to_apply',
+    family: 'compact',
+    slug: 'new-inc-media-fabrication-lab-manager',
+    archetype: 'institutional',
+    notes: 'Institutional compact dossier; Digilab-adjacent proof.',
+  },
+  {
+    id: 'playwire-return',
+    company: 'Playwire',
+    role: 'Data · Solutions · Product Engineering (return)',
+    status: 'to_apply',
+    family: 'compact',
+    slug: 'playwire',
+    archetype: 'ai-solutions-architect',
+    notes: 'Private return dossier.',
+  },
+  {
+    id: 'wmx-senior-art-director-ai-driven-design-leader',
+    company: 'WMX',
+    role: 'Senior Art Director, AI-Driven Design Leader',
+    status: 'to_apply',
+    family: 'creative-agency',
+    slug: 'wmx-senior-art-director-ai-driven-design-leader',
+    archetype: 'creative',
+    notes: 'Sibling of wmx-senior-art-director-ai — differentiate or merge later.',
   },
 
   // —— Earlier 2025 prep (no confirmation) ——

@@ -150,6 +150,8 @@ export type RoleReferenceData = {
   title: string;
   fields: RoleReferenceField[];
   platformReferences: string[];
+  /** Optional narrative blocks (e.g. About DAVID / Ogilvy / WPP) shown when expanded. */
+  narrativeSections?: { heading: string; body: string }[];
   /** Only set when a real careers URL is available. */
   listingUrl?: string;
   listingUrlLabel?: string;

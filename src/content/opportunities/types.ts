@@ -1,6 +1,6 @@
 import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
-import type { EvidenceStatus, SystemsDossier } from '@/content/opportunities/systemsDossier';
+import type { EvidenceStatus, RoleReferenceData, SystemsDossier } from '@/content/opportunities/systemsDossier';
 import type { RolePortfolioDossier } from '@/content/opportunities/rolePortfolio';
 import type { CreativeAgencyDossier } from '@/content/opportunities/creativeAgencyDossier';
 
@@ -211,6 +211,8 @@ export type Opportunity = {
   };
   /** Systems engineering application sections (architecture, trust, 30/60/90, etc.). */
   systemsDossier?: SystemsDossier;
+  /** Optional expandable JD / listing snapshot (creative-agency + systems). */
+  roleReference?: RoleReferenceData;
   /** Creative / forward-deployed role portfolio sections (no Affirm-shaped architecture panels). */
   rolePortfolio?: RolePortfolioDossier;
   /** Art-direction / creative-director dossier sections (campaign system, AI workflow, POV). */

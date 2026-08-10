@@ -20,8 +20,8 @@ Read path from this repo into the personal **LIFE OS** Airtable base used for jo
 
 ### Needs build (ordered)
 
-1. **Vercel env** — set `AIRTABLE_LIFE_OS_API_KEY` + `LIFE_OS_READ_TOKEN` on moises production (local already works).
-2. **Opportunities → dossiers** — map LIFE OS Opportunities rows to `/opportunities/[slug]` tracker status (one source of truth for applications).
+1. ~~Vercel env~~ — **optional**. LIFE OS is for local agent read/write; production dossiers do not need Airtable on Vercel.
+2. **Opportunities → dossiers** — map LIFE OS Opportunities rows to `/opportunities/[slug]` tracker status (local PM spine).
 3. **Write/claim port** — today write ops live in infra24; port only if agents should claim from moises.
 4. **Optional tables** — People, Organizations, Interactions, Revenue (discover already lists them).
 5. **Rotate PAT** — token was pasted in chat; regenerate when convenient.

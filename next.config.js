@@ -198,6 +198,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'i.ytimg.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'www.blind-magazine.com',
         port: '',
         pathname: '/**',

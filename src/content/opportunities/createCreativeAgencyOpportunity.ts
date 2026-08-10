@@ -2,8 +2,10 @@
  * Helper to assemble creative-agency opportunity dossiers with shared chrome.
  */
 
-import type { ApplicationBanner, Opportunity, RoleMatchRow } from './types';
+import type { ApplicationBanner, Opportunity, RoleMatchRow, SkillsMatrixRow } from './types';
 import type { CreativeAgencyDossier } from './creativeAgencyDossier';
+import type { RoleReferenceData } from '@/content/opportunities/systemsDossier';
+import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 import {
   creativeAgencyNavItems,
   creativeAgencySkillsMatrix,
@@ -40,8 +42,15 @@ export type CreativeAgencyOpportunityConfig = {
   navItems?: Opportunity['navItems'];
   evidenceRecipe?: Opportunity['evidenceRecipe'];
   caseStudiesIntro?: string;
-  /** Live send URL for packet CTA. Default `/career-packet` until `/creative-ai` is deployed. */
+  /** Live send URL for packet CTA. */
   careerPacketHref?: string;
+  animatedLogoBand?: LogoBandItem[];
+  skillsMatrixRows?: SkillsMatrixRow[];
+  /** Expandable listing snapshot (JD meta). */
+  roleReference?: RoleReferenceData;
+  companyLogoSrc?: string;
+  companyLogoSrcDark?: string;
+  companyLogoAlt?: string;
 };
 
 export function createCreativeAgencyOpportunity(
@@ -95,7 +104,7 @@ export function createCreativeAgencyOpportunity(
     featuredProjectIds: [...creativeProofPack.featuredProjectIds],
     evidenceRecipe: config.evidenceRecipe,
     caseStudiesIntro: config.caseStudiesIntro,
-    skillsMatrixRows: creativeAgencySkillsMatrix,
+    skillsMatrixRows: config.skillsMatrixRows ?? creativeAgencySkillsMatrix,
     processSectionTitle: `How I would work at ${config.company}`,
     processIntro:
       config.processIntro ??
@@ -109,6 +118,11 @@ export function createCreativeAgencyOpportunity(
       emailSubject: config.emailSubject,
     }),
     techLogoIds: [],
+    animatedLogoBand: config.animatedLogoBand,
+    roleReference: config.roleReference,
+    companyLogoSrc: config.companyLogoSrc,
+    companyLogoSrcDark: config.companyLogoSrcDark,
+    companyLogoAlt: config.companyLogoAlt,
     resumeSectionTitle: agency.ctaHeadline,
     resumeSectionNote:
       config.resumeSectionNote ??

@@ -50,6 +50,16 @@ export function RoleReferenceAccordion({
                 </div>
               ))}
             </dl>
+            {data.narrativeSections?.length ? (
+              <div className="mt-6 space-y-5 border-t border-stone-100 pt-5 dark:border-stone-800">
+                {data.narrativeSections.map((section) => (
+                  <div key={section.heading}>
+                    <p className={opp.label}>{section.heading}</p>
+                    <p className={`mt-1.5 max-w-3xl ${opp.body}`}>{section.body}</p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
             <p className={`mt-5 ${opp.label}`}>Core platform references</p>
             <ul className="mt-2 flex flex-wrap gap-1.5">
               {data.platformReferences.map((ref) => (
