@@ -126,6 +126,9 @@ export type MotionClip = {
   placeholderNote?: string;
   /** Full-width featured treatment (e.g. high-view count YouTube proof). */
   featured?: boolean;
+  /** Optional deep link (research page, case study, etc.). */
+  href?: string;
+  linkLabel?: string;
 };
 
 export type MotionSection = {

@@ -1,7 +1,8 @@
 'use client';
 
 import { ChevronRight } from 'lucide-react';
-import type { OpportunityNavItem } from '@/content/opportunities/types';
+import type { OpportunityNavItem, SkillsMatrixIconKey } from '@/content/opportunities/types';
+import { MatrixRowIcon } from '@/components/opportunities/ExperienceMatrixSection';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { scrollToDossierSection } from '@/components/opportunities/creative-agency/scrollToDossierSection';
@@ -12,6 +13,44 @@ type DossierSectionNavProps = {
   title?: string;
   intro?: string;
   className?: string;
+};
+
+/** Fallback icons when a nav item omits `icon` — keeps the dossier map consistent. */
+const DOSSIER_ICON_BY_ID: Record<string, SkillsMatrixIconKey> = {
+  hero: 'fileText',
+  overview: 'fileText',
+  capabilities: 'sparkles',
+  skills: 'cpu',
+  'case-studies': 'image',
+  campaign: 'presentation',
+  workflow: 'workflow',
+  motion: 'tv',
+  process: 'workflow',
+  leadership: 'users',
+  pov: 'target',
+  fit: 'scale',
+  'role-fit': 'scale',
+  stack: 'layers',
+  contact: 'rocket',
+  resume: 'fileText',
+  layers: 'boxes',
+  related: 'target',
+  evidence: 'boxes',
+  experience: 'users',
+  technologies: 'layers',
+  'teaching-cred': 'users',
+  'coming-soon': 'rocket',
+  'data-model': 'workflow',
+  'selected-project': 'image',
+  education: 'fileText',
+  credibility: 'shield',
+  'comfyui-experience': 'cpu',
+  'work-sample': 'image',
+  engineering: 'code2',
+  ramp: 'workflow',
+  'provenance-explorer': 'sparkles',
+  'selected-work': 'image',
+  work: 'image',
 };
 
 /**
@@ -36,36 +75,75 @@ export function DossierSectionNav({
         {title}
       </h2>
       <p className={`mt-1.5 max-w-2xl ${opp.subtle}`}>{intro}</p>
-      <ol className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <ol className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, index) => {
           const accent = getOpportunityCompactAccent(item.id);
+          const icon = item.icon ?? DOSSIER_ICON_BY_ID[item.id] ?? 'layers';
+          const delayMs = Math.min(index * 45, 360);
+
           return (
-            <li key={item.id}>
+            <li
+              key={item.id}
+              className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both"
+              style={{ animationDelay: `${delayMs}ms`, animationDuration: '420ms' }}
+            >
               <a
                 href={`#${item.id}`}
                 className={cn(
-                  'group flex min-h-12 items-center gap-3 rounded-lg border border-l-[3px] bg-white px-3 py-2.5 text-sm font-medium text-stone-800 shadow-sm transition hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 dark:bg-stone-900 dark:text-stone-100',
+                  'group relative flex min-h-[3.25rem] items-center gap-3 overflow-hidden rounded-xl border border-l-[3px] bg-white px-3 py-2.5 text-sm font-medium text-stone-800 shadow-sm',
+                  'transition duration-300 ease-out',
+                  'hover:-translate-y-1 hover:shadow-lg hover:shadow-stone-900/10',
+                  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500',
+                  'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+                  'dark:bg-stone-900 dark:text-stone-100 dark:hover:shadow-black/40',
                   accent.rail,
                   'border-stone-200 hover:border-stone-300 dark:border-stone-700 dark:hover:border-stone-600',
                   accent.softBg,
+                  '[transform-style:preserve-3d]',
+                  'hover:[transform:perspective(800px)_translateY(-4px)_rotateX(2deg)_rotateY(-1.5deg)]',
+                  'motion-reduce:hover:[transform:none]',
                 )}
                 onClick={(e) => {
                   e.preventDefault();
                   scrollToDossierSection(item.id);
                 }}
               >
+                {/* Hover sheen */}
+                <span
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100 motion-reduce:hidden dark:via-white/10"
+                  aria-hidden
+                />
+
                 <span
                   className={cn(
-                    'flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold tabular-nums',
+                    'relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border shadow-sm',
+                    'bg-white/95 transition duration-300 dark:bg-stone-950/90',
+                    'group-hover:scale-110 group-hover:shadow-md',
+                    'motion-reduce:group-hover:scale-100',
                     accent.navIdle,
                     accent.eyebrow,
                   )}
                 >
-                  {String(index + 1).padStart(2, '0')}
+                  <MatrixRowIcon
+                    icon={icon}
+                    className="h-4 w-4 transition duration-300 group-hover:rotate-6 motion-reduce:group-hover:rotate-0"
+                  />
                 </span>
-                <span className="min-w-0 flex-1 leading-snug">{item.label}</span>
+
+                <span className="relative min-w-0 flex-1 leading-snug">
+                  <span className="block">{item.label}</span>
+                  <span
+                    className={cn(
+                      'mt-0.5 block font-mono text-[10px] font-normal uppercase tracking-[0.14em] opacity-0 transition duration-300 group-hover:opacity-70',
+                      accent.eyebrow,
+                    )}
+                  >
+                    Jump · {String(index + 1).padStart(2, '0')}
+                  </span>
+                </span>
+
                 <ChevronRight
-                  className="h-4 w-4 shrink-0 text-stone-400 transition group-hover:translate-x-0.5 group-hover:text-stone-600 motion-reduce:transition-none dark:text-stone-500 dark:group-hover:text-stone-300"
+                  className="relative h-4 w-4 shrink-0 text-stone-400 transition duration-300 group-hover:translate-x-1 group-hover:text-stone-700 motion-reduce:transition-none dark:text-stone-500 dark:group-hover:text-stone-200"
                   aria-hidden
                 />
               </a>

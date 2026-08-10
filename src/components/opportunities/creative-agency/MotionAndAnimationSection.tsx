@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 import { AssetPlaceholder } from '@/components/opportunities/creative-agency/AssetPlaceholder';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -76,6 +78,18 @@ function ClipCard({ clip, featured }: { clip: MotionClip; featured?: boolean }) 
         <p className={cn(opp.body, 'mt-2 text-sm', featured && 'max-w-3xl sm:text-base')}>
           {clip.contribution}
         </p>
+        {clip.href ? (
+          <Link
+            href={clip.href}
+            className={cn(
+              opp.linkAccent,
+              'mt-3 inline-flex items-center gap-1.5 text-sm font-medium',
+            )}
+          >
+            {clip.linkLabel ?? 'View related work'}
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+          </Link>
+        ) : null}
         {clip.placeholderNote ? (
           <div className="mt-3">
             <AssetPlaceholder

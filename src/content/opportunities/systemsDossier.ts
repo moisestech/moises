@@ -7,6 +7,11 @@ export type FitPillar = {
   id: string;
   title: string;
   body: string;
+  /** Optional still for richer creative-agency / flagship cards. */
+  imageSrc?: string;
+  imageAlt?: string;
+  /** Lucide key shared with skills matrix icon map. */
+  icon?: import('@/content/opportunities/types').SkillsMatrixIconKey;
 };
 
 export type EvidenceStatus =

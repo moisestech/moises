@@ -12,10 +12,28 @@ export type ApplicationBanner = {
   srcExtraWide?: string;
   alt: string;
   /**
+   * Intrinsic width ÷ height of the master asset (e.g. `3` for 2172×724).
+   * Drives the sharp layer’s aspect box so art fills the strip’s **full height**
+   * without horizontal crush. Measure after upload — see docs/opportunities/application-banners.md.
+   */
+  intrinsicRatio?: number;
+  /**
    * Optional Tailwind classes for the image frame (width is always full-bleed).
-   * Default: wide cinematic crop. Example: `aspect-[3/1] max-h-[280px]`
+   * Prefer fixed-height frames via the default contain-blur presentation.
+   * Only applied when `presentation: 'cover'`.
    */
   aspectClass?: string;
+  /**
+   * Optional frame-height override for `contain-blur` (Tailwind height utilities).
+   * Default shared strip heights live in OpportunityApplicationBanner.
+   */
+  frameClass?: string;
+  /**
+   * `contain-blur` (default): fixed-height strip; sharp art fills full height (`object-contain`);
+   * blurred cover of the same image fills the sides.
+   * `cover`: legacy full-bleed crop — only for assets designed to survive edge crop.
+   */
+  presentation?: 'contain-blur' | 'cover';
 };
 
 export type OpportunityStatus = 'active' | 'draft';
@@ -119,6 +137,8 @@ export type OpportunityNavItem = {
   label: string;
   /** Shorter label for sticky nav on narrow screens. */
   shortLabel?: string;
+  /** Optional Lucide key for dossier-map tiles. */
+  icon?: SkillsMatrixIconKey;
 };
 
 /** Single hoverable term in the audience keyword strip (opportunity hero lead-in). */

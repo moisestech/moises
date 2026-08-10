@@ -23,16 +23,16 @@ import {
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
 export const creativeAgencyNavItems: OpportunityNavItem[] = [
-  { id: 'hero', label: 'Overview', shortLabel: 'Overview' },
-  { id: 'capabilities', label: 'What I bring', shortLabel: 'Capabilities' },
-  { id: 'case-studies', label: 'Case studies', shortLabel: 'Cases' },
-  { id: 'campaign', label: 'Campaign system', shortLabel: 'Campaign' },
-  { id: 'workflow', label: 'Workflow', shortLabel: 'Workflow' },
-  { id: 'leadership', label: 'Leadership', shortLabel: 'Lead' },
-  { id: 'pov', label: 'Point of view', shortLabel: 'POV' },
-  { id: 'fit', label: 'Role alignment', shortLabel: 'Fit' },
-  { id: 'stack', label: 'Production stack', shortLabel: 'Stack' },
-  { id: 'contact', label: 'Contact', shortLabel: 'Contact' },
+  { id: 'hero', label: 'Overview', shortLabel: 'Overview', icon: 'fileText' },
+  { id: 'capabilities', label: 'What I bring', shortLabel: 'Capabilities', icon: 'sparkles' },
+  { id: 'case-studies', label: 'Case studies', shortLabel: 'Cases', icon: 'image' },
+  { id: 'campaign', label: 'Campaign system', shortLabel: 'Campaign', icon: 'presentation' },
+  { id: 'workflow', label: 'Workflow', shortLabel: 'Workflow', icon: 'workflow' },
+  { id: 'leadership', label: 'Leadership', shortLabel: 'Lead', icon: 'users' },
+  { id: 'pov', label: 'Point of view', shortLabel: 'POV', icon: 'target' },
+  { id: 'fit', label: 'Role alignment', shortLabel: 'Fit', icon: 'scale' },
+  { id: 'stack', label: 'Production stack', shortLabel: 'Stack', icon: 'layers' },
+  { id: 'contact', label: 'Contact', shortLabel: 'Contact', icon: 'rocket' },
 ];
 
 export const creativeAgencySkillsMatrix: SkillsMatrixRow[] = [
@@ -69,31 +69,50 @@ export const creativeAgencySkillsMatrix: SkillsMatrixRow[] = [
 ];
 
 export function buildCreativeCapabilities(): FitPillar[] {
+  const lore = evidenceProjects['lore-machine'];
+  const ai24 = evidenceProjects.ai24;
   return [
     {
       id: 'brand-systems',
       title: 'Brand and Visual Systems',
       body: 'Concept development, identity evolution, typography, image direction, presentations, and digital and print applications—keeping a visual idea coherent across formats.',
+      icon: 'image',
+      imageSrc: lore.imageSrc,
+      imageAlt: lore.imageAlt,
     },
     {
       id: 'ai-production',
       title: 'AI-Augmented Creative Production',
       body: 'Midjourney, Firefly, DALL·E, Runway, image pipelines, prompt systems, compositing, human review, and scalable variation—with brand constraints enforced before channel rollout.',
+      icon: 'sparkles',
+      imageSrc:
+        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-2_ljoygv.png',
+      imageAlt:
+        'Landscape generative still from Broken Acceleration research — AI production under editorial direction',
     },
     {
       id: 'ux-frontend',
       title: 'UX/UI and Frontend Craft',
       body: 'Figma, responsive design, accessibility, HTML, CSS, JavaScript, React, prototyping, and production interfaces. Commercial email / WooCommerce specimens stay labeled honestly when pending.',
+      icon: 'code2',
+      imageSrc: ai24.imageSrc,
+      imageAlt: ai24.imageAlt,
     },
     {
       id: 'creative-ops',
       title: 'Creative Operations',
       body: 'Briefs, prioritization, reusable templates, asset governance, review checkpoints, documentation, and cross-functional delivery so speed does not erase craft.',
+      icon: 'workflow',
+      imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
+      imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
     },
     {
       id: 'leadership',
       title: 'Leadership and Mentorship',
       body: 'Product leadership, workshops, artist support, critique, technical translation, and helping collaborators adopt unfamiliar tools without losing authorship.',
+      icon: 'users',
+      imageSrc: `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`,
+      imageAlt: 'Bakehouse Art Complex — Digital Divinities open studios',
     },
   ];
 }
@@ -630,7 +649,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
           items: [
             '**Midjourney, Adobe Firefly, DALL·E, Runway, Stable Diffusion / ComfyUI research, prompt systems, human review gates**',
           ],
-          logoIds: ['openai', 'comfyui', 'stable-diffusion', 'replicate'],
+          logoIds: ['openai', 'adobe-firefly', 'comfyui', 'stable-diffusion', 'replicate'],
         },
         {
           id: 'adobe',
@@ -638,7 +657,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
           items: [
             '**Photoshop, Illustrator, After Effects, Premiere, Creative Cloud compositing and delivery prep**',
           ],
-          logoIds: ['adobe-premiere', 'adobe-after-effects'],
+          logoIds: ['adobe-premiere', 'adobe-after-effects', 'adobe-firefly'],
         },
         {
           id: 'ux-web',

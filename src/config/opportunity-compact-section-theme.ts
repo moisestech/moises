@@ -208,6 +208,7 @@ const byId: Record<string, OpportunityCompactSectionAccent> = {
   leadership,
   pov,
   stack: technologies,
+  motion: campaign,
   'data-model': process,
 };
 

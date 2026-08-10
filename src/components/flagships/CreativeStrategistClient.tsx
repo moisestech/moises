@@ -1,14 +1,14 @@
 'use client';
 
 import { CreativeSystemsFlagshipClient } from '@/components/flagships/CreativeSystemsFlagshipClient';
-import { creativeAiFlagship } from '@/content/flagships/creative-ai';
+import { creativeStrategistFlagship } from '@/content/flagships/creative-strategist';
 
-export function CreativeAiClient() {
-  const data = creativeAiFlagship;
+export function CreativeStrategistClient() {
+  const data = creativeStrategistFlagship;
   return (
     <CreativeSystemsFlagshipClient
       data={{
-        flagshipId: 'creative-ai',
+        flagshipId: 'creative-strategist',
         eyebrow: data.eyebrow,
         title: data.title,
         subtitle: data.subtitle,
@@ -27,10 +27,7 @@ export function CreativeAiClient() {
         workflow: data.workflow,
         motionSection: data.motionSection,
         stack: data.stack,
-        layers: data.layers,
-        evidenceCases: data.evidenceCases,
         digilabBridge: data.digilabBridge,
-        futureCases: data.futureCases,
         relatedFlagships: data.relatedFlagships,
       }}
     />

@@ -1,4 +1,13 @@
 import { flagshipEvidence, listClaimableCases } from '@/content/evidence/flagships';
+import {
+  creativeSystemsCapabilities,
+  creativeSystemsCases,
+  creativeSystemsLogoBand,
+  creativeSystemsMotion,
+  creativeSystemsNavItems,
+  creativeSystemsStack,
+  creativeSystemsWorkflow,
+} from '@/content/flagships/creativeSystemsShared';
 
 export type CreativeLayerId = 'direction' | 'production' | 'software';
 
@@ -27,15 +36,36 @@ export const creativeAiFlagship = {
   seo: {
     title: 'Creative AI — Moises Sanabria',
     description:
-      'AI as a production medium, interface system, and creative infrastructure — Lore Machine, ComfyUI provenance, Digilab, multimodal systems, AI24.',
+      'Creative AI flagship: direction, generative production systems, and software interfaces — Lore Machine, ComfyUI provenance, Digilab, multimodal systems, AI24, motion craft.',
   },
+  eyebrow: 'Hiring flagship · Creative systems',
   title: hub.title,
   subtitle: hub.subtitle,
   intro:
-    'This is not a Midjourney portfolio. It is proof that creative direction, generative production systems, and software interfaces can be owned end-to-end — for products, institutions, and research.',
-  primaryCta: { label: 'Technical capabilities', href: '/capabilities#design-creative-technology' },
-  secondaryCta: { label: 'AI engineering packet', href: '/ai-engineering' },
+    'This is not a Midjourney portfolio. It is proof that creative direction, generative production systems, and software interfaces can be owned end-to-end — for products, institutions, agencies, and research.',
+  primaryCta: {
+    label: 'DAVID / Ogilvy dossier',
+    href: '/opportunities/ogilvy-senior-ai-driven-creative-director',
+  },
+  secondaryCta: { label: 'Creative Strategist', href: '/creative-strategist' },
   tertiaryCta: { label: 'Tech CV', href: '/cv/tech' },
+  logoBand: creativeSystemsLogoBand,
+  navItems: [
+    ...creativeSystemsNavItems.slice(0, 2),
+    { id: 'layers', label: 'Three layers', shortLabel: 'Layers', icon: 'boxes' as const },
+    ...creativeSystemsNavItems.slice(2),
+  ],
+  capabilitiesTitle: 'What I bring',
+  capabilitiesIntro:
+    'Creative AI as a production medium: brand systems, generative pipelines under human review, product interfaces, creative ops, and mentorship — not prompt screenshots.',
+  capabilities: creativeSystemsCapabilities,
+  caseStudiesTitle: 'Selected production cases',
+  caseStudiesIntro:
+    'Shipped creative systems across product, institutional enablement, and editorial pipelines. Same evidence spine used on agency application dossiers.',
+  caseStudies: creativeSystemsCases,
+  workflow: creativeSystemsWorkflow,
+  motionSection: creativeSystemsMotion,
+  stack: creativeSystemsStack,
   layers: [
     {
       id: 'direction',
@@ -56,7 +86,7 @@ export const creativeAiFlagship = {
       caseIds: ['lore-machine', 'comfyui-provenance', 'ai24'],
     },
   ] satisfies CreativeLayer[],
-  cases: shippedCases,
+  evidenceCases: shippedCases,
   digilabBridge: {
     title: 'Institutional creative infrastructure',
     body: 'Oolite Digital Lab is the institutional bridge: fabrication, curriculum, and enablement that make creative technology usable in a real arts organization.',
@@ -82,7 +112,14 @@ export const creativeAiFlagship = {
     ],
   },
   relatedFlagships: [
+    { id: 'creative-strategist', href: '/creative-strategist', label: 'Creative Strategist', status: 'live' as const },
     { id: 'forward-deployed', href: '/forward-deployed', label: 'Forward-Deployed', status: 'live' as const },
     { id: 'agentic-ops', href: '/projects/agentic-ops', label: 'Agentic Ops', status: 'building' as const },
+    {
+      id: 'ogilvy',
+      href: '/opportunities/ogilvy-senior-ai-driven-creative-director',
+      label: 'DAVID / Ogilvy dossier',
+      status: 'live' as const,
+    },
   ],
 };
