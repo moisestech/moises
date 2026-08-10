@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { artistInfrastructurePage as P } from '@/content/institutions/artistInfrastructure';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
+import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { track } from '@/lib/analytics';
 import {
   InstContainer,
@@ -14,13 +16,13 @@ import {
 import {
   CaseStudyGallery,
   CaseStudyIntro,
-  ClaimsHonesty,
   ContextProofStrip,
   CurriculumModuleCard,
   EngagementFormatCards,
   EngagementProcess,
   InstitutionalCTA,
   InstitutionalHero,
+  MediaNeededStrip,
   PositioningTriad,
   PracticeProjectStrip,
   ProofStrip,
@@ -36,7 +38,7 @@ const SECTION_NAV = [
   { id: 'supporting-proof', label: 'Proof', accent: 'copper' as const },
   { id: 'practice', label: 'Practice', accent: 'rose' as const },
   { id: 'engagement', label: 'Engage', accent: 'ocean' as const },
-  { id: 'claims', label: 'Claims', accent: 'ink' as const },
+  { id: 'media-needed', label: 'Media', accent: 'copper' as const },
   { id: 'contact', label: 'Contact', accent: 'ink' as const },
 ] as const;
 
@@ -59,7 +61,7 @@ export function ArtistInfrastructureClient() {
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= 130) current = id;
+        if (el.getBoundingClientRect().top <= 180) current = id;
       }
       setActiveNav(current);
     };
@@ -69,10 +71,16 @@ export function ArtistInfrastructureClient() {
   }, []);
 
   return (
-    <InstPageShell>
+    <InstPageShell className="pt-[170px]">
+      <OpportunityApplicationBanner banner={P.banner} className="mb-0" />
+      {P.bannerNote ? (
+        <p className="border-b border-neutral-200 bg-amber-50/80 px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-amber-950 sm:px-6">
+          {P.bannerNote}
+        </p>
+      ) : null}
+
       <InstFamilyNav active="artist-infrastructure" className="sticky top-0 z-40" />
 
-      {/* Non-sticky section jump — avoids double sticky crowding the first viewport */}
       <nav
         className="border-b border-neutral-200 bg-[#f7f6f3]"
         aria-label="Page sections"
@@ -116,6 +124,17 @@ export function ArtistInfrastructureClient() {
 
       <ContextProofStrip eyebrow={P.contextProof.eyebrow} items={P.contextProof.items} />
 
+      <div className="border-b border-neutral-200 bg-white py-6 sm:py-8">
+        <InstContainer>
+          <InstReveal>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
+              {P.logoBandLabel}
+            </p>
+          </InstReveal>
+        </InstContainer>
+        <AnimatedLogoBand logos={[...P.logoBand]} bleed ariaLabel={P.logoBandLabel} />
+      </div>
+
       <InstContainer>
         <PositioningTriad
           eyebrow={P.positioning.eyebrow}
@@ -138,7 +157,7 @@ export function ArtistInfrastructureClient() {
             {P.curriculum.modules.map((module, i) => (
               <InstReveal key={module.id} delay={0.05 * i}>
                 <li className="h-full">
-                  <CurriculumModuleCard module={module} />
+                  <CurriculumModuleCard module={module} defaultOpen={i === 0} />
                 </li>
               </InstReveal>
             ))}
@@ -228,11 +247,11 @@ export function ArtistInfrastructureClient() {
           formats={P.engagement.formats}
         />
 
-        <ClaimsHonesty
-          eyebrow={P.claimsHonesty.eyebrow}
-          title={P.claimsHonesty.title}
-          lead={P.claimsHonesty.lead}
-          points={P.claimsHonesty.points}
+        <MediaNeededStrip
+          eyebrow={P.mediaNeeded.eyebrow}
+          title={P.mediaNeeded.title}
+          lead={P.mediaNeeded.lead}
+          items={P.mediaNeeded.items}
         />
       </InstContainer>
 

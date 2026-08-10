@@ -47,6 +47,7 @@ Credits framing (canonical): **Fabiola Larios** (Director of Digital Lab) first,
 ## Digilab media
 
 Stills, portraits, class banners, and service previews: [`docs/oolite-digilab-media-workflow.md`](../oolite-digilab-media-workflow.md)  
+Banner generation prompt for `/artist-infrastructure`: [`artist-infrastructure-banner-prompt.md`](./artist-infrastructure-banner-prompt.md)
 Cursor rule: [`.cursor/rules/digilab-oolite-media.mdc`](../../.cursor/rules/digilab-oolite-media.mdc)
 
 Next phases: layout polish → 360 viewer → video entries in the same registry.

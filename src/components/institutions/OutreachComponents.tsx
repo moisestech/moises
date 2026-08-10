@@ -1,8 +1,29 @@
 'use client';
 
+import { useId, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, CheckCircle2, Lightbulb, Sparkles } from 'lucide-react';
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  ChevronDown,
+  Code2,
+  Ear,
+  FileText,
+  FlaskConical,
+  GraduationCap,
+  Layers,
+  Lightbulb,
+  Network,
+  Palette,
+  Presentation,
+  Rocket,
+  SlidersHorizontal,
+  Sparkles,
+  Users,
+  Workflow,
+  type LucideIcon,
+} from 'lucide-react';
 import {
   INST_ACCENT,
   InstPlaceholder,
@@ -13,6 +34,28 @@ import {
 } from '@/components/institutions/InstitutionalUi';
 import type { DeliveryStatus, InstMedia } from '@/content/institutions/artistInfrastructure';
 import { cn } from '@/lib/utils';
+
+const INST_ICON: Record<string, LucideIcon> = {
+  palette: Palette,
+  graduation: GraduationCap,
+  network: Network,
+  workflow: Workflow,
+  code: Code2,
+  layers: Layers,
+  ear: Ear,
+  sliders: SlidersHorizontal,
+  sparkles: Sparkles,
+  file: FileText,
+  presentation: Presentation,
+  users: Users,
+  rocket: Rocket,
+  flask: FlaskConical,
+};
+
+function InstBigIcon({ name, className }: { name?: string; className?: string }) {
+  const Icon = (name && INST_ICON[name]) || Sparkles;
+  return <Icon className={cn('h-7 w-7 sm:h-8 sm:w-8', className)} aria-hidden />;
+}
 
 export function CreditCaption({
   caption,
@@ -79,7 +122,7 @@ export function DeliveryStatusBadge({ status }: { status: DeliveryStatus }) {
         className,
       )}
     >
-      <Icon className="h-3 w-3" aria-hidden />
+      <Icon className="h-3.5 w-3.5" aria-hidden />
       {label}
     </span>
   );
@@ -95,16 +138,22 @@ function MediaFrame({
   aspect?: string;
 }) {
   return (
-    <figure>
-      <div className={cn('relative w-full overflow-hidden bg-neutral-200', aspect)}>
+    <figure className="group/media">
+      <div
+        className={cn(
+          'relative w-full overflow-hidden bg-neutral-200 transition duration-300 group-hover/media:shadow-lg',
+          aspect,
+        )}
+      >
         <Image
           src={media.src}
           alt={media.alt}
           fill
           priority={priority}
-          className="object-cover"
+          className="object-cover transition duration-700 ease-out group-hover/media:scale-[1.04] motion-reduce:group-hover/media:scale-100"
           sizes="(max-width: 768px) 100vw, 960px"
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-neutral-950/25 via-transparent to-transparent opacity-60" />
       </div>
       <CreditCaption
         caption={media.caption}
@@ -232,6 +281,8 @@ export function PositioningTriad({
     title: string;
     body: string;
     accent: keyof typeof INST_ACCENT;
+    icon?: string;
+    image?: { src: string; alt: string };
   }[];
 }) {
   return (
@@ -250,17 +301,59 @@ export function PositioningTriad({
           <InstReveal key={card.id} delay={0.05 * i}>
             <li
               className={cn(
-                'border border-neutral-200 bg-white p-5 sm:p-6',
+                'group relative flex h-full flex-col overflow-hidden border border-neutral-200 bg-white',
+                'transition duration-300 hover:-translate-y-1.5 hover:shadow-xl active:scale-[0.99]',
+                'motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100',
                 INST_ACCENT[card.accent].ring,
                 'ring-1 ring-inset',
               )}
             >
-              <span
-                className={cn('mb-4 block h-1 w-8', INST_ACCENT[card.accent].bar)}
+              <div
+                className={cn(
+                  'pointer-events-none absolute inset-0 bg-gradient-to-br opacity-90',
+                  INST_ACCENT[card.accent].soft,
+                )}
                 aria-hidden
               />
-              <h3 className="text-lg font-semibold tracking-tight">{card.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{card.body}</p>
+              {card.image ? (
+                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-200">
+                  <Image
+                    src={card.image.src}
+                    alt={card.image.alt}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-[1.05] motion-reduce:group-hover:scale-100"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/55 to-transparent" />
+                  <span
+                    className={cn(
+                      'absolute bottom-3 left-3 flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg transition group-hover:scale-110',
+                      INST_ACCENT[card.accent].iconBg,
+                    )}
+                  >
+                    <InstBigIcon name={card.icon} />
+                  </span>
+                </div>
+              ) : (
+                <div className="relative p-5 pb-0 sm:p-6 sm:pb-0">
+                  <span
+                    className={cn(
+                      'flex h-14 w-14 items-center justify-center rounded-2xl shadow-md transition group-hover:scale-110',
+                      INST_ACCENT[card.accent].iconBg,
+                    )}
+                  >
+                    <InstBigIcon name={card.icon} />
+                  </span>
+                </div>
+              )}
+              <div className="relative z-10 flex flex-1 flex-col p-5 sm:p-6">
+                <span
+                  className={cn('mb-3 block h-1.5 w-10', INST_ACCENT[card.accent].bar)}
+                  aria-hidden
+                />
+                <h3 className="text-lg font-semibold tracking-tight sm:text-xl">{card.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{card.body}</p>
+              </div>
             </li>
           </InstReveal>
         ))}
@@ -271,6 +364,7 @@ export function PositioningTriad({
 
 export function CurriculumModuleCard({
   module,
+  defaultOpen = false,
 }: {
   module: {
     id: string;
@@ -283,8 +377,15 @@ export function CurriculumModuleCard({
     equipment: string;
     options: readonly string[];
     href: string;
+    accent?: keyof typeof INST_ACCENT;
+    icon?: string;
+    image?: { src: string; alt: string };
   };
+  defaultOpen?: boolean;
 }) {
+  const [open, setOpen] = useState(defaultOpen);
+  const panelId = useId();
+  const accent = module.accent ?? 'ocean';
   const rows = [
     { label: 'Audience', value: module.audience },
     { label: 'Formats', value: module.formats.join(' · ') },
@@ -295,28 +396,85 @@ export function CurriculumModuleCard({
   ];
 
   return (
-    <article className="flex h-full flex-col border border-neutral-200 bg-white p-5 sm:p-6">
-      <h3 className="text-lg font-semibold leading-snug tracking-tight sm:text-xl">
-        {module.title}
-      </h3>
-      <p className="mt-3 text-sm leading-relaxed text-neutral-600">{module.promise}</p>
-      <dl className="mt-5 space-y-3 border-t border-neutral-100 pt-4">
-        {rows.map((row) => (
-          <div key={row.label}>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
-              {row.label}
-            </dt>
-            <dd className="mt-1 text-sm leading-relaxed text-neutral-800">{row.value}</dd>
-          </div>
-        ))}
-      </dl>
-      <Link
-        href={module.href}
-        className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-950 underline-offset-4 hover:underline"
+    <article
+      className={cn(
+        'group flex h-full flex-col overflow-hidden border border-neutral-200 bg-white',
+        'border-l-[3px] transition duration-300',
+        'hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0',
+        open ? 'shadow-md ring-1 ring-neutral-200' : '',
+        accent === 'ocean' && 'border-l-sky-700',
+        accent === 'teal' && 'border-l-teal-700',
+        accent === 'copper' && 'border-l-amber-700',
+        accent === 'ink' && 'border-l-neutral-900',
+      )}
+    >
+      {module.image ? (
+        <div className="relative aspect-[16/10] overflow-hidden bg-neutral-200">
+          <Image
+            src={module.image.src}
+            alt={module.image.alt}
+            fill
+            className="object-cover transition duration-700 group-hover:scale-[1.04]"
+            sizes="(max-width: 1024px) 100vw, 33vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/55 to-transparent" />
+          <span
+            className={cn(
+              'absolute bottom-3 left-3 flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg',
+              INST_ACCENT[accent].iconBg,
+            )}
+          >
+            <InstBigIcon name={module.icon} />
+          </span>
+        </div>
+      ) : null}
+
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        className="flex w-full items-start gap-3 p-5 text-left sm:p-6"
+        onClick={() => setOpen((v) => !v)}
       >
-        Open related page
-        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-      </Link>
+        <div className="min-w-0 flex-1">
+          <p className={cn('font-mono text-[10px] uppercase tracking-[0.16em]', INST_ACCENT[accent].text)}>
+            Module
+          </p>
+          <h3 className="mt-1 text-lg font-semibold leading-snug tracking-tight sm:text-xl">
+            {module.title}
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-600">{module.promise}</p>
+          <p className="mt-3 text-xs font-medium text-neutral-500">
+            {open ? 'Hide details' : 'Expand · audience, formats, take-homes'}
+          </p>
+        </div>
+        <ChevronDown
+          className={cn('mt-1 h-5 w-5 shrink-0 text-neutral-400 transition', open && 'rotate-180')}
+          aria-hidden
+        />
+      </button>
+
+      {open ? (
+        <div id={panelId} className="border-t border-neutral-100 px-5 pb-5 sm:px-6 sm:pb-6">
+          <dl className="space-y-3 pt-4">
+            {rows.map((row) => (
+              <div key={row.label}>
+                <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
+                  {row.label}
+                </dt>
+                <dd className="mt-1 text-sm leading-relaxed text-neutral-800">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <Link
+            href={module.href}
+            className="mt-5 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-neutral-950 underline-offset-4 hover:underline"
+          >
+            Open related page
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+      ) : null}
     </article>
   );
 }
@@ -457,15 +615,16 @@ export function SupportingProofCard({
   image: InstMedia;
 }) {
   return (
-    <article className="overflow-hidden border border-neutral-200 bg-white">
-      <div className="relative aspect-[16/10] bg-neutral-200">
+    <article className="group overflow-hidden border border-neutral-200 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0">
+      <div className="relative aspect-[16/10] overflow-hidden bg-neutral-200">
         <Image
           src={image.src}
           alt={image.alt}
           fill
-          className="object-cover"
+          className="object-cover transition duration-700 group-hover:scale-[1.04]"
           sizes="(max-width: 768px) 100vw, 480px"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 to-transparent" />
       </div>
       <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
@@ -586,8 +745,10 @@ export function EngagementFormatCards({
   eyebrow: string;
   title: string;
   availability: string;
-  formats: readonly { id: string; title: string; body: string }[];
+  formats: readonly { id: string; title: string; body: string; icon?: string }[];
 }) {
+  const [openId, setOpenId] = useState<string | null>(formats[0]?.id ?? null);
+
   return (
     <section id="engagement" className="scroll-mt-28 py-12 sm:py-16">
       <InstReveal>
@@ -599,18 +760,54 @@ export function EngagementFormatCards({
           {availability}
         </p>
       </InstReveal>
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {formats.map((format, i) => (
-          <InstReveal key={format.id} delay={0.05 * i}>
-            <li className="border border-neutral-200 bg-white p-5 sm:p-6">
-              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-sky-800">
-                {String(i + 1).padStart(2, '0')}
-              </p>
-              <h3 className="mt-2 text-lg font-semibold tracking-tight">{format.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{format.body}</p>
-            </li>
-          </InstReveal>
-        ))}
+      <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+        {formats.map((format, i) => {
+          const open = openId === format.id;
+          return (
+            <InstReveal key={format.id} delay={0.05 * i}>
+              <li>
+                <button
+                  type="button"
+                  aria-expanded={open}
+                  className={cn(
+                    'group flex w-full items-start gap-4 border border-neutral-200 bg-white p-5 text-left transition duration-300 sm:p-6',
+                    'hover:-translate-y-1 hover:shadow-lg active:scale-[0.99]',
+                    'motion-reduce:hover:translate-y-0',
+                    open && 'border-sky-300 shadow-md ring-1 ring-sky-200/80',
+                  )}
+                  onClick={() => setOpenId(open ? null : format.id)}
+                >
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-sky-700 text-white shadow-md transition group-hover:scale-110">
+                    <InstBigIcon name={format.icon} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-sky-800">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="mt-1 text-lg font-semibold tracking-tight">{format.title}</h3>
+                    {open ? (
+                      <p className="mt-2 text-sm leading-relaxed text-neutral-600">{format.body}</p>
+                    ) : (
+                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-neutral-600">
+                        {format.body}
+                      </p>
+                    )}
+                    <span className="mt-2 inline-block text-xs font-medium text-neutral-500">
+                      {open ? 'Click to collapse' : 'Click to expand'}
+                    </span>
+                  </span>
+                  <ChevronDown
+                    className={cn(
+                      'mt-1 h-5 w-5 shrink-0 text-neutral-400 transition',
+                      open && 'rotate-180',
+                    )}
+                    aria-hidden
+                  />
+                </button>
+              </li>
+            </InstReveal>
+          );
+        })}
       </ul>
     </section>
   );
@@ -625,7 +822,7 @@ export function EngagementProcess({
   eyebrow: string;
   title: string;
   valueLine: string;
-  steps: readonly { id: string; title: string; body: string }[];
+  steps: readonly { id: string; title: string; body: string; icon?: string }[];
 }) {
   return (
     <section id="process" className="scroll-mt-28 py-12 sm:py-16">
@@ -639,20 +836,19 @@ export function EngagementProcess({
         </p>
       </InstReveal>
 
-      {/* Lightweight process graphic — readable without motion */}
       <div className="mt-8 overflow-x-auto">
         <ol
-          className="flex min-w-[36rem] items-stretch gap-0 sm:min-w-0 sm:grid sm:grid-cols-4"
+          className="flex min-w-[40rem] items-stretch gap-3 sm:min-w-0 sm:grid sm:grid-cols-4"
           aria-label="Engagement process"
         >
           {steps.map((step, i) => (
-            <li key={step.id} className="relative flex flex-1 flex-col border border-neutral-200 bg-white p-4 sm:p-5">
-              {i < steps.length - 1 ? (
-                <span
-                  className="pointer-events-none absolute -right-3 top-1/2 z-10 hidden h-px w-6 -translate-y-1/2 bg-neutral-400 sm:block"
-                  aria-hidden
-                />
-              ) : null}
+            <li
+              key={step.id}
+              className="group relative flex flex-1 flex-col border border-neutral-200 bg-gradient-to-br from-teal-50/80 via-white to-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-5 motion-reduce:hover:translate-y-0"
+            >
+              <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-700 text-white shadow-md transition group-hover:scale-110">
+                <InstBigIcon name={step.icon} />
+              </span>
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-teal-800">
                 {String(i + 1).padStart(2, '0')}
               </p>
@@ -665,6 +861,45 @@ export function EngagementProcess({
       <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
         Artist need → workshop / prototype → working artifact → documentation / system → continued use
       </p>
+    </section>
+  );
+}
+
+export function MediaNeededStrip({
+  eyebrow,
+  title,
+  lead,
+  items,
+}: {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  items: readonly { id: string; title: string; note: string; status?: string }[];
+}) {
+  return (
+    <section id="media-needed" className="scroll-mt-28 border-t border-neutral-200 py-12 sm:py-16">
+      <InstReveal>
+        <InstSectionLabel accent="copper">{eyebrow}</InstSectionLabel>
+        <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+          {lead}
+        </p>
+      </InstReveal>
+      <ul className="mt-8 grid gap-4 md:grid-cols-3">
+        {items.map((item, i) => (
+          <InstReveal key={item.id} delay={0.05 * i}>
+            <li className="flex h-full flex-col border border-dashed border-amber-400/70 bg-gradient-to-br from-amber-50/90 to-white p-5 transition hover:-translate-y-1 hover:shadow-md">
+              <span className="inline-flex w-fit rounded-full border border-amber-500/50 bg-amber-100 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-amber-950">
+                Slot open
+              </span>
+              <h3 className="mt-3 text-base font-semibold tracking-tight">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{item.note}</p>
+            </li>
+          </InstReveal>
+        ))}
+      </ul>
     </section>
   );
 }
