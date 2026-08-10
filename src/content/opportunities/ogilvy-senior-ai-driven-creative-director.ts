@@ -5,6 +5,8 @@
  *
  * Listing: Creative Editor/AI (Miami-active). Banner may still say Creative Director.
  * Do not invent Ogilvy client work or network title history.
+ *
+ * Submission surface: no recruiter-visible TODO / Placeholder tiles.
  */
 
 import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportunity';
@@ -14,6 +16,8 @@ import {
   miamiLightCampaignSpecimens,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
+  submissionCreativeCaseStudies,
+  submissionCreativeWorkflow,
 } from './creativeAgencyShared';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { ogilvySeniorAiDrivenCreativeDirectorBanner } from '@/content/evidence/applicationBanners';
@@ -28,13 +32,20 @@ const creativeAgency = buildCreativeAgencyDossier({
   capabilitiesIntro:
     'Capabilities framed for a Creative Editor/AI seat: editorial judgment, generative production under review, and systems that protect brand voice and story craft.',
   caseStudiesIntro:
-    'Evidence of AI-native visual systems, editorial identity, and human critique—not network campaign claims.',
+    'Three shipped proof lines—product generative systems, institutional enablement, and editorial AI literacy. Self-initiated channel study below is labeled; not Ogilvy client work.',
+  caseStudies: submissionCreativeCaseStudies,
+  workflow: submissionCreativeWorkflow,
   campaign: buildCampaignSystem({
     conceptTitle: 'Working concept — editorial clarity, brand-safe AI craft',
     conceptBody:
-      'A self-initiated campaign system showing how a strong visual idea moves from exploration to channel rollout with critique gates—built to demonstrate Ogilvy-adjacent editorial discipline, not to claim Ogilvy client work.',
+      'A self-initiated campaign system showing how a strong visual idea moves from exploration to channel crops under critique—built to demonstrate Ogilvy-adjacent editorial discipline, not to claim Ogilvy client work.',
     eyebrow: 'Self-Initiated Brand-Safe AI Campaign Study',
+    intro:
+      'Ready channel specimens from one master still. Additional formats stay off this page until they are finished—no placeholder tiles on the submission surface.',
+    disclaimer:
+      'Self-initiated study for application evidence. Not an Ogilvy client project. Specimens shown are Ready crops of the master still.',
     specimens: miamiLightCampaignSpecimens,
+    readyOnly: true,
   }),
   alignmentTitle: 'Role alignment',
   alignmentIntro:
@@ -46,9 +57,12 @@ export const ogilvySeniorAiDrivenCreativeDirectorOpportunity = createCreativeAge
   slug: 'ogilvy-senior-ai-driven-creative-director',
   company: COMPANY,
   roleTitle: ROLE_TITLE,
+  evidenceRecipe: 'wpp-hex',
+  caseStudiesIntro:
+    'PRIMARY Creative AI proof · SECONDARY Forward-Deployed enablement · SUPPORTING Agentic Ops (Building). Same flagships, agency ordering.',
   seoTitle: 'Moises Sanabria — Ogilvy · Creative Editor / AI',
   seoDescription:
-    'Private application dossier for Ogilvy Creative Editor/AI — editorial judgment, human-directed generative systems, and brand craft.',
+    'Application dossier for Ogilvy Creative Editor/AI — editorial judgment, human-directed generative systems, and brand craft.',
   banner: ogilvySeniorAiDrivenCreativeDirectorBanner,
   heroEyebrow: 'APPLICATION DOSSIER · OGILVY · MIAMI',
   headline: 'Editorial craft first. AI as production acceleration.',
@@ -105,7 +119,7 @@ export const ogilvySeniorAiDrivenCreativeDirectorOpportunity = createCreativeAge
     {
       requirement: 'Network / agency campaign ownership',
       evidence:
-        'Not claimed. Conventional agency ACD title path and Ogilvy client campaigns remain an honest gap—addressed via self-initiated channel study.',
+        'Not claimed. Conventional agency ACD title path and Ogilvy client campaigns remain an honest gap—addressed via self-initiated channel study (Ready specimens only).',
       status: 'todo',
     },
   ],
@@ -113,4 +127,5 @@ export const ogilvySeniorAiDrivenCreativeDirectorOpportunity = createCreativeAge
   availabilityNote:
     'Available for Ogilvy Creative Editor/AI conversations; Miami-active listing — confirm location and hybrid expectations against the live post.',
   applicationStatus: 'ready',
+  careerPacketHref: '/career-packet',
 });

@@ -40,6 +40,8 @@ export type CreativeAgencyOpportunityConfig = {
   navItems?: Opportunity['navItems'];
   evidenceRecipe?: Opportunity['evidenceRecipe'];
   caseStudiesIntro?: string;
+  /** Live send URL for packet CTA. Default `/career-packet` until `/creative-ai` is deployed. */
+  careerPacketHref?: string;
 };
 
 export function createCreativeAgencyOpportunity(
@@ -102,7 +104,7 @@ export function createCreativeAgencyOpportunity(
     ctas: recruitingCtas({
       resumePdfPath: resumePdfDriveViewUrl,
       resumePrintPath: '/cv/tech/print',
-      careerPacket: '/creative-ai',
+      careerPacket: config.careerPacketHref ?? '/career-packet',
       caseStudiesAnchor: '#case-studies',
       emailSubject: config.emailSubject,
     }),
