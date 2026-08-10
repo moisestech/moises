@@ -10,6 +10,9 @@ import { FitPillars } from '@/components/opportunities/FitPillars';
 import { RoleMatchMatrix } from '@/components/opportunities/RoleMatchMatrix';
 import { CapabilityMap } from '@/components/opportunities/CapabilityMap';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { SkillsMatrix } from '@/components/opportunities/SkillsMatrix';
+import { InnovationProcess } from '@/components/opportunities/InnovationProcess';
+import { RoleReferenceAccordion } from '@/components/opportunities/RoleReferenceAccordion';
 import { CreativeCaseStudyModules } from '@/components/opportunities/creative-agency/CreativeCaseStudyModules';
 import { CampaignChannelSystem } from '@/components/opportunities/creative-agency/CampaignChannelSystem';
 import { HumanAiWorkflow } from '@/components/opportunities/creative-agency/HumanAiWorkflow';
@@ -35,6 +38,8 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
   const dossier = opportunity.rolePortfolio;
   const agency = opportunity.creativeAgency;
   const hasBanner = Boolean(opportunity.applicationBanner?.src);
+  const hasSkills = Boolean(opportunity.skillsMatrixRows?.length);
+  const hasProcess = Boolean(opportunity.processSteps?.length);
 
   if (!dossier || !agency) {
     return (
@@ -46,7 +51,7 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
     );
   }
 
-  const sectionClass = 'mt-8 sm:mt-10 md:mt-14';
+  const sectionClass = 'mt-12 sm:mt-14 md:mt-20';
   const framed = '!mt-0 !border-0 !pt-0 scroll-mt-28 sm:scroll-mt-32';
 
   return (
@@ -86,12 +91,18 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
           <OpportunityHero opportunity={opportunity} />
         </OpportunityColorSection>
 
+        {opportunity.roleReference ? (
+          <div className="mt-8 sm:mt-10">
+            <RoleReferenceAccordion data={opportunity.roleReference} />
+          </div>
+        ) : null}
+
         {opportunity.navItems?.length ? (
-          <div className="mt-6 sm:mt-8">
+          <div className="mt-8 sm:mt-10">
             <DossierSectionNav
               items={opportunity.navItems.filter((item) => item.id !== 'hero')}
               title="Dossier map"
-              intro="Tap any section to jump. Sticky nav at the top stays in sync as you scroll. Amber labels mark placeholders—nothing unfinished is presented as shipped client work."
+              intro="Jump to any section. Sticky nav at the top stays in sync as you scroll."
             />
           </div>
         ) : null}
@@ -105,6 +116,12 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
             className={framed}
           />
         </OpportunityColorSection>
+
+        {hasSkills ? (
+          <OpportunityColorSection sectionId="skills" className={sectionClass}>
+            <SkillsMatrix opportunity={opportunity} framed />
+          </OpportunityColorSection>
+        ) : null}
 
         <OpportunityColorSection sectionId="case-studies" className={sectionClass}>
           <CreativeCaseStudyModules
@@ -131,6 +148,12 @@ export function CreativeAgencyClient({ opportunity }: CreativeAgencyClientProps)
               sectionId="motion"
               className={framed}
             />
+          </OpportunityColorSection>
+        ) : null}
+
+        {hasProcess ? (
+          <OpportunityColorSection sectionId="process" className={sectionClass}>
+            <InnovationProcess opportunity={opportunity} sectionId="process" framed layout="horizontal" />
           </OpportunityColorSection>
         ) : null}
 

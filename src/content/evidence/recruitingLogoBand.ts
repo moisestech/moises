@@ -121,3 +121,39 @@ export const floraDataEngineerSkillLogoBand: LogoBandItem[] = [
   { src: 'https://cdn.simpleicons.org/amazonaws/FF9900', alt: 'AWS', height: 36 },
   { src: 'https://cdn.simpleicons.org/github', alt: 'GitHub', height: 36 },
 ];
+
+/**
+ * Creative Editor / AI stack — Adobe craft + generative tools named in agency listings.
+ * Swap in official Midjourney / Runway / Firefly / VEO marks when brand assets are cleared.
+ */
+export const creativeAiSkillLogoBand: LogoBandItem[] = [
+  {
+    src: 'https://cdn.simpleicons.org/adobephotoshop/31A8FF',
+    alt: 'Adobe Photoshop',
+    height: 36,
+  },
+  {
+    src: 'https://cdn.simpleicons.org/adobeillustrator/FF9A00',
+    alt: 'Adobe Illustrator',
+    height: 36,
+  },
+  { src: 'https://cdn.simpleicons.org/adobeindesign/FF3366', alt: 'Adobe InDesign', height: 36 },
+  {
+    src: 'https://cdn.simpleicons.org/adobeaftereffects/9999FF',
+    alt: 'Adobe After Effects',
+    height: 36,
+  },
+  {
+    src: 'https://cdn.simpleicons.org/adobepremierepro/9999FF',
+    alt: 'Adobe Premiere Pro',
+    height: 36,
+  },
+  { src: 'https://cdn.simpleicons.org/adobe/FF0000', alt: 'Adobe Firefly', height: 36 },
+  { src: 'https://cdn.simpleicons.org/figma/F24E1E', alt: 'Figma', height: 36 },
+  { src: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png`, alt: 'OpenAI', height: 36 },
+  { src: 'https://cdn.simpleicons.org/google/4285F4', alt: 'Google AI / VEO 3', height: 36 },
+  { src: '/images/tech-logos/comfyui.svg', alt: 'ComfyUI', height: 36 },
+  { src: 'https://cdn.simpleicons.org/youtube/FF0000', alt: 'YouTube', height: 36 },
+  { src: 'https://cdn.simpleicons.org/instagram/E4405F', alt: 'Instagram', height: 36 },
+  { src: 'https://cdn.simpleicons.org/tiktok', alt: 'TikTok', height: 36 },
+];

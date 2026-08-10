@@ -114,14 +114,18 @@ export type MotionClip = {
   roleLabel: string;
   /** What you did: animation, edit, composite, keyframes, etc. */
   contribution: string;
-  /** Poster / still — required. */
+  /** Poster / still — required (also used as YouTube poster fallback). */
   posterSrc: string;
   posterAlt: string;
   posterLocal?: boolean;
   /** Optional hosted video URL (Cloudinary / Mux / Vimeo). */
   videoSrc?: string;
+  /** YouTube video id — renders privacy-enhanced embed when set. */
+  youtubeId?: string;
   /** Honest note when clip is pending upload. */
   placeholderNote?: string;
+  /** Full-width featured treatment (e.g. high-view count YouTube proof). */
+  featured?: boolean;
 };
 
 export type MotionSection = {

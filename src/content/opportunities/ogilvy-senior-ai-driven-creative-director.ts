@@ -1,10 +1,10 @@
 /**
- * Ogilvy — Creative Editor / AI
+ * Ogilvy / DAVID Agency — Creative Editor / AI
  * Canonical: /opportunities/ogilvy-senior-ai-driven-creative-director
  * Alias:     /opportunities/ogilvy-senior-ai-driven-creative-editor → redirect
  *
- * Listing: Creative Editor/AI (Miami-active). Banner may still say Creative Director.
- * Do not invent Ogilvy client work or network title history.
+ * Listing: Creative Editor/AI · DAVID Agency (WPP / Ogilvy network) · Miami · posted 08/04/2026
+ * Do not invent Ogilvy or DAVID client work or network title history.
  *
  * Submission surface: no recruiter-visible TODO / Placeholder tiles.
  */
@@ -13,45 +13,176 @@ import { createCreativeAgencyOpportunity } from './createCreativeAgencyOpportuni
 import {
   buildCampaignSystem,
   buildCreativeAgencyDossier,
+  creativeAgencyNavItems,
   miamiLightCampaignSpecimens,
   OOLITE_DIGITAL_LAB_IMAGE,
   OOLITE_DIGITAL_LAB_IMAGE_ALT,
   submissionCreativeCaseStudies,
   submissionCreativeWorkflow,
 } from './creativeAgencyShared';
+import type { MotionSection } from './creativeAgencyDossier';
+import type { RoleReferenceData } from '@/content/opportunities/systemsDossier';
+import type { SkillsMatrixRow } from '@/content/opportunities/types';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { ogilvySeniorAiDrivenCreativeDirectorBanner } from '@/content/evidence/applicationBanners';
+import { creativeAiSkillLogoBand } from '@/content/evidence/recruitingLogoBand';
 
 /** Listing title on LinkedIn; keep slug stable for existing links. */
 const ROLE_TITLE = 'Creative Editor / AI';
 const COMPANY = 'Ogilvy';
 const lore = evidenceProjects['lore-machine'];
 const ai24 = evidenceProjects.ai24;
+const multimodal = evidenceProjects['multimodal-image-systems'];
+
+const ALL_STUDIOS_EVERYTHING_YT = 'XuSwUBULiQs';
+const ALL_STUDIOS_POSTER = `https://i.ytimg.com/vi/${ALL_STUDIOS_EVERYTHING_YT}/hqdefault.jpg`;
+
+const ogilvyMotionSection: MotionSection = {
+  title: 'Motion, edit & viral craft',
+  intro:
+    'Editorial and motion proof for a Creative Editor/AI seat: culture-native video that earns attention, then production systems that keep taste and brand intact under AI acceleration.',
+  toolsLine:
+    'YouTube · Premiere · After Effects · generative stills → edit · platform-native pacing · human review before publish',
+  clips: [
+    {
+      id: 'all-studios-everything',
+      title: 'All Studios Everything',
+      roleLabel: 'Creator · Edit · Direction · 18M+ views',
+      contribution:
+        'Original YouTube piece with 18M+ views—scroll-stopping concept, edit rhythm, and cultural hook. Proof that platform-native storytelling can scale without abandoning craft.',
+      posterSrc: ALL_STUDIOS_POSTER,
+      posterAlt: 'All Studios Everything — YouTube thumbnail',
+      youtubeId: ALL_STUDIOS_EVERYTHING_YT,
+      featured: true,
+    },
+    {
+      id: 'generative-to-edit',
+      title: 'Generative still → editorial cut',
+      roleLabel: 'AI exploration · Edit · Compositing',
+      contribution:
+        'Controlled generative exploration refined into editorial pacing—human direction at every gate so AI expands options without owning the final cut.',
+      posterSrc: multimodal.imageSrc,
+      posterAlt: multimodal.imageAlt,
+    },
+    {
+      id: 'ai24-editorial-pipeline',
+      title: 'AI24 editorial review pipeline',
+      roleLabel: 'Editorial systems · Review gates',
+      contribution:
+        'Product and editorial surfaces where generative drafts require critique before publish—the same discipline an agency Creative Editor/AI seat needs under brand guidelines.',
+      posterSrc: ai24.imageSrc,
+      posterAlt: ai24.imageAlt,
+    },
+  ],
+};
+
+const ogilvySkillsMatrix: SkillsMatrixRow[] = [
+  {
+    category: 'Editorial + AI production',
+    skills:
+      'Concept → script → execution with AI as accelerator; human critique on taste, brand voice, and cultural precision',
+    icon: 'sparkles',
+  },
+  {
+    category: 'Visual design & art direction',
+    skills: 'Branding, visual systems, decks, print, information design, UX sensibility',
+    icon: 'image',
+  },
+  {
+    category: 'AI creative tools',
+    skills:
+      'Google AI / VEO 3, OpenAI, Adobe Firefly, Runway-class video, ComfyUI, prompt systems, compositing under human review',
+    icon: 'cpu',
+  },
+  {
+    category: 'Adobe craft',
+    skills:
+      'Expert Photoshop, Illustrator, InDesign (+ Premiere / After Effects finish) — shippable files, not prompt screenshots',
+    icon: 'layers',
+  },
+  {
+    category: 'Social & platform-native',
+    skills: 'Hooks, formats, repurposing across channels; trend → brief → asset with performance awareness',
+    icon: 'tv',
+  },
+  {
+    category: 'Leadership & mentorship',
+    skills: 'Directing creators, workshops, critique culture, cross-functional translation (creative ↔ product ↔ leadership)',
+    icon: 'users',
+  },
+];
+
+const ogilvyRoleReference: RoleReferenceData = {
+  title: 'Listing snapshot — expand for role meta & network context',
+  fields: [
+    { label: 'Role', value: 'Creative Editor / AI' },
+    { label: 'Agency', value: 'DAVID Agency (Ogilvy / WPP network)' },
+    { label: 'Location', value: 'Miami' },
+    { label: 'Posted', value: '08/04/2026' },
+    { label: 'Focus', value: 'Digital creative + AI production leadership' },
+    { label: 'Experience signal', value: '7+ years visual design, art direction, creative strategy' },
+  ],
+  narrativeSections: [
+    {
+      heading: 'About DAVID',
+      body: 'DAVID is a global creative boutique (founded 2012) with offices including Miami, New York, Madrid, Buenos Aires, São Paulo, and Bogotá. Part of WPP and Ogilvy’s global creative network, it is known for high-craft campaigns and festival recognition (Cannes Lions, EFFIEs, Agency of the Year honors). This dossier does not claim prior DAVID client work.',
+    },
+    {
+      heading: 'About Ogilvy',
+      body: 'Ogilvy, part of WPP, builds Borderless Creativity across advertising, PR, relationship design, consulting, and health—ranked #1 global agency network for creative excellence and effectiveness by WARC. The Creative Editor/AI seat sits inside that craft standard.',
+    },
+    {
+      heading: 'About WPP',
+      body: 'WPP is the parent network powering media, creativity, production, and enterprise solutions—including the agentic marketing platform WPP Open. Network context only; not an employment claim.',
+    },
+  ],
+  platformReferences: [
+    'Adobe Photoshop / Illustrator / InDesign',
+    'Adobe Firefly',
+    'Google AI / VEO 3',
+    'OpenAI',
+    'Runway-class video tools',
+    'Premiere / After Effects',
+    'Social & video storytelling',
+  ],
+  listingUrl: 'https://www.linkedin.com/jobs/view/creative-editor-ai-at-ogilvy-4400258835',
+  listingUrlLabel: 'LinkedIn listing',
+};
 
 const creativeAgency = buildCreativeAgencyDossier({
   capabilitiesIntro:
-    'Capabilities framed for a Creative Editor/AI seat: editorial judgment, generative production under review, and systems that protect brand voice and story craft.',
+    'Built for DAVID’s Creative Editor/AI seat: originate AI-native concepts, lead production workflows, protect brand craft, and mentor creators—under Borderless Creativity, not tool novelty.',
   caseStudiesIntro:
-    'Three shipped proof lines—product generative systems, institutional enablement, and editorial AI literacy. Self-initiated channel study below is labeled; not Ogilvy client work.',
+    'Three shipped proof lines—product generative systems, institutional enablement, and editorial AI literacy. Self-initiated channel study below is labeled; not DAVID or Ogilvy client work.',
   caseStudies: submissionCreativeCaseStudies,
   workflow: submissionCreativeWorkflow,
   campaign: buildCampaignSystem({
     conceptTitle: 'Working concept — editorial clarity, brand-safe AI craft',
     conceptBody:
-      'A self-initiated campaign system showing how a strong visual idea moves from exploration to channel crops under critique—built to demonstrate Ogilvy-adjacent editorial discipline, not to claim Ogilvy client work.',
+      'A self-initiated campaign system showing how a strong visual idea moves from exploration to channel crops under critique—built to demonstrate DAVID/Ogilvy-adjacent editorial discipline, not to claim network client work.',
     eyebrow: 'Self-Initiated Brand-Safe AI Campaign Study',
     intro:
       'Ready channel specimens from one master still. Additional formats stay off this page until they are finished—no placeholder tiles on the submission surface.',
     disclaimer:
-      'Self-initiated study for application evidence. Not an Ogilvy client project. Specimens shown are Ready crops of the master still.',
+      'Self-initiated study for application evidence. Not a DAVID or Ogilvy client project. Specimens shown are Ready crops of the master still.',
     specimens: miamiLightCampaignSpecimens,
     readyOnly: true,
   }),
+  motionSection: ogilvyMotionSection,
   alignmentTitle: 'Role alignment',
   alignmentIntro:
-    'Ogilvy Creative Editor/AI priorities mapped to demonstrated practice. Do not read this as prior Ogilvy employment or network ACD title history.',
-  ctaHeadline: 'Let’s put AI in service of editorial craft—not the other way around.',
+    'Creative Editor/AI priorities from the Miami listing mapped to demonstrated practice. Do not read this as prior DAVID or Ogilvy employment.',
+  ctaHeadline: 'Let’s put AI in service of editorial craft—at DAVID speed.',
 });
+
+const ogilvyNavItems = [
+  ...creativeAgencyNavItems.slice(0, 2),
+  { id: 'skills', label: 'Skills & tools', shortLabel: 'Skills' },
+  ...creativeAgencyNavItems.slice(2, 5),
+  { id: 'motion', label: 'Motion & YouTube', shortLabel: 'Motion' },
+  { id: 'process', label: 'How I’d work', shortLabel: 'Process' },
+  ...creativeAgencyNavItems.slice(5),
+];
 
 export const ogilvySeniorAiDrivenCreativeDirectorOpportunity = createCreativeAgencyOpportunity({
   slug: 'ogilvy-senior-ai-driven-creative-director',
@@ -60,72 +191,99 @@ export const ogilvySeniorAiDrivenCreativeDirectorOpportunity = createCreativeAge
   evidenceRecipe: 'wpp-hex',
   caseStudiesIntro:
     'PRIMARY Creative AI proof · SECONDARY Forward-Deployed enablement · SUPPORTING Agentic Ops (Building). Same flagships, agency ordering.',
-  seoTitle: 'Moises Sanabria — Ogilvy · Creative Editor / AI',
+  seoTitle: 'Moises Sanabria — DAVID / Ogilvy · Creative Editor / AI',
   seoDescription:
-    'Application dossier for Ogilvy Creative Editor/AI — editorial judgment, human-directed generative systems, and brand craft.',
+    'Application dossier for DAVID Agency Creative Editor/AI (Ogilvy / WPP) — editorial judgment, AI production leadership, and brand craft. Includes All Studios Everything (18M+ views).',
   banner: ogilvySeniorAiDrivenCreativeDirectorBanner,
-  heroEyebrow: 'APPLICATION DOSSIER · OGILVY · MIAMI',
+  heroEyebrow: 'APPLICATION DOSSIER · DAVID · OGILVY / WPP · MIAMI',
   headline: 'Editorial craft first. AI as production acceleration.',
-  subheadline: `${ROLE_TITLE} · Selected work for Ogilvy`,
+  subheadline: `${ROLE_TITLE} · DAVID Agency · Selected work for Ogilvy`,
   introParagraphs: [
-    'I’m a Miami-based interdisciplinary artist and design technologist. I lead editorial and visual systems where generative tools expand exploration while human critique protects taste, narrative clarity, brand integrity, and cultural precision—the standard an Ogilvy Creative Editor/AI seat requires.',
+    'I’m a Miami-based interdisciplinary artist and design technologist applying for Creative Editor/AI at DAVID Agency (Ogilvy’s global creative network / WPP). I lead editorial and visual systems where generative tools expand exploration while human critique protects taste, narrative clarity, brand integrity, and cultural precision.',
+    'What you’ll get: end-to-end ownership from concept and scripting to AI-accelerated execution, platform-native social craft, Adobe finishing, and the judgment to say no when a generative draft fails the brief—plus proof that culture-native video can scale (All Studios Everything, 18M+ views).',
   ],
-  trustLine: 'Lore Machine · AI24 · Oolite Arts · Cooper Union BFA',
+  trustLine: 'All Studios Everything · Lore Machine · AI24 · Oolite Arts · Cooper Union BFA',
   heroMetaChips: [
     'Editorial + AI production',
-    'Brand voice under review',
+    'DAVID / Miami',
+    '18M+ view YouTube proof',
     'Adobe finishing',
-    'Cross-functional translation',
-    'Miami-active',
+    'Social & video storytelling',
+    'Mentor creators',
   ],
   audienceTerms: [
     {
-      label: 'Ogilvy',
-      detail: 'Global creative network — ideas, brand craft, and emerging technology under discipline.',
+      label: 'DAVID Agency',
+      detail: 'Global creative boutique in the Ogilvy / WPP network — Cannes-caliber craft with Miami presence.',
+    },
+    {
+      label: 'Ogilvy / WPP',
+      detail: 'Borderless Creativity — advertising, PR, relationship design, and emerging tech under one network.',
     },
     {
       label: 'Creative Editor / AI',
-      detail: 'Editorial judgment with generative production fluency—not tool novelty alone.',
+      detail: 'Lead AI-integrated creative execution: concepts, workflows, social systems, and creator mentorship.',
     },
     {
       label: 'Human review',
-      detail: 'Pipelines that require critique before publish.',
+      detail: 'Pipelines that require critique before publish — AI accelerates; taste decides.',
     },
   ],
   creativeAgency,
+  navItems: ogilvyNavItems,
+  animatedLogoBand: creativeAiSkillLogoBand,
+  skillsMatrixRows: ogilvySkillsMatrix,
+  roleReference: ogilvyRoleReference,
+  // companyLogoSrc: wire when DAVID / Ogilvy brand assets are provided (light + dark).
   roleMatchIntro: creativeAgency.alignmentIntro,
   roleMatchRows: [
     {
-      requirement: 'Editorial judgment with AI production',
+      requirement: 'Lead AI production workflows & set the standard',
       evidence:
         'AI24 editorial pipeline with human review before publish; Lore Machine prompt systems turning narrative into structured multimedia under craft control.',
       status: 'demonstrated',
       illustration: { src: ai24.imageSrc, alt: ai24.imageAlt },
     },
     {
-      requirement: 'Visual and conceptual craft',
+      requirement: 'Own concept → script → execution with AI',
       evidence:
-        'Museum-legible art practice plus product and editorial visual systems—original POV with production finish.',
+        'End-to-end creative systems from brief to channel crops; self-initiated campaign study shows exploration → critique → Ready specimens.',
       status: 'demonstrated',
       illustration: { src: lore.imageSrc, alt: lore.imageAlt },
     },
     {
-      requirement: 'Enablement and critique culture',
+      requirement: 'Platform-native social & audiovisual storytelling',
+      evidence:
+        'All Studios Everything (18M+ YouTube views) plus multi-format campaign adaptations—hooks, pacing, and channel-aware crops.',
+      status: 'demonstrated',
+      illustration: { src: ALL_STUDIOS_POSTER, alt: 'All Studios Everything — YouTube proof' },
+    },
+    {
+      requirement: 'Adobe craft + AI creative tools fluency',
+      evidence:
+        'Expert Adobe finishing (Photoshop, Illustrator, InDesign, Premiere, After Effects) with generative exploration under review—Firefly, Google AI / VEO-class, OpenAI, and ComfyUI workflows as accelerators.',
+      status: 'demonstrated',
+      illustration: { src: multimodal.imageSrc, alt: multimodal.imageAlt },
+    },
+    {
+      requirement: 'Mentor creators & cross-functional collaboration',
       evidence:
         'Oolite workshops and artist mentorship; translating emerging tools for non-engineers; review gates as pedagogy.',
       status: 'demonstrated',
       illustration: { src: OOLITE_DIGITAL_LAB_IMAGE, alt: OOLITE_DIGITAL_LAB_IMAGE_ALT },
     },
     {
-      requirement: 'Network / agency campaign ownership',
+      requirement: 'Network / DAVID–Ogilvy client campaign ownership',
       evidence:
-        'Not claimed. Conventional agency ACD title path and Ogilvy client campaigns remain an honest gap—addressed via self-initiated channel study (Ready specimens only).',
+        'Not claimed. Conventional agency title path and DAVID/Ogilvy client campaigns remain an honest gap—addressed via self-initiated channel study and viral craft proof (Ready specimens only).',
       status: 'todo',
     },
   ],
-  emailSubject: 'Ogilvy — Creative Editor / AI — Moises Sanabria',
+  processIntro:
+    'How I would operate on DAVID briefs: lock brand constraints, explore under direction, finish in Adobe, adapt for platforms, and mentor creators so speed never outruns taste.',
+  emailSubject: 'DAVID / Ogilvy — Creative Editor / AI — Moises Sanabria',
   availabilityNote:
-    'Available for Ogilvy Creative Editor/AI conversations; Miami-active listing — confirm location and hybrid expectations against the live post.',
+    'Available for DAVID Agency Creative Editor/AI conversations (Ogilvy / WPP · Miami listing posted 08/04/2026). Confirm hybrid / onsite expectations against the live post.',
   applicationStatus: 'ready',
-  careerPacketHref: '/career-packet',
+  careerPacketHref: '/creative-ai',
 });
