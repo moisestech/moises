@@ -20,6 +20,7 @@ import {
   CurriculumModuleCard,
   EngagementFormatCards,
   EngagementProcess,
+  InstNavIcon,
   InstitutionalCTA,
   InstitutionalHero,
   MediaNeededStrip,
@@ -31,15 +32,15 @@ import {
 import { cn } from '@/lib/utils';
 
 const SECTION_NAV = [
-  { id: 'positioning', label: 'Positioning', accent: 'ink' as const },
-  { id: 'curriculum', label: 'Curriculum', accent: 'ocean' as const },
-  { id: 'oolite-proof', label: 'Oolite', accent: 'teal' as const },
-  { id: 'process', label: 'Process', accent: 'teal' as const },
-  { id: 'supporting-proof', label: 'Proof', accent: 'copper' as const },
-  { id: 'practice', label: 'Practice', accent: 'rose' as const },
-  { id: 'engagement', label: 'Engage', accent: 'ocean' as const },
-  { id: 'media-needed', label: 'Media', accent: 'copper' as const },
-  { id: 'contact', label: 'Contact', accent: 'ink' as const },
+  { id: 'positioning', label: 'Positioning', accent: 'ink' as const, icon: 'palette' },
+  { id: 'curriculum', label: 'Curriculum', accent: 'ocean' as const, icon: 'graduation' },
+  { id: 'oolite-proof', label: 'Oolite', accent: 'teal' as const, icon: 'layers' },
+  { id: 'process', label: 'Process', accent: 'teal' as const, icon: 'workflow' },
+  { id: 'supporting-proof', label: 'Proof', accent: 'copper' as const, icon: 'sparkles' },
+  { id: 'practice', label: 'Practice', accent: 'rose' as const, icon: 'flask' },
+  { id: 'engagement', label: 'Engage', accent: 'ocean' as const, icon: 'users' },
+  { id: 'media-needed', label: 'Media', accent: 'copper' as const, icon: 'image' },
+  { id: 'contact', label: 'Contact', accent: 'ink' as const, icon: 'mail' },
 ] as const;
 
 function scrollToId(id: string) {
@@ -61,7 +62,7 @@ export function ArtistInfrastructureClient() {
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= 180) current = id;
+        if (el.getBoundingClientRect().top <= 200) current = id;
       }
       setActiveNav(current);
     };
@@ -71,7 +72,7 @@ export function ArtistInfrastructureClient() {
   }, []);
 
   return (
-    <InstPageShell className="pt-[170px]">
+    <InstPageShell className="pt-[192px]">
       <OpportunityApplicationBanner banner={P.banner} className="mb-0" />
       {P.bannerNote ? (
         <p className="border-b border-neutral-200 bg-amber-50/80 px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-amber-950 sm:px-6">
@@ -93,7 +94,8 @@ export function ArtistInfrastructureClient() {
                 key={item.id}
                 href={`#${item.id}`}
                 className={cn(
-                  'shrink-0 border px-3 py-1.5 text-xs font-medium transition',
+                  'inline-flex shrink-0 items-center gap-1.5 border px-3 py-1.5 text-xs font-medium transition',
+                  'hover:-translate-y-0.5 active:scale-[0.98] motion-reduce:hover:translate-y-0',
                   active
                     ? INST_ACCENT[item.accent].chipActive
                     : INST_ACCENT[item.accent].chip,
@@ -104,6 +106,7 @@ export function ArtistInfrastructureClient() {
                   setActiveNav(item.id);
                 }}
               >
+                <InstNavIcon name={item.icon} className="h-3.5 w-3.5" />
                 {item.label}
               </a>
             );
