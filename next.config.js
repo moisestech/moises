@@ -276,6 +276,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cdn.simpleicons.org',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'images.squarespace-cdn.com',
         port: '',
         pathname: '/**',

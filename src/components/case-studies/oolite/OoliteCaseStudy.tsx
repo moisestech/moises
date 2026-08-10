@@ -454,7 +454,22 @@ export default function OoliteCaseStudy() {
             Featured Digital Lab workshops
           </h2>
           <p className="text-neutral-700 max-w-2xl mb-8">
-            Class cards use workshop banners; documentary stills sit underneath where available.
+            Class cards use workshop banners; documentary stills sit underneath where available.{' '}
+            <Link href="/workshops#catalog" className="underline underline-offset-4">
+              Full public catalog
+            </Link>
+            {' · '}
+            <Link
+              href="/workshop/seo-for-artists-in-the-age-of-ai-search"
+              className="underline underline-offset-4"
+            >
+              SEO for Artists
+            </Link>
+            {' · '}
+            <Link href="/workshop/vibe-coding-with-net-art" className="underline underline-offset-4">
+              Vibe-coding with Net Art
+            </Link>
+            .
           </p>
           <ClassArchive />
         </div>

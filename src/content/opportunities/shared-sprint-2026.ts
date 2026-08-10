@@ -41,11 +41,12 @@ export const sprint2026ProcessSteps: ProcessStep[] = [
 export const sprint2026TeachingHighlights: TeachingHighlight[] = [
   {
     title: 'The Art of AI Agents',
-    description: 'Multi-session workshop on practical agent workflows and tooling.',
+    description:
+      'Multi-session workshop on practical agent workflows — Email Inbox Organizer diagram and Artist Task Automation slides attached.',
     href: '/workshop/the-art-of-ai-agents',
     imageSrc:
-      'https://res.cloudinary.com/du1ysiumj/image/upload/v1774829074/the-art-of-ai-agents-locust-projects-the-dill-2026_xjb76m.jpg',
-    imageAlt: 'The Art of AI Agents workshop',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786386766/dccmiami/workshops/the-art-of-ai-agents/n8n-diagram-email-inbox-organizer_nqwn9r.png',
+    imageAlt: 'n8n Email Inbox Organizer workflow diagram from The Art of AI Agents',
   },
   {
     title: 'Learn AI Without Losing Yourself',

@@ -16,6 +16,7 @@ export const endorLabsSolutionsArchitectOpportunity: Opportunity = {
   status: 'active',
   listed: false,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#software-engineering',
   seo: {
     title: 'Solutions Architect — Endor Labs · Moises Sanabria',
     description:

@@ -15,13 +15,14 @@ import {
 export const blueAcornAgenticAiOpportunity: Opportunity = {
   slug: 'blue-acorn-ici-agentic-ai-integration-engineer',
   status: 'active',
-  listed: true,
+  listed: false,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'Agentic AI Integration Engineer — Blue Acorn iCi · Moises Sanabria',
     description:
       'Agentic workflows, n8n production automation, Make/Airtable integrations, and client-facing AI delivery.',
-    indexable: true,
+    indexable: false,
   },
   company: 'Blue Acorn iCi',
   roleTitle: 'Agentic AI Integration Engineer',

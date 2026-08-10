@@ -8,6 +8,7 @@ export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
   slug: 'new-inc-media-fabrication-lab-manager',
   status: 'active',
   variant: 'compact',
+  capabilitiesHref: '/capabilities#design-creative-technology',
   applicationBanner: newIncMediaFabLabBanner,
   seo: {
     title: 'Media & Fabrication Lab Manager — NEW INC | Moises Sanabria',

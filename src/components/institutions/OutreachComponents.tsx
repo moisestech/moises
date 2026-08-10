@@ -956,7 +956,16 @@ export function MediaNeededStrip({
   eyebrow: string;
   title: string;
   lead: string;
-  items: readonly { id: string; title: string; note: string; status?: string; icon?: string }[];
+  items: readonly {
+    id: string;
+    title: string;
+    note: string;
+    status?: string;
+    icon?: string;
+    href?: string;
+    imageSrc?: string;
+    imageAlt?: string;
+  }[];
 }) {
   return (
     <section id="media-needed" className="scroll-mt-28 border-t border-neutral-200 py-12 sm:py-16">
@@ -970,20 +979,72 @@ export function MediaNeededStrip({
         </p>
       </InstReveal>
       <ul className="mt-8 grid gap-4 md:grid-cols-3">
-        {items.map((item, i) => (
-          <InstReveal key={item.id} delay={0.05 * i}>
-            <li className="group flex h-full flex-col border border-dashed border-amber-400/70 bg-gradient-to-br from-amber-50/90 to-white p-5 transition duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.99]">
-              <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-700 text-white shadow-md transition group-hover:scale-110">
-                <InstBigIcon name={item.icon ?? 'video'} className="h-7 w-7" />
-              </span>
-              <span className="inline-flex w-fit rounded-full border border-amber-500/50 bg-amber-100 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-amber-950">
-                Slot open
-              </span>
-              <h3 className="mt-3 text-base font-semibold tracking-tight">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{item.note}</p>
-            </li>
-          </InstReveal>
-        ))}
+        {items.map((item, i) => {
+          const attached = item.status === 'attached';
+          const inner = (
+            <>
+              {item.imageSrc ? (
+                <div className="relative aspect-[16/10] bg-neutral-200">
+                  <Image
+                    src={item.imageSrc}
+                    alt={item.imageAlt ?? item.title}
+                    fill
+                    className="object-cover object-top transition duration-700 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, 360px"
+                  />
+                </div>
+              ) : (
+                <div className="px-5 pt-5">
+                  <span
+                    className={cn(
+                      'mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-md transition group-hover:scale-110',
+                      attached ? 'bg-teal-700' : 'bg-amber-700',
+                    )}
+                  >
+                    <InstBigIcon name={item.icon ?? 'video'} className="h-7 w-7" />
+                  </span>
+                </div>
+              )}
+              <div className="flex flex-1 flex-col p-5">
+                <span
+                  className={cn(
+                    'inline-flex w-fit rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em]',
+                    attached
+                      ? 'border-teal-500/50 bg-teal-100 text-teal-950'
+                      : 'border-amber-500/50 bg-amber-100 text-amber-950',
+                  )}
+                >
+                  {attached ? 'Attached' : 'Slot open'}
+                </span>
+                <h3 className="mt-3 text-base font-semibold tracking-tight">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{item.note}</p>
+              </div>
+            </>
+          );
+          return (
+            <InstReveal key={item.id} delay={0.05 * i}>
+              <li
+                className={cn(
+                  'group flex h-full flex-col overflow-hidden border transition duration-300 hover:-translate-y-1 hover:shadow-md active:scale-[0.99]',
+                  attached
+                    ? 'border-teal-500/40 bg-gradient-to-br from-teal-50/90 to-white'
+                    : 'border-dashed border-amber-400/70 bg-gradient-to-br from-amber-50/90 to-white',
+                )}
+              >
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className="flex h-full flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-600"
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  inner
+                )}
+              </li>
+            </InstReveal>
+          );
+        })}
       </ul>
     </section>
   );

@@ -39,7 +39,7 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
   {
     title: 'SEO Workshop',
     description: 'Get found, get seen, and expand your reach with search engine optimization strategies.',
-    link: 'https://fabiola.io/workshop_seo/index.html',
+    link: '/workshop/seo-for-artists-in-the-age-of-ai-search',
     disabled: false,
     instructor: 'Fabiola Larios',
     instructorRole: 'SEO Workshop Lead',

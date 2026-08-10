@@ -1,8 +1,24 @@
 # Artist Infrastructure banner prompt
 
-Use this to generate the `/artist-infrastructure` application banner (target **2172×724**, landscape, museum-legible, not startup purple).
+Use this to generate or refine the `/artist-infrastructure` application banner.
 
-## Prompt (starting point)
+## Current live asset
+
+- Cloudinary: `dccmiami/workshops/the-art-of-ai-agents/artist-infrastructure-banner-wide_fqgn4y`
+  `https://res.cloudinary.com/dck5rzi4h/image/upload/v1786387514/dccmiami/workshops/the-art-of-ai-agents/artist-infrastructure-banner-wide_fqgn4y.png`
+- Measured: **2171×724** (~3:1 flagship strip) — wired via `artistInfrastructureBanner`
+
+## Companion stills (also live)
+
+| Asset | Use |
+| --- | --- |
+| `creative-direction-spatial-interface_etmyvp` | Artist positioning + Creative AI “direction” layer |
+| `ai-production-systems-human-review-pipeline_cvjuvi` | Systems Builder + Creative AI “production” layer |
+| `software-interfaces-creator-tool_tg0p4r` | Educator / vibe-coding + Creative AI “software” layer |
+
+Constants: `src/content/institutions/artistInfrastructureMedia.ts`
+
+## Prompt (starting point for regenerations)
 
 ```
 Editorial institutional banner for "Creative Infrastructure for Artists" — Moises Sanabria, Miami.
@@ -21,12 +37,8 @@ Avoid: purple AI gradients, stock handshake photos, corporate skyline, “first/
 Typography: bold condensed sans for title; quiet mono caption strip at bottom: ARTIST · EDUCATOR · SYSTEMS BUILDER
 ```
 
-## Interim asset
+## Related media
 
-Until the custom banner is generated/uploaded, the page uses the Digilab teaching still as a temporary strip.
-
-## Related media to attach later
-
-- Locust Projects — Artist in the Automation event videos
-- Idea Center — QuickBooks workshop documentation
+- Locust Projects — The Art of AI Agents / Email Inbox Organizer screenshots (attached)
+- Idea Center — QuickBooks workshop documentation (still needed)
 - Additional Digilab participant-output stills (permission-cleared)

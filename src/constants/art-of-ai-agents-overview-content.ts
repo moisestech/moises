@@ -180,9 +180,9 @@ export const ART_OF_AI_AGENTS_PROOF: {
   stillOrClip: string
 } = {
   presentedWith: 'Locust Projects · The Dill — 2026',
-  organizerNotes: '',
+  organizerNotes: 'Artist Task Automation track — n8n, agents, and human-supervised studio workflows.',
   audienceResponse: '',
-  stillOrClip: '',
+  stillOrClip: 'Workshop slides + n8n Email Inbox Organizer diagram attached below.',
 }
 
 export const ART_OF_AI_AGENTS_PROOF_PLACEHOLDERS = {

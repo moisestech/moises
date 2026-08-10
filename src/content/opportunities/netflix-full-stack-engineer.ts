@@ -9,6 +9,7 @@ export const netflixFullStackEngineerOpportunity: Opportunity = {
   status: 'active',
   listed: false,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#software-engineering',
   applicationBanner: {
     src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
     alt: 'Netflix Full-Stack Engineer — AI Insights & Visualizations reach application',

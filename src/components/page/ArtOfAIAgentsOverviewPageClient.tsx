@@ -3,7 +3,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ART_OF_AI_AGENTS_HERO_IMAGE } from '@/constants/art-of-ai-agents'
+import {
+  ART_OF_AI_AGENTS_EMAIL_SORTER_HREF,
+  ART_OF_AI_AGENTS_HERO_IMAGE,
+  ART_OF_AI_AGENTS_SCREENSHOTS,
+  N8N_LOGO,
+} from '@/constants/art-of-ai-agents'
 import {
   ART_OF_AI_AGENTS_DIFFERENTIATION_BULLETS,
   ART_OF_AI_AGENTS_FORMATS,
@@ -142,6 +147,19 @@ function OverviewHero() {
           <p className="mt-4 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed">
             {ART_OF_AI_AGENTS_OVERVIEW_HERO_SECOND}
           </p>
+          <div className="mt-6 flex items-center gap-3">
+            <Image
+              src={N8N_LOGO.src}
+              alt={N8N_LOGO.alt}
+              width={28}
+              height={28}
+              className="h-7 w-7"
+              unoptimized
+            />
+            <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+              Built with n8n · agent workflows you can read
+            </p>
+          </div>
           <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link
               href={ART_OF_AI_AGENTS_COURSE_HUB}
@@ -149,12 +167,12 @@ function OverviewHero() {
             >
               Open workshop materials
             </Link>
-            <a
-              href="#inquiry"
+            <Link
+              href={ART_OF_AI_AGENTS_EMAIL_SORTER_HREF}
               className="inline-flex justify-center items-center rounded-sm border border-zinc-300 text-zinc-800 px-6 py-3.5 text-sm font-medium hover:bg-zinc-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:border-zinc-600 dark:text-zinc-100 dark:hover:bg-zinc-900 dark:focus-visible:ring-zinc-500 dark:focus-visible:ring-offset-zinc-950"
             >
-              Host or customize
-            </a>
+              Email Inbox Organizer
+            </Link>
           </div>
         </div>
       </div>
@@ -458,6 +476,49 @@ export default function ArtOfAIAgentsOverviewPageClient() {
               value={ART_OF_AI_AGENTS_PROOF.stillOrClip}
               placeholder={ART_OF_AI_AGENTS_PROOF_PLACEHOLDERS.stillOrClip}
             />
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            {ART_OF_AI_AGENTS_SCREENSHOTS.map((shot) => (
+              <figure
+                key={shot.id}
+                className="overflow-hidden rounded-sm border border-zinc-200 bg-zinc-50/90 dark:border-zinc-800 dark:bg-zinc-900/30"
+              >
+                <div className="relative aspect-[16/10] bg-zinc-200 dark:bg-zinc-800">
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    fill
+                    className={
+                      shot.id === 'email-inbox-organizer-diagram'
+                        ? 'object-contain object-center p-2 bg-zinc-100 dark:bg-zinc-950'
+                        : 'object-cover object-top'
+                    }
+                    sizes="(max-width: 640px) 100vw, 360px"
+                  />
+                </div>
+                <figcaption className="px-4 py-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  {shot.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div className="inline-flex items-center gap-2 rounded-sm border border-zinc-200 bg-white/90 px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900/40">
+              <Image src={N8N_LOGO.src} alt={N8N_LOGO.alt} width={22} height={22} className="h-5 w-5" unoptimized />
+              <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">n8n</span>
+            </div>
+            <Link
+              href={ART_OF_AI_AGENTS_EMAIL_SORTER_HREF}
+              className="text-sm font-medium text-lime-700 underline-offset-4 hover:underline dark:text-lime-400/90"
+            >
+              Open Email Inbox Organizer handout →
+            </Link>
+            <a
+              href={`#inquiry`}
+              className="text-sm text-zinc-600 underline-offset-4 hover:underline dark:text-zinc-400"
+            >
+              Host or customize
+            </a>
           </div>
         </LearnAiReveal>
 

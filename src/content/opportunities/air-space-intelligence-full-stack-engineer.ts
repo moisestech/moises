@@ -13,6 +13,7 @@ export const airSpaceIntelligenceFullStackEngineerOpportunity: Opportunity = {
   status: 'active',
   listed: false,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#software-engineering',
   seo: {
     title: 'Air Space Intelligence — Full Stack Engineer — Moises Sanabria | moises.tech',
     description:

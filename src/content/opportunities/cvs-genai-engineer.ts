@@ -7,7 +7,9 @@ import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evide
 export const cvsGenaiEngineerOpportunity: Opportunity = {
   slug: 'cvs-senior-genai-engineer',
   status: 'active',
+  listed: false,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#ai-engineering',
   applicationBanner: {
     ...seniorGenAiEngineerBanner,
     alt: 'Senior GenAI Engineer — application banner tailored to this role.',
@@ -16,7 +18,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     title: 'Senior GenAI Engineer — Moises Sanabria | moises.tech',
     description:
       'GenAI prototypes, LLM systems, agent workflows, and multimodal AI products — compact dossier for innovation lab and senior GenAI engineering roles.',
-    indexable: true,
+    indexable: false,
   },
   audienceKeywords: {
     terms: [
@@ -34,7 +36,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
       },
     ],
   },
-  company: 'CVS Health (example targeting)',
+  company: 'Senior GenAI Engineer (archetype overlay)',
   roleTitle: 'Senior GenAI Engineer',
   navItems: [
     { id: 'hero', label: 'Overview' },

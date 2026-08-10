@@ -26,6 +26,7 @@ import { motion } from 'framer-motion'
 import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
 import { WORKSHOP_FEATURES, type WorkshopCardVisual } from '@/constants/workshop-features'
 import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings'
+import { listReadyWorkshops } from '@/content/workshops/catalog'
 import { PilotPricingBand } from '@/components/institutions/PilotPricingBand'
 import { InstFamilyNav } from '@/components/institutions/InstitutionalUi'
 import { track } from '@/lib/analytics'
@@ -441,6 +442,101 @@ export default function WorkshopClient() {
               </li>
             ))}
           </ul>
+        </motion.section>
+
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.18 }}
+          className="mb-10 sm:mb-16"
+          id="catalog"
+          aria-labelledby="workshop-catalog-heading"
+        >
+          <div className="mb-6 sm:mb-8 text-center max-w-2xl mx-auto">
+            <p
+              className={cn(
+                'text-[11px] font-semibold uppercase tracking-[0.18em] mb-2',
+                isDark ? 'text-cyan-300/90' : 'text-cyan-800'
+              )}
+            >
+              Public catalog
+            </p>
+            <h2
+              id="workshop-catalog-heading"
+              className={cn('text-xl sm:text-2xl font-bold', heading)}
+            >
+              Workshops we offer
+            </h2>
+            <p className={cn('mt-2 text-sm sm:text-base leading-relaxed', bodyMuted)}>
+              Ready programs from the teaching catalog—Presence, AI Literacy, Creative Coding, and
+              Systems + Archive. Deep syllabi ship over time; Ready titles are bookable now.
+            </p>
+          </div>
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {listReadyWorkshops().map((workshop) => (
+                <li
+                  key={workshop.slug}
+                  className={cn(
+                    cardBase,
+                    !isDark && 'rounded-none border-neutral-200 bg-white shadow-none'
+                  )}
+                >
+                  <p
+                    className={cn(
+                      'font-mono text-[10px] uppercase tracking-[0.14em] mb-2',
+                      bodyMuted
+                    )}
+                  >
+                    {workshop.track} · {workshop.level} · {workshop.duration}
+                  </p>
+                  <h3 className={cn('text-base sm:text-lg font-bold leading-snug', heading)}>
+                    {workshop.publicTitle}
+                  </h3>
+                  <p className={cn('mt-2 text-sm leading-relaxed', bodyMuted)}>
+                    {workshop.hook}
+                  </p>
+                  <p className={cn('mt-3 text-xs sm:text-sm leading-relaxed line-clamp-3', bodyMuted)}>
+                    {workshop.shortDescription}
+                  </p>
+                  <div className="mt-4">
+                      <Link
+                        href={workshop.href}
+                        className={cn(
+                          'inline-flex min-h-10 items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold',
+                          isDark
+                            ? 'bg-white/15 text-white hover:bg-white/20'
+                            : 'bg-neutral-950 text-white hover:bg-neutral-800'
+                        )}
+                        onClick={() =>
+                          track('workshop_catalog_open', {
+                            slug: workshop.slug,
+                            source: 'workshops_hub',
+                          })
+                        }
+                      >
+                        Open workshop
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                      </Link>
+                  </div>
+                </li>
+            ))}
+          </ul>
+          <p className={cn('mt-6 text-center text-xs sm:text-sm', bodyMuted)}>
+            More titles are in development.{' '}
+            <Link
+              href="/artist-infrastructure"
+              className={cn('underline underline-offset-2', isDark ? 'text-cyan-300' : 'text-neutral-800')}
+            >
+              Creative infrastructure overview
+            </Link>
+            {' · '}
+            <Link
+              href="/oolite-arts#classes"
+              className={cn('underline underline-offset-2', isDark ? 'text-cyan-300' : 'text-neutral-800')}
+            >
+              Digilab class archive
+            </Link>
+          </p>
         </motion.section>
 
         <motion.section

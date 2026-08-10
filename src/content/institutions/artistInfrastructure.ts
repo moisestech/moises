@@ -16,6 +16,18 @@ import {
   VIBE_CODE_NET_ART_BANNER_ALT,
 } from '@/content/oolite-arts/media';
 import {
+  ART_OF_AI_AGENTS_EMAIL_SORTER_HREF,
+  ART_OF_AI_AGENTS_SCREENSHOTS,
+  ART_OF_AI_AGENTS_WORKSHOP_HREF,
+  N8N_LOGO,
+} from '@/constants/art-of-ai-agents';
+import {
+  AI_PRODUCTION_HUMAN_REVIEW_PIPELINE,
+  ARTIST_INFRASTRUCTURE_BANNER_WIDE,
+  CREATIVE_DIRECTION_SPATIAL_INTERFACE,
+  SOFTWARE_INTERFACES_CREATOR_TOOL,
+} from './artistInfrastructureMedia';
+import {
   INSTITUTIONAL_CALENDLY_URL,
   INSTITUTIONAL_COLLABORATION_AVAILABILITY,
   INSTITUTIONAL_EMAIL,
@@ -53,18 +65,20 @@ export const ARTIST_INFRASTRUCTURE_AVAILABILITY = INSTITUTIONAL_COLLABORATION_AV
 
 /** Tool / platform marks named in the incubator offer — swap when clearer brand assets land. */
 export const artistInfrastructureLogoBand: LogoBandItem[] = [
+  { src: N8N_LOGO.src, alt: N8N_LOGO.alt, height: 36 },
   { src: 'https://cdn.simpleicons.org/notion', alt: 'Notion', height: 36 },
   { src: 'https://cdn.simpleicons.org/cursor', alt: 'Cursor', height: 36 },
   { src: 'https://cdn.simpleicons.org/figma/F24E1E', alt: 'Figma', height: 36 },
-  { src: 'https://cdn.simpleicons.org/n8n/EA4B71', alt: 'n8n', height: 36 },
   { src: `${jobsCdn}/v1783032752/jobs/airtable_logo_xserwf.png`, alt: 'Airtable', height: 36 },
   { src: 'https://cdn.simpleicons.org/quickbooks/2CA01C', alt: 'QuickBooks', height: 36 },
   { src: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png`, alt: 'OpenAI', height: 36 },
+  { src: 'https://cdn.simpleicons.org/anthropic', alt: 'Anthropic', height: 36 },
   {
     src: `${jobsCdn}/v1786372919/jobs/comfy-ui-logo-full_width_viyj7a.png`,
     alt: 'ComfyUI',
     height: 36,
   },
+  { src: `${jobsCdn}/v1778692505/jobs/python-logo_edccrx.png`, alt: 'Python', height: 40 },
   { src: 'https://cdn.simpleicons.org/github', alt: 'GitHub', height: 36 },
   { src: 'https://cdn.simpleicons.org/vercel', alt: 'Vercel', height: 36 },
   { src: 'https://cdn.simpleicons.org/nextdotjs', alt: 'Next.js', height: 36 },
@@ -81,27 +95,29 @@ export const artistInfrastructurePage = {
     description:
       'Workshops, tools, and operational systems that help artists move from idea to working prototype—across AI, vibe coding, digital fabrication, and studio automation.',
     url: 'https://moises.tech/artist-infrastructure',
-    ogImage: TEACHING_HERO.src,
+    ogImage: ARTIST_INFRASTRUCTURE_BANNER_WIDE.src,
   },
 
   banner: artistInfrastructureBanner,
-  bannerNote:
-    'Temporary Digilab teaching strip. Custom banner prompt: docs/institutions/artist-infrastructure-banner-prompt.md',
+  bannerNote: null as string | null,
 
   logoBand: artistInfrastructureLogoBand,
   logoBandLabel: 'Tools and systems named in this offer',
 
   mediaNeeded: {
-    eyebrow: 'Media to attach',
-    title: 'Documentary video and stills that strengthen this page',
-    lead: 'These slots are ready for your Locust / Idea Center footage, or generated stills from the banner prompt. Nothing invented as shipped proof until attached.',
+    eyebrow: 'Media attached',
+    title: 'Workshop and banner assets on this page',
+    lead: 'Wide Creative Infrastructure banner, Locust n8n screenshots, and three-layer creative systems stills are live. Idea Center QuickBooks documentation remains the open slot.',
     items: [
       {
         id: 'locust-automation',
-        title: 'Locust Projects — Artist in the Automation',
-        note: 'Event videos / stills from Artist in the Automation programming. Ideal for curriculum + engagement proof.',
-        status: 'needed' as const,
+        title: 'Locust Projects — Email Inbox Organizer',
+        note: 'n8n Email Inbox Organizer diagram + Artist Task Automation slides attached — handout at /workshop/the-art-of-ai-agents/share.',
+        status: 'attached' as const,
         icon: 'video' as const,
+        href: ART_OF_AI_AGENTS_EMAIL_SORTER_HREF,
+        imageSrc: ART_OF_AI_AGENTS_SCREENSHOTS[0].src,
+        imageAlt: ART_OF_AI_AGENTS_SCREENSHOTS[0].alt,
       },
       {
         id: 'idea-center-quickbooks',
@@ -112,14 +128,15 @@ export const artistInfrastructurePage = {
       },
       {
         id: 'custom-banner',
-        title: 'Custom application banner (2172×724)',
-        note: 'Generate from the banner prompt, then swap artistInfrastructureBanner in applicationBanners.ts.',
-        status: 'needed' as const,
+        title: 'Creative Infrastructure banner (2171×724)',
+        note: 'Wide flagship strip is live on this page.',
+        status: 'attached' as const,
         icon: 'image' as const,
+        imageSrc: ARTIST_INFRASTRUCTURE_BANNER_WIDE.src,
+        imageAlt: ARTIST_INFRASTRUCTURE_BANNER_WIDE.alt,
       },
     ],
   },
-
   hero: {
     kicker: 'Artist · Educator · Systems Builder',
     category: 'Artist infrastructure · Workshops · Institutional collaboration',
@@ -187,8 +204,8 @@ export const artistInfrastructurePage = {
         accent: 'ink' as const,
         icon: 'palette' as const,
         image: {
-          src: SMART_SHOPPERS,
-          alt: 'Smart Shoppers — sculptural consumer cognition work',
+          src: CREATIVE_DIRECTION_SPATIAL_INTERFACE.src,
+          alt: CREATIVE_DIRECTION_SPATIAL_INTERFACE.alt,
         },
       },
       {
@@ -198,8 +215,8 @@ export const artistInfrastructurePage = {
         accent: 'ocean' as const,
         icon: 'graduation' as const,
         image: {
-          src: TEACHING_HERO.src,
-          alt: TEACHING_HERO.alt,
+          src: SOFTWARE_INTERFACES_CREATOR_TOOL.src,
+          alt: SOFTWARE_INTERFACES_CREATOR_TOOL.alt,
         },
       },
       {
@@ -209,8 +226,8 @@ export const artistInfrastructurePage = {
         accent: 'teal' as const,
         icon: 'network' as const,
         image: {
-          src: digilabAsset('digilab.room-cyan').src,
-          alt: digilabAsset('digilab.room-cyan').alt,
+          src: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.src,
+          alt: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.alt,
         },
       },
     ],
@@ -237,12 +254,12 @@ export const artistInfrastructurePage = {
         equipment:
           'Laptops, projector, stable Wi-Fi; optional shared Notion / Drive / email accounts for demos.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
-        href: '/workshops#institutional-offerings',
+        href: ART_OF_AI_AGENTS_WORKSHOP_HREF,
         accent: 'ocean' as const,
         icon: 'workflow' as const,
         image: {
-          src: digilabAsset('docs.vibe-apr25-35').src,
-          alt: digilabAsset('docs.vibe-apr25-35').alt,
+          src: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.src,
+          alt: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.alt,
         },
       },
       {
@@ -263,8 +280,8 @@ export const artistInfrastructurePage = {
         accent: 'teal' as const,
         icon: 'code' as const,
         image: {
-          src: VIBE_CODE_NET_ART_BANNER,
-          alt: VIBE_CODE_NET_ART_BANNER_ALT,
+          src: SOFTWARE_INTERFACES_CREATOR_TOOL.src,
+          alt: SOFTWARE_INTERFACES_CREATOR_TOOL.alt,
         },
       },
       {
@@ -284,8 +301,8 @@ export const artistInfrastructurePage = {
         accent: 'copper' as const,
         icon: 'layers' as const,
         image: {
-          src: digilabAsset('workshop.resin-2026').src,
-          alt: digilabAsset('workshop.resin-2026').alt,
+          src: CREATIVE_DIRECTION_SPATIAL_INTERFACE.src,
+          alt: CREATIVE_DIRECTION_SPATIAL_INTERFACE.alt,
         },
       },
     ],
@@ -388,6 +405,21 @@ export const artistInfrastructurePage = {
     lead: 'A small number of verified proof cards—not a product pitch or logo wall.',
     cards: [
       {
+        id: 'art-of-ai-agents',
+        title: 'The Art of AI Agents',
+        org: 'Locust Projects · The Dill',
+        body: 'Artist Task Automation + Email Inbox Organizer — n8n AI agents with public chapter materials, handout prompts, and workflow screenshots.',
+        status: 'completed' as DeliveryStatus,
+        statusNote: 'Diagram + slides live at /workshop/the-art-of-ai-agents and /share.',
+        href: ART_OF_AI_AGENTS_EMAIL_SORTER_HREF,
+        image: {
+          src: ART_OF_AI_AGENTS_SCREENSHOTS[0].src,
+          alt: ART_OF_AI_AGENTS_SCREENSHOTS[0].alt,
+          caption: 'n8n Email Inbox Organizer — Locust workshop workflow diagram.',
+          category: 'medium' as const,
+        } satisfies InstMedia,
+      },
+      {
         id: 'bakehouse',
         title: 'Bakehouse SmartSigns',
         org: 'Bakehouse Art Complex',
@@ -422,7 +454,6 @@ export const artistInfrastructurePage = {
       },
     ],
   },
-
   practice: {
     eyebrow: 'Artistic practice',
     title: 'Teaching from a live artistic practice',

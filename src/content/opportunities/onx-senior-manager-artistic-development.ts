@@ -32,6 +32,7 @@ export const onxSeniorManagerArtisticDevelopmentOpportunity: Opportunity = {
   family: 'compact',
   applicationStatus: 'ready',
   variant: 'compact',
+  capabilitiesHref: '/capabilities#design-creative-technology',
   applicationBanner: onxArtisticDevelopmentBanner,
   seo: {
     title: 'ONX — Senior Manager of Artistic Development — Moises Sanabria',
