@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { CapabilityMap } from '@/components/opportunities/CapabilityMap';
 import { FitPillars } from '@/components/opportunities/FitPillars';
@@ -23,7 +24,7 @@ import type {
   MotionSection,
 } from '@/content/opportunities/creativeAgencyDossier';
 import type { CapabilityMapData, FitPillar } from '@/content/opportunities/systemsDossier';
-import type { OpportunityNavItem } from '@/content/opportunities/types';
+import type { ApplicationBanner, OpportunityNavItem } from '@/content/opportunities/types';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 
@@ -36,11 +37,17 @@ export type CreativeSystemsFlagshipData = {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   tertiaryCta: { label: string; href: string };
+  banner?: ApplicationBanner;
+  headshotSrc?: string;
+  headshotAlt?: string;
   logoBand: LogoBandItem[];
   navItems: OpportunityNavItem[];
   capabilitiesTitle: string;
   capabilitiesIntro?: string;
   capabilities: FitPillar[];
+  ganTitle?: string;
+  ganIntro?: string;
+  ganPillars?: FitPillar[];
   caseStudiesTitle: string;
   caseStudiesIntro: string;
   caseStudies: CreativeCaseStudyModule[];
@@ -74,7 +81,7 @@ export type CreativeSystemsFlagshipData = {
     id: string;
     title: string;
     body: string;
-    slots: Array<{ id: string; title: string; note: string }>;
+    slots: Array<{ id: string; title: string; note: string; imageSrc?: string; imageAlt?: string }>;
   };
   relatedFlagships: Array<{
     id: string;
@@ -95,6 +102,7 @@ type CreativeSystemsFlagshipClientProps = {
 export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipClientProps) {
   const sectionClass = 'mt-16 sm:mt-20 md:mt-24';
   const framed = '!mt-0 !border-0 !pt-0 scroll-mt-28 sm:scroll-mt-32';
+  const hasBanner = Boolean(data.banner?.src);
 
   return (
     <OpportunityShell
@@ -103,32 +111,85 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
       stickyNavTopClassName="top-[4.5rem] md:top-[5.25rem]"
       sectionSpyOffsetPx={160}
     >
-      <main className={cn(opp.main, 'overflow-x-clip pt-8 sm:pt-10')}>
-        <section id="overview" className="scroll-mt-28 sm:scroll-mt-32">
-          <p className={opp.accent}>{data.eyebrow}</p>
-          <h1 className={cn(opp.h1, 'mt-2')}>{data.title}</h1>
-          <p className={cn(opp.bodyLg, 'mt-3 max-w-3xl')}>{data.subtitle}</p>
-          <p className={cn(opp.body, 'mt-4 max-w-3xl')}>{data.intro}</p>
+      {data.banner ? <OpportunityApplicationBanner banner={data.banner} className="mb-0" /> : null}
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={data.primaryCta.href}
-              className={opp.btnPrimary}
-              onClick={() =>
-                track('flagship_cta_click', { flagship: data.flagshipId, kind: 'primary' })
-              }
-            >
-              {data.primaryCta.label}
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-            <Link href={data.secondaryCta.href} className={opp.btnSecondary}>
-              {data.secondaryCta.label}
-            </Link>
-            <Link href={data.tertiaryCta.href} className={opp.btnSecondaryMedium}>
-              {data.tertiaryCta.label}
-            </Link>
-          </div>
-        </section>
+      <main
+        className={cn(
+          opp.main,
+          'overflow-x-clip',
+          hasBanner ? 'pt-6 sm:pt-8' : 'pt-8 sm:pt-10',
+        )}
+      >
+        <OpportunityColorSection sectionId="overview" className="!mt-0 scroll-mt-28 sm:scroll-mt-32">
+          <section id="overview">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(220px,320px)] lg:items-start">
+              <div>
+                <p className={opp.accent}>{data.eyebrow}</p>
+                <h1 className={cn(opp.h1, 'mt-2')}>{data.title}</h1>
+                <p className={cn(opp.bodyLg, 'mt-3 max-w-3xl')}>{data.subtitle}</p>
+                <p className={cn(opp.body, 'mt-4 max-w-3xl')}>{data.intro}</p>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    href={data.primaryCta.href}
+                    className={opp.btnPrimary}
+                    onClick={() =>
+                      track('flagship_cta_click', { flagship: data.flagshipId, kind: 'primary' })
+                    }
+                  >
+                    {data.primaryCta.label}
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                  <Link href={data.secondaryCta.href} className={opp.btnSecondary}>
+                    {data.secondaryCta.label}
+                  </Link>
+                  <Link href={data.tertiaryCta.href} className={opp.btnSecondaryMedium}>
+                    {data.tertiaryCta.label}
+                  </Link>
+                </div>
+              </div>
+
+              {data.headshotSrc ? (
+                <div className="mx-auto w-full max-w-[280px] lg:mx-0 lg:justify-self-end">
+                  <p className={`mb-2 ${opp.label}`}>Profile</p>
+                  <div
+                    className={cn(
+                      opp.headshot,
+                      'group/portrait relative border-0 bg-transparent [perspective:1200px]',
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        'relative h-full w-full overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-none transition-[transform,box-shadow] duration-500 ease-out motion-safe:transform-gpu motion-safe:will-change-transform dark:border-stone-700 dark:bg-stone-800',
+                        'motion-safe:group-hover/portrait:shadow-[0_22px_48px_-18px_rgba(0,0,0,0.45)] motion-safe:group-hover/portrait:[transform:rotateY(-7deg)_rotateX(5deg)_scale(1.045)]',
+                        '[transform-style:preserve-3d]',
+                      )}
+                    >
+                      <Image
+                        src={data.headshotSrc}
+                        alt={data.headshotAlt ?? 'Moises Sanabria'}
+                        fill
+                        className="object-cover transition duration-500 motion-safe:group-hover/portrait:scale-[1.06]"
+                        sizes="(max-width: 1024px) 100vw, 320px"
+                        priority
+                      />
+                      <span
+                        className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-300 motion-safe:group-hover/portrait:opacity-100"
+                        aria-hidden
+                      >
+                        <span className="grant-portrait-sheen absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/45 to-transparent motion-safe:group-hover/portrait:animate-[grant-portrait-sheen_0.85s_ease-in-out]" />
+                      </span>
+                      <span
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-stone-900/10 via-transparent to-white/10 opacity-0 transition-opacity duration-500 motion-safe:group-hover/portrait:opacity-100"
+                        aria-hidden
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </section>
+        </OpportunityColorSection>
 
         {data.logoBand.length ? (
           <div className="mt-10 sm:mt-12">
@@ -296,6 +357,24 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
           />
         </OpportunityColorSection>
 
+        {data.ganPillars?.length ? (
+          <>
+            <DossierSectionBreak />
+            <OpportunityColorSection sectionId="gan" className={sectionClass}>
+              <FitPillars
+                title={data.ganTitle ?? 'GAN & machine-learning art'}
+                intro={
+                  data.ganIntro ??
+                  'Machine-learning artworks and documentation films—GANs as medium, not as a buzzword list.'
+                }
+                pillars={data.ganPillars}
+                sectionId="gan"
+                className={framed}
+              />
+            </OpportunityColorSection>
+          </>
+        ) : null}
+
         {data.digilabBridge ? (
           <>
             <DossierSectionBreak />
@@ -327,25 +406,53 @@ export function CreativeSystemsFlagshipClient({ data }: CreativeSystemsFlagshipC
         {data.futureCases ? (
           <>
             <DossierSectionBreak />
-            <section
-              id={data.futureCases.id}
-              className={sectionClass}
-              aria-labelledby="future-heading"
-            >
-              <h2 id="future-heading" className={opp.h2}>
-                {data.futureCases.title}
-              </h2>
-              <p className={cn(opp.body, 'mt-2 max-w-3xl')}>{data.futureCases.body}</p>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2" role="list">
-                {data.futureCases.slots.map((slot) => (
-                  <li key={slot.id} className={cn(opp.card, 'p-4 opacity-70')}>
-                    <p className={opp.accent}>Planned</p>
-                    <h3 className={cn(opp.h3, 'mt-1')}>{slot.title}</h3>
-                    <p className={cn(opp.subtle, 'mt-2')}>{slot.note}</p>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            <OpportunityColorSection sectionId="future-cases" className={sectionClass}>
+              <section
+                id={data.futureCases.id}
+                className={framed}
+                aria-labelledby="future-heading"
+              >
+                <h2 id="future-heading" className={opp.h2}>
+                  {data.futureCases.title}
+                </h2>
+                <p className={cn(opp.body, 'mt-2 max-w-3xl')}>{data.futureCases.body}</p>
+                <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
+                  {data.futureCases.slots.map((slot, index) => (
+                    <li
+                      key={slot.id}
+                      className={cn(
+                        opp.card,
+                        'group overflow-hidden border-l-[3px] p-0 transition duration-300',
+                        'hover:-translate-y-1 hover:shadow-lg',
+                        'motion-reduce:hover:translate-y-0',
+                        getOpportunityCompactAccent('coming-soon').rail,
+                      )}
+                    >
+                      {slot.imageSrc ? (
+                        <div className="relative aspect-[16/10] overflow-hidden bg-stone-100 dark:bg-stone-900">
+                          <Image
+                            src={slot.imageSrc}
+                            alt={slot.imageAlt ?? ''}
+                            fill
+                            className="object-cover transition duration-500 group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+                            sizes="400px"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 to-transparent" />
+                        </div>
+                      ) : null}
+                      <div className="p-4">
+                        <p className={opp.accent}>
+                          {slot.id === 'rammstein-face' ? 'Video pending' : 'Planned'} ·{' '}
+                          {String(index + 1).padStart(2, '0')}
+                        </p>
+                        <h3 className={cn(opp.h3, 'mt-1')}>{slot.title}</h3>
+                        <p className={cn(opp.subtle, 'mt-2')}>{slot.note}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            </OpportunityColorSection>
           </>
         ) : null}
 

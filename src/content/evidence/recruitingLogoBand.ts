@@ -124,7 +124,8 @@ export const floraDataEngineerSkillLogoBand: LogoBandItem[] = [
 
 /**
  * Creative Editor / AI stack — Adobe craft + generative tools named in agency listings.
- * Swap in official Midjourney / Runway / Firefly / VEO marks when brand assets are cleared.
+ * Official After Effects, Premiere, Firefly, and ComfyUI marks are live (Cloudinary jobs/).
+ * Midjourney / Runway / VEO remain generic marks until cleared brand assets replace them.
  */
 export const creativeAiSkillLogoBand: LogoBandItem[] = [
   {

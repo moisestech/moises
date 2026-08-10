@@ -117,6 +117,20 @@ export const ogilvySeniorAiDrivenCreativeDirectorBanner = defineApplicationBanne
   intrinsicRatio: CREATIVE_AGENCY_BANNER_RATIO,
 });
 
+/** Public hiring flagship — `/creative-ai` (measured 2172×724). */
+export const creativeAiFlagshipBanner = defineApplicationBanner({
+  src: `${cdn}/v1786380608/jobs/banners/creative-ai-moises-tech-banner_qtiy2f.png`,
+  alt: 'Creative AI — Moises Sanabria hiring flagship banner',
+  intrinsicRatio: 2172 / 724,
+});
+
+/** Public hiring flagship — `/creative-strategist` (measured 2172×724). */
+export const creativeStrategistFlagshipBanner = defineApplicationBanner({
+  src: `${cdn}/v1786380606/jobs/banners/creative-strategist-moises-tech-banner_ptxn5d.png`,
+  alt: 'Creative Strategist — Moises Sanabria hiring flagship banner',
+  intrinsicRatio: 2172 / 724,
+});
+
 /** Morley — Art Director (Remote, Florida). */
 export const morleyArtDirectorBanner = defineApplicationBanner({
   src: `${cdn}/v1785862415/jobs/banners/art-director-morley-banner_b5ridm.png`,

@@ -54,7 +54,9 @@ export function FitPillars({
       ? 'Capabilities'
       : sectionId === 'fit'
         ? 'Role fit'
-        : 'Highlights';
+        : sectionId === 'gan'
+          ? 'GAN · ML art'
+          : 'Highlights';
 
   return (
     <section id={sectionId} className={cn(opp.section, className)} aria-labelledby={`${sectionId}-heading`}>

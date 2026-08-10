@@ -12,6 +12,9 @@ const RESEARCH_SLUG_TO_KEY: Record<string, string> = {
   'locust-echo-economies': 'echo_economies',
   'touch-grass-circuit-floor': 'touch_grass_circuit_floor',
   'weight-of-the-cloud': 'weight_of_the_cloud',
+  'the-algorithm-is-outside': 'the_algorithm_is_outside',
+  'privacy-is-a-luxury': 'privacy_is_a_luxury',
+  'i-will-remember-you': 'i_will_remember_you',
 }
 
 function resolveResearchKey(slug: string): string {
