@@ -8,6 +8,8 @@ import {
   AI24_WEBSITE_HERO_IMAGE,
   evidenceProjects,
 } from '@/content/evidence/projects';
+import { artistInfrastructureBanner } from '@/content/evidence/applicationBanners';
+import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
 import {
   digilabAsset,
   VIBE_CODE_NET_ART_BANNER,
@@ -25,6 +27,7 @@ const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 const BAKEHOUSE_IMAGE = `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`;
 const DOOMSCROLLING = `${CDN}/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg`;
 const SMART_SHOPPERS = `${CDN}/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg`;
+const jobsCdn = CDN;
 
 const TEACHING_HERO = digilabAsset('workshop.art-tech-coding');
 
@@ -48,6 +51,30 @@ export type DeliveryStatus =
 /** @deprecated Use INSTITUTIONAL_COLLABORATION_AVAILABILITY from shared.ts */
 export const ARTIST_INFRASTRUCTURE_AVAILABILITY = INSTITUTIONAL_COLLABORATION_AVAILABILITY;
 
+/** Tool / platform marks named in the incubator offer — swap when clearer brand assets land. */
+export const artistInfrastructureLogoBand: LogoBandItem[] = [
+  { src: 'https://cdn.simpleicons.org/notion', alt: 'Notion', height: 36 },
+  { src: 'https://cdn.simpleicons.org/cursor', alt: 'Cursor', height: 36 },
+  { src: 'https://cdn.simpleicons.org/figma/F24E1E', alt: 'Figma', height: 36 },
+  { src: 'https://cdn.simpleicons.org/n8n/EA4B71', alt: 'n8n', height: 36 },
+  { src: `${jobsCdn}/v1783032752/jobs/airtable_logo_xserwf.png`, alt: 'Airtable', height: 36 },
+  { src: 'https://cdn.simpleicons.org/quickbooks/2CA01C', alt: 'QuickBooks', height: 36 },
+  { src: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png`, alt: 'OpenAI', height: 36 },
+  {
+    src: `${jobsCdn}/v1786372919/jobs/comfy-ui-logo-full_width_viyj7a.png`,
+    alt: 'ComfyUI',
+    height: 36,
+  },
+  { src: 'https://cdn.simpleicons.org/github', alt: 'GitHub', height: 36 },
+  { src: 'https://cdn.simpleicons.org/vercel', alt: 'Vercel', height: 36 },
+  { src: 'https://cdn.simpleicons.org/nextdotjs', alt: 'Next.js', height: 36 },
+  {
+    src: `${jobsCdn}/v1786372919/jobs/Adobe_Firefly_Logo.svg_xcwqvc.webp`,
+    alt: 'Adobe Firefly',
+    height: 36,
+  },
+];
+
 export const artistInfrastructurePage = {
   meta: {
     title: 'Creative Infrastructure for Artists — Moises Sanabria',
@@ -55,6 +82,39 @@ export const artistInfrastructurePage = {
       'Workshops, tools, and operational systems that help artists move from idea to working prototype—across AI, vibe coding, digital fabrication, and studio automation.',
     url: 'https://moises.tech/artist-infrastructure',
     ogImage: TEACHING_HERO.src,
+  },
+
+  banner: artistInfrastructureBanner,
+  bannerNote:
+    'Temporary Digilab teaching strip. Custom banner prompt: docs/institutions/artist-infrastructure-banner-prompt.md',
+
+  logoBand: artistInfrastructureLogoBand,
+  logoBandLabel: 'Tools and systems named in this offer',
+
+  mediaNeeded: {
+    eyebrow: 'Media to attach',
+    title: 'Documentary video and stills that strengthen this page',
+    lead: 'These slots are ready for your Locust / Idea Center footage, or generated stills from the banner prompt. Nothing invented as shipped proof until attached.',
+    items: [
+      {
+        id: 'locust-automation',
+        title: 'Locust Projects — Artist in the Automation',
+        note: 'Event videos / stills from Artist in the Automation programming. Ideal for curriculum + engagement proof.',
+        status: 'needed' as const,
+      },
+      {
+        id: 'idea-center-quickbooks',
+        title: 'Idea Center — QuickBooks workshop',
+        note: 'Recent QuickBooks / studio-ops workshop documentation. Fits Studio Automation for Artists.',
+        status: 'needed' as const,
+      },
+      {
+        id: 'custom-banner',
+        title: 'Custom application banner (2172×724)',
+        note: 'Generate from the banner prompt, then swap artistInfrastructureBanner in applicationBanners.ts.',
+        status: 'needed' as const,
+      },
+    ],
   },
 
   hero: {
@@ -116,18 +176,33 @@ export const artistInfrastructurePage = {
         title: 'Artist',
         body: 'I use technology as material, culture, and subject—examining how interfaces, automation, platforms, and machines shape everyday life.',
         accent: 'ink' as const,
+        icon: 'palette' as const,
+        image: {
+          src: SMART_SHOPPERS,
+          alt: 'Smart Shoppers — sculptural consumer cognition work',
+        },
       },
       {
         id: 'educator',
         title: 'Educator',
         body: 'I build accessible learning experiences in which artists leave with a working artifact, a repeatable method, and resources they can continue using.',
         accent: 'ocean' as const,
+        icon: 'graduation' as const,
+        image: {
+          src: TEACHING_HERO.src,
+          alt: TEACHING_HERO.alt,
+        },
       },
       {
         id: 'systems',
         title: 'Systems Builder',
         body: 'I design the infrastructure around creative work: documentation, equipment workflows, interfaces, automation, permissions, and tools that institutions can maintain.',
         accent: 'teal' as const,
+        icon: 'network' as const,
+        image: {
+          src: digilabAsset('digilab.room-cyan').src,
+          alt: digilabAsset('digilab.room-cyan').alt,
+        },
       },
     ],
   },
@@ -136,47 +211,73 @@ export const artistInfrastructurePage = {
     eyebrow: 'Incubator offer',
     title: 'What I can bring to an incubator',
     lead:
-      'These modules complement entrepreneurship and digital-presence programs by focusing on the operational and technical layer underneath an artist’s practice.',
+      'These modules complement entrepreneurship and digital-presence programs by focusing on the operational and technical layer underneath an artist’s practice. Expand a card for audience, formats, and take-homes.',
     modules: [
       {
         id: 'studio-automation',
         title: 'Studio Automation for Artists',
         promise:
           'Identify repetitive studio work and turn it into practical, human-supervised workflows.',
-        audience: 'Artists, residents, and studio managers comfortable with everyday digital tools; no CS degree required.',
+        audience:
+          'Artists, residents, and studio managers comfortable with everyday digital tools; no CS degree required.',
         formats: ['90-minute introduction', 'Half-day lab', 'Three-session curriculum'],
-        artifact: 'A mapped studio workflow plus one small working automation or reusable operating template.',
-        takeHome: 'A reusable checklist, prompt/agent notes with human review gates, and next-step tooling options.',
-        equipment: 'Laptops, projector, stable Wi-Fi; optional shared Notion / Drive / email accounts for demos.',
+        artifact:
+          'A mapped studio workflow plus one small working automation or reusable operating template.',
+        takeHome:
+          'A reusable checklist, prompt/agent notes with human review gates, and next-step tooling options.',
+        equipment:
+          'Laptops, projector, stable Wi-Fi; optional shared Notion / Drive / email accounts for demos.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
         href: '/workshops#institutional-offerings',
+        accent: 'ocean' as const,
+        icon: 'workflow' as const,
+        image: {
+          src: digilabAsset('docs.vibe-apr25-35').src,
+          alt: digilabAsset('docs.vibe-apr25-35').alt,
+        },
       },
       {
         id: 'vibe-coding',
         title: 'Vibe Coding as Artistic Method',
         promise:
           'Use conversational coding tools to build small websites, interfaces, artist tools, and browser-native experiments without requiring a traditional computer-science background.',
-        audience: 'Artists and creative practitioners new to code; incubators seeking method over product tutorials.',
+        audience:
+          'Artists and creative practitioners new to code; incubators seeking method over product tutorials.',
         formats: ['90-minute demonstration', 'Half-day build lab', 'Multi-session studio'],
         artifact:
           'A functional browser-based prototype or net-art experiment, plus a documented iteration path.',
-        takeHome: 'A published or exportable project plus a maintainable workflow for continuing iteration.',
+        takeHome:
+          'A published or exportable project plus a maintainable workflow for continuing iteration.',
         equipment: 'Laptops, browsers, projector; optional GitHub / hosting accounts.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
         href: '/workshops#institutional-offerings',
+        accent: 'teal' as const,
+        icon: 'code' as const,
+        image: {
+          src: VIBE_CODE_NET_ART_BANNER,
+          alt: VIBE_CODE_NET_ART_BANNER_ALT,
+        },
       },
       {
         id: 'creative-tech-infra',
         title: 'Creative-Technology Infrastructure',
         promise:
           'Build a practical production system around digital fabrication, equipment, archives, collaborative work, and public presentation.',
-        audience: 'Digital labs, fabrication programs, and institutions standing up artist-facing tech capacity.',
+        audience:
+          'Digital labs, fabrication programs, and institutions standing up artist-facing tech capacity.',
         formats: ['Guest session', 'Technical clinic', 'Project-based short curriculum'],
         artifact: 'A production plan, tested prototype step, and reusable documentation package.',
-        takeHome: 'Equipment/readiness notes, safety-aware process framing, and templates for open lab support.',
+        takeHome:
+          'Equipment/readiness notes, safety-aware process framing, and templates for open lab support.',
         equipment: 'Access to lab tools under supervision; projector; printed or digital guides.',
         options: ['Guest session', 'Co-taught module', 'Short curriculum block'],
         href: '/oolite-arts',
+        accent: 'copper' as const,
+        icon: 'layers' as const,
+        image: {
+          src: digilabAsset('workshop.resin-2026').src,
+          alt: digilabAsset('workshop.resin-2026').alt,
+        },
       },
     ],
   },
@@ -249,21 +350,25 @@ export const artistInfrastructurePage = {
         id: 'listen',
         title: 'Listen and map',
         body: 'Clarify the cohort, goals, constraints, access needs, and existing programming.',
+        icon: 'ear' as const,
       },
       {
         id: 'adapt',
         title: 'Adapt the module',
         body: 'Shape examples, tools, pacing, equipment, and participant output for the institution.',
+        icon: 'sliders' as const,
       },
       {
         id: 'teach',
         title: 'Teach and build',
         body: 'Facilitate a hands-on session centered on a working artifact.',
+        icon: 'sparkles' as const,
       },
       {
         id: 'document',
         title: 'Document and extend',
         body: 'Deliver resources, capture approved outcomes, and identify what should repeat or grow.',
+        icon: 'file' as const,
       },
     ],
   },
@@ -279,7 +384,8 @@ export const artistInfrastructurePage = {
         org: 'Bakehouse Art Complex',
         body: 'Artist-facing digital signage and kiosk infrastructure connecting spatial communication, staff-updatable programming, and maintainable technical workflows at Bakehouse Art Complex.',
         status: 'in-progress' as DeliveryStatus,
-        statusNote: 'Active implementation / in progress. Dedicated install photography pending on the Bakehouse page.',
+        statusNote:
+          'Active implementation / in progress. Dedicated install photography pending on the Bakehouse page.',
         href: '/bakehouse',
         image: {
           src: BAKEHOUSE_IMAGE,
@@ -361,35 +467,26 @@ export const artistInfrastructurePage = {
         id: 'guest',
         title: 'Guest session',
         body: 'A focused talk, demonstration, or hands-on workshop adapted to an existing class, cohort, or public program.',
+        icon: 'presentation' as const,
       },
       {
         id: 'co-taught',
         title: 'Co-taught curriculum module',
         body: 'A short sequence developed with faculty or program staff, connecting the institution’s existing goals to a participant-made artifact.',
+        icon: 'users' as const,
       },
       {
         id: 'pilot',
         title: 'Institutional pilot',
         body: 'A combined program and systems engagement that tests curriculum, documents outcomes, and identifies a repeatable model.',
+        icon: 'rocket' as const,
       },
       {
         id: 'collaboration',
         title: 'Research or teaching collaboration',
         body: 'A longer relationship joining artistic research, curriculum development, prototypes, public programming, or institutional infrastructure.',
+        icon: 'flask' as const,
       },
-    ],
-  },
-
-  claimsHonesty: {
-    eyebrow: 'Claims policy',
-    title: 'What this page will and will not claim',
-    lead: 'Institutional partners should be able to trust the evidence boundary.',
-    points: [
-      'Oolite Digital Lab work is credited with Director Fabiola Larios first, then Moises Sanabria as Technical Director of Digital, with staff, artists, and partners.',
-      'No invented participant counts, satisfaction scores, revenue, or “first/leading” claims.',
-      'Bakehouse SmartSigns is labeled in progress; AI24 / Infra24 are labeled prototype unless a destination page proves more.',
-      'DCC.MIAMI and Knight Foundation application context are not presented as awards or endorsements on this page.',
-      'This is not a consulting pitch, job announcement, or replacement for the art-practice portfolio.',
     ],
   },
 

@@ -141,6 +141,17 @@ export const creativeStrategistFlagshipBanner = defineApplicationBanner({
   frameClass: FLAGSHIP_BANNER_FRAME,
 });
 
+/**
+ * Interim `/artist-infrastructure` banner — Digilab teaching still until custom 2172×724 collage ships.
+ * @see docs/institutions/artist-infrastructure-banner-prompt.md
+ */
+export const artistInfrastructureBanner = defineApplicationBanner({
+  src: `${cdn}/v1786123445/oolite-arts/moises-sanabria-art-tech-coding-workshop_yw3kuu.jpg`,
+  alt: 'Creative Infrastructure for Artists — temporary Digilab workshop banner (custom collage pending)',
+  intrinsicRatio: 2172 / 724,
+  frameClass: FLAGSHIP_BANNER_FRAME,
+});
+
 /** Morley — Art Director (Remote, Florida). */
 export const morleyArtDirectorBanner = defineApplicationBanner({
   src: `${cdn}/v1785862415/jobs/banners/art-director-morley-banner_b5ridm.png`,
