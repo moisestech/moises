@@ -614,7 +614,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
   return {
     capabilityMap: {
       title: 'Production stack',
-      subtitle: 'Tools used to finish work—not a buzzword list.',
+      subtitle: 'Tools used to finish work—not a buzzword list. Hover or tap a group to inspect.',
       groups: [
         {
           id: 'art-direction',
@@ -622,6 +622,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
           items: [
             '**Concept development, visual systems, typography, image direction, presentations, digital and print applications**',
           ],
+          logoIds: ['figma', 'canva'],
         },
         {
           id: 'ai-tools',
@@ -629,6 +630,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
           items: [
             '**Midjourney, Adobe Firefly, DALL·E, Runway, Stable Diffusion / ComfyUI research, prompt systems, human review gates**',
           ],
+          logoIds: ['openai', 'comfyui', 'stable-diffusion', 'replicate'],
         },
         {
           id: 'adobe',
@@ -636,6 +638,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
           items: [
             '**Photoshop, Illustrator, After Effects, Premiere, Creative Cloud compositing and delivery prep**',
           ],
+          logoIds: ['adobe-premiere', 'adobe-after-effects'],
         },
         {
           id: 'ux-web',
@@ -643,6 +646,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
           items: [
             '**Figma, responsive design, accessibility, HTML, CSS, JavaScript, React, Next.js, prototyping to production**',
           ],
+          logoIds: ['figma', 'react', 'nextjs', 'typescript'],
         },
         {
           id: 'ops',
@@ -650,6 +654,7 @@ export function buildCreativeRolePortfolio(availabilityNote: string): RolePortfo
           items: [
             '**Briefs, templates, asset governance, review checkpoints, documentation, cross-functional delivery**',
           ],
+          logoIds: ['airtable', 'github', 'n8n'],
         },
       ],
       currentlyExtending: [
