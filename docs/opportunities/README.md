@@ -66,6 +66,7 @@ Audit date: **2026-08-07**. Listed = appears on `/opportunities` (`status: 'acti
 | digitas-associate-director-creative | creative-agency | no* | yes | factory | yes | A |
 | endor-labs-solutions-architect | compact | no | **no** | yes | yes | C |
 | flora-founding-data-engineer | role-portfolio | no | yes | yes | yes | A |
+| flora-forward-deployed-creative | role-portfolio | no | yes | yes | yes | A |
 | forward-deployed-ai-engineer | role-portfolio | yes | yes | yes | yes | A |
 | harvey-automation-engineer-customer-education | compact | no | **no** | yes | yes | C (unlisted pass 1) |
 | knight-journalism-tech-product-strategist | full-dossier | yes | yes | — | yes | A |

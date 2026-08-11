@@ -171,6 +171,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/roles/flora-forward-deployed-creative',
+        destination: '/opportunities/flora-forward-deployed-creative',
+        permanent: false,
+      },
+      {
         // Listing title sometimes reads Creative Editor; canonical slug is Creative Director.
         source: '/opportunities/ogilvy-senior-ai-driven-creative-editor',
         destination: '/opportunities/ogilvy-senior-ai-driven-creative-director',

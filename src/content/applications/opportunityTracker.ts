@@ -462,6 +462,17 @@ export const opportunityTracker: ApplicationTrack[] = [
     notes: 'Private role-portfolio with honest Coming soon gaps.',
   },
   {
+    id: 'flora-forward-deployed-creative',
+    company: 'FLORA',
+    role: 'Forward Deployed Creative',
+    status: 'to_apply',
+    family: 'role-portfolio',
+    slug: 'flora-forward-deployed-creative',
+    archetype: 'creative',
+    notes:
+      'Private role-portfolio; Field Kit at flora-field-kit.moises.tech + github.com/moisestech/flora-field-kit; three View Links pending.',
+  },
+  {
     id: 'knight-journalism-tech-product-strategist',
     company: 'Knight Foundation',
     role: 'Technology Product Strategist, Journalism',

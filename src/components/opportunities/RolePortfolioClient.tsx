@@ -61,6 +61,40 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
 
   const sectionClass = 'mt-8 sm:mt-10 md:mt-14';
   const framed = '!mt-0 !border-0 !pt-0 scroll-mt-28 sm:scroll-mt-32';
+  const architectureSectionId = dossier.architectureSectionId ?? 'data-model';
+  const architectureEarly =
+    Boolean(dossier.architecture) &&
+    (dossier.architecturePlacement ?? 'early') === 'early';
+  const architectureAfterSelected =
+    Boolean(dossier.architecture) &&
+    dossier.architecturePlacement === 'after-selected-project';
+  const selectedProjectAfterEvidence =
+    Boolean(dossier.selectedProject) &&
+    dossier.selectedProjectPlacement === 'after-evidence';
+  const selectedProjectDefault =
+    Boolean(dossier.selectedProject) && !selectedProjectAfterEvidence;
+
+  const architectureBlock = dossier.architecture ? (
+    <OpportunityColorSection sectionId={architectureSectionId} className={sectionClass}>
+      <SystemArchitectureFlow
+        data={dossier.architecture}
+        sectionId={architectureSectionId}
+        className={framed}
+        accent="cyan"
+      />
+    </OpportunityColorSection>
+  ) : null;
+
+  const selectedProjectBlock = dossier.selectedProject ? (
+    <OpportunityColorSection sectionId="selected-project" className={sectionClass}>
+      <SelectedProjectSection
+        project={dossier.selectedProject}
+        sectionId="selected-project"
+        sectionTitle={dossier.selectedProjectSectionTitle ?? 'Selected AI Project'}
+        className={framed}
+      />
+    </OpportunityColorSection>
+  ) : null;
 
   return (
     <OpportunityShell
@@ -111,19 +145,7 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
           </OpportunityColorSection>
         ) : null}
 
-        {dossier.architecture ? (
-          <OpportunityColorSection
-            sectionId={dossier.architectureSectionId ?? 'data-model'}
-            className={sectionClass}
-          >
-            <SystemArchitectureFlow
-              data={dossier.architecture}
-              sectionId={dossier.architectureSectionId ?? 'data-model'}
-              className={framed}
-              accent="cyan"
-            />
-          </OpportunityColorSection>
-        ) : null}
+        {architectureEarly ? architectureBlock : null}
 
         {dossier.evidenceRoadmap ? (
           <OpportunityColorSection sectionId="evidence" className={sectionClass}>
@@ -134,6 +156,11 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
             />
           </OpportunityColorSection>
         ) : null}
+
+        {selectedProjectAfterEvidence ? selectedProjectBlock : null}
+        {architectureAfterSelected && selectedProjectAfterEvidence
+          ? architectureBlock
+          : null}
 
         {dossier.comingSoon ? (
           <OpportunityColorSection sectionId="coming-soon" className={sectionClass}>
@@ -199,16 +226,11 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
           </OpportunityColorSection>
         ) : null}
 
-        {dossier.selectedProject ? (
-          <OpportunityColorSection sectionId="selected-project" className={sectionClass}>
-            <SelectedProjectSection
-              project={dossier.selectedProject}
-              sectionId="selected-project"
-              sectionTitle={dossier.selectedProjectSectionTitle ?? 'Selected AI Project'}
-              className={framed}
-            />
-          </OpportunityColorSection>
-        ) : null}
+        {selectedProjectDefault ? selectedProjectBlock : null}
+
+        {architectureAfterSelected && !selectedProjectAfterEvidence
+          ? architectureBlock
+          : null}
 
         {dossier.education?.length ? (
           <OpportunityColorSection sectionId="education" className={sectionClass}>
