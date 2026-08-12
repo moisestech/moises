@@ -13,10 +13,13 @@ import {
   workshopPromise,
 } from '@/content/workshops/moonlighter-ai-3d-printing'
 import type { MeshGlyphId } from '@/content/workshops/moonlighter-ai-3d-printing/mesh-glyphs'
+import { instructorTeachingSlides } from '@/content/workshops/moonlighter-ai-3d-printing/instructor-media'
 import { MoonlighterShell } from './MoonlighterShell'
 import { SectionMedia } from './SectionMedia'
 import { GlossaryCard, MeshKeyword } from './MeshKeyword'
 import { MeshGlyph, MeshGlyphFrame } from './MeshGlyphs'
+import { InstructorTeachingCarousel } from './InstructorTeachingCarousel'
+import { ScheduleModuleRows } from './ScheduleModuleRows'
 
 const base = `/workshop/${MOONLIGHTER_SLUG}`
 
@@ -548,7 +551,9 @@ export function MoonlighterLandingClient() {
       {/* Instructor */}
       <section className="border-b border-[var(--ml-soft-gray)] bg-[var(--ml-charcoal)] py-16 text-white md:py-20">
         <SectionEnter className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-center">
-          <SectionMedia id="instructor" tilt="strong" float />
+          <EnterItem>
+            <InstructorTeachingCarousel slides={instructorTeachingSlides} />
+          </EnterItem>
           <EnterItem>
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-accent)]">
               <MeshGlyph id="ml-shared-handoff" className="h-4 w-4" />
@@ -558,6 +563,10 @@ export function MoonlighterLandingClient() {
               Moises Sanabria
             </h2>
             <p className="mt-5 text-white/80">{workshopPromise.instructorStatement}</p>
+            <p className="mt-4 text-sm text-white/55">
+              Teaching stills from Digilab workshops and fabrication sessions — not a stock
+              portrait set.
+            </p>
             <motion.div
               className="mt-6 inline-flex"
               whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
@@ -606,33 +615,7 @@ export function MoonlighterLandingClient() {
             </div>
           </div>
           <EnterItem>
-            <div className="mt-8 overflow-x-auto">
-              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <thead>
-                  <tr className="border-b-2 border-[var(--ml-charcoal)] text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ml-ink)]/55">
-                    <th className="py-3 pr-4">Time</th>
-                    <th className="py-3 pr-4">Module</th>
-                    <th className="py-3">Output</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sixHourRunOfShow.map((row, i) => (
-                    <motion.tr
-                      key={row.moduleId}
-                      className="border-b border-[var(--ml-soft-gray)] transition-colors duration-150 hover:bg-[var(--ml-accent)]/8"
-                      initial={reduceMotion ? false : { opacity: 0, x: -8 }}
-                      whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.03, duration: 0.3 }}
-                    >
-                      <td className="py-3.5 pr-4 whitespace-nowrap font-mono text-xs">{row.time}</td>
-                      <td className="py-3.5 pr-4 font-medium">{row.module}</td>
-                      <td className="py-3.5 text-[var(--ml-ink)]/75">{row.output}</td>
-                    </motion.tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ScheduleModuleRows rows={sixHourRunOfShow} />
           </EnterItem>
         </SectionEnter>
       </section>

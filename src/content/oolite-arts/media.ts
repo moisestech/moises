@@ -103,7 +103,11 @@ export const digilabMedia = {
     alt: 'Oolite Arts Digital Lab — workstations and 3D printer station',
     category: 'space',
     cloudinaryId: 'oolite-arts/oolite-digilab-360-pcs-3d-printer-2_bz4s7h',
-    usedOn: ['/oolite-arts#lab-gallery', '/oolite-arts#resin'],
+    usedOn: [
+      '/oolite-arts#lab-gallery',
+      '/oolite-arts#resin',
+      '/workshop/moonlighter-ai-3d-printing#instructor',
+    ],
   },
   'digilab.360-faby-printer': {
     id: 'digilab.360-faby-printer',
@@ -164,6 +168,7 @@ export const digilabMedia = {
       '/oolite-arts#classes.intro-resin-printing',
       '/oolite-arts#resin',
       '/artist-infrastructure#hero',
+      '/workshop/moonlighter-ai-3d-printing#instructor',
     ],
   },
   'workshop.art-tech-coding': {
@@ -178,6 +183,7 @@ export const digilabMedia = {
       '/oolite-arts#classes.artist-website-beginners.documentary',
       '/artist-infrastructure#hero',
       '/artist-infrastructure#oolite-proof',
+      '/workshop/moonlighter-ai-3d-printing#instructor',
     ],
   },
 
@@ -188,7 +194,11 @@ export const digilabMedia = {
     alt: 'Vibe coding workshop documentation — Digital Lab, April 25',
     category: 'documentary',
     cloudinaryId: 'oolite-arts/vibe-coding-documentation-apr25th_29_ltq9if',
-    usedOn: ['/oolite-arts#classes.artist-website-beginners.documentary', '/oolite-arts#documentation'],
+    usedOn: [
+      '/oolite-arts#classes.artist-website-beginners.documentary',
+      '/oolite-arts#documentation',
+      '/workshop/moonlighter-ai-3d-printing#instructor',
+    ],
   },
   'docs.vibe-apr25-35': {
     id: 'docs.vibe-apr25-35',
@@ -201,6 +211,7 @@ export const digilabMedia = {
       '/oolite-arts#classes.artist-website-beginners.documentary',
       '/artist-infrastructure#oolite-proof',
       '/artist-infrastructure#hero',
+      '/workshop/moonlighter-ai-3d-printing#instructor',
     ],
   },
   'docs.vibe-apr25-39': {
@@ -210,7 +221,11 @@ export const digilabMedia = {
     alt: 'Vibe coding workshop documentation — Digital Lab workstations',
     category: 'documentary',
     cloudinaryId: 'oolite-arts/vibe-coding-documentation-apr25th_39_tdskyw',
-    usedOn: ['/oolite-arts#classes.artist-website-beginners.documentary', '/oolite-arts#documentation'],
+    usedOn: [
+      '/oolite-arts#classes.artist-website-beginners.documentary',
+      '/oolite-arts#documentation',
+      '/workshop/moonlighter-ai-3d-printing#instructor',
+    ],
   },
 
   'service.3d-consulting': {
@@ -276,7 +291,11 @@ export const digilabMedia = {
     category: 'headshot',
     cloudinaryId: 'oolite-arts/moises-portrait-oolite-arts_xetxca',
     credit: 'Oolite Arts',
-    usedOn: ['/oolite-arts#credits', '/artist-infrastructure#oolite-proof'],
+    usedOn: [
+      '/oolite-arts#credits',
+      '/artist-infrastructure#oolite-proof',
+      '/workshop/moonlighter-ai-3d-printing#instructor',
+    ],
   },
   'portrait.fabiola': {
     id: 'portrait.fabiola',
