@@ -8,11 +8,11 @@ export const MOONLIGHTER_SLUG = 'moonlighter-ai-3d-printing' as const
 export const MOONLIGHTER_PLACEHOLDERS = {
   dateTime: '[MOONLIGHTER TO CONFIRM], 10:00 AM–4:00 PM',
   registrationUrl: '[REGISTRATION URL PENDING]',
-  brandHex: '[HEX PENDING]',
+  brandHex: '#FF6B5A',
   brandName: 'Moonlighter FabLab',
   printerModels: '[PRINTER MODELS PENDING]',
   nozzlePlateDefaults: '[PENDING MACHINE VALIDATION]',
-  plaAccentName: '[MOONLIGHTER BRAND COLOR / INVENTORY MATCH]',
+  plaAccentName: 'Moonlighter coral (provisional)',
   computerCount: '[COMPUTER COUNT PENDING]',
   pickupPromise: '[PICKUP PROMISE PENDING OPERATIONAL SIGN-OFF]',
   additionalPrintBookingUrl: '[MOONLIGHTER LINK PENDING]',

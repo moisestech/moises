@@ -1,14 +1,17 @@
 /** Scoped visual tokens for the Moonlighter workshop microsite only. */
 
 export const moonlighterTokens = {
-  paper: '#F4F1E8',
-  ink: '#171916',
-  softGray: '#D8D7D0',
+  paper: '#FFFFFF',
+  ink: '#1A1A1A',
+  softGray: '#E8E8E8',
   digital: '#277DA8',
   controlled: '#D88A24',
   diagnose: '#CC5A55',
   verified: '#347A52',
-  moonlighterAccent: 'var(--ml-accent, #277DA8)',
+  /** FabLab coral — provisional until official brand hex arrives */
+  coral: '#FF6B5A',
+  charcoal: '#1A1A1A',
+  moonlighterAccent: 'var(--ml-accent, #FF6B5A)',
   blackFilament: '#1a1a1a',
   whiteFilament: '#f7f7f5',
 } as const
@@ -21,5 +24,7 @@ export const moonlighterCssVars: Record<string, string> = {
   '--ml-controlled': moonlighterTokens.controlled,
   '--ml-diagnose': moonlighterTokens.diagnose,
   '--ml-verified': moonlighterTokens.verified,
-  '--ml-accent': moonlighterTokens.digital,
+  '--ml-coral': moonlighterTokens.coral,
+  '--ml-charcoal': moonlighterTokens.charcoal,
+  '--ml-accent': moonlighterTokens.coral,
 }

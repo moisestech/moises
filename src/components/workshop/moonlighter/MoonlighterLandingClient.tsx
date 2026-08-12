@@ -1,20 +1,100 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import Link from 'next/link'
+import { motion, useReducedMotion } from 'framer-motion'
+import {
+  Box,
+  Folder,
+  Image as ImageIcon,
+  Printer,
+  Shield,
+  Sparkles,
+} from 'lucide-react'
 import {
   MOONLIGHTER_PLACEHOLDERS,
   MOONLIGHTER_SLUG,
+  moonlighterGlossary,
   productionTiers,
   printAttemptPolicySummary,
   sixHourRunOfShow,
   workshopPromise,
 } from '@/content/workshops/moonlighter-ai-3d-printing'
 import { MoonlighterShell } from './MoonlighterShell'
+import { MoonlighterIconFrame, SectionMedia } from './SectionMedia'
+import { GlossaryCard, MeshKeyword } from './MeshKeyword'
 
 const base = `/workshop/${MOONLIGHTER_SLUG}`
 
+const OUTCOME_TILES = [
+  { id: 'outcome-reference', icon: 'camera' as const, tone: 'charcoal' as const },
+  { id: 'outcome-image', icon: 'sparkles' as const, tone: 'coral' as const },
+  { id: 'outcome-mesh', icon: 'box' as const, tone: 'charcoal' as const, float: true },
+  { id: 'outcome-print', icon: 'printer' as const, tone: 'charcoal' as const },
+]
+
+const TOOL_ICONS = [
+  { label: 'Image gen', icon: ImageIcon },
+  { label: 'AI to 3D', icon: Sparkles },
+  { label: 'Mesh check', icon: Box },
+  { label: 'Slice & print', icon: Printer },
+]
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0 },
+}
+
+function SectionEnter({
+  children,
+  className = '',
+  stagger = 0.06,
+}: {
+  children: ReactNode
+  className?: string
+  stagger?: number
+}) {
+  const reduceMotion = useReducedMotion()
+  return (
+    <motion.div
+      className={className}
+      initial={reduceMotion ? false : 'hidden'}
+      whileInView={reduceMotion ? undefined : 'show'}
+      viewport={{ once: true, margin: '-60px' }}
+      variants={{
+        hidden: {},
+        show: {
+          transition: { staggerChildren: stagger, delayChildren: 0.04 },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+function EnterItem({
+  children,
+  className = '',
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  const reduceMotion = useReducedMotion()
+  return (
+    <motion.div
+      className={className}
+      variants={reduceMotion ? undefined : fadeUp}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 export function MoonlighterLandingClient() {
   const p = MOONLIGHTER_PLACEHOLDERS
+  const reduceMotion = useReducedMotion()
   const registerHref =
     p.registrationUrl.startsWith('http') || p.registrationUrl.startsWith('/')
       ? p.registrationUrl
@@ -22,205 +102,593 @@ export function MoonlighterLandingClient() {
 
   return (
     <MoonlighterShell>
-      <header className="border-b border-[var(--ml-soft-gray)]">
+      <header className="sticky top-0 z-30 border-b border-[var(--ml-soft-gray)] bg-[var(--ml-paper)]/90 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
-          <Link href="/workshops" className="text-sm tracking-wide text-[var(--ml-ink)]/70 hover:text-[var(--ml-ink)]">
+          <Link
+            href="/workshops"
+            className="text-sm font-medium uppercase tracking-[0.14em] text-[var(--ml-ink)]/60 transition-colors hover:text-[var(--ml-ink)]"
+          >
             Workshops
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-sm">
-            <Link href={`${base}/resources`} className="underline-offset-4 hover:underline">
+            <Link
+              href={`${base}/resources`}
+              className="uppercase tracking-[0.12em] text-[var(--ml-ink)]/70 underline-offset-4 transition-colors hover:text-[var(--ml-accent)] hover:underline"
+            >
               Resources
             </Link>
-            <Link href={`${base}/join`} className="underline-offset-4 hover:underline">
+            <a
+              href="#glossary"
+              className="uppercase tracking-[0.12em] text-[var(--ml-ink)]/70 underline-offset-4 transition-colors hover:text-[var(--ml-accent)] hover:underline"
+            >
+              Glossary
+            </a>
+            <Link
+              href={`${base}/join`}
+              className="uppercase tracking-[0.12em] text-[var(--ml-ink)]/70 underline-offset-4 transition-colors hover:text-[var(--ml-accent)] hover:underline"
+            >
               Join session
             </Link>
-            <a
+            <motion.a
               href={registerHref}
-              className="rounded-sm bg-[var(--ml-ink)] px-4 py-2 text-[var(--ml-paper)]"
+              className="rounded-full bg-[var(--ml-charcoal)] px-5 py-2.5 text-sm font-medium text-white"
+              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.03 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 24 }}
             >
               Register
-            </a>
+            </motion.a>
           </div>
         </div>
       </header>
 
-      <section className="relative overflow-hidden border-b border-[var(--ml-soft-gray)]">
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-[var(--ml-soft-gray)] bg-[var(--ml-charcoal)]">
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse at 20% 0%, rgba(39,125,168,0.18), transparent 55%), radial-gradient(ellipse at 90% 40%, rgba(216,138,36,0.12), transparent 45%)',
+              'radial-gradient(ellipse at 88% 12%, rgba(255,107,90,0.42), transparent 48%), linear-gradient(105deg, #1A1A1A 0%, #1A1A1A 48%, #2A2422 62%, #3A2E2A 100%)',
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--ml-digital)]">
-            {p.brandName} · Ages {p.ages} · {p.durationHours} hours
-          </p>
-          <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl">
-            {workshopPromise.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-[var(--ml-ink)]/80">{workshopPromise.short}</p>
-          <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
-            {[
-              ['Date', p.dateTime],
-              ['Ticket', `$${p.ticketPrice}`],
-              ['Seats', `${p.pilotCapacity} (max ${p.conditionalMax})`],
-              ['Material', `PLA · black / white / ${p.plaAccentName}`],
-            ].map(([k, v]) => (
-              <div key={k} className="border border-[var(--ml-soft-gray)] bg-white/40 p-3">
-                <dt className="font-mono text-[10px] uppercase tracking-wider text-[var(--ml-ink)]/55">{k}</dt>
-                <dd className="mt-1 text-sm leading-snug">{v}</dd>
-              </div>
-            ))}
-          </dl>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <a href={registerHref} className="rounded-sm bg-[var(--ml-digital)] px-5 py-3 text-white">
-              Register for the pilot
-            </a>
-            <Link
-              href={`${base}/join`}
-              className="rounded-sm border border-[var(--ml-ink)] px-5 py-3"
-            >
-              Enter class session
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--ml-soft-gray)] py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--ml-ink)]/55">Outcome</h2>
-          <ol className="mt-6 flex flex-wrap items-center gap-2 md:gap-4">
-            {workshopPromise.pipeline.map((step, i) => (
-              <li key={step} className="flex items-center gap-2 md:gap-4">
-                <span className="rounded-sm border border-[var(--ml-digital)] bg-white/50 px-4 py-3 text-sm font-medium">
-                  {step}
-                </span>
-                {i < workshopPromise.pipeline.length - 1 && (
-                  <span className="text-[var(--ml-ink)]/40" aria-hidden>
-                    →
-                  </span>
-                )}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--ml-soft-gray)] py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-semibold tracking-tight">What you&apos;ll make</h2>
-          <p className="mt-2 max-w-2xl text-[var(--ml-ink)]/75">
-            Creative choice stays open; the site explains the physical consequences of each choice.
-          </p>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {productionTiers.map((tier) => (
-              <article key={tier.id} className="border border-[var(--ml-soft-gray)] bg-white/40 p-6">
-                <p className="font-mono text-xs tracking-wider text-[var(--ml-controlled)]">{tier.label}</p>
-                <h3 className="mt-2 text-xl font-medium capitalize">{tier.id}</h3>
-                <ul className="mt-4 space-y-2 text-sm text-[var(--ml-ink)]/80">
-                  <li>Provisional size: {tier.sizeMm}</li>
-                  <li>{tier.typicalEstimate}</li>
-                  <li>{tier.classOutcome}</li>
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--ml-soft-gray)] py-16">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-2">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Tool-flexible method</h2>
-            <p className="mt-3 text-[var(--ml-ink)]/75">
-              ChatGPT Images or Adobe Firefly; Meshy or Tripo; optional Blender; Bambu Studio; Bambu
-              printers. The workshop teaches a transferable method rather than a single vendor interface.
-            </p>
-            <h3 className="mt-8 font-medium">Included</h3>
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--ml-ink)]/80">
-              <li>Moonlighter computer (provisional: one per participant)</li>
-              <li>PLA choice: black, white, or brand accent</li>
-              <li>All source and production files</li>
-              <li>One approved print attempt + qualifying automatic reprint</li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Prerequisite</h2>
-            <p className="mt-3 text-[var(--ml-ink)]/75">
-              Ages {p.ages}. Moonlighter Basic 3D Printing or equivalent experience. Bring a reference
-              image, upload before class, or photograph an object during class.
-            </p>
-            <h3 className="mt-8 font-medium">Print attempt & recovery</h3>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--ml-ink)]/80">{printAttemptPolicySummary}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--ml-soft-gray)] py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-semibold tracking-tight">Instructor</h2>
-          <p className="mt-4 max-w-3xl text-[var(--ml-ink)]/80">{workshopPromise.instructorStatement}</p>
-          <Link
-            href={workshopPromise.artistInfrastructureHref}
-            className="mt-4 inline-block text-[var(--ml-digital)] underline-offset-4 hover:underline"
+        {!reduceMotion && (
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute -right-16 top-10 h-64 w-64 rounded-full bg-[var(--ml-accent)]/20 blur-3xl"
+            animate={{ opacity: [0.25, 0.45, 0.25], scale: [1, 1.12, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        )}
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-16 md:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <motion.div
+            initial={reduceMotion ? false : 'hidden'}
+            animate={reduceMotion ? undefined : 'show'}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+            }}
           >
-            Artist Infrastructure
-          </Link>
-        </div>
-      </section>
-
-      <section className="border-b border-[var(--ml-soft-gray)] py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-semibold tracking-tight">Schedule preview</h2>
-          <p className="mt-2 text-sm text-[var(--ml-ink)]/65">
-            Short demos alternate with guided work. Breaks occur during processing windows.
-          </p>
-          <div className="mt-8 overflow-x-auto">
-            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-              <thead>
-                <tr className="border-b border-[var(--ml-soft-gray)] font-mono text-[10px] uppercase tracking-wider text-[var(--ml-ink)]/55">
-                  <th className="py-2 pr-4">Time</th>
-                  <th className="py-2 pr-4">Module</th>
-                  <th className="py-2">Output</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sixHourRunOfShow.map((row) => (
-                  <tr key={row.moduleId} className="border-b border-[var(--ml-soft-gray)]/80">
-                    <td className="py-3 pr-4 whitespace-nowrap font-mono text-xs">{row.time}</td>
-                    <td className="py-3 pr-4 font-medium">{row.module}</td>
-                    <td className="py-3 text-[var(--ml-ink)]/75">{row.output}</td>
-                  </tr>
+            <EnterItem>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-accent)]">
+                {p.brandName} · Ages {p.ages} · {p.durationHours} hours
+              </p>
+            </EnterItem>
+            <EnterItem>
+              <h1 className="mt-5 max-w-xl text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl">
+                {workshopPromise.title}
+              </h1>
+            </EnterItem>
+            <EnterItem>
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-white/80 md:text-lg">
+                An advanced follow-on to Moonlighter&apos;s Basic 3D Printing class:{' '}
+                <MeshKeyword id="reference" variant="dark">
+                  reference
+                </MeshKeyword>{' '}
+                + prompt →{' '}
+                <MeshKeyword id="image" variant="dark">
+                  generated image
+                </MeshKeyword>{' '}
+                → <MeshKeyword id="mesh" variant="dark">mesh</MeshKeyword> → validation → optional
+                repair → <MeshKeyword id="slice" variant="dark">slice</MeshKeyword> → approved{' '}
+                <MeshKeyword id="print" variant="dark">print</MeshKeyword> or queue.
+              </p>
+            </EnterItem>
+            <EnterItem>
+              <dl className="mt-10 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
+                {[
+                  ['Date', p.dateTime],
+                  ['Ticket', `$${p.ticketPrice}`],
+                  ['Seats', `${p.pilotCapacity} (max ${p.conditionalMax})`],
+                  ['Material', `PLA · black / white / coral`],
+                ].map(([k, v]) => (
+                  <motion.div
+                    key={k}
+                    className="bg-white/10 p-3 backdrop-blur-sm transition-colors duration-200 hover:bg-white/20"
+                    whileHover={reduceMotion ? undefined : { y: -3, rotateX: 4 }}
+                    style={{ transformStyle: 'preserve-3d' }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 22 }}
+                  >
+                    <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55">
+                      {k}
+                    </dt>
+                    <dd className="mt-1 text-sm leading-snug text-white">{v}</dd>
+                  </motion.div>
                 ))}
-              </tbody>
-            </table>
+              </dl>
+            </EnterItem>
+            <EnterItem>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <motion.a
+                  href={registerHref}
+                  className="rounded-full bg-[var(--ml-accent)] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_-12px_rgba(255,107,90,0.8)]"
+                  whileHover={reduceMotion ? undefined : { y: -3, scale: 1.03 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+                >
+                  Register for the pilot
+                </motion.a>
+                <motion.div
+                  whileHover={reduceMotion ? undefined : { y: -3, scale: 1.02 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                >
+                  <Link
+                    href={`${base}/join`}
+                    className="inline-block rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[var(--ml-charcoal)]"
+                  >
+                    Enter class session
+                  </Link>
+                </motion.div>
+              </div>
+            </EnterItem>
+          </motion.div>
+
+          <div className="flex flex-col gap-2 [perspective:1400px]">
+            <SectionMedia
+              id="hero-pipeline"
+              priority
+              tilt="strong"
+              float
+              className="rounded-none shadow-[0_24px_60px_rgba(0,0,0,0.28)]"
+            />
+            <div className="grid grid-cols-4 gap-2">
+              {(
+                ['outcome-reference', 'outcome-image', 'outcome-mesh', 'outcome-print'] as const
+              ).map((id, i) => (
+                <SectionMedia
+                  key={id}
+                  id={id}
+                  showIconFrame={false}
+                  tilt="subtle"
+                  delay={0.08 + i * 0.05}
+                  className="rounded-none"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-semibold tracking-tight">Access notes</h2>
-          <ul className="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm text-[var(--ml-ink)]/80">
-            <li>Under-18 participation follows Moonlighter waiver/media procedure: {p.under18Procedure}.</li>
-            <li>Accessibility accommodations: {p.accessibilityContact}.</li>
-            <li>Account and credit policies vary by tool; free tiers first, instructor credits as backup.</li>
-            <li>This workshop does not certify independent printer operation.</li>
-          </ul>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <a href={registerHref} className="rounded-sm bg-[var(--ml-ink)] px-5 py-3 text-[var(--ml-paper)]">
-              Register
-            </a>
-            <Link href={`${base}/resources`} className="rounded-sm border border-[var(--ml-ink)] px-5 py-3">
-              Post-class resources
-            </Link>
+      {/* Outcome pillars */}
+      <section className="border-b border-[var(--ml-soft-gray)] bg-[var(--ml-paper)] py-16 md:py-20">
+        <SectionEnter className="mx-auto max-w-6xl px-6">
+          <EnterItem>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              Outcome
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              Reference → Image → Mesh → Print
+            </h2>
+            <p className="mt-3 max-w-2xl text-[var(--ml-ink)]/70">
+              One continuous pipeline. Each stage leaves a file you can inspect, revise, and keep —
+              from <MeshKeyword id="reference">reference</MeshKeyword> through{' '}
+              <MeshKeyword id="mesh">mesh</MeshKeyword> to a finished{' '}
+              <MeshKeyword id="pla">PLA</MeshKeyword> object.
+            </p>
+          </EnterItem>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 [perspective:1200px]">
+            {OUTCOME_TILES.map((tile, i) => (
+              <motion.article
+                key={tile.id}
+                className={`group/tile flex flex-col overflow-hidden ${
+                  tile.tone === 'coral'
+                    ? 'bg-[var(--ml-accent)] text-white'
+                    : 'bg-[var(--ml-charcoal)] text-white'
+                }`}
+                variants={reduceMotion ? undefined : fadeUp}
+                transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        y: -8,
+                        rotateY: i % 2 === 0 ? -4 : 4,
+                        rotateX: 3,
+                        transition: { type: 'spring', stiffness: 320, damping: 20 },
+                      }
+                }
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <div className="flex items-center gap-3 px-5 pt-5">
+                  <MoonlighterIconFrame
+                    icon={tile.icon}
+                    tone={tile.tone === 'coral' ? 'paper' : 'coral'}
+                  />
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70">
+                      Stage {i + 1}
+                    </p>
+                    <h3 className="text-lg font-semibold uppercase tracking-wide transition-transform duration-200 group-hover/tile:translate-x-0.5">
+                      {workshopPromise.pipeline[i]}
+                    </h3>
+                  </div>
+                </div>
+                <SectionMedia
+                  id={tile.id}
+                  className="mt-4"
+                  showIconFrame={false}
+                  tilt="medium"
+                  float={Boolean(tile.float)}
+                  delay={0.05 + i * 0.04}
+                />
+              </motion.article>
+            ))}
           </div>
-          <p className="mt-6 max-w-2xl text-xs text-[var(--ml-ink)]/55">
-            Registration URL, fleet profiles, brand color, and one-week pickup language remain pending
-            Moonlighter operational sign-off.
-          </p>
-        </div>
+        </SectionEnter>
+      </section>
+
+      {/* What you'll make */}
+      <section className="border-b border-[var(--ml-soft-gray)] bg-[#F7F6F4] py-16 md:py-20">
+        <SectionEnter className="mx-auto max-w-6xl px-6">
+          <EnterItem>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              What you&apos;ll make
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              Two production tiers
+            </h2>
+            <p className="mt-3 max-w-2xl text-[var(--ml-ink)]/70">
+              Creative choice stays open; the site explains the physical consequences of each choice —
+              <MeshKeyword id="mini"> miniature</MeshKeyword> vs{' '}
+              <MeshKeyword id="sculpture">sculpture</MeshKeyword>, including time,{' '}
+              <MeshKeyword id="support">supports</MeshKeyword>, and{' '}
+              <MeshKeyword id="pickup">pickup</MeshKeyword>.
+            </p>
+          </EnterItem>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 [perspective:1200px]">
+            {productionTiers.map((tier, i) => {
+              const mediaId = tier.id === 'miniature' ? 'tier-mini' : 'tier-sculpture'
+              return (
+                <motion.article
+                  key={tier.id}
+                  className="group overflow-hidden bg-white"
+                  variants={reduceMotion ? undefined : fadeUp}
+                  whileHover={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          y: -6,
+                          rotateY: i === 0 ? -3 : 3,
+                          boxShadow: '0 28px 50px -28px rgba(26,26,26,0.35)',
+                        }
+                  }
+                  transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <SectionMedia id={mediaId} tilt="medium" delay={i * 0.06} />
+                  <div className="p-6 md:p-8">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ml-accent)]">
+                      {tier.label}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold capitalize tracking-tight transition-transform duration-200 group-hover:translate-x-1">
+                      {tier.id}
+                    </h3>
+                    <ul className="mt-5 space-y-2 text-sm text-[var(--ml-ink)]/75">
+                      <li>Provisional size: {tier.sizeMm}</li>
+                      <li>{tier.typicalEstimate}</li>
+                      <li>{tier.classOutcome}</li>
+                    </ul>
+                  </div>
+                </motion.article>
+              )
+            })}
+          </div>
+        </SectionEnter>
+      </section>
+
+      {/* Tools + Included */}
+      <section className="border-b border-[var(--ml-soft-gray)] py-16 md:py-20">
+        <SectionEnter className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-2">
+          <div>
+            <EnterItem>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+                Method
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight">Tool-flexible</h2>
+              <p className="mt-4 text-[var(--ml-ink)]/75">
+                ChatGPT Images or Adobe Firefly; Meshy or Tripo; optional Blender; Bambu Studio; Bambu
+                printers. The workshop is <MeshKeyword id="tool-flexible">tool-flexible</MeshKeyword>
+                : it teaches a transferable method rather than a single vendor interface.
+              </p>
+            </EnterItem>
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 [perspective:800px]">
+              {TOOL_ICONS.map(({ label, icon: Icon }, i) => (
+                <motion.div
+                  key={label}
+                  className="flex flex-col items-center gap-3 bg-[var(--ml-charcoal)] px-3 py-5 text-center text-white"
+                  variants={reduceMotion ? undefined : fadeUp}
+                  whileHover={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          y: -6,
+                          rotateY: -8,
+                          rotateX: 4,
+                          backgroundColor: '#2A2A2A',
+                        }
+                  }
+                  transition={{ type: 'spring', stiffness: 360, damping: 20, delay: i * 0.03 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <motion.span
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ml-accent)]"
+                    whileHover={reduceMotion ? undefined : { scale: 1.12, rotate: -8 }}
+                    style={{ transform: 'translateZ(16px)' }}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+                  </motion.span>
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.14em]">{label}</span>
+                </motion.div>
+              ))}
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <SectionMedia id="tools-flexible" tilt="medium" />
+              <SectionMedia id="tools-filament" tilt="medium" delay={0.06} />
+            </div>
+            <EnterItem>
+              <h3 className="mt-8 text-lg font-semibold">Prerequisite</h3>
+              <p className="mt-3 text-[var(--ml-ink)]/75">
+                Ages {p.ages}. Moonlighter Basic 3D Printing or equivalent experience. Bring a{' '}
+                <MeshKeyword id="reference">reference</MeshKeyword> image, upload before class, or
+                photograph an object during class.
+              </p>
+            </EnterItem>
+          </div>
+          <div>
+            <EnterItem>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+                Included
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight">What you leave with</h2>
+            </EnterItem>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <SectionMedia id="included-kit" tilt="medium" />
+              <SectionMedia id="included-files" tilt="medium" delay={0.06} />
+            </div>
+            <ul className="mt-6 space-y-3 text-sm text-[var(--ml-ink)]/80">
+              {[
+                { icon: Folder, text: 'Moonlighter computer (provisional: one per participant)' },
+                { icon: Box, text: 'PLA choice: black, white, or coral accent' },
+                { icon: Folder, text: 'All source and production files' },
+                {
+                  icon: Shield,
+                  text: 'One approved print attempt + qualifying automatic reprint',
+                },
+              ].map(({ icon: Icon, text }, i) => (
+                <motion.li
+                  key={text}
+                  className="flex items-start gap-3"
+                  variants={reduceMotion ? undefined : fadeUp}
+                  whileHover={reduceMotion ? undefined : { x: 4 }}
+                  transition={{ delay: i * 0.04 }}
+                >
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--ml-soft-gray)] transition-colors duration-200 hover:bg-[var(--ml-accent)] hover:text-white">
+                    <Icon className="h-4 w-4 text-[var(--ml-charcoal)]" strokeWidth={1.75} />
+                  </span>
+                  <span>{text}</span>
+                </motion.li>
+              ))}
+            </ul>
+            <EnterItem>
+              <h3 className="mt-8 text-lg font-semibold">Print attempt & recovery</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--ml-ink)]/80">
+                Your workshop includes one approved <MeshKeyword id="print">print</MeshKeyword>{' '}
+                attempt. Qualifying production or repairable{' '}
+                <MeshKeyword id="mesh">mesh</MeshKeyword> failures include one{' '}
+                <MeshKeyword id="reprint">automatic reprint</MeshKeyword>. Redesigns and preference
+                changes are separate. {printAttemptPolicySummary}
+              </p>
+            </EnterItem>
+          </div>
+        </SectionEnter>
+      </section>
+
+      {/* Instructor */}
+      <section className="border-b border-[var(--ml-soft-gray)] bg-[var(--ml-charcoal)] py-16 text-white md:py-20">
+        <SectionEnter className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-center">
+          <SectionMedia id="instructor" tilt="strong" float />
+          <EnterItem>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-accent)]">
+              Instructor
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              Moises Sanabria
+            </h2>
+            <p className="mt-5 text-white/80">{workshopPromise.instructorStatement}</p>
+            <motion.div
+              className="mt-6 inline-flex"
+              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+            >
+              <Link
+                href={workshopPromise.artistInfrastructureHref}
+                className="inline-flex rounded-full border border-white/30 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/60 hover:bg-white/10"
+              >
+                Artist Infrastructure
+              </Link>
+            </motion.div>
+          </EnterItem>
+        </SectionEnter>
+      </section>
+
+      {/* Schedule */}
+      <section className="border-b border-[var(--ml-soft-gray)] py-16 md:py-20">
+        <SectionEnter className="mx-auto max-w-6xl px-6">
+          <EnterItem>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              Schedule
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              Six-hour run of show
+            </h2>
+            <p className="mt-3 max-w-2xl text-[var(--ml-ink)]/70">
+              Short demos alternate with guided work. Breaks occur during processing windows.
+            </p>
+          </EnterItem>
+          <div className="mt-8 grid gap-3 lg:grid-cols-2">
+            <SectionMedia id="schedule-room" tilt="medium" />
+            <SectionMedia id="schedule-printers" tilt="medium" delay={0.06} />
+          </div>
+          <EnterItem>
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b-2 border-[var(--ml-charcoal)] text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ml-ink)]/55">
+                    <th className="py-3 pr-4">Time</th>
+                    <th className="py-3 pr-4">Module</th>
+                    <th className="py-3">Output</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sixHourRunOfShow.map((row, i) => (
+                    <motion.tr
+                      key={row.moduleId}
+                      className="border-b border-[var(--ml-soft-gray)] transition-colors duration-150 hover:bg-[var(--ml-accent)]/8"
+                      initial={reduceMotion ? false : { opacity: 0, x: -8 }}
+                      whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.03, duration: 0.3 }}
+                    >
+                      <td className="py-3.5 pr-4 whitespace-nowrap font-mono text-xs">{row.time}</td>
+                      <td className="py-3.5 pr-4 font-medium">{row.module}</td>
+                      <td className="py-3.5 text-[var(--ml-ink)]/75">{row.output}</td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </EnterItem>
+        </SectionEnter>
+      </section>
+
+      {/* Glossary */}
+      <section
+        id="glossary"
+        className="border-b border-[var(--ml-soft-gray)] bg-[var(--ml-paper)] py-16 md:py-20"
+      >
+        <SectionEnter className="mx-auto max-w-6xl px-6">
+          <EnterItem>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              Glossary
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              Shared workshop language
+            </h2>
+            <p className="mt-3 max-w-2xl text-[var(--ml-ink)]/70">
+              Hover dotted keywords anywhere on the page for a quick definition. This starter set
+              covers the pipeline, fabrication choices, and recovery terms used in class.
+            </p>
+          </EnterItem>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 [perspective:1100px]">
+            {moonlighterGlossary.map((term, i) => (
+              <GlossaryCard key={term.id} term={term} index={i} />
+            ))}
+          </div>
+        </SectionEnter>
+      </section>
+
+      {/* Access */}
+      <section className="bg-[#F7F6F4] py-16 md:py-20">
+        <SectionEnter className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-start">
+          <div>
+            <EnterItem>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+                Access notes
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+                Welcome & policies
+              </h2>
+            </EnterItem>
+            <ul className="mt-6 space-y-3 text-sm text-[var(--ml-ink)]/80">
+              <motion.li
+                className="flex gap-3"
+                variants={reduceMotion ? undefined : fadeUp}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
+              >
+                <MoonlighterIconFrame icon="shield" tone="coral" className="mt-0.5 h-9 w-9 shrink-0" />
+                <span>
+                  Under-18 participation follows Moonlighter waiver/media procedure:{' '}
+                  {p.under18Procedure}.
+                </span>
+              </motion.li>
+              <motion.li
+                className="flex gap-3"
+                variants={reduceMotion ? undefined : fadeUp}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
+              >
+                <MoonlighterIconFrame icon="users" tone="charcoal" className="mt-0.5 h-9 w-9 shrink-0" />
+                <span>Accessibility accommodations: {p.accessibilityContact}.</span>
+              </motion.li>
+              <motion.li
+                className="flex gap-3"
+                variants={reduceMotion ? undefined : fadeUp}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
+              >
+                <MoonlighterIconFrame icon="folder" tone="paper" className="mt-0.5 h-9 w-9 shrink-0" />
+                <span>
+                  Account and credit policies vary by tool; free tiers first, instructor credits as
+                  backup.
+                </span>
+              </motion.li>
+              <motion.li
+                className="flex gap-3"
+                variants={reduceMotion ? undefined : fadeUp}
+                whileHover={reduceMotion ? undefined : { x: 4 }}
+              >
+                <MoonlighterIconFrame icon="printer" tone="charcoal" className="mt-0.5 h-9 w-9 shrink-0" />
+                <span>This workshop does not certify independent printer operation.</span>
+              </motion.li>
+            </ul>
+            <EnterItem>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <motion.a
+                  href={registerHref}
+                  className="rounded-full bg-[var(--ml-charcoal)] px-6 py-3.5 text-sm font-semibold text-white"
+                  whileHover={reduceMotion ? undefined : { y: -3, scale: 1.03 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                >
+                  Register
+                </motion.a>
+                <motion.div
+                  whileHover={reduceMotion ? undefined : { y: -3, scale: 1.02 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                >
+                  <Link
+                    href={`${base}/resources`}
+                    className="inline-block rounded-full border-2 border-[var(--ml-charcoal)] px-6 py-3.5 text-sm font-semibold text-[var(--ml-charcoal)]"
+                  >
+                    Post-class resources
+                  </Link>
+                </motion.div>
+              </div>
+              <p className="mt-6 max-w-xl text-xs text-[var(--ml-ink)]/50">
+                Registration URL, printer profiles, and one-week pickup language remain pending
+                Moonlighter operational sign-off. Coral accent is provisional until official brand hex
+                arrives.
+              </p>
+            </EnterItem>
+          </div>
+          <SectionMedia id="access-welcome" tilt="strong" float />
+        </SectionEnter>
       </section>
     </MoonlighterShell>
   )
