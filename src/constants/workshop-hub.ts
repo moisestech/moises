@@ -1,105 +1,109 @@
+import { digilabAsset } from '@/content/oolite-arts/media';
+
 /**
  * Workshop / Talk Hub page configuration.
  * Used for QR code landing page at events (e.g. Locust Projects talk).
  */
 export const CALENDLY_URL =
   process.env.NEXT_PUBLIC_CALENDLY_URL ||
-  "https://calendly.com/moisestech/15-minute-meeting";
+  'https://calendly.com/moisestech/15-minute-meeting';
 
 export const WORKSHOP_HUB = {
-  PAGE_TITLE: "Art & Technology Workshops",
-  PAGE_SUBTITLE: "Talk Hub",
+  PAGE_TITLE: 'Art & Technology Workshops',
+  PAGE_SUBTITLE: 'Talk Hub',
 
   HERO: {
-    HEADLINE: "Art & Technology Workshops",
-    SUBHEADLINE: "Talk Hub — Automation & partnerships for artists and orgs",
+    HEADLINE: 'Art & Technology Workshops',
+    SUBHEADLINE: 'Talk Hub — Automation & partnerships for artists and orgs',
   },
 
   /** Top-of-page band — specific to practice, not generic “bootcamp” copy */
   INTRO: {
-    EYEBROW: "Programs & partnerships",
-    TITLE: "Automation, presence, and creative technology — taught from an art practice",
+    EYEBROW: 'Programs & partnerships',
+    TITLE: 'Automation, presence, and creative technology — taught from an art practice',
     LEAD:
-      "Three bookable institutional offerings plus deeper workshop programs. Built from Oolite Arts Digital Lab work and public teaching — live, accountable, and institution-shaped.",
+      'Three bookable institutional offerings plus deeper workshop programs. Built from Oolite Arts Digital Lab work and public teaching — live, accountable, and institution-shaped.',
   },
 
   CTA_INSTITUTIONS: {
-    TITLE: "Work with me (Institutions)",
+    TITLE: 'Work with me (Institutions)',
     BULLETS: [
-      "Embedded digital / creative-technology leadership",
-      "Paid workshop pilots for artist communities",
-      "Platforms, kiosks, and institutional workflows",
+      'Embedded digital / creative-technology leadership',
+      'Paid workshop pilots for artist communities',
+      'Platforms, kiosks, and institutional workflows',
     ],
-    BUTTON_LABEL: "Start an institutional conversation",
-    LINK: "/institutions",
+    BUTTON_LABEL: 'Start an institutional conversation',
+    LINK: '/institutions',
   },
 
   CTA_WORKSHOP: {
-    TITLE: "Join the Workshop Waitlist",
+    TITLE: 'Join the Workshop Waitlist',
     BULLETS: [
-      "n8n automations & agent patterns",
-      "Capture → summarize → publish pipelines",
-      "Hands-on workflow templates",
+      'n8n automations & agent patterns',
+      'Capture → summarize → publish pipelines',
+      'Hands-on workflow templates',
     ],
-    BUTTON_LABEL: "Join waitlist",
+    BUTTON_LABEL: 'Join waitlist',
   },
 
   WHAT_YOU_LEAVE_WITH: [
-    "Clear automation roadmap for your practice",
-    "Hands-on workflow templates",
-    "Community of artist-automators",
+    'Clear automation roadmap for your practice',
+    'Hands-on workflow templates',
+    'Community of artist-automators',
   ],
 
   RESOURCES: [
     {
-      label: "Download: AI Agents Packet",
-      href: "/workshop/the-art-of-ai-agents",
-      description: "Slides, notes, and chapter hub for the n8n / agents workshop.",
-      ctaLabel: "Get the packet",
+      label: 'Download: AI Agents Packet',
+      href: '/workshop/the-art-of-ai-agents',
+      description: 'Slides, notes, and chapter hub for the n8n / agents workshop.',
+      ctaLabel: 'Get the packet',
       external: false,
-      icon: "package",
+      icon: 'package',
     },
     {
-      label: "Example automations",
-      href: "/workshop/the-art-of-ai-agents/course",
-      description: "Chapter hub — workflow patterns and reference builds as sections expand.",
-      ctaLabel: "Browse examples",
+      label: 'Example automations',
+      href: '/workshop/the-art-of-ai-agents/course',
+      description: 'Chapter hub — workflow patterns and reference builds as sections expand.',
+      ctaLabel: 'Browse examples',
       external: false,
-      icon: "cog",
+      icon: 'cog',
     },
     {
-      label: "Book a discovery call",
+      label: 'Book a discovery call',
       href: CALENDLY_URL,
-      description: "15 minutes — institutions, partnerships, or custom programs.",
-      ctaLabel: "Schedule",
+      description: '15 minutes — institutions, partnerships, or custom programs.',
+      ctaLabel: 'Schedule',
       external: true,
-      icon: "phone",
+      icon: 'phone',
     },
   ],
 
   ABOUT: {
     MOISES: {
-      name: "Moises Sanabria",
-      role: "Technical Director of Digital at Oolite Arts",
-      bio: "Builds automation tools, institutional digital infrastructure, and teaches artists to offload repetitive tasks.",
-      avatar: "https://ui-avatars.com/api/?name=Moises+Sanabria&background=7f5af0&color=fff&size=128",
-      instagram: "moisesdsanabria",
+      name: 'Moises Sanabria',
+      role: 'Technical Director of Digital at Oolite Arts',
+      bio: 'Builds automation tools, institutional digital infrastructure, and teaches artists to offload repetitive tasks.',
+      avatar: digilabAsset('portrait.moises').src,
+      icons: ['workflow', 'code', 'printer'] as const,
+      instagram: 'moisesdsanabria',
     },
     FABIOLA: {
-      name: "Fabiola Larios",
-      role: "Director of Digital at Oolite Arts",
-      bio: "SEO & digital presence workshops. 360 Lead Director of Digital. Immersive 360° captures of exhibitions and studios.",
-      avatar: "https://ui-avatars.com/api/?name=Fabiola+Larios&background=ff6ac1&color=fff&size=128",
-      instagram: "fabiolalariosm",
+      name: 'Fabiola Larios',
+      role: 'Director of Digital at Oolite Arts',
+      bio: 'SEO & digital presence workshops. 360 Lead Director of Digital. Immersive 360° captures of exhibitions and studios.',
+      avatar: digilabAsset('portrait.fabiola').src,
+      icons: ['search', 'globe', 'camera'] as const,
+      instagram: 'fabiolalariosm',
     },
     TRUST_SIGNALS: [
-      { name: "Oolite Arts", logo: null },
-      { name: "Locust Projects", logo: null },
-      { name: "Bakehouse Art Complex", logo: null },
+      { name: 'Oolite Arts', logo: null },
+      { name: 'Locust Projects', logo: null },
+      { name: 'Bakehouse Art Complex', logo: null },
     ],
   },
 
   FOOTER: {
-    EMAIL: "m@moises.tech",
+    EMAIL: 'm@moises.tech',
   },
 } as const;

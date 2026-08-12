@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Building2, Layers, Ticket, ArrowUpRight } from 'lucide-react';
 import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings';
 import { PILOT_PRICING } from '@/content/institutions/shared';
 import { track } from '@/lib/analytics';
@@ -19,6 +21,33 @@ type PilotPricingBandProps = {
   source?: string;
 };
 
+const PKG_ICONS = {
+  seat: Ticket,
+  building: Building2,
+  layers: Layers,
+} as const;
+
+const HUB_ACCENT = {
+  cyan: {
+    icon: 'text-cyan-300',
+    soft: 'bg-cyan-400/15',
+    border: 'border-cyan-400/30',
+    price: 'text-cyan-200',
+  },
+  teal: {
+    icon: 'text-teal-300',
+    soft: 'bg-teal-400/15',
+    border: 'border-teal-400/30',
+    price: 'text-teal-200',
+  },
+  coral: {
+    icon: 'text-rose-300',
+    soft: 'bg-rose-400/15',
+    border: 'border-rose-400/30',
+    price: 'text-rose-200',
+  },
+} as const;
+
 /**
  * Oolite-aligned seat + hosted flat pricing for institutional pilots.
  */
@@ -30,19 +59,21 @@ export function PilotPricingBand({
 }: PilotPricingBandProps) {
   const pricing = institutionalWorkshopOfferings.pricing;
   const dark = tone === 'hub';
+  const reduceMotion = useReducedMotion();
 
   return (
     <section
       className={cn(
         dark
-          ? 'rounded-xl border border-white/10 bg-white/5 p-5 sm:p-6'
+          ? 'overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-white/[0.07] via-white/[0.03] to-cyan-500/[0.06] p-5 sm:p-7'
           : 'border border-neutral-200 bg-white p-5 sm:p-6',
         className,
       )}
       aria-labelledby="pilot-pricing-heading"
     >
       {dark ? (
-        <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-white/50 sm:text-xs">
+        <p className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-300/90 sm:text-xs">
+          <Ticket className="h-3.5 w-3.5" aria-hidden />
           {pricing.eyebrow}
         </p>
       ) : (
@@ -70,37 +101,56 @@ export function PilotPricingBand({
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          'mt-2 inline-block text-xs font-medium underline underline-offset-4',
+          'mt-2 inline-flex items-center gap-1 text-xs font-medium underline underline-offset-4',
           dark ? 'text-cyan-300' : 'text-neutral-600',
         )}
       >
         {pricing.sourceLabel}
+        <ArrowUpRight className="h-3 w-3" aria-hidden />
       </a>
 
       <ul className="mt-6 grid gap-3 sm:grid-cols-3">
         {pricing.packages.map((pkg, index) => {
-          const accents = ['ocean', 'teal', 'copper'] as const;
-          const accent = INST_ACCENT[accents[index] ?? 'ink'];
+          const dossierAccent = (['ocean', 'teal', 'copper'] as const)[index] ?? 'ink';
+          const accent = INST_ACCENT[dossierAccent];
+          const hub = HUB_ACCENT[pkg.accent];
+          const Icon = PKG_ICONS[pkg.icon];
           return (
-            <li
+            <motion.li
               key={pkg.id}
+              initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06, duration: 0.35 }}
+              whileHover={reduceMotion ? undefined : { y: -3, scale: 1.01 }}
               className={cn(
-                'border p-4 transition',
-                dark ? 'border-white/15 bg-black/20' : cn('bg-[#f7f6f3]', accent.ring, 'ring-1'),
+                'relative overflow-hidden border p-4 transition',
+                dark
+                  ? cn('border-white/15 bg-black/25', hub.border)
+                  : cn('bg-[#f7f6f3]', accent.ring, 'ring-1'),
               )}
             >
+              <div
+                className={cn(
+                  'mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full',
+                  dark ? hub.soft : 'bg-white',
+                )}
+                aria-hidden
+              >
+                <Icon className={cn('h-5 w-5', dark ? hub.icon : accent.text)} />
+              </div>
               <p
                 className={cn(
                   'font-mono text-[10px] uppercase tracking-[0.14em]',
-                  dark ? 'text-white/50' : accent.text,
+                  dark ? 'text-white/55' : accent.text,
                 )}
               >
                 {pkg.label}
               </p>
               <p
                 className={cn(
-                  "mt-2 font-['MoMA_Sans'] text-2xl font-semibold",
-                  dark ? 'text-white' : 'text-neutral-950',
+                  "mt-2 font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl",
+                  dark ? hub.price : 'text-neutral-950',
                 )}
               >
                 {pkg.price}
@@ -108,22 +158,46 @@ export function PilotPricingBand({
               <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-white/70' : 'text-neutral-600')}>
                 {pkg.detail}
               </p>
-              <p className={cn('mt-2 text-xs leading-relaxed', dark ? 'text-white/55' : 'text-neutral-500')}>
+              <p className={cn('mt-2 text-xs leading-relaxed', dark ? 'text-white/50' : 'text-neutral-500')}>
                 {pkg.note}
               </p>
-            </li>
+              {dark ? (
+                <div
+                  aria-hidden
+                  className={cn(
+                    'pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-40 blur-2xl',
+                    pkg.accent === 'cyan' && 'bg-cyan-400',
+                    pkg.accent === 'teal' && 'bg-teal-400',
+                    pkg.accent === 'coral' && 'bg-rose-400',
+                  )}
+                />
+              ) : null}
+            </motion.li>
           );
         })}
       </ul>
 
       {showCta ? (
         <div className="mt-6">
-          <InstPrimaryCta
-            href={PILOT_PRICING.calendlyHref}
-            label={PILOT_PRICING.calendlyLabel}
-            external
-            onClick={() => track('cta_institutions_click', { source })}
-          />
+          {dark ? (
+            <a
+              href={PILOT_PRICING.calendlyHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('cta_institutions_click', { source })}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-neutral-950 transition hover:bg-white/90"
+            >
+              {PILOT_PRICING.calendlyLabel}
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </a>
+          ) : (
+            <InstPrimaryCta
+              href={PILOT_PRICING.calendlyHref}
+              label={PILOT_PRICING.calendlyLabel}
+              external
+              onClick={() => track('cta_institutions_click', { source })}
+            />
+          )}
         </div>
       ) : null}
     </section>

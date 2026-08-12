@@ -20,6 +20,11 @@ import {
   Workflow,
   BrainCircuit,
   Layers,
+  Code2,
+  Printer,
+  Globe,
+  Camera,
+  Sparkles,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -27,11 +32,25 @@ import { WORKSHOP_HUB, CALENDLY_URL } from '@/constants/workshop-hub'
 import { WORKSHOP_FEATURES, type WorkshopCardVisual } from '@/constants/workshop-features'
 import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings'
 import { listReadyWorkshops } from '@/content/workshops/catalog'
+import {
+  getWorkshopCover,
+  WORKSHOP_TRACK_VISUAL,
+} from '@/content/workshops/catalog-covers'
 import { PilotPricingBand } from '@/components/institutions/PilotPricingBand'
+import { InstitutionalOfferingsAccordion } from '@/components/workshops/InstitutionalOfferingsAccordion'
 import { InstFamilyNav } from '@/components/institutions/InstitutionalUi'
 import { track } from '@/lib/analytics'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
+
+const ABOUT_ICONS: Record<string, LucideIcon> = {
+  workflow: Workflow,
+  code: Code2,
+  printer: Printer,
+  search: Search,
+  globe: Globe,
+  camera: Camera,
+}
 
 const WorkshopCanvas = dynamic(
   () => import('@/components/canvas/WorkshopCanvas'),
@@ -347,101 +366,7 @@ export default function WorkshopClient() {
             </a>
           </div>
           <PilotPricingBand tone="hub" className="mb-6 sm:mb-8" source="workshops_pricing" />
-          <ul className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-            {institutionalWorkshopOfferings.offerings.map((offering) => (
-              <li
-                key={offering.id}
-                id={offering.id}
-                className={cn(
-                  cardBase,
-                  'scroll-mt-28',
-                  !isDark && 'rounded-none border-neutral-200 bg-white shadow-none'
-                )}
-              >
-                <h3 className={cn('text-base sm:text-lg font-bold leading-snug', heading)}>
-                  {offering.title}
-                </h3>
-                <p className={cn('mt-2 text-sm leading-relaxed font-medium', heading)}>
-                  {offering.promise}
-                </p>
-                <p className={cn('mt-3 text-[11px] font-semibold uppercase tracking-wide', accentIcon)}>
-                  {offering.duration} · {offering.capacity}
-                </p>
-                <p className={cn('mt-1 text-sm font-semibold', heading)}>{offering.priceLabel}</p>
-                <p className={cn('mt-3 text-xs sm:text-sm leading-relaxed', bodyMuted)}>
-                  {offering.body}
-                </p>
-                <dl className={cn('mt-4 space-y-2.5 border-t pt-3 text-xs sm:text-sm', isDark ? 'border-white/10' : 'border-neutral-100')}>
-                  <div>
-                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Audience</dt>
-                    <dd className={cn('mt-0.5 leading-relaxed', heading)}>{offering.audience}</dd>
-                  </div>
-                  <div>
-                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>They make</dt>
-                    <dd className={cn('mt-0.5 leading-relaxed', heading)}>{offering.artifact}</dd>
-                  </div>
-                  <div>
-                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Outcomes</dt>
-                    <dd className={cn('mt-0.5 leading-relaxed', bodyMuted)}>
-                      {offering.outcomes.join(' · ')}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Formats</dt>
-                    <dd className={cn('mt-0.5 leading-relaxed', heading)}>
-                      {offering.formats.join(' · ')}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className={cn('font-mono text-[10px] uppercase tracking-[0.14em]', bodyMuted)}>Setup</dt>
-                    <dd className={cn('mt-0.5 leading-relaxed', bodyMuted)}>{offering.setup}</dd>
-                  </div>
-                </dl>
-                <p className={cn('mt-3 text-[11px] uppercase tracking-wide', bodyMuted)}>
-                  Fits: {offering.fits}
-                </p>
-                <div className="mt-4 flex flex-col gap-2">
-                  <a
-                    href={offering.inquiryHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      'inline-flex min-h-10 items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold',
-                      isDark
-                        ? 'bg-white/15 text-white hover:bg-white/20'
-                        : 'bg-neutral-950 text-white hover:bg-neutral-800'
-                    )}
-                    onClick={() =>
-                      track('workshop_offering_inquire', { id: offering.id, source: 'workshops' })
-                    }
-                  >
-                    {offering.inquiryLabel}
-                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                  </a>
-                  <Link
-                    href={offering.toolkitHref}
-                    className={cn(
-                      'inline-flex items-center gap-1 text-sm font-semibold',
-                      isDark ? 'text-cyan-300' : 'text-neutral-800'
-                    )}
-                  >
-                    {offering.toolkitLabel}
-                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                  </Link>
-                  <Link
-                    href={offering.relatedHref}
-                    className={cn(
-                      'inline-flex items-center gap-1 text-sm',
-                      isDark ? 'text-white/70' : 'text-neutral-600'
-                    )}
-                  >
-                    {offering.relatedLabel}
-                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <InstitutionalOfferingsAccordion isDark={isDark} />
         </motion.section>
 
         <motion.section
@@ -473,38 +398,87 @@ export default function WorkshopClient() {
             </p>
           </div>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {listReadyWorkshops().map((workshop) => (
-                <li
+            {listReadyWorkshops().map((workshop, i) => {
+              const cover = getWorkshopCover(workshop.slug)
+              const trackVisual = WORKSHOP_TRACK_VISUAL[workshop.track]
+              return (
+                <motion.li
                   key={workshop.slug}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ delay: Math.min(i * 0.03, 0.3), duration: 0.35 }}
+                  whileHover={{ y: -4 }}
                   className={cn(
-                    cardBase,
-                    !isDark && 'rounded-none border-neutral-200 bg-white shadow-none'
+                    'group overflow-hidden border backdrop-blur-md transition-shadow',
+                    isDark
+                      ? cn(
+                          'rounded-xl border-white/10 bg-white/5 hover:shadow-lg',
+                          trackVisual.ring,
+                          'hover:ring-1'
+                        )
+                      : 'rounded-none border-neutral-200 bg-white shadow-none'
                   )}
                 >
-                  <p
-                    className={cn(
-                      'font-mono text-[10px] uppercase tracking-[0.14em] mb-2',
-                      bodyMuted
+                  <div className="relative aspect-[16/10] w-full overflow-hidden">
+                    {cover ? (
+                      <Image
+                        src={cover.src}
+                        alt={cover.alt}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div
+                        className={cn(
+                          'absolute inset-0 bg-gradient-to-br',
+                          isDark ? trackVisual.glow : 'from-zinc-200 to-zinc-100'
+                        )}
+                      />
                     )}
-                  >
-                    {workshop.track} · {workshop.level} · {workshop.duration}
-                  </p>
-                  <h3 className={cn('text-base sm:text-lg font-bold leading-snug', heading)}>
-                    {workshop.publicTitle}
-                  </h3>
-                  <p className={cn('mt-2 text-sm leading-relaxed', bodyMuted)}>
-                    {workshop.hook}
-                  </p>
-                  <p className={cn('mt-3 text-xs sm:text-sm leading-relaxed line-clamp-3', bodyMuted)}>
-                    {workshop.shortDescription}
-                  </p>
-                  <div className="mt-4">
+                    <div
+                      aria-hidden
+                      className={cn(
+                        'absolute inset-0 bg-gradient-to-t to-transparent',
+                        isDark ? 'from-black/75 via-black/25' : 'from-black/50 via-black/10'
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        'absolute left-3 top-3 rounded-full border px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]',
+                        isDark ? trackVisual.chip : 'border-white/40 bg-white/90 text-neutral-800'
+                      )}
+                    >
+                      {workshop.track}
+                    </span>
+                    <Sparkles
+                      className="absolute bottom-3 right-3 h-4 w-4 text-white/80 opacity-0 transition group-hover:opacity-100"
+                      aria-hidden
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-4 sm:p-5">
+                    <p
+                      className={cn(
+                        'font-mono text-[10px] uppercase tracking-[0.14em] mb-2',
+                        bodyMuted
+                      )}
+                    >
+                      {workshop.level} · {workshop.duration}
+                    </p>
+                    <h3 className={cn('text-base sm:text-lg font-bold leading-snug', heading)}>
+                      {workshop.publicTitle}
+                    </h3>
+                    <p className={cn('mt-2 text-sm leading-relaxed line-clamp-2', bodyMuted)}>
+                      {workshop.hook}
+                    </p>
+                    <div className="mt-4">
                       <Link
                         href={workshop.href}
                         className={cn(
-                          'inline-flex min-h-10 items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold',
+                          'inline-flex min-h-10 items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold transition',
                           isDark
-                            ? 'bg-white/15 text-white hover:bg-white/20'
+                            ? 'bg-white/15 text-white hover:bg-white/25'
                             : 'bg-neutral-950 text-white hover:bg-neutral-800'
                         )}
                         onClick={() =>
@@ -517,9 +491,11 @@ export default function WorkshopClient() {
                         Open workshop
                         <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
                       </Link>
+                    </div>
                   </div>
-                </li>
-            ))}
+                </motion.li>
+              )
+            })}
           </ul>
           <p className={cn('mt-6 text-center text-xs sm:text-sm', bodyMuted)}>
             More titles are in development.{' '}
@@ -663,24 +639,61 @@ export default function WorkshopClient() {
         </motion.section>
 
         <motion.section
+          id="about"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-16"
         >
           <h2 className={cn('text-xl font-bold mb-8 text-center', heading)}>About us</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-3xl mx-auto">
             {(['MOISES', 'FABIOLA'] as const).map((key) => {
               const person = WORKSHOP_HUB.ABOUT[key]
               return (
-                <div key={key} className={cn(cardBase, 'items-center text-center')}>
+                <motion.div
+                  key={key}
+                  whileHover={{ y: -4 }}
+                  className={cn(
+                    cardBase,
+                    'items-center text-center overflow-hidden',
+                    isDark && 'hover:shadow-[0_0_36px_-14px_rgba(167,139,250,0.45)]'
+                  )}
+                >
                   <div
                     className={cn(
-                      'w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden mb-4',
+                      'relative w-24 h-24 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden mb-4 ring-2 ring-offset-2',
+                      isDark
+                        ? 'ring-white/20 ring-offset-transparent'
+                        : 'ring-violet-200 ring-offset-white',
                       avatarRing
                     )}
                   >
-                    <Image src={person.avatar} alt={person.name} width={80} height={80} className="rounded-full object-cover" />
+                    <Image
+                      src={person.avatar}
+                      alt={person.name}
+                      width={96}
+                      height={96}
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <div className="mb-3 flex items-center justify-center gap-2" aria-label="Practice signals">
+                    {person.icons.map((iconKey) => {
+                      const Icon = ABOUT_ICONS[iconKey]
+                      if (!Icon) return null
+                      return (
+                        <span
+                          key={iconKey}
+                          className={cn(
+                            'inline-flex h-8 w-8 items-center justify-center rounded-full border',
+                            isDark
+                              ? 'border-white/15 bg-white/10 text-cyan-300'
+                              : 'border-zinc-200 bg-zinc-50 text-violet-700'
+                          )}
+                        >
+                          <Icon className="h-3.5 w-3.5" aria-hidden />
+                        </span>
+                      )
+                    })}
                   </div>
                   <h3 className={cn('font-semibold mb-1', heading)}>{person.name}</h3>
                   <p className={cn('text-xs font-medium mb-2', accentIcon)}>{person.role}</p>
@@ -696,7 +709,7 @@ export default function WorkshopClient() {
                   >
                     <Instagram className="w-4 h-4" />@{person.instagram}
                   </a>
-                </div>
+                </motion.div>
               )
             })}
           </div>

@@ -7,6 +7,7 @@ import {
   relatedWorkshops,
   type WorkshopCatalogEntry,
 } from '@/content/workshops/catalog';
+import { getWorkshopCover } from '@/content/workshops/catalog-covers';
 import {
   QUICKBOOKS_AUTOMATION_AGENDA,
   QUICKBOOKS_AUTOMATION_AUDIENCE,
@@ -54,6 +55,7 @@ export function WorkshopCatalogLandingClient({ slug }: { slug: string }) {
   const related = relatedWorkshops(slug);
   const media = WORKSHOP_LANDING_MEDIA[slug] ?? [];
   const isQuickBooks = slug === 'quickbooks-automation-for-artists';
+  const cover = getWorkshopCover(slug);
   const mailHref = `mailto:${INSTITUTIONAL_EMAIL}?subject=${encodeURIComponent(
     `Workshop inquiry — ${workshop.publicTitle}`,
   )}`;
@@ -79,6 +81,20 @@ export function WorkshopCatalogLandingClient({ slug }: { slug: string }) {
                 Interim banner · dedicated strip coming
               </p>
             ) : null}
+          </div>
+        </div>
+      ) : cover ? (
+        <div className="relative w-full overflow-hidden border-b border-neutral-200 bg-neutral-900">
+          <div className="relative mx-auto aspect-[21/9] max-h-[240px] w-full sm:max-h-[300px] lg:max-h-[340px]">
+            <Image
+              src={cover.src}
+              alt={cover.alt}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           </div>
         </div>
       ) : null}

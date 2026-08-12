@@ -295,6 +295,7 @@ export const digilabMedia = {
       '/oolite-arts#credits',
       '/artist-infrastructure#oolite-proof',
       '/workshop/moonlighter-ai-3d-printing#instructor',
+      '/workshops#about',
     ],
   },
   'portrait.fabiola': {
@@ -305,7 +306,7 @@ export const digilabMedia = {
     category: 'headshot',
     cloudinaryId: 'oolite-arts/fabiola-portrait-oolite-arts_cqg32x',
     credit: 'Oolite Arts',
-    usedOn: ['/oolite-arts#credits'],
+    usedOn: ['/oolite-arts#credits', '/workshops#about'],
   },
 } as const satisfies Record<string, DigilabMediaAsset>;
 

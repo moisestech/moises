@@ -29,6 +29,8 @@ export const institutionalWorkshopOfferings = {
         price: PILOT_PRICING.seat.display,
         detail: PILOT_PRICING.seat.unit,
         note: PILOT_PRICING.seat.capacityTypical,
+        icon: 'seat' as const,
+        accent: 'cyan' as const,
       },
       {
         id: 'hosted',
@@ -36,6 +38,8 @@ export const institutionalWorkshopOfferings = {
         price: PILOT_PRICING.hostedFlat.display,
         detail: PILOT_PRICING.hostedFlat.unit,
         note: PILOT_PRICING.hostedFlat.mathNote,
+        icon: 'building' as const,
+        accent: 'teal' as const,
       },
       {
         id: 'two-part',
@@ -43,12 +47,16 @@ export const institutionalWorkshopOfferings = {
         price: PILOT_PRICING.twoPart.display,
         detail: PILOT_PRICING.twoPart.unit,
         note: PILOT_PRICING.twoPart.mathNote,
+        icon: 'layers' as const,
+        accent: 'coral' as const,
       },
     ],
   },
   offerings: [
     {
       id: 'studio-automation',
+      accent: 'violet' as const,
+      icon: 'workflow' as const,
       title: 'Studio Automation for Artists',
       promise:
         'Automate repetitive administrative, research, documentation, and production tasks while keeping human review and authorship intact.',
@@ -83,6 +91,8 @@ export const institutionalWorkshopOfferings = {
     },
     {
       id: 'vibe-coding',
+      accent: 'cyan' as const,
+      icon: 'code' as const,
       title: 'Vibe Coding and Net Art',
       promise:
         'Build small interfaces, tools, and experimental net-art projects without a traditional CS path—websites are one possible output, not the lead promise.',
@@ -117,6 +127,8 @@ export const institutionalWorkshopOfferings = {
     },
     {
       id: 'prototyping',
+      accent: 'coral' as const,
+      icon: 'printer' as const,
       title: 'Creative Technology Prototyping and Digital Fabrication',
       promise:
         'From idea to shared-facility prototype: fabrication literacy, documentation, and production workflows for institutional labs.',
