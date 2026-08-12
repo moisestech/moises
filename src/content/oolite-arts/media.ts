@@ -125,6 +125,7 @@ export const digilabMedia = {
     usedOn: [
       '/oolite-arts#classes.artist-website-beginners',
       '/artist-infrastructure#oolite-proof',
+      '/artist-infrastructure#hero',
       'replaces former dccmiami vibe-coding digilab banner',
     ],
   },
@@ -135,7 +136,10 @@ export const digilabMedia = {
     alt: 'SEO workshop banner — artist discoverability and search',
     category: 'workshop-banner',
     cloudinaryId: 'seo-workshop-banner_np2vhf',
-    usedOn: ['/oolite-arts#classes.seo-for-artists'],
+    usedOn: [
+      '/oolite-arts#classes.seo-for-artists',
+      '/artist-infrastructure#hero',
+    ],
   },
   'workshop.artist-websites-cover': {
     id: 'workshop.artist-websites-cover',
@@ -144,7 +148,10 @@ export const digilabMedia = {
     alt: 'Artist Websites for Beginners — Digital Lab workshop cover',
     category: 'workshop-banner',
     cloudinaryId: 'oolite-arts/artists-websites-for-beginners-background-cover-text_hjhhb1',
-    usedOn: ['/oolite-arts#classes.artist-websites-aug'],
+    usedOn: [
+      '/oolite-arts#classes.artist-websites-aug',
+      '/artist-infrastructure#hero',
+    ],
   },
   'workshop.resin-2026': {
     id: 'workshop.resin-2026',
@@ -153,7 +160,11 @@ export const digilabMedia = {
     alt: 'Intro to 3D Resin Printing for Artists — Digilab workshop documentation',
     category: 'workshop-banner',
     cloudinaryId: 'oolite-arts/3d-resin-printing-for-artists-digilab-2026-landscape-2_xu5bil',
-    usedOn: ['/oolite-arts#classes.intro-resin-printing', '/oolite-arts#resin'],
+    usedOn: [
+      '/oolite-arts#classes.intro-resin-printing',
+      '/oolite-arts#resin',
+      '/artist-infrastructure#hero',
+    ],
   },
   'workshop.art-tech-coding': {
     id: 'workshop.art-tech-coding',
@@ -186,7 +197,11 @@ export const digilabMedia = {
     alt: 'Vibe coding workshop in progress — screens and participants, Digital Lab',
     category: 'documentary',
     cloudinaryId: 'oolite-arts/vibe-coding-documentation-apr25th_35_x2dqzj',
-    usedOn: ['/oolite-arts#classes.artist-website-beginners.documentary', '/artist-infrastructure#oolite-proof'],
+    usedOn: [
+      '/oolite-arts#classes.artist-website-beginners.documentary',
+      '/artist-infrastructure#oolite-proof',
+      '/artist-infrastructure#hero',
+    ],
   },
   'docs.vibe-apr25-39': {
     id: 'docs.vibe-apr25-39',

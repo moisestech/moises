@@ -9,8 +9,6 @@ import {
   CalendarDays,
   CheckCircle2,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Code2,
   Ear,
   FileText,
@@ -41,7 +39,13 @@ import {
   InstSectionLabel,
 } from '@/components/institutions/InstitutionalUi';
 import type { DeliveryStatus, InstMedia } from '@/content/institutions/artistInfrastructure';
+import {
+  HeroWorkshopCarousel,
+  type HeroCarouselSlide,
+} from '@/components/institutions/HeroWorkshopCarousel';
 import { cn } from '@/lib/utils';
+
+export type { HeroCarouselSlide };
 
 const INST_ICON: Record<string, LucideIcon> = {
   palette: Palette,
@@ -184,145 +188,6 @@ function MediaFrame({
   );
 }
 
-export type HeroCarouselSlide = InstMedia & {
-  /** In-page section id, e.g. `curriculum` */
-  sectionId?: string;
-  sectionLabel?: string;
-};
-
-function scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-  window.history.replaceState(null, '', `#${id}`);
-}
-
-function HeroMediaCarousel({
-  slides,
-  imageNote,
-}: {
-  slides: readonly HeroCarouselSlide[];
-  imageNote?: string;
-}) {
-  const labelId = useId();
-  const [index, setIndex] = useState(0);
-  const count = slides.length;
-  const current = slides[index] ?? slides[0];
-
-  useEffect(() => {
-    if (count < 2) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
-    const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % count);
-    }, 7000);
-    return () => window.clearInterval(id);
-  }, [count]);
-
-  if (!current) return null;
-
-  const go = (next: number) => {
-    setIndex((next + count) % count);
-  };
-
-  return (
-    <div className="min-w-0">
-      <figure className="group/media relative" aria-labelledby={labelId}>
-        <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200 sm:aspect-[16/10]">
-          {slides.map((slide, i) => (
-            <div
-              key={`${slide.src}-${i}`}
-              className={cn(
-                'absolute inset-0 transition-opacity duration-500',
-                i === index ? 'opacity-100' : 'pointer-events-none opacity-0',
-              )}
-              aria-hidden={i !== index}
-            >
-              <Image
-                src={slide.src}
-                alt={slide.alt}
-                fill
-                priority={i === 0}
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 520px"
-              />
-            </div>
-          ))}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-neutral-950/55 via-transparent to-transparent" />
-
-          {count > 1 ? (
-            <>
-              <button
-                type="button"
-                onClick={() => go(index - 1)}
-                className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-neutral-950/55 text-white backdrop-blur-sm transition hover:bg-neutral-950/75"
-                aria-label="Previous image"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => go(index + 1)}
-                className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-neutral-950/55 text-white backdrop-blur-sm transition hover:bg-neutral-950/75"
-                aria-label="Next image"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </>
-          ) : null}
-
-          <div className="absolute bottom-0 left-0 right-0 z-10 p-3 sm:p-4">
-            <p id={labelId} className="text-sm font-medium text-white drop-shadow">
-              {current.caption ?? current.alt}
-            </p>
-            {current.sectionId ? (
-              <button
-                type="button"
-                onClick={() => scrollToSection(current.sectionId!)}
-                className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white/90 underline-offset-4 hover:underline"
-              >
-                {current.sectionLabel ?? 'View section'}
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </button>
-            ) : null}
-          </div>
-        </div>
-
-        {count > 1 ? (
-          <div className="mt-3 flex items-center justify-between gap-3">
-            <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Hero images">
-              {slides.map((slide, i) => (
-                <button
-                  key={`dot-${slide.src}-${i}`}
-                  type="button"
-                  role="tab"
-                  aria-selected={i === index}
-                  aria-label={`Show image ${i + 1}: ${slide.caption ?? slide.alt}`}
-                  onClick={() => setIndex(i)}
-                  className={cn(
-                    'h-2 rounded-full transition-all',
-                    i === index ? 'w-6 bg-neutral-900' : 'w-2 bg-neutral-300 hover:bg-neutral-500',
-                  )}
-                />
-              ))}
-            </div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-              {index + 1} / {count}
-            </p>
-          </div>
-        ) : null}
-
-        {(current.credit || imageNote) && (
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-            {current.credit ?? imageNote}
-          </p>
-        )}
-      </figure>
-    </div>
-  );
-}
-
 export function InstitutionalHero({
   kicker,
   headline,
@@ -342,17 +207,15 @@ export function InstitutionalHero({
   secondaryCta: { label: string; href: string; external?: boolean };
   image: InstMedia;
   imageNote?: string;
-  /** When provided, replaces the single right-side image with a section-linked carousel. */
+  /** When provided, replaces the single right-side image with a workshop carousel. */
   carousel?: readonly HeroCarouselSlide[];
 }) {
   return (
     <header id="hero" className="scroll-mt-28 border-b border-neutral-200">
-      <div className="mx-auto grid w-full max-w-5xl gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-10 lg:px-8">
-        <InstReveal>
+      <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center lg:gap-12 lg:px-8 xl:gap-14">
+        <InstReveal className="min-w-0">
           <InstSectionLabel accent="ink">{kicker}</InstSectionLabel>
-          <h1
-            className="mt-2 font-[MoMA_Sans] text-4xl font-semibold leading-[1.05] tracking-tight text-neutral-950 sm:text-5xl lg:text-[3.35rem]"
-          >
+          <h1 className="mt-2 font-[MoMA_Sans] text-[2.35rem] font-semibold leading-[1.05] tracking-tight text-neutral-950 sm:text-5xl lg:text-[3.2rem]">
             {headline}
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-700 sm:text-lg">
@@ -376,9 +239,9 @@ export function InstitutionalHero({
             />
           </div>
         </InstReveal>
-        <InstReveal delay={0.08} className="min-w-0">
+        <InstReveal delay={0.08} className="min-w-0 w-full">
           {carousel && carousel.length > 0 ? (
-            <HeroMediaCarousel slides={carousel} imageNote={imageNote} />
+            <HeroWorkshopCarousel slides={carousel} imageNote={imageNote} />
           ) : (
             <>
               <MediaFrame media={image} priority aspect="aspect-[4/3] sm:aspect-[16/10]" />
