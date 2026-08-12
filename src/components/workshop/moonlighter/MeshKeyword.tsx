@@ -15,6 +15,15 @@ import {
   type GlossaryTerm,
   type GlossaryTone,
 } from '@/content/workshops/moonlighter-ai-3d-printing/glossary'
+import type { MeshGlyphId } from '@/content/workshops/moonlighter-ai-3d-printing/mesh-glyphs'
+import { MeshGlyph } from './MeshGlyphs'
+
+const CATEGORY_GLYPH: Record<GlossaryTerm['category'], MeshGlyphId> = {
+  pipeline: 'ml-layers',
+  fabrication: 'ml-filament',
+  policy: 'ml-reprint',
+  access: 'ml-access',
+}
 
 const GRADIENTS: Record<GlossaryTone, string> = {
   coral: 'radial-gradient(circle at var(--kw-x, 50%) var(--kw-y, 40%), #FF6B5A 0%, #FF927F 35%, transparent 68%)',
@@ -216,7 +225,8 @@ export function GlossaryCard({
           background: `radial-gradient(circle at var(--kw-x) var(--kw-y), rgba(255,255,255,0.55), transparent 45%)`,
         }}
       />
-      <p className="relative z-[1] text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ml-ink)]/45">
+      <p className="relative z-[1] flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ml-ink)]/45">
+        <MeshGlyph id={CATEGORY_GLYPH[term.category]} className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
         {term.category}
       </p>
       <h3 className="relative z-[1] mt-2 text-lg font-semibold tracking-tight text-[var(--ml-ink)]">

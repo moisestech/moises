@@ -9,40 +9,13 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import {
-  Box,
-  Camera,
-  Folder,
-  Image as ImageIcon,
-  Layers,
-  Printer,
-  Rocket,
-  Ruler,
-  Shield,
-  Sparkles,
-  Users,
-  type LucideIcon,
-} from 'lucide-react'
 import type {
   LandingMediaAspect,
-  LandingMediaIcon,
   LandingMediaItem,
 } from '@/content/workshops/moonlighter-ai-3d-printing/landing-media'
 import { getLandingMedia } from '@/content/workshops/moonlighter-ai-3d-printing/landing-media'
-
-const ICON_MAP: Record<LandingMediaIcon, LucideIcon> = {
-  image: ImageIcon,
-  sparkles: Sparkles,
-  box: Box,
-  printer: Printer,
-  ruler: Ruler,
-  layers: Layers,
-  users: Users,
-  folder: Folder,
-  shield: Shield,
-  camera: Camera,
-  rocket: Rocket,
-}
+import type { MeshGlyphId } from '@/content/workshops/moonlighter-ai-3d-printing/mesh-glyphs'
+import { MeshGlyph, MeshGlyphFrame, type MeshGlyphTone } from './MeshGlyphs'
 
 const ASPECT_CLASS: Record<LandingMediaAspect, string> = {
   '16:9': 'aspect-video',
@@ -82,11 +55,8 @@ type SectionMediaProps = {
   showCaption?: boolean
   showIconFrame?: boolean
   priority?: boolean
-  /** CSS 3D pointer tilt. Default medium. */
   tilt?: TiltIntensity
-  /** Soft idle float/orbit when not hovering (mesh-like presence). */
   float?: boolean
-  /** Enter animation delay in seconds for staggered grids. */
   delay?: number
 }
 
@@ -131,7 +101,6 @@ export function SectionMedia({
 
   if (!media) return null
 
-  const Icon = ICON_MAP[media.icon]
   const tone = media.tone ?? 'charcoal'
   const isLight = tone === 'paper' || tone === 'coral'
   const hasSrc = Boolean(media.src)
@@ -160,7 +129,9 @@ export function SectionMedia({
       sizes="(max-width: 768px) 100vw, 720px"
       style={
         tiltEnabled && pointer.active
-          ? { transform: `translateZ(18px) translate(${(pointer.x - 50) * -0.04}%, ${(pointer.y - 50) * -0.04}%)` }
+          ? {
+              transform: `translateZ(18px) translate(${(pointer.x - 50) * -0.04}%, ${(pointer.y - 50) * -0.04}%)`,
+            }
           : undefined
       }
     />
@@ -185,7 +156,7 @@ export function SectionMedia({
               : 'border-white/25 bg-white/10 text-white'
           }`}
         >
-          <Icon className="h-7 w-7 md:h-8 md:w-8" strokeWidth={1.75} />
+          <MeshGlyph id={media.icon} className="h-7 w-7 md:h-8 md:w-8" />
         </div>
       )}
       <p
@@ -218,9 +189,9 @@ export function SectionMedia({
           animate={
             !reduceMotion && float && !pointer.active
               ? {
-                  rotateY: [ -4, 4, -4 ],
-                  rotateX: [ 2, 4, 2 ],
-                  y: [ 0, -4, 0 ],
+                  rotateY: [-4, 4, -4],
+                  rotateX: [2, 4, 2],
+                  y: [0, -4, 0],
                 }
               : undefined
           }
@@ -230,14 +201,10 @@ export function SectionMedia({
               : { duration: 0.3, ease: 'easeOut' }
           }
         >
-          <div
-            className="absolute inset-0"
-            style={{ transformStyle: 'preserve-3d' }}
-          >
+          <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
             {inner}
             {!hasSrc && <span className="sr-only">{media.alt}</span>}
 
-            {/* Specular sheen that tracks pointer */}
             {tiltEnabled && (
               <div
                 aria-hidden
@@ -249,7 +216,6 @@ export function SectionMedia({
               />
             )}
 
-            {/* Depth edge highlight */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-0 ring-1 ring-inset ring-white/25 transition-opacity duration-300 motion-safe:group-hover/ml-media:opacity-100"
@@ -267,33 +233,15 @@ export function SectionMedia({
   )
 }
 
-/** Circular icon badge matching FabLab modular pillars */
+/** @deprecated Prefer MeshGlyphFrame — kept for existing call sites */
 export function MoonlighterIconFrame({
   icon,
   tone = 'charcoal',
   className = '',
 }: {
-  icon: LandingMediaIcon
-  tone?: 'charcoal' | 'coral' | 'paper'
+  icon: MeshGlyphId
+  tone?: MeshGlyphTone
   className?: string
 }) {
-  const Icon = ICON_MAP[icon]
-  const reduceMotion = useReducedMotion()
-  const styles =
-    tone === 'coral'
-      ? 'bg-[var(--ml-accent)] text-white'
-      : tone === 'paper'
-        ? 'bg-white text-[var(--ml-ink)] border border-[var(--ml-soft-gray)]'
-        : 'bg-[var(--ml-charcoal)] text-white'
-
-  return (
-    <motion.span
-      className={`inline-flex h-12 w-12 items-center justify-center rounded-full ${styles} ${className}`}
-      aria-hidden
-      whileHover={reduceMotion ? undefined : { scale: 1.08, rotate: -6 }}
-      transition={{ type: 'spring', stiffness: 420, damping: 22 }}
-    >
-      <Icon className="h-5 w-5" strokeWidth={1.75} />
-    </motion.span>
-  )
+  return <MeshGlyphFrame id={icon} tone={tone} className={className} />
 }

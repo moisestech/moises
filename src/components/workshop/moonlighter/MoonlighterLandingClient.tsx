@@ -4,14 +4,6 @@ import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
-  Box,
-  Folder,
-  Image as ImageIcon,
-  Printer,
-  Shield,
-  Sparkles,
-} from 'lucide-react'
-import {
   MOONLIGHTER_PLACEHOLDERS,
   MOONLIGHTER_SLUG,
   moonlighterGlossary,
@@ -20,24 +12,39 @@ import {
   sixHourRunOfShow,
   workshopPromise,
 } from '@/content/workshops/moonlighter-ai-3d-printing'
+import type { MeshGlyphId } from '@/content/workshops/moonlighter-ai-3d-printing/mesh-glyphs'
 import { MoonlighterShell } from './MoonlighterShell'
-import { MoonlighterIconFrame, SectionMedia } from './SectionMedia'
+import { SectionMedia } from './SectionMedia'
 import { GlossaryCard, MeshKeyword } from './MeshKeyword'
+import { MeshGlyph, MeshGlyphFrame } from './MeshGlyphs'
 
 const base = `/workshop/${MOONLIGHTER_SLUG}`
 
-const OUTCOME_TILES = [
-  { id: 'outcome-reference', icon: 'camera' as const, tone: 'charcoal' as const },
-  { id: 'outcome-image', icon: 'sparkles' as const, tone: 'coral' as const },
-  { id: 'outcome-mesh', icon: 'box' as const, tone: 'charcoal' as const, float: true },
-  { id: 'outcome-print', icon: 'printer' as const, tone: 'charcoal' as const },
+const OUTCOME_TILES: {
+  id: string
+  icon: MeshGlyphId
+  tone: 'charcoal' | 'coral'
+  float?: boolean
+}[] = [
+  { id: 'outcome-reference', icon: 'ml-reference', tone: 'charcoal' },
+  { id: 'outcome-image', icon: 'ml-image', tone: 'coral' },
+  { id: 'outcome-mesh', icon: 'ml-mesh', tone: 'charcoal', float: true },
+  { id: 'outcome-print', icon: 'ml-print', tone: 'charcoal' },
 ]
 
-const TOOL_ICONS = [
-  { label: 'Image gen', icon: ImageIcon },
-  { label: 'AI to 3D', icon: Sparkles },
-  { label: 'Mesh check', icon: Box },
-  { label: 'Slice & print', icon: Printer },
+/** Set B — method pillars: generate → volume → validate → slice */
+const TOOL_PILLARS: { label: string; icon: MeshGlyphId; hint: string }[] = [
+  { label: 'Image gen', icon: 'ml-image-generate', hint: 'Concept still' },
+  { label: 'AI to 3D', icon: 'ml-image-to-3d', hint: 'Flat → volume' },
+  { label: 'Mesh check', icon: 'ml-mesh-check', hint: 'Inspect topology' },
+  { label: 'Slice & print', icon: 'ml-slice-print', hint: 'Layers on bed' },
+]
+
+const INCLUDED_ROWS: { icon: MeshGlyphId; text: string }[] = [
+  { icon: 'ml-computer', text: 'Moonlighter computer (provisional: one per participant)' },
+  { icon: 'ml-filament', text: 'PLA choice: black, white, or coral accent' },
+  { icon: 'ml-archive', text: 'All source and production files' },
+  { icon: 'ml-reprint', text: 'One approved print attempt + qualifying automatic reprint' },
 ]
 
 const fadeUp = {
@@ -243,25 +250,41 @@ export function MoonlighterLandingClient() {
           </motion.div>
 
           <div className="flex flex-col gap-2 [perspective:1400px]">
-            <SectionMedia
-              id="hero-pipeline"
-              priority
-              tilt="strong"
-              float
-              className="rounded-none shadow-[0_24px_60px_rgba(0,0,0,0.28)]"
-            />
+            <div className="relative">
+              <div className="pointer-events-none absolute left-3 top-3 z-10">
+                <MeshGlyphFrame id="ml-layers" tone="coral" size="md" />
+              </div>
+              <SectionMedia
+                id="hero-pipeline"
+                priority
+                tilt="strong"
+                float
+                className="rounded-none shadow-[0_24px_60px_rgba(0,0,0,0.28)]"
+              />
+            </div>
             <div className="grid grid-cols-4 gap-2">
               {(
-                ['outcome-reference', 'outcome-image', 'outcome-mesh', 'outcome-print'] as const
-              ).map((id, i) => (
-                <SectionMedia
-                  key={id}
-                  id={id}
-                  showIconFrame={false}
-                  tilt="subtle"
-                  delay={0.08 + i * 0.05}
-                  className="rounded-none"
-                />
+                [
+                  { id: 'outcome-reference', glyph: 'ml-reference' as const },
+                  { id: 'outcome-image', glyph: 'ml-image' as const },
+                  { id: 'outcome-mesh', glyph: 'ml-mesh' as const },
+                  { id: 'outcome-print', glyph: 'ml-print' as const },
+                ]
+              ).map(({ id, glyph }, i) => (
+                <div key={id} className="relative">
+                  <div className="pointer-events-none absolute inset-x-0 top-1 z-10 flex justify-center">
+                    <span className="rounded-full bg-[var(--ml-charcoal)]/70 p-1 text-white backdrop-blur-sm">
+                      <MeshGlyph id={glyph} className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
+                  <SectionMedia
+                    id={id}
+                    showIconFrame={false}
+                    tilt="subtle"
+                    delay={0.08 + i * 0.05}
+                    className="rounded-none"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -272,7 +295,8 @@ export function MoonlighterLandingClient() {
       <section className="border-b border-[var(--ml-soft-gray)] bg-[var(--ml-paper)] py-16 md:py-20">
         <SectionEnter className="mx-auto max-w-6xl px-6">
           <EnterItem>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              <MeshGlyph id="ml-layers" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
               Outcome
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -309,9 +333,10 @@ export function MoonlighterLandingClient() {
                 style={{ transformStyle: 'preserve-3d' }}
               >
                 <div className="flex items-center gap-3 px-5 pt-5">
-                  <MoonlighterIconFrame
-                    icon={tile.icon}
+                  <MeshGlyphFrame
+                    id={tile.icon}
                     tone={tile.tone === 'coral' ? 'paper' : 'coral'}
+                    size="lg"
                   />
                   <div>
                     <p className="text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70">
@@ -340,7 +365,8 @@ export function MoonlighterLandingClient() {
       <section className="border-b border-[var(--ml-soft-gray)] bg-[#F7F6F4] py-16 md:py-20">
         <SectionEnter className="mx-auto max-w-6xl px-6">
           <EnterItem>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              <MeshGlyph id="ml-mini" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
               What you&apos;ll make
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -376,16 +402,37 @@ export function MoonlighterLandingClient() {
                 >
                   <SectionMedia id={mediaId} tilt="medium" delay={i * 0.06} />
                   <div className="p-6 md:p-8">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ml-accent)]">
-                      {tier.label}
-                    </p>
-                    <h3 className="mt-2 text-2xl font-semibold capitalize tracking-tight transition-transform duration-200 group-hover:translate-x-1">
-                      {tier.id}
-                    </h3>
+                    <div className="flex items-center gap-3">
+                      <MeshGlyphFrame
+                        id={tier.id === 'miniature' ? 'ml-mini' : 'ml-sculpture'}
+                        tone={tier.id === 'miniature' ? 'soft' : 'coral'}
+                        size="md"
+                      />
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ml-accent)]">
+                          {tier.label}
+                        </p>
+                        <h3 className="mt-1 text-2xl font-semibold capitalize tracking-tight transition-transform duration-200 group-hover:translate-x-1">
+                          {tier.id}
+                        </h3>
+                      </div>
+                    </div>
                     <ul className="mt-5 space-y-2 text-sm text-[var(--ml-ink)]/75">
-                      <li>Provisional size: {tier.sizeMm}</li>
-                      <li>{tier.typicalEstimate}</li>
-                      <li>{tier.classOutcome}</li>
+                      <li className="flex items-center gap-2">
+                        <MeshGlyph id="ml-orient" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
+                        Provisional size: {tier.sizeMm}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <MeshGlyph id="ml-clock" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
+                        {tier.typicalEstimate}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <MeshGlyph
+                          id={tier.id === 'miniature' ? 'ml-print' : 'ml-pickup'}
+                          className="h-3.5 w-3.5 text-[var(--ml-accent)]"
+                        />
+                        {tier.classOutcome}
+                      </li>
                     </ul>
                   </div>
                 </motion.article>
@@ -400,7 +447,8 @@ export function MoonlighterLandingClient() {
         <SectionEnter className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-2">
           <div>
             <EnterItem>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+                <MeshGlyph id="ml-image-to-3d" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
                 Method
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight">Tool-flexible</h2>
@@ -411,7 +459,7 @@ export function MoonlighterLandingClient() {
               </p>
             </EnterItem>
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 [perspective:800px]">
-              {TOOL_ICONS.map(({ label, icon: Icon }, i) => (
+              {TOOL_PILLARS.map(({ label, icon, hint }, i) => (
                 <motion.div
                   key={label}
                   className="flex flex-col items-center gap-3 bg-[var(--ml-charcoal)] px-3 py-5 text-center text-white"
@@ -430,13 +478,14 @@ export function MoonlighterLandingClient() {
                   style={{ transformStyle: 'preserve-3d' }}
                 >
                   <motion.span
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ml-accent)]"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ml-accent)] text-[var(--ml-charcoal)]"
                     whileHover={reduceMotion ? undefined : { scale: 1.12, rotate: -8 }}
                     style={{ transform: 'translateZ(16px)' }}
                   >
-                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    <MeshGlyph id={icon} className="h-5 w-5" />
                   </motion.span>
                   <span className="text-[10px] font-semibold uppercase tracking-[0.14em]">{label}</span>
+                  <span className="text-[9px] uppercase tracking-[0.12em] text-white/45">{hint}</span>
                 </motion.div>
               ))}
             </div>
@@ -445,7 +494,10 @@ export function MoonlighterLandingClient() {
               <SectionMedia id="tools-filament" tilt="medium" delay={0.06} />
             </div>
             <EnterItem>
-              <h3 className="mt-8 text-lg font-semibold">Prerequisite</h3>
+              <h3 className="mt-8 flex items-center gap-2 text-lg font-semibold">
+                <MeshGlyphFrame id="ml-prerequisite" tone="soft" size="sm" />
+                Prerequisite
+              </h3>
               <p className="mt-3 text-[var(--ml-ink)]/75">
                 Ages {p.ages}. Moonlighter Basic 3D Printing or equivalent experience. Bring a{' '}
                 <MeshKeyword id="reference">reference</MeshKeyword> image, upload before class, or
@@ -455,7 +507,8 @@ export function MoonlighterLandingClient() {
           </div>
           <div>
             <EnterItem>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+                <MeshGlyph id="ml-archive" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
                 Included
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight">What you leave with</h2>
@@ -465,15 +518,7 @@ export function MoonlighterLandingClient() {
               <SectionMedia id="included-files" tilt="medium" delay={0.06} />
             </div>
             <ul className="mt-6 space-y-3 text-sm text-[var(--ml-ink)]/80">
-              {[
-                { icon: Folder, text: 'Moonlighter computer (provisional: one per participant)' },
-                { icon: Box, text: 'PLA choice: black, white, or coral accent' },
-                { icon: Folder, text: 'All source and production files' },
-                {
-                  icon: Shield,
-                  text: 'One approved print attempt + qualifying automatic reprint',
-                },
-              ].map(({ icon: Icon, text }, i) => (
+              {INCLUDED_ROWS.map(({ icon, text }, i) => (
                 <motion.li
                   key={text}
                   className="flex items-start gap-3"
@@ -481,9 +526,7 @@ export function MoonlighterLandingClient() {
                   whileHover={reduceMotion ? undefined : { x: 4 }}
                   transition={{ delay: i * 0.04 }}
                 >
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--ml-soft-gray)] transition-colors duration-200 hover:bg-[var(--ml-accent)] hover:text-white">
-                    <Icon className="h-4 w-4 text-[var(--ml-charcoal)]" strokeWidth={1.75} />
-                  </span>
+                  <MeshGlyphFrame id={icon} tone="soft" size="sm" className="mt-0.5 shrink-0" />
                   <span>{text}</span>
                 </motion.li>
               ))}
@@ -507,7 +550,8 @@ export function MoonlighterLandingClient() {
         <SectionEnter className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-center">
           <SectionMedia id="instructor" tilt="strong" float />
           <EnterItem>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-accent)]">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-accent)]">
+              <MeshGlyph id="ml-shared-handoff" className="h-4 w-4" />
               Instructor
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -534,19 +578,32 @@ export function MoonlighterLandingClient() {
       <section className="border-b border-[var(--ml-soft-gray)] py-16 md:py-20">
         <SectionEnter className="mx-auto max-w-6xl px-6">
           <EnterItem>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              <MeshGlyph id="ml-clock" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
               Schedule
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
               Six-hour run of show
             </h2>
             <p className="mt-3 max-w-2xl text-[var(--ml-ink)]/70">
-              Short demos alternate with guided work. Breaks occur during processing windows.
+              Short demos alternate with guided work. Breaks occur during processing windows. The{' '}
+              <MeshGlyph id="ml-printer" className="mr-1 inline h-3.5 w-3.5 align-[-2px] text-[var(--ml-accent)]" />
+              printer station stays supervised while you move through modules.
             </p>
           </EnterItem>
           <div className="mt-8 grid gap-3 lg:grid-cols-2">
-            <SectionMedia id="schedule-room" tilt="medium" />
-            <SectionMedia id="schedule-printers" tilt="medium" delay={0.06} />
+            <div className="relative">
+              <div className="pointer-events-none absolute left-3 top-3 z-10">
+                <MeshGlyphFrame id="ml-clock" tone="coral" size="sm" />
+              </div>
+              <SectionMedia id="schedule-room" tilt="medium" />
+            </div>
+            <div className="relative">
+              <div className="pointer-events-none absolute left-3 top-3 z-10">
+                <MeshGlyphFrame id="ml-printer" tone="charcoal" size="sm" />
+              </div>
+              <SectionMedia id="schedule-printers" tilt="medium" delay={0.06} />
+            </div>
           </div>
           <EnterItem>
             <div className="mt-8 overflow-x-auto">
@@ -587,7 +644,8 @@ export function MoonlighterLandingClient() {
       >
         <SectionEnter className="mx-auto max-w-6xl px-6">
           <EnterItem>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              <MeshGlyph id="ml-glossary" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
               Glossary
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -611,7 +669,8 @@ export function MoonlighterLandingClient() {
         <SectionEnter className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-start">
           <div>
             <EnterItem>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--ml-ink)]/50">
+                <MeshGlyph id="ml-access" className="h-3.5 w-3.5 text-[var(--ml-accent)]" />
                 Access notes
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -624,10 +683,10 @@ export function MoonlighterLandingClient() {
                 variants={reduceMotion ? undefined : fadeUp}
                 whileHover={reduceMotion ? undefined : { x: 4 }}
               >
-                <MoonlighterIconFrame icon="shield" tone="coral" className="mt-0.5 h-9 w-9 shrink-0" />
+                <MeshGlyphFrame id="ml-age-16" tone="coral" size="sm" className="mt-0.5 shrink-0" />
                 <span>
                   Under-18 participation follows Moonlighter waiver/media procedure:{' '}
-                  {p.under18Procedure}.
+                  {p.under18Procedure}. Ages {p.ages} shown in HTML, not baked into the icon.
                 </span>
               </motion.li>
               <motion.li
@@ -635,7 +694,7 @@ export function MoonlighterLandingClient() {
                 variants={reduceMotion ? undefined : fadeUp}
                 whileHover={reduceMotion ? undefined : { x: 4 }}
               >
-                <MoonlighterIconFrame icon="users" tone="charcoal" className="mt-0.5 h-9 w-9 shrink-0" />
+                <MeshGlyphFrame id="ml-access" tone="charcoal" size="sm" className="mt-0.5 shrink-0" />
                 <span>Accessibility accommodations: {p.accessibilityContact}.</span>
               </motion.li>
               <motion.li
@@ -643,7 +702,7 @@ export function MoonlighterLandingClient() {
                 variants={reduceMotion ? undefined : fadeUp}
                 whileHover={reduceMotion ? undefined : { x: 4 }}
               >
-                <MoonlighterIconFrame icon="folder" tone="paper" className="mt-0.5 h-9 w-9 shrink-0" />
+                <MeshGlyphFrame id="ml-account" tone="paper" size="sm" className="mt-0.5 shrink-0" />
                 <span>
                   Account and credit policies vary by tool; free tiers first, instructor credits as
                   backup.
@@ -654,7 +713,7 @@ export function MoonlighterLandingClient() {
                 variants={reduceMotion ? undefined : fadeUp}
                 whileHover={reduceMotion ? undefined : { x: 4 }}
               >
-                <MoonlighterIconFrame icon="printer" tone="charcoal" className="mt-0.5 h-9 w-9 shrink-0" />
+                <MeshGlyphFrame id="ml-printer" tone="soft" size="sm" className="mt-0.5 shrink-0" />
                 <span>This workshop does not certify independent printer operation.</span>
               </motion.li>
             </ul>
