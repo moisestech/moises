@@ -10,6 +10,7 @@ import { deepgramSolutionsArchitectOpportunity } from './deepgram-solutions-arch
 import { digitasAssociateDirectorCreativeOpportunity } from './digitas-associate-director-creative';
 import { endorLabsSolutionsArchitectOpportunity } from './endor-labs-solutions-architect';
 import { harveyAutomationEngineerOpportunity } from './harvey-automation-engineer-customer-education';
+import { hurixSmeGenerativeAiOpportunity } from './hurix-sme-generative-ai';
 import { knightJournalismTechProductStrategistOpportunity } from './knight-journalism-tech-product-strategist';
 import { morleyArtDirectorFloridaOpportunity } from './morley-art-director-florida';
 import { mscCruisesCreativeDirectorTravelExperiencesOpportunity } from './msc-cruises-creative-director-travel-experiences';
@@ -44,6 +45,7 @@ const bySlug: Record<string, Opportunity> = {
   [floraFoundingDataEngineerOpportunity.slug]: floraFoundingDataEngineerOpportunity,
   [forwardDeployedAiEngineerOpportunity.slug]: forwardDeployedAiEngineerOpportunity,
   [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
+  [hurixSmeGenerativeAiOpportunity.slug]: hurixSmeGenerativeAiOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:
     knightJournalismTechProductStrategistOpportunity,
   [morleyArtDirectorFloridaOpportunity.slug]: morleyArtDirectorFloridaOpportunity,

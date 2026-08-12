@@ -1,4 +1,5 @@
 import type { Opportunity } from './types';
+import { aiSolutionsArchitectBanner } from '@/content/evidence/applicationBanners';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import {
@@ -20,6 +21,7 @@ export const aiSolutionsArchitectOpportunity: Opportunity = {
   listed: true,
   variant: 'compact',
   capabilitiesHref: '/capabilities#software-engineering',
+  applicationBanner: aiSolutionsArchitectBanner,
   seo: {
     title: 'AI Solutions Architect — Moises Sanabria | moises.tech',
     description:
@@ -28,7 +30,7 @@ export const aiSolutionsArchitectOpportunity: Opportunity = {
   },
   visibilityNote:
     'Public role archetype — send this URL for Solutions Architect / AI Solutions Engineer clusters. Employer dossiers stay private.',
-  company: 'Open',
+  company: 'AI Solutions Architect (archetype)',
   roleTitle: 'AI Solutions Architect',
   audienceKeywords: {
     lead: 'Prepared for',

@@ -5,6 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Copy, Check, ExternalLink, ArrowLeft, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
+import {
+  ART_OF_AI_AGENTS_EMAIL_INBOX_DIAGRAM,
+  ART_OF_AI_AGENTS_SCREENSHOTS,
+  ART_OF_AI_AGENTS_WORKSHOP_HREF,
+  N8N_LOGO,
+} from '@/constants/art-of-ai-agents';
 
 const SLIDES_URL =
   'https://www.canva.com/design/DAG8XUDbk08/WLDVoo18PxMVv9kem2jPxw/view?utm_content=DAG8XUDbk08&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea00d41ad3';
@@ -132,7 +138,7 @@ export default function EmailSorterShareClient() {
 
       <div className="relative max-w-2xl mx-auto px-4 py-12 sm:py-16 pt-20">
         <Link
-          href="/workshop/the-art-of-ai-agents"
+          href={ART_OF_AI_AGENTS_WORKSHOP_HREF}
           className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -144,6 +150,19 @@ export default function EmailSorterShareClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
+          <div className="mb-6 flex items-center gap-3">
+            <a
+              href={N8N_LOGO.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 p-2 transition hover:border-[#ea4b71]/40 hover:bg-white/10"
+              aria-label="n8n"
+            >
+              <Image src={N8N_LOGO.src} alt={N8N_LOGO.alt} width={28} height={28} className="h-7 w-7" unoptimized />
+            </a>
+            <p className="text-xs uppercase tracking-[0.2em] text-white/50">Built in n8n</p>
+          </div>
+
           <h1
             className="text-2xl sm:text-3xl font-bold mb-2"
             style={{
@@ -152,13 +171,52 @@ export default function EmailSorterShareClient() {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            Email Sorter Handout
+            Email Inbox Organizer
           </h1>
           <p className="text-white/70 text-sm sm:text-base mb-8">
-            Copy each block into n8n. Scan the QR from the slide to get here.
+            Locust workshop handout — copy each block into n8n. Scan the QR from the slide to get here.
           </p>
 
-          {/* Block A: Prompt field */}
+          <div className="mb-10 space-y-4">
+            <figure className="overflow-hidden rounded-xl border border-white/10 bg-black/40">
+              <div className="relative aspect-[16/10] bg-black/60">
+                <Image
+                  src={ART_OF_AI_AGENTS_EMAIL_INBOX_DIAGRAM.src}
+                  alt={ART_OF_AI_AGENTS_EMAIL_INBOX_DIAGRAM.alt}
+                  fill
+                  priority
+                  className="object-contain object-center p-2 sm:p-3"
+                  sizes="(max-width: 672px) 100vw, 672px"
+                />
+              </div>
+              <figcaption className="border-t border-white/10 px-4 py-3 text-xs text-white/60 sm:text-sm">
+                {ART_OF_AI_AGENTS_EMAIL_INBOX_DIAGRAM.caption}
+              </figcaption>
+            </figure>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {ART_OF_AI_AGENTS_SCREENSHOTS.filter((s) => s.id !== 'email-inbox-organizer-diagram').map((shot) => (
+                <figure
+                  key={shot.id}
+                  className="overflow-hidden rounded-xl border border-white/10 bg-black/40"
+                >
+                  <div className="relative aspect-[16/10] bg-black/60">
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 640px) 100vw, 320px"
+                    />
+                  </div>
+                  <figcaption className="border-t border-white/10 px-3 py-2.5 text-[11px] leading-snug text-white/55 sm:text-xs">
+                    {shot.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+
           <CopyBlock
             blockId="prompt"
             label="Block A — Prompt field"
@@ -168,7 +226,6 @@ export default function EmailSorterShareClient() {
             onCopy={(id) => handleCopy(id, PROMPT_FIELD)}
           />
 
-          {/* Block B: System message */}
           <CopyBlock
             blockId="system"
             label="Block B — System message"
@@ -178,7 +235,6 @@ export default function EmailSorterShareClient() {
             onCopy={(id) => handleCopy(id, SYSTEM_MESSAGE)}
           />
 
-          {/* Gmail labels */}
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 overflow-hidden mb-8 backdrop-blur-sm">
             <div className="px-4 py-3 border-b border-amber-500/20 flex flex-wrap items-center justify-between gap-2">
               <div>
@@ -203,7 +259,6 @@ export default function EmailSorterShareClient() {
             </p>
           </div>
 
-          {/* Slides link */}
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 mb-12 backdrop-blur-sm hover:border-[#7f5af0]/30 transition-colors">
             <h2 className="text-lg font-semibold mb-2">Workshop slides</h2>
             <p className="text-white/70 text-sm mb-4">Follow along with the full presentation.</p>
@@ -218,7 +273,6 @@ export default function EmailSorterShareClient() {
             </a>
           </div>
 
-          {/* 360 Experiences */}
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 mb-12 backdrop-blur-sm">
             <div className="flex items-start gap-4">
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#7f5af0]/30 to-[#ff6ac1]/30 flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -242,7 +296,6 @@ export default function EmailSorterShareClient() {
             </div>
           </div>
 
-          {/* About Us */}
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-sm">
             <h2 className="text-xl font-bold text-center mb-8">About us</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">

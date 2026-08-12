@@ -12,6 +12,11 @@ import {
   creativeSystemsWorkflow,
   LINDEMANN_ICH_WEISS_ES_NICHT_YT,
 } from '@/content/flagships/creativeSystemsShared';
+import {
+  AI_PRODUCTION_HUMAN_REVIEW_PIPELINE,
+  CREATIVE_DIRECTION_SPATIAL_INTERFACE,
+  SOFTWARE_INTERFACES_CREATOR_TOOL,
+} from '@/content/institutions/artistInfrastructureMedia';
 import type { SkillsMatrixIconKey } from '@/content/opportunities/types';
 
 export type CreativeLayerId = 'direction' | 'production' | 'software';
@@ -28,8 +33,6 @@ export type CreativeLayer = {
 };
 
 const hub = flagshipEvidence['creative-ai'];
-const lore = flagshipEvidence['lore-machine'];
-const ai24 = flagshipEvidence.ai24;
 
 const ytPoster = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
@@ -93,8 +96,8 @@ export const creativeAiFlagship = {
       body: 'Concept, visual systems, and editorial judgment that decide what should be generated, shown, or withheld.',
       caseIds: ['lore-machine', 'ai24', 'multimodal-image-systems'],
       icon: 'sparkles',
-      imageSrc: lore.imageSrc,
-      imageAlt: lore.imageAlt,
+      imageSrc: CREATIVE_DIRECTION_SPATIAL_INTERFACE.src,
+      imageAlt: CREATIVE_DIRECTION_SPATIAL_INTERFACE.alt,
       outcome: 'Taste-led briefs, visual territories, and kill decisions before volume scales.',
     },
     {
@@ -103,9 +106,8 @@ export const creativeAiFlagship = {
       body: 'Pipelines that turn briefs into repeatable generative workflows — prompts, ControlNet, ComfyUI graphs, review loops.',
       caseIds: ['comfyui-provenance', 'multimodal-image-systems', 'lore-machine'],
       icon: 'workflow',
-      imageSrc:
-        'https://res.cloudinary.com/dck5rzi4h/image/upload/v1774644704/art/moisestech-website/research/broken-acceleration/broken-acceleration-2_ljoygv.png',
-      imageAlt: 'Generative production still — pipelines under editorial control',
+      imageSrc: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.src,
+      imageAlt: AI_PRODUCTION_HUMAN_REVIEW_PIPELINE.alt,
       outcome: 'Repeatable generation under brand constraints and human review gates.',
     },
     {
@@ -114,8 +116,8 @@ export const creativeAiFlagship = {
       body: 'Product surfaces and tools that make creative AI operable by writers, artists, and institutions — not only by engineers.',
       caseIds: ['lore-machine', 'comfyui-provenance', 'ai24'],
       icon: 'code2',
-      imageSrc: ai24.imageSrc,
-      imageAlt: ai24.imageAlt,
+      imageSrc: SOFTWARE_INTERFACES_CREATOR_TOOL.src,
+      imageAlt: SOFTWARE_INTERFACES_CREATOR_TOOL.alt,
       outcome: 'Creator-facing products and institutional tools that survive real use.',
     },
   ] satisfies CreativeLayer[],

@@ -14,13 +14,14 @@ import {
 export const neogovStaffAgenticAiOpportunity: Opportunity = {
   slug: 'neogov-staff-agentic-ai-developer',
   status: 'active',
-  listed: true,
+  listed: false,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'Staff Agentic AI Developer — NEOGOV · Moises Sanabria',
     description:
       'Production agentic automation, governance boundaries, Airtable approval patterns, and public-sector-ready documentation.',
-    indexable: true,
+    indexable: false,
   },
   company: 'NEOGOV',
   roleTitle: 'Staff Agentic AI Developer',

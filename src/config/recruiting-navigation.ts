@@ -3,13 +3,12 @@ import { technologyCvPdfPath } from '@/content/technologyCvPrint';
 
 /** Desktop + mobile menu for recruiting / professional dossier pages (not the main exhibition nav). */
 export const RECRUITING_SITE_NAV_ITEMS: SiteNavItem[] = [
-  { label: 'Home', path: '/', enabled: true },
   { label: 'Capabilities', path: '/capabilities', enabled: true },
   { label: 'AI Engineering', path: '/ai-engineering', enabled: true },
   { label: 'Forward-Deployed', path: '/forward-deployed', enabled: true },
   { label: 'Creative AI', path: '/creative-ai', enabled: true },
   { label: 'Career Packet', path: '/career-packet', enabled: true },
-  { label: 'Web CV', path: '/cv/tech', enabled: true },
+  { label: 'CV', path: '/cv/tech', enabled: true },
   { label: 'GitHub', path: 'https://github.com/moisestech', external: true, enabled: true },
   { label: 'Bio', path: '/bio', enabled: true },
   { label: 'Email', path: 'mailto:m@moises.tech', external: true, enabled: true },

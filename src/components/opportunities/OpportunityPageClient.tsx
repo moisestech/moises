@@ -14,6 +14,7 @@ import { InnovationProcess } from '@/components/opportunities/InnovationProcess'
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
+import { OpportunityApplicationAnswers } from '@/components/opportunities/OpportunityApplicationAnswers';
 import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
 import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
 import { ComfyWorkSampleClient } from '@/components/opportunities/comfy/ComfyWorkSampleClient';
@@ -101,6 +102,12 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           <OpportunityColorSection sectionId="process" className="mt-10 sm:mt-14">
             <InnovationProcess opportunity={opportunity} framed />
           </OpportunityColorSection>
+
+          {opportunity.applicationAnswers?.length ? (
+            <OpportunityColorSection sectionId="application-answers" className="mt-10 sm:mt-14">
+              <OpportunityApplicationAnswers opportunity={opportunity} framed />
+            </OpportunityColorSection>
+          ) : null}
 
           {opportunity.animatedLogoBand?.length ? (
             <section className="mt-12 sm:mt-16" aria-labelledby="platform-logos-heading">

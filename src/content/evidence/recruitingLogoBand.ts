@@ -11,6 +11,11 @@ export type LogoBandItem = {
  */
 export const genAiRecruitingLogoBand: LogoBandItem[] = [
   {
+    src: '/images/tech-logos/n8n.svg',
+    alt: 'n8n',
+    height: 36,
+  },
+  {
     src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1778692506/jobs/weaviate-logo_g6kh3i.svg',
     alt: 'Weaviate',
     height: 36,

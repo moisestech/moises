@@ -10,9 +10,9 @@ const WorkshopHubClient = dynamic(() => import('@/components/page/WorkshopClient
   ),
 })
 
-const title = 'Art & Technology Workshops — Bookable Institutional Offerings | Moises Sanabria'
+const title = 'Art & Technology Workshops — Catalog & Institutional Pilots | Moises Sanabria'
 const description =
-  'Three bookable offerings: Vibe Coding and Digital Presence, AI and Automation for the Artist Studio, and Creative Technology Prototyping—plus deeper workshop programs from Oolite Arts practice.'
+  'Bookable workshops for artists and institutions: digital presence, SEO, vibe coding, AI literacy, documentation, and creative-technology pilots from Oolite Digilab practice.'
 
 export const metadata: Metadata = {
   title,
@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     title,
     description,
     type: 'website',
+  },
+  alternates: {
+    canonical: 'https://moises.tech/workshops',
   },
 }
 

@@ -31,9 +31,11 @@ export const automationProjectSpecs = {
     evidenceLine:
       'Production n8n workflow: AI Agent node classifies incoming Gmail, applies structured labels, and writes recruiter/opportunity signals to Airtable for pipeline triage.',
     gapNote: '[OPTIONAL: add label taxonomy, daily volume, and error-handling detail for interview depth]',
-    imageSrc: '/images/tech-logos/n8n.svg',
-    imageAlt: 'n8n automation — Gmail intelligence and label routing workflow',
-    imageLocal: true,
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786386766/dccmiami/workshops/the-art-of-ai-agents/n8n-diagram-email-inbox-organizer_nqwn9r.png',
+    imageAlt: 'n8n Email Inbox Organizer — Gmail AI Agent classification and label routing workflow diagram',
+    imageLocal: false,
+    href: '/workshop/the-art-of-ai-agents/share',
   },
   'bookleggers-commerce-automation': {
     id: 'bookleggers-commerce-automation',

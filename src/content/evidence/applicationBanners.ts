@@ -44,6 +44,13 @@ export const seniorGenAiEngineerBanner = defineApplicationBanner({
   intrinsicRatio: GENAI_BANNER_RATIO,
 });
 
+/** Role banner for GenAI curriculum / SME education contracts (Hurix and reusable overlays). */
+export const genAiCurriculumSmeBanner = defineApplicationBanner({
+  src: `${cdn}/v1778695455/jobs/banners/senior-genai-engineer-banner_iljp58.png`,
+  alt: 'Subject Matter Expert — Generative AI curriculum and technical learning content',
+  intrinsicRatio: GENAI_BANNER_RATIO,
+});
+
 export const knightTechProductStrategistBanner = defineApplicationBanner({
   src: `${cdn}/v1778702939/jobs/banners/tech-strategy-knight-foundation-banner_lctdt0.png`,
   alt: 'Knight Foundation — Technology Product Strategist, Journalism Program — application banner',
@@ -142,13 +149,13 @@ export const creativeStrategistFlagshipBanner = defineApplicationBanner({
 });
 
 /**
- * Interim `/artist-infrastructure` banner — Digilab teaching still until custom 2172×724 collage ships.
+ * `/artist-infrastructure` banner — measured 2171×724 (~3:1 flagship strip).
  * @see docs/institutions/artist-infrastructure-banner-prompt.md
  */
 export const artistInfrastructureBanner = defineApplicationBanner({
-  src: `${cdn}/v1786123445/oolite-arts/moises-sanabria-art-tech-coding-workshop_yw3kuu.jpg`,
-  alt: 'Creative Infrastructure for Artists — temporary Digilab workshop banner (custom collage pending)',
-  intrinsicRatio: 2172 / 724,
+  src: `${cdn}/v1786387514/dccmiami/workshops/the-art-of-ai-agents/artist-infrastructure-banner-wide_fqgn4y.png`,
+  alt: 'Creative Infrastructure for Artists — workshops, tools, and systems banner',
+  intrinsicRatio: 2171 / 724,
   frameClass: FLAGSHIP_BANNER_FRAME,
 });
 

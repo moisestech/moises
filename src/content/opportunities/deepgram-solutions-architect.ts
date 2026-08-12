@@ -16,6 +16,7 @@ export const deepgramSolutionsArchitectOpportunity: Opportunity = {
   status: 'active',
   listed: false,
   variant: 'compact',
+  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'Solutions Architect — Deepgram · Moises Sanabria',
     description:

@@ -20,7 +20,7 @@ const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 const BAKEHOUSE_IMAGE = `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`;
 const BAKEHOUSE_STUDIO = `${CDN}/v1783907488/art/moisestech-website/studio/moises-sanabria-open-studios-red-world-eye-2024_zdyayj.jpg`;
 const LOCUST_IMAGE =
-  'https://res.cloudinary.com/du1ysiumj/image/upload/v1774829074/the-art-of-ai-agents-locust-projects-the-dill-2026_xjb76m.jpg';
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786389637/dccmiami/workshops/the-art-of-ai-agents/the-art-of-ai-agents-locust-projects-the-dill-2026_abkuj1.jpg';
 const SMART_SHOPPERS = `${CDN}/v1737831876/art/moisestech-website/smart_shoppers__bsw9ko.jpg`;
 const TOUCH_GRASS = `${CDN}/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg`;
 const MOMUS = `${CDN}/v1740950484/art/moisestech-website/exhibitions/apr_2025_technofetishism_momus/momus-exhibition-banner_uun9rx.jpg`;

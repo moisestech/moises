@@ -30,6 +30,7 @@ export const alphaDriveAiFullStackEngineerOpportunity: Opportunity = {
   family: 'compact',
   applicationStatus: 'ready',
   variant: 'compact',
+  capabilitiesHref: '/capabilities#software-engineering',
   applicationBanner: alphaDriveAiFullStackBanner,
   seo: {
     title: 'Alpha Drive AI — Full Stack Engineer — Moises Sanabria',

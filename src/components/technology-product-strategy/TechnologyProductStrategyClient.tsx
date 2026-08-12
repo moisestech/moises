@@ -236,14 +236,14 @@ export default function TechnologyProductStrategyClient() {
                       rel="noopener noreferrer"
                       className={opp.btnSecondaryMedium}
                     >
-                      Web CV
+                      CV
                     </a>
                   ) : (
                     <Link
                       href={ctas.cv}
                       className={opp.btnSecondaryMedium}
                     >
-                      Web CV
+                      CV
                     </Link>
                   )
                 ) : null}
