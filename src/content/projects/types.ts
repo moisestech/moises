@@ -1,3 +1,5 @@
+import type { SystemPipelineCaseStudyData } from '@/content/evidence/systemPipeline';
+
 export type ProjectDossier = {
   slug: string;
   seo: {
@@ -15,4 +17,6 @@ export type ProjectDossier = {
   /** Optional external product or program link */
   externalHref?: string;
   externalLabel?: string;
+  /** Optional multi-stage system pipeline walkthrough */
+  systemPipeline?: SystemPipelineCaseStudyData;
 };

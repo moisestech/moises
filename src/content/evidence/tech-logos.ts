@@ -127,6 +127,8 @@ export const techLogoRegistry: Record<string, TechLogoEntry> = {
     'Adobe Firefly',
     `${jobsCdn}/v1786372919/jobs/Adobe_Firefly_Logo.svg_xcwqvc.webp`,
   ),
+  adobe: simpleIconEntry('adobe', 'Adobe', 'adobe', 'FF0000'),
+  figma: simpleIconEntry('figma', 'Figma', 'figma', 'F24E1E'),
   canva: simpleIconEntry('canva', 'Canva', 'canva', '00C4CC'),
   capcut: simpleIconEntry('capcut', 'CapCut', 'capcut', '000000', 'dark:invert'),
   tiktok: simpleIconEntry('tiktok', 'TikTok', 'tiktok'),

@@ -71,9 +71,13 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
 
         <SystemArchitectureFlow data={dossier.architecture} sectionId="systems-demo" />
 
-        <PermissionScenario data={dossier.permissions} sectionId="permissions" />
+        {dossier.permissions ? (
+          <PermissionScenario data={dossier.permissions} sectionId="permissions" />
+        ) : null}
 
-        <ReliabilityControlPanel data={dossier.reliability} sectionId="reliability" />
+        {dossier.reliability ? (
+          <ReliabilityControlPanel data={dossier.reliability} sectionId="reliability" />
+        ) : null}
 
         <EvidenceMatrix
           title={opportunity.roleMatchSectionTitle ?? 'Role requirement to demonstrated evidence'}
@@ -82,7 +86,7 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
           columnHeaders={{
             left: opportunity.roleMatchColumnHeaders?.left ?? 'Affirm requirement',
             right: opportunity.roleMatchColumnHeaders?.right ?? 'Evidence to present',
-            status: 'Status',
+            status: opportunity.roleMatchColumnHeaders?.status ?? 'Status',
           }}
           sectionId="evidence"
         />
@@ -94,8 +98,9 @@ export function SystemsOpportunityClient({ opportunity }: SystemsOpportunityClie
           sectionId="work"
         />
 
-        <TranslationPanel data={dossier.translation} sectionId="translation" />
-
+        {dossier.translation ? (
+          <TranslationPanel data={dossier.translation} sectionId="translation" />
+        ) : null}
         <CapabilityMap data={dossier.capabilityMap} sectionId="capabilities" />
         {opportunity.capabilitiesHref ? (
           <CapabilitiesDeepLink href={opportunity.capabilitiesHref} className="mt-6" />

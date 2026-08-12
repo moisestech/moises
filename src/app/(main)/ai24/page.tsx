@@ -1,38 +1,34 @@
 import type { Metadata } from 'next';
-import Ai24StudioLanding from '@/components/page/Ai24StudioLanding';
-import { AI24_STUDIO } from '@/content/ai24/studio';
-
-const { meta } = AI24_STUDIO;
+import Ai24PageClient from '@/components/ai24/Ai24PageClient';
+import { ai24Seo } from '@/content/ai24/page';
 
 export const metadata: Metadata = {
-  title: meta.title,
-  description: meta.description,
+  title: ai24Seo.title,
+  description: ai24Seo.description,
+  keywords: [...ai24Seo.keywords],
+  alternates: { canonical: ai24Seo.canonical },
   openGraph: {
-    title: meta.title,
-    description: meta.description,
+    title: ai24Seo.title,
+    description: ai24Seo.description,
     type: 'website',
-    url: meta.url,
+    url: ai24Seo.canonical,
+    siteName: 'Moises Sanabria',
+    locale: 'en_US',
     images: [
       {
-        url: meta.ogImage,
-        width: 1200,
-        height: 630,
-        alt: 'AI24 — creative technology studio',
+        url: ai24Seo.ogImage,
+        alt: ai24Seo.ogImageAlt,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: meta.title,
-    description: meta.description,
-    images: [meta.ogImage],
-  },
-  robots: {
-    index: true,
-    follow: true,
+    title: ai24Seo.title,
+    description: ai24Seo.description,
+    images: [ai24Seo.ogImage],
   },
 };
 
-export default function Ai24Page() {
-  return <Ai24StudioLanding />;
+export default function Ai24CompanyPage() {
+  return <Ai24PageClient />;
 }

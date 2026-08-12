@@ -1,6 +1,12 @@
 import type { CaseStudyOverride } from '@/content/evidence/caseStudyCards';
 import type { LogoBandItem } from '@/content/evidence/recruitingLogoBand';
-import type { EvidenceStatus, RoleReferenceData, SystemsDossier } from '@/content/opportunities/systemsDossier';
+import type { SystemPipelineCaseStudyData } from '@/content/evidence/systemPipeline';
+import type {
+  EvidenceStatus,
+  RoleReferenceData,
+  SystemsDossier,
+  ThirtySixtyNinetyData,
+} from '@/content/opportunities/systemsDossier';
 import type { RolePortfolioDossier } from '@/content/opportunities/rolePortfolio';
 import type { CreativeAgencyDossier } from '@/content/opportunities/creativeAgencyDossier';
 
@@ -53,6 +59,7 @@ export type OpportunitySeo = {
   description: string;
   /** When false, page sets robots noindex (draft private links). */
   indexable?: boolean;
+  keywords?: string[];
 };
 
 /** Optional visual for the role-fit matrix — shown in the storytelling panel when the row is hovered or focused. */
@@ -245,7 +252,7 @@ export type Opportunity = {
   creativeAgency?: CreativeAgencyDossier;
   roleMatchSectionTitle?: string;
   roleMatchIntro?: string;
-  roleMatchColumnHeaders?: { left: string; right: string };
+  roleMatchColumnHeaders?: { left: string; right: string; status?: string };
   roleMatchRows: RoleMatchRow[];
   featuredProjectIds: string[];
   /**
@@ -291,4 +298,8 @@ export type Opportunity = {
    * (e.g. `/capabilities#ai-engineering`). Renders a shared strip near Skills.
    */
   capabilitiesHref?: string;
+  /** When set, OpportunityPageClient can render a 30/60/90 plan. */
+  plan?: ThirtySixtyNinetyData;
+  /** Optional multi-stage system pipeline case study (e.g. Lore Machine walkthrough). */
+  systemPipeline?: SystemPipelineCaseStudyData;
 };

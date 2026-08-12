@@ -3,14 +3,21 @@ import { affirmAiSolutionsEngineerOpportunity } from './affirm-ai-solutions-engi
 import { airSpaceIntelligenceFullStackEngineerOpportunity } from './air-space-intelligence-full-stack-engineer';
 import { aiSolutionsArchitectOpportunity } from './ai-solutions-architect';
 import { alphaDriveAiFullStackEngineerOpportunity } from './alpha-drive-ai-full-stack-engineer';
+import { anthropicResearchEngineerUniversesOpportunity } from './anthropic-research-engineer-universes';
+import { banescoAiDeveloperOpportunity } from './banesco-ai-developer';
 import { blueAcornAgenticAiOpportunity } from './blue-acorn-ici-agentic-ai-integration-engineer';
+import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
 import { corestoryAiEngineerOpportunity } from './corestory-ai-engineer';
 import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
 import { deepgramSolutionsArchitectOpportunity } from './deepgram-solutions-architect';
 import { digitasAssociateDirectorCreativeOpportunity } from './digitas-associate-director-creative';
 import { endorLabsSolutionsArchitectOpportunity } from './endor-labs-solutions-architect';
+import { floraFoundingDataEngineerOpportunity } from './flora-founding-data-engineer';
+import { floraForwardDeployedCreativeOpportunity } from './flora-forward-deployed-creative';
+import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
 import { harveyAutomationEngineerOpportunity } from './harvey-automation-engineer-customer-education';
 import { hurixSmeGenerativeAiOpportunity } from './hurix-sme-generative-ai';
+import { instacartAiSolutionsArchitectOpportunity } from './instacart-ai-solutions-architect';
 import { knightJournalismTechProductStrategistOpportunity } from './knight-journalism-tech-product-strategist';
 import { morleyArtDirectorFloridaOpportunity } from './morley-art-director-florida';
 import { mscCruisesCreativeDirectorTravelExperiencesOpportunity } from './msc-cruises-creative-director-travel-experiences';
@@ -20,15 +27,13 @@ import { newIncMediaFabricationLabManagerOpportunity } from './new-inc-media-fab
 import { ogilvySeniorAiDrivenCreativeDirectorOpportunity } from './ogilvy-senior-ai-driven-creative-director';
 import { onxSeniorManagerArtisticDevelopmentOpportunity } from './onx-senior-manager-artistic-development';
 import { playwireOpportunity } from './playwire';
-import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
-import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
-import { floraFoundingDataEngineerOpportunity } from './flora-founding-data-engineer';
-import { floraForwardDeployedCreativeOpportunity } from './flora-forward-deployed-creative';
 import { razorfishJuniorArtDirectorOpportunity } from './razorfish-junior-art-director';
+import { renderSolutionsEngineerOpportunity } from './render-solutions-engineer';
 import { stacklokStaffForwardDeployedEngineerOpportunity } from './stacklok-staff-forward-deployed-engineer';
+import { talkiatrySeniorAiEngineerOpportunity } from './talkiatry-senior-ai-engineer';
 import { wmxAiDrivenDesignLeaderOpportunity } from './wmx-senior-art-director-ai-driven-design-leader';
 import { wmxSeniorArtDirectorAiOpportunity } from './wmx-senior-art-director-ai';
-import { wppHexCreativeInnovationLeadAcdOpportunity } from './wpp-hex-creative-innovation-lead-acd';
+import { wppHexCreativeInnovationLeadOpportunity } from './wpp-hex-creative-innovation-lead-acd';
 
 const bySlug: Record<string, Opportunity> = {
   [affirmAiSolutionsEngineerOpportunity.slug]: affirmAiSolutionsEngineerOpportunity,
@@ -36,6 +41,9 @@ const bySlug: Record<string, Opportunity> = {
     airSpaceIntelligenceFullStackEngineerOpportunity,
   [aiSolutionsArchitectOpportunity.slug]: aiSolutionsArchitectOpportunity,
   [alphaDriveAiFullStackEngineerOpportunity.slug]: alphaDriveAiFullStackEngineerOpportunity,
+  [anthropicResearchEngineerUniversesOpportunity.slug]:
+    anthropicResearchEngineerUniversesOpportunity,
+  [banescoAiDeveloperOpportunity.slug]: banescoAiDeveloperOpportunity,
   [blueAcornAgenticAiOpportunity.slug]: blueAcornAgenticAiOpportunity,
   [comfyMtsFrontendOpportunity.slug]: comfyMtsFrontendOpportunity,
   [corestoryAiEngineerOpportunity.slug]: corestoryAiEngineerOpportunity,
@@ -48,6 +56,7 @@ const bySlug: Record<string, Opportunity> = {
   [forwardDeployedAiEngineerOpportunity.slug]: forwardDeployedAiEngineerOpportunity,
   [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
   [hurixSmeGenerativeAiOpportunity.slug]: hurixSmeGenerativeAiOpportunity,
+  [instacartAiSolutionsArchitectOpportunity.slug]: instacartAiSolutionsArchitectOpportunity,
   [knightJournalismTechProductStrategistOpportunity.slug]:
     knightJournalismTechProductStrategistOpportunity,
   [morleyArtDirectorFloridaOpportunity.slug]: morleyArtDirectorFloridaOpportunity,
@@ -62,11 +71,13 @@ const bySlug: Record<string, Opportunity> = {
     onxSeniorManagerArtisticDevelopmentOpportunity,
   [playwireOpportunity.slug]: playwireOpportunity,
   [razorfishJuniorArtDirectorOpportunity.slug]: razorfishJuniorArtDirectorOpportunity,
+  [renderSolutionsEngineerOpportunity.slug]: renderSolutionsEngineerOpportunity,
   [stacklokStaffForwardDeployedEngineerOpportunity.slug]:
     stacklokStaffForwardDeployedEngineerOpportunity,
+  [talkiatrySeniorAiEngineerOpportunity.slug]: talkiatrySeniorAiEngineerOpportunity,
   [wmxAiDrivenDesignLeaderOpportunity.slug]: wmxAiDrivenDesignLeaderOpportunity,
   [wmxSeniorArtDirectorAiOpportunity.slug]: wmxSeniorArtDirectorAiOpportunity,
-  [wppHexCreativeInnovationLeadAcdOpportunity.slug]: wppHexCreativeInnovationLeadAcdOpportunity,
+  [wppHexCreativeInnovationLeadOpportunity.slug]: wppHexCreativeInnovationLeadOpportunity,
 };
 
 export function getOpportunity(slug: string): Opportunity | undefined {
@@ -78,7 +89,21 @@ export function listOpportunities(): Opportunity[] {
 }
 
 export function listActiveOpportunities(): Opportunity[] {
-  return listOpportunities().filter((o) => o.status === 'active' && o.listed !== false);
+  return listOpportunities()
+    .filter((o) => o.status === 'active' && o.listed !== false)
+    .sort((a, b) => {
+      const companyCmp = (a.company ?? a.roleTitle ?? a.slug).localeCompare(
+        b.company ?? b.roleTitle ?? b.slug,
+        undefined,
+        { sensitivity: 'base' },
+      );
+      if (companyCmp !== 0) return companyCmp;
+      return (a.roleTitle ?? a.hero.headline).localeCompare(
+        b.roleTitle ?? b.hero.headline,
+        undefined,
+        { sensitivity: 'base' },
+      );
+    });
 }
 
 /** For `generateStaticParams` — all active slugs including unlisted private dossiers. */

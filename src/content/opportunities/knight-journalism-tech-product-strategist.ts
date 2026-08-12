@@ -21,6 +21,7 @@ export const knightJournalismTechProductStrategistMeta = {
 export const knightJournalismTechProductStrategistOpportunity: Opportunity = {
   slug: knightJournalismTechProductStrategistMeta.slug,
   status: 'active',
+  listed: true,
   variant: 'full-dossier',
   applicationBanner: technologyProductStrategy.applicationBanner,
   seo: {

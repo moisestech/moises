@@ -3,14 +3,12 @@ import { seniorGenAiEngineerBanner } from '@/content/evidence/applicationBanners
 import { evidenceProjects } from '@/content/evidence/projects';
 import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { genAiRecruitingLogoBand, moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
-import { ART_OF_AI_AGENTS_HERO_IMAGE } from '@/constants/art-of-ai-agents';
 
 export const cvsGenaiEngineerOpportunity: Opportunity = {
   slug: 'cvs-senior-genai-engineer',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
-  capabilitiesHref: '/capabilities#ai-engineering',
   applicationBanner: {
     ...seniorGenAiEngineerBanner,
     alt: 'Senior GenAI Engineer — application banner tailored to this role.',
@@ -19,7 +17,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
     title: 'Senior GenAI Engineer — Moises Sanabria | moises.tech',
     description:
       'GenAI prototypes, LLM systems, agent workflows, and multimodal AI products — compact dossier for innovation lab and senior GenAI engineering roles.',
-    indexable: false,
+    indexable: true,
   },
   audienceKeywords: {
     terms: [
@@ -37,7 +35,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
       },
     ],
   },
-  company: 'Senior GenAI Engineer (archetype overlay)',
+  company: 'CVS Health (example targeting)',
   roleTitle: 'Senior GenAI Engineer',
   navItems: [
     { id: 'hero', label: 'Overview' },
@@ -246,7 +244,8 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
       title: 'The Art of AI Agents',
       description: 'Multi-session workshop on practical agent workflows and tooling.',
       href: '/workshop/the-art-of-ai-agents',
-      imageSrc: ART_OF_AI_AGENTS_HERO_IMAGE,
+      imageSrc:
+        'https://res.cloudinary.com/du1ysiumj/image/upload/v1774829074/the-art-of-ai-agents-locust-projects-the-dill-2026_xjb76m.jpg',
       imageAlt: 'The Art of AI Agents workshop at Locust Projects',
     },
     {

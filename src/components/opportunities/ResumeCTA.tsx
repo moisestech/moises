@@ -30,14 +30,18 @@ export function ResumeCTA({ opportunity, framed = false, sectionId = 'resume' }:
       {opportunity.resumeSectionNote ? <p className={`mt-2 max-w-3xl ${opp.muted}`}>{opportunity.resumeSectionNote}</p> : null}
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="footer" />
-        <CoverLetterCtaLink ctas={ctas} onClick={() => onCta('cover_letter_footer')} />
+        <CoverLetterCtaLink
+          ctas={ctas}
+          includePrintFallback
+          onClick={() => onCta('cover_letter_footer')}
+        />
         <a
           href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
           className={cn(opp.btnSecondaryMedium, 'min-h-11 justify-center')}
           onClick={() => onCta('email_footer')}
         >
           <Mail className="h-4 w-4 shrink-0" aria-hidden />
-          Email
+          Email Moises
         </a>
         <a
           href={ctas.linkedin}

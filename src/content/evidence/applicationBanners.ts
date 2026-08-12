@@ -240,7 +240,24 @@ export const onxArtisticDevelopmentBanner = defineApplicationBanner({
 
 /** Stacklok — Staff Forward Deployed Engineer. */
 export const stacklokStaffFdeBanner = defineApplicationBanner({
-  src: `${cdn}/v1780248505/jobs/banners/ChatGPT_Image_May_31_2026_12_19_46_PM_wu8xw1.png`,
-  alt: 'Stacklok — Staff Forward Deployed Engineer application banner',
+  src: `${cdn}/v1785454236/jobs/banners/forward-deploiyed-engineer-stacklok_mdpzpp.png`,
+  alt: 'Stacklok Staff Forward Deployed Engineer — enterprise AI deployment, secure agent connectivity, and field-to-platform delivery',
+  intrinsicRatio: GENAI_BANNER_RATIO,
+});
+
+/** Alias used by the Stacklok dossier module. */
+export const stacklokStaffForwardDeployedEngineerBanner = stacklokStaffFdeBanner;
+
+/** Banesco USA — AI Developer. */
+export const banescoAiDeveloperBanner = defineApplicationBanner({
+  src: `${cdn}/v1784909845/jobs/banners/banesco-ai-engineer_njqmce.png`,
+  alt: 'Banesco USA AI Developer — applied AI, cloud data systems, and bilingual delivery',
+  intrinsicRatio: GENAI_BANNER_RATIO,
+});
+
+/** CoreStory — AI Engineer. */
+export const corestoryAiEngineerBanner = defineApplicationBanner({
+  src: `${cdn}/v1785208741/jobs/banners/corestory-ai-engineer-banner_pa23tj.png`,
+  alt: 'CoreStory AI Engineer — LLM systems, retrieval, and narrative intelligence from legacy complexity',
   intrinsicRatio: GENAI_BANNER_RATIO,
 });

@@ -216,15 +216,14 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
   listed: true,
   variant: 'role-portfolio',
   applicationBanner: forwardDeployedAiEngineerBanner,
-  capabilitiesHref: '/capabilities#ai-engineering',
   seo: {
     title: 'Moises Sanabria — Creative Technologist · Forward Deployed AI Engineer',
     description:
       'Creative Technologist and full-stack AI engineer — Lore Machine founding engineer, generative-AI systems, creative production, and client-facing delivery.',
-    indexable: true,
+    indexable: false,
   },
-  visibilityNote:
-    'Public role archetype for Forward Deployed / client-facing AI engineer clusters. Employer overlays (e.g. Stacklok) stay private.',
+  visibilityNote: 'Role-specific portfolio · Forward Deployed AI Engineer',
+  company: 'Forward Deployed AI',
   audienceKeywords: {
     lead: 'Prepared for',
     terms: [
@@ -279,10 +278,6 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
   rolePortfolio,
   roleMatchRows: [],
   featuredProjectIds: ['lore-machine', 'ai24'],
-  evidenceRecipe: 'forward-deployed-default',
-  caseStudiesSectionTitle: 'Flagship proof for forward-deployed roles',
-  caseStudiesIntro:
-    'Canonical lifecycle flagship: /forward-deployed. Nested cases ranked for FDE delivery — SmartSigns, automation, Agentic Ops (Building).',
   skillsMatrixRows: [
     {
       category: 'Creative AI & Production',

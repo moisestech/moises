@@ -8,6 +8,7 @@ import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 export const newIncMediaFabricationLabManagerOpportunity: Opportunity = {
   slug: 'new-inc-media-fabrication-lab-manager',
   status: 'active',
+  listed: true,
   variant: 'compact',
   capabilitiesHref: '/capabilities#design-creative-technology',
   applicationBanner: newIncMediaFabLabBanner,

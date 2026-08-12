@@ -7,7 +7,7 @@ import { technologyCvPdfPath } from '@/content/technologyCvPrint';
 export const playwireOpportunity: Opportunity = {
   slug: 'playwire',
   status: 'active',
-  listed: false,
+  listed: true,
   variant: 'compact',
   capabilitiesHref: '/capabilities#software-engineering',
   applicationBanner: {

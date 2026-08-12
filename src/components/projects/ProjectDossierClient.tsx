@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Mail } from 'lucide-react';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { SystemPipelineCaseStudy } from '@/components/opportunities/SystemPipelineCaseStudy';
 import type { ProjectDossier } from '@/content/projects/types';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
@@ -58,6 +59,14 @@ export function ProjectDossierClient({ project }: ProjectDossierClientProps) {
             </h2>
             <p className={cn(opp.body, 'mt-3 max-w-3xl')}>{project.whatIBuilt}</p>
           </section>
+
+          {project.systemPipeline ? (
+            <SystemPipelineCaseStudy
+              data={project.systemPipeline}
+              sectionId={`${project.slug}-pipeline`}
+              variant="full"
+            />
+          ) : null}
 
           <section className={opp.sectionSm} aria-labelledby={`${project.slug}-stack`}>
             <h2 id={`${project.slug}-stack`} className={opp.h2}>
