@@ -117,6 +117,16 @@ export const floraFoundingDataEngineerBanner = defineApplicationBanner({
   intrinsicRatio: GENAI_BANNER_RATIO,
 });
 
+/**
+ * FLORA — Forward Deployed Creative.
+ * Local 3:1 hero banner (2172×724) from public/images/opportunities/flora-forward-deployed-creative/.
+ */
+export const floraForwardDeployedCreativeBanner = defineApplicationBanner({
+  src: '/images/opportunities/flora-forward-deployed-creative/flora-forward-deployed-creative-hero-banner.png',
+  alt: 'FLORA Forward Deployed Creative — creative workflow systems and customer enablement atmosphere',
+  intrinsicRatio: 2172 / 724,
+});
+
 /** Ogilvy — Creative Editor / AI (banner asset may still read Creative Director). */
 export const ogilvySeniorAiDrivenCreativeDirectorBanner = defineApplicationBanner({
   src: `${cdn}/v1785862416/jobs/banners/senior-ai-driven-creative-director-banner_y1mof7.png`,

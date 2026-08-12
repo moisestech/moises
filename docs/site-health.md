@@ -5,7 +5,7 @@ Living audit of page families, source-of-truth paths, opportunity readiness, and
 
 Cursor rule: [`.cursor/rules/site-health.mdc`](../.cursor/rules/site-health.mdc)
 
-Last audit: **2026-08-07** · Last progress update: **2026-08-10 (LIFE OS read + flagship deploy gap)**
+Last audit: **2026-08-07** · Last progress update: **2026-08-10 (FLORA FDC dossier → role-portfolio)**
 
 ---
 
@@ -22,6 +22,7 @@ Use this table to resume work. Update when a pass ships.
 | **Workshops SEO** | 2026-08-07 | Thin landings for 7 Ready slugs at `/workshop/[slug]`; outcomes/whyNow in catalog; cross-links from artist-infrastructure + Digilab classes; SEO feature card points in-site | Indexable landings for SEO/writing/docs/AI/vibe/studio/copyright |
 | **Three flagships** | 2026-08-09 | Evidence registry v2; `/forward-deployed`, `/creative-ai`, `/projects/agentic-ops`; homepage hire door; sitemap/robots; recipe-ranked dossiers | Code on branch; **must merge to `main` for production** |
 | **LIFE OS read** | 2026-08-10 | Inbox/Actions/Projects/Opportunities readers + `/api/life-os` | Local reads verified; PAT in `.env.local` only |
+| **FLORA FDC dossier** | 2026-08-10 | `/opportunities/flora-forward-deployed-creative` upgraded to role-portfolio; links Field Kit subdomain + Technique placeholders | Unlisted / noindex; View Links still pending |
 
 ### Production incident — `/creative-ai` 404
 

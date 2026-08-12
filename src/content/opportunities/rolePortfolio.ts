@@ -145,6 +145,12 @@ export type RolePortfolioDossier = {
   architecture?: ArchitectureFlowData;
   /** Sticky-nav / section id for `architecture` (default: `data-model`). */
   architectureSectionId?: string;
+  /**
+   * Where to render `architecture` on role-portfolio pages.
+   * `early` (default): after fit pillars.
+   * `after-selected-project`: after the selected-project case study (Field Kit pattern).
+   */
+  architecturePlacement?: 'early' | 'after-selected-project';
   /** Optional legacy case-study grid; omit when using selectedProject + experienceRoles. */
   caseStudiesTitle?: string;
   caseStudiesIntro?: string;
@@ -167,6 +173,12 @@ export type RolePortfolioDossier = {
   selectedProject?: RolePortfolioSelectedProject;
   /** Override heading for selected project section (default: Selected AI Project). */
   selectedProjectSectionTitle?: string;
+  /**
+   * Where to render `selectedProject`.
+   * `default`: after experience / before education.
+   * `after-evidence`: immediately after the Techniques evidence roadmap (Field Kit pattern).
+   */
+  selectedProjectPlacement?: 'default' | 'after-evidence';
   evidenceRoadmap?: RolePortfolioEvidenceRoadmap;
   comingSoon?: RolePortfolioComingSoonBlock;
   educationTitle?: string;

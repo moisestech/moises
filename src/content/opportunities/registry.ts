@@ -23,6 +23,7 @@ import { playwireOpportunity } from './playwire';
 import { forwardDeployedAiEngineerOpportunity } from './forward-deployed-ai-engineer';
 import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
 import { floraFoundingDataEngineerOpportunity } from './flora-founding-data-engineer';
+import { floraForwardDeployedCreativeOpportunity } from './flora-forward-deployed-creative';
 import { razorfishJuniorArtDirectorOpportunity } from './razorfish-junior-art-director';
 import { stacklokStaffForwardDeployedEngineerOpportunity } from './stacklok-staff-forward-deployed-engineer';
 import { wmxAiDrivenDesignLeaderOpportunity } from './wmx-senior-art-director-ai-driven-design-leader';
@@ -43,6 +44,7 @@ const bySlug: Record<string, Opportunity> = {
   [digitasAssociateDirectorCreativeOpportunity.slug]: digitasAssociateDirectorCreativeOpportunity,
   [endorLabsSolutionsArchitectOpportunity.slug]: endorLabsSolutionsArchitectOpportunity,
   [floraFoundingDataEngineerOpportunity.slug]: floraFoundingDataEngineerOpportunity,
+  [floraForwardDeployedCreativeOpportunity.slug]: floraForwardDeployedCreativeOpportunity,
   [forwardDeployedAiEngineerOpportunity.slug]: forwardDeployedAiEngineerOpportunity,
   [harveyAutomationEngineerOpportunity.slug]: harveyAutomationEngineerOpportunity,
   [hurixSmeGenerativeAiOpportunity.slug]: hurixSmeGenerativeAiOpportunity,

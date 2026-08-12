@@ -10,6 +10,8 @@ export type FitPillar = {
   /** Optional still for richer creative-agency / flagship cards. */
   imageSrc?: string;
   imageAlt?: string;
+  /** Local file under `/public` — use plain img / OpportunityCardImage. */
+  imageLocal?: boolean;
   /** Lucide key shared with skills matrix icon map. */
   icon?: import('@/content/opportunities/types').SkillsMatrixIconKey;
 };

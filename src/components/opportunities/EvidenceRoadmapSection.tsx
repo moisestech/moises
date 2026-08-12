@@ -54,27 +54,34 @@ export function EvidenceRoadmapSection({
         </p>
       ) : null}
 
-      <ol className="mt-8 space-y-4">
+      <ol className="mt-8 space-y-6">
         {data.items.map((item, index) => (
-          <li key={item.id} className={cn(opp.card, 'overflow-hidden p-0 sm:flex')}>
+          <li key={item.id} className={cn(opp.card, 'overflow-hidden p-0')}>
             {item.imageSrc ? (
-              <div className="relative aspect-[16/9] shrink-0 bg-stone-100 dark:bg-stone-800 sm:aspect-auto sm:w-40 sm:min-h-[7rem] md:w-44 md:min-h-[7.5rem]">
+              <figure className="relative aspect-[16/9] w-full bg-stone-100 dark:bg-stone-800">
                 {item.imageLocal || !item.imageSrc.startsWith('http') ? (
-                  <OpportunityCardImage src={item.imageSrc} alt={item.imageAlt ?? item.title} local />
+                  <OpportunityCardImage
+                    src={item.imageSrc}
+                    alt={item.imageAlt ?? item.title}
+                    local
+                  />
                 ) : (
                   <Image
                     src={item.imageSrc}
                     alt={item.imageAlt ?? item.title}
                     fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 640px) 100vw, 176px"
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 960px"
                   />
                 )}
-              </div>
+                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-2.5 pt-8 text-[11px] font-medium tracking-wide text-white/95 sm:px-4 sm:text-xs">
+                  {item.imageAlt ?? `${item.title} — Concept Study`}
+                </figcaption>
+              </figure>
             ) : (
               <div
                 className={cn(
-                  'flex aspect-[5/2] shrink-0 items-center justify-center sm:aspect-auto sm:w-40 sm:min-h-[7rem] md:w-44 md:min-h-[7.5rem]',
+                  'flex aspect-[5/2] items-center justify-center sm:aspect-[21/9]',
                   STATUS_DOT[item.status],
                 )}
                 aria-hidden
@@ -87,16 +94,14 @@ export function EvidenceRoadmapSection({
 
             <div className="flex-1 p-4 sm:p-5">
               <div className="flex flex-wrap items-center gap-2">
-                {!item.imageSrc ? null : (
-                  <span
-                    className={cn(
-                      'flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold',
-                      STATUS_DOT[item.status],
-                    )}
-                  >
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                )}
+                <span
+                  className={cn(
+                    'flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold',
+                    STATUS_DOT[item.status],
+                  )}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 <h3 className={cn(opp.matrixPrimary, 'min-w-0 flex-1 break-words')}>{item.title}</h3>
                 <span
                   className={cn(
