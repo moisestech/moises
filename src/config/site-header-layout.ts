@@ -21,6 +21,13 @@ export const siteHeaderStickyTopClass =
 /** Page padding at scroll 0 — uses expanded header height so hero is not clipped. */
 export const siteHeaderExpandedPaddingTopClass = 'pt-[var(--site-header-expanded-height,10rem)]';
 
+/**
+ * Grant proposal page top padding — clears the expanded header plus a per-breakpoint
+ * comfort gap so status/back-nav never sit under the fixed header on mobile/tablet/desktop.
+ */
+export const grantPageTopPaddingClass =
+  'pt-[calc(var(--site-header-expanded-height,10rem)+1.5rem)] md:pt-[calc(var(--site-header-expanded-height,10rem)+2.5rem)] lg:pt-[calc(var(--site-header-expanded-height,10rem)+3.5rem)]';
+
 /** Section anchors on mobile/tablet: header + horizontal subnav. */
 export const grantDossierSectionScrollMarginClass =
   'scroll-mt-[calc(var(--site-header-height,5rem)+var(--grant-dossier-subnav-height,3.5rem)+0.5rem)] lg:scroll-mt-[calc(var(--site-header-height,5rem)+1rem)]';

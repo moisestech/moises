@@ -1,8 +1,9 @@
 /**
  * Volver a Valer: The Value We Carry
- * Official No Vacancy Miami Beach 2026 proposal content.
+ * Official No Vacancy Miami Beach 2026 proposal content — practical canon.
  */
-import type { GrantBudgetLine, GrantPlaceholderMedia, GrantRelatedWork } from '@/components/grant/shared/GrantProposalUi';
+import type { GrantBudgetLine, GrantRelatedWork } from '@/components/grant/shared/GrantProposalUi';
+import type { VolverIconId } from '@/components/grant/no-vacancy/VolverIcons';
 import {
   toGrantMedia,
   volverMedia,
@@ -13,23 +14,19 @@ import {
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 
 export type NvBudgetLine = GrantBudgetLine;
-export type NvPlaceholderMedia = GrantPlaceholderMedia;
 
-/** @deprecated Touch Grass hotel studies — legacy shape for archived alternate */
-export type NvHotelStudy = {
+export type VolverChapterAccent =
+  | 'arrival'
+  | 'recognition'
+  | 'embodiment'
+  | 'exchange'
+  | 'operations';
+
+export type VolverChapter = {
   id: string;
-  hotelName: string;
-  strategicRole: string;
-  locationType: string;
-  beforeImage: NvPlaceholderMedia;
-  establishingView: NvPlaceholderMedia;
-  visitorExperience: NvPlaceholderMedia;
-  materialDetail: NvPlaceholderMedia;
-  installationElements: string[];
-  siteAdvantages: string[];
-  constraints: string[];
-  adaptationNotes: string[];
-  whyThisLocation: string;
+  number: string;
+  label: string;
+  accent: VolverChapterAccent;
 };
 
 export type NvHotelAdaptation = {
@@ -37,12 +34,10 @@ export type NvHotelAdaptation = {
   hotelName: string;
   strategicRole: string;
   locationType: string;
-  configuration: 'compact' | 'large';
+  configuration: 'compact' | 'intimate' | 'full';
   panorama: VolverMediaAsset;
   poster: VolverMediaAsset;
   proposedRender: VolverMediaAsset;
-  floorDetail: VolverMediaAsset;
-  sculptureDetail: VolverMediaAsset;
   installationElements: string[];
   siteAdvantages: string[];
   constraints: string[];
@@ -51,106 +46,280 @@ export type NvHotelAdaptation = {
   whyThisLocation: string;
 };
 
+export type VolverSculpture = {
+  id: string;
+  title: string;
+  role: string;
+  workingTitle?: boolean;
+  conceptualRole: string[];
+  materials: string[];
+  dimensions: string;
+  construction: string[];
+  siteVariation: string;
+  riskNote: string;
+  /** Always-visible scan sentence */
+  summary: string;
+  body: string;
+  overview: VolverMediaAsset;
+  detail?: VolverMediaAsset;
+  reveal: {
+    iconId: VolverIconId;
+    caption: string;
+    media: VolverMediaAsset;
+  };
+};
+
 export const volverAValer = {
   title: 'Volver a Valer',
   subtitle: 'The Value We Carry',
   route: '/grant/no-vacancy-2026/volver-a-valer',
   status: 'Proposed site-specific installation · No Vacancy Miami Beach 2026',
   oneSentenceForm:
-    'Volver a Valer: The Value We Carry is a site-specific hotel installation composed of a printed floor drawn from Latin American currencies and two or three freestanding sculptures that examine how money, labor, memory, care, and identity are transformed through migration.',
-  thesis:
-    'Currencies can collapse, fluctuate, or disappear without diminishing the value of the people who carried them.',
+    'Volver a Valer is a site-specific hotel installation composed of a printed floor drawn from selected Latin American currencies and migration documents, together with two or three life-size sculptures that stage humor, cultural memory, hospitality, and systems of exchange.',
+  physicalFormParagraph:
+    'A removable laminated currency floor (Common Tender) transforms part of a hotel lobby, waiting area, or check-in zone. Two or three life-size sculptures — El Cuentachiste, Harina de Otro Costal, and Casa de Cambio — adapt to circulation and the assigned property across a five-week temporary installation.',
+  thesis: 'Currencies can be devalued. People cannot.',
   criticalDistinction:
-    'The installation does not ask whether migrants can become valuable again; it asks why economic, political, and cultural systems repeatedly fail to recognize the value they already carry.',
+    'The installation does not restore value to migrants. It exposes the economic, political, and cultural systems — from remittance corridors to redenomination — that repeatedly fail to recognize the value they already carry.',
   emotionalSequence: 'beautiful → abundant → familiar → strange → unresolved but hopeful',
-  systemOverview:
-    'A site-adaptable hotel environment composed of a printed Latin American currency floor and two or three freestanding sculptures. The floor creates an immediate world; the sculptures remain autonomous objects that can survive outside the hotel.',
 } as const;
 
-export const volverInstallationSystem = {
-  floor: {
-    id: 'common-tender',
-    title: 'Common Tender',
-    role: 'Primary spatial gesture — printed currency floor',
-    body: `A site-fitted, non-slip printed floor covering transforms part of the hotel lobby, waiting area, bar transition, or check-in zone into a continuous field of Latin American currencies and migration documents.
+/** Sticky nav + per-section accents — one accent per chapter */
+export const volverChapters: readonly VolverChapter[] = [
+  { id: 'form', number: '01', label: 'Form', accent: 'arrival' },
+  { id: 'journey', number: '02', label: 'Experience', accent: 'recognition' },
+  { id: 'common-tender', number: '03', label: 'Common Tender', accent: 'arrival' },
+  { id: 'el-cuentachiste', number: '04', label: 'El Cuentachiste', accent: 'embodiment' },
+  { id: 'harina-de-otro-costal', number: '05', label: 'Harina de Otro Costal', accent: 'embodiment' },
+  { id: 'casa-de-cambio', number: '06', label: 'Casa de Cambio', accent: 'exchange' },
+  { id: 'hotels', number: '07', label: 'Hotels', accent: 'operations' },
+  { id: 'archive', number: '08', label: 'Archive', accent: 'recognition' },
+  { id: 'feasibility', number: '09', label: 'Feasibility', accent: 'operations' },
+  { id: 'prototypes', number: '10', label: 'Prototypes', accent: 'operations' },
+  { id: 'budget', number: '11', label: 'Budget', accent: 'operations' },
+  { id: 'lineage', number: '12', label: 'Lineage', accent: 'exchange' },
+] as const;
 
-From a distance the surface resembles a luxury hotel carpet. At close range it resolves into bolívares, historical and decommissioned notes, remittance slips, exchange receipts, hotel invoices, shipping labels, serial numbers, and selected U.S. currency fragments.
+export const volverChapterAccentClass: Record<VolverChapterAccent, string> = {
+  arrival: 'border-l-[#C4A574] dark:border-l-[#D4B896]',
+  recognition: 'border-l-[#1F6B5A] dark:border-l-[#7EB8A8]',
+  embodiment: 'border-l-[#8B6B3D] dark:border-l-[#C4A574]',
+  exchange: 'border-l-stone-900 dark:border-l-stone-100',
+  operations: 'border-l-[#5C6670] dark:border-l-stone-400',
+};
 
-The floor is anchored visually by Venezuelan bolívares without becoming a pan-Latin collage, national ranking, or country-by-country grid. Full readable notes concentrate along edges and approach zones; the central walking path uses magnified security patterns, guilloche lines, denomination fragments, and abstracted fields so the experience is walking through money without simply trampling portraits and national symbols.`,
-    publicMaterialTerm: 'site-fitted printed currency floor',
-    substrateNote:
-      'Final substrate is selected after the hotel site survey: reusable PVC-free covering, modular commercial floorcloth, removable non-slip graphic material, or fabric-/rubber-backed panels. The proposal does not lock to single-use adhesive vinyl.',
+/** Glossary for VolverKeywordText hover/focus tooltips */
+export const volverGlossary = [
+  {
+    term: 'bolívar',
+    definition: 'Venezuelan currency; the material and historical point of entry for the artist’s practice.',
   },
-  sculptures: [
-    {
-      id: 'market-rate',
-      title: 'Market Rate',
-      role: 'Core sculpture — reflective monolith',
-      optional: false,
-      body: `A freestanding oil-black or smoked-mirror monolith derived from the proportions of a hotel check-in counter (approximately 60–72 inches wide, waist height). Sparse hotel-style plaques compare Room Rate, Resort Fee, and Valet with categories that resist pricing: Labor, Memory, Identity, Distance, Family, Future.
+  {
+    term: 'remittance',
+    definition: 'Money and care transferred across distance — a shared migration document, not a national symbol.',
+  },
+  {
+    term: 'chinchorro',
+    definition: 'A woven hammock form; here nonfunctional, freestanding, and restrained as cultural structure.',
+  },
+  {
+    term: 'redenomination',
+    definition: 'Official replacement of a currency’s nominal value — history written into the floor archive.',
+  },
+  {
+    term: 'casa de cambio',
+    definition: 'Currency-exchange house; the kiosk sculpture that stages institutional calculation of value.',
+  },
+] as const;
 
-The reflective surface creates the final viewer encounter: the currency floor and the viewer appear together inside the value system. This is the intellectual anchor — hotel pricing, exchange, Miami luxury, and human worth in one minimal object.`,
-    },
-    {
-      id: 'soft-currency',
-      title: 'Soft Currency',
-      role: 'Core sculpture — woven carrier',
-      optional: false,
-      body: `A freestanding, nonfunctional chinchorro-like textile suspended in a minimal metal frame. Woven from obsolete bills, printed currency strips, receipts, remittance records, and fiber, it references rest and home without becoming folk-art costume or a usable hammock.
+export const volverFloor = {
+  id: 'common-tender',
+  title: 'Common Tender',
+  role: 'Primary environmental field — printed currency floor',
+  summary:
+    'A removable laminated floor of selected Latin American currencies and remittance documents that reads as a luxury carpet from a distance.',
+  body: `A removable, laminated, non-slip modular floor system transforms part of the hotel lobby, waiting area, bar transition, or check-in zone into a continuous field of selected Latin American currencies and migration documents.
 
-The metal frame allows installation without relying on the hotel ceiling. Soft Currency carries the Venezuelan point of entry through labor, memory, and cultural knowledge without defining the entire installation as exclusively Venezuelan.`,
-    },
-    {
-      id: 'carry-on',
-      title: 'Carry-On',
-      role: 'Optional sculpture — large sites only',
-      optional: true,
-      body: `A polished hotel luggage cart supporting clear archival containers of bills, receipts, luggage tags, hotel invoices, and remittance records. Containers reveal accumulated documents rather than hiding them. Avoid stacks that resemble contraband or bricks of cash.
+From a distance the surface resembles a luxury hotel carpet. At close range it resolves into historical, obsolete, demonetized, or materially transformed currency imagery together with remittance slips, exchange receipts, hotel invoices, shipping labels, serial numbers, and security patterns.
 
-Included only when the assigned hotel has enough circulation. It makes migration physical: what is carried, declared, and what cannot be converted.`,
-    },
+Maximum planning footprint is approximately 12 × 24 feet, adapted downward to the assigned site. Notes appear at believable scale where appropriate and permitted. Current or restricted banknotes are cropped, overlapped, transformed, rescaled, or abstracted. The final floor is built from a real master texture — photographed or scanned source material under legal review — then perspective-mapped into hotel photography. No permanent alteration to the hotel floor.`,
+  publicMaterialTerm: 'removable laminated non-slip modular floor graphics',
+  dimensions: 'Maximum planning footprint ≈ 12 × 24 ft (under ≈ 300 sq ft); site-adapted downward',
+  materials: [
+    'Selected historical / obsolete / demonetized Latin American and Caribbean currency imagery',
+    'Remittance slips, exchange receipts, hotel invoices, shipping labels',
+    'Serial numbers and transformed security patterns',
+    'Laminated non-slip modular panels (PVC-free preferred after survey)',
   ],
-  adaptationRules: [
-    {
-      scale: 'Compact site',
-      elements: ['Printed currency floor', 'Market Rate', 'Soft Currency'],
-    },
-    {
-      scale: 'Medium site',
-      elements: [
-        'Printed currency floor',
-        'Market Rate',
-        'Soft Currency',
-        'Small supporting material or wall label',
-      ],
-    },
-    {
-      scale: 'Large site',
-      elements: ['Printed currency floor', 'Market Rate', 'Soft Currency', 'Carry-On'],
-    },
+  construction: [
+    'Modular panels mechanically placed — no adhesive lock to hotel finish',
+    'Real master texture (not AI-generated banknotes as final art)',
+    'Banknote-image and brand-review checklist during prototype phase',
   ],
+  siteVariation: 'Largest field at Cadillac; reduced footprints at Betsy and Casa Faena.',
+  overview: volverMedia.currencyFloorOverview,
+  detail: volverMedia.currencyFloorDetail,
+  reveal: {
+    iconId: 'floor' as const,
+    caption:
+      'Alternate pattern or note-scale still for Common Tender. Replace this slot with your floor icon or detail photograph.',
+    media: volverMedia.revealFloorPattern,
+  },
 } as const;
+
+export const volverSculptures: VolverSculpture[] = [
+  {
+    id: 'el-cuentachiste',
+    title: 'El Cuentachiste',
+    role: 'Life-size figure — humor as survival intelligence',
+    conceptualRole: [
+      'Humor as survival intelligence',
+      'Informal conversation and everyday social value',
+      'The body exceeding monetary measurement',
+      'A cheap plastic chair inside a luxury hotel',
+    ],
+    materials: [
+      'Commercial flexible mannequin',
+      'White molded-plastic chair',
+      'Removable textile currency skin',
+      'Permanently secured coffee cup and domino',
+      'Concealed weighted base',
+    ],
+    dimensions: 'Life-size seated figure on standard molded-plastic chair',
+    construction: [
+      'Mannequin mechanically secured to the chair',
+      'Paper material attached to a removable textile skin',
+      'Simplified articulated hands; no loose bills',
+      'Props permanently secured',
+    ],
+    siteVariation: 'Preferred in Compact and Full configurations; prioritized at The Betsy.',
+    riskNote:
+      'Avoid caricature: no facial expression, no exaggerated posture, no costume, no national flag treatment. Quiet, self-possessed body language. Humor comes from scene and material contradiction, not from mocking the figure.',
+    summary:
+      'A faceless currency-covered figure on a white plastic chair, holding a cup and domino — humor as survival intelligence.',
+    body: `A faceless figure covered with currency, seated on a white molded-plastic chair, holding a small coffee cup and domino. The sculpture stages informal social exchange and the body as something that exceeds exchange rates — without implying that the person is literally made valuable by money.`,
+    overview: volverMedia.cuentachisteOverview,
+    detail: volverMedia.cuentachisteDetail,
+    reveal: {
+      iconId: 'chair',
+      caption: 'Chair / cup / domino icon or prop still for El Cuentachiste. Replace when ready.',
+      media: volverMedia.revealCuentachisteIcon,
+    },
+  },
+  {
+    id: 'harina-de-otro-costal',
+    title: 'Harina de Otro Costal',
+    role: 'Life-size figure — Venezuelan material anchor',
+    workingTitle: true,
+    conceptualRole: [
+      'Explicitly Venezuelan anchor',
+      'Home and food memory',
+      'Music, rest, domestic knowledge',
+      'Identity surviving economic rupture',
+    ],
+    materials: [
+      'Commercial flexible mannequin',
+      'Commercial cotton hammock (chinchorro)',
+      'Commercial freestanding steel hammock stand',
+      'Used, borrowed, or entry-level cuatro',
+      'Empty cleaned yellow corn-flour packaging stitched to fabric skin',
+    ],
+    dimensions: 'Life-size seated figure in freestanding hammock stand; nonfunctional seating',
+    construction: [
+      'Figure, instrument, and hammock mechanically tethered',
+      'No ceiling or wall suspension',
+      'Packaging stitched to removable fabric skin',
+      'Not available for seating',
+    ],
+    siteVariation: 'Preferred in Intimate and Full configurations; prioritized at Casa Faena.',
+    riskNote:
+      'Avoid folklore costume: one brand/material system, one instrument, no tropical decoration, no flags. Minimal black or ivory hammock frame; dignified pose. This is the one clearly Venezuelan sculpture.',
+    summary:
+      'A faceless figure in corn-flour packaging, seated in a chinchorro with a cuatro — the project’s explicit Venezuelan material anchor.',
+    body: `A faceless figure covered with clean yellow corn-flour packaging, seated in a chinchorro and holding a cuatro. The phrase harina de otro costal — “another matter entirely,” literally flour from another sack — is funny, materially exact, and recognizable across Spanish-speaking cultures while remaining the project’s explicit Venezuelan material entry.`,
+    overview: volverMedia.harinaOverview,
+    detail: volverMedia.harinaDetail,
+    reveal: {
+      iconId: 'hammock',
+      caption: 'Chinchorro / packaging / cuatro still for Harina de Otro Costal. Replace when ready.',
+      media: volverMedia.revealHarinaIcon,
+    },
+  },
+  {
+    id: 'casa-de-cambio',
+    title: 'Casa de Cambio',
+    role: 'Institutional counterweight — airport-style exchange kiosk',
+    conceptualRole: [
+      'Systems attempting to calculate cultural value',
+      'Hospitality and border infrastructure',
+      'Architectural counterweight to the two figures',
+    ],
+    materials: [
+      'Black plywood or MDF body',
+      'One 32-inch commercial display',
+      'Clear acrylic transaction window',
+      'Brass or stainless service ledge',
+      'Small secured bell',
+      'Locking casters and leveling feet',
+    ],
+    dimensions: 'Approximately 42 in. W × 24 in. D × 78 in. H; one standard electrical connection',
+    construction: [
+      'Offline locally stored webpage or video loop — no internet, no live API',
+      'No touchscreen, cash drawer, or live transactions',
+      'Precise autonomous sculpture finish (not movie-set prop)',
+      'Ventilation and service access for the display',
+    ],
+    siteVariation: 'Persists across Compact, Intimate, and Full configurations.',
+    riskNote:
+      'Most of the display must remain visually credible as airport signage. Interruptions (HOME, MEMORY, LABOR, FAMILY, FUTURE → NOT CONVERTIBLE / N/A / NO FIXED RATE) happen sparingly.',
+    summary:
+      'A compact airport-style casa de cambio on the money floor — institutional calculation facing values that resist conversion.',
+    body: `A compact airport-style currency-exchange kiosk installed on the money floor. The digital board resembles actual airport exchange signage — currency code, buy, sell, timestamp, minimal sans-serif typography, blue-white or amber-white display, subtle movement. At restrained intervals, one or two rows may show HOME, MEMORY, LABOR, FAMILY, or FUTURE with values such as NOT CONVERTIBLE, N/A, or NO FIXED RATE. Content is stored locally.`,
+    overview: volverMedia.casaDeCambioFront,
+    detail: volverMedia.casaDeCambioScreen,
+    reveal: {
+      iconId: 'kiosk',
+      caption: 'Kiosk silhouette or rate-board still for Casa de Cambio. Replace when ready.',
+      media: volverMedia.revealCasaIcon,
+    },
+  },
+];
+
+export const volverAdaptationRules = [
+  {
+    scale: 'Compact site',
+    elements: ['Common Tender', 'El Cuentachiste', 'Casa de Cambio'],
+  },
+  {
+    scale: 'Intimate or culturally atmospheric site',
+    elements: ['Common Tender', 'Harina de Otro Costal', 'Casa de Cambio'],
+  },
+  {
+    scale: 'Full installation',
+    elements: ['Common Tender', 'El Cuentachiste', 'Harina de Otro Costal', 'Casa de Cambio'],
+  },
+] as const;
 
 export const volverVisitorJourney = [
   {
     number: '01',
     title: 'Arrival',
-    body: 'The viewer enters a luxury hotel and encounters what initially appears to be an extravagant custom carpet made from an abundance of money.',
+    body: 'The floor appears as an extravagant luxury carpet — abundance before recognition.',
   },
   {
     number: '02',
     title: 'Recognition',
-    body: 'At closer range, the floor resolves into bolívares, pesos, soles, reais, quetzales, receipts, remittance records, serial numbers, hotel charges, and documents of work and movement.',
+    body: 'The viewer identifies different currencies and migration documents with unequal histories and present-day values.',
   },
   {
     number: '03',
     title: 'Embodiment',
-    body: 'The sculptures convert the flat financial image into something carried, woven, rested beside, displayed, and priced — without costume or theatrical props.',
+    body: 'The figures materialize humor, food, music, rest, and memory — cultural value made bodily.',
   },
   {
     number: '04',
-    title: 'Revaluation',
-    body: 'The viewer encounters their reflection in Market Rate, surrounded by currencies and categories of value that cannot be reconciled through one exchange rate.',
+    title: 'Exchange',
+    body: 'Casa de Cambio attempts to assign rates to values that resist conversion.',
   },
 ] as const;
 
@@ -158,89 +327,82 @@ export const volverHotelStudies: NvHotelAdaptation[] = [
   {
     id: 'cadillac',
     hotelName: 'Cadillac Hotel & Beach Club',
-    strategicRole: 'Most expansive and socially visible version',
+    strategicRole: 'Full installation — bright, expansive, social',
     locationType: 'Bright resort lobby / lounge circulation',
-    configuration: 'large',
+    configuration: 'full',
     panorama: volverMedia.cadillacPanorama,
     poster: volverMedia.cadillacRender,
     proposedRender: volverMedia.cadillacRender,
-    floorDetail: volverMedia.cadillacFloorDetail,
-    sculptureDetail: volverMedia.cadillacSculptureDetail,
     installationElements: [
-      'Long currency floor field',
-      'Market Rate',
-      'Soft Currency',
-      'Optional Carry-On along circulation',
+      'Largest Common Tender floor field',
+      'El Cuentachiste',
+      'Harina de Otro Costal',
+      'Casa de Cambio',
     ],
     siteAdvantages: [
       'Long sight lines and resort brightness',
+      'Space for full sculpture roster',
       'Strong photography of abundance → recognition',
-      'Space for optional third sculpture',
     ],
     constraints: [
       'Must not obstruct bar/lounge operations',
       'Evacuation path and sprinkler clearances required',
     ],
     adaptationNotes: [
-      'Prefer freestanding modules and mechanically fastened floor panels',
-      'Carry-On only if bypass remains clear',
+      'Prefer freestanding modules and mechanically placed floor panels',
+      'Full configuration when circulation permits',
     ],
-    dimensionsNote: 'Final dimensions after site survey and Cultural Affairs coordination.',
+    dimensionsNote: 'Floor adapted within ≈ 12 × 24 ft maximum; final dimensions after site survey.',
     whyThisLocation:
-      'Resort brightness and circulation make the currency field photographable while staging the double take between leisure and unstable value.',
+      'Resort brightness and circulation make the currency field and full sculpture set photographable while staging the double take between leisure and unstable value.',
   },
   {
     id: 'betsy',
     hotelName: 'The Betsy Hotel',
-    strategicRole: 'Most restrained and intellectually architectural version',
+    strategicRole: 'Restrained architectural version',
     locationType: 'Refined check-in / waiting architecture',
     configuration: 'compact',
     panorama: volverMedia.betsyPanorama,
     poster: volverMedia.betsyRender,
     proposedRender: volverMedia.betsyRender,
-    floorDetail: volverMedia.betsyFloorDetail,
-    sculptureDetail: volverMedia.betsySculptureDetail,
     installationElements: [
-      'Currency floor adapted to waiting or check-in zone',
-      'Market Rate as dominant object',
-      'Soft Currency as cultural counterpoint',
+      'Reduced Common Tender floor field',
+      'El Cuentachiste',
+      'Casa de Cambio',
     ],
     siteAdvantages: [
       'Quieter conceptual atmosphere',
-      'Architecture supports Minimal monolith finish',
+      'Architecture supports precise kiosk finish',
       'Strong intellectual application image',
     ],
     constraints: [
       'Finish must meet luxury hospitality standards',
-      'Limited footprint — no third sculpture unless survey allows',
+      'Limited footprint — Harina deferred unless survey allows Full',
     ],
     adaptationNotes: [
-      'Prioritize clean silhouette over maximal floor coverage',
-      'Market Rate reads as furniture-scale architecture, not prop',
+      'Prioritize El Cuentachiste + Casa de Cambio',
+      'Clean silhouette over maximal floor coverage',
     ],
     dimensionsNote: 'Compact adaptation — floor footprint sized to waiting/check-in edge.',
     whyThisLocation:
-      'Refined architecture makes revaluation feel credible rather than spectacular alone.',
+      'Refined architecture makes exchange and informal humor feel credible rather than spectacular alone.',
   },
   {
     id: 'casa-faena',
     hotelName: 'Casa Faena',
-    strategicRole: 'Most intimate and materially embodied version',
+    strategicRole: 'Intimate and culturally embodied version',
     locationType: 'Intimate theatrical interior',
-    configuration: 'compact',
+    configuration: 'intimate',
     panorama: volverMedia.casaFaenaPanorama,
     poster: volverMedia.casaFaenaRender,
     proposedRender: volverMedia.casaFaenaRender,
-    floorDetail: volverMedia.casaFaenaFloorDetail,
-    sculptureDetail: volverMedia.casaFaenaSculptureDetail,
     installationElements: [
-      'Smaller currency field',
-      'Soft Currency as hero silhouette',
-      'Market Rate as reflective endpoint',
-      'Carry-On only if circulation permits',
+      'Smaller Common Tender floor field',
+      'Harina de Otro Costal',
+      'Casa de Cambio',
     ],
     siteAdvantages: [
-      'Intimate scale favors material richness of Soft Currency',
+      'Intimate scale favors Harina as hero silhouette',
       'Theatrical interior without needing expansive floor',
     ],
     constraints: [
@@ -248,92 +410,80 @@ export const volverHotelStudies: NvHotelAdaptation[] = [
       'Attachment and floor clearances TBD with property',
     ],
     adaptationNotes: [
-      'Heritage weave must remain structured, not illustrative costume',
-      'Scale for intimacy without blocking egress',
+      'Prioritize Harina de Otro Costal + Casa de Cambio',
+      'Heritage forms remain structured, not costume',
     ],
-    dimensionsNote: 'Intimate field — Soft Currency prioritized in the frame.',
+    dimensionsNote: 'Intimate field — Harina prioritized in the frame.',
     whyThisLocation:
-      'Allows Soft Currency to carry cultural memory inside a theatrical hospitality interior without casino excess.',
+      'Allows the Venezuelan material anchor to carry cultural memory inside a theatrical hospitality interior without casino excess.',
   },
 ];
 
 export const volverCurrencyArchive = {
   heading: 'Currency archive methodology',
   intro:
-    'The floor is not a colorful inventory of “all Latin American bills.” It follows a curatorial method so Venezuela remains foundational without flattening distinct countries into decorative multiculturalism.',
+    'The floor uses selected currencies across countries and periods — not every Latin American bill. The bolívar and redenomination histories remain foundational without flattening distinct countries into decorative multiculturalism.',
   principles: [
-    'Obsolete and decommissioned notes preferred over circulating legal tender when feasible',
-    'Currencies carried by Miami diasporas and remittance corridors, not a comprehensive map of Latin America',
+    'Selected historical, obsolete, demonetized, or materially transformed notes preferred when feasible',
+    'Currencies carried by Miami diasporas and remittance corridors — not a comprehensive map',
     'Currencies with major redenominations and inflation histories',
     'Documents of exchange, remittance, hotel hospitality, labor, and shipping as equal material to notes',
     'No flags, maps, national ranking, or country-by-country grid',
-    'Controlled local collection process for receipts and documents — not scavenged personal data',
+    'Accurate note dimensions verified; banknote-image and brand/image-rights review during prototype production',
+    'Current or restricted notes cropped, overlapped, transformed, or abstracted',
   ],
   walkingPathNote:
-    'Central walking paths use abstraction (guilloche, serials, fragments). Full portraits and national symbols concentrate at edges and approach zones. The proposal acknowledges that walking on currency remains a charged tension.',
+    'Central walking paths prefer abstraction (guilloche, serials, fragments) where trampling portraits would be disrespectful. Full readable notes concentrate at edges and approach zones when permitted. The proposal acknowledges that walking on currency remains a charged tension.',
 } as const;
 
-export const volverValueTransformations = [
-  {
-    mechanism: 'Labor',
-    transformation: 'Notes and documents become woven, printed, supported, and installed.',
-  },
-  {
-    mechanism: 'Context',
-    transformation: 'Currency enters a luxury hotel as carpet and sculpture.',
-  },
-  {
-    mechanism: 'Authorship',
-    transformation: 'Material becomes a contemporary artwork with institutional framing.',
-  },
-  {
-    mechanism: 'Memory',
-    transformation: 'Notes retain histories that exceed exchange value.',
-  },
-  {
-    mechanism: 'Collective belief',
-    transformation:
-      'Viewers and institutions participate in revaluation — without claiming art repairs collapse.',
-  },
-] as const;
-
-export const volverFabrication = [
-  'Historical, obsolete, or discarded paper materials where available',
-  'Reusable modular printed floor system (PVC-free preferred)',
-  'No permanent alteration of hotel surfaces',
-  'Mechanically assembled sculpture frames',
-  'Disassembly and reuse after exhibition',
-  'Low-energy lighting only if needed',
-  'No single-use scenic construction',
-  'Editioned afterlife (floor fragments, woven studies, modules) — not onsite sales during the hotel run',
+export const volverFeasibility = [
+  'Floor stays under approximately 300 square feet and adapts downward to site',
+  'Modular, removable laminated panels — no permanent hotel floor alteration',
+  'One standard electrical connection for Casa de Cambio; offline media only',
+  'Clear egress and bypass routes; no blocking required circulation',
+  'No ceiling or wall attachments; freestanding hammock stand and weighted bases',
+  'No visitor interaction required for the work to remain complete',
+  'Maintenance: daily visual check of props/tethers; weekly screen content verification',
 ] as const;
 
 export const volverPrototypes = [
-  'Printed floor module + non-slip / edge finish sample',
-  'Soft Currency weave sample in metal frame',
-  'Market Rate oil-black / smoked-mirror finish plaque mockup',
-  'Fire-retardant / hospitality safety review for paper materials',
-  'Mounting and mechanical fastener test',
-  'Optional Carry-On container layout study',
+  '24 × 36-inch printed floor sample for scale, color, glare, slip, and removal testing',
+  'One mannequin forearm/hand currency-skin attachment test',
+  'One packaging-to-textile attachment test (corn-flour skin)',
+  'Full-scale cardboard Casa de Cambio kiosk mockup',
+  'Screen typography and motion test (offline rate board)',
+  'Hotel floor, egress, and electrical survey',
+  'Banknote-image and brand-review checklist',
 ] as const;
 
 export const volverBudget: NvBudgetLine[] = [
-  { category: 'Printed modular currency floor', amount: 2000 },
-  { category: 'Market Rate fabrication', amount: 1600 },
-  { category: 'Soft Currency fabrication', amount: 1600 },
-  { category: 'Optional Carry-On (large sites; reallocable)', amount: 1200 },
-  { category: 'Currency, receipts, and textile materials', amount: 700 },
-  { category: 'Fabrication assistance', amount: 1200 },
-  { category: 'Transport and installation', amount: 700 },
-  { category: 'Safety, mounting, and insurance', amount: 400 },
-  { category: 'Documentation', amount: 300 },
-  { category: 'Contingency', amount: 300 },
+  { category: 'Common Tender — floor printing, proofing, waste, install/removal', amount: 2425 },
+  { category: 'El Cuentachiste — mannequin, chair, materials and modifications', amount: 700 },
+  { category: 'Harina de Otro Costal — mannequin, hammock, stand, cuatro and materials', amount: 1050 },
+  { category: 'Casa de Cambio — screen, media player, structure, acrylic and hardware', amount: 1100 },
+  { category: 'Artist fabrication labor', amount: 2000 },
+  { category: 'Fabrication / install assistant', amount: 500 },
+  { category: 'Local transport, installation and removal', amount: 600 },
+  { category: 'Safety treatment, mounting and insurance reserve', amount: 400 },
+  { category: 'Documentation', amount: 250 },
+  { category: 'Contingency', amount: 975 },
 ];
 
 export const volverBudgetTotal = volverBudget.reduce((sum, line) => sum + line.amount, 0);
 
+export const volverBudgetAssumptions = [
+  'Floor remains under approximately 300 square feet',
+  'Fabrication is primarily artist-led',
+  'Both figures use commercial flexible mannequins',
+  'Hammock uses a commercial freestanding stand',
+  'Casa de Cambio uses one 32-inch screen with offline media',
+  'No ceiling rigging and no custom welded structure',
+  'Hotel or union labor is not assumed mandatory',
+  'Installation and removal each fit within one working day',
+] as const;
+
 export const volverBudgetNote =
-  'Draft within the $10,000 all-inclusive stipend. If Carry-On is not produced for the assigned hotel, its allocation strengthens floor fabrication, labor, finish quality, and contingency.';
+  'Draft within the $10,000 all-inclusive stipend. The budget is viable only under the assumptions listed beside the table — otherwise allocations shift before procurement.';
 
 export const volverRelatedWorks: GrantRelatedWork[] = [
   {
@@ -342,7 +492,7 @@ export const volverRelatedWorks: GrantRelatedWork[] = [
     year: 2024,
     image: `${CDN}/v1753724794/art/moisestech-website/artworks/2024_price_of_existence/MoisesSanabria-PriceOfExistence-2024_e4mizb.jpg`,
     blurb:
-      'Precedent: death and monetary collapse through the body. Volver a Valer moves into hospitality, migration, collective value, and possible renewal — floor and freestanding sculptures, not a body wrap.',
+      'Price of Existence addressed monetary collapse through mortality. Volver a Valer moves that material history into migration, hospitality, humor, cultural continuity, and unresolved renewal.',
   },
   {
     slug: 'privacy_is_a_luxury',
@@ -362,10 +512,13 @@ export const volverRelatedWorks: GrantRelatedWork[] = [
 
 export const volverClosingQuestion = 'What survives when exchange rates do not?';
 
+export const volverLineageParagraph =
+  'Price of Existence addressed monetary collapse through mortality. Volver a Valer moves that material history into migration, hospitality, humor, cultural continuity, and unresolved renewal — floor and life-size sculptures, not a body wrap.';
+
 export const volverSeo = {
   title: 'Volver a Valer: The Value We Carry — No Vacancy 2026 | Moises Sanabria',
   description:
-    'Proposed hotel installation for No Vacancy Miami Beach 2026: a printed Latin American currency floor and freestanding sculptures examining how money, labor, memory, care, and identity transform through migration.',
+    'Proposed hotel installation for No Vacancy Miami Beach 2026: a printed floor of selected Latin American currencies with El Cuentachiste, Harina de Otro Costal, and Casa de Cambio.',
 } as const;
 
 export const volverHeroMedia = toGrantMedia(volverMedia.hero);
@@ -374,8 +527,6 @@ export const volverClosingMedia = toGrantMedia(volverMedia.closing);
 export const volverProjectStatement = {
   interestAndApproach: `No Vacancy offers a rare context: Miami Beach hotels as temporary public galleries during Art Week, when hospitality architecture becomes a stage for contemporary art. I am drawn to this program because it places work inside spaces of transit, leisure, and spectacle — where visitors already negotiate desire, consumption, and image — while keeping the work free and accessible to the public.
 
-I propose Volver a Valer: The Value We Carry. A site-fitted printed currency floor transforms part of a lobby, waiting area, or check-in zone into a continuous field drawn from Venezuelan bolívares and historical Latin American currencies together with remittance slips, hotel invoices, and documents of movement. Two core freestanding sculptures — Market Rate, an oil-black monolith of hotel pricing and human worth, and Soft Currency, a woven chinchorro-like form of bills and receipts — complete the work. A third sculpture, Carry-On, is optional for larger sites.
-
-From a distance the hotel appears to hold an extravagant money carpet. At closer range that abundance destabilizes. The currency changed value. The people who carried it did not. Full proposal: https://moises.tech/grant/no-vacancy-2026/volver-a-valer`,
-  idealSiteConditions: `Ideal placement is a publicly accessible lobby edge, waiting alcove, or check-in adjacent zone where a modular printed floor can read as an environment and two freestanding sculptures can stand without blocking required circulation. Compact sites receive floor + Market Rate + Soft Currency. Larger sites may add Carry-On. Final layout will be determined collaboratively with Cultural Affairs staff and the assigned property after site survey.`,
+I propose Volver a Valer: The Value We Carry. A removable printed floor drawn from selected Latin American currencies and migration documents transforms part of a lobby, waiting area, or check-in zone. Life-size sculptures — El Cuentachiste, a currency-covered figure of informal humor; Harina de Otro Costal, a Venezuelan material anchor of food, music, and rest; and Casa de Cambio, an airport-style exchange kiosk — adapt to the assigned hotel. Currencies can be devalued. People cannot. Full proposal: https://moises.tech/grant/no-vacancy-2026/volver-a-valer`,
+  idealSiteConditions: `Ideal placement is a publicly accessible lobby edge, waiting alcove, or check-in adjacent zone where a modular printed floor can read as an environment and freestanding sculptures can stand without blocking required circulation. Compact sites receive floor + El Cuentachiste + Casa de Cambio. Intimate sites may prioritize Harina de Otro Costal with Casa de Cambio. Full sites include all three sculptures. Final layout will be determined collaboratively with Cultural Affairs staff and the assigned property after site survey.`,
 } as const;

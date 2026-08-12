@@ -70,7 +70,7 @@ export function GrantPanoramaViewer({
             role="img"
             aria-label={alt}
           >
-            <p className="text-sm text-stone-500 text-center max-w-md">{label ?? alt}</p>
+            <p className="text-sm text-stone-500 dark:text-stone-400 text-center max-w-md">{label ?? alt}</p>
           </div>
         )}
 
@@ -85,7 +85,7 @@ export function GrantPanoramaViewer({
             <button
               type="button"
               onClick={() => setExplore((v) => !v)}
-              className="min-h-11 px-4 py-2 text-sm font-medium border border-stone-900 bg-white/95 text-stone-900 hover:bg-stone-900 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-800"
+              className="min-h-11 px-4 py-2 text-sm font-medium border border-stone-800 bg-white/95 text-stone-900 transition-colors hover:bg-stone-900 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-800 dark:border-stone-200 dark:bg-neutral-950/95 dark:text-stone-100 dark:hover:bg-stone-100 dark:hover:text-black dark:focus-visible:outline-stone-200"
               aria-pressed={explore}
             >
               {explore ? 'Exit 360' : 'Explore 360'}

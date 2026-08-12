@@ -300,6 +300,11 @@ export const encounterStageIcons = {
 } as const;
 
 export const authoredStateIcons = {
+  sealed: IconStateCube,
+  listening: IconSentenceInput,
+  attentive: IconStateWitness,
+  exposed: IconStateAperture,
+  unresolved: IconStateFaultLine,
   column: IconStateCube,
   sentence: IconStateWitness,
   aperture: IconStateAperture,

@@ -323,7 +323,7 @@ export function GrantDossierNav({
       >
         <summary className={cn('cursor-pointer list-none px-4 py-3', dossierTypography.meta, '[&::-webkit-details-marker]:hidden')}>
           <span className="font-semibold text-stone-900 dark:text-stone-100">Sections</span>
-          <span className="ml-2 text-stone-500">▾</span>
+          <span className="ml-2 text-stone-500 dark:text-stone-400">▾</span>
         </summary>
         <nav aria-label="Dossier sections" className="border-t border-stone-200 px-2 py-2 dark:border-stone-700">
           {zones.map((zone) => (

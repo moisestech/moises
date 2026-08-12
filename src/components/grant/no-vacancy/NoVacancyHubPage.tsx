@@ -16,7 +16,7 @@ export function NoVacancyHubPage() {
     <div className="min-h-screen bg-[#f7f4ef] text-stone-900 dark:bg-neutral-950 dark:text-stone-100">
       <article className="mx-auto max-w-3xl px-4 sm:px-6 pt-28 sm:pt-32 pb-20 sm:pb-28">
         <header className="mb-12 sm:mb-16">
-          <p className="text-sm uppercase tracking-widest text-stone-500 mb-3">
+          <p className="text-sm uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-3">
             Application packet · {meta.callId}
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">{meta.projectName}</h1>
@@ -25,19 +25,19 @@ export function NoVacancyHubPage() {
           </p>
           <dl className="grid sm:grid-cols-2 gap-3 text-sm border border-stone-200 dark:border-stone-700 p-4 sm:p-5 bg-white/60 dark:bg-black/30">
             <div>
-              <dt className="text-stone-500 uppercase tracking-wide text-xs mb-1">Deadline</dt>
+              <dt className="text-stone-500 dark:text-stone-400 uppercase tracking-wide text-xs mb-1">Deadline</dt>
               <dd className="font-medium">{meta.deadline}</dd>
             </div>
             <div>
-              <dt className="text-stone-500 uppercase tracking-wide text-xs mb-1">Stipend</dt>
+              <dt className="text-stone-500 dark:text-stone-400 uppercase tracking-wide text-xs mb-1">Stipend</dt>
               <dd className="font-medium">{meta.stipend}</dd>
             </div>
             <div>
-              <dt className="text-stone-500 uppercase tracking-wide text-xs mb-1">Duration</dt>
+              <dt className="text-stone-500 dark:text-stone-400 uppercase tracking-wide text-xs mb-1">Duration</dt>
               <dd className="font-medium">{meta.duration}</dd>
             </div>
             <div>
-              <dt className="text-stone-500 uppercase tracking-wide text-xs mb-1">Submit</dt>
+              <dt className="text-stone-500 dark:text-stone-400 uppercase tracking-wide text-xs mb-1">Submit</dt>
               <dd>
                 <a
                   href={meta.submittableUrl}
@@ -72,9 +72,9 @@ export function NoVacancyHubPage() {
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-semibold">{proposal.title}</h3>
-              <p className="text-stone-500 mt-1">{proposal.subtitle}</p>
+              <p className="text-stone-500 dark:text-stone-400 mt-1">{proposal.subtitle}</p>
               <p className="mt-3 text-stone-700 dark:text-stone-300 leading-relaxed">{proposal.thesis}</p>
-              <p className="mt-3 text-sm text-stone-500">Spatial system: {proposal.gesture}</p>
+              <p className="mt-3 text-sm text-stone-500 dark:text-stone-400">Spatial system: {proposal.gesture}</p>
               <p className="mt-4 text-sm font-medium underline underline-offset-4">Open full proposal →</p>
             </Link>
           </section>
@@ -82,7 +82,7 @@ export function NoVacancyHubPage() {
 
         <section className="mb-16">
           <h2 className="text-2xl font-semibold mb-4">Artist statement</h2>
-          <p className="text-xs text-stone-500 mb-4">Submittable field</p>
+          <p className="text-xs text-stone-500 dark:text-stone-400 mb-4">Submittable field</p>
           <div className="prose prose-stone dark:prose-invert max-w-none whitespace-pre-line text-stone-700 dark:text-stone-300 leading-relaxed">
             {noVacancyArtistStatement}
           </div>
@@ -91,7 +91,7 @@ export function NoVacancyHubPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-semibold mb-4">Artist</h2>
           <p className="text-stone-700 dark:text-stone-300 leading-relaxed mb-4">{noVacancyArtistBioShort}</p>
-          <p className="text-sm text-stone-500">
+          <p className="text-sm text-stone-500 dark:text-stone-400">
             {noVacancySharedContact.email} ·{' '}
             <Link href="/contact" className="underline underline-offset-4">
               Contact
@@ -123,7 +123,7 @@ export function NoVacancyHubPage() {
                   />
                 </div>
                 <h3 className="font-semibold text-sm">{sample.title}</h3>
-                <p className="text-xs text-stone-500 mt-1">{sample.description}</p>
+                <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">{sample.description}</p>
               </li>
             ))}
           </ul>
@@ -135,7 +135,7 @@ export function NoVacancyHubPage() {
             {meta.contacts.map((c) => (
               <li key={c.email}>
                 <p className="font-medium">{c.name}</p>
-                <p className="text-stone-500">{c.role}</p>
+                <p className="text-stone-500 dark:text-stone-400">{c.role}</p>
                 <p className="text-stone-600 dark:text-stone-400">
                   {c.phone} ·{' '}
                   <a href={`mailto:${c.email}`} className="underline underline-offset-4">
@@ -147,13 +147,7 @@ export function NoVacancyHubPage() {
           </ul>
         </section>
 
-        <footer className="border-t border-stone-200 dark:border-stone-700 pt-8 text-sm text-stone-500">
-          <p className="mb-3">
-            Related research (not this application):{' '}
-            <Link href={meta.researchTouchGrassRoute} className="underline underline-offset-4">
-              Touch Grass Circuit Floor
-            </Link>
-          </p>
+        <footer className="border-t border-stone-200 dark:border-stone-700 pt-8 text-sm text-stone-500 dark:text-stone-400">
           <p>Moises Sanabria · Miami, Florida · {meta.year}</p>
           <div className="mt-4 flex flex-wrap gap-4">
             <Link href="/grants" className="underline underline-offset-4">

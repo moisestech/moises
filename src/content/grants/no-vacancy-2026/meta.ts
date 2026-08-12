@@ -15,8 +15,6 @@ export const noVacancyGrantMeta = {
   submittableUrl: 'http://cityofmiamibeach.submittable.com/submit',
   hubRoute: '/grant/no-vacancy-2026',
   volverRoute: '/grant/no-vacancy-2026/volver-a-valer',
-  touchGrassRoute: '/grant/no-vacancy-2026/touch-grass',
-  researchTouchGrassRoute: '/research/touch-grass-circuit-floor',
   contacts: [
     {
       name: 'Danielle Bender',
@@ -40,9 +38,10 @@ export const noVacancyProposalCards = [
     title: 'Volver a Valer',
     subtitle: 'The Value We Carry',
     thesis:
-      'A site-fitted printed currency floor and two or three freestanding sculptures examining how money, labor, memory, care, and identity are transformed through migration.',
+      'Currencies can be devalued. People cannot. A site-fitted printed currency floor with El Cuentachiste, Harina de Otro Costal, and Casa de Cambio — examining how money, labor, memory, care, and identity transform through migration.',
     status: 'Official proposal',
     href: noVacancyGrantMeta.volverRoute,
-    gesture: 'Printed currency floor + Market Rate + Soft Currency (+ optional Carry-On)',
+    gesture:
+      'Printed currency floor + El Cuentachiste, Harina de Otro Costal, Casa de Cambio',
   },
 ] as const;

@@ -1,35 +1,35 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import type { BodyScore } from '@/content/grants/modal-gray-area-2026/machine-sentence-no-1';
-import { machineSentenceSuggestedInput } from '@/content/grants/modal-gray-area-2026/machine-sentence-no-1';
+import type { InferenceScore } from '@/content/grants/modal-gray-area-2026/incomplete-containment-of-a-model';
+import { incompleteContainmentSuggestedInput } from '@/content/grants/modal-gray-area-2026/incomplete-containment-of-a-model';
 import { scoreSentenceMock } from '@/lib/grant/machine-sentence-score';
-import { LatentMonumentFigure } from './LatentMonumentFigure';
+import { ListeningStructureFigure } from './ListeningStructureFigure';
 import { MutationReadout } from './MutationReadout';
 
-type Phase = 'idle' | 'reflex' | 'metabolization' | 'rest';
+type Phase = 'idle' | 'acknowledgment' | 'interpretation' | 'rest';
 type Mode = 'mock' | 'live';
 
 const EXAMPLES = [
-  'I remember something that never happened.',
-  'I trust the machine until it recognizes me.',
-  'Some thoughts become smaller when I explain them.',
+  'I want this to be remembered, not explained.',
+  'Say it back without pretending you understood.',
+  'Some sentences shrink when a machine hears them.',
 ] as const;
 
-const INITIAL = scoreSentenceMock(machineSentenceSuggestedInput);
+const INITIAL = scoreSentenceMock(incompleteContainmentSuggestedInput);
 
 export function MachineSentencePrototype() {
-  const [text, setText] = useState(machineSentenceSuggestedInput);
+  const [text, setText] = useState(incompleteContainmentSuggestedInput);
   const [mode, setMode] = useState<Mode>('mock');
-  const [score, setScore] = useState<BodyScore>(INITIAL);
+  const [score, setScore] = useState<InferenceScore>(INITIAL);
   const [phase, setPhase] = useState<Phase>('idle');
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
   useEffect(() => {
     if (phase === 'idle' || phase === 'rest') return;
-    const ms = phase === 'reflex' ? 900 : 2800;
-    const next: Phase = phase === 'reflex' ? 'metabolization' : 'rest';
+    const ms = phase === 'acknowledgment' ? 700 : 2200;
+    const next: Phase = phase === 'acknowledgment' ? 'interpretation' : 'rest';
     const t = window.setTimeout(() => setPhase(next), ms);
     return () => window.clearTimeout(t);
   }, [phase]);
@@ -38,7 +38,7 @@ export function MachineSentencePrototype() {
     setError(null);
     startTransition(async () => {
       try {
-        let next: BodyScore;
+        let next: InferenceScore;
         if (mode === 'mock') {
           next = scoreSentenceMock(text);
         } else {
@@ -51,14 +51,14 @@ export function MachineSentencePrototype() {
             const data = (await res.json().catch(() => null)) as { error?: string } | null;
             throw new Error(data?.error ?? `Request failed (${res.status})`);
           }
-          next = (await res.json()) as BodyScore;
+          next = (await res.json()) as InferenceScore;
         }
         setScore(next);
-        setPhase('reflex');
+        setPhase('acknowledgment');
       } catch (e) {
         setError(e instanceof Error ? e.message : 'Scoring failed');
         setScore(scoreSentenceMock(text));
-        setPhase('reflex');
+        setPhase('acknowledgment');
       }
     });
   }
@@ -66,20 +66,20 @@ export function MachineSentencePrototype() {
   return (
     <div className="border border-neutral-800 bg-neutral-950 text-stone-100 overflow-hidden">
       <div className="px-4 sm:px-5 py-4 border-b border-neutral-800">
-        <p className="text-xs uppercase tracking-widest text-neutral-400">Digital movement study</p>
+        <p className="text-xs uppercase tracking-widest text-neutral-400">Live inference prototype</p>
         <p className="text-sm text-neutral-400 mt-1 leading-relaxed">
-          This prototype maps language into a digital sculptural state. It does not represent completed physical
-          hardware.
+          Digital study mapping one sentence into constrained inference values and an authored aperture state. Not
+          completed physical hardware.
         </p>
       </div>
 
       <div className="p-4 sm:p-6 flex flex-col items-center">
-        <div className="w-full max-w-lg min-h-[420px] sm:min-h-[520px] flex items-center">
-          <LatentMonumentFigure score={score} phase={phase} className="w-full" />
+        <div className="w-full max-w-lg min-h-[360px] sm:min-h-[420px] flex items-center">
+          <ListeningStructureFigure score={score} phase={phase} className="w-full" />
         </div>
         <p className="mt-3 text-[11px] text-neutral-500 text-center max-w-md leading-relaxed">
-          Exhibition timing: Reflex 1–3s · Metabolization 20–45s · Rest 30–90s (accelerated here). The model does
-          not understand emotion, consciousness, or true intent.
+          Exhibition timing: acknowledgment before inference completes · interpretation maps values · rest holds
+          aperture. The model does not diagnose, score, or advise.
         </p>
       </div>
 
@@ -103,7 +103,9 @@ export function MachineSentencePrototype() {
         </div>
 
         <label className="block">
-          <span className="text-xs uppercase tracking-widest text-neutral-400">Offer the sculpture one sentence.</span>
+          <span className="text-xs uppercase tracking-widest text-neutral-400">
+            Offer one sentence you want heard, not answered.
+          </span>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -132,7 +134,7 @@ export function MachineSentencePrototype() {
           disabled={pending || !text.trim()}
           className="w-full min-h-11 bg-[#a3be8c] text-neutral-950 font-semibold text-sm hover:bg-[#b5cda0] disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3be8c]"
         >
-          {pending ? 'Interpreting…' : 'Infer a body'}
+          {pending ? 'Interpreting…' : 'Map testimony to aperture'}
         </button>
 
         {error ? (

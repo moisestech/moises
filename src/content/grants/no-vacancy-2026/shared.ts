@@ -26,5 +26,5 @@ export const noVacancyArtistBioShort = `Moises Sanabria is a Miami-based interdi
 export const noVacancyHubSeo = {
   title: 'No Vacancy Miami Beach 2026 — Volver a Valer | Moises Sanabria',
   description:
-    'Application packet for No Vacancy Miami Beach 2026: Volver a Valer — The Value We Carry. Printed currency floor and freestanding sculptures for temporary hotel installation. Deadline July 16, 2026.',
+    'Application packet for No Vacancy Miami Beach 2026: Volver a Valer — The Value We Carry. Printed currency floor with El Cuentachiste, Harina de Otro Costal, and Casa de Cambio. Deadline July 16, 2026.',
 } as const;

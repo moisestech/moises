@@ -1,12 +1,7 @@
 'use client';
 
-import React, {
-  createContext,
-  useState,
-  useContext,
-  ReactNode,
-  useEffect,
-} from 'react';
+import React, { createContext, useContext, type ReactNode } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface AppContextProps {
   darkMode: boolean;
@@ -15,23 +10,20 @@ interface AppContextProps {
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
-  };
-
-  useEffect(() => {
-    // Set initial theme
-    document.documentElement.classList.toggle('dark', darkMode);
-  }, [darkMode]);
+/**
+ * Legacy app shell provider. Theme ownership lives in ThemeContext —
+ * do not toggle `document.documentElement.classList` here (that forced light mode on mount).
+ */
+export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <AppContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <AppContext.Provider
+      value={{
+        darkMode: theme === 'dark',
+        toggleDarkMode: toggleTheme,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

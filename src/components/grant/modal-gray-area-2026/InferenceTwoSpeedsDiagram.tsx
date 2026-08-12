@@ -1,4 +1,5 @@
-import { IconFastPath, IconInfer, IconSentenceInput, IconSlowPath, IconSafetyController, IconPhysicalMovement, IconDistributedSurface } from './MachineSentenceIcons';
+import { IconInfer, IconSentenceInput, IconSafetyController, IconStateAperture } from './MachineSentenceIcons';
+import { incompleteContainmentInferenceFlow } from '@/content/grants/modal-gray-area-2026/incomplete-containment-of-a-model';
 
 function Node({
   label,
@@ -27,38 +28,41 @@ function Arrow() {
 }
 
 export function InferenceTwoSpeedsDiagram() {
+  const flow = incompleteContainmentInferenceFlow;
   return (
     <div
       className="space-y-1"
       role="group"
-      aria-label="Inference operates at two speeds: fast body path and slow skin path"
+      aria-label="Inference path from testimony to aperture and evidence receipt"
     >
-      <Node label="Visitor input" sub="voice or text" icon={IconSentenceInput} />
+      <Node label="Visitor testimony" sub="one sentence" icon={IconSentenceInput} />
       <Arrow />
-      <Node label="Modal inference" sub="on-demand compute" icon={IconInfer} />
-      <div className="grid sm:grid-cols-2 gap-3 my-2">
-        <div>
-          <div className="flex items-center justify-center gap-2 mb-2 text-[#3d5a3a] dark:text-[#a3be8c]">
-            <IconFastPath className="h-4 w-4" decorative />
-            <span className="text-[10px] font-semibold uppercase tracking-widest">Fast body path</span>
-          </div>
-          <ul className="text-[11px] text-stone-600 dark:text-stone-400 space-y-1 border border-stone-200 dark:border-stone-700 p-3">
-            <li>Transcription / text</li>
-            <li>Embedding</li>
-            <li>Structured body score</li>
-            <li>Authored state</li>
+      <Node label="Modal inference" sub="when live — on-demand compute" icon={IconInfer} />
+      <div className="grid sm:grid-cols-3 gap-3 my-2">
+        <div className="border border-stone-200 dark:border-stone-700 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-stone-500 mb-2">Input path</p>
+          <ul className="text-[11px] text-stone-600 dark:text-stone-400 space-y-1">
+            {flow.input.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </div>
-        <div>
-          <div className="flex items-center justify-center gap-2 mb-2 text-stone-500">
-            <IconSlowPath className="h-4 w-4" decorative />
-            <span className="text-[10px] font-semibold uppercase tracking-widest">Slow skin path</span>
-          </div>
-          <ul className="text-[11px] text-stone-600 dark:text-stone-400 space-y-1 border border-stone-200 dark:border-stone-700 p-3">
-            <li>Semantic features</li>
-            <li>Texture family</li>
-            <li>Distributed visual surface</li>
-            <li>Generated or cached imagery</li>
+        <div className="border border-stone-200 dark:border-stone-700 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#3d5a3a] dark:text-[#a3be8c] mb-2">
+            Control layer
+          </p>
+          <ul className="text-[11px] text-stone-600 dark:text-stone-400 space-y-1">
+            {flow.control.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="border border-stone-200 dark:border-stone-700 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-stone-500 mb-2">Output path</p>
+          <ul className="text-[11px] text-stone-600 dark:text-stone-400 space-y-1">
+            {flow.output.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -66,21 +70,23 @@ export function InferenceTwoSpeedsDiagram() {
       <Node label="Local control layer" icon={IconSafetyController} />
       <Arrow />
       <div className="grid sm:grid-cols-2 gap-3">
-        <Node label="Physical movement" icon={IconPhysicalMovement} />
-        <Node label="Screen surface" icon={IconDistributedSurface} />
+        <Node label="Aperture position" icon={IconStateAperture} />
+        <Node label="Thermal evidence receipt" sub="forensic trace" icon={IconSentenceInput} />
       </div>
-      <Arrow />
-      <Node label="Temporary sculptural state" />
+
+      <p className="mt-6 text-sm text-stone-600 dark:text-stone-400 leading-relaxed border-l-2 border-stone-400 pl-4">
+        {flow.note}
+      </p>
 
       <div className="mt-6 grid sm:grid-cols-2 gap-4 text-sm">
         <div className="border border-stone-300 dark:border-stone-600 p-4">
           <p className="text-xs uppercase tracking-widest text-stone-500 mb-2">Implemented now</p>
-          <p className="text-stone-700 dark:text-stone-300">Deterministic web-based body-score study</p>
+          <p className="text-stone-700 dark:text-stone-300">Deterministic web-based inference and aperture study</p>
         </div>
         <div className="border border-stone-300 dark:border-stone-600 p-4">
           <p className="text-xs uppercase tracking-widest text-stone-500 mb-2">Proposed exhibition path</p>
           <p className="text-stone-700 dark:text-stone-300">
-            Modal-hosted inference connected to the physical controller
+            Modal-hosted inference connected to physical controller and thermal printer
           </p>
         </div>
       </div>

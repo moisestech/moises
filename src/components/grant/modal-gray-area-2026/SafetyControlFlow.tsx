@@ -2,25 +2,25 @@ import {
   IconCachedFallback,
   IconRest,
   IconSafetyController,
-  IconStateCube,
+  IconStateAperture,
   IconInfer,
 } from './MachineSentenceIcons';
 
 const FLOW = [
-  { title: 'Model output', body: 'Semantic values only — never motor commands', icon: IconInfer },
+  { title: 'Model output', body: 'Constrained semantic values only — never motor commands', icon: IconInfer },
   { title: 'Schema validation', body: 'Reject malformed or empty payloads', icon: IconSafetyController },
-  { title: 'Clamp to safe ranges', body: 'All continuous values bound to [0, 1]', icon: IconSafetyController },
-  { title: 'Authored-state mapper', body: 'Finite vocabulary: Cube, Aperture, Witness…', icon: IconStateCube },
-  { title: 'Speed and collision limits', body: 'Soft limits hold planes apart', icon: IconRest },
-  { title: 'Local motor commands', body: 'Deterministic controller only', icon: IconSafetyController },
-  { title: 'Physical sculpture', body: 'Temporary authored body', icon: IconStateCube },
+  { title: 'Clamp to safe ranges', body: 'Retention, transformation, ambiguity, certainty, unresolved bounded', icon: IconSafetyController },
+  { title: 'Authored-state mapper', body: 'Finite vocabulary: Sealed, Listening, Attentive, Exposed, Unresolved', icon: IconStateAperture },
+  { title: 'Actuator limits', body: 'Single gearmotor within soft travel limits', icon: IconRest },
+  { title: 'Linked shutter command', body: 'Deterministic local controller only', icon: IconSafetyController },
+  { title: 'Physical aperture', body: 'Temporary authored opening — not continuous robot motion', icon: IconStateAperture },
 ] as const;
 
 const FALLBACKS = [
-  'Malformed model output → cached body score',
-  'Network failure → cached authored state',
-  'Visual-generation failure → existing or cached screen surface',
-  'Motor fault → stop and neutral pose',
+  'Malformed model output → cached inference values',
+  'Network failure → cached authored aperture state',
+  'Visual-generation failure → existing or cached display field',
+  'Actuator fault → stop and sealed pose',
   'Staff intervention → physical emergency stop',
 ] as const;
 

@@ -32,12 +32,12 @@ export const modalGrayAreaMeta = {
 
 export const modalGrayAreaProposalCard = {
   slug: 'machine-sentence-no-1',
-  title: 'MACHINE SENTENCE NO. 1',
-  subtitle: 'A model organism from Born into the Machine',
+  title: 'INCOMPLETE CONTAINMENT OF A MODEL',
+  subtitle: 'A listening structure for inference under observation',
   thesis:
-    'A self-standing inference sculpture transforms human language into physical orientation, distributed imagery, and temporary machine posture.',
+    'A civic-forensic sculpture receives one human sentence, changes its central aperture, and produces evidence of what the machine retained, transformed, and could not resolve.',
   status: 'Primary candidate',
   href: modalGrayAreaMeta.proposalRoute,
   gesture:
-    'Seven mixed-proportion screens as three articulated clusters inside a rigid aluminum cubic lattice — central void as latent space.',
+    'White civic-industrial listening structure — linked shutter aperture, static display, thermal forensic receipt.',
 } as const;
