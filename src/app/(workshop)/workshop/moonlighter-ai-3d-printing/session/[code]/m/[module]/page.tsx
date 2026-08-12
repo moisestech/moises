@@ -22,7 +22,7 @@ export default function ParticipantModulePage() {
   const router = useRouter()
   const code = String(params.code ?? '').toUpperCase()
   const moduleId = Number(params.module)
-  const module = getModule(moduleId)
+  const curriculumModule = getModule(moduleId)
   const { bundle, error, markReady, setPace, setHelpFlag, ackPolicy, participantId } =
     useMoonlighterSession(code)
 
@@ -45,7 +45,7 @@ export default function ParticipantModulePage() {
     }
   }, [bundle, me, moduleId, code, router])
 
-  if (!module) {
+  if (!curriculumModule) {
     return (
       <MoonlighterShell>
         <p className="p-8">Module not found.</p>
@@ -62,10 +62,10 @@ export default function ParticipantModulePage() {
       <ParticipantTopBar
         title={workshopPromise.title}
         sessionCode={code}
-        moduleLabel={`Module ${module.id} · ${module.phase}`}
+        moduleLabel={`Module ${curriculumModule.id} · ${curriculumModule.phase}`}
         pace={me?.pace ?? 'follow'}
         onPaceChange={(p) => void setPace(p)}
-        progress={`${module.id + 1} / 10`}
+        progress={`${curriculumModule.id + 1} / 10`}
         saveStatus={bundle?.offline ? 'Local save' : 'Synced'}
         onHelpFlag={(c) => void setHelpFlag(c)}
       />
@@ -81,7 +81,7 @@ export default function ParticipantModulePage() {
       )}
       {error && <p className="px-4 py-2 text-sm text-[var(--ml-diagnose)]">{error}</p>}
       <ModuleShell
-        module={module}
+        module={curriculumModule}
         sessionCode={code}
         hrefForModule={(id) => `${base}/session/${code}/m/${id}`}
         onMarkReady={() => void markReady(moduleId)}

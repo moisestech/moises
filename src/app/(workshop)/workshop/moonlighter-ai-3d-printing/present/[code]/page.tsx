@@ -17,7 +17,7 @@ export default function PresenterPage() {
   const code = String(params.code ?? '').toUpperCase()
   const { bundle, error } = useMoonlighterSession(code, 2500)
   const moduleId = bundle?.session.current_module ?? 0
-  const module = getModule(moduleId)
+  const curriculumModule = getModule(moduleId)
   const schedule = useMemo(
     () => sixHourRunOfShow.find((r) => r.moduleId === moduleId),
     [moduleId],
@@ -35,9 +35,9 @@ export default function PresenterPage() {
               {workshopPromise.title}
             </h1>
           </div>
-          {module && (
+          {curriculumModule && (
             <PresenterTimer
-              timeboxMin={module.timeboxMin}
+              timeboxMin={curriculumModule.timeboxMin}
               warningMinutes={bundle?.session.warning_minutes ?? null}
               mode={bundle?.session.mode ?? 'running'}
             />
@@ -50,20 +50,20 @@ export default function PresenterPage() {
           <WorkflowRail current={moduleId} />
         </div>
 
-        {module && (
+        {curriculumModule && (
           <div className="mt-auto flex flex-1 flex-col justify-center py-12">
             <p className="font-mono text-sm uppercase tracking-[0.2em] text-[var(--ml-controlled)] md:text-base">
-              Module {module.id} · {module.phase}
+              Module {curriculumModule.id} · {curriculumModule.phase}
               {schedule ? ` · ${schedule.time}` : ''}
             </p>
             <h2 className="mt-4 max-w-5xl text-4xl font-semibold leading-[1.1] md:text-6xl lg:text-7xl">
-              {module.header}
+              {curriculumModule.header}
             </h2>
             <p className="mt-6 max-w-3xl text-xl text-[var(--ml-paper)]/80 md:text-2xl md:leading-snug">
-              {module.objective}
+              {curriculumModule.objective}
             </p>
             <p className="mt-8 max-w-2xl border-l-2 border-[var(--ml-digital)] pl-4 text-lg text-[var(--ml-paper)]/70">
-              Pass check: {module.passCheck}
+              Pass check: {curriculumModule.passCheck}
             </p>
           </div>
         )}

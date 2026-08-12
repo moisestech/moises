@@ -29,7 +29,7 @@ export default function FacilitatePage() {
   const [handoffDraft, setHandoffDraft] = useState<Partial<MoonlighterHandoff>>({})
 
   const moduleId = bundle?.session.current_module ?? 0
-  const module = getModule(moduleId)
+  const curriculumModule = getModule(moduleId)
 
   const selected = useMemo(
     () => bundle?.participants.find((p) => p.id === selectedParticipant),
@@ -137,7 +137,7 @@ export default function FacilitatePage() {
           <div>
             <h1 className="text-2xl font-semibold">Facilitator · {code}</h1>
             <p className="text-sm text-[var(--ml-ink)]/65">
-              {module ? `Module ${module.id}: ${module.phase}` : 'Loading…'}
+              {curriculumModule ? `Module ${curriculumModule.id}: ${curriculumModule.phase}` : 'Loading…'}
               {bundle?.offline ? ' · offline store' : ''}
             </p>
           </div>
@@ -230,16 +230,16 @@ export default function FacilitatePage() {
                 )
               })}
             </ul>
-            {module && (
+            {curriculumModule && (
               <div className="mt-4 border border-[var(--ml-soft-gray)] bg-white/50 p-3 text-sm">
                 <p className="font-medium">Demo cue</p>
                 <ul className="mt-2 list-disc pl-4 text-[var(--ml-ink)]/75">
-                  {module.demos.map((d) => (
+                  {curriculumModule.demos.map((d) => (
                     <li key={d.id}>{d.title}</li>
                   ))}
                 </ul>
                 <p className="mt-3 font-medium">Pass check</p>
-                <p className="mt-1 text-[var(--ml-ink)]/75">{module.passCheck}</p>
+                <p className="mt-1 text-[var(--ml-ink)]/75">{curriculumModule.passCheck}</p>
               </div>
             )}
           </div>
