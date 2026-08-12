@@ -27,6 +27,18 @@ export interface WorkshopFeature {
 
 export const WORKSHOP_FEATURES: WorkshopFeature[] = [
   {
+    title: 'From Image to Object',
+    description:
+      'Moonlighter FabLab: AI-assisted 3D printing — reference + prompt → mesh → slice → approved print or queue.',
+    link: '/workshop/moonlighter-ai-3d-printing',
+    disabled: false,
+    instructor: null,
+    instructorRole: null,
+    featured: true,
+    cardVisual: 'generic',
+    ctaLabel: 'Open Moonlighter workshop',
+  },
+  {
     title: 'Digital Presence',
     description: 'Build and optimize your online portfolio and website.',
     link: '/workshop/own-your-digital-presence',

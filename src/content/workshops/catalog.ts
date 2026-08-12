@@ -44,6 +44,7 @@ export const WORKSHOP_RESERVED_DEEP_SLUGS = [
   'artist-in-the-automation',
   'ai-and-the-arts',
   'the-art-of-ai-marketing',
+  'moonlighter-ai-3d-printing',
 ] as const;
 
 export const workshopCatalog: WorkshopCatalogEntry[] = [
@@ -481,6 +482,32 @@ export const workshopCatalog: WorkshopCatalogEntry[] = [
     featured: true,
     href: '/workshop/quickbooks-automation-for-artists',
     sortOrder: 7,
+  },
+  {
+    slug: 'moonlighter-ai-3d-printing',
+    title: 'From Image to Object: AI-Assisted 3D Printing',
+    publicTitle: 'From Image to Object: AI-Assisted 3D Printing',
+    track: 'Creative Coding' as WorkshopCatalogTrack,
+    status: 'ready',
+    level: 'Advanced beginner / Intermediate',
+    duration: '6 hours',
+    subtitle:
+      'Moonlighter FabLab workshop: reference + prompt → AI image → mesh → slice → approved print or queue.',
+    hook: 'Turn a reference and a written prompt into a validated, sliced, print-ready object on Bambu printers.',
+    shortDescription:
+      'An advanced follow-on to Moonlighter’s Basic 3D Printing class. Participants develop a print-friendly concept with replaceable AI image tools, convert it to a mesh, inspect and optionally repair geometry, slice in Bambu Studio, and leave with source files plus one approved print attempt.',
+    whyNow:
+      'Artists and makers need a transferable method across AI image tools and image-to-3D services—not a single-vendor demo—while still meeting real printer constraints, approval gates, and durable project archives.',
+    learningOutcomes: [
+      'Combine a reference image and transformation prompt for printable volume',
+      'Convert, inspect, and triage an AI-generated mesh',
+      'Choose Miniature vs Sculpture tier with support and time tradeoffs',
+      'Slice and document a Bambu Studio project for instructor approval',
+      'Package a reproducible project archive and understand recovery/pickup policy',
+    ],
+    featured: true,
+    href: '/workshop/moonlighter-ai-3d-printing',
+    sortOrder: 0,
   },
 ] as const;
 

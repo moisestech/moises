@@ -30,6 +30,8 @@ const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[0]['changeF
     { path: '/projects/infra24', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/projects/oolite-digital-lab', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/workshops', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/workshop/moonlighter-ai-3d-printing', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/workshop/moonlighter-ai-3d-printing/resources', changeFrequency: 'monthly', priority: 0.5 },
     { path: '/bio', changeFrequency: 'monthly', priority: 0.6 },
   ];
 

@@ -41,6 +41,11 @@ export const WORKSHOP_NAV_PROGRAMS: SiteNavItem[] = [
     path: '/workshop/learn-ai-without-losing-yourself',
     enabled: true,
   },
+  {
+    label: '3D Print',
+    path: '/workshop/moonlighter-ai-3d-printing',
+    enabled: true,
+  },
 ]
 
 /** Active state for workshop header links (exact match or nested under the same program/research tree). */

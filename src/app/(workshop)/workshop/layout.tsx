@@ -10,7 +10,10 @@ export default function WorkshopLayout({
 }) {
   const pathname = usePathname()
   const hideTopNav =
-    pathname?.endsWith('/full') || pathname?.includes('/workshop/the-art-of-ai-agents/share')
+    pathname?.endsWith('/full') ||
+    pathname?.includes('/workshop/the-art-of-ai-agents/share') ||
+    pathname?.includes('/workshop/moonlighter-ai-3d-printing/present') ||
+    pathname?.includes('/workshop/moonlighter-ai-3d-printing/facilitate')
 
   return (
     <div className="min-h-screen">
