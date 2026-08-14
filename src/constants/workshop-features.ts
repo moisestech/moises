@@ -82,6 +82,18 @@ export const WORKSHOP_FEATURES: WorkshopFeature[] = [
     ctaLabel: 'View overview',
   },
   {
+    title: 'QuickBooks Automation for Artists',
+    description:
+      'Studio bookkeeping made usable — invoices, expenses, and categories with light automation and human review gates.',
+    link: '/workshop/quickbooks-automation-for-artists',
+    disabled: false,
+    instructor: null,
+    instructorRole: null,
+    featured: true,
+    cardVisual: 'generic',
+    ctaLabel: 'Open workshop',
+  },
+  {
     title: 'Learn AI Without Losing Yourself',
     description:
       'Separate live workshop-performance on practical AI, burnout culture, and staying human in the loop—writing, research, and creative work without flattening your voice.',

@@ -212,6 +212,8 @@ const byId: Record<string, OpportunityCompactSectionAccent> = {
   gan: technologies,
   layers: capabilities,
   overview: hero,
+  'teaching-cred': process,
+  'application-answers': leadership,
   'future-cases': comingSoon,
   related: fit,
   'data-model': process,

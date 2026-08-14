@@ -1,5 +1,6 @@
 'use client';
 
+import { ClipboardList } from 'lucide-react';
 import type { Opportunity } from '@/content/opportunities/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
 
@@ -15,9 +16,12 @@ export function OpportunityApplicationAnswers({ opportunity, framed = false }: P
 
   return (
     <section id="application-answers" className={framed ? 'scroll-mt-32' : opp.section}>
-      <h2 className={opp.h2}>
-        {applicationAnswersSectionTitle ?? 'Application answers'}
-      </h2>
+      <div className="flex items-center gap-2">
+        <ClipboardList className="h-5 w-5 text-indigo-600 dark:text-indigo-300" aria-hidden />
+        <h2 className={opp.h2}>
+          {applicationAnswersSectionTitle ?? 'Application answers'}
+        </h2>
+      </div>
       {applicationAnswersIntro ? (
         <p className={`mt-3 max-w-3xl ${opp.body}`}>{applicationAnswersIntro}</p>
       ) : null}

@@ -9,9 +9,10 @@ import { opp } from '@/components/opportunities/opportunityTheme';
 
 type Props = {
   opportunity: Opportunity;
+  framed?: boolean;
 };
 
-export function OpportunityTeachingCredentials({ opportunity }: Props) {
+export function OpportunityTeachingCredentials({ opportunity, framed = false }: Props) {
   const { teachingHighlights, certifications, slug } = opportunity;
   if (!teachingHighlights?.length && !certifications?.length) return null;
 
@@ -20,7 +21,7 @@ export function OpportunityTeachingCredentials({ opportunity }: Props) {
   };
 
   return (
-    <section id="teaching-cred" className={opp.section}>
+    <section id="teaching-cred" className={framed ? 'scroll-mt-32' : opp.section}>
       {teachingHighlights?.length ? (
         <div>
           <div className="flex items-center gap-2">

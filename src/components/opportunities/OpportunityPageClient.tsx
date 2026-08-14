@@ -90,7 +90,9 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             <CaseStudyGrid opportunity={opportunity} framed />
           </OpportunityColorSection>
 
-          <OpportunityTeachingCredentials opportunity={opportunity} />
+          <OpportunityColorSection sectionId="teaching-cred" className="mt-10 sm:mt-14">
+            <OpportunityTeachingCredentials opportunity={opportunity} framed />
+          </OpportunityColorSection>
 
           <OpportunityColorSection sectionId="skills" className="mt-10 sm:mt-14">
             <SkillsMatrix opportunity={opportunity} framed />

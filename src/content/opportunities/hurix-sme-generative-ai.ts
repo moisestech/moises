@@ -5,8 +5,7 @@
  * Reusable overlay for GenAI certificate / curriculum SME contracts
  * (Coursera, edX, Udemy, corporate learning refresh engagements).
  *
- * Banner: currently shares GenAI family asset — replace with dedicated
- * curriculum-SME banner when ready (see docs/workshops/hurix-quickbooks-banner-prompts.md).
+ * Banner: dedicated GenAI SME strip (`genAiCurriculumSmeBanner`).
  */
 
 import type { Opportunity } from './types';

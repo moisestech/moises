@@ -9,6 +9,13 @@ const cdn = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
  */
 export const CREATIVE_AGENCY_BANNER_RATIO = 3;
 
+/**
+ * 3:1 strip height — fills viewport width so 2172×724 assets don't leave a gray band.
+ * Height tracks width, capped at 640px.
+ */
+const FLAGSHIP_BANNER_FRAME =
+  '!h-[min(calc(100vw/3),640px)] sm:!h-[min(calc(100vw/3),640px)] md:!h-[min(calc(100vw/3),640px)] lg:!h-[min(calc(100vw/3),640px)] xl:!h-[min(calc(100vw/3),640px)] w-full';
+
 /** Older gen-AI / strategy banners (CVS, Knight, creative-tech). Measured: 1916×821 → ~2.334. */
 export const GENAI_BANNER_RATIO = 1916 / 821;
 
@@ -44,11 +51,12 @@ export const seniorGenAiEngineerBanner = defineApplicationBanner({
   intrinsicRatio: GENAI_BANNER_RATIO,
 });
 
-/** Role banner for GenAI curriculum / SME education contracts (Hurix and reusable overlays). */
+/** Role banner for GenAI curriculum / SME education contracts (Hurix and reusable overlays). Measured 2172×724. */
 export const genAiCurriculumSmeBanner = defineApplicationBanner({
-  src: `${cdn}/v1778695455/jobs/banners/senior-genai-engineer-banner_iljp58.png`,
-  alt: 'Subject Matter Expert — Generative AI curriculum and technical learning content',
-  intrinsicRatio: GENAI_BANNER_RATIO,
+  src: `${cdn}/v1786719736/jobs/banners/hurix-genai-sme-banner_nlymdc.png`,
+  alt: 'Subject Matter Expert — Generative AI — curriculum, labs, and video-ready teaching banner',
+  intrinsicRatio: CREATIVE_AGENCY_BANNER_RATIO,
+  frameClass: FLAGSHIP_BANNER_FRAME,
 });
 
 export const knightTechProductStrategistBanner = defineApplicationBanner({
@@ -133,14 +141,6 @@ export const ogilvySeniorAiDrivenCreativeDirectorBanner = defineApplicationBanne
   alt: 'Ogilvy — Creative Editor / AI application banner',
   intrinsicRatio: CREATIVE_AGENCY_BANNER_RATIO,
 });
-
-/**
- * Public hiring flagships — measured 2172×724 (~3:1).
- * Height tracks viewport width so the collage spans edge-to-edge (shared opportunity
- * strip is shorter and left a large empty gray band on desktop).
- */
-const FLAGSHIP_BANNER_FRAME =
-  '!h-[min(calc(100vw/3),640px)] sm:!h-[min(calc(100vw/3),640px)] md:!h-[min(calc(100vw/3),640px)] lg:!h-[min(calc(100vw/3),640px)] xl:!h-[min(calc(100vw/3),640px)] w-full';
 
 /** Public hiring flagship — `/creative-ai` (measured 2172×724). */
 export const creativeAiFlagshipBanner = defineApplicationBanner({
