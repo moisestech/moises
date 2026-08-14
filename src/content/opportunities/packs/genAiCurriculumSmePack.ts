@@ -120,7 +120,7 @@ export const genAiCurriculumSmeRoleMatchRows: RoleMatchRow[] = [
   {
     requirement: 'LLM / GenAI production applications',
     evidence:
-      'Founding-engineer GenAI product work (Lore Machine) plus production n8n Gmail intelligence. Honest boundary: do not claim production LangChain/LangGraph/RAG depth until verified live.',
+      'Founding-engineer GenAI product work (Lore Machine) plus production n8n Gmail intelligence. Confirmed stack is LLMs, prompt engineering, agents, and API delivery — not LangChain, LangGraph, or RAG production ownership.',
     illustration: {
       src: lore.imageSrc,
       alt: lore.imageAlt,
@@ -146,8 +146,8 @@ export const genAiCurriculumSmeSkills: SkillsMatrixRow[] = [
     icon: 'workflow',
   },
   {
-    category: 'Honest boundaries',
-    skills: 'No unverified LangChain/LangGraph/RAG production claims — teaching + confirmed automation only',
+    category: 'Confirmed scope',
+    skills: 'Teaching and production n8n/API agents; LangChain, LangGraph, and RAG are not claimed as production ownership',
     icon: 'fileText',
   },
 ];

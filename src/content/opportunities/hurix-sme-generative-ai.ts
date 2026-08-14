@@ -14,7 +14,6 @@ import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 import { technologyCvPdfPath } from '@/content/technologyCvPrint';
 import {
-  genAiCurriculumSmeApplicationAnswers,
   genAiCurriculumSmeCertifications,
   genAiCurriculumSmeEvidenceLine,
   genAiCurriculumSmeFeaturedProjectIds,
@@ -23,7 +22,6 @@ import {
   genAiCurriculumSmeRoleMatchRows,
   genAiCurriculumSmeSkills,
   genAiCurriculumSmeTeachingHighlights,
-  genAiCurriculumSmeVerifierNote,
 } from './packs/genAiCurriculumSmePack';
 
 export const hurixSmeGenerativeAiOpportunity: Opportunity = {
@@ -60,7 +58,7 @@ export const hurixSmeGenerativeAiOpportunity: Opportunity = {
     'Video-ready teaching',
   ],
   heroPrimaryCta: { label: 'Role fit', href: '#fit' },
-  heroSecondaryCta: { label: 'Application answers', href: '#application-answers' },
+  heroSecondaryCta: { label: 'Teaching', href: '#teaching-cred' },
   audienceKeywords: {
     lead: 'Prepared for',
     terms: [
@@ -85,7 +83,6 @@ export const hurixSmeGenerativeAiOpportunity: Opportunity = {
     { id: 'teaching-cred', label: 'Teaching' },
     { id: 'skills', label: 'Skills' },
     { id: 'process', label: 'How I work' },
-    { id: 'application-answers', label: 'App answers', shortLabel: 'Answers' },
     { id: 'resume', label: 'Résumé' },
   ],
   hero: {
@@ -94,8 +91,7 @@ export const hurixSmeGenerativeAiOpportunity: Opportunity = {
     introParagraphs: [
       'Hurix Digital needs experienced Generative AI professionals to redevelop a professional certificate program — refreshing technical content, updating coding labs, reviewing assessments, collaborating on instructional design, and supporting high-quality video learning.',
       'I already teach GenAI and agent workflows in public programs (The Art of AI Agents, Learn AI Without Losing Yourself), ship production automations with LLM agent nodes, and write materials nontechnical and practitioner audiences can follow.',
-      'This page is the application packet: role fit, teaching proof, production evidence, honest stack boundaries, and ready answers for the Hurix screening form.',
-      genAiCurriculumSmeVerifierNote,
+      'This page is the application packet: role fit, teaching proof, production evidence, and honest stack boundaries.',
     ],
     trustLine: 'Public AI workshops · production n8n agents · Lore Machine GenAI product · Miami / remote US',
     headshotSrc: moisesSanabriaHeadshot,
@@ -122,11 +118,7 @@ export const hurixSmeGenerativeAiOpportunity: Opportunity = {
   processSteps: genAiCurriculumSmeProcessSteps,
   innovationLabSectionTitle: 'Positioning',
   innovationLabLead: 'Technical SME who already teaches',
-  innovationLabBody: `Most GenAI SMEs can list frameworks. I bring confirmed workshop curricula, production agent evidence (${genAiCurriculumSmeEvidenceLine}), and GenAI product delivery — packaged for certificate redevelopment, not slide-deck theory. Reuse this pack for other GenAI SME overlays (Coursera, edX, Udemy, corporate learning).`,
-  applicationAnswersSectionTitle: 'Hurix application form — ready answers',
-  applicationAnswersIntro:
-    'Copy these into the screening form. Prefer honesty over keyword matching — unverified RAG / LangChain / LangGraph claims stay unchecked.',
-  applicationAnswers: genAiCurriculumSmeApplicationAnswers,
+  innovationLabBody: `Most GenAI SMEs can list frameworks. I bring confirmed workshop curricula, production agent evidence (${genAiCurriculumSmeEvidenceLine}), and GenAI product delivery — packaged for certificate redevelopment, not slide-deck theory.`,
   ctas: recruitingCtas({
     emailSubject: 'Hurix — SME Generative AI — Moises Sanabria',
     caseStudiesAnchor: '#case-studies',
@@ -138,5 +130,5 @@ export const hurixSmeGenerativeAiOpportunity: Opportunity = {
   techLogoIds: [],
   resumeSectionTitle: 'Submit packet',
   resumeSectionNote:
-    'Private Hurix dossier · not indexed. Attach tech CV PDF, link this page, and point reviewers at Art of AI Agents screenshots. Swap employer chrome for Coursera / edX / Udemy overlays without rewriting the teaching pack.',
+    'Private dossier · not indexed. Technology CV PDF, teaching programs, and production evidence are linked from this page.',
 };
