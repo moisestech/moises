@@ -98,7 +98,7 @@ Avoid: Intuit / QuickBooks official logos, green brand splash, purple AI glow, c
 
 **Alt text once live:** `QuickBooks Automation for Artists — studio bookkeeping workshop banner`
 
-**Interim now:** page uses slide 1 as banner with an “interim” caption until you upload the dedicated strip.
+**Live (2026-08-14):** both strips are 2172×724 on Cloudinary — Hurix `jobs/banners/hurix-genai-sme-banner_nlymdc.png`, QuickBooks `jobs/banners/quickbooks-automation-artists-banner_xzffns.png`. Interim caption removed.
 
 ---
 

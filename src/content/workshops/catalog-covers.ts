@@ -4,7 +4,7 @@
  */
 
 import type { WorkshopCatalogTrack } from './catalog';
-import { QUICKBOOKS_AUTOMATION_COVER } from './quickbooksAutomation';
+import { QUICKBOOKS_AUTOMATION_BANNER } from './quickbooksAutomation';
 import { LANDING_MEDIA_CDN } from './moonlighter-ai-3d-printing/landing-media';
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
@@ -153,8 +153,8 @@ export const WORKSHOP_CATALOG_COVERS: Record<string, { src: string; alt: string 
     alt: 'AI and the arts portfolio — sustainable digital practice',
   },
   'quickbooks-automation-for-artists': {
-    src: QUICKBOOKS_AUTOMATION_COVER.src,
-    alt: QUICKBOOKS_AUTOMATION_COVER.alt,
+    src: QUICKBOOKS_AUTOMATION_BANNER.src,
+    alt: QUICKBOOKS_AUTOMATION_BANNER.alt,
   },
 };
 

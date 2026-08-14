@@ -29,14 +29,10 @@ export const QUICKBOOKS_AUTOMATION_SLIDES = [
 
 export const QUICKBOOKS_AUTOMATION_COVER = QUICKBOOKS_AUTOMATION_SLIDES[0];
 
-/**
- * Dedicated workshop banner — replace when ChatGPT asset lands.
- * @see docs/workshops/hurix-quickbooks-banner-prompts.md
- */
+/** Dedicated 2172×724 workshop strip. */
 export const QUICKBOOKS_AUTOMATION_BANNER = {
-  src: QUICKBOOKS_AUTOMATION_COVER.src,
-  alt: 'QuickBooks Automation for Artists — workshop banner (interim: slide 1 until dedicated strip ships)',
-  interim: true as const,
+  src: `${CDN}/v1786719735/jobs/banners/quickbooks-automation-artists-banner_xzffns.png`,
+  alt: 'QuickBooks Automation for Artists — studio bookkeeping workshop banner',
 };
 
 export const QUICKBOOKS_AUTOMATION_AGENDA = [

@@ -44,11 +44,11 @@ export const seniorGenAiEngineerBanner = defineApplicationBanner({
   intrinsicRatio: GENAI_BANNER_RATIO,
 });
 
-/** Role banner for GenAI curriculum / SME education contracts (Hurix and reusable overlays). */
+/** Role banner for GenAI curriculum / SME education contracts (Hurix and reusable overlays). Measured 2172×724. */
 export const genAiCurriculumSmeBanner = defineApplicationBanner({
-  src: `${cdn}/v1778695455/jobs/banners/senior-genai-engineer-banner_iljp58.png`,
-  alt: 'Subject Matter Expert — Generative AI curriculum and technical learning content',
-  intrinsicRatio: GENAI_BANNER_RATIO,
+  src: `${cdn}/v1786719736/jobs/banners/hurix-genai-sme-banner_nlymdc.png`,
+  alt: 'Subject Matter Expert — Generative AI — curriculum, labs, and video-ready teaching banner',
+  intrinsicRatio: CREATIVE_AGENCY_BANNER_RATIO,
 });
 
 export const knightTechProductStrategistBanner = defineApplicationBanner({

@@ -29,6 +29,7 @@ import {
   SOFTWARE_INTERFACES_CREATOR_TOOL,
 } from './artistInfrastructureMedia';
 import {
+  QUICKBOOKS_AUTOMATION_BANNER,
   QUICKBOOKS_AUTOMATION_COVER,
   QUICKBOOKS_AUTOMATION_WORKSHOP_HREF,
 } from '@/content/workshops/quickbooksAutomation';
@@ -127,7 +128,7 @@ export const artistInfrastructurePage = {
       {
         id: 'idea-center-quickbooks',
         title: 'QuickBooks Automation for Artists',
-        note: 'Three workshop slides attached — studio bookkeeping, automation, and human review gates.',
+        note: 'Dedicated workshop banner plus three slides — studio bookkeeping, automation, and human review gates.',
         status: 'attached' as const,
         icon: 'workflow' as const,
         href: QUICKBOOKS_AUTOMATION_WORKSHOP_HREF,
@@ -235,12 +236,10 @@ export const artistInfrastructurePage = {
         sectionLabel: 'Open workshop',
       },
       {
-        src: QUICKBOOKS_AUTOMATION_COVER.src,
-        alt: QUICKBOOKS_AUTOMATION_COVER.alt,
+        src: QUICKBOOKS_AUTOMATION_BANNER.src,
+        alt: QUICKBOOKS_AUTOMATION_BANNER.alt,
         title: 'QuickBooks Automation for Artists',
-        caption:
-          QUICKBOOKS_AUTOMATION_COVER.caption ??
-          'Studio bookkeeping made legible — light automation with human review gates.',
+        caption: 'Studio bookkeeping made legible — light automation with human review gates.',
         href: QUICKBOOKS_AUTOMATION_WORKSHOP_HREF,
         sectionLabel: 'Open workshop',
       },
@@ -360,8 +359,8 @@ export const artistInfrastructurePage = {
         accent: 'copper' as const,
         icon: 'workflow' as const,
         image: {
-          src: QUICKBOOKS_AUTOMATION_COVER.src,
-          alt: QUICKBOOKS_AUTOMATION_COVER.alt,
+          src: QUICKBOOKS_AUTOMATION_BANNER.src,
+          alt: QUICKBOOKS_AUTOMATION_BANNER.alt,
         },
       },
       {

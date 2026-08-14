@@ -72,15 +72,10 @@ export function WorkshopCatalogLandingClient({ slug }: { slug: string }) {
               alt={QUICKBOOKS_AUTOMATION_BANNER.alt}
               fill
               priority
-              className="object-cover object-top"
+              className="object-cover object-center"
               sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
-            {QUICKBOOKS_AUTOMATION_BANNER.interim ? (
-              <p className="absolute bottom-3 left-4 right-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/70 sm:left-8">
-                Interim banner · dedicated strip coming
-              </p>
-            ) : null}
           </div>
         </div>
       ) : cover ? (

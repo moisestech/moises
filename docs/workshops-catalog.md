@@ -26,6 +26,7 @@ Public teaching catalog sourced from `Workshops-All Data.csv`.
 | vibe-coding-with-net-art | `/workshop/vibe-coding-with-net-art` |
 | organizing-your-digital-studio | `/workshop/organizing-your-digital-studio` |
 | ai-copyright-and-creative-risk | `/workshop/ai-copyright-and-creative-risk` |
+| quickbooks-automation-for-artists | `/workshop/quickbooks-automation-for-artists` |
 | own-your-digital-presence | `/workshop/own-your-digital-presence` (deep program) |
 
 ## Strategy (SEO + outreach)
