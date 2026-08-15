@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { forwardDeployedFlagship } from '@/content/flagships/forward-deployed';
 import { flagshipEvidence } from '@/content/evidence/flagships';
@@ -14,7 +15,8 @@ export function ForwardDeployedClient() {
 
   return (
     <div className={opp.shell}>
-      <main className={cn(opp.main, 'pt-8 sm:pt-10')}>
+      {data.banner ? <OpportunityApplicationBanner banner={data.banner} className="mb-0" /> : null}
+      <main className={cn(opp.main, data.banner ? 'pt-6 sm:pt-8' : 'pt-8 sm:pt-10')}>
         <p className={opp.accent}>Hiring flagship · Real-world systems</p>
         <h1 className={cn(opp.h1, 'mt-2')}>{data.title}</h1>
         <p className={cn(opp.bodyLg, 'mt-3 max-w-3xl')}>{data.subtitle}</p>

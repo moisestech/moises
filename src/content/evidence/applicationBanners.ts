@@ -96,13 +96,14 @@ export const aiSolutionsArchitectBanner = defineApplicationBanner({
 });
 
 /**
- * Forward Deployed AI Engineer — Creative Technologist.
- * Local 21:9 editorial workstation banner (left negative space for headline).
+ * Forward-Deployed Systems — `/forward-deployed` + `/opportunities/forward-deployed-ai-engineer`.
+ * Measured 2172×724.
  */
 export const forwardDeployedAiEngineerBanner = defineApplicationBanner({
-  src: '/images/opportunities/forward-deployed-ai-engineer-banner.png',
-  alt: 'Creative technology workbench — modular workstation connecting generative media tools, fabrication prototypes, and production workflows',
-  intrinsicRatio: 1536 / 1024, // measured local asset
+  src: `${cdn}/v1786744384/jobs/banners/forward-deployed-systems-banner_brf4sa.png`,
+  alt: 'Forward-Deployed Systems — from organizational problems to deployed technical systems',
+  intrinsicRatio: CREATIVE_AGENCY_BANNER_RATIO,
+  frameClass: FLAGSHIP_BANNER_FRAME,
 });
 
 /**

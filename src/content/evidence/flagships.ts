@@ -121,8 +121,8 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
       'Lifecycle proof: discover → map → prototype → deploy → enable → measure → iterate across Digilab, SmartSigns, and production automations.',
     href: '/forward-deployed',
     imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781710428/oolite-arts/oolite-arts-computer-vision-digilab-room-upscale-cyan-1030x579_whqmlg.webp',
-    imageAlt: 'Forward-deployed systems — institutional creative technology lab',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786744384/jobs/banners/forward-deployed-systems-banner_brf4sa.png',
+    imageAlt: 'Forward-Deployed Systems — from organizational problems to deployed technical systems',
     categories: ['forward-deployed', 'deployment', 'stakeholders'],
     skills: ['discovery', 'prototyping', 'deployment', 'enablement', 'hardware'],
     roles: ['forward-deployed-engineer', 'solutions-engineer', 'creative-technologist'],

@@ -1,4 +1,5 @@
 import { flagshipEvidence, listClaimableCases } from '@/content/evidence/flagships';
+import { forwardDeployedAiEngineerBanner } from '@/content/evidence/applicationBanners';
 
 export type LifecycleStageId =
   | 'discover'
@@ -32,6 +33,7 @@ export const forwardDeployedFlagship = {
     description:
       'From ambiguous organizational problems to deployed technical systems: Digilab, SmartSigns, and production automations.',
   },
+  banner: forwardDeployedAiEngineerBanner,
   title: hub.title,
   subtitle: hub.subtitle,
   intro:
