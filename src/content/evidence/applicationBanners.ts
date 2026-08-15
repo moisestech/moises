@@ -103,7 +103,9 @@ export const forwardDeployedAiEngineerBanner = defineApplicationBanner({
   src: `${cdn}/v1786744384/jobs/banners/forward-deployed-systems-banner_brf4sa.png`,
   alt: 'Forward-Deployed Systems — from organizational problems to deployed technical systems',
   intrinsicRatio: CREATIVE_AGENCY_BANNER_RATIO,
-  frameClass: FLAGSHIP_BANNER_FRAME,
+  presentation: 'cover',
+  aspectClass:
+    '!aspect-[3/1] w-full !min-h-[168px] sm:!min-h-[220px] md:!min-h-[248px] !max-h-[min(42vh,420px)]',
 });
 
 /**

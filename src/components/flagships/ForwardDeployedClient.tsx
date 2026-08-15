@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
-import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { forwardDeployedFlagship } from '@/content/flagships/forward-deployed';
 import { flagshipEvidence } from '@/content/evidence/flagships';
@@ -12,11 +11,25 @@ import { cn } from '@/lib/utils';
 
 export function ForwardDeployedClient() {
   const data = forwardDeployedFlagship;
+  const banner = data.banner;
 
   return (
     <div className={opp.shell}>
-      {data.banner ? <OpportunityApplicationBanner banner={data.banner} className="mb-0" /> : null}
-      <main className={cn(opp.main, data.banner ? 'pt-6 sm:pt-8' : 'pt-8 sm:pt-10')}>
+      {banner?.src ? (
+        <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden border-b border-stone-200 bg-[#1a1814] dark:border-stone-800">
+          <div className="relative h-[168px] w-full sm:h-[220px] md:h-[268px] lg:h-[min(calc(100vw/3),420px)]">
+            <Image
+              src={banner.src}
+              alt={banner.alt}
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+          </div>
+        </div>
+      ) : null}
+      <main className={cn(opp.main, banner?.src ? 'pt-6 sm:pt-8' : 'pt-8 sm:pt-10')}>
         <p className={opp.accent}>Hiring flagship · Real-world systems</p>
         <h1 className={cn(opp.h1, 'mt-2')}>{data.title}</h1>
         <p className={cn(opp.bodyLg, 'mt-3 max-w-3xl')}>{data.subtitle}</p>
