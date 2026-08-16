@@ -4,6 +4,7 @@
  * Notions of Home is later exhibition context only — not employment proof.
  */
 
+import { icaMiamiSystemsBanner } from '@/content/evidence/applicationBanners';
 import { INSTITUTIONAL_CALENDLY_URL, INSTITUTIONAL_EMAIL } from './shared';
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
@@ -16,6 +17,8 @@ export const icaMiamiPage = {
       'Digital Producer at ICA Miami (2019–2020): Salesforce-to-WordPress workflows, website management, livestreaming, SEO, and vendor coordination for museum public programs.',
     url: 'https://moises.tech/ica-miami',
   },
+  banner: icaMiamiSystemsBanner,
+  bannerNote: null as string | null,
   hero: {
     eyebrow: 'ICA Miami · Digital Producer',
     headline: 'Connecting museum data, public programming, and digital audiences.',

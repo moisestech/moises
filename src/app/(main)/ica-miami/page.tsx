@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     description: meta.description,
     type: 'website',
     url: meta.url,
+    images: [
+      {
+        url: icaMiamiPage.banner.src,
+        alt: icaMiamiPage.banner.alt,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

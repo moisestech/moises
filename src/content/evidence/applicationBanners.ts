@@ -184,6 +184,18 @@ export const institutionsDigitalSystemsBanner = defineApplicationBanner({
   frameClass: FLAGSHIP_BANNER_FRAME,
 });
 
+/**
+ * /ica-miami — wide ICA exhibition still as page chrome.
+ * Later-context only: not visual evidence of the 2019–2020 Digital Producer role.
+ */
+export const icaMiamiSystemsBanner = defineApplicationBanner({
+  src: `${cdn}/v1739483923/art/moisestech-website/exhibitions/dec_2024_dminti_notions_of_home/NotionsOfHome_banner_soubxf.jpg`,
+  alt: 'Notions of Home — ICA Miami × Dminti exhibition banner',
+  intrinsicRatio: 21 / 9,
+  presentation: 'cover',
+  frameClass: FLAGSHIP_BANNER_FRAME,
+});
+
 /** Morley — Art Director (Remote, Florida). */
 export const morleyArtDirectorBanner = defineApplicationBanner({
   src: `${cdn}/v1785862415/jobs/banners/art-director-morley-banner_b5ridm.png`,
