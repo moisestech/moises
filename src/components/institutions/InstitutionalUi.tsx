@@ -26,7 +26,7 @@ import { cn } from '@/lib/utils';
 
 /** Accent tokens — color-coded without purple-gradient AI look. */
 export const INST_ACCENT: Record<
-  InstitutionalAccent | 'rose' | 'sky' | 'emerald',
+  InstitutionalAccent | 'rose' | 'sky' | 'emerald' | 'violet',
   {
     chip: string;
     chipActive: string;
@@ -116,7 +116,26 @@ export const INST_ACCENT: Record<
     ring: 'ring-emerald-700/20',
     iconBg: 'bg-emerald-700 text-white',
   },
+  violet: {
+    chip: 'border-violet-200 bg-violet-50 text-violet-950 hover:border-violet-400',
+    chipActive: 'border-violet-800 bg-violet-800 text-white',
+    chipDark: 'border-violet-300/30 bg-violet-950/40 text-violet-100 hover:border-violet-300/60',
+    chipDarkActive: 'border-violet-300 bg-violet-300 text-violet-950',
+    bar: 'bg-violet-800',
+    soft: 'bg-violet-50',
+    text: 'text-violet-950',
+    ring: 'ring-violet-700/20',
+    iconBg: 'bg-violet-800 text-white',
+  },
 };
+
+/** Semantic colors for /institutions practice lanes. */
+export const LANE_ACCENT = {
+  web: 'ocean',
+  automation: 'teal',
+  live: 'violet',
+  lab: 'copper',
+} as const satisfies Record<string, keyof typeof INST_ACCENT>;
 
 const FAMILY_ICONS: Record<InstitutionalFamilyMatch, LucideIcon> = {
   'artist-infrastructure': Network,

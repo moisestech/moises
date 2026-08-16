@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
 
         <div className="text-3xl font-extrabold mb-2">Moises</div>
-        <div className="text-base text-gray-300">© 2025 The Studio of Moises Sanabria</div>
+        <div className="text-base text-gray-300">© 2026 The Studio of Moises Sanabria</div>
       </div>
     </footer>
   );
