@@ -47,6 +47,7 @@ export const digilabMedia = {
       '/oolite-arts#before-after',
       '/artist-infrastructure#hero',
       '/artist-infrastructure#oolite-proof',
+      '/institutions#hero',
       'OOLITE_DIGITAL_LAB_IMAGE (shared constant)',
     ],
   },
@@ -67,7 +68,7 @@ export const digilabMedia = {
     alt: 'Oolite Arts Digital Lab — 360° wide room view with workstations',
     category: 'space',
     cloudinaryId: 'oolite-arts/oolite-arts-digital-lab-360-photo_uaguwe',
-    usedOn: ['/oolite-arts#hero-parallax', '/oolite-arts#lab-gallery'],
+    usedOn: ['/oolite-arts#hero-parallax', '/oolite-arts#lab-gallery', '/institutions#banner'],
   },
   'digilab.360-photo-2': {
     id: 'digilab.360-photo-2',
@@ -184,6 +185,7 @@ export const digilabMedia = {
       '/artist-infrastructure#hero',
       '/artist-infrastructure#oolite-proof',
       '/workshop/moonlighter-ai-3d-printing#instructor',
+      '/institutions#hero',
     ],
   },
 
@@ -296,6 +298,7 @@ export const digilabMedia = {
       '/artist-infrastructure#oolite-proof',
       '/workshop/moonlighter-ai-3d-printing#instructor',
       '/workshops#about',
+      '/institutions#profile',
     ],
   },
   'portrait.fabiola': {

@@ -16,6 +16,14 @@ export const INSTITUTIONAL_COLLABORATION_AVAILABILITY =
   'Available for paid guest teaching, curriculum development, and institutional creative-technology collaborations beginning fall 2026.';
 
 /**
+ * /institutions services page — current availability for technical review,
+ * focused projects, and fractional digital support. Do not reuse the
+ * teaching-collaboration fall 2026 line on this page.
+ */
+export const INSTITUTIONAL_SERVICES_AVAILABILITY =
+  'Currently available for project-based and fractional engagements.';
+
+/**
  * Oolite case-study context only — not a competing hero availability line.
  * Year-long Technical Director of Digital engagement concludes September 17, 2026.
  */
@@ -68,7 +76,7 @@ export const INSTITUTIONAL_FAMILY_NAV = [
     href: '/institutions',
     label: 'Hub',
     match: 'institutions',
-    short: 'Directory',
+    short: 'Services',
     accent: 'rose',
   },
 ] as const;

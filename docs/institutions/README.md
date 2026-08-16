@@ -7,12 +7,19 @@ Museum-legible pages for incubators, cultural partners, and institutional outrea
 
 Use this order when picking a link:
 
-1. **`/artist-infrastructure`** — primary offer (workshops, systems, engagement formats)
-2. **`/oolite-arts`** — Digilab proof / case study (canonical Oolite story)
-3. **`/institutions`** — verified org + case-study directory
-4. **`/bakehouse`** — systems ask (shipped / proposed / ask buckets)
-5. **`/workshops`** — bookable pilots + public catalog (`#catalog`)
-6. **`/artist-sustainability`** — private YoungArts supplement (`noindex`) — not a public outreach door
+**Museum / nonprofit digital systems (e.g. Courtney at ICA):**
+
+1. **`/institutions`** — focused services page (web, Salesforce, automation, livestreaming, labs)
+2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof
+3. Calendly — 20-minute conversation
+
+**Artist-facing workshops / incubators:**
+
+1. **`/artist-infrastructure`** — workshops, systems, engagement formats
+2. **`/oolite-arts`** — Digilab proof
+3. **`/workshops`** — bookable pilots + public catalog (`#catalog`)
+
+**Private:** `/artist-sustainability` — YoungArts supplement (`noindex`) — not a public outreach door.
 
 **Named contact audits:** Dimitry Chamy + Sophia (MadArts) — [`docs/outreach/madarts-dimitry-send-audit.md`](../outreach/madarts-dimitry-send-audit.md).  
 Sophia’s research door includes **`/research/the-algorithm-is-outside`**.
@@ -55,8 +62,9 @@ Next phases: layout polish → 360 viewer → video entries in the same registry
 ## Availability and pricing
 
 - **Collaboration offer line:** `INSTITUTIONAL_COLLABORATION_AVAILABILITY` in [`shared.ts`](../../src/content/institutions/shared.ts) (fall 2026 paid guest teaching / curriculum / pilots). Used by `/artist-infrastructure` hero, engagement, and CTA. `INSTITUTIONAL_AVAILABILITY` aliases this.
+- **Services page availability:** `INSTITUTIONAL_SERVICES_AVAILABILITY` — currently available for project-based and fractional work on `/institutions`. Do not reuse the fall 2026 teaching line there.
 - **Oolite contract context:** `OOLITE_CONTRACT_CONTEXT` (Sept 17, 2026) — case-study framing only, not a competing hero availability line.
-- **Pilot pricing** mirrors Digilab public seat rates via `PILOT_PRICING` + [`workshopsOfferings.ts`](../../src/content/institutions/workshopsOfferings.ts) for workshops/hub. Do **not** present `$45` as an institutional teaching fee on `/artist-infrastructure`.
+- **Pilot pricing** mirrors Digilab public seat rates via `PILOT_PRICING` + [`workshopsOfferings.ts`](../../src/content/institutions/workshopsOfferings.ts) for workshops. Do **not** present `$45` or hosted workshop flats on `/institutions`.
 
 ## Key content files
 
@@ -65,6 +73,7 @@ Next phases: layout polish → 360 viewer → video entries in the same registry
 | `/artist-infrastructure` | `artistInfrastructure.ts` | `ArtistInfrastructureClient.tsx` |
 | `/oolite-arts` | `oolite-arts/case-study.ts` | `OoliteCaseStudy.tsx` |
 | `/institutions` | `hub.ts` | `InstitutionsHubClient.tsx` |
+| `/ica-miami` | `icaMiami.ts` | `IcaMiamiPageClient.tsx` |
 | `/bakehouse` | `bakehouse.ts` | `BakehousePageClient.tsx` |
 | `/workshops` | `workshopsOfferings.ts` | `WorkshopClient.tsx` |
 | `/artist-sustainability` | `artistSustainability.ts` | `ArtistSustainabilityClient.tsx` |

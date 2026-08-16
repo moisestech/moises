@@ -42,7 +42,7 @@ Use this table to resume work. Update when a pass ships.
 The site has **two institutional doors** and **three hiring flagships**. Conversion lifts come from deepening those proofs — not from more thin `/opportunities/*` pages.
 
 ```text
-Institutions send:  /artist-infrastructure  →  /oolite-arts (proof)  →  Calendly
+Institutions send:  /institutions (museum digital systems)  →  /oolite-arts · /ica-miami (proof)  →  Calendly
 Hiring flagships:   /projects/agentic-ops · /forward-deployed · /creative-ai
 Hiring skills SoT:  /capabilities  →  private /opportunities/[slug] (thin overlays)
 Do not mix doors:   incubators ≠ /ai-engineering; hiring ≠ /artist-infrastructure alone
@@ -66,7 +66,7 @@ Standalone MCP demo, RAG demo, FastAPI demo, pgvector demo, Claude demo, OAuth d
 
 | Family | Primary send URL | Also | Audience |
 |---|---|---|---|
-| Institutions / Miami outreach | `/artist-infrastructure` | `/oolite-arts`, `/institutions`, `/bakehouse`, `/workshops` | Incubators, orgs, partners |
+| Institutions / Miami outreach | `/institutions` | `/artist-infrastructure`, `/oolite-arts`, `/ica-miami`, `/bakehouse`, `/workshops` | Museum digital systems, incubators, partners |
 | Digilab proof | `/oolite-arts` | Digilab media registry | Curators, panels, partners needing depth |
 | **Hiring flagship — agents** | `/projects/agentic-ops` | `/ai-engineering`, `/capabilities#ai-engineering` | Applied AI / FDE / SA (Building until gates) |
 | **Hiring flagship — FDE** | `/forward-deployed` | `/opportunities/forward-deployed-ai-engineer` overlay | Recruiters, FDE roles |

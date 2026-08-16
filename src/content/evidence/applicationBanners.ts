@@ -172,6 +172,18 @@ export const artistInfrastructureBanner = defineApplicationBanner({
   frameClass: FLAGSHIP_BANNER_FRAME,
 });
 
+/**
+ * /institutions — cinematic lab still until a dedicated 2172×724 services banner is produced.
+ * Cover crop of the Oolite Digital Lab 360 room (institutional workspace, not a logo wall).
+ */
+export const institutionsDigitalSystemsBanner = defineApplicationBanner({
+  src: `${cdn}/v1786123448/oolite-arts/oolite-arts-digital-lab-360-photo_uaguwe.jpg`,
+  alt: 'Oolite Arts Digital Lab — workstations and production room used for artist programs',
+  intrinsicRatio: 16 / 9,
+  presentation: 'cover',
+  frameClass: FLAGSHIP_BANNER_FRAME,
+});
+
 /** Morley — Art Director (Remote, Florida). */
 export const morleyArtDirectorBanner = defineApplicationBanner({
   src: `${cdn}/v1785862415/jobs/banners/art-director-morley-banner_b5ridm.png`,
