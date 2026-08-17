@@ -40,6 +40,11 @@ export type ApplicationBanner = {
    * `cover`: legacy full-bleed crop — only for assets designed to survive edge crop.
    */
   presentation?: 'contain-blur' | 'cover';
+  /**
+   * Cover-crop focal point. Default `top` matches recruiting banners.
+   * Use `center` for cinematic stills that should stay vertically aligned in the strip.
+   */
+  objectPosition?: 'center' | 'top';
 };
 
 export type OpportunityStatus = 'active' | 'draft';

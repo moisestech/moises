@@ -28,6 +28,7 @@ type BannerInput = {
   presentation?: ApplicationBanner['presentation'];
   aspectClass?: string;
   frameClass?: string;
+  objectPosition?: ApplicationBanner['objectPosition'];
 };
 
 /** Prefer this helper so every banner declares its intrinsic width÷height. */
@@ -41,6 +42,7 @@ export function defineApplicationBanner(input: BannerInput): ApplicationBanner {
     presentation: input.presentation ?? 'contain-blur',
     aspectClass: input.aspectClass,
     frameClass: input.frameClass,
+    objectPosition: input.objectPosition,
   };
 }
 
@@ -182,6 +184,7 @@ export const institutionsDigitalSystemsBanner = defineApplicationBanner({
   intrinsicRatio: 16 / 9,
   presentation: 'cover',
   frameClass: FLAGSHIP_BANNER_FRAME,
+  objectPosition: 'center',
 });
 
 /**

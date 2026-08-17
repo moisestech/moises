@@ -137,6 +137,21 @@ export const LANE_ACCENT = {
   lab: 'copper',
 } as const satisfies Record<string, keyof typeof INST_ACCENT>;
 
+/**
+ * Site header is `fixed` (expanded ≈ 192px / 12rem, collapses to 80px).
+ * Family nav must stick *below* that live height — never `top-0`.
+ */
+export const INST_FAMILY_STICKY_CLASS =
+  'sticky z-40 top-[var(--site-header-height,12rem)] transition-[top] duration-300 ease-in-out';
+
+/** Page-section chips sit under the family strip (~3.75rem). */
+export const INST_SECTION_STICKY_CLASS =
+  'sticky z-30 top-[calc(var(--site-header-height,12rem)+3.75rem)] transition-[top] duration-300 ease-in-out';
+
+/** Anchor offset: live header + family nav + section nav. */
+export const INST_ANCHOR_SCROLL_MT_CLASS =
+  'scroll-mt-[calc(var(--site-header-height,12rem)+7.5rem)]';
+
 const FAMILY_ICONS: Record<InstitutionalFamilyMatch, LucideIcon> = {
   'artist-infrastructure': Network,
   institutions: LayoutGrid,

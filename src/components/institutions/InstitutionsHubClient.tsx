@@ -8,6 +8,8 @@ import {
   InstContainer,
   InstFamilyNav,
   InstPageShell,
+  INST_FAMILY_STICKY_CLASS,
+  INST_SECTION_STICKY_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { InstitutionsHero } from '@/components/institutions/InstitutionsHero';
@@ -77,10 +79,13 @@ export function InstitutionsHubClient() {
         </p>
       ) : null}
 
-      <InstFamilyNav active="institutions" className="sticky top-0 z-40" />
+      <InstFamilyNav active="institutions" className={INST_FAMILY_STICKY_CLASS} />
 
       <nav
-        className="sticky top-[45px] z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
+        className={cn(
+          INST_SECTION_STICKY_CLASS,
+          'border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur',
+        )}
         aria-label="Page sections"
       >
         <InstContainer className="flex items-center gap-2 py-2">

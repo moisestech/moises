@@ -10,7 +10,9 @@ import {
   InstReveal,
   InstSecondaryCta,
   InstSectionLabel,
+  INST_ANCHOR_SCROLL_MT_CLASS,
 } from '@/components/institutions/InstitutionalUi';
+import { cn } from '@/lib/utils';
 
 const PROCESS_ICON: Record<(typeof H.process.steps)[number]['icon'], LucideIcon> = {
   search: Search,
@@ -22,7 +24,7 @@ export function ProcessSteps() {
   return (
     <section
       id="process"
-      className="scroll-mt-32 border-b border-neutral-200 py-16 sm:py-20"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-16 sm:py-20')}
       aria-labelledby="process-heading"
     >
       <InstContainer>
@@ -70,7 +72,7 @@ export function EngagementModes() {
   return (
     <section
       id="engage"
-      className="scroll-mt-32 border-b border-neutral-200 py-16 sm:py-20"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-16 sm:py-20')}
       aria-labelledby="engage-heading"
     >
       <InstContainer>

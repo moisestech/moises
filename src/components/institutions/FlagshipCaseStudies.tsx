@@ -11,6 +11,7 @@ import {
   InstReveal,
   InstSectionLabel,
   LANE_ACCENT,
+  INST_ANCHOR_SCROLL_MT_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { IcaSystemsDiagram } from '@/components/institutions/IcaSystemsDiagram';
 import { cn } from '@/lib/utils';
@@ -40,7 +41,7 @@ export function FlagshipCaseStudies() {
   return (
     <section
       id="work"
-      className="scroll-mt-32 border-b border-neutral-200 py-16 sm:py-20"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-16 sm:py-20')}
       aria-labelledby="work-heading"
     >
       <InstContainer>
@@ -62,7 +63,7 @@ export function FlagshipCaseStudies() {
               <InstReveal key={study.id}>
                 <article
                   id={`work-${study.id}`}
-                  className="scroll-mt-32 border border-neutral-200 bg-white"
+                  className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border border-neutral-200 bg-white')}
                 >
                   <div className={cn('grid lg:grid-cols-12', reverse && 'lg:[&>*:first-child]:order-2')}>
                     <div className="relative min-h-[240px] bg-neutral-100 lg:col-span-5">
@@ -166,7 +167,7 @@ export function AdditionalEvidence() {
   return (
     <section
       id="evidence"
-      className="scroll-mt-32 border-b border-neutral-200 py-16 sm:py-20"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-16 sm:py-20')}
       aria-labelledby="evidence-heading"
     >
       <InstContainer>

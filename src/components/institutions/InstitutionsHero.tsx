@@ -11,13 +11,14 @@ import {
   InstPrimaryCta,
   InstSecondaryCta,
   InstSectionLabel,
+  INST_ANCHOR_SCROLL_MT_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 
 export function InstitutionsHero() {
   const { collage } = H.hero;
 
   return (
-    <header id="top" className="scroll-mt-32 border-b border-neutral-200">
+    <header id="top" className={`${INST_ANCHOR_SCROLL_MT_CLASS} border-b border-neutral-200`}>
       <InstContainer className="py-12 sm:py-16 md:py-20">
         <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
