@@ -113,7 +113,12 @@ function BannerLayer({
   if (isSvgLocal) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={alt} className={cn('h-full w-full object-cover', coverPos, className)} />
+      <img
+        src={src}
+        alt={alt}
+        className={cn('h-full w-full object-cover', coverPos, className)}
+        style={{ objectPosition: objectPosition === 'center' ? 'center' : 'top' }}
+      />
     );
   }
 
@@ -123,6 +128,7 @@ function BannerLayer({
       alt={alt}
       fill
       className={cn('object-cover', coverPos, className)}
+      style={{ objectPosition: objectPosition === 'center' ? 'center' : 'top' }}
       sizes="100vw"
       priority={priority}
     />
