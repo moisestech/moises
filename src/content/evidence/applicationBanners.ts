@@ -28,6 +28,7 @@ type BannerInput = {
   presentation?: ApplicationBanner['presentation'];
   aspectClass?: string;
   frameClass?: string;
+  objectPosition?: ApplicationBanner['objectPosition'];
 };
 
 /** Prefer this helper so every banner declares its intrinsic width÷height. */
@@ -41,6 +42,7 @@ export function defineApplicationBanner(input: BannerInput): ApplicationBanner {
     presentation: input.presentation ?? 'contain-blur',
     aspectClass: input.aspectClass,
     frameClass: input.frameClass,
+    objectPosition: input.objectPosition,
   };
 }
 
@@ -180,6 +182,19 @@ export const institutionsDigitalSystemsBanner = defineApplicationBanner({
   src: `${cdn}/v1786123448/oolite-arts/oolite-arts-digital-lab-360-photo_uaguwe.jpg`,
   alt: 'Oolite Arts Digital Lab — workstations and production room used for artist programs',
   intrinsicRatio: 16 / 9,
+  presentation: 'cover',
+  frameClass: FLAGSHIP_BANNER_FRAME,
+  objectPosition: 'center',
+});
+
+/**
+ * /ica-miami — wide ICA exhibition still as page chrome.
+ * Later-context only: not visual evidence of the 2019–2020 Digital Producer role.
+ */
+export const icaMiamiSystemsBanner = defineApplicationBanner({
+  src: `${cdn}/v1739483923/art/moisestech-website/exhibitions/dec_2024_dminti_notions_of_home/NotionsOfHome_banner_soubxf.jpg`,
+  alt: 'Notions of Home — ICA Miami × Dminti exhibition banner',
+  intrinsicRatio: 21 / 9,
   presentation: 'cover',
   frameClass: FLAGSHIP_BANNER_FRAME,
 });

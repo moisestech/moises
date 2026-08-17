@@ -7,13 +7,15 @@ import {
   InstContainer,
   InstReveal,
   InstSecondaryCta,
+  INST_ANCHOR_SCROLL_MT_CLASS,
 } from '@/components/institutions/InstitutionalUi';
+import { cn } from '@/lib/utils';
 
 export function InstitutionsFinalCTA() {
   return (
     <section
       id="contact"
-      className="scroll-mt-32 bg-neutral-950 py-16 text-white sm:py-20"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'bg-neutral-950 py-16 text-white sm:py-20')}
       aria-labelledby="contact-heading"
     >
       <InstContainer>

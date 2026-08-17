@@ -28,6 +28,7 @@ type BannerLayerProps = {
   intrinsicRatio?: number;
   className?: string;
   priority?: boolean;
+  objectPosition?: 'center' | 'top';
 };
 
 function BannerLayer({
@@ -38,8 +39,10 @@ function BannerLayer({
   intrinsicRatio,
   className,
   priority,
+  objectPosition = 'top',
 }: BannerLayerProps) {
   const isSvgLocal = !remote && src.endsWith('.svg');
+  const coverPos = objectPosition === 'center' ? 'object-center' : 'object-top';
 
   if (presentation === 'contain-blur') {
     return (
@@ -110,7 +113,12 @@ function BannerLayer({
   if (isSvgLocal) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={alt} className={cn('h-full w-full object-cover object-top', className)} />
+      <img
+        src={src}
+        alt={alt}
+        className={cn('h-full w-full object-cover', coverPos, className)}
+        style={{ objectPosition: objectPosition === 'center' ? 'center' : 'top' }}
+      />
     );
   }
 
@@ -119,7 +127,8 @@ function BannerLayer({
       src={src}
       alt={alt}
       fill
-      className={cn('object-cover object-top', className)}
+      className={cn('object-cover', coverPos, className)}
+      style={{ objectPosition: objectPosition === 'center' ? 'center' : 'top' }}
       sizes="100vw"
       priority={priority}
     />
@@ -167,6 +176,7 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
               remote={remote}
               presentation={presentation}
               intrinsicRatio={banner.intrinsicRatio}
+              objectPosition={banner.objectPosition}
               className="sm:hidden"
               priority
             />
@@ -176,6 +186,7 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
               remote
               presentation={presentation}
               intrinsicRatio={banner.intrinsicRatio}
+              objectPosition={banner.objectPosition}
               className="hidden sm:block lg:hidden"
               priority
             />
@@ -185,6 +196,7 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
               remote
               presentation={presentation}
               intrinsicRatio={banner.intrinsicRatio}
+              objectPosition={banner.objectPosition}
               className="hidden lg:block"
               priority
             />
@@ -197,6 +209,7 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
               remote={remote}
               presentation={presentation}
               intrinsicRatio={banner.intrinsicRatio}
+              objectPosition={banner.objectPosition}
               className="sm:hidden"
               priority
             />
@@ -206,6 +219,7 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
               remote
               presentation={presentation}
               intrinsicRatio={banner.intrinsicRatio}
+              objectPosition={banner.objectPosition}
               className="hidden sm:block"
               priority
             />
@@ -217,6 +231,7 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
             remote={remote}
             presentation={presentation}
             intrinsicRatio={banner.intrinsicRatio}
+            objectPosition={banner.objectPosition}
             priority
           />
         )}

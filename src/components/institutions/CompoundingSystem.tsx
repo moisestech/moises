@@ -9,6 +9,7 @@ import {
   InstReveal,
   InstSectionLabel,
   LANE_ACCENT,
+  INST_ANCHOR_SCROLL_MT_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { cn } from '@/lib/utils';
 
@@ -16,7 +17,7 @@ export function InstitutionalProofStrip() {
   return (
     <section
       id="proof"
-      className="scroll-mt-32 border-b border-neutral-200 py-10 sm:py-12"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-10 sm:py-12')}
       aria-labelledby="proof-heading"
     >
       <InstContainer>
@@ -72,7 +73,7 @@ export function CompoundingSystem() {
   return (
     <section
       id="system"
-      className="scroll-mt-32 border-b border-neutral-200 py-16 sm:py-20"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-16 sm:py-20')}
       aria-labelledby="system-heading"
     >
       <InstContainer>

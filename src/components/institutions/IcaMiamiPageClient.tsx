@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { icaMiamiPage as P } from '@/content/institutions/icaMiami';
+import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
 import { track } from '@/lib/analytics';
 import {
   InstContainer,
@@ -18,6 +19,12 @@ import { IcaSystemsDiagram } from '@/components/institutions/IcaSystemsDiagram';
 export function IcaMiamiPageClient() {
   return (
     <InstPageShell className="pt-[192px]">
+      <OpportunityApplicationBanner banner={P.banner} className="mb-0" />
+      {P.bannerNote ? (
+        <p className="border-b border-neutral-200 bg-amber-50/80 px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-amber-950 sm:px-6">
+          {P.bannerNote}
+        </p>
+      ) : null}
       <InstFamilyNav active="institutions" className="sticky top-0 z-40" />
       <header className="border-b border-neutral-200">
         <InstContainer className="py-14 sm:py-20">

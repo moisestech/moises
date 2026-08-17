@@ -15,6 +15,7 @@ import {
   InstContainer,
   InstReveal,
   InstSectionLabel,
+  INST_ANCHOR_SCROLL_MT_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { cn } from '@/lib/utils';
 
@@ -50,7 +51,7 @@ export function InstitutionArchive() {
   return (
     <section
       id="archive"
-      className="scroll-mt-32 border-b border-neutral-200 py-16 sm:py-20"
+      className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-16 sm:py-20')}
       aria-labelledby="archive-heading"
     >
       <InstContainer>
