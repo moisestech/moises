@@ -29,7 +29,12 @@ export function ResumeCTA({ opportunity, framed = false, sectionId = 'resume' }:
       <h2 className={opp.h2}>{opportunity.resumeSectionTitle ?? 'Résumé and contact'}</h2>
       {opportunity.resumeSectionNote ? <p className={`mt-2 max-w-3xl ${opp.muted}`}>{opportunity.resumeSectionNote}</p> : null}
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="footer" />
+        <OpportunityResumeLinks
+          ctas={ctas}
+          onCta={onCta}
+          variant="footer"
+          includeGithub={Boolean(ctas.evidenceBriefPdfPath && ctas.github)}
+        />
         <CoverLetterCtaLink
           ctas={ctas}
           includePrintFallback
@@ -53,7 +58,7 @@ export function ResumeCTA({ opportunity, framed = false, sectionId = 'resume' }:
           <Linkedin className="h-4 w-4 shrink-0" aria-hidden />
           LinkedIn
         </a>
-        {ctas.github ? (
+        {ctas.github && !ctas.evidenceBriefPdfPath ? (
           <a
             href={ctas.github}
             target="_blank"
@@ -62,7 +67,7 @@ export function ResumeCTA({ opportunity, framed = false, sectionId = 'resume' }:
             onClick={() => onCta('github')}
           >
             <Github className="h-4 w-4 shrink-0" aria-hidden />
-            GitHub
+            {ctas.githubLabel ?? 'GitHub'}
           </a>
         ) : null}
         {ctas.instagram ? (

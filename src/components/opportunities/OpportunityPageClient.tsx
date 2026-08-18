@@ -20,6 +20,9 @@ import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioCli
 import { ComfyWorkSampleClient } from '@/components/opportunities/comfy/ComfyWorkSampleClient';
 import { CreativeAgencyClient } from '@/components/opportunities/creative-agency/CreativeAgencyClient';
 import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
+import { ThirtySixtyNinetyPlan } from '@/components/opportunities/ThirtySixtyNinetyPlan';
+import { HonestyOverlaySection } from '@/components/opportunities/HonestyOverlaySection';
+import { CodeInspectSection } from '@/components/opportunities/CodeInspectSection';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -82,6 +85,12 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             <OpportunityHero opportunity={opportunity} />
           </OpportunityColorSection>
 
+          {opportunity.honestyOverlay ? (
+            <OpportunityColorSection sectionId="honesty" className="mt-10 sm:mt-14">
+              <HonestyOverlaySection data={opportunity.honestyOverlay} framed />
+            </OpportunityColorSection>
+          ) : null}
+
           <OpportunityColorSection sectionId="fit" className="mt-10 sm:mt-14">
             <RoleMatchMatrix opportunity={opportunity} framed />
           </OpportunityColorSection>
@@ -90,24 +99,44 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             <CaseStudyGrid opportunity={opportunity} framed />
           </OpportunityColorSection>
 
-          <OpportunityColorSection sectionId="teaching-cred" className="mt-10 sm:mt-14">
-            <OpportunityTeachingCredentials opportunity={opportunity} framed />
-          </OpportunityColorSection>
+          {opportunity.codeInspect ? (
+            <OpportunityColorSection sectionId="code-inspect" className="mt-10 sm:mt-14">
+              <CodeInspectSection data={opportunity.codeInspect} framed />
+            </OpportunityColorSection>
+          ) : null}
 
-          <OpportunityColorSection sectionId="skills" className="mt-10 sm:mt-14">
-            <SkillsMatrix opportunity={opportunity} framed />
-            {opportunity.capabilitiesHref ? (
-              <CapabilitiesDeepLink href={opportunity.capabilitiesHref} className="mt-6" />
-            ) : null}
-          </OpportunityColorSection>
+          {opportunity.teachingHighlights?.length || opportunity.certifications?.length ? (
+            <OpportunityColorSection sectionId="teaching-cred" className="mt-10 sm:mt-14">
+              <OpportunityTeachingCredentials opportunity={opportunity} framed />
+            </OpportunityColorSection>
+          ) : null}
+
+          {opportunity.skillsMatrixRows.length ? (
+            <OpportunityColorSection sectionId="skills" className="mt-10 sm:mt-14">
+              <SkillsMatrix opportunity={opportunity} framed />
+              {opportunity.capabilitiesHref ? (
+                <CapabilitiesDeepLink href={opportunity.capabilitiesHref} className="mt-6" />
+              ) : null}
+            </OpportunityColorSection>
+          ) : opportunity.capabilitiesHref ? (
+            <div className="mt-10 sm:mt-14">
+              <CapabilitiesDeepLink href={opportunity.capabilitiesHref} />
+            </div>
+          ) : null}
 
           <OpportunityColorSection sectionId="process" className="mt-10 sm:mt-14">
-            <InnovationProcess opportunity={opportunity} framed />
+            <InnovationProcess opportunity={opportunity} framed layout="horizontal" />
           </OpportunityColorSection>
 
           {opportunity.applicationAnswers?.length ? (
             <OpportunityColorSection sectionId="application-answers" className="mt-10 sm:mt-14">
               <OpportunityApplicationAnswers opportunity={opportunity} framed />
+            </OpportunityColorSection>
+          ) : null}
+
+          {opportunity.plan ? (
+            <OpportunityColorSection sectionId="plan" className="mt-10 sm:mt-14">
+              <ThirtySixtyNinetyPlan data={opportunity.plan} sectionId="plan" framed />
             </OpportunityColorSection>
           ) : null}
 

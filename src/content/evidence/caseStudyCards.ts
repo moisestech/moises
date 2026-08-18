@@ -18,6 +18,9 @@ export type CaseStudyOverride = {
   imageLocal?: boolean;
   href?: string;
   linkLabel?: string;
+  /** Optional second outbound link (e.g. Oolite beside Lore Machine). */
+  secondaryHref?: string;
+  secondaryLinkLabel?: string;
 };
 
 export type ResolvedCaseStudyCard = {
@@ -31,6 +34,8 @@ export type ResolvedCaseStudyCard = {
   imageLocal?: boolean;
   href?: string;
   linkLabel?: string;
+  secondaryHref?: string;
+  secondaryLinkLabel?: string;
   tier?: 'primary' | 'secondary' | 'supporting';
 };
 
@@ -56,6 +61,8 @@ export function resolveCaseStudyCards(
       imageLocal: o?.imageLocal ?? base.imageLocal,
       href: o?.href ?? base.href,
       linkLabel: o?.linkLabel,
+      secondaryHref: o?.secondaryHref,
+      secondaryLinkLabel: o?.secondaryLinkLabel,
     });
   }
   return cards;

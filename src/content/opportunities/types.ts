@@ -45,6 +45,40 @@ export type ApplicationBanner = {
    * Use `center` for cinematic stills that should stay vertically aligned in the strip.
    */
   objectPosition?: 'center' | 'top';
+  /** Accessible HTML overlay on the banner — never bake this text into the bitmap. */
+  overlayLabel?: string;
+};
+
+/** Compact two-column honesty split (proven vs not claimed). */
+export type HonestyOverlay = {
+  title: string;
+  intro: string;
+  provenTitle: string;
+  proven: string[];
+  notClaimedTitle: string;
+  notClaimed: string[];
+  rampStatement: string;
+};
+
+/** Compact “code to inspect” cards under featured proof. */
+export type CodeInspectItem = {
+  id: string;
+  title: string;
+  href: string;
+  body: string;
+};
+
+export type CodeInspectFootnote = {
+  label: string;
+  href: string;
+  note?: string;
+};
+
+export type CodeInspectBlock = {
+  title: string;
+  intro?: string;
+  items: CodeInspectItem[];
+  footnotes?: CodeInspectFootnote[];
 };
 
 export type OpportunityStatus = 'active' | 'draft';
@@ -126,6 +160,15 @@ export type OpportunityCtas = {
   scheduleUrl?: string;
   /** Button label for `scheduleUrl`; defaults to “Schedule intro”. */
   scheduleLabel?: string;
+  /** Override résumé PDF button label (default: “Download résumé (PDF)”). */
+  resumePdfLabel?: string;
+  /** Second PDF (e.g. technical evidence brief) shown after the résumé CTA. */
+  evidenceBriefPdfPath?: string;
+  evidenceBriefLabel?: string;
+  /** Profile GitHub (moisestech). When set, hero Profiles uses this instead of `github`. */
+  githubProfile?: string;
+  /** Override GitHub button label (default: “GitHub”). */
+  githubLabel?: string;
 };
 
 export type TeachingHighlight = {
@@ -305,6 +348,10 @@ export type Opportunity = {
   capabilitiesHref?: string;
   /** When set, OpportunityPageClient can render a 30/60/90 plan. */
   plan?: ThirtySixtyNinetyData;
+  /** Compact honesty split: proven now vs not claimed yet. */
+  honestyOverlay?: HonestyOverlay;
+  /** Compact “code to inspect” cards under featured proof. */
+  codeInspect?: CodeInspectBlock;
   /** Optional multi-stage system pipeline case study (e.g. Lore Machine walkthrough). */
   systemPipeline?: SystemPipelineCaseStudyData;
 };

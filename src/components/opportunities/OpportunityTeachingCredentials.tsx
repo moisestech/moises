@@ -5,6 +5,7 @@ import { BookOpen, GraduationCap, ExternalLink } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
+import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
 import { opp } from '@/components/opportunities/opportunityTheme';
 
 type Props = {
@@ -33,25 +34,32 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
           </p>
           <ul className="mt-6 grid gap-6 sm:grid-cols-2">
             {teachingHighlights.map((item) => (
-              <li key={item.href}>
+              <li key={item.href} className={`flex h-full flex-col overflow-hidden ${opp.card}`}>
+                {item.imageSrc ? (
+                  <OpportunityZoomTrigger
+                    src={item.imageSrc}
+                    alt={item.imageAlt ?? item.title}
+                    caption={item.title}
+                    className={opp.cardMedia}
+                  >
+                    <OpportunityCardImage
+                      src={item.imageSrc}
+                      alt={item.imageAlt ?? item.title}
+                      local={item.imageLocal}
+                    />
+                  </OpportunityZoomTrigger>
+                ) : null}
                 <Link
                   href={item.href}
-                  className={`flex h-full flex-col overflow-hidden ${opp.card} transition hover:border-cyan-400/35 dark:hover:border-cyan-500/40 hover:shadow-md`}
+                  className={`flex flex-1 flex-col ${opp.cardPad} transition hover:bg-stone-50 dark:hover:bg-stone-800/60`}
                   onClick={() => onOut(`teaching_${item.title.slice(0, 24)}`)}
                 >
-                  {item.imageSrc ? (
-                    <div className={opp.cardMedia}>
-                      <OpportunityCardImage src={item.imageSrc} alt={item.imageAlt ?? item.title} local={item.imageLocal} />
-                    </div>
-                  ) : null}
-                  <div className={opp.cardPad}>
-                    <h3 className={opp.matrixPrimary}>{item.title}</h3>
-                    <p className={opp.matrixSecondary}>{item.description}</p>
-                    <span className={`mt-3 inline-flex items-center gap-1 text-xs font-medium ${opp.linkAccent}`}>
-                      Open page
-                      <ExternalLink className="h-3 w-3" aria-hidden />
-                    </span>
-                  </div>
+                  <h3 className={opp.matrixPrimary}>{item.title}</h3>
+                  <p className={opp.matrixSecondary}>{item.description}</p>
+                  <span className={`mt-3 inline-flex items-center gap-1 text-xs font-medium ${opp.linkAccent}`}>
+                    Open page
+                    <ExternalLink className="h-3 w-3" aria-hidden />
+                  </span>
                 </Link>
               </li>
             ))}

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import type { ApplicationBanner } from '@/content/opportunities/types';
+import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
 
 type OpportunityApplicationBannerProps = {
   banner?: ApplicationBanner;
@@ -158,6 +159,8 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
       ? coverFrame
       : cn(APPLICATION_BANNER_FRAME, banner.frameClass);
 
+  const zoomSrc = banner.srcExtraWide ?? banner.srcWide ?? banner.src;
+
   return (
     <div
       className={cn(
@@ -167,7 +170,11 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
         className,
       )}
     >
-      <div className={cn(frame, presentation === 'cover' ? banner.aspectClass : undefined)}>
+      <OpportunityZoomTrigger
+        src={zoomSrc}
+        alt={banner.alt}
+        className={cn(frame, presentation === 'cover' ? banner.aspectClass : undefined)}
+      >
         {banner.srcExtraWide && banner.srcWide ? (
           <>
             <BannerLayer
@@ -235,7 +242,18 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
             priority
           />
         )}
-      </div>
+        {banner.overlayLabel ? (
+          <>
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-24 bg-gradient-to-t from-stone-950/70 to-transparent"
+              aria-hidden
+            />
+            <p className="pointer-events-none absolute bottom-3 left-3 right-3 z-[3] text-[10px] font-semibold uppercase tracking-[0.16em] text-white sm:bottom-4 sm:left-4 sm:text-[11px]">
+              {banner.overlayLabel}
+            </p>
+          </>
+        ) : null}
+      </OpportunityZoomTrigger>
     </div>
   );
 }
