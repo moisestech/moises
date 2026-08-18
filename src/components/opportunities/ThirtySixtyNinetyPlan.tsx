@@ -5,11 +5,21 @@ import { cn } from '@/lib/utils';
 type ThirtySixtyNinetyPlanProps = {
   data: ThirtySixtyNinetyData;
   sectionId?: string;
+  /** When nested in OpportunityColorSection — drop outer section chrome. */
+  framed?: boolean;
 };
 
-export function ThirtySixtyNinetyPlan({ data, sectionId = 'plan' }: ThirtySixtyNinetyPlanProps) {
+export function ThirtySixtyNinetyPlan({
+  data,
+  sectionId = 'plan',
+  framed = false,
+}: ThirtySixtyNinetyPlanProps) {
   return (
-    <section id={sectionId} className={opp.section} aria-labelledby={`${sectionId}-heading`}>
+    <section
+      id={sectionId}
+      className={framed ? 'scroll-mt-32' : opp.section}
+      aria-labelledby={`${sectionId}-heading`}
+    >
       <h2 id={`${sectionId}-heading`} className={opp.h2}>
         {data.title}
       </h2>

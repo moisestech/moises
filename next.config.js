@@ -136,6 +136,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/applied-ai/deloitte-fde-servicenow',
+        destination: '/opportunities/deloitte-servicenow-fde',
+        permanent: false,
+      },
+      {
         source: '/roles/ai-solutions-architect',
         destination: '/opportunities/ai-solutions-architect',
         permanent: false,

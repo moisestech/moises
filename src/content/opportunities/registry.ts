@@ -10,6 +10,7 @@ import { comfyMtsFrontendOpportunity } from './comfy-mts-frontend';
 import { corestoryAiEngineerOpportunity } from './corestory-ai-engineer';
 import { cvsGenaiEngineerOpportunity } from './cvs-genai-engineer';
 import { deepgramSolutionsArchitectOpportunity } from './deepgram-solutions-architect';
+import { deloitteServicenowFdeOpportunity } from './deloitte-servicenow-fde';
 import { digitasAssociateDirectorCreativeOpportunity } from './digitas-associate-director-creative';
 import { endorLabsSolutionsArchitectOpportunity } from './endor-labs-solutions-architect';
 import { floraFoundingDataEngineerOpportunity } from './flora-founding-data-engineer';
@@ -49,6 +50,7 @@ const bySlug: Record<string, Opportunity> = {
   [corestoryAiEngineerOpportunity.slug]: corestoryAiEngineerOpportunity,
   [cvsGenaiEngineerOpportunity.slug]: cvsGenaiEngineerOpportunity,
   [deepgramSolutionsArchitectOpportunity.slug]: deepgramSolutionsArchitectOpportunity,
+  [deloitteServicenowFdeOpportunity.slug]: deloitteServicenowFdeOpportunity,
   [digitasAssociateDirectorCreativeOpportunity.slug]: digitasAssociateDirectorCreativeOpportunity,
   [endorLabsSolutionsArchitectOpportunity.slug]: endorLabsSolutionsArchitectOpportunity,
   [floraFoundingDataEngineerOpportunity.slug]: floraFoundingDataEngineerOpportunity,

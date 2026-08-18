@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { Mail, FolderKanban, Linkedin, Github, Instagram, ArrowDown, Calendar } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { Opportunity } from '@/content/opportunities/types';
@@ -8,6 +7,8 @@ import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
 import { OpportunityRichText } from '@/components/opportunities/OpportunityRichText';
+import { OpportunityProfileImage } from '@/components/opportunities/OpportunityProfileImage';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import {
   isExternalHttpHref,
@@ -21,12 +22,13 @@ type OpportunityHeroProps = {
 
 export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
   const { hero, ctas, slug, animatedLogoBand } = opportunity;
+  const heroAccent = getOpportunityCompactAccent('hero');
+  const githubProfileHref = ctas.githubProfile ?? ctas.github;
 
   const onCta = (kind: string) => {
     track('opportunity_cta_click', { opportunitySlug: slug, kind });
   };
 
-  const headshotRemote = hero.headshotSrc?.startsWith('http') ?? false;
   const eyebrow = opportunity.heroEyebrow ?? opportunity.roleTitle ?? 'Positioning';
   const showSystemsHero =
     opportunity.variant === 'systems-dossier' ||
@@ -37,7 +39,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
     <section id="hero" className="scroll-mt-32">
       <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div>
-          <p className={opp.accent}>{eyebrow}</p>
+          <p className={cn(opp.accent, heroAccent.eyebrow)}>{eyebrow}</p>
           <h1 className={`mt-2 ${opp.h1}`}>{hero.headline}</h1>
           {opportunity.heroRoleMeta ? (
             <p className={`mt-2 ${opp.bodyLg}`}>{opportunity.heroRoleMeta}</p>
@@ -69,9 +71,15 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             {opportunity.heroPrimaryCta ? (
               <a
                 href={opportunity.heroPrimaryCta.href}
-                className={cn(opp.btnPrimary, 'min-h-11 w-full justify-center sm:w-auto')}
-                {...(isExternalHttpHref(opportunity.heroPrimaryCta.href)
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                className={cn(
+                  opp.btnPrimary,
+                  'min-h-11 w-full justify-center sm:w-auto',
+                  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                  heroAccent.focusRing,
+                )}
+                {...(isExternalHttpHref(opportunity.heroPrimaryCta.href) ||
+                opportunity.heroPrimaryCta.href.endsWith('.pdf')
+                  ? { target: '_blank', rel: 'noreferrer' }
                   : {})}
                 onClick={() =>
                   onCta(
@@ -94,9 +102,15 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             {opportunity.heroSecondaryCta ? (
               <a
                 href={opportunity.heroSecondaryCta.href}
-                className={cn(opp.btnSecondary, 'min-h-11 w-full justify-center sm:w-auto')}
-                {...(isExternalHttpHref(opportunity.heroSecondaryCta.href)
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                className={cn(
+                  opp.btnSecondary,
+                  'min-h-11 w-full justify-center sm:w-auto',
+                  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                  heroAccent.focusRing,
+                )}
+                {...(isExternalHttpHref(opportunity.heroSecondaryCta.href) ||
+                opportunity.heroSecondaryCta.href.endsWith('.pdf')
+                  ? { target: '_blank', rel: 'noreferrer' }
                   : {})}
                 onClick={() =>
                   onCta(
@@ -116,7 +130,12 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             ) : ctas.caseStudiesAnchor ? (
               <a
                 href={ctas.caseStudiesAnchor}
-                className={cn(opp.btnSecondary, 'min-h-11 w-full justify-center sm:w-auto')}
+                className={cn(
+                  opp.btnSecondary,
+                  'min-h-11 w-full justify-center sm:w-auto',
+                  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                  heroAccent.focusRing,
+                )}
                 onClick={() => onCta('case_studies_anchor')}
               >
                 <FolderKanban className="h-4 w-4 shrink-0" aria-hidden />
@@ -127,7 +146,12 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             {!showSystemsHero ? (
               <a
                 href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
-                className={cn(opp.btnSecondary, 'min-h-11 w-full justify-center sm:w-auto')}
+                className={cn(
+                  opp.btnSecondary,
+                  'min-h-11 w-full justify-center sm:w-auto',
+                  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                  heroAccent.focusRing,
+                )}
                 onClick={() => onCta('email')}
               >
                 <Mail className="h-4 w-4 shrink-0" aria-hidden />
@@ -140,7 +164,7 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           {opportunity.heroMetaChips?.length ? (
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Role focus">
               {opportunity.heroMetaChips.map((chip) => (
-                <li key={chip} className={cn(opp.pillTag, 'max-w-full break-words')}>
+                <li key={chip} className={cn(opp.pillTag, heroAccent.chipHover, 'max-w-full break-words')}>
                   {chip}
                 </li>
               ))}
@@ -159,13 +183,13 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             >
               <Linkedin className="h-5 w-5" aria-hidden />
             </a>
-            {ctas.github ? (
+            {githubProfileHref ? (
               <a
-                href={ctas.github}
+                href={githubProfileHref}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noreferrer"
                 className={opportunitySocialIconClass('github')}
-                aria-label="GitHub"
+                aria-label="GitHub profile"
                 onClick={() => onCta('github_hero')}
               >
                 <Github className="h-5 w-5" aria-hidden />
@@ -215,48 +239,12 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
           {hero.headshotSrc ? (
             <>
               <p className={`mb-2 ${opp.label}`}>Profile</p>
-              <div
-                className={cn(
-                  opp.headshot,
-                  'group/portrait relative border-0 bg-transparent [perspective:1200px]',
-                )}
-              >
-                <div
-                  className={cn(
-                    'relative h-full w-full overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-none transition-[transform,box-shadow] duration-500 ease-out motion-safe:transform-gpu motion-safe:will-change-transform dark:border-stone-700 dark:bg-stone-800',
-                    'motion-safe:group-hover/portrait:shadow-[0_22px_48px_-18px_rgba(0,0,0,0.45)] motion-safe:group-hover/portrait:[transform:rotateY(-7deg)_rotateX(5deg)_scale(1.045)]',
-                    '[transform-style:preserve-3d]',
-                  )}
-                >
-                  {headshotRemote || !hero.headshotSrc.endsWith('.svg') ? (
-                    <Image
-                      src={hero.headshotSrc}
-                      alt={hero.headshotAlt ?? ''}
-                      fill
-                      className="object-cover transition duration-500 motion-safe:group-hover/portrait:scale-[1.06]"
-                      sizes="(max-width: 1024px) 100vw, 400px"
-                      priority
-                    />
-                  ) : (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={hero.headshotSrc}
-                      alt={hero.headshotAlt ?? ''}
-                      className="h-full w-full object-cover transition duration-500 motion-safe:group-hover/portrait:scale-[1.06]"
-                    />
-                  )}
-                  <span
-                    className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-300 motion-safe:group-hover/portrait:opacity-100"
-                    aria-hidden
-                  >
-                    <span className="grant-portrait-sheen absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/45 to-transparent motion-safe:group-hover/portrait:animate-[grant-portrait-sheen_0.85s_ease-in-out]" />
-                  </span>
-                  <span
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-stone-900/10 via-transparent to-white/10 opacity-0 transition-opacity duration-500 motion-safe:group-hover/portrait:opacity-100"
-                    aria-hidden
-                  />
-                </div>
-              </div>
+              <OpportunityProfileImage
+                src={hero.headshotSrc}
+                alt={hero.headshotAlt ?? 'Moises Sanabria'}
+                accentRingClassName={heroAccent.portraitRing}
+                accentShadowClassName={heroAccent.portraitShadow}
+              />
             </>
           ) : null}
         </div>

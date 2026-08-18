@@ -17,7 +17,10 @@ export type EvidenceProjectId =
   | 'digital-culture-infrastructure'
   | 'playwire-alumni'
   | 'n8n-gmail-intelligence'
-  | 'bookleggers-commerce-automation';
+  | 'bookleggers-commerce-automation'
+  | 'agentic-ops'
+  | 'comfyui-output-provenance'
+  | 'flora-field-kit';
 
 export type EvidenceProject = {
   id: EvidenceProjectId;
@@ -140,6 +143,43 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     skillTags: [...automationProjectSpecs['bookleggers-commerce-automation'].skillTags],
     imageSrc: automationProjectSpecs['bookleggers-commerce-automation'].imageSrc,
     imageAlt: automationProjectSpecs['bookleggers-commerce-automation'].imageAlt,
+  },
+  'agentic-ops': {
+    id: 'agentic-ops',
+    title: 'Agentic Ops — auditable multi-tool agent runtime',
+    category: 'AI engineering · Building',
+    summary:
+      'Planner → tools → state → retrieval → synthesis → human approval → execute. Public engineering flagship for MCP, HITL, evals, and reusable agent patterns. Building until demo and regression gates are live — not claimed as production ServiceNow.',
+    skillTags: ['MCP', 'HITL', 'Python', 'FastAPI', 'TypeScript', 'Evals', 'CI'],
+    imageSrc: AI24_WEBSITE_HERO_IMAGE,
+    imageAlt: 'Agentic Ops — organizational multi-tool agent runtime',
+    href: 'https://github.com/moisestech/agentic-ops',
+  },
+  'comfyui-output-provenance': {
+    id: 'comfyui-output-provenance',
+    title: 'ComfyUI Output Provenance — tests, CI, and docs',
+    category: 'Production engineering · public repo',
+    summary:
+      'Typed monorepo with Zod-validated graph parse, upstream provenance trace, GitHub Actions, and written architecture/testing docs. Evidence of maintainable code, versioning, and reviewable documentation — not a ServiceNow SDK claim.',
+    skillTags: ['TypeScript', 'CI/CD', 'Testing', 'Documentation', 'GitHub Actions'],
+    imageSrc:
+      'https://raw.githubusercontent.com/moisestech/comfyui-output-provenance/main/docs/assets/readme-hero.svg',
+    imageAlt: 'ComfyUI Output Provenance Explorer — public engineering artifact',
+    imageLocal: true,
+    href: 'https://github.com/moisestech/comfyui-output-provenance',
+  },
+  'flora-field-kit': {
+    id: 'flora-field-kit',
+    title: 'FLORA Field Kit — client workflow console',
+    category: 'Forward-deployed delivery · prototype',
+    summary:
+      'Standalone Next.js console for brief intake, technique recommendation, run/review, and shareable case-study export. Models the FDE loop: sit with a customer problem, prototype a working path, leave something the team can reuse.',
+    skillTags: ['Next.js', 'TypeScript', 'Client delivery', 'Runbooks', 'Prototyping'],
+    imageSrc:
+      '/images/opportunities/flora-forward-deployed-creative/flora-field-kit-overview-concept-study.png',
+    imageAlt: 'FLORA Field Kit — brief-to-handoff client workflow console',
+    imageLocal: true,
+    href: 'https://github.com/moisestech/flora-field-kit',
   },
 };
 

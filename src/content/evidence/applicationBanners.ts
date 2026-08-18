@@ -29,6 +29,7 @@ type BannerInput = {
   aspectClass?: string;
   frameClass?: string;
   objectPosition?: ApplicationBanner['objectPosition'];
+  overlayLabel?: string;
 };
 
 /** Prefer this helper so every banner declares its intrinsic width÷height. */
@@ -43,6 +44,7 @@ export function defineApplicationBanner(input: BannerInput): ApplicationBanner {
     aspectClass: input.aspectClass,
     frameClass: input.frameClass,
     objectPosition: input.objectPosition,
+    overlayLabel: input.overlayLabel,
   };
 }
 
@@ -290,4 +292,15 @@ export const corestoryAiEngineerBanner = defineApplicationBanner({
   src: `${cdn}/v1785208741/jobs/banners/corestory-ai-engineer-banner_pa23tj.png`,
   alt: 'CoreStory AI Engineer — LLM systems, retrieval, and narrative intelligence from legacy complexity',
   intrinsicRatio: GENAI_BANNER_RATIO,
+});
+
+/** Deloitte — Forward Deployed Engineer, ServiceNow (req. 362315). Branded crop 1983×793; text is in the image. */
+export const deloitteServicenowFdeBanner = defineApplicationBanner({
+  src: `${cdn}/v1787067441/jobs/banners/deloitte-fde-servicenow_bw2clz.png`,
+  alt: 'Deloitte Forward Deployed Engineer evidence — Discover, Build, Harden, Enable.',
+  intrinsicRatio: 1983 / 793,
+  presentation: 'cover',
+  objectPosition: 'center',
+  aspectClass:
+    '!aspect-[1983/793] w-full !min-h-[168px] sm:!min-h-[220px] md:!min-h-[248px] !max-h-[min(42vh,420px)]',
 });

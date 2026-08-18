@@ -379,6 +379,18 @@ export const opportunityTracker: ApplicationTrack[] = [
     notes: 'P2.',
   },
   {
+    id: 'deloitte-servicenow-fde',
+    company: 'Deloitte',
+    role: 'Forward Deployed Engineer — ServiceNow',
+    status: 'to_apply',
+    family: 'compact',
+    slug: 'deloitte-servicenow-fde',
+    employerUrl:
+      'https://apply.deloitte.com/en_US/careers/JobDetail/Forward-Deployed-Engineer-ServiceNow/362315',
+    notes:
+      'Private compact overlay for rec 362315. Honesty overlay + targeted resume. Alias /applied-ai/deloitte-fde-servicenow. Recruiting ends 10/30/2026.',
+  },
+  {
     id: 'neogov-agentic',
     company: 'NEOGOV',
     role: 'Staff Agentic AI Developer',

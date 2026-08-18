@@ -5,7 +5,7 @@ Living audit of page families, source-of-truth paths, opportunity readiness, and
 
 Cursor rule: [`.cursor/rules/site-health.mdc`](../.cursor/rules/site-health.mdc)
 
-Last audit: **2026-08-07** · Last progress update: **2026-08-10 (FLORA FDC dossier → role-portfolio)**
+Last audit: **2026-08-07** · Last progress update: **2026-08-18 (Deloitte ServiceNow FDE overlay)**
 
 ---
 
@@ -23,6 +23,7 @@ Use this table to resume work. Update when a pass ships.
 | **Three flagships** | 2026-08-09 | Evidence registry v2; `/forward-deployed`, `/creative-ai`, `/projects/agentic-ops`; homepage hire door; sitemap/robots; recipe-ranked dossiers | Code on branch; **must merge to `main` for production** |
 | **LIFE OS read** | 2026-08-10 | Inbox/Actions/Projects/Opportunities readers + `/api/life-os` | Local reads verified; PAT in `.env.local` only |
 | **FLORA FDC dossier** | 2026-08-10 | `/opportunities/flora-forward-deployed-creative` upgraded to role-portfolio; links Field Kit subdomain + Technique placeholders | Unlisted / noindex; View Links still pending |
+| **Deloitte SN FDE** | 2026-08-18 | Compact `/opportunities/deloitte-servicenow-fde`; compact shell now renders `plan` when set | Private / noindex; SN CAD framed as 90-day ramp |
 
 ### Production incident — `/creative-ai` 404
 

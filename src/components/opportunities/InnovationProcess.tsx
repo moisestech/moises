@@ -6,6 +6,7 @@ import { ApproachDiagramGallery } from '@/components/opportunities/ApproachDiagr
 import { ProcessStepLogos } from '@/components/opportunities/ProcessStepLogos';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 
 type InnovationProcessProps = {
   opportunity: Opportunity;
@@ -29,6 +30,7 @@ export function InnovationProcess({
   const [activeIndex, setActiveIndex] = useState(0);
   const steps = opportunity.processSteps;
   const isHorizontal = layout === 'horizontal';
+  const accent = getOpportunityCompactAccent(sectionId);
 
   return (
     <section id={sectionId} className={framed ? 'scroll-mt-32' : opp.section}>
@@ -81,18 +83,21 @@ export function InnovationProcess({
                   onMouseEnter={() => setActiveIndex(i)}
                   onFocus={() => setActiveIndex(i)}
                   className={cn(
-                    'flex h-full w-full flex-col gap-3 rounded-xl border p-4 text-left transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 motion-reduce:transition-none',
+                    'flex h-full w-full flex-col gap-3 rounded-xl border p-4 text-left transition duration-300 motion-reduce:transition-none',
+                    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                    accent.focusRing,
                     selected
-                      ? 'border-cyan-400 bg-cyan-50/90 shadow-md shadow-cyan-500/10 ring-1 ring-cyan-300/50 dark:border-cyan-600 dark:bg-cyan-950/40 dark:ring-cyan-800/40'
-                      : 'border-stone-200 bg-white hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-md motion-reduce:hover:translate-y-0 dark:border-stone-700 dark:bg-stone-900 dark:hover:border-stone-500',
+                      ? accent.processSelected
+                      : cn(
+                          'border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900',
+                          accent.cardHover,
+                        ),
                   )}
                 >
                   <span
                     className={cn(
                       'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold transition',
-                      selected
-                        ? 'bg-cyan-500 text-white dark:bg-cyan-400 dark:text-stone-950'
-                        : 'bg-cyan-400/15 text-cyan-600 dark:bg-cyan-500/20 dark:text-cyan-400',
+                      selected ? accent.processSelectedBadge : accent.processIdleBadge,
                     )}
                   >
                     {String(i + 1).padStart(2, '0')}
@@ -113,8 +118,8 @@ export function InnovationProcess({
                   </div>
                 </button>
               ) : (
-                <div className={cn(`flex gap-4 ${opp.card} p-4`)}>
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-xs font-bold text-cyan-600 dark:bg-cyan-500/20 dark:text-cyan-400">
+                <div className={cn(`flex gap-4 ${opp.card} p-4 transition duration-300 motion-reduce:transition-none`, accent.cardHover)}>
+                  <span className={cn('flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold', accent.processIdleBadge)}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -131,10 +136,13 @@ export function InnovationProcess({
 
       {isHorizontal && steps[activeIndex] ? (
         <div
-          className="mt-4 hidden rounded-xl border border-cyan-200/80 bg-cyan-50/60 p-4 dark:border-cyan-900/60 dark:bg-cyan-950/30 sm:block lg:hidden"
+          className={cn(
+            'mt-4 hidden rounded-xl border p-4 sm:block lg:hidden',
+            accent.processSelected,
+          )}
           aria-live="polite"
         >
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-cyan-700 dark:text-cyan-300">
+          <p className={cn('text-[11px] font-semibold uppercase tracking-wide', accent.eyebrow)}>
             Focus · Step {String(activeIndex + 1).padStart(2, '0')}
           </p>
           <p className={`mt-1 font-semibold text-stone-900 dark:text-stone-50`}>

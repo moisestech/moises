@@ -5,6 +5,8 @@ import Image from 'next/image';
 import type { Opportunity, RoleMatchRow } from '@/content/opportunities/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
+import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
+import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
 
 type RoleMatchMatrixProps = {
   opportunity: Opportunity;
@@ -44,6 +46,7 @@ function rowKey(row: RoleMatchRow, index: number) {
 }
 
 export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrixProps) {
+  const accent = getOpportunityCompactAccent('fit');
   const headers = opportunity.roleMatchColumnHeaders ?? {
     left: 'Skill/Experience',
     right: 'Relevant experience',
@@ -115,16 +118,21 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
         >
           <div className="relative aspect-[16/10] w-full sm:aspect-[4/3]">
             {activeIllustration ? (
-              <div
+              <OpportunityZoomTrigger
                 key={activeIndex}
-                className="absolute inset-0 animate-in fade-in-0 duration-300 motion-reduce:animate-none"
+                src={activeIllustration.src}
+                alt={activeIllustration.alt}
+                caption={activeRow?.requirement}
+                className="absolute inset-0 h-full animate-in fade-in-0 duration-300 motion-reduce:animate-none"
               >
-                <IllustrationFrame
-                  src={activeIllustration.src}
-                  alt={activeIllustration.alt}
-                  local={activeIllustration.local}
-                />
-              </div>
+                <div className="relative h-full w-full">
+                  <IllustrationFrame
+                    src={activeIllustration.src}
+                    alt={activeIllustration.alt}
+                    local={activeIllustration.local}
+                  />
+                </div>
+              </OpportunityZoomTrigger>
             ) : (
               <div className={`flex h-full min-h-[160px] flex-col items-center justify-center gap-2 p-6 text-center text-sm ${opp.muted}`}>
                 <p>No preview for this row yet.</p>
@@ -158,8 +166,9 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
                     type="button"
                     className={cn(
                       'min-h-[3rem] w-full px-3 py-3.5 text-left transition-colors sm:px-4',
-                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-cyan-400 dark:focus-visible:outline-cyan-500',
-                      active ? opp.activeRow : opp.rowHover,
+                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]',
+                      accent.focusRing,
+                      active ? accent.activeRow : opp.rowHover,
                     )}
                     aria-current={active ? 'true' : undefined}
                     onMouseEnter={() => setActiveIndex(index)}

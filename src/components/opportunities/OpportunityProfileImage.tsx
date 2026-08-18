@@ -9,6 +9,8 @@ import {
   type CSSProperties,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
+import { Maximize2 } from 'lucide-react';
+import { OpportunityZoomLightbox } from '@/components/opportunities/OpportunityZoomLightbox';
 import { cn } from '@/lib/utils';
 import { opp } from '@/components/opportunities/opportunityTheme';
 
@@ -18,6 +20,10 @@ export type OpportunityProfileImageProps = {
   className?: string;
   /** Extra classes on the outer interactive frame (tilt / glass). */
   frameClassName?: string;
+  /** Inset ring on hover (section-colored). */
+  accentRingClassName?: string;
+  /** Dark-mode hover shadow (section-colored). */
+  accentShadowClassName?: string;
   priority?: boolean;
   sizes?: string;
 };
@@ -42,6 +48,8 @@ export function OpportunityProfileImage({
   alt,
   className,
   frameClassName,
+  accentRingClassName,
+  accentShadowClassName,
   priority = true,
   sizes = '(max-width: 1024px) 100vw, 400px',
 }: OpportunityProfileImageProps) {
@@ -87,6 +95,7 @@ export function OpportunityProfileImage({
   }, []);
 
   const useNextImage = src.startsWith('http') || !src.endsWith('.svg');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const frameStyle = reduceMotion
     ? undefined
@@ -114,7 +123,8 @@ export function OpportunityProfileImage({
           opp.headshot,
           'mx-auto w-full transform-gpu transition-[transform,box-shadow] duration-300 ease-out will-change-transform',
           'motion-safe:group-hover/profile:shadow-[0_24px_48px_-20px_rgba(0,0,0,0.45)]',
-          'motion-safe:dark:group-hover/profile:shadow-[0_24px_48px_-18px_rgba(34,211,238,0.22)]',
+          accentShadowClassName ??
+            'motion-safe:dark:group-hover/profile:shadow-[0_24px_48px_-18px_rgba(34,211,238,0.22)]',
           className,
         )}
         style={frameStyle}
@@ -164,12 +174,27 @@ export function OpportunityProfileImage({
           className={cn(
             'pointer-events-none absolute inset-0 z-[3] rounded-[inherit] opacity-0 transition-opacity duration-500',
             'bg-gradient-to-tr from-stone-950/15 via-transparent to-white/25',
-            'ring-1 ring-inset ring-white/25 dark:ring-cyan-400/20',
+            'ring-1 ring-inset ring-white/25',
+            accentRingClassName ?? 'dark:ring-cyan-400/20',
             'motion-safe:group-hover/profile:opacity-100',
           )}
           aria-hidden
         />
       </div>
+      <button
+        type="button"
+        className="absolute bottom-2 right-2 z-10 inline-flex min-h-11 items-center gap-1 rounded-md bg-stone-950/80 px-2.5 py-1.5 text-[10px] font-medium uppercase tracking-wide text-white backdrop-blur-sm hover:bg-stone-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 sm:text-xs"
+        onPointerDown={(event) => event.stopPropagation()}
+        onClick={(event) => {
+          event.stopPropagation();
+          setLightboxOpen(true);
+        }}
+        aria-label={`Enlarge portrait: ${alt}`}
+      >
+        <Maximize2 className="h-3.5 w-3.5" aria-hidden />
+        Zoom
+      </button>
+      <OpportunityZoomLightbox open={lightboxOpen} onOpenChange={setLightboxOpen} src={src} alt={alt} />
     </div>
   );
 }

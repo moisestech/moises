@@ -63,6 +63,7 @@ Audit date: **2026-08-07**. Listed = appears on `/opportunities` (`status: 'acti
 | corestory-ai-engineer | compact | no | **no** | yes | yes | B |
 | cvs-senior-genai-engineer | compact (archetype overlay) | no | yes | yes | yes | C→private (pass 1) |
 | deepgram-solutions-architect | compact | no | **no** | yes | yes | C |
+| deloitte-servicenow-fde | compact | no | yes | yes | yes | B |
 | digitas-associate-director-creative | creative-agency | no* | yes | factory | yes | A |
 | endor-labs-solutions-architect | compact | no | **no** | yes | yes | C |
 | flora-founding-data-engineer | role-portfolio | no | yes | yes | yes | A |
@@ -156,7 +157,7 @@ Default is **height-locked `contain-blur`**: shared strip heights, sharp art fil
 1. **Classify** — Use the family decision tree above; add/update a row in [`opportunityTracker.ts`](../../src/content/applications/opportunityTracker.ts).
 2. **Evidence** — Pick a pack subset from [`packs/`](../../src/content/opportunities/packs/). Extend [`projects.ts`](../../src/content/evidence/projects.ts) only when needed. Add preview images under `public/images/opportunities/`.
 3. **Tech logos** — Add keys to [`src/content/evidence/tech-logos.ts`](../../src/content/evidence/tech-logos.ts) (`id`, `label`, optional `imageSrc` under `/public`). Reference ids from the opportunity config’s `techLogoIds`.
-4. **Config** — Create [`src/content/opportunities/your-slug.ts`](../../src/content/opportunities/) exporting an `Opportunity` (or use the creative-agency factory). Prefer `listed: false` and `seo.indexable: false` for private dossiers. Set `capabilitiesHref`.
+4. **Config** — Create [`src/content/opportunities/your-slug.ts`](../../src/content/opportunities/) exporting an `Opportunity` (or use the creative-agency factory). Prefer `listed: false` and `seo.indexable: false` for private dossiers. Set `capabilitiesHref`. Compact shells render `plan` (30/60/90) when `opportunity.plan` is set.
 5. **Registry** — Register the object in [`src/content/opportunities/registry.ts`](../../src/content/opportunities/registry.ts) inside `bySlug`.
 6. **Résumé** — Set `ctas.resumePdfPath` (file in `public/resume/`) and/or `ctas.resumePrintPath` (print route). Shared UI: [`OpportunityResumeLinks.tsx`](../../src/components/opportunities/OpportunityResumeLinks.tsx). Theme tokens: [`opportunityTheme.ts`](../../src/components/opportunities/opportunityTheme.ts).
 7. **Optional redirect** — If you want a second vanity URL, add a `redirects()` entry in `next.config.js`.

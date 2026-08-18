@@ -46,6 +46,7 @@ Focus pages wired today:
 - `/projects/agentic-ops` → Building shell for RAG / MCP / agents (not Proven until gates)
 - Affirm systems dossier → `#ai-engineering`
 - Forward Deployed overlay → `#devops-deployment`
+- Deloitte ServiceNow FDE → `#ai-engineering`
 - AI Solutions Architect → `#software-engineering`
 - FLORA Founding DE → `#data-infrastructure`
 - Comfy MTS Frontend → `#design-creative-technology`
