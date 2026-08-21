@@ -63,6 +63,7 @@ Audit date: **2026-08-07**. Listed = appears on `/opportunities` (`status: 'acti
 | corestory-ai-engineer | compact | no | **no** | yes | yes | B |
 | cvs-senior-genai-engineer | compact (archetype overlay) | no | yes | yes | yes | C→private (pass 1) |
 | deepgram-solutions-architect | compact | no | **no** | yes | yes | C |
+| deloitte-ai-design-facilitator-fde | compact | no | yes | yes | yes | B |
 | deloitte-servicenow-fde | compact | no | yes | yes | yes | B |
 | digitas-associate-director-creative | creative-agency | no* | yes | factory | yes | A |
 | endor-labs-solutions-architect | compact | no | **no** | yes | yes | C |

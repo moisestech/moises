@@ -365,7 +365,19 @@ export const opportunityTracker: ApplicationTrack[] = [
     family: 'compact',
     employerUrl:
       'https://apply.deloitte.com/en_US/careers/JobDetail/Technical-AI-Instructor-and-Forward-Deployed-Engineer-II/350622',
-    notes: 'P2.',
+    notes: 'P2. Sibling of 360529 Design Facilitator; no overlay yet.',
+  },
+  {
+    id: 'deloitte-ai-design-facilitator-fde',
+    company: 'Deloitte',
+    role: 'AI Design Facilitator and Forward-Deployed Engineer II',
+    status: 'to_apply',
+    family: 'compact',
+    slug: 'deloitte-ai-design-facilitator-fde',
+    employerUrl:
+      'https://apply.deloitte.com/en_US/careers/JobDetail/AI-Design-Facilitator-and-Forward-Deployed-Engineer-II/360529',
+    notes:
+      'Private compact overlay for rec 360529. Design + teaching + incubation. Alias /applied-ai/deloitte-ai-design-facilitator. Recruiting ends 8/31/2026.',
   },
   {
     id: 'deloitte-frontier-fde',

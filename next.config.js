@@ -141,6 +141,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/applied-ai/deloitte-ai-design-facilitator',
+        destination: '/opportunities/deloitte-ai-design-facilitator-fde',
+        permanent: false,
+      },
+      {
         source: '/roles/ai-solutions-architect',
         destination: '/opportunities/ai-solutions-architect',
         permanent: false,
