@@ -5,7 +5,7 @@ Living audit of page families, source-of-truth paths, opportunity readiness, and
 
 Cursor rule: [`.cursor/rules/site-health.mdc`](../.cursor/rules/site-health.mdc)
 
-Last audit: **2026-08-07** · Last progress update: **2026-08-18 (Deloitte ServiceNow FDE overlay)**
+Last audit: **2026-08-07** · Last progress update: **2026-08-21 (Deloitte AI Design Facilitator overlay)**
 
 ---
 
@@ -24,6 +24,7 @@ Use this table to resume work. Update when a pass ships.
 | **LIFE OS read** | 2026-08-10 | Inbox/Actions/Projects/Opportunities readers + `/api/life-os` | Local reads verified; PAT in `.env.local` only |
 | **FLORA FDC dossier** | 2026-08-10 | `/opportunities/flora-forward-deployed-creative` upgraded to role-portfolio; links Field Kit subdomain + Technique placeholders | Unlisted / noindex; View Links still pending |
 | **Deloitte SN FDE** | 2026-08-18 | Compact `/opportunities/deloitte-servicenow-fde`; compact shell now renders `plan` when set | Private / noindex; SN CAD framed as 90-day ramp |
+| **Deloitte AI Design Facilitator** | 2026-08-21 | Compact `/opportunities/deloitte-ai-design-facilitator-fde` (req. 360529) | Private / noindex; design + teaching + incubation; consulting cadence as ramp |
 
 ### Production incident — `/creative-ai` 404
 

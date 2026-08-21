@@ -304,3 +304,16 @@ export const deloitteServicenowFdeBanner = defineApplicationBanner({
   aspectClass:
     '!aspect-[1983/793] w-full !min-h-[168px] sm:!min-h-[220px] md:!min-h-[248px] !max-h-[min(42vh,420px)]',
 });
+
+/**
+ * Deloitte — AI Design Facilitator and Forward-Deployed Engineer II (req. 360529).
+ * Local 1536×1024 workshop still; title is in the image. No employer logo.
+ */
+export const deloitteAiDesignFacilitatorFdeBanner = defineApplicationBanner({
+  src: '/images/opportunities/deloitte-ai-design-facilitator-fde/hero-banner.png',
+  alt: 'AI Design Facilitator and Forward-Deployed Engineer application evidence — workshop, journey map, and prototype review.',
+  intrinsicRatio: 1536 / 1024,
+  presentation: 'cover',
+  objectPosition: 'center',
+  frameClass: FLAGSHIP_BANNER_FRAME,
+});
