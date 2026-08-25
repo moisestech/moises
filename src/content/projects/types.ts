@@ -17,6 +17,10 @@ export type ProjectDossier = {
   /** Optional external product or program link */
   externalHref?: string;
   externalLabel?: string;
+  /** Short editorial lead above the dossier body */
+  lead?: string;
+  /** Visible product flow for incubation case studies */
+  productFlow?: readonly { label: string; detail: string }[];
   /** Optional multi-stage system pipeline walkthrough */
   systemPipeline?: SystemPipelineCaseStudyData;
 };

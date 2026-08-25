@@ -11,6 +11,18 @@ import {
   ART_OF_AI_AGENTS_WORKSHOP_HREF,
   N8N_LOGO,
 } from '@/constants/art-of-ai-agents';
+import { digilabAsset } from '@/content/oolite-arts/media';
+
+const MOISES_PORTRAIT = digilabAsset('portrait.moises');
+const FABIOLA_PORTRAIT = digilabAsset('portrait.fabiola');
+
+const WORKSHOP_FLOW = [
+  'Incoming email',
+  'Classify',
+  'Apply structured label',
+  'Route for review when needed',
+  'Human control over outbound actions',
+] as const;
 
 const SLIDES_URL =
   'https://www.canva.com/design/DAG8XUDbk08/WLDVoo18PxMVv9kem2jPxw/view?utm_content=DAG8XUDbk08&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hea00d41ad3';
@@ -79,13 +91,14 @@ function CopyBlock({
           <button
             type="button"
             onClick={() => setPlainText(!plainText)}
-            className="text-xs text-white/60 hover:text-white transition-colors"
+            className="min-h-11 px-2 text-xs text-white/60 hover:text-white transition-colors"
           >
             {plainText ? 'View as code' : 'View as plain text'}
           </button>
           <button
+            type="button"
             onClick={() => onCopy(blockId)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7f5af0] hover:bg-[#8b6cf7] text-white text-xs font-medium transition-colors"
+            className="inline-flex min-h-11 items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7f5af0] hover:bg-[#8b6cf7] text-white text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             {isCopied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             {isCopied ? 'Copied!' : 'Copy'}
@@ -136,7 +149,7 @@ export default function EmailSorterShareClient() {
         />
       </div>
 
-      <div className="relative max-w-2xl mx-auto px-4 py-12 sm:py-16 pt-20">
+      <div className="relative max-w-3xl mx-auto px-4 py-12 sm:py-16 pt-20">
         <Link
           href={ART_OF_AI_AGENTS_WORKSHOP_HREF}
           className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors"
@@ -163,19 +176,51 @@ export default function EmailSorterShareClient() {
             <p className="text-xs uppercase tracking-[0.2em] text-white/50">Built in n8n</p>
           </div>
 
-          <h1
-            className="text-2xl sm:text-3xl font-bold mb-2"
-            style={{
-              background: 'linear-gradient(135deg, #7f5af0 0%, #ff6ac1 50%, #42d392 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
+          <p className="text-[11px] uppercase tracking-[0.2em] text-white/45 mb-3">
+            Public workshop artifact · The Art of AI Agents
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-3 tracking-tight text-white">
             Email Inbox Organizer
           </h1>
-          <p className="text-white/70 text-sm sm:text-base mb-8">
-            Locust workshop handout — copy each block into n8n. Scan the QR from the slide to get here.
+          <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-8">
+            Locust workshop handout — copy each block into n8n. Classification can be automated. Outbound communication stays human-approved.
           </p>
+
+          <div className="grid gap-4 sm:grid-cols-2 mb-8">
+            <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-white/45 mb-2">What participants learn</p>
+              <p className="text-sm sm:text-base text-white/85 leading-relaxed">
+                How to design a useful AI assistant around a real workflow rather than treating AI as an abstract chatbot.
+              </p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-white/45 mb-2">What they build</p>
+              <p className="text-sm sm:text-base text-white/85 leading-relaxed">
+                A reviewable email-intelligence workflow with clear categories and human boundaries.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-black/40 p-4 sm:p-5 mb-10">
+            <p className="text-[11px] uppercase tracking-[0.16em] text-white/45 mb-3">How it works</p>
+            <ol className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+              {WORKSHOP_FLOW.map((step, index) => (
+                <li key={step} className="flex items-center gap-2">
+                  <span className="inline-flex min-h-11 items-center border border-white/20 bg-white/5 px-3 py-2 text-sm text-white">
+                    {step}
+                  </span>
+                  {index < WORKSHOP_FLOW.length - 1 ? (
+                    <span className="hidden text-white/40 sm:inline" aria-hidden>
+                      →
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ol>
+            <p className="mt-4 text-xs sm:text-sm text-white/55 leading-relaxed">
+              The AI assigns one label. A person still decides what to send. Example emails in this handout are anonymized categories — not private inboxes.
+            </p>
+          </div>
 
           <div className="mb-10 space-y-4">
             <figure className="overflow-hidden rounded-xl border border-white/10 bg-black/40">
@@ -277,8 +322,8 @@ export default function EmailSorterShareClient() {
             <div className="flex items-start gap-4">
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#7f5af0]/30 to-[#ff6ac1]/30 flex items-center justify-center flex-shrink-0 overflow-hidden">
                 <Image
-                  src="https://ui-avatars.com/api/?name=Fabiola+Larios&background=7f5af0&color=fff&size=128"
-                  alt="Fabiola Larios"
+                  src={FABIOLA_PORTRAIT.src}
+                  alt={FABIOLA_PORTRAIT.alt}
                   width={64}
                   height={64}
                   className="rounded-full object-cover"
@@ -301,13 +346,13 @@ export default function EmailSorterShareClient() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden mb-4">
-                  <Image
-                    src="https://ui-avatars.com/api/?name=Moises+Sanabria&background=7f5af0&color=fff&size=128"
-                    alt="Moises Sanabria"
-                    width={96}
-                    height={96}
-                    className="rounded-full object-cover"
-                  />
+                <Image
+                  src={MOISES_PORTRAIT.src}
+                  alt={MOISES_PORTRAIT.alt}
+                  width={96}
+                  height={96}
+                  className="rounded-full object-cover"
+                />
                 </div>
                 <h3 className="font-semibold text-lg mb-1">Moises Sanabria</h3>
                 <p className="text-white/70 text-sm mb-3">
@@ -325,13 +370,13 @@ export default function EmailSorterShareClient() {
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden mb-4">
-                  <Image
-                    src="https://ui-avatars.com/api/?name=Fabiola+Larios&background=ff6ac1&color=fff&size=128"
-                    alt="Fabiola Larios"
-                    width={96}
-                    height={96}
-                    className="rounded-full object-cover"
-                  />
+                <Image
+                  src={FABIOLA_PORTRAIT.src}
+                  alt={FABIOLA_PORTRAIT.alt}
+                  width={96}
+                  height={96}
+                  className="rounded-full object-cover"
+                />
                 </div>
                 <h3 className="font-semibold text-lg mb-1">Fabiola Larios</h3>
                 <p className="text-white/70 text-sm mb-3">

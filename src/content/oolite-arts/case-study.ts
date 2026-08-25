@@ -57,7 +57,7 @@ export const OOLITE_ARTS_CASE_STUDY = {
     oneSentence:
       'A digital lab becomes valuable not when an institution acquires equipment, but when artists can confidently use it to make, learn, experiment, and connect.',
     supportingLine:
-      'Technical systems, classes, fabrication, artist support, and community access—designed as one connected program.',
+      'Space, tools, curriculum, human support, and repeatable programming — designed as one connected system.',
     credits: [
       {
         name: 'Fabiola Larios',
@@ -97,6 +97,29 @@ export const OOLITE_ARTS_CASE_STUDY = {
       note: 'Hover parallax layers entrance + 360 stills over the production room hero.',
     },
   },
+
+  programChain: [
+    {
+      label: 'Space',
+      body: 'A room that can host workshops, open hours, and one-on-one support without competing setups.',
+    },
+    {
+      label: 'Tools',
+      body: 'Workstations, fabrication, software, and media — ready to be taught, not only displayed.',
+    },
+    {
+      label: 'Curriculum',
+      body: 'Hands-on classes that end with a finished, shareable artifact.',
+    },
+    {
+      label: 'Human support',
+      body: 'Intake, troubleshooting, and critique so artists can return without starting over.',
+    },
+    {
+      label: 'Repeatable programming',
+      body: 'Documentation, scheduling, and handoffs that survive a single instructor.',
+    },
+  ],
 
   labGallery: digilabLabGalleryIds.map((id) => {
     const a = digilabAsset(id);

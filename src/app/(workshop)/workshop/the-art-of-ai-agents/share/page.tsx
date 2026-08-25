@@ -3,7 +3,7 @@ import EmailSorterShareClient from './EmailSorterShareClient';
 export const metadata = {
   title: 'Email Inbox Organizer | The Art of AI Agents — Moises Sanabria',
   description:
-    'n8n Email Inbox Organizer handout — workflow diagram, Artist Task Automation slides, and copy-paste prompts for the Locust workshop.',
+    'Public workshop artifact: how to design a reviewable email-intelligence workflow with classification, structured labels, and human control over outbound actions.',
   openGraph: {
     title: 'Email Inbox Organizer | The Art of AI Agents',
     description:

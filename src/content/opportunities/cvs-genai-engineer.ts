@@ -1,3 +1,4 @@
+import { LEARN_AI_WORKSHOP_HERO_IMAGE } from '@/constants/learn-ai-workshop';
 import type { Opportunity } from './types';
 import { seniorGenAiEngineerBanner } from '@/content/evidence/applicationBanners';
 import { evidenceProjects } from '@/content/evidence/projects';
@@ -252,8 +253,7 @@ export const cvsGenaiEngineerOpportunity: Opportunity = {
       title: 'Learn AI Without Losing Yourself',
       description: 'Structured curriculum for critical, sustainable AI practice.',
       href: '/workshop/learn-ai-without-losing-yourself',
-      imageSrc:
-        'https://res.cloudinary.com/du1ysiumj/image/upload/v1774826962/learn-ai-without-loosing-yourself-bg-no-text_pz3qno.png',
+      imageSrc: LEARN_AI_WORKSHOP_HERO_IMAGE,
       imageAlt: 'Learn AI Without Losing Yourself — workshop visual',
     },
     {

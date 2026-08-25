@@ -18,6 +18,7 @@ import { OpportunityApplicationAnswers } from '@/components/opportunities/Opport
 import { SystemsOpportunityClient } from '@/components/opportunities/SystemsOpportunityClient';
 import { RolePortfolioClient } from '@/components/opportunities/RolePortfolioClient';
 import { ComfyWorkSampleClient } from '@/components/opportunities/comfy/ComfyWorkSampleClient';
+import { DeloitteAiDesignFacilitatorClient } from '@/components/opportunities/deloitte/DeloitteAiDesignFacilitatorClient';
 import { CreativeAgencyClient } from '@/components/opportunities/creative-agency/CreativeAgencyClient';
 import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { ThirtySixtyNinetyPlan } from '@/components/opportunities/ThirtySixtyNinetyPlan';
@@ -39,6 +40,10 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
   if (opportunity.variant === 'systems-dossier') {
     return <SystemsOpportunityClient opportunity={opportunity} />;
+  }
+
+  if (opportunity.slug === 'deloitte-ai-design-facilitator-fde') {
+    return <DeloitteAiDesignFacilitatorClient opportunity={opportunity} />;
   }
 
   if (opportunity.slug === 'comfy-mts-frontend') {

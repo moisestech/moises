@@ -205,9 +205,9 @@ const stagesCondensed: SystemPipelineStage[] = stagesFull.map((stage) => {
 
 const sharedBase = {
   eyebrow: 'System walkthrough · Lore Machine',
-  title: 'From unstructured narrative to an editable generative production system',
+  title: 'From generative storytelling idea to creator-facing product',
   summary:
-    'Lore Machine connected long-form narrative input, AI-assisted scene development, prompt and model operations, media generation, and human revision inside one creator-facing application. As a founding engineer, Moises owned the frontend application, authentication, and AI/data API integrations while helping carry the platform from early prototype through production.',
+    'Lore Machine connected long-form narrative input, AI-assisted scene development, prompt and model operations, media generation, and human revision inside one creator-facing application. As a founding engineer, Moises owned the frontend application, authentication, and AI/data API integrations while helping carry the platform from early prototype through production. He did not personally build every model, training system, or infrastructure layer.',
   ownershipLegend,
   technologyTags: [...verifiedTech],
   relevanceTitle: 'Why this experience maps to CoreStory',

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Bookleggers review workflow</title>
+  <desc id="desc">Data source to Airtable review to field cleanup to human approval to CRM-ready export.</desc>
+  <rect width="960" height="360" fill="#F7F6F2"/>
+  <text x="48" y="48" fill="#131313" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4">LIVE CLIENT WORK · PRIVACY-SAFE DIAGRAM</text>
+  <text x="48" y="78" fill="#131313" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="700">A workflow the client can actually trust</text>
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#131313">
+    <rect x="48" y="128" width="148" height="72" fill="#fff" stroke="#131313" stroke-width="1.25"/>
+    <text x="122" y="170" text-anchor="middle">Data source</text>
+    <polygon points="206,164 224,155 224,173" fill="#86BC25"/>
+    <rect x="236" y="128" width="148" height="72" fill="#fff" stroke="#131313" stroke-width="1.25"/>
+    <text x="310" y="170" text-anchor="middle">Airtable review</text>
+    <polygon points="394,164 412,155 412,173" fill="#86BC25"/>
+    <rect x="424" y="128" width="148" height="72" fill="#fff" stroke="#131313" stroke-width="1.25"/>
+    <text x="498" y="170" text-anchor="middle">Field cleanup</text>
+    <polygon points="582,164 600,155 600,173" fill="#86BC25"/>
+    <rect x="612" y="128" width="148" height="72" fill="#fff" stroke="#86BC25" stroke-width="2"/>
+    <text x="686" y="170" text-anchor="middle">Human approval</text>
+    <polygon points="770,164 788,155 788,173" fill="#86BC25"/>
+    <rect x="800" y="128" width="112" height="72" fill="#131313"/>
+    <text x="856" y="170" text-anchor="middle" fill="#F7F6F2">CRM export</text>
+  </g>
+  <text x="48" y="248" fill="#5c5c5c" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14">Square ’ Make ’ Airtable is verified live. Airtable cleanup before Bloomerang is an adjacent review workflow.</text>
+  <text x="48" y="276" fill="#5c5c5c" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14">A timestamp in a date-only field became a data-contract requirement  not a reason to rewrite the source.</text>
+  <text x="48" y="318" fill="#5a7d18" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="1.6">NO DONOR RECORDS · NO PRIVATE INBOXES · HUMAN REVIEW BEFORE IMPORT</text>
+</svg>

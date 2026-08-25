@@ -314,7 +314,7 @@ export const deloitteAiDesignFacilitatorFdeBanner = defineApplicationBanner({
   src: '/images/opportunities/deloitte-ai-design-facilitator-fde/hero-banner.png',
   alt: 'AI Design Facilitator and Forward-Deployed Engineer application evidence — workshop, journey map, and prototype review.',
   intrinsicRatio: 1536 / 1024,
-  presentation: 'contain-blur',
-  frameClass:
-    '!h-[min(calc(100vw*2/3),640px)] sm:!h-[min(calc(100vw*2/3),640px)] md:!h-[min(calc(100vw*2/3),640px)] lg:!h-[min(calc(100vw*2/3),640px)] xl:!h-[min(calc(100vw*2/3),640px)] w-full',
+  presentation: 'cover',
+  objectPosition: 'center',
+  overlayLabel: 'FRAME → FACILITATE → PROTOTYPE → TEST → ENABLE',
 });

@@ -31,6 +31,11 @@ export function ProjectDossierClient({ project }: ProjectDossierClientProps) {
 
         <p className={cn(opp.accent, 'mt-6')}>{project.category}</p>
         <h1 className={cn(opp.h1, 'mt-2')}>{project.title}</h1>
+        {project.lead ? (
+          <p className={cn(opp.bodyLg, 'mt-3 max-w-3xl text-stone-800 dark:text-stone-200')}>
+            {project.lead}
+          </p>
+        ) : null}
 
         <div className={cn(opp.illustrationPanel, 'mt-6')}>
           <div className="relative aspect-[16/10] w-full">
@@ -46,6 +51,26 @@ export function ProjectDossierClient({ project }: ProjectDossierClientProps) {
         </div>
 
         <div className="mt-10 space-y-10">
+          {project.productFlow?.length ? (
+            <section aria-labelledby={`${project.slug}-flow`}>
+              <h2 id={`${project.slug}-flow`} className={opp.h2}>
+                What a creator could actually do
+              </h2>
+              <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                {project.productFlow.map((step, index) => (
+                  <li key={step.label} className="border-t border-stone-800 pt-4 dark:border-stone-200">
+                    <p className="font-mono text-[11px] tracking-[0.14em] text-stone-500">
+                      {String(index + 1).padStart(2, '0')}
+                      {index < project.productFlow!.length - 1 ? ' →' : ''}
+                    </p>
+                    <h3 className={`mt-2 ${opp.h3MoMA}`}>{step.label}</h3>
+                    <p className={`mt-2 ${opp.body}`}>{step.detail}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ) : null}
+
           <section aria-labelledby={`${project.slug}-what`}>
             <h2 id={`${project.slug}-what`} className={opp.h2}>
               What it is

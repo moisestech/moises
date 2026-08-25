@@ -5,6 +5,7 @@
 import type { EvidenceProjectId } from '@/content/evidence/projects';
 import type { SkillsMatrixRow, TeachingHighlight } from '@/content/opportunities/types';
 import { ART_OF_AI_AGENTS_SCREENSHOTS } from '@/constants/art-of-ai-agents';
+import { LEARN_AI_WORKSHOP_HERO_IMAGE } from '@/constants/learn-ai-workshop';
 
 const emailInboxDiagram = ART_OF_AI_AGENTS_SCREENSHOTS[0];
 
@@ -33,8 +34,7 @@ export const educationEvidencePack = {
       title: 'Learn AI Without Losing Yourself',
       description: 'Structured curriculum for critical, sustainable AI practice.',
       href: '/workshop/learn-ai-without-losing-yourself',
-      imageSrc:
-        'https://res.cloudinary.com/du1ysiumj/image/upload/v1774826962/learn-ai-without-loosing-yourself-bg-no-text_pz3qno.png',
+      imageSrc: LEARN_AI_WORKSHOP_HERO_IMAGE,
       imageAlt: 'Learn AI Without Losing Yourself',
     },
   ] as const satisfies readonly TeachingHighlight[],

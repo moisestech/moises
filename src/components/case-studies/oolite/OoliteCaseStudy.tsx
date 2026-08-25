@@ -82,11 +82,11 @@ function DigilabHeroParallax() {
         <h1 className="font-['MoMA_Sans'] text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[0.95] max-w-4xl mb-4">
           {C.overview.title}
         </h1>
-        <p className="text-white/90 text-base sm:text-xl max-w-2xl mb-2">
+        <p className="text-white/90 text-base sm:text-xl max-w-2xl mb-6">
           {C.overview.supportingLine}
         </p>
-        <p className="font-mono text-[10px] text-white/60 tracking-wide">
-          Hover to shift space · layered Digilab photography
+        <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.14em] uppercase text-white/80 max-w-3xl">
+          {C.programChain.map((layer) => layer.label).join(' → ')}
         </p>
       </div>
     </div>
@@ -237,6 +237,19 @@ export default function OoliteCaseStudy() {
           </p>
         </blockquote>
 
+        <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12" aria-label="Lab as a designed system">
+          {C.programChain.map((layer, i) => (
+            <li key={layer.label} className="border-t border-black pt-4">
+              <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-neutral-400 mb-2">
+                {String(i + 1).padStart(2, '0')}
+                {i < C.programChain.length - 1 ? ' →' : ''}
+              </p>
+              <h3 className="font-['MoMA_Sans'] text-xl sm:text-2xl font-bold mb-2">{layer.label}</h3>
+              <p className="text-sm sm:text-base text-neutral-700 leading-relaxed">{layer.body}</p>
+            </li>
+          ))}
+        </ol>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-black/10 pt-8 mb-8">
           {C.overview.credits.map((c) => (
             <div key={c.name} className="flex gap-4 items-start">
@@ -373,8 +386,8 @@ export default function OoliteCaseStudy() {
       <section id="system" className="border-t border-black/10 bg-white py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
           <SectionLabel>What we built · five layers</SectionLabel>
-          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-            Lab as connected system
+          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-5xl font-bold tracking-tight mb-3">
+            The lab was a system, not a room of equipment
           </h2>
           <p className="text-neutral-700 max-w-2xl mb-10">
             Click a layer to read the problem, intervention, evidence, and outcome.
@@ -449,12 +462,12 @@ export default function OoliteCaseStudy() {
       {/* Classes */}
       <section id="classes" className="border-t border-black/10 bg-white py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
-          <SectionLabel>Classes as a living program</SectionLabel>
-          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-            Featured Digital Lab workshops
+          <SectionLabel>Facilitation · mixed audiences</SectionLabel>
+          <h2 className="font-['MoMA_Sans'] text-3xl sm:text-5xl font-bold tracking-tight mb-3">
+            Workshops that end with a working artifact
           </h2>
-          <p className="text-neutral-700 max-w-2xl mb-8">
-            Class cards use workshop banners; documentary stills sit underneath where available.{' '}
+          <p className="text-neutral-700 text-base sm:text-lg max-w-2xl mb-8">
+            Translate a difficult tool into an exercise people can finish — then leave documentation so the lab can run it again.{' '}
             <Link href="/workshops#catalog" className="underline underline-offset-4">
               Full public catalog
             </Link>

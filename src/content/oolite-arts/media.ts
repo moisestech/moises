@@ -132,6 +132,7 @@ export const digilabMedia = {
       '/artist-infrastructure#oolite-proof',
       '/artist-infrastructure#hero',
       'replaces former dccmiami vibe-coding digilab banner',
+      '/opportunities/deloitte-ai-design-facilitator-fde#facilitation',
     ],
   },
   'workshop.seo-banner': {
@@ -156,6 +157,7 @@ export const digilabMedia = {
     usedOn: [
       '/oolite-arts#classes.artist-websites-aug',
       '/artist-infrastructure#hero',
+      '/opportunities/deloitte-ai-design-facilitator-fde#facilitation',
     ],
   },
   'workshop.resin-2026': {
@@ -186,6 +188,7 @@ export const digilabMedia = {
       '/artist-infrastructure#oolite-proof',
       '/workshop/moonlighter-ai-3d-printing#instructor',
       '/institutions#hero',
+      '/opportunities/deloitte-ai-design-facilitator-fde#facilitation',
     ],
   },
 
