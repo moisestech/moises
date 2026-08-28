@@ -210,9 +210,9 @@ const sharedBase = {
     'Lore Machine connected long-form narrative input, AI-assisted scene development, prompt and model operations, media generation, and human revision inside one creator-facing application. As a founding engineer, Moises owned the frontend application, authentication, and AI/data API integrations while helping carry the platform from early prototype through production.',
   ownershipLegend,
   technologyTags: [...verifiedTech],
-  relevanceTitle: 'Why this experience maps to CoreStory',
+  relevanceTitle: 'Product and engineering decisions',
   relevanceIntro:
-    'Structurally relevant experience — not a claim that Lore Machine used CoreStory’s architecture, domain, or retrieval stack.',
+    'How creator needs shaped application state, model integration, human review, and delivery.',
   relevanceRows,
   caveats,
   verificationNote:
@@ -228,6 +228,9 @@ export const loreMachinePipelineFull: SystemPipelineCaseStudyData = {
 /** Condensed pipeline for CoreStory opportunity page — links to the full project dossier. */
 export const loreMachinePipelineCondensed: SystemPipelineCaseStudyData = {
   ...sharedBase,
+  relevanceTitle: 'Why this experience maps to CoreStory',
+  relevanceIntro:
+    'Structurally relevant experience — not a claim that Lore Machine used CoreStory’s architecture, domain, or retrieval stack.',
   stages: stagesCondensed,
   fullCaseStudyHref: '/projects/lore-machine',
   fullCaseStudyLabel: 'Open full Lore Machine case study',

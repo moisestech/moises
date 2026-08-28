@@ -12,13 +12,15 @@ import type { HonestyOverlay, Opportunity } from './types';
 import { deloitteAiDesignFacilitatorFdeBanner } from '@/content/evidence/applicationBanners';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
-import { productionAiAutomationPack } from '@/content/evidence/productionAiAutomationPack';
 import { capabilitiesPillarHref } from '@/content/capabilities';
 import { sprint2026Ctas, sprint2026Headshot } from './shared-sprint-2026';
 import {
   genAiCurriculumSmeCertifications,
-  genAiCurriculumSmeTeachingHighlights,
 } from './packs/genAiCurriculumSmePack';
+import {
+  designFacilitationTeachingHighlights,
+  saturdayLabLive,
+} from './packs/designFacilitationEvidencePack';
 import { ART_OF_AI_AGENTS_SCREENSHOTS } from '@/constants/art-of-ai-agents';
 import { OOLITE_DIGITAL_LAB_IMAGE, OOLITE_DIGITAL_LAB_IMAGE_ALT } from '@/content/oolite-arts/media';
 
@@ -28,14 +30,12 @@ const EMPLOYER_URL =
 const TECH_CV_PDF = '/resume/moises-sanabria-technology-cv.pdf';
 const EVIDENCE_BRIEF_PDF = '/resume/MoisesSanabria_FDE_Technical_Evidence.pdf';
 const FIELD_KIT_REPO = 'https://github.com/moisestech/flora-field-kit';
-const FIELD_KIT_DEMO = 'https://flora-field-kit.moises.tech';
+const AEP_REPO = 'https://github.com/moisestech/agentic-evidence-pipeline';
 
 const lore = evidenceProjects['lore-machine'];
-const ai24 = evidenceProjects.ai24;
 const playwire = evidenceProjects['playwire-alumni'];
 const fieldKit = evidenceProjects['flora-field-kit'];
 const n8nSpec = automationProjectSpecs['n8n-gmail-intelligence'];
-const n8nPack = productionAiAutomationPack.n8nGmailIntelligence;
 
 const taskAutomationSlide = ART_OF_AI_AGENTS_SCREENSHOTS.find(
   (s) => s.id === 'artist-task-automation-1',
@@ -45,9 +45,9 @@ const emailInboxDiagram = ART_OF_AI_AGENTS_SCREENSHOTS.find(
 )!;
 
 const honestyOverlay: HonestyOverlay = {
-  title: 'Strong design-facilitation match. Consulting cadence is the ramp.',
+  title: 'What I bring and where I would ramp',
   intro:
-    'This page does not treat workshop teaching as a substitute for Deloitte client tenure. It separates the design, facilitation, and incubation work I can contribute immediately from the consulting-platform context I would still need to learn.',
+    'My evidence spans teaching, creator-facing AI products, and client-facing engineering. Workshop materials, product contributions, and reference implementations are identified separately.',
   provenTitle: 'Proven now',
   proven: [
     'Cooper Union BFA and a design practice applied to actual project work — installations, product interfaces, and workshop curricula.',
@@ -55,18 +55,17 @@ const honestyOverlay: HonestyOverlay = {
     'Generative AI tools in software, design, and product work: Cursor, Claude, Airtable, OpenAI / Anthropic APIs, and generative image pipelines.',
     'Product incubation at Lore Machine — from concept to a shipped generative storytelling platform with mixed stakeholders.',
     'Client-facing translation at Playwire and with institutional partners: listen, prototype, explain tradeoffs, leave the team able to operate the work.',
-    'Human-centered workshop design: artist intake, critique, user testing of tools, and iterating the brief before scaling the build.',
+    'Inspectable workshop design: intake questions, differentiated learner paths, practical exercises, and an exit-ticket instrument.',
   ],
   notClaimedTitle: 'Not claimed yet',
   notClaimed: [
     'Deloitte client work or Advertising, Marketing & Commerce platform ownership.',
-    'A formal UX-researcher title inside a consultancy.',
+    'Measured learning gains or a formal usability-study result from the materials linked here.',
     'Ownership of Deloitte’s existing Forward-Deployed Engineer method.',
     'GitHub Copilot or Replit as the primary daily stack — Cursor and Claude are.',
-    'Current employment on a 50% travel consulting cadence.',
   ],
   rampStatement:
-    'If the seat is a career UX researcher who does not ship, I am not that candidate. If the team needs someone who can teach technical AI through making, run design-forward workshops, prototype with generative tools, and incubate a product with mixed stakeholders, the match is direct.',
+    'I would bring design practice, hands-on teaching, and product engineering while learning the team’s delivery method, client governance, and platform conventions.',
 };
 
 /**
@@ -77,7 +76,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   status: 'active',
   listed: false,
   family: 'compact',
-  applicationStatus: 'draft',
+  applicationStatus: 'submitted',
   variant: 'compact',
   capabilitiesHref: capabilitiesPillarHref('design-creative-technology'),
   applicationBanner: deloitteAiDesignFacilitatorFdeBanner,
@@ -97,7 +96,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     ],
   },
   visibilityNote:
-    'Private application-evidence page for Deloitte AI Design Facilitator and Forward-Deployed Engineer II (requisition 360529). Not affiliated with or endorsed by Deloitte.',
+    'Unlisted application-evidence page for Deloitte AI Design Facilitator and Forward-Deployed Engineer II (requisition 360529). Anyone with the URL can view it. Not affiliated with or endorsed by Deloitte.',
   company: 'Deloitte',
   roleTitle: 'AI Design Facilitator and Forward-Deployed Engineer II',
   heroEyebrow: 'APPLICATION EVIDENCE / DELOITTE / REQ. 360529',
@@ -113,7 +112,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   heroSecondaryCta: { label: 'Teaching', href: '#teaching-cred' },
   navItems: [
     { id: 'hero', label: 'Overview' },
-    { id: 'honesty', label: 'Honesty' },
+    { id: 'honesty', label: 'Scope' },
     { id: 'fit', label: 'Role fit' },
     { id: 'case-studies', label: 'Evidence' },
     { id: 'teaching-cred', label: 'Teaching' },
@@ -132,7 +131,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   honestyOverlay,
   roleMatchSectionTitle: 'Role-to-evidence map',
   roleMatchIntro:
-    'Deloitte responsibilities mapped to public, working evidence. Advertising, Marketing & Commerce platform work is not inferred from these rows.',
+    'Deloitte responsibilities mapped to inspectable materials and project contributions. A lesson plan demonstrates instructional design; a prototype demonstrates implementation within its stated limits.',
   roleMatchColumnHeaders: {
     left: 'Deloitte responsibility',
     right: 'Evidence',
@@ -141,7 +140,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     {
       requirement: 'Teach technical AI skills through a design lens',
       evidence:
-        'Eighteen Oolite workshops plus public curricula (The Art of AI Agents, Learn AI Without Losing Yourself) that turn Cursor-class tools, Airtable, and LLM workflows into hands-on exercises for designers, engineers, and nontechnical practitioners.',
+        'Eighteen Oolite workshops plus public curricula (The Art of AI Agents, Learn AI Without Losing Yourself). A recurring Saturday Lab stuck point is deploying from GitHub and using Copilot, Cursor, or Replit to create a repo and connect a purchased domain — the facilitator guide routes that through intake, learner paths, and a help queue. Those pages are designed instruments; attendance and scores are not published.',
       status: 'demonstrated',
       illustration: {
         src: taskAutomationSlide.src,
@@ -151,7 +150,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     {
       requirement: 'User research, user testing, and design workshops',
       evidence:
-        'Artist intake, critique sessions, and tool testing inside live workshops — participants try the workflow, the brief gets rewritten, then the prototype is rebuilt. Closely related human-centered design on actual project work, not a consultancy UX-research title.',
+        'At Lore Machine, face-coherent generation assumed human characters; animal and other nonhuman casts had no usable face path. The pipeline split: people keep face-to-face coherence; animals skip that and use prompt engineering. Creators could then generate nonhuman casts without the face pipeline failing. Saturday Lab materials show the same research-to-adaptation loop in teaching (intake, paths, help queue) as designed instruments, not measured outcomes.',
       status: 'demonstrated',
       illustration: {
         src: OOLITE_DIGITAL_LAB_IMAGE,
@@ -204,26 +203,26 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   caseStudyColumns: 2,
   caseStudiesSectionTitle: 'Featured evidence',
   caseStudiesIntro:
-    'Teaching and incubation first. Field Kit is a rapid-prototype console, not a Deloitte delivery. The Gmail agent is production / verified live.',
+    'Teaching and incubation first. Field Kit is a fixture-based prototype; the email organizer is linked as an inspectable teaching artifact. Supporting AEP source is available in the technical-evidence links below.',
   caseStudyOverrides: [
     {
       evidenceId: 'ai24',
       title: 'Teaching + facilitation',
       category: 'OOLITE ARTS + PUBLIC WORKSHOPS',
       summary:
-        'Eighteen hands-on technical workshops at Oolite Arts, plus public programs that teach generative AI through making. Evidence of mixed-audience facilitation, critique, and leaving teams able to operate the tools.',
+        'Eighteen hands-on technical workshops at Oolite Arts, plus public programs that teach generative AI through making. A designed Saturday Lab beat is getting people unstuck on GitHub deploy, Copilot / Cursor / Replit, and connecting a purchased domain — not a published attendance or score claim.',
       skillTags: ['Workshops', 'Curriculum', 'Critique', 'Enablement', 'Handoff'],
       href: '/oolite-arts',
       linkLabel: 'View Oolite case study',
-      secondaryHref: 'https://oolitearts.org/digital-lab/',
-      secondaryLinkLabel: 'Oolite Digital Lab',
+      secondaryHref: saturdayLabLive.facilitator,
+      secondaryLinkLabel: 'Saturday Lab facilitator',
     },
     {
       evidenceId: 'lore-machine',
       title: 'Product incubation',
       category: 'LORE MACHINE — CONCEPT TO SHIPPED PLATFORM',
       summary:
-        'Generative storytelling product: prompt systems, image pipelines, APIs, and creator-facing workflows. Evidence of incubating an AI product with designers, engineers, and nontechnical users in the loop.',
+        'Generative storytelling product: prompt systems, image pipelines, APIs, and creator-facing workflows. Face-coherent generation assumed human characters; animal and other nonhuman casts needed a different path. People still use face coherence; animals skip it and use prompt engineering so those stories could ship without the face pipeline failing. CoreStory is a separate dossier — not inferred here.',
       skillTags: ['Product incubation', 'GenAI', 'Prompt systems', 'APIs', 'Creator UX'],
       href: '/projects/lore-machine',
       linkLabel: 'View Lore Machine',
@@ -233,27 +232,25 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
       title: 'Rapid-prototype FDE console',
       category: 'FIELD KIT — PROTOTYPE',
       summary:
-        'Standalone Next.js console for brief intake, technique recommendation, run/review, and shareable case-study export. Models the FDE loop. Independent prototype — not affiliated with Deloitte.',
+        'Next.js prototype for brief intake, technique recommendation, review, and case-study export. The documented demo uses fixtures; live Techniques require published identifiers and paid API access. Independent work, not a Deloitte delivery.',
       skillTags: ['Prototyping', 'Brief intake', 'Review', 'Handoff', 'Next.js'],
-      href: FIELD_KIT_DEMO,
-      linkLabel: 'Open Field Kit demo',
-      secondaryHref: FIELD_KIT_REPO,
-      secondaryLinkLabel: 'View repository',
+      href: FIELD_KIT_REPO,
+      linkLabel: 'Inspect prototype and setup',
     },
     {
       evidenceId: 'n8n-gmail-intelligence',
       title: n8nSpec.title,
-      category: `HANDS-ON GENAI TEACHING ARTIFACT — ${n8nPack.buildState.replace('_', ' ')}`,
+      category: 'HANDS-ON GENAI TEACHING ARTIFACT',
       summary:
-        'Production n8n + Airtable pattern taught in The Art of AI Agents: classify inbound mail, apply structured labels, pause for human approval. Workshop diagram and copy-paste prompts are public.',
+        'Email classification exercise from The Art of AI Agents: workflow diagram, label definitions, and a structured-output prompt that learners can inspect and adapt. This handout is teaching evidence, not a production reliability report.',
       skillTags: [...n8nSpec.skillTags],
-      href: n8nSpec.href ?? '/workshop/the-art-of-ai-agents/share',
+      href: '/workshop/the-art-of-ai-agents/share',
       linkLabel: 'View workshop handout',
       secondaryHref: '/workshop/the-art-of-ai-agents',
       secondaryLinkLabel: 'Art of AI Agents',
     },
   ],
-  teachingHighlights: [...genAiCurriculumSmeTeachingHighlights],
+  teachingHighlights: designFacilitationTeachingHighlights,
   certifications: [...genAiCurriculumSmeCertifications],
   skillsMatrixRows: [
     {
@@ -263,7 +260,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     },
     {
       category: 'Human-centered design',
-      skills: 'Intake, journey framing, tool testing with real users, rewrite the brief before scaling the build',
+      skills: 'Intake, learner pathways, creator review interfaces, assessment design',
       icon: 'users',
     },
     {
@@ -278,23 +275,23 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   processSteps: [
     {
       title: 'Frame the user problem',
-      description: 'Intake with the people who will use the thing. Write the job, the constraint, and what “done” looks like.',
+      description: 'Observe the current workflow with a user. Name the decision owner, baseline, data constraints, and a measurable acceptance criterion before choosing tools.',
     },
     {
       title: 'Facilitate a working session',
-      description: 'Run a design-forward workshop so engineers, designers, and product partners share the same brief.',
+      description: 'Give designers, engineers, and product partners a shared task with paths for different skill levels. Capture assumptions and decide what is outside the first prototype.',
     },
     {
       title: 'Prototype with GenAI tools',
-      description: 'Ship the smallest reviewable slice in Cursor / Claude / Next.js — fast enough to test this week.',
+      description: 'Build one reviewable workflow. Keep deterministic rules outside the model, limit tool permissions, and define a manual fallback. Add an agent only if the task needs one.',
     },
     {
       title: 'Test with real users',
-      description: 'Put the prototype in front of the mixed audience. Capture failures. Rewrite the brief before scaling.',
+      description: 'Observe task completion and errors, then test expected, ambiguous, and adversarial inputs. Compare against the baseline; record what changed and what remains uncertain.',
     },
     {
       title: 'Leave a teaching artifact',
-      description: 'Handoff is a runbook plus an exercise the team can repeat — not a one-off demo they cannot operate.',
+      description: 'Leave an owner, setup guide, failure procedure, and repeatable exercise. Ask a teammate to operate and explain the workflow without assistance before calling handover complete.',
     },
   ],
   ctas: {
@@ -303,14 +300,14 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     resumePdfLabel: 'Download résumé',
     evidenceBriefPdfPath: EVIDENCE_BRIEF_PDF,
     evidenceBriefLabel: 'Open technical evidence brief',
-    github: FIELD_KIT_REPO,
-    githubLabel: 'Inspect the prototype console',
+    github: AEP_REPO,
+    githubLabel: 'Inspect AEP source and limitations',
     githubProfile: 'https://github.com/moisestech',
     careerPacket: '/forward-deployed',
     caseStudiesAnchor: undefined,
     resumePrintPath: undefined,
   },
   techLogoIds: [],
-  resumeSectionTitle: 'The design practice is already public. The consulting cadence is the ramp.',
-  resumeSectionNote: `I am most useful where a team needs someone who can teach AI through making, run a design-forward working session, prototype in the same week, and leave a product plus a teaching artifact. Résumé, technical evidence brief, and prototype console below. Listing: ${EMPLOYER_URL}`,
+  resumeSectionTitle: 'Discuss the work, inspect the evidence',
+  resumeSectionNote: `I bring teaching, design practice, and AI product engineering. AEP is a supporting TypeScript reference implementation with synthetic evidence and a fake-model evaluation harness; it is not a production deployment or live-model quality claim. Listing: ${EMPLOYER_URL}`,
 };
