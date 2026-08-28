@@ -4,6 +4,10 @@ Role-specific recruiting dossiers: compact technical briefs you can drop into em
 
 **Continuity:** site-wide audit and pickup protocol live in [`docs/site-health.md`](../site-health.md). Read that first in a new chat.
 
+## Deloitte evidence update — August 28, 2026
+
+The AI Design Facilitator overlay now uses `designFacilitationEvidencePack.ts` to link a facilitator guide, learner exercise, and exit-ticket instrument. Materials are not labeled as measured learner outcomes. The dossier stays unlisted/noindex, which is not access control. The application tracker reflects the candidate-confirmed active interview process. Field Kit links to its fixture-prototype source; AEP is supporting reference-code evidence. The general Lore pipeline is employer-neutral; the condensed CoreStory variant keeps its role-specific introduction. No new shell or artwork-homepage changes are introduced.
+
 ## Family decision tree
 
 Classify every new role before writing a page. Personalization = thin config (hero, role-match, banner, ≤1 unique section)—not a forked architecture.
