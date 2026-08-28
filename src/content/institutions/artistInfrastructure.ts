@@ -509,7 +509,7 @@ export const artistInfrastructurePage = {
         id: 'art-of-ai-agents',
         title: 'The Art of AI Agents',
         org: 'Locust Projects · The Dill',
-        body: 'Artist Task Automation + Email Inbox Organizer — n8n AI agents with public chapter materials, handout prompts, and workflow screenshots.',
+        body: 'Artist Task Automation + Email Inbox Organizer — n8n AI agents with a public workshop and an inspectable handout on this site.',
         status: 'completed' as DeliveryStatus,
         statusNote: 'Diagram + slides live at /workshop/the-art-of-ai-agents and /share.',
         href: ART_OF_AI_AGENTS_WORKSHOP_HREF,

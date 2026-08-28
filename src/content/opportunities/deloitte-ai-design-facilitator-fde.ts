@@ -17,7 +17,10 @@ import { sprint2026Ctas, sprint2026Headshot } from './shared-sprint-2026';
 import {
   genAiCurriculumSmeCertifications,
 } from './packs/genAiCurriculumSmePack';
-import { designFacilitationTeachingHighlights } from './packs/designFacilitationEvidencePack';
+import {
+  designFacilitationTeachingHighlights,
+  saturdayLabLive,
+} from './packs/designFacilitationEvidencePack';
 import { ART_OF_AI_AGENTS_SCREENSHOTS } from '@/constants/art-of-ai-agents';
 import { OOLITE_DIGITAL_LAB_IMAGE, OOLITE_DIGITAL_LAB_IMAGE_ALT } from '@/content/oolite-arts/media';
 
@@ -137,7 +140,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     {
       requirement: 'Teach technical AI skills through a design lens',
       evidence:
-        'Eighteen Oolite workshops plus public curricula (The Art of AI Agents, Learn AI Without Losing Yourself) that turn Cursor-class tools, Airtable, and LLM workflows into hands-on exercises for designers, engineers, and nontechnical practitioners.',
+        'Eighteen Oolite workshops plus public curricula (The Art of AI Agents, Learn AI Without Losing Yourself). A recurring Saturday Lab stuck point is deploying from GitHub and using Copilot, Cursor, or Replit to create a repo and connect a purchased domain — the facilitator guide routes that through intake, learner paths, and a help queue. Those pages are designed instruments; attendance and scores are not published.',
       status: 'demonstrated',
       illustration: {
         src: taskAutomationSlide.src,
@@ -147,8 +150,8 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     {
       requirement: 'User research, user testing, and design workshops',
       evidence:
-        'Saturday Lab documents intake, learner-specific paths, and an exit ticket; Lore Machine documents creator-facing review and revision. These support a design-practice discussion. A specific observed-user finding, resulting change, and validation remain to be documented.',
-      status: 'transferable',
+        'At Lore Machine, face-coherent generation assumed human characters; animal and other nonhuman casts had no usable face path. The pipeline split: people keep face-to-face coherence; animals skip that and use prompt engineering. Creators could then generate nonhuman casts without the face pipeline failing. Saturday Lab materials show the same research-to-adaptation loop in teaching (intake, paths, help queue) as designed instruments, not measured outcomes.',
+      status: 'demonstrated',
       illustration: {
         src: OOLITE_DIGITAL_LAB_IMAGE,
         alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
@@ -207,19 +210,19 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
       title: 'Teaching + facilitation',
       category: 'OOLITE ARTS + PUBLIC WORKSHOPS',
       summary:
-        'Eighteen hands-on technical workshops at Oolite Arts, plus public programs that teach generative AI through making. Evidence of mixed-audience facilitation, critique, and leaving teams able to operate the tools.',
+        'Eighteen hands-on technical workshops at Oolite Arts, plus public programs that teach generative AI through making. A designed Saturday Lab beat is getting people unstuck on GitHub deploy, Copilot / Cursor / Replit, and connecting a purchased domain — not a published attendance or score claim.',
       skillTags: ['Workshops', 'Curriculum', 'Critique', 'Enablement', 'Handoff'],
       href: '/oolite-arts',
       linkLabel: 'View Oolite case study',
-      secondaryHref: designFacilitationTeachingHighlights[1].href,
-      secondaryLinkLabel: 'Inspect facilitator guide',
+      secondaryHref: saturdayLabLive.facilitator,
+      secondaryLinkLabel: 'Saturday Lab facilitator',
     },
     {
       evidenceId: 'lore-machine',
       title: 'Product incubation',
       category: 'LORE MACHINE — CONCEPT TO SHIPPED PLATFORM',
       summary:
-        'Generative storytelling product: prompt systems, image pipelines, APIs, and creator-facing workflows. Evidence of incubating an AI product with designers, engineers, and nontechnical users in the loop.',
+        'Generative storytelling product: prompt systems, image pipelines, APIs, and creator-facing workflows. Face-coherent generation assumed human characters; animal and other nonhuman casts needed a different path. People still use face coherence; animals skip it and use prompt engineering so those stories could ship without the face pipeline failing. CoreStory is a separate dossier — not inferred here.',
       skillTags: ['Product incubation', 'GenAI', 'Prompt systems', 'APIs', 'Creator UX'],
       href: '/projects/lore-machine',
       linkLabel: 'View Lore Machine',
