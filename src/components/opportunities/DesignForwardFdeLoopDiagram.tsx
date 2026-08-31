@@ -19,7 +19,7 @@ const NODES = [
  * Museum-legible proposed FDE thin-slice. Decorative — step copy lives in the process list.
  */
 export function DesignForwardFdeLoopDiagram({ className }: DesignForwardFdeLoopDiagramProps) {
-  const rootRef = useRef<HTMLFigureElement>(null);
+  const rootRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
