@@ -15,6 +15,7 @@ import type {
 } from './types';
 import { deloitteAiDesignFacilitatorFdeBanner } from '@/content/evidence/applicationBanners';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
+import { evidenceProjects } from '@/content/evidence/projects';
 import { capabilitiesPillarHref } from '@/content/capabilities';
 import { sprint2026Ctas, sprint2026Headshot } from './shared-sprint-2026';
 import {
@@ -53,6 +54,8 @@ const OOLITE_LOGO_WHITE =
 const teachingWorkshop = digilabMedia['workshop.art-tech-coding'];
 const n8nSpec = automationProjectSpecs['n8n-gmail-intelligence'];
 const bookleggersSpec = automationProjectSpecs['bookleggers-commerce-automation'];
+const playwireProject = evidenceProjects['playwire-alumni'];
+const aepProject = evidenceProjects['agentic-evidence-pipeline'];
 const oolite = fdeItem('oolite-workshops');
 const lore = fdeItem('lore-machine');
 const bookleggers = fdeItem('bookleggers');
@@ -300,6 +303,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         secondaryLinkLabel: 'Saturday Lab facilitator',
         imageSrc: teachingWorkshop.src,
         imageAlt: teachingWorkshop.alt,
+        evidenceType: oolite.evidenceType,
       },
       {
         evidenceId: 'lore-machine',
@@ -309,6 +313,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         skillTags: ['Product incubation', 'GenAI', 'Prompt systems', 'APIs', 'Creator UX'],
         href: lore.inspectHref,
         linkLabel: lore.inspectLabel,
+        evidenceType: lore.evidenceType,
       },
       {
         evidenceId: 'bookleggers-commerce-automation',
@@ -320,6 +325,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         linkLabel: bookleggers.inspectLabel,
         imageSrc: bookleggersSpec.imageSrc,
         imageAlt: bookleggersSpec.imageAlt,
+        evidenceType: bookleggers.evidenceType,
       },
       {
         evidenceId: 'agentic-evidence-pipeline',
@@ -331,7 +337,10 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         linkLabel: 'Inspect code on this page',
         secondaryHref: AEP_REPO,
         secondaryLinkLabel: 'AEP on GitHub',
-        visual: 'harness',
+        imageSrc: aepProject.imageSrc,
+        imageSrcDark: aepProject.imageSrcDark,
+        imageAlt: aepProject.imageAlt,
+        evidenceType: aep.evidenceType,
       },
     ],
     supportingEvidenceTitle: 'See all — supporting evidence',
@@ -352,6 +361,14 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
           ...item,
           title: n8nSpec.teachingTitle ?? item.title,
           body: n8nSpec.teachingEvidenceLine ?? item.body,
+        };
+      }
+      if (id === 'playwire') {
+        return {
+          ...item,
+          imageSrc: playwireProject.imageSrc,
+          imageSrcDark: playwireProject.imageSrcDark,
+          imageAlt: playwireProject.imageAlt,
         };
       }
       return item;

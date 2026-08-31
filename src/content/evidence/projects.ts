@@ -31,10 +31,21 @@ export type EvidenceProject = {
   skillTags: string[];
   imageSrc: string;
   imageAlt: string;
+  /** Optional dark-theme landscape. Falls back to `imageSrc`. */
+  imageSrcDark?: string;
   /** Local file in /public — use img; remote use next/image in consumer */
   imageLocal?: boolean;
   href?: string;
 };
+
+export const PLAYWIRE_CARD_V2 =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788213852/dccmiami/workshops/agentic-engineering-for-beginners/playwire-adtech-solutions-engineering-card-v2_nhro3m.png';
+export const PLAYWIRE_CARD_V2_DARK =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788213855/dccmiami/workshops/agentic-engineering-for-beginners/playwire-adtech-solutions-engineering-card-v2-dark_n47bcz.png';
+export const AEP_CARD_V2 =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788213853/dccmiami/workshops/agentic-engineering-for-beginners/agentic-evidence-pipeline-governed-workflow-card-v2_omzcro.png';
+export const AEP_CARD_V2_DARK =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788213854/dccmiami/workshops/agentic-engineering-for-beginners/agentic-evidence-pipeline-governed-workflow-card-v2-dark_ms4dqs.png';
 
 export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
   'lore-machine': {
@@ -104,9 +115,10 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     summary:
       'Two years in-house: Solutions Engineer delivering publisher integrations and JS debugging for SaaS onboarding; Data Analyst migrating Kinesis/Athena pipelines to Snowflake, building Tableau auction analytics, and Slack alerting for data reliability.',
     skillTags: ['Snowflake', 'Tableau', 'AWS Kinesis', 'JavaScript', 'Publisher integrations', 'Slack alerts'],
-    imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
-    imageAlt: 'Playwire concept banner — former Data and Solutions team experience',
+    imageSrc: PLAYWIRE_CARD_V2,
+    imageSrcDark: PLAYWIRE_CARD_V2_DARK,
+    imageAlt:
+      'Confidentiality-safe AdTech abstraction: publisher integration, diagnostics, and solutions handoff — no client names or metrics',
   },
   'digital-culture-infrastructure': {
     id: 'digital-culture-infrastructure',
@@ -189,9 +201,11 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     summary:
       'Evidence in. Reviewable decisions out. TypeScript reference with hybrid retrieval, citation fail-closed, persisted human review, and an append-only audit trail. Synthetic fixtures and a fake-model harness — not a hosted customer product.',
     skillTags: ['TypeScript', 'Postgres', 'Human review', 'Citation gate', 'LangGraph'],
-    imageSrc: '/images/teaching/saturday-lab-facilitator-flow.svg',
-    imageAlt: 'Agentic Evidence Pipeline — evidence in, reviewable decisions out',
-    imageLocal: true,
+    imageSrc: AEP_CARD_V2,
+    imageSrcDark: AEP_CARD_V2_DARK,
+    imageAlt:
+      'Conceptual cover for a governed evidence workflow — reference implementation, not a hosted product UI',
+    imageLocal: false,
     href: 'https://github.com/moisestech/agentic-evidence-pipeline',
   },
 };

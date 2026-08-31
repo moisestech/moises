@@ -8,7 +8,8 @@ import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
-import { EvidenceTypeBadge, MATURITY_LEGEND } from '@/components/opportunities/EvidenceTypeBadge';
+import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
+import { EvidenceMaturityLegend } from '@/components/opportunities/EvidenceMaturityLegend';
 import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
 import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
 import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
@@ -64,24 +65,13 @@ function StageIcon({ stage }: { stage?: string }) {
 
 function ExplorerLegend() {
   return (
-    <div className={`mt-4 space-y-2 ${opp.subtle}`}>
-      <p>
+    <div className="mt-4 space-y-3">
+      <p className={opp.subtle}>
         <span className="font-semibold text-stone-600 dark:text-stone-300">Stage</span>
         {' — '}
         hue + icon (Discover through Handoff).
       </p>
-      <p>
-        <span className="font-semibold text-stone-600 dark:text-stone-300">Maturity</span>
-        {' — '}
-        line treatment, not more hues:{' '}
-        {MATURITY_LEGEND.map((item, i) => (
-          <span key={item.type}>
-            {i > 0 ? ' · ' : null}
-            {item.mark}
-          </span>
-        ))}
-        .
-      </p>
+      <EvidenceMaturityLegend />
     </div>
   );
 }

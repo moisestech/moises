@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
+import { EvidenceMaturityLegend } from '@/components/opportunities/EvidenceMaturityLegend';
 import { LifecycleStageChip } from '@/components/opportunities/LifecycleStageChip';
 import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
 import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
@@ -63,6 +64,7 @@ export function ProofSnapshotSection({
         {data.title}
       </h2>
       {data.intro ? <p className={`mt-3 max-w-3xl ${opp.muted}`}>{data.intro}</p> : null}
+      <EvidenceMaturityLegend className="mt-4" />
 
       <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {data.cards.map((card) => (

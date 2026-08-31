@@ -175,7 +175,8 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     lifecycleStage: 'Handoff',
     evidenceType: 'production-experience',
     claim: 'Listen, integrate, leave the publisher able to operate the onboarding path.',
-    limitation: 'No public case page. Scale numbers are not disclosed here.',
+    limitation:
+      'Confidentiality-safe abstraction. No public case page. Client names, dashboards, and scale numbers are not disclosed here.',
     whatChanged:
       'Publisher integrations and JS debugging for SaaS onboarding; data reliability alerting on the analytics side.',
     whatThisProves: 'Client-facing solutions habit. Not a featured case this pass.',
@@ -284,5 +285,7 @@ export function toSupportingItem(item: FdeEvidenceItem): SupportingEvidenceItem 
           : undefined,
     secondaryLinkLabel:
       item.id === 'field-kit' ? 'Inspect repo' : item.id === 'n8n-workshop' ? 'Art of AI Agents' : undefined,
+    imageSrc: item.illustration.src,
+    imageAlt: item.illustration.alt,
   };
 }

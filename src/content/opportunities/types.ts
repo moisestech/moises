@@ -160,6 +160,9 @@ export type SupportingEvidenceItem = {
   limitation?: string;
   secondaryHref?: string;
   secondaryLinkLabel?: string;
+  imageSrc?: string;
+  imageSrcDark?: string;
+  imageAlt?: string;
 };
 
 export type SectionQuote = {

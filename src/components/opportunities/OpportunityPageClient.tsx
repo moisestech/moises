@@ -25,8 +25,16 @@ import { HonestyOverlaySection } from '@/components/opportunities/HonestyOverlay
 import { ProofSnapshotSection } from '@/components/opportunities/ProofSnapshotSection';
 import { CodeInspectSection } from '@/components/opportunities/CodeInspectSection';
 import { FdeRoleMap } from '@/components/opportunities/FdeRoleMap';
+import { LifecycleStageStrip } from '@/components/opportunities/LifecycleStageStrip';
 import { ModelVsHarness, AllowAskDeny } from '@/components/opportunities/AepHarnessDiagrams';
 import { SupportingEvidenceRow } from '@/components/opportunities/SupportingEvidenceRow';
+import {
+  LoreCreatorFlow,
+  LoreOwnershipChips,
+  N8nAuthorityBoundary,
+  CapabilityTransferLoop,
+  FacilitationTimeline,
+} from '@/components/opportunities/FdeCaseDiagrams';
 import { SectionFlourish } from '@/components/opportunities/SectionFlourish';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -95,7 +103,12 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           <OpportunityColorSection sectionId="hero" className="mt-2 sm:mt-4">
             <OpportunityHero opportunity={opportunity} />
           </OpportunityColorSection>
-          {opportunity.showFdeRoleMap ? <FdeRoleMap className="mt-10 sm:mt-12" /> : null}
+          {opportunity.showFdeRoleMap ? (
+            <>
+              <FdeRoleMap className="mt-10 sm:mt-12" />
+              <LifecycleStageStrip className="mt-10 sm:mt-12" />
+            </>
+          ) : null}
           </div>
 
           {bannerAfterHero && banner ? <div className="mt-8 w-full sm:mt-10">{banner}</div> : null}
@@ -119,7 +132,14 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
           <OpportunityColorSection sectionId="case-studies" className="mt-10 sm:mt-14">
             <CaseStudyGrid opportunity={opportunity} framed />
+            {opportunity.showFdeRoleMap ? (
+              <>
+                <LoreCreatorFlow />
+                <LoreOwnershipChips />
+              </>
+            ) : null}
             <SupportingEvidenceRow opportunity={opportunity} />
+            {opportunity.showFdeRoleMap ? <N8nAuthorityBoundary /> : null}
           </OpportunityColorSection>
 
           {quoteAfter('cases') ? <SectionFlourish quote={quoteAfter('cases')!} className="mt-10 sm:mt-12" /> : null}
@@ -127,6 +147,12 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           {opportunity.teachingHighlights?.length || opportunity.certifications?.length ? (
             <OpportunityColorSection sectionId="teaching-cred" className="mt-10 sm:mt-14">
               <OpportunityTeachingCredentials opportunity={opportunity} framed />
+              {opportunity.showFdeRoleMap ? (
+                <>
+                  <CapabilityTransferLoop />
+                  <FacilitationTimeline />
+                </>
+              ) : null}
             </OpportunityColorSection>
           ) : null}
 

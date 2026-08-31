@@ -1,4 +1,5 @@
 import { getEvidenceProject } from './projects';
+import type { EvidenceType } from '@/content/opportunities/types';
 import {
   flagshipEvidence,
   rankEvidenceForOpportunity,
@@ -15,9 +16,11 @@ export type CaseStudyOverride = {
   skillTags?: string[];
   imageSrc?: string;
   imageAlt?: string;
+  imageSrcDark?: string;
   imageLocal?: boolean;
   /** Inline diagram instead of a raster (Field Kit loop / AEP harness). */
   visual?: 'field-kit-loop' | 'harness' | 'thin-slice';
+  evidenceType?: EvidenceType;
   href?: string;
   linkLabel?: string;
   /** Optional second outbound link (e.g. Oolite beside Lore Machine). */
@@ -33,8 +36,10 @@ export type ResolvedCaseStudyCard = {
   skillTags: string[];
   imageSrc: string;
   imageAlt: string;
+  imageSrcDark?: string;
   imageLocal?: boolean;
   visual?: 'field-kit-loop' | 'harness' | 'thin-slice';
+  evidenceType?: EvidenceType;
   href?: string;
   linkLabel?: string;
   secondaryHref?: string;
@@ -61,8 +66,10 @@ export function resolveCaseStudyCards(
       skillTags: o?.skillTags ?? base.skillTags,
       imageSrc: o?.imageSrc ?? base.imageSrc,
       imageAlt: o?.imageAlt ?? base.imageAlt,
+      imageSrcDark: o?.imageSrcDark ?? base.imageSrcDark,
       imageLocal: o?.imageLocal ?? base.imageLocal,
       visual: o?.visual,
+      evidenceType: o?.evidenceType,
       href: o?.href ?? base.href,
       linkLabel: o?.linkLabel,
       secondaryHref: o?.secondaryHref,

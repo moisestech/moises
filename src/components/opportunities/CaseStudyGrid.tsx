@@ -11,6 +11,7 @@ import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiag
 import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
 import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
+import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
@@ -93,11 +94,19 @@ export function CaseStudyGrid({ opportunity, framed = false }: CaseStudyGridProp
                 caption={cs.title}
                 className={opp.cardMedia}
               >
-                <OpportunityCardImage src={cs.imageSrc} alt={cs.imageAlt} local={cs.imageLocal} />
+                <OpportunityCardImage
+                  src={cs.imageSrc}
+                  srcDark={cs.imageSrcDark}
+                  alt={cs.imageAlt}
+                  local={cs.imageLocal}
+                />
               </OpportunityZoomTrigger>
             )}
             <div className={opp.cardPad}>
-              <p className={cn(opp.accentCategory, accent.eyebrow)}>{cs.category}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className={cn(opp.accentCategory, accent.eyebrow)}>{cs.category}</p>
+                {cs.evidenceType ? <EvidenceTypeBadge type={cs.evidenceType} /> : null}
+              </div>
               <h3 className={cn(opp.matrixPrimary, 'mt-1')}>{cs.title}</h3>
               <p className={opp.matrixSecondary}>{cs.summary}</p>
               <p className={`mt-3 ${opp.label}`}>{stackLabel}</p>

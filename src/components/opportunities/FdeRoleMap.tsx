@@ -1,63 +1,97 @@
-import { GraduationCap, PencilRuler, Search, Workflow } from 'lucide-react';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
 const PETALS = [
-  {
-    title: 'Client / workflow discovery',
-    body: 'Watch the stuck point. Name the owner and the acceptance test.',
-    icon: Search,
-    className: 'border-cyan-200 bg-cyan-50/70 dark:border-cyan-800 dark:bg-cyan-950/40',
-  },
-  {
-    title: 'Product / experience design',
-    body: 'Turn ambiguity into a reviewable path people can follow.',
-    icon: PencilRuler,
-    className: 'border-sky-200 bg-sky-50/70 dark:border-sky-800 dark:bg-sky-950/40',
-  },
-  {
-    title: 'Software / integration engineering',
-    body: 'Ship the slice: tools, permissions, persistence, and a fallback.',
-    icon: Workflow,
-    className: 'border-emerald-200 bg-emerald-50/70 dark:border-emerald-800 dark:bg-emerald-950/40',
-  },
-  {
-    title: 'Teaching / capability transfer',
-    body: 'Leave a session and a runbook the team can operate without me.',
-    icon: GraduationCap,
-    className: 'border-violet-200 bg-violet-50/70 dark:border-violet-800 dark:bg-violet-950/40',
-  },
+  { id: 'discover', label: 'Client + workflow discovery', x: 360, y: 36 },
+  { id: 'design', label: 'Product + experience design', x: 620, y: 210 },
+  { id: 'integrate', label: 'Software + system integration', x: 360, y: 384 },
+  { id: 'teach', label: 'Teaching + capability transfer', x: 100, y: 210 },
 ] as const;
 
 export function FdeRoleMap({ className }: { className?: string }) {
   return (
     <section id="role-map" className={cn('scroll-mt-32', className)} aria-labelledby="role-map-heading">
       <h2 id="role-map-heading" className={opp.h2}>
-        Forward-Deployed AI practice
+        Forward-Deployed Engineering
       </h2>
       <p className={`mt-3 max-w-3xl ${opp.muted}`}>
-        Four petals around one practice — not a Platform / SWE / SA Venn. Recruiter scan: I sit with the
-        workflow, design the experience, engineer the integration, and teach the handoff.
+        Four petals into one practice. A design and teaching background is inside the engineering work — not a
+        fifth identity.
       </p>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        {PETALS.map((petal) => {
-          const Icon = petal.icon;
-          return (
-            <article key={petal.title} className={cn(opp.card, 'p-4', petal.className)}>
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-stone-300/60 bg-white/70 dark:border-stone-600 dark:bg-stone-900/60">
-                  <Icon className="h-4 w-4" aria-hidden />
-                </span>
-                <div>
-                  <h3 className={opp.matrixPrimary}>{petal.title}</h3>
-                  <p className={cn(opp.matrixSecondary, 'mt-1')}>{petal.body}</p>
-                </div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-      <p className={cn(opp.subtle, 'mt-4 text-center')}>Center: Forward-Deployed AI practice</p>
+      <figure
+        className={cn(
+          'mt-6 overflow-hidden rounded-xl border border-stone-200 bg-[linear-gradient(160deg,#f7f3ee_0%,#efe8df_55%,#e8dfd4_100%)] dark:border-stone-700 dark:bg-[linear-gradient(160deg,#1c1917_0%,#292524_100%)]',
+        )}
+      >
+        <svg
+          viewBox="0 0 720 460"
+          role="img"
+          aria-label="Four petals — discovery, design, integration, and teaching — meet at Forward-Deployed Engineering"
+          className="h-auto w-full"
+        >
+          <title>FDE role map</title>
+          {PETALS.map((petal) => (
+            <g key={petal.id}>
+              <path
+                d={`M360 230 L${petal.x} ${petal.y}`}
+                fill="none"
+                stroke="#a8a29e"
+                strokeWidth="1.25"
+              />
+              <rect
+                x={petal.x - 118}
+                y={petal.y - 28}
+                width="236"
+                height="56"
+                rx="8"
+                fill="#fffbeb"
+                stroke="#d6d3d1"
+                className="dark:fill-stone-900"
+              />
+              <text
+                x={petal.x}
+                y={petal.y + 5}
+                textAnchor="middle"
+                fontSize="12"
+                fontFamily="ui-sans-serif, system-ui, sans-serif"
+                fontWeight="600"
+                className="fill-stone-900 dark:fill-stone-100"
+              >
+                {petal.label}
+              </text>
+            </g>
+          ))}
+          <circle cx="360" cy="230" r="58" fill="#1c1917" className="dark:fill-cyan-400" />
+          <text
+            x="360"
+            y="224"
+            textAnchor="middle"
+            fontSize="11"
+            fontFamily="ui-sans-serif, system-ui, sans-serif"
+            fontWeight="700"
+            fill="#fff"
+            className="dark:fill-stone-950"
+          >
+            FORWARD-DEPLOYED
+          </text>
+          <text
+            x="360"
+            y="240"
+            textAnchor="middle"
+            fontSize="11"
+            fontFamily="ui-sans-serif, system-ui, sans-serif"
+            fontWeight="700"
+            fill="#fff"
+            className="dark:fill-stone-950"
+          >
+            ENGINEERING
+          </text>
+        </svg>
+        <figcaption className="border-t border-stone-200/80 px-3 py-2 text-[11px] text-stone-500 dark:border-stone-700 dark:text-stone-400">
+          Not a Platform / SWE / SA Venn. Creative-technologist craft sits inside discovery, design, and
+          transfer.
+        </figcaption>
+      </figure>
     </section>
   );
 }
