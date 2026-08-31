@@ -31,7 +31,7 @@ export const forwardDeployedFlagship = {
   seo: {
     title: 'Forward-Deployed Systems — Moises Sanabria',
     description:
-      'From ambiguous organizational problems to deployed technical systems: Digilab, SmartSigns, and production automations.',
+      'From ambiguous organizational problems to deployed technical systems: Digilab, SmartSigns, Saturday Lab teaching instruments, and production automations.',
   },
   banner: forwardDeployedAiEngineerBanner,
   title: hub.title,
@@ -60,7 +60,7 @@ export const forwardDeployedFlagship = {
       id: 'prototype',
       title: 'Prototype',
       question: 'What can we learn this week?',
-      body: 'Fast prototypes that surface integration risk, UX friction, and institutional politics early.',
+      body: 'Fast prototypes that surface integration risk, UX friction, and institutional politics early. At Lore Machine, face-coherent generation assumed human characters; animal and other nonhuman casts had no usable face path, so the pipeline split before those stories could ship.',
       evidenceIds: ['lore-machine', 'n8n-gmail-intelligence'],
     },
     {
@@ -74,8 +74,8 @@ export const forwardDeployedFlagship = {
       id: 'enable',
       title: 'Enable',
       question: 'Can non-engineers operate it next week?',
-      body: 'Training, documentation, open hours, and handoff patterns so systems outlive a single builder.',
-      evidenceIds: ['oolite-digilab', 'smart-signs'],
+      body: 'Training, documentation, open hours, and handoff patterns so systems outlive a single builder. Saturday Lab publishes intake questions, learner paths, a help queue, and an exit ticket for GitHub deploy and domain setup — designed instruments, not published attendance or scores.',
+      evidenceIds: ['oolite-digilab', 'saturday-lab', 'smart-signs'],
     },
     {
       id: 'measure',
@@ -88,8 +88,8 @@ export const forwardDeployedFlagship = {
       id: 'iterate',
       title: 'Iterate',
       question: 'What failed in production, and what changed?',
-      body: 'Failure recovery, content governance revisions, and curriculum updates based on lived use.',
-      evidenceIds: ['oolite-digilab', 'smart-signs'],
+      body: 'Failure recovery, content governance revisions, and curriculum updates based on lived use. Lore kept face-to-face coherence for people and skipped that path for animals, using prompt engineering so nonhuman casts would not fail the face pipeline.',
+      evidenceIds: ['lore-machine', 'oolite-digilab', 'smart-signs'],
     },
   ] satisfies LifecycleStage[],
   cases: listClaimableCases('forward-deployed').map((c) => ({

@@ -204,3 +204,17 @@ export const wppProductionCompanyLogos = {
   dark: '/images/opportunities/placeholders/wpp-production-logo-dark.svg',
   alt: 'WPP Production',
 } as const;
+
+/** Design Facilitator overlay — claimed daily/teaching stack only. No LangGraph / vector DBs. */
+export const designFacilitationClaimedStackBand: LogoBandItem[] = [
+  { src: 'https://cdn.simpleicons.org/cursor', alt: 'Cursor', height: 36 },
+  { src: `${jobsCdn}/v1783032752/jobs/claude_logo_2023_wihocz.png`, alt: 'Claude', height: 36 },
+  { src: `${jobsCdn}/v1783032752/jobs/airtable_logo_xserwf.png`, alt: 'Airtable', height: 36 },
+  { src: 'https://cdn.simpleicons.org/figma/F24E1E', alt: 'Figma', height: 36 },
+  {
+    src: `${jobsCdn}/v1786372919/jobs/Adobe_After_Effects_CC_icon.svg_q4r9tg.webp`,
+    alt: 'Adobe',
+    height: 36,
+  },
+  { src: '/images/tech-logos/n8n.svg', alt: 'n8n', height: 36 },
+];

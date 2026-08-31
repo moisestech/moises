@@ -22,6 +22,7 @@ import { ComingSoonSection } from '@/components/opportunities/ComingSoonSection'
 import { EducationContinuingSection } from '@/components/opportunities/EducationContinuingSection';
 import { SelectedTechnologiesSection } from '@/components/opportunities/SelectedTechnologiesSection';
 import { SkillsMatrix } from '@/components/opportunities/SkillsMatrix';
+import { OpportunityTeachingCredentials } from '@/components/opportunities/OpportunityTeachingCredentials';
 import { TechStackLogos } from '@/components/opportunities/TechStackLogos';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { ResumeCTA } from '@/components/opportunities/ResumeCTA';
@@ -223,6 +224,12 @@ export function RolePortfolioClient({ opportunity }: RolePortfolioClientProps) {
               items={dossier.experience}
               sectionId="experience"
             />
+          </OpportunityColorSection>
+        ) : null}
+
+        {opportunity.teachingHighlights?.length || opportunity.certifications?.length ? (
+          <OpportunityColorSection sectionId="teaching-cred" className={sectionClass}>
+            <OpportunityTeachingCredentials opportunity={opportunity} framed />
           </OpportunityColorSection>
         ) : null}
 

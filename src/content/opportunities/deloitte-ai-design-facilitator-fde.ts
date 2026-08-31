@@ -9,7 +9,7 @@
  */
 
 import type { HonestyOverlay, Opportunity } from './types';
-import { deloitteAiDesignFacilitatorFdeBanner } from '@/content/evidence/applicationBanners';
+import { deloitteAiDesignFacilitatorFdeBanner, deloitteFacilitatorWorkshopStill } from '@/content/evidence/applicationBanners';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import { capabilitiesPillarHref } from '@/content/capabilities';
@@ -21,8 +21,8 @@ import {
   designFacilitationTeachingHighlights,
   saturdayLabLive,
 } from './packs/designFacilitationEvidencePack';
+import { designFacilitationClaimedStackBand } from '@/content/evidence/recruitingLogoBand';
 import { ART_OF_AI_AGENTS_SCREENSHOTS } from '@/constants/art-of-ai-agents';
-import { OOLITE_DIGITAL_LAB_IMAGE, OOLITE_DIGITAL_LAB_IMAGE_ALT } from '@/content/oolite-arts/media';
 
 const EMPLOYER_URL =
   'https://apply.deloitte.com/en_US/careers/JobDetail/AI-Design-Facilitator-and-Forward-Deployed-Engineer-II/360529';
@@ -47,12 +47,12 @@ const emailInboxDiagram = ART_OF_AI_AGENTS_SCREENSHOTS.find(
 const honestyOverlay: HonestyOverlay = {
   title: 'What I bring and where I would ramp',
   intro:
-    'My evidence spans teaching, creator-facing AI products, and client-facing engineering. Workshop materials, product contributions, and reference implementations are identified separately.',
+    'This overlay maps the posted work — teaching through a design lens, early-stage prototyping, and incubation from concept to code — to inspectable materials. Client-facing delivery and internal enablement are both in scope. Workshop pages, product contributions, and reference implementations are identified separately.',
   provenTitle: 'Proven now',
   proven: [
     'Cooper Union BFA and a design practice applied to actual project work — installations, product interfaces, and workshop curricula.',
-    'Eighteen hands-on technical workshops at Oolite Arts, plus public programs that turn generative AI into exercises mixed audiences can follow.',
-    'Generative AI tools in software, design, and product work: Cursor, Claude, Airtable, OpenAI / Anthropic APIs, and generative image pipelines.',
+    'Eighteen hands-on technical workshops at Oolite Arts, plus public programs that turn generative AI into exercises mixed audiences of designers, engineers, and product partners can follow.',
+    'Generative AI tools in software, design, and product work: Cursor, Claude, Airtable, Figma, Adobe Creative Cloud, OpenAI / Anthropic APIs, and generative image pipelines. Gemini is a platform I can teach to; it is not my daily stack.',
     'Product incubation at Lore Machine — from concept to a shipped generative storytelling platform with mixed stakeholders.',
     'Client-facing translation at Playwire and with institutional partners: listen, prototype, explain tradeoffs, leave the team able to operate the work.',
     'Inspectable workshop design: intake questions, differentiated learner paths, practical exercises, and an exit-ticket instrument.',
@@ -62,7 +62,7 @@ const honestyOverlay: HonestyOverlay = {
     'Deloitte client work or Advertising, Marketing & Commerce platform ownership.',
     'Measured learning gains or a formal usability-study result from the materials linked here.',
     'Ownership of Deloitte’s existing Forward-Deployed Engineer method.',
-    'GitHub Copilot or Replit as the primary daily stack — Cursor and Claude are.',
+    'GitHub Copilot, Replit, or Codex as the primary daily stack — Cursor and Claude are.',
   ],
   rampStatement:
     'I would bring design practice, hands-on teaching, and product engineering while learning the team’s delivery method, client governance, and platform conventions.',
@@ -96,16 +96,16 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     ],
   },
   visibilityNote:
-    'Unlisted application-evidence page for Deloitte AI Design Facilitator and Forward-Deployed Engineer II (requisition 360529). Anyone with the URL can view it. Not affiliated with or endorsed by Deloitte.',
+    'Unlisted application-evidence page for Deloitte AI Design Facilitator and Forward-Deployed Engineer II (requisition 360529). Recruiting for this listing ends October 1, 2026. Anyone with the URL can view it. Not affiliated with or endorsed by Deloitte.',
   company: 'Deloitte',
   roleTitle: 'AI Design Facilitator and Forward-Deployed Engineer II',
-  heroEyebrow: 'APPLICATION EVIDENCE / DELOITTE / REQ. 360529',
+  heroEyebrow: 'APPLICATION EVIDENCE / DELOITTE / REQ. 360529 / THROUGH 1 OCT 2026',
   candidateName: 'Moises Sanabria',
   heroMetaChips: [
     'Cooper Union BFA',
     '18 workshops delivered',
     'Product incubation / Lore Machine',
-    'Cursor · Claude · Airtable',
+    'Cursor · Claude · Airtable · Figma',
     'Miami / U.S. citizen',
   ],
   heroPrimaryCta: { label: 'View the evidence', href: '#case-studies' },
@@ -123,7 +123,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     headline: 'AI Design Facilitator',
     subheadline: 'Teach technical AI through a design lens. Prototype. Incubate the right thing.',
     introParagraphs: [
-      'I run mixed-audience workshops, translate generative-AI tools into exercises people can actually finish, and take ambiguous product briefs from sketch to working prototype. The through-line is design: frame the user problem, test the prototype, then leave a system and a teaching artifact the team can operate.',
+      'I teach technical AI through a design lens, prototype early, and incubate products from concept to code. The work is both client-facing and internal enablement: mixed-audience workshops, user research that changes the build, and a system plus a teaching artifact the team can operate without me.',
     ],
     headshotSrc: sprint2026Headshot,
     headshotAlt: 'Moises Sanabria',
@@ -131,16 +131,16 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   honestyOverlay,
   roleMatchSectionTitle: 'Role-to-evidence map',
   roleMatchIntro:
-    'Deloitte responsibilities mapped to inspectable materials and project contributions. A lesson plan demonstrates instructional design; a prototype demonstrates implementation within its stated limits.',
+    'Posted responsibilities mapped to inspectable materials. A lesson plan demonstrates instructional design; a prototype demonstrates implementation within its stated limits.',
   roleMatchColumnHeaders: {
-    left: 'Deloitte responsibility',
+    left: 'Posted work',
     right: 'Evidence',
   },
   roleMatchRows: [
     {
       requirement: 'Teach technical AI skills through a design lens',
       evidence:
-        'Eighteen Oolite workshops plus public curricula (The Art of AI Agents, Learn AI Without Losing Yourself). A recurring Saturday Lab stuck point is deploying from GitHub and using Copilot, Cursor, or Replit to create a repo and connect a purchased domain — the facilitator guide routes that through intake, learner paths, and a help queue. Those pages are designed instruments; attendance and scores are not published.',
+        'Eighteen Oolite workshops plus public curricula (The Art of AI Agents, Learn AI Without Losing Yourself) for mixed designer, engineer, and product audiences. A recurring Saturday Lab stuck point is deploying from GitHub and using Copilot, Cursor, or Replit to create a repo and connect a purchased domain — the facilitator guide routes that through intake, learner paths, and a help queue. Those pages are designed instruments; attendance and scores are not published.',
       status: 'demonstrated',
       illustration: {
         src: taskAutomationSlide.src,
@@ -148,17 +148,18 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
       },
     },
     {
-      requirement: 'User research, user testing, and design workshops',
+      requirement: 'Bring user research, user testing, and design workshops into the work',
       evidence:
         'At Lore Machine, face-coherent generation assumed human characters; animal and other nonhuman casts had no usable face path. The pipeline split: people keep face-to-face coherence; animals skip that and use prompt engineering. Creators could then generate nonhuman casts without the face pipeline failing. Saturday Lab materials show the same research-to-adaptation loop in teaching (intake, paths, help queue) as designed instruments, not measured outcomes.',
       status: 'demonstrated',
       illustration: {
-        src: OOLITE_DIGITAL_LAB_IMAGE,
-        alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
+        src: deloitteFacilitatorWorkshopStill.src,
+        alt: deloitteFacilitatorWorkshopStill.alt,
+        local: true,
       },
     },
     {
-      requirement: 'Shape where human-centered design fits the FDE method',
+      requirement: 'Help shape where human-centered design fits an FDE method',
       evidence:
         'Workshop framing before build: map the user, define what “done” means, put a human-approval gate on write-paths, then hand off a runbook. Field Kit models the same loop as a rapid-prototype console — prototype, not a Deloitte method claim.',
       status: 'transferable',
@@ -272,6 +273,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   processSectionTitle: 'Proposed design-forward FDE thin slice',
   processIntro:
     'A bounded first engagement: frame a real user problem, facilitate a mixed-audience session, prototype with generative tools, test, then leave a runbook and a teaching artifact. This is how I would enter the FDE method; it is not presented as completed Deloitte client work.',
+  processVisual: 'design-fde-loop',
   processSteps: [
     {
       title: 'Frame the user problem',
@@ -308,6 +310,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     resumePrintPath: undefined,
   },
   techLogoIds: [],
+  animatedLogoBand: designFacilitationClaimedStackBand,
   resumeSectionTitle: 'Discuss the work, inspect the evidence',
   resumeSectionNote: `I bring teaching, design practice, and AI product engineering. AEP is a supporting TypeScript reference implementation with synthetic evidence and a fake-model evaluation harness; it is not a production deployment or live-model quality claim. Listing: ${EMPLOYER_URL}`,
 };

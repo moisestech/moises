@@ -76,6 +76,12 @@ const relevanceRows: SystemPipelineRelevanceRow[] = [
     challenge: 'Keep humans in control of AI output',
     evidence: 'Built creator-facing review and revision workflows around generated scenes and media.',
   },
+  {
+    id: 'face-vs-animal',
+    challenge: 'Adapt the pipeline when the creator brief does not match the model assumption',
+    evidence:
+      'Face-coherent generation assumed human characters; animal and other nonhuman casts had no usable face path. People keep face-to-face coherence; animals skip that and use prompt engineering so those stories could ship without the face pipeline failing.',
+  },
 ];
 
 const caveats = [

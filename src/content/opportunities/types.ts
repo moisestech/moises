@@ -319,6 +319,10 @@ export type Opportunity = {
   processSectionTitle?: string;
   processIntro?: string;
   processSteps: ProcessStep[];
+  /** Optional zoomable architecture stills for the compact process section. */
+  processDiagrams?: ProcessDiagram[];
+  /** Inline process visual; compact client maps this to a museum-legible SVG. */
+  processVisual?: 'design-fde-loop';
   innovationLabSectionTitle?: string;
   innovationLabLead?: string;
   innovationLabBody?: string;

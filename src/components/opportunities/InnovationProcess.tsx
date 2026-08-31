@@ -3,6 +3,7 @@
 import { useId, useState } from 'react';
 import type { Opportunity, ProcessDiagram } from '@/content/opportunities/types';
 import { ApproachDiagramGallery } from '@/components/opportunities/ApproachDiagramGallery';
+import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { ProcessStepLogos } from '@/components/opportunities/ProcessStepLogos';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -31,6 +32,9 @@ export function InnovationProcess({
   const steps = opportunity.processSteps;
   const isHorizontal = layout === 'horizontal';
   const accent = getOpportunityCompactAccent(sectionId);
+  const gallery = diagrams ?? opportunity.processDiagrams;
+  const showLoop = opportunity.processVisual === 'design-fde-loop';
+  const hasVisual = showLoop || Boolean(gallery?.length);
 
   return (
     <section id={sectionId} className={framed ? 'scroll-mt-32' : opp.section}>
@@ -38,10 +42,12 @@ export function InnovationProcess({
       {opportunity.processIntro ? (
         <p className={`mt-3 max-w-3xl ${opp.body}`}>{opportunity.processIntro}</p>
       ) : null}
-      {diagrams?.length ? (
+      {showLoop ? (
+        <DesignForwardFdeLoopDiagram className="mt-6" />
+      ) : gallery?.length ? (
         <>
           <p className={`mt-6 ${opp.label}`}>Architecture overview</p>
-          <ApproachDiagramGallery diagrams={diagrams} className="mt-3" />
+          <ApproachDiagramGallery diagrams={gallery} className="mt-3" />
         </>
       ) : null}
 
@@ -51,7 +57,7 @@ export function InnovationProcess({
 
       <ol
         className={cn(
-          diagrams?.length ? 'mt-10' : 'mt-8',
+          hasVisual ? 'mt-10' : 'mt-8',
           isHorizontal
             ? 'flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:pb-0 md:gap-4 lg:grid-cols-5 [&::-webkit-scrollbar]:hidden'
             : 'space-y-4',

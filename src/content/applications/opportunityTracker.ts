@@ -377,7 +377,7 @@ export const opportunityTracker: ApplicationTrack[] = [
     employerUrl:
       'https://apply.deloitte.com/en_US/careers/JobDetail/AI-Design-Facilitator-and-Forward-Deployed-Engineer-II/360529',
     notes:
-      'Active interview process confirmed by candidate. Unlisted compact overlay for req 360529; design, teaching, and incubation. Alias /applied-ai/deloitte-ai-design-facilitator. Check the employer listing for current recruiting dates.',
+      'Active interview process confirmed by candidate. Unlisted compact overlay for req 360529; design, teaching, and incubation. Alias /applied-ai/deloitte-ai-design-facilitator. Listing recruiting ends October 1, 2026.',
   },
   {
     id: 'deloitte-frontier-fde',

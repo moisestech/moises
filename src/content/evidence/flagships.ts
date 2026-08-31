@@ -27,6 +27,7 @@ export type FlagshipEvidenceId =
   | 'lore-machine'
   | 'n8n-gmail-intelligence'
   | 'bookleggers-commerce-automation'
+  | 'saturday-lab'
   | 'comfyui-provenance'
   | 'ai24'
   | 'multimodal-image-systems'
@@ -118,7 +119,7 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     title: 'Forward-Deployed Systems',
     subtitle: 'From ambiguous organizational problems to deployed technical systems',
     summary:
-      'Lifecycle proof: discover → map → prototype → deploy → enable → measure → iterate across Digilab, SmartSigns, and production automations.',
+      'Lifecycle proof: discover → map → prototype → deploy → enable → measure → iterate across Digilab, SmartSigns, Saturday Lab teaching instruments, and production automations.',
     href: '/forward-deployed',
     imageSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786744384/jobs/banners/forward-deployed-systems-banner_brf4sa.png',
@@ -197,7 +198,7 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     title: 'Oolite Digital Lab',
     subtitle: 'Creative technology program infrastructure',
     summary:
-      'Technical direction for a public digital lab: space, tools, curriculum, documentation, and artist enablement.',
+      'Technical direction for a public digital lab: space, tools, curriculum, documentation, and artist enablement. Saturday Lab materials sit alongside as designed workshop instruments, not attendance or score reports.',
     href: '/oolite-arts',
     imageSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781710428/oolite-arts/oolite-arts-computer-vision-digilab-room-upscale-cyan-1030x579_whqmlg.webp',
@@ -224,7 +225,7 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     title: 'Lore Machine',
     subtitle: 'AI narrative-to-media product',
     summary:
-      'Founding engineer / Chief Prompt Officer on a production creative AI platform — prompts, multimodal pipelines, Next.js delivery.',
+      'Founding engineer / Chief Prompt Officer on a production creative AI platform — prompts, multimodal pipelines, Next.js delivery. Face-coherent generation assumed human characters; animal and other nonhuman casts skip that path and use prompt engineering.',
     href: '/projects/lore-machine',
     imageSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1780253940/resume/resume-images/lore-machine-home-page_wra1x2.png',
@@ -292,6 +293,33 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
       aiRelevance: 2,
       creativeRelevance: 1,
       dataRelevance: 3,
+    }),
+    status: 'live',
+    kind: 'case',
+    parentFlagship: 'forward-deployed',
+    claimable: true,
+  },
+  'saturday-lab': {
+    id: 'saturday-lab',
+    title: 'Saturday Lab',
+    subtitle: 'Public workshop instruments',
+    summary:
+      'Intake, learner paths, help queue, and an exit ticket for mixed-audience making and deploy. Designed program pages — not an attendance or score report.',
+    href: 'https://www.dcc.miami/workshop/saturday-lab',
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781710428/oolite-arts/oolite-arts-computer-vision-digilab-room-upscale-cyan-1030x579_whqmlg.webp',
+    imageAlt: 'Workshop lab workspace used for mixed-audience technical sessions',
+    categories: ['forward-deployed', 'enablement', 'curriculum'],
+    skills: ['facilitation', 'intake', 'curriculum', 'handoff'],
+    roles: ['forward-deployed-engineer', 'creative-technologist', 'solutions-engineer'],
+    strength: strength({
+      technicalDepth: 2,
+      productionReality: 3,
+      clientRelevance: 4,
+      visualImpact: 3,
+      aiRelevance: 3,
+      creativeRelevance: 3,
+      dataRelevance: 1,
     }),
     status: 'live',
     kind: 'case',

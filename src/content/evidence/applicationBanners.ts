@@ -306,15 +306,22 @@ export const deloitteServicenowFdeBanner = defineApplicationBanner({
 });
 
 /**
+ * Retired Facilitator hero still — keep as a role-fit / teaching illustration, not a banner.
+ * Local 1536×1024 workshop frame; title is in the image. No employer logo.
+ */
+export const deloitteFacilitatorWorkshopStill = {
+  src: '/images/opportunities/deloitte-ai-design-facilitator-fde/hero-banner.png',
+  alt: 'Workshop table with a journey map and prototype review — mixed-audience generative-AI session.',
+} as const;
+
+/**
  * Deloitte — AI Design Facilitator and Forward-Deployed Engineer II (req. 360529).
- * Local 1536×1024 (3:2) workshop still; title is in the image. No employer logo.
- * Contain-blur so the full frame stays visible; strip height tracks 3:2 until 640px, then side blur.
+ * Same Forward-Deployed Systems cinematic as `/forward-deployed` (2172×724).
+ * Contain-blur: sharp art fills the shared strip height; sides use a blurred cover of the same image.
  */
 export const deloitteAiDesignFacilitatorFdeBanner = defineApplicationBanner({
-  src: '/images/opportunities/deloitte-ai-design-facilitator-fde/hero-banner.png',
-  alt: 'AI Design Facilitator and Forward-Deployed Engineer application evidence — workshop, journey map, and prototype review.',
-  intrinsicRatio: 1536 / 1024,
+  src: `${cdn}/v1786744384/jobs/banners/forward-deployed-systems-banner_brf4sa.png`,
+  alt: 'Forward-deployed systems — from organizational problems to deployed technical systems',
+  intrinsicRatio: 2172 / 724,
   presentation: 'contain-blur',
-  frameClass:
-    '!h-[min(calc(100vw*2/3),640px)] sm:!h-[min(calc(100vw*2/3),640px)] md:!h-[min(calc(100vw*2/3),640px)] lg:!h-[min(calc(100vw*2/3),640px)] xl:!h-[min(calc(100vw*2/3),640px)] w-full',
 });

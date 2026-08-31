@@ -4,6 +4,7 @@ import { recruitingCtas } from '@/content/evidence/recruitingDefaults';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 import { resumePdfDriveViewUrl } from '@/content/ai-engineering/packet';
 import { forwardDeployedAiEngineerBanner } from '@/content/evidence/applicationBanners';
+import { designFacilitationTeachingHighlights } from './packs/designFacilitationEvidencePack';
 
 const TITLE_STACK =
   'Creative Technologist · Forward Deployed AI Engineer · Full-Stack AI Engineer';
@@ -52,7 +53,7 @@ const rolePortfolio: RolePortfolioDossier = {
         id: 'forward-deployed',
         title: 'Forward-Deployed Delivery',
         items: [
-          '**Rapid prototyping, client discovery, technical demonstrations, stakeholder communication, ambiguous-problem definition, creative-workflow design, contractor management, sprint planning, and prototype-to-production delivery**',
+          '**Rapid prototyping, client discovery, technical demonstrations, stakeholder communication, ambiguous-problem definition, facilitation, intake and learner pathways, teaching-artifact handoff, contractor management, sprint planning, and prototype-to-production delivery**',
         ],
       },
     ],
@@ -74,6 +75,7 @@ const rolePortfolio: RolePortfolioDossier = {
         'Developed and refined **prompt systems and multimodal-generation workflows** connecting language models, image-generation systems, narrative structure, and visual output.',
         'Translated experimental generative-model capabilities into understandable product features that creators and nontechnical users could operate reliably.',
         'Rapidly prototyped new AI features, evaluated model behavior, identified workflow failures, and iterated across **interface design, prompt architecture, generated assets, and application logic**.',
+        'Face-coherent generation assumed **human** characters; animal and other nonhuman casts had no usable face path. The pipeline split: people keep face-to-face coherence; animals skip that and use prompt engineering so those stories could ship without the face pipeline failing.',
         'Used **Figma, Photoshop, Adobe Creative Cloud, and generative-AI tools** to prototype product experiences, prepare visual assets, and communicate workflows across engineering, design, marketing, and business stakeholders.',
         'Worked directly across technical, creative, marketing, and executive functions, helping turn ambiguous product goals into **implementation plans, working demonstrations, and production features**.',
         'Managed contractors, engineering sprints, feature priorities, and progress reporting to company leadership.',
@@ -138,6 +140,17 @@ const rolePortfolio: RolePortfolioDossier = {
         'Managed third-party developers and production vendors across **interactive HTML5 video, WordPress, GitHub, GraphQL, Salesforce integrations, and AWS CloudFront delivery**.',
         'Helped synchronize collection and institutional data across **Salesforce, web platforms, and ticketing infrastructure**.',
         'Converted programming and curatorial requirements into practical technical workflows that could be delivered under institutional timelines and production constraints.',
+      ],
+    },
+    {
+      id: 'oolite-saturday-lab',
+      org: 'Oolite Arts · Digital Culture Center Miami',
+      title: 'Workshop facilitation · Technical enablement',
+      location: 'Miami, FL',
+      bullets: [
+        'Eighteen hands-on technical workshops at **Oolite Arts**, plus public programs that turn generative AI into exercises mixed audiences can finish.',
+        'A recurring **Saturday Lab** stuck point is deploying from GitHub and using Copilot, Cursor, or Replit to create a repo and connect a purchased domain — the facilitator guide routes that through intake, learner paths, and a help queue.',
+        'Those pages are **designed instruments**; attendance and scores are not published.',
       ],
     },
   ],
@@ -256,6 +269,7 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
     { id: 'hero', label: 'Overview' },
     { id: 'capabilities', label: 'Capabilities' },
     { id: 'experience', label: 'Experience' },
+    { id: 'teaching-cred', label: 'Teaching' },
     { id: 'selected-project', label: 'AI Project' },
     { id: 'education', label: 'Education' },
     { id: 'technologies', label: 'Technologies' },
@@ -267,7 +281,7 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
     subheadline: TITLE_STACK,
     introParagraphs: [
       'Creative Technologist and full-stack AI engineer with more than **10 years of experience** building digital products, generative-AI systems, creative tools, and client-facing technology.',
-      'Founding engineer at **Lore Machine**, where I helped build a real-time AI storytelling platform that transformed text into visual narrative experiences. My work combines **generative AI, software engineering, creative production, and rapid prototyping**—from an ambiguous client brief through functional prototype and production workflow.',
+      'Founding engineer at **Lore Machine**, where I helped build a real-time AI storytelling platform that transformed text into visual narrative experiences. When face-coherent generation assumed human characters, animal and other nonhuman casts needed a different path so those stories could ship. My work combines **generative AI, software engineering, creative production, facilitation, and rapid prototyping**—from an ambiguous client brief through functional prototype, teaching artifact, and production workflow.',
       'Hands-on experience includes **Adobe Creative Cloud, Photoshop, Firefly, After Effects, Figma, Figma Plugin SDK, Python, FastAPI, React, Next.js, TypeScript, AWS, Azure, Docker, multimodal AI APIs, RAG systems, vector databases, and generative-image workflows**.',
       'Currently developing deeper **Kubernetes** proficiency through *Udacity coursework, technical labs, and container-orchestration exercises*.',
     ],
@@ -276,6 +290,7 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
     headshotAlt: 'Moises Sanabria — professional headshot',
   },
   rolePortfolio,
+  teachingHighlights: designFacilitationTeachingHighlights,
   roleMatchRows: [],
   featuredProjectIds: ['lore-machine', 'ai24'],
   skillsMatrixRows: [
@@ -296,7 +311,7 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
     },
     {
       category: 'Forward-Deployed',
-      skills: 'Discovery, prototyping, demos, stakeholder communication, delivery',
+      skills: 'Discovery, prototyping, facilitation, teaching artifacts, stakeholder delivery',
       icon: 'users',
     },
   ],
@@ -325,7 +340,8 @@ export const forwardDeployedAiEngineerOpportunity: Opportunity = {
     },
     {
       title: 'Transfer',
-      description: 'Document the system and enable the client team to operate and extend it.',
+      description:
+        'Document the system and leave a teaching artifact the team can operate. Saturday Lab materials show intake, learner paths, and a help queue for GitHub deploy and domain setup — designed instruments, not published attendance or scores.',
     },
   ],
   ctas: recruitingCtas({

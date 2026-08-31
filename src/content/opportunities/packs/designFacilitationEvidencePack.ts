@@ -1,5 +1,8 @@
 import type { TeachingHighlight } from '../types';
 import { genAiCurriculumSmeTeachingHighlights } from './genAiCurriculumSmePack';
+import { deloitteFacilitatorWorkshopStill } from '@/content/evidence/applicationBanners';
+import { OOLITE_DIGITAL_LAB_IMAGE, OOLITE_DIGITAL_LAB_IMAGE_ALT } from '@/content/oolite-arts/media';
+import { ART_OF_AI_AGENTS_SCREENSHOTS } from '@/constants/art-of-ai-agents';
 
 /** Live teaching pack — prefer these in the dossier over GitHub blobs. */
 export const saturdayLabLive = {
@@ -14,6 +17,10 @@ const saturdayLabSource =
   'https://github.com/moisestech/infra24/blob/4f7ec7e78601434be142dc333bff1fa726bce976/content/workshops/saturday-lab';
 
 /** Inspectable teaching materials; these links do not establish learner outcomes. */
+const taskAutomationSlide2 = ART_OF_AI_AGENTS_SCREENSHOTS.find(
+  (item) => item.id === 'artist-task-automation-2',
+)!;
+
 export const designFacilitationTeachingHighlights: TeachingHighlight[] = [
   ...genAiCurriculumSmeTeachingHighlights.filter(
     (item) => item.href === '/workshop/the-art-of-ai-agents/share',
@@ -23,24 +30,33 @@ export const designFacilitationTeachingHighlights: TeachingHighlight[] = [
     description:
       'Public workshop hub for mixed-audience making, deploy, and review. A designed program page, not an attendance report. Source: GitHub markdown at commit 4f7ec7e.',
     href: saturdayLabLive.hub,
+    imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
+    imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
   },
   {
     title: 'Facilitation: intake to working session',
     description:
       'Saturday Lab facilitator guide: intake questions, learner paths, shared demonstration, help queue, and closing reflection. Designed session plan, not an attendance report. Source: GitHub facilitator-run-of-show.md at 4f7ec7e.',
     href: saturdayLabLive.facilitator,
+    imageSrc: deloitteFacilitatorWorkshopStill.src,
+    imageAlt: deloitteFacilitatorWorkshopStill.alt,
+    imageLocal: true,
   },
   {
     title: 'Exercise: explain, edit, test',
     description:
       'Vibe Coding learner packet with tool choices and prompts for understanding, changing, reviewing, and debugging code. Inspect the exercise a participant would follow. Source: GitHub packet-vibe-coding-for-artists.md at 4f7ec7e.',
     href: saturdayLabLive.vibeCoding,
+    imageSrc: taskAutomationSlide2.src,
+    imageAlt: taskAutomationSlide2.alt,
   },
   {
     title: 'Assessment: exit ticket',
     description:
       'The closing assessment instrument. Completed learner responses and measured learning gains are not published here. Source: GitHub print/exit-ticket.md at 4f7ec7e.',
     href: saturdayLabLive.exitTicket,
+    imageSrc: OOLITE_DIGITAL_LAB_IMAGE,
+    imageAlt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
   },
 ];
 

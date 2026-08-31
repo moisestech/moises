@@ -125,7 +125,12 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           ) : null}
 
           <OpportunityColorSection sectionId="process" className="mt-10 sm:mt-14">
-            <InnovationProcess opportunity={opportunity} framed layout="horizontal" />
+            <InnovationProcess
+              opportunity={opportunity}
+              diagrams={opportunity.processDiagrams}
+              framed
+              layout="horizontal"
+            />
           </OpportunityColorSection>
 
           {opportunity.applicationAnswers?.length ? (
