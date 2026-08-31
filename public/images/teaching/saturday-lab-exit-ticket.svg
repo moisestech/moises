@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Saturday Lab exit ticket instrument</title>
+  <desc id="desc">Designed closing questions. Completed learner responses are not published.</desc>
+  <rect width="960" height="600" fill="#f5f0e8"/>
+  <rect x="48" y="40" width="864" height="520" rx="16" fill="#fffdf8" stroke="#d6d3d1"/>
+  <text x="80" y="92" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="700" fill="#1c1917">Saturday Lab � Exit ticket</text>
+  <text x="80" y="122" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#57534e">Designed instrument  not a published score or attendance report</text>
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" fill="#292524">
+    <text x="80" y="180">1. What did you ship or change today?</text>
+    <rect x="80" y="196" width="780" height="48" rx="8" fill="#fafaf9" stroke="#e7e5e4"/>
+    <text x="80" y="290">2. Where did you get stuck (deploy, domain, tool, or review)?</text>
+    <rect x="80" y="306" width="780" height="48" rx="8" fill="#fafaf9" stroke="#e7e5e4"/>
+    <text x="80" y="400">3. What would you try next, and who can operate it without you?</text>
+    <rect x="80" y="416" width="780" height="48" rx="8" fill="#fafaf9" stroke="#e7e5e4"/>
+  </g>
+  <text x="80" y="520" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#78716c">Source: Saturday Lab print/exit-ticket.md � dcc.miami</text>
+</svg>

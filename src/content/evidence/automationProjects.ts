@@ -32,8 +32,8 @@ export const automationProjectSpecs = {
       'Production n8n workflow: AI Agent node classifies incoming Gmail, applies structured labels, and writes recruiter/opportunity signals to Airtable for pipeline triage.',
     gapNote: '[OPTIONAL: add label taxonomy, daily volume, and error-handling detail for interview depth]',
     imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786386766/dccmiami/workshops/the-art-of-ai-agents/n8n-diagram-email-inbox-organizer_nqwn9r.png',
-    imageAlt: 'n8n Email Inbox Organizer — Gmail AI Agent classification and label routing workflow diagram',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788209503/dccmiami/workshops/n8n-no-code-email-labeler-ai-automation-banner_ru8ivy.png',
+    imageAlt: 'n8n no-code email labeler — AI automation workshop banner',
     imageLocal: false,
     href: '/workshop/the-art-of-ai-agents/share',
   },
@@ -49,8 +49,8 @@ export const automationProjectSpecs = {
       'Live Make + Airtable + Square automation for Bookleggers Library: Square sales/transactions sync into Airtable for inventory and sales-log visibility.',
     gapNote: '[OPTIONAL: add sync frequency, field mapping, and go-live date for case-study depth]',
     imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
-    imageAlt: 'Bookleggers Library — Square to Airtable commerce automation',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788209502/dccmiami/workshops/make-airtable-no-code-square-data-ingestion-ai-automation-banner-bookleggers_h4e9k9.png',
+    imageAlt: 'Bookleggers — Make, Airtable, and Square no-code data-ingestion automation banner',
   },
 } as const satisfies Record<string, AutomationProjectSpec>;
 

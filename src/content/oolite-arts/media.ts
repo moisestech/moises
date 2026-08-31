@@ -186,6 +186,7 @@ export const digilabMedia = {
       '/artist-infrastructure#oolite-proof',
       '/workshop/moonlighter-ai-3d-printing#instructor',
       '/institutions#hero',
+      '/forward-deployed#case-studies',
     ],
   },
 

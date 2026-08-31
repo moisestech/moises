@@ -7,6 +7,7 @@ import {
 import type { Opportunity } from '@/content/opportunities/types';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
+import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -71,14 +72,20 @@ export function CaseStudyGrid({ opportunity, framed = false }: CaseStudyGridProp
               accent.cardHover,
             )}
           >
-            <OpportunityZoomTrigger
-              src={cs.imageSrc}
-              alt={cs.imageAlt}
-              caption={cs.title}
-              className={opp.cardMedia}
-            >
-              <OpportunityCardImage src={cs.imageSrc} alt={cs.imageAlt} local={cs.imageLocal} />
-            </OpportunityZoomTrigger>
+            {cs.visual === 'field-kit-loop' ? (
+              <div className="border-b border-stone-100 dark:border-stone-800">
+                <FieldKitLoopDiagram className="rounded-none border-0" />
+              </div>
+            ) : (
+              <OpportunityZoomTrigger
+                src={cs.imageSrc}
+                alt={cs.imageAlt}
+                caption={cs.title}
+                className={opp.cardMedia}
+              >
+                <OpportunityCardImage src={cs.imageSrc} alt={cs.imageAlt} local={cs.imageLocal} />
+              </OpportunityZoomTrigger>
+            )}
             <div className={opp.cardPad}>
               <p className={cn(opp.accentCategory, accent.eyebrow)}>{cs.category}</p>
               <h3 className={cn(opp.matrixPrimary, 'mt-1')}>{cs.title}</h3>

@@ -31,7 +31,14 @@ export function HonestyOverlaySection({
       </h2>
       <p className={`mt-3 max-w-3xl ${opp.muted}`}>{data.intro}</p>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-6">
+      <div
+        className={cn(
+          'mt-6 grid gap-4 lg:gap-6',
+          data.notClaimed?.length
+            ? 'lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]'
+            : 'lg:grid-cols-1',
+        )}
+      >
         <div
           className={cn(
             opp.card,
@@ -50,23 +57,27 @@ export function HonestyOverlaySection({
           </ul>
         </div>
 
-        <div
-          className={cn(
-            opp.card,
-            'border-stone-200/80 bg-stone-50/80 p-5 transition duration-300 motion-reduce:transition-none dark:border-stone-700/80 dark:bg-stone-900/60',
-            'hover:border-stone-300 hover:shadow-sm dark:hover:border-stone-600',
-          )}
-        >
-          <h3 className={cn(opp.h3MoMA, 'text-stone-700 dark:text-stone-300')}>{data.notClaimedTitle}</h3>
-          <ul className="mt-4 space-y-2">
-            {data.notClaimed.map((item) => (
-              <li key={item} className={cn(opp.muted, 'flex gap-2')}>
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-stone-400 dark:bg-stone-500" aria-hidden />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {data.notClaimed?.length ? (
+          <div
+            className={cn(
+              opp.card,
+              'border-stone-200/80 bg-stone-50/80 p-5 transition duration-300 motion-reduce:transition-none dark:border-stone-700/80 dark:bg-stone-900/60',
+              'hover:border-stone-300 hover:shadow-sm dark:hover:border-stone-600',
+            )}
+          >
+            <h3 className={cn(opp.h3MoMA, 'text-stone-700 dark:text-stone-300')}>
+              {data.notClaimedTitle ?? 'Not claimed yet'}
+            </h3>
+            <ul className="mt-4 space-y-2">
+              {data.notClaimed.map((item) => (
+                <li key={item} className={cn(opp.muted, 'flex gap-2')}>
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-stone-400 dark:bg-stone-500" aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
 
       <p className={cn(opp.callout, 'mt-6 max-w-3xl', opp.body)}>{data.rampStatement}</p>

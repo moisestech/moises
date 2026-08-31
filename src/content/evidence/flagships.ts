@@ -254,8 +254,9 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     summary:
       'Live organizational automation: Gmail → AI Agent labels → Airtable. Artifact screenshots still deepening.',
     href: '/ai-engineering#proof',
-    imageSrc: '/images/tech-logos/n8n-logo.png',
-    imageAlt: 'n8n automation',
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788209503/dccmiami/workshops/n8n-no-code-email-labeler-ai-automation-banner_ru8ivy.png',
+    imageAlt: 'n8n no-code email labeler — AI automation workshop banner',
     categories: ['forward-deployed', 'automation', 'agents'],
     skills: ['n8n', 'airtable', 'gmail', 'agents'],
     roles: ['forward-deployed-engineer', 'ai-engineer', 'solutions-engineer'],
@@ -280,8 +281,8 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     summary: 'Client-facing commerce automation for a nonprofit library — live sync workflows.',
     href: '/ai-engineering#proof',
     imageSrc:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1781659236/product-ai-data-career-direction_ofgnrk.png',
-    imageAlt: 'Bookleggers commerce automation',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788209502/dccmiami/workshops/make-airtable-no-code-square-data-ingestion-ai-automation-banner-bookleggers_h4e9k9.png',
+    imageAlt: 'Bookleggers — Make, Airtable, and Square no-code data-ingestion automation banner',
     categories: ['forward-deployed', 'automation', 'integrations'],
     skills: ['make', 'square', 'airtable', 'ops'],
     roles: ['forward-deployed-engineer', 'solutions-engineer'],

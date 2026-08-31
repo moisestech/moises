@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" role="img" aria-labelledby="title desc">
+  <title id="title">Saturday Lab facilitator flow</title>
+  <desc id="desc">Intake, learner-path routing, help queue, and run-of-show. Designed session plan, not an attendance report.</desc>
+  <rect width="960" height="280" fill="#f5f0e8"/>
+  <g font-family="ui-sans-serif, system-ui, sans-serif">
+    <rect x="32" y="72" width="190" height="120" rx="12" fill="#fffdf8" stroke="#d6d3d1"/>
+    <text x="48" y="108" font-size="12" fill="#78716c">01</text>
+    <text x="48" y="136" font-size="18" font-weight="700" fill="#1c1917">Intake</text>
+    <text x="48" y="160" font-size="13" fill="#57534e">What is stuck?</text>
+    <path d="M230 132 H250" stroke="#a8a29e" stroke-width="1.5"/>
+    <rect x="258" y="72" width="190" height="120" rx="12" fill="#fffdf8" stroke="#d6d3d1"/>
+    <text x="274" y="108" font-size="12" fill="#78716c">02</text>
+    <text x="274" y="136" font-size="18" font-weight="700" fill="#1c1917">Paths</text>
+    <text x="274" y="160" font-size="13" fill="#57534e">Route by skill</text>
+    <path d="M456 132 H476" stroke="#a8a29e" stroke-width="1.5"/>
+    <rect x="484" y="72" width="190" height="120" rx="12" fill="#fffdf8" stroke="#d6d3d1"/>
+    <text x="500" y="108" font-size="12" fill="#78716c">03</text>
+    <text x="500" y="136" font-size="18" font-weight="700" fill="#1c1917">Help queue</text>
+    <text x="500" y="160" font-size="13" fill="#57534e">Unstick deploy</text>
+    <path d="M682 132 H702" stroke="#a8a29e" stroke-width="1.5"/>
+    <rect x="710" y="72" width="218" height="120" rx="12" fill="#fffdf8" stroke="#d6d3d1"/>
+    <text x="726" y="108" font-size="12" fill="#78716c">04</text>
+    <text x="726" y="136" font-size="18" font-weight="700" fill="#1c1917">Run-of-show</text>
+    <text x="726" y="160" font-size="13" fill="#57534e">Close + reflect</text>
+  </g>
+</svg>

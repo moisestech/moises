@@ -7,6 +7,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Logo } from '@/features/landing';
 import HeaderControls from '@/features/landing/components/HeaderControls';
 import { recruitingNavItemsForPath } from '@/config/recruiting-navigation';
+import { HorizontalOverflowNav } from '@/components/nav/HorizontalOverflowNav';
+import { cn } from '@/lib/utils';
 
 type RecruitingSiteHeaderProps = {
   onMobileMenuToggle: () => void;
@@ -60,35 +62,41 @@ export function RecruitingSiteHeader({ onMobileMenuToggle, mobileMenuOpen }: Rec
       <div
         className={`hidden md:block w-full ${isDark ? 'border-black bg-black' : 'border-none bg-white'}`}
       >
-        <div className="max-w-7xl mx-auto px-11 py-5">
-          <nav aria-label="Professional site">
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xl lg:gap-x-8">
-              {navItems.map((item) => {
-                const active =
-                  !item.external &&
-                  (pathname === item.path ||
-                    (item.path.length > 1 && pathname.startsWith(`${item.path}/`)));
-                return (
-                  <li key={`${item.label}:${item.path}`}>
-                    {item.external ? (
-                      <a
-                        href={item.path}
-                        className={linkClass(false)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {item.label}
-                      </a>
-                    ) : (
-                      <Link href={item.path} className={linkClass(active)}>
-                        {item.label}
-                      </Link>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+        <div className="mx-auto max-w-7xl px-11 py-5">
+          <HorizontalOverflowNav
+            ariaLabel="Professional site"
+            activeKey={pathname}
+            fadeFromClassName={isDark ? 'from-black' : 'from-white'}
+            scrollerClassName="gap-x-6 text-xl lg:gap-x-8"
+          >
+            {navItems.map((item) => {
+              const active =
+                !item.external &&
+                (pathname === item.path ||
+                  (item.path.length > 1 && pathname.startsWith(`${item.path}/`)));
+              return item.external ? (
+                <a
+                  key={`${item.label}:${item.path}`}
+                  href={item.path}
+                  className={cn(linkClass(false), 'shrink-0 whitespace-nowrap')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-nav-active={active ? 'true' : undefined}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={`${item.label}:${item.path}`}
+                  href={item.path}
+                  className={cn(linkClass(active), 'shrink-0 whitespace-nowrap')}
+                  data-nav-active={active ? 'true' : undefined}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </HorizontalOverflowNav>
         </div>
       </div>
     </header>

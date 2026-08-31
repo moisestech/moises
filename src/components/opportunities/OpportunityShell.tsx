@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { OpportunityNavItem } from '@/content/opportunities/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { HorizontalOverflowNav } from '@/components/nav/HorizontalOverflowNav';
 import { cn } from '@/lib/utils';
 
 export type OpportunitySectionNavAccent = {
@@ -37,8 +38,6 @@ function StickyMiniNav({
   sectionSpyOffsetPx?: number;
 }) {
   const navRef = useRef<HTMLElement>(null);
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const [measuredSpyOffset, setMeasuredSpyOffset] = useState(SECTION_SPY_OFFSET_PX);
   const spyOffset = sectionSpyOffsetPx ?? measuredSpyOffset;
   const ids = useMemo(() => items.map((i) => i.id), [items]);
@@ -98,18 +97,6 @@ function StickyMiniNav({
     };
   }, [ids, idsKey, spyOffset]);
 
-  useEffect(() => {
-    const node = itemRefs.current[activeId];
-    const scroller = scrollerRef.current;
-    if (!node || !scroller) return;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    node.scrollIntoView({
-      behavior: reduceMotion ? 'instant' : 'smooth',
-      inline: 'center',
-      block: 'nearest',
-    });
-  }, [activeId]);
-
   const scrollToSection = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -130,9 +117,12 @@ function StickyMiniNav({
       )}
       aria-label="Section navigation"
     >
-      <div
-        ref={scrollerRef}
-        className="mx-auto flex max-w-5xl snap-x snap-mandatory items-center gap-1.5 overflow-x-auto px-3 pb-1.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-1.5 sm:px-4 sm:pb-1 md:flex-wrap md:overflow-visible md:snap-none [&::-webkit-scrollbar]:hidden"
+      <HorizontalOverflowNav
+        asNav={false}
+        ariaLabel="Section navigation"
+        activeKey={activeId}
+        className="mx-auto max-w-5xl px-3 sm:px-4"
+        scrollerClassName="gap-1.5 pb-1.5 sm:pb-1"
       >
         {items.map((item) => {
           const accent = getSectionNavAccent?.(item.id);
@@ -141,12 +131,10 @@ function StickyMiniNav({
           return (
             <a
               key={item.id}
-              ref={(el) => {
-                itemRefs.current[item.id] = el;
-              }}
               href={`#${item.id}`}
+              data-nav-active={active ? 'true' : undefined}
               className={cn(
-                'inline-flex min-h-11 shrink-0 snap-start items-center rounded-full border px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 sm:min-h-9 sm:px-3 sm:py-1.5 md:min-h-0',
+                'inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 sm:min-h-9 sm:px-3 sm:py-1.5 md:min-h-0',
                 active && accent
                   ? cn(accent.navActive, accent.navActiveText)
                   : active
@@ -166,7 +154,7 @@ function StickyMiniNav({
             </a>
           );
         })}
-      </div>
+      </HorizontalOverflowNav>
     </nav>
   );
 }

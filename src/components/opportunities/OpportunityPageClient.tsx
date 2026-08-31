@@ -22,6 +22,7 @@ import { CreativeAgencyClient } from '@/components/opportunities/creative-agency
 import { CapabilitiesDeepLink } from '@/components/capabilities/CapabilitiesDeepLink';
 import { ThirtySixtyNinetyPlan } from '@/components/opportunities/ThirtySixtyNinetyPlan';
 import { HonestyOverlaySection } from '@/components/opportunities/HonestyOverlaySection';
+import { ProofSnapshotSection } from '@/components/opportunities/ProofSnapshotSection';
 import { CodeInspectSection } from '@/components/opportunities/CodeInspectSection';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
@@ -54,6 +55,10 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
   }
 
   const hasBanner = Boolean(opportunity.applicationBanner?.src);
+  const bannerAfterHero = opportunity.bannerPlacement === 'after-hero';
+  const banner = hasBanner ? (
+    <OpportunityApplicationBanner banner={opportunity.applicationBanner} />
+  ) : null;
 
   return (
     <OpportunityShell
@@ -62,14 +67,14 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
       stickyNavTopClassName="top-[4.75rem] md:top-[8.4rem]"
     >
       <>
-        <OpportunityApplicationBanner banner={opportunity.applicationBanner} />
-        <main
-          className={cn(
-            opp.main,
-            'overflow-x-clip',
-            hasBanner ? 'pt-3 sm:pt-6' : 'pt-6 sm:pt-10',
-          )}
-        >
+        {!bannerAfterHero ? banner : null}
+        <main className="overflow-x-clip pb-20 sm:pb-24">
+          <div
+            className={cn(
+              "mx-auto max-w-5xl px-3 font-['MoMA_Sans'] sm:px-4",
+              hasBanner && !bannerAfterHero ? 'pt-3 sm:pt-6' : 'pt-6 sm:pt-10',
+            )}
+          >
           {opportunity.visibilityNote ? (
             <p className="mb-3 px-1 text-center text-[11px] leading-relaxed text-stone-500 dark:text-stone-400 sm:mb-4 sm:text-xs">
               {opportunity.visibilityNote}
@@ -84,8 +89,16 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           <OpportunityColorSection sectionId="hero" className="mt-2 sm:mt-4">
             <OpportunityHero opportunity={opportunity} />
           </OpportunityColorSection>
+          </div>
 
-          {opportunity.honestyOverlay ? (
+          {bannerAfterHero && banner ? <div className="mt-8 w-full sm:mt-10">{banner}</div> : null}
+
+          <div className="mx-auto max-w-5xl px-3 font-['MoMA_Sans'] sm:px-4">
+          {opportunity.proofSnapshot ? (
+            <OpportunityColorSection sectionId="honesty" className="mt-10 sm:mt-14">
+              <ProofSnapshotSection data={opportunity.proofSnapshot} framed />
+            </OpportunityColorSection>
+          ) : opportunity.honestyOverlay ? (
             <OpportunityColorSection sectionId="honesty" className="mt-10 sm:mt-14">
               <HonestyOverlaySection data={opportunity.honestyOverlay} framed />
             </OpportunityColorSection>
@@ -159,6 +172,7 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           <OpportunityColorSection sectionId="resume" className="mt-10 sm:mt-14">
             <ResumeCTA opportunity={opportunity} framed />
           </OpportunityColorSection>
+          </div>
         </main>
       </>
     </OpportunityShell>

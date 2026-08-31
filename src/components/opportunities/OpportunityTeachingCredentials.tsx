@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { BookOpen, GraduationCap, ExternalLink } from 'lucide-react';
+import { BookOpen, Building2, GraduationCap, ExternalLink } from 'lucide-react';
 import { track } from '@/lib/analytics';
-import type { Opportunity } from '@/content/opportunities/types';
+import type { CertificationItem, Opportunity } from '@/content/opportunities/types';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
+import { EvidenceMediaCarousel } from '@/components/opportunities/EvidenceMediaCarousel';
 import { opp } from '@/components/opportunities/opportunityTheme';
 
 type Props = {
@@ -35,7 +36,9 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
           <ul className="mt-6 grid gap-6 sm:grid-cols-2">
             {teachingHighlights.map((item) => (
               <li key={item.href} className={`flex h-full flex-col overflow-hidden ${opp.card}`}>
-                {item.imageSrc ? (
+                {item.media?.length ? (
+                  <EvidenceMediaCarousel items={item.media} title={item.title} />
+                ) : item.imageSrc ? (
                   <OpportunityZoomTrigger
                     src={item.imageSrc}
                     alt={item.imageAlt ?? item.title}
@@ -48,7 +51,9 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
                       local={item.imageLocal}
                     />
                   </OpportunityZoomTrigger>
-                ) : null}
+                ) : (
+                  <div className={`${opp.cardMedia} bg-stone-200 dark:bg-stone-800`} aria-hidden />
+                )}
                 <Link
                   href={item.href}
                   className={`flex flex-1 flex-col ${opp.cardPad} transition hover:bg-stone-50 dark:hover:bg-stone-800/60`}
@@ -78,8 +83,10 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
             {certifications.map((c) => (
               <li
                 key={c.name}
-                className="rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-4 py-3 text-sm shadow-sm"
+                className="flex gap-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-4 py-3 text-sm shadow-sm"
               >
+                <CredentialMark item={c} />
+                <div className="min-w-0 flex-1">
                 <p className={opp.matrixPrimary}>{c.name}</p>
                 {c.detail ? <p className={opp.matrixSecondary}>{c.detail}</p> : null}
                 {c.href ? (
@@ -104,11 +111,37 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
                     </a>
                   )
                 ) : null}
+                </div>
               </li>
             ))}
           </ul>
         </div>
       ) : null}
     </section>
+  );
+}
+
+function CredentialMark({ item }: { item: CertificationItem }) {
+  if (item.logoSrc) {
+    return (
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-950">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.logoSrc}
+          alt={item.logoAlt ?? ''}
+          className={item.logoSrcDark ? 'h-7 w-7 object-contain dark:hidden' : 'h-7 w-7 object-contain'}
+        />
+        {item.logoSrcDark ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={item.logoSrcDark} alt="" className="hidden h-7 w-7 object-contain dark:block" />
+        ) : null}
+      </span>
+    );
+  }
+  const Icon = item.icon === 'building' ? Building2 : item.icon === 'graduation' ? GraduationCap : BookOpen;
+  return (
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-stone-200 bg-stone-50 text-stone-700 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-200">
+      <Icon className="h-4 w-4" aria-hidden />
+    </span>
   );
 }

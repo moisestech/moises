@@ -34,7 +34,7 @@ export function AnimatedLogoBand({
     <div
       className={cn(
         'border-y border-stone-200 dark:border-stone-700 bg-gradient-to-b from-stone-50 to-white dark:from-stone-900 dark:to-stone-950 py-4 shadow-inner',
-        bleed && 'relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2',
+        bleed && '-mx-3 w-[calc(100%+1.5rem)] sm:-mx-4 sm:w-[calc(100%+2rem)]',
         className,
       )}
       role="region"

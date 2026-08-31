@@ -2,16 +2,36 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import {
+  Eye,
+  FlaskConical,
+  GraduationCap,
+  Handshake,
+  Rocket,
+  Shield,
+  type LucideIcon,
+} from 'lucide-react';
 import type { Opportunity, RoleMatchRow } from '@/content/opportunities/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
+import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
+import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
 
 type RoleMatchMatrixProps = {
   opportunity: Opportunity;
   /** When nested in OpportunityColorSection — drop outer section chrome. */
   framed?: boolean;
+};
+
+const STAGE_ICONS: Record<string, LucideIcon> = {
+  Discover: Eye,
+  Prototype: FlaskConical,
+  Govern: Shield,
+  Deploy: Rocket,
+  Teach: GraduationCap,
+  Handoff: Handshake,
 };
 
 function IllustrationFrame({
@@ -45,6 +65,11 @@ function rowKey(row: RoleMatchRow, index: number) {
   return `${row.requirement}::${index}`;
 }
 
+function StageIcon({ stage }: { stage?: string }) {
+  const Icon = (stage && STAGE_ICONS[stage]) || Eye;
+  return <Icon className="h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400" aria-hidden />;
+}
+
 export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrixProps) {
   const accent = getOpportunityCompactAccent('fit');
   const headers = opportunity.roleMatchColumnHeaders ?? {
@@ -53,6 +78,7 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
   };
 
   const rows = opportunity.roleMatchRows;
+  const explorer = useMemo(() => rows.some((r) => r.claim || r.evidenceType), [rows]);
   const storytelling = useMemo(() => rows.some((r) => r.illustration), [rows]);
   const sectionClass = framed ? 'scroll-mt-32' : opp.section;
 
@@ -70,7 +96,7 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
   const activeRow = rows[activeIndex];
   const activeIllustration = activeRow?.illustration;
 
-  if (!storytelling) {
+  if (!storytelling && !explorer) {
     return (
       <section id="fit" className={sectionClass}>
         <h2 className={opp.h2}>{opportunity.roleMatchSectionTitle ?? 'Role fit'}</h2>
@@ -100,6 +126,106 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
     );
   }
 
+  if (explorer) {
+    return (
+      <section id="fit" className={sectionClass}>
+        <h2 className={opp.h2}>{opportunity.roleMatchSectionTitle ?? 'Evidence explorer'}</h2>
+        {opportunity.roleMatchIntro ? <p className={`mt-3 max-w-3xl ${opp.muted}`}>{opportunity.roleMatchIntro}</p> : null}
+        <p className={`mt-4 ${opp.subtle}`}>
+          Coverage checklist — Discover through Handoff. Select a stage to inspect the artifact.
+        </p>
+
+        <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:items-start lg:gap-6">
+          <div className={cn(opp.illustrationPanel, 'order-1 lg:order-2 lg:sticky lg:top-36')} aria-live="polite">
+            <ExplorerVisual row={activeRow} />
+            {activeRow ? (
+              <div className={opp.illustrationCaption}>
+                <div className="flex flex-wrap items-center gap-2">
+                  {activeRow.stage ? (
+                    <p className={opp.accentCategory}>{activeRow.stage}</p>
+                  ) : (
+                    <p className={opp.accentCategory}>{activeRow.requirement}</p>
+                  )}
+                  {activeRow.evidenceType ? <EvidenceTypeBadge type={activeRow.evidenceType} /> : null}
+                </div>
+                {activeRow.whatChanged ? (
+                  <div className="mt-3">
+                    <p className={opp.label}>What changed</p>
+                    <p className={cn(opp.matrixSecondary, 'mt-1')}>{activeRow.whatChanged}</p>
+                  </div>
+                ) : null}
+                {activeRow.whatThisProves ? (
+                  <div className="mt-3">
+                    <p className={opp.label}>What this proves</p>
+                    <p className={cn(opp.matrixSecondary, 'mt-1')}>{activeRow.whatThisProves}</p>
+                  </div>
+                ) : null}
+                {activeRow.inspectHref ? (
+                  <a
+                    href={activeRow.inspectHref}
+                    className={cn(
+                      'mt-3 inline-flex min-h-11 items-center text-sm',
+                      opp.linkAccent,
+                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                      accent.focusRing,
+                    )}
+                    {...(activeRow.inspectHref.startsWith('http')
+                      ? { target: '_blank', rel: 'noreferrer' }
+                      : {})}
+                  >
+                    {activeRow.inspectLabel ?? 'Inspect evidence'}
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={cn(opp.tableWrap, 'order-2 lg:order-1')}>
+            <div className={opp.matrixHeader}>
+              <span>Stage</span>
+              <span>Claim</span>
+            </div>
+            <ul className={opp.divide} role="list">
+              {rows.map((row, index) => {
+                const active = index === activeIndex;
+                return (
+                  <li key={rowKey(row, index)}>
+                    <button
+                      type="button"
+                      className={cn(
+                        'min-h-[3rem] w-full px-3 py-3.5 text-left transition-colors sm:px-4',
+                        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]',
+                        accent.focusRing,
+                        active ? accent.activeRow : opp.rowHover,
+                      )}
+                      aria-current={active ? 'true' : undefined}
+                      onMouseEnter={() => setActiveIndex(index)}
+                      onFocus={() => setActiveIndex(index)}
+                      onClick={() => setActiveIndex(index)}
+                    >
+                      <span className="flex items-start gap-3">
+                        <StageIcon stage={row.stage} />
+                        <span className="min-w-0 flex-1">
+                          <span className="flex flex-wrap items-center gap-2">
+                            <span className={opp.matrixPrimary}>{row.stage ?? row.requirement}</span>
+                            {row.evidenceType ? <EvidenceTypeBadge type={row.evidenceType} /> : null}
+                          </span>
+                          <span className={cn(opp.matrixSecondary, 'mt-1 block')}>
+                            {row.claim ?? row.evidence}
+                          </span>
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="fit" className={sectionClass}>
       <h2 className={opp.h2}>{opportunity.roleMatchSectionTitle ?? 'Role fit'}</h2>
@@ -116,19 +242,19 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
           )}
           aria-live="polite"
         >
-          <div className="relative aspect-[16/10] w-full sm:aspect-[4/3]">
-            {activeIllustration ? (
+          <div className="relative aspect-[16/10] w-full bg-stone-200 dark:bg-stone-800 sm:aspect-[4/3]">
+            {activeIllustration?.src ? (
               <OpportunityZoomTrigger
                 key={activeIndex}
                 src={activeIllustration.src}
-                alt={activeIllustration.alt}
+                alt={activeIllustration.alt ?? activeRow?.requirement ?? ''}
                 caption={activeRow?.requirement}
                 className="absolute inset-0 h-full animate-in fade-in-0 duration-300 motion-reduce:animate-none"
               >
                 <div className="relative h-full w-full">
                   <IllustrationFrame
                     src={activeIllustration.src}
-                    alt={activeIllustration.alt}
+                    alt={activeIllustration.alt ?? ''}
                     local={activeIllustration.local}
                   />
                 </div>
@@ -190,6 +316,39 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
         </div>
       </div>
     </section>
+  );
+}
+
+function ExplorerVisual({ row }: { row?: RoleMatchRow }) {
+  const illustration = row?.illustration;
+  if (illustration?.visual === 'field-kit-loop') {
+    return <FieldKitLoopDiagram className="rounded-none border-0" />;
+  }
+  if (illustration?.src) {
+    return (
+      <div className="relative aspect-[16/10] w-full bg-stone-200 dark:bg-stone-800">
+        <OpportunityZoomTrigger
+          src={illustration.src}
+          alt={illustration.alt ?? row?.requirement ?? ''}
+          caption={row?.stage ?? row?.requirement}
+          className="absolute inset-0 h-full"
+        >
+          <div className="relative h-full w-full">
+            <IllustrationFrame
+              src={illustration.src}
+              alt={illustration.alt ?? ''}
+              local={illustration.local}
+            />
+          </div>
+        </OpportunityZoomTrigger>
+      </div>
+    );
+  }
+  return (
+    <div className={`flex aspect-[16/10] flex-col items-center justify-center gap-2 bg-stone-100 p-6 text-center text-sm dark:bg-stone-800 ${opp.muted}`}>
+      <p>No preview for this stage yet.</p>
+      <p className={opp.subtle}>{row?.stage ?? row?.requirement}</p>
+    </div>
   );
 }
 

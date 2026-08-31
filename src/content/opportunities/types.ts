@@ -55,17 +55,47 @@ export type HonestyOverlay = {
   intro: string;
   provenTitle: string;
   proven: string[];
-  notClaimedTitle: string;
-  notClaimed: string[];
+  notClaimedTitle?: string;
+  notClaimed?: string[];
   rampStatement: string;
 };
 
 /** Compact “code to inspect” cards under featured proof. */
+export type EvidenceType =
+  | 'production-experience'
+  | 'shipped-product'
+  | 'reference-implementation'
+  | 'fixture-prototype'
+  | 'teaching-instrument'
+  | 'proposed-approach';
+
+export type ProofSnapshotCard = {
+  title: string;
+  body: string;
+  evidenceType: EvidenceType;
+  tools?: string[];
+};
+
+export type ProofSnapshot = {
+  title: string;
+  intro?: string;
+  cards: ProofSnapshotCard[];
+  rampStatement?: string;
+};
+
+export type TeachingMediaItem = {
+  src: string;
+  alt: string;
+  caption?: string;
+  local?: boolean;
+};
+
 export type CodeInspectItem = {
   id: string;
   title: string;
   href: string;
   body: string;
+  icon?: 'git-branch' | 'shield' | 'search' | 'repeat';
 };
 
 export type CodeInspectFootnote = {
@@ -103,10 +133,12 @@ export type OpportunitySeo = {
 
 /** Optional visual for the role-fit matrix — shown in the storytelling panel when the row is hovered or focused. */
 export type RoleMatchIllustration = {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
   /** SVG or other static files under `/public` — use plain `img` to avoid Next image SVG constraints. */
   local?: boolean;
+  /** Inline diagram instead of a raster. */
+  visual?: 'field-kit-loop';
 };
 
 export type RoleMatchRow = {
@@ -115,6 +147,15 @@ export type RoleMatchRow = {
   /** Transparent evidence label for systems-dossier / EvidenceMatrix pages. */
   status?: EvidenceStatus;
   illustration?: RoleMatchIllustration;
+  /** Kickstart-coverage stage label (Discover, Prototype, Govern…). */
+  stage?: string;
+  /** One-sentence claim for the explorer row. Falls back to a shortened `evidence`. */
+  claim?: string;
+  evidenceType?: EvidenceType;
+  whatChanged?: string;
+  whatThisProves?: string;
+  inspectHref?: string;
+  inspectLabel?: string;
 };
 
 export type ProcessStep = {
@@ -179,12 +220,18 @@ export type TeachingHighlight = {
   imageAlt?: string;
   /** SVG or files under `/public` — use plain `img` */
   imageLocal?: boolean;
+  /** Optional scroll-snap gallery when more than one real artifact exists. */
+  media?: TeachingMediaItem[];
 };
 
 export type CertificationItem = {
   name: string;
   detail?: string;
   href?: string;
+  logoSrc?: string;
+  logoSrcDark?: string;
+  logoAlt?: string;
+  icon?: 'book' | 'building' | 'graduation';
 };
 
 /** Employer application-form Q&A (compact dossiers). */
@@ -354,6 +401,10 @@ export type Opportunity = {
   plan?: ThirtySixtyNinetyData;
   /** Compact honesty split: proven now vs not claimed yet. */
   honestyOverlay?: HonestyOverlay;
+  /** Compact proof cards with evidence-type badges (flagship). */
+  proofSnapshot?: ProofSnapshot;
+  /** When `after-hero`, banner does not precede the value proposition. */
+  bannerPlacement?: 'before-hero' | 'after-hero';
   /** Compact “code to inspect” cards under featured proof. */
   codeInspect?: CodeInspectBlock;
   /** Optional multi-stage system pipeline case study (e.g. Lore Machine walkthrough). */

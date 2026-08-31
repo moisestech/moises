@@ -16,6 +16,8 @@ export type CaseStudyOverride = {
   imageSrc?: string;
   imageAlt?: string;
   imageLocal?: boolean;
+  /** Inline diagram instead of a raster (Field Kit loop). */
+  visual?: 'field-kit-loop';
   href?: string;
   linkLabel?: string;
   /** Optional second outbound link (e.g. Oolite beside Lore Machine). */
@@ -32,6 +34,7 @@ export type ResolvedCaseStudyCard = {
   imageSrc: string;
   imageAlt: string;
   imageLocal?: boolean;
+  visual?: 'field-kit-loop';
   href?: string;
   linkLabel?: string;
   secondaryHref?: string;
@@ -59,6 +62,7 @@ export function resolveCaseStudyCards(
       imageSrc: o?.imageSrc ?? base.imageSrc,
       imageAlt: o?.imageAlt ?? base.imageAlt,
       imageLocal: o?.imageLocal ?? base.imageLocal,
+      visual: o?.visual,
       href: o?.href ?? base.href,
       linkLabel: o?.linkLabel,
       secondaryHref: o?.secondaryHref,

@@ -164,7 +164,7 @@ export function OpportunityApplicationBanner({ banner, className }: OpportunityA
   return (
     <div
       className={cn(
-        'relative left-1/2 mb-8 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden shadow-sm dark:shadow-none',
+        'relative mb-8 w-full overflow-hidden shadow-sm dark:shadow-none',
         opp.bannerBorder,
         'bg-stone-200 dark:bg-stone-900',
         className,
