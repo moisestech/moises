@@ -8,11 +8,12 @@ type DesignForwardFdeLoopDiagramProps = {
 };
 
 const NODES = [
-  { id: 'frame', n: '01', label: 'Frame', sub: 'user problem' },
-  { id: 'facilitate', n: '02', label: 'Facilitate', sub: 'mixed session' },
-  { id: 'prototype', n: '03', label: 'Prototype', sub: 'human gate' },
-  { id: 'test', n: '04', label: 'Test', sub: 'real users' },
-  { id: 'teach', n: '05', label: 'Leave', sub: 'teaching artifact' },
+  { id: 'discover', n: '01', label: 'Discover', sub: 'observe + frame' },
+  { id: 'prototype', n: '02', label: 'Prototype', sub: 'one slice' },
+  { id: 'govern', n: '03', label: 'Govern', sub: 'human gate' },
+  { id: 'deploy', n: '04', label: 'Deploy', sub: 'operable' },
+  { id: 'teach', n: '05', label: 'Teach', sub: 'mixed session' },
+  { id: 'handoff', n: '06', label: 'Handoff', sub: 'runbook' },
 ] as const;
 
 /**
@@ -52,14 +53,14 @@ export function DesignForwardFdeLoopDiagram({ className }: DesignForwardFdeLoopD
       )}
     >
       <svg
-        viewBox="0 0 720 168"
+        viewBox="0 0 760 168"
         role="img"
-        aria-label="Proposed design-forward FDE thin slice: frame, facilitate, prototype with a human gate, test, leave a teaching artifact"
+        aria-label="Proposed design-forward FDE thin slice: Discover, Prototype, Govern, Deploy, Teach, Handoff"
         className="h-auto w-full"
       >
         <title>Proposed first engagement — design-forward FDE thin slice</title>
         {NODES.map((node, i) => {
-          const x = 36 + i * 138;
+          const x = 12 + i * 124;
           const delay = `${i * 90}ms`;
           return (
             <g
@@ -72,7 +73,7 @@ export function DesignForwardFdeLoopDiagram({ className }: DesignForwardFdeLoopD
             >
               {i < NODES.length - 1 ? (
                 <path
-                  d={`M${x + 104} 78 H${x + 130}`}
+                  d={`M${x + 106} 78 H${x + 120}`}
                   fill="none"
                   stroke="#a8a29e"
                   strokeWidth="1.25"
@@ -87,7 +88,7 @@ export function DesignForwardFdeLoopDiagram({ className }: DesignForwardFdeLoopD
               <rect
                 x={x}
                 y={36}
-                width="104"
+                width="108"
                 height="84"
                 rx="8"
                 fill="#fffbeb"

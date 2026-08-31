@@ -16,8 +16,8 @@ export type CaseStudyOverride = {
   imageSrc?: string;
   imageAlt?: string;
   imageLocal?: boolean;
-  /** Inline diagram instead of a raster (Field Kit loop). */
-  visual?: 'field-kit-loop';
+  /** Inline diagram instead of a raster (Field Kit loop / AEP harness). */
+  visual?: 'field-kit-loop' | 'harness' | 'thin-slice';
   href?: string;
   linkLabel?: string;
   /** Optional second outbound link (e.g. Oolite beside Lore Machine). */
@@ -34,7 +34,7 @@ export type ResolvedCaseStudyCard = {
   imageSrc: string;
   imageAlt: string;
   imageLocal?: boolean;
-  visual?: 'field-kit-loop';
+  visual?: 'field-kit-loop' | 'harness' | 'thin-slice';
   href?: string;
   linkLabel?: string;
   secondaryHref?: string;

@@ -8,6 +8,8 @@ import type { Opportunity } from '@/content/opportunities/types';
 import { OpportunityCardImage } from '@/components/opportunities/OpportunityCardImage';
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
 import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
+import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
+import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -76,6 +78,14 @@ export function CaseStudyGrid({ opportunity, framed = false }: CaseStudyGridProp
               <div className="border-b border-stone-100 dark:border-stone-800">
                 <FieldKitLoopDiagram className="rounded-none border-0" />
               </div>
+            ) : cs.visual === 'harness' ? (
+              <div className="border-b border-stone-100 dark:border-stone-800">
+                <AepHarnessVisual />
+              </div>
+            ) : cs.visual === 'thin-slice' ? (
+              <div className="border-b border-stone-100 dark:border-stone-800">
+                <DesignForwardFdeLoopDiagram className="rounded-none border-0" />
+              </div>
             ) : (
               <OpportunityZoomTrigger
                 src={cs.imageSrc}
@@ -120,6 +130,14 @@ export function CaseStudyGrid({ opportunity, framed = false }: CaseStudyGridProp
           </article>
         ))}
       </div>
+      {opportunity.supportingEvidence?.length ? (
+        <p className="mt-5">
+          <a href="#supporting-evidence" className={linkClass}>
+            See all supporting evidence
+            <ChevronRight className="h-3.5 w-3.5" aria-hidden />
+          </a>
+        </p>
+      ) : null}
     </section>
   );
 }

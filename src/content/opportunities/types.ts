@@ -69,11 +69,19 @@ export type EvidenceType =
   | 'teaching-instrument'
   | 'proposed-approach';
 
+export type ProofSnapshotVisual = 'field-kit-loop' | 'harness' | 'thin-slice' | 'allow-ask-deny';
+
 export type ProofSnapshotCard = {
   title: string;
   body: string;
   evidenceType: EvidenceType;
   tools?: string[];
+  imageSrc?: string;
+  imageAlt?: string;
+  imageLocal?: boolean;
+  visual?: ProofSnapshotVisual;
+  href?: string;
+  lifecycleStage?: string;
 };
 
 export type ProofSnapshot = {
@@ -138,7 +146,26 @@ export type RoleMatchIllustration = {
   /** SVG or other static files under `/public` — use plain `img` to avoid Next image SVG constraints. */
   local?: boolean;
   /** Inline diagram instead of a raster. */
-  visual?: 'field-kit-loop';
+  visual?: ProofSnapshotVisual;
+};
+
+export type SupportingEvidenceItem = {
+  id: string;
+  title: string;
+  body: string;
+  href: string;
+  linkLabel: string;
+  evidenceType: EvidenceType;
+  lifecycleStage?: string;
+  limitation?: string;
+  secondaryHref?: string;
+  secondaryLinkLabel?: string;
+};
+
+export type SectionQuote = {
+  after: 'hero' | 'proof' | 'cases' | 'teaching';
+  quote: string;
+  attribution?: string;
 };
 
 export type RoleMatchRow = {
@@ -409,4 +436,15 @@ export type Opportunity = {
   codeInspect?: CodeInspectBlock;
   /** Optional multi-stage system pipeline case study (e.g. Lore Machine walkthrough). */
   systemPipeline?: SystemPipelineCaseStudyData;
+  /**
+   * Hero CTA layout. `primary-then-rest` keeps See the proof / Inspect evidence
+   * in the first row and moves résumé, site, and profile links below.
+   */
+  heroActionLayout?: 'stacked' | 'primary-then-rest';
+  supportingEvidence?: SupportingEvidenceItem[];
+  supportingEvidenceTitle?: string;
+  supportingEvidenceIntro?: string;
+  showFdeRoleMap?: boolean;
+  showAepHarness?: boolean;
+  sectionQuotes?: SectionQuote[];
 };

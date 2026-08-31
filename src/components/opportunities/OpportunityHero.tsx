@@ -1,8 +1,21 @@
 'use client';
 
-import { Mail, FolderKanban, Linkedin, Github, Instagram, ArrowDown, Calendar } from 'lucide-react';
+import Link from 'next/link';
+import {
+  Mail,
+  FolderKanban,
+  Linkedin,
+  Github,
+  Instagram,
+  ArrowDown,
+  Calendar,
+  Download,
+  FileText,
+  Building2,
+  type LucideIcon,
+} from 'lucide-react';
 import { track } from '@/lib/analytics';
-import type { Opportunity } from '@/content/opportunities/types';
+import type { Opportunity, OpportunityCtas } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
@@ -14,16 +27,194 @@ import {
   isExternalHttpHref,
   opportunitySocialIconClass,
 } from '@/components/opportunities/opportunitySocialStyles';
+import { LIFECYCLE_META, type LifecycleStage } from '@/content/opportunities/lifecycle';
 import { cn } from '@/lib/utils';
 
 type OpportunityHeroProps = {
   opportunity: Opportunity;
 };
 
+function HeroActionLink({
+  href,
+  label,
+  icon: Icon,
+  stage,
+  onClick,
+}: {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  stage: LifecycleStage;
+  onClick: () => void;
+}) {
+  const meta = LIFECYCLE_META[stage];
+  const className = cn(
+    'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none sm:justify-start',
+    'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
+    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
+    'dark:bg-stone-900',
+    meta.btnClass,
+  );
+  const inner = (
+    <>
+      <Icon className="h-4 w-4 shrink-0" aria-hidden />
+      {label}
+    </>
+  );
+  if (isExternalHttpHref(href) || href.endsWith('.pdf')) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={className} onClick={onClick}>
+        {inner}
+      </a>
+    );
+  }
+  if (href.startsWith('/')) {
+    return (
+      <Link href={href} className={className} onClick={onClick}>
+        {inner}
+      </Link>
+    );
+  }
+  return (
+    <a href={href} className={className} onClick={onClick}>
+      {inner}
+    </a>
+  );
+}
+
+function HeroSecondaryActions({
+  ctas,
+  onCta,
+  githubProfileHref,
+}: {
+  ctas: OpportunityCtas;
+  onCta: (kind: string) => void;
+  githubProfileHref?: string;
+}) {
+  return (
+    <div className="mt-5 border-t border-stone-200/80 pt-4 dark:border-stone-700/80">
+      <p className={opp.label}>Actions</p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {ctas.resumePdfPath ? (
+          <HeroActionLink
+            href={ctas.resumePdfPath}
+            label={ctas.resumePdfLabel ?? 'Download résumé'}
+            icon={Download}
+            stage="Handoff"
+            onClick={() => onCta('resume_pdf')}
+          />
+        ) : null}
+        {ctas.evidenceBriefPdfPath ? (
+          <HeroActionLink
+            href={ctas.evidenceBriefPdfPath}
+            label={ctas.evidenceBriefLabel ?? 'Open technical evidence brief'}
+            icon={FileText}
+            stage="Govern"
+            onClick={() => onCta('evidence_brief_pdf')}
+          />
+        ) : null}
+        {ctas.cv ? (
+          <HeroActionLink href={ctas.cv} label="CV" icon={FileText} stage="Deploy" onClick={() => onCta('cv_hero')} />
+        ) : null}
+        {ctas.portfolio ? (
+          <HeroActionLink
+            href={ctas.portfolio}
+            label="Portfolio"
+            icon={FolderKanban}
+            stage="Discover"
+            onClick={() => onCta('portfolio_hero')}
+          />
+        ) : null}
+        {ctas.ooliteWork ? (
+          <HeroActionLink
+            href={ctas.ooliteWork}
+            label={ctas.ooliteWorkLabel ?? 'Oolite Digital Lab'}
+            icon={Building2}
+            stage="Teach"
+            onClick={() => onCta('oolite_work_hero')}
+          />
+        ) : null}
+        {ctas.careerPacket ? (
+          <HeroActionLink
+            href={ctas.careerPacket}
+            label="Career packet"
+            icon={FolderKanban}
+            stage="Prototype"
+            onClick={() => onCta('career_packet_hero')}
+          />
+        ) : null}
+        <HeroActionLink
+          href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
+          label="Email Moises"
+          icon={Mail}
+          stage="Handoff"
+          onClick={() => onCta('email')}
+        />
+        <a
+          href={ctas.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none',
+            'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
+            'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
+            'dark:bg-stone-900',
+            LIFECYCLE_META.Deploy.btnClass,
+          )}
+          aria-label="LinkedIn"
+          onClick={() => onCta('linkedin_hero')}
+        >
+          <Linkedin className="h-4 w-4 shrink-0" aria-hidden />
+          LinkedIn
+        </a>
+        {githubProfileHref ? (
+          <a
+            href={githubProfileHref}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(
+              'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none',
+              'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
+              'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
+              'dark:bg-stone-900',
+              LIFECYCLE_META.Prototype.btnClass,
+            )}
+            aria-label="GitHub profile"
+            onClick={() => onCta('github_hero')}
+          >
+            <Github className="h-4 w-4 shrink-0" aria-hidden />
+            GitHub
+          </a>
+        ) : null}
+        {ctas.instagram ? (
+          <a
+            href={ctas.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none',
+              'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
+              'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
+              'dark:bg-stone-900',
+              LIFECYCLE_META.Teach.btnClass,
+            )}
+            aria-label="Instagram"
+            onClick={() => onCta('instagram_hero')}
+          >
+            <Instagram className="h-4 w-4 shrink-0" aria-hidden />
+            Instagram
+          </a>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
   const { hero, ctas, slug, animatedLogoBand } = opportunity;
   const heroAccent = getOpportunityCompactAccent('hero');
   const githubProfileHref = ctas.githubProfile ?? ctas.github;
+  const splitActions = opportunity.heroActionLayout === 'primary-then-rest';
 
   const onCta = (kind: string) => {
     track('opportunity_cta_click', { opportunitySlug: slug, kind });
@@ -142,8 +333,10 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
                 View case studies
               </a>
             ) : null}
-            {showSystemsHero ? <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="hero" /> : null}
-            {!showSystemsHero ? (
+            {!splitActions && showSystemsHero ? (
+              <OpportunityResumeLinks ctas={ctas} onCta={onCta} variant="hero" />
+            ) : null}
+            {!splitActions && !showSystemsHero ? (
               <a
                 href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
                 className={cn(
@@ -158,8 +351,14 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
                 Email Moises
               </a>
             ) : null}
-            <OpportunitySiteLinks ctas={ctas} onCta={onCta} variant="hero" className="w-full sm:w-auto" />
+            {!splitActions ? (
+              <OpportunitySiteLinks ctas={ctas} onCta={onCta} variant="hero" className="w-full sm:w-auto" />
+            ) : null}
           </div>
+
+          {splitActions ? (
+            <HeroSecondaryActions ctas={ctas} onCta={onCta} githubProfileHref={githubProfileHref} />
+          ) : null}
 
           {opportunity.heroMetaChips?.length ? (
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Role focus">
@@ -171,43 +370,45 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             </ul>
           ) : null}
 
-          <div className={opp.profilesBorder}>
-            <span className={`w-full sm:w-auto sm:pr-2 ${opp.label}`}>Profiles</span>
-            <a
-              href={ctas.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={opportunitySocialIconClass('linkedin')}
-              aria-label="LinkedIn"
-              onClick={() => onCta('linkedin_hero')}
-            >
-              <Linkedin className="h-5 w-5" aria-hidden />
-            </a>
-            {githubProfileHref ? (
+          {!splitActions ? (
+            <div className={opp.profilesBorder}>
+              <span className={`w-full sm:w-auto sm:pr-2 ${opp.label}`}>Profiles</span>
               <a
-                href={githubProfileHref}
-                target="_blank"
-                rel="noreferrer"
-                className={opportunitySocialIconClass('github')}
-                aria-label="GitHub profile"
-                onClick={() => onCta('github_hero')}
-              >
-                <Github className="h-5 w-5" aria-hidden />
-              </a>
-            ) : null}
-            {ctas.instagram ? (
-              <a
-                href={ctas.instagram}
+                href={ctas.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={opportunitySocialIconClass('instagram')}
-                aria-label="Instagram"
-                onClick={() => onCta('instagram_hero')}
+                className={opportunitySocialIconClass('linkedin')}
+                aria-label="LinkedIn"
+                onClick={() => onCta('linkedin_hero')}
               >
-                <Instagram className="h-5 w-5" aria-hidden />
+                <Linkedin className="h-5 w-5" aria-hidden />
               </a>
-            ) : null}
-          </div>
+              {githubProfileHref ? (
+                <a
+                  href={githubProfileHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={opportunitySocialIconClass('github')}
+                  aria-label="GitHub profile"
+                  onClick={() => onCta('github_hero')}
+                >
+                  <Github className="h-5 w-5" aria-hidden />
+                </a>
+              ) : null}
+              {ctas.instagram ? (
+                <a
+                  href={ctas.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={opportunitySocialIconClass('instagram')}
+                  aria-label="Instagram"
+                  onClick={() => onCta('instagram_hero')}
+                >
+                  <Instagram className="h-5 w-5" aria-hidden />
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
         <div>
           {opportunity.companyLogoSrc ? (

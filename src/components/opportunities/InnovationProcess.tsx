@@ -59,7 +59,7 @@ export function InnovationProcess({
         className={cn(
           hasVisual ? 'mt-10' : 'mt-8',
           isHorizontal
-            ? 'flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:pb-0 md:gap-4 lg:grid-cols-5 [&::-webkit-scrollbar]:hidden'
+            ? 'flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:pb-0 md:gap-4 lg:grid-cols-3 xl:grid-cols-6 [&::-webkit-scrollbar]:hidden'
             : 'space-y-4',
         )}
         role={isHorizontal ? 'listbox' : undefined}

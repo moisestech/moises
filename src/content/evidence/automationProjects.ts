@@ -17,6 +17,12 @@ export type AutomationProjectSpec = {
   imageAlt: string;
   imageLocal?: boolean;
   href?: string;
+  /** Teaching-surface copy. Do not silently overwrite `summary` used by other dossiers. */
+  teachingTitle?: string;
+  teachingCategory?: string;
+  teachingSummary?: string;
+  teachingEvidenceLine?: string;
+  relatedOpsNote?: string;
 };
 
 export const automationProjectSpecs = {
@@ -36,6 +42,14 @@ export const automationProjectSpecs = {
     imageAlt: 'n8n no-code email labeler — AI automation workshop banner',
     imageLocal: false,
     href: '/workshop/the-art-of-ai-agents/share',
+    teachingTitle: 'n8n email labeler — teaching',
+    teachingCategory: 'Hands-on GenAI teaching',
+    teachingSummary:
+      'February no-code workshop: learners classify mail, then review the rules. A related operational Gmail → labels → Airtable workflow exists and is labeled separately — this card is the teaching adaptation, not a production reliability report.',
+    teachingEvidenceLine:
+      'Taught February no-code artist/automation workshop. Can teach again. Operational Gmail → labels → Airtable is a related system, not this card.',
+    relatedOpsNote:
+      'Related ops system: Gmail → structured labels → Airtable. Not the same claim as this teaching artifact.',
   },
   'bookleggers-commerce-automation': {
     id: 'bookleggers-commerce-automation',

@@ -24,6 +24,10 @@ import { ThirtySixtyNinetyPlan } from '@/components/opportunities/ThirtySixtyNin
 import { HonestyOverlaySection } from '@/components/opportunities/HonestyOverlaySection';
 import { ProofSnapshotSection } from '@/components/opportunities/ProofSnapshotSection';
 import { CodeInspectSection } from '@/components/opportunities/CodeInspectSection';
+import { FdeRoleMap } from '@/components/opportunities/FdeRoleMap';
+import { ModelVsHarness, AllowAskDeny } from '@/components/opportunities/AepHarnessDiagrams';
+import { SupportingEvidenceRow } from '@/components/opportunities/SupportingEvidenceRow';
+import { SectionFlourish } from '@/components/opportunities/SectionFlourish';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -56,6 +60,8 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
   const hasBanner = Boolean(opportunity.applicationBanner?.src);
   const bannerAfterHero = opportunity.bannerPlacement === 'after-hero';
+  const quoteAfter = (after: 'hero' | 'proof' | 'cases' | 'teaching') =>
+    opportunity.sectionQuotes?.find((quote) => quote.after === after);
   const banner = hasBanner ? (
     <OpportunityApplicationBanner banner={opportunity.applicationBanner} />
   ) : null;
@@ -89,11 +95,13 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           <OpportunityColorSection sectionId="hero" className="mt-2 sm:mt-4">
             <OpportunityHero opportunity={opportunity} />
           </OpportunityColorSection>
+          {opportunity.showFdeRoleMap ? <FdeRoleMap className="mt-10 sm:mt-12" /> : null}
           </div>
 
           {bannerAfterHero && banner ? <div className="mt-8 w-full sm:mt-10">{banner}</div> : null}
 
           <div className="mx-auto max-w-5xl px-3 font-['MoMA_Sans'] sm:px-4">
+          {quoteAfter('hero') ? <SectionFlourish quote={quoteAfter('hero')!} className="mt-10 sm:mt-12" /> : null}
           {opportunity.proofSnapshot ? (
             <OpportunityColorSection sectionId="honesty" className="mt-10 sm:mt-14">
               <ProofSnapshotSection data={opportunity.proofSnapshot} framed />
@@ -103,6 +111,7 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
               <HonestyOverlaySection data={opportunity.honestyOverlay} framed />
             </OpportunityColorSection>
           ) : null}
+          {quoteAfter('proof') ? <SectionFlourish quote={quoteAfter('proof')!} className="mt-10 sm:mt-12" /> : null}
 
           <OpportunityColorSection sectionId="fit" className="mt-10 sm:mt-14">
             <RoleMatchMatrix opportunity={opportunity} framed />
@@ -110,7 +119,10 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
           <OpportunityColorSection sectionId="case-studies" className="mt-10 sm:mt-14">
             <CaseStudyGrid opportunity={opportunity} framed />
+            <SupportingEvidenceRow opportunity={opportunity} />
           </OpportunityColorSection>
+
+          {quoteAfter('cases') ? <SectionFlourish quote={quoteAfter('cases')!} className="mt-10 sm:mt-12" /> : null}
 
           {opportunity.teachingHighlights?.length || opportunity.certifications?.length ? (
             <OpportunityColorSection sectionId="teaching-cred" className="mt-10 sm:mt-14">
@@ -118,7 +130,21 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             </OpportunityColorSection>
           ) : null}
 
-          {opportunity.codeInspect ? (
+          {quoteAfter('teaching') ? (
+            <SectionFlourish quote={quoteAfter('teaching')!} className="mt-10 sm:mt-12" />
+          ) : null}
+
+          {opportunity.showAepHarness ? (
+            <OpportunityColorSection sectionId="code-inspect" className="mt-10 sm:mt-14">
+              <ModelVsHarness />
+              <AllowAskDeny />
+              {opportunity.codeInspect ? (
+                <div className="mt-10">
+                  <CodeInspectSection data={opportunity.codeInspect} framed />
+                </div>
+              ) : null}
+            </OpportunityColorSection>
+          ) : opportunity.codeInspect ? (
             <OpportunityColorSection sectionId="code-inspect" className="mt-10 sm:mt-14">
               <CodeInspectSection data={opportunity.codeInspect} framed />
             </OpportunityColorSection>

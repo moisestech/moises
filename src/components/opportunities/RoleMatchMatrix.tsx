@@ -1,23 +1,19 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useState } from 'react';
 import Image from 'next/image';
-import {
-  Eye,
-  FlaskConical,
-  GraduationCap,
-  Handshake,
-  Rocket,
-  Shield,
-  type LucideIcon,
-} from 'lucide-react';
+import { Eye, type LucideIcon } from 'lucide-react';
 import type { Opportunity, RoleMatchRow } from '@/content/opportunities/types';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
-import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
+import { EvidenceTypeBadge, MATURITY_LEGEND } from '@/components/opportunities/EvidenceTypeBadge';
 import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
+import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
+import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
+import { LifecycleStageChip } from '@/components/opportunities/LifecycleStageChip';
+import { LIFECYCLE_META, LIFECYCLE_STAGES, isLifecycleStage } from '@/content/opportunities/lifecycle';
 
 type RoleMatchMatrixProps = {
   opportunity: Opportunity;
@@ -25,14 +21,9 @@ type RoleMatchMatrixProps = {
   framed?: boolean;
 };
 
-const STAGE_ICONS: Record<string, LucideIcon> = {
-  Discover: Eye,
-  Prototype: FlaskConical,
-  Govern: Shield,
-  Deploy: Rocket,
-  Teach: GraduationCap,
-  Handoff: Handshake,
-};
+const STAGE_ICONS: Record<string, LucideIcon> = Object.fromEntries(
+  LIFECYCLE_STAGES.map((stage) => [stage, LIFECYCLE_META[stage].icon]),
+);
 
 function IllustrationFrame({
   src,
@@ -67,7 +58,32 @@ function rowKey(row: RoleMatchRow, index: number) {
 
 function StageIcon({ stage }: { stage?: string }) {
   const Icon = (stage && STAGE_ICONS[stage]) || Eye;
-  return <Icon className="h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400" aria-hidden />;
+  const color = stage && isLifecycleStage(stage) ? LIFECYCLE_META[stage].textClass : 'text-cyan-600 dark:text-cyan-400';
+  return <Icon className={cn('h-4 w-4 shrink-0', color)} aria-hidden />;
+}
+
+function ExplorerLegend() {
+  return (
+    <div className={`mt-4 space-y-2 ${opp.subtle}`}>
+      <p>
+        <span className="font-semibold text-stone-600 dark:text-stone-300">Stage</span>
+        {' — '}
+        hue + icon (Discover through Handoff).
+      </p>
+      <p>
+        <span className="font-semibold text-stone-600 dark:text-stone-300">Maturity</span>
+        {' — '}
+        line treatment, not more hues:{' '}
+        {MATURITY_LEGEND.map((item, i) => (
+          <span key={item.type}>
+            {i > 0 ? ' · ' : null}
+            {item.mark}
+          </span>
+        ))}
+        .
+      </p>
+    </div>
+  );
 }
 
 export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrixProps) {
@@ -87,6 +103,7 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
     return i >= 0 ? i : 0;
   }, [rows]);
 
+  const explorerTabId = useId();
   const [activeIndex, setActiveIndex] = useState(firstIllustrated);
 
   useEffect(() => {
@@ -127,6 +144,8 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
   }
 
   if (explorer) {
+    const tabBase = `${explorerTabId}-tab`;
+    const panelId = `${explorerTabId}-panel`;
     return (
       <section id="fit" className={sectionClass}>
         <h2 className={opp.h2}>{opportunity.roleMatchSectionTitle ?? 'Evidence explorer'}</h2>
@@ -134,15 +153,81 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
         <p className={`mt-4 ${opp.subtle}`}>
           Coverage checklist — Discover through Handoff. Select a stage to inspect the artifact.
         </p>
+        <ExplorerLegend />
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:items-start lg:gap-6">
-          <div className={cn(opp.illustrationPanel, 'order-1 lg:order-2 lg:sticky lg:top-36')} aria-live="polite">
+          <div className={cn(opp.tableWrap, 'order-1')}>
+            <div className={opp.matrixHeader}>
+              <span>Stage</span>
+              <span>Claim</span>
+            </div>
+            <div
+              className={opp.divide}
+              role="tablist"
+              aria-label="FDE lifecycle stages"
+              onKeyDown={(event) => {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+                  event.preventDefault();
+                  setActiveIndex((i) => (i + 1) % rows.length);
+                }
+                if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+                  event.preventDefault();
+                  setActiveIndex((i) => (i - 1 + rows.length) % rows.length);
+                }
+              }}
+            >
+              {rows.map((row, index) => {
+                const active = index === activeIndex;
+                const tabId = `${tabBase}-${index}`;
+                return (
+                  <button
+                    key={rowKey(row, index)}
+                    type="button"
+                    role="tab"
+                    id={tabId}
+                    aria-selected={active}
+                    aria-controls={panelId}
+                    tabIndex={active ? 0 : -1}
+                    className={cn(
+                      'min-h-[3rem] w-full px-3 py-3.5 text-left transition-colors sm:px-4',
+                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]',
+                      accent.focusRing,
+                      active ? accent.activeRow : opp.rowHover,
+                    )}
+                    onClick={() => setActiveIndex(index)}
+                    onFocus={() => setActiveIndex(index)}
+                  >
+                    <span className="flex items-start gap-3">
+                      <StageIcon stage={row.stage} />
+                      <span className="min-w-0 flex-1">
+                        <span className="flex flex-wrap items-center gap-2">
+                          <span className={opp.matrixPrimary}>{row.stage ?? row.requirement}</span>
+                          {row.evidenceType ? <EvidenceTypeBadge type={row.evidenceType} /> : null}
+                        </span>
+                        <span className={cn(opp.matrixSecondary, 'mt-1 block')}>
+                          {row.claim ?? row.evidence}
+                        </span>
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div
+            className={cn(opp.illustrationPanel, 'order-2 lg:sticky lg:top-36')}
+            role="tabpanel"
+            id={panelId}
+            aria-labelledby={`${tabBase}-${activeIndex}`}
+            tabIndex={0}
+          >
             <ExplorerVisual row={activeRow} />
             {activeRow ? (
               <div className={opp.illustrationCaption}>
                 <div className="flex flex-wrap items-center gap-2">
                   {activeRow.stage ? (
-                    <p className={opp.accentCategory}>{activeRow.stage}</p>
+                    <LifecycleStageChip stage={activeRow.stage} />
                   ) : (
                     <p className={opp.accentCategory}>{activeRow.requirement}</p>
                   )}
@@ -178,48 +263,6 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
                 ) : null}
               </div>
             ) : null}
-          </div>
-
-          <div className={cn(opp.tableWrap, 'order-2 lg:order-1')}>
-            <div className={opp.matrixHeader}>
-              <span>Stage</span>
-              <span>Claim</span>
-            </div>
-            <ul className={opp.divide} role="list">
-              {rows.map((row, index) => {
-                const active = index === activeIndex;
-                return (
-                  <li key={rowKey(row, index)}>
-                    <button
-                      type="button"
-                      className={cn(
-                        'min-h-[3rem] w-full px-3 py-3.5 text-left transition-colors sm:px-4',
-                        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]',
-                        accent.focusRing,
-                        active ? accent.activeRow : opp.rowHover,
-                      )}
-                      aria-current={active ? 'true' : undefined}
-                      onMouseEnter={() => setActiveIndex(index)}
-                      onFocus={() => setActiveIndex(index)}
-                      onClick={() => setActiveIndex(index)}
-                    >
-                      <span className="flex items-start gap-3">
-                        <StageIcon stage={row.stage} />
-                        <span className="min-w-0 flex-1">
-                          <span className="flex flex-wrap items-center gap-2">
-                            <span className={opp.matrixPrimary}>{row.stage ?? row.requirement}</span>
-                            {row.evidenceType ? <EvidenceTypeBadge type={row.evidenceType} /> : null}
-                          </span>
-                          <span className={cn(opp.matrixSecondary, 'mt-1 block')}>
-                            {row.claim ?? row.evidence}
-                          </span>
-                        </span>
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
           </div>
         </div>
       </section>
@@ -323,6 +366,12 @@ function ExplorerVisual({ row }: { row?: RoleMatchRow }) {
   const illustration = row?.illustration;
   if (illustration?.visual === 'field-kit-loop') {
     return <FieldKitLoopDiagram className="rounded-none border-0" />;
+  }
+  if (illustration?.visual === 'harness' || illustration?.visual === 'allow-ask-deny') {
+    return <AepHarnessVisual />;
+  }
+  if (illustration?.visual === 'thin-slice') {
+    return <DesignForwardFdeLoopDiagram className="rounded-none border-0" />;
   }
   if (illustration?.src) {
     return (

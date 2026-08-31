@@ -20,7 +20,8 @@ export type EvidenceProjectId =
   | 'bookleggers-commerce-automation'
   | 'agentic-ops'
   | 'comfyui-output-provenance'
-  | 'flora-field-kit';
+  | 'flora-field-kit'
+  | 'agentic-evidence-pipeline';
 
 export type EvidenceProject = {
   id: EvidenceProjectId;
@@ -173,13 +174,25 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     title: 'FLORA Field Kit — client workflow console',
     category: 'Forward-deployed delivery · prototype',
     summary:
-      'Standalone Next.js console for brief intake, technique recommendation, run/review, and shareable case-study export. Models the FDE loop: sit with a customer problem, prototype a working path, leave something the team can reuse.',
+      'Standalone Next.js console for brief intake, technique recommendation, run/review, and shareable case-study export. Models the FDE loop: sit with a customer problem, prototype a working path, leave something the team can reuse. Fixture demo at flora-field-kit.vercel.app; live FLORA Techniques need published IDs and paid API access.',
     skillTags: ['Next.js', 'TypeScript', 'Client delivery', 'Runbooks', 'Prototyping'],
     imageSrc:
       '/images/opportunities/flora-forward-deployed-creative/flora-field-kit-overview-concept-study.png',
     imageAlt: 'FLORA Field Kit — brief-to-handoff client workflow console',
     imageLocal: true,
-    href: 'https://github.com/moisestech/flora-field-kit',
+    href: 'https://flora-field-kit.vercel.app',
+  },
+  'agentic-evidence-pipeline': {
+    id: 'agentic-evidence-pipeline',
+    title: 'Agentic Evidence Pipeline',
+    category: 'Reference implementation · governance',
+    summary:
+      'Evidence in. Reviewable decisions out. TypeScript reference with hybrid retrieval, citation fail-closed, persisted human review, and an append-only audit trail. Synthetic fixtures and a fake-model harness — not a hosted customer product.',
+    skillTags: ['TypeScript', 'Postgres', 'Human review', 'Citation gate', 'LangGraph'],
+    imageSrc: '/images/teaching/saturday-lab-facilitator-flow.svg',
+    imageAlt: 'Agentic Evidence Pipeline — evidence in, reviewable decisions out',
+    imageLocal: true,
+    href: 'https://github.com/moisestech/agentic-evidence-pipeline',
   },
 };
 

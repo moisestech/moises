@@ -12,11 +12,8 @@ import type {
   CodeInspectBlock,
   HonestyOverlay,
   Opportunity,
-  ProofSnapshot,
-  RoleMatchRow,
 } from './types';
-import { deloitteAiDesignFacilitatorFdeBanner, deloitteFacilitatorWorkshopStill } from '@/content/evidence/applicationBanners';
-import { evidenceProjects } from '@/content/evidence/projects';
+import { deloitteAiDesignFacilitatorFdeBanner } from '@/content/evidence/applicationBanners';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import { capabilitiesPillarHref } from '@/content/capabilities';
 import { sprint2026Ctas, sprint2026Headshot } from './shared-sprint-2026';
@@ -25,17 +22,28 @@ import {
   saturdayLabLive,
 } from './packs/designFacilitationEvidencePack';
 import { designFacilitationClaimedStackBand } from '@/content/evidence/recruitingLogoBand';
-import { ART_OF_AI_AGENTS_SCREENSHOTS } from '@/constants/art-of-ai-agents';
 import { digilabMedia } from '@/content/oolite-arts/media';
+import {
+  AEP_BLOB,
+  AEP_REPO,
+  FIELD_KIT_DEMO,
+  FIELD_KIT_DEMO_CASE,
+  FIELD_KIT_REPO,
+  FDE_EXPLORER_IDS,
+  FDE_FEATURED_PROJECT_IDS,
+  FDE_PROOF_IDS,
+  FDE_SUPPORTING_IDS,
+  fdeItem,
+  toExplorerRow,
+  toProofCard,
+  toSupportingItem,
+} from './fdeEvidenceRegistry';
 
 const EMPLOYER_URL =
   'https://apply.deloitte.com/en_US/careers/JobDetail/AI-Design-Facilitator-and-Forward-Deployed-Engineer-II/360529';
 
 const TECH_CV_PDF = '/resume/moises-sanabria-technology-cv.pdf';
 const EVIDENCE_BRIEF_PDF = '/resume/MoisesSanabria_FDE_Technical_Evidence.pdf';
-const FIELD_KIT_REPO = 'https://github.com/moisestech/flora-field-kit';
-const AEP_REPO = 'https://github.com/moisestech/agentic-evidence-pipeline';
-const AEP_BLOB = `${AEP_REPO}/blob/main`;
 
 const OOLITE_LOGO_BLACK =
   'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753833092/tech-nonprofit/oolite/logos/oolite-arts-logo-black_sx0l62.png';
@@ -43,14 +51,12 @@ const OOLITE_LOGO_WHITE =
   'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753833092/tech-nonprofit/oolite/logos/oolite-arts-logo-white_sbfeqz.png';
 
 const teachingWorkshop = digilabMedia['workshop.art-tech-coding'];
-const lore = evidenceProjects['lore-machine'];
-const playwire = evidenceProjects['playwire-alumni'];
 const n8nSpec = automationProjectSpecs['n8n-gmail-intelligence'];
 const bookleggersSpec = automationProjectSpecs['bookleggers-commerce-automation'];
-
-const taskAutomationSlide = ART_OF_AI_AGENTS_SCREENSHOTS.find(
-  (s) => s.id === 'artist-task-automation-1',
-)!;
+const oolite = fdeItem('oolite-workshops');
+const lore = fdeItem('lore-machine');
+const bookleggers = fdeItem('bookleggers');
+const aep = fdeItem('aep');
 
 const overlayHonesty: HonestyOverlay = {
   title: 'What I bring',
@@ -69,50 +75,10 @@ const overlayHonesty: HonestyOverlay = {
     'I would bring design practice, hands-on teaching, and product engineering while learning the team’s delivery method, client governance, and platform conventions.',
 };
 
-const proofSnapshot: ProofSnapshot = {
-  title: 'Proof snapshot',
-  intro:
-    'Each card is an evidence type, not a claim of completeness. Tools sit on the card they actually support.',
-  cards: [
-    {
-      title: 'Oolite + Playwire delivery',
-      body: 'Eighteen workshops and publisher-facing solutions work. I observe the stuck point, then leave a path the team can run.',
-      evidenceType: 'production-experience',
-    },
-    {
-      title: 'Lore Machine',
-      body: 'Founding engineer / Chief Prompt Officer: prompt systems, image pipelines, and creator workflows that shipped.',
-      evidenceType: 'shipped-product',
-    },
-    {
-      title: 'Agentic Evidence Pipeline',
-      body: 'TypeScript reference with synthetic evidence and a fake-model harness — not a hosted product.',
-      evidenceType: 'reference-implementation',
-    },
-    {
-      title: 'Field Kit',
-      body: 'Brief → technique → human review → handoff. Fixture demo; live FLORA is optional and paid.',
-      evidenceType: 'fixture-prototype',
-      tools: ['Cursor', 'Claude', 'Next.js'],
-    },
-    {
-      title: 'Saturday Lab pack',
-      body: 'Intake, learner paths, help queue, and an exit-ticket instrument. Designed pages — not attendance or scores.',
-      evidenceType: 'teaching-instrument',
-      tools: ['Figma', 'Airtable'],
-    },
-    {
-      title: 'Design-forward thin slice',
-      body: 'How I would enter an FDE method: frame, facilitate, prototype, test, leave a teaching artifact. Not completed client work.',
-      evidenceType: 'proposed-approach',
-    },
-  ],
-};
-
 const codeInspect: CodeInspectBlock = {
   title: 'Code to inspect',
   intro:
-    'Strongest public files from the Agentic Evidence Pipeline. This is a TypeScript reference implementation with synthetic evidence and a fake-model evaluation harness — not a hosted product, not a customer production deployment, and not client platform work. Demo rasters from the AEP repo are not copied here.',
+    'Evidence in. Reviewable decisions out. Strongest public files from the Agentic Evidence Pipeline — a TypeScript reference implementation with synthetic fixtures and a fake-model evaluation harness. Not a hosted customer product, not a live-model quality claim, and not client platform work. Demo rasters from the AEP repo are not copied here.',
   items: [
     {
       id: 'run',
@@ -155,114 +121,6 @@ const codeInspect: CodeInspectBlock = {
     },
   ],
 };
-
-const explorerRows: RoleMatchRow[] = [
-  {
-    requirement: 'Observe real workflows',
-    stage: 'Discover',
-    claim: 'I watch the stuck point before choosing a tool.',
-    evidence:
-      'At Lore Machine, face-coherent generation assumed human characters; animal casts had no usable face path. Saturday Lab intake asks what is stuck before routing a path.',
-    evidenceType: 'production-experience',
-    whatChanged:
-      'The Lore pipeline split: people keep face-to-face coherence; animals skip it and use prompt engineering so nonhuman casts could ship.',
-    whatThisProves:
-      'Observation changed the build. This is not a formal usability-study result.',
-    inspectHref: '/projects/lore-machine',
-    inspectLabel: 'Inspect Lore Machine',
-    status: 'demonstrated',
-    illustration: {
-      src: deloitteFacilitatorWorkshopStill.src,
-      alt: deloitteFacilitatorWorkshopStill.alt,
-      local: true,
-    },
-  },
-  {
-    requirement: 'Early-stage prototyping',
-    stage: 'Prototype',
-    claim: 'I turn a brief into one reviewable workflow.',
-    evidence:
-      'Field Kit models brief intake, technique recommendation, review, and case-study export as a Next.js fixture demo.',
-    evidenceType: 'fixture-prototype',
-    whatChanged: 'A client-shaped loop exists as a console: brief → recommend → review → handoff.',
-    whatThisProves:
-      'Rapid prototyping habit. Live FLORA Techniques need published IDs and paid API access. Not a delivery method claim.',
-    inspectHref: FIELD_KIT_REPO,
-    inspectLabel: 'Inspect Field Kit repo',
-    status: 'demonstrated',
-    illustration: { visual: 'field-kit-loop' },
-  },
-  {
-    requirement: 'Human review in the loop',
-    stage: 'Govern',
-    claim: 'Write-paths pause for a person; unsupported citations fail closed.',
-    evidence:
-      'AEP policy.ts lowers confidence and forces review when evidence IDs are missing. Field Kit keeps a human gate before handoff.',
-    evidenceType: 'reference-implementation',
-    whatChanged: 'Assessment state persists across a review pause; invalid citations cannot silently pass.',
-    whatThisProves:
-      'Governance as code in a TypeScript reference — not a hosted production system.',
-    inspectHref: `${AEP_BLOB}/packages/agent/src/policy.ts`,
-    inspectLabel: 'Inspect policy.ts',
-    status: 'demonstrated',
-    illustration: {
-      src: taskAutomationSlide.src,
-      alt: taskAutomationSlide.alt,
-    },
-  },
-  {
-    requirement: 'Product incubation',
-    stage: 'Deploy',
-    claim: 'I take a concept to a system people can operate.',
-    evidence:
-      'Lore Machine: prompt systems, generative image pipelines, APIs, and creator-facing workflows.',
-    evidenceType: 'shipped-product',
-    whatChanged: 'Creators could generate nonhuman casts without the face pipeline failing.',
-    whatThisProves: 'Shipped product incubation with mixed stakeholders. CoreStory is a separate dossier.',
-    inspectHref: '/projects/lore-machine',
-    inspectLabel: 'Inspect Lore Machine',
-    status: 'demonstrated',
-    illustration: {
-      src: lore.imageSrc,
-      alt: lore.imageAlt,
-    },
-  },
-  {
-    requirement: 'Teach technical AI through a design lens',
-    stage: 'Teach',
-    claim: 'Mixed audiences leave with a path, not a lecture.',
-    evidence:
-      'Eighteen Oolite workshops plus Saturday Lab materials: intake, learner paths, help queue. Designed instruments; attendance and scores are not published.',
-    evidenceType: 'teaching-instrument',
-    whatChanged:
-      'A recurring stuck point — GitHub deploy, editor choice, connecting a purchased domain — is routed through intake and a help queue.',
-    whatThisProves: 'Instructional design you can inspect. Not measured learning gains.',
-    inspectHref: saturdayLabLive.facilitator,
-    inspectLabel: 'Inspect Saturday Lab facilitator',
-    status: 'demonstrated',
-    illustration: {
-      src: teachingWorkshop.src,
-      alt: teachingWorkshop.alt,
-    },
-  },
-  {
-    requirement: 'Leave the team able to operate the work',
-    stage: 'Handoff',
-    claim: 'The artifact is a runbook and a teaching page, not a dependency on me.',
-    evidence:
-      'Playwire solutions engineering; Oolite Digilab documentation; workshop handouts left behind.',
-    evidenceType: 'production-experience',
-    whatChanged: 'Partners keep a setup guide, failure procedure, and a repeatable exercise.',
-    whatThisProves: 'Enablement as a delivery habit. Not a claim that I own a firm method.',
-    inspectHref: '/oolite-arts',
-    inspectLabel: 'Inspect Oolite case study',
-    status: 'demonstrated',
-    illustration: {
-      src: playwire.imageSrc,
-      alt: playwire.imageAlt,
-    },
-  },
-];
 
 const facilitatorCertifications: Opportunity['certifications'] = [
   {
@@ -324,13 +182,17 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
     capabilitiesHref: capabilitiesPillarHref('design-creative-technology'),
     applicationBanner: deloitteAiDesignFacilitatorFdeBanner,
     bannerPlacement: 'after-hero',
+    heroActionLayout: 'primary-then-rest',
+    showFdeRoleMap: true,
+    showAepHarness: true,
     seo: isFlagship
       ? {
-          title: 'Forward-Deployed Systems — AI Design Facilitator | Moises Sanabria',
+          title: 'Forward-Deployed AI Systems | Moises Sanabria',
           description:
             'I turn ambiguous needs into usable AI workflows, teach people to work with them, and make their limitations explicit.',
           indexable: true,
           keywords: [
+            'Forward-Deployed AI Systems',
             'AI Design Facilitator',
             'Forward Deployed Engineer',
             'human-centered design',
@@ -370,10 +232,13 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
     audienceKeywords: {
       lead: 'How the work moves',
       terms: [
-        { label: 'Observe', detail: 'Watch the real workflow and name the stuck point before choosing tools.' },
-        { label: 'Frame', detail: 'Turn ambiguity into a bounded problem, an owner, and an acceptance test.' },
+        {
+          label: 'Discover',
+          detail: 'Observe the real workflow and frame a bounded problem, an owner, and an acceptance test before choosing tools.',
+        },
         { label: 'Prototype', detail: 'Build one reviewable workflow with generative tools and a manual fallback.' },
         { label: 'Govern', detail: 'Put a human gate on write-paths and make limitations explicit.' },
+        { label: 'Deploy', detail: 'Take a concept to a system people can operate.' },
         { label: 'Teach', detail: 'Run a mixed-audience session so people can operate the work.' },
         { label: 'Handoff', detail: 'Leave a runbook and a teaching artifact the team can run without me.' },
       ],
@@ -389,8 +254,10 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
     heroSecondaryCta: { label: 'Inspect evidence', href: '#fit' },
     navItems: isFlagship ? flagshipNav : overlayNav,
     hero: {
-      headline: 'AI Design Facilitator',
-      subheadline: 'I observe real workflows, turn ambiguity into usable AI systems, build human review into them, and leave teams able to operate the work.',
+      headline: isFlagship ? 'Forward-Deployed AI Systems' : 'AI Design Facilitator and Forward-Deployed Engineer II',
+      subheadline: isFlagship
+        ? 'AI Design Facilitator — I watch real workflows, turn ambiguity into usable AI systems, build human review into them, and leave teams able to operate the work.'
+        : 'I watch real workflows, turn ambiguity into usable AI systems, build human review into them, and leave teams able to operate the work.',
       introParagraphs: [
         'The work is both client-facing and internal enablement: mixed-audience workshops, user research that changes the build, and a system plus a teaching artifact the team can operate without me.',
       ],
@@ -398,7 +265,14 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
       headshotAlt: 'Moises Sanabria',
     },
     honestyOverlay: isFlagship ? undefined : overlayHonesty,
-    proofSnapshot: isFlagship ? proofSnapshot : undefined,
+    proofSnapshot: isFlagship
+      ? {
+          title: 'Proof snapshot',
+          intro:
+            'Each card is an evidence type, not a claim of completeness. Tools sit on the card they actually support. Stage color and maturity treatment are separate encodings.',
+          cards: FDE_PROOF_IDS.map((id) => toProofCard(fdeItem(id))),
+        }
+      : undefined,
     codeInspect,
     roleMatchSectionTitle: 'FDE evidence explorer',
     roleMatchIntro:
@@ -407,28 +281,21 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
       left: 'Stage',
       right: 'Claim',
     },
-    roleMatchRows: explorerRows,
-    featuredProjectIds: [
-      'ai24',
-      'lore-machine',
-      'flora-field-kit',
-      'n8n-gmail-intelligence',
-      'bookleggers-commerce-automation',
-    ],
+    roleMatchRows: FDE_EXPLORER_IDS.map((id) => toExplorerRow(fdeItem(id), surface)),
+    featuredProjectIds: [...FDE_FEATURED_PROJECT_IDS],
     caseStudyColumns: 2,
     caseStudiesSectionTitle: 'Featured evidence',
     caseStudiesIntro:
-      'Teaching and incubation first. Field Kit is a fixture-based prototype; the email organizer is a teaching artifact. Bookleggers is live client ops. Supporting AEP source is in Code.',
+      'Four primary cases. Field Kit, the February n8n workshop, and Playwire sit under See all — supporting, not competing with these.',
     caseStudyOverrides: [
       {
         evidenceId: 'ai24',
-        title: 'Teaching + facilitation',
+        title: oolite.title,
         category: 'OOLITE ARTS + PUBLIC WORKSHOPS',
-        summary:
-          'Eighteen hands-on technical workshops at Oolite Arts, plus public programs that teach generative AI through making. A designed Saturday Lab beat is getting people unstuck on GitHub deploy, Copilot / Cursor / Replit, and connecting a purchased domain — not a published attendance or score claim.',
+        summary: `${oolite.whatChanged} ${oolite.limitation}`,
         skillTags: ['Workshops', 'Curriculum', 'Critique', 'Enablement', 'Handoff'],
-        href: '/oolite-arts',
-        linkLabel: 'View Oolite case study',
+        href: oolite.inspectHref,
+        linkLabel: oolite.inspectLabel,
         secondaryHref: saturdayLabLive.facilitator,
         secondaryLinkLabel: 'Saturday Lab facilitator',
         imageSrc: teachingWorkshop.src,
@@ -436,50 +303,71 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
       },
       {
         evidenceId: 'lore-machine',
-        title: 'Product incubation',
+        title: lore.title,
         category: 'LORE MACHINE — CONCEPT TO SHIPPED PLATFORM',
-        summary:
-          'Generative storytelling product: prompt systems, image pipelines, APIs, and creator-facing workflows. Face-coherent generation assumed human characters; animal and other nonhuman casts needed a different path. People still use face coherence; animals skip it and use prompt engineering so those stories could ship without the face pipeline failing. CoreStory is a separate dossier — not inferred here.',
+        summary: `${lore.whatChanged} ${lore.limitation}`,
         skillTags: ['Product incubation', 'GenAI', 'Prompt systems', 'APIs', 'Creator UX'],
-        href: '/projects/lore-machine',
-        linkLabel: 'View Lore Machine',
-      },
-      {
-        evidenceId: 'flora-field-kit',
-        title: 'Rapid-prototype FDE console',
-        category: 'FIELD KIT — PROTOTYPE',
-        summary:
-          'Next.js prototype for brief intake, technique recommendation, review, and case-study export. The documented demo uses fixtures; live Techniques require published identifiers and paid API access. Independent work, not a client delivery. No hosted demo URL is published here — inspect the repo.',
-        skillTags: ['Prototyping', 'Brief intake', 'Review', 'Handoff', 'Next.js'],
-        href: FIELD_KIT_REPO,
-        linkLabel: 'Inspect prototype and setup',
-        visual: 'field-kit-loop',
-      },
-      {
-        evidenceId: 'n8n-gmail-intelligence',
-        title: n8nSpec.title,
-        category: 'HANDS-ON GENAI TEACHING ARTIFACT',
-        summary:
-          'Email classification exercise from The Art of AI Agents: workflow diagram, label definitions, and a structured-output prompt that learners can inspect and adapt. This handout is teaching evidence, not a production reliability report.',
-        skillTags: [...n8nSpec.skillTags],
-        href: '/workshop/the-art-of-ai-agents/share',
-        linkLabel: 'View workshop handout',
-        secondaryHref: '/workshop/the-art-of-ai-agents',
-        secondaryLinkLabel: 'Art of AI Agents',
-        imageSrc: n8nSpec.imageSrc,
-        imageAlt: n8nSpec.imageAlt,
+        href: lore.inspectHref,
+        linkLabel: lore.inspectLabel,
       },
       {
         evidenceId: 'bookleggers-commerce-automation',
-        title: bookleggersSpec.title,
+        title: bookleggers.title,
         category: 'CLIENT OPS — BOOKLEGGERS LIBRARY',
-        summary:
-          'Make.com scenario connecting Square transactions to Airtable so library staff can see sales and inventory without a spreadsheet handoff. Independent client ops — not a Deloitte or AMC delivery.',
+        summary: `${bookleggers.whatChanged} ${bookleggers.limitation}`,
         skillTags: [...bookleggersSpec.skillTags],
-        href: '/ai-engineering#proof',
-        linkLabel: 'View in AI Engineering',
+        href: bookleggers.inspectHref,
+        linkLabel: bookleggers.inspectLabel,
         imageSrc: bookleggersSpec.imageSrc,
         imageAlt: bookleggersSpec.imageAlt,
+      },
+      {
+        evidenceId: 'agentic-evidence-pipeline',
+        title: aep.title,
+        category: 'AEP — EVIDENCE IN, REVIEWABLE DECISIONS OUT',
+        summary: `${aep.whatThisProves} ${aep.limitation}`,
+        skillTags: aep.tools ?? ['TypeScript', 'Postgres', 'human review'],
+        href: '#code-inspect',
+        linkLabel: 'Inspect code on this page',
+        secondaryHref: AEP_REPO,
+        secondaryLinkLabel: 'AEP on GitHub',
+        visual: 'harness',
+      },
+    ],
+    supportingEvidenceTitle: 'See all — supporting evidence',
+    supportingEvidenceIntro:
+      'Field Kit is last on purpose. The n8n card is the February teaching workshop. Playwire is a one-line supporting tile — not a featured case.',
+    supportingEvidence: FDE_SUPPORTING_IDS.map((id) => {
+      const item = toSupportingItem(fdeItem(id));
+      if (id === 'field-kit') {
+        return {
+          ...item,
+          body: `${item.body} Demo case: ${FIELD_KIT_DEMO_CASE.replace('https://', '')}.`,
+          href: FIELD_KIT_DEMO,
+          secondaryHref: FIELD_KIT_REPO,
+        };
+      }
+      if (id === 'n8n-workshop') {
+        return {
+          ...item,
+          title: n8nSpec.teachingTitle ?? item.title,
+          body: n8nSpec.teachingEvidenceLine ?? item.body,
+        };
+      }
+      return item;
+    }),
+    sectionQuotes: [
+      {
+        after: 'hero',
+        quote: 'Watch the stuck point. Leave a path the team can run.',
+      },
+      {
+        after: 'cases',
+        quote: 'Four cases you can inspect. Supporting work is labeled as supporting.',
+      },
+      {
+        after: 'teaching',
+        quote: 'The model interprets ambiguity. The harness owns context, tools, permissions, and review.',
       },
     ],
     teachingHighlights: designFacilitationTeachingHighlights,
@@ -505,28 +393,38 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         ],
     processSectionTitle: 'Proposed design-forward FDE thin slice',
     processIntro:
-      'A bounded first engagement: frame a real user problem, facilitate a mixed-audience session, prototype with generative tools, test, then leave a runbook and a teaching artifact. This is how I would enter an FDE method; it is not presented as completed client work.',
+      'A bounded first engagement in the same six words as the rest of this page. Facilitate and test are verbs inside Teach and Prototype — not extra stages. This is how I would enter an FDE method; it is not presented as completed client work.',
     processVisual: 'design-fde-loop',
     processSteps: [
       {
-        title: 'Frame the user problem',
-        description: 'Observe the current workflow with a user. Name the decision owner, baseline, data constraints, and a measurable acceptance criterion before choosing tools.',
+        title: 'Discover',
+        description:
+          'Observe the current workflow with a user, then frame the decision owner, baseline, data constraints, and a measurable acceptance criterion before choosing tools.',
       },
       {
-        title: 'Facilitate a working session',
-        description: 'Give designers, engineers, and product partners a shared task with paths for different skill levels. Capture assumptions and decide what is outside the first prototype.',
+        title: 'Prototype',
+        description:
+          'Build one reviewable workflow. Keep deterministic rules outside the model, limit tool permissions, and define a manual fallback. Test expected, ambiguous, and adversarial inputs against the baseline.',
       },
       {
-        title: 'Prototype with GenAI tools',
-        description: 'Build one reviewable workflow. Keep deterministic rules outside the model, limit tool permissions, and define a manual fallback. Add an agent only if the task needs one.',
+        title: 'Govern',
+        description:
+          'Put a human gate on write-paths. Unsupported citations fail closed; uncertain results pause for a person. Make limitations explicit.',
       },
       {
-        title: 'Test with real users',
-        description: 'Observe task completion and errors, then test expected, ambiguous, and adversarial inputs. Compare against the baseline; record what changed and what remains uncertain.',
+        title: 'Deploy',
+        description:
+          'Take the slice to a system people can operate. Record what changed and what remains uncertain.',
       },
       {
-        title: 'Leave a teaching artifact',
-        description: 'Leave an owner, setup guide, failure procedure, and repeatable exercise. Ask a teammate to operate and explain the workflow without assistance before calling handover complete.',
+        title: 'Teach',
+        description:
+          'Facilitate a mixed-audience session so designers, engineers, and product partners can operate the work. Capture assumptions and decide what is outside the first slice.',
+      },
+      {
+        title: 'Handoff',
+        description:
+          'Leave an owner, setup guide, failure procedure, and repeatable exercise. Ask a teammate to operate and explain the workflow without assistance before calling handover complete.',
       },
     ],
     ctas: {

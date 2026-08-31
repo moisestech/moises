@@ -27,6 +27,10 @@ export const designFacilitationTeachingHighlights: TeachingHighlight[] = [
     .filter((item) => item.href === '/workshop/the-art-of-ai-agents/share')
     .map((item) => ({
       ...item,
+      title: n8nBanner.teachingTitle ?? item.title,
+      description:
+        n8nBanner.teachingEvidenceLine ??
+        'February no-code workshop: learners classify mail, then review the rules. Operational Gmail → labels → Airtable is a related system, labeled separately.',
       imageSrc: n8nBanner.imageSrc,
       imageAlt: n8nBanner.imageAlt,
     })),

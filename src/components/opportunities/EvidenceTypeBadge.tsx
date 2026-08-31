@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { EvidenceType } from '@/content/opportunities/types';
 
@@ -10,19 +11,19 @@ export const EVIDENCE_TYPE_LABEL: Record<EvidenceType, string> = {
   'proposed-approach': 'Proposed approach',
 };
 
-const STYLES: Record<EvidenceType, string> = {
-  'production-experience':
-    'border-emerald-300/80 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-200',
+/** Shape / line treatments — not the lifecycle hue system. */
+const TREATMENTS: Record<EvidenceType, string> = {
+  'production-experience': 'border-solid bg-stone-800 text-stone-50 dark:bg-stone-200 dark:text-stone-900',
   'shipped-product':
-    'border-sky-300/80 bg-sky-50 text-sky-900 dark:border-sky-800 dark:bg-sky-950/50 dark:text-sky-200',
+    'border-solid bg-stone-50 text-stone-800 dark:bg-stone-900 dark:text-stone-100',
   'reference-implementation':
-    'border-violet-300/80 bg-violet-50 text-violet-900 dark:border-violet-800 dark:bg-violet-950/50 dark:text-violet-200',
+    'border-solid bg-transparent text-stone-700 dark:text-stone-200',
   'fixture-prototype':
-    'border-amber-300/80 bg-amber-50 text-amber-950 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-100',
+    'border-dotted bg-transparent text-stone-700 dark:text-stone-200',
   'teaching-instrument':
-    'border-cyan-300/80 bg-cyan-50 text-cyan-900 dark:border-cyan-800 dark:bg-cyan-950/50 dark:text-cyan-200',
+    'border-solid bg-[repeating-linear-gradient(-45deg,transparent,transparent_3px,rgba(120,113,108,0.18)_3px,rgba(120,113,108,0.18)_6px)] text-stone-800 dark:text-stone-100',
   'proposed-approach':
-    'border-stone-300 bg-stone-100 text-stone-700 dark:border-stone-600 dark:bg-stone-800 dark:text-stone-200',
+    'border-dashed bg-transparent text-stone-600 dark:text-stone-300',
 };
 
 export function EvidenceTypeBadge({
@@ -35,12 +36,22 @@ export function EvidenceTypeBadge({
   return (
     <span
       className={cn(
-        'inline-flex w-fit rounded-md border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide',
-        STYLES[type],
+        'inline-flex w-fit items-center gap-1 rounded-md border-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide',
+        TREATMENTS[type],
         className,
       )}
     >
+      {type === 'shipped-product' ? <Check className="h-3 w-3" aria-hidden /> : null}
       {EVIDENCE_TYPE_LABEL[type]}
     </span>
   );
 }
+
+export const MATURITY_LEGEND: { type: EvidenceType; mark: string }[] = [
+  { type: 'production-experience', mark: 'solid fill' },
+  { type: 'shipped-product', mark: 'check' },
+  { type: 'reference-implementation', mark: 'outline' },
+  { type: 'fixture-prototype', mark: 'dotted' },
+  { type: 'teaching-instrument', mark: 'striped' },
+  { type: 'proposed-approach', mark: 'dashed' },
+];
