@@ -99,15 +99,15 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             <CaseStudyGrid opportunity={opportunity} framed />
           </OpportunityColorSection>
 
-          {opportunity.codeInspect ? (
-            <OpportunityColorSection sectionId="code-inspect" className="mt-10 sm:mt-14">
-              <CodeInspectSection data={opportunity.codeInspect} framed />
-            </OpportunityColorSection>
-          ) : null}
-
           {opportunity.teachingHighlights?.length || opportunity.certifications?.length ? (
             <OpportunityColorSection sectionId="teaching-cred" className="mt-10 sm:mt-14">
               <OpportunityTeachingCredentials opportunity={opportunity} framed />
+            </OpportunityColorSection>
+          ) : null}
+
+          {opportunity.codeInspect ? (
+            <OpportunityColorSection sectionId="code-inspect" className="mt-10 sm:mt-14">
+              <CodeInspectSection data={opportunity.codeInspect} framed />
             </OpportunityColorSection>
           ) : null}
 

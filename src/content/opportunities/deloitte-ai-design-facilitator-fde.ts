@@ -1,14 +1,14 @@
 /**
  * Deloitte — AI Design Facilitator and Forward-Deployed Engineer II
- * /opportunities/deloitte-ai-design-facilitator-fde
+ * Public send: /forward-deployed
+ * Private overlay: /opportunities/deloitte-ai-design-facilitator-fde
  * Alias: /applied-ai/deloitte-ai-design-facilitator
  *
- * Compact application-evidence overlay for requisition 360529.
- * Lead with design practice, facilitation, and product incubation; keep
- * consulting-platform cadence as an explicit ramp.
+ * Compact application-evidence dossier for requisition 360529.
+ * One body, two surfaces (indexable flagship vs noindex overlay).
  */
 
-import type { HonestyOverlay, Opportunity } from './types';
+import type { CodeInspectBlock, HonestyOverlay, Opportunity } from './types';
 import { deloitteAiDesignFacilitatorFdeBanner, deloitteFacilitatorWorkshopStill } from '@/content/evidence/applicationBanners';
 import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
@@ -31,6 +31,7 @@ const TECH_CV_PDF = '/resume/moises-sanabria-technology-cv.pdf';
 const EVIDENCE_BRIEF_PDF = '/resume/MoisesSanabria_FDE_Technical_Evidence.pdf';
 const FIELD_KIT_REPO = 'https://github.com/moisestech/flora-field-kit';
 const AEP_REPO = 'https://github.com/moisestech/agentic-evidence-pipeline';
+const AEP_BLOB = `${AEP_REPO}/blob/main`;
 
 const lore = evidenceProjects['lore-machine'];
 const playwire = evidenceProjects['playwire-alumni'];
@@ -47,7 +48,7 @@ const emailInboxDiagram = ART_OF_AI_AGENTS_SCREENSHOTS.find(
 const honestyOverlay: HonestyOverlay = {
   title: 'What I bring and where I would ramp',
   intro:
-    'This overlay maps the posted work — teaching through a design lens, early-stage prototyping, and incubation from concept to code — to inspectable materials. Client-facing delivery and internal enablement are both in scope. Workshop pages, product contributions, and reference implementations are identified separately.',
+    'This page maps the posted work — teaching through a design lens, early-stage prototyping, and incubation from concept to code — to inspectable materials. Client-facing delivery and internal enablement are both in scope. Workshop pages, product contributions, and reference implementations are identified separately.',
   provenTitle: 'Proven now',
   proven: [
     'Cooper Union BFA and a design practice applied to actual project work — installations, product interfaces, and workshop curricula.',
@@ -62,17 +63,73 @@ const honestyOverlay: HonestyOverlay = {
     'Deloitte client work or Advertising, Marketing & Commerce platform ownership.',
     'Measured learning gains or a formal usability-study result from the materials linked here.',
     'Ownership of Deloitte’s existing Forward-Deployed Engineer method.',
+    'ServiceNow platform ownership or implementation.',
     'GitHub Copilot, Replit, or Codex as the primary daily stack — Cursor and Claude are.',
   ],
   rampStatement:
     'I would bring design practice, hands-on teaching, and product engineering while learning the team’s delivery method, client governance, and platform conventions.',
 };
 
-/**
- * Deloitte AI Design Facilitator FDE II — compact recruiter dossier.
- */
-export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
-  slug: 'deloitte-ai-design-facilitator-fde',
+const codeInspect: CodeInspectBlock = {
+  title: 'Code to inspect',
+  intro:
+    'Strongest public files from the Agentic Evidence Pipeline. This is a TypeScript reference implementation with synthetic evidence and a fake-model evaluation harness — not a hosted product, not a customer production deployment, and not Deloitte or AMC work.',
+  items: [
+    {
+      id: 'run',
+      title: 'Stateful run + human review',
+      href: `${AEP_BLOB}/packages/agent/src/run.ts`,
+      body: 'Idempotent run creation, explicit state transitions, persisted assessment state, review pause/resume, and audit events.',
+    },
+    {
+      id: 'policy',
+      title: 'Citation fail-closed policy',
+      href: `${AEP_BLOB}/packages/agent/src/policy.ts`,
+      body: 'Unsupported evidence IDs lower confidence, change status to insufficient evidence, and force human review.',
+    },
+    {
+      id: 'search',
+      title: 'Hybrid retrieval',
+      href: `${AEP_BLOB}/packages/retrieval/src/search.ts`,
+      body: 'Tenant- and visibility-scoped lexical and vector search combined through reciprocal rank fusion.',
+    },
+    {
+      id: 'runner',
+      title: 'Durable job runner',
+      href: `${AEP_BLOB}/packages/jobs/src/runner.ts`,
+      body: 'Duplicate protection, classified failures, retry backoff, dead-letter handling, and replay semantics.',
+    },
+  ],
+  footnotes: [
+    {
+      label: 'Evidence ledger',
+      href: `${AEP_BLOB}/docs/EVIDENCE_LEDGER.md`,
+    },
+    {
+      label: 'Offline fake-provider report',
+      href: `${AEP_BLOB}/reports/offline/2026-08-12-fake-provider.json`,
+      note: 'offline harness evidence only',
+    },
+  ],
+};
+
+const navItems: Opportunity['navItems'] = [
+  { id: 'hero', label: 'Overview' },
+  { id: 'honesty', label: 'Honesty' },
+  { id: 'fit', label: 'Role fit' },
+  { id: 'case-studies', label: 'Evidence' },
+  { id: 'teaching-cred', label: 'Teaching' },
+  { id: 'code-inspect', label: 'Code' },
+  { id: 'process', label: 'Thin slice' },
+  { id: 'resume', label: 'Contact' },
+];
+
+type FacilitatorSurface = 'overlay' | 'flagship';
+
+function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opportunity {
+  const isFlagship = surface === 'flagship';
+  return {
+  slug: isFlagship ? 'forward-deployed' : 'deloitte-ai-design-facilitator-fde',
   status: 'active',
   listed: false,
   family: 'compact',
@@ -80,26 +137,44 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   variant: 'compact',
   capabilitiesHref: capabilitiesPillarHref('design-creative-technology'),
   applicationBanner: deloitteAiDesignFacilitatorFdeBanner,
-  seo: {
-    title: 'Moises Sanabria — Deloitte AI Design Facilitator Evidence',
-    description:
-      'Design facilitation, generative-AI teaching, rapid prototyping, and product incubation evidence for Deloitte AI Design Facilitator and Forward-Deployed Engineer II, requisition 360529.',
-    indexable: false,
-    keywords: [
-      'AI Design Facilitator',
-      'Forward Deployed Engineer',
-      'Deloitte',
-      'human-centered design',
-      'generative AI workshops',
-      'product incubation',
-      'application evidence',
-    ],
-  },
-  visibilityNote:
-    'Unlisted application-evidence page for Deloitte AI Design Facilitator and Forward-Deployed Engineer II (requisition 360529). Recruiting for this listing ends October 1, 2026. Anyone with the URL can view it. Not affiliated with or endorsed by Deloitte.',
+  seo: isFlagship
+    ? {
+        title: 'Forward-Deployed Systems — AI Design Facilitator | Moises Sanabria',
+        description:
+          'Design-forward forward-deployed engineering: teach technical AI through a design lens, rapid prototyping with generative tools, and product incubation from concept to code.',
+        indexable: true,
+        keywords: [
+          'AI Design Facilitator',
+          'Forward Deployed Engineer',
+          'human-centered design',
+          'generative AI workshops',
+          'product incubation',
+          'rapid prototyping',
+        ],
+      }
+    : {
+        title: 'Moises Sanabria — Deloitte AI Design Facilitator Evidence',
+        description:
+          'Design facilitation, generative-AI teaching, rapid prototyping, and product incubation evidence for Deloitte AI Design Facilitator and Forward-Deployed Engineer II, requisition 360529.',
+        indexable: false,
+        keywords: [
+          'AI Design Facilitator',
+          'Forward Deployed Engineer',
+          'Deloitte',
+          'human-centered design',
+          'generative AI workshops',
+          'product incubation',
+          'application evidence',
+        ],
+      },
+  visibilityNote: isFlagship
+    ? 'Prepared for AI Design Facilitator and Forward-Deployed Engineer II · recruiting through 1 Oct 2026 · not affiliated with or endorsed by Deloitte.'
+    : 'Unlisted application-evidence page for Deloitte AI Design Facilitator and Forward-Deployed Engineer II (requisition 360529). Recruiting for this listing ends October 1, 2026. Anyone with the URL can view it. Not affiliated with or endorsed by Deloitte.',
   company: 'Deloitte',
   roleTitle: 'AI Design Facilitator and Forward-Deployed Engineer II',
-  heroEyebrow: 'APPLICATION EVIDENCE / DELOITTE / REQ. 360529 / THROUGH 1 OCT 2026',
+  heroEyebrow: isFlagship
+    ? 'FORWARD-DEPLOYED · AI DESIGN FACILITATOR · FDE II · THROUGH 1 OCT 2026'
+    : 'APPLICATION EVIDENCE / DELOITTE / REQ. 360529 / THROUGH 1 OCT 2026',
   candidateName: 'Moises Sanabria',
   heroMetaChips: [
     'Cooper Union BFA',
@@ -110,15 +185,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   ],
   heroPrimaryCta: { label: 'View the evidence', href: '#case-studies' },
   heroSecondaryCta: { label: 'Teaching', href: '#teaching-cred' },
-  navItems: [
-    { id: 'hero', label: 'Overview' },
-    { id: 'honesty', label: 'Scope' },
-    { id: 'fit', label: 'Role fit' },
-    { id: 'case-studies', label: 'Evidence' },
-    { id: 'teaching-cred', label: 'Teaching' },
-    { id: 'process', label: 'Thin slice' },
-    { id: 'resume', label: 'Contact' },
-  ],
+  navItems,
   hero: {
     headline: 'AI Design Facilitator',
     subheadline: 'Teach technical AI through a design lens. Prototype. Incubate the right thing.',
@@ -129,6 +196,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     headshotAlt: 'Moises Sanabria',
   },
   honestyOverlay,
+  codeInspect,
   roleMatchSectionTitle: 'Role-to-evidence map',
   roleMatchIntro:
     'Posted responsibilities mapped to inspectable materials. A lesson plan demonstrates instructional design; a prototype demonstrates implementation within its stated limits.',
@@ -305,7 +373,7 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
     github: AEP_REPO,
     githubLabel: 'Inspect AEP source and limitations',
     githubProfile: 'https://github.com/moisestech',
-    careerPacket: '/forward-deployed',
+    careerPacket: isFlagship ? undefined : '/forward-deployed',
     caseStudiesAnchor: undefined,
     resumePrintPath: undefined,
   },
@@ -313,4 +381,13 @@ export const deloitteAiDesignFacilitatorFdeOpportunity: Opportunity = {
   animatedLogoBand: designFacilitationClaimedStackBand,
   resumeSectionTitle: 'Discuss the work, inspect the evidence',
   resumeSectionNote: `I bring teaching, design practice, and AI product engineering. AEP is a supporting TypeScript reference implementation with synthetic evidence and a fake-model evaluation harness; it is not a production deployment or live-model quality claim. Listing: ${EMPLOYER_URL}`,
-};
+  };
+}
+
+/** Private noindex overlay — /opportunities/deloitte-ai-design-facilitator-fde */
+export const deloitteAiDesignFacilitatorFdeOpportunity =
+  createDesignFacilitatorFdeOpportunity('overlay');
+
+/** Public interview send — /forward-deployed */
+export const forwardDeployedInterviewOpportunity =
+  createDesignFacilitatorFdeOpportunity('flagship');
