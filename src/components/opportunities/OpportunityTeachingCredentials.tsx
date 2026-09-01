@@ -8,6 +8,7 @@ import { OpportunityCardImage } from '@/components/opportunities/OpportunityCard
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
 import { EvidenceMediaCarousel } from '@/components/opportunities/EvidenceMediaCarousel';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import { cn } from '@/lib/utils';
 
 type Props = {
   opportunity: Opportunity;
@@ -83,10 +84,10 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
             {certifications.map((c) => (
               <li
                 key={c.name}
-                className="flex gap-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 px-4 py-3 text-sm shadow-sm"
+                className="flex items-stretch overflow-hidden rounded-xl border border-stone-200 bg-white text-sm shadow-sm dark:border-stone-700 dark:bg-stone-900"
               >
                 <CredentialMark item={c} />
-                <div className="min-w-0 flex-1">
+                <div className="min-w-0 flex-1 px-4 py-3">
                 <p className={opp.matrixPrimary}>{c.name}</p>
                 {c.detail ? <p className={opp.matrixSecondary}>{c.detail}</p> : null}
                 {c.href ? (
@@ -124,24 +125,32 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
 function CredentialMark({ item }: { item: CertificationItem }) {
   if (item.logoSrc) {
     return (
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-stone-200 bg-white dark:border-stone-700 dark:bg-white">
+      <span className="flex w-16 shrink-0 self-stretch items-center justify-center border-r border-stone-200 bg-white p-2 sm:w-20 dark:border-stone-700 dark:bg-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.logoSrc}
           alt={item.logoAlt ?? ''}
-          className={item.logoSrcDark ? 'h-7 w-7 object-contain dark:hidden' : 'h-7 w-7 object-contain'}
+          className={item.logoSrcDark ? 'h-full w-full object-contain dark:hidden' : 'h-full w-full object-contain'}
         />
         {item.logoSrcDark ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={item.logoSrcDark} alt="" className="hidden h-7 w-7 object-contain dark:block" />
+          <img src={item.logoSrcDark} alt="" className="hidden h-full w-full object-contain dark:block" />
         ) : null}
       </span>
     );
   }
   const Icon = item.icon === 'building' ? Building2 : item.icon === 'graduation' ? GraduationCap : BookOpen;
+  const cyanRail = item.icon === 'graduation';
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-stone-200 bg-stone-50 text-stone-700 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-200">
-      <Icon className="h-4 w-4" aria-hidden />
+    <span
+      className={cn(
+        'flex w-16 shrink-0 self-stretch items-center justify-center border-r sm:w-20',
+        cyanRail
+          ? 'border-cyan-200 bg-cyan-50 text-cyan-700 dark:border-cyan-800 dark:bg-cyan-950/60 dark:text-cyan-300'
+          : 'border-stone-200 bg-stone-50 text-stone-700 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-200',
+      )}
+    >
+      <Icon className="h-8 w-8 sm:h-10 sm:w-10" aria-hidden />
     </span>
   );
 }

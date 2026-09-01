@@ -150,6 +150,7 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
               <OpportunityTeachingCredentials opportunity={opportunity} framed />
               {opportunity.showFdeRoleMap ? (
                 <>
+                  <FdeDigitalDivider label="Capability transfer" />
                   <CapabilityTransferLoop />
                   <FacilitationTimeline />
                 </>

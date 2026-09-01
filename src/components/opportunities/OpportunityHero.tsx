@@ -11,8 +11,7 @@ import {
   Calendar,
   Download,
   FileText,
-  Building2,
-  type LucideIcon,
+  GraduationCap,
 } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import type { HeroMetaChip, Opportunity, OpportunityCtas } from '@/content/opportunities/types';
@@ -27,8 +26,14 @@ import {
   isExternalHttpHref,
   opportunitySocialIconClass,
 } from '@/components/opportunities/opportunitySocialStyles';
+import {
+  OpportunityActionLink,
+  OOLITE_ACTION_LINK_CLASS,
+  OPPORTUNITY_ACTION_LINK_BASE,
+} from '@/components/opportunities/OpportunityActionLink';
 import { HeroToolMarks } from '@/components/opportunities/HeroToolMarks';
-import { LIFECYCLE_META, type LifecycleStage } from '@/content/opportunities/lifecycle';
+import { FDE_PARTNER_LOGOS } from '@/content/opportunities/fdePartnerLogos';
+import { LIFECYCLE_META } from '@/content/opportunities/lifecycle';
 import { cn } from '@/lib/utils';
 
 type OpportunityHeroProps = {
@@ -43,52 +48,13 @@ function heroChipHref(chip: HeroMetaChip) {
   return typeof chip === 'string' ? undefined : chip.href;
 }
 
-function HeroActionLink({
-  href,
-  label,
-  icon: Icon,
-  stage,
-  onClick,
-}: {
-  href: string;
-  label: string;
-  icon: LucideIcon;
-  stage: LifecycleStage;
-  onClick: () => void;
-}) {
-  const meta = LIFECYCLE_META[stage];
-  const className = cn(
-    'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none sm:justify-start',
-    'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
-    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
-    'dark:bg-stone-900',
-    meta.btnClass,
-  );
-  const inner = (
-    <>
-      <Icon className="h-4 w-4 shrink-0" aria-hidden />
-      {label}
-    </>
-  );
-  if (isExternalHttpHref(href) || href.endsWith('.pdf')) {
-    return (
-      <a href={href} target="_blank" rel="noreferrer" className={className} onClick={onClick}>
-        {inner}
-      </a>
-    );
-  }
-  if (href.startsWith('/')) {
-    return (
-      <Link href={href} className={className} onClick={onClick}>
-        {inner}
-      </Link>
-    );
-  }
-  return (
-    <a href={href} className={className} onClick={onClick}>
-      {inner}
-    </a>
-  );
+function heroChipLogo(chip: HeroMetaChip) {
+  if (typeof chip === 'string') return undefined;
+  return chip.logoSrc ? { src: chip.logoSrc, alt: chip.logoAlt ?? '' } : undefined;
+}
+
+function heroChipIcon(chip: HeroMetaChip) {
+  return typeof chip === 'string' ? undefined : chip.icon;
 }
 
 function HeroSecondaryActions({
@@ -105,7 +71,7 @@ function HeroSecondaryActions({
       <p className={opp.label}>Actions</p>
       <div className="mt-3 flex flex-wrap gap-2">
         {ctas.resumePdfPath ? (
-          <HeroActionLink
+          <OpportunityActionLink
             href={ctas.resumePdfPath}
             label={ctas.resumePdfLabel ?? 'Download résumé'}
             icon={Download}
@@ -114,7 +80,7 @@ function HeroSecondaryActions({
           />
         ) : null}
         {ctas.evidenceBriefPdfPath ? (
-          <HeroActionLink
+          <OpportunityActionLink
             href={ctas.evidenceBriefPdfPath}
             label={ctas.evidenceBriefLabel ?? 'Open technical evidence brief'}
             icon={FileText}
@@ -123,10 +89,16 @@ function HeroSecondaryActions({
           />
         ) : null}
         {ctas.cv ? (
-          <HeroActionLink href={ctas.cv} label="CV" icon={FileText} stage="Deploy" onClick={() => onCta('cv_hero')} />
+          <OpportunityActionLink
+            href={ctas.cv}
+            label="CV"
+            icon={FileText}
+            stage="Deploy"
+            onClick={() => onCta('cv_hero')}
+          />
         ) : null}
         {ctas.portfolio ? (
-          <HeroActionLink
+          <OpportunityActionLink
             href={ctas.portfolio}
             label="Portfolio"
             icon={FolderKanban}
@@ -135,16 +107,16 @@ function HeroSecondaryActions({
           />
         ) : null}
         {ctas.ooliteWork ? (
-          <HeroActionLink
+          <OpportunityActionLink
             href={ctas.ooliteWork}
             label={ctas.ooliteWorkLabel ?? 'Oolite Digital Lab'}
-            icon={Building2}
-            stage="Teach"
+            mark={{ src: FDE_PARTNER_LOGOS.oolite.src, alt: FDE_PARTNER_LOGOS.oolite.alt }}
+            className={OOLITE_ACTION_LINK_CLASS}
             onClick={() => onCta('oolite_work_hero')}
           />
         ) : null}
         {ctas.careerPacket ? (
-          <HeroActionLink
+          <OpportunityActionLink
             href={ctas.careerPacket}
             label="Career packet"
             icon={FolderKanban}
@@ -152,7 +124,7 @@ function HeroSecondaryActions({
             onClick={() => onCta('career_packet_hero')}
           />
         ) : null}
-        <HeroActionLink
+        <OpportunityActionLink
           href={`mailto:${ctas.email}${ctas.emailSubject ? `?subject=${encodeURIComponent(ctas.emailSubject)}` : ''}`}
           label="Email Moises"
           icon={Mail}
@@ -163,13 +135,7 @@ function HeroSecondaryActions({
           href={ctas.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className={cn(
-            'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none',
-            'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
-            'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
-            'dark:bg-stone-900',
-            LIFECYCLE_META.Deploy.btnClass,
-          )}
+          className={cn(OPPORTUNITY_ACTION_LINK_BASE, LIFECYCLE_META.Deploy.btnClass)}
           aria-label="LinkedIn"
           onClick={() => onCta('linkedin_hero')}
         >
@@ -181,13 +147,7 @@ function HeroSecondaryActions({
             href={githubProfileHref}
             target="_blank"
             rel="noreferrer"
-            className={cn(
-              'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none',
-              'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
-              'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
-              'dark:bg-stone-900',
-              LIFECYCLE_META.Prototype.btnClass,
-            )}
+            className={cn(OPPORTUNITY_ACTION_LINK_BASE, LIFECYCLE_META.Prototype.btnClass)}
             aria-label="GitHub profile"
             onClick={() => onCta('github_hero')}
           >
@@ -200,13 +160,7 @@ function HeroSecondaryActions({
             href={ctas.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(
-              'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-3 py-2 text-sm font-semibold transition duration-200 motion-reduce:transition-none',
-              'hover:-translate-y-0.5 hover:shadow-sm motion-reduce:hover:translate-y-0',
-              'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
-              'dark:bg-stone-900',
-              LIFECYCLE_META.Teach.btnClass,
-            )}
+            className={cn(OPPORTUNITY_ACTION_LINK_BASE, LIFECYCLE_META.Teach.btnClass)}
             aria-label="Instagram"
             onClick={() => onCta('instagram_hero')}
           >
@@ -376,14 +330,50 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
               {opportunity.heroMetaChips.map((chip) => {
                 const label = heroChipLabel(chip);
                 const href = heroChipHref(chip);
+                const logo = heroChipLogo(chip);
+                const icon = heroChipIcon(chip);
+                const clickable = Boolean(href);
+                const inner = (
+                  <>
+                    {logo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={logo.src} alt="" className="h-5 w-5 shrink-0 object-contain" />
+                    ) : icon === 'graduation' ? (
+                      <GraduationCap className="h-4 w-4 shrink-0" aria-hidden />
+                    ) : null}
+                    {label}
+                  </>
+                );
+                const chipClass = cn(
+                  'inline-flex max-w-full items-center gap-1.5 break-words',
+                  clickable
+                    ? cn(
+                        'min-h-11 rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-xs font-semibold text-stone-800',
+                        'transition duration-200 hover:-translate-y-0.5 hover:border-cyan-400 hover:shadow-sm',
+                        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400',
+                        'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+                        'dark:border-stone-600 dark:bg-stone-900 dark:text-stone-100 dark:hover:border-cyan-500',
+                      )
+                    : cn(opp.pillTag, heroAccent.chipHover),
+                );
                 return (
-                  <li key={label} className={cn(opp.pillTag, heroAccent.chipHover, 'max-w-full break-words')}>
+                  <li key={label}>
                     {href ? (
-                      <Link href={href} className="underline-offset-2 hover:underline">
-                        {label}
-                      </Link>
+                      href.startsWith('/') ? (
+                        <Link href={href} className={chipClass}>
+                          {inner}
+                        </Link>
+                      ) : (
+                        <a
+                          href={href}
+                          className={chipClass}
+                          {...(isExternalHttpHref(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                        >
+                          {inner}
+                        </a>
+                      )
                     ) : (
-                      label
+                      <span className={chipClass}>{inner}</span>
                     )}
                   </li>
                 );

@@ -72,13 +72,19 @@ export function ProofSnapshotSection({
       {data.intro ? <p className={`mt-3 max-w-3xl ${opp.muted}`}>{data.intro}</p> : null}
       <EvidenceMaturityLegend className="mt-4" />
 
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-6 overflow-hidden rounded-xl border border-stone-300 bg-stone-50 dark:border-stone-600 dark:bg-stone-950">
+        <div className="flex items-center justify-between gap-2 border-b border-dashed border-cyan-700/40 bg-[linear-gradient(to_right,rgba(14,116,144,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(14,116,144,0.07)_1px,transparent_1px)] bg-[size:18px_18px] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-800 dark:border-cyan-400/40 dark:text-cyan-300">
+          <span>Proof // inspectable</span>
+          <span className="hidden sm:inline">Technical evidence</span>
+        </div>
+      <ul className="grid gap-3 p-3 sm:grid-cols-2 lg:grid-cols-3">
         {data.cards.map((card) => (
           <li
             key={card.title}
             className={cn(
               opp.card,
               'overflow-hidden transition duration-300 motion-reduce:transition-none',
+              'hover:-translate-y-0.5 hover:shadow-md motion-reduce:hover:translate-y-0',
               accent.cardHover,
             )}
           >
@@ -111,6 +117,7 @@ export function ProofSnapshotSection({
           </li>
         ))}
       </ul>
+      </div>
 
       {data.rampStatement ? (
         <p className={cn(opp.callout, 'mt-6 max-w-3xl', opp.body)}>{data.rampStatement}</p>

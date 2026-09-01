@@ -191,8 +191,13 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
       ],
     },
     heroMetaChips: [
-      'Cooper Union BFA',
-      { label: '18 workshops delivered', href: '/workshops' },
+      {
+        label: 'Cooper Union BFA',
+        href: 'https://cooper.edu',
+        logoSrc: FDE_PARTNER_LOGOS.cooperUnion.src,
+        logoAlt: FDE_PARTNER_LOGOS.cooperUnion.alt,
+      },
+      { label: '18 workshops delivered', href: '/workshops', icon: 'graduation' },
       'Product incubation / Lore Machine',
       'Miami / U.S. citizen',
     ],
@@ -328,6 +333,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
       {
         after: 'hero',
         quote: 'Watch the stuck point. Leave a path the team can run.',
+        variant: 'terminal',
       },
       {
         after: 'cases',

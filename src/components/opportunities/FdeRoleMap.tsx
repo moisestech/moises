@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { LIFECYCLE_META, type LifecycleStage } from '@/content/opportunities/lifecycle';
 import { selectFdeExplorerStage } from '@/content/opportunities/fdeStageSelect';
+import { FDE_COVERS } from '@/content/opportunities/fdeEvidenceRegistry';
 import { RECRUITING_FDE_SCROLL_MT } from '@/config/recruiting-layout';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -15,6 +16,7 @@ const PETALS = [
     stage: 'Discover' as LifecycleStage,
     insight: 'Watch the stuck point and frame a bounded problem before choosing a tool.',
     place: 'top' as const,
+    cover: FDE_COVERS.discover,
   },
   {
     id: 'design',
@@ -23,6 +25,7 @@ const PETALS = [
     stage: 'Prototype' as LifecycleStage,
     insight: 'Shape one reviewable path a mixed audience can follow, with a manual fallback.',
     place: 'right' as const,
+    cover: FDE_COVERS.fieldKit,
   },
   {
     id: 'integrate',
@@ -31,6 +34,7 @@ const PETALS = [
     stage: 'Deploy' as LifecycleStage,
     insight: 'Take the concept to a system people can operate — not a demo that dies on the laptop.',
     place: 'bottom' as const,
+    cover: FDE_COVERS.thinSlice,
   },
   {
     id: 'teach',
@@ -39,6 +43,7 @@ const PETALS = [
     stage: 'Teach' as LifecycleStage,
     insight: 'Leave a path and a teaching artifact the team can run without me.',
     place: 'left' as const,
+    cover: FDE_COVERS.saturdayLab,
   },
 ] as const;
 
@@ -49,11 +54,27 @@ const PLACE_CLASS: Record<(typeof PETALS)[number]['place'], string> = {
   bottom: 'md:col-start-2 md:row-start-3',
 };
 
+function CoverImage({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={alt} className={cn('h-full w-full object-cover', className)} />
+  );
+}
+
 export function FdeRoleMap({ className }: { className?: string }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [entered, setEntered] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const active = PETALS.find((petal) => petal.id === activeId) ?? PETALS[0];
+  const showingCover = activeId != null;
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -122,19 +143,32 @@ export function FdeRoleMap({ className }: { className?: string }) {
             );
           })}
 
-          <div className="flex min-h-[7.5rem] flex-col items-center justify-center rounded-lg border-2 border-stone-900 bg-stone-950 px-4 py-5 text-center text-white dark:border-cyan-400 dark:bg-cyan-400 dark:text-stone-950 sm:col-span-2 md:col-start-2 md:row-start-2 md:col-span-1">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] opacity-80">Join</p>
-            <p className="mt-1 text-sm font-bold leading-tight">FORWARD-DEPLOYED</p>
-            <p className="text-sm font-bold leading-tight">ENGINEERING</p>
+          <div
+            className={cn(
+              'relative min-h-[7.5rem] overflow-hidden rounded-lg border-2 sm:col-span-2 md:col-span-1 md:col-start-2 md:row-start-2',
+              showingCover
+                ? 'border-cyan-600 dark:border-cyan-400'
+                : 'flex flex-col items-center justify-center border-stone-900 bg-stone-950 px-4 py-5 text-center text-white dark:border-cyan-400 dark:bg-cyan-400 dark:text-stone-950',
+            )}
+          >
+            {showingCover ? (
+              <CoverImage
+                src={active.cover.src}
+                alt={active.cover.alt}
+                className={cn(!reduceMotion && 'transition-opacity duration-300')}
+              />
+            ) : (
+              <>
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] opacity-80">Join</p>
+                <p className="mt-1 text-sm font-bold leading-tight">FORWARD-DEPLOYED</p>
+                <p className="text-sm font-bold leading-tight">ENGINEERING</p>
+              </>
+            )}
           </div>
         </div>
 
         <p className="border-t border-dashed border-cyan-700/40 px-3 py-3 text-sm text-stone-700 dark:border-cyan-400/40 dark:text-stone-200">
           {active.insight}
-        </p>
-        <p className={cn(opp.subtle, 'px-3 pb-3')}>
-          Not a Platform / SWE / SA Venn. Creative-technologist craft sits inside discovery, design, and
-          transfer.
         </p>
       </div>
     </section>

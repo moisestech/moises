@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { loreMachinePipelineCondensed } from '@/content/evidence/loreMachineSystemPipeline';
 import { FDE_PARTNER_LOGOS } from '@/content/opportunities/fdePartnerLogos';
 import { PartnerMark } from '@/components/opportunities/PartnerMark';
@@ -101,31 +104,93 @@ export function N8nAuthorityBoundary({ className }: { className?: string }) {
 }
 
 const TRANSFER = [
-  { n: '01', label: 'See' },
-  { n: '02', label: 'Predict' },
-  { n: '03', label: 'Build' },
-  { n: '04', label: 'Break' },
-  { n: '05', label: 'Explain' },
-  { n: '06', label: 'Transfer' },
+  { n: '01', label: 'See', body: 'Watch the stuck point before choosing a tool.' },
+  { n: '02', label: 'Predict', body: 'Name what the path should change for the people in the room.' },
+  { n: '03', label: 'Build', body: 'Make one reviewable slice with a manual fallback.' },
+  { n: '04', label: 'Break', body: 'Find where the system fails closed or needs a person.' },
+  { n: '05', label: 'Explain', body: 'Say the limitation out loud so the team can operate it.' },
+  { n: '06', label: 'Transfer', body: 'Leave a runbook and a teaching artifact they can run without me.' },
 ] as const;
 
 export function CapabilityTransferLoop({ className }: { className?: string }) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const step = TRANSFER[active];
+
+  useEffect(() => {
+    setReduceMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
+
+  useEffect(() => {
+    if (paused || reduceMotion) return;
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % TRANSFER.length);
+    }, 3200);
+    return () => window.clearInterval(timer);
+  }, [paused, reduceMotion]);
+
   return (
-    <section className={cn('mt-8', className)} aria-labelledby="transfer-heading">
+    <section
+      className={cn('mt-8', className)}
+      aria-labelledby="transfer-heading"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <h3 id="transfer-heading" className={opp.h3MoMA}>
         Capability-transfer loop
       </h3>
       <p className={`mt-2 max-w-3xl ${opp.muted}`}>
         Teaching leaves a path, not a lecture. Mixed audiences move through making and handoff.
       </p>
-      <ol className="mt-4 grid gap-2 sm:grid-cols-3 lg:grid-cols-6">
-        {TRANSFER.map((step) => (
-          <li key={step.n} className={cn(opp.card, 'p-3')}>
-            <p className={opp.subtle}>{step.n}</p>
-            <p className={cn(opp.matrixPrimary, 'mt-1')}>{step.label}</p>
-          </li>
-        ))}
-      </ol>
+      <div className="mt-4 rounded-xl border border-stone-300 bg-stone-50 dark:border-stone-600 dark:bg-stone-950">
+        <div className="flex items-center justify-between gap-2 border-b border-dashed border-cyan-700/40 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-800 dark:border-cyan-400/40 dark:text-cyan-300">
+          <span>Transfer // 01–06</span>
+          <span className="hidden sm:inline">See → Transfer</span>
+        </div>
+        <ol className="relative grid gap-2 p-3 sm:grid-cols-3 lg:grid-cols-6">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-x-8 top-[1.65rem] hidden h-px bg-[repeating-linear-gradient(90deg,#0e7490_0,#0e7490_4px,transparent_4px,transparent_10px)] lg:block dark:bg-[repeating-linear-gradient(90deg,#22d3ee_0,#22d3ee_4px,transparent_4px,transparent_10px)]"
+          />
+          {TRANSFER.map((item, index) => {
+            const selected = index === active;
+            return (
+              <li key={item.n}>
+                <button
+                  type="button"
+                  className={cn(
+                    'relative flex min-h-11 w-full flex-col rounded-lg border px-3 py-3 text-left',
+                    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500',
+                    !reduceMotion && 'transition-all duration-300',
+                    selected
+                      ? 'border-cyan-500 bg-cyan-50 text-cyan-900 shadow-sm dark:border-cyan-400 dark:bg-cyan-950/60 dark:text-cyan-100'
+                      : 'border-stone-200 bg-white text-stone-800 hover:-translate-y-0.5 hover:border-cyan-400 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100',
+                    !selected && active !== index && paused && 'opacity-50',
+                  )}
+                  onClick={() => {
+                    setPaused(true);
+                    setActive(index);
+                  }}
+                  onFocus={() => {
+                    setPaused(true);
+                    setActive(index);
+                  }}
+                >
+                  <span className="font-mono text-[10px] tracking-widest opacity-70">{item.n}</span>
+                  <span className="mt-1 text-sm font-semibold">{item.label}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+        <p className="border-t border-dashed border-cyan-700/40 px-3 py-3 font-mono text-sm text-stone-700 dark:border-cyan-400/40 dark:text-stone-200">
+          <span className="text-[10px] uppercase tracking-[0.16em] text-cyan-700 dark:text-cyan-400">
+            {step.n} {step.label}
+          </span>
+          <span className="mt-1 block font-sans">{step.body}</span>
+        </p>
+      </div>
     </section>
   );
 }

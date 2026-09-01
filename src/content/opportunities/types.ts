@@ -173,6 +173,8 @@ export type SectionQuote = {
   after: 'hero' | 'proof' | 'cases' | 'teaching';
   quote: string;
   attribution?: string;
+  /** Terminal typewriter treatment. Used on FDE after-hero line. */
+  variant?: 'terminal';
 };
 
 export type RoleMatchRow = {
@@ -288,7 +290,15 @@ export type OpportunityNavItem = {
   href?: string;
 };
 
-export type HeroMetaChip = string | { label: string; href?: string };
+export type HeroMetaChip =
+  | string
+  | {
+      label: string;
+      href?: string;
+      logoSrc?: string;
+      logoAlt?: string;
+      icon?: 'graduation';
+    };
 
 export type HeroToolMark = {
   src: string;
