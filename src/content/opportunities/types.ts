@@ -82,6 +82,8 @@ export type ProofSnapshotCard = {
   visual?: ProofSnapshotVisual;
   href?: string;
   lifecycleStage?: string;
+  logoSrc?: string;
+  logoAlt?: string;
 };
 
 export type ProofSnapshot = {

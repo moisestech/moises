@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
 import { EvidenceMaturityLegend } from '@/components/opportunities/EvidenceMaturityLegend';
+import { PartnerMark } from '@/components/opportunities/PartnerMark';
 import { LifecycleStageChip } from '@/components/opportunities/LifecycleStageChip';
 import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
 import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
@@ -78,11 +79,16 @@ export function ProofSnapshotSection({
           >
             <ProofCardVisual card={card} />
             <div className="p-4">
-              <div className="flex flex-wrap items-center gap-2">
-                {card.lifecycleStage ? <LifecycleStageChip stage={card.lifecycleStage} /> : null}
-                <EvidenceTypeBadge type={card.evidenceType} />
+              <div className="flex items-start gap-3">
+                {card.logoSrc ? <PartnerMark src={card.logoSrc} alt={card.logoAlt ?? card.title} size="sm" /> : null}
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {card.lifecycleStage ? <LifecycleStageChip stage={card.lifecycleStage} /> : null}
+                    <EvidenceTypeBadge type={card.evidenceType} />
+                  </div>
+                  <h3 className={cn(opp.matrixPrimary, 'mt-3')}>{card.title}</h3>
+                </div>
               </div>
-              <h3 className={cn(opp.matrixPrimary, 'mt-3')}>{card.title}</h3>
               <p className={cn(opp.matrixSecondary, 'mt-1.5')}>{card.body}</p>
               {card.tools?.length ? (
                 <p className={cn(opp.subtle, 'mt-3')}>{card.tools.join(' · ')}</p>

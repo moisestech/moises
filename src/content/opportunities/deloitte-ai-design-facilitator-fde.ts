@@ -23,6 +23,7 @@ import {
   saturdayLabLive,
 } from './packs/designFacilitationEvidencePack';
 import { designFacilitationClaimedStackBand } from '@/content/evidence/recruitingLogoBand';
+import { FDE_PARTNER_LOGOS } from './fdePartnerLogos';
 import { digilabMedia } from '@/content/oolite-arts/media';
 import {
   AEP_BLOB,
@@ -45,11 +46,6 @@ const EMPLOYER_URL =
 
 const TECH_CV_PDF = '/resume/moises-sanabria-technology-cv.pdf';
 const EVIDENCE_BRIEF_PDF = '/resume/MoisesSanabria_FDE_Technical_Evidence.pdf';
-
-const OOLITE_LOGO_BLACK =
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753833092/tech-nonprofit/oolite/logos/oolite-arts-logo-black_sx0l62.png';
-const OOLITE_LOGO_WHITE =
-  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753833092/tech-nonprofit/oolite/logos/oolite-arts-logo-white_sbfeqz.png';
 
 const teachingWorkshop = digilabMedia['workshop.art-tech-coding'];
 const n8nSpec = automationProjectSpecs['n8n-gmail-intelligence'];
@@ -128,9 +124,10 @@ const codeInspect: CodeInspectBlock = {
 const facilitatorCertifications: Opportunity['certifications'] = [
   {
     name: 'Cooper Union — Bachelor of Fine Arts (BFA)',
-    detail: 'Studio practice + systems thinking foundation for teaching technical content to creative practitioners. No official mark is in this repo — wordmark plus book icon.',
+    detail: 'Studio practice + systems thinking foundation for teaching technical content to creative practitioners.',
     href: 'https://cooper.edu',
-    icon: 'book',
+    logoSrc: FDE_PARTNER_LOGOS.cooperUnion.src,
+    logoAlt: FDE_PARTNER_LOGOS.cooperUnion.alt,
   },
   {
     name: 'Public GenAI / agent curricula',
@@ -143,9 +140,8 @@ const facilitatorCertifications: Opportunity['certifications'] = [
     name: 'Institutional Digilab teaching',
     detail: 'Oolite Arts Digital Lab facilitation — artist-facing AI and creative-tech workshops.',
     href: '/oolite-arts',
-    logoSrc: OOLITE_LOGO_BLACK,
-    logoSrcDark: OOLITE_LOGO_WHITE,
-    logoAlt: 'Oolite Arts',
+    logoSrc: FDE_PARTNER_LOGOS.oolite.src,
+    logoAlt: FDE_PARTNER_LOGOS.oolite.alt,
   },
 ];
 
@@ -304,6 +300,8 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         imageSrc: teachingWorkshop.src,
         imageAlt: teachingWorkshop.alt,
         evidenceType: oolite.evidenceType,
+        logoSrc: oolite.logoSrc,
+        logoAlt: oolite.logoAlt,
       },
       {
         evidenceId: 'lore-machine',
@@ -314,6 +312,8 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         href: lore.inspectHref,
         linkLabel: lore.inspectLabel,
         evidenceType: lore.evidenceType,
+        logoSrc: lore.logoSrc,
+        logoAlt: lore.logoAlt,
       },
       {
         evidenceId: 'bookleggers-commerce-automation',
@@ -326,6 +326,8 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         imageSrc: bookleggersSpec.imageSrc,
         imageAlt: bookleggersSpec.imageAlt,
         evidenceType: bookleggers.evidenceType,
+        logoSrc: bookleggers.logoSrc,
+        logoAlt: bookleggers.logoAlt,
       },
       {
         evidenceId: 'agentic-evidence-pipeline',

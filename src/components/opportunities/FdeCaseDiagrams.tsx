@@ -1,4 +1,6 @@
 import { loreMachinePipelineCondensed } from '@/content/evidence/loreMachineSystemPipeline';
+import { FDE_PARTNER_LOGOS } from '@/content/opportunities/fdePartnerLogos';
+import { PartnerMark } from '@/components/opportunities/PartnerMark';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
@@ -13,9 +15,12 @@ const LORE_FLOW = [
 export function LoreCreatorFlow({ className }: { className?: string }) {
   return (
     <section className={cn('mt-8', className)} aria-labelledby="lore-flow-heading">
-      <h3 id="lore-flow-heading" className={opp.h3MoMA}>
-        Lore Machine — creator flow
-      </h3>
+      <div className="flex items-center gap-3">
+        <PartnerMark src={FDE_PARTNER_LOGOS.lore.src} alt={FDE_PARTNER_LOGOS.lore.alt} size="sm" />
+        <h3 id="lore-flow-heading" className={opp.h3MoMA}>
+          Lore Machine — creator flow
+        </h3>
+      </div>
       <p className={`mt-2 max-w-3xl ${opp.muted}`}>
         Real product path, not a generated UI. Full ownership notes live on the Lore case page.
       </p>
@@ -36,9 +41,12 @@ export function LoreOwnershipChips({ className }: { className?: string }) {
   const stages = loreMachinePipelineCondensed.stages;
   return (
     <section className={cn('mt-6', className)} aria-labelledby="lore-own-heading">
-      <h3 id="lore-own-heading" className={opp.h3MoMA}>
-        Lore Machine — ownership
-      </h3>
+      <div className="flex items-center gap-3">
+        <PartnerMark src={FDE_PARTNER_LOGOS.lore.src} alt={FDE_PARTNER_LOGOS.lore.alt} size="sm" />
+        <h3 id="lore-own-heading" className={opp.h3MoMA}>
+          Lore Machine — ownership
+        </h3>
+      </div>
       <p className={`mt-2 max-w-3xl ${opp.muted}`}>
         From the published Lore pipeline. Did-not-own layers are omitted rather than invented.
       </p>

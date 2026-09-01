@@ -124,7 +124,7 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
 function CredentialMark({ item }: { item: CertificationItem }) {
   if (item.logoSrc) {
     return (
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-950">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-md border border-stone-200 bg-white dark:border-stone-700 dark:bg-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.logoSrc}

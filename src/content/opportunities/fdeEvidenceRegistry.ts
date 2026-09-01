@@ -11,6 +11,7 @@ import { evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import { deloitteFacilitatorWorkshopStill } from '@/content/evidence/applicationBanners';
 import { saturdayLabLive } from './packs/designFacilitationEvidencePack';
+import { FDE_PARTNER_LOGOS } from './fdePartnerLogos';
 
 export const FIELD_KIT_REPO = 'https://github.com/moisestech/flora-field-kit';
 export const FIELD_KIT_DEMO = 'https://flora-field-kit.vercel.app';
@@ -37,6 +38,8 @@ export type FdeEvidenceItem = {
   inspectLabel: string;
   illustration: RoleMatchIllustration;
   overlayIllustration?: RoleMatchIllustration;
+  logoSrc?: string;
+  logoAlt?: string;
   featured?: boolean;
   supporting?: boolean;
   tools?: string[];
@@ -56,6 +59,8 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     inspectHref: '/oolite-arts',
     inspectLabel: 'Inspect Oolite case study',
     illustration: { src: teachingWorkshop.src, alt: teachingWorkshop.alt },
+    logoSrc: FDE_PARTNER_LOGOS.oolite.src,
+    logoAlt: FDE_PARTNER_LOGOS.oolite.alt,
     featured: true,
   },
   {
@@ -70,6 +75,8 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     inspectHref: '/projects/lore-machine',
     inspectLabel: 'Inspect Lore Machine',
     illustration: { src: lore.imageSrc, alt: lore.imageAlt },
+    logoSrc: FDE_PARTNER_LOGOS.lore.src,
+    logoAlt: FDE_PARTNER_LOGOS.lore.alt,
     featured: true,
   },
   {
@@ -85,6 +92,8 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     inspectHref: '/ai-engineering#proof',
     inspectLabel: 'View in AI Engineering',
     illustration: { src: bookleggers.imageSrc, alt: bookleggers.imageAlt },
+    logoSrc: FDE_PARTNER_LOGOS.bookleggers.src,
+    logoAlt: FDE_PARTNER_LOGOS.bookleggers.alt,
     featured: true,
   },
   {
@@ -153,6 +162,8 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
       alt: deloitteFacilitatorWorkshopStill.alt,
       local: true,
     },
+    logoSrc: FDE_PARTNER_LOGOS.lore.src,
+    logoAlt: FDE_PARTNER_LOGOS.lore.alt,
   },
   {
     id: 'saturday-lab',
@@ -167,6 +178,8 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     inspectHref: saturdayLabLive.facilitator,
     inspectLabel: 'Inspect Saturday Lab facilitator',
     illustration: { src: teachingWorkshop.src, alt: teachingWorkshop.alt },
+    logoSrc: FDE_PARTNER_LOGOS.oolite.src,
+    logoAlt: FDE_PARTNER_LOGOS.oolite.alt,
     tools: ['Figma', 'Airtable'],
   },
   {
@@ -264,6 +277,8 @@ export function toProofCard(item: FdeEvidenceItem): ProofSnapshotCard {
     visual: item.illustration.visual,
     href: item.inspectHref,
     lifecycleStage: item.lifecycleStage,
+    logoSrc: item.logoSrc,
+    logoAlt: item.logoAlt,
   };
 }
 

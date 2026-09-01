@@ -12,6 +12,7 @@ import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams'
 import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
+import { PartnerMark } from '@/components/opportunities/PartnerMark';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 
@@ -103,11 +104,16 @@ export function CaseStudyGrid({ opportunity, framed = false }: CaseStudyGridProp
               </OpportunityZoomTrigger>
             )}
             <div className={opp.cardPad}>
-              <div className="flex flex-wrap items-center gap-2">
-                <p className={cn(opp.accentCategory, accent.eyebrow)}>{cs.category}</p>
-                {cs.evidenceType ? <EvidenceTypeBadge type={cs.evidenceType} /> : null}
+              <div className="flex items-start gap-3">
+                {cs.logoSrc ? <PartnerMark src={cs.logoSrc} alt={cs.logoAlt ?? cs.title} /> : null}
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className={cn(opp.accentCategory, accent.eyebrow)}>{cs.category}</p>
+                    {cs.evidenceType ? <EvidenceTypeBadge type={cs.evidenceType} /> : null}
+                  </div>
+                  <h3 className={cn(opp.matrixPrimary, 'mt-1')}>{cs.title}</h3>
+                </div>
               </div>
-              <h3 className={cn(opp.matrixPrimary, 'mt-1')}>{cs.title}</h3>
               <p className={opp.matrixSecondary}>{cs.summary}</p>
               <p className={`mt-3 ${opp.label}`}>{stackLabel}</p>
               <ul className="mt-1 flex flex-wrap gap-1.5">
