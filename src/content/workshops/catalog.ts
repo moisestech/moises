@@ -45,6 +45,7 @@ export const WORKSHOP_RESERVED_DEEP_SLUGS = [
   'ai-and-the-arts',
   'the-art-of-ai-marketing',
   'moonlighter-ai-3d-printing',
+  'agentic-evidence-pipeline',
 ] as const;
 
 export const workshopCatalog: WorkshopCatalogEntry[] = [
@@ -508,6 +509,31 @@ export const workshopCatalog: WorkshopCatalogEntry[] = [
     featured: true,
     href: '/workshop/moonlighter-ai-3d-printing',
     sortOrder: 0,
+  },
+  {
+    slug: 'agentic-evidence-pipeline',
+    title: 'Agentic Evidence Pipeline',
+    publicTitle: 'Agentic Evidence Pipeline',
+    track: 'Systems + Archive' as WorkshopCatalogTrack,
+    status: 'ready',
+    level: 'Intermediate',
+    duration: 'Self-guided',
+    subtitle:
+      'Reference implementation: model versus harness, Allow/Ask/Deny, inspectable TypeScript, and a proposed FDE thin slice.',
+    hook: 'Inspect a TypeScript reference for governed evidence — not a hosted customer product.',
+    shortDescription:
+      'A single-page teaching surface for the Agentic Evidence Pipeline. Participants inspect how a harness owns context, tools, permissions, and review; how unsupported citations fail closed; and how a proposed six-word engagement would move from observation to handoff. AEP is a reference implementation with synthetic fixtures. The thin slice is proposed, not Deloitte client work.',
+    whyNow:
+      'Teams need a way to talk about agent governance without inventing product screenshots. This page keeps the vocabulary inspectable: README-derived diagrams, public source files, and a labeled proposed method.',
+    learningOutcomes: [
+      'Separate model judgment from harness ownership',
+      'Read Allow / Ask / Deny as an authority boundary',
+      'Inspect public TypeScript for review, policy, retrieval, and jobs',
+      'Walk a proposed Discover → Handoff thin slice without treating it as shipped work',
+    ],
+    featured: true,
+    href: '/workshop/agentic-evidence-pipeline',
+    sortOrder: 8,
   },
 ] as const;
 

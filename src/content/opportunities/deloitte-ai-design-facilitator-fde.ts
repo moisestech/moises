@@ -8,11 +8,7 @@
  * deadline, or employer overlay). Private overlay keeps requisition 360529.
  */
 
-import type {
-  CodeInspectBlock,
-  HonestyOverlay,
-  Opportunity,
-} from './types';
+import type { HonestyOverlay, Opportunity } from './types';
 import { deloitteAiDesignFacilitatorFdeBanner } from '@/content/evidence/applicationBanners';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import { evidenceProjects } from '@/content/evidence/projects';
@@ -26,7 +22,6 @@ import { designFacilitationClaimedStackBand } from '@/content/evidence/recruitin
 import { FDE_PARTNER_LOGOS } from './fdePartnerLogos';
 import { digilabMedia } from '@/content/oolite-arts/media';
 import {
-  AEP_BLOB,
   AEP_REPO,
   FIELD_KIT_DEMO,
   FIELD_KIT_DEMO_CASE,
@@ -74,53 +69,6 @@ const overlayHonesty: HonestyOverlay = {
     'I would bring design practice, hands-on teaching, and product engineering while learning the team’s delivery method, client governance, and platform conventions.',
 };
 
-const codeInspect: CodeInspectBlock = {
-  title: 'Code to inspect',
-  intro:
-    'Evidence in. Reviewable decisions out. Strongest public files from the Agentic Evidence Pipeline — a TypeScript reference implementation with synthetic fixtures and a fake-model evaluation harness. Not a hosted customer product, not a live-model quality claim, and not client platform work. Demo rasters from the AEP repo are not copied here.',
-  items: [
-    {
-      id: 'run',
-      title: 'run.ts — stateful run + human review',
-      href: `${AEP_BLOB}/packages/agent/src/run.ts`,
-      icon: 'git-branch',
-      body: 'Idempotent run creation, explicit state transitions, persisted assessment state, review pause/resume, and audit events.',
-    },
-    {
-      id: 'policy',
-      title: 'policy.ts — citation fail-closed',
-      href: `${AEP_BLOB}/packages/agent/src/policy.ts`,
-      icon: 'shield',
-      body: 'Unsupported evidence IDs lower confidence, change status to insufficient evidence, and force human review.',
-    },
-    {
-      id: 'search',
-      title: 'search.ts — hybrid retrieval',
-      href: `${AEP_BLOB}/packages/retrieval/src/search.ts`,
-      icon: 'search',
-      body: 'Tenant- and visibility-scoped lexical and vector search combined through reciprocal rank fusion.',
-    },
-    {
-      id: 'runner',
-      title: 'runner.ts — durable jobs',
-      href: `${AEP_BLOB}/packages/jobs/src/runner.ts`,
-      icon: 'repeat',
-      body: 'Duplicate protection, classified failures, retry backoff, dead-letter handling, and replay semantics.',
-    },
-  ],
-  footnotes: [
-    {
-      label: 'Evidence ledger',
-      href: `${AEP_BLOB}/docs/EVIDENCE_LEDGER.md`,
-    },
-    {
-      label: 'Offline fake-provider report',
-      href: `${AEP_BLOB}/reports/offline/2026-08-12-fake-provider.json`,
-      note: 'offline harness evidence only',
-    },
-  ],
-};
-
 const facilitatorCertifications: Opportunity['certifications'] = [
   {
     name: 'Cooper Union — Bachelor of Fine Arts (BFA)',
@@ -151,8 +99,8 @@ const overlayNav: Opportunity['navItems'] = [
   { id: 'fit', label: 'Explorer' },
   { id: 'case-studies', label: 'Evidence' },
   { id: 'teaching-cred', label: 'Teaching' },
-  { id: 'code-inspect', label: 'Code' },
-  { id: 'process', label: 'Thin slice' },
+  { id: 'code-inspect', label: 'Code', href: '/workshop/agentic-evidence-pipeline#harness' },
+  { id: 'process', label: 'Thin slice', href: '/workshop/agentic-evidence-pipeline#process' },
   { id: 'resume', label: 'Contact' },
 ];
 
@@ -162,8 +110,8 @@ const flagshipNav: Opportunity['navItems'] = [
   { id: 'fit', label: 'Explorer' },
   { id: 'case-studies', label: 'Evidence' },
   { id: 'teaching-cred', label: 'Teaching' },
-  { id: 'code-inspect', label: 'Code' },
-  { id: 'process', label: 'Thin slice' },
+  { id: 'code-inspect', label: 'Code', href: '/workshop/agentic-evidence-pipeline#harness' },
+  { id: 'process', label: 'Thin slice', href: '/workshop/agentic-evidence-pipeline#process' },
   { id: 'resume', label: 'Contact' },
 ];
 
@@ -183,7 +131,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
     bannerPlacement: 'after-hero',
     heroActionLayout: 'primary-then-rest',
     showFdeRoleMap: true,
-    showAepHarness: true,
+    showAepHarness: false,
     seo: isFlagship
       ? {
           title: 'Forward-Deployed AI Systems | Moises Sanabria',
@@ -244,11 +192,11 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
     },
     heroMetaChips: [
       'Cooper Union BFA',
-      '18 workshops delivered',
+      { label: '18 workshops delivered', href: '/workshops' },
       'Product incubation / Lore Machine',
-      'Cursor · Claude · Airtable · Figma',
       'Miami / U.S. citizen',
     ],
+    heroToolMarks: designFacilitationClaimedStackBand.slice(0, 4),
     heroPrimaryCta: { label: 'See the proof', href: '#honesty' },
     heroSecondaryCta: { label: 'Inspect evidence', href: '#fit' },
     navItems: isFlagship ? flagshipNav : overlayNav,
@@ -272,10 +220,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
           cards: FDE_PROOF_IDS.map((id) => toProofCard(fdeItem(id))),
         }
       : undefined,
-    codeInspect,
     roleMatchSectionTitle: 'FDE evidence explorer',
-    roleMatchIntro:
-      'Interview Kickstart coverage — Discover, Prototype, Govern, Deploy, Teach, Handoff — not a mastered-stack list. Each stage maps to one inspectable artifact.',
     roleMatchColumnHeaders: {
       left: 'Stage',
       right: 'Claim',
@@ -302,6 +247,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         evidenceType: oolite.evidenceType,
         logoSrc: oolite.logoSrc,
         logoAlt: oolite.logoAlt,
+        media: oolite.media,
       },
       {
         evidenceId: 'lore-machine',
@@ -314,6 +260,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         evidenceType: lore.evidenceType,
         logoSrc: lore.logoSrc,
         logoAlt: lore.logoAlt,
+        media: lore.media,
       },
       {
         evidenceId: 'bookleggers-commerce-automation',
@@ -328,6 +275,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         evidenceType: bookleggers.evidenceType,
         logoSrc: bookleggers.logoSrc,
         logoAlt: bookleggers.logoAlt,
+        media: bookleggers.media,
       },
       {
         evidenceId: 'agentic-evidence-pipeline',
@@ -335,14 +283,15 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
         category: 'AEP — EVIDENCE IN, REVIEWABLE DECISIONS OUT',
         summary: `${aep.whatThisProves} ${aep.limitation}`,
         skillTags: aep.tools ?? ['TypeScript', 'Postgres', 'human review'],
-        href: '#code-inspect',
-        linkLabel: 'Inspect code on this page',
+        href: aep.inspectHref,
+        linkLabel: aep.inspectLabel,
         secondaryHref: AEP_REPO,
         secondaryLinkLabel: 'AEP on GitHub',
         imageSrc: aepProject.imageSrc,
         imageSrcDark: aepProject.imageSrcDark,
         imageAlt: aepProject.imageAlt,
         evidenceType: aep.evidenceType,
+        media: aep.media,
       },
     ],
     supportingEvidenceTitle: 'See all — supporting evidence',
@@ -410,42 +359,7 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
             icon: 'sparkles',
           },
         ],
-    processSectionTitle: 'Proposed design-forward FDE thin slice',
-    processIntro:
-      'A bounded first engagement in the same six words as the rest of this page. Facilitate and test are verbs inside Teach and Prototype — not extra stages. This is how I would enter an FDE method; it is not presented as completed client work.',
-    processVisual: 'design-fde-loop',
-    processSteps: [
-      {
-        title: 'Discover',
-        description:
-          'Observe the current workflow with a user, then frame the decision owner, baseline, data constraints, and a measurable acceptance criterion before choosing tools.',
-      },
-      {
-        title: 'Prototype',
-        description:
-          'Build one reviewable workflow. Keep deterministic rules outside the model, limit tool permissions, and define a manual fallback. Test expected, ambiguous, and adversarial inputs against the baseline.',
-      },
-      {
-        title: 'Govern',
-        description:
-          'Put a human gate on write-paths. Unsupported citations fail closed; uncertain results pause for a person. Make limitations explicit.',
-      },
-      {
-        title: 'Deploy',
-        description:
-          'Take the slice to a system people can operate. Record what changed and what remains uncertain.',
-      },
-      {
-        title: 'Teach',
-        description:
-          'Facilitate a mixed-audience session so designers, engineers, and product partners can operate the work. Capture assumptions and decide what is outside the first slice.',
-      },
-      {
-        title: 'Handoff',
-        description:
-          'Leave an owner, setup guide, failure procedure, and repeatable exercise. Ask a teammate to operate and explain the workflow without assistance before calling handover complete.',
-      },
-    ],
+    processSteps: [],
     ctas: {
       ...sprint2026Ctas(
         isFlagship

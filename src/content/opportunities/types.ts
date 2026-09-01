@@ -71,6 +71,13 @@ export type EvidenceType =
 
 export type ProofSnapshotVisual = 'field-kit-loop' | 'harness' | 'thin-slice' | 'allow-ask-deny';
 
+export type TeachingMediaItem = {
+  src: string;
+  alt: string;
+  caption?: string;
+  local?: boolean;
+};
+
 export type ProofSnapshotCard = {
   title: string;
   body: string;
@@ -84,6 +91,7 @@ export type ProofSnapshotCard = {
   lifecycleStage?: string;
   logoSrc?: string;
   logoAlt?: string;
+  media?: TeachingMediaItem[];
 };
 
 export type ProofSnapshot = {
@@ -91,13 +99,6 @@ export type ProofSnapshot = {
   intro?: string;
   cards: ProofSnapshotCard[];
   rampStatement?: string;
-};
-
-export type TeachingMediaItem = {
-  src: string;
-  alt: string;
-  caption?: string;
-  local?: boolean;
 };
 
 export type CodeInspectItem = {
@@ -165,6 +166,7 @@ export type SupportingEvidenceItem = {
   imageSrc?: string;
   imageSrcDark?: string;
   imageAlt?: string;
+  imageLocal?: boolean;
 };
 
 export type SectionQuote = {
@@ -188,6 +190,9 @@ export type RoleMatchRow = {
   whatThisProves?: string;
   inspectHref?: string;
   inspectLabel?: string;
+  logoSrc?: string;
+  logoAlt?: string;
+  media?: TeachingMediaItem[];
 };
 
 export type ProcessStep = {
@@ -279,6 +284,15 @@ export type OpportunityNavItem = {
   shortLabel?: string;
   /** Optional Lucide key for dossier-map tiles. */
   icon?: SkillsMatrixIconKey;
+  /** When set, the sticky item is an outbound/in-app link instead of an in-page scroll target. */
+  href?: string;
+};
+
+export type HeroMetaChip = string | { label: string; href?: string };
+
+export type HeroToolMark = {
+  src: string;
+  alt: string;
 };
 
 /** Single hoverable term in the audience keyword strip (opportunity hero lead-in). */
@@ -348,7 +362,9 @@ export type Opportunity = {
   /** Short positioning line above intro paragraphs. */
   candidatePositioning?: string;
   /** Restrained metadata chips under hero CTAs. */
-  heroMetaChips?: string[];
+  heroMetaChips?: HeroMetaChip[];
+  /** Compact tool marks in the above-the-fold hero (not an infinite band). */
+  heroToolMarks?: HeroToolMark[];
   /** Primary in-page scroll CTA (label + hash). */
   heroPrimaryCta?: { label: string; href: string };
   /** Secondary in-page scroll CTA. */

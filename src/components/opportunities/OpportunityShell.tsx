@@ -40,7 +40,7 @@ function StickyMiniNav({
   const navRef = useRef<HTMLElement>(null);
   const [measuredSpyOffset, setMeasuredSpyOffset] = useState(SECTION_SPY_OFFSET_PX);
   const spyOffset = sectionSpyOffsetPx ?? measuredSpyOffset;
-  const ids = useMemo(() => items.map((i) => i.id), [items]);
+  const ids = useMemo(() => items.filter((i) => !i.href).map((i) => i.id), [items]);
   const idsKey = ids.join('|');
 
   const [activeId, setActiveId] = useState(ids[0] ?? '');
@@ -126,23 +126,39 @@ function StickyMiniNav({
       >
         {items.map((item) => {
           const accent = getSectionNavAccent?.(item.id);
-          const active = activeId === item.id;
+          const outbound = Boolean(item.href);
+          const active = !outbound && activeId === item.id;
           const short = item.shortLabel ?? item.label;
+          const className = cn(
+            'inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 sm:min-h-9 sm:px-3 sm:py-1.5 md:min-h-0',
+            active && accent
+              ? cn(accent.navActive, accent.navActiveText)
+              : active
+                ? opp.stickyNavActive
+                : accent
+                  ? cn(accent.navIdle, 'text-stone-600 dark:text-stone-400')
+                  : opp.stickyNavIdle,
+          );
+          if (outbound && item.href) {
+            const external = item.href.startsWith('http');
+            return (
+              <a
+                key={item.id}
+                href={item.href}
+                className={className}
+                {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+              >
+                <span className="md:hidden">{short}</span>
+                <span className="hidden md:inline">{item.label}</span>
+              </a>
+            );
+          }
           return (
             <a
               key={item.id}
               href={`#${item.id}`}
               data-nav-active={active ? 'true' : undefined}
-              className={cn(
-                'inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500 sm:min-h-9 sm:px-3 sm:py-1.5 md:min-h-0',
-                active && accent
-                  ? cn(accent.navActive, accent.navActiveText)
-                  : active
-                    ? opp.stickyNavActive
-                    : accent
-                      ? cn(accent.navIdle, 'text-stone-600 dark:text-stone-400')
-                      : opp.stickyNavIdle,
-              )}
+              className={className}
               aria-current={active ? 'true' : undefined}
               onClick={(e) => {
                 e.preventDefault();

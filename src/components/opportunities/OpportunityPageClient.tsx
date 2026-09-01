@@ -26,20 +26,21 @@ import { ProofSnapshotSection } from '@/components/opportunities/ProofSnapshotSe
 import { CodeInspectSection } from '@/components/opportunities/CodeInspectSection';
 import { FdeRoleMap } from '@/components/opportunities/FdeRoleMap';
 import { LifecycleStageStrip } from '@/components/opportunities/LifecycleStageStrip';
+import { FdeDigitalDivider } from '@/components/opportunities/FdeDigitalDivider';
 import { ModelVsHarness, AllowAskDeny } from '@/components/opportunities/AepHarnessDiagrams';
 import { SupportingEvidenceRow } from '@/components/opportunities/SupportingEvidenceRow';
 import {
-  LoreCreatorFlow,
-  LoreOwnershipChips,
   N8nAuthorityBoundary,
   CapabilityTransferLoop,
   FacilitationTimeline,
 } from '@/components/opportunities/FdeCaseDiagrams';
+import { AEP_WORKSHOP_HREF } from '@/content/workshops/aepHarness';
 import { SectionFlourish } from '@/components/opportunities/SectionFlourish';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
+import { RECRUITING_FDE_SCROLL_MT, RECRUITING_FDE_SUBNAV_TOP } from '@/config/recruiting-layout';
 
 type OpportunityPageClientProps = {
   opportunity: Opportunity;
@@ -68,6 +69,7 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
   const hasBanner = Boolean(opportunity.applicationBanner?.src);
   const bannerAfterHero = opportunity.bannerPlacement === 'after-hero';
+  const fdeScrollMt = opportunity.showFdeRoleMap ? RECRUITING_FDE_SCROLL_MT : undefined;
   const quoteAfter = (after: 'hero' | 'proof' | 'cases' | 'teaching') =>
     opportunity.sectionQuotes?.find((quote) => quote.after === after);
   const banner = hasBanner ? (
@@ -78,7 +80,9 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
     <OpportunityShell
       navItems={opportunity.navItems}
       getSectionNavAccent={getOpportunityCompactAccent}
-      stickyNavTopClassName="top-[4.75rem] md:top-[8.4rem]"
+      stickyNavTopClassName={
+        opportunity.showFdeRoleMap ? RECRUITING_FDE_SUBNAV_TOP : 'top-[4.75rem] md:top-[8.4rem]'
+      }
     >
       <>
         {!bannerAfterHero ? banner : null}
@@ -100,13 +104,16 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             <p className={opp.audienceLine}>{opportunity.audienceLine}</p>
           ) : null}
 
-          <OpportunityColorSection sectionId="hero" className="mt-2 sm:mt-4">
+          <OpportunityColorSection sectionId="hero" className={cn('mt-2 sm:mt-4', fdeScrollMt)}>
             <OpportunityHero opportunity={opportunity} />
           </OpportunityColorSection>
           {opportunity.showFdeRoleMap ? (
             <>
-              <FdeRoleMap className="mt-10 sm:mt-12" />
-              <LifecycleStageStrip className="mt-10 sm:mt-12" />
+              <FdeDigitalDivider label="Role map" />
+              <FdeRoleMap className="mt-6 sm:mt-8" />
+              <FdeDigitalDivider label="Discover → Handoff" />
+              <LifecycleStageStrip className="mt-6 sm:mt-8" />
+              <FdeDigitalDivider label="Proof" />
             </>
           ) : null}
           </div>
@@ -116,28 +123,22 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
           <div className="mx-auto max-w-5xl px-3 font-['MoMA_Sans'] sm:px-4">
           {quoteAfter('hero') ? <SectionFlourish quote={quoteAfter('hero')!} className="mt-10 sm:mt-12" /> : null}
           {opportunity.proofSnapshot ? (
-            <OpportunityColorSection sectionId="honesty" className="mt-10 sm:mt-14">
+            <OpportunityColorSection sectionId="honesty" className={cn('mt-10 sm:mt-14', fdeScrollMt)}>
               <ProofSnapshotSection data={opportunity.proofSnapshot} framed />
             </OpportunityColorSection>
           ) : opportunity.honestyOverlay ? (
-            <OpportunityColorSection sectionId="honesty" className="mt-10 sm:mt-14">
+            <OpportunityColorSection sectionId="honesty" className={cn('mt-10 sm:mt-14', fdeScrollMt)}>
               <HonestyOverlaySection data={opportunity.honestyOverlay} framed />
             </OpportunityColorSection>
           ) : null}
           {quoteAfter('proof') ? <SectionFlourish quote={quoteAfter('proof')!} className="mt-10 sm:mt-12" /> : null}
 
-          <OpportunityColorSection sectionId="fit" className="mt-10 sm:mt-14">
+          <OpportunityColorSection sectionId="fit" className={cn('mt-10 sm:mt-14', fdeScrollMt)}>
             <RoleMatchMatrix opportunity={opportunity} framed />
           </OpportunityColorSection>
 
           <OpportunityColorSection sectionId="case-studies" className="mt-10 sm:mt-14">
             <CaseStudyGrid opportunity={opportunity} framed />
-            {opportunity.showFdeRoleMap ? (
-              <>
-                <LoreCreatorFlow />
-                <LoreOwnershipChips />
-              </>
-            ) : null}
             <SupportingEvidenceRow opportunity={opportunity} />
             {opportunity.showFdeRoleMap ? <N8nAuthorityBoundary /> : null}
           </OpportunityColorSection>
@@ -189,14 +190,22 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
             </div>
           ) : null}
 
-          <OpportunityColorSection sectionId="process" className="mt-10 sm:mt-14">
-            <InnovationProcess
-              opportunity={opportunity}
-              diagrams={opportunity.processDiagrams}
-              framed
-              layout="horizontal"
-            />
-          </OpportunityColorSection>
+          {opportunity.processSteps.length ? (
+            <OpportunityColorSection sectionId="process" className="mt-10 sm:mt-14">
+              <InnovationProcess
+                opportunity={opportunity}
+                diagrams={opportunity.processDiagrams}
+                framed
+                layout="horizontal"
+              />
+            </OpportunityColorSection>
+          ) : opportunity.showFdeRoleMap ? (
+            <p className={`mt-10 sm:mt-14 ${opp.body}`}>
+              <a href={AEP_WORKSHOP_HREF} className={opp.linkAccent}>
+                Inspect harness / proposed slice
+              </a>
+            </p>
+          ) : null}
 
           {opportunity.applicationAnswers?.length ? (
             <OpportunityColorSection sectionId="application-answers" className="mt-10 sm:mt-14">

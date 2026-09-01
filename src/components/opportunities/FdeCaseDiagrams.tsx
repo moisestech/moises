@@ -22,7 +22,7 @@ export function LoreCreatorFlow({ className }: { className?: string }) {
         </h3>
       </div>
       <p className={`mt-2 max-w-3xl ${opp.muted}`}>
-        Real product path, not a generated UI. Full ownership notes live on the Lore case page.
+        Real product path, not a generated UI.
       </p>
       <ol className="mt-4 grid gap-2 sm:grid-cols-5">
         {LORE_FLOW.map((step) => (

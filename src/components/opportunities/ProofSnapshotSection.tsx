@@ -2,12 +2,14 @@ import Image from 'next/image';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
 import { EvidenceMaturityLegend } from '@/components/opportunities/EvidenceMaturityLegend';
+import { EvidenceMediaCarousel } from '@/components/opportunities/EvidenceMediaCarousel';
 import { PartnerMark } from '@/components/opportunities/PartnerMark';
 import { LifecycleStageChip } from '@/components/opportunities/LifecycleStageChip';
 import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
 import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
 import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
+import { RECRUITING_FDE_SCROLL_MT } from '@/config/recruiting-layout';
 import type { ProofSnapshot, ProofSnapshotCard } from '@/content/opportunities/types';
 import { cn } from '@/lib/utils';
 
@@ -18,6 +20,9 @@ type ProofSnapshotSectionProps = {
 };
 
 function ProofCardVisual({ card }: { card: ProofSnapshotCard }) {
+  if (card.media?.length) {
+    return <EvidenceMediaCarousel items={card.media} title={card.title} hoverPlay />;
+  }
   if (card.visual === 'field-kit-loop') {
     return <FieldKitLoopDiagram className="rounded-none border-0" />;
   }
@@ -58,7 +63,7 @@ export function ProofSnapshotSection({
   return (
     <section
       id={sectionId}
-      className={framed ? 'scroll-mt-32' : opp.section}
+      className={framed ? RECRUITING_FDE_SCROLL_MT : opp.section}
       aria-labelledby={`${sectionId}-heading`}
     >
       <h2 id={`${sectionId}-heading`} className={opp.h2}>

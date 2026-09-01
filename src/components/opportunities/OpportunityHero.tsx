@@ -15,7 +15,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { track } from '@/lib/analytics';
-import type { Opportunity, OpportunityCtas } from '@/content/opportunities/types';
+import type { HeroMetaChip, Opportunity, OpportunityCtas } from '@/content/opportunities/types';
 import { AnimatedLogoBand } from '@/components/opportunities/AnimatedLogoBand';
 import { OpportunityResumeLinks } from '@/components/opportunities/OpportunityResumeLinks';
 import { OpportunitySiteLinks } from '@/components/opportunities/OpportunitySiteLinks';
@@ -27,12 +27,21 @@ import {
   isExternalHttpHref,
   opportunitySocialIconClass,
 } from '@/components/opportunities/opportunitySocialStyles';
+import { HeroToolMarks } from '@/components/opportunities/HeroToolMarks';
 import { LIFECYCLE_META, type LifecycleStage } from '@/content/opportunities/lifecycle';
 import { cn } from '@/lib/utils';
 
 type OpportunityHeroProps = {
   opportunity: Opportunity;
 };
+
+function heroChipLabel(chip: HeroMetaChip) {
+  return typeof chip === 'string' ? chip : chip.label;
+}
+
+function heroChipHref(chip: HeroMetaChip) {
+  return typeof chip === 'string' ? undefined : chip.href;
+}
 
 function HeroActionLink({
   href,
@@ -360,13 +369,25 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             <HeroSecondaryActions ctas={ctas} onCta={onCta} githubProfileHref={githubProfileHref} />
           ) : null}
 
+          {opportunity.heroToolMarks?.length ? <HeroToolMarks /> : null}
+
           {opportunity.heroMetaChips?.length ? (
-            <ul className="mt-5 flex flex-wrap gap-2" aria-label="Role focus">
-              {opportunity.heroMetaChips.map((chip) => (
-                <li key={chip} className={cn(opp.pillTag, heroAccent.chipHover, 'max-w-full break-words')}>
-                  {chip}
-                </li>
-              ))}
+            <ul className="mt-4 flex flex-wrap gap-2" aria-label="Role focus">
+              {opportunity.heroMetaChips.map((chip) => {
+                const label = heroChipLabel(chip);
+                const href = heroChipHref(chip);
+                return (
+                  <li key={label} className={cn(opp.pillTag, heroAccent.chipHover, 'max-w-full break-words')}>
+                    {href ? (
+                      <Link href={href} className="underline-offset-2 hover:underline">
+                        {label}
+                      </Link>
+                    ) : (
+                      label
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           ) : null}
 

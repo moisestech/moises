@@ -45,14 +45,17 @@ export function RoleApplicationBar({ opportunity }: RoleApplicationBarProps) {
                 className="flex flex-wrap gap-x-2 gap-y-1 text-[11px] text-stone-600 dark:text-stone-400 sm:text-xs"
                 aria-label="Availability"
               >
-                {heroMetaChips.map((chip) => (
-                  <li
-                    key={chip}
-                    className="after:ml-2 after:text-stone-300 after:content-['·'] last:after:content-none dark:after:text-stone-600"
-                  >
-                    {chip}
-                  </li>
-                ))}
+                {heroMetaChips.map((chip) => {
+                  const label = typeof chip === 'string' ? chip : chip.label;
+                  return (
+                    <li
+                      key={label}
+                      className="after:ml-2 after:text-stone-300 after:content-['·'] last:after:content-none dark:after:text-stone-600"
+                    >
+                      {label}
+                    </li>
+                  );
+                })}
               </ul>
             ) : null}
           </div>

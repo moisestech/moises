@@ -61,6 +61,7 @@ export function SupportingEvidenceRow({ opportunity }: { opportunity: Opportunit
                   src={item.imageSrc}
                   srcDark={item.imageSrcDark}
                   alt={item.imageAlt ?? item.title}
+                  local={item.imageLocal}
                 />
               </div>
             ) : null}

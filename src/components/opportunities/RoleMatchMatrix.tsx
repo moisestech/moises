@@ -9,12 +9,15 @@ import { cn } from '@/lib/utils';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { OpportunityZoomTrigger } from '@/components/opportunities/OpportunityZoomLightbox';
 import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
-import { EvidenceMaturityLegend } from '@/components/opportunities/EvidenceMaturityLegend';
+import { EvidenceMediaCarousel } from '@/components/opportunities/EvidenceMediaCarousel';
+import { PartnerMark } from '@/components/opportunities/PartnerMark';
 import { FieldKitLoopDiagram } from '@/components/opportunities/FieldKitLoopDiagram';
 import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams';
 import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { LifecycleStageChip } from '@/components/opportunities/LifecycleStageChip';
 import { LIFECYCLE_META, LIFECYCLE_STAGES, isLifecycleStage } from '@/content/opportunities/lifecycle';
+import { FDE_SELECT_STAGE_EVENT } from '@/content/opportunities/fdeStageSelect';
+import { RECRUITING_FDE_SCROLL_MT } from '@/config/recruiting-layout';
 
 type RoleMatchMatrixProps = {
   opportunity: Opportunity;
@@ -57,22 +60,14 @@ function rowKey(row: RoleMatchRow, index: number) {
   return `${row.requirement}::${index}`;
 }
 
-function StageIcon({ stage }: { stage?: string }) {
+function StageIcon({ stage, large }: { stage?: string; large?: boolean }) {
   const Icon = (stage && STAGE_ICONS[stage]) || Eye;
   const color = stage && isLifecycleStage(stage) ? LIFECYCLE_META[stage].textClass : 'text-cyan-600 dark:text-cyan-400';
-  return <Icon className={cn('h-4 w-4 shrink-0', color)} aria-hidden />;
-}
-
-function ExplorerLegend() {
   return (
-    <div className="mt-4 space-y-3">
-      <p className={opp.subtle}>
-        <span className="font-semibold text-stone-600 dark:text-stone-300">Stage</span>
-        {' — '}
-        hue + icon (Discover through Handoff).
-      </p>
-      <EvidenceMaturityLegend />
-    </div>
+    <Icon
+      className={cn(large ? 'h-11 w-11 sm:h-12 sm:w-12' : 'h-4 w-4', 'shrink-0', color)}
+      aria-hidden
+    />
   );
 }
 
@@ -86,7 +81,11 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
   const rows = opportunity.roleMatchRows;
   const explorer = useMemo(() => rows.some((r) => r.claim || r.evidenceType), [rows]);
   const storytelling = useMemo(() => rows.some((r) => r.illustration), [rows]);
-  const sectionClass = framed ? 'scroll-mt-32' : opp.section;
+  const sectionClass = framed
+    ? explorer
+      ? RECRUITING_FDE_SCROLL_MT
+      : 'scroll-mt-32'
+    : opp.section;
 
   const firstIllustrated = useMemo(() => {
     const i = rows.findIndex((r) => r.illustration);
@@ -99,6 +98,16 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
   useEffect(() => {
     setActiveIndex(firstIllustrated);
   }, [firstIllustrated, rows]);
+
+  useEffect(() => {
+    const onSelect = (event: Event) => {
+      const stage = (event as CustomEvent<string>).detail;
+      const next = rows.findIndex((row) => row.stage === stage);
+      if (next >= 0) setActiveIndex(next);
+    };
+    window.addEventListener(FDE_SELECT_STAGE_EVENT, onSelect);
+    return () => window.removeEventListener(FDE_SELECT_STAGE_EVENT, onSelect);
+  }, [rows]);
 
   const activeRow = rows[activeIndex];
   const activeIllustration = activeRow?.illustration;
@@ -139,11 +148,6 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
     return (
       <section id="fit" className={sectionClass}>
         <h2 className={opp.h2}>{opportunity.roleMatchSectionTitle ?? 'Evidence explorer'}</h2>
-        {opportunity.roleMatchIntro ? <p className={`mt-3 max-w-3xl ${opp.muted}`}>{opportunity.roleMatchIntro}</p> : null}
-        <p className={`mt-4 ${opp.subtle}`}>
-          Coverage checklist — Discover through Handoff. Select a stage to inspect the artifact.
-        </p>
-        <ExplorerLegend />
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:items-start lg:gap-6">
           <div className={cn(opp.tableWrap, 'order-1')}>
@@ -169,29 +173,39 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
               {rows.map((row, index) => {
                 const active = index === activeIndex;
                 const tabId = `${tabBase}-${index}`;
+                const meta = isLifecycleStage(row.stage) ? LIFECYCLE_META[row.stage] : undefined;
                 return (
                   <button
                     key={rowKey(row, index)}
                     type="button"
                     role="tab"
                     id={tabId}
+                    data-stage={row.stage}
                     aria-selected={active}
                     aria-controls={panelId}
                     tabIndex={active ? 0 : -1}
                     className={cn(
-                      'min-h-[3rem] w-full px-3 py-3.5 text-left transition-colors sm:px-4',
+                      'min-h-[4.75rem] w-full border-l-4 px-3 py-2.5 text-left transition-colors sm:px-4',
                       'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]',
                       accent.focusRing,
-                      active ? accent.activeRow : opp.rowHover,
+                      active
+                        ? cn(meta?.selectedBgClass, meta?.borderClass, meta?.textClass, 'shadow-sm')
+                        : cn(
+                            'border-transparent bg-stone-50/70 text-stone-500 dark:bg-stone-950/25 dark:text-stone-400',
+                            meta?.hoverBgClass,
+                          ),
                     )}
                     onClick={() => setActiveIndex(index)}
                     onFocus={() => setActiveIndex(index)}
+                    onMouseEnter={() => setActiveIndex(index)}
                   >
-                    <span className="flex items-start gap-3">
-                      <StageIcon stage={row.stage} />
+                    <span className={cn('flex items-center gap-3', !active && 'opacity-70 hover:opacity-95')}>
+                      <StageIcon stage={row.stage} large />
                       <span className="min-w-0 flex-1">
                         <span className="flex flex-wrap items-center gap-2">
-                          <span className={opp.matrixPrimary}>{row.stage ?? row.requirement}</span>
+                          <span className={cn(opp.matrixPrimary, active && meta?.textClass)}>
+                            {row.stage ?? row.requirement}
+                          </span>
                           {row.evidenceType ? <EvidenceTypeBadge type={row.evidenceType} /> : null}
                         </span>
                         <span className={cn(opp.matrixSecondary, 'mt-1 block')}>
@@ -216,6 +230,9 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
             {activeRow ? (
               <div className={opp.illustrationCaption}>
                 <div className="flex flex-wrap items-center gap-2">
+                  {activeRow.logoSrc ? (
+                    <PartnerMark src={activeRow.logoSrc} alt={activeRow.logoAlt ?? activeRow.requirement} size="sm" />
+                  ) : null}
                   {activeRow.stage ? (
                     <LifecycleStageChip stage={activeRow.stage} />
                   ) : (
@@ -353,6 +370,15 @@ export function RoleMatchMatrix({ opportunity, framed = false }: RoleMatchMatrix
 }
 
 function ExplorerVisual({ row }: { row?: RoleMatchRow }) {
+  if (row?.media?.length) {
+    return (
+      <EvidenceMediaCarousel
+        items={row.media}
+        title={row.stage ?? row.requirement}
+        hoverPlay
+      />
+    );
+  }
   const illustration = row?.illustration;
   if (illustration?.visual === 'field-kit-loop') {
     return <FieldKitLoopDiagram className="rounded-none border-0" />;

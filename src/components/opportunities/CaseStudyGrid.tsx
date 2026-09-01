@@ -12,6 +12,7 @@ import { AepHarnessVisual } from '@/components/opportunities/AepHarnessDiagrams'
 import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { EvidenceTypeBadge } from '@/components/opportunities/EvidenceTypeBadge';
+import { EvidenceMediaCarousel } from '@/components/opportunities/EvidenceMediaCarousel';
 import { PartnerMark } from '@/components/opportunities/PartnerMark';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
@@ -76,7 +77,9 @@ export function CaseStudyGrid({ opportunity, framed = false }: CaseStudyGridProp
               accent.cardHover,
             )}
           >
-            {cs.visual === 'field-kit-loop' ? (
+            {cs.media?.length ? (
+              <EvidenceMediaCarousel items={cs.media} title={cs.title} hoverPlay />
+            ) : cs.visual === 'field-kit-loop' ? (
               <div className="border-b border-stone-100 dark:border-stone-800">
                 <FieldKitLoopDiagram className="rounded-none border-0" />
               </div>

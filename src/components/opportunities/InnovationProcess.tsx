@@ -1,7 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
-import type { Opportunity, ProcessDiagram } from '@/content/opportunities/types';
+import type { Opportunity, ProcessDiagram, ProcessStep } from '@/content/opportunities/types';
 import { ApproachDiagramGallery } from '@/components/opportunities/ApproachDiagramGallery';
 import { DesignForwardFdeLoopDiagram } from '@/components/opportunities/DesignForwardFdeLoopDiagram';
 import { ProcessStepLogos } from '@/components/opportunities/ProcessStepLogos';
@@ -9,8 +9,17 @@ import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 
+type InnovationProcessContent = {
+  title?: string;
+  intro?: string;
+  steps: ProcessStep[];
+  visual?: 'design-fde-loop';
+  diagrams?: ProcessDiagram[];
+};
+
 type InnovationProcessProps = {
-  opportunity: Opportunity;
+  opportunity?: Opportunity;
+  content?: InnovationProcessContent;
   /** Sticky nav anchor; defaults to `process` */
   sectionId?: string;
   /** Optional architecture diagrams (click to expand full screen). */
@@ -22,6 +31,7 @@ type InnovationProcessProps = {
 
 export function InnovationProcess({
   opportunity,
+  content,
   sectionId = 'process',
   diagrams,
   layout = 'stack',
@@ -29,18 +39,22 @@ export function InnovationProcess({
 }: InnovationProcessProps) {
   const groupId = useId();
   const [activeIndex, setActiveIndex] = useState(0);
-  const steps = opportunity.processSteps;
+  const steps = content?.steps ?? opportunity?.processSteps ?? [];
+  const title = content?.title ?? opportunity?.processSectionTitle ?? 'Process';
+  const intro = content?.intro ?? opportunity?.processIntro;
   const isHorizontal = layout === 'horizontal';
   const accent = getOpportunityCompactAccent(sectionId);
-  const gallery = diagrams ?? opportunity.processDiagrams;
-  const showLoop = opportunity.processVisual === 'design-fde-loop';
+  const gallery = diagrams ?? content?.diagrams ?? opportunity?.processDiagrams;
+  const showLoop = (content?.visual ?? opportunity?.processVisual) === 'design-fde-loop';
   const hasVisual = showLoop || Boolean(gallery?.length);
+
+  if (!steps.length) return null;
 
   return (
     <section id={sectionId} className={framed ? 'scroll-mt-32' : opp.section}>
-      <h2 className={opp.h2}>{opportunity.processSectionTitle ?? 'Process'}</h2>
-      {opportunity.processIntro ? (
-        <p className={`mt-3 max-w-3xl ${opp.body}`}>{opportunity.processIntro}</p>
+      <h2 className={opp.h2}>{title}</h2>
+      {intro ? (
+        <p className={`mt-3 max-w-3xl ${opp.body}`}>{intro}</p>
       ) : null}
       {showLoop ? (
         <DesignForwardFdeLoopDiagram className="mt-6" />
@@ -67,7 +81,7 @@ export function InnovationProcess({
       >
         {isHorizontal ? (
           <span id={groupId} className="sr-only">
-            First ninety days plan steps
+            {showLoop ? 'Proposed thin-slice steps' : 'Process steps'}
           </span>
         ) : null}
         {steps.map((step, i) => {
@@ -158,7 +172,7 @@ export function InnovationProcess({
         </div>
       ) : null}
 
-      {opportunity.innovationLabLead || opportunity.innovationLabBody ? (
+      {opportunity?.innovationLabLead || opportunity?.innovationLabBody ? (
         <div className={opp.calloutInner}>
           {opportunity.innovationLabSectionTitle ? (
             <h3 className={opp.h3MoMA}>{opportunity.innovationLabSectionTitle}</h3>

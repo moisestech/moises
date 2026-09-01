@@ -4,14 +4,46 @@ import type {
   RoleMatchIllustration,
   RoleMatchRow,
   SupportingEvidenceItem,
+  TeachingMediaItem,
 } from './types';
 import type { LifecycleStage } from './lifecycle';
 import { digilabMedia } from '@/content/oolite-arts/media';
-import { evidenceProjects } from '@/content/evidence/projects';
+import { AEP_CARD_V2, AEP_CARD_V2_DARK, evidenceProjects } from '@/content/evidence/projects';
 import { automationProjectSpecs } from '@/content/evidence/automationProjects';
-import { deloitteFacilitatorWorkshopStill } from '@/content/evidence/applicationBanners';
 import { saturdayLabLive } from './packs/designFacilitationEvidencePack';
 import { FDE_PARTNER_LOGOS } from './fdePartnerLogos';
+
+export const FDE_COVERS = {
+  discover: {
+    src: '/images/opportunities/forward-deployed/fde-discover-observation-cover.png',
+    alt: 'Conceptual cover — observation split: face-coherence versus an animal prompt path. Not a product screenshot.',
+    local: true,
+  },
+  saturdayLab: {
+    src: '/images/opportunities/forward-deployed/fde-saturday-lab-intake-cover.png',
+    alt: 'Conceptual cover — intake paths into a mixed-audience session. Not an Oolite teaching photograph.',
+    local: true,
+  },
+  fieldKit: {
+    src: '/images/opportunities/forward-deployed/fde-field-kit-handoff-cover.png',
+    alt: 'Conceptual cover — brief to recommend to review to handoff. Not a live FLORA screenshot.',
+    local: true,
+  },
+  thinSlice: {
+    src: '/images/opportunities/forward-deployed/fde-thin-slice-method-cover.png',
+    alt: 'Conceptual cover — proposed six-word loop. Not completed client work.',
+    local: true,
+  },
+} as const;
+
+const fieldKitConceptStudy: TeachingMediaItem = {
+  src: '/images/opportunities/flora-forward-deployed-creative/flora-field-kit-overview-concept-study.png',
+  alt: 'FLORA Field Kit — brief-to-handoff client workflow concept study',
+  caption: 'Concept study',
+  local: true,
+};
+
+const WORKSHOP_HARNESS = '/workshop/agentic-evidence-pipeline';
 
 export const FIELD_KIT_REPO = 'https://github.com/moisestech/flora-field-kit';
 export const FIELD_KIT_DEMO = 'https://flora-field-kit.vercel.app';
@@ -43,6 +75,7 @@ export type FdeEvidenceItem = {
   featured?: boolean;
   supporting?: boolean;
   tools?: string[];
+  media?: TeachingMediaItem[];
 };
 
 export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
@@ -62,6 +95,24 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     logoSrc: FDE_PARTNER_LOGOS.oolite.src,
     logoAlt: FDE_PARTNER_LOGOS.oolite.alt,
     featured: true,
+    media: [
+      { src: teachingWorkshop.src, alt: teachingWorkshop.alt, caption: 'Oolite Digital Lab' },
+      {
+        src: digilabMedia['docs.vibe-apr25-29'].src,
+        alt: digilabMedia['docs.vibe-apr25-29'].alt,
+        caption: 'Digilab still — April 25',
+      },
+      {
+        src: digilabMedia['docs.vibe-apr25-35'].src,
+        alt: digilabMedia['docs.vibe-apr25-35'].alt,
+        caption: 'Screens and participants',
+      },
+      {
+        src: digilabMedia['docs.vibe-apr25-39'].src,
+        alt: digilabMedia['docs.vibe-apr25-39'].alt,
+        caption: 'Digital Lab workstations',
+      },
+    ],
   },
   {
     id: 'lore-machine',
@@ -78,6 +129,7 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     logoSrc: FDE_PARTNER_LOGOS.lore.src,
     logoAlt: FDE_PARTNER_LOGOS.lore.alt,
     featured: true,
+    media: [{ src: lore.imageSrc, alt: lore.imageAlt, caption: 'Lore Machine home' }],
   },
   {
     id: 'bookleggers',
@@ -95,6 +147,7 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     logoSrc: FDE_PARTNER_LOGOS.bookleggers.src,
     logoAlt: FDE_PARTNER_LOGOS.bookleggers.alt,
     featured: true,
+    media: [{ src: bookleggers.imageSrc, alt: bookleggers.imageAlt, caption: 'Bookleggers Library' }],
   },
   {
     id: 'aep',
@@ -106,11 +159,26 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
       'TypeScript reference with synthetic fixtures and a fake-model harness — not a hosted customer product.',
     whatChanged: 'Assessment state persists across a review pause; invalid citations cannot silently pass.',
     whatThisProves: 'Governance as code. Evidence in, reviewable decisions out.',
-    inspectHref: `${AEP_BLOB}/packages/agent/src/policy.ts`,
-    inspectLabel: 'Inspect policy.ts',
-    illustration: { visual: 'harness' },
+    inspectHref: WORKSHOP_HARNESS,
+    inspectLabel: 'Inspect harness',
+    illustration: {
+      src: AEP_CARD_V2,
+      alt: 'Conceptual cover for a governed evidence workflow — reference implementation, not a hosted product UI',
+    },
     featured: true,
     tools: ['TypeScript', 'Postgres', 'human review'],
+    media: [
+      {
+        src: AEP_CARD_V2,
+        alt: 'Conceptual cover for a governed evidence workflow — reference implementation, not a hosted product UI',
+        caption: 'Conceptual cover',
+      },
+      {
+        src: AEP_CARD_V2_DARK,
+        alt: 'Dark conceptual cover for a governed evidence workflow — reference implementation, not a hosted product UI',
+        caption: 'Conceptual cover (dark)',
+      },
+    ],
   },
   {
     id: 'field-kit',
@@ -124,9 +192,22 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     whatThisProves: 'Rapid prototyping habit you can click without an API key.',
     inspectHref: FIELD_KIT_DEMO,
     inspectLabel: 'Open fixture demo',
-    illustration: { visual: 'field-kit-loop' },
+    illustration: {
+      src: FDE_COVERS.fieldKit.src,
+      alt: FDE_COVERS.fieldKit.alt,
+      local: true,
+    },
     supporting: true,
     tools: ['Cursor', 'Claude', 'Next.js'],
+    media: [
+      {
+        src: FDE_COVERS.fieldKit.src,
+        alt: FDE_COVERS.fieldKit.alt,
+        caption: 'Conceptual cover',
+        local: true,
+      },
+      fieldKitConceptStudy,
+    ],
   },
   {
     id: 'n8n-workshop',
@@ -156,14 +237,21 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     whatThisProves: 'Observation changed the build.',
     inspectHref: '/projects/lore-machine',
     inspectLabel: 'Inspect Lore Machine',
-    illustration: { src: teachingWorkshop.src, alt: teachingWorkshop.alt },
-    overlayIllustration: {
-      src: deloitteFacilitatorWorkshopStill.src,
-      alt: deloitteFacilitatorWorkshopStill.alt,
+    illustration: {
+      src: FDE_COVERS.discover.src,
+      alt: FDE_COVERS.discover.alt,
       local: true,
     },
     logoSrc: FDE_PARTNER_LOGOS.lore.src,
     logoAlt: FDE_PARTNER_LOGOS.lore.alt,
+    media: [
+      {
+        src: FDE_COVERS.discover.src,
+        alt: FDE_COVERS.discover.alt,
+        caption: 'Conceptual cover',
+        local: true,
+      },
+    ],
   },
   {
     id: 'saturday-lab',
@@ -177,10 +265,22 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     whatThisProves: 'Instructional design you can inspect.',
     inspectHref: saturdayLabLive.facilitator,
     inspectLabel: 'Inspect Saturday Lab facilitator',
-    illustration: { src: teachingWorkshop.src, alt: teachingWorkshop.alt },
+    illustration: {
+      src: FDE_COVERS.saturdayLab.src,
+      alt: FDE_COVERS.saturdayLab.alt,
+      local: true,
+    },
     logoSrc: FDE_PARTNER_LOGOS.oolite.src,
     logoAlt: FDE_PARTNER_LOGOS.oolite.alt,
     tools: ['Figma', 'Airtable'],
+    media: [
+      {
+        src: FDE_COVERS.saturdayLab.src,
+        alt: FDE_COVERS.saturdayLab.alt,
+        caption: 'Conceptual cover',
+        local: true,
+      },
+    ],
   },
   {
     id: 'playwire',
@@ -207,9 +307,21 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     limitation: 'Proposed first engagement. Not a Deloitte delivery.',
     whatChanged: 'A bounded slice: discover, prototype, govern, deploy, teach, handoff.',
     whatThisProves: 'A method I can walk into, not a claim that it already shipped for a firm.',
-    inspectHref: '#process',
-    inspectLabel: 'Read the thin slice',
-    illustration: { visual: 'thin-slice' },
+    inspectHref: WORKSHOP_HARNESS,
+    inspectLabel: 'Read the proposed slice',
+    illustration: {
+      src: FDE_COVERS.thinSlice.src,
+      alt: FDE_COVERS.thinSlice.alt,
+      local: true,
+    },
+    media: [
+      {
+        src: FDE_COVERS.thinSlice.src,
+        alt: FDE_COVERS.thinSlice.alt,
+        caption: 'Conceptual cover — proposed method',
+        local: true,
+      },
+    ],
   },
 ];
 
@@ -262,6 +374,9 @@ export function toExplorerRow(item: FdeEvidenceItem, surface: 'flagship' | 'over
       surface === 'overlay' && item.overlayIllustration
         ? item.overlayIllustration
         : item.illustration,
+    logoSrc: item.logoSrc,
+    logoAlt: item.logoAlt,
+    media: item.media,
   };
 }
 
@@ -279,6 +394,7 @@ export function toProofCard(item: FdeEvidenceItem): ProofSnapshotCard {
     lifecycleStage: item.lifecycleStage,
     logoSrc: item.logoSrc,
     logoAlt: item.logoAlt,
+    media: item.media,
   };
 }
 
@@ -302,5 +418,6 @@ export function toSupportingItem(item: FdeEvidenceItem): SupportingEvidenceItem 
       item.id === 'field-kit' ? 'Inspect repo' : item.id === 'n8n-workshop' ? 'Art of AI Agents' : undefined,
     imageSrc: item.illustration.src,
     imageAlt: item.illustration.alt,
+    imageLocal: item.illustration.local,
   };
 }

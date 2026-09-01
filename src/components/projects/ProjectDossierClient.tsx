@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Mail } from 'lucide-react';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { SystemPipelineCaseStudy } from '@/components/opportunities/SystemPipelineCaseStudy';
+import { LoreCreatorFlow, LoreOwnershipChips } from '@/components/opportunities/FdeCaseDiagrams';
 import type { ProjectDossier } from '@/content/projects/types';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
@@ -66,6 +67,13 @@ export function ProjectDossierClient({ project }: ProjectDossierClientProps) {
               sectionId={`${project.slug}-pipeline`}
               variant="full"
             />
+          ) : null}
+
+          {project.slug === 'lore-machine' ? (
+            <>
+              <LoreCreatorFlow />
+              <LoreOwnershipChips />
+            </>
           ) : null}
 
           <section className={opp.sectionSm} aria-labelledby={`${project.slug}-stack`}>

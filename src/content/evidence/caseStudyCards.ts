@@ -1,5 +1,5 @@
 import { getEvidenceProject } from './projects';
-import type { EvidenceType } from '@/content/opportunities/types';
+import type { EvidenceType, TeachingMediaItem } from '@/content/opportunities/types';
 import {
   flagshipEvidence,
   rankEvidenceForOpportunity,
@@ -28,6 +28,7 @@ export type CaseStudyOverride = {
   secondaryLinkLabel?: string;
   logoSrc?: string;
   logoAlt?: string;
+  media?: TeachingMediaItem[];
 };
 
 export type ResolvedCaseStudyCard = {
@@ -48,6 +49,7 @@ export type ResolvedCaseStudyCard = {
   secondaryLinkLabel?: string;
   logoSrc?: string;
   logoAlt?: string;
+  media?: TeachingMediaItem[];
   tier?: 'primary' | 'secondary' | 'supporting';
 };
 
@@ -80,6 +82,7 @@ export function resolveCaseStudyCards(
       secondaryLinkLabel: o?.secondaryLinkLabel,
       logoSrc: o?.logoSrc,
       logoAlt: o?.logoAlt,
+      media: o?.media,
     });
   }
   return cards;

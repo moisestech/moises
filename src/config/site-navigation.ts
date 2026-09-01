@@ -46,6 +46,11 @@ export const WORKSHOP_NAV_PROGRAMS: SiteNavItem[] = [
     path: '/workshop/moonlighter-ai-3d-printing',
     enabled: true,
   },
+  {
+    label: 'AEP',
+    path: '/workshop/agentic-evidence-pipeline',
+    enabled: true,
+  },
 ]
 
 /** Active state for workshop header links (exact match or nested under the same program/research tree). */

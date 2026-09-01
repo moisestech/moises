@@ -11,12 +11,16 @@ import { cn } from '@/lib/utils';
 type EvidenceMediaCarouselProps = {
   items: TeachingMediaItem[];
   title: string;
+  /** Auto-advance while hovered, unless the viewer prefers reduced motion. */
+  hoverPlay?: boolean;
 };
 
-export function EvidenceMediaCarousel({ items, title }: EvidenceMediaCarouselProps) {
+export function EvidenceMediaCarousel({ items, title, hoverPlay = false }: EvidenceMediaCarouselProps) {
   const id = useId();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
+  const [hovering, setHovering] = useState(false);
+  const itemKey = items.map((item) => item.src).join('|');
 
   const go = useCallback((next: number) => {
     const el = scrollerRef.current;
@@ -29,6 +33,21 @@ export function EvidenceMediaCarousel({ items, title }: EvidenceMediaCarouselPro
     });
     setIndex(clamped);
   }, [items.length]);
+
+  useEffect(() => {
+    setIndex(0);
+    scrollerRef.current?.scrollTo({ left: 0, behavior: 'auto' });
+  }, [itemKey]);
+
+  useEffect(() => {
+    if (!hoverPlay || items.length < 2 || !hovering) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    const timer = window.setInterval(() => {
+      go(index + 1);
+    }, 1400);
+    return () => window.clearInterval(timer);
+  }, [go, hoverPlay, hovering, index, items.length]);
 
   useEffect(() => {
     const el = scrollerRef.current;
@@ -44,7 +63,13 @@ export function EvidenceMediaCarousel({ items, title }: EvidenceMediaCarouselPro
   if (!items.length) return null;
 
   return (
-    <div className={cn(opp.cardMedia, 'overflow-hidden')} aria-roledescription="carousel" aria-label={`${title} media`}>
+    <div
+      className={cn(opp.cardMedia, 'overflow-hidden')}
+      aria-roledescription="carousel"
+      aria-label={`${title} media`}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
       <div
         ref={scrollerRef}
         id={`${id}-scroller`}
