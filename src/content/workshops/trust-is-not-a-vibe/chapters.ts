@@ -2,6 +2,7 @@ import type { TrustChapter, TrustChapterId } from './types'
 
 export const TRUST_TITLE = 'Trust Is Not a Vibe'
 export const TRUST_SUBTITLE = 'A 30-minute field lab for evaluating AI before it acts.'
+export { TRUST_SESSION_TITLE, TRUST_CENTRAL_QUESTION } from './types'
 export const TRUST_PROBLEM_NAME = 'Painfully Alone'
 export const TRUST_SECONDARY_LINE = 'No agent is an island.'
 export const TRUST_THESIS = 'The model proposes. The system controls. The team authorizes.'

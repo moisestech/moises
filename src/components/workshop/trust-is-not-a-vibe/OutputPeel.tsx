@@ -1,14 +1,15 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
-import type { TrustCase } from '@/content/workshops/trust-is-not-a-vibe'
+import { TRUST_CENTRAL_QUESTION, type TrustCase } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustMark } from './TrustMarks'
 import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
 
 const LAYERS = [
-  { id: 'evidence', label: 'Evidence', hint: 'What did it read?' },
-  { id: 'authority', label: 'Authority', hint: 'What may it change?' },
-  { id: 'impact', label: 'Impact', hint: 'Who feels this?' },
+  { id: 'evidence', label: 'Evidence', hint: 'What did it read?', mark: 'evidence' as const },
+  { id: 'authority', label: 'Authority', hint: 'What may it change?', mark: 'authority' as const },
+  { id: 'impact', label: 'Impact', hint: 'Who feels this?', mark: 'impact' as const },
 ] as const
 
 export function AgentOutputCard({
@@ -40,7 +41,7 @@ export function AgentOutputCard({
       </ul>
       {peeled ? (
         <p className="border-t border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-          Looks right. Would you let it act?
+          Looks right. {TRUST_CENTRAL_QUESTION}
         </p>
       ) : null}
     </article>
@@ -75,6 +76,7 @@ export function OutputPeel({
       <AgentOutputCard caseData={caseData} peeled={open} />
       {vote}
       <TrustPlaceholderFrame asset={caseData.id === 'case-a' ? 'caseAOutput' : 'caseBTransfer'} />
+      {open && caseData.id === 'case-a' ? <TrustPlaceholderFrame asset="caseAEnvironment" /> : null}
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -101,6 +103,7 @@ export function OutputPeel({
                     : 'border-stone-200 text-stone-600 dark:border-stone-600 dark:text-stone-300'
                 )}
               >
+                <TrustMark id={item.mark} className="mr-1 inline-block h-3.5 w-3.5 align-[-2px]" />
                 {item.label}
                 <span className="ml-1 font-normal opacity-70">{item.hint}</span>
               </button>

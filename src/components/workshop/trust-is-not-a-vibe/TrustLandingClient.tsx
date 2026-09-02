@@ -12,9 +12,11 @@ import {
   TRUST_OUTCOMES,
   TRUST_PROBLEM_NAME,
   TRUST_QUICK_FACTS,
+  TRUST_CENTRAL_QUESTION,
   TRUST_REHEARSE_HREF,
   TRUST_ROLES,
   TRUST_SECONDARY_LINE,
+  TRUST_SESSION_TITLE,
   TRUST_SUBTITLE,
   TRUST_THESIS,
   TRUST_TITLE,
@@ -27,9 +29,10 @@ export function TrustLandingClient() {
   return (
     <main className={cn(trust.shell, 'overflow-x-clip pb-20 sm:pb-24')}>
       <div className={trust.main}>
-        <p className={trust.eyebrow}>Workshop · field lab · 30 minutes</p>
+        <p className={trust.eyebrow}>Workshop · field lab · 30 minutes · live session: {TRUST_SESSION_TITLE}</p>
         <h1 className={cn(trust.title, 'mt-2')}>{TRUST_TITLE}</h1>
         <p className="mt-3 max-w-2xl text-lg font-light text-stone-600 dark:text-stone-300">{TRUST_SUBTITLE}</p>
+        <p className="mt-2 max-w-2xl text-sm font-medium text-stone-800 dark:text-stone-200">{TRUST_CENTRAL_QUESTION}</p>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-600 dark:text-stone-400">
           {TRUST_SECONDARY_LINE} {TRUST_THESIS}
         </p>

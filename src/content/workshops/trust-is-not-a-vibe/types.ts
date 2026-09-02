@@ -2,6 +2,19 @@ export const TRUST_SLUG = 'trust-is-not-a-vibe' as const
 export const TRUST_BASE = `/workshop/${TRUST_SLUG}` as const
 export const TRUST_LEARN_BASE = `${TRUST_BASE}/learn` as const
 export const TRUST_REHEARSE_HREF = `${TRUST_BASE}/rehearse` as const
+export const TRUST_SURFACES_HREF = `${TRUST_REHEARSE_HREF}/surfaces` as const
+export const TRUST_DECISION_CARD_HREF = `${TRUST_REHEARSE_HREF}/decision-card` as const
+export const TRUST_SESSION_TITLE = 'Before the Agent Acts' as const
+export const TRUST_CENTRAL_QUESTION = 'Should this AI output be allowed to act?' as const
+
+export type TrustLayerId = 'evidence' | 'authority' | 'impact'
+export type TrustFailureMarkId =
+  | 'wrong-evidence'
+  | 'wrong-path'
+  | 'wrong-power'
+  | 'wrong-impact'
+  | 'wrong-judge'
+export type TrustMarkId = TrustLayerId | TrustVerdict | TrustRoleId | TrustFailureMarkId
 
 export type TrustRoleId = 'pm' | 'engineering' | 'design' | 'strategy'
 export type TrustVerdict = 'allow' | 'ask' | 'deny'
@@ -45,6 +58,7 @@ export type TrustRole = {
   chapterHighlight: string
   inspectPrompts: readonly string[]
   needToSeePrompt: string
+  teachBackPrompt: string
 }
 
 export type TrustFailure = {
@@ -94,4 +108,27 @@ export type TrustSpeakerNote = {
   chapterId: TrustChapterId
   interrupt?: string
   beats: readonly string[]
+}
+
+export type TrustLiveBeatId =
+  | 'open-vote'
+  | 'context'
+  | 'teach-layers'
+  | 'assign-lenses'
+  | 'role-inspect'
+  | 'reveal-verdict'
+  | 'harness'
+  | 'transfer'
+  | 'teach-back'
+  | 'exit'
+
+export type TrustLiveBeat = {
+  id: TrustLiveBeatId
+  startMin: number
+  endMin: number
+  title: string
+  chapterId: TrustChapterId
+  interrupt?: boolean
+  skipOnLiveClock?: boolean
+  cue: string
 }

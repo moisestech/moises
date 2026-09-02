@@ -2,15 +2,15 @@ import type { TrustCase, TrustControl, TrustLoopNode } from './types'
 
 export const TRUST_CASE_A: TrustCase = {
   id: 'case-a',
-  title: 'Program-launch agent',
-  domain: 'Institutional workshop launch',
+  title: 'Six-week program-launch agent',
+  domain: 'Institutional six-week program launch',
   fixtureNote:
     'Synthetic teaching fixture. Not a live program system, not a client dashboard, and not a production quality claim.',
   output: {
-    headline: 'Launch is ready. Messages are queued. Low-engagement participants will be removed.',
+    headline: 'The six-week cohort is confirmed for October 6. Messages are queued. Low-engagement participants will be removed.',
     confidence: 'High confidence · looks production-ready',
     claims: [
-      { label: 'Launch date', value: 'Confirmed' },
+      { label: 'Launch date', value: 'October 6 · confirmed' },
       { label: 'Messages ready', value: '120 participant messages' },
       { label: 'Expected completion', value: '87%' },
       { label: 'Low engagement', value: 'Will be removed automatically' },
@@ -23,7 +23,7 @@ export const TRUST_CASE_A: TrustCase = {
   },
   environment: {
     evidence: [
-      'The launch date is still marked tentative on the source calendar.',
+      'The launch date is still marked tentative on the source calendar. October 6 is not confirmed.',
       'The roster file contains 80 people, not 120.',
       'No historical completion data supports an 87% forecast.',
     ],

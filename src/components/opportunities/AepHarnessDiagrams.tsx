@@ -297,7 +297,7 @@ const ROUTES = [
 
 export function AllowAskDeny({ className }: { className?: string }) {
   return (
-    <section className={cn('mt-8', className)} aria-labelledby="aad-heading">
+    <section id="allow-ask-deny" className={cn('mt-8', className)} aria-labelledby="aad-heading">
       <h3 id="aad-heading" className={opp.h3MoMA}>
         Allow / Ask / Deny
       </h3>
