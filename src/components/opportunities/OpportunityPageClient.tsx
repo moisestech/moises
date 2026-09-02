@@ -34,6 +34,7 @@ import {
   CapabilityTransferLoop,
   FacilitationTimeline,
 } from '@/components/opportunities/FdeCaseDiagrams';
+import { TeachingJudgmentPanel } from '@/components/opportunities/TeachingJudgmentPanel';
 import { AEP_WORKSHOP_HREF } from '@/content/workshops/aepHarness';
 import { SectionFlourish } from '@/components/opportunities/SectionFlourish';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
@@ -135,6 +136,7 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
           <OpportunityColorSection sectionId="fit" className={cn('mt-10 sm:mt-14', fdeScrollMt)}>
             <RoleMatchMatrix opportunity={opportunity} framed />
+            {opportunity.showFdeRoleMap ? <TeachingJudgmentPanel /> : null}
           </OpportunityColorSection>
 
           <OpportunityColorSection sectionId="case-studies" className="mt-10 sm:mt-14">

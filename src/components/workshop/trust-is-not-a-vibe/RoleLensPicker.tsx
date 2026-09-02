@@ -3,6 +3,8 @@
 import { getTrustRole, TRUST_COMBINED_STRATEGY_DESIGN, TRUST_ROLES } from '@/content/workshops/trust-is-not-a-vibe'
 import type { TrustRoleId } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustMissingStillNote } from './TrustMissingStill'
+import { TrustMark } from './TrustMarks'
 
 export function RoleLensPicker({
   value,
@@ -24,6 +26,9 @@ export function RoleLensPicker({
         <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
           One path, four lenses. Stay with this seat for the rest of the lab.
         </p>
+        <div className="mt-2">
+          <TrustMissingStillNote asset="roleLensCards" />
+        </div>
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
           {TRUST_ROLES.map((role) => {
             const active = value === role.id
@@ -40,7 +45,10 @@ export function RoleLensPicker({
                     : 'border-stone-200 bg-white hover:border-stone-400 dark:border-stone-700 dark:bg-stone-900'
                 )}
               >
-                <p className="text-[10px] uppercase tracking-wide text-stone-500">{role.shortLabel}</p>
+                <p className="flex items-center gap-2 text-[10px] uppercase tracking-wide text-stone-500">
+                  <TrustMark id={role.id} className="h-4 w-4" />
+                  {role.shortLabel}
+                </p>
                 <p className="mt-0.5 font-semibold text-stone-950 dark:text-stone-50">{role.label}</p>
                 <p className="mt-2 text-xs text-stone-600 dark:text-stone-400">{role.primaryQuestions[0]}</p>
               </button>

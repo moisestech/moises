@@ -51,6 +51,11 @@ export function OpportunityTeachingCredentials({ opportunity, framed = false }: 
                       alt={item.imageAlt ?? item.title}
                       local={item.imageLocal}
                     />
+                    {item.imagePending ? (
+                      <span className="pointer-events-none absolute left-3 top-3 rounded-full border border-amber-400/80 bg-amber-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-amber-950">
+                        Missing still
+                      </span>
+                    ) : null}
                   </OpportunityZoomTrigger>
                 ) : (
                   <div className={`${opp.cardMedia} bg-stone-200 dark:bg-stone-800`} aria-hidden />

@@ -1,8 +1,12 @@
 export {
   TRUST_BASE,
+  TRUST_CENTRAL_QUESTION,
+  TRUST_DECISION_CARD_HREF,
   TRUST_LEARN_BASE,
   TRUST_REHEARSE_HREF,
+  TRUST_SESSION_TITLE,
   TRUST_SLUG,
+  TRUST_SURFACES_HREF,
 } from './types'
 export type {
   TrustCase,
@@ -11,8 +15,13 @@ export type {
   TrustControl,
   TrustControlId,
   TrustFailure,
+  TrustFailureMarkId,
+  TrustLayerId,
+  TrustLiveBeat,
+  TrustLiveBeatId,
   TrustLoopNode,
   TrustLoopStage,
+  TrustMarkId,
   TrustRole,
   TrustRoleId,
   TrustRubricKey,
@@ -21,8 +30,10 @@ export type {
   TrustVerdict,
 } from './types'
 
-export { TRUST_PLACEHOLDERS } from './placeholders'
-export type { TrustPlaceholderKey } from './placeholders'
+export { TRUST_DEMO_SURFACES, TRUST_PLACEHOLDERS, trustPlaceholderEntries, trustStillsNeeded } from './placeholders'
+export type { TrustPlaceholder, TrustPlaceholderKey, TrustPlaceholderStatus } from './placeholders'
+
+export { getLiveBeatAtElapsed, TRUST_LIVE_BEATS, TRUST_LIVE_CUE_MINUTES } from './live-beats'
 
 export { getTrustRole, TRUST_COMBINED_STRATEGY_DESIGN, TRUST_ROLES } from './roles'
 

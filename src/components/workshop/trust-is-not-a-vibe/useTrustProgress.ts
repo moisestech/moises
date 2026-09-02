@@ -24,7 +24,9 @@ export type TrustProgress = {
   loopPlacements: Partial<Record<string, TrustLoopStage>>
   controlMatches: Partial<Record<string, TrustControlId>>
   teamVerdict: TrustVerdict | null
+  safeguard: string
   transferVote: TrustVerdict | null
+  teachBack: string
   rubric: TrustRubric
   exitTicket: string
   completedChapters: TrustChapterId[]
@@ -46,7 +48,9 @@ export const EMPTY_TRUST_PROGRESS: TrustProgress = {
   loopPlacements: {},
   controlMatches: {},
   teamVerdict: null,
+  safeguard: '',
   transferVote: null,
+  teachBack: '',
   rubric: EMPTY_RUBRIC,
   exitTicket: '',
   completedChapters: [],

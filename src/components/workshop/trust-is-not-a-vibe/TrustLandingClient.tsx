@@ -12,24 +12,30 @@ import {
   TRUST_OUTCOMES,
   TRUST_PROBLEM_NAME,
   TRUST_QUICK_FACTS,
+  TRUST_CENTRAL_QUESTION,
   TRUST_REHEARSE_HREF,
   TRUST_ROLES,
   TRUST_SECONDARY_LINE,
+  TRUST_SESSION_TITLE,
   TRUST_SUBTITLE,
   TRUST_THESIS,
   TRUST_TITLE,
+  TRUST_PLACEHOLDERS,
+  trustStillsNeeded,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { trust } from './trust-tokens'
+import { TrustMissingStillBadge } from './TrustMissingStill'
 import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
+import { trust } from './trust-tokens'
 
 export function TrustLandingClient() {
   return (
     <main className={cn(trust.shell, 'overflow-x-clip pb-20 sm:pb-24')}>
       <div className={trust.main}>
-        <p className={trust.eyebrow}>Workshop · field lab · 30 minutes</p>
+        <p className={trust.eyebrow}>Workshop · field lab · 30 minutes · live session: {TRUST_SESSION_TITLE}</p>
         <h1 className={cn(trust.title, 'mt-2')}>{TRUST_TITLE}</h1>
         <p className="mt-3 max-w-2xl text-lg font-light text-stone-600 dark:text-stone-300">{TRUST_SUBTITLE}</p>
+        <p className="mt-2 max-w-2xl text-sm font-medium text-stone-800 dark:text-stone-200">{TRUST_CENTRAL_QUESTION}</p>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone-600 dark:text-stone-400">
           {TRUST_SECONDARY_LINE} {TRUST_THESIS}
         </p>
@@ -54,6 +60,22 @@ export function TrustLandingClient() {
             </div>
           ))}
         </dl>
+
+        <section className="mt-10 rounded-xl border border-dashed border-amber-400/70 bg-amber-50/50 p-4 dark:border-amber-500/50 dark:bg-amber-950/20">
+          <h2 className="text-sm font-bold text-amber-950 dark:text-amber-50">Images still needed</h2>
+          <p className="mt-1 max-w-2xl text-xs text-amber-900/80 dark:text-amber-100/80">
+            Designed slots stand in until stills exist. Filenames are the replacement targets. Do not read these as
+            finished photography.
+          </p>
+          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+            {trustStillsNeeded().map(([, item]) => (
+              <li key={item.id} className="flex flex-col gap-1 rounded-lg border border-amber-300/60 bg-white/70 px-3 py-2 dark:border-amber-800 dark:bg-stone-950/40">
+                <TrustMissingStillBadge status={item.status} filename={item.surfaceFilename} />
+                <p className="text-xs font-semibold text-stone-800 dark:text-stone-100">{item.label}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
           <TrustPlaceholderFrame asset="peelOpenHero" />
@@ -88,7 +110,13 @@ export function TrustLandingClient() {
           <p className={cn(trust.muted, 'mt-2 max-w-2xl')}>
             Not four courses. The taught fixture is a program-launch agent. {TRUST_CASE_A.fixtureNote}
           </p>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-4">
+            <TrustMissingStillBadge
+              status={TRUST_PLACEHOLDERS.roleLensCards.status}
+              filename={TRUST_PLACEHOLDERS.roleLensCards.surfaceFilename}
+            />
+          </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {TRUST_ROLES.map((role) => (
               <article key={role.id} className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900">
                 <p className={trust.label}>{role.shortLabel}</p>

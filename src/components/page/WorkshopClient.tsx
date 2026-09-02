@@ -422,6 +422,7 @@ export default function WorkshopClient() {
                 >
                   <div className="relative aspect-[16/10] w-full overflow-hidden">
                     {cover ? (
+                      <>
                       <Image
                         src={cover.src}
                         alt={cover.alt}
@@ -429,6 +430,12 @@ export default function WorkshopClient() {
                         className="object-cover transition duration-500 group-hover:scale-[1.04]"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
+                      {cover.pending ? (
+                        <span className="absolute right-3 top-3 z-[1] rounded-full border border-amber-400/80 bg-amber-50 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-950">
+                          14-workshop-cover · missing still
+                        </span>
+                      ) : null}
+                      </>
                     ) : (
                       <div
                         className={cn(

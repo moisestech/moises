@@ -19,6 +19,7 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'What would make you stop the send even if the copy looks polished?',
     ],
     needToSeePrompt: 'Name one thing you would need to see before this recommendation may act.',
+    teachBackPrompt: 'In one sentence, explain the engineering permission check as if you were briefing a PM.',
   },
   {
     id: 'engineering',
@@ -38,6 +39,7 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'If this run fails at 2 a.m., can someone replay it from a trace?',
     ],
     needToSeePrompt: 'Name one observable trace you would need before this write-path is safe.',
+    teachBackPrompt: 'In one sentence, explain the design Ask state as if you were briefing an engineer.',
   },
   {
     id: 'design',
@@ -57,6 +59,7 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'Where does a facilitator pause the send without hunting through a transcript?',
     ],
     needToSeePrompt: 'Name one intervention a person should be able to make before this acts.',
+    teachBackPrompt: 'In one sentence, explain the PM acceptance line as if you were briefing strategy.',
   },
   {
     id: 'strategy',
@@ -76,6 +79,7 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'Who is the named owner after the facilitator leaves the room?',
     ],
     needToSeePrompt: 'Name one ownership or cost question that must be answered before this scales.',
+    teachBackPrompt: 'In one sentence, explain the design handoff as if you were briefing a PM.',
   },
 ] as const
 
