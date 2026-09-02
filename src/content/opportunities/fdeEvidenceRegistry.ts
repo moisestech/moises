@@ -13,6 +13,22 @@ import { automationProjectSpecs } from '@/content/evidence/automationProjects';
 import { saturdayLabLive } from './packs/designFacilitationEvidencePack';
 import { FDE_PARTNER_LOGOS } from './fdePartnerLogos';
 
+/** Portrait stills for the FDE supporting-evidence row (Cloudinary). */
+export const FDE_PORTRAITS = {
+  n8nTeaching: {
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788271701/jobs/banners/ai-engineer/fde-n8n-teaching-workshop-portrait_m5xbap.png',
+    alt: 'n8n teaching workshop — portrait still for the February no-code email-labeler session.',
+  },
+  fieldKit: {
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788271665/jobs/banners/ai-engineer/fde-field-kit-handoff-portrait_ceocxs.png',
+    alt: 'Field Kit handoff — portrait still of the brief-to-review loop. Fixture demo, not a live FLORA screenshot.',
+  },
+  playwire: {
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788271664/jobs/banners/ai-engineer/fde-playwire-publisher-integrations-portrait_myqtgm.png',
+    alt: 'Playwire publisher integrations — confidentiality-safe portrait still. Not a client dashboard.',
+  },
+} as const;
+
 export const FDE_COVERS = {
   discover: {
     src: '/images/opportunities/forward-deployed/fde-discover-observation-cover.png',
@@ -53,8 +69,6 @@ export const AEP_BLOB = `${AEP_REPO}/blob/main`;
 
 const teachingWorkshop = digilabMedia['workshop.art-tech-coding'];
 const lore = evidenceProjects['lore-machine'];
-const playwire = evidenceProjects['playwire-alumni'];
-const n8n = automationProjectSpecs['n8n-gmail-intelligence'];
 const bookleggers = automationProjectSpecs['bookleggers-commerce-automation'];
 
 export type FdeEvidenceItem = {
@@ -193,9 +207,8 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     inspectHref: FIELD_KIT_DEMO,
     inspectLabel: 'Open fixture demo',
     illustration: {
-      src: FDE_COVERS.fieldKit.src,
-      alt: FDE_COVERS.fieldKit.alt,
-      local: true,
+      src: FDE_PORTRAITS.fieldKit.src,
+      alt: FDE_PORTRAITS.fieldKit.alt,
     },
     supporting: true,
     tools: ['Cursor', 'Claude', 'Next.js'],
@@ -221,7 +234,7 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     whatThisProves: 'No-code enablement I can teach again. Not attendance or scores.',
     inspectHref: '/workshop/the-art-of-ai-agents/share',
     inspectLabel: 'View workshop handout',
-    illustration: { src: n8n.imageSrc, alt: n8n.imageAlt },
+    illustration: { src: FDE_PORTRAITS.n8nTeaching.src, alt: FDE_PORTRAITS.n8nTeaching.alt },
     supporting: true,
     tools: ['n8n', 'Gmail', 'Airtable'],
   },
@@ -295,7 +308,7 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     whatThisProves: 'Client-facing solutions habit. Not a featured case this pass.',
     inspectHref: '/ai-engineering#proof',
     inspectLabel: 'Related proof on AI Engineering',
-    illustration: { src: playwire.imageSrc, alt: playwire.imageAlt },
+    illustration: { src: FDE_PORTRAITS.playwire.src, alt: FDE_PORTRAITS.playwire.alt },
     supporting: true,
   },
   {

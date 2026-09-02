@@ -54,9 +54,9 @@ export function SupportingEvidenceRow({ opportunity }: { opportunity: Opportunit
       ) : null}
       <ul className="mt-4 grid gap-3">
         {items.map((item) => (
-          <li key={item.id} className={cn(opp.card, 'overflow-hidden sm:grid sm:grid-cols-[minmax(0,11rem)_1fr]')}>
+          <li key={item.id} className={cn(opp.card, 'overflow-hidden sm:grid sm:grid-cols-[minmax(0,13rem)_1fr]')}>
             {item.imageSrc ? (
-              <div className={cn(opp.cardMedia, 'border-b sm:border-b-0 sm:border-r')}>
+              <div className={cn(opp.cardMedia, 'aspect-[4/5] border-b sm:border-b-0 sm:border-r')}>
                 <OpportunityCardImage
                   src={item.imageSrc}
                   srcDark={item.imageSrcDark}

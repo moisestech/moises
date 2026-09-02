@@ -45,7 +45,6 @@ const EVIDENCE_BRIEF_PDF = '/resume/MoisesSanabria_FDE_Technical_Evidence.pdf';
 const teachingWorkshop = digilabMedia['workshop.art-tech-coding'];
 const n8nSpec = automationProjectSpecs['n8n-gmail-intelligence'];
 const bookleggersSpec = automationProjectSpecs['bookleggers-commerce-automation'];
-const playwireProject = evidenceProjects['playwire-alumni'];
 const aepProject = evidenceProjects['agentic-evidence-pipeline'];
 const oolite = fdeItem('oolite-workshops');
 const lore = fdeItem('lore-machine');
@@ -317,14 +316,6 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
           ...item,
           title: n8nSpec.teachingTitle ?? item.title,
           body: n8nSpec.teachingEvidenceLine ?? item.body,
-        };
-      }
-      if (id === 'playwire') {
-        return {
-          ...item,
-          imageSrc: playwireProject.imageSrc,
-          imageSrcDark: playwireProject.imageSrcDark,
-          imageAlt: playwireProject.imageAlt,
         };
       }
       return item;
