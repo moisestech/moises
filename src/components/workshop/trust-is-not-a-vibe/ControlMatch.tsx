@@ -13,6 +13,7 @@ import { TRUST_CONTROLS, type TrustControlId, type TrustFailure } from '@/conten
 import { cn } from '@/lib/utils'
 import { FullHarnessSvg } from './TrustDiagrams'
 import { TrustMissingStillNote } from './TrustMissingStill'
+import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
 import { TRUST_CONTROL_CLASS } from './trust-tokens'
 
 const CONTROL_ICONS: Record<TrustControlId, IconType> = {
@@ -38,6 +39,7 @@ export function ControlMatch({
   return (
     <div className="space-y-4">
       <TrustMissingStillNote asset="controlCards" />
+      <TrustPlaceholderFrame asset="fullHarness" compact />
       <TrustMissingStillNote asset="fullHarness" />
       <FullHarnessSvg />
       <p className="text-sm text-stone-600 dark:text-stone-400">

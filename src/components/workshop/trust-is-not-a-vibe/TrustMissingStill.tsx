@@ -55,7 +55,7 @@ export function TrustMissingStillNote({
   className?: string
 }) {
   const item = TRUST_PLACEHOLDERS[asset]
-  if (item.status === 'ready') return null
+  if (!trustStillIsMissing(item.status)) return null
   return (
     <p className={cn('flex flex-wrap items-center gap-2 text-[11px] leading-relaxed', className)}>
       <TrustMissingStillBadge status={item.status} filename={item.surfaceFilename} />

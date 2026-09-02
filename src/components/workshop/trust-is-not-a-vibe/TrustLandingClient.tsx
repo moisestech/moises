@@ -20,7 +20,6 @@ import {
   TRUST_SUBTITLE,
   TRUST_THESIS,
   TRUST_TITLE,
-  TRUST_PLACEHOLDERS,
   trustStillsNeeded,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
@@ -61,6 +60,7 @@ export function TrustLandingClient() {
           ))}
         </dl>
 
+        {trustStillsNeeded().length > 0 ? (
         <section className="mt-10 rounded-xl border border-dashed border-amber-400/70 bg-amber-50/50 p-4 dark:border-amber-500/50 dark:bg-amber-950/20">
           <h2 className="text-sm font-bold text-amber-950 dark:text-amber-50">Images still needed</h2>
           <p className="mt-1 max-w-2xl text-xs text-amber-900/80 dark:text-amber-100/80">
@@ -76,6 +76,7 @@ export function TrustLandingClient() {
             ))}
           </ul>
         </section>
+        ) : null}
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
           <TrustPlaceholderFrame asset="peelOpenHero" />
@@ -111,10 +112,7 @@ export function TrustLandingClient() {
             Not four courses. The taught fixture is a program-launch agent. {TRUST_CASE_A.fixtureNote}
           </p>
           <div className="mt-4">
-            <TrustMissingStillBadge
-              status={TRUST_PLACEHOLDERS.roleLensCards.status}
-              filename={TRUST_PLACEHOLDERS.roleLensCards.surfaceFilename}
-            />
+            <TrustPlaceholderFrame asset="roleLensCards" compact />
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {TRUST_ROLES.map((role) => (

@@ -32,7 +32,7 @@ import { TransferRubric } from './TransferRubric'
 import { FullHarnessSvg, SimpleLoopSvg } from './TrustDiagrams'
 import { TrustChapterNav } from './TrustChapterNav'
 import { TrustMissingStillNote } from './TrustMissingStill'
-import { TrustInstructorClip } from './TrustPlaceholderFrame'
+import { TrustInstructorClip, TrustPlaceholderFrame } from './TrustPlaceholderFrame'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
@@ -126,6 +126,7 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
         return (
           <div className="space-y-6">
             <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
+            <TrustPlaceholderFrame asset="simpleLoop" />
             <TrustMissingStillNote asset="simpleLoop" />
             <SimpleLoopSvg />
             <p className={trust.body}>{TRUST_HARNESS_LINE}</p>
