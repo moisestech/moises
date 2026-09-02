@@ -32,6 +32,9 @@ export function AgenticEvidencePipelineClient() {
           <Link href="/forward-deployed" className={opp.linkAccent}>
             Back to Forward-Deployed AI Systems
           </Link>
+          <Link href="/workshop/trust-is-not-a-vibe" className={opp.linkAccent}>
+            Trust Is Not a Vibe — 30-minute evals lab
+          </Link>
         </div>
 
         <div className="mt-12 space-y-12 sm:mt-14">

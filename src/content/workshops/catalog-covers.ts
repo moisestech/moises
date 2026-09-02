@@ -148,6 +148,10 @@ export const WORKSHOP_CATALOG_COVERS: Record<string, { src: string; alt: string 
     src: cover('v1776525117/dccmiami/workshops/systems-and-archive-for-artists_xzrwin.png'),
     alt: 'Systems and archive for artists — resource packets',
   },
+  'trust-is-not-a-vibe': {
+    src: cover('v1776525117/dccmiami/workshops/systems-and-archive-for-artists_xzrwin.png'),
+    alt: 'Catalog stand-in for Trust Is Not a Vibe — peel-open hero illustration pending. Not a product screenshot.',
+  },
   'designing-a-sustainable-digital-practice': {
     src: cover('v1776525104/dccmiami/workshops/ai-and-the-arts-portfolio_r9t3ky.png'),
     alt: 'AI and the arts portfolio — sustainable digital practice',

@@ -51,6 +51,11 @@ export const WORKSHOP_NAV_PROGRAMS: SiteNavItem[] = [
     path: '/workshop/agentic-evidence-pipeline',
     enabled: true,
   },
+  {
+    label: 'Evals',
+    path: '/workshop/trust-is-not-a-vibe',
+    enabled: true,
+  },
 ]
 
 /** Active state for workshop header links (exact match or nested under the same program/research tree). */

@@ -102,6 +102,16 @@ export const designFacilitationTeachingHighlights: TeachingHighlight[] = [
       },
     ],
   },
+  {
+    title: 'Trust Is Not a Vibe',
+    description:
+      'A 30-minute field lab for mixed teams: peel a confident agent recommendation, locate failures on the loop, and Allow / Ask / Deny before it acts. Teaching instrument. Synthetic fixtures — not client work.',
+    href: '/workshop/trust-is-not-a-vibe',
+    imageSrc: '/images/teaching/saturday-lab-facilitator-flow.svg',
+    imageAlt:
+      'Stand-in diagram for Trust Is Not a Vibe — peel-open hero pending. Conceptual teaching graphic, not a product screenshot.',
+    imageLocal: true,
+  },
 ];
 
 export const saturdayLabSourceIndex = saturdayLabSource;

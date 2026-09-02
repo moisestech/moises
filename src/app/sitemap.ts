@@ -33,6 +33,13 @@ const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[0]['changeF
     { path: '/workshops', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/workshop/moonlighter-ai-3d-printing', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/workshop/moonlighter-ai-3d-printing/resources', changeFrequency: 'monthly', priority: 0.5 },
+    { path: '/workshop/trust-is-not-a-vibe', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/workshop/trust-is-not-a-vibe/learn/looks-right', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/trust-is-not-a-vibe/learn/four-lenses', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/trust-is-not-a-vibe/learn/seeded-failures', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/trust-is-not-a-vibe/learn/the-loop', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/trust-is-not-a-vibe/learn/the-harness', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/trust-is-not-a-vibe/learn/transfer', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/bio', changeFrequency: 'monthly', priority: 0.6 },
   ];
 
