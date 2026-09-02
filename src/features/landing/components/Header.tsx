@@ -127,7 +127,7 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
           } hidden md:block w-full ${
             isScrolled ? 'fixed top-0 left-0 right-0 border-t' : 'relative'
           }`}>
-            <div className="max-w-7xl mx-auto px-11 py-6 flex justify-between items-center">
+            <div className="mx-auto flex min-w-0 max-w-7xl items-center px-11 py-6">
               <DesktopNavigation
                 menuItems={menuItems}
                 onDropdownOpen={setDropdownOpen}

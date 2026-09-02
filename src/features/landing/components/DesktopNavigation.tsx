@@ -6,11 +6,13 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { HorizontalOverflowNav } from '@/components/nav/HorizontalOverflowNav';
 import {
   WORKSHOP_NAV_PROGRAMS,
   WORKSHOP_NAV_SITE,
   isWorkshopProgramLinkActive,
 } from '@/config/site-navigation';
+import { cn } from '@/lib/utils';
 
 interface MenuItem {
   label: string;
@@ -95,58 +97,67 @@ export default function DesktopNavigation({
 
   if (workshopMode) {
     const linkClass = (active: boolean) =>
-      `transition-colors py-2 text-sm font-bold tracking-tight lg:text-base ${
+      cn(
+        'shrink-0 whitespace-nowrap border-b-2 py-2 text-sm font-bold tracking-tight transition-colors lg:text-base',
         active
           ? isDark
-            ? 'border-b-2 border-white text-white'
-            : 'border-b-2 border-black text-black'
+            ? 'border-white text-white'
+            : 'border-black text-black'
           : isDark
-            ? 'text-white/85 hover:text-white'
-            : 'text-black/80 hover:text-black'
-      }`;
+            ? 'border-transparent text-white/85 hover:border-white hover:text-white'
+            : 'border-transparent text-black/80 hover:border-black hover:text-black',
+      );
 
     return (
-      <nav className="relative z-50 flex max-w-full flex-1 items-center" aria-label="Workshop navigation">
-        <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:gap-x-7">
-          {WORKSHOP_NAV_PROGRAMS.map((item) => (
-            <li key={`${item.label}:${item.path}`}>
-              {item.external ? (
-                <a
-                  href={item.path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={linkClass(false)}
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  href={item.path}
-                  className={linkClass(isWorkshopProgramLinkActive(pathname, item.path))}
-                >
-                  {item.label}
-                </Link>
-              )}
-            </li>
-          ))}
-          <li
-            className={`hidden lg:block ${isDark ? 'text-white/25' : 'text-black/25'}`}
-            aria-hidden
-          >
-            |
-          </li>
-          {WORKSHOP_NAV_SITE.map((item) => (
-            <li key={`${item.label}:${item.path}`}>
-              <Link
-                href={item.path}
-                className={linkClass(isWorkshopProgramLinkActive(pathname, item.path))}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <HorizontalOverflowNav
+        ariaLabel="Workshop programs"
+        activeKey={pathname ?? ''}
+        className="relative z-50 w-full min-w-0"
+        fadeFromClassName={isDark ? 'from-black' : 'from-white'}
+        scrollerClassName="gap-x-5 text-sm lg:gap-x-7 lg:text-base"
+      >
+        {WORKSHOP_NAV_PROGRAMS.map((item) => {
+          const active = isWorkshopProgramLinkActive(pathname, item.path);
+          return item.external ? (
+            <a
+              key={`${item.label}:${item.path}`}
+              href={item.path}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass(false)}
+            >
+              {item.label}
+            </a>
+          ) : (
+            <Link
+              key={`${item.label}:${item.path}`}
+              href={item.path}
+              data-nav-active={active ? 'true' : undefined}
+              aria-current={active ? 'page' : undefined}
+              className={linkClass(active)}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+        <span className={cn('shrink-0 select-none', isDark ? 'text-white/25' : 'text-black/25')} aria-hidden>
+          |
+        </span>
+        {WORKSHOP_NAV_SITE.map((item) => {
+          const active = isWorkshopProgramLinkActive(pathname, item.path);
+          return (
+            <Link
+              key={`${item.label}:${item.path}`}
+              href={item.path}
+              data-nav-active={active ? 'true' : undefined}
+              aria-current={active ? 'page' : undefined}
+              className={linkClass(active)}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </HorizontalOverflowNav>
     );
   }
 
