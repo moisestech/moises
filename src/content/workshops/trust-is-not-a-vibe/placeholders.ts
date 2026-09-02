@@ -3,7 +3,7 @@ import type { TrustMarkId } from './types'
 /**
  * Asset register — pending stills and clips stay labeled as pending.
  * Never present these as finished photography or recorded video.
- * The designed slot is the illustration until a still replaces it.
+ * Ready srcs are conceptual teaching illustrations, not product screenshots.
  */
 
 export type TrustPlaceholderStatus = 'pending' | 'css' | 'svg' | 'ready'
@@ -16,26 +16,32 @@ export type TrustPlaceholder = {
   depiction: string
   mark: TrustMarkId
   surfaceFilename?: string
+  src?: string
 }
+
+const TRUST_STILL_CDN =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/dccmiami/workshops/agentic-engineering-for-beginners'
 
 export const TRUST_PLACEHOLDERS = {
   labBanner: {
     id: 'lab-banner',
     label: 'Lab wide banner',
-    status: 'pending' as const,
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/01-Agentic-Engineering-Painfully-Alone-Ultrawide-Banner_ke5jde.png`,
     surfaceFilename: '00-lab-banner',
     mark: 'ask' as const,
-    depiction: 'A confident agent card peeling open across Evidence, Authority, and Impact.',
-    alt: 'Designed wide banner slot for Trust Is Not a Vibe. Peel-open still pending. Not a product screenshot.',
+    depiction: 'Ultrawide teaching banner for the Painfully Alone problem. Not a product screenshot.',
+    alt: 'Teaching illustration — Agentic Engineering for the Painfully Alone ultrawide banner. Not a product screenshot.',
   },
   peelOpenHero: {
     id: 'peel-open-hero',
     label: 'Peel-open hero illustration',
-    status: 'pending' as const,
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/02-Evaluating-AI-Output-Peel-Open-Hero_rawqgs.png`,
     surfaceFilename: '01-before-the-agent-acts',
     mark: 'ask' as const,
-    depiction: 'A confident agent card peeling open to Evidence, Authority, and Impact. Not a product screenshot.',
-    alt: 'Conceptual slot — an agent recommendation peeling open to show evidence, authority, and impact. Not a product screenshot.',
+    depiction: 'A confident agent card peeling open so the system under the answer can be inspected.',
+    alt: 'Teaching illustration — evaluating an AI output by opening the system beneath it. Not a product screenshot.',
   },
   caseAOutput: {
     id: 'case-a-output',
@@ -48,39 +54,43 @@ export const TRUST_PLACEHOLDERS = {
   },
   caseAEnvironment: {
     id: 'case-a-environment',
-    label: 'Case A environment card still',
-    status: 'pending' as const,
+    label: 'Evaluate the system',
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/04-Evaluation-Lab-Output-Trace-Action-Outcome_mn6ncu.png`,
     surfaceFilename: '03-evidence-authority-impact',
     mark: 'evidence' as const,
-    depiction: 'The hidden environment: tentative date, 80-person roster, draft-only send, no forecast data.',
-    alt: 'Slot for the hidden environment behind the program-launch recommendation. Synthetic fixture.',
+    depiction: 'Output, trace, action, and outcome — the answer is only the first layer.',
+    alt: 'Teaching illustration — evaluate the system across output, trace, action, and outcome. Not a product screenshot.',
   },
   verdictCards: {
     id: 'verdict-cards',
     label: 'Allow / Ask / Deny verdict cards',
-    status: 'css' as const,
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/06-Human-Authority-Allow-Ask-Deny_rltkm9.png`,
     surfaceFilename: '04-allow-ask-deny',
     mark: 'allow' as const,
-    depiction: 'Three verdict marks. Interface cards exist; printed still pending.',
-    alt: 'Verdict cards rendered in the interface. Illustration still pending.',
+    depiction: 'Human authority threshold: Allow, Ask, or Deny before the system may act.',
+    alt: 'Teaching illustration — Allow, Ask, or Deny as a human authority threshold. Not a product screenshot.',
   },
   roleLensCards: {
     id: 'role-lens-cards',
     label: 'Four role-lens cards',
-    status: 'css' as const,
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/03-Cross-Functional-Release-Contract_fseg1f.png`,
     surfaceFilename: '06-role-lens-cards',
     mark: 'design' as const,
-    depiction: 'Product, Engineering, Design, Strategy seats as inspectable cards.',
-    alt: 'Role-lens cards rendered in the interface. Printed-card still pending.',
+    depiction: 'Product, Engineering, Design, and Strategy sharing one release contract.',
+    alt: 'Teaching illustration — four seats sharing a release contract. Not a team photograph.',
   },
   failureTokens: {
     id: 'failure-tokens',
-    label: 'Six failure-mode tokens',
-    status: 'css' as const,
+    label: 'Failure-mode atlas',
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/05-Agentic-Failure-Atlas_q4ubym.png`,
     surfaceFilename: '07-failure-tokens',
     mark: 'wrong-evidence' as const,
-    depiction: 'Wrong evidence, path, power, impact — named tokens, not “hallucination.”',
-    alt: 'Failure tokens rendered in the interface. Physical-token still pending.',
+    depiction: 'Named failure classes: evidence, path, power, impact, and judge.',
+    alt: 'Teaching illustration — agentic failure atlas. Not a live incident log.',
   },
   controlCards: {
     id: 'control-cards',
@@ -93,39 +103,43 @@ export const TRUST_PLACEHOLDERS = {
   },
   simpleLoop: {
     id: 'simple-loop',
-    label: 'Simple agent-loop SVG',
-    status: 'svg' as const,
+    label: 'Simple agent-loop diagram',
+    status: 'ready' as const,
+    src: '/images/teaching/trust-agent-loop-simple.png',
     surfaceFilename: '09-simple-loop',
     mark: 'wrong-path' as const,
     depiction: 'Observe, Decide, Act, Check — then Stop / Ask / Continue.',
-    alt: 'Observe, Decide, Act, Check — simple loop diagram.',
+    alt: 'Teaching illustration — the agent loop. Evaluate behavior across the loop, not a hidden chain of thought.',
   },
   fullHarness: {
     id: 'full-harness',
-    label: 'Full harness SVG',
-    status: 'svg' as const,
+    label: 'Eval and regression workbench',
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/07-Eval-Regression-Workbench_mzy5r3.png`,
     surfaceFilename: '10-full-harness',
     mark: 'engineering' as const,
-    depiction: 'Model proposes. Tools, eval, approval, and team sit around it.',
-    alt: 'Harness diagram: context, tools, permissions, approval, traces, evals, recovery.',
+    depiction: 'Failure to eval to regression — the engineering cycle around the model.',
+    alt: 'Teaching illustration — eval and regression workbench. Not a live monitoring console.',
   },
   caseBTransfer: {
     id: 'case-b-transfer',
     label: 'Case B transfer card still',
-    status: 'pending' as const,
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/08-Fabrication-Transfer-Human-Approval_brsexw.png`,
     surfaceFilename: '05-transfer-case',
     mark: 'impact' as const,
-    depiction: 'Unseen museum-intake card. Same peel. Different domain.',
-    alt: 'Slot for the unseen museum-intake case. Synthetic fixture, not a museum system screenshot.',
+    depiction: 'Fabrication transfer with approval before operational handoff.',
+    alt: 'Teaching illustration — fabrication transfer case with human approval. Synthetic fixture, not a museum system screenshot.',
   },
   sharedOwnership: {
     id: 'shared-ownership',
     label: 'Shared-ownership closing illustration',
-    status: 'pending' as const,
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/03-Cross-Functional-Release-Contract_fseg1f.png`,
     surfaceFilename: '11-shared-ownership',
     mark: 'strategy' as const,
-    depiction: 'Four seats around one harness. Not a team photograph.',
-    alt: 'Conceptual slot — four seats around one harness. Not a team photograph.',
+    depiction: 'Four seats around one contract. Not a team photograph.',
+    alt: 'Teaching illustration — four seats sharing one release contract. Not a team photograph.',
   },
   instructorClips: {
     id: 'instructor-clips',
@@ -148,11 +162,12 @@ export const TRUST_PLACEHOLDERS = {
   catalogCover: {
     id: 'catalog-cover',
     label: 'Workshops catalog cover',
-    status: 'pending' as const,
+    status: 'ready' as const,
+    src: `${TRUST_STILL_CDN}/02-Evaluating-AI-Output-Peel-Open-Hero_rawqgs.png`,
     surfaceFilename: '14-workshop-cover',
     mark: 'ask' as const,
-    depiction: 'Catalog and FDE teaching tile. Slot SVG stands in until a peel-open still exists.',
-    alt: 'Designed catalog slot for Trust Is Not a Vibe. Peel-open cover still pending.',
+    depiction: 'Catalog and FDE teaching tile uses the peel-open hero.',
+    alt: 'Teaching illustration — peel-open hero used as the Trust Is Not a Vibe catalog cover. Not a product screenshot.',
   },
 } as const satisfies Record<string, TrustPlaceholder>
 

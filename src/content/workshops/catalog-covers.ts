@@ -149,9 +149,8 @@ export const WORKSHOP_CATALOG_COVERS: Record<string, { src: string; alt: string 
     alt: 'Systems and archive for artists — resource packets',
   },
   'trust-is-not-a-vibe': {
-    src: '/images/teaching/trust-is-not-a-vibe-slot.svg',
-    alt: 'Designed slot for Trust Is Not a Vibe — Allow / Ask / Deny marks. Peel-open still pending. Not a product screenshot.',
-    pending: true,
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/dccmiami/workshops/agentic-engineering-for-beginners/02-Evaluating-AI-Output-Peel-Open-Hero_rawqgs.png',
+    alt: 'Teaching illustration — evaluating an AI output by opening the system beneath it. Not a product screenshot.',
   },
   'designing-a-sustainable-digital-practice': {
     src: cover('v1776525104/dccmiami/workshops/ai-and-the-arts-portfolio_r9t3ky.png'),

@@ -105,13 +105,13 @@ export const designFacilitationTeachingHighlights: TeachingHighlight[] = [
   {
     title: 'Trust Is Not a Vibe',
     description:
-      'A 30-minute field lab for mixed teams: peel a confident agent recommendation, locate failures on the loop, and Allow / Ask / Deny before it acts. Teaching instrument. Synthetic fixtures — not client work. Peel-open hero still pending.',
+      'A 30-minute field lab for mixed teams: peel a confident agent recommendation, locate failures on the loop, and Allow / Ask / Deny before it acts. Teaching instrument. Synthetic fixtures — not client work.',
     href: '/workshop/trust-is-not-a-vibe',
-    imageSrc: '/images/teaching/trust-is-not-a-vibe-slot.svg',
+    imageSrc:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/dccmiami/workshops/agentic-engineering-for-beginners/02-Evaluating-AI-Output-Peel-Open-Hero_rawqgs.png',
     imageAlt:
-      'Designed slot for Trust Is Not a Vibe — Allow / Ask / Deny and Evidence / Authority / Impact. Peel-open still pending. Not a product screenshot.',
-    imageLocal: true,
-    imagePending: true,
+      'Teaching illustration — evaluating an AI output by opening the system beneath it. Not a product screenshot.',
+    imageLocal: false,
   },
 ];
 
