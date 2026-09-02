@@ -46,6 +46,7 @@ export const WORKSHOP_RESERVED_DEEP_SLUGS = [
   'the-art-of-ai-marketing',
   'moonlighter-ai-3d-printing',
   'agentic-evidence-pipeline',
+  'trust-is-not-a-vibe',
 ] as const;
 
 export const workshopCatalog: WorkshopCatalogEntry[] = [
@@ -534,6 +535,31 @@ export const workshopCatalog: WorkshopCatalogEntry[] = [
     featured: true,
     href: '/workshop/agentic-evidence-pipeline',
     sortOrder: 8,
+  },
+  {
+    slug: 'trust-is-not-a-vibe',
+    title: 'Trust Is Not a Vibe',
+    publicTitle: 'Trust Is Not a Vibe',
+    track: 'Systems + Archive' as WorkshopCatalogTrack,
+    status: 'ready',
+    level: 'Mixed team — PM, design, engineering, strategy',
+    duration: '30 minutes',
+    subtitle: 'A 30-minute field lab for evaluating AI before it acts.',
+    hook: 'A good-looking output can still come from a bad agent. Learn to Allow, Ask, or Deny before anyone uses it.',
+    shortDescription:
+      'Self-guided or facilitated. Mixed teams peel a confident agent recommendation, inspect it through four seats, locate failures on the agent loop, and match a control before the system may act. Both cases are synthetic teaching fixtures.',
+    whyNow:
+      'Teams still ship on vibe evals — watching an agent succeed once. This lab gives product, engineering, design, and strategy a shared vocabulary for evaluation without treating a demo as proof.',
+    learningOutcomes: [
+      'Separate output quality from system safety',
+      'Identify failures beyond hallucination',
+      'Locate failures on Observe → Decide → Act → Check',
+      'Choose Allow, Ask, or Deny and name one control',
+      'Transfer the framework to an unseen second case',
+    ],
+    featured: true,
+    href: '/workshop/trust-is-not-a-vibe',
+    sortOrder: 7,
   },
 ] as const;
 
