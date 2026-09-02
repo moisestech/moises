@@ -3,6 +3,7 @@
 import { getTrustRole, TRUST_COMBINED_STRATEGY_DESIGN, TRUST_ROLES } from '@/content/workshops/trust-is-not-a-vibe'
 import type { TrustRoleId } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustMissingStillNote } from './TrustMissingStill'
 import { TrustMark } from './TrustMarks'
 
 export function RoleLensPicker({
@@ -25,6 +26,9 @@ export function RoleLensPicker({
         <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
           One path, four lenses. Stay with this seat for the rest of the lab.
         </p>
+        <div className="mt-2">
+          <TrustMissingStillNote asset="roleLensCards" />
+        </div>
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
           {TRUST_ROLES.map((role) => {
             const active = value === role.id

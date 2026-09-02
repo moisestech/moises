@@ -259,6 +259,8 @@ export type TeachingHighlight = {
   imageAlt?: string;
   /** SVG or files under `/public` — use plain `img` */
   imageLocal?: boolean;
+  /** Designed slot — still is not finished photography. */
+  imagePending?: boolean;
   /** Optional scroll-snap gallery when more than one real artifact exists. */
   media?: TeachingMediaItem[];
 };

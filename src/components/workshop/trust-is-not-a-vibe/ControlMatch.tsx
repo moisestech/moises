@@ -12,6 +12,7 @@ import {
 import { TRUST_CONTROLS, type TrustControlId, type TrustFailure } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { FullHarnessSvg } from './TrustDiagrams'
+import { TrustMissingStillNote } from './TrustMissingStill'
 import { TRUST_CONTROL_CLASS } from './trust-tokens'
 
 const CONTROL_ICONS: Record<TrustControlId, IconType> = {
@@ -36,6 +37,8 @@ export function ControlMatch({
 
   return (
     <div className="space-y-4">
+      <TrustMissingStillNote asset="controlCards" />
+      <TrustMissingStillNote asset="fullHarness" />
       <FullHarnessSvg />
       <p className="text-sm text-stone-600 dark:text-stone-400">
         One primary control per failure. An eval measures. A guardrail constrains. An approval grants authority.

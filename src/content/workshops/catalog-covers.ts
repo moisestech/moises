@@ -151,6 +151,7 @@ export const WORKSHOP_CATALOG_COVERS: Record<string, { src: string; alt: string 
   'trust-is-not-a-vibe': {
     src: '/images/teaching/trust-is-not-a-vibe-slot.svg',
     alt: 'Designed slot for Trust Is Not a Vibe — Allow / Ask / Deny marks. Peel-open still pending. Not a product screenshot.',
+    pending: true,
   },
   'designing-a-sustainable-digital-practice': {
     src: cover('v1776525104/dccmiami/workshops/ai-and-the-arts-portfolio_r9t3ky.png'),
@@ -185,6 +186,6 @@ export const WORKSHOP_COVER_LIBRARY = {
   '3d-printing-workshop': cover('v1776525103/dccmiami/workshops/3d-printing-workshop_zwzabw.png'),
 } as const;
 
-export function getWorkshopCover(slug: string): { src: string; alt: string } | null {
+export function getWorkshopCover(slug: string): { src: string; alt: string; pending?: boolean } | null {
   return WORKSHOP_CATALOG_COVERS[slug] ?? null;
 }

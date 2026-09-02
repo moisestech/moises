@@ -2,6 +2,7 @@
 
 import type { TrustFailure } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustMissingStillNote } from './TrustMissingStill'
 import { failureMarkFromVisible, TrustMark } from './TrustMarks'
 
 export function FailureTokens({
@@ -21,6 +22,7 @@ export function FailureTokens({
 }) {
   return (
     <div className="space-y-4">
+      <TrustMissingStillNote asset="failureTokens" />
       {!revealed ? (
         <button
           type="button"

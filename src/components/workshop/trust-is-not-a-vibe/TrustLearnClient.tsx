@@ -31,6 +31,7 @@ import { RoleLensPicker, RoleMargin } from './RoleLensPicker'
 import { TransferRubric } from './TransferRubric'
 import { FullHarnessSvg, SimpleLoopSvg } from './TrustDiagrams'
 import { TrustChapterNav } from './TrustChapterNav'
+import { TrustMissingStillNote } from './TrustMissingStill'
 import { TrustInstructorClip } from './TrustPlaceholderFrame'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
@@ -125,6 +126,7 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
         return (
           <div className="space-y-6">
             <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
+            <TrustMissingStillNote asset="simpleLoop" />
             <SimpleLoopSvg />
             <p className={trust.body}>{TRUST_HARNESS_LINE}</p>
             <dl className="grid gap-2 sm:grid-cols-2">

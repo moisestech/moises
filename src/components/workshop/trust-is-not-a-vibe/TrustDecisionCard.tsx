@@ -8,6 +8,7 @@ import {
   TRUST_TITLE,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustMissingStillNote } from './TrustMissingStill'
 import { TrustMark, TRUST_LAYER_MARKS, TRUST_VERDICT_MARKS } from './TrustMarks'
 import { trust } from './trust-tokens'
 
@@ -17,6 +18,9 @@ export function TrustDecisionCard() {
       <style>{`@media print { header, footer, [data-site-chrome] { display: none !important; } }`}</style>
       <div className={cn(trust.main, 'max-w-3xl print:max-w-none print:px-0')}>
         <p className={cn(trust.eyebrow, 'print:hidden')}>Printable card · not indexed</p>
+        <div className="mt-3 print:hidden">
+          <TrustMissingStillNote asset="decisionCard" />
+        </div>
         <article className="mt-4 rounded-xl border border-stone-300 bg-white p-6 dark:border-stone-600 dark:bg-stone-900 print:border-stone-900 print:shadow-none">
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">
             {TRUST_TITLE} · {TRUST_SESSION_TITLE}

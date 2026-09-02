@@ -3,6 +3,7 @@
 import type { TrustVerdict } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { TrustMark } from './TrustMarks'
+import { TrustMissingStillNote } from './TrustMissingStill'
 import { TRUST_VERDICT_CLASS, TRUST_VERDICT_HINT, TRUST_VERDICT_LABEL } from './trust-tokens'
 
 const VERDICTS: TrustVerdict[] = ['allow', 'ask', 'deny']
@@ -21,6 +22,7 @@ export function TrustVote({
   return (
     <fieldset className="space-y-3">
       <legend className="text-sm font-semibold text-stone-900 dark:text-stone-100">{legend}</legend>
+      <TrustMissingStillNote asset="verdictCards" />
       <div className="grid gap-2 sm:grid-cols-3">
         {VERDICTS.map((verdict) => {
           const selected = value === verdict

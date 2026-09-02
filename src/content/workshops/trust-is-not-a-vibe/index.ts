@@ -30,7 +30,7 @@ export type {
   TrustVerdict,
 } from './types'
 
-export { TRUST_DEMO_SURFACES, TRUST_PLACEHOLDERS } from './placeholders'
+export { TRUST_DEMO_SURFACES, TRUST_PLACEHOLDERS, trustPlaceholderEntries, trustStillsNeeded } from './placeholders'
 export type { TrustPlaceholder, TrustPlaceholderKey, TrustPlaceholderStatus } from './placeholders'
 
 export { getLiveBeatAtElapsed, TRUST_LIVE_BEATS, TRUST_LIVE_CUE_MINUTES } from './live-beats'

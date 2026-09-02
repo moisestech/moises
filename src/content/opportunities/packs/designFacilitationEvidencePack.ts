@@ -111,6 +111,7 @@ export const designFacilitationTeachingHighlights: TeachingHighlight[] = [
     imageAlt:
       'Designed slot for Trust Is Not a Vibe — Allow / Ask / Deny and Evidence / Authority / Impact. Peel-open still pending. Not a product screenshot.',
     imageLocal: true,
+    imagePending: true,
   },
 ];
 

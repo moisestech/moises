@@ -11,6 +11,7 @@ import {
   TRUST_TITLE,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TRUST_MISSING_HATCH, TrustMissingStillBadge } from './TrustMissingStill'
 import { TrustMark } from './TrustMarks'
 
 export function TrustLabBanner() {
@@ -22,10 +23,13 @@ export function TrustLabBanner() {
   return (
     <div
       data-site-chrome
-      className={cn(APPLICATION_BANNER_FRAME, 'overflow-hidden border-b border-stone-200 print:hidden dark:border-stone-800')}
+      className={cn(
+        APPLICATION_BANNER_FRAME,
+        'overflow-hidden border-b border-dashed border-amber-400/80 print:hidden dark:border-amber-500/60'
+      )}
     >
       <div
-        className="relative h-full w-full bg-stone-100 dark:bg-stone-900"
+        className={cn('relative h-full w-full bg-stone-100 dark:bg-stone-900', TRUST_MISSING_HATCH)}
         onMouseEnter={() => setPeeled(true)}
         onMouseLeave={() => setPeeled(false)}
         onFocus={() => setPeeled(true)}
@@ -46,9 +50,7 @@ export function TrustLabBanner() {
         ) : null}
 
         <div className="relative z-[1] flex h-full flex-col justify-between px-4 py-3 sm:px-6 sm:py-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">
-            {asset.surfaceFilename} · designed slot · still pending
-          </p>
+          <TrustMissingStillBadge status={asset.status} filename={asset.surfaceFilename} />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-cyan-600 dark:text-cyan-400">
               {TRUST_SESSION_TITLE}

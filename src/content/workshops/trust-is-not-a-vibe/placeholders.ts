@@ -68,6 +68,7 @@ export const TRUST_PLACEHOLDERS = {
     id: 'role-lens-cards',
     label: 'Four role-lens cards',
     status: 'css' as const,
+    surfaceFilename: '06-role-lens-cards',
     mark: 'design' as const,
     depiction: 'Product, Engineering, Design, Strategy seats as inspectable cards.',
     alt: 'Role-lens cards rendered in the interface. Printed-card still pending.',
@@ -76,6 +77,7 @@ export const TRUST_PLACEHOLDERS = {
     id: 'failure-tokens',
     label: 'Six failure-mode tokens',
     status: 'css' as const,
+    surfaceFilename: '07-failure-tokens',
     mark: 'wrong-evidence' as const,
     depiction: 'Wrong evidence, path, power, impact — named tokens, not “hallucination.”',
     alt: 'Failure tokens rendered in the interface. Physical-token still pending.',
@@ -84,6 +86,7 @@ export const TRUST_PLACEHOLDERS = {
     id: 'control-cards',
     label: 'Six control cards',
     status: 'css' as const,
+    surfaceFilename: '08-control-cards',
     mark: 'authority' as const,
     depiction: 'Ground, validate, restrict, approve, trace, recover.',
     alt: 'Control cards rendered in the interface. Printed-card still pending.',
@@ -92,6 +95,7 @@ export const TRUST_PLACEHOLDERS = {
     id: 'simple-loop',
     label: 'Simple agent-loop SVG',
     status: 'svg' as const,
+    surfaceFilename: '09-simple-loop',
     mark: 'wrong-path' as const,
     depiction: 'Observe, Decide, Act, Check — then Stop / Ask / Continue.',
     alt: 'Observe, Decide, Act, Check — simple loop diagram.',
@@ -100,6 +104,7 @@ export const TRUST_PLACEHOLDERS = {
     id: 'full-harness',
     label: 'Full harness SVG',
     status: 'svg' as const,
+    surfaceFilename: '10-full-harness',
     mark: 'engineering' as const,
     depiction: 'Model proposes. Tools, eval, approval, and team sit around it.',
     alt: 'Harness diagram: context, tools, permissions, approval, traces, evals, recovery.',
@@ -117,6 +122,7 @@ export const TRUST_PLACEHOLDERS = {
     id: 'shared-ownership',
     label: 'Shared-ownership closing illustration',
     status: 'pending' as const,
+    surfaceFilename: '11-shared-ownership',
     mark: 'strategy' as const,
     depiction: 'Four seats around one harness. Not a team photograph.',
     alt: 'Conceptual slot — four seats around one harness. Not a team photograph.',
@@ -125,6 +131,7 @@ export const TRUST_PLACEHOLDERS = {
     id: 'instructor-clips',
     label: 'Instructor clips (45–90s per chapter)',
     status: 'pending' as const,
+    surfaceFilename: '12-instructor-clips',
     mark: 'ask' as const,
     depiction: 'Six short instructor clips. Captions required when recorded.',
     alt: 'Recording pending. Captions and transcript required when recorded.',
@@ -133,10 +140,19 @@ export const TRUST_PLACEHOLDERS = {
     id: 'decision-card',
     label: 'Participant decision card',
     status: 'css' as const,
-    surfaceFilename: 'participant-decision-card',
+    surfaceFilename: '13-participant-decision-card',
     mark: 'ask' as const,
     depiction: 'Printable card: vote, three layers, one safeguard. Not a scanned worksheet.',
     alt: 'Printable decision card rendered in the interface. PDF export is the print route.',
+  },
+  catalogCover: {
+    id: 'catalog-cover',
+    label: 'Workshops catalog cover',
+    status: 'pending' as const,
+    surfaceFilename: '14-workshop-cover',
+    mark: 'ask' as const,
+    depiction: 'Catalog and FDE teaching tile. Slot SVG stands in until a peel-open still exists.',
+    alt: 'Designed catalog slot for Trust Is Not a Vibe. Peel-open cover still pending.',
   },
 } as const satisfies Record<string, TrustPlaceholder>
 
@@ -149,3 +165,11 @@ export const TRUST_DEMO_SURFACES: readonly TrustPlaceholderKey[] = [
   'verdictCards',
   'caseBTransfer',
 ]
+
+export function trustPlaceholderEntries() {
+  return Object.entries(TRUST_PLACEHOLDERS) as [TrustPlaceholderKey, TrustPlaceholder][]
+}
+
+export function trustStillsNeeded() {
+  return trustPlaceholderEntries().filter(([, item]) => item.status === 'pending' || item.status === 'css')
+}
