@@ -81,6 +81,38 @@ export type TrustFailure = {
   detail: string
 }
 
+/**
+ * The machine layer beneath a case card: the call the agent is about to fire,
+ * the permission it holds versus the permission that call needs, and the source
+ * records the surface claims rest on. Every value restates something already in
+ * `environment` at the level a system would see it, so the confident surface and
+ * the payload contradict each other in front of the learner.
+ */
+export type TrustSpecimenRuntime = {
+  surface: {
+    /** Invented product the card belongs to. */
+    app: string
+    screen: string
+    /** The button the card is asking someone to press. */
+    primaryAction: string
+  }
+  call: {
+    method: string
+    endpoint: string
+    body: readonly {
+      key: string
+      value: string
+      /** `claims` label this value undermines, if any. */
+      contradicts?: string
+    }[]
+  }
+  scopes: {
+    granted: readonly string[]
+    required: readonly string[]
+  }
+  sources: readonly { record: string; actual: string }[]
+}
+
 export type TrustCase = {
   id: 'case-a' | 'case-b'
   title: string
@@ -92,6 +124,7 @@ export type TrustCase = {
     claims: readonly { label: string; value: string }[]
     proposedActions: readonly string[]
   }
+  runtime: TrustSpecimenRuntime
   environment: {
     evidence: readonly string[]
     authority: readonly string[]

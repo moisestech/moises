@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { TRUST_CASE_A, TRUST_PLACEHOLDERS } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { AgentOutputCard } from './AgentOutputCard'
+import { TrustSpecimen } from './TrustSpecimen'
 
 const SURFACE = TRUST_PLACEHOLDERS.caseAOutput
 
@@ -22,9 +22,11 @@ export function CaseAStudioStill() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" aria-hidden />
         <div className="absolute inset-x-3 bottom-3 top-[18%] flex items-end justify-center sm:inset-x-10 sm:bottom-5 sm:top-[16%]">
-          <div className="w-full max-w-xl scale-[0.92] shadow-2xl sm:scale-100">
-            <AgentOutputCard caseData={TRUST_CASE_A} />
-          </div>
+          <TrustSpecimen
+            caseData={TRUST_CASE_A}
+            variant="bare"
+            className="w-full max-w-xl scale-[0.92] shadow-2xl sm:scale-100"
+          />
         </div>
       </div>
       <figcaption className={cn('border-t border-stone-200 bg-white px-4 py-3 text-xs text-stone-600 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-400')}>

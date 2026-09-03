@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { type TrustCase } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { TrustMark } from './TrustMarks'
+import { TRUST_SCROLL_MT } from './trust-tokens'
 
 const LAYERS = [
   { id: 'evidence', term: 'Evidence', question: 'What did it read?', mark: 'evidence' as const },
@@ -32,13 +33,12 @@ export function TrustSystemLayers({
       <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">
         You saw the card. Not the system.
       </p>
-      <div className="mt-3 grid gap-2 sm:grid-cols-3" role="tablist" aria-label="What the card left out">
+      <div className="mt-3 grid gap-2 sm:grid-cols-3" role="group" aria-label="What the card left out">
         {LAYERS.map((item) => (
           <button
             key={item.id}
             type="button"
-            role="tab"
-            aria-selected={layer === item.id}
+            aria-pressed={layer === item.id}
             onClick={() => {
               setLayer(item.id)
               if (!interacted) {
@@ -47,7 +47,8 @@ export function TrustSystemLayers({
               }
             }}
             className={cn(
-              'rounded-lg border px-3 py-2 text-left',
+              'rounded-lg border px-3 py-2 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-950',
+              TRUST_SCROLL_MT,
               layer === item.id
                 ? 'border-cyan-400 bg-cyan-50 text-cyan-800 dark:bg-cyan-950/50 dark:text-cyan-200'
                 : 'border-stone-200 text-stone-600 dark:border-stone-600 dark:text-stone-300'

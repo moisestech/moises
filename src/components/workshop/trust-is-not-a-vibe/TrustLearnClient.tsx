@@ -24,10 +24,12 @@ import { FailureTokens } from './FailureTokens'
 import { LoopMapper } from './LoopMapper'
 import { OutputPeel } from './OutputPeel'
 import { TrustCaseContext } from './TrustCaseContext'
+import { TrustFourLensesLesson } from './TrustFourLensesLesson'
+import { TrustGoDeeper } from './TrustGoDeeper'
 import { TrustLooksRightLesson } from './TrustLooksRightLesson'
 import { TrustSeatSection } from './TrustSeatSection'
 import { TransferRubric } from './TransferRubric'
-import { FullHarnessSvg, SimpleLoopSvg } from './TrustDiagrams'
+import { SimpleLoopSvg } from './TrustDiagrams'
 import { TrustChapterNav } from './TrustChapterNav'
 import { TrustMissingStillNote } from './TrustMissingStill'
 import { TrustInstructorClip } from './TrustInstructorClip'
@@ -53,24 +55,11 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
       case 'looks-right':
         return <TrustLooksRightLesson />
       case 'four-lenses':
-        return (
-          <div>
-            <TrustSection kind="read" title="Four seats share one card" flush>
-              <TrustTeachingCards cards={EVALS_TEACHING['four-lenses']} roleId={progress.role} />
-              <p className={cn(trust.body, 'mt-4 max-w-3xl')}>
-                Your move is in Your seat above: hover each job for an example on The send, then write one thing that
-                job must see before this send may go out.
-              </p>
-            </TrustSection>
-          </div>
-        )
+        return <TrustFourLensesLesson />
       case 'seeded-failures':
         return (
           <div>
-            <TrustSection kind="read" title="Name what went wrong" flush>
-              <TrustTeachingCards cards={EVALS_TEACHING['seeded-failures']} roleId={progress.role} />
-            </TrustSection>
-            <TrustSection kind="inspect" title="What was planted in The send">
+            <TrustSection kind="inspect" title="What was planted in The send" flush>
               <p className={cn(trust.body, 'mb-4 max-w-3xl')}>
                 These are not a new case. They were already in the card you voted on: the date against the calendar, 120
                 messages against an 80-person roster, an 87% with no history, a send the agent is not allowed to make, a
@@ -105,27 +94,19 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                 </p>
               </TrustSection>
             ) : null}
+            <div className="mt-12">
+              <TrustGoDeeper hint="The failure chain, benchmarks versus evals, and the clip.">
+                <TrustTeachingCards cards={EVALS_TEACHING['seeded-failures']} roleId={progress.role} />
+                <TrustInstructorClip chapterId="seeded-failures" />
+              </TrustGoDeeper>
+            </div>
           </div>
         )
       case 'the-loop':
         return (
           <div>
             <TrustSection kind="read" title="The agent loop" flush>
-              <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
-              <div className="mt-8 space-y-6">
-                <TrustPlaceholderFrame asset="simpleLoop" />
-                <TrustMissingStillNote asset="simpleLoop" />
-                <SimpleLoopSvg />
-                <p className={trust.body}>{TRUST_HARNESS_LINE}</p>
-                <dl className="grid gap-2 sm:grid-cols-2">
-                  {TRUST_VOCAB_SLIDE.map((row) => (
-                    <div key={row.visible} className="rounded-lg border border-stone-200 px-3 py-2 dark:border-stone-700">
-                      <dt className="text-sm font-semibold">{row.visible}</dt>
-                      <dd className="text-xs text-stone-500">{row.technical}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
+              <SimpleLoopSvg />
             </TrustSection>
             <TrustSection kind="practice" title="Place each failure on the loop">
               <LoopMapper
@@ -138,18 +119,29 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                 }}
               />
             </TrustSection>
+            <div className="mt-12">
+              <TrustGoDeeper hint="What an eval is, the four signals, plain-language vocabulary, and the clip.">
+                <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
+                <p className={trust.body}>{TRUST_HARNESS_LINE}</p>
+                <dl className="grid gap-2 sm:grid-cols-2">
+                  {TRUST_VOCAB_SLIDE.map((row) => (
+                    <div key={row.visible} className="rounded-lg border border-stone-200 px-3 py-2 dark:border-stone-700">
+                      <dt className="text-sm font-semibold">{row.visible}</dt>
+                      <dd className="text-xs text-stone-500">{row.technical}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <TrustPlaceholderFrame asset="simpleLoop" />
+                <TrustMissingStillNote asset="simpleLoop" />
+                <TrustInstructorClip chapterId="the-loop" />
+              </TrustGoDeeper>
+            </div>
           </div>
         )
       case 'the-harness':
         return (
           <div>
-            <TrustSection kind="read" title="The harness around the model" flush>
-              <TrustTeachingCards cards={EVALS_TEACHING['the-harness']} roleId={progress.role} />
-              <div className="mt-8">
-                <FullHarnessSvg />
-              </div>
-            </TrustSection>
-            <TrustSection kind="practice" title="Match a control to each failure">
+            <TrustSection kind="practice" title="Match a control to each failure" flush>
               <ControlMatch
                 failures={TRUST_CASE_A.failures}
                 matches={progress.controlMatches}
@@ -161,23 +153,6 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                   }
                 }}
               />
-              {progress.role === 'engineering' ? (
-                <aside className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
-                  <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
-                    Engineer toolkit — not required for other seats
-                  </p>
-                  <ul className="mt-2 space-y-1">
-                    {EVALS_ENGINEER_STACK.map((row) => (
-                      <li key={row.use}>
-                        <span className="font-medium">{row.use}:</span> {row.tools}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-2 text-xs text-slate-500">
-                    Treat evals like continuous testing. Do not make Product or Design memorize the stack.
-                  </p>
-                </aside>
-              ) : null}
               <label className="mt-8 block">
                 <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
                   Name one safeguard before this may act
@@ -215,16 +190,33 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                 }}
               />
             </TrustSection>
+            <div className="mt-12">
+              <TrustGoDeeper hint="Golden cases, the four graders, the engineer toolkit, and the clip.">
+                <TrustTeachingCards cards={EVALS_TEACHING['the-harness']} roleId={progress.role} />
+                <aside className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                    Engineer toolkit — not required for other seats
+                  </p>
+                  <ul className="mt-2 space-y-1">
+                    {EVALS_ENGINEER_STACK.map((row) => (
+                      <li key={row.use}>
+                        <span className="font-medium">{row.use}:</span> {row.tools}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-2 text-xs text-slate-500">
+                    Treat evals like continuous testing. Do not make Product or Design memorize the stack.
+                  </p>
+                </aside>
+                <TrustInstructorClip chapterId="the-harness" />
+              </TrustGoDeeper>
+            </div>
           </div>
         )
       case 'transfer':
         return (
           <div>
-            <TrustSection kind="read" title="An unseen case" flush>
-              <TrustTeachingCards cards={EVALS_TEACHING.transfer} roleId={progress.role} />
-              <p className={cn(trust.muted, 'mt-6')}>{TRUST_CASE_B.fixtureNote}</p>
-            </TrustSection>
-            <TrustSection kind="inspect" title="Open the transfer card">
+            <TrustSection kind="inspect" title="Open the transfer card" flush>
               <OutputPeel caseData={TRUST_CASE_B} />
             </TrustSection>
             <TrustSection kind="vote" title="Unseen case — Allow, Ask, or Deny?">
@@ -275,6 +267,13 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                 />
               </div>
             </TrustSection>
+            <div className="mt-12">
+              <TrustGoDeeper hint="The one rule to carry out, the fixture note, and the clip.">
+                <TrustTeachingCards cards={EVALS_TEACHING.transfer} roleId={progress.role} />
+                <p className={trust.muted}>{TRUST_CASE_B.fixtureNote}</p>
+                <TrustInstructorClip chapterId="transfer" />
+              </TrustGoDeeper>
+            </div>
           </div>
         )
       default:
@@ -285,7 +284,8 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
   if (!chapter) return null
 
   const Shell = embedded ? 'section' : 'main'
-  const looksRight = chapter.id === 'looks-right'
+  /** Guided lessons carry their own frame, case, seat, and optional reading. */
+  const guided = chapter.id === 'looks-right' || chapter.id === 'four-lenses'
 
   return (
     <Shell className={cn(embedded ? '' : cn(trust.shell, 'overflow-x-clip pb-20'))}>
@@ -293,40 +293,36 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
         className={
           embedded
             ? 'space-y-6'
-            : looksRight
+            : guided
               ? cn(trust.gutter, 'pb-16 pt-3 font-[\'MoMA_Sans\']')
               : trust.main
         }
       >
-        {embedded && !looksRight ? (
+        {embedded && !guided ? (
           <h2 className={cn(trust.title, 'mt-2')}>
             {chapter.number}. {chapter.title}
           </h2>
         ) : null}
-        {looksRight || chapter.id === 'transfer' ? null : (
+        {guided || chapter.id === 'transfer' ? null : (
           <TrustCaseContext
             className={embedded ? 'mt-3' : 'mt-1'}
             vote={progress.revote ?? progress.baselineVote}
           />
         )}
-        {looksRight ? null : (
+        {guided ? null : (
           <>
             <div className="mt-6">
-              <TrustSeatSection variant="dock" showNeedToSee={chapter.id === 'four-lenses'} />
+              <TrustSeatSection variant="dock" />
             </div>
             <p className={cn(trust.body, 'mt-6 max-w-3xl text-base leading-relaxed')}>
               {getTrustChapterPath(chapter.id).learnerBrief}
             </p>
           </>
         )}
-        <div className={looksRight ? 'mt-2' : 'mt-8'}>
-          {hydrated || looksRight ? body : <p className={trust.muted}>Loading your progress…</p>}
+        {/* Every chapter now carries its own clip inside Go deeper. */}
+        <div className={guided ? 'mt-2' : 'mt-8'}>
+          {hydrated || guided ? body : <p className={trust.muted}>Loading your progress…</p>}
         </div>
-        {looksRight ? null : (
-          <div className="mt-10">
-            <TrustInstructorClip chapterId={chapter.id} />
-          </div>
-        )}
         {embedded ? null : <TrustChapterNav slug={chapter.slug} />}
       </div>
     </Shell>

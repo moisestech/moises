@@ -4,25 +4,29 @@ import { useEffect, useState } from 'react'
 import {
   EVALS_TEACHING,
   TRUST_CASE_A,
-  TRUST_CASE_A_CARD_NOTE,
   TRUST_CASE_A_INTRO,
   TRUST_CENTRAL_QUESTION,
-  TRUST_LOOKS_RIGHT_FRAME,
   TRUST_ROLES,
+  getTrustLessonPacket,
   getTrustRole,
   type TrustRoleId,
   type TrustVerdict,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { AgentOutputCard } from './AgentOutputCard'
-import { TrustChapterFrame } from './TrustChapterFrame'
+import { TrustInstructorClip } from './TrustInstructorClip'
+import { TrustLessonPacket } from './TrustLessonPacket'
+import { TrustSeatStance } from './TrustSeatStance'
+import { TrustSpecimen } from './TrustSpecimen'
 import { TrustSystemLayers } from './TrustSystemLayers'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
 import { ROLE_ICON } from './TrustSeatSection'
-import { TRUST_ROLE_TONE, TRUST_VERDICT_LABEL as VERDICT_LABEL, trust } from './trust-tokens'
+import { TRUST_ROLE_TONE, TRUST_VERDICT_LABEL as VERDICT_LABEL } from './trust-tokens'
 import { useTrustProgress } from './useTrustProgress'
 
+const PACKET = getTrustLessonPacket('looks-right')!
+
+/** Chapter 1 is where the learner takes a seat, so the job field is the picker. */
 function LooksRightJob({
   role,
   onPick,
@@ -32,12 +36,9 @@ function LooksRightJob({
 }) {
   const selected = getTrustRole(role)
   if (selected) {
-    const tone = TRUST_ROLE_TONE[selected.id]
     return (
       <div>
-        <p>
-          <span className={cn('font-semibold', tone.text)}>{selected.label}.</span> {selected.learnerJob}
-        </p>
+        <p>{selected.learnerJob}</p>
         <p className="mt-2 text-sm text-stone-500">Change seat</p>
         <div className="mt-2 flex flex-wrap gap-2">
           {TRUST_ROLES.map((entry) => {
@@ -72,16 +73,14 @@ function LooksRightJob({
         const Icon = ROLE_ICON[entry.id]
         return (
           <li key={entry.id}>
-            <button
-              type="button"
-              onClick={() => onPick(entry.id)}
-              className="w-full text-left text-xs leading-tight"
-            >
+            <button type="button" onClick={() => onPick(entry.id)} className="w-full text-left text-xs leading-tight">
               <span className={cn('inline-flex items-center gap-1 font-semibold', TRUST_ROLE_TONE[entry.id].text)}>
                 <Icon className="h-3.5 w-3.5" aria-hidden />
                 {entry.label}.
               </span>{' '}
-              <span className="text-stone-600 dark:text-stone-400">{entry.learnerJob}</span>
+              <span className="text-stone-600 dark:text-stone-400">
+                {PACKET.roleSignals[entry.id] ?? entry.learnerJob}
+              </span>
             </button>
           </li>
         )
@@ -109,109 +108,86 @@ export function TrustLooksRightLesson() {
     setSystemOpen(true)
   }
 
-  return (
-    <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
-      <div className="space-y-3">
-        <header className="rounded-lg border border-stone-200 bg-white px-3 py-2 dark:border-stone-700 dark:bg-stone-900">
-          <p className="font-space-mono text-[11px] uppercase tracking-[0.18em] text-stone-500">
-            {TRUST_LOOKS_RIGHT_FRAME.where}
-          </p>
-          <p className="mt-0.5 text-sm font-semibold text-stone-950 dark:text-stone-50">
-            {TRUST_LOOKS_RIGHT_FRAME.goal}
-          </p>
-        </header>
+  const seeIt = (
+    <div className="space-y-2">
+      <p className="text-sm leading-snug text-stone-800 dark:text-stone-200">{TRUST_CASE_A_INTRO}</p>
+      <TrustSpecimen
+        caseData={TRUST_CASE_A}
+        underneathUnlocked={systemOpen}
+        lockedNote="Vote first, then open the system. This shows the request the card would actually send."
+      />
+    </div>
+  )
 
-        <section className="rounded-lg border border-stone-200 bg-white px-3 py-2 dark:border-stone-700 dark:bg-stone-900">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-700 dark:text-cyan-400">
-            The card
-          </p>
-          <p className="mt-0.5 text-sm leading-snug text-stone-800 dark:text-stone-200">{TRUST_CASE_A_INTRO}</p>
-        </section>
+  const tryIt = (
+    <TrustVote
+      compact
+      legend={TRUST_CENTRAL_QUESTION}
+      value={progress.baselineVote}
+      onChange={(baselineVote: TrustVerdict) => update({ baselineVote })}
+    />
+  )
 
-        <AgentOutputCard compact caseData={TRUST_CASE_A} peeled={systemOpen} />
-
-        {voted ? (
-          <div className="space-y-3 rounded-lg border border-stone-200 bg-white p-3 dark:border-stone-700 dark:bg-stone-900">
-            <p className={cn(trust.body, 'text-sm')}>
-              Your first call is saved
-              {voteLabel ? (
-                <>
-                  {' '}
-                  as <span className="font-semibold">{voteLabel}</span>
-                </>
-              ) : null}
-              . Now open the system and see what the card left out.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                if (systemOpen) {
-                  setSystemOpen(false)
-                  return
-                }
-                openSystem()
-              }}
-              aria-expanded={systemOpen}
-              className="inline-flex items-center rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white dark:bg-cyan-500 dark:text-stone-950"
-            >
-              {systemOpen ? 'Hide the system' : 'Open the system'}
-            </button>
-            {systemOpen ? <TrustSystemLayers caseData={TRUST_CASE_A} onFirstInteraction={openSystem} /> : null}
-          </div>
+  const checkIt = voted ? (
+    <div className="space-y-3">
+      <p className="text-sm text-stone-800 dark:text-stone-200">
+        Your first call is saved
+        {voteLabel ? (
+          <>
+            {' '}
+            as <span className="font-semibold">{voteLabel}</span>
+          </>
         ) : null}
-      </div>
+        . Now open the system and see what the card left out.
+      </p>
+      <button
+        type="button"
+        onClick={() => {
+          if (systemOpen) {
+            setSystemOpen(false)
+            return
+          }
+          openSystem()
+        }}
+        aria-expanded={systemOpen}
+        className="inline-flex items-center rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white dark:bg-cyan-500 dark:text-stone-950"
+      >
+        {systemOpen ? 'Hide the system' : 'Open the system'}
+      </button>
+      {systemOpen ? <TrustSystemLayers caseData={TRUST_CASE_A} onFirstInteraction={openSystem} /> : null}
+      {completed ? (
+        <p className="text-sm font-medium text-stone-900 dark:text-stone-100">
+          Complete: your vote is saved and you opened the system.
+        </p>
+      ) : null}
+    </div>
+  ) : undefined
 
-      <aside className="lg:sticky lg:top-28">
-        <div className="space-y-3 rounded-xl border border-stone-200 bg-white p-3 dark:border-stone-700 dark:bg-stone-900">
-          <TrustChapterFrame
-            compact
-            hideWhereGoal
-            where={TRUST_LOOKS_RIGHT_FRAME.where}
-            goal={TRUST_LOOKS_RIGHT_FRAME.goal}
-            card={TRUST_CASE_A_CARD_NOTE}
-            job={<LooksRightJob role={progress.role} onPick={(role) => update({ role })} />}
-            doNow={TRUST_LOOKS_RIGHT_FRAME.doNow}
-            doneWhen={
-              completed
-                ? 'Complete: your vote is saved and you opened the system.'
-                : voted
-                  ? TRUST_LOOKS_RIGHT_FRAME.doneAfter
-                  : TRUST_LOOKS_RIGHT_FRAME.doneBefore
-            }
-          />
-          <TrustVote
-            compact
-            legend={TRUST_CENTRAL_QUESTION}
-            value={progress.baselineVote}
-            onChange={(baselineVote: TrustVerdict) => {
-              update({ baselineVote })
-            }}
-          />
-        </div>
-      </aside>
+  const announce = voted && voteLabel
+    ? completed
+      ? `Looks Right complete. Your vote is saved: ${voteLabel}.`
+      : `Your vote is saved: ${voteLabel}. Open the system is now available.`
+    : undefined
 
-      <div className="sr-only" aria-live="polite">
-        {voted && voteLabel
-          ? completed
-            ? `Looks Right complete. Your vote is saved: ${voteLabel}.`
-            : `Your vote is saved: ${voteLabel}. Open the system is now available.`
-          : null}
-      </div>
-
-      <div className="lg:col-span-2">
-        {voted ? (
-          <details className="rounded-xl border border-stone-200 px-4 py-3 dark:border-stone-700">
-            <summary className="cursor-pointer text-sm font-semibold text-stone-800 dark:text-stone-100">
-              Go deeper
-            </summary>
-            <div className="mt-3">
-              <TrustTeachingCards cards={EVALS_TEACHING['looks-right']} />
-            </div>
-          </details>
-        ) : hydrated ? null : (
-          <p className={cn(trust.muted, 'mt-6')}>Loading your progress…</p>
-        )}
-      </div>
-    </section>
+  return (
+    <TrustLessonPacket
+      where={PACKET.where}
+      idea={PACKET.idea}
+      seeIt={seeIt}
+      tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
+      checkIt={checkIt}
+      job={<LooksRightJob role={progress.role} onPick={(role) => update({ role })} />}
+      doNow={PACKET.tryPrompt}
+      doneWhen={voted ? PACKET.doneAfter : PACKET.doneBefore}
+      seat={<TrustSeatStance roleId={progress.role} />}
+      announce={announce}
+      deeperHint="Why one good run is not proof, and the clip."
+      deeper={
+        <>
+          <TrustTeachingCards cards={EVALS_TEACHING['looks-right']} roleId={progress.role} />
+          <TrustInstructorClip chapterId="looks-right" />
+        </>
+      }
+    />
   )
 }

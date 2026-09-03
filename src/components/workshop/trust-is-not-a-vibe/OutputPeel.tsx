@@ -7,6 +7,7 @@ import { CaseAStudioStill } from './CaseAStudioStill'
 import { cn } from '@/lib/utils'
 import { TrustMark } from './TrustMarks'
 import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
+import { TrustSpecimen } from './TrustSpecimen'
 
 const LAYERS = [
   { id: 'evidence', label: 'Evidence', hint: 'What did it read?', mark: 'evidence' as const },
@@ -46,7 +47,11 @@ export function OutputPeel({
         whether the prose looks finished.
       </p>
       {caseData.id === 'case-a' ? <CaseAStudioStill /> : null}
-      <AgentOutputCard caseData={caseData} peeled={open} />
+      <TrustSpecimen
+        caseData={caseData}
+        underneathUnlocked={open}
+        lockedNote="Open the system to see the request behind this card."
+      />
       {vote}
       {caseData.id === 'case-b' ? <TrustPlaceholderFrame asset="caseBTransfer" /> : null}
       {open && caseData.id === 'case-a' ? <TrustPlaceholderFrame asset="caseAEnvironment" /> : null}
