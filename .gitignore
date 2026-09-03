@@ -44,3 +44,6 @@ next-env.d.ts
 
 # Local instructor packet — never commit
 /private/
+
+# Trust lab QA screenshots
+/scripts/.trust-qa/

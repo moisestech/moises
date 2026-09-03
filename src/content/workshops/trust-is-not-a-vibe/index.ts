@@ -93,6 +93,41 @@ export {
 } from './cases'
 
 export {
+  TRUST_EVAL_ANATOMY,
+  TRUST_EVAL_DEFINITION,
+  TRUST_EVAL_LOOP,
+  TRUST_GOLDEN_BUCKET_HINT,
+  TRUST_GOLDEN_BUCKET_LABEL,
+  TRUST_GOLDEN_CASES,
+  TRUST_GRADERS,
+  TRUST_JUDGE_CAVEAT,
+  TRUST_ONE_RUN_LINE,
+  TRUST_REGRESSION_LINE,
+  TRUST_REGRESSION_RUN,
+  TRUST_ROLE_CRITERION,
+  TRUST_SCORING_APPROACHES,
+  TRUST_SCORING_PROBES,
+  TRUST_TESTING_LINE,
+  TRUST_TOOL_LANDSCAPE,
+  TRUST_TRACE_STEPS,
+} from './evals'
+export type {
+  TrustEvalLoopStage,
+  TrustEvalLoopStageId,
+  TrustEvalStage,
+  TrustEvalStageId,
+  TrustGoldenBucket,
+  TrustGoldenCase,
+  TrustGrader,
+  TrustGraderId,
+  TrustRunResult,
+  TrustScoringApproach,
+  TrustScoringApproachId,
+  TrustScoringProbe,
+  TrustTraceStep,
+} from './evals'
+
+export {
   EVALS_ENGINEER_STACK,
   EVALS_FIELD_VOCAB,
   EVALS_SOURCE,

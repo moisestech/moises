@@ -10,6 +10,7 @@ import {
   TRUST_CASE_A,
   TRUST_CASE_B,
   TRUST_HARNESS_LINE,
+  TRUST_TESTING_LINE,
   TRUST_VOCAB_SLIDE,
   type TrustControlId,
   type TrustLoopStage,
@@ -25,9 +26,11 @@ import { LoopMapper } from './LoopMapper'
 import { OutputPeel } from './OutputPeel'
 import { TrustCaseContext } from './TrustCaseContext'
 import { TrustFourLensesLesson } from './TrustFourLensesLesson'
+import { TrustEvalAnatomy } from './TrustEvalAnatomy'
 import { TrustGoDeeper } from './TrustGoDeeper'
 import { TrustLooksRightLesson } from './TrustLooksRightLesson'
 import { TrustPresentationBar } from './TrustPresentationBar'
+import { TrustScoringApproaches, TrustScoringMethods } from './TrustScoringApproaches'
 import { TrustSeatSection } from './TrustSeatSection'
 import { TransferRubric } from './TransferRubric'
 import { SimpleLoopSvg } from './TrustDiagrams'
@@ -39,11 +42,13 @@ import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustSection } from './TrustSection'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
+import { usePresentationMode } from './usePresentationMode'
 import { useTrustProgress } from './useTrustProgress'
 
 export function TrustLearnClient({ slug, embedded = false }: { slug: string; embedded?: boolean }) {
   const chapter = getTrustChapter(slug)
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
+  const { present } = usePresentationMode()
   const [failuresRevealed, setFailuresRevealed] = useState(false)
 
   useEffect(() => {
@@ -106,8 +111,15 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
       case 'the-loop':
         return (
           <div>
-            <TrustSection kind="read" title="The agent loop" flush>
-              <SimpleLoopSvg />
+            <TrustSection kind="read" title="Anatomy of an eval" flush>
+              <p className={cn(trust.body, 'mb-3 max-w-2xl')}>
+                Five parts, in order. Select one to see what it means on this card.
+              </p>
+              <TrustEvalAnatomy showOwners={present} />
+            </TrustSection>
+            <TrustSection kind="practice" title="Which check settles each question?">
+              <TrustScoringApproaches />
+              <p className={cn(trust.muted, 'mt-3 max-w-2xl text-sm')}>{TRUST_TESTING_LINE}</p>
             </TrustSection>
             <TrustSection kind="practice" title="Place each failure on the loop">
               <LoopMapper
@@ -121,8 +133,10 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
               />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="What an eval is, the four signals, plain-language vocabulary, and the clip.">
+              <TrustGoDeeper hint="Metric names, the agent loop diagram, plain-language vocabulary, and the clip.">
+                <TrustScoringMethods />
                 <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
+                <SimpleLoopSvg />
                 <p className={trust.body}>{TRUST_HARNESS_LINE}</p>
                 <dl className="grid gap-2 sm:grid-cols-2">
                   {TRUST_VOCAB_SLIDE.map((row) => (
@@ -260,7 +274,7 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
       default:
         return null
     }
-  }, [chapter, failuresRevealed, markChapterComplete, progress, update])
+  }, [chapter, failuresRevealed, markChapterComplete, present, progress, update])
 
   if (!chapter) return null
 
