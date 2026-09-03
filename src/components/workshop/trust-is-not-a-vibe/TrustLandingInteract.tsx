@@ -28,6 +28,7 @@ import {
   TRUST_OUTCOMES,
   TRUST_PLACEHOLDERS,
   TRUST_TITLE,
+  type TrustPlaceholder,
   type TrustPlaceholderKey,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
@@ -90,7 +91,7 @@ function TrustStillFill({
   asset: TrustPlaceholderKey
   className?: string
 }) {
-  const item = TRUST_PLACEHOLDERS[asset]
+  const item = TRUST_PLACEHOLDERS[asset] as TrustPlaceholder
   const src = item.src
   if (!src) return null
   const remote = src.startsWith('https://')
