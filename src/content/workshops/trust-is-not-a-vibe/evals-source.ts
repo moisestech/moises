@@ -297,8 +297,8 @@ export const EVALS_FIELD_VOCAB: readonly {
     chapterId: 'seeded-failures',
   },
   {
-    term: 'Golden dataset',
-    meaning: 'Five to twenty of your cases — common, edge, and every failure already seen.',
+    term: 'Golden set',
+    meaning: 'Six to twelve of your cases — common, edge, and every failure already seen. Also called an eval set.',
     example: 'The roster-mismatch card. The draft-only send. The invented forecast.',
     notThis: 'Not a thousand random prompts. Not “whatever the model feels like today.”',
     more: 'Start with the failures you already know. That set is the harness, not a vibe.',

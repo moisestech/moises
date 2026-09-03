@@ -26,7 +26,7 @@ const VOCAB_ICON: Record<string, IconType> = {
   'Vibe eval': HiOutlineSparkles,
   Eval: HiOutlineChartBar,
   Benchmark: HiOutlineQueueList,
-  'Golden dataset': HiOutlineStar,
+  'Golden set': HiOutlineStar,
   Faithfulness: HiOutlineShieldCheck,
   'LLM-as-judge': HiOutlineScale,
   Baseline: HiOutlineFlag,
