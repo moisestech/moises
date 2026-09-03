@@ -62,44 +62,61 @@ export const TRUST_NAV_TEXT: Record<TrustNavItemId, { active: string; hover: str
   },
 }
 
+/**
+ * Roles occupy a different visual family than decisions. Allow / Ask / Deny own
+ * emerald, amber, and red, so no seat may use them. Cyan is course chrome —
+ * eyebrows, links, focus rings — so no seat may use that either. Engineering
+ * stays steel on purpose: indigo would sit between Product blue and Design
+ * violet and give three adjacent hues.
+ */
 export const TRUST_ROLE_TONE = {
   pm: {
-    border: 'border-sky-500 dark:border-sky-400',
-    fill: 'bg-sky-950 text-sky-50 dark:bg-sky-200 dark:text-sky-950',
-    wash: 'bg-sky-50 dark:bg-sky-950/50',
-    text: 'text-sky-900 dark:text-sky-100',
-    icon: 'text-sky-600 dark:text-sky-300',
-    overlay: 'bg-sky-500/20',
-    ring: 'ring-2 ring-sky-400 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
+    border: 'border-blue-600 dark:border-blue-400',
+    fill: 'bg-blue-950 text-blue-50 dark:bg-blue-200 dark:text-blue-950',
+    wash: 'bg-blue-50 dark:bg-blue-950/50',
+    text: 'text-blue-800 dark:text-blue-200',
+    icon: 'text-blue-700 dark:text-blue-300',
+    overlay: 'bg-blue-600/20',
+    ring: 'ring-2 ring-blue-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
   },
   engineering: {
-    border: 'border-slate-500 dark:border-slate-300',
+    border: 'border-slate-600 dark:border-slate-300',
     fill: 'bg-slate-950 text-slate-50 dark:bg-slate-200 dark:text-slate-950',
     wash: 'bg-slate-50 dark:bg-slate-950/50',
-    text: 'text-slate-900 dark:text-slate-100',
-    icon: 'text-slate-600 dark:text-slate-300',
-    overlay: 'bg-slate-500/20',
-    ring: 'ring-2 ring-slate-400 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
+    text: 'text-slate-800 dark:text-slate-200',
+    icon: 'text-slate-700 dark:text-slate-300',
+    overlay: 'bg-slate-600/20',
+    ring: 'ring-2 ring-slate-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
   },
   design: {
-    border: 'border-violet-500 dark:border-violet-400',
+    border: 'border-violet-600 dark:border-violet-400',
     fill: 'bg-violet-950 text-violet-50 dark:bg-violet-200 dark:text-violet-950',
     wash: 'bg-violet-50 dark:bg-violet-950/50',
-    text: 'text-violet-900 dark:text-violet-100',
-    icon: 'text-violet-600 dark:text-violet-300',
-    overlay: 'bg-violet-500/20',
-    ring: 'ring-2 ring-violet-400 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
+    text: 'text-violet-800 dark:text-violet-200',
+    icon: 'text-violet-700 dark:text-violet-300',
+    overlay: 'bg-violet-600/20',
+    ring: 'ring-2 ring-violet-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
   },
   strategy: {
-    border: 'border-emerald-500 dark:border-emerald-400',
-    fill: 'bg-emerald-950 text-emerald-50 dark:bg-emerald-200 dark:text-emerald-950',
-    wash: 'bg-emerald-50 dark:bg-emerald-950/50',
-    text: 'text-emerald-900 dark:text-emerald-100',
-    icon: 'text-emerald-600 dark:text-emerald-300',
-    overlay: 'bg-emerald-500/20',
-    ring: 'ring-2 ring-emerald-400 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
+    border: 'border-fuchsia-600 dark:border-fuchsia-400',
+    fill: 'bg-fuchsia-950 text-fuchsia-50 dark:bg-fuchsia-200 dark:text-fuchsia-950',
+    wash: 'bg-fuchsia-50 dark:bg-fuchsia-950/50',
+    text: 'text-fuchsia-800 dark:text-fuchsia-200',
+    icon: 'text-fuchsia-700 dark:text-fuchsia-300',
+    overlay: 'bg-fuchsia-600/20',
+    ring: 'ring-2 ring-fuchsia-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
   },
 } as const
+
+/** Second, non-color channel for seat identity. Paired with a label and an icon. */
+export const TRUST_ROLE_PATTERN = {
+  pm: 'circles',
+  engineering: 'grid',
+  design: 'curves',
+  strategy: 'diamonds',
+} as const
+
+export type TrustRolePatternId = (typeof TRUST_ROLE_PATTERN)[keyof typeof TRUST_ROLE_PATTERN]
 
 export const TRUST_CHAPTER_TONE: Record<
   'looks-right' | 'four-lenses' | 'seeded-failures' | 'the-loop' | 'the-harness' | 'transfer',

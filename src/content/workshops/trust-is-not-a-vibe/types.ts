@@ -40,8 +40,8 @@ export type TrustChapter = {
   id: TrustChapterId
   slug: TrustChapterId
   number: number
-  clock: string
-  durationHint: string
+  /** Budgeted length of the required path. The running clock is derived in `time-budget`. */
+  minutes: number
   title: string
   summary: string
   objectives: readonly string[]

@@ -3,6 +3,7 @@
 import { HiCheck } from 'react-icons/hi2'
 import { TRUST_CASE_A, TRUST_ROLES, type TrustRoleId } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustRolePattern } from './TrustRolePattern'
 import { ROLE_ICON } from './TrustSeatSection'
 import { TrustSpecimen } from './TrustSpecimen'
 import { TRUST_ROLE_TONE, TRUST_SCROLL_MT } from './trust-tokens'
@@ -47,7 +48,7 @@ export function TrustFourSeatsDiagram({
               onClick={() => onSelect(entry.id)}
               aria-pressed={selected}
               className={cn(
-                'relative rounded-xl border px-3 py-3 text-left transition duration-200 hover:border-stone-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-950',
+                'relative overflow-hidden rounded-xl border px-3 py-3 text-left transition duration-200 hover:border-stone-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-950',
                 placement.cell,
                 TRUST_SCROLL_MT,
                 selected
@@ -56,21 +57,26 @@ export function TrustFourSeatsDiagram({
               )}
             >
               {selected ? <span className="sr-only">Selected seat. </span> : null}
+              {selected ? (
+                <span className={cn('absolute inset-0', tone.icon)} aria-hidden>
+                  <TrustRolePattern role={entry.id} />
+                </span>
+              ) : null}
               <span
                 aria-hidden
                 className={cn('absolute top-1/2 hidden h-px w-3 bg-stone-300 dark:bg-stone-600', placement.connector)}
               />
-              <span className={cn('flex items-center gap-2 text-sm font-semibold', tone.text)}>
+              <span className={cn('relative flex items-center gap-2 text-sm font-semibold', tone.text)}>
                 <Icon className={cn('h-5 w-5 shrink-0', tone.icon)} aria-hidden />
                 {entry.label}
               </span>
-              <span className="mt-1.5 block text-sm leading-snug text-stone-700 dark:text-stone-300">
+              <span className="relative mt-1.5 block text-sm leading-snug text-stone-700 dark:text-stone-300">
                 {signals[entry.id] ?? entry.primaryQuestions[0]}
               </span>
               {selected ? (
                 <span
                   className={cn(
-                    'mt-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold',
+                    'relative mt-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold',
                     tone.fill
                   )}
                 >

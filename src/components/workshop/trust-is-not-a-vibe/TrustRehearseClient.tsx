@@ -9,6 +9,7 @@ import {
   getTrustSpeakerNote,
   TRUST_BASE,
   TRUST_CHAPTERS,
+  TRUST_CHAPTER_TIME,
   TRUST_COMBINED_STRATEGY_DESIGN,
   TRUST_DECISION_CARD_HREF,
   TRUST_LEARN_BASE,
@@ -115,7 +116,7 @@ export function TrustRehearseClient() {
               >
                 <button type="button" className="w-full text-left" onClick={() => setPreviewSlug(chapter.slug)}>
                   <p className="text-[10px] uppercase tracking-wide text-stone-500">
-                    {chapter.clock} · {chapter.durationHint}
+                    {TRUST_CHAPTER_TIME[chapter.id].clock} · {TRUST_CHAPTER_TIME[chapter.id].durationHint}
                   </p>
                   <h2 className="mt-1 text-lg font-semibold">
                     {chapter.number}. {chapter.title}

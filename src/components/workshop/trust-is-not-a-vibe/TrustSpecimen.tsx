@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import { AgentOutputCard } from './AgentOutputCard'
 import { TrustSpecimenUnderneath } from './TrustSpecimenUnderneath'
 import { TRUST_SCROLL_MT } from './trust-tokens'
+import { usePresentationMode } from './usePresentationMode'
 
 type SpecimenLayer = 'surface' | 'underneath'
 
@@ -61,11 +62,15 @@ export function TrustSpecimen({
   className?: string
 }) {
   const [layer, setLayer] = useState<SpecimenLayer>('surface')
+  const { present } = usePresentationMode()
   const { surface } = caseData.runtime
   const caseA = caseData.id === 'case-a'
   const name = caseA ? TRUST_CASE_A_LEARNER_NAME : caseData.title
   const note = caseA ? TRUST_CASE_A_CARD_NOTE : caseData.domain
-  const showUnderneath = layer === 'underneath' && underneathUnlocked
+  // Presenting, the facilitator opens the machine layer on the room's behalf,
+  // so the vote-first gate would only get in the way.
+  const unlocked = underneathUnlocked || present
+  const showUnderneath = layer === 'underneath' && unlocked
 
   const windowPane = (
     <div className="overflow-hidden rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900">
@@ -79,7 +84,7 @@ export function TrustSpecimen({
         >
           {(['surface', 'underneath'] as const).map((id) => {
             const active = id === 'underneath' ? showUnderneath : layer === 'surface'
-            const locked = id === 'underneath' && !underneathUnlocked
+            const locked = id === 'underneath' && !unlocked
             return (
               <button
                 key={id}

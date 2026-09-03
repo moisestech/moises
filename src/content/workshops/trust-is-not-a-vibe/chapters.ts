@@ -42,8 +42,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     id: 'looks-right',
     slug: 'looks-right',
     number: 1,
-    clock: '0–5',
-    durationHint: '~5 min',
+    minutes: 4,
     title: 'Looks Right',
     summary:
       'A polished agent card asks for a launch. Vote Allow, Ask, or Deny before you see the system. Then peel the output open: Evidence, Authority, Impact.',
@@ -70,8 +69,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     id: 'four-lenses',
     slug: 'four-lenses',
     number: 2,
-    clock: '5–10',
-    durationHint: '~5 min',
+    minutes: 4,
     title: 'Four Lenses',
     summary:
       'Same card — The send. Pick the job you will keep. Write one thing that job must see before this send may go out.',
@@ -98,8 +96,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     id: 'seeded-failures',
     slug: 'seeded-failures',
     number: 3,
-    clock: '10–15',
-    durationHint: '~5 min',
+    minutes: 4.5,
     title: 'Seeded Failures',
     summary:
       'Six problems were planted in The send — calendar, roster, 87%, send permission, auto-removal, and the missing pause. Reveal them. Name three. Vote again.',
@@ -127,8 +124,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     id: 'the-loop',
     slug: 'the-loop',
     number: 4,
-    clock: '15–20',
-    durationHint: '~5 min',
+    minutes: 4.5,
     title: 'The Loop',
     summary:
       'Give each failure a location: Observe, Decide, Act, Check, then Stop / Ask / Continue. Simple labels first. Technical vocabulary in the notes.',
@@ -157,8 +153,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     id: 'the-harness',
     slug: 'the-harness',
     number: 5,
-    clock: '20–25',
-    durationHint: '~5 min',
+    minutes: 6,
     title: 'The Harness',
     summary:
       'Match one control to each failure. Learn the golden-case rule. Decide Allow, Ask, or Deny as a team — with one safeguard named.',
@@ -187,8 +182,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     id: 'transfer',
     slug: 'transfer',
     number: 6,
-    clock: '25–30',
-    durationHint: '~5 min',
+    minutes: 2.5,
     title: 'Transfer',
     summary:
       'An unseen museum-intake case. Score Evidence, Authority, Impact, and Control. Write what changed your decision.',
@@ -202,7 +196,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
       '6/8 is an exercise target, not a measured cohort claim.',
       TRUST_ONE_LINE,
     ],
-    checkpoint: 'Complete the eight-point rubric and the exit ticket.',
+    checkpoint: 'Judge the unseen case and leave one sentence you can defend.',
     videoClip: {
       title: 'The one thing to remember',
       status: 'pending',

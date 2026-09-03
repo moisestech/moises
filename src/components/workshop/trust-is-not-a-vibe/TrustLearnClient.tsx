@@ -27,6 +27,7 @@ import { TrustCaseContext } from './TrustCaseContext'
 import { TrustFourLensesLesson } from './TrustFourLensesLesson'
 import { TrustGoDeeper } from './TrustGoDeeper'
 import { TrustLooksRightLesson } from './TrustLooksRightLesson'
+import { TrustPresentationBar } from './TrustPresentationBar'
 import { TrustSeatSection } from './TrustSeatSection'
 import { TransferRubric } from './TransferRubric'
 import { SimpleLoopSvg } from './TrustDiagrams'
@@ -153,27 +154,6 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                   }
                 }}
               />
-              <label className="mt-8 block">
-                <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
-                  Name one safeguard before this may act
-                </span>
-                <textarea
-                  value={progress.safeguard}
-                  onChange={(event) => {
-                    update({ safeguard: event.target.value })
-                    if (
-                      event.target.value.trim() &&
-                      progress.teamVerdict &&
-                      Object.keys(progress.controlMatches).length === TRUST_CASE_A.failures.length
-                    ) {
-                      markChapterComplete('the-harness')
-                    }
-                  }}
-                  rows={3}
-                  className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100"
-                  placeholder="A specific validation, approval, or rollback — not “human review.”"
-                />
-              </label>
             </TrustSection>
             <TrustSection kind="vote" title="Team verdict for Case A">
               <TrustVote
@@ -181,17 +161,26 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                 value={progress.teamVerdict}
                 onChange={(teamVerdict) => {
                   update({ teamVerdict })
-                  if (
-                    progress.safeguard.trim() &&
-                    Object.keys(progress.controlMatches).length === TRUST_CASE_A.failures.length
-                  ) {
+                  if (Object.keys(progress.controlMatches).length === TRUST_CASE_A.failures.length) {
                     markChapterComplete('the-harness')
                   }
                 }}
               />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="Golden cases, the four graders, the engineer toolkit, and the clip.">
+              <TrustGoDeeper hint="Write a safeguard, then golden cases, the four graders, and the toolkit.">
+                <label className="block">
+                  <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
+                    Name one safeguard before this may act
+                  </span>
+                  <textarea
+                    value={progress.safeguard}
+                    onChange={(event) => update({ safeguard: event.target.value })}
+                    rows={3}
+                    className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100"
+                    placeholder="A specific validation, approval, or rollback — not “human review.”"
+                  />
+                </label>
                 <TrustTeachingCards cards={EVALS_TEACHING['the-harness']} roleId={progress.role} />
                 <aside className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
                   <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
@@ -223,52 +212,44 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
               <TrustVote
                 legend="Unseen case — Allow, Ask, or Deny?"
                 value={progress.transferVote}
-                onChange={(transferVote) => update({ transferVote })}
-              />
-            </TrustSection>
-            <TrustSection kind="practice" title="Score the system, then leave one sentence">
-              <TransferRubric
-                rubric={progress.rubric}
-                onScore={(key: TrustRubricKey, score: TrustRubricScore) => {
-                  const rubric = { ...progress.rubric, [key]: score }
-                  update({ rubric })
-                  if (progress.exitTicket.trim() && progress.teachBack.trim()) markChapterComplete('transfer')
+                onChange={(transferVote) => {
+                  update({ transferVote })
+                  if (progress.exitTicket.trim()) markChapterComplete('transfer')
                 }}
               />
-              <label className="mt-8 block rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-700 dark:text-cyan-400">
-                  Role-switch teach-back
-                </span>
-                <span className="mt-1 block text-sm font-semibold text-stone-900 dark:text-stone-100">
-                  {getTrustRole(progress.role)?.teachBackPrompt ??
-                    'Pick a seat first, then explain another lens in one sentence.'}
-                </span>
-                <textarea
-                  value={progress.teachBack}
-                  onChange={(event) => {
-                    update({ teachBack: event.target.value })
-                    const scored = Object.values({ ...progress.rubric }).every((item) => item !== null)
-                    if (event.target.value.trim() && progress.exitTicket.trim() && scored) {
-                      markChapterComplete('transfer')
-                    }
-                  }}
-                  rows={3}
-                  className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100"
-                />
-              </label>
-              <div className="mt-8">
-                <ExitTicket
-                  value={progress.exitTicket}
-                  onChange={(exitTicket) => {
-                    update({ exitTicket })
-                    const scored = Object.values({ ...progress.rubric }).every((item) => item !== null)
-                    if (exitTicket.trim() && scored) markChapterComplete('transfer')
-                  }}
-                />
-              </div>
+            </TrustSection>
+            <TrustSection kind="practice" title="Leave one sentence you can defend">
+              <ExitTicket
+                value={progress.exitTicket}
+                onChange={(exitTicket) => {
+                  update({ exitTicket })
+                  if (exitTicket.trim() && progress.transferVote) markChapterComplete('transfer')
+                }}
+              />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="The one rule to carry out, the fixture note, and the clip.">
+              <TrustGoDeeper hint="Score the system, teach the other seat, then the one rule to carry out.">
+                <TransferRubric
+                  rubric={progress.rubric}
+                  onScore={(key: TrustRubricKey, score: TrustRubricScore) => {
+                    update({ rubric: { ...progress.rubric, [key]: score } })
+                  }}
+                />
+                <label className="block rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-700 dark:text-cyan-400">
+                    Role-switch teach-back
+                  </span>
+                  <span className="mt-1 block text-sm font-semibold text-stone-900 dark:text-stone-100">
+                    {getTrustRole(progress.role)?.teachBackPrompt ??
+                      'Pick a seat first, then explain another lens in one sentence.'}
+                  </span>
+                  <textarea
+                    value={progress.teachBack}
+                    onChange={(event) => update({ teachBack: event.target.value })}
+                    rows={3}
+                    className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100"
+                  />
+                </label>
                 <TrustTeachingCards cards={EVALS_TEACHING.transfer} roleId={progress.role} />
                 <p className={trust.muted}>{TRUST_CASE_B.fixtureNote}</p>
                 <TrustInstructorClip chapterId="transfer" />
@@ -298,6 +279,8 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
               : trust.main
         }
       >
+        {/* Rehearse embeds these chapters and already has its own facilitator chrome. */}
+        {embedded ? null : <TrustPresentationBar className="mb-4" />}
         {embedded && !guided ? (
           <h2 className={cn(trust.title, 'mt-2')}>
             {chapter.number}. {chapter.title}

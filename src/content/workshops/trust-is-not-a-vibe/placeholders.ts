@@ -1,4 +1,5 @@
 import { TRUST_CHAPTERS, TRUST_TITLE } from './chapters'
+import { TRUST_CHAPTER_TIME } from './time-budget'
 import {
   TRUST_DECISION_CARD_HREF,
   TRUST_LEARN_BASE,
@@ -466,7 +467,7 @@ export function trustBannerCopyForPath(pathname: string | null | undefined): Tru
   return {
     number: String(chapter.number).padStart(2, '0'),
     title: chapter.title,
-    clock: `${chapter.clock} min`,
+    clock: TRUST_CHAPTER_TIME[chapter.id].clock,
   }
 }
 
