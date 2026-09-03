@@ -94,17 +94,7 @@ function TrustSeatStill({ active }: { active: TrustRoleId | null }) {
   )
 }
 
-function TrustSeatBrief({
-  roleId,
-  showNeedToSee,
-  needToSee,
-  onNeedToSeeChange,
-}: {
-  roleId: TrustRoleId | null
-  showNeedToSee?: boolean
-  needToSee: string
-  onNeedToSeeChange: (value: string) => void
-}) {
+function TrustSeatBrief({ roleId }: { roleId: TrustRoleId | null }) {
   const role = getTrustRole(roleId)
   if (!role) {
     return (
@@ -124,30 +114,12 @@ function TrustSeatBrief({
         {role.exampleNeedToSee}
       </p>
       <p className="mt-2 text-xs text-stone-500">Blind spot: {role.blindSpot}</p>
-      {showNeedToSee ? (
-        <label className="mt-4 block">
-          <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">{role.needToSeePrompt}</span>
-          <textarea
-            value={needToSee}
-            onChange={(event) => onNeedToSeeChange(event.target.value)}
-            rows={3}
-            placeholder={role.exampleNeedToSee}
-            className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-800 dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100"
-          />
-        </label>
-      ) : null}
     </div>
   )
 }
 
-export function TrustSeatSection({
-  variant,
-  showNeedToSee = false,
-}: {
-  variant: 'studio' | 'dock'
-  showNeedToSee?: boolean
-}) {
-  const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
+export function TrustSeatSection({ variant }: { variant: 'studio' | 'dock' }) {
+  const { progress, hydrated, update } = useTrustProgress()
   const [hovered, setHovered] = useState<TrustRoleId | null>(null)
   const preview = hovered ?? progress.role
 
@@ -190,10 +162,7 @@ export function TrustSeatSection({
             <button
               key={entry.id}
               type="button"
-              onClick={() => {
-                update({ role: entry.id })
-                if (showNeedToSee && progress.needToSee.trim()) markChapterComplete('four-lenses')
-              }}
+              onClick={() => update({ role: entry.id })}
               onMouseEnter={() => setHovered(entry.id)}
               onMouseLeave={() => setHovered(null)}
               onFocus={() => setHovered(entry.id)}
@@ -228,15 +197,7 @@ export function TrustSeatSection({
       </div>
 
       <div className="mt-4">
-        <TrustSeatBrief
-          roleId={preview}
-          showNeedToSee={showNeedToSee}
-          needToSee={progress.needToSee}
-          onNeedToSeeChange={(needToSee) => {
-            update({ needToSee })
-            if (progress.role && needToSee.trim()) markChapterComplete('four-lenses')
-          }}
-        />
+        <TrustSeatBrief roleId={preview} />
       </div>
     </div>
   )

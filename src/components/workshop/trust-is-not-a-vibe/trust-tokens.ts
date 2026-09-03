@@ -158,6 +158,29 @@ export const TRUST_CHAPTER_TONE: Record<
 /** Same column as chapter nav and landing body. */
 export const TRUST_PAGE_GUTTER = 'mx-auto w-full max-w-5xl px-3 sm:px-4'
 
+/** Live site header plus the measured Trust subnav. Published by `TrustWorkshopNav`. */
+export const TRUST_SUBNAV_HEIGHT_VAR = '--trust-subnav-height'
+
+export const TRUST_STICKY_TOP =
+  'top-[calc(var(--site-header-height,5rem)+var(--trust-subnav-height,3.5rem)+0.5rem)]'
+
+/** Keeps anchored and focused lesson content clear of the sticky header and subnav. */
+export const TRUST_SCROLL_MT =
+  'scroll-mt-[calc(var(--site-header-height,5rem)+var(--trust-subnav-height,3.5rem)+0.75rem)]'
+
+/**
+ * Overview-only type scale. The chapters use `trust.h2`; the contents page needs
+ * a heavier top end and a measured deck so it reads as a document rather than a
+ * lesson step.
+ */
+export const trustOverview = {
+  eyebrow: 'font-space-mono text-[11px] uppercase tracking-[0.2em] text-cyan-700 dark:text-cyan-400',
+  title:
+    'text-3xl font-bold leading-[1.08] tracking-tight text-stone-950 text-balance sm:text-4xl md:text-5xl dark:text-stone-50',
+  deck: 'max-w-[58ch] text-lg leading-relaxed text-stone-600 sm:text-xl dark:text-stone-400',
+  body: 'max-w-[68ch] text-base leading-relaxed text-stone-700 dark:text-stone-300',
+} as const
+
 export const trust = {
   shell: opp.shell,
   gutter: TRUST_PAGE_GUTTER,

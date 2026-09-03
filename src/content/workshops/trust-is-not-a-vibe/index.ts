@@ -28,6 +28,7 @@ export type {
   TrustRoleId,
   TrustRubricKey,
   TrustRubricScore,
+  TrustSpecimenRuntime,
   TrustSpeakerNote,
   TrustVerdict,
 } from './types'
@@ -65,7 +66,10 @@ export type { TrustChapterPath } from './chapter-path'
 
 export { getLiveBeatAtElapsed, TRUST_LIVE_BEATS, TRUST_LIVE_CUE_MINUTES } from './live-beats'
 
-export { getTrustRole, TRUST_COMBINED_STRATEGY_DESIGN, TRUST_ROLES } from './roles'
+export { getTrustRole, TRUST_COMBINED_STRATEGY_DESIGN, TRUST_ROLES, TRUST_ROLE_STANCE } from './roles'
+
+export { getTrustLessonPacket, TRUST_LESSON_PACKETS } from './lesson-packets'
+export type { TrustLessonPacket } from './lesson-packets'
 
 export {
   TRUST_CASE_A,
@@ -110,6 +114,9 @@ export {
 } from './chapters'
 
 export { getTrustSpeakerNote, TRUST_SPEAKER_NOTES } from './speaker-notes'
+
+export { TRUST_OVERVIEW_SECTIONS, TRUST_OVERVIEW_SPEC } from './overview'
+export type { TrustOverviewSection, TrustOverviewSectionId } from './overview'
 
 export const TRUST_SEO = {
   title: 'Trust Is Not a Vibe — 30-minute field lab | Moises Sanabria',

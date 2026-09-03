@@ -18,6 +18,8 @@ export type TrustRubric = Record<TrustRubricKey, TrustRubricScore | null>
 export type TrustProgress = {
   role: TrustRoleId | null
   needToSee: string
+  /** Which seat the saved requirement was written for. */
+  needToSeeRole: TrustRoleId | null
   baselineVote: TrustVerdict | null
   looksRightSystemOpened: boolean
   revote: TrustVerdict | null
@@ -43,6 +45,7 @@ const EMPTY_RUBRIC: TrustRubric = {
 export const EMPTY_TRUST_PROGRESS: TrustProgress = {
   role: null,
   needToSee: '',
+  needToSeeRole: null,
   baselineVote: null,
   looksRightSystemOpened: false,
   revote: null,
@@ -62,6 +65,10 @@ function isVerdict(value: unknown): value is TrustVerdict {
   return value === 'allow' || value === 'ask' || value === 'deny'
 }
 
+function isRoleId(value: unknown): value is TrustRoleId {
+  return value === 'pm' || value === 'engineering' || value === 'design' || value === 'strategy'
+}
+
 function parseProgress(raw: string | null): TrustProgress {
   if (!raw) return EMPTY_TRUST_PROGRESS
   try {
@@ -74,6 +81,13 @@ function parseProgress(raw: string | null): TrustProgress {
       controlMatches: parsed.controlMatches ?? {},
       rubric: { ...EMPTY_RUBRIC, ...parsed.rubric },
       completedChapters: Array.isArray(parsed.completedChapters) ? parsed.completedChapters : [],
+      role: isRoleId(parsed.role) ? parsed.role : null,
+      // Notes saved before seats were attributed belong to the seat held at the time.
+      needToSeeRole: isRoleId(parsed.needToSeeRole)
+        ? parsed.needToSeeRole
+        : parsed.needToSee?.trim() && isRoleId(parsed.role)
+          ? parsed.role
+          : null,
       baselineVote: isVerdict(parsed.baselineVote) ? parsed.baselineVote : null,
       looksRightSystemOpened: Boolean(parsed.looksRightSystemOpened),
       revote: isVerdict(parsed.revote) ? parsed.revote : null,

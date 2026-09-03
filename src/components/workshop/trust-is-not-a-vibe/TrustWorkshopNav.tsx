@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, useReducedMotion } from 'framer-motion'
@@ -15,7 +16,13 @@ import {
   TRUST_TITLE,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { TRUST_NAV_ACCENT_ID, TRUST_NAV_TEXT, TRUST_PAGE_GUTTER, type TrustNavItemId } from './trust-tokens'
+import {
+  TRUST_NAV_ACCENT_ID,
+  TRUST_NAV_TEXT,
+  TRUST_PAGE_GUTTER,
+  TRUST_SUBNAV_HEIGHT_VAR,
+  type TrustNavItemId,
+} from './trust-tokens'
 import { useTrustProgress } from './useTrustProgress'
 
 const NAV_ITEMS: readonly { id: TrustNavItemId; href: string; label: string }[] = [
@@ -31,15 +38,41 @@ export function TrustWorkshopNav() {
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
   const { progress, hydrated } = useTrustProgress()
+  const navRef = useRef<HTMLElement | null>(null)
   const activeHref = NAV_ITEMS.find((item) => item.href === pathname)?.href ?? ''
   const chapterSlug = pathname?.startsWith(`${TRUST_LEARN_BASE}/`)
     ? pathname.slice(TRUST_LEARN_BASE.length + 1).split('/')[0]
     : null
   const chapter = chapterSlug ? getTrustChapter(chapterSlug) : null
 
+  // Lesson content offsets its sticky rail and scroll anchors against this height.
+  useEffect(() => {
+    const node = navRef.current
+    if (!node) return
+
+    const publishHeight = () => {
+      const height = Math.round(node.getBoundingClientRect().height)
+      if (height > 0) {
+        document.documentElement.style.setProperty(TRUST_SUBNAV_HEIGHT_VAR, `${height}px`)
+      }
+    }
+
+    publishHeight()
+    const observer = new ResizeObserver(publishHeight)
+    observer.observe(node)
+    window.addEventListener('resize', publishHeight)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', publishHeight)
+    }
+  }, [])
+
   return (
     <nav
+      ref={navRef}
       data-site-chrome
+      data-trust-subnav
       className={cn(opp.stickyNav, siteHeaderStickyTopClass, 'print:hidden')}
       aria-label={`${TRUST_TITLE} sections`}
     >

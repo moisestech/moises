@@ -103,6 +103,14 @@ export const TRUST_ROLES: readonly TrustRole[] = [
   },
 ] as const
 
+/** One persistent statement per seat. Shown in every chapter's "Your seat" callout. */
+export const TRUST_ROLE_STANCE: Record<TrustRoleId, string> = {
+  pm: 'Define what good means.',
+  engineering: 'Make the path observable and recoverable.',
+  design: 'Make uncertainty and intervention legible.',
+  strategy: 'Name the owner, value, and risk.',
+}
+
 export const TRUST_COMBINED_STRATEGY_DESIGN = {
   id: 'strategy-design' as const,
   label: 'Strategy / Design',

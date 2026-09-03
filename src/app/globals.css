@@ -66,6 +66,7 @@
     --site-header-height: 5rem;
     --site-header-expanded-height: 10rem;
     --grant-dossier-subnav-height: 3.5rem;
+    --trust-subnav-height: 3.5rem;
   }
 
   :root {

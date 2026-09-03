@@ -38,6 +38,34 @@ export const TRUST_CASE_A: TrustCase = {
       'Auto-remove participants below the engagement threshold.',
     ],
   },
+  runtime: {
+    surface: {
+      app: 'Cohort Studio',
+      screen: 'Enrollment decision',
+      primaryAction: 'Send 120 messages',
+    },
+    call: {
+      method: 'POST',
+      endpoint: '/v1/cohorts/oct-6/messages:send',
+      body: [
+        { key: 'cohort_id', value: '"oct-6"' },
+        { key: 'launch_date', value: '"2026-10-06"' },
+        { key: 'date_source', value: '"calendar#tentative"', contradicts: 'Launch date' },
+        { key: 'recipients', value: '120', contradicts: 'Messages ready' },
+        { key: 'completion_forecast', value: '0.87', contradicts: 'Expected completion' },
+        { key: 'remove_below_engagement', value: 'true', contradicts: 'Low engagement' },
+      ],
+    },
+    scopes: {
+      granted: ['cohort:read', 'roster:read', 'messages:draft'],
+      required: ['messages:send', 'roster:write', 'calendar:confirm'],
+    },
+    sources: [
+      { record: 'calendar/oct-6.event → status', actual: 'tentative · never confirmed' },
+      { record: 'roster/participants.csv → rows', actual: '80 rows, not 120' },
+      { record: 'history/completion_rate', actual: 'no prior cohorts recorded' },
+    ],
+  },
   environment: {
     evidence: [
       'The launch date is still marked tentative on the source calendar. October 6 is not confirmed.',
@@ -130,6 +158,34 @@ export const TRUST_CASE_B: TrustCase = {
       'Move all 40 waitlist records to enrolled.',
       'Send acceptance email with a media-release reminder as a courtesy.',
       'Publish the session as full at 24 seats.',
+    ],
+  },
+  runtime: {
+    surface: {
+      app: 'Studio Intake',
+      screen: 'Waitlist decision',
+      primaryAction: 'Send 40 acceptances',
+    },
+    call: {
+      method: 'POST',
+      endpoint: '/v1/sessions/spring-studio/enrollments:bulk',
+      body: [
+        { key: 'session_id', value: '"spring-studio"' },
+        { key: 'enroll_rows', value: '40', contradicts: 'Waitlist' },
+        { key: 'release_status', value: '"draft"', contradicts: 'Media release' },
+        { key: 'seats', value: '24', contradicts: 'Studio capacity' },
+        { key: 'notify', value: '"acceptance_email"', contradicts: 'Next action' },
+      ],
+    },
+    scopes: {
+      granted: ['waitlist:read', 'email:draft'],
+      required: ['email:send', 'enrollment:write', 'guardian_consent:verify'],
+    },
+    sources: [
+      { record: 'waitlist/spring.csv → rows', actual: '40 rows · 11 duplicate or already enrolled' },
+      { record: 'forms/media_release.pdf → signed', actual: 'false · draft, nothing signed' },
+      { record: 'rooms/studio.posted_capacity', actual: '18 by fire code, not 24' },
+      { record: 'waitlist/spring.csv → age', actual: '2 minors · guardian consent missing' },
     ],
   },
   environment: {
