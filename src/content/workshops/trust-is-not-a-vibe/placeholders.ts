@@ -63,7 +63,7 @@ export const TRUST_PLACEHOLDERS = {
     status: 'ready' as const,
     kind: 'generated-still' as const,
     required: true,
-    src: `${TRUST_STILL_CDN}/01-Agentic-Engineering-Painfully-Alone-Ultrawide-Banner_ke5jde.png`,
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788447377/dccmiami/workshops/agentic-engineering-for-beginners/trust-is-not-a-vibe-00-course-overview-banner-v2_p52xu6.png',
     surfaceFilename: '00-lab-banner',
     mark: 'ask' as const,
     depiction: 'Ultrawide teaching banner for the Painfully Alone problem. Not a product screenshot.',

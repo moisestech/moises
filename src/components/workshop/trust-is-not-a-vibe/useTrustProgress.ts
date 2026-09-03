@@ -19,6 +19,7 @@ export type TrustProgress = {
   role: TrustRoleId | null
   needToSee: string
   baselineVote: TrustVerdict | null
+  looksRightSystemOpened: boolean
   revote: TrustVerdict | null
   namedFailures: string[]
   loopPlacements: Partial<Record<string, TrustLoopStage>>
@@ -43,6 +44,7 @@ export const EMPTY_TRUST_PROGRESS: TrustProgress = {
   role: null,
   needToSee: '',
   baselineVote: null,
+  looksRightSystemOpened: false,
   revote: null,
   namedFailures: [],
   loopPlacements: {},
@@ -73,6 +75,7 @@ function parseProgress(raw: string | null): TrustProgress {
       rubric: { ...EMPTY_RUBRIC, ...parsed.rubric },
       completedChapters: Array.isArray(parsed.completedChapters) ? parsed.completedChapters : [],
       baselineVote: isVerdict(parsed.baselineVote) ? parsed.baselineVote : null,
+      looksRightSystemOpened: Boolean(parsed.looksRightSystemOpened),
       revote: isVerdict(parsed.revote) ? parsed.revote : null,
       teamVerdict: isVerdict(parsed.teamVerdict) ? parsed.teamVerdict : null,
       transferVote: isVerdict(parsed.transferVote) ? parsed.transferVote : null,

@@ -8,6 +8,7 @@ import { opp } from '@/components/opportunities/opportunityTheme'
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme'
 import { siteHeaderStickyTopClass } from '@/config/site-header-layout'
 import {
+  getTrustChapter,
   TRUST_BASE,
   TRUST_CHAPTERS,
   TRUST_LEARN_BASE,
@@ -15,6 +16,7 @@ import {
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { TRUST_NAV_ACCENT_ID, TRUST_NAV_TEXT, TRUST_PAGE_GUTTER, type TrustNavItemId } from './trust-tokens'
+import { useTrustProgress } from './useTrustProgress'
 
 const NAV_ITEMS: readonly { id: TrustNavItemId; href: string; label: string }[] = [
   { id: 'overview', href: TRUST_BASE, label: 'Overview' },
@@ -28,7 +30,12 @@ const NAV_ITEMS: readonly { id: TrustNavItemId; href: string; label: string }[] 
 export function TrustWorkshopNav() {
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
+  const { progress, hydrated } = useTrustProgress()
   const activeHref = NAV_ITEMS.find((item) => item.href === pathname)?.href ?? ''
+  const chapterSlug = pathname?.startsWith(`${TRUST_LEARN_BASE}/`)
+    ? pathname.slice(TRUST_LEARN_BASE.length + 1).split('/')[0]
+    : null
+  const chapter = chapterSlug ? getTrustChapter(chapterSlug) : null
 
   return (
     <nav
@@ -36,6 +43,11 @@ export function TrustWorkshopNav() {
       className={cn(opp.stickyNav, siteHeaderStickyTopClass, 'print:hidden')}
       aria-label={`${TRUST_TITLE} sections`}
     >
+      {chapter ? (
+        <div className={cn(TRUST_PAGE_GUTTER, 'pb-1 text-xs text-stone-600 dark:text-stone-300')}>
+          Chapter {chapter.number} of {TRUST_CHAPTERS.length} · {chapter.title}
+        </div>
+      ) : null}
       <HorizontalOverflowNav
         asNav={false}
         ariaLabel={`${TRUST_TITLE} sections`}
@@ -47,6 +59,11 @@ export function TrustWorkshopNav() {
           const active = item.href === activeHref
           const accent = getOpportunityCompactAccent(TRUST_NAV_ACCENT_ID[item.id])
           const tone = TRUST_NAV_TEXT[item.id]
+          const chapterId = item.id === 'overview' ? null : item.id
+          const complete =
+            hydrated && chapterId ? progress.completedChapters.includes(chapterId as (typeof progress.completedChapters)[number]) : false
+          const marker = complete ? '✓' : active ? '●' : '○'
+          const markerLabel = complete ? 'Completed' : active ? 'Current' : 'Not started'
           return (
             <Link
               key={item.id}
@@ -61,6 +78,10 @@ export function TrustWorkshopNav() {
                   : cn('border-transparent text-stone-600 dark:text-stone-400', tone.hover)
               )}
             >
+              <span aria-hidden className="mr-1.5 inline-block w-3 text-center">
+                {marker}
+              </span>
+              <span className="sr-only">{markerLabel}. </span>
               {active && !reduceMotion ? (
                 <motion.span
                   layoutId="trust-subnav-active"

@@ -29,23 +29,29 @@ export function TrustChapterFrame({
   job,
   doNow,
   doneWhen,
+  compact,
+  hideWhereGoal,
   className,
 }: {
   where: string
   goal: string
-  card: ReactNode
+  card?: ReactNode
   job: ReactNode
   doNow: string
   doneWhen: string
+  compact?: boolean
+  hideWhereGoal?: boolean
   className?: string
 }) {
   return (
-    <header className={cn('grid gap-2 md:grid-cols-2', className)}>
-      <div className="md:col-span-2">
-        <p className="font-space-mono text-[11px] uppercase tracking-[0.18em] text-stone-500">{where}</p>
-        <p className="mt-0.5 text-sm font-semibold text-stone-950 sm:text-base dark:text-stone-50">{goal}</p>
-      </div>
-      <FrameField label="The card">{card}</FrameField>
+    <header className={cn(compact ? 'space-y-3' : 'grid gap-2 md:grid-cols-2', className)}>
+      {hideWhereGoal ? null : (
+        <div className={compact ? '' : 'md:col-span-2'}>
+          <p className="font-space-mono text-[11px] uppercase tracking-[0.18em] text-stone-500">{where}</p>
+          <p className="mt-0.5 text-sm font-semibold text-stone-950 sm:text-base dark:text-stone-50">{goal}</p>
+        </div>
+      )}
+      {card ? <FrameField label="The card">{card}</FrameField> : null}
       <FrameField label="Your job">{job}</FrameField>
       <FrameField label="Do this now">{doNow}</FrameField>
       <p className="self-start rounded-lg border border-cyan-400/40 bg-cyan-50 px-3 py-1.5 text-sm font-medium text-cyan-950 dark:border-cyan-500/40 dark:bg-cyan-950/40 dark:text-cyan-100">
