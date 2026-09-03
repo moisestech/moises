@@ -4,12 +4,12 @@ import { useState } from 'react'
 import Image from 'next/image'
 import type { IconType } from 'react-icons'
 import {
-  HiOutlineBuildingLibrary,
-  HiOutlineClipboardDocumentCheck,
-  HiOutlineSwatch,
+  HiOutlineCommandLine,
+  HiOutlineEye,
   HiOutlineUsers,
-  HiOutlineWrenchScrewdriver,
+  HiOutlineViewfinderCircle,
 } from 'react-icons/hi2'
+import { TbCompass } from 'react-icons/tb'
 import {
   getTrustRole,
   TRUST_FOUR_SEATS_BODY,
@@ -21,6 +21,7 @@ import {
   type TrustRoleId,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustRolePattern } from './TrustRolePattern'
 import { TRUST_ROLE_TONE } from './trust-tokens'
 import { useTrustProgress } from './useTrustProgress'
 
@@ -31,11 +32,12 @@ const ROLE_STILL: Record<TrustRoleId, TrustPlaceholderKey> = {
   strategy: 'sharedOwnership',
 }
 
+/** One glyph per seat, so the seat never depends on color alone. */
 export const ROLE_ICON: Record<TrustRoleId, IconType> = {
-  pm: HiOutlineClipboardDocumentCheck,
-  engineering: HiOutlineWrenchScrewdriver,
-  design: HiOutlineSwatch,
-  strategy: HiOutlineBuildingLibrary,
+  pm: HiOutlineViewfinderCircle,
+  engineering: HiOutlineCommandLine,
+  design: HiOutlineEye,
+  strategy: TbCompass,
 }
 
 function TrustSeatStill({ active }: { active: TrustRoleId | null }) {
@@ -169,28 +171,33 @@ export function TrustSeatSection({ variant }: { variant: 'studio' | 'dock' }) {
               onBlur={() => setHovered(null)}
               aria-pressed={progress.role === entry.id}
               className={cn(
-                'rounded-xl border text-left transition duration-200',
+                'relative overflow-hidden rounded-xl border text-left transition duration-200',
                 variant === 'studio' ? 'p-5' : 'p-4',
                 lit
                   ? cn(roleTone.border, roleTone.fill, 'motion-safe:-translate-y-0.5 shadow-md')
                   : 'border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900'
               )}
             >
-              <p
-                className={cn(
-                  'flex items-center gap-2 text-xs font-semibold uppercase tracking-wide',
-                  lit ? 'text-current' : cn('text-stone-500', roleTone.icon)
-                )}
-              >
-                <Icon className="h-5 w-5" aria-hidden />
-                {entry.shortLabel}
-              </p>
-              <p className={cn('mt-1 font-bold', variant === 'studio' ? 'text-xl' : 'text-base', lit ? 'text-current' : 'text-stone-950 dark:text-stone-50')}>
-                {entry.label}
-              </p>
-              <p className={cn('mt-2 leading-snug', variant === 'studio' ? 'text-base' : 'text-sm', lit ? 'text-current/85' : 'text-stone-600 dark:text-stone-400')}>
-                {entry.primaryQuestions[0]}
-              </p>
+              <span className={cn('absolute inset-0', lit ? 'text-current' : roleTone.icon)} aria-hidden>
+                <TrustRolePattern role={entry.id} />
+              </span>
+              <span className="relative block">
+                <span
+                  className={cn(
+                    'flex items-center gap-2 text-xs font-semibold uppercase tracking-wide',
+                    lit ? 'text-current' : cn('text-stone-500', roleTone.icon)
+                  )}
+                >
+                  <Icon className="h-5 w-5" aria-hidden />
+                  {entry.shortLabel}
+                </span>
+                <span className={cn('mt-1 block font-bold', variant === 'studio' ? 'text-xl' : 'text-base', lit ? 'text-current' : 'text-stone-950 dark:text-stone-50')}>
+                  {entry.label}
+                </span>
+                <span className={cn('mt-2 block leading-snug', variant === 'studio' ? 'text-base' : 'text-sm', lit ? 'text-current/85' : 'text-stone-600 dark:text-stone-400')}>
+                  {entry.primaryQuestions[0]}
+                </span>
+              </span>
             </button>
           )
         })}

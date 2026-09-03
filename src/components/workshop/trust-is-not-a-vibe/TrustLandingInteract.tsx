@@ -16,6 +16,7 @@ import {
 import {
   EVALS_FIELD_VOCAB,
   TRUST_CHAPTERS,
+  TRUST_CHAPTER_TIME,
   TRUST_LEARN_BASE,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
@@ -123,7 +124,7 @@ export function TrustClockList() {
                 {chapter.number}. {chapter.title}
               </span>
               <span className="text-xs text-stone-500 group-hover:text-inherit">
-                {chapter.clock} min · {chapter.checkpoint}
+                {TRUST_CHAPTER_TIME[chapter.id].clock} · {chapter.checkpoint}
               </span>
             </Link>
           </li>

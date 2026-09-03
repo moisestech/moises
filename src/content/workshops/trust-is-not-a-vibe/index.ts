@@ -66,7 +66,15 @@ export type { TrustChapterPath } from './chapter-path'
 
 export { getLiveBeatAtElapsed, TRUST_LIVE_BEATS, TRUST_LIVE_CUE_MINUTES } from './live-beats'
 
-export { getTrustRole, TRUST_COMBINED_STRATEGY_DESIGN, TRUST_ROLES, TRUST_ROLE_STANCE } from './roles'
+export {
+  getTrustRole,
+  TRUST_COMBINED_STRATEGY_DESIGN,
+  TRUST_ROLES,
+  TRUST_ROLE_ARTIFACT,
+  TRUST_ROLE_DIRECTIVE,
+  TRUST_ROLE_STANCE,
+  TRUST_ROLE_TERMS,
+} from './roles'
 
 export { getTrustLessonPacket, TRUST_LESSON_PACKETS } from './lesson-packets'
 export type { TrustLessonPacket } from './lesson-packets'
@@ -114,6 +122,17 @@ export {
 } from './chapters'
 
 export { getTrustSpeakerNote, TRUST_SPEAKER_NOTES } from './speaker-notes'
+
+export {
+  TRUST_BUFFER_MINUTES,
+  TRUST_CHAPTER_TIME,
+  TRUST_OVERVIEW_MINUTES,
+  TRUST_OVERVIEW_TIME,
+  TRUST_REQUIRED_MINUTES,
+  TRUST_TIME_SEGMENTS,
+  TRUST_TOTAL_MINUTES,
+} from './time-budget'
+export type { TrustTimeSegment, TrustTimeSegmentId } from './time-budget'
 
 export { TRUST_OVERVIEW_SECTIONS, TRUST_OVERVIEW_SPEC } from './overview'
 export type { TrustOverviewSection, TrustOverviewSectionId } from './overview'

@@ -14,6 +14,7 @@ import { TrustFourSeatsDiagram } from './TrustFourSeatsDiagram'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustLessonPacket } from './TrustLessonPacket'
 import { TrustSeatStance } from './TrustSeatStance'
+import { usePresentationMode } from './usePresentationMode'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TRUST_ROLE_TONE } from './trust-tokens'
 import { useTrustProgress } from './useTrustProgress'
@@ -28,6 +29,7 @@ function nextSeat(id: TrustRoleId): TrustRoleId {
 
 export function TrustFourLensesLesson() {
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
+  const { present } = usePresentationMode()
   const [probeOpen, setProbeOpen] = useState(false)
 
   const role = progress.role
@@ -145,7 +147,7 @@ export function TrustFourLensesLesson() {
       }
       doNow={PACKET.tryPrompt}
       doneWhen={attributed ? PACKET.doneAfter : PACKET.doneBefore}
-      seat={<TrustSeatStance roleId={role} />}
+      seat={<TrustSeatStance roleId={role} allSeats={present} />}
       announce={announce}
       deeperHint="How each seat reads the same card, and the clip."
       deeper={

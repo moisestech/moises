@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustLessonPacket } from './TrustLessonPacket'
 import { TrustSeatStance } from './TrustSeatStance'
+import { usePresentationMode } from './usePresentationMode'
 import { TrustSpecimen } from './TrustSpecimen'
 import { TrustSystemLayers } from './TrustSystemLayers'
 import { TrustTeachingCards } from './TrustTeachingCards'
@@ -91,6 +92,7 @@ function LooksRightJob({
 
 export function TrustLooksRightLesson() {
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
+  const { present } = usePresentationMode()
   const [systemOpen, setSystemOpen] = useState(progress.looksRightSystemOpened)
   const voted = Boolean(progress.baselineVote)
   const voteLabel = progress.baselineVote ? VERDICT_LABEL[progress.baselineVote] : null
@@ -179,7 +181,7 @@ export function TrustLooksRightLesson() {
       job={<LooksRightJob role={progress.role} onPick={(role) => update({ role })} />}
       doNow={PACKET.tryPrompt}
       doneWhen={voted ? PACKET.doneAfter : PACKET.doneBefore}
-      seat={<TrustSeatStance roleId={progress.role} />}
+      seat={<TrustSeatStance roleId={progress.role} allSeats={present} />}
       announce={announce}
       deeperHint="Why one good run is not proof, and the clip."
       deeper={

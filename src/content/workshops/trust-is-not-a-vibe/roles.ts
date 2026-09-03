@@ -111,6 +111,37 @@ export const TRUST_ROLE_STANCE: Record<TrustRoleId, string> = {
   strategy: 'Name the owner, value, and risk.',
 }
 
+/**
+ * The instruction each seat carries through the whole course. Self-paced
+ * learners see their own; presenting to a room shows all four so the seats can
+ * be compared.
+ */
+export const TRUST_ROLE_DIRECTIVE: Record<TrustRoleId, string> = {
+  pm: 'Define the outcome and acceptance threshold.',
+  engineering: 'Trace the state, tools, permissions, and recovery path.',
+  design: 'Make uncertainty, consequence, and intervention understandable.',
+  strategy: 'Name the value, exposure, decision threshold, and owner.',
+}
+
+/**
+ * Two or three emphasized terms per seat. Used for short highlighted phrases
+ * and diagram ownership tags — never to color arbitrary words in body copy.
+ */
+export const TRUST_ROLE_TERMS: Record<TrustRoleId, readonly string[]> = {
+  pm: ['outcome', 'acceptance', 'task success'],
+  engineering: ['state', 'trace', 'permission', 'recovery'],
+  design: ['clarity', 'uncertainty', 'intervention'],
+  strategy: ['risk', 'owner', 'threshold', 'value'],
+}
+
+/** What each seat is accountable for producing. Assembled in Transfer. */
+export const TRUST_ROLE_ARTIFACT: Record<TrustRoleId, string> = {
+  pm: 'Acceptance criteria',
+  engineering: 'Checks and traces',
+  design: 'Review experience and rubric',
+  strategy: 'Release policy',
+}
+
 export const TRUST_COMBINED_STRATEGY_DESIGN = {
   id: 'strategy-design' as const,
   label: 'Strategy / Design',

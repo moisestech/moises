@@ -12,6 +12,7 @@ import { TrustClockList, TrustVocabGrid } from './TrustLandingInteract'
 import { TrustOverviewSpec, TrustOverviewVerdicts, TrustOverviewWhy } from './TrustOverviewBands'
 import { TrustOverviewContents, TrustOverviewRail } from './TrustOverviewRail'
 import { TrustOverviewSection } from './TrustOverviewSection'
+import { TrustPresentationBar } from './TrustPresentationBar'
 import { TrustQuestionBreak } from './TrustQuestionBreak'
 import { TrustSeatStudio } from './TrustSeatSection'
 import { trust } from './trust-tokens'
@@ -25,6 +26,7 @@ export function TrustLandingClient() {
   return (
     <main className={cn(trust.shell, 'overflow-x-clip pb-20 sm:pb-24')}>
       <div className={trust.main}>
+        <TrustPresentationBar className="mb-6" />
         <TrustOverviewContents className="mb-10" />
 
         <div className="lg:grid lg:grid-cols-[10rem_minmax(0,1fr)] lg:gap-x-10">
