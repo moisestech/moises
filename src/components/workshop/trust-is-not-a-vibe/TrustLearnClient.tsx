@@ -29,7 +29,9 @@ import { TrustCaseContext } from './TrustCaseContext'
 import { TrustFourLensesLesson } from './TrustFourLensesLesson'
 import { TrustEvalAnatomy } from './TrustEvalAnatomy'
 import { TrustEvalConfigExample } from './TrustEvalConfigExample'
+import { TrustCriterionCarry } from './TrustCriterionCarry'
 import { TrustEvalLoopStepper } from './TrustEvalLoopStepper'
+import { TrustEvalPlan } from './TrustEvalPlan'
 import { TrustGoldenSet } from './TrustGoldenSet'
 import { TrustGraderMatrix } from './TrustGraderMatrix'
 import { TrustGoDeeper } from './TrustGoDeeper'
@@ -50,7 +52,7 @@ import { TrustTraceDiagram } from './TrustTraceDiagram'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
 import { usePresentationMode } from './usePresentationMode'
-import { useTrustProgress } from './useTrustProgress'
+import { evalPlanComplete, useTrustProgress } from './useTrustProgress'
 
 export function TrustLearnClient({ slug, embedded = false }: { slug: string; embedded?: boolean }) {
   const chapter = getTrustChapter(slug)
@@ -172,6 +174,14 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
             <TrustSection kind="read" title="Who or what grades each case?">
               <TrustGraderMatrix showOwners={present} />
             </TrustSection>
+            <TrustSection kind="practice" title="Give your own criterion a grader">
+              <TrustCriterionCarry
+                criterion={progress.needToSee}
+                criterionRole={getTrustRole(progress.needToSeeRole ?? progress.role)}
+                grader={progress.criterionGrader}
+                onPickGrader={(criterionGrader) => update({ criterionGrader })}
+              />
+            </TrustSection>
             <TrustSection kind="read" title="Evals are a loop, not a launch gate">
               <TrustEvalLoopStepper showOwners={present} />
             </TrustSection>
@@ -267,21 +277,23 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                 value={progress.transferVote}
                 onChange={(transferVote) => {
                   update({ transferVote })
-                  if (progress.exitTicket.trim()) markChapterComplete('transfer')
+                  if (evalPlanComplete(progress.evalPlan)) markChapterComplete('transfer')
                 }}
               />
             </TrustSection>
-            <TrustSection kind="practice" title="Leave one sentence you can defend">
-              <ExitTicket
-                value={progress.exitTicket}
-                onChange={(exitTicket) => {
-                  update({ exitTicket })
-                  if (exitTicket.trim() && progress.transferVote) markChapterComplete('transfer')
+            <TrustSection kind="practice" title="Write the evaluation plan you would bring">
+              <TrustEvalPlan
+                plan={progress.evalPlan}
+                onChange={(patch) => {
+                  const evalPlan = { ...progress.evalPlan, ...patch }
+                  update({ evalPlan })
+                  if (evalPlanComplete(evalPlan) && progress.transferVote) markChapterComplete('transfer')
                 }}
               />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="Score the system, teach the other seat, then the one rule to carry out.">
+              <TrustGoDeeper hint="Leave a closing sentence, score the system, teach the other seat, then the one rule to carry out.">
+                <ExitTicket value={progress.exitTicket} onChange={(exitTicket) => update({ exitTicket })} />
                 <TransferRubric
                   rubric={progress.rubric}
                   onScore={(key: TrustRubricKey, score: TrustRubricScore) => {

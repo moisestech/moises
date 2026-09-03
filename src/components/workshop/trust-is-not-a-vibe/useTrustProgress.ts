@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from 'react'
 import type {
   TrustChapterId,
   TrustControlId,
+  TrustEvalStageId,
+  TrustGraderId,
   TrustLoopStage,
   TrustRoleId,
   TrustRubricKey,
@@ -14,6 +16,9 @@ import type {
 export const TRUST_PROGRESS_KEY = 'trust-is-not-a-vibe:v1'
 
 export type TrustRubric = Record<TrustRubricKey, TrustRubricScore | null>
+
+/** The five fields of the plan a learner leaves Transfer with. */
+export type TrustEvalPlan = Record<TrustEvalStageId, string>
 
 export type TrustProgress = {
   role: TrustRoleId | null
@@ -28,11 +33,22 @@ export type TrustProgress = {
   controlMatches: Partial<Record<string, TrustControlId>>
   teamVerdict: TrustVerdict | null
   safeguard: string
+  /** Which grader the learner assigned to their own Four Lenses criterion. */
+  criterionGrader: TrustGraderId | null
   transferVote: TrustVerdict | null
+  evalPlan: TrustEvalPlan
   teachBack: string
   rubric: TrustRubric
   exitTicket: string
   completedChapters: TrustChapterId[]
+}
+
+const EMPTY_EVAL_PLAN: TrustEvalPlan = {
+  cases: '',
+  criteria: '',
+  graders: '',
+  evidence: '',
+  decision: '',
 }
 
 const EMPTY_RUBRIC: TrustRubric = {
@@ -54,7 +70,9 @@ export const EMPTY_TRUST_PROGRESS: TrustProgress = {
   controlMatches: {},
   teamVerdict: null,
   safeguard: '',
+  criterionGrader: null,
   transferVote: null,
+  evalPlan: EMPTY_EVAL_PLAN,
   teachBack: '',
   rubric: EMPTY_RUBRIC,
   exitTicket: '',
@@ -80,6 +98,7 @@ function parseProgress(raw: string | null): TrustProgress {
       loopPlacements: parsed.loopPlacements ?? {},
       controlMatches: parsed.controlMatches ?? {},
       rubric: { ...EMPTY_RUBRIC, ...parsed.rubric },
+      evalPlan: { ...EMPTY_EVAL_PLAN, ...parsed.evalPlan },
       completedChapters: Array.isArray(parsed.completedChapters) ? parsed.completedChapters : [],
       role: isRoleId(parsed.role) ? parsed.role : null,
       // Notes saved before seats were attributed belong to the seat held at the time.
@@ -137,4 +156,8 @@ export function useTrustProgress() {
 
 export function rubricTotal(rubric: TrustRubric): number {
   return (rubric.evidence ?? 0) + (rubric.authority ?? 0) + (rubric.impact ?? 0) + (rubric.control ?? 0)
+}
+
+export function evalPlanComplete(plan: TrustEvalPlan): boolean {
+  return Object.values(plan).every((field) => field.trim().length > 0)
 }

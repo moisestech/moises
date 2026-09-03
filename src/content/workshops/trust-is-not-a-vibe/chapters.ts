@@ -196,7 +196,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
       '6/8 is an exercise target, not a measured cohort claim.',
       TRUST_ONE_LINE,
     ],
-    checkpoint: 'Judge the unseen case and leave one sentence you can defend.',
+    checkpoint: 'Judge the unseen case and write the five-field evaluation plan.',
     videoClip: {
       title: 'The one thing to remember',
       status: 'pending',
