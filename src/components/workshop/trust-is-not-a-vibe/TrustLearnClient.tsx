@@ -11,6 +11,7 @@ import {
   TRUST_CASE_B,
   TRUST_HARNESS_LINE,
   TRUST_TESTING_LINE,
+  TRUST_TOOL_LANDSCAPE,
   TRUST_VOCAB_SLIDE,
   type TrustControlId,
   type TrustLoopStage,
@@ -27,9 +28,14 @@ import { OutputPeel } from './OutputPeel'
 import { TrustCaseContext } from './TrustCaseContext'
 import { TrustFourLensesLesson } from './TrustFourLensesLesson'
 import { TrustEvalAnatomy } from './TrustEvalAnatomy'
+import { TrustEvalConfigExample } from './TrustEvalConfigExample'
+import { TrustEvalLoopStepper } from './TrustEvalLoopStepper'
+import { TrustGoldenSet } from './TrustGoldenSet'
+import { TrustGraderMatrix } from './TrustGraderMatrix'
 import { TrustGoDeeper } from './TrustGoDeeper'
 import { TrustLooksRightLesson } from './TrustLooksRightLesson'
 import { TrustPresentationBar } from './TrustPresentationBar'
+import { TrustRegressionRun } from './TrustRegressionRun'
 import { TrustScoringApproaches, TrustScoringMethods } from './TrustScoringApproaches'
 import { TrustSeatSection } from './TrustSeatSection'
 import { TransferRubric } from './TransferRubric'
@@ -40,6 +46,7 @@ import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustSection } from './TrustSection'
+import { TrustTraceDiagram } from './TrustTraceDiagram'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
 import { usePresentationMode } from './usePresentationMode'
@@ -156,7 +163,22 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
       case 'the-harness':
         return (
           <div>
-            <TrustSection kind="practice" title="Match a control to each failure" flush>
+            <TrustSection kind="read" title="Where a failure actually happened" flush>
+              <TrustTraceDiagram />
+            </TrustSection>
+            <TrustSection kind="practice" title="Build the set you keep rerunning">
+              <TrustGoldenSet />
+            </TrustSection>
+            <TrustSection kind="read" title="Who or what grades each case?">
+              <TrustGraderMatrix showOwners={present} />
+            </TrustSection>
+            <TrustSection kind="read" title="Evals are a loop, not a launch gate">
+              <TrustEvalLoopStepper showOwners={present} />
+            </TrustSection>
+            <TrustSection kind="read" title="The score went up. Did the system get better?">
+              <TrustRegressionRun />
+            </TrustSection>
+            <TrustSection kind="practice" title="Match a control to each failure">
               <ControlMatch
                 failures={TRUST_CASE_A.failures}
                 matches={progress.controlMatches}
@@ -198,7 +220,7 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                 <TrustTeachingCards cards={EVALS_TEACHING['the-harness']} roleId={progress.role} />
                 <aside className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
                   <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
-                    Engineer toolkit — not required for other seats
+                    Engineering — not required for other seats
                   </p>
                   <ul className="mt-2 space-y-1">
                     {EVALS_ENGINEER_STACK.map((row) => (
@@ -207,9 +229,26 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-2 text-xs text-slate-500">
-                    Treat evals like continuous testing. Do not make Product or Design memorize the stack.
+                  <p className="mt-3 text-xs text-slate-500">
+                    Tools that implement the architecture above. The architecture is the point; any of these can
+                    host it.
                   </p>
+                  <ul className="mt-1.5 space-y-1">
+                    {TRUST_TOOL_LANDSCAPE.map((tool) => (
+                      <li key={tool.name}>
+                        <a
+                          href={tool.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-medium underline-offset-2 hover:underline"
+                        >
+                          {tool.name}
+                        </a>
+                        <span className="text-slate-600 dark:text-slate-400"> — {tool.use}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <TrustEvalConfigExample className="mt-3" />
                 </aside>
                 <TrustInstructorClip chapterId="the-harness" />
               </TrustGoDeeper>
