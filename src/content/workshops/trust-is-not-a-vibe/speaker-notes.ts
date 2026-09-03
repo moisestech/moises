@@ -6,7 +6,7 @@ export const TRUST_SPEAKER_NOTES: readonly TrustSpeakerNote[] = [
     interrupt: 'Wait for the first vote before you peel. Do not rescue the room with the environment card.',
     beats: [
       '0–2: Show only the polished card. Central question: should this AI output be allowed to act? Collect Allow / Ask / Deny. Do not debate yet.',
-      '2–4: State the shared problem. Six-week launch. Synthetic fixture. October 6 is on the card. The calendar is still tentative.',
+      '2–4: State the shared problem. Made-up enrollment card. October 6 is on the card. The calendar is still tentative.',
       '4–7: Teach Evidence, then Authority, then Impact. One example each. Fluent output is not grounded evidence, permission, or acceptable impact.',
       'Close the beat: you saw the answer. Not the system.',
     ],

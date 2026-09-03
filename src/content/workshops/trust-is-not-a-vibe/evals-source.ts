@@ -264,15 +264,78 @@ export const EVALS_TEACHING: Record<TrustChapterId, readonly TrustTeachingCard[]
   ],
 }
 
-export const EVALS_FIELD_VOCAB: readonly { term: string; meaning: string; chapterId: TrustChapterId }[] = [
-  { term: 'Vibe eval', meaning: 'Watching it succeed once and calling that proof.', chapterId: 'looks-right' },
-  { term: 'Eval', meaning: 'A repeatable score for this agent, on this task, with this data.', chapterId: 'the-loop' },
-  { term: 'Benchmark', meaning: 'A generic model test. Useful for picking a starting model, not for proving your system.', chapterId: 'seeded-failures' },
-  { term: 'Golden dataset', meaning: 'Five to twenty of your cases — common, edge, and every failure already seen.', chapterId: 'the-harness' },
-  { term: 'Faithfulness', meaning: 'True and backed by sources. The hallucination check. Also called groundedness.', chapterId: 'the-loop' },
-  { term: 'LLM-as-judge', meaning: 'A strong model grades against your rubric. Calibrate it on a human sample first.', chapterId: 'the-harness' },
-  { term: 'Baseline', meaning: 'The number you get before you start improving. Without it, “better” is a vibe.', chapterId: 'the-harness' },
-  { term: 'Whac-a-mole', meaning: 'Fix one failure, another pops. The loop exists because this does not stop.', chapterId: 'the-harness' },
+export const EVALS_FIELD_VOCAB: readonly {
+  term: string
+  meaning: string
+  example: string
+  notThis: string
+  more: string
+  chapterId: TrustChapterId
+}[] = [
+  {
+    term: 'Vibe eval',
+    meaning: 'Watching it succeed once and calling that proof.',
+    example: '“It worked in the demo. Ship it.”',
+    notThis: 'Not a mood. Not “I have a good feeling about this model.”',
+    more: 'One clean run is a story. It is not a score you can rerun tomorrow.',
+    chapterId: 'looks-right',
+  },
+  {
+    term: 'Eval',
+    meaning: 'A repeatable score for this agent, on this task, with this data.',
+    example: '“On our 12 enrollment cases, the send still fails the permission check.”',
+    notThis: 'Not a leaderboard. Not “GPT-5 scored 92 somewhere.”',
+    more: 'If you cannot run it again on the same cases, it is not an eval.',
+    chapterId: 'the-loop',
+  },
+  {
+    term: 'Benchmark',
+    meaning: 'A generic model test. Useful for picking a starting model, not for proving your system.',
+    example: '“This model is strong on MMLU” — and still invents a launch date.',
+    notThis: 'Not proof your agent is safe to act.',
+    more: 'A benchmark grades a model in the abstract. An eval grades this agent, here.',
+    chapterId: 'seeded-failures',
+  },
+  {
+    term: 'Golden dataset',
+    meaning: 'Five to twenty of your cases — common, edge, and every failure already seen.',
+    example: 'The roster-mismatch card. The draft-only send. The invented forecast.',
+    notThis: 'Not a thousand random prompts. Not “whatever the model feels like today.”',
+    more: 'Start with the failures you already know. That set is the harness, not a vibe.',
+    chapterId: 'the-harness',
+  },
+  {
+    term: 'Faithfulness',
+    meaning: 'True and backed by sources. The hallucination check. Also called groundedness.',
+    example: '“October 6 is confirmed” — but the calendar still says tentative.',
+    notThis: 'Not “it sounds confident.” Not fluency.',
+    more: 'If the card cannot point to a source, the claim is decoration.',
+    chapterId: 'the-loop',
+  },
+  {
+    term: 'LLM-as-judge',
+    meaning: 'A strong model grades against your rubric. Calibrate it on a human sample first.',
+    example: 'A second model scores “may it send?” after you grade twenty cards by hand.',
+    notThis: 'Not “ask ChatGPT if this looks good.”',
+    more: 'The judge is only as honest as the human sample you checked it against.',
+    chapterId: 'the-harness',
+  },
+  {
+    term: 'Baseline',
+    meaning: 'The number you get before you start improving. Without it, “better” is a vibe.',
+    example: 'First vote: Allow. After the peel: Deny. That change is the lesson.',
+    notThis: 'Not the score you hope to publish.',
+    more: 'Write the first number down. Otherwise every later run is theater.',
+    chapterId: 'the-harness',
+  },
+  {
+    term: 'Whac-a-mole',
+    meaning: 'Fix one failure, another pops. The loop exists because this does not stop.',
+    example: 'You block the invented date. The roster count is still wrong.',
+    notThis: 'Not a one-time cleanup. Not “we patched it, we are done.”',
+    more: 'A provider can change the model under you overnight. The loop is the point.',
+    chapterId: 'the-harness',
+  },
 ]
 
 export const EVALS_ENGINEER_STACK = [

@@ -1,14 +1,31 @@
 import type { TrustCase, TrustControl, TrustLoopNode } from './types'
 
+/** Learner-facing name for Case A. Internal id stays `case-a`. */
+export const TRUST_CASE_A_LEARNER_NAME = 'Enrollment decision'
+
+export const TRUST_CASE_A_INTRO =
+  'This is a made-up enrollment card. An AI wants to confirm October 6, email 120 people, and automatically remove participants it calls quiet. Nothing has been sent or changed. You decide whether it may act.'
+
+export const TRUST_CASE_A_CARD_NOTE = 'Made-up case. Nothing has been sent or changed.'
+
+export const TRUST_LOOKS_RIGHT_FRAME = {
+  where: '1 of 6 · Looks Right',
+  goal: 'Goal: make your first decision before inspecting how the system worked.',
+  doNow: 'Read the card. Vote Allow, Ask, or Deny.',
+  doneBefore: 'Done when your first vote is saved.',
+  doneAfter:
+    'Your vote is saved. Now open the system and compare your first impression with what the card left out.',
+} as const
+
 export const TRUST_CASE_A: TrustCase = {
   id: 'case-a',
-  title: 'Six-week program-launch agent',
-  domain: 'Institutional six-week program launch',
+  title: 'The send',
+  domain: 'A made-up enrollment card — an AI wants to announce a start date and email participants',
   fixtureNote:
-    'Synthetic teaching fixture. Not a live program system, not a client dashboard, and not a production quality claim.',
+    'Invented for this 30-minute lesson. Not a live program, not a client dashboard, and not a quality claim.',
   output: {
-    headline: 'The six-week cohort is confirmed for October 6. Messages are queued. Low-engagement participants will be removed.',
-    confidence: 'High confidence · looks production-ready',
+    headline: 'The cohort is confirmed for October 6. Messages are queued. Quiet participants will be removed.',
+    confidence: 'High confidence · looks finished',
     claims: [
       { label: 'Launch date', value: 'October 6 · confirmed' },
       { label: 'Messages ready', value: '120 participant messages' },

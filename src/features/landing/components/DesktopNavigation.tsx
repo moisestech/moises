@@ -12,6 +12,7 @@ import {
   WORKSHOP_NAV_SITE,
   isWorkshopProgramLinkActive,
 } from '@/config/site-navigation';
+import { TRUST_BASE, TRUST_TITLE } from '@/content/workshops/trust-is-not-a-vibe';
 import { cn } from '@/lib/utils';
 
 interface MenuItem {
@@ -26,18 +27,26 @@ interface DesktopNavigationProps {
   onDropdownOpen?: (open: boolean) => void;
   /** Replaces exhibition mega-nav with compact workshop links */
   workshopMode?: boolean;
+  /** Trust lab: title only; programs menu stays closed until asked. */
+  trustFocus?: boolean;
 }
 
 export default function DesktopNavigation({
   menuItems: _menuItems,
   onDropdownOpen,
   workshopMode,
+  trustFocus,
 }: DesktopNavigationProps) {
   const { theme } = useTheme();
   const { toast } = useToast();
   const pathname = usePathname();
   const isDark = theme === 'dark';
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [programsOpen, setProgramsOpen] = useState(false);
+
+  useEffect(() => {
+    setProgramsOpen(false);
+  }, [pathname]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Check if current path is related to exhibitions/events
@@ -108,7 +117,7 @@ export default function DesktopNavigation({
             : 'border-transparent text-black/80 hover:border-black hover:text-black',
       );
 
-    return (
+    const programs = (
       <HorizontalOverflowNav
         ariaLabel="Workshop programs"
         activeKey={pathname ?? ''}
@@ -159,6 +168,38 @@ export default function DesktopNavigation({
         })}
       </HorizontalOverflowNav>
     );
+
+    if (trustFocus) {
+      return (
+        <div className="relative z-50 flex w-full min-w-0 flex-col gap-3">
+          <div className="flex items-center justify-between gap-4">
+            <Link
+              href={TRUST_BASE}
+              className={cn(
+                'shrink-0 text-lg font-bold tracking-tight lg:text-xl',
+                isDark ? 'text-white' : 'text-black',
+              )}
+            >
+              {TRUST_TITLE}
+            </Link>
+            <button
+              type="button"
+              aria-expanded={programsOpen}
+              onClick={() => setProgramsOpen((open) => !open)}
+              className={cn(
+                'shrink-0 text-sm font-medium underline-offset-4 hover:underline',
+                isDark ? 'text-white/70 hover:text-white' : 'text-black/60 hover:text-black',
+              )}
+            >
+              {programsOpen ? 'Hide programs' : 'All programs'}
+            </button>
+          </div>
+          {programsOpen ? programs : null}
+        </div>
+      );
+    }
+
+    return programs;
   }
 
   return (

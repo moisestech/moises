@@ -26,13 +26,18 @@ export function FailureTokens({
       <TrustPlaceholderFrame asset="failureTokens" compact />
       <TrustMissingStillNote asset="failureTokens" />
       {!revealed ? (
-        <button
-          type="button"
-          onClick={onReveal}
-          className="inline-flex items-center rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white dark:bg-cyan-500 dark:text-stone-950"
-        >
-          Reveal the seeded failures
-        </button>
+        <div className="space-y-3">
+          <p className="max-w-3xl text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+            Reveal opens the six planted breaks. Then tap at least three that are not “it hallucinated.”
+          </p>
+          <button
+            type="button"
+            onClick={onReveal}
+            className="inline-flex items-center rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white dark:bg-cyan-500 dark:text-stone-950"
+          >
+            Reveal the six planted breaks
+          </button>
+        </div>
       ) : (
         <>
           <p className="text-sm text-stone-600 dark:text-stone-400">

@@ -82,41 +82,16 @@ export function TrustPlaceholderFrame({
             : 'border-stone-200 bg-white/90 text-stone-500 dark:border-stone-700 dark:bg-stone-900/90'
         )}
       >
-        {item.alt}
+        {item.quote ? (
+          <>
+            <p className="text-sm font-medium italic text-stone-800 dark:text-stone-100">“{item.quote.text}”</p>
+            <p className="mt-1 text-[11px] uppercase tracking-wide text-stone-500">— {item.quote.attribution}</p>
+          </>
+        ) : (
+          item.alt
+        )}
       </figcaption>
     </figure>
   )
 }
 
-export function TrustInstructorClip({
-  title,
-  durationHint,
-  sourceNote,
-}: {
-  title: string
-  durationHint: string
-  sourceNote: string
-}) {
-  const item = TRUST_PLACEHOLDERS.instructorClips
-  return (
-    <aside className="rounded-xl border border-dashed border-amber-400/80 bg-amber-50/40 p-4 dark:border-amber-500/60 dark:bg-amber-950/20">
-      <TrustMissingStillBadge status={item.status} filename={item.surfaceFilename} />
-      <h3 className="mt-2 text-sm font-semibold text-stone-900 dark:text-stone-100">{title}</h3>
-      <p className="mt-1 text-xs text-stone-500">
-        Instructor clip · {durationHint} · {TRUST_STATUS_LABEL[item.status]}
-      </p>
-      <div
-        className={cn(
-          'mt-3 flex aspect-video flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-amber-400/70 text-xs text-amber-900 dark:border-amber-500/50 dark:text-amber-100',
-          TRUST_MISSING_HATCH
-        )}
-        role="img"
-        aria-label={item.alt}
-      >
-        <TrustMark id="ask" className="h-8 w-8" />
-        <span>Poster / recording missing</span>
-      </div>
-      <p className="mt-2 text-xs text-stone-500">{sourceNote}</p>
-    </aside>
-  )
-}

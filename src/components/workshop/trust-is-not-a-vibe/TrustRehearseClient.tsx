@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {
   EVALS_SOURCE,
   EVALS_TRANSLATION,
+  getTrustChapterPath,
   getTrustSpeakerNote,
   TRUST_BASE,
   TRUST_CHAPTERS,
@@ -100,6 +101,7 @@ export function TrustRehearseClient() {
         <ol className="mt-10 space-y-6">
           {TRUST_CHAPTERS.map((chapter) => {
             const notes = getTrustSpeakerNote(chapter.id)
+            const path = getTrustChapterPath(chapter.id)
             const active = previewSlug === chapter.slug
             return (
               <li
@@ -120,6 +122,24 @@ export function TrustRehearseClient() {
                   </h2>
                   <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">{chapter.summary}</p>
                 </button>
+                <dl className="mt-3 grid gap-2 text-xs text-stone-600 sm:grid-cols-2 dark:text-stone-400">
+                  <div>
+                    <dt className="font-semibold uppercase tracking-wide text-stone-500">Advance when</dt>
+                    <dd className="mt-0.5">{path.advanceWhen}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold uppercase tracking-wide text-stone-500">Likely misconception</dt>
+                    <dd className="mt-0.5">{path.misconception}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold uppercase tracking-wide text-stone-500">Expected response</dt>
+                    <dd className="mt-0.5">{path.expectedResponse}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold uppercase tracking-wide text-stone-500">Follow-up probe</dt>
+                    <dd className="mt-0.5">{path.probe}</dd>
+                  </div>
+                </dl>
                 {notes?.interrupt ? (
                   <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
                     Interrupt: {notes.interrupt}

@@ -1,13 +1,41 @@
 import type { TrustChapter, TrustChapterId } from './types'
 
 export const TRUST_TITLE = 'Trust Is Not a Vibe'
-export const TRUST_SUBTITLE = 'A 30-minute field lab for evaluating AI before it acts.'
+export const TRUST_SUBTITLE = 'A field lab for evaluating AI before it acts.'
 export { TRUST_SESSION_TITLE, TRUST_CENTRAL_QUESTION } from './types'
 export const TRUST_PROBLEM_NAME = 'Painfully Alone'
 export const TRUST_SECONDARY_LINE = 'No agent is an island.'
 export const TRUST_THESIS = 'The model proposes. The system controls. The team authorizes.'
 export const TRUST_ONE_LINE =
   'You never know an agent works by watching it succeed once. You know by measuring it on your data, again.'
+
+export const TRUST_ISLAND_BEATS = [
+  {
+    id: 'proposes',
+    line: 'The model proposes.',
+    body: 'The agent writes a recommendation. That is a draft, not permission to act.',
+    still: 'peelOpenHero' as const,
+  },
+  {
+    id: 'controls',
+    line: 'The system controls.',
+    body: 'Checks, permissions, and the loop decide what that draft is allowed to touch.',
+    still: 'fullHarness' as const,
+  },
+  {
+    id: 'authorizes',
+    line: 'The team authorizes.',
+    body: 'Someone with a seat says Allow, Ask, or Deny before anything writes, sends, or ships.',
+    still: 'verdictCards' as const,
+  },
+] as const
+
+export const TRUST_ALONE_SLIDES = [
+  { asset: 'peelOpenHero' as const, goalIndex: 0 },
+  { asset: 'simpleLoop' as const, goalIndex: 1 },
+  { asset: 'verdictCards' as const, goalIndex: 2 },
+  { asset: 'roleLensCards' as const, goalIndex: 3 },
+] as const
 
 export const TRUST_CHAPTERS: readonly TrustChapter[] = [
   {
@@ -46,7 +74,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     durationHint: '~5 min',
     title: 'Four Lenses',
     summary:
-      'Pick Product, Engineering, Design, or Strategy. The case stays the same. The questions change. You are now part of the harness.',
+      'Same card — The send. Pick the job you will keep. Write one thing that job must see before this send may go out.',
     objectives: [
       'Choose one seat and stay with it for the rest of the lab.',
       'Write one thing that seat would need to see before the agent may act.',
@@ -74,7 +102,7 @@ export const TRUST_CHAPTERS: readonly TrustChapter[] = [
     durationHint: '~5 min',
     title: 'Seeded Failures',
     summary:
-      'Six failures were already in the case. Reveal them, name at least three, and vote again. A correct-looking answer can still come from an unsafe process.',
+      'Six problems were planted in The send — calendar, roster, 87%, send permission, auto-removal, and the missing pause. Reveal them. Name three. Vote again.',
     objectives: [
       'Identify at least three seeded failures beyond “hallucination.”',
       'Re-vote after seeing Evidence, Authority, and Impact.',
@@ -225,9 +253,14 @@ export const TRUST_OUTCOMES = [
   },
 ] as const
 
+export const TRUST_FOUR_SEATS_LEAD =
+  'Four people inspect one recommendation. The case does not change when the seat does.'
+
+export const TRUST_FOUR_SEATS_BODY =
+  'The object is The send: an invented card that wants to confirm October 6, email 120 people, and auto-remove quiet participants. Product, Engineering, Design, and Strategy each ask a different question of that same card. Pick one job and keep it. You can change it later — the section stays here.'
+
 export const TRUST_QUICK_FACTS = [
-  { label: 'Length', value: '30 minutes' },
   { label: 'Seats', value: 'PM · Eng · Design · Strategy' },
   { label: 'Mode', value: 'Self-guided or facilitated' },
-  { label: 'Cases', value: 'Two synthetic fixtures' },
+  { label: 'Cases', value: 'Two cases' },
 ] as const

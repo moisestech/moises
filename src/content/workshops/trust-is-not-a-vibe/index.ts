@@ -1,4 +1,5 @@
 export {
+  isTrustLabPath,
   TRUST_BASE,
   TRUST_CENTRAL_QUESTION,
   TRUST_DECISION_CARD_HREF,
@@ -7,6 +8,7 @@ export {
   TRUST_SESSION_TITLE,
   TRUST_SLUG,
   TRUST_SURFACES_HREF,
+  TRUST_FIXTURE_LABEL,
 } from './types'
 export type {
   TrustCase,
@@ -30,8 +32,36 @@ export type {
   TrustVerdict,
 } from './types'
 
-export { TRUST_DEMO_SURFACES, TRUST_PLACEHOLDERS, trustPlaceholderEntries, trustStillsNeeded } from './placeholders'
-export type { TrustPlaceholder, TrustPlaceholderKey, TrustPlaceholderStatus } from './placeholders'
+export {
+  TRUST_CHAPTER_BANNER,
+  TRUST_DEMO_SURFACES,
+  TRUST_PLACEHOLDERS,
+  trustBannerCopyForPath,
+  trustBannerForPath,
+  trustIncompleteRequired,
+  trustOptionalStills,
+  trustPlaceholderEntries,
+  trustStillsNeeded,
+} from './placeholders'
+export type {
+  TrustAssetKind,
+  TrustBannerCopy,
+  TrustPlaceholder,
+  TrustPlaceholderKey,
+  TrustPlaceholderStatus,
+} from './placeholders'
+
+export {
+  getTrustInstructorClip,
+  TRUST_INSTRUCTOR_CLIPS,
+  TRUST_MEDIA_DIR,
+  trustClipIsComplete,
+  trustInstructorGroupStatus,
+} from './instructor-clips'
+export type { TrustClipMediaStatus, TrustInstructorClipRecord } from './instructor-clips'
+
+export { getTrustChapterPath, TRUST_CHAPTER_PATH } from './chapter-path'
+export type { TrustChapterPath } from './chapter-path'
 
 export { getLiveBeatAtElapsed, TRUST_LIVE_BEATS, TRUST_LIVE_CUE_MINUTES } from './live-beats'
 
@@ -39,7 +69,11 @@ export { getTrustRole, TRUST_COMBINED_STRATEGY_DESIGN, TRUST_ROLES } from './rol
 
 export {
   TRUST_CASE_A,
+  TRUST_CASE_A_CARD_NOTE,
+  TRUST_CASE_A_INTRO,
+  TRUST_CASE_A_LEARNER_NAME,
   TRUST_CASE_B,
+  TRUST_LOOKS_RIGHT_FRAME,
   TRUST_CONTROLS,
   TRUST_HARNESS_LINE,
   TRUST_LOOP,
@@ -61,6 +95,10 @@ export {
   getTrustChapterIndex,
   TRUST_CHAPTER_SLUGS,
   TRUST_CHAPTERS,
+  TRUST_ALONE_SLIDES,
+  TRUST_FOUR_SEATS_BODY,
+  TRUST_FOUR_SEATS_LEAD,
+  TRUST_ISLAND_BEATS,
   TRUST_ONE_LINE,
   TRUST_OUTCOMES,
   TRUST_PROBLEM_NAME,
