@@ -6,6 +6,12 @@ export const TRUST_SURFACES_HREF = `${TRUST_REHEARSE_HREF}/surfaces` as const
 export const TRUST_DECISION_CARD_HREF = `${TRUST_REHEARSE_HREF}/decision-card` as const
 export const TRUST_SESSION_TITLE = 'Before the Agent Acts' as const
 export const TRUST_CENTRAL_QUESTION = 'Should this AI output be allowed to act?' as const
+export const TRUST_FIXTURE_LABEL = 'Synthetic teaching fixture' as const
+
+export function isTrustLabPath(pathname: string | null | undefined): boolean {
+  if (!pathname) return false
+  return pathname === TRUST_BASE || pathname.startsWith(`${TRUST_BASE}/`)
+}
 
 export type TrustLayerId = 'evidence' | 'authority' | 'impact'
 export type TrustFailureMarkId =
@@ -55,6 +61,10 @@ export type TrustRole = {
   shortLabel: string
   primaryQuestions: readonly string[]
   blindSpot: string
+  watchesFor: string
+  onThisCase: string
+  learnerJob: string
+  exampleNeedToSee: string
   chapterHighlight: string
   inspectPrompts: readonly string[]
   needToSeePrompt: string

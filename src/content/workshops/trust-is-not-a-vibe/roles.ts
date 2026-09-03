@@ -10,6 +10,11 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'What is acceptable?',
       'What failure is intolerable?',
     ],
+    watchesFor: 'The outcome, what “good” means, and which failure is intolerable.',
+    onThisCase:
+      'Is October 6 a launch you would actually ship, or a date that looks decisive? Does 87% change a decision, or only decorate the card?',
+    learnerJob: 'What outcome must be true before this can be released?',
+    exampleNeedToSee: 'A calendar row that says confirmed — not the card saying it.',
     blindSpot: 'Optimizing for a compelling demo.',
     chapterHighlight:
       'Write one acceptance line and one intolerable line before the agent may act. Those two lines are seeds for the golden set — they define what good means before anyone grades.',
@@ -30,6 +35,11 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'Can it retry, trace, and recover without duplicating a write?',
       'Which checks are code, and which still need a person?',
     ],
+    watchesFor: 'What the agent read, called, and is allowed to change.',
+    onThisCase:
+      'The card wants to send 120 messages and rewrite the roster. What file did it read? Can draft-only permission actually stop the send?',
+    learnerJob: 'Does it have valid evidence, permission, and a safe write boundary?',
+    exampleNeedToSee: 'A trace: which file, which permission, which write would fire.',
     blindSpot: 'Testing only the happy path.',
     chapterHighlight:
       'Trace, permissions, and code-based checks — JSON, tool, latency, cost. After a fix, rerun the same set. That catch is the whole reason the eval loop exists.',
@@ -50,6 +60,11 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'Is uncertainty readable?',
       'Can a person intervene before harm lands?',
     ],
+    watchesFor: 'Who feels the result, and whether a person can stop it in time.',
+    onThisCase:
+      'A quiet participant would be removed without a conversation. Can anyone see that coming and hold the send?',
+    learnerJob: 'Can a person understand, question, and stop what will happen?',
+    exampleNeedToSee: 'A visible Ask state — hold the send without opening a transcript.',
     blindSpot: 'Approval fatigue and misplaced trust.',
     chapterHighlight:
       'The Ask state: make uncertainty visible, and keep a human in the loop. User signals arrive after harm. They cannot be the safety net.',
@@ -70,6 +85,11 @@ export const TRUST_ROLES: readonly TrustRole[] = [
       'Who owns it when it scales?',
       'What does a silent failure cost the institution?',
     ],
+    watchesFor: 'Value versus speed, and who owns a silent miss.',
+    onThisCase:
+      'A faster send is not a better program. If the auto-removal is wrong, who explains it next week?',
+    learnerJob: 'Who owns the decision and its consequences?',
+    exampleNeedToSee: 'A named owner after this room ends — not “the agent handled it.”',
     blindSpot: 'Scaling before proving adoption.',
     chapterHighlight:
       'Ownership and the cost of a silent failure — not just a faster send. Lab scores are not deployed work. Who absorbs the gap?',

@@ -15,7 +15,7 @@ export const TRUST_LIVE_BEATS: readonly TrustLiveBeat[] = [
     endMin: 4,
     title: 'Name the shared problem',
     chapterId: 'looks-right',
-    cue: 'Six-week launch. Synthetic fixture. Restate the decision: may this system act?',
+    cue: 'Made-up enrollment card. Restate the decision: may this system act?',
   },
   {
     id: 'teach-layers',

@@ -10,9 +10,13 @@ export const TRUST_MISSING_HATCH =
 
 export const TRUST_STATUS_LABEL = {
   pending: 'Missing still',
-  css: 'Interface exists · missing still',
+  css: 'Interface exists · optional still',
   svg: 'SVG in place',
   ready: 'Ready',
+  'poster-ready': 'Poster ready · recording pending',
+  'recording-ready': 'Recording ready · captions pending',
+  captioned: 'Captioned',
+  complete: 'Complete',
 } as const
 
 export function trustStillIsMissing(status: TrustPlaceholderStatus) {

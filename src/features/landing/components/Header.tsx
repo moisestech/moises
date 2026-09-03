@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import {
   SITE_HEADER_EXPANDED_HEIGHT_VAR,
   SITE_HEADER_HEIGHT_VAR,
@@ -9,6 +10,7 @@ import {
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/contexts/ThemeContext';
 import { isWorkshopNavContext, navigationItemsForPath } from '@/config/site-navigation';
+import { isTrustLabPath, TRUST_BASE, TRUST_TITLE } from '@/content/workshops/trust-is-not-a-vibe';
 import HeaderControls from './HeaderControls';
 import MobileMenu from './MobileMenu';
 import DesktopNavigation from './DesktopNavigation';
@@ -76,6 +78,7 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
   const isDark = theme === 'dark';
 
   const menuItems = navigationItemsForPath(pathname, 'desktop');
+  const trustFocus = isTrustLabPath(pathname);
 
   return (
     <>
@@ -89,20 +92,28 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
       >
         {/* Fixed Header Controls */}
         {!dropdownOpen && (
-          <div className="hidden md:block absolute right-0 top-[30px] px-10 z-10">
-            <HeaderControls />
+          <div className={`hidden md:block absolute right-0 z-10 px-10 ${trustFocus ? 'top-1/2 -translate-y-1/2' : 'top-[30px]'}`}>
+            <HeaderControls variant={trustFocus ? 'recruiting' : 'default'} />
           </div>
         )}
 
-        <div className={`transition-all duration-300 ${isScrolled ? 'h-[80px]' : 'h-auto'}`}>
+        <div className={`transition-all duration-300 ${isScrolled && !trustFocus ? 'h-[80px]' : 'h-auto'}`}>
           {/* First row */}
           <div className={`transition-transform duration-300 ${
             isScrolled
               ? '-translate-y-full opacity-0 md:h-0 overflow-hidden'
-              : 'translate-y-0 opacity-100'
+              : trustFocus
+                ? 'md:hidden'
+                : 'translate-y-0 opacity-100'
           }`}>
             <div className="max-w-7xl mx-auto px-10 pt-7 flex justify-between items-start">
-              <Logo />
+              {trustFocus ? (
+                <Link href={TRUST_BASE} className="text-lg font-bold tracking-tight">
+                  {TRUST_TITLE}
+                </Link>
+              ) : (
+                <Logo />
+              )}
               
               {/* Mobile Controls */}
               <div className="md:hidden flex items-center gap-3">
@@ -127,11 +138,12 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
           } hidden md:block w-full ${
             isScrolled ? 'fixed top-0 left-0 right-0 border-t' : 'relative'
           }`}>
-            <div className="mx-auto flex min-w-0 max-w-7xl items-center px-11 py-6">
+            <div className={`mx-auto flex min-w-0 max-w-7xl items-center px-11 ${trustFocus ? 'py-4 pr-24' : 'py-6'}`}>
               <DesktopNavigation
                 menuItems={menuItems}
                 onDropdownOpen={setDropdownOpen}
                 workshopMode={isWorkshopNavContext(pathname)}
+                trustFocus={trustFocus}
               />
             </div>
           </div>

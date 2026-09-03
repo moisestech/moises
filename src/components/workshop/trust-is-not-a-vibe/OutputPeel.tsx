@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
-import { TRUST_CENTRAL_QUESTION, type TrustCase } from '@/content/workshops/trust-is-not-a-vibe'
+import { type TrustCase } from '@/content/workshops/trust-is-not-a-vibe'
+import { AgentOutputCard } from './AgentOutputCard'
+import { CaseAStudioStill } from './CaseAStudioStill'
 import { cn } from '@/lib/utils'
 import { TrustMark } from './TrustMarks'
 import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
@@ -12,41 +14,7 @@ const LAYERS = [
   { id: 'impact', label: 'Impact', hint: 'Who feels this?', mark: 'impact' as const },
 ] as const
 
-export function AgentOutputCard({
-  caseData,
-  peeled,
-}: {
-  caseData: TrustCase
-  peeled?: boolean
-}) {
-  return (
-    <article className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm dark:border-stone-700 dark:bg-stone-900">
-      <div className="border-b border-stone-100 bg-stone-50 px-4 py-3 dark:border-stone-800 dark:bg-stone-800/60">
-        <p className="text-[10px] uppercase tracking-[0.18em] text-cyan-600 dark:text-cyan-400">Agent recommendation</p>
-        <h3 className="mt-1 text-lg font-semibold text-stone-950 dark:text-stone-50">{caseData.output.headline}</h3>
-        <p className="mt-1 text-xs text-stone-500">{caseData.output.confidence}</p>
-      </div>
-      <dl className="grid gap-px bg-stone-100 dark:bg-stone-800 sm:grid-cols-2">
-        {caseData.output.claims.map((claim) => (
-          <div key={claim.label} className="bg-white px-4 py-3 dark:bg-stone-900">
-            <dt className="text-[10px] uppercase tracking-wide text-stone-500">{claim.label}</dt>
-            <dd className="mt-0.5 text-sm font-medium text-stone-900 dark:text-stone-100">{claim.value}</dd>
-          </div>
-        ))}
-      </dl>
-      <ul className="space-y-1 border-t border-stone-100 px-4 py-3 text-sm text-stone-600 dark:border-stone-800 dark:text-stone-400">
-        {caseData.output.proposedActions.map((action) => (
-          <li key={action}>→ {action}</li>
-        ))}
-      </ul>
-      {peeled ? (
-        <p className="border-t border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-          Looks right. {TRUST_CENTRAL_QUESTION}
-        </p>
-      ) : null}
-    </article>
-  )
-}
+export { AgentOutputCard } from './AgentOutputCard'
 
 export function OutputPeel({
   caseData,
@@ -73,9 +41,14 @@ export function OutputPeel({
 
   return (
     <div className="space-y-4">
+      <p className="max-w-2xl text-base text-stone-700 dark:text-stone-300">
+        This card is invented for the lesson. An AI wrote a recommendation and is asking to act. Judge the ask — not
+        whether the prose looks finished.
+      </p>
+      {caseData.id === 'case-a' ? <CaseAStudioStill /> : null}
       <AgentOutputCard caseData={caseData} peeled={open} />
       {vote}
-      <TrustPlaceholderFrame asset={caseData.id === 'case-a' ? 'caseAOutput' : 'caseBTransfer'} />
+      {caseData.id === 'case-b' ? <TrustPlaceholderFrame asset="caseBTransfer" /> : null}
       {open && caseData.id === 'case-a' ? <TrustPlaceholderFrame asset="caseAEnvironment" /> : null}
       <button
         type="button"
@@ -83,7 +56,7 @@ export function OutputPeel({
         aria-expanded={open}
         className="inline-flex items-center rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-800 hover:bg-stone-50 dark:border-stone-600 dark:bg-stone-900 dark:text-stone-100"
       >
-        {open ? 'Hide the system' : 'Open the box'}
+        {open ? 'Hide the system' : 'Open the system'}
       </button>
       {open ? (
         <div className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900">
