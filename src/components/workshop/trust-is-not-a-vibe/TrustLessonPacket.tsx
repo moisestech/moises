@@ -16,6 +16,7 @@ import { TrustPresentPortions } from './TrustPresentPortions'
 import { useRegisterTrustStep, useTrustPresentation } from './TrustPresentation'
 import { ROLE_ICON } from './TrustSeatSection'
 import { highlightIdeaTerms, IdeaTermsProvider } from './TrustIdeaCopy'
+import { TrustIdeaDiagram } from './TrustIdeaDiagrams'
 import { TrustRoleCheck } from './TrustRoleCheck'
 import { TrustIdeaStill } from './TrustIdeaStill'
 import { TrustTryHint } from './TrustSeatStance'
@@ -281,6 +282,7 @@ export function TrustLessonPacket({
                             {highlightIdeaTerms(paragraph, packetMeta?.ideaTerms ?? [])}
                           </p>
                         ))}
+                      {packetMeta?.ideaDiagram ? <TrustIdeaDiagram id={packetMeta.ideaDiagram} /> : null}
                     </TrustPresentPortions>
                   </IdeaTermsProvider>
                 </div>

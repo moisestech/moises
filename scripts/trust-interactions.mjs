@@ -501,6 +501,10 @@ const browser = await chromium.launch()
     (await page.locator('[data-trust-idea-term]').count()) > 0,
     String(await page.locator('[data-trust-idea-term]').count())
   )
+  check(
+    'The idea includes a teaching diagram',
+    (await page.locator('[data-trust-idea-diagram="prompt-output"]').count()) === 1
+  )
   await page.locator('[data-trust-idea-term]').filter({ hasText: 'the card' }).first().click()
   check(
     'a marked term opens its definition',
@@ -625,16 +629,32 @@ const browser = await chromium.launch()
   const second = await page.locator('[data-trust-portion]').innerText()
   check('the next arrow opens the next idea sentence', /That recommendation/.test(second), second.slice(0, 80))
   check('the announcement stays on The idea', /Step 1 of \d+\. The idea/.test(await announcement(page)))
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(250)
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(300)
+  check(
+    'the last idea portion is the teaching diagram',
+    await page.locator('[data-trust-idea-diagram="prompt-output"]').isVisible()
+  )
+  check('the announcement still stays on The idea', /Step 1 of \d+\. The idea/.test(await announcement(page)))
   await ctx.close()
 }
 
 /* 13. Packet + full specimen must not overflow a phone width. */
 {
-  for (const slug of ['looks-right', 'seeded-failures', 'the-loop', 'the-harness', 'transfer']) {
+  for (const slug of ['looks-right', 'four-lenses', 'seeded-failures', 'the-loop', 'the-harness', 'transfer']) {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } })
     const page = await ctx.newPage()
     await page.goto(`${LEARN}/${slug}`, { waitUntil: 'networkidle' })
     await waitForSteps(page)
+    const ideaOverflow = await page.evaluate(() => {
+      window.scrollTo(1000, 0)
+      const scrolled = window.scrollX
+      window.scrollTo(0, 0)
+      return scrolled
+    })
+    check(`${slug} idea does not scroll sideways at 390`, ideaOverflow === 0, String(ideaOverflow))
     await openPortion(page, 'See it')
     const overflow = await page.evaluate(() => {
       window.scrollTo(1000, 0)
