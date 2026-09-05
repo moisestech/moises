@@ -8,6 +8,8 @@ import {
   type TrustOverviewSectionId,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustCourseMap } from './TrustCourseMap'
+import { TrustGoDeeper } from './TrustGoDeeper'
 import { TrustClockList, TrustVocabGrid } from './TrustLandingInteract'
 import { TrustOverviewSpec, TrustOverviewVerdicts, TrustOverviewWhy } from './TrustOverviewBands'
 import { TrustOverviewContents, TrustOverviewRail } from './TrustOverviewRail'
@@ -59,6 +61,9 @@ function TrustLandingBody() {
 
             <TrustOverviewSection section={SECTION['the-path']}>
               <TrustClockList />
+              <TrustGoDeeper className="mt-6" hint="How the six chapters sit on one eval cycle.">
+                <TrustCourseMap />
+              </TrustGoDeeper>
             </TrustOverviewSection>
 
             <TrustOverviewSection section={SECTION['your-seat']}>

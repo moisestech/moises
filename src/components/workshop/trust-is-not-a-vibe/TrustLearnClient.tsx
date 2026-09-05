@@ -52,7 +52,9 @@ import { TrustTraceDiagram } from './TrustTraceDiagram'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
 import { TrustClaimTrace } from './TrustClaimTrace'
+import { TrustEvalArchitecture } from './TrustEvalArchitecture'
 import { TrustMethodTransfer } from './TrustMethodTransfer'
+import { TrustScoringTree } from './TrustScoringTree'
 import { TrustPresentationProvider, usePresentationMode } from './TrustPresentation'
 import { evalPlanComplete, useTrustProgress } from './useTrustProgress'
 
@@ -153,7 +155,8 @@ function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean })
               />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="Metric names, the agent loop diagram, plain-language vocabulary, and the clip.">
+              <TrustGoDeeper hint="Which check settles which question, metric names, the agent loop diagram, plain-language vocabulary, and the clip.">
+                <TrustScoringTree />
                 <TrustScoringMethods />
                 <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
                 <SimpleLoopSvg />
@@ -225,7 +228,8 @@ function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean })
               />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="Write a safeguard, then golden cases, the four graders, and the toolkit.">
+              <TrustGoDeeper hint="How the whole harness fits together, write a safeguard, then golden cases, the four graders, and the toolkit.">
+                <TrustEvalArchitecture />
                 <label className="block">
                   <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
                     Name one safeguard before this may act

@@ -687,3 +687,59 @@ export const TRUST_METHOD_TRANSFER: readonly { stage: string; caseA: string; cas
 
 export const TRUST_METHOD_TRANSFER_LINE =
   'New card, same job. The domain changed; the five questions did not.'
+
+/* --------------------------------------------------------- seat coverage --- */
+
+/**
+ * Which seat notices which planted failure first, derived from each role's own
+ * directive rather than assigned arbitrarily.
+ *
+ * The interesting result is the gap: auto-removal is caught by neither Product
+ * nor Engineering, so a room of only those two ships it.
+ */
+export const TRUST_SEAT_COVERAGE: readonly {
+  failureId: string
+  label: string
+  seats: readonly TrustRoleId[]
+  because: string
+}[] = [
+  {
+    failureId: 'unsupported-date',
+    label: 'Unsupported launch date',
+    seats: ['pm', 'engineering', 'strategy'],
+    because: 'It breaks the outcome, has no source, and commits the org publicly.',
+  },
+  {
+    failureId: 'roster-mismatch',
+    label: 'Roster does not match the send',
+    seats: ['pm', 'engineering'],
+    because: 'A counting error against the acceptance threshold.',
+  },
+  {
+    failureId: 'fabricated-forecast',
+    label: 'Fabricated completion forecast',
+    seats: ['pm', 'engineering', 'design'],
+    because: 'No source behind it, and it presents certainty the system does not have.',
+  },
+  {
+    failureId: 'draft-only-send',
+    label: 'Send exceeds draft-only permission',
+    seats: ['engineering', 'strategy'],
+    because: 'A permission boundary, and an exposure with an owner.',
+  },
+  {
+    failureId: 'auto-remove-harm',
+    label: 'Auto-removal without a person',
+    seats: ['design', 'strategy'],
+    because: 'Consequence to a person, and risk nobody has accepted.',
+  },
+  {
+    failureId: 'no-escalation',
+    label: 'No escalation before the write',
+    seats: ['engineering', 'design', 'strategy'],
+    because: 'No recovery path, no intervention point, no named owner.',
+  },
+]
+
+export const TRUST_SEAT_COVERAGE_LINE =
+  'Remove Design and Strategy from the room and the auto-removal goes unnoticed.'

@@ -33,32 +33,45 @@ function path(from: TrustPoint, to: TrustPoint, kind: 'straight' | 'elbow' | 'cu
 export function TrustEdge({
   from,
   to,
+  points,
   kind = 'straight',
   bow = 24,
   label,
+  labelAt,
   dashed,
   arrow = true,
   className,
 }: {
   from: TrustPoint
   to: TrustPoint
+  /**
+   * Explicit waypoints between `from` and `to`. Needed for return edges that
+   * have to route around the outside of the diagram; a two-point curve or a
+   * midpoint elbow would cut straight through the nodes in between.
+   */
+  points?: TrustPoint[]
   kind?: 'straight' | 'elbow' | 'curve'
   /** Perpendicular offset for `curve`, in viewBox units. */
   bow?: number
   label?: string
+  /** Overrides the midpoint, which is wrong for routed and bowed edges. */
+  labelAt?: TrustPoint
   /** Weaker or provisional relationships. */
   dashed?: boolean
   arrow?: boolean
   className?: string
 }) {
   const ids = useTrustDiagramIds()
-  const midX = (from.x + to.x) / 2
-  const midY = (from.y + to.y) / 2
+  const midX = labelAt?.x ?? (from.x + to.x) / 2
+  const midY = labelAt?.y ?? (from.y + to.y) / 2
+  const d = points?.length
+    ? [from, ...points, to].map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`).join(' ')
+    : path(from, to, kind, bow)
 
   return (
     <g className={className}>
       <path
-        d={path(from, to, kind, bow)}
+        d={d}
         fill="none"
         className={TRUST_DIAGRAM_EDGE}
         strokeWidth="2"
@@ -68,7 +81,7 @@ export function TrustEdge({
       {label ? (
         <text
           x={midX}
-          y={midY - 6}
+          y={labelAt ? midY : midY - 6}
           textAnchor="middle"
           className={cn(TRUST_DIAGRAM_SUB, TRUST_DIAGRAM_HALO, 'text-[10px]')}
           strokeWidth="3"
