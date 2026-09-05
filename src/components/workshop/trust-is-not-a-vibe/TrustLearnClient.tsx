@@ -51,6 +51,8 @@ import { TrustSection } from './TrustSection'
 import { TrustTraceDiagram } from './TrustTraceDiagram'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
+import { TrustClaimTrace } from './TrustClaimTrace'
+import { TrustMethodTransfer } from './TrustMethodTransfer'
 import { TrustPresentationProvider, usePresentationMode } from './TrustPresentation'
 import { evalPlanComplete, useTrustProgress } from './useTrustProgress'
 
@@ -88,11 +90,7 @@ function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean })
         return (
           <div>
             <TrustSection kind="inspect" title="What was planted in The send" flush>
-              <p className={cn(trust.body, 'mb-4 max-w-3xl')}>
-                These are not a new case. They were already in the card you voted on: the date against the calendar, 120
-                messages against an 80-person roster, an 87% with no history, a send the agent is not allowed to make, a
-                removal with no person, and no pause before the write.
-              </p>
+              <TrustClaimTrace className="mb-6" />
               <FailureTokens
                 failures={TRUST_CASE_A.failures}
                 selected={progress.namedFailures}
@@ -283,6 +281,7 @@ function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean })
           <div>
             <TrustSection kind="inspect" title="Open the transfer card" flush>
               <OutputPeel caseData={TRUST_CASE_B} />
+              <TrustMethodTransfer className="mt-6" />
             </TrustSection>
             <TrustSection kind="vote" title="Unseen case — Allow, Ask, or Deny?">
               <TrustVote

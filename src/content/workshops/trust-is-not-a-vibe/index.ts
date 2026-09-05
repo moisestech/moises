@@ -93,9 +93,13 @@ export {
 } from './cases'
 
 export {
+  TRUST_CLAIM_TRACE,
+  TRUST_CLAIM_TRACE_LINE,
   TRUST_EVAL_ANATOMY,
   TRUST_EVAL_DEFINITION,
   TRUST_EVAL_LOOP,
+  TRUST_METHOD_TRANSFER,
+  TRUST_METHOD_TRANSFER_LINE,
   TRUST_GOLDEN_BUCKET_HINT,
   TRUST_GOLDEN_BUCKET_LABEL,
   TRUST_GOLDEN_CASES,
@@ -110,6 +114,7 @@ export {
   TRUST_TESTING_LINE,
   TRUST_TOOL_LANDSCAPE,
   TRUST_TRACE_STEPS,
+  TRUST_TRACE_VERDICT,
 } from './evals'
 export type {
   TrustEvalLoopStage,
@@ -121,6 +126,7 @@ export type {
   TrustGrader,
   TrustGraderId,
   TrustRunResult,
+  TrustTraceVerdict,
   TrustScoringApproach,
   TrustScoringApproachId,
   TrustScoringProbe,
