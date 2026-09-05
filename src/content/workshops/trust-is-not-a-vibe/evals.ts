@@ -592,3 +592,154 @@ export const TRUST_ROLE_CRITERION: Record<TrustRoleId, string> = {
   design: 'The reviewer must understand uncertainty and consequence before approving.',
   strategy: 'The action must have an accountable owner and acceptable risk.',
 }
+
+/* ----------------------------------------------------- claim provenance ---- */
+
+/**
+ * Where did each claim come from?
+ *
+ * `traced` means the record backs the claim, `unsupported` means a record
+ * exists and disagrees, `fabricated` means there is no record at all. On Case A
+ * nothing traces cleanly, which is the point of the chapter.
+ */
+export type TrustTraceVerdict = 'traced' | 'unsupported' | 'fabricated'
+
+export const TRUST_CLAIM_TRACE: readonly {
+  claim: string
+  asserted: string
+  record: string
+  found: string
+  verdict: TrustTraceVerdict
+}[] = [
+  {
+    claim: 'Launch date',
+    asserted: 'October 6 · confirmed',
+    record: 'calendar/oct-6.event → status',
+    found: 'tentative · never confirmed',
+    verdict: 'unsupported',
+  },
+  {
+    claim: 'Messages ready',
+    asserted: '120 participant messages',
+    record: 'roster/participants.csv → rows',
+    found: '80 rows',
+    verdict: 'unsupported',
+  },
+  {
+    claim: 'Expected completion',
+    asserted: '87%',
+    record: 'history/completion_rate',
+    found: 'no prior cohorts recorded',
+    verdict: 'fabricated',
+  },
+  {
+    claim: 'Low engagement',
+    asserted: 'will be removed automatically',
+    record: 'roster write grant · facilitator approval',
+    found: 'draft-only · no approval on file',
+    verdict: 'unsupported',
+  },
+]
+
+export const TRUST_TRACE_VERDICT: Record<TrustTraceVerdict, { label: string; meaning: string }> = {
+  traced: { label: 'Traced', meaning: 'a record backs it' },
+  unsupported: { label: 'Unsupported', meaning: 'a record exists and disagrees' },
+  fabricated: { label: 'Fabricated', meaning: 'no record exists' },
+}
+
+export const TRUST_CLAIM_TRACE_LINE =
+  'Four confident claims. Not one of them traces to a record that agrees.'
+
+/* -------------------------------------------------------- method transfer -- */
+
+/**
+ * The same five-part method on an unseen case. Case B is a different domain
+ * with the same failure profile, so the method carries and only the specifics
+ * change — which is the whole argument of the last chapter.
+ */
+export const TRUST_METHOD_TRANSFER: readonly { stage: string; caseA: string; caseB: string }[] = [
+  {
+    stage: 'cases',
+    caseA: 'Enrollment requests, including every failure already seen.',
+    caseB: 'Intake requests: duplicate waitlist rows, an unsigned release, a minor with no consent.',
+  },
+  {
+    stage: 'criteria',
+    caseA: 'The date must be confirmed by a source. No send beyond draft-only.',
+    caseB: 'Capacity must not exceed the posted limit. No acceptance beyond draft-only.',
+  },
+  {
+    stage: 'graders',
+    caseA: 'Code counts the roster. A person judges whether a removal was fair.',
+    caseB: 'Code de-duplicates rows. A person judges guardian consent.',
+  },
+  {
+    stage: 'evidence',
+    caseA: 'Three failures on evidence, one each on power, impact, and path.',
+    caseB: 'The same profile: three on evidence, one each on power, impact, and path.',
+  },
+  {
+    stage: 'decision',
+    caseA: 'Allow, Ask, or Deny the send, signed by a named owner.',
+    caseB: 'Allow, Ask, or Deny the acceptances, signed by a named owner.',
+  },
+]
+
+export const TRUST_METHOD_TRANSFER_LINE =
+  'New card, same job. The domain changed; the five questions did not.'
+
+/* --------------------------------------------------------- seat coverage --- */
+
+/**
+ * Which seat notices which planted failure first, derived from each role's own
+ * directive rather than assigned arbitrarily.
+ *
+ * The interesting result is the gap: auto-removal is caught by neither Product
+ * nor Engineering, so a room of only those two ships it.
+ */
+export const TRUST_SEAT_COVERAGE: readonly {
+  failureId: string
+  label: string
+  seats: readonly TrustRoleId[]
+  because: string
+}[] = [
+  {
+    failureId: 'unsupported-date',
+    label: 'Unsupported launch date',
+    seats: ['pm', 'engineering', 'strategy'],
+    because: 'It breaks the outcome, has no source, and commits the org publicly.',
+  },
+  {
+    failureId: 'roster-mismatch',
+    label: 'Roster does not match the send',
+    seats: ['pm', 'engineering'],
+    because: 'A counting error against the acceptance threshold.',
+  },
+  {
+    failureId: 'fabricated-forecast',
+    label: 'Fabricated completion forecast',
+    seats: ['pm', 'engineering', 'design'],
+    because: 'No source behind it, and it presents certainty the system does not have.',
+  },
+  {
+    failureId: 'draft-only-send',
+    label: 'Send exceeds draft-only permission',
+    seats: ['engineering', 'strategy'],
+    because: 'A permission boundary, and an exposure with an owner.',
+  },
+  {
+    failureId: 'auto-remove-harm',
+    label: 'Auto-removal without a person',
+    seats: ['design', 'strategy'],
+    because: 'Consequence to a person, and risk nobody has accepted.',
+  },
+  {
+    failureId: 'no-escalation',
+    label: 'No escalation before the write',
+    seats: ['engineering', 'design', 'strategy'],
+    because: 'No recovery path, no intervention point, no named owner.',
+  },
+]
+
+export const TRUST_SEAT_COVERAGE_LINE =
+  'Remove Design and Strategy from the room and the auto-removal goes unnoticed.'

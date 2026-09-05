@@ -8,11 +8,14 @@ import {
   type TrustOverviewSectionId,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustCourseMap } from './TrustCourseMap'
+import { TrustGoDeeper } from './TrustGoDeeper'
 import { TrustClockList, TrustVocabGrid } from './TrustLandingInteract'
 import { TrustOverviewSpec, TrustOverviewVerdicts, TrustOverviewWhy } from './TrustOverviewBands'
 import { TrustOverviewContents, TrustOverviewRail } from './TrustOverviewRail'
 import { TrustOverviewSection } from './TrustOverviewSection'
 import { TrustPresentationBar } from './TrustPresentationBar'
+import { TrustPresentationProvider } from './TrustPresentation'
 import { TrustQuestionBreak } from './TrustQuestionBreak'
 import { TrustSeatStudio } from './TrustSeatSection'
 import { trust } from './trust-tokens'
@@ -23,6 +26,14 @@ const SECTION = Object.fromEntries(TRUST_OVERVIEW_SECTIONS.map((item) => [item.i
 >
 
 export function TrustLandingClient() {
+  return (
+    <TrustPresentationProvider>
+      <TrustLandingBody />
+    </TrustPresentationProvider>
+  )
+}
+
+function TrustLandingBody() {
   return (
     <main className={cn(trust.shell, 'overflow-x-clip pb-20 sm:pb-24')}>
       <div className={trust.main}>
@@ -50,6 +61,9 @@ export function TrustLandingClient() {
 
             <TrustOverviewSection section={SECTION['the-path']}>
               <TrustClockList />
+              <TrustGoDeeper className="mt-6" hint="How the six chapters sit on one eval cycle.">
+                <TrustCourseMap />
+              </TrustGoDeeper>
             </TrustOverviewSection>
 
             <TrustOverviewSection section={SECTION['your-seat']}>

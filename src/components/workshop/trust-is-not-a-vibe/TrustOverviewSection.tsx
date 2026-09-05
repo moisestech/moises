@@ -1,6 +1,9 @@
+'use client'
+
 import type { ReactNode } from 'react'
 import type { TrustOverviewSection as TrustOverviewSectionData } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { useRegisterTrustStep } from './TrustPresentation'
 import { TRUST_SCROLL_MT, trustOverview } from './trust-tokens'
 
 /**
@@ -17,13 +20,21 @@ export function TrustOverviewSection({
   children: ReactNode
   className?: string
 }) {
+  const { ref, current } = useRegisterTrustStep(section.title)
+
   return (
     <section
       id={section.id}
+      ref={ref}
+      tabIndex={-1}
+      data-trust-step
+      data-trust-step-current={current || undefined}
       aria-labelledby={`${section.id}-title`}
       className={cn(
         'border-t border-stone-200 pt-10 first:border-t-0 first:pt-0 sm:pt-14 dark:border-stone-800',
         TRUST_SCROLL_MT,
+        'outline-none motion-safe:transition-[box-shadow,padding]',
+        current && 'rounded-r-lg pl-4 shadow-[inset_3px_0_0_0_theme(colors.cyan.500)]',
         className
       )}
     >

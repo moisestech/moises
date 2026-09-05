@@ -51,10 +51,27 @@ import { TrustSection } from './TrustSection'
 import { TrustTraceDiagram } from './TrustTraceDiagram'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
-import { usePresentationMode } from './usePresentationMode'
+import { TrustClaimTrace } from './TrustClaimTrace'
+import { TrustEvalArchitecture } from './TrustEvalArchitecture'
+import { TrustMethodTransfer } from './TrustMethodTransfer'
+import { TrustScoringTree } from './TrustScoringTree'
+import { TrustPresentationProvider, usePresentationMode } from './TrustPresentation'
 import { evalPlanComplete, useTrustProgress } from './useTrustProgress'
 
 export function TrustLearnClient({ slug, embedded = false }: { slug: string; embedded?: boolean }) {
+  const chapter = getTrustChapter(slug)
+  if (!chapter) return null
+
+  // The body reads the presentation context, so it cannot be the component that
+  // provides it.
+  return (
+    <TrustPresentationProvider slug={chapter.slug} stepping={!embedded}>
+      <TrustLearnBody slug={slug} embedded={embedded} />
+    </TrustPresentationProvider>
+  )
+}
+
+function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean }) {
   const chapter = getTrustChapter(slug)
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
   const { present } = usePresentationMode()
@@ -75,11 +92,7 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
         return (
           <div>
             <TrustSection kind="inspect" title="What was planted in The send" flush>
-              <p className={cn(trust.body, 'mb-4 max-w-3xl')}>
-                These are not a new case. They were already in the card you voted on: the date against the calendar, 120
-                messages against an 80-person roster, an 87% with no history, a send the agent is not allowed to make, a
-                removal with no person, and no pause before the write.
-              </p>
+              <TrustClaimTrace className="mb-6" />
               <FailureTokens
                 failures={TRUST_CASE_A.failures}
                 selected={progress.namedFailures}
@@ -142,7 +155,8 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
               />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="Metric names, the agent loop diagram, plain-language vocabulary, and the clip.">
+              <TrustGoDeeper hint="Which check settles which question, metric names, the agent loop diagram, plain-language vocabulary, and the clip.">
+                <TrustScoringTree />
                 <TrustScoringMethods />
                 <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
                 <SimpleLoopSvg />
@@ -214,7 +228,8 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
               />
             </TrustSection>
             <div className="mt-12">
-              <TrustGoDeeper hint="Write a safeguard, then golden cases, the four graders, and the toolkit.">
+              <TrustGoDeeper hint="How the whole harness fits together, write a safeguard, then golden cases, the four graders, and the toolkit.">
+                <TrustEvalArchitecture />
                 <label className="block">
                   <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
                     Name one safeguard before this may act
@@ -270,6 +285,7 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
           <div>
             <TrustSection kind="inspect" title="Open the transfer card" flush>
               <OutputPeel caseData={TRUST_CASE_B} />
+              <TrustMethodTransfer className="mt-6" />
             </TrustSection>
             <TrustSection kind="vote" title="Unseen case — Allow, Ask, or Deny?">
               <TrustVote

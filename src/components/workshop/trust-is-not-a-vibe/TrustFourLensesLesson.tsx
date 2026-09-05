@@ -12,9 +12,10 @@ import {
 import { cn } from '@/lib/utils'
 import { TrustFourSeatsDiagram } from './TrustFourSeatsDiagram'
 import { TrustInstructorClip } from './TrustInstructorClip'
+import { TrustSeatCoverage } from './TrustSeatCoverage'
 import { TrustLessonPacket } from './TrustLessonPacket'
 import { TrustSeatStance } from './TrustSeatStance'
-import { usePresentationMode } from './usePresentationMode'
+import { usePresentationMode } from './TrustPresentation'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TRUST_ROLE_TONE } from './trust-tokens'
 import { useTrustProgress } from './useTrustProgress'
@@ -149,10 +150,11 @@ export function TrustFourLensesLesson() {
       doneWhen={attributed ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={role} allSeats={present} />}
       announce={announce}
-      deeperHint="How each seat reads the same card, and the clip."
+      deeperHint="How each seat reads the same card, which failures need two seats, and the clip."
       deeper={
         <>
           <TrustTeachingCards cards={TEACHING} roleId={role} />
+          <TrustSeatCoverage />
           <TrustInstructorClip chapterId="four-lenses" />
         </>
       }

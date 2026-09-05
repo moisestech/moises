@@ -14,9 +14,10 @@ import {
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { TrustInstructorClip } from './TrustInstructorClip'
+import { TrustPolishAxis } from './TrustPolishAxis'
 import { TrustLessonPacket } from './TrustLessonPacket'
 import { TrustSeatStance } from './TrustSeatStance'
-import { usePresentationMode } from './usePresentationMode'
+import { usePresentationMode } from './TrustPresentation'
 import { TrustSpecimen } from './TrustSpecimen'
 import { TrustSystemLayers } from './TrustSystemLayers'
 import { TrustTeachingCards } from './TrustTeachingCards'
@@ -183,10 +184,11 @@ export function TrustLooksRightLesson() {
       doneWhen={voted ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={progress.role} allSeats={present} />}
       announce={announce}
-      deeperHint="Why one good run is not proof, and the clip."
+      deeperHint="Why one good run is not proof, polish against evidence, and the clip."
       deeper={
         <>
           <TrustTeachingCards cards={EVALS_TEACHING['looks-right']} roleId={progress.role} />
+          <TrustPolishAxis />
           <TrustInstructorClip chapterId="looks-right" />
         </>
       }
