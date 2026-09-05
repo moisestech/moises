@@ -10,6 +10,7 @@ import {
 import { TRUST_ROLES } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { useTrustPresentation } from './TrustPresentation'
+import { TrustPresentationClock } from './TrustPresentationClock'
 import { trust } from './trust-tokens'
 import { useTrustProgress } from './useTrustProgress'
 
@@ -21,7 +22,8 @@ import { useTrustProgress } from './useTrustProgress'
  * the room's answers between runs, and leaving presentation mode.
  */
 export function TrustPresentationBar({ className }: { className?: string }) {
-  const { present, exit, steps, stepIndex, armed, next, prev, depthOpen, setDepthOpen } = useTrustPresentation()
+  const { present, slug, exit, steps, stepIndex, armed, pending, next, prev, depthOpen, setDepthOpen } =
+    useTrustPresentation()
   const { progress, update, reset } = useTrustProgress()
 
   if (!present) return null
@@ -43,6 +45,8 @@ export function TrustPresentationBar({ className }: { className?: string }) {
       </p>
 
       <p className="text-xs text-stone-600 dark:text-stone-400">{seat ? `Focused on ${seat.label}` : 'All seats'}</p>
+
+      <TrustPresentationClock slug={slug} />
 
       <div className="flex items-center gap-1">
         <button type="button" onClick={prev} className={cn(control, 'px-2')} aria-label="Previous section">

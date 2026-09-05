@@ -1,5 +1,5 @@
 import { TRUST_CHAPTERS } from './chapters'
-import type { TrustChapterId } from './types'
+import type { TrustChapterId, TrustTimeSegmentId } from './types'
 
 /**
  * One source for the course clock. Chapters carry their own `minutes`; the
@@ -13,19 +13,28 @@ import type { TrustChapterId } from './types'
 export const TRUST_OVERVIEW_MINUTES = 2.5
 export const TRUST_BUFFER_MINUTES = 2
 
-export type TrustTimeSegmentId = 'overview' | TrustChapterId | 'buffer'
+export type { TrustTimeSegmentId }
 
 export type TrustTimeSegment = {
   id: TrustTimeSegmentId
   label: string
   minutes: number
+  /** Minutes from the start of the course. Anchors the live facilitation beats. */
+  startMin: number
   /** Running position, e.g. `2:30–6:30`. */
   clock: string
   /** Standalone length, e.g. `4 min 30 s`. */
   durationHint: string
 }
 
-function formatClock(minutes: number): string {
+/**
+ * Minutes as a `m:ss` position on the course clock.
+ *
+ * Exported because the live facilitation beats derive their windows from these
+ * same segments, and half-minute boundaries like 2.5 must not be printed as
+ * "2.5" or zero-padded as a whole number.
+ */
+export function formatTrustClock(minutes: number): string {
   const whole = Math.floor(minutes)
   const seconds = Math.round((minutes - whole) * 60)
   return `${whole}:${String(seconds).padStart(2, '0')}`
@@ -54,7 +63,8 @@ export const TRUST_TIME_SEGMENTS: readonly TrustTimeSegment[] = SEGMENT_SOURCE.r
       id: segment.id,
       label: segment.label,
       minutes: segment.minutes,
-      clock: `${formatClock(start)}–${formatClock(start + segment.minutes)}`,
+      startMin: start,
+      clock: `${formatTrustClock(start)}–${formatTrustClock(start + segment.minutes)}`,
       durationHint: formatDuration(segment.minutes),
     })
     return segments

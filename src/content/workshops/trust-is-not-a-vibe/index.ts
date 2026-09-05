@@ -64,7 +64,12 @@ export type { TrustClipMediaStatus, TrustInstructorClipRecord } from './instruct
 export { getTrustChapterPath, TRUST_CHAPTER_PATH } from './chapter-path'
 export type { TrustChapterPath } from './chapter-path'
 
-export { getLiveBeatAtElapsed, TRUST_LIVE_BEATS, TRUST_LIVE_CUE_MINUTES } from './live-beats'
+export {
+  getLiveBeatAtElapsed,
+  TRUST_INTERRUPT_BEAT,
+  TRUST_LIVE_BEATS,
+  TRUST_LIVE_CUE_MINUTES,
+} from './live-beats'
 
 export {
   getTrustRole,
@@ -167,6 +172,7 @@ export {
 export { getTrustSpeakerNote, TRUST_SPEAKER_NOTES } from './speaker-notes'
 
 export {
+  formatTrustClock,
   TRUST_BUFFER_MINUTES,
   TRUST_CHAPTER_TIME,
   TRUST_OVERVIEW_MINUTES,

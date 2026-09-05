@@ -55,7 +55,7 @@ import { TrustClaimTrace } from './TrustClaimTrace'
 import { TrustEvalArchitecture } from './TrustEvalArchitecture'
 import { TrustMethodTransfer } from './TrustMethodTransfer'
 import { TrustScoringTree } from './TrustScoringTree'
-import { TrustPresentationProvider, usePresentationMode } from './TrustPresentation'
+import { TrustPresentationProvider, usePresentationMode, useTrustPendingReveal } from './TrustPresentation'
 import { evalPlanComplete, useTrustProgress } from './useTrustProgress'
 
 export function TrustLearnClient({ slug, embedded = false }: { slug: string; embedded?: boolean }) {
@@ -80,6 +80,12 @@ function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean })
   useEffect(() => {
     if (progress.namedFailures.length > 0) setFailuresRevealed(true)
   }, [progress.namedFailures.length])
+
+  // Until the reveal, this chapter registers a single section, so the room can
+  // reach "end of chapter" with the whole exercise still hidden.
+  useTrustPendingReveal(
+    chapter?.id === 'seeded-failures' && !failuresRevealed ? 'The six planted failures are still hidden.' : null
+  )
 
   const body = useMemo(() => {
     if (!chapter) return null
