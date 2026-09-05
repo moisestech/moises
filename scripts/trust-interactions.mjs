@@ -320,6 +320,11 @@ const browser = await chromium.launch()
   await page.keyboard.press('ArrowRight')
   await page.waitForTimeout(700)
   check('one section is not enough to step out of the chapter', page.url() === here, page.url())
+  check(
+    'and names the hidden failures instead of a generic end',
+    /planted failures are still hidden/.test(await announcement(page)),
+    await announcement(page)
+  )
   await ctx.close()
 }
 {
@@ -354,6 +359,14 @@ const browser = await chromium.launch()
 
   const counter = bar.locator('p').filter({ hasText: /\d+ \/ \d+/ }).first()
   check('the bar shows a step counter', await counter.isVisible(), (await counter.textContent())?.trim())
+  const startClock = bar.getByRole('button', { name: 'Start clock' })
+  check('the bar offers a start-clock control', await startClock.isVisible())
+  await startClock.click()
+  await page.waitForTimeout(600)
+  check('starting the clock shows elapsed time', await bar.getByText(/^\d+:\d{2}$/).first().isVisible())
+  check('the clock names the current section window', await bar.getByText('The Loop').isVisible())
+  await bar.getByRole('button', { name: /Stop the clock/ }).click()
+  check('stopping the clock returns the start control', await startClock.isVisible())
 
   await bar.getByRole('button', { name: 'Next section' }).click()
   await page.waitForTimeout(500)

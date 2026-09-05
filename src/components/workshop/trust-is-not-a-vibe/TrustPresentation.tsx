@@ -28,6 +28,8 @@ type TrustStep = { id: string; label: string; element: HTMLElement }
 type TrustPresentationValue = {
   present: boolean
   hydrated: boolean
+  /** Chapter slug, or undefined on the overview. Lets the bar price the section against the budget. */
+  slug?: string
   exit: () => void
   /** Whether every Go deeper panel is forced open. */
   depthOpen: boolean
@@ -36,6 +38,12 @@ type TrustPresentationValue = {
   stepIndex: number
   /** At the last step, with a pending press to leave the chapter. */
   armed: boolean
+  /**
+   * What is still hidden on this chapter, when leaving would skip it. Set by the
+   * lesson, because only the lesson knows whether its reveal has happened.
+   */
+  pending: string | null
+  setPending: (hint: string | null) => void
   registerStep: (id: string, label: string, element: HTMLElement | null) => void
   goToStep: (index: number) => void
   next: () => void
@@ -56,6 +64,8 @@ const FALLBACK: TrustPresentationValue = {
   steps: [],
   stepIndex: -1,
   armed: false,
+  pending: null,
+  setPending: () => {},
   registerStep: () => {},
   goToStep: () => {},
   next: () => {},
@@ -108,6 +118,7 @@ export function TrustPresentationProvider({
   const [depthOpen, setDepthOpen] = useState(false)
   const [stepIndex, setStepIndex] = useState(-1)
   const [armed, setArmed] = useState(false)
+  const [pending, setPending] = useState<string | null>(null)
   const [steps, setSteps] = useState<TrustStep[]>([])
   const [announcement, setAnnouncement] = useState('')
 
@@ -209,11 +220,19 @@ export function TrustPresentationProvider({
     */
     if (!armed) {
       setArmed(true)
-      setAnnouncement('End of this chapter. Press again to continue.')
+      // Naming what is still hidden matters more than the warning itself. On
+      // seeded-failures the room can reach the end of the list with the six
+      // failures unrevealed, and "press again to continue" alone would not say
+      // that continuing skips the exercise.
+      setAnnouncement(
+        pending
+          ? `${pending} Press again to leave this chapter anyway.`
+          : 'End of this chapter. Press again to continue.'
+      )
       return
     }
     leaveChapter()
-  }, [armed, goToStep, leaveChapter, stepIndex, steps.length])
+  }, [armed, goToStep, leaveChapter, pending, stepIndex, steps.length])
 
   // Clamps at the first step rather than paging back a chapter. Advancing off
   // the end is a deliberate "we are done here"; going back is usually a
@@ -268,18 +287,35 @@ export function TrustPresentationProvider({
     () => ({
       present,
       hydrated,
+      slug,
       exit,
       depthOpen,
       setDepthOpen,
       steps: publicSteps,
       stepIndex,
       armed,
+      pending,
+      setPending,
       registerStep,
       goToStep,
       next,
       prev,
     }),
-    [armed, depthOpen, exit, goToStep, hydrated, next, prev, present, publicSteps, registerStep, stepIndex]
+    [
+      armed,
+      depthOpen,
+      exit,
+      goToStep,
+      hydrated,
+      next,
+      pending,
+      prev,
+      present,
+      publicSteps,
+      registerStep,
+      slug,
+      stepIndex,
+    ]
   )
 
   return (
@@ -322,4 +358,23 @@ export function useRegisterTrustStep(label: string) {
   const current = present && stepIndex >= 0 && steps[stepIndex]?.id === generated
 
   return { ref, current }
+}
+
+/**
+ * Declares that this chapter is still holding something back.
+ *
+ * Pass a hint while a required reveal has not happened, and `null` once it has.
+ * Leaving is never blocked — presenting is not the place for hard gating — but
+ * the warning names what would be skipped instead of just saying "end of
+ * chapter".
+ */
+export function useTrustPendingReveal(hint: string | null) {
+  const { setPending } = useTrustPresentation()
+
+  useEffect(() => {
+    setPending(hint)
+    // Clear on unmount so a hint cannot outlive its chapter and warn about a
+    // reveal that belongs to a page the room has already left.
+    return () => setPending(null)
+  }, [hint, setPending])
 }

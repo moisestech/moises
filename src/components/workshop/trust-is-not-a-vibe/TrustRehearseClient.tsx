@@ -60,6 +60,15 @@ export function TrustRehearseClient() {
           <Link href={`${TRUST_LEARN_BASE}/${previewSlug}`} className={trust.link}>
             Open this chapter in LMS
           </Link>
+          {/*
+            Presentation mode is only reachable by query string, and the flag
+            then persists in sessionStorage for the rest of the run. Linking it
+            here means the presenter never has to hand-edit the URL on the
+            projected screen.
+          */}
+          <Link href={`${TRUST_LEARN_BASE}/${previewSlug}?present=1`} className={trust.link}>
+            Present this chapter
+          </Link>
           <Link href={TRUST_SURFACES_HREF} className={trust.link}>
             Five surfaces
           </Link>
@@ -71,7 +80,8 @@ export function TrustRehearseClient() {
         <section className="mt-8">
           <h2 className={trust.h2}>Live 30-minute clock</h2>
           <p className={cn(trust.muted, 'mt-2')}>
-            Self-guided LMS stays six chapters. This clock is the room. Skip The Loop if you are on this table.
+            Same six chapters as the LMS, subdivided into room beats. Windows are derived from each chapter&rsquo;s
+            budget, so this table and the learner clocks always agree.
           </p>
           <ol className="mt-4 grid gap-2 sm:grid-cols-2">
             {TRUST_LIVE_BEATS.map((beat) => (
@@ -81,14 +91,20 @@ export function TrustRehearseClient() {
                   'rounded-xl border px-3 py-3',
                   beat.interrupt
                     ? 'border-amber-400 bg-amber-50 dark:border-amber-500 dark:bg-amber-950/30'
-                    : beat.chapterId === 'the-loop'
-                      ? 'border-dashed border-stone-300 dark:border-stone-600'
-                      : 'border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900'
+                    : beat.chapterId
+                      ? 'border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900'
+                      : // Overview and buffer have no chapter to open.
+                        'border-dashed border-stone-300 dark:border-stone-600'
                 )}
               >
-                <button type="button" className="w-full text-left" onClick={() => setPreviewSlug(beat.chapterId)}>
+                <button
+                  type="button"
+                  className="w-full text-left disabled:cursor-default"
+                  disabled={!beat.chapterId}
+                  onClick={() => beat.chapterId && setPreviewSlug(beat.chapterId)}
+                >
                   <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-500">
-                    {String(beat.startMin).padStart(2, '0')}–{String(beat.endMin).padStart(2, '0')}
+                    {beat.clock}
                     {beat.interrupt ? ' · interrupt' : ''}
                   </p>
                   <p className="mt-1 text-sm font-semibold">{beat.title}</p>

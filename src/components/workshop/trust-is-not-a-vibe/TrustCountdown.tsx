@@ -1,10 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getLiveBeatAtElapsed, TRUST_LIVE_BEATS, TRUST_LIVE_CUE_MINUTES } from '@/content/workshops/trust-is-not-a-vibe'
+import {
+  formatTrustClock,
+  getLiveBeatAtElapsed,
+  TRUST_INTERRUPT_BEAT,
+  TRUST_LIVE_BEATS,
+  TRUST_LIVE_CUE_MINUTES,
+  TRUST_TOTAL_MINUTES,
+} from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 
-const THIRTY_MIN_MS = 30 * 60 * 1000
+const THIRTY_MIN_MS = TRUST_TOTAL_MINUTES * 60 * 1000
 
 function formatClock(ms: number) {
   const clamped = Math.max(0, ms)
@@ -51,9 +58,10 @@ export function TrustCountdown({
   const elapsedMs = THIRTY_MIN_MS - Math.max(0, remaining)
   const elapsedMin = elapsedMs / 60000
   const beat = getLiveBeatAtElapsed(elapsedMin)
-  const elapsedWhole = Math.floor(elapsedMin)
   const warning = remaining <= 5 * 60 * 1000
-  const atInterrupt = elapsedWhole === 8 || (elapsedMin >= 8 && elapsedMin < 9)
+  // Derived from the beat data rather than a hardcoded minute, so moving the
+  // interruption in the content moves the highlight with it.
+  const atInterrupt = Boolean(beat.interrupt)
 
   return (
     <div className="min-w-0 flex-1">
@@ -74,14 +82,14 @@ export function TrustCountdown({
         {expired ? '00:00' : formatClock(remaining)}
       </p>
       <p className="mt-1 text-xs text-stone-500">
-        {beat.startMin}–{beat.endMin} · {beat.title}
+        {beat.clock} · {beat.title}
         {beat.interrupt ? ' · interrupt window' : ''}
       </p>
       <ol className="mt-2 flex flex-wrap gap-1" aria-label="Live session cues">
         {TRUST_LIVE_CUE_MINUTES.map((minute) => {
           const passed = elapsedMin >= minute
           const current = TRUST_LIVE_BEATS.some((item) => item.startMin === minute && item.id === beat.id)
-          const interrupt = minute === 8
+          const interrupt = minute === TRUST_INTERRUPT_BEAT?.startMin
           return (
             <li
               key={minute}
@@ -96,7 +104,7 @@ export function TrustCountdown({
                       : 'bg-stone-100 text-stone-400 dark:bg-stone-800'
               )}
             >
-              {String(minute).padStart(2, '0')}
+              {formatTrustClock(minute)}
             </li>
           )
         })}

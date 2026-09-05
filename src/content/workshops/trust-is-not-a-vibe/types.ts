@@ -33,6 +33,12 @@ export type TrustChapterId =
   | 'the-loop'
   | 'the-harness'
   | 'transfer'
+/**
+ * A segment of the 30-minute course clock. Defined here rather than in
+ * time-budget.ts so the live facilitation beats can reference it without a
+ * circular import back through the budget.
+ */
+export type TrustTimeSegmentId = 'overview' | TrustChapterId | 'buffer'
 export type TrustRubricKey = 'evidence' | 'authority' | 'impact' | 'control'
 export type TrustRubricScore = 0 | 1 | 2
 
@@ -154,24 +160,41 @@ export type TrustSpeakerNote = {
 }
 
 export type TrustLiveBeatId =
+  | 'orient'
   | 'open-vote'
   | 'context'
   | 'teach-layers'
   | 'assign-lenses'
   | 'role-inspect'
   | 'reveal-verdict'
-  | 'harness'
+  | 'loop-anatomy'
+  | 'loop-scoring'
+  | 'harness-cases'
+  | 'harness-graders'
   | 'transfer'
-  | 'teach-back'
-  | 'exit'
+  | 'buffer'
 
-export type TrustLiveBeat = {
+/**
+ * A facilitation beat as authored: which course segment it belongs to and how
+ * long it runs. Window positions are derived from the time budget rather than
+ * written here, so the live clock cannot drift from the chapter minutes.
+ */
+export type TrustAuthoredLiveBeat = {
   id: TrustLiveBeatId
+  /** The budget segment this beat subdivides. */
+  segmentId: TrustTimeSegmentId
+  minutes: number
+  title: string
+  /** Designed pause for the in-character question. */
+  interrupt?: boolean
+  cue: string
+}
+
+export type TrustLiveBeat = TrustAuthoredLiveBeat & {
   startMin: number
   endMin: number
-  title: string
-  chapterId: TrustChapterId
-  interrupt?: boolean
-  skipOnLiveClock?: boolean
-  cue: string
+  /** Running position, e.g. `6:30–7:30`. */
+  clock: string
+  /** Set when the beat's segment is a chapter, so the rehearse preview can open it. */
+  chapterId?: TrustChapterId
 }
