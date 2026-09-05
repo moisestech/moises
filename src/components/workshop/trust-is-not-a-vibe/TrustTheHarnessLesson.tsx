@@ -24,7 +24,7 @@ import { TrustRegressionRun } from './TrustRegressionRun'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustTraceDiagram } from './TrustTraceDiagram'
 import { TrustVote } from './TrustVote'
-import { useTrustProgress } from './useTrustProgress'
+import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('the-harness')!
 
@@ -106,6 +106,7 @@ export function TrustTheHarnessLesson() {
 
   return (
     <TrustLessonPacket
+      chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
       seeIt={<TrustTraceDiagram />}
@@ -124,6 +125,9 @@ export function TrustTheHarnessLesson() {
       doNow={PACKET.tryPrompt}
       doneWhen={completed ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={progress.role} allSeats={present} />}
+      roleId={progress.role}
+      roleCheckChoice={roleCheckChoice(progress, PACKET.chapterId)}
+      onRoleCheck={(choice) => update(withRoleCheck(progress, PACKET.chapterId, choice))}
       announce={announce}
       deeperHint="Golden cases, the four graders, the eval loop, regression, architecture, and the toolkit."
       deeper={

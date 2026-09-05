@@ -14,7 +14,7 @@ export function TrustChapterNav({ slug }: { slug: string }) {
   )
 
   return (
-    <nav className="mt-10 flex flex-col gap-4 border-t border-stone-200 pt-8 dark:border-stone-800 sm:flex-row sm:items-center sm:justify-between" aria-label="Chapter navigation">
+    <nav data-trust-chapter-nav className="mt-10 flex flex-col gap-4 border-t border-stone-200 pt-8 dark:border-stone-800 sm:flex-row sm:items-center sm:justify-between" aria-label="Chapter navigation">
       <div>
         {prev ? (
           <Link href={`${TRUST_LEARN_BASE}/${prev.slug}`} className={linkClass}>

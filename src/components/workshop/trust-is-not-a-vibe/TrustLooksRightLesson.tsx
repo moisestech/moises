@@ -24,7 +24,7 @@ import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
 import { ROLE_ICON } from './TrustSeatSection'
 import { TRUST_ROLE_TONE, TRUST_VERDICT_LABEL as VERDICT_LABEL } from './trust-tokens'
-import { useTrustProgress } from './useTrustProgress'
+import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('looks-right')!
 
@@ -174,24 +174,9 @@ export function TrustLooksRightLesson() {
 
   return (
     <TrustLessonPacket
+      chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
-      ideaBody={
-        <>
-          <p>
-            Cohort Studio is a made-up enrollment product. An agent inside it just wrote what to do with a
-            cohort — confirm October 6, email 120 people, drop the ones it calls quiet.
-          </p>
-          <p>
-            That recommendation lands as a screen in the product. In this lab we call that screen the card.
-            It is not a slide and not a quiz. It is the surface a teammate would see before anything sends.
-          </p>
-          <p>
-            A finished-looking screen is not proof the system behind it is safe. In Try it you will Allow,
-            Ask, or Deny from that screen alone — before you see what the agent read.
-          </p>
-        </>
-      }
       seeIt={seeIt}
       seeCaption={PACKET.seeCaption}
       tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
@@ -201,6 +186,9 @@ export function TrustLooksRightLesson() {
       doNow={PACKET.tryPrompt}
       doneWhen={voted ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={progress.role} allSeats={present} />}
+      roleId={progress.role}
+      roleCheckChoice={roleCheckChoice(progress, PACKET.chapterId)}
+      onRoleCheck={(choice) => update(withRoleCheck(progress, PACKET.chapterId, choice))}
       announce={announce}
       deeperHint="Why one good run is not proof, polish against evidence, and the clip."
       deeper={

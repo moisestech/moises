@@ -15,7 +15,7 @@ import { usePresentationMode, useTrustPendingReveal } from './TrustPresentation'
 import { TrustSpecimen } from './TrustSpecimen'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
-import { useTrustProgress } from './useTrustProgress'
+import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('seeded-failures')!
 
@@ -88,6 +88,7 @@ export function TrustSeededFailuresLesson() {
 
   return (
     <TrustLessonPacket
+      chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
       seeIt={seeIt}
@@ -106,6 +107,9 @@ export function TrustSeededFailuresLesson() {
       doNow={PACKET.tryPrompt}
       doneWhen={completed ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={progress.role} allSeats={present} />}
+      roleId={progress.role}
+      roleCheckChoice={roleCheckChoice(progress, PACKET.chapterId)}
+      onRoleCheck={(choice) => update(withRoleCheck(progress, PACKET.chapterId, choice))}
       announce={announce}
       deeperHint="The failure chain, benchmarks versus evals, and the clip."
       deeper={
