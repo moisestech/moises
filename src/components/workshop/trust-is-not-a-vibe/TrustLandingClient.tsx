@@ -36,8 +36,8 @@ export function TrustLandingClient() {
 function TrustLandingBody() {
   return (
     <main className={cn(trust.shell, 'overflow-x-clip pb-20 sm:pb-24')}>
+      <TrustPresentationBar />
       <div className={trust.main}>
-        <TrustPresentationBar className="mb-6" />
         <TrustOverviewContents className="mb-10" />
 
         <div className="lg:grid lg:grid-cols-[10rem_minmax(0,1fr)] lg:gap-x-10">

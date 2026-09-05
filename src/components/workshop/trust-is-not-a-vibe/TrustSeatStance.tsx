@@ -90,3 +90,23 @@ export function TrustSeatStance({
 
   return <SeatLine roleId={roleId} dominant showCase />
 }
+
+/** Orientation-strip job line for packet chapters after Looks Right. */
+export function TrustPacketJob({
+  roleId,
+  signal,
+  fallback,
+}: {
+  roleId: TrustRoleId | null
+  signal?: string
+  fallback: string
+}) {
+  const role = getTrustRole(roleId)
+  if (!role) return <p>{fallback}</p>
+  return (
+    <p>
+      <span className={cn('font-semibold', TRUST_ROLE_TONE[role.id].text)}>{role.label}.</span>{' '}
+      {signal ?? role.learnerJob}
+    </p>
+  )
+}

@@ -178,12 +178,15 @@ export const TRUST_PAGE_GUTTER = 'mx-auto w-full max-w-5xl px-3 sm:px-4'
 /** Live site header plus the measured Trust subnav. Published by `TrustWorkshopNav`. */
 export const TRUST_SUBNAV_HEIGHT_VAR = '--trust-subnav-height'
 
-export const TRUST_STICKY_TOP =
-  'top-[calc(var(--site-header-height,5rem)+var(--trust-subnav-height,3.5rem)+0.5rem)]'
+/** Published by the sticky course strip so in-page rails sit below it. */
+export const TRUST_COURSE_BAR_HEIGHT_VAR = '--trust-course-bar-height'
 
-/** Keeps anchored and focused lesson content clear of the sticky header and subnav. */
+export const TRUST_STICKY_TOP =
+  'top-[calc(var(--site-header-height,5rem)+var(--trust-subnav-height,3.5rem)+var(--trust-course-bar-height,3.25rem)+0.5rem)]'
+
+/** Keeps anchored and focused lesson content clear of the sticky header, subnav, and course bar. */
 export const TRUST_SCROLL_MT =
-  'scroll-mt-[calc(var(--site-header-height,5rem)+var(--trust-subnav-height,3.5rem)+0.75rem)]'
+  'scroll-mt-[calc(var(--site-header-height,5rem)+var(--trust-subnav-height,3.5rem)+var(--trust-course-bar-height,3.25rem)+0.75rem)]'
 
 /**
  * Overview-only type scale. The chapters use `trust.h2`; the contents page needs
@@ -196,6 +199,17 @@ export const trustOverview = {
     'text-3xl font-bold leading-[1.08] tracking-tight text-stone-950 text-balance sm:text-4xl md:text-5xl dark:text-stone-50',
   deck: 'max-w-[58ch] text-lg leading-relaxed text-stone-600 sm:text-xl dark:text-stone-400',
   body: 'max-w-[68ch] text-base leading-relaxed text-stone-700 dark:text-stone-300',
+} as const
+
+/**
+ * Lesson-packet type. Same order as Overview (number, title, deck) at a size
+ * that fits an accordion control rather than a contents band.
+ */
+export const trustLesson = {
+  eyebrow: 'font-space-mono text-[11px] uppercase tracking-[0.2em] text-stone-500',
+  title: 'text-xl font-bold leading-tight tracking-tight text-stone-950 sm:text-2xl dark:text-stone-50',
+  deck: 'mt-1 max-w-[58ch] text-base leading-relaxed text-stone-600 dark:text-stone-400',
+  body: 'max-w-[68ch] text-base leading-relaxed text-stone-800 dark:text-stone-200',
 } as const
 
 export const trust = {

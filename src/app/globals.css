@@ -67,6 +67,22 @@
     --site-header-expanded-height: 10rem;
     --grant-dossier-subnav-height: 3.5rem;
     --trust-subnav-height: 3.5rem;
+    --trust-course-bar-height: 3.25rem;
+  }
+
+  /*
+    Immersive presentation: hide site chrome and zero the offsets the lesson
+    rails and scroll-margins read. Fullscreen is requested separately and may
+    fail; this CSS is the reliable half of the mode.
+  */
+  html[data-trust-present='1'] {
+    --site-header-height: 0px !important;
+    --site-header-expanded-height: 0px !important;
+    --trust-subnav-height: 0px !important;
+  }
+
+  html[data-trust-present='1'] [data-site-chrome] {
+    display: none !important;
   }
 
   :root {

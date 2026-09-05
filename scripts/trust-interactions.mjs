@@ -31,6 +31,23 @@ const announcement = (page) =>
         .find(Boolean) ?? ''
   )
 
+async function openPortion(page, label) {
+  const btn = page.locator('[data-trust-step][aria-expanded]').filter({ hasText: label }).first()
+  await btn.waitFor({ state: 'visible', timeout: 15000 })
+  if ((await btn.getAttribute('aria-expanded')) !== 'true') {
+    await btn.click()
+    await page.waitForTimeout(200)
+  }
+}
+
+async function openDeeper(page) {
+  await page.locator('summary').filter({ hasText: 'Go deeper' }).first().waitFor({ state: 'visible', timeout: 15000 })
+  await page.evaluate(() => {
+    document.querySelectorAll('main details').forEach((el) => el.setAttribute('open', ''))
+  })
+  await page.waitForTimeout(200)
+}
+
 const browser = await chromium.launch()
 
 /* 1. Presentation mode survives navigation and exits cleanly. */
@@ -40,6 +57,8 @@ const browser = await chromium.launch()
   await page.goto(`${LEARN}/the-loop?present=1`, { waitUntil: 'networkidle' })
   const bar = page.getByRole('complementary', { name: 'Presentation controls' })
   check('present=1 shows the presentation bar', await bar.isVisible())
+  await waitForSteps(page)
+  await openDeeper(page)
   check('presenting shows ownership tags', await page.getByText('leads', { exact: false }).first().isVisible())
 
   // Navigate via an in-app link that carries no query string.
@@ -60,12 +79,16 @@ const browser = await chromium.launch()
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
   const page = await ctx.newPage()
   await page.goto(`${LEARN}/looks-right`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await openPortion(page, 'See it')
   const layerBtn = page.getByRole('button', { name: /What it would send/ }).first()
   await layerBtn.scrollIntoViewIfNeeded()
   const lockedLabel = await layerBtn.textContent()
   check('machine layer is locked before voting', /locked/i.test(lockedLabel ?? ''), lockedLabel?.trim())
 
   await page.goto(`${LEARN}/looks-right?present=1`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await openPortion(page, 'See it')
   const presentBtn = page.getByRole('button', { name: /What it would send/ }).first()
   await presentBtn.scrollIntoViewIfNeeded()
   const openLabel = await presentBtn.textContent()
@@ -78,6 +101,8 @@ const browser = await chromium.launch()
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
   const page = await ctx.newPage()
   await page.goto(`${LEARN}/the-loop`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await openDeeper(page)
 
   const node = page.getByRole('button', { name: /Graders/ }).first()
   await node.scrollIntoViewIfNeeded()
@@ -97,6 +122,7 @@ const browser = await chromium.launch()
     (await node.getAttribute('aria-pressed')) === 'true'
   )
 
+  await openDeeper(page)
   const probe = page.getByRole('button', { name: 'Check it in code', exact: true }).first()
   await probe.scrollIntoViewIfNeeded()
   await probe.focus()
@@ -112,11 +138,14 @@ const browser = await chromium.launch()
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
   const page = await ctx.newPage()
   await page.goto(`${LEARN}/transfer`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
 
   const openDetails = await page.locator('details[open]').count()
   check('Go deeper starts closed', openDetails === 0, `${openDetails} open`)
 
+  await openPortion(page, 'Try it')
   await page.getByRole('button', { name: /^Allow/ }).first().click()
+  await openPortion(page, 'Check it')
   for (let i = 0; i < 5; i += 1) {
     const suggest = page.getByRole('button', { name: 'Use the suggestion' }).first()
     await suggest.scrollIntoViewIfNeeded()
@@ -134,6 +163,8 @@ const browser = await chromium.launch()
   check('Transfer is marked complete', (stored.completedChapters ?? []).includes('transfer'))
 
   await page.reload({ waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await openPortion(page, 'Check it')
   const afterReload = await page.getByRole('button', { name: 'Use the suggestion' }).count()
   check('plan survives reload', afterReload === 0, `${afterReload} unfilled`)
   await ctx.close()
@@ -144,6 +175,8 @@ const browser = await chromium.launch()
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
   const page = await ctx.newPage()
   await page.goto(`${LEARN}/the-harness`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await openDeeper(page)
   check(
     'no criterion yet shows the fallback and a way back',
     await page.getByRole('link', { name: 'Four Lenses' }).first().isVisible()
@@ -157,6 +190,8 @@ const browser = await chromium.launch()
     )
   }, sentence)
   await page.reload({ waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await openDeeper(page)
   check('the learner criterion appears in The Harness', await page.getByText(sentence).isVisible())
 
   await page.getByRole('button', { name: 'Code check', exact: true }).first().click()
@@ -176,6 +211,8 @@ const browser = await chromium.launch()
   const errors = []
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
   await page.goto(`${LEARN}/the-harness`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await openDeeper(page)
   await page.getByRole('button', { name: 'Compare case by case' }).click()
   await page.waitForTimeout(300)
   check('reduced motion still reveals the comparison', await page.getByText('regression', { exact: false }).first().isVisible())
@@ -211,7 +248,7 @@ const browser = await chromium.launch()
     await page.waitForTimeout(700)
 
     const state = await page.evaluate(() => ({
-      focusedIsStep: document.activeElement?.hasAttribute('data-trust-step') ?? false,
+      focusedIsStep: Boolean(document.activeElement?.closest('[data-trust-step]')),
       current: document.querySelectorAll('[data-trust-step-current]').length,
     }))
     check(`${name}: ArrowRight announces step 1 of ${total}`, /^Step 1 of \d+\./.test(await announcement(page)))
@@ -253,14 +290,25 @@ const browser = await chromium.launch()
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
     const page = await ctx.newPage()
     // The Four Lenses field stays disabled until a seat is chosen, so seed one.
-    await page.addInitScript(() => {
-      localStorage.setItem(
-        'trust-is-not-a-vibe:v1',
-        JSON.stringify({ role: 'pm', completedChapters: [] })
-      )
-    })
+    await page.addInitScript((chapter) => {
+      const seed = { role: 'pm', completedChapters: [] }
+      if (chapter === 'transfer') seed.transferVote = 'allow'
+      if (chapter === 'the-harness') {
+        seed.controlMatches = {
+          'unsupported-date': 'ground',
+          'roster-mismatch': 'validate',
+          'fabricated-forecast': 'ground',
+          'draft-only-send': 'restrict',
+          'auto-remove-harm': 'approve',
+          'no-escalation': 'approve',
+        }
+      }
+      localStorage.setItem('trust-is-not-a-vibe:v1', JSON.stringify(seed))
+    }, name)
     await page.goto(`${LEARN}/${name}?present=1`, { waitUntil: 'networkidle' })
     await waitForSteps(page)
+    if (name === 'four-lenses') await openPortion(page, 'Try it')
+    if (name === 'transfer' || name === 'the-harness') await openPortion(page, 'Check it')
     // Some fields sit in a collapsed panel, which cannot receive keys.
     await page.evaluate(() => {
       document.querySelectorAll('details').forEach((el) => el.setAttribute('open', ''))
@@ -306,20 +354,20 @@ const browser = await chromium.launch()
 }
 {
   /*
-    seeded-failures registers one section until the failures are revealed, so
-    the end of the list is not the end of the chapter. Stepping must not carry
-    the room out of an exercise it is still working through.
+    seeded-failures holds Check it until the failures are revealed, so the end
+    of the list is not the end of the chapter. Stepping must not carry the room
+    out of an exercise it is still working through.
   */
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
   const page = await ctx.newPage()
   await page.goto(`${LEARN}/seeded-failures?present=1`, { waitUntil: 'networkidle' })
   await waitForSteps(page)
   const here = page.url()
-  await page.keyboard.press('ArrowRight')
-  await page.waitForTimeout(400)
+  await page.keyboard.press('End')
+  await page.waitForTimeout(600)
   await page.keyboard.press('ArrowRight')
   await page.waitForTimeout(700)
-  check('one section is not enough to step out of the chapter', page.url() === here, page.url())
+  check('the last visible portion is not enough to step out of the chapter', page.url() === here, page.url())
   check(
     'and names the hidden failures instead of a generic end',
     /planted failures are still hidden/.test(await announcement(page)),
@@ -403,6 +451,109 @@ const browser = await chromium.launch()
   check('reduced motion still steps', /^Step 1 of \d+\./.test(await announcement(page)))
   check('reduced motion throws nothing', errors.length === 0, errors[0] ?? '')
   await ctx.close()
+}
+
+/* 12. Course chrome: Present, dormant clock, exclusive focus, rail. */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+  const page = await ctx.newPage()
+  await page.goto(`${LEARN}/looks-right`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+
+  const clockBar = page.getByRole('complementary', { name: 'Course clock' })
+  check('self-paced pages show the course clock', await clockBar.isVisible())
+  check('the dormant clock names the budgeted window', await clockBar.getByText('Looks Right').isVisible())
+  check('the dormant clock shows the chapter span', await clockBar.getByText('2:30–6:30').isVisible())
+  const presentBtn = clockBar.getByRole('button', { name: 'Present' })
+  check('Present is visible without a query string', await presentBtn.isVisible())
+
+  const expanded = page.locator('[data-trust-step][aria-expanded="true"]')
+  check('exactly one portion is open', (await expanded.count()) === 1, String(await expanded.count()))
+  check(
+    'The idea is the open portion on arrival',
+    (await expanded.filter({ hasText: 'The idea' }).count()) === 1
+  )
+
+  const brief = page.locator('[data-trust-brief]')
+  check('Your seat is collapsed on arrival', (await brief.getAttribute('aria-expanded')) === 'false')
+  check('Do this now stays inside the closed brief', (await page.getByText('Do this now', { exact: true }).count()) === 0)
+  check('the in-page rail does not list Your seat', (await page.getByRole('navigation', { name: 'On this page' }).getByRole('button', { name: /Your seat/ }).count()) === 0)
+
+  await brief.click()
+  await page.waitForTimeout(200)
+  check('opening Your seat expands the brief', (await brief.getAttribute('aria-expanded')) === 'true')
+  check(
+    'opening Your seat closes the lesson portions',
+    (await page.locator('[data-trust-step][aria-expanded="true"]').count()) === 0,
+    String(await page.locator('[data-trust-step][aria-expanded="true"]').count())
+  )
+  check('Do this now is visible once the brief is open', await page.getByText('Do this now', { exact: true }).isVisible())
+
+  await page.locator('[data-trust-step]').filter({ hasText: 'The idea' }).click()
+  await page.waitForTimeout(200)
+  check('opening The idea closes the brief', (await brief.getAttribute('aria-expanded')) === 'false')
+
+  const rail = page.getByRole('navigation', { name: 'On this page' }).first()
+  check('the in-page rail is visible on desktop', await rail.isVisible())
+  await rail.getByRole('button', { name: /See it/ }).click()
+  await page.waitForTimeout(400)
+  check(
+    'the rail opens See it and closes The idea',
+    (await page.locator('[data-trust-step][aria-expanded="true"]').count()) === 1 &&
+      (await page.locator('[data-trust-step][aria-expanded="true"]').filter({ hasText: 'See it' }).count()) === 1
+  )
+
+  await presentBtn.click()
+  await page.waitForTimeout(400)
+  const immersive = await page.evaluate(() => {
+    const header = document.querySelector('header[data-site-chrome]')
+    const idea = document.querySelector('[data-trust-step]')
+    return {
+      flag: document.documentElement.dataset.trustPresent === '1',
+      headerHidden: header ? getComputedStyle(header).display === 'none' : false,
+      ideaHeight: idea?.getBoundingClientRect().height ?? 0,
+      headerVar: getComputedStyle(document.documentElement).getPropertyValue('--site-header-height').trim(),
+    }
+  })
+  check('Present sets the immersive flag', immersive.flag)
+  check('Present hides the site header', immersive.headerHidden)
+  check('The idea stays visible while presenting', immersive.ideaHeight > 20, String(immersive.ideaHeight))
+  check('immersive zeros the header offset', immersive.headerVar === '0px', immersive.headerVar)
+  check(
+    'the bar becomes presentation controls',
+    await page.getByRole('complementary', { name: 'Presentation controls' }).isVisible()
+  )
+
+  await page.getByRole('button', { name: 'Exit' }).click()
+  await page.waitForTimeout(400)
+  const restored = await page.evaluate(() => ({
+    flag: document.documentElement.dataset.trustPresent === '1',
+    headerDisplay: document.querySelector('header[data-site-chrome]')
+      ? getComputedStyle(document.querySelector('header[data-site-chrome]')).display
+      : 'missing',
+  }))
+  check('Exit clears the immersive flag', !restored.flag)
+  check('Exit restores the site header', restored.headerDisplay !== 'none', restored.headerDisplay)
+  await ctx.close()
+}
+
+/* 13. Packet + full specimen must not overflow a phone width. */
+{
+  for (const slug of ['looks-right', 'seeded-failures', 'the-loop', 'the-harness', 'transfer']) {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } })
+    const page = await ctx.newPage()
+    await page.goto(`${LEARN}/${slug}`, { waitUntil: 'networkidle' })
+    await waitForSteps(page)
+    await openPortion(page, 'See it')
+    const overflow = await page.evaluate(() => {
+      window.scrollTo(1000, 0)
+      const scrolled = window.scrollX
+      window.scrollTo(0, 0)
+      return scrolled
+    })
+    check(`${slug} does not scroll sideways at 390`, overflow === 0, String(overflow))
+    await ctx.close()
+  }
 }
 
 await browser.close()

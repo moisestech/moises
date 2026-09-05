@@ -41,17 +41,28 @@ export function TrustPresentationClock({ slug }: { slug?: string }) {
   const { running, elapsedMs, start, stop } = useTrustPresentationClock()
   const segment = segmentFor(slug)
 
+  const windowLabel = (
+    <p className="font-space-mono text-[10px] leading-tight text-stone-500 dark:text-stone-400">
+      {segment.label}
+      <br />
+      {segment.clock}
+    </p>
+  )
+
   if (!running) {
     return (
-      <button
-        type="button"
-        onClick={start}
-        className={cn(trust.btnSecondary, 'px-2.5 py-1 text-xs')}
-        title={`This section is budgeted ${segment.clock}`}
-      >
-        <HiOutlineClock className="mr-1 inline h-3.5 w-3.5" aria-hidden />
-        Start clock
-      </button>
+      <div className="flex items-center gap-2">
+        {windowLabel}
+        <button
+          type="button"
+          onClick={start}
+          className={cn(trust.btnSecondary, 'px-2.5 py-1 text-xs')}
+          title={`This section is budgeted ${segment.clock}`}
+        >
+          <HiOutlineClock className="mr-1 inline h-3.5 w-3.5" aria-hidden />
+          Start clock
+        </button>
+      </div>
     )
   }
 
@@ -77,11 +88,7 @@ export function TrustPresentationClock({ slug }: { slug?: string }) {
       <p className="font-mono text-sm font-semibold tabular-nums text-stone-900 dark:text-stone-100">
         {formatElapsed(elapsedMs)}
       </p>
-      <p className="font-space-mono text-[10px] leading-tight text-stone-500 dark:text-stone-400">
-        {segment.label}
-        <br />
-        {segment.clock}
-      </p>
+      {windowLabel}
       <p className={cn('font-space-mono text-[10px] font-semibold', pace.tone)}>{pace.label}</p>
       <button
         type="button"

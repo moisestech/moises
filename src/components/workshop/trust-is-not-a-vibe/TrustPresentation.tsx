@@ -30,12 +30,18 @@ type TrustPresentationValue = {
   hydrated: boolean
   /** Chapter slug, or undefined on the overview. Lets the bar price the section against the budget. */
   slug?: string
+  enter: () => void
   exit: () => void
   /** Whether every Go deeper panel is forced open. */
   depthOpen: boolean
   setDepthOpen: (open: boolean) => void
   steps: { id: string; label: string }[]
   stepIndex: number
+  /**
+   * Which accordion panel is open. Follows `stepIndex` while presenting; self-paced
+   * readers set it from the rail without turning on the room controls.
+   */
+  focusIndex: number
   /** At the last step, with a pending press to leave the chapter. */
   armed: boolean
   /**
@@ -46,6 +52,8 @@ type TrustPresentationValue = {
   setPending: (hint: string | null) => void
   registerStep: (id: string, label: string, element: HTMLElement | null) => void
   goToStep: (index: number) => void
+  /** Close every registered panel. Used by the orientation accordion so The idea can yield. */
+  releaseFocus: () => void
   next: () => void
   prev: () => void
 }
@@ -58,16 +66,19 @@ type TrustPresentationValue = {
 const FALLBACK: TrustPresentationValue = {
   present: false,
   hydrated: false,
+  enter: () => {},
   exit: () => {},
   depthOpen: false,
   setDepthOpen: () => {},
   steps: [],
   stepIndex: -1,
+  focusIndex: 0,
   armed: false,
   pending: null,
   setPending: () => {},
   registerStep: () => {},
   goToStep: () => {},
+  releaseFocus: () => {},
   next: () => {},
   prev: () => {},
 }
@@ -98,6 +109,7 @@ function isActivatableTarget(node: EventTarget | null): boolean {
 export function TrustPresentationProvider({
   slug,
   stepping = true,
+  root = true,
   children,
 }: {
   /** Chapter slug, or omitted on the overview. Used only at step boundaries. */
@@ -108,6 +120,12 @@ export function TrustPresentationProvider({
    * facilitator's own notes would move the embedded lesson instead.
    */
   stepping?: boolean
+  /**
+   * The page-level provider owns immersive chrome and the fullscreen root.
+   * Nested providers (the Rehearse embed) must not write `data-trust-present`
+   * or reuse the root id, or they would undo the outer mode.
+   */
+  root?: boolean
   children: ReactNode
 }) {
   const router = useRouter()
@@ -117,6 +135,7 @@ export function TrustPresentationProvider({
   const [hydrated, setHydrated] = useState(false)
   const [depthOpen, setDepthOpen] = useState(false)
   const [stepIndex, setStepIndex] = useState(-1)
+  const [focusIndex, setFocusIndex] = useState(0)
   const [armed, setArmed] = useState(false)
   const [pending, setPending] = useState<string | null>(null)
   const [steps, setSteps] = useState<TrustStep[]>([])
@@ -139,12 +158,38 @@ export function TrustPresentationProvider({
     setHydrated(true)
   }, [])
 
+  const enter = useCallback(() => {
+    window.sessionStorage.setItem(TRUST_PRESENT_KEY, '1')
+    setPresent(true)
+    if (!root) return
+    const host = document.getElementById('trust-course-root')
+    if (host && host.requestFullscreen) {
+      void host.requestFullscreen().catch(() => {
+        // Chrome-hiding via data-trust-present is the fallback. iOS Safari
+        // and some embedded webviews refuse fullscreen without a stronger gesture.
+      })
+    }
+  }, [root])
+
   const exit = useCallback(() => {
     window.sessionStorage.removeItem(TRUST_PRESENT_KEY)
     setPresent(false)
     setDepthOpen(false)
     setStepIndex(-1)
+    if (document.fullscreenElement) {
+      void document.exitFullscreen().catch(() => {})
+    }
   }, [])
+
+  useEffect(() => {
+    if (!root) return
+    const page = document.documentElement
+    if (present) page.dataset.trustPresent = '1'
+    else delete page.dataset.trustPresent
+    return () => {
+      delete page.dataset.trustPresent
+    }
+  }, [present, root])
 
   /**
    * Batches registrations from one commit into a single sort and render: a
@@ -178,18 +223,31 @@ export function TrustPresentationProvider({
     [scheduleSync]
   )
 
+  const releaseFocus = useCallback(() => {
+    setFocusIndex(-1)
+  }, [])
+
   const goToStep = useCallback(
     (index: number) => {
       const step = steps[index]
       if (!step) return
-      setStepIndex(index)
+      setFocusIndex(index)
       setArmed(false)
-      step.element.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
-      // Focus without a second scroll, so the smooth scroll above is not cut short.
-      step.element.focus({ preventScroll: true })
-      setAnnouncement(`Step ${index + 1} of ${steps.length}. ${step.label}`)
+      if (present) {
+        setStepIndex(index)
+        setAnnouncement(`Step ${index + 1} of ${steps.length}. ${step.label}`)
+      }
+      const id = step.id
+      // Focus after the accordion re-render. Opening a panel replaces the
+      // current node; focusing the pre-commit element leaves focus on body.
+      requestAnimationFrame(() => {
+        const latest = registry.current.get(id)?.element
+        if (!latest) return
+        latest.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+        latest.focus({ preventScroll: true })
+      })
     },
-    [reduceMotion, steps]
+    [present, reduceMotion, steps]
   )
 
   const leaveChapter = useCallback(() => {
@@ -288,23 +346,28 @@ export function TrustPresentationProvider({
       present,
       hydrated,
       slug,
+      enter,
       exit,
       depthOpen,
       setDepthOpen,
       steps: publicSteps,
       stepIndex,
+      focusIndex,
       armed,
       pending,
       setPending,
       registerStep,
       goToStep,
+      releaseFocus,
       next,
       prev,
     }),
     [
       armed,
       depthOpen,
+      enter,
       exit,
+      focusIndex,
       goToStep,
       hydrated,
       next,
@@ -313,6 +376,7 @@ export function TrustPresentationProvider({
       present,
       publicSteps,
       registerStep,
+      releaseFocus,
       slug,
       stepIndex,
     ]
@@ -320,7 +384,9 @@ export function TrustPresentationProvider({
 
   return (
     <TrustPresentationContext.Provider value={value}>
-      {children}
+      <div id={root ? 'trust-course-root' : undefined}>
+        {children}
+      </div>
       <div
         className="sr-only"
         role="status"
@@ -343,7 +409,7 @@ export function TrustPresentationProvider({
  * reveal — still sort into the position the room sees them in.
  */
 export function useRegisterTrustStep(label: string) {
-  const { registerStep, steps, stepIndex, present } = useTrustPresentation()
+  const { registerStep, steps, stepIndex, focusIndex, present, goToStep } = useTrustPresentation()
   const generated = useId()
 
   const ref = useCallback(
@@ -353,11 +419,17 @@ export function useRegisterTrustStep(label: string) {
     [generated, label, registerStep]
   )
 
+  const index = steps.findIndex((step) => step.id === generated)
   // Only meaningful while presenting: a self-paced learner scrolls freely and
   // should not see a block marked as the room's current one.
   const current = present && stepIndex >= 0 && steps[stepIndex]?.id === generated
+  const focused = index >= 0 && focusIndex === index
 
-  return { ref, current }
+  const select = useCallback(() => {
+    if (index >= 0) goToStep(index)
+  }, [goToStep, index])
+
+  return { ref, current, focused, select, index }
 }
 
 /**

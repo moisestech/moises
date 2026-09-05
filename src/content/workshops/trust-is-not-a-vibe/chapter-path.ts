@@ -100,7 +100,7 @@ export const TRUST_CHAPTER_PATH: Record<TrustChapterId, TrustChapterPath> = {
     action: 'Vote, score Evidence / Authority / Impact / Control, write the exit ticket.',
     misconception: 'Recalling Case A is the same as being able to judge a new one.',
     fallback: 'The typed Case B card and rubric are the assessment if the transfer still fails.',
-    advanceWhen: 'Rubric is scored and the exit ticket has a sentence.',
+    advanceWhen: 'A transfer vote is saved and the five-field evaluation plan is filled.',
     expectedResponse: 'Ask or Deny. A zero in Authority means the write is not safe.',
     probe: 'What mechanism — not what vibe — moved you from the first vote?',
     transition: 'You never know by watching it succeed once.',

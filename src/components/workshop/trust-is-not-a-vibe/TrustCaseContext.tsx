@@ -15,7 +15,7 @@ export function TrustCaseContext({
 }) {
   return (
     <aside className={cn('space-y-2', className)}>
-      <TrustSpecimen caseData={TRUST_CASE_A} variant="compact" />
+      <TrustSpecimen caseData={TRUST_CASE_A} />
       <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{TRUST_CENTRAL_QUESTION}</p>
       {vote ? (
         <p className="text-xs uppercase tracking-wide text-stone-500">Saved vote · {TRUST_VERDICT_LABEL[vote]}</p>
