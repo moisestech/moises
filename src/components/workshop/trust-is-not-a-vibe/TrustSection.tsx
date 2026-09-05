@@ -1,6 +1,9 @@
+'use client'
+
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
-import { trust } from './trust-tokens'
+import { useRegisterTrustStep } from './TrustPresentation'
+import { trust, TRUST_SCROLL_MT } from './trust-tokens'
 
 const KIND = {
   read: { label: 'Read', note: 'Context before you act.' },
@@ -29,12 +32,25 @@ export function TrustSection({
   className?: string
 }) {
   const meta = KIND[kind]
+  const { ref, current } = useRegisterTrustStep(title)
+
   return (
     <section
+      ref={ref}
+      // Focusable only programmatically: presenting moves focus here so the
+      // announcement lands and Tab continues from the section on screen.
+      tabIndex={-1}
+      data-trust-step
+      data-trust-step-current={current || undefined}
       className={cn(
         flush
           ? 'mt-10'
           : 'mt-20 border-t border-stone-200 pt-16 dark:border-stone-800',
+        TRUST_SCROLL_MT,
+        // A left accent rather than a focus ring. A ring around a full-width
+        // block reads as an error state on a projector.
+        'outline-none motion-safe:transition-[box-shadow,padding] pl-0',
+        current && 'rounded-r-lg shadow-[inset_3px_0_0_0_theme(colors.cyan.500)] pl-4',
         className
       )}
     >

@@ -51,10 +51,23 @@ import { TrustSection } from './TrustSection'
 import { TrustTraceDiagram } from './TrustTraceDiagram'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
-import { usePresentationMode } from './usePresentationMode'
+import { TrustPresentationProvider, usePresentationMode } from './TrustPresentation'
 import { evalPlanComplete, useTrustProgress } from './useTrustProgress'
 
 export function TrustLearnClient({ slug, embedded = false }: { slug: string; embedded?: boolean }) {
+  const chapter = getTrustChapter(slug)
+  if (!chapter) return null
+
+  // The body reads the presentation context, so it cannot be the component that
+  // provides it.
+  return (
+    <TrustPresentationProvider slug={chapter.slug} stepping={!embedded}>
+      <TrustLearnBody slug={slug} embedded={embedded} />
+    </TrustPresentationProvider>
+  )
+}
+
+function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean }) {
   const chapter = getTrustChapter(slug)
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
   const { present } = usePresentationMode()

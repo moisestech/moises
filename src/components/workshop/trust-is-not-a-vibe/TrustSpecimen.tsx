@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 import { AgentOutputCard } from './AgentOutputCard'
 import { TrustSpecimenUnderneath } from './TrustSpecimenUnderneath'
 import { TRUST_SCROLL_MT } from './trust-tokens'
-import { usePresentationMode } from './usePresentationMode'
+import { usePresentationMode } from './TrustPresentation'
 
 type SpecimenLayer = 'surface' | 'underneath'
 

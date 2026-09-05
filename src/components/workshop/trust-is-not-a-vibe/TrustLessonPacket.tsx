@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { TrustChapterFrame } from './TrustChapterFrame'
 import { TrustGoDeeper } from './TrustGoDeeper'
+import { useRegisterTrustStep } from './TrustPresentation'
 import { TRUST_SCROLL_MT, TRUST_STICKY_TOP } from './trust-tokens'
 
 function PacketStep({
@@ -17,11 +18,19 @@ function PacketStep({
   className?: string
   children: ReactNode
 }) {
+  const { ref, current } = useRegisterTrustStep(label)
+
   return (
     <section
+      ref={ref}
+      tabIndex={-1}
+      data-trust-step
+      data-trust-step-current={current || undefined}
       className={cn(
         'rounded-lg border border-stone-200 bg-white px-3 py-3 dark:border-stone-700 dark:bg-stone-900',
         TRUST_SCROLL_MT,
+        'outline-none',
+        current && 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
         className
       )}
     >
@@ -70,14 +79,22 @@ export function TrustLessonPacket({
 }) {
   // The rail spans the workspace rows so its inner block can stick within them.
   const railSpan = checkIt ? 'lg:row-span-4' : 'lg:row-span-3'
+  // The idea block is the chapter's first stop when presenting.
+  const { ref: ideaRef, current: ideaCurrent } = useRegisterTrustStep('The idea')
 
   return (
     // Items stretch by design: the rail cell must fill the rows it spans, or its sticky child cannot travel.
     <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
       <header
+        ref={ideaRef}
+        tabIndex={-1}
+        data-trust-step
+        data-trust-step-current={ideaCurrent || undefined}
         className={cn(
           'rounded-lg border border-stone-200 bg-white px-3 py-3 lg:col-start-1 dark:border-stone-700 dark:bg-stone-900',
-          TRUST_SCROLL_MT
+          TRUST_SCROLL_MT,
+          'outline-none',
+          ideaCurrent && 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950'
         )}
       >
         <p className="font-space-mono text-[11px] uppercase tracking-[0.18em] text-stone-500">{where}</p>

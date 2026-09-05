@@ -13,6 +13,7 @@ import { TrustOverviewSpec, TrustOverviewVerdicts, TrustOverviewWhy } from './Tr
 import { TrustOverviewContents, TrustOverviewRail } from './TrustOverviewRail'
 import { TrustOverviewSection } from './TrustOverviewSection'
 import { TrustPresentationBar } from './TrustPresentationBar'
+import { TrustPresentationProvider } from './TrustPresentation'
 import { TrustQuestionBreak } from './TrustQuestionBreak'
 import { TrustSeatStudio } from './TrustSeatSection'
 import { trust } from './trust-tokens'
@@ -23,6 +24,14 @@ const SECTION = Object.fromEntries(TRUST_OVERVIEW_SECTIONS.map((item) => [item.i
 >
 
 export function TrustLandingClient() {
+  return (
+    <TrustPresentationProvider>
+      <TrustLandingBody />
+    </TrustPresentationProvider>
+  )
+}
+
+function TrustLandingBody() {
   return (
     <main className={cn(trust.shell, 'overflow-x-clip pb-20 sm:pb-24')}>
       <div className={trust.main}>

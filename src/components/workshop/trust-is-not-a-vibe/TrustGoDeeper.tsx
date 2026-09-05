@@ -1,5 +1,8 @@
-import type { ReactNode } from 'react'
+'use client'
+
+import { useEffect, useState, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { useTrustPresentation } from './TrustPresentation'
 import { TRUST_SCROLL_MT } from './trust-tokens'
 
 /**
@@ -17,8 +20,20 @@ export function TrustGoDeeper({
   hint?: string
   className?: string
 }) {
+  const { depthOpen } = useTrustPresentation()
+  const [open, setOpen] = useState(false)
+
+  // Seeded rather than controlled. One toggle in the presentation bar opens
+  // every panel for a technical question, and each panel can still be closed
+  // individually afterwards without fighting the shared value.
+  useEffect(() => {
+    setOpen(depthOpen)
+  }, [depthOpen])
+
   return (
     <details
+      open={open}
+      onToggle={(event) => setOpen(event.currentTarget.open)}
       className={cn(
         'rounded-xl border border-stone-200 px-4 py-3 dark:border-stone-700',
         TRUST_SCROLL_MT,
