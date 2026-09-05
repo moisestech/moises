@@ -82,7 +82,13 @@ export {
 } from './roles'
 
 export { getTrustLessonPacket, TRUST_LESSON_PACKETS } from './lesson-packets'
-export type { TrustIdeaTerm, TrustLessonPacket, TrustRoleCheck, TrustRoleChoice } from './lesson-packets'
+export type {
+  TrustIdeaDiagramId,
+  TrustIdeaTerm,
+  TrustLessonPacket,
+  TrustRoleCheck,
+  TrustRoleChoice,
+} from './lesson-packets'
 
 export {
   TRUST_CASE_A,

@@ -63,7 +63,17 @@ export type TrustLessonPacket = {
   ideaTerms: readonly TrustIdeaTerm[]
   /** Concept still for the right column of The idea. */
   ideaStill: TrustPlaceholderKey
+  /** Teaching diagram that pages as the last Idea portion. */
+  ideaDiagram: TrustIdeaDiagramId
 }
+
+export type TrustIdeaDiagramId =
+  | 'prompt-output'
+  | 'four-tasks'
+  | 'output-kinds'
+  | 'eval-steps'
+  | 'grader-score'
+  | 'transfer-pipeline'
 
 export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPacket>> = {
   // Where, do-now, and done-when reuse the locked frame copy rather than restating it.
@@ -89,6 +99,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'proof', meaning: 'A finished look is not evidence the system behind the screen is safe.' },
     ],
     ideaStill: 'peelOpenHero',
+    ideaDiagram: 'prompt-output',
     roleSignals: {
       pm: 'Is this outcome actually ready?',
       engineering: 'What evidence and permissions exist?',
@@ -144,6 +155,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'act', meaning: 'Write, send, or change something in the world — not just generate text.' },
     ],
     ideaStill: 'roleLensCards',
+    ideaDiagram: 'four-tasks',
     roleSignals: {
       pm: 'What outcome must be true before this is acceptable?',
       engineering: 'What evidence and permission can you verify?',
@@ -202,6 +214,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'pause', meaning: 'A stop before the write, where a person can still intervene.' },
     ],
     ideaStill: 'failureTokens',
+    ideaDiagram: 'output-kinds',
     roleSignals: {
       pm: 'Which planted break would still ship if the prose were true?',
       engineering: 'Which failure is evidence, and which is permission?',
@@ -261,6 +274,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'stage', meaning: 'Where in the loop the break actually lives, not how the prose sounds.' },
     ],
     ideaStill: 'simpleLoop',
+    ideaDiagram: 'eval-steps',
     roleSignals: {
       pm: 'If you only graded the output, which stage would you never see?',
       engineering: 'Which stage is a data or permission break, not a wording break?',
@@ -317,6 +331,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'gate', meaning: 'The specific stop you name before the team votes.' },
     ],
     ideaStill: 'fullHarness',
+    ideaDiagram: 'grader-score',
     roleSignals: {
       pm: 'Which control would have stopped the write even if the card still looked finished?',
       engineering: 'Which control is a check you can run before the send?',
@@ -371,6 +386,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'your data', meaning: 'The cases you actually hold, not the enrollment card you already judged.' },
     ],
     ideaStill: 'caseBTransfer',
+    ideaDiagram: 'transfer-pipeline',
     roleSignals: {
       pm: 'What outcome must be true before this unseen card may act?',
       engineering: 'What evidence and permission can you verify on a case you have not rehearsed?',
