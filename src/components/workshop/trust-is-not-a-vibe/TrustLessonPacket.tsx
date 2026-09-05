@@ -83,8 +83,17 @@ export function TrustLessonPacket({
   const { ref: ideaRef, current: ideaCurrent } = useRegisterTrustStep('The idea')
 
   return (
-    // Items stretch by design: the rail cell must fill the rows it spans, or its sticky child cannot travel.
-    <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_20rem]">
+    /*
+      Items stretch by design: the rail cell must fill the rows it spans, or its
+      sticky child cannot travel.
+
+      Items also need `min-w-0`. A grid item defaults to `min-width: auto`, so
+      anything with a wide intrinsic size — a table set to scroll sideways
+      inside Go deeper — pushes the whole column past the viewport instead of
+      scrolling within it. `minmax(0,1fr)` guards the desktop track; this
+      guards the single implicit column on a phone.
+    */
+    <section className="grid gap-4 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1fr)_20rem]">
       <header
         ref={ideaRef}
         tabIndex={-1}

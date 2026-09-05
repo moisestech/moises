@@ -2,12 +2,34 @@ import { chromium } from 'playwright'
 
 const BASE = process.env.BASE ?? 'http://localhost:3001'
 const LEARN = `${BASE}/workshop/trust-is-not-a-vibe/learn`
+const OVERVIEW = `${BASE}/workshop/trust-is-not-a-vibe`
 
 const results = []
 function check(name, pass, detail = '') {
   results.push({ name, pass, detail })
   console.log(`${pass ? 'ok  ' : 'FAIL'} ${name}${detail ? ` — ${detail}` : ''}`)
 }
+
+/**
+ * Sections server-render their step attributes but only join the registry after
+ * hydration. Waiting on the count avoids an early keypress reading zero steps,
+ * which looks like "past the last step" and jumps to the next chapter.
+ */
+async function waitForSteps(page) {
+  await page.waitForFunction(
+    () => Number(document.querySelector('[data-trust-steps]')?.getAttribute('data-trust-steps')) > 0,
+    null,
+    { timeout: 30000 }
+  )
+}
+
+const announcement = (page) =>
+  page.evaluate(
+    () =>
+      [...document.querySelectorAll('[role="status"][aria-live="polite"]')]
+        .map((node) => node.textContent?.trim())
+        .find(Boolean) ?? ''
+  )
 
 const browser = await chromium.launch()
 
@@ -158,6 +180,215 @@ const browser = await chromium.launch()
   await page.waitForTimeout(300)
   check('reduced motion still reveals the comparison', await page.getByText('regression', { exact: false }).first().isVisible())
   check('no console errors under reduced motion', errors.length === 0, errors[0] ?? '')
+  await ctx.close()
+}
+
+/* 7. Keyboard stepping, on every page that hosts steps. */
+{
+  const pages = [
+    ['overview', `${OVERVIEW}?present=1`],
+    ['looks-right', `${LEARN}/looks-right?present=1`],
+    ['four-lenses', `${LEARN}/four-lenses?present=1`],
+    ['seeded-failures', `${LEARN}/seeded-failures?present=1`],
+    ['the-loop', `${LEARN}/the-loop?present=1`],
+    ['the-harness', `${LEARN}/the-harness?present=1`],
+    ['transfer', `${LEARN}/transfer?present=1`],
+  ]
+
+  for (const [name, url] of pages) {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+    const page = await ctx.newPage()
+    const errors = []
+    page.on('pageerror', (error) => errors.push(String(error).slice(0, 160)))
+    await page.goto(url, { waitUntil: 'networkidle' })
+    await waitForSteps(page)
+
+    const startUrl = page.url()
+    const total = Number(
+      await page.getAttribute('[data-trust-steps]', 'data-trust-steps')
+    )
+    await page.keyboard.press('ArrowRight')
+    await page.waitForTimeout(700)
+
+    const state = await page.evaluate(() => ({
+      focusedIsStep: document.activeElement?.hasAttribute('data-trust-step') ?? false,
+      current: document.querySelectorAll('[data-trust-step-current]').length,
+    }))
+    check(`${name}: ArrowRight announces step 1 of ${total}`, /^Step 1 of \d+\./.test(await announcement(page)))
+    check(`${name}: focus lands on the step`, state.focusedIsStep)
+    check(`${name}: exactly one step reads as current`, state.current === 1, String(state.current))
+
+    // seeded-failures has a single section until the failures are revealed.
+    if (total > 1) {
+      await page.keyboard.press('ArrowRight')
+      await page.waitForTimeout(500)
+      check(`${name}: advances to step 2`, /^Step 2 of \d+\./.test(await announcement(page)))
+
+      await page.keyboard.press('ArrowLeft')
+      await page.waitForTimeout(500)
+      check(`${name}: ArrowLeft goes back`, /^Step 1 of \d+\./.test(await announcement(page)))
+    }
+
+    await page.keyboard.press('ArrowLeft')
+    await page.waitForTimeout(400)
+    check(`${name}: ArrowLeft at step 1 stays put`, page.url() === startUrl)
+
+    await page.keyboard.press('End')
+    await page.waitForTimeout(700)
+    const end = (await announcement(page)).match(/^Step (\d+) of (\d+)\./)
+    check(`${name}: End jumps to the last step`, Boolean(end) && end[1] === end[2], end?.[0] ?? 'no match')
+
+    await page.keyboard.press('Home')
+    await page.waitForTimeout(500)
+    check(`${name}: Home returns to step 1`, /^Step 1 of \d+\./.test(await announcement(page)))
+
+    check(`${name}: stepping throws nothing`, errors.length === 0, errors[0] ?? '')
+    await ctx.close()
+  }
+}
+
+/* 8. Text fields keep their keys. Four Lenses, transfer, and the harness all have them. */
+{
+  for (const name of ['four-lenses', 'transfer', 'the-harness']) {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+    const page = await ctx.newPage()
+    // The Four Lenses field stays disabled until a seat is chosen, so seed one.
+    await page.addInitScript(() => {
+      localStorage.setItem(
+        'trust-is-not-a-vibe:v1',
+        JSON.stringify({ role: 'pm', completedChapters: [] })
+      )
+    })
+    await page.goto(`${LEARN}/${name}?present=1`, { waitUntil: 'networkidle' })
+    await waitForSteps(page)
+    // Some fields sit in a collapsed panel, which cannot receive keys.
+    await page.evaluate(() => {
+      document.querySelectorAll('details').forEach((el) => el.setAttribute('open', ''))
+    })
+    const field = page
+      .locator('input[type="text"]:visible:not([disabled]), textarea:visible:not([disabled])')
+      .first()
+    if ((await field.count()) === 0) {
+      check(`${name}: has a text field to guard`, false, 'none found')
+      await ctx.close()
+      continue
+    }
+    await field.scrollIntoViewIfNeeded()
+    await field.click()
+    const before = await announcement(page)
+    await page.keyboard.type('ab cd')
+    await page.keyboard.press('ArrowLeft')
+    await page.keyboard.press('ArrowRight')
+    await page.waitForTimeout(400)
+    check(`${name}: space reaches the field`, (await field.inputValue()).includes('ab cd'))
+    check(`${name}: arrows do not step while typing`, (await announcement(page)) === before)
+    await ctx.close()
+  }
+}
+
+/* 9. Leaving a chapter takes a confirming press. Self-paced never steps. */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+  const page = await ctx.newPage()
+  await page.goto(`${LEARN}/looks-right?present=1`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await page.keyboard.press('End')
+  await page.waitForTimeout(600)
+  const here = page.url()
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(700)
+  check('the first press past the end stays in the chapter', page.url() === here)
+  check('and says another press will continue', /Press again to continue/.test(await announcement(page)))
+  await page.keyboard.press('ArrowRight')
+  await page.waitForURL(/four-lenses/, { timeout: 15000 }).catch(() => {})
+  check('the confirming press enters the next chapter', page.url().includes('/four-lenses'), page.url())
+  await ctx.close()
+}
+{
+  /*
+    seeded-failures registers one section until the failures are revealed, so
+    the end of the list is not the end of the chapter. Stepping must not carry
+    the room out of an exercise it is still working through.
+  */
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+  const page = await ctx.newPage()
+  await page.goto(`${LEARN}/seeded-failures?present=1`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  const here = page.url()
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(400)
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(700)
+  check('one section is not enough to step out of the chapter', page.url() === here, page.url())
+  await ctx.close()
+}
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+  const page = await ctx.newPage()
+  await page.goto(`${LEARN}/looks-right`, { waitUntil: 'networkidle' })
+  await page.waitForTimeout(1200)
+  await page.keyboard.press('ArrowRight')
+  await page.keyboard.press('End')
+  await page.waitForTimeout(500)
+  const quiet = await page.evaluate(() => ({
+    current: document.querySelectorAll('[data-trust-step-current]').length,
+    live: [...document.querySelectorAll('[role="status"][aria-live="polite"]')]
+      .map((node) => node.textContent?.trim())
+      .filter(Boolean).length,
+  }))
+  check(
+    'self-paced reading ignores the stepping keys',
+    quiet.current === 0 && quiet.live === 0,
+    JSON.stringify(quiet)
+  )
+  await ctx.close()
+}
+
+/* 10. The bar makes stepping and depth discoverable without the keyboard. */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+  const page = await ctx.newPage()
+  await page.goto(`${LEARN}/the-loop?present=1`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  const bar = page.getByRole('complementary', { name: 'Presentation controls' })
+
+  const counter = bar.locator('p').filter({ hasText: /\d+ \/ \d+/ }).first()
+  check('the bar shows a step counter', await counter.isVisible(), (await counter.textContent())?.trim())
+
+  await bar.getByRole('button', { name: 'Next section' }).click()
+  await page.waitForTimeout(500)
+  check('the Next button steps', /^Step 1 of \d+\./.test(await announcement(page)))
+  await bar.getByRole('button', { name: 'Next section' }).click()
+  await page.waitForTimeout(500)
+  await bar.getByRole('button', { name: 'Previous section' }).click()
+  await page.waitForTimeout(500)
+  check('the Previous button steps back', /^Step 1 of \d+\./.test(await announcement(page)))
+
+  const depth = bar.getByRole('button', { name: /depth/i })
+  const closedCount = await page.locator('details').count()
+  await depth.click()
+  await page.waitForTimeout(400)
+  const openCount = await page.locator('details[open]').count()
+  check('Open depth opens every panel at once', openCount === closedCount && openCount > 0, `${openCount}/${closedCount}`)
+  check('the depth toggle reports its state', (await depth.getAttribute('aria-pressed')) === 'true')
+  await depth.click()
+  await page.waitForTimeout(400)
+  check('Close depth collapses them again', (await page.locator('details[open]').count()) === 0)
+  await ctx.close()
+}
+
+/* 11. Stepping under reduced motion. */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' })
+  const page = await ctx.newPage()
+  const errors = []
+  page.on('pageerror', (error) => errors.push(String(error).slice(0, 160)))
+  await page.goto(`${LEARN}/seeded-failures?present=1`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(500)
+  check('reduced motion still steps', /^Step 1 of \d+\./.test(await announcement(page)))
+  check('reduced motion throws nothing', errors.length === 0, errors[0] ?? '')
   await ctx.close()
 }
 

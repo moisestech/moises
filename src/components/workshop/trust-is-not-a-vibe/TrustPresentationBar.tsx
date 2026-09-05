@@ -21,7 +21,7 @@ import { useTrustProgress } from './useTrustProgress'
  * the room's answers between runs, and leaving presentation mode.
  */
 export function TrustPresentationBar({ className }: { className?: string }) {
-  const { present, exit, steps, stepIndex, next, prev, depthOpen, setDepthOpen } = useTrustPresentation()
+  const { present, exit, steps, stepIndex, armed, next, prev, depthOpen, setDepthOpen } = useTrustPresentation()
   const { progress, update, reset } = useTrustProgress()
 
   if (!present) return null
@@ -48,12 +48,30 @@ export function TrustPresentationBar({ className }: { className?: string }) {
         <button type="button" onClick={prev} className={cn(control, 'px-2')} aria-label="Previous section">
           <HiOutlineChevronLeft className="h-3.5 w-3.5" aria-hidden />
         </button>
-        {/* The counter makes the arrow keys discoverable rather than hidden. */}
-        <p className="min-w-[5.5rem] text-center font-space-mono text-[11px] text-stone-600 dark:text-stone-300">
-          {steps.length === 0 ? '—' : `${Math.max(stepIndex + 1, 1)} / ${steps.length}`}
+        {/*
+          The counter makes the arrow keys discoverable rather than hidden, and
+          shows when the next press will leave the chapter rather than move
+          within it.
+        */}
+        <p
+          className={cn(
+            'min-w-[5.5rem] text-center font-space-mono text-[11px]',
+            armed ? 'text-amber-700 dark:text-amber-300' : 'text-stone-600 dark:text-stone-300'
+          )}
+        >
+          {steps.length === 0
+            ? '—'
+            : armed
+              ? 'end · again'
+              : `${Math.max(stepIndex + 1, 1)} / ${steps.length}`}
           <span className="sr-only"> sections. Use the arrow keys to move between them.</span>
         </p>
-        <button type="button" onClick={next} className={cn(control, 'px-2')} aria-label="Next section">
+        <button
+          type="button"
+          onClick={next}
+          className={cn(control, 'px-2', armed && 'border-amber-500 text-amber-800 dark:text-amber-200')}
+          aria-label={armed ? 'Continue to the next chapter' : 'Next section'}
+        >
           <HiOutlineChevronRight className="h-3.5 w-3.5" aria-hidden />
         </button>
       </div>

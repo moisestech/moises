@@ -34,6 +34,8 @@ type TrustPresentationValue = {
   setDepthOpen: (open: boolean) => void
   steps: { id: string; label: string }[]
   stepIndex: number
+  /** At the last step, with a pending press to leave the chapter. */
+  armed: boolean
   registerStep: (id: string, label: string, element: HTMLElement | null) => void
   goToStep: (index: number) => void
   next: () => void
@@ -53,6 +55,7 @@ const FALLBACK: TrustPresentationValue = {
   setDepthOpen: () => {},
   steps: [],
   stepIndex: -1,
+  armed: false,
   registerStep: () => {},
   goToStep: () => {},
   next: () => {},
@@ -104,6 +107,7 @@ export function TrustPresentationProvider({
   const [hydrated, setHydrated] = useState(false)
   const [depthOpen, setDepthOpen] = useState(false)
   const [stepIndex, setStepIndex] = useState(-1)
+  const [armed, setArmed] = useState(false)
   const [steps, setSteps] = useState<TrustStep[]>([])
   const [announcement, setAnnouncement] = useState('')
 
@@ -168,6 +172,7 @@ export function TrustPresentationProvider({
       const step = steps[index]
       if (!step) return
       setStepIndex(index)
+      setArmed(false)
       step.element.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
       // Focus without a second scroll, so the smooth scroll above is not cut short.
       step.element.focus({ preventScroll: true })
@@ -175,6 +180,16 @@ export function TrustPresentationProvider({
     },
     [reduceMotion, steps]
   )
+
+  const leaveChapter = useCallback(() => {
+    if (!slug) {
+      const first = TRUST_CHAPTERS[0]
+      if (first) router.push(`${TRUST_LEARN_BASE}/${first.slug}`)
+      return
+    }
+    const { next: nextChapter } = getAdjacentTrustChapters(slug)
+    router.push(nextChapter ? `${TRUST_LEARN_BASE}/${nextChapter.slug}` : TRUST_BASE)
+  }, [router, slug])
 
   const next = useCallback(() => {
     // Sections render on the server but only register after hydration. Without
@@ -185,16 +200,20 @@ export function TrustPresentationProvider({
       goToStep(stepIndex + 1)
       return
     }
-    // Past the last section, carry on into the next chapter. Presentation mode
-    // survives the navigation through sessionStorage.
-    if (!slug) {
-      const first = TRUST_CHAPTERS[0]
-      if (first) router.push(`${TRUST_LEARN_BASE}/${first.slug}`)
+    /*
+      Leaving takes a second press. Some chapters grow as the room works —
+      seeded-failures registers one section until the failures are revealed — so
+      the end of the list is not reliably the end of the chapter, and a stray
+      arrow key would otherwise move everyone on mid-exercise. Presentation mode
+      survives the navigation through sessionStorage.
+    */
+    if (!armed) {
+      setArmed(true)
+      setAnnouncement('End of this chapter. Press again to continue.')
       return
     }
-    const { next: nextChapter } = getAdjacentTrustChapters(slug)
-    router.push(nextChapter ? `${TRUST_LEARN_BASE}/${nextChapter.slug}` : TRUST_BASE)
-  }, [goToStep, router, slug, stepIndex, steps.length])
+    leaveChapter()
+  }, [armed, goToStep, leaveChapter, stepIndex, steps.length])
 
   // Clamps at the first step rather than paging back a chapter. Advancing off
   // the end is a deliberate "we are done here"; going back is usually a
@@ -203,6 +222,12 @@ export function TrustPresentationProvider({
     if (stepIndex > 0) goToStep(stepIndex - 1)
     else goToStep(0)
   }, [goToStep, stepIndex])
+
+  // A section appearing after the room acts means there is more to show here
+  // after all, so the pending exit no longer reflects where we are.
+  useEffect(() => {
+    setArmed(false)
+  }, [steps.length])
 
   useEffect(() => {
     if (!present || !stepping) return
@@ -248,12 +273,13 @@ export function TrustPresentationProvider({
       setDepthOpen,
       steps: publicSteps,
       stepIndex,
+      armed,
       registerStep,
       goToStep,
       next,
       prev,
     }),
-    [depthOpen, exit, goToStep, hydrated, next, prev, present, publicSteps, registerStep, stepIndex]
+    [armed, depthOpen, exit, goToStep, hydrated, next, prev, present, publicSteps, registerStep, stepIndex]
   )
 
   return (
