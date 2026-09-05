@@ -1,0 +1,38 @@
+# pnpm 10 reads overrides from here; the `pnpm` field in package.json is ignored.
+#
+# There is no `packages:` key on purpose. The root is the only project, and
+# labs/agentic-ops is a standalone container app with its own package.json that
+# nothing here installs or builds. Listing it would pull its dependency tree
+# into this lockfile.
+#
+# Each override is scoped to the vulnerable range rather than pinning a single
+# version, so a dependency that already resolves to a patched release is left
+# alone and these entries fall away naturally as parents catch up.
+overrides:
+  # DoS via exponential-time expansion
+  brace-expansion@<1.1.16: '>=1.1.16'
+  brace-expansion@>=2 <2.1.2: '>=2.1.2'
+  # Uncaught crash / prototype write via untrusted input
+  browserslist@<4.28.7: '>=4.28.7'
+  # Prototype pollution via parse()
+  flatted@<3.4.2: '>=3.4.2'
+  # CRLF injection via unescaped multipart boundary
+  form-data@<4.0.6: '>=4.0.6'
+  # Quadratic CPU via YAML merge-key chains and !!omap resolution
+  js-yaml@<3.15.1: '>=3.15.1'
+  js-yaml@>=4 <4.3.1: '>=4.3.1'
+  # Code injection via _.template
+  lodash@<4.18.0: '>=4.18.0'
+  lodash-es@<4.18.0: '>=4.18.0'
+  # ReDoS via matchOne() combinatorial backtracking
+  minimatch@<3.1.3: '>=3.1.3'
+  minimatch@>=9 <9.0.7: '>=9.0.7'
+  # Integer overflow, and non-secure generators looping indefinitely
+  nanoid@<3.3.18: '>=3.3.18'
+  # ReDoS via extglob quantifiers
+  picomatch@<2.3.2: '>=2.3.2'
+  picomatch@>=4 <4.0.4: '>=4.0.4'
+  # Arbitrary file read via source-map auto-loading
+  postcss@<8.5.18: '>=8.5.18'
+  # JSON VNode injection
+  preact@<10.28.2: '>=10.28.2'
