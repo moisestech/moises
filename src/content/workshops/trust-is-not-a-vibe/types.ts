@@ -99,6 +99,10 @@ export type TrustSpecimenRuntime = {
     /** Invented product the card belongs to. */
     app: string
     screen: string
+    /** Named agent inside that product. */
+    agent: string
+    /** Product status on the recommendation, e.g. Ready for review. */
+    status: string
     /** The button the card is asking someone to press. */
     primaryAction: string
   }

@@ -84,6 +84,7 @@ export default function Header({ onMobileMenuToggle, mobileMenuOpen }: { onMobil
     <>
       <header
         ref={headerRef}
+        data-site-chrome
         className={`fixed top-0 left-0 right-0 z-50 transition-colors font-['MoMA_Sans'] ${
           isDark 
             ? 'bg-black text-white border-black' 

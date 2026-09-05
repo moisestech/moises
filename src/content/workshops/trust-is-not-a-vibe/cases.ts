@@ -4,14 +4,14 @@ import type { TrustCase, TrustControl, TrustLoopNode } from './types'
 export const TRUST_CASE_A_LEARNER_NAME = 'Enrollment decision'
 
 export const TRUST_CASE_A_INTRO =
-  'This is a made-up enrollment card. An AI wants to confirm October 6, email 120 people, and automatically remove participants it calls quiet. Nothing has been sent or changed. You decide whether it may act.'
+  'This is the enrollment screen from Cohort Studio. An agent wants to confirm October 6, email 120 people, and automatically remove participants it calls quiet. Nothing has been sent or changed. You decide whether it may act.'
 
 export const TRUST_CASE_A_CARD_NOTE = 'Made-up case. Nothing has been sent or changed.'
 
 export const TRUST_LOOKS_RIGHT_FRAME = {
   where: '1 of 6 · Looks Right',
   goal: 'Goal: make your first decision before inspecting how the system worked.',
-  doNow: 'Read the card. Vote Allow, Ask, or Deny.',
+  doNow: 'Read that screen. Vote Allow, Ask, or Deny.',
   doneBefore: 'Done when your first vote is saved.',
   doneAfter:
     'Your vote is saved. Now open the system and compare your first impression with what the card left out.',
@@ -42,6 +42,8 @@ export const TRUST_CASE_A: TrustCase = {
     surface: {
       app: 'Cohort Studio',
       screen: 'Enrollment decision',
+      agent: 'Enrollment agent',
+      status: 'Ready for review',
       primaryAction: 'Send 120 messages',
     },
     call: {
@@ -164,6 +166,8 @@ export const TRUST_CASE_B: TrustCase = {
     surface: {
       app: 'Studio Intake',
       screen: 'Waitlist decision',
+      agent: 'Intake agent',
+      status: 'Ready to notify',
       primaryAction: 'Send 40 acceptances',
     },
     call: {

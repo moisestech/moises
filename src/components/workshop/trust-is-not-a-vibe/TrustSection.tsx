@@ -32,34 +32,39 @@ export function TrustSection({
   className?: string
 }) {
   const meta = KIND[kind]
-  const { ref, current } = useRegisterTrustStep(title)
+  const { ref, current, focused, select } = useRegisterTrustStep(title)
 
   return (
     <section
-      ref={ref}
-      // Focusable only programmatically: presenting moves focus here so the
-      // announcement lands and Tab continues from the section on screen.
-      tabIndex={-1}
-      data-trust-step
-      data-trust-step-current={current || undefined}
       className={cn(
-        flush
-          ? 'mt-10'
-          : 'mt-20 border-t border-stone-200 pt-16 dark:border-stone-800',
-        TRUST_SCROLL_MT,
-        // A left accent rather than a focus ring. A ring around a full-width
-        // block reads as an error state on a projector.
-        'outline-none motion-safe:transition-[box-shadow,padding] pl-0',
-        current && 'rounded-r-lg shadow-[inset_3px_0_0_0_theme(colors.cyan.500)] pl-4',
+        'rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900',
+        flush ? 'mt-0' : 'mt-3',
+        current && 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
         className
       )}
     >
-      <p className="font-space-mono text-[11px] uppercase tracking-[0.2em] text-cyan-700 dark:text-cyan-400">
-        {meta.label}
-      </p>
-      <p className="mt-2 max-w-2xl text-base text-stone-500 dark:text-stone-400">{note ?? meta.note}</p>
-      <h2 className={cn(trust.h2, 'mt-5')}>{title}</h2>
-      <div className="mt-8">{children}</div>
+      <button
+        ref={ref}
+        type="button"
+        tabIndex={-1}
+        data-trust-step
+        data-trust-step-current={current || undefined}
+        aria-expanded={focused}
+        onClick={select}
+        className={cn(
+          'flex w-full flex-col items-start px-3 py-3 text-left outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-inset',
+          TRUST_SCROLL_MT
+        )}
+      >
+        <p className="font-space-mono text-[11px] uppercase tracking-[0.2em] text-cyan-700 dark:text-cyan-400">
+          {meta.label}
+        </p>
+        <h2 className={cn(trust.h2, 'mt-1 text-lg sm:text-xl')}>{title}</h2>
+        <p className="mt-1 max-w-2xl text-sm text-stone-500 dark:text-stone-400">{note ?? meta.note}</p>
+      </button>
+      {focused ? (
+        <div className="border-t border-stone-200 px-3 py-4 dark:border-stone-700">{children}</div>
+      ) : null}
     </section>
   )
 }

@@ -134,7 +134,9 @@ export function TrustFourLensesLesson() {
       where={PACKET.where}
       idea={PACKET.idea}
       seeIt={seeIt}
+      seeCaption={PACKET.seeCaption}
       tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
+      tryCaption={PACKET.tryPrompt}
       checkIt={checkIt}
       job={
         roleData ? (

@@ -21,16 +21,18 @@ import {
   TRUST_TITLE,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { TrustCountdown } from './TrustCountdown'
 import { TrustLearnClient } from './TrustLearnClient'
+import { TrustPresentationBar } from './TrustPresentationBar'
+import { TrustPresentationProvider } from './TrustPresentation'
 import { trust } from './trust-tokens'
 
 export function TrustRehearseClient() {
-  const [running, setRunning] = useState(false)
   const [previewSlug, setPreviewSlug] = useState(TRUST_CHAPTERS[0].slug)
 
   return (
+    <TrustPresentationProvider slug={previewSlug} stepping={false}>
     <div className={cn(trust.shell, 'pb-24')}>
+      <TrustPresentationBar />
       <div className={cn(trust.main, 'max-w-6xl')}>
         <p className={trust.eyebrow}>Facilitator · not indexed · {TRUST_SESSION_TITLE}</p>
         <h1 className={cn(trust.title, 'mt-2')}>Rehearse · {TRUST_TITLE}</h1>
@@ -46,14 +48,6 @@ export function TrustRehearseClient() {
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-4 rounded-xl border border-stone-200 bg-white px-4 py-3 dark:border-stone-700 dark:bg-stone-900">
-          <TrustCountdown running={running} />
-          <button
-            type="button"
-            onClick={() => setRunning((value) => !value)}
-            className={running ? trust.btnSecondary : trust.btnPrimary}
-          >
-            {running ? 'Reset clock' : 'Start 30:00'}
-          </button>
           <Link href={TRUST_BASE} className={trust.link}>
             Public landing
           </Link>
@@ -198,5 +192,6 @@ export function TrustRehearseClient() {
         </section>
       </div>
     </div>
+    </TrustPresentationProvider>
   )
 }

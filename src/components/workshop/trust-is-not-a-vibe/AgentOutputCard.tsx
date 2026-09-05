@@ -54,7 +54,9 @@ export function AgentOutputCard({
         >
           {caseData.output.headline}
         </h3>
-        <p className="mt-0.5 text-xs text-stone-500">{caseData.output.confidence}</p>
+        <p className="mt-1.5 inline-flex rounded-full bg-stone-200/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-stone-700 dark:bg-stone-700 dark:text-stone-200">
+          {caseData.output.confidence}
+        </p>
       </div>
       {/* Compact renders inside narrow columns, where a claims grid would truncate. */}
       {compact ? null : (

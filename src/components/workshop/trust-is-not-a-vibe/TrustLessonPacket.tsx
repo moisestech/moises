@@ -1,61 +1,75 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { TrustChapterFrame } from './TrustChapterFrame'
 import { TrustGoDeeper } from './TrustGoDeeper'
-import { useRegisterTrustStep } from './TrustPresentation'
-import { TRUST_SCROLL_MT, TRUST_STICKY_TOP } from './trust-tokens'
+import { TrustPageContents, TrustPageRail } from './TrustPageRail'
+import { useRegisterTrustStep, useTrustPresentation } from './TrustPresentation'
+import { TRUST_SCROLL_MT, trustLesson } from './trust-tokens'
 
 function PacketStep({
   step,
   label,
+  deck,
   className,
   children,
 }: {
   step: number
   label: string
+  deck?: string
   className?: string
   children: ReactNode
 }) {
-  const { ref, current } = useRegisterTrustStep(label)
+  const { ref, current, focused, select } = useRegisterTrustStep(label)
 
   return (
     <section
-      ref={ref}
-      tabIndex={-1}
-      data-trust-step
-      data-trust-step-current={current || undefined}
       className={cn(
-        'rounded-lg border border-stone-200 bg-white px-3 py-3 dark:border-stone-700 dark:bg-stone-900',
-        TRUST_SCROLL_MT,
-        'outline-none',
+        'rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900',
         current && 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950',
         className
       )}
     >
-      <p className="font-space-mono text-[11px] uppercase tracking-[0.16em] text-cyan-700 dark:text-cyan-400">
-        {step} · {label}
-      </p>
-      <div className="mt-2">{children}</div>
+      <button
+        ref={ref}
+        type="button"
+        tabIndex={-1}
+        data-trust-step
+        data-trust-step-current={current || undefined}
+        aria-expanded={focused}
+        onClick={select}
+        className={cn(
+          'flex w-full flex-col items-start px-3 py-3 text-left outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-inset',
+          TRUST_SCROLL_MT
+        )}
+      >
+        <p className={trustLesson.eyebrow}>{step}</p>
+        <p className={cn(trustLesson.title, 'mt-1')}>{label}</p>
+        {deck ? <p className={trustLesson.deck}>{deck}</p> : null}
+      </button>
+      {focused ? (
+        <div className="border-t border-stone-200 px-3 py-3 dark:border-stone-700">{children}</div>
+      ) : null}
     </section>
   )
 }
 
 /**
- * The repeatable chapter packet. DOM order is the mobile learning order —
- * where you are, the goal, the case, your seat and instruction, the exercise,
- * feedback, then optional depth. On large screens the orientation block moves
- * into a sticky task rail beside the workspace.
- *
- * The packet owns layout and orientation. Each chapter owns its own exercise.
+ * The repeatable chapter packet. One portion is open at a time. The left rail
+ * and the presentation arrows share the same step list. Seat, job, and do-now
+ * live in a closed accordion above The idea so a chapter opens on the claim.
  */
 export function TrustLessonPacket({
   where,
   idea,
+  ideaBody,
   seeIt,
+  seeCaption,
   tryIt,
+  tryCaption,
   checkIt,
+  checkCaption,
   job,
   doNow,
   doneWhen,
@@ -66,9 +80,14 @@ export function TrustLessonPacket({
 }: {
   where: string
   idea: string
+  /** Richer idea copy. When omitted, `idea` is the single paragraph. */
+  ideaBody?: ReactNode
   seeIt: ReactNode
+  seeCaption?: string
   tryIt: ReactNode
+  tryCaption?: string
   checkIt?: ReactNode
+  checkCaption?: string
   job: ReactNode
   doNow: string
   doneWhen: string
@@ -77,84 +96,120 @@ export function TrustLessonPacket({
   deeperHint?: string
   announce?: string
 }) {
-  // The rail spans the workspace rows so its inner block can stick within them.
-  const railSpan = checkIt ? 'lg:row-span-4' : 'lg:row-span-3'
-  // The idea block is the chapter's first stop when presenting.
-  const { ref: ideaRef, current: ideaCurrent } = useRegisterTrustStep('The idea')
+  const { ref: ideaRef, current: ideaCurrent, focused: ideaFocused, select: selectIdea } =
+    useRegisterTrustStep('The idea')
+  const { focusIndex, releaseFocus } = useTrustPresentation()
+  const [briefOpen, setBriefOpen] = useState(false)
+
+  useEffect(() => {
+    if (focusIndex >= 0) setBriefOpen(false)
+  }, [focusIndex])
+
+  const toggleBrief = () => {
+    if (briefOpen) {
+      setBriefOpen(false)
+      selectIdea()
+      return
+    }
+    setBriefOpen(true)
+    releaseFocus()
+  }
 
   return (
-    /*
-      Items stretch by design: the rail cell must fill the rows it spans, or its
-      sticky child cannot travel.
+    <div className="lg:grid lg:grid-cols-[10rem_minmax(0,1fr)] lg:gap-x-10">
+      <TrustPageRail />
+      <div className="min-w-0 space-y-3">
+        <TrustPageContents className="mb-4" />
 
-      Items also need `min-w-0`. A grid item defaults to `min-width: auto`, so
-      anything with a wide intrinsic size — a table set to scroll sideways
-      inside Go deeper — pushes the whole column past the viewport instead of
-      scrolling within it. `minmax(0,1fr)` guards the desktop track; this
-      guards the single implicit column on a phone.
-    */
-    <section className="grid gap-4 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1fr)_20rem]">
-      <header
-        ref={ideaRef}
-        tabIndex={-1}
-        data-trust-step
-        data-trust-step-current={ideaCurrent || undefined}
-        className={cn(
-          'rounded-lg border border-stone-200 bg-white px-3 py-3 lg:col-start-1 dark:border-stone-700 dark:bg-stone-900',
-          TRUST_SCROLL_MT,
-          'outline-none',
-          ideaCurrent && 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950'
-        )}
-      >
-        <p className="font-space-mono text-[11px] uppercase tracking-[0.18em] text-stone-500">{where}</p>
-        <p className="mt-1 text-base font-semibold leading-snug text-stone-950 dark:text-stone-50">1 · The idea</p>
-        <p className="mt-1 text-sm leading-relaxed text-stone-800 dark:text-stone-200">{idea}</p>
-      </header>
-
-      <PacketStep step={2} label="See it" className="lg:col-start-1">
-        {seeIt}
-      </PacketStep>
-
-      <div className={cn('lg:col-start-2 lg:row-start-1', railSpan)}>
-        <div
+        <section
           className={cn(
-            'space-y-3 rounded-xl border border-stone-200 bg-white p-3 lg:sticky dark:border-stone-700 dark:bg-stone-900',
-            TRUST_STICKY_TOP
+            'rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900',
+            briefOpen && 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950'
           )}
         >
-          {seat ? (
-            <div>
-              <p className="font-space-mono text-[10px] uppercase tracking-[0.16em] text-cyan-700 dark:text-cyan-400">
-                Your seat
-              </p>
-              <div className="mt-1">{seat}</div>
+          <button
+            type="button"
+            data-trust-brief
+            aria-expanded={briefOpen}
+            onClick={toggleBrief}
+            className={cn(
+              'flex w-full flex-col items-start px-3 py-3 text-left outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-inset',
+              TRUST_SCROLL_MT
+            )}
+          >
+            <p className={trustLesson.eyebrow}>On this chapter</p>
+            <p className={cn(trustLesson.title, 'mt-1')}>Your seat</p>
+            {briefOpen ? null : (
+              <p className={trustLesson.deck}>Seat, job, and what to do now</p>
+            )}
+          </button>
+          {briefOpen ? (
+            <div className="border-t border-stone-200 px-3 py-3 dark:border-stone-700">
+              {seat ? <div className="mb-3">{seat}</div> : null}
+              <TrustChapterFrame
+                compact
+                hideWhereGoal
+                where={where}
+                goal={idea}
+                job={job}
+                doNow={doNow}
+                doneWhen={doneWhen}
+              />
             </div>
           ) : null}
-          <TrustChapterFrame compact hideWhereGoal where={where} goal={idea} job={job} doNow={doNow} doneWhen={doneWhen} />
-        </div>
-      </div>
+        </section>
 
-      <PacketStep step={3} label="Try it" className="lg:col-start-1">
-        {tryIt}
-      </PacketStep>
+        <section
+          className={cn(
+            'rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900',
+            ideaCurrent && 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-stone-50 dark:ring-offset-stone-950'
+          )}
+        >
+          <button
+            ref={ideaRef}
+            type="button"
+            tabIndex={-1}
+            data-trust-step
+            data-trust-step-current={ideaCurrent || undefined}
+            aria-expanded={ideaFocused}
+            onClick={selectIdea}
+            className={cn(
+              'flex w-full flex-col items-start px-3 py-3 text-left outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-inset',
+              TRUST_SCROLL_MT
+            )}
+          >
+            <p className={trustLesson.eyebrow}>{where}</p>
+            <p className={cn(trustLesson.title, 'mt-1')}>The idea</p>
+          </button>
+          {ideaFocused ? (
+            <div className={cn('space-y-3 border-t border-stone-200 px-3 py-3 dark:border-stone-700', trustLesson.body)}>
+              {ideaBody ?? <p>{idea}</p>}
+            </div>
+          ) : null}
+        </section>
 
-      {checkIt ? (
-        <PacketStep step={4} label="Check it" className="lg:col-start-1">
-          {checkIt}
+        <PacketStep step={2} label="See it" deck={seeCaption}>
+          {seeIt}
         </PacketStep>
-      ) : null}
 
-      {announce ? (
-        <div className="sr-only" aria-live="polite">
-          {announce}
-        </div>
-      ) : null}
+        <PacketStep step={3} label="Try it" deck={tryCaption}>
+          {tryIt}
+        </PacketStep>
 
-      {deeper ? (
-        <div className="lg:col-span-2 lg:col-start-1">
-          <TrustGoDeeper hint={deeperHint}>{deeper}</TrustGoDeeper>
-        </div>
-      ) : null}
-    </section>
+        {checkIt ? (
+          <PacketStep step={4} label="Check it" deck={checkCaption}>
+            {checkIt}
+          </PacketStep>
+        ) : null}
+
+        {announce ? (
+          <div className="sr-only" aria-live="polite">
+            {announce}
+          </div>
+        ) : null}
+
+        {deeper ? <TrustGoDeeper hint={deeperHint}>{deeper}</TrustGoDeeper> : null}
+      </div>
+    </div>
   )
 }

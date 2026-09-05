@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { HiLockClosed } from 'react-icons/hi2'
+import { HiLockClosed, HiOutlineCpuChip } from 'react-icons/hi2'
 import {
   TRUST_CASE_A_CARD_NOTE,
   TRUST_CASE_A_LEARNER_NAME,
@@ -21,7 +21,7 @@ const LAYER_LABEL: Record<SpecimenLayer, string> = {
 }
 
 /** Product chrome. Signals that the artifact is software, not course material. */
-function WindowChrome({ app, screen }: { app: string; screen: string }) {
+function WindowChrome({ app, screen, agent }: { app: string; screen: string; agent: string }) {
   return (
     <div className="flex items-center gap-2 border-b border-stone-200 bg-stone-100 px-3 py-1.5 dark:border-stone-700 dark:bg-stone-800">
       <span className="flex shrink-0 gap-1" aria-hidden>
@@ -29,9 +29,13 @@ function WindowChrome({ app, screen }: { app: string; screen: string }) {
         <span className="h-2 w-2 rounded-full bg-stone-300 dark:bg-stone-600" />
         <span className="h-2 w-2 rounded-full bg-stone-300 dark:bg-stone-600" />
       </span>
-      <p className="truncate font-space-mono text-[11px] text-stone-500 dark:text-stone-400">
+      <p className="min-w-0 flex-1 truncate font-space-mono text-[11px] text-stone-500 dark:text-stone-400">
         {app} <span aria-hidden>/</span> {screen}
       </p>
+      <span className="inline-flex shrink-0 items-center gap-1 rounded-full border border-stone-200 bg-white px-1.5 py-0.5 text-[10px] font-semibold text-stone-700 dark:border-stone-600 dark:bg-stone-900 dark:text-stone-200">
+        <HiOutlineCpuChip className="h-3 w-3 text-cyan-700 dark:text-cyan-400" aria-hidden />
+        {agent}
+      </span>
     </div>
   )
 }
@@ -42,8 +46,8 @@ function WindowChrome({ app, screen }: { app: string; screen: string }) {
  * once unlocked, the machine layer that contradicts it.
  *
  * `bare` skips the mat for contexts that already supply one, such as the studio
- * photograph. `compact` shows the surface only, for recurring references to the
- * same object.
+ * photograph. Lesson surfaces always use the full frame so the card stays the
+ * same object from Looks Right through Transfer.
  */
 export function TrustSpecimen({
   caseData,
@@ -54,7 +58,7 @@ export function TrustSpecimen({
   className,
 }: {
   caseData: TrustCase
-  variant?: 'full' | 'compact' | 'bare'
+  variant?: 'full' | 'bare'
   underneathUnlocked?: boolean
   /** What the learner must do first. Shown in place of the locked layer. */
   lockedNote?: string
@@ -74,7 +78,23 @@ export function TrustSpecimen({
 
   const windowPane = (
     <div className="overflow-hidden rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900">
-      <WindowChrome app={surface.app} screen={surface.screen} />
+      <WindowChrome app={surface.app} screen={surface.screen} agent={surface.agent} />
+
+      <div className="flex items-center gap-2 border-b border-stone-200 bg-white px-3 py-2 dark:border-stone-700 dark:bg-stone-900">
+        <span
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-600 text-white dark:bg-cyan-500 dark:text-stone-950"
+          aria-hidden
+        >
+          <HiOutlineCpuChip className="h-4 w-4" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-xs font-semibold text-stone-950 dark:text-stone-50">{surface.agent}</p>
+          <p className="font-space-mono text-[10px] text-stone-500">Just now · generated</p>
+        </div>
+        <span className="shrink-0 rounded-full bg-cyan-50 px-2 py-0.5 text-[10px] font-semibold text-cyan-900 dark:bg-cyan-950/50 dark:text-cyan-100">
+          {surface.status}
+        </span>
+      </div>
 
       {variant === 'full' ? (
         <div
@@ -125,17 +145,29 @@ export function TrustSpecimen({
               {lockedNote ?? 'This opens after you make your first call.'}
             </p>
           ) : null}
-          <AgentOutputCard caseData={caseData} compact={variant === 'compact'} frameless />
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-stone-200 bg-stone-50 px-3 py-2 dark:border-stone-700 dark:bg-stone-800/60">
+          <AgentOutputCard caseData={caseData} frameless />
+          <div className="flex flex-wrap items-center gap-2 border-t border-stone-200 bg-stone-50 px-3 py-2 dark:border-stone-700 dark:bg-stone-800/60">
             <span
               aria-disabled
               className="pointer-events-none inline-flex items-center rounded-md bg-cyan-600 px-3 py-1.5 text-xs font-semibold text-white opacity-90 dark:bg-cyan-500 dark:text-stone-950"
             >
               {surface.primaryAction}
             </span>
-            {variant === 'compact' ? null : (
-              <span className="text-xs text-stone-500">Not a real button. Nothing sends.</span>
-            )}
+            <span
+              aria-disabled
+              className="pointer-events-none inline-flex items-center rounded-md border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-stone-500 dark:border-stone-600 dark:bg-stone-900"
+            >
+              Save draft
+            </span>
+            <span
+              aria-disabled
+              className="pointer-events-none inline-flex items-center rounded-md border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-stone-500 dark:border-stone-600 dark:bg-stone-900"
+            >
+              Assign
+            </span>
+            <span className="w-full text-[10px] text-stone-400 sm:ml-auto sm:w-auto">
+              Not a live product. Nothing sends.
+            </span>
           </div>
         </>
       )}
@@ -149,7 +181,7 @@ export function TrustSpecimen({
   return (
     <figure
       className={cn(
-        'm-0 rounded-2xl bg-stone-900 p-2.5 ring-1 ring-stone-950/10 sm:p-3 dark:bg-stone-800 dark:ring-white/10',
+        'mx-auto w-full max-w-xl rounded-2xl bg-stone-900 p-2.5 ring-1 ring-stone-950/10 sm:p-3 dark:bg-stone-800 dark:ring-white/10',
         className
       )}
     >
