@@ -110,3 +110,39 @@ export function TrustPacketJob({
     </p>
   )
 }
+
+/** Seat-colored prompt above Try it. Empty until a seat is picked. */
+export function TrustTryHint({
+  roleId,
+  signal,
+}: {
+  roleId: TrustRoleId | null
+  signal?: string
+}) {
+  const role = getTrustRole(roleId)
+  if (!role || !signal) {
+    return (
+      <p
+        data-trust-try-hint
+        className="mb-3 rounded-lg border border-dashed border-stone-300 px-3 py-2 text-sm text-stone-600 dark:border-stone-600 dark:text-stone-400"
+      >
+        Pick a seat first. The hint will match that job.
+      </p>
+    )
+  }
+
+  const Icon = ROLE_ICON[role.id]
+  const tone = TRUST_ROLE_TONE[role.id]
+  return (
+    <p
+      data-trust-try-hint
+      className={cn('mb-3 rounded-lg border px-3 py-2 text-sm leading-snug', tone.border, tone.wash, tone.text)}
+    >
+      <span className="flex items-center gap-1.5 font-semibold">
+        <Icon className={cn('h-4 w-4', tone.icon)} aria-hidden />
+        {role.label} hint
+      </span>
+      <span className="mt-1 block text-stone-800 dark:text-stone-200">{signal}</span>
+    </p>
+  )
+}

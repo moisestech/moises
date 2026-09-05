@@ -20,7 +20,7 @@ import { usePresentationMode } from './TrustPresentation'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
 import { trust } from './trust-tokens'
-import { evalPlanComplete, useTrustProgress } from './useTrustProgress'
+import { evalPlanComplete, roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('transfer')!
 
@@ -73,6 +73,7 @@ export function TrustTransferLesson() {
 
   return (
     <TrustLessonPacket
+      chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
       seeIt={seeIt}
@@ -91,6 +92,9 @@ export function TrustTransferLesson() {
       doNow={PACKET.tryPrompt}
       doneWhen={completed ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={progress.role} allSeats={present} />}
+      roleId={progress.role}
+      roleCheckChoice={roleCheckChoice(progress, PACKET.chapterId)}
+      onRoleCheck={(choice) => update(withRoleCheck(progress, PACKET.chapterId, choice))}
       announce={announce}
       deeperHint="Leave a closing sentence, score the system, teach the other seat, then the one rule to carry out."
       deeper={

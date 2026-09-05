@@ -51,9 +51,13 @@ type TrustPresentationValue = {
   pending: string | null
   setPending: (hint: string | null) => void
   registerStep: (id: string, label: string, element: HTMLElement | null) => void
-  goToStep: (index: number) => void
+  goToStep: (index: number, opts?: { at?: 'start' | 'end' }) => void
   /** Close every registered panel. Used by the orientation accordion so The idea can yield. */
   releaseFocus: () => void
+  /** How many slides the open section has declared. */
+  portionIndex: number
+  portionCount: number
+  registerPortions: (count: number) => void
   next: () => void
   prev: () => void
 }
@@ -79,6 +83,9 @@ const FALLBACK: TrustPresentationValue = {
   registerStep: () => {},
   goToStep: () => {},
   releaseFocus: () => {},
+  portionIndex: 0,
+  portionCount: 1,
+  registerPortions: () => {},
   next: () => {},
   prev: () => {},
 }
@@ -140,6 +147,9 @@ export function TrustPresentationProvider({
   const [pending, setPending] = useState<string | null>(null)
   const [steps, setSteps] = useState<TrustStep[]>([])
   const [announcement, setAnnouncement] = useState('')
+  const [portionIndex, setPortionIndex] = useState(0)
+  const [portionCount, setPortionCount] = useState(1)
+  const preferLastPortion = useRef(false)
 
   const registry = useRef(new Map<string, { label: string; element: HTMLElement }>())
   const syncPending = useRef(false)
@@ -227,15 +237,39 @@ export function TrustPresentationProvider({
     setFocusIndex(-1)
   }, [])
 
-  const goToStep = useCallback(
-    (index: number) => {
+  const registerPortions = useCallback((count: number) => {
+    const n = Math.max(1, count)
+    setPortionCount(n)
+    setPortionIndex((current) => {
+      if (preferLastPortion.current) {
+        preferLastPortion.current = false
+        return n - 1
+      }
+      return Math.min(current, n - 1)
+    })
+  }, [])
+
+  const announceStep = useCallback(
+    (index: number, portion = 0, portions = 1) => {
       const step = steps[index]
       if (!step) return
+      const slide = portions > 1 ? ` ${portion + 1} of ${portions}.` : ''
+      setAnnouncement(`Step ${index + 1} of ${steps.length}. ${step.label}.${slide}`)
+    },
+    [steps]
+  )
+
+  const goToStep = useCallback(
+    (index: number, opts?: { at?: 'start' | 'end' }) => {
+      const step = steps[index]
+      if (!step) return
+      preferLastPortion.current = opts?.at === 'end'
       setFocusIndex(index)
       setArmed(false)
+      setPortionIndex(opts?.at === 'end' ? 999 : 0)
       if (present) {
         setStepIndex(index)
-        setAnnouncement(`Step ${index + 1} of ${steps.length}. ${step.label}`)
+        announceStep(index, opts?.at === 'end' ? 999 : 0, 1)
       }
       const id = step.id
       // Focus after the accordion re-render. Opening a panel replaces the
@@ -247,7 +281,7 @@ export function TrustPresentationProvider({
         latest.focus({ preventScroll: true })
       })
     },
-    [present, reduceMotion, steps]
+    [announceStep, present, reduceMotion, steps]
   )
 
   const leaveChapter = useCallback(() => {
@@ -265,6 +299,17 @@ export function TrustPresentationProvider({
     // this guard an early keypress reads zero steps, looks like "past the last
     // step", and jumps the room into the next chapter.
     if (steps.length === 0) return
+    if (stepIndex < 0) {
+      goToStep(0)
+      return
+    }
+    if (portionIndex + 1 < portionCount) {
+      const nextPortion = portionIndex + 1
+      setPortionIndex(nextPortion)
+      setArmed(false)
+      announceStep(stepIndex, nextPortion, portionCount)
+      return
+    }
     if (stepIndex + 1 < steps.length) {
       goToStep(stepIndex + 1)
       return
@@ -290,15 +335,26 @@ export function TrustPresentationProvider({
       return
     }
     leaveChapter()
-  }, [armed, goToStep, leaveChapter, pending, stepIndex, steps.length])
+  }, [announceStep, armed, goToStep, leaveChapter, pending, portionCount, portionIndex, stepIndex, steps.length])
 
   // Clamps at the first step rather than paging back a chapter. Advancing off
   // the end is a deliberate "we are done here"; going back is usually a
   // correction, and jumping the room to the previous chapter is not that.
   const prev = useCallback(() => {
-    if (stepIndex > 0) goToStep(stepIndex - 1)
+    if (stepIndex < 0) {
+      goToStep(0)
+      return
+    }
+    if (portionIndex > 0) {
+      const nextPortion = portionIndex - 1
+      setPortionIndex(nextPortion)
+      setArmed(false)
+      announceStep(stepIndex, nextPortion, portionCount)
+      return
+    }
+    if (stepIndex > 0) goToStep(stepIndex - 1, { at: 'end' })
     else goToStep(0)
-  }, [goToStep, stepIndex])
+  }, [announceStep, goToStep, portionCount, portionIndex, stepIndex])
 
   // A section appearing after the room acts means there is more to show here
   // after all, so the pending exit no longer reflects where we are.
@@ -331,7 +387,7 @@ export function TrustPresentationProvider({
         goToStep(0)
       } else if (event.key === 'End') {
         event.preventDefault()
-        goToStep(steps.length - 1)
+        goToStep(steps.length - 1, { at: 'end' })
       }
     }
 
@@ -359,6 +415,9 @@ export function TrustPresentationProvider({
       registerStep,
       goToStep,
       releaseFocus,
+      portionIndex,
+      portionCount,
+      registerPortions,
       next,
       prev,
     }),
@@ -372,9 +431,12 @@ export function TrustPresentationProvider({
       hydrated,
       next,
       pending,
+      portionCount,
+      portionIndex,
       prev,
       present,
       publicSteps,
+      registerPortions,
       registerStep,
       releaseFocus,
       slug,

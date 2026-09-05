@@ -18,7 +18,7 @@ import { TrustSeatStance } from './TrustSeatStance'
 import { usePresentationMode } from './TrustPresentation'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TRUST_ROLE_TONE } from './trust-tokens'
-import { useTrustProgress } from './useTrustProgress'
+import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('four-lenses')!
 const TEACHING = EVALS_TEACHING['four-lenses']
@@ -131,6 +131,7 @@ export function TrustFourLensesLesson() {
 
   return (
     <TrustLessonPacket
+      chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
       seeIt={seeIt}
@@ -151,6 +152,9 @@ export function TrustFourLensesLesson() {
       doNow={PACKET.tryPrompt}
       doneWhen={attributed ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={role} allSeats={present} />}
+      roleId={role}
+      roleCheckChoice={roleCheckChoice(progress, PACKET.chapterId)}
+      onRoleCheck={(choice) => update(withRoleCheck(progress, PACKET.chapterId, choice))}
       announce={announce}
       deeperHint="How each seat reads the same card, which failures need two seats, and the clip."
       deeper={

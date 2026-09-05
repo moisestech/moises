@@ -33,14 +33,28 @@ const announcement = (page) =>
 
 async function openPortion(page, label) {
   const btn = page.locator('[data-trust-step][aria-expanded]').filter({ hasText: label }).first()
-  await btn.waitFor({ state: 'visible', timeout: 15000 })
+  await btn.waitFor({ state: 'attached', timeout: 15000 })
   if ((await btn.getAttribute('aria-expanded')) !== 'true') {
-    await btn.click()
+    await btn.evaluate((el) => el.click())
+    await page.waitForTimeout(200)
+  }
+}
+
+/** Page remaining slides in the open section until `locator` is on screen. */
+async function revealInPortion(page, locator) {
+  for (let i = 0; i < 10; i += 1) {
+    if ((await locator.count()) > 0 && (await locator.first().isVisible())) return
+    await page.keyboard.press('ArrowRight')
     await page.waitForTimeout(200)
   }
 }
 
 async function openDeeper(page) {
+  const depth = page.getByRole('button', { name: /Open depth/ })
+  if ((await depth.count()) > 0 && (await depth.isVisible())) {
+    await depth.click()
+    await page.waitForTimeout(200)
+  }
   await page.locator('summary').filter({ hasText: 'Go deeper' }).first().waitFor({ state: 'visible', timeout: 15000 })
   await page.evaluate(() => {
     document.querySelectorAll('main details').forEach((el) => el.setAttribute('open', ''))
@@ -90,6 +104,7 @@ const browser = await chromium.launch()
   await waitForSteps(page)
   await openPortion(page, 'See it')
   const presentBtn = page.getByRole('button', { name: /What it would send/ }).first()
+  await revealInPortion(page, presentBtn)
   await presentBtn.scrollIntoViewIfNeeded()
   const openLabel = await presentBtn.textContent()
   check('presenting unlocks the machine layer', !/locked/i.test(openLabel ?? ''), openLabel?.trim())
@@ -257,9 +272,13 @@ const browser = await chromium.launch()
 
     // seeded-failures has a single section until the failures are revealed.
     if (total > 1) {
-      await page.keyboard.press('ArrowRight')
-      await page.waitForTimeout(500)
-      check(`${name}: advances to step 2`, /^Step 2 of \d+\./.test(await announcement(page)))
+      let now = await announcement(page)
+      for (let i = 0; i < 12 && !/^Step 2 of \d+\./.test(now); i += 1) {
+        await page.keyboard.press('ArrowRight')
+        await page.waitForTimeout(250)
+        now = await announcement(page)
+      }
+      check(`${name}: advances to step 2`, /^Step 2 of \d+\./.test(now), now)
 
       await page.keyboard.press('ArrowLeft')
       await page.waitForTimeout(500)
@@ -316,6 +335,10 @@ const browser = await chromium.launch()
     const field = page
       .locator('input[type="text"]:visible:not([disabled]), textarea:visible:not([disabled])')
       .first()
+    // Check it now opens on the seat question; the writing field is the next portion.
+    if (name === 'transfer' || name === 'the-harness') {
+      await revealInPortion(page, field)
+    }
     if ((await field.count()) === 0) {
       check(`${name}: has a text field to guard`, false, 'none found')
       await ctx.close()
@@ -473,6 +496,30 @@ const browser = await chromium.launch()
     'The idea is the open portion on arrival',
     (await expanded.filter({ hasText: 'The idea' }).count()) === 1
   )
+  check(
+    'The idea marks working vocabulary',
+    (await page.locator('[data-trust-idea-term]').count()) > 0,
+    String(await page.locator('[data-trust-idea-term]').count())
+  )
+  await page.locator('[data-trust-idea-term]').filter({ hasText: 'the card' }).first().click()
+  check(
+    'a marked term opens its definition',
+    await page.getByText('The screen a teammate would see before anything sends.').isVisible()
+  )
+  await page.locator('[data-trust-idea-term]').filter({ hasText: 'proof' }).first().click()
+  check(
+    'opening another term closes the previous definition',
+    (await page.locator('[data-trust-idea-def]').count()) === 1
+  )
+  check(
+    'the new term’s definition is the one that stays open',
+    await page.getByText('A finished look is not evidence the system behind the screen is safe.').isVisible()
+  )
+  check(
+    'the previous definition is gone',
+    (await page.getByText('The screen a teammate would see before anything sends.').count()) === 0
+  )
+  check('the open accordion is marked as the focus', (await page.locator('[data-trust-panel-open]').count()) === 1)
 
   const brief = page.locator('[data-trust-brief]')
   check('Your seat is collapsed on arrival', (await brief.getAttribute('aria-expanded')) === 'false')
@@ -489,9 +536,30 @@ const browser = await chromium.launch()
   )
   check('Do this now is visible once the brief is open', await page.getByText('Do this now', { exact: true }).isVisible())
 
+  await page.getByRole('button', { name: /^Product/ }).first().click()
+  await page.waitForTimeout(200)
+  await brief.click()
+  await page.waitForTimeout(200)
+  check('the closed brief names the picked seat', (await brief.innerText()).includes('Product'))
+  check('the closed brief shows the seat stance', (await brief.innerText()).includes('Define what good means.'))
+
   await page.locator('[data-trust-step]').filter({ hasText: 'The idea' }).click()
   await page.waitForTimeout(200)
   check('opening The idea closes the brief', (await brief.getAttribute('aria-expanded')) === 'false')
+
+  await openPortion(page, 'Try it')
+  check('Try it shows the Product hint', await page.getByText('Is this outcome actually ready?').isVisible())
+  await openPortion(page, 'Check it')
+  check('Check it shows the Product question', await page.getByText('A finished-looking enrollment screen is:').isVisible())
+  await page.locator('[data-trust-role-choice="a"]').click()
+  check('a wrong choice is marked wrong', (await page.locator('[data-trust-role-check-result="wrong"]').count()) === 1)
+  await page.locator('[data-trust-role-choice="b"]').click()
+  check('the right Product answer is marked correct', (await page.locator('[data-trust-role-check-result="correct"]').count()) === 1)
+  check(
+    'the because line appears after a choice',
+    await page.getByText('The card is the surface a teammate sees.').isVisible()
+  )
+  await openPortion(page, 'The idea')
 
   const rail = page.getByRole('navigation', { name: 'On this page' }).first()
   check('the in-page rail is visible on desktop', await rail.isVisible())
@@ -507,17 +575,21 @@ const browser = await chromium.launch()
   await page.waitForTimeout(400)
   const immersive = await page.evaluate(() => {
     const header = document.querySelector('header[data-site-chrome]')
-    const idea = document.querySelector('[data-trust-step]')
+    const current = document.querySelector('[data-trust-step][aria-expanded="true"]')
     return {
       flag: document.documentElement.dataset.trustPresent === '1',
       headerHidden: header ? getComputedStyle(header).display === 'none' : false,
-      ideaHeight: idea?.getBoundingClientRect().height ?? 0,
+      ideaHeight: current?.getBoundingClientRect().height ?? 0,
       headerVar: getComputedStyle(document.documentElement).getPropertyValue('--site-header-height').trim(),
     }
   })
   check('Present sets the immersive flag', immersive.flag)
   check('Present hides the site header', immersive.headerHidden)
-  check('The idea stays visible while presenting', immersive.ideaHeight > 20, String(immersive.ideaHeight))
+  check('the open portion stays visible while presenting', immersive.ideaHeight > 20, String(immersive.ideaHeight))
+  check(
+    'presenting hides the other accordion cards',
+    !(await page.locator('[data-trust-step]').filter({ hasText: 'The idea' }).isVisible())
+  )
   check('immersive zeros the header offset', immersive.headerVar === '0px', immersive.headerVar)
   check(
     'the bar becomes presentation controls',
@@ -534,6 +606,25 @@ const browser = await chromium.launch()
   }))
   check('Exit clears the immersive flag', !restored.flag)
   check('Exit restores the site header', restored.headerDisplay !== 'none', restored.headerDisplay)
+  await ctx.close()
+}
+
+/* 12b. Presenting pages through idea portions instead of showing them all. */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+  const page = await ctx.newPage()
+  await page.goto(`${LEARN}/looks-right?present=1`, { waitUntil: 'networkidle' })
+  await waitForSteps(page)
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(400)
+  const first = await page.locator('[data-trust-portion]').innerText()
+  check('the first idea portion is on screen', /Cohort Studio/.test(first), first.slice(0, 80))
+  check('later idea sentences wait', !/That recommendation/.test(first))
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(300)
+  const second = await page.locator('[data-trust-portion]').innerText()
+  check('the next arrow opens the next idea sentence', /That recommendation/.test(second), second.slice(0, 80))
+  check('the announcement stays on The idea', /Step 1 of \d+\. The idea/.test(await announcement(page)))
   await ctx.close()
 }
 

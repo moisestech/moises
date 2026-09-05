@@ -24,7 +24,7 @@ import { useTrustProgress } from './useTrustProgress'
  * two hide and this bar is the only top chrome.
  */
 export function TrustPresentationBar({ className }: { className?: string }) {
-  const { present, slug, enter, exit, steps, stepIndex, armed, next, prev, depthOpen, setDepthOpen } =
+  const { present, slug, enter, exit, steps, stepIndex, portionIndex, portionCount, armed, next, prev, depthOpen, setDepthOpen } =
     useTrustPresentation()
   const { progress, update, reset } = useTrustProgress()
   const barRef = useRef<HTMLElement | null>(null)
@@ -79,30 +79,48 @@ export function TrustPresentationBar({ className }: { className?: string }) {
       <TrustPresentationClock slug={slug} />
 
       {present ? (
-        <div className="flex items-center gap-1">
-          <button type="button" onClick={prev} className={cn(control, 'px-2')} aria-label="Previous section">
-            <HiOutlineChevronLeft className="h-3.5 w-3.5" aria-hidden />
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={prev}
+            className={cn(control, 'flex h-11 w-11 items-center justify-center px-0')}
+            aria-label="Previous section"
+          >
+            <HiOutlineChevronLeft className="h-6 w-6" aria-hidden />
           </button>
-          <p
+          <div
             className={cn(
-              'min-w-[5.5rem] text-center font-space-mono text-[11px]',
-              armed ? 'text-amber-700 dark:text-amber-300' : 'text-stone-600 dark:text-stone-300'
+              'min-w-[7.5rem] text-center',
+              armed ? 'text-amber-700 dark:text-amber-300' : 'text-stone-800 dark:text-stone-100'
             )}
           >
-            {steps.length === 0
-              ? '—'
-              : armed
-                ? 'end · again'
-                : `${Math.max(stepIndex + 1, 1)} / ${steps.length}`}
-            <span className="sr-only"> sections. Use the arrow keys to move between them.</span>
-          </p>
+            <p className="text-sm font-semibold leading-tight">
+              {steps.length === 0 ? '—' : armed ? 'End of chapter' : (steps[Math.max(stepIndex, 0)]?.label ?? '—')}
+            </p>
+            <p className="font-space-mono text-[11px] text-stone-500 dark:text-stone-400">
+              {steps.length === 0
+                ? ''
+                : armed
+                  ? 'press again'
+                  : portionCount > 1
+                    ? `${portionIndex + 1} / ${portionCount}`
+                    : `${Math.max(stepIndex + 1, 1)} / ${steps.length}`}
+            </p>
+            <span className="sr-only">
+              {` ${Math.max(stepIndex + 1, 1)} / ${steps.length} sections. Use the arrow keys to move between them.`}
+            </span>
+          </div>
           <button
             type="button"
             onClick={next}
-            className={cn(control, 'px-2', armed && 'border-amber-500 text-amber-800 dark:text-amber-200')}
+            className={cn(
+              control,
+              'flex h-11 w-11 items-center justify-center px-0',
+              armed && 'border-amber-500 text-amber-800 dark:text-amber-200'
+            )}
             aria-label={armed ? 'Continue to the next chapter' : 'Next section'}
           >
-            <HiOutlineChevronRight className="h-3.5 w-3.5" aria-hidden />
+            <HiOutlineChevronRight className="h-6 w-6" aria-hidden />
           </button>
         </div>
       ) : null}

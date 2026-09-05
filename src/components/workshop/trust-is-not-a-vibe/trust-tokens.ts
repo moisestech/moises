@@ -212,6 +212,28 @@ export const trustLesson = {
   body: 'max-w-[68ch] text-base leading-relaxed text-stone-800 dark:text-stone-200',
 } as const
 
+/**
+ * The idea is the claim, not a task card. Larger measure, marked terms, a
+ * still on the right. See it / Try it / Check it stay on `trustLesson`.
+ */
+export const trustIdea = {
+  title: 'text-2xl font-semibold italic leading-tight tracking-tight text-stone-950 sm:text-3xl dark:text-stone-50',
+  body: 'max-w-[42ch] text-lg leading-[1.55] text-stone-800 dark:text-stone-200',
+  term: 'bg-cyan-100/90 px-0.5 font-semibold not-italic text-cyan-950 dark:bg-cyan-950/70 dark:text-cyan-100',
+} as const
+
+/** Open accordion: cyan edge and ring so the active portion holds the eye. */
+export const trustPanelOpen =
+  'border-cyan-500 bg-white shadow-md ring-2 ring-cyan-500/35 ring-offset-2 ring-offset-stone-50 dark:bg-stone-900 dark:ring-offset-stone-950'
+export const trustPanelIdle = 'border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900'
+
+/** Projection scale. One portion on screen, readable from a few seats back. */
+export const trustPresent = {
+  title: 'text-3xl font-bold leading-[1.1] tracking-tight text-stone-950 sm:text-4xl md:text-5xl dark:text-stone-50',
+  deck: 'mt-2 max-w-[36ch] text-xl leading-snug text-stone-600 sm:text-2xl dark:text-stone-400',
+  body: 'max-w-[36ch] text-2xl leading-snug text-stone-800 sm:text-3xl dark:text-stone-200',
+} as const
+
 export const trust = {
   shell: opp.shell,
   gutter: TRUST_PAGE_GUTTER,

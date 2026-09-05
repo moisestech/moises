@@ -23,7 +23,7 @@ import { TrustScoringTree } from './TrustScoringTree'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { SimpleLoopSvg } from './TrustDiagrams'
 import { trust, trustLesson } from './trust-tokens'
-import { useTrustProgress } from './useTrustProgress'
+import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('the-loop')!
 const PATH = getTrustChapterPath('the-loop')
@@ -73,6 +73,7 @@ export function TrustTheLoopLesson() {
 
   return (
     <TrustLessonPacket
+      chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
       seeIt={seeIt}
@@ -91,6 +92,9 @@ export function TrustTheLoopLesson() {
       doNow={PACKET.tryPrompt}
       doneWhen={completed ? PACKET.doneAfter : PACKET.doneBefore}
       seat={<TrustSeatStance roleId={progress.role} allSeats={present} />}
+      roleId={progress.role}
+      roleCheckChoice={roleCheckChoice(progress, PACKET.chapterId)}
+      onRoleCheck={(choice) => update(withRoleCheck(progress, PACKET.chapterId, choice))}
       announce={announce}
       deeperHint="Eval anatomy, which check settles which question, metric names, vocabulary, and the clip."
       deeper={

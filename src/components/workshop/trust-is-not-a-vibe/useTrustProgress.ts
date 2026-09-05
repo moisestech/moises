@@ -41,6 +41,8 @@ export type TrustProgress = {
   rubric: TrustRubric
   exitTicket: string
   completedChapters: TrustChapterId[]
+  /** Graded seat check per chapter. Cleared visually when the seat changes. */
+  roleChecks: Partial<Record<TrustChapterId, { role: TrustRoleId; choice: string }>>
 }
 
 const EMPTY_EVAL_PLAN: TrustEvalPlan = {
@@ -77,6 +79,7 @@ export const EMPTY_TRUST_PROGRESS: TrustProgress = {
   rubric: EMPTY_RUBRIC,
   exitTicket: '',
   completedChapters: [],
+  roleChecks: {},
 }
 
 function isVerdict(value: unknown): value is TrustVerdict {
@@ -85,6 +88,51 @@ function isVerdict(value: unknown): value is TrustVerdict {
 
 function isRoleId(value: unknown): value is TrustRoleId {
   return value === 'pm' || value === 'engineering' || value === 'design' || value === 'strategy'
+}
+
+function isChapterId(value: unknown): value is TrustChapterId {
+  return (
+    value === 'looks-right' ||
+    value === 'four-lenses' ||
+    value === 'seeded-failures' ||
+    value === 'the-loop' ||
+    value === 'the-harness' ||
+    value === 'transfer'
+  )
+}
+
+function parseRoleChecks(
+  value: unknown
+): Partial<Record<TrustChapterId, { role: TrustRoleId; choice: string }>> {
+  if (!value || typeof value !== 'object') return {}
+  const next: Partial<Record<TrustChapterId, { role: TrustRoleId; choice: string }>> = {}
+  for (const [key, entry] of Object.entries(value as Record<string, unknown>)) {
+    if (!isChapterId(key) || !entry || typeof entry !== 'object') continue
+    const row = entry as { role?: unknown; choice?: unknown }
+    if (!isRoleId(row.role) || typeof row.choice !== 'string' || !row.choice) continue
+    next[key] = { role: row.role, choice: row.choice }
+  }
+  return next
+}
+
+export function roleCheckChoice(progress: TrustProgress, chapterId: TrustChapterId): string | null {
+  const saved = progress.roleChecks[chapterId]
+  if (!saved || saved.role !== progress.role) return null
+  return saved.choice
+}
+
+export function withRoleCheck(
+  progress: TrustProgress,
+  chapterId: TrustChapterId,
+  choice: string
+): Pick<TrustProgress, 'roleChecks'> {
+  if (!progress.role) return { roleChecks: progress.roleChecks }
+  return {
+    roleChecks: {
+      ...progress.roleChecks,
+      [chapterId]: { role: progress.role, choice },
+    },
+  }
 }
 
 function parseProgress(raw: string | null): TrustProgress {
@@ -112,6 +160,7 @@ function parseProgress(raw: string | null): TrustProgress {
       revote: isVerdict(parsed.revote) ? parsed.revote : null,
       teamVerdict: isVerdict(parsed.teamVerdict) ? parsed.teamVerdict : null,
       transferVote: isVerdict(parsed.transferVote) ? parsed.transferVote : null,
+      roleChecks: parseRoleChecks(parsed.roleChecks),
     }
   } catch {
     return EMPTY_TRUST_PROGRESS
