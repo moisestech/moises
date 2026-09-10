@@ -81,14 +81,48 @@ export {
   TRUST_ROLE_TERMS,
 } from './roles'
 
-export { getTrustLessonPacket, TRUST_LESSON_PACKETS } from './lesson-packets'
+export {
+  getTrustLessonPacket,
+  TRUST_IDEA_LANDSCAPE_SIZE,
+  TRUST_IDEA_QUOTES,
+  TRUST_LESSON_PACKETS,
+} from './lesson-packets'
 export type {
   TrustIdeaDiagramId,
+  TrustIdeaQuote,
+  TrustIdeaStill,
   TrustIdeaTerm,
   TrustLessonPacket,
   TrustRoleCheck,
   TrustRoleChoice,
 } from './lesson-packets'
+
+export {
+  getTrustIdeaIllustration,
+  TRUST_HOLD_IDEA_ILLUSTRATIONS,
+  TRUST_IDEA_ILLUSTRATIONS,
+  TRUST_IDEA_PORTRAIT_SIZE,
+  TRUST_READY_IDEA_ILLUSTRATIONS,
+} from './idea-illustrations'
+export type {
+  TrustIdeaIllustration,
+  TrustIdeaIllustrationId,
+  TrustIdeaIllustrationStatus,
+} from './idea-illustrations'
+
+export {
+  getTrustEvalDiagram,
+  TRUST_DEEPER_EVAL_DIAGRAMS,
+  TRUST_EVAL_DIAGRAMS,
+  TRUST_EVAL_DIAGRAM_SIZE,
+  TRUST_REQUIRED_EVAL_DIAGRAMS,
+  TRUST_SUPPORTING_EVAL_DIAGRAMS,
+} from './eval-diagrams'
+export type {
+  TrustEvalDiagram,
+  TrustEvalDiagramId,
+  TrustEvalDiagramUse,
+} from './eval-diagrams'
 
 export {
   TRUST_CASE_A,
@@ -189,7 +223,7 @@ export {
 } from './time-budget'
 export type { TrustTimeSegment, TrustTimeSegmentId } from './time-budget'
 
-export { TRUST_OVERVIEW_SECTIONS, TRUST_OVERVIEW_SPEC } from './overview'
+export { TRUST_OVERVIEW_IDEA_QUOTE, TRUST_OVERVIEW_SECTIONS, TRUST_OVERVIEW_SPEC } from './overview'
 export type { TrustOverviewSection, TrustOverviewSectionId } from './overview'
 
 export const TRUST_SEO = {

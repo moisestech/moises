@@ -8,7 +8,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#444444] text-white min-h-[730px] py-16 md:py-[64px] font-['MoMA_Sans']">
+    <footer data-site-chrome className="bg-[#444444] text-white min-h-[730px] py-16 md:py-[64px] font-['MoMA_Sans']">
       <div className="max-w-7xl mx-auto px-6 flex flex-col h-full justify-between">
         {/* Main Navigation */}
         <nav className="pt-8 mb-16">

@@ -10,23 +10,27 @@ import {
   getTrustLessonPacket,
   type TrustLoopStage,
 } from '@/content/workshops/trust-is-not-a-vibe'
+import { cn } from '@/lib/utils'
 import { LoopMapper } from './LoopMapper'
+import { TrustEvalDiagram } from './TrustEvalDiagram'
+import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustEvalAnatomy } from './TrustEvalAnatomy'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustLessonPacket } from './TrustLessonPacket'
 import { TrustMissingStillNote } from './TrustMissingStill'
-import { TrustPacketJob, TrustSeatStance } from './TrustSeatStance'
+import { TrustKeepTogether } from './TrustPresentPortions'
+import { TrustPacketJob, TrustSeatStance, TrustTryHint } from './TrustSeatStance'
 import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
 import { usePresentationMode } from './TrustPresentation'
 import { TrustScoringApproaches, TrustScoringMethods } from './TrustScoringApproaches'
 import { TrustScoringTree } from './TrustScoringTree'
 import { TrustTeachingCards } from './TrustTeachingCards'
-import { SimpleLoopSvg } from './TrustDiagrams'
 import { trust, trustLesson } from './trust-tokens'
 import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('the-loop')!
 const PATH = getTrustChapterPath('the-loop')
+const LOOP_PORTRAIT_ID = 'idea-04-the-loop-human-controlled-agent-loop' as const
 
 export function TrustTheLoopLesson() {
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
@@ -35,22 +39,40 @@ export function TrustTheLoopLesson() {
   const completed = progress.completedChapters.includes('the-loop')
 
   const seeIt = (
-    <div className="space-y-3">
-      <SimpleLoopSvg />
-      <p className={trustLesson.body}>{PACKET.seeCaption}</p>
-    </div>
+    <>
+      <TrustEvalDiagram id="eval-05" />
+      {hydrated ? (
+        <LoopMapper
+          failures={TRUST_CASE_A.failures}
+          placements={progress.loopPlacements}
+          onPlace={(failureId, stage: TrustLoopStage) => {
+            const loopPlacements = { ...progress.loopPlacements, [failureId]: stage }
+            update({ loopPlacements })
+            if (Object.keys(loopPlacements).length >= 3) markChapterComplete('the-loop')
+          }}
+        />
+      ) : (
+        <p className="text-sm text-stone-500">Loading your progress…</p>
+      )}
+    </>
   )
 
   const tryIt = (
-    <LoopMapper
-      failures={TRUST_CASE_A.failures}
-      placements={progress.loopPlacements}
-      onPlace={(failureId, stage: TrustLoopStage) => {
-        const loopPlacements = { ...progress.loopPlacements, [failureId]: stage }
-        update({ loopPlacements })
-        if (Object.keys(loopPlacements).length >= 3) markChapterComplete('the-loop')
-      }}
-    />
+    <TrustKeepTogether
+      data-trust-loop-try-row
+      className={cn(
+        'grid items-start gap-6',
+        present ? 'grid-cols-[minmax(0,1fr)_auto]' : 'md:grid-cols-[minmax(0,1fr)_auto]'
+      )}
+    >
+      <div className="min-w-0 [&>[data-trust-try-hint]]:mb-0">
+        <TrustTryHint
+          roleId={progress.role}
+          signal={progress.role ? PACKET.roleSignals[progress.role] : undefined}
+        />
+      </div>
+      <TrustIdeaPortrait id={LOOP_PORTRAIT_ID} className="justify-self-end" />
+    </TrustKeepTogether>
   )
 
   const checkIt =
@@ -76,12 +98,13 @@ export function TrustTheLoopLesson() {
       chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
+      ideaFigure={<TrustIdeaPortrait id={LOOP_PORTRAIT_ID} priority />}
       seeIt={seeIt}
       seeCaption={PACKET.seeCaption}
-      tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
+      tryIt={tryIt}
       tryCaption={PACKET.tryPrompt}
+      hideTryHint
       checkIt={checkIt}
-      checkCaption={PATH.probe}
       job={
         <TrustPacketJob
           roleId={progress.role}
@@ -105,6 +128,17 @@ export function TrustTheLoopLesson() {
           <TrustScoringTree />
           <TrustScoringMethods />
           <TrustTeachingCards cards={EVALS_TEACHING['the-loop']} roleId={progress.role} />
+          <aside className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+              Engineering — not required for other seats
+            </p>
+            <p className="mt-2 text-sm leading-relaxed">
+              Retrieval quality and answer faithfulness are separate claims. They need separate graders.
+            </p>
+            <div className="mt-3">
+              <TrustEvalDiagram id="eval-06" />
+            </div>
+          </aside>
           <p className={trust.body}>{TRUST_HARNESS_LINE}</p>
           <dl className="grid gap-2 sm:grid-cols-2">
             {TRUST_VOCAB_SLIDE.map((row) => (

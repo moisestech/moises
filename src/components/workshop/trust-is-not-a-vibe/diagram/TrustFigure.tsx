@@ -30,6 +30,7 @@ export function TrustFigure({
 }) {
   return (
     <figure
+      data-trust-figure
       className={cn(
         'rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900',
         TRUST_SCROLL_MT,
@@ -44,7 +45,12 @@ export function TrustFigure({
             </p>
           ) : null}
           {title ? (
-            <p className="mt-1 text-sm font-semibold text-stone-900 dark:text-stone-100">{title}</p>
+            <p
+              data-trust-figure-title
+              className="mt-1 text-sm font-semibold text-stone-900 dark:text-stone-100"
+            >
+              {title}
+            </p>
           ) : null}
         </div>
       ) : null}

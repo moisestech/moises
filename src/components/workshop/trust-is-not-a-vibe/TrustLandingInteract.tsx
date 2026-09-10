@@ -20,6 +20,7 @@ import {
   TRUST_LEARN_BASE,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { useTrustPresentation } from './TrustPresentation'
 import { TRUST_CHAPTER_TONE } from './trust-tokens'
 
 const VOCAB_ICON: Record<string, IconType> = {
@@ -105,31 +106,56 @@ export function TrustVocabGrid() {
 }
 
 export function TrustClockList() {
+  const { present } = useTrustPresentation()
+
   return (
-    <ol className="space-y-2">
-      {TRUST_CHAPTERS.map((chapter) => {
-        const tone = TRUST_CHAPTER_TONE[chapter.id]
-        return (
-          <li key={chapter.id}>
-            <Link
-              href={`${TRUST_LEARN_BASE}/${chapter.slug}`}
+    <ol data-trust-overview-clock className={present ? 'space-y-3' : 'space-y-2'}>
+      {TRUST_CHAPTERS.map((chapter) => (
+        <li key={chapter.id}>
+          <Link
+            href={`${TRUST_LEARN_BASE}/${chapter.slug}`}
+            data-trust-overview-clock-row={chapter.id}
+            className={cn(
+              'group flex rounded-xl border border-stone-200 bg-white text-stone-800 transition duration-200',
+              'dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200',
+              present
+                ? 'flex-col gap-2 px-5 py-4'
+                : 'flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:justify-between',
+              'motion-safe:hover:-translate-y-0.5 hover:shadow-md',
+              'hover:border-stone-900 hover:bg-stone-100 hover:text-stone-950',
+              'dark:hover:border-stone-100 dark:hover:bg-stone-800 dark:hover:text-white',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+              'focus-visible:border-stone-900 focus-visible:bg-stone-100 focus-visible:text-stone-950',
+              'focus-visible:ring-stone-900 focus-visible:ring-offset-stone-50',
+              'dark:focus-visible:border-stone-100 dark:focus-visible:bg-stone-800 dark:focus-visible:text-white',
+              'dark:focus-visible:ring-stone-100 dark:focus-visible:ring-offset-stone-950'
+            )}
+          >
+            <span
+              data-trust-overview-clock-title
               className={cn(
-                'flex flex-col gap-1 rounded-xl border border-stone-200 bg-white px-4 py-3 transition duration-200',
-                'dark:border-stone-700 dark:bg-stone-900 sm:flex-row sm:items-baseline sm:justify-between',
-                'motion-safe:hover:-translate-y-0.5 hover:shadow-md',
-                tone.hover
+                'font-semibold text-stone-950 dark:text-stone-50',
+                'group-hover:text-stone-950 dark:group-hover:text-white',
+                'group-focus-visible:text-stone-950 dark:group-focus-visible:text-white',
+                present ? 'text-2xl sm:text-3xl' : 'text-xl'
               )}
             >
-              <span className="text-sm font-semibold">
-                {chapter.number}. {chapter.title}
-              </span>
-              <span className="text-xs text-stone-500 group-hover:text-inherit">
-                {TRUST_CHAPTER_TIME[chapter.id].clock} · {chapter.checkpoint}
-              </span>
-            </Link>
-          </li>
-        )
-      })}
+              {chapter.number}. {chapter.title}
+            </span>
+            <span
+              data-trust-overview-clock-meta
+              className={cn(
+                'text-stone-500 dark:text-stone-400',
+                'group-hover:text-stone-950 dark:group-hover:text-white',
+                'group-focus-visible:text-stone-950 dark:group-focus-visible:text-white',
+                present ? 'text-lg sm:text-xl' : 'text-base'
+              )}
+            >
+              {TRUST_CHAPTER_TIME[chapter.id].clock} · {chapter.checkpoint}
+            </span>
+          </Link>
+        </li>
+      ))}
     </ol>
   )
 }

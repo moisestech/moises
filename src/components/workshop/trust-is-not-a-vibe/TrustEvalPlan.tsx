@@ -3,7 +3,8 @@
 import { HiCheckCircle } from 'react-icons/hi2'
 import { TRUST_EVAL_ANATOMY, type TrustEvalStageId } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { TRUST_SCROLL_MT } from './trust-tokens'
+import { TRUST_SCROLL_MT, trustPresent } from './trust-tokens'
+import { usePresentationMode } from './TrustPresentation'
 import { evalPlanComplete, type TrustEvalPlan as TrustEvalPlanData } from './useTrustProgress'
 
 /**
@@ -54,21 +55,28 @@ export function TrustEvalPlan({
   onChange: (patch: Partial<TrustEvalPlanData>) => void
   className?: string
 }) {
+  const { present } = usePresentationMode()
   const done = evalPlanComplete(plan)
   const filled = Object.values(plan).filter((field) => field.trim()).length
 
   return (
-    <div className={cn('space-y-3', className)}>
+    <div className={cn(present ? 'space-y-6' : 'space-y-3', className)}>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <p className="text-sm text-stone-700 dark:text-stone-300">
+        <p
+          className={
+            present
+              ? cn(trustPresent.note, 'max-w-none text-xl text-stone-800 sm:text-2xl')
+              : 'text-sm text-stone-700 dark:text-stone-300'
+          }
+        >
           Five fields, same five parts as The Loop. Write your own, or start from the suggestion.
         </p>
-        <p className="text-xs text-stone-500" aria-live="polite">
+        <p className={present ? 'text-lg text-stone-500 sm:text-xl' : 'text-xs text-stone-500'} aria-live="polite">
           {filled} of 5 filled
         </p>
       </div>
 
-      <ol className="space-y-2">
+      <ol className={present ? 'space-y-5' : 'space-y-2'}>
         {TRUST_EVAL_ANATOMY.map((stage, index) => {
           const field = FIELD[stage.id]
           const value = plan[stage.id]
@@ -76,7 +84,8 @@ export function TrustEvalPlan({
             <li
               key={stage.id}
               className={cn(
-                'rounded-xl border px-3 py-3',
+                'rounded-xl border',
+                present ? 'px-5 py-5' : 'px-3 py-3',
                 value.trim()
                   ? 'border-stone-400 bg-stone-50 dark:border-stone-500 dark:bg-stone-900/60'
                   : 'border-stone-200 dark:border-stone-700',
@@ -84,24 +93,53 @@ export function TrustEvalPlan({
               )}
             >
               <label className="block">
-                <span className="flex flex-wrap items-baseline gap-x-2">
-                  <span className="font-space-mono text-[10px] text-stone-500">{index + 1}</span>
-                  <span className="text-sm font-semibold text-stone-950 dark:text-stone-50">{stage.term}</span>
-                  <span className="text-xs text-stone-600 dark:text-stone-400">{field.prompt}</span>
+                <span className={cn('flex flex-wrap items-baseline', present ? 'gap-x-3 gap-y-1' : 'gap-x-2')}>
+                  <span
+                    className={cn(
+                      'font-space-mono text-stone-500',
+                      present ? 'text-lg sm:text-xl' : 'text-[10px]'
+                    )}
+                  >
+                    {index + 1}
+                  </span>
+                  <span
+                    className={cn(
+                      'font-semibold text-stone-950 dark:text-stone-50',
+                      present ? 'text-2xl sm:text-3xl' : 'text-sm'
+                    )}
+                  >
+                    {stage.term}
+                  </span>
+                  <span
+                    className={
+                      present
+                        ? cn(trustPresent.note, 'max-w-none text-xl sm:text-2xl')
+                        : 'text-xs text-stone-600 dark:text-stone-400'
+                    }
+                  >
+                    {field.prompt}
+                  </span>
                 </span>
                 <textarea
                   value={value}
                   onChange={(event) => onChange({ [stage.id]: event.target.value })}
-                  rows={2}
+                  rows={present ? 3 : 2}
                   placeholder={field.placeholder}
-                  className="mt-1.5 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100"
+                  className={cn(
+                    'mt-2 w-full rounded-lg border border-stone-300 bg-white dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100',
+                    present ? 'px-4 py-3 text-xl leading-snug sm:text-2xl' : 'px-3 py-2 text-sm'
+                  )}
                 />
               </label>
               {value.trim() ? null : (
                 <button
                   type="button"
                   onClick={() => onChange({ [stage.id]: field.starter })}
-                  className="mt-1 text-xs text-stone-500 underline-offset-2 hover:underline"
+                  className={
+                    present
+                      ? 'mt-2 text-lg text-stone-600 underline-offset-4 hover:underline sm:text-xl'
+                      : 'mt-1 text-xs text-stone-500 underline-offset-2 hover:underline'
+                  }
                 >
                   Use the suggestion
                 </button>
@@ -113,10 +151,16 @@ export function TrustEvalPlan({
 
       {done ? (
         <p
-          className="flex items-start gap-1.5 text-sm font-medium text-stone-900 dark:text-stone-100"
+          className={cn(
+            'flex items-start gap-1.5 font-medium text-stone-900 dark:text-stone-100',
+            present ? 'text-xl sm:text-2xl' : 'text-sm'
+          )}
           aria-live="polite"
         >
-          <HiCheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-stone-500" aria-hidden />
+          <HiCheckCircle
+            className={cn('mt-0.5 shrink-0 text-stone-500', present ? 'h-7 w-7' : 'h-4 w-4')}
+            aria-hidden
+          />
           That is an evaluation plan. It is the same five parts you would bring to any system that acts on
           your behalf.
         </p>

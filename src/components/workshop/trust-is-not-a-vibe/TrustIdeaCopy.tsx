@@ -11,6 +11,7 @@ import {
 } from 'react'
 import type { TrustIdeaTerm } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { usePresentationMode } from './TrustPresentation'
 import { trustIdea } from './trust-tokens'
 
 const IdeaTermsContext = createContext<{
@@ -60,17 +61,21 @@ function TrustIdeaMark({
   const id = useId()
   const key = term.toLowerCase()
   const { openTerm, toggle } = useContext(IdeaTermsContext)
+  const { present } = usePresentationMode()
   const open = openTerm === key
 
   return (
-    <span className="relative inline">
+    <span className="inline">
       <button
         type="button"
         data-trust-idea-term
         aria-expanded={open}
         aria-controls={id}
         onClick={() => toggle(key)}
-        className={cn(trustIdea.term, 'cursor-help underline decoration-cyan-500/50 decoration-dotted underline-offset-2')}
+        className={cn(
+          trustIdea.term,
+          'scroll-mt-28 cursor-help underline decoration-cyan-500/50 decoration-dotted underline-offset-2'
+        )}
       >
         {children}
       </button>
@@ -79,12 +84,12 @@ function TrustIdeaMark({
           id={id}
           role="note"
           data-trust-idea-def
-          className="absolute left-0 top-full z-20 mt-1 w-[min(18rem,calc(100vw-2rem))] rounded-md border border-cyan-300 bg-white px-2.5 py-2 text-left text-sm font-normal not-italic leading-snug text-stone-800 shadow-md dark:border-cyan-800 dark:bg-stone-900 dark:text-stone-100"
+          className={present ? trustIdea.defPresent : trustIdea.def}
         >
-          <span className="font-space-mono text-[10px] uppercase tracking-[0.14em] text-cyan-700 dark:text-cyan-400">
-            {term}
+          <span className={present ? trustIdea.defLabelPresent : trustIdea.defLabel}>{term}</span>
+          <span className={cn('mt-2 block', present ? trustIdea.defMeaningPresent : trustIdea.defMeaning)}>
+            {meaning}
           </span>
-          <span className="mt-1 block">{meaning}</span>
         </span>
       ) : null}
     </span>
@@ -94,9 +99,10 @@ function TrustIdeaMark({
 export function highlightIdeaTerms(text: string, terms: readonly TrustIdeaTerm[]): ReactNode[] {
   if (terms.length === 0) return [text]
   const sorted = [...terms].sort((a, b) => b.term.length - a.term.length)
-  const pattern = new RegExp(`(${sorted.map((entry) => escapeRegExp(entry.term)).join('|')})`, 'gi')
+  const pattern = new RegExp(`(${sorted.map((entry) => `${escapeRegExp(entry.term)}[.,;:]?`).join('|')})`, 'gi')
   return text.split(pattern).map((part, index) => {
-    const entry = terms.find((item) => item.term.toLowerCase() === part.toLowerCase())
+    const bare = part.replace(/[.,;:]$/, '')
+    const entry = terms.find((item) => item.term.toLowerCase() === bare.toLowerCase())
     if (!entry || !part) return part
     return (
       <TrustIdeaMark key={`${entry.term}-${index}`} term={entry.term} meaning={entry.meaning}>

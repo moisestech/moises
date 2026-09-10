@@ -8,7 +8,7 @@ import {
   type TrustTimeSegment,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { trust } from './trust-tokens'
+import { trustPresentChrome } from './trust-tokens'
 import { useTrustPresentationClock } from './useTrustPresentationClock'
 
 function formatElapsed(ms: number): string {
@@ -40,11 +40,14 @@ function segmentFor(slug?: string): TrustTimeSegment {
 export function TrustPresentationClock({ slug }: { slug?: string }) {
   const { running, elapsedMs, start, stop } = useTrustPresentationClock()
   const segment = segmentFor(slug)
+  const chrome = trustPresentChrome
 
   const windowLabel = (
-    <p className="font-space-mono text-[10px] leading-tight text-stone-500 dark:text-stone-400">
+    <p className={chrome.meta}>
       {segment.label}
-      <br />
+      <span className="mx-1 text-stone-300 dark:text-stone-600" aria-hidden>
+        ·
+      </span>
       {segment.clock}
     </p>
   )
@@ -56,10 +59,10 @@ export function TrustPresentationClock({ slug }: { slug?: string }) {
         <button
           type="button"
           onClick={start}
-          className={cn(trust.btnSecondary, 'px-2.5 py-1 text-xs')}
+          className={chrome.control}
           title={`This section is budgeted ${segment.clock}`}
         >
-          <HiOutlineClock className="mr-1 inline h-3.5 w-3.5" aria-hidden />
+          <HiOutlineClock className={chrome.icon} aria-hidden />
           Start clock
         </button>
       </div>
@@ -85,15 +88,13 @@ export function TrustPresentationClock({ slug }: { slug?: string }) {
         that would bury every other update in the bar. The button label carries
         the same information on demand instead.
       */}
-      <p className="font-mono text-sm font-semibold tabular-nums text-stone-900 dark:text-stone-100">
-        {formatElapsed(elapsedMs)}
-      </p>
+      <p className={cn(chrome.label, 'font-space-mono tabular-nums')}>{formatElapsed(elapsedMs)}</p>
       {windowLabel}
-      <p className={cn('font-space-mono text-[10px] font-semibold', pace.tone)}>{pace.label}</p>
+      <p className={cn(chrome.meta, 'font-semibold', pace.tone)}>{pace.label}</p>
       <button
         type="button"
         onClick={stop}
-        className={cn(trust.btnSecondary, 'px-2 py-1 text-[11px]')}
+        className={chrome.control}
         aria-label={`Stop the clock. ${formatElapsed(elapsedMs)} elapsed, ${pace.label}, in ${segment.label} budgeted ${segment.clock}.`}
       >
         Stop

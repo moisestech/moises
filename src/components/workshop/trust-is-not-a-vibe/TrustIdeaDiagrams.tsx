@@ -5,7 +5,12 @@ import {
   type TrustIdeaDiagramId,
   type TrustRoleId,
 } from '@/content/workshops/trust-is-not-a-vibe'
+import { cn } from '@/lib/utils'
 import { TrustDiagramSvg, TrustEdge, TrustFigure, TrustNode, type TrustDiagramTone } from './diagram'
+import { TrustKeepTogether } from './TrustPresentPortions'
+import { usePresentationMode } from './TrustPresentation'
+import { TrustVerdictHover } from './TrustVerdictHover'
+import { trustIdea, trustLesson, trustPresent } from './trust-tokens'
 
 type FlowNode = {
   label: string | string[]
@@ -312,18 +317,49 @@ function EvalStepsDiagram() {
 }
 
 function GraderScoreDiagram() {
+  const { present } = usePresentationMode()
+  const nodes = [
+    { label: 'Output', tone: 'blue' as const },
+    { label: 'Grader', sub: 'code · model · human', tone: 'violet' as const },
+    { label: 'Score', shape: 'pill' as const, tone: 'emerald' as const },
+  ]
+  const title = 'Output becomes a score'
+  const description =
+    'A grader takes the system output and turns it into a score someone can act on.'
+
   return (
-    <LinearIdeaFlow
-      eyebrow="The grader"
-      title="Output becomes a score"
-      description="A grader takes the system output and turns it into a score someone can act on."
-      caption="The harness turns a write into a number a person can Allow, Ask, or Deny."
-      nodes={[
-        { label: 'Output', tone: 'blue' },
-        { label: 'Grader', sub: 'code · model · human', tone: 'violet' },
-        { label: 'Score', shape: 'pill', tone: 'emerald' },
-      ]}
-    />
+    <TrustKeepTogether
+      data-trust-grader-score
+      className={cn(
+        'grid items-start gap-6',
+        present ? 'lg:grid-cols-[minmax(0,1fr)_minmax(18rem,42%)]' : 'md:grid-cols-[minmax(0,1fr)_minmax(16rem,42%)]'
+      )}
+    >
+      <div>
+        <p
+          className={cn(
+            present
+              ? 'font-space-mono text-sm uppercase tracking-[0.2em] text-cyan-700 dark:text-cyan-400'
+              : trustLesson.eyebrow
+          )}
+        >
+          The grader
+        </p>
+        <p className={cn('mt-2', present ? trustPresent.title : trustIdea.title)}>{title}</p>
+        <p className={cn('mt-4', present ? trustPresent.body : 'max-w-[42ch] text-lg leading-snug text-stone-800 dark:text-stone-200')}>
+          The harness turns a write into a number a person can <TrustVerdictHover verdict="allow" />,{' '}
+          <TrustVerdictHover verdict="ask" />, or <TrustVerdictHover verdict="deny" />.
+        </p>
+      </div>
+      <div className="min-w-0">
+        <div className="hidden sm:block">
+          <LinearFlowSvg nodes={nodes} title={title} description={description} orientation="horizontal" />
+        </div>
+        <div className="sm:hidden">
+          <LinearFlowSvg nodes={nodes} title={title} description={description} orientation="vertical" />
+        </div>
+      </div>
+    </TrustKeepTogether>
   )
 }
 

@@ -26,18 +26,58 @@ export type TrustBannerCta = {
   label: string
 }
 
-function BannerTitle({
+const TRUST_BANNER_SCRIM =
+  'absolute inset-0 bg-gradient-to-r from-stone-950/85 via-stone-950/45 to-stone-950/10 dark:from-black/90 dark:via-black/50 dark:to-black/15'
+
+/** Image plus left-field scrim. Shared by the site-chrome banner and the Present transition. */
+export function TrustBannerBackdrop({ asset }: { asset: TrustPlaceholderKey }) {
+  const item = TRUST_PLACEHOLDERS[asset] as TrustPlaceholder
+  const src = item.src
+
+  if (src) {
+    const remote = src.startsWith('https://')
+    return (
+      <>
+        <Image
+          src={src}
+          alt={item.alt}
+          fill
+          priority
+          unoptimized={remote}
+          className="object-cover object-right"
+          sizes="100vw"
+        />
+        <div className={TRUST_BANNER_SCRIM} aria-hidden />
+      </>
+    )
+  }
+
+  return (
+    <div className={cn('absolute inset-0 bg-stone-100 dark:bg-stone-900', TRUST_MISSING_HATCH)}>
+      <TrustMissingStillBadge
+        status={item.status}
+        filename={item.surfaceFilename}
+        className="absolute right-4 top-3 z-[2]"
+      />
+    </div>
+  )
+}
+
+export function BannerTitle({
   copy,
   tone = 'light',
   cta,
   lede,
   compact,
+  progress,
 }: {
   copy: TrustBannerCopy
   tone?: 'light' | 'dark'
   cta?: TrustBannerCta
   lede?: string
   compact?: boolean
+  /** Quiet “1 of 6” for the Present chapter slide. Course language stays in HTML. */
+  progress?: string
 }) {
   const onDark = tone === 'light'
   return (
@@ -76,6 +116,17 @@ function BannerTitle({
             {copy.clock}
           </span>
         </h1>
+        {progress ? (
+          <p
+            className={cn(
+              'font-space-mono uppercase tracking-[0.18em]',
+              compact ? 'mt-1 text-[10px]' : 'mt-3 text-[11px] sm:text-xs',
+              onDark ? 'text-white/60' : 'text-stone-500'
+            )}
+          >
+            {progress}
+          </p>
+        ) : null}
         {lede ? (
           <p
             className={cn(
@@ -121,42 +172,14 @@ export function TrustLabBanner({
   const src = item.src
   const frame = compact ? TRUST_BANNER_FRAME_COMPACT : cta ? TRUST_BANNER_FRAME_CTA : TRUST_BANNER_FRAME
 
-  if (src) {
-    const remote = src.startsWith('https://')
-    return (
-      <div data-site-chrome className={frame}>
-        <Image
-          src={src}
-          alt={item.alt}
-          fill
-          priority
-          unoptimized={remote}
-          className="object-cover object-right"
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-stone-950/85 via-stone-950/45 to-stone-950/10 dark:from-black/90 dark:via-black/50 dark:to-black/15"
-          aria-hidden
-        />
-        <div className="relative z-[1] h-full w-full">
-          <BannerTitle copy={copy} cta={cta} lede={lede} compact={compact} />
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div
       data-site-chrome
-      className={cn(frame, 'border-dashed border-amber-400/80 dark:border-amber-500/60')}
+      className={cn(frame, !src && 'border-dashed border-amber-400/80 dark:border-amber-500/60')}
     >
-      <div className={cn('relative flex h-full w-full bg-stone-100 dark:bg-stone-900', TRUST_MISSING_HATCH)}>
-        <TrustMissingStillBadge
-          status={item.status}
-          filename={item.surfaceFilename}
-          className="absolute right-4 top-3 z-[2]"
-        />
-        <BannerTitle copy={copy} tone="dark" cta={cta} lede={lede} compact={compact} />
+      <TrustBannerBackdrop asset={asset} />
+      <div className="relative z-[1] h-full w-full">
+        <BannerTitle copy={copy} tone={src ? 'light' : 'dark'} cta={cta} lede={lede} compact={compact} />
       </div>
     </div>
   )

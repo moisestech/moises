@@ -3,8 +3,7 @@ import type { TrustCase, TrustControl, TrustLoopNode } from './types'
 /** Learner-facing name for Case A. Internal id stays `case-a`. */
 export const TRUST_CASE_A_LEARNER_NAME = 'Enrollment decision'
 
-export const TRUST_CASE_A_INTRO =
-  'This is the enrollment screen from Cohort Studio. An agent wants to confirm October 6, email 120 people, and automatically remove participants it calls quiet. Nothing has been sent or changed. You decide whether it may act.'
+export const TRUST_CASE_A_INTRO = 'You decide whether it may act.'
 
 export const TRUST_CASE_A_CARD_NOTE = 'Made-up case. Nothing has been sent or changed.'
 

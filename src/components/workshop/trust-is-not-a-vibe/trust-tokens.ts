@@ -175,6 +175,9 @@ export const TRUST_CHAPTER_TONE: Record<
 /** Same column as chapter nav and landing body. */
 export const TRUST_PAGE_GUTTER = 'mx-auto w-full max-w-5xl px-3 sm:px-4'
 
+/** Presenting column: 20% past the prior 83.2rem stage (64rem × 1.3 × 1.2). */
+export const TRUST_PRESENT_GUTTER = 'mx-auto w-full max-w-[99.84rem] px-3 sm:px-6'
+
 /** Live site header plus the measured Trust subnav. Published by `TrustWorkshopNav`. */
 export const TRUST_SUBNAV_HEIGHT_VAR = '--trust-subnav-height'
 
@@ -220,6 +223,13 @@ export const trustIdea = {
   title: 'text-2xl font-semibold italic leading-tight tracking-tight text-stone-950 sm:text-3xl dark:text-stone-50',
   body: 'max-w-[42ch] text-lg leading-[1.55] text-stone-800 dark:text-stone-200',
   term: 'bg-cyan-100/90 px-0.5 font-semibold not-italic text-cyan-950 dark:bg-cyan-950/70 dark:text-cyan-100',
+  def: 'mt-3 block w-[min(28rem,calc(100vw-2rem))] max-w-full rounded-md border border-cyan-300 bg-white px-3.5 py-3 text-left text-lg font-normal not-italic leading-snug text-stone-800 shadow-md dark:border-cyan-800 dark:bg-stone-900 dark:text-stone-100',
+  defLabel: 'font-space-mono text-xs uppercase tracking-[0.14em] text-cyan-700 dark:text-cyan-400',
+  defMeaning: 'text-lg leading-snug',
+  defPresent:
+    'mt-4 block w-full min-w-[min(36rem,100%)] rounded-lg border border-cyan-300 bg-white px-5 py-4 text-left text-2xl font-normal not-italic leading-snug text-stone-800 shadow-md dark:border-cyan-800 dark:bg-stone-900 dark:text-stone-100',
+  defLabelPresent: 'font-space-mono text-lg uppercase tracking-[0.14em] text-cyan-700 dark:text-cyan-400',
+  defMeaningPresent: 'text-2xl leading-snug sm:text-3xl',
 } as const
 
 /** Open accordion: cyan edge and ring so the active portion holds the eye. */
@@ -227,11 +237,28 @@ export const trustPanelOpen =
   'border-cyan-500 bg-white shadow-md ring-2 ring-cyan-500/35 ring-offset-2 ring-offset-stone-50 dark:bg-stone-900 dark:ring-offset-stone-950'
 export const trustPanelIdle = 'border-stone-200 bg-white dark:border-stone-700 dark:bg-stone-900'
 
+/**
+ * Presentation bar chrome. One size for every control so the strip does not
+ * mix 10 / 11 / 12 / 14px. Buttons stay 2rem tall; meta is the same 12px mono.
+ */
+export const trustPresentChrome = {
+  control:
+    "inline-flex h-8 items-center gap-1.5 rounded-md border border-stone-300 bg-white px-2.5 text-xs font-medium leading-none text-stone-800 hover:border-cyan-400 hover:bg-cyan-50 hover:text-cyan-950 dark:border-stone-600 dark:bg-stone-900 dark:text-stone-100 dark:hover:border-cyan-400 dark:hover:bg-cyan-950/50 dark:hover:text-cyan-50",
+  current:
+    'border-cyan-500 bg-cyan-50 text-cyan-900 dark:border-cyan-400 dark:bg-cyan-950/50 dark:text-cyan-100',
+  meta: 'font-space-mono text-xs tabular-nums leading-none text-stone-500 dark:text-stone-400',
+  label: 'text-xs font-medium leading-none text-stone-800 dark:text-stone-100',
+  item: 'flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-xs font-medium leading-snug text-stone-800 hover:bg-stone-100 dark:text-stone-100 dark:hover:bg-stone-800',
+  icon: 'h-3.5 w-3.5 shrink-0',
+} as const
+
 /** Projection scale. One portion on screen, readable from a few seats back. */
 export const trustPresent = {
-  title: 'text-3xl font-bold leading-[1.1] tracking-tight text-stone-950 sm:text-4xl md:text-5xl dark:text-stone-50',
-  deck: 'mt-2 max-w-[36ch] text-xl leading-snug text-stone-600 sm:text-2xl dark:text-stone-400',
-  body: 'max-w-[36ch] text-2xl leading-snug text-stone-800 sm:text-3xl dark:text-stone-200',
+  title: 'text-4xl font-bold leading-[1.08] tracking-tight text-stone-950 sm:text-5xl md:text-6xl dark:text-stone-50',
+  deck: 'mt-2 max-w-[36ch] text-2xl leading-snug text-stone-600 sm:text-3xl dark:text-stone-400',
+  body: 'max-w-[34ch] text-3xl leading-snug text-stone-800 sm:text-4xl dark:text-stone-200',
+  choice: 'text-xl font-medium leading-snug sm:text-2xl',
+  note: 'text-lg leading-snug sm:text-xl',
 } as const
 
 export const trust = {
@@ -278,6 +305,20 @@ export const TRUST_VERDICT_CLASS: Record<TrustVerdict, string> = {
   allow: 'border-emerald-400/60 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200',
   ask: 'border-amber-400/60 bg-amber-50 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200',
   deny: 'border-red-400/60 bg-red-50 text-red-900 dark:bg-red-950/40 dark:text-red-200',
+}
+
+export const TRUST_VERDICT_HOVER: Record<TrustVerdict, string> = {
+  allow: 'hover:border-emerald-400 hover:bg-emerald-50 hover:text-emerald-900 dark:hover:border-emerald-400 dark:hover:bg-emerald-950/40 dark:hover:text-emerald-200',
+  ask: 'hover:border-amber-400 hover:bg-amber-50 hover:text-amber-900 dark:hover:border-amber-400 dark:hover:bg-amber-950/40 dark:hover:text-amber-200',
+  deny: 'hover:border-red-400 hover:bg-red-50 hover:text-red-900 dark:hover:border-red-400 dark:hover:bg-red-950/40 dark:hover:text-red-200',
+}
+
+/** Same ink as `TRUST_VERDICT_HOVER`, for keyboard focus-visible. */
+export const TRUST_VERDICT_FOCUS: Record<TrustVerdict, string> = {
+  allow:
+    'focus-visible:border-emerald-400 focus-visible:bg-emerald-50 focus-visible:text-emerald-900 dark:focus-visible:border-emerald-400 dark:focus-visible:bg-emerald-950/40 dark:focus-visible:text-emerald-200',
+  ask: 'focus-visible:border-amber-400 focus-visible:bg-amber-50 focus-visible:text-amber-900 dark:focus-visible:border-amber-400 dark:focus-visible:bg-amber-950/40 dark:focus-visible:text-amber-200',
+  deny: 'focus-visible:border-red-400 focus-visible:bg-red-50 focus-visible:text-red-900 dark:focus-visible:border-red-400 dark:focus-visible:bg-red-950/40 dark:focus-visible:text-red-200',
 }
 
 export const TRUST_VERDICT_LABEL: Record<TrustVerdict, string> = {

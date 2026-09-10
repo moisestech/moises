@@ -1,3 +1,4 @@
+import type { TrustIdeaQuote } from './lesson-packets'
 import { TRUST_CENTRAL_QUESTION } from './types'
 
 export type TrustOverviewSectionId =
@@ -22,6 +23,15 @@ export type TrustOverviewSection = {
   title: string
   /** One sentence, set below the title. */
   deck: string
+  /** Opening thesis quote. Why it matters is the idea of the landing. */
+  ideaQuote?: TrustIdeaQuote
+}
+
+export const TRUST_OVERVIEW_IDEA_QUOTE: TrustIdeaQuote = {
+  text: 'AI systems are inherently socio-technical in nature.',
+  attribution: 'NIST, AI Risk Management Framework',
+  bridge: 'Trust depends on models, data, interfaces, permissions, and people — not only how the card looks.',
+  href: 'https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf',
 }
 
 export const TRUST_OVERVIEW_SECTIONS: readonly TrustOverviewSection[] = [
@@ -45,6 +55,7 @@ export const TRUST_OVERVIEW_SECTIONS: readonly TrustOverviewSection[] = [
     navLabel: 'Why it matters',
     title: 'One person cannot be five roles',
     deck: 'Speed collapses interpretation, building, judging, and permission into one seat. That is not evaluation.',
+    ideaQuote: TRUST_OVERVIEW_IDEA_QUOTE,
   },
   {
     id: 'the-path',
