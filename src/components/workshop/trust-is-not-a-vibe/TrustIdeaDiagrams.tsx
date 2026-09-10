@@ -31,17 +31,20 @@ function LinearFlowSvg({
   title,
   description,
   orientation,
+  size = 'page',
 }: {
   nodes: readonly FlowNode[]
   title: string
   description: string
   orientation: 'horizontal' | 'vertical'
+  size?: 'page' | 'stage'
 }) {
   if (orientation === 'vertical') {
-    const vW = 240
-    const vH = 56
-    const vPitch = 78
-    const vPad = 16
+    const room = size === 'stage'
+    const vW = room ? 360 : 280
+    const vH = room ? 88 : 64
+    const vPitch = room ? 124 : 90
+    const vPad = room ? 24 : 16
     return (
       <TrustDiagramSvg
         viewBox={`0 0 ${vPad * 2 + vW} ${vPad + vH + (nodes.length - 1) * vPitch + 8}`}
@@ -62,9 +65,10 @@ function LinearFlowSvg({
                 label={node.label}
                 sub={node.sub}
                 shape={node.shape}
-                labelClassName="text-[13px]"
-                subClassName="text-[10px]"
-                leading={{ label: 15, sub: 12, gap: 2 }}
+                radius={node.shape === 'pill' ? vH / 2 : undefined}
+                labelClassName={room ? 'text-[22px]' : 'text-[16px]'}
+                subClassName={room ? 'text-[14px]' : 'text-[12px]'}
+                leading={room ? { label: 26, sub: 18, gap: 4 } : { label: 18, sub: 14, gap: 3 }}
               />
               {index < nodes.length - 1 ? (
                 <TrustEdge
@@ -240,7 +244,7 @@ function FourTasksDiagram() {
 function OutputKindsDiagram() {
   const title = 'Open-ended output'
   const description =
-    'An LLM produces text, code, or multi-step actions. There is often no single right answer, so a finished look can hide a planted break.'
+    'An LLM can write text, code, or a sequence of actions. There is often no single right answer, so a confident voice can hide a planted break in the facts, the permission, or the pause.'
   const kinds: FlowNode[] = [
     { label: 'Text', tone: 'stone' },
     { label: 'Code', tone: 'emerald' },
@@ -251,7 +255,7 @@ function OutputKindsDiagram() {
     <TrustFigure
       eyebrow="Open-ended"
       title={title}
-      caption="Breaks hide in the open-ended result, not in the voice."
+      caption="The break is in what the result does — a wrong count, a missing permission, a skipped pause — not in how the card sounds."
     >
       <div className="hidden sm:block">
         <TrustDiagramSvg viewBox="0 0 500 236" title={title} description={description}>
@@ -328,13 +332,7 @@ function GraderScoreDiagram() {
     'A grader takes the system output and turns it into a score someone can act on.'
 
   return (
-    <TrustKeepTogether
-      data-trust-grader-score
-      className={cn(
-        'grid items-start gap-6',
-        present ? 'lg:grid-cols-[minmax(0,1fr)_minmax(18rem,42%)]' : 'md:grid-cols-[minmax(0,1fr)_minmax(16rem,42%)]'
-      )}
-    >
+    <TrustKeepTogether data-trust-grader-score className="space-y-6">
       <div>
         <p
           className={cn(
@@ -351,13 +349,14 @@ function GraderScoreDiagram() {
           <TrustVerdictHover verdict="ask" />, or <TrustVerdictHover verdict="deny" />.
         </p>
       </div>
-      <div className="min-w-0">
-        <div className="hidden sm:block">
-          <LinearFlowSvg nodes={nodes} title={title} description={description} orientation="horizontal" />
-        </div>
-        <div className="sm:hidden">
-          <LinearFlowSvg nodes={nodes} title={title} description={description} orientation="vertical" />
-        </div>
+      <div className={cn('mx-auto w-full', present ? 'max-w-xl' : 'max-w-sm')}>
+        <LinearFlowSvg
+          nodes={nodes}
+          title={title}
+          description={description}
+          orientation="vertical"
+          size={present ? 'stage' : 'page'}
+        />
       </div>
     </TrustKeepTogether>
   )

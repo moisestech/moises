@@ -18,6 +18,7 @@ import {
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { TrustFigure } from './diagram/TrustFigure'
+import { ConceptConstellation } from './ConceptConstellation'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustIdeaQuote } from './TrustIdeaQuote'
 import { TrustKeepTogether } from './TrustPresentPortions'
@@ -342,6 +343,9 @@ export function trustOverviewWhyChildren() {
         client. That is not independent evaluation.
       </p>
     </TrustOverviewWhyBeat>,
+    <TrustKeepTogether key="overview-core">
+      <ConceptConstellation clusterId="overview-core" />
+    </TrustKeepTogether>,
     ...(WHY_SECTION?.ideaQuote
       ? [<TrustIdeaQuote key="idea-quote" quote={WHY_SECTION.ideaQuote} />]
       : []),

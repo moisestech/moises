@@ -1,11 +1,9 @@
 import { TRUST_LEARN_BASE, type TrustChapterId } from './types'
 
 /**
- * Landscape evaluation diagrams. Concept references until the custom 16:9
- * rasters exist. Swap `src` to the production Cloudinary URL — one field —
- * when `trust-is-not-a-vibe-diagram-NN-…-landscape.png` is uploaded.
- *
- * These are not idea portraits. Portrait cards stay in idea-illustrations.ts.
+ * Landscape evaluation diagrams. Production 16:9 WebPs (1672 × 941) live on
+ * Cloudinary. Pages read `src` from this registry — do not hard-code paths
+ * in chapter JSX. These are not idea portraits.
  */
 export type TrustEvalDiagramUse = 'required' | 'supporting' | 'deeper'
 
@@ -24,186 +22,175 @@ export type TrustEvalDiagramId =
   | 'eval-12'
   | 'eval-13'
   | 'eval-14'
+  | 'eval-15'
 
 export type TrustEvalDiagram = {
   id: TrustEvalDiagramId
   chapter: TrustChapterId
   use: TrustEvalDiagramUse
-  /** Concept-reference Cloudinary URL. Keep the uploaded original unchanged. */
-  reference: string
-  /** Planned production filename. Not a path — swap `src` when it exists. */
-  production: string
-  /**
-   * Image actually rendered. Currently the reference URL. Point this at the
-   * production Cloudinary object when the custom raster lands.
-   */
+  filename: string
   src: string
   alt: string
-  /** Teaching purpose. Course language stays in HTML, not on the image. */
+  /** Presenter takeaway. Course language stays in nearby HTML, not on the image. */
   caption: string
   placement: string
 }
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload'
 
-function diagram(entry: Omit<TrustEvalDiagram, 'src'>): TrustEvalDiagram {
-  return { ...entry, src: entry.reference }
-}
-
-export const TRUST_EVAL_DIAGRAM_SIZE = { width: 1600, height: 900 } as const
+export const TRUST_EVAL_DIAGRAM_SIZE = { width: 1672, height: 941 } as const
 
 export const TRUST_EVAL_DIAGRAMS: Record<TrustEvalDiagramId, TrustEvalDiagram> = {
-  'eval-01': diagram({
+  'eval-01': {
     id: 'eval-01',
     chapter: 'looks-right',
     use: 'required',
-    reference: `${CDN}/v1789009998/dccmiami/workshops/agentic-engineering-for-beginners/reference-01-looks-right-one-output-many-claims_np2k28.png`,
-    production: 'trust-is-not-a-vibe-diagram-01-one-output-many-claims-landscape.png',
-    alt: 'One polished cohort card surrounded by separate checks for evidence, tone, permission, impact, and cost.',
-    caption:
-      'One polished output contains factual, qualitative, authority, impact, and operational claims, and each claim needs a different kind of check.',
+    filename: '01-looks-right-one-output-many-claims.webp',
+    src: `${CDN}/v1789037358/dccmiami/workshops/agentic-engineering-for-beginners/01-looks-right-one-output-many-claims_il6xfu.webp`,
+    alt: 'One AI output separates into factual, permission, and impact claims that require different checks.',
+    caption: 'A polished answer contains different kinds of claims; each needs a different check.',
     placement: `Looks Right · Check it · after the first Allow / Ask / Deny vote · ${TRUST_LEARN_BASE}/looks-right`,
-  }),
-  'eval-02': diagram({
+  },
+  'eval-02': {
     id: 'eval-02',
     chapter: 'looks-right',
     use: 'supporting',
-    reference: `${CDN}/v1789009997/dccmiami/workshops/agentic-engineering-for-beginners/reference-02-looks-right-one-behavior-per-eval_oo4wzy.png`,
-    production: 'trust-is-not-a-vibe-diagram-02-one-behavior-per-eval-landscape.png',
-    alt: 'Several individual evaluation cards, each testing one behavior instead of judging the whole agent at once.',
-    caption: 'Replace the vague question “Is the agent good?” with one testable behavior at a time.',
-    placement: `Looks Right · Check it · after Evidence / Authority / Impact · collapsed · ${TRUST_LEARN_BASE}/looks-right`,
-  }),
-  'eval-03': diagram({
+    filename: '02-looks-right-one-behavior-per-eval.webp',
+    src: `${CDN}/v1789037358/dccmiami/workshops/agentic-engineering-for-beginners/02-looks-right-one-behavior-per-eval_f4vjpp.webp`,
+    alt: 'One behavior is isolated and tested with its own cases and grader.',
+    caption: 'Test one behavior at a time, or you will not know what failed.',
+    placement: `Looks Right · Check it · supporting reveal after Evidence / Authority / Impact · ${TRUST_LEARN_BASE}/looks-right`,
+  },
+  'eval-03': {
     id: 'eval-03',
     chapter: 'seeded-failures',
     use: 'required',
-    reference: `${CDN}/v1789009998/dccmiami/workshops/agentic-engineering-for-beginners/reference-03-seeded-failures-output-only-evaluation_wjgwoo.png`,
-    production: 'trust-is-not-a-vibe-diagram-03-output-only-evaluation-landscape.png',
-    alt: 'A polished output receiving a good score while system failures remain hidden behind it.',
-    caption:
-      'A polished final card can score well while hiding failures in evidence, tools, permissions, and pauses.',
+    filename: '03-seeded-failures-output-only-evaluation.webp',
+    src: `${CDN}/v1789037359/dccmiami/workshops/agentic-engineering-for-beginners/03-seeded-failures-output-only-evaluation_fqlifa.webp`,
+    alt: 'A polished message passes an output check while hidden system stages remain unexamined.',
+    caption: 'Output grading sees the prose, not the path that produced it.',
     placement: `Seeded Failures · See it · before learners inspect The send · ${TRUST_LEARN_BASE}/seeded-failures`,
-  }),
-  'eval-04': diagram({
+  },
+  'eval-04': {
     id: 'eval-04',
     chapter: 'seeded-failures',
     use: 'required',
-    reference: `${CDN}/v1789009999/dccmiami/workshops/agentic-engineering-for-beginners/reference-04-seeded-failures-system-trajectory-evaluation_ujjeju.png`,
-    production: 'trust-is-not-a-vibe-diagram-04-system-trajectory-evaluation-landscape.png',
-    alt: 'Evaluation probes placed along sources, reasoning, tool use, permission, action, and outcome.',
-    caption:
-      'Move evaluation inside the system: inspect sources, counts, tool use, permission, action, and outcome.',
-    placement: `Seeded Failures · Check it · immediately after planted failures are revealed · ${TRUST_LEARN_BASE}/seeded-failures`,
-  }),
-  'eval-05': diagram({
+    filename: '04-seeded-failures-system-trajectory-evaluation.webp',
+    src: `${CDN}/v1789037360/dccmiami/workshops/agentic-engineering-for-beginners/04-seeded-failures-system-trajectory-evaluation_zahqld.webp`,
+    alt: 'Request, evidence, decision, tool call, permission, action, and outcome are inspected as one system trace.',
+    caption: 'For an agent, the trajectory is part of the product.',
+    placement: `Seeded Failures · Check it · after the planted failures are revealed · ${TRUST_LEARN_BASE}/seeded-failures`,
+  },
+  'eval-05': {
     id: 'eval-05',
     chapter: 'the-loop',
     use: 'required',
-    reference: `${CDN}/v1789010000/dccmiami/workshops/agentic-engineering-for-beginners/reference-05-the-loop-agent-runtime-cycle_wazbp2.png`,
-    production: 'trust-is-not-a-vibe-diagram-05-controlled-agent-runtime-loop-landscape.png',
-    alt: 'A controlled agent loop in which a proposal must pass a gate before action and is checked afterward.',
-    caption:
-      'Locate a break on Observe, Decide, Propose/Gate, Act, Check, or Stop rather than judging how the prose sounds.',
+    filename: '05-the-loop-controlled-agent-runtime.webp',
+    src: `${CDN}/v1789037360/dccmiami/workshops/agentic-engineering-for-beginners/05-the-loop-controlled-agent-runtime_h03ewl.webp`,
+    alt: 'An agent observes, decides, and proposes, then stops at a permission gate before acting and checking.',
+    caption: 'The model proposes; the system controls; the team authorizes.',
     placement: `The Loop · See it · immediately before the stage-mapping interaction · ${TRUST_LEARN_BASE}/the-loop`,
-  }),
-  'eval-06': diagram({
+  },
+  'eval-06': {
     id: 'eval-06',
     chapter: 'the-loop',
     use: 'deeper',
-    reference: `${CDN}/v1789010000/dccmiami/workshops/agentic-engineering-for-beginners/reference-06-the-loop-rag-stage-specific-evaluation-go-deeper_jyxmrb.png`,
-    production: 'trust-is-not-a-vibe-diagram-06-retrieval-and-answer-evaluation-landscape.png',
-    alt: 'Retrieval and answer generation shown as separate stages with separate evaluations.',
-    caption: 'Retrieval quality and answer faithfulness are separate claims with separate graders.',
-    placement: `The Loop · Engineering Go deeper · after stage mapping · ${TRUST_LEARN_BASE}/the-loop`,
-  }),
-  'eval-07': diagram({
+    filename: '06-the-loop-retrieval-answer-evaluation.webp',
+    src: `${CDN}/v1789037361/dccmiami/workshops/agentic-engineering-for-beginners/06-the-loop-retrieval-answer-evaluation_tl8dbn.webp`,
+    alt: 'Retrieval evidence and answer quality are evaluated separately before a decision.',
+    caption: 'A good answer can rest on bad retrieval, and good retrieval can still be misused.',
+    placement: `The Loop · Engineering Go deeper · optional · ${TRUST_LEARN_BASE}/the-loop`,
+  },
+  'eval-07': {
     id: 'eval-07',
     chapter: 'the-harness',
     use: 'required',
-    reference: `${CDN}/v1789010001/dccmiami/workshops/agentic-engineering-for-beginners/reference-07-the-harness-task-data-grader-foundation_qwbtoq.png`,
-    production: 'trust-is-not-a-vibe-diagram-07-task-cases-grader-foundation-landscape.png',
-    alt: 'Task, cases, and grader arranged as the three foundations of one evaluation.',
-    caption: 'The minimal evaluation unit is one task, revealing cases, and an appropriate grader.',
-    placement: `The Harness · The idea · landscape before matching controls · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
-  'eval-08': diagram({
+    filename: '07-the-harness-task-cases-grader.webp',
+    src: `${CDN}/v1789037362/dccmiami/workshops/agentic-engineering-for-beginners/07-the-harness-task-cases-grader_plu5l8.webp`,
+    alt: 'A task flows into test cases and a grader, producing evidence rather than an automatic verdict.',
+    caption: 'Every evaluation needs a task, cases that expose it, and a grader.',
+    placement: `The Harness · The idea · opening · ${TRUST_LEARN_BASE}/the-harness`,
+  },
+  'eval-08': {
     id: 'eval-08',
     chapter: 'the-harness',
     use: 'required',
-    reference: `${CDN}/v1789010001/dccmiami/workshops/agentic-engineering-for-beginners/reference-08-the-harness-golden-cases-diverse-difficult_kttupq.png`,
-    production: 'trust-is-not-a-vibe-diagram-08-golden-cases-cover-the-failure-zone-landscape.png',
-    alt: 'A golden set composed of common cases, edge cases, and known failures.',
-    caption:
-      'A useful golden set includes common cases, edge cases, and known failures — not merely many examples.',
+    filename: '08-the-harness-golden-cases.webp',
+    src: `${CDN}/v1789037362/dccmiami/workshops/agentic-engineering-for-beginners/08-the-harness-golden-cases_le0jk4.webp`,
+    alt: 'Common, edge, and known-failure cases surround the risk area in a curated golden set.',
+    caption: 'A golden set is small by design and grows from real failures.',
     placement: `The Harness · See it · golden-set activity · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
-  'eval-09': diagram({
+  },
+  'eval-09': {
     id: 'eval-09',
     chapter: 'the-harness',
     use: 'required',
-    reference: `${CDN}/v1789010002/dccmiami/workshops/agentic-engineering-for-beginners/reference-09-the-harness-complementary-grader-types_uko7c3.png`,
-    production: 'trust-is-not-a-vibe-diagram-09-complementary-graders-landscape.png',
-    alt: 'Four complementary grading methods contributing different evidence about the same output.',
-    caption:
-      'Code, model, human, and outcome evidence have different strengths and blind spots; they feed one evidence pool rather than map to fixed verdicts.',
-    placement: `The Harness · See it · after the golden-set activity, when graders unlock · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
-  'eval-10': diagram({
+    filename: '09-the-harness-complementary-graders.webp',
+    src: `${CDN}/v1789037363/dccmiami/workshops/agentic-engineering-for-beginners/09-the-harness-complementary-graders_wxch5q.webp`,
+    alt: 'Code, model, human, and outcome graders inspect one proposal and combine complementary evidence.',
+    caption: 'No grader sees everything; confidence comes from complementary evidence.',
+    placement: `The Harness · See it · after the golden-set activity · ${TRUST_LEARN_BASE}/the-harness`,
+  },
+  'eval-10': {
     id: 'eval-10',
     chapter: 'the-harness',
     use: 'supporting',
-    reference: `${CDN}/v1789010003/dccmiami/workshops/agentic-engineering-for-beginners/reference-10-the-harness-model-judge-subjective-criteria_rraey2.png`,
-    production: 'trust-is-not-a-vibe-diagram-10-calibrated-model-judge-landscape.png',
-    alt: 'A model judge applying a rubric and being calibrated against human-reviewed examples.',
-    caption:
-      'Use a model judge for rubric-shaped qualities such as tone and clarity, then calibrate it against human-labeled examples.',
-    placement: `The Harness · Go deeper · model-judge detail under the grader chooser · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
-  'eval-11': diagram({
+    filename: '10-the-harness-calibrated-model-judge.webp',
+    src: `${CDN}/v1789037364/dccmiami/workshops/agentic-engineering-for-beginners/10-the-harness-calibrated-model-judge_wjxywq.webp`,
+    alt: 'Tone, clarity, and completeness ratings are calibrated against human anchors before becoming evidence.',
+    caption: 'A model judge is useful only when calibrated against human-labeled anchors.',
+    placement: `The Harness · Go deeper · model-judge supporting detail, first reveal · ${TRUST_LEARN_BASE}/the-harness`,
+  },
+  'eval-11': {
     id: 'eval-11',
     chapter: 'the-harness',
     use: 'supporting',
-    reference: `${CDN}/v1789010003/dccmiami/workshops/agentic-engineering-for-beginners/reference-11-the-harness-varied-wording-semantic-grader_sjig5p.png`,
-    production: 'trust-is-not-a-vibe-diagram-11-semantic-grading-across-varied-wording-landscape.png',
-    alt: 'Different refusal phrasings converging on the same semantic behavior check.',
-    caption:
-      'Exact-string checks fail when different wording expresses the same behavior; semantic grading still needs clear criteria and calibration.',
-    placement: `The Harness · Go deeper · model-judge detail, after calibration · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
-  'eval-12': diagram({
+    filename: '11-the-harness-semantic-grading.webp',
+    src: `${CDN}/v1789037364/dccmiami/workshops/agentic-engineering-for-beginners/11-the-harness-semantic-grading_lq6fo4.webp`,
+    alt: 'No, I cannot, not allowed, and unable converge into the semantic category refusal before a calibration check.',
+    caption: 'Exact wording changes; behavior is what we grade.',
+    placement: `The Harness · Go deeper · model-judge supporting detail, second reveal · ${TRUST_LEARN_BASE}/the-harness`,
+  },
+  'eval-12': {
     id: 'eval-12',
     chapter: 'the-harness',
     use: 'deeper',
-    reference: `${CDN}/v1789010004/dccmiami/workshops/agentic-engineering-for-beginners/reference-12-the-harness-agent-multimetric-radar-go-deeper_jzivpz.png`,
-    production: 'trust-is-not-a-vibe-diagram-12-agent-performance-is-multidimensional-landscape.png',
-    alt: 'Two agent versions compared across resolution, steps, latency, cost, and recovery.',
-    caption:
-      'Compare task resolution, steps, latency, cost, and recovery without compressing them into a single score.',
-    placement: `The Harness · Engineering Go deeper · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
-  'eval-13': diagram({
+    filename: '12-the-harness-multidimensional-performance.webp',
+    src: `${CDN}/v1789037365/dccmiami/workshops/agentic-engineering-for-beginners/12-the-harness-multidimensional-performance_nisysl.webp`,
+    alt: 'Versions A and B differ across resolution, steps, latency, cost, and recovery.',
+    caption: 'Averages erase tradeoffs; keep independent dimensions visible.',
+    placement: `The Harness · Engineering Go deeper · optional · ${TRUST_LEARN_BASE}/the-harness`,
+  },
+  'eval-13': {
     id: 'eval-13',
     chapter: 'the-harness',
     use: 'required',
-    reference: `${CDN}/v1789010005/dccmiami/workshops/agentic-engineering-for-beginners/reference-13-the-harness-allow-ask-deny-threshold_l5bgtn.png`,
-    production: 'trust-is-not-a-vibe-diagram-13-allow-ask-deny-threshold-landscape.png',
-    alt: 'Cases distributed across explicit Allow, Ask, and Deny decision bands.',
-    caption:
-      'A harness converts evidence into an explicit gate: Allow, Ask, or Deny, and the Ask band should remain visible and meaningful.',
+    filename: '13-the-harness-allow-ask-deny-threshold.webp',
+    src: `${CDN}/v1789037366/dccmiami/workshops/agentic-engineering-for-beginners/13-the-harness-allow-ask-deny-threshold_dubtg6.webp`,
+    alt: 'Eight cases sit across Allow, Ask, and Deny zones, including cases near both decision boundaries.',
+    caption: 'Ask is not indecision; it is an intentional intervention state.',
     placement: `The Harness · Check it · immediately before the team release vote · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
-  'eval-14': diagram({
+  },
+  'eval-14': {
     id: 'eval-14',
     chapter: 'the-harness',
     use: 'required',
-    reference: `${CDN}/v1789010005/dccmiami/workshops/agentic-engineering-for-beginners/reference-14-the-harness-aggregate-score-hides-critical-failure_bzhzw3.png`,
-    production: 'trust-is-not-a-vibe-diagram-14-aggregate-score-hides-critical-failure-landscape.png',
-    alt: 'A high overall score beside category results that reveal one critical permission failure.',
-    caption:
-      'A high overall score can hide a failed permission or pause case; release decisions must preserve critical slices, not only improve the average.',
+    filename: '14-the-harness-critical-slice-regression.webp',
+    src: `${CDN}/v1789037367/dccmiami/workshops/agentic-engineering-for-beginners/14-the-harness-critical-slice-regression_gailbr.webp`,
+    alt: 'An overall score of 92 percent sits beside passing date, count, and pause checks while permission fails and regresses.',
+    caption: 'A high overall score cannot cancel a release-blocking failure.',
     placement: `The Harness · See it · regression check before the chapter verdict · ${TRUST_LEARN_BASE}/the-harness`,
-  }),
+  },
+  'eval-15': {
+    id: 'eval-15',
+    chapter: 'seeded-failures',
+    use: 'required',
+    filename: '15-agent-system-evaluation-boundary.webp',
+    src: `${CDN}/v1789038116/dccmiami/workshops/agentic-engineering-for-beginners/trust-is-not-a-vibe-diagram-15-agent-system-evaluation-boundary-landscape_aintfu.webp`,
+    alt: 'An AI system of model, tools, context, and guardrails sits before the output that an evaluation scores.',
+    caption: 'Scoring the output leaves the system unexamined. The eval has to reach the harness, the tools, and the gate.',
+    placement: `Seeded Failures · The idea · evaluation boundary · ${TRUST_LEARN_BASE}/seeded-failures`,
+  },
 }
 
 export function getTrustEvalDiagram(id: TrustEvalDiagramId): TrustEvalDiagram {

@@ -11,7 +11,7 @@ import {
   type TrustLoopStage,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
-import { LoopMapper } from './LoopMapper'
+import { LoopSeeStage, LoopTryStage, useLoopSeeSlides } from './LoopMapper'
 import { TrustEvalDiagram } from './TrustEvalDiagram'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustEvalAnatomy } from './TrustEvalAnatomy'
@@ -19,7 +19,7 @@ import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustLessonPacket } from './TrustLessonPacket'
 import { TrustMissingStillNote } from './TrustMissingStill'
 import { TrustKeepTogether } from './TrustPresentPortions'
-import { TrustPacketJob, TrustSeatStance, TrustTryHint } from './TrustSeatStance'
+import { TrustPacketJob, TrustSeatStance, trustRoleSignalPortions, trustTryHintPortions } from './TrustSeatStance'
 import { TrustPlaceholderFrame } from './TrustPlaceholderFrame'
 import { usePresentationMode } from './TrustPresentation'
 import { TrustScoringApproaches, TrustScoringMethods } from './TrustScoringApproaches'
@@ -38,41 +38,43 @@ export function TrustTheLoopLesson() {
   const placed = Object.keys(progress.loopPlacements).length
   const completed = progress.completedChapters.includes('the-loop')
 
+  const loopSlides = useLoopSeeSlides({
+    failures: TRUST_CASE_A.failures,
+    placements: progress.loopPlacements,
+    onPlace: (failureId, stage: TrustLoopStage) => {
+      const loopPlacements = { ...progress.loopPlacements, [failureId]: stage }
+      update({ loopPlacements })
+      if (Object.keys(loopPlacements).length >= 3) markChapterComplete('the-loop')
+    },
+  })
+
   const seeIt = (
-    <>
+    <LoopSeeStage>
       <TrustEvalDiagram id="eval-05" />
-      {hydrated ? (
-        <LoopMapper
-          failures={TRUST_CASE_A.failures}
-          placements={progress.loopPlacements}
-          onPlace={(failureId, stage: TrustLoopStage) => {
-            const loopPlacements = { ...progress.loopPlacements, [failureId]: stage }
-            update({ loopPlacements })
-            if (Object.keys(loopPlacements).length >= 3) markChapterComplete('the-loop')
-          }}
-        />
-      ) : (
-        <p className="text-sm text-stone-500">Loading your progress…</p>
-      )}
-    </>
+      {loopSlides}
+    </LoopSeeStage>
   )
 
+  const tryHints = present
+    ? trustRoleSignalPortions({ signals: PACKET.roleSignals, present })
+    : trustTryHintPortions({
+        roleId: progress.role,
+        signal: progress.role ? PACKET.roleSignals[progress.role] : undefined,
+        present,
+      })
+  const tryRowClass = cn(
+    'grid items-start gap-6',
+    present ? 'grid-cols-[minmax(0,1fr)_auto]' : 'md:grid-cols-[minmax(0,1fr)_auto]'
+  )
   const tryIt = (
-    <TrustKeepTogether
-      data-trust-loop-try-row
-      className={cn(
-        'grid items-start gap-6',
-        present ? 'grid-cols-[minmax(0,1fr)_auto]' : 'md:grid-cols-[minmax(0,1fr)_auto]'
-      )}
-    >
-      <div className="min-w-0 [&>[data-trust-try-hint]]:mb-0">
-        <TrustTryHint
-          roleId={progress.role}
-          signal={progress.role ? PACKET.roleSignals[progress.role] : undefined}
-        />
-      </div>
-      <TrustIdeaPortrait id={LOOP_PORTRAIT_ID} className="justify-self-end" />
-    </TrustKeepTogether>
+    <LoopTryStage>
+      {tryHints.map((hint, index) => (
+        <TrustKeepTogether key={index} data-trust-loop-try-row className={tryRowClass}>
+          <div className="min-w-0 [&>[data-trust-try-hint]]:mb-0">{hint}</div>
+          <TrustIdeaPortrait id={LOOP_PORTRAIT_ID} className="justify-self-end" />
+        </TrustKeepTogether>
+      ))}
+    </LoopTryStage>
   )
 
   const checkIt =

@@ -1379,8 +1379,26 @@ const browser = await chromium.launch()
 
   await page.keyboard.press('ArrowRight')
   await page.waitForTimeout(350)
+  const overviewCluster = page.locator('[data-trust-concept-constellation="overview-core"]')
+  check('overview present: after the thesis the next portion is the constellation', await overviewCluster.isVisible())
+  check('overview present: constellation shows Eval', await overviewCluster.getByRole('button', { name: 'Eval' }).isVisible())
+  check('overview present: constellation shows Task', await overviewCluster.getByRole('button', { name: 'Task' }).isVisible())
+  check('overview present: constellation shows Cases', await overviewCluster.getByRole('button', { name: 'Cases' }).isVisible())
+  check('overview present: constellation shows Grader', await overviewCluster.getByRole('button', { name: 'Grader' }).isVisible())
+  check('overview present: constellation starts empty', await overviewCluster.getByText('Choose a term.').isVisible())
+  check('overview present: title beat hides on the constellation', !(await whyBeat('thesis').isVisible()))
+  check('overview present: NIST waits after the constellation', (await page.locator('[data-trust-idea-quote]').count()) === 0)
+  check('overview present: the model proposes still waits after the constellation', !(await whyBeat('proposes').isVisible()))
   check(
-    'overview present: after the thesis the next portion is NIST',
+    'overview present: constellation stays on Why it matters',
+    /Step 3 of 6/.test(await announcement(page)),
+    await announcement(page)
+  )
+
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(350)
+  check(
+    'overview present: after the constellation the next portion is NIST',
     await page.locator('[data-trust-idea-quote]').getByText('AI systems are inherently socio-technical in nature.').isVisible()
   )
   check('overview present: title beat hides after the quote', !(await whyBeat('thesis').isVisible()))
@@ -1539,6 +1557,10 @@ const browser = await chromium.launch()
   check('self-paced Deny stays collapsed after Ask', !(await self.locator('[data-trust-overview-verdict-hint="deny"]').isVisible()))
   check('self-paced why still shows the title beat', await self.locator('[data-trust-overview-why="thesis"]').isVisible())
   check(
+    'self-paced why shows the overview constellation',
+    await self.locator('[data-trust-concept-constellation="overview-core"]').isVisible()
+  )
+  check(
     'self-paced overview shows the NIST quote',
     await self.locator('#why-it-matters [data-trust-idea-quote]').getByText('AI systems are inherently socio-technical in nature.').isVisible()
   )
@@ -1597,7 +1619,7 @@ const browser = await chromium.launch()
   await readingPhone.close()
 }
 
-/* 15. Portrait teaching illustrations: ten ready, two hold, no extras. */
+/* 15. Portrait teaching illustrations: nine ready in-path, two hold, no extras. */
 {
   const HOLD = [
     'idea-02-looks-right-claims-need-different-checks',
@@ -1710,9 +1732,37 @@ const browser = await chromium.launch()
     harnessIdeaIds.includes('idea-09-the-harness-control-gate-vote'),
     harnessIdeaIds.join(',')
   )
+  const harnessClaim = page.getByText('The model proposes.', { exact: true })
+  const harnessHarness = page.getByText('The harness is what must be true before a write.', { exact: true })
+  const harnessDo = page.getByText('Match a control, name one gate, then vote as a team.', { exact: true })
+  check('The Harness The idea shows the first claim', await harnessClaim.isVisible())
+  check('The Harness The idea shows the harness beat after the break', await harnessHarness.isVisible())
+  check('The Harness The idea keeps the do-now after the second break', await harnessDo.isVisible())
+  const harnessClaimBox = await harnessClaim.boundingBox()
+  const harnessHarnessBox = await harnessHarness.boundingBox()
+  const harnessDoBox = await harnessDo.boundingBox()
+  check(
+    'The Harness The idea leaves space between the first two sentences',
+    Boolean(
+      harnessClaimBox &&
+        harnessHarnessBox &&
+        harnessHarnessBox.y >= harnessClaimBox.y + harnessClaimBox.height + 8
+    ),
+    `${Math.round(harnessClaimBox?.y ?? 0)}+${Math.round(harnessClaimBox?.height ?? 0)} / ${Math.round(harnessHarnessBox?.y ?? 0)}`
+  )
+  check(
+    'The Harness The idea leaves space before the do-now',
+    Boolean(
+      harnessHarnessBox && harnessDoBox && harnessDoBox.y >= harnessHarnessBox.y + harnessHarnessBox.height + 8
+    ),
+    `${Math.round(harnessHarnessBox?.y ?? 0)}+${Math.round(harnessHarnessBox?.height ?? 0)} / ${Math.round(harnessDoBox?.y ?? 0)}`
+  )
   await openPortion(page, 'See it')
   const beforeGolden = await collect('the-harness before golden')
-  check('The Harness See it opens with the golden-set portrait', beforeGolden.includes('idea-05-the-harness-golden-dataset-first'))
+  check(
+    'The Harness See it opens without the golden-set portrait',
+    !beforeGolden.includes('idea-05-the-harness-golden-dataset-first')
+  )
   check(
     'The Harness keeps grader and regression portraits gated',
     !beforeGolden.includes('idea-06-the-harness-four-graders-have-blind-spots') &&
@@ -1782,8 +1832,8 @@ const browser = await chromium.launch()
   )
 
   check(
-    'exactly ten ready portraits appear in the learner path',
-    seen.size === 10,
+    'exactly nine ready portraits appear in the learner path',
+    seen.size === 9,
     [...seen].sort().join(', ')
   )
   await ctx.close()
@@ -1817,7 +1867,34 @@ const browser = await chromium.launch()
     'self-paced See it shows the runtime-loop diagram before the mapper',
     await page.locator('[data-trust-eval-diagram="eval-05"]').isVisible()
   )
+  check(
+    'self-paced See it hides failures until Next',
+    (await page.getByText('Unsupported launch date').count()) === 0
+  )
+  await page.getByRole('button', { name: 'Next' }).click()
+  await page.waitForTimeout(200)
+  check('self-paced See it pages one failure', await page.getByText('Unsupported launch date').isVisible())
+  check(
+    'self-paced See it still hides the next failure',
+    (await page.getByText('Roster does not match the send').count()) === 0
+  )
   await page.screenshot({ path: join(LOOP_SHOTS, '02-see-it-mapper.png'), fullPage: true })
+
+  await openPortion(page, 'Try it')
+  check('self-paced Try it opens on the signal beat', await page.locator('[data-trust-try-hint-beat="signal"]').isVisible())
+  check(
+    'self-paced Try it hides later hints until Next',
+    (await page.locator('[data-trust-try-hint-beat="do"]').count()) === 0 &&
+      (await page.locator('[data-trust-try-hint-beat="example"]').count()) === 0
+  )
+  check('self-paced Try it keeps the permission-gate portrait', await page.locator(portrait).isVisible())
+  await page.getByRole('button', { name: 'Next' }).click()
+  await page.waitForTimeout(200)
+  check('self-paced Try it pages the do-now beat', await page.locator('[data-trust-try-hint-beat="do"]').isVisible())
+  check(
+    'self-paced Try it still hides the example beat',
+    (await page.locator('[data-trust-try-hint-beat="example"]').count()) === 0
+  )
 
   await page.goto(`${LEARN}/the-loop?present=1`, { waitUntil: 'networkidle' })
   await waitForSteps(page)
@@ -1831,11 +1908,53 @@ const browser = await chromium.launch()
     'present See it opens on the runtime-loop diagram',
     await page.locator('[data-trust-eval-diagram="eval-05"]').isVisible()
   )
+  check(
+    'present See it holds the mapper until the next beat',
+    (await page.getByText(mapperCopy).count()) === 0
+  )
+  check(
+    'present See it holds the first failure until it is paged',
+    (await page.getByText('Unsupported launch date').count()) === 0
+  )
   await revealInPortion(page, page.getByText(mapperCopy))
   check('present See it shows the mapper', await page.getByText(mapperCopy).isVisible())
+  check(
+    'present See it teaches stages before any failure',
+    (await page.getByText('Unsupported launch date').count()) === 0
+  )
+  check(
+    'present See it keeps technical names off the stage beat',
+    (await page.getByText('Context, retrieval, sources').count()) === 0
+  )
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(250)
+  check('present See it pages one failure at a time', await page.getByText('Unsupported launch date').isVisible())
+  check(
+    'present See it hides the next failure',
+    (await page.getByText('Roster does not match the send').count()) === 0
+  )
+  await page.getByRole('button', { name: 'Observe', exact: true }).click()
+  await page.waitForTimeout(200)
+  check(
+    'present See it confirms the placed stage',
+    await page.getByText('Placed on Observe. Context, retrieval, sources.').isVisible()
+  )
   check('present See it keeps the mapper out of The idea', (await page.getByText(claim).count()) === 0)
 
   await openPortion(page, 'Try it')
+  check(
+    'present Try it opens on the Product hint',
+    await page.locator('[data-trust-try-hint-seat="pm"]').isVisible()
+  )
+  check(
+    'present Try it shows the Product loop question',
+    await page.getByText('If you only graded the output, which stage would you never see?').isVisible()
+  )
+  check(
+    'present Try it holds later seat hints',
+    (await page.locator('[data-trust-try-hint-seat="engineering"]').count()) === 0 &&
+      (await page.locator('[data-trust-try-hint-seat="design"]').count()) === 0
+  )
   const hint = page.locator('[data-trust-try-hint]')
   const image = page.locator(portrait)
   await hint.waitFor({ state: 'visible', timeout: 15000 })
@@ -1863,6 +1982,17 @@ const browser = await chromium.launch()
     String(Math.round(hintBox?.width ?? 0))
   )
   await page.screenshot({ path: join(LOOP_SHOTS, '03-try-it-hint-image.png'), fullPage: true })
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(250)
+  check(
+    'present Try it pages the Engineering hint',
+    await page.locator('[data-trust-try-hint-seat="engineering"]').isVisible()
+  )
+  check(
+    'present Try it hides the Product hint after paging',
+    (await page.locator('[data-trust-try-hint-seat="pm"]').count()) === 0
+  )
+  check('present Try it keeps the portrait beside the next hint', await page.locator(portrait).isVisible())
   await ctx.close()
 }
 
@@ -2286,6 +2416,10 @@ const browser = await chromium.launch()
     check('self-paced Try it stacks the do-now beat', await page.locator('[data-trust-try-hint-beat="do"]').isVisible())
     check('self-paced Try it stacks the example beat', await page.locator('[data-trust-try-hint-beat="example"]').isVisible())
     check('self-paced Try it still shows the pick-3 search', await page.locator('[data-trust-failure-search]').isVisible())
+    check(
+      'self-paced Check it constellation stays hidden during the search',
+      (await page.locator('[data-trust-concept-constellation="seeded-inspect"]').count()) === 0
+    )
     await page.getByRole('button', { name: /Reveal the six planted breaks/ }).click()
     await page.locator('[data-trust-failure-token="unsupported-date"]').click()
     await page.locator('[data-trust-failure-token="roster-mismatch"]').click()
@@ -2293,11 +2427,19 @@ const browser = await chromium.launch()
     await page.waitForTimeout(200)
     check('self-paced naming three marks the checkpoint', await page.getByText(/checkpoint met/).isVisible())
     await openPortion(page, 'Check it')
+    check(
+      'self-paced Check it shows Output after the reveal',
+      await page.locator('[data-trust-concept-term="output"]').isVisible()
+    )
+    check(
+      'self-paced Check it shows Trajectory after the reveal',
+      await page.locator('[data-trust-concept-term="trajectory"]').isVisible()
+    )
     await page.getByRole('button', { name: /^Ask/ }).click()
     await page.waitForTimeout(200)
     check(
       'self-paced Check it still completes after three names and a revote',
-      await page.getByText('Complete: three failures named and a second vote saved.').isVisible()
+      await page.locator('[data-trust-seeded-result]').getByText('Second call saved as Ask.').isVisible()
     )
     await ctx.close()
   }
@@ -2324,7 +2466,7 @@ const browser = await chromium.launch()
           document
             .querySelector('[data-trust-panel-open] [data-trust-portion-count]')
             ?.getAttribute('data-trust-portion-count')
-        ) === 5,
+        ) === 6,
       null,
       { timeout: 10000 }
     )
@@ -2335,7 +2477,7 @@ const browser = await chromium.launch()
         .first()
         .getAttribute('data-trust-portion-count')
     )
-    check('present Check it has five portions after the reveal', checkCount === 5, String(checkCount))
+    check('present Check it has six portions after the reveal', checkCount === 6, String(checkCount))
     check('present Check it opens on diagram 04', await evalDiagramVisible(page, 'eval-04'))
     check(
       'present Check it first beat is not the portrait',
@@ -2362,6 +2504,17 @@ const browser = await chromium.launch()
     check('present Check it still holds the revote', (await page.locator('[data-trust-vote]').count()) === 0)
     await page.screenshot({ path: join(CHECK_SHOTS, 'present-check-2-portrait.png'), fullPage: true })
 
+    await revealInPortion(page, page.locator('[data-trust-concept-constellation="seeded-inspect"]'))
+    check(
+      'present Check it pages to Output after the claim',
+      await page.locator('[data-trust-concept-term="output"]').isVisible()
+    )
+    check(
+      'present Check it pages to Trajectory after the claim',
+      await page.locator('[data-trust-concept-term="trajectory"]').isVisible()
+    )
+    check('present Check it still holds the revote on the constellation', (await page.locator('[data-trust-vote]').count()) === 0)
+
     await revealInPortion(page, page.locator('[data-trust-vote]'))
     check('present Check it ArrowRight reaches the revote', await page.locator('[data-trust-vote]').isVisible())
     check('present Check it drops the diagram on the vote beat', !(await evalDiagramVisible(page, 'eval-04')))
@@ -2384,7 +2537,7 @@ const browser = await chromium.launch()
 {
   const HARNESS_SEE = join(process.cwd(), 'tmp', 'trust-harness-see')
   mkdirSync(HARNESS_SEE, { recursive: true })
-  const unlocked = 1 + 8 + 5
+  const unlocked = 2 + 8 + 5
 
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
   const page = await ctx.newPage()
@@ -2399,8 +2552,8 @@ const browser = await chromium.launch()
   const firstTitle = page.getByText('Eight variants of the same request')
   check('present See it opens on the golden-set intro', await firstTitle.isVisible())
   check(
-    'present See it opens with the golden-set portrait',
-    await page.locator('[data-trust-idea-portrait="idea-05-the-harness-golden-dataset-first"]').isVisible()
+    'present See it opens without the golden-set portrait',
+    (await page.locator('[data-trust-idea-portrait="idea-05-the-harness-golden-dataset-first"]').count()) === 0
   )
   const firstSize = parseFloat(await firstTitle.evaluate((el) => getComputedStyle(el).fontSize))
   check('present See it first example is room-readable', firstSize >= 28, String(firstSize))
@@ -2414,21 +2567,47 @@ const browser = await chromium.launch()
 
   await page.keyboard.press('ArrowRight')
   await page.waitForTimeout(250)
+  const harnessCore = page.locator('[data-trust-concept-constellation="harness-core"]')
+  check('present See it ArrowRight shows the core constellation', await harnessCore.isVisible())
+  check('present See it core constellation names Criterion', await harnessCore.getByRole('button', { name: 'Criterion' }).isVisible())
+  check('present See it core constellation names Evidence', await harnessCore.getByRole('button', { name: 'Evidence' }).isVisible())
+  check('present See it core constellation names Gate', await harnessCore.getByRole('button', { name: 'Gate' }).isVisible())
+  check('present See it core constellation names Golden set', await harnessCore.getByRole('button', { name: 'Golden set' }).isVisible())
+  check(
+    'present See it core constellation holds Calibration',
+    (await harnessCore.getByRole('button', { name: 'Calibration' }).count()) === 0
+  )
+  check('present See it drops the intro on the constellation', (await firstTitle.count()) === 0)
+  check(
+    'present See it still holds later golden cases',
+    (await page.getByText('Clean enrollment request').count()) === 0
+  )
+
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(250)
   const secondTitle = page.getByText('Clean enrollment request')
   check('present See it ArrowRight shows the next example', await secondTitle.isVisible())
-  check('present See it drops the intro on the next example', (await firstTitle.count()) === 0)
+  check('present See it drops the constellation on the next example', (await harnessCore.count()) === 0)
   const secondSize = parseFloat(await secondTitle.evaluate((el) => getComputedStyle(el).fontSize))
   check('present See it second example is room-readable', secondSize >= 20, String(secondSize))
   await page.screenshot({ path: join(HARNESS_SEE, '02-present-see-2.png'), fullPage: true })
 
   const allow = page.locator('[data-trust-verdict-term="allow"]')
   await openPortion(page, 'The idea')
+  const harnessFirst = page.getByText('The model proposes.', { exact: true })
+  const harnessSecond = page.getByText('The harness is what must be true before a write.', { exact: true })
+  const harnessThird = page.getByText('Match a control, name one gate, then vote as a team.', { exact: true })
+  check('present The idea starts on the first sentence', await harnessFirst.isVisible())
+  check('present The idea holds the second sentence', !(await harnessSecond.isVisible()))
+  check('present The idea holds the do-now', !(await harnessThird.isVisible()))
   await page.keyboard.press('ArrowRight')
   await page.waitForTimeout(200)
-  if ((await allow.count()) === 0) {
-    await page.keyboard.press('ArrowRight')
-    await page.waitForTimeout(200)
-  }
+  check('present The idea ArrowRight reveals the harness beat', await harnessSecond.isVisible())
+  check('present The idea still holds the do-now', !(await harnessThird.isVisible()))
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(200)
+  check('present The idea ArrowRight reveals the do-now', await harnessThird.isVisible())
+  await revealInPortion(page, allow)
   check('The idea marks Allow for verdict hover', (await allow.count()) > 0)
   if ((await allow.count()) > 0) {
     const hoverClass = await allow.first().getAttribute('class')
@@ -2625,8 +2804,11 @@ const browser = await chromium.launch()
     })
     await page.goto(`${LEARN}/seeded-failures`, { waitUntil: 'networkidle' })
     await waitForSteps(page)
+    await openPortion(page, 'The idea')
+    check('Seeded Failures The idea shows 15 at the evaluation boundary', await evalDiagramVisible(page, 'eval-15'))
     await openPortion(page, 'See it')
     check('Seeded Failures See it shows 03 before The send', await evalDiagramVisible(page, 'eval-03'))
+    check('Seeded Failures See it keeps 15 on The idea', !(await evalDiagramVisible(page, 'eval-15')))
     check('Seeded Failures hides 04 before the reveal', !(await evalDiagramVisible(page, 'eval-04')))
     await openPortion(page, 'Try it')
     await page.getByRole('button', { name: /Reveal the six planted breaks/ }).click()
@@ -2718,14 +2900,30 @@ const browser = await chromium.launch()
     check('The Harness keeps 12 out of the required path', !(await evalDiagramVisible(page, 'eval-12')))
     await openDeeper(page)
     check('The Harness shows 12 in Engineering Go deeper', await evalDiagramVisible(page, 'eval-12'))
+    check('The Harness toolkit shows Promptfoo', await page.locator('[data-trust-tool="promptfoo"]').isVisible())
+    check('The Harness toolkit shows Ragas', await page.locator('[data-trust-tool="ragas"]').isVisible())
+    check('The Harness toolkit shows LangSmith', await page.locator('[data-trust-tool="langsmith"]').isVisible())
+    check('The Harness toolkit shows Langfuse', await page.locator('[data-trust-tool="langfuse"]').isVisible())
+    check('The Harness toolkit shows Arize Phoenix', await page.locator('[data-trust-tool="arize-phoenix"]').isVisible())
+    check('The Harness toolkit shows Braintrust', await page.locator('[data-trust-tool="braintrust"]').isVisible())
     check('The Harness still hides 10 before the judge is picked', !(await evalDiagramVisible(page, 'eval-10')))
-    await page.getByRole('button', { name: 'Model judge' }).click()
+    await page.getByRole('button', { name: 'Model judge', exact: true }).click()
     await page.waitForTimeout(200)
     check('The Harness still hides 10 until the detail opens', !(await evalDiagramVisible(page, 'eval-10')))
     await page.locator('[data-trust-eval-supporting="eval-10"] summary').click()
     await page.waitForTimeout(200)
     check('The Harness shows 10 in model-judge detail', await evalDiagramVisible(page, 'eval-10'))
-    check('The Harness shows 11 after calibration in that detail', await evalDiagramVisible(page, 'eval-11'))
+    check('The Harness keeps 11 closed until the second reveal', !(await evalDiagramVisible(page, 'eval-11')))
+    await page.locator('[data-trust-eval-supporting="eval-11"] summary').click()
+    await page.waitForTimeout(200)
+    check('The Harness shows 11 after the semantic-grading reveal', await evalDiagramVisible(page, 'eval-11'))
+    const box10 = await evalDiagram(page, 'eval-10').boundingBox()
+    const box11 = await evalDiagram(page, 'eval-11').boundingBox()
+    check(
+      'The Harness stacks 10 and 11 instead of pairing them',
+      Boolean(box10 && box11 && box11.y >= box10.y + box10.height - 8),
+      `${Math.round(box10?.y ?? 0)} then ${Math.round(box11?.y ?? 0)}`
+    )
     await ctx.close()
   }
 
@@ -2745,11 +2943,9 @@ const browser = await chromium.launch()
       check(`Four Lenses required path keeps ${id} in Go deeper`, !(await evalDiagramVisible(page, id)))
     }
     await openDeeper(page)
-    check('Four Lenses Go deeper reuses 01 with ownership tags', await evalDiagramVisible(page, 'eval-01'))
-    check(
-      'Four Lenses tags Product on the reused diagrams',
-      await page.locator('[data-trust-eval-ownership]').getByText('Product').first().isVisible()
-    )
+    for (const id of ['eval-01', 'eval-05', 'eval-07', 'eval-13']) {
+      check(`Four Lenses Go deeper keeps ${id} off this chapter`, !(await evalDiagramVisible(page, id)))
+    }
     await ctx.close()
   }
 
@@ -2762,9 +2958,9 @@ const browser = await chromium.launch()
     await page.goto(`${LEARN}/transfer`, { waitUntil: 'networkidle' })
     await waitForSteps(page)
     await openPortion(page, 'See it')
-    check('Transfer See it reuses 07 with Case B framing', await evalDiagramVisible(page, 'eval-07'))
+    check('Transfer See it keeps 07 off this chapter', !(await evalDiagramVisible(page, 'eval-07')))
     check(
-      'Transfer frames 07 as Case B, not Case A recall',
+      'Transfer keeps the Case B intake as the teaching surface',
       await page.getByText('recall of Case A is not the test', { exact: false }).isVisible()
     )
     await ctx.close()
@@ -2791,6 +2987,95 @@ const browser = await chromium.launch()
       if (await evalDiagramVisible(page, id)) hidden.push(id)
     }
     check('supporting and Go deeper diagrams stay off the required path', hidden.length === 0, hidden.join(','))
+    await ctx.close()
+  }
+}
+
+/* 19. Concept constellation: live vocabulary, no new gates. */
+{
+  async function overflowX(page) {
+    return page.evaluate(() => {
+      window.scrollTo(2000, 0)
+      const scrolled = window.scrollX
+      window.scrollTo(0, 0)
+      return scrolled
+    })
+  }
+
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
+    const page = await ctx.newPage()
+    await page.addInitScript(() => {
+      localStorage.setItem('trust-is-not-a-vibe:v1', JSON.stringify({ role: 'pm', completedChapters: [] }))
+    })
+    await page.goto(`${LEARN}/the-harness`, { waitUntil: 'networkidle' })
+    await waitForSteps(page)
+    await openPortion(page, 'See it')
+    check(
+      'The Harness See it holds the reliability constellation',
+      !(await page.locator('[data-trust-concept-constellation="harness-reliability"]').isVisible())
+    )
+    check(
+      'The Harness See it holds Calibration on the required path',
+      !(await page.locator('[data-trust-concept-term="calibration"]').isVisible())
+    )
+    const next = page.getByRole('button', { name: /^Next example/ })
+    if ((await next.count()) > 0 && (await next.isEnabled())) {
+      await next.click()
+      await page.waitForTimeout(200)
+    }
+    const harnessCore = page.locator('[data-trust-concept-constellation="harness-core"]')
+    check('The Harness See it shows Criterion after the golden intro', await harnessCore.getByRole('button', { name: 'Criterion' }).isVisible())
+    check('The Harness See it shows Evidence', await harnessCore.getByRole('button', { name: 'Evidence' }).isVisible())
+    check('The Harness See it shows Gate', await harnessCore.getByRole('button', { name: 'Gate' }).isVisible())
+    check('The Harness See it shows Golden set', await harnessCore.getByRole('button', { name: 'Golden set' }).isVisible())
+    check('The Harness See it still holds Calibration after the core terms', (await harnessCore.getByRole('button', { name: 'Calibration' }).count()) === 0)
+    await openDeeper(page)
+    const reliability = page.locator('[data-trust-concept-constellation="harness-reliability"]')
+    check('The Harness Go deeper shows Slice after Open depth', await reliability.getByRole('button', { name: 'Slice' }).isVisible())
+    check('The Harness Go deeper shows Regression after Open depth', await reliability.getByRole('button', { name: 'Regression' }).isVisible())
+    check('The Harness Go deeper shows Calibration after Open depth', await reliability.getByRole('button', { name: 'Calibration' }).isVisible())
+    await ctx.close()
+  }
+
+  for (const width of [390, 768, 1280, 1440]) {
+    const ctx = await browser.newContext({ viewport: { width, height: 900 } })
+    const page = await ctx.newPage()
+    await page.goto(OVERVIEW, { waitUntil: 'networkidle' })
+    await waitForSteps(page)
+    const cluster = page.locator('[data-trust-concept-constellation="overview-core"]')
+    await cluster.scrollIntoViewIfNeeded()
+    const term = cluster.getByRole('button', { name: 'Eval' })
+    const box = await term.boundingBox()
+    check(`overview constellation is visible at ${width}`, await cluster.isVisible())
+    check(
+      `overview constellation Eval is at least 44px at ${width}`,
+      Boolean(box && box.height >= 44 && box.width >= 44),
+      box ? `${Math.round(box.width)}×${Math.round(box.height)}` : 'missing'
+    )
+    check(`overview constellation does not scroll sideways at ${width}`, (await overflowX(page)) === 0, String(await overflowX(page)))
+    await ctx.close()
+  }
+
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' })
+    const page = await ctx.newPage()
+    await page.goto(OVERVIEW, { waitUntil: 'networkidle' })
+    await waitForSteps(page)
+    const evalBtn = page.locator('[data-trust-concept-constellation="overview-core"]').getByRole('button', { name: 'Eval' })
+    await evalBtn.focus()
+    const transform = await evalBtn.evaluate((el) => getComputedStyle(el).transform)
+    check('reduced motion keeps constellation terms unscaled', transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)', transform)
+    await evalBtn.click()
+    await page.waitForTimeout(150)
+    const panel = page.locator('[data-trust-concept-constellation="overview-core"] [data-trust-concept-panel]')
+    check('keyboard click reveals the definition', await panel.locator('[data-trust-concept-definition]').isVisible())
+    check(
+      'keyboard click shows the Eval definition',
+      (await panel.locator('[data-trust-concept-definition]').innerText()) ===
+        'A repeatable test of one behavior on representative cases, using an explicit grader.'
+    )
+    check('definition is not hover-only', await panel.getByText('Why it matters.').isVisible())
     await ctx.close()
   }
 }

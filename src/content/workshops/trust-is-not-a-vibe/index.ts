@@ -177,8 +177,20 @@ export type {
   TrustScoringApproach,
   TrustScoringApproachId,
   TrustScoringProbe,
+  TrustToolMark,
   TrustTraceStep,
 } from './evals'
+
+export {
+  getTrustConceptCluster,
+  TRUST_CONCEPT_CLUSTERS,
+} from './concept-clusters'
+export type {
+  ConceptCluster,
+  ConceptClusterId,
+  ConceptEmphasis,
+  ConceptItem,
+} from './concept-clusters'
 
 export {
   EVALS_ENGINEER_STACK,

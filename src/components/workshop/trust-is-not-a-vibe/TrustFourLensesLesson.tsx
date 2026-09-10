@@ -11,7 +11,6 @@ import {
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { TrustFourSeatsDiagram } from './TrustFourSeatsDiagram'
-import { TrustEvalDiagram } from './TrustEvalDiagram'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustSeatCoverage } from './TrustSeatCoverage'
@@ -187,48 +186,6 @@ export function TrustFourLensesLesson() {
         <>
           <TrustTeachingCards cards={TEACHING} roleId={role} />
           <TrustSeatCoverage />
-          <div className="space-y-8">
-            <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-              The same four diagrams, tagged for who owns the check. System stages stay
-              unlabeled on the image. Allow, Ask, and Deny keep their verdict colors.
-            </p>
-            <TrustEvalDiagram
-              id="eval-01"
-              owners={[
-                { role: 'pm', owns: 'evidence claims' },
-                { role: 'design', owns: 'tone and qualitative claims' },
-                { role: 'engineering', owns: 'permission and operational claims' },
-                { role: 'strategy', owns: 'impact claims' },
-              ]}
-            />
-            <TrustEvalDiagram
-              id="eval-05"
-              owners={[
-                { role: 'pm', owns: 'Observe' },
-                { role: 'engineering', owns: 'Decide, Act, Check' },
-                { role: 'design', owns: 'Propose / Gate' },
-                { role: 'strategy', owns: 'Stop' },
-              ]}
-            />
-            <TrustEvalDiagram
-              id="eval-07"
-              owners={[
-                { role: 'pm', owns: 'task and cases' },
-                { role: 'engineering', owns: 'grader' },
-                { role: 'design', owns: 'criteria someone can read' },
-                { role: 'strategy', owns: 'decision' },
-              ]}
-            />
-            <TrustEvalDiagram
-              id="eval-13"
-              owners={[
-                { role: 'pm', owns: 'what good means before the gate' },
-                { role: 'engineering', owns: 'evidence that feeds the gate' },
-                { role: 'design', owns: 'Ask stays visible' },
-                { role: 'strategy', owns: 'the recorded Allow / Ask / Deny' },
-              ]}
-            />
-          </div>
           <TrustInstructorClip chapterId="four-lenses" />
         </>
       }

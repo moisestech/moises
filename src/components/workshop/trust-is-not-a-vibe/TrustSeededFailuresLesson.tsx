@@ -5,8 +5,10 @@ import {
   EVALS_TEACHING,
   TRUST_CASE_A,
   getTrustLessonPacket,
+  type TrustVerdict,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { ConceptConstellation } from './ConceptConstellation'
 import { FailureTokens } from './FailureTokens'
 import { TrustClaimTrace } from './TrustClaimTrace'
 import { TrustEvalDiagram } from './TrustEvalDiagram'
@@ -17,9 +19,9 @@ import { TrustKeepTogether } from './TrustPresentPortions'
 import { TrustCaseStage } from './TrustCaseStage'
 import { TrustPacketJob, TrustSeatStance } from './TrustSeatStance'
 import { usePresentationMode, useTrustPendingReveal } from './TrustPresentation'
-import { trustPresent } from './trust-tokens'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
+import { TRUST_VERDICT_CLASS, TRUST_VERDICT_LABEL, trustPresent } from './trust-tokens'
 import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('seeded-failures')!
@@ -98,6 +100,9 @@ export function TrustSeededFailuresLesson() {
       >
         A correct-looking answer can still be produced by an unsafe process.
       </p>
+      <TrustKeepTogether>
+        <ConceptConstellation clusterId="seeded-inspect" />
+      </TrustKeepTogether>
       <TrustKeepTogether className={cn('space-y-4', present && 'space-y-6')}>
         <TrustVote
           legend="Vote again — after seeing the system"
@@ -107,10 +112,13 @@ export function TrustSeededFailuresLesson() {
             if (named >= 3) markChapterComplete('seeded-failures')
           }}
         />
-        {completed ? (
-          <p className={cn('font-medium text-stone-900 dark:text-stone-100', present ? trustPresent.note : 'text-sm')}>
-            {PACKET.doneAfter}
-          </p>
+        {progress.revote ? (
+          <SeededRevoteResult
+            verdict={progress.revote}
+            named={named}
+            prior={progress.baselineVote}
+            present={present}
+          />
         ) : null}
       </TrustKeepTogether>
     </>
@@ -131,6 +139,7 @@ export function TrustSeededFailuresLesson() {
       where={PACKET.where}
       idea={PACKET.idea}
       ideaFigure={<TrustIdeaPortrait id={IDEA_PORTRAIT_ID} priority />}
+      ideaLandscape={<TrustEvalDiagram id="eval-15" />}
       seeIt={seeIt}
       seeCaption={PACKET.seeCaption}
       tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
@@ -161,5 +170,50 @@ export function TrustSeededFailuresLesson() {
         </>
       }
     />
+  )
+}
+
+function SeededRevoteResult({
+  verdict,
+  named,
+  prior,
+  present,
+}: {
+  verdict: TrustVerdict
+  named: number
+  prior: TrustVerdict | null
+  present: boolean
+}) {
+  const label = TRUST_VERDICT_LABEL[verdict]
+  const priorLabel = prior ? TRUST_VERDICT_LABEL[prior] : null
+  const ready = named >= 3
+
+  return (
+    <div
+      data-trust-seeded-result
+      className={cn(
+        'rounded-xl border px-4 py-4',
+        TRUST_VERDICT_CLASS[verdict],
+        present && 'px-6 py-5'
+      )}
+    >
+      <p className={cn('font-semibold', present ? trustPresent.body : 'text-lg leading-snug')}>
+        Second call saved as {label}.
+      </p>
+      <p className={cn('mt-2', present ? trustPresent.note : 'text-sm leading-relaxed')}>
+        {ready
+          ? `${named} planted failures named. A correct-looking card can still come from an unsafe process.`
+          : `Name at least three planted failures in Try it to finish this chapter.`}
+      </p>
+      {ready && priorLabel && prior !== verdict ? (
+        <p className={cn('mt-2', present ? trustPresent.note : 'text-sm leading-relaxed')}>
+          You moved from {priorLabel} to {label} after seeing the system.
+        </p>
+      ) : ready && priorLabel ? (
+        <p className={cn('mt-2', present ? trustPresent.note : 'text-sm leading-relaxed')}>
+          That matches your first call. The system still had planted breaks.
+        </p>
+      ) : null}
+    </div>
   )
 }

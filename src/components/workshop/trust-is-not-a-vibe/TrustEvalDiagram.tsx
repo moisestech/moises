@@ -31,9 +31,8 @@ export type TrustEvalOwnerTag = {
 }
 
 /**
- * Landscape teaching diagram. Renders the registry `src` (the concept
- * reference until `src` is pointed at the production filename). Course
- * language lives in the HTML caption, not on the image.
+ * Landscape teaching diagram. Renders the registry `src`. Course language
+ * lives in nearby HTML and the caption, not painted on the image.
  */
 export function TrustEvalDiagram({
   id,
@@ -43,7 +42,7 @@ export function TrustEvalDiagram({
 }: {
   id: TrustEvalDiagramId
   owners?: readonly TrustEvalOwnerTag[]
-  /** Extra HTML above the figure — Case B framing, ownership, a beat label. */
+  /** Extra HTML above the figure — ownership, a beat label. */
   frame?: ReactNode
   className?: string
 }) {
@@ -58,31 +57,18 @@ export function TrustEvalDiagram({
     >
       {frame}
       {owners && owners.length > 0 ? <TrustEvalOwnershipTags tags={owners} /> : null}
-      <TrustFigure caption={<TrustEvalCaption text={item.caption} />}>
-        <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-lg bg-stone-50 dark:bg-stone-950">
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={TRUST_EVAL_DIAGRAM_SIZE.width}
-            height={TRUST_EVAL_DIAGRAM_SIZE.height}
-            sizes="(max-width: 768px) 100vw, min(100vw, 56rem)"
-            className="h-full w-full object-contain"
-            unoptimized
-          />
-        </div>
+      <TrustFigure caption={item.caption}>
+        <Image
+          src={item.src}
+          alt={item.alt}
+          width={TRUST_EVAL_DIAGRAM_SIZE.width}
+          height={TRUST_EVAL_DIAGRAM_SIZE.height}
+          sizes="(max-width: 390px) 100vw, (max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1672px"
+          className="h-auto w-full rounded-lg bg-stone-50 object-contain dark:bg-stone-950"
+          unoptimized
+        />
       </TrustFigure>
     </div>
-  )
-}
-
-function TrustEvalCaption({ text }: { text: string }) {
-  return (
-    <>
-      <span className="block text-stone-600 dark:text-stone-400">{text}</span>
-      <span className="mt-1 block text-stone-500 dark:text-stone-500">
-        Teaching reference — course language lives in this caption, not on the image.
-      </span>
-    </>
   )
 }
 
@@ -146,7 +132,7 @@ export function TrustEvalSupporting({
         className
       )}
     >
-      <summary className="cursor-pointer text-sm font-semibold text-stone-800 dark:text-stone-100">
+      <summary className="cursor-pointer text-sm font-semibold text-stone-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:text-stone-100 dark:focus-visible:ring-offset-stone-950">
         {summary}
       </summary>
       {open ? <div className="mt-3">{children}</div> : null}

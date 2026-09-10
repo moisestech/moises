@@ -5,11 +5,11 @@ import {
   EVALS_ENGINEER_STACK,
   EVALS_TEACHING,
   TRUST_CASE_A,
-  TRUST_TOOL_LANDSCAPE,
   getTrustLessonPacket,
   getTrustRole,
   type TrustControlId,
 } from '@/content/workshops/trust-is-not-a-vibe'
+import { ConceptConstellation } from './ConceptConstellation'
 import { ControlMatch } from './ControlMatch'
 import { TrustCriterionCarry } from './TrustCriterionCarry'
 import { TrustEvalArchitecture } from './TrustEvalArchitecture'
@@ -25,6 +25,7 @@ import { TrustKeepTogether } from './TrustPresentPortions'
 import { TrustPacketJob, TrustSeatStance } from './TrustSeatStance'
 import { usePresentationMode } from './TrustPresentation'
 import { TrustTeachingCards } from './TrustTeachingCards'
+import { TrustToolLandscape } from './TrustToolLandscape'
 import { TrustVote } from './TrustVote'
 import { cn } from '@/lib/utils'
 import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
@@ -166,6 +167,9 @@ export function TrustTheHarnessLesson() {
             grader={progress.criterionGrader}
             onPickGrader={(criterionGrader) => update({ criterionGrader })}
           />
+          <TrustKeepTogether>
+            <ConceptConstellation clusterId="harness-reliability" />
+          </TrustKeepTogether>
           <TrustEvalLoopStepper showOwners={present} />
           <TrustEvalArchitecture />
           <TrustTeachingCards cards={EVALS_TEACHING['the-harness']} roleId={progress.role} />
@@ -186,21 +190,7 @@ export function TrustTheHarnessLesson() {
             <div className="mt-3">
               <TrustEvalDiagram id="eval-12" />
             </div>
-            <ul className="mt-1.5 space-y-1">
-              {TRUST_TOOL_LANDSCAPE.map((tool) => (
-                <li key={tool.name}>
-                  <a
-                    href={tool.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-medium underline-offset-2 hover:underline"
-                  >
-                    {tool.name}
-                  </a>
-                  <span className="text-slate-600 dark:text-slate-400"> — {tool.use}</span>
-                </li>
-              ))}
-            </ul>
+            <TrustToolLandscape className="mt-3" />
             <TrustEvalConfigExample className="mt-3" />
           </aside>
           <TrustInstructorClip chapterId="the-harness" />

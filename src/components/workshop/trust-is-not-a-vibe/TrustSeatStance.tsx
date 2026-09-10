@@ -117,12 +117,14 @@ function tryHintShell({
   present,
   tone,
   beat,
+  seat,
   markHint = true,
   children,
 }: {
   present: boolean
   tone?: (typeof TRUST_ROLE_TONE)[TrustRoleId]
   beat?: 'empty' | 'signal' | 'do' | 'example'
+  seat?: TrustRoleId
   markHint?: boolean
   children: ReactNode
 }) {
@@ -131,6 +133,7 @@ function tryHintShell({
       key={beat}
       data-trust-try-hint={markHint || undefined}
       data-trust-try-hint-beat={beat}
+      data-trust-try-hint-seat={seat}
       className={cn(
         'rounded-lg border leading-snug',
         tone ? cn(tone.border, tone.wash, tone.text) : 'border-dashed border-stone-300 text-stone-600 dark:border-stone-600 dark:text-stone-400',
@@ -187,6 +190,7 @@ export function trustTryHintPortions({
       tone,
       markHint,
       beat: 'signal',
+      seat: role.id,
       children: (
         <>
           {eyebrow}
@@ -219,6 +223,43 @@ export function trustTryHintPortions({
       ),
     }),
   ]
+}
+
+/** One hint per seat so Present can walk the room without picking one job. */
+export function trustRoleSignalPortions({
+  signals,
+  present,
+}: {
+  signals: Partial<Record<TrustRoleId, string>>
+  present: boolean
+}): ReactNode[] {
+  const title = present ? 'text-xl font-semibold sm:text-2xl' : 'text-base font-semibold'
+  const body = present ? cn('mt-2', trustPresent.body) : 'mt-3 text-lg leading-snug sm:text-xl'
+
+  return TRUST_ROLES.flatMap((role) => {
+    const signal = signals[role.id]
+    if (!signal) return []
+    const Icon = ROLE_ICON[role.id]
+    const tone = TRUST_ROLE_TONE[role.id]
+    return [
+      tryHintShell({
+        present,
+        tone,
+        markHint: true,
+        beat: 'signal',
+        seat: role.id,
+        children: (
+          <>
+            <p className={cn('flex items-center gap-1.5', title)}>
+              <Icon className={cn(present ? 'h-7 w-7' : 'h-5 w-5', tone.icon)} aria-hidden />
+              {role.label} hint
+            </p>
+            <p className={cn('text-stone-800 dark:text-stone-200', body)}>{signal}</p>
+          </>
+        ),
+      }),
+    ]
+  })
 }
 
 /** Seat-colored prompt above Try it. Empty until a seat is picked. */

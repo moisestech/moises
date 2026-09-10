@@ -109,7 +109,7 @@ export const TRUST_IDEA_ILLUSTRATIONS: Record<TrustIdeaIllustrationId, TrustIdea
     alt: 'Teaching illustration — examples come before metrics: a golden set of cases the system must keep passing. Not a product screenshot.',
     caption: 'Examples before metrics. A golden set is the cases this system has to keep passing.',
     route: `${TRUST_LEARN_BASE}/the-harness`,
-    placement: 'The Harness · See it · first concept',
+    placement: 'The Harness · unused · dropped from See it opener',
     status: 'ready',
     lessonConcept: 'the-harness',
   },

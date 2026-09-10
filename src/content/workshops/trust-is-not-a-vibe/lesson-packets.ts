@@ -303,11 +303,15 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
   'seeded-failures': {
     chapterId: 'seeded-failures',
     where: '3 of 6 · Seeded Failures',
-    idea: 'A correct-looking card can hide planted failures that are not “it hallucinated.” Count mismatches, missing permission, and a skipped pause count.',
+    idea: 'A correct-looking card can hide planted failures that are not “it hallucinated.”',
+    ideaParagraphs: [
+      'A correct-looking card can hide planted failures that are not “it hallucinated.”',
+      'Count mismatches, missing permission, and a skipped pause count.',
+    ],
     seeCaption: 'The same send. Six problems were planted in the calendar, the roster, the 87%, the send permission, the removal, and the missing pause.',
     tryPrompt: 'Reveal the six failures. Name at least three.',
     doneBefore: 'Done when you name three failures and vote again.',
-    doneAfter: 'Complete: three failures named and a second vote saved.',
+    doneAfter: 'Second call saved. Three planted failures named.',
     ideaTerms: [
       {
         term: 'planted failures',
@@ -364,7 +368,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     chapterId: 'the-loop',
     where: '4 of 6 · The Loop',
     idea: 'Locate each break on Observe, Decide, Act, Check, or Stop — not how the prose sounds. You are finding a stage in The send.',
-    seeCaption: 'The loop is the map. Visible labels first; technical names sit on the token.',
+    seeCaption: 'The loop is the map. One failure at a time.',
     tryPrompt: 'Place at least three failures on the loop.',
     doneBefore: 'Done when three failures have a stage.',
     doneAfter: 'Complete: three failures are on the loop.',
@@ -424,6 +428,11 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     chapterId: 'the-harness',
     where: '5 of 6 · The Harness',
     idea: 'The model proposes. The harness is what must be true before a write. Match a control, name one gate, then vote as a team.',
+    ideaParagraphs: [
+      'The model proposes.',
+      'The harness is what must be true before a write.',
+      'Match a control, name one gate, then vote as a team.',
+    ],
     seeCaption: 'Follow the run. See where each failure actually happened.',
     tryPrompt: 'Match a control to each break in The send.',
     doneBefore: 'Done when every failure has a control, a safeguard is named, and the team votes.',

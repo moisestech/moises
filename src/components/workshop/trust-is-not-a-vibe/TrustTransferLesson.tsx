@@ -12,7 +12,6 @@ import { ExitTicket } from './ExitTicket'
 import { OutputPeel } from './OutputPeel'
 import { TransferRubric } from './TransferRubric'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
-import { TrustEvalDiagram } from './TrustEvalDiagram'
 import { TrustEvalPlan } from './TrustEvalPlan'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustLessonPacket } from './TrustLessonPacket'
@@ -79,7 +78,6 @@ export function TrustTransferLesson() {
             </dd>
           </div>
         </dl>
-        <TrustEvalDiagram id="eval-07" />
       </TrustKeepTogether>
       <div className="space-y-6">
         <p className={trust.body}>New card. Same job. Decide whether it may act.</p>

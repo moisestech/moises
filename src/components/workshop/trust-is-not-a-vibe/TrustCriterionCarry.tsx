@@ -99,10 +99,10 @@ export function TrustCriterionCarry({
 
       {grader === 'judge' ? (
         <TrustEvalSupporting id="eval-10" summary="Model-judge detail">
-          <div className="space-y-6">
-            <TrustEvalDiagram id="eval-10" />
+          <TrustEvalDiagram id="eval-10" />
+          <TrustEvalSupporting id="eval-11" summary="Semantic grading" className="mt-4">
             <TrustEvalDiagram id="eval-11" />
-          </div>
+          </TrustEvalSupporting>
         </TrustEvalSupporting>
       ) : null}
     </div>

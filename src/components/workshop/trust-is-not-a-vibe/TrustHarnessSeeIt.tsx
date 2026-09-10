@@ -16,6 +16,7 @@ import {
   type TrustRunResult,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { ConceptConstellation } from './ConceptConstellation'
 import { TrustGoldenCaseCard } from './TrustGoldenSet'
 import { TrustEvalDiagram } from './TrustEvalDiagram'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
@@ -166,8 +167,7 @@ export function useHarnessSeeExamples({
 
   const slides: ReactNode[] = [
     <TrustKeepTogether key="golden-intro" data-trust-harness-example="golden-intro">
-      <TrustIdeaPortrait id="idea-05-the-harness-golden-dataset-first" />
-      <TrustEvalDiagram id="eval-08" className="mt-4" />
+      <TrustEvalDiagram id="eval-08" />
       <p className={cn('mt-4', type.eyebrow)}>Golden set</p>
       <p className={cn('mt-2', type.title)}>Eight variants of the same request</p>
       <p className={cn('mt-3', type.body)}>
@@ -185,6 +185,9 @@ export function useHarnessSeeExamples({
           </div>
         ))}
       </dl>
+    </TrustKeepTogether>,
+    <TrustKeepTogether key="harness-core" data-trust-harness-example="harness-core">
+      <ConceptConstellation clusterId="harness-core" />
     </TrustKeepTogether>,
     ...TRUST_GOLDEN_CASES.map((item) => (
       <TrustKeepTogether key={item.id} data-trust-harness-example={item.id}>
