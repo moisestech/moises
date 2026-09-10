@@ -50,6 +50,8 @@ export type TrustLessonPacket = {
   where: string
   idea: string
   seeCaption: string
+  /** Lead copy when See it looks at the specimen (Four Lenses card mode). */
+  seeLead?: string
   tryPrompt: string
   doneBefore: string
   doneAfter: string
@@ -61,11 +63,73 @@ export type TrustLessonPacket = {
   ideaParagraphs?: readonly string[]
   /** Working terms this chapter teaches. Marked in The idea, each with a definition. */
   ideaTerms: readonly TrustIdeaTerm[]
-  /** Concept still for the right column of The idea. */
-  ideaStill: TrustPlaceholderKey
-  /** Teaching diagram that pages as the last Idea portion. */
+  /** Concept still for the right column of The idea. Omitted when `ideaStills` carry the images. */
+  ideaStill?: TrustPlaceholderKey
+  /**
+   * Landscape stills aligned with `ideaParagraphs`. Each beat is one Present
+   * slide: the sentence plus its image. Course language stays in the caption.
+   */
+  ideaStills?: readonly TrustIdeaStill[]
+  /** Teaching diagram that pages before the quote. */
   ideaDiagram: TrustIdeaDiagramId
+  /** Source quote after the claim, before See it. Not a rail step. */
+  ideaQuote: TrustIdeaQuote
 }
+
+/** One compact beat after The idea: quote, attribution, and a course bridge. */
+export type TrustIdeaQuote = {
+  text: string
+  attribution: string
+  bridge: string
+  /** Self-paced source link only. Present stays uncluttered. */
+  href?: string
+}
+
+export const TRUST_IDEA_QUOTES = {
+  'looks-right': {
+    text: 'What you see is all there is.',
+    attribution: 'Daniel Kahneman',
+    bridge: 'The polished card is all you can see — missing evidence still counts.',
+  },
+  'four-lenses': {
+    text: 'A systems approach begins when first you see the world through the eyes of another.',
+    attribution: 'C. West Churchman',
+    bridge: 'Each seat changes the boundary and what counts as enough evidence.',
+  },
+  'seeded-failures': {
+    text: 'We cannot change the human condition, but we can change the conditions under which humans work.',
+    attribution: 'James Reason',
+    bridge: 'Planted breaks are operating conditions, not “the model hallucinated.”',
+  },
+  'the-loop': {
+    text: 'The purpose of a system is what it does.',
+    attribution: 'Stafford Beer',
+    bridge: 'Trace what it observed, decided, and wrote — not what the prose claims.',
+  },
+  'the-harness': {
+    text: 'Safety is a system property, not a component property, and must be controlled at the system level, not the component level.',
+    attribution: 'Nancy Leveson',
+    bridge: 'A good model cannot make a write safe by itself.',
+  },
+  transfer: {
+    text: 'In general, measure performance of a model on the data gathered after the data you trained the model on.',
+    attribution: 'Martin Zinkevich, Google',
+    bridge: 'Case A recall is not the test. Measure Case B on new data.',
+    href: 'https://developers.google.com/machine-learning/guides/rules-of-ml',
+  },
+} as const satisfies Record<TrustChapterId, TrustIdeaQuote>
+
+export type TrustIdeaStill = {
+  id: string
+  src: string
+  alt: string
+  caption: string
+}
+
+export const TRUST_IDEA_LANDSCAPE_SIZE = { width: 1672, height: 941 } as const
+
+const LOOKS_RIGHT_CDN =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload'
 
 export type TrustIdeaDiagramId =
   | 'prompt-output'
@@ -81,16 +145,30 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     chapterId: 'looks-right',
     where: TRUST_LOOKS_RIGHT_FRAME.where,
     idea: 'An enrollment product asked an agent what to do. The agent wrote a recommendation — a screen that looks finished. That screen is not proof the system behind it is safe. Decide Allow, Ask, or Deny from that screen alone, before you see what the agent read.',
-    seeCaption: 'This is the enrollment screen the agent wrote. Nothing has been sent or changed.',
+    seeCaption: 'The card, before you vote.',
     tryPrompt: TRUST_LOOKS_RIGHT_FRAME.doNow,
     doneBefore: TRUST_LOOKS_RIGHT_FRAME.doneBefore,
     doneAfter: TRUST_LOOKS_RIGHT_FRAME.doneAfter,
     ideaParagraphs: [
-      'Cohort Studio is a made-up enrollment product. An agent inside it just wrote what to do with a cohort — confirm October 6, email 120 people, drop the ones it calls quiet.',
+      'Cohort Studio is a made-up enrollment product.',
+      'An agent inside it just wrote what to do with a cohort.',
+      'Confirm October 6, email 120 people, drop the ones it calls quiet.',
       'That recommendation lands as a screen in the product. In this lab we call that screen the card. It is not a slide and not a quiz. It is the surface a teammate would see before anything sends.',
       'A finished-looking screen is not proof the system behind it is safe. In Try it you will Allow, Ask, or Deny from that screen alone — before you see what the agent read.',
     ],
     ideaTerms: [
+      {
+        term: 'Cohort Studio is a made-up enrollment product',
+        meaning: 'A fictional enrollment tool. Not a live dashboard.',
+      },
+      {
+        term: 'An agent inside it just wrote what to do with a cohort',
+        meaning: 'The model proposed an action. That is a draft, not permission to act.',
+      },
+      {
+        term: 'Confirm October 6, email 120 people, drop the ones it calls quiet',
+        meaning: 'The three writes the card is asking to make.',
+      },
       { term: 'the card', meaning: 'The screen a teammate would see before anything sends. Not a slide and not a quiz.' },
       { term: 'Allow, Ask, or Deny', meaning: 'The three verdicts: let it act, pause for a person, or stop it.' },
       { term: 'Allow', meaning: 'Let the system act from this screen.' },
@@ -98,8 +176,28 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'Deny', meaning: 'Do not let it act.' },
       { term: 'proof', meaning: 'A finished look is not evidence the system behind the screen is safe.' },
     ],
-    ideaStill: 'peelOpenHero',
+    ideaStills: [
+      {
+        id: 'looks-right-cohort-studio',
+        src: `${LOOKS_RIGHT_CDN}/v1788998855/dccmiami/workshops/agentic-engineering-for-beginners/cohort-studio-card-proposal-image_ar7tqf.png`,
+        alt: 'A 3D illustration of Cohort Studio: a roster of participants, a calendar, and a chart, with a wand note beside the window.',
+        caption: 'Cohort Studio. A roster, a calendar, and a send — before anyone has approved it.',
+      },
+      {
+        id: 'looks-right-agent-action',
+        src: `${LOOKS_RIGHT_CDN}/v1788999173/dccmiami/workshops/agentic-engineering-for-beginners/cohort-studio-ai-agent-action-image_oic2tf.png`,
+        alt: 'A 3D illustration of an agent drafting a recommendation, connected by a line to the Cohort Studio window.',
+        caption: 'The agent writes a recommendation. That draft is not permission to act.',
+      },
+      {
+        id: 'looks-right-card-suggestion',
+        src: `${LOOKS_RIGHT_CDN}/v1788999295/dccmiami/workshops/agentic-engineering-for-beginners/cohort-studio-ai-agent-action-image-suggestion_oino5y.png`,
+        alt: 'A 3D illustration of the finished card: October 6, an email to many people, and a quiet participant marked to drop.',
+        caption: 'The card: a date, a mass email, and a quiet person marked to drop.',
+      },
+    ],
     ideaDiagram: 'prompt-output',
+    ideaQuote: TRUST_IDEA_QUOTES['looks-right'],
     roleSignals: {
       pm: 'Is this outcome actually ready?',
       engineering: 'What evidence and permissions exist?',
@@ -145,7 +243,12 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     chapterId: 'four-lenses',
     where: '2 of 6 · Four Lenses',
     idea: 'Good depends on what your job must protect. Four seats read the same enrollment card and each one needs something different before it may act.',
-    seeCaption: 'One card, four seats. Pick the seat you will keep for the rest of the class.',
+    ideaParagraphs: [
+      'Good depends on what your job must protect.',
+      'Four seats read the same enrollment card and each one needs something different before it may act.',
+    ],
+    seeCaption: 'One card, four seats. Look at the card, then pick the seat you will keep.',
+    seeLead: 'This card is one enrollment recommendation, not a live send.',
     tryPrompt: 'Write one thing your seat must see before this card may act.',
     doneBefore: 'Done when you pick a seat and save one requirement.',
     doneAfter: 'Complete: your seat and your requirement are saved.',
@@ -154,8 +257,8 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'card', meaning: 'The same enrollment screen all four seats read.' },
       { term: 'act', meaning: 'Write, send, or change something in the world — not just generate text.' },
     ],
-    ideaStill: 'roleLensCards',
     ideaDiagram: 'four-tasks',
+    ideaQuote: TRUST_IDEA_QUOTES['four-lenses'],
     roleSignals: {
       pm: 'What outcome must be true before this is acceptable?',
       engineering: 'What evidence and permission can you verify?',
@@ -200,11 +303,15 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
   'seeded-failures': {
     chapterId: 'seeded-failures',
     where: '3 of 6 · Seeded Failures',
-    idea: 'A correct-looking card can hide planted failures that are not “it hallucinated.” Count mismatches, missing permission, and a skipped pause count.',
+    idea: 'A correct-looking card can hide planted failures that are not “it hallucinated.”',
+    ideaParagraphs: [
+      'A correct-looking card can hide planted failures that are not “it hallucinated.”',
+      'Count mismatches, missing permission, and a skipped pause count.',
+    ],
     seeCaption: 'The same send. Six problems were planted in the calendar, the roster, the 87%, the send permission, the removal, and the missing pause.',
     tryPrompt: 'Reveal the six failures. Name at least three.',
     doneBefore: 'Done when you name three failures and vote again.',
-    doneAfter: 'Complete: three failures named and a second vote saved.',
+    doneAfter: 'Second call saved. Three planted failures named.',
     ideaTerms: [
       {
         term: 'planted failures',
@@ -215,6 +322,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     ],
     ideaStill: 'failureTokens',
     ideaDiagram: 'output-kinds',
+    ideaQuote: TRUST_IDEA_QUOTES['seeded-failures'],
     roleSignals: {
       pm: 'Which planted break would still ship if the prose were true?',
       engineering: 'Which failure is evidence, and which is permission?',
@@ -260,7 +368,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     chapterId: 'the-loop',
     where: '4 of 6 · The Loop',
     idea: 'Locate each break on Observe, Decide, Act, Check, or Stop — not how the prose sounds. You are finding a stage in The send.',
-    seeCaption: 'The loop is the map. Visible labels first; technical names sit on the token.',
+    seeCaption: 'The loop is the map. One failure at a time.',
     tryPrompt: 'Place at least three failures on the loop.',
     doneBefore: 'Done when three failures have a stage.',
     doneAfter: 'Complete: three failures are on the loop.',
@@ -273,8 +381,8 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
       { term: 'Stop', meaning: 'Budgets, escalation, fallback — where a person can halt the write.' },
       { term: 'stage', meaning: 'Where in the loop the break actually lives, not how the prose sounds.' },
     ],
-    ideaStill: 'simpleLoop',
     ideaDiagram: 'eval-steps',
+    ideaQuote: TRUST_IDEA_QUOTES['the-loop'],
     roleSignals: {
       pm: 'If you only graded the output, which stage would you never see?',
       engineering: 'Which stage is a data or permission break, not a wording break?',
@@ -320,6 +428,11 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     chapterId: 'the-harness',
     where: '5 of 6 · The Harness',
     idea: 'The model proposes. The harness is what must be true before a write. Match a control, name one gate, then vote as a team.',
+    ideaParagraphs: [
+      'The model proposes.',
+      'The harness is what must be true before a write.',
+      'Match a control, name one gate, then vote as a team.',
+    ],
     seeCaption: 'Follow the run. See where each failure actually happened.',
     tryPrompt: 'Match a control to each break in The send.',
     doneBefore: 'Done when every failure has a control, a safeguard is named, and the team votes.',
@@ -332,6 +445,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     ],
     ideaStill: 'fullHarness',
     ideaDiagram: 'grader-score',
+    ideaQuote: TRUST_IDEA_QUOTES['the-harness'],
     roleSignals: {
       pm: 'Which control would have stopped the write even if the card still looked finished?',
       engineering: 'Which control is a check you can run before the send?',
@@ -376,7 +490,11 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
   transfer: {
     chapterId: 'transfer',
     where: '6 of 6 · Transfer',
-    idea: 'New card, same question. Recall of Case A is not the test — you only know by measuring on your data, again.',
+    idea: 'New card, same question. Recall of Case A is not the test, you only know by measuring on your data, again.',
+    ideaParagraphs: [
+      'New card, same question.',
+      'Recall of Case A is not the test, you only know by measuring on your data, again.',
+    ],
     seeCaption: 'An unseen museum-intake case. Same Allow, Ask, or Deny.',
     tryPrompt: 'Vote on the unseen case.',
     doneBefore: 'Done when you vote and write the evaluation plan you would bring.',
@@ -387,6 +505,7 @@ export const TRUST_LESSON_PACKETS: Partial<Record<TrustChapterId, TrustLessonPac
     ],
     ideaStill: 'caseBTransfer',
     ideaDiagram: 'transfer-pipeline',
+    ideaQuote: TRUST_IDEA_QUOTES.transfer,
     roleSignals: {
       pm: 'What outcome must be true before this unseen card may act?',
       engineering: 'What evidence and permission can you verify on a case you have not rehearsed?',

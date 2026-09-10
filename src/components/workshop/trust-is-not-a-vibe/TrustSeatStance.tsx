@@ -1,5 +1,6 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import {
   getTrustRole,
   TRUST_ROLES,
@@ -9,7 +10,8 @@ import {
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { ROLE_ICON } from './TrustSeatSection'
-import { TRUST_ROLE_TONE } from './trust-tokens'
+import { usePresentationMode } from './TrustPresentation'
+import { TRUST_ROLE_TONE, trustPresent } from './trust-tokens'
 
 function SeatLine({
   roleId,
@@ -111,6 +113,155 @@ export function TrustPacketJob({
   )
 }
 
+function tryHintShell({
+  present,
+  tone,
+  beat,
+  seat,
+  markHint = true,
+  children,
+}: {
+  present: boolean
+  tone?: (typeof TRUST_ROLE_TONE)[TrustRoleId]
+  beat?: 'empty' | 'signal' | 'do' | 'example'
+  seat?: TrustRoleId
+  markHint?: boolean
+  children: ReactNode
+}) {
+  return (
+    <div
+      key={beat}
+      data-trust-try-hint={markHint || undefined}
+      data-trust-try-hint-beat={beat}
+      data-trust-try-hint-seat={seat}
+      className={cn(
+        'rounded-lg border leading-snug',
+        tone ? cn(tone.border, tone.wash, tone.text) : 'border-dashed border-stone-300 text-stone-600 dark:border-stone-600 dark:text-stone-400',
+        present ? 'px-5 py-4' : 'px-4 py-3'
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
+/** One seat-hint beat. Present pages these; self-paced stacks them with space. */
+export function trustTryHintPortions({
+  roleId,
+  signal,
+  present,
+  markHint = true,
+}: {
+  roleId: TrustRoleId | null
+  signal?: string
+  present: boolean
+  markHint?: boolean
+}): ReactNode[] {
+  const role = getTrustRole(roleId)
+  if (!role || !signal) {
+    return [
+      tryHintShell({
+        present,
+        markHint,
+        beat: 'empty',
+        children: (
+          <p className={present ? trustPresent.note : 'text-sm'}>
+            Pick a seat first. The hint will match that job.
+          </p>
+        ),
+      }),
+    ]
+  }
+
+  const Icon = ROLE_ICON[role.id]
+  const tone = TRUST_ROLE_TONE[role.id]
+  const title = present ? 'text-xl font-semibold sm:text-2xl' : 'text-base font-semibold'
+  const body = present ? cn('mt-2', trustPresent.body) : 'mt-3 text-lg leading-snug sm:text-xl'
+  const eyebrow = (
+    <p className={cn('flex items-center gap-1.5', title)}>
+      <Icon className={cn(present ? 'h-7 w-7' : 'h-5 w-5', tone.icon)} aria-hidden />
+      {role.label} hint
+    </p>
+  )
+
+  return [
+    tryHintShell({
+      present,
+      tone,
+      markHint,
+      beat: 'signal',
+      seat: role.id,
+      children: (
+        <>
+          {eyebrow}
+          <p className={cn('text-stone-800 dark:text-stone-200', body)}>{signal}</p>
+        </>
+      ),
+    }),
+    tryHintShell({
+      present,
+      tone,
+      markHint,
+      beat: 'do',
+      children: (
+        <>
+          {eyebrow}
+          <p className={cn('text-stone-800 dark:text-stone-200', body)}>{role.needToSeePrompt}</p>
+        </>
+      ),
+    }),
+    tryHintShell({
+      present,
+      tone,
+      markHint,
+      beat: 'example',
+      children: (
+        <>
+          {eyebrow}
+          <p className={cn('text-stone-700 dark:text-stone-300', body)}>{role.exampleNeedToSee}</p>
+        </>
+      ),
+    }),
+  ]
+}
+
+/** One hint per seat so Present can walk the room without picking one job. */
+export function trustRoleSignalPortions({
+  signals,
+  present,
+}: {
+  signals: Partial<Record<TrustRoleId, string>>
+  present: boolean
+}): ReactNode[] {
+  const title = present ? 'text-xl font-semibold sm:text-2xl' : 'text-base font-semibold'
+  const body = present ? cn('mt-2', trustPresent.body) : 'mt-3 text-lg leading-snug sm:text-xl'
+
+  return TRUST_ROLES.flatMap((role) => {
+    const signal = signals[role.id]
+    if (!signal) return []
+    const Icon = ROLE_ICON[role.id]
+    const tone = TRUST_ROLE_TONE[role.id]
+    return [
+      tryHintShell({
+        present,
+        tone,
+        markHint: true,
+        beat: 'signal',
+        seat: role.id,
+        children: (
+          <>
+            <p className={cn('flex items-center gap-1.5', title)}>
+              <Icon className={cn(present ? 'h-7 w-7' : 'h-5 w-5', tone.icon)} aria-hidden />
+              {role.label} hint
+            </p>
+            <p className={cn('text-stone-800 dark:text-stone-200', body)}>{signal}</p>
+          </>
+        ),
+      }),
+    ]
+  })
+}
+
 /** Seat-colored prompt above Try it. Empty until a seat is picked. */
 export function TrustTryHint({
   roleId,
@@ -119,30 +270,11 @@ export function TrustTryHint({
   roleId: TrustRoleId | null
   signal?: string
 }) {
-  const role = getTrustRole(roleId)
-  if (!role || !signal) {
-    return (
-      <p
-        data-trust-try-hint
-        className="mb-3 rounded-lg border border-dashed border-stone-300 px-3 py-2 text-sm text-stone-600 dark:border-stone-600 dark:text-stone-400"
-      >
-        Pick a seat first. The hint will match that job.
-      </p>
-    )
-  }
-
-  const Icon = ROLE_ICON[role.id]
-  const tone = TRUST_ROLE_TONE[role.id]
+  const { present } = usePresentationMode()
+  const beats = trustTryHintPortions({ roleId, signal, present, markHint: false })
   return (
-    <p
-      data-trust-try-hint
-      className={cn('mb-3 rounded-lg border px-3 py-2 text-sm leading-snug', tone.border, tone.wash, tone.text)}
-    >
-      <span className="flex items-center gap-1.5 font-semibold">
-        <Icon className={cn('h-4 w-4', tone.icon)} aria-hidden />
-        {role.label} hint
-      </span>
-      <span className="mt-1 block text-stone-800 dark:text-stone-200">{signal}</span>
-    </p>
+    <div data-trust-try-hint className={present ? 'space-y-6' : 'space-y-5'}>
+      {beats}
+    </div>
   )
 }

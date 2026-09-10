@@ -6,6 +6,7 @@ import {
   type TrustOverviewSectionId,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { useTrustPresentation } from './TrustPresentation'
 import { TRUST_STICKY_TOP } from './trust-tokens'
 
 /**
@@ -40,8 +41,18 @@ function useActiveSection() {
   return active
 }
 
+function railItemClass(current: boolean) {
+  return cn(
+    'flex items-baseline gap-2 rounded border-l-2 py-1 pl-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-950',
+    current
+      ? 'border-cyan-500 font-semibold text-stone-950 dark:border-cyan-400 dark:text-stone-50'
+      : 'border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-800 dark:border-stone-700 dark:hover:text-stone-200'
+  )
+}
+
 export function TrustOverviewRail() {
-  const active = useActiveSection()
+  const { present, focusIndex, goToStep } = useTrustPresentation()
+  const scrollActive = useActiveSection()
 
   return (
     <nav
@@ -50,24 +61,32 @@ export function TrustOverviewRail() {
     >
       <p className="font-space-mono text-[10px] uppercase tracking-[0.18em] text-stone-500">On this page</p>
       <ol className="mt-3 space-y-1">
-        {TRUST_OVERVIEW_SECTIONS.map((section) => {
-          const current = section.id === active
+        {TRUST_OVERVIEW_SECTIONS.map((section, index) => {
+          const current = present ? index === focusIndex : section.id === scrollActive
           return (
             <li key={section.id}>
-              <a
-                href={`#${section.id}`}
-                aria-current={current ? 'true' : undefined}
-                className={cn(
-                  'flex items-baseline gap-2 rounded border-l-2 py-1 pl-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-950',
-                  current
-                    ? 'border-cyan-500 font-semibold text-stone-950 dark:border-cyan-400 dark:text-stone-50'
-                    : 'border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-800 dark:border-stone-700 dark:hover:text-stone-200'
-                )}
-              >
-                <span className="font-space-mono text-[10px] text-stone-400">{section.number}</span>
-                {section.navLabel}
-                {current ? <span className="sr-only"> (current section)</span> : null}
-              </a>
+              {present ? (
+                <button
+                  type="button"
+                  onClick={() => goToStep(index)}
+                  aria-current={current ? 'true' : undefined}
+                  className={cn(railItemClass(current), 'w-full text-left')}
+                >
+                  <span className="font-space-mono text-[10px] text-stone-400">{section.number}</span>
+                  {section.navLabel}
+                  {current ? <span className="sr-only"> (current section)</span> : null}
+                </button>
+              ) : (
+                <a
+                  href={`#${section.id}`}
+                  aria-current={current ? 'true' : undefined}
+                  className={railItemClass(current)}
+                >
+                  <span className="font-space-mono text-[10px] text-stone-400">{section.number}</span>
+                  {section.navLabel}
+                  {current ? <span className="sr-only"> (current section)</span> : null}
+                </a>
+              )}
             </li>
           )
         })}
@@ -78,6 +97,9 @@ export function TrustOverviewRail() {
 
 /** Small-screen equivalent. The subnav is already pinned there, so this stays in flow. */
 export function TrustOverviewContents({ className }: { className?: string }) {
+  const { present } = useTrustPresentation()
+  if (present) return null
+
   return (
     <nav
       aria-label="On this page"

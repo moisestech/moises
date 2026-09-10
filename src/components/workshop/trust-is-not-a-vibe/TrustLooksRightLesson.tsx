@@ -13,17 +13,20 @@ import {
   type TrustVerdict,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustEvalDiagram, TrustEvalSupporting } from './TrustEvalDiagram'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustPolishAxis } from './TrustPolishAxis'
+import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustLessonPacket } from './TrustLessonPacket'
-import { TrustSeatStance } from './TrustSeatStance'
+import { TrustCaseStage } from './TrustCaseStage'
+import { TrustSeatStance, TrustTryHint } from './TrustSeatStance'
 import { usePresentationMode } from './TrustPresentation'
-import { TrustSpecimen } from './TrustSpecimen'
 import { TrustSystemLayers } from './TrustSystemLayers'
+import { TrustKeepTogether } from './TrustPresentPortions'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
 import { ROLE_ICON } from './TrustSeatSection'
-import { TRUST_ROLE_TONE, TRUST_VERDICT_LABEL as VERDICT_LABEL } from './trust-tokens'
+import { TRUST_ROLE_TONE, TRUST_VERDICT_LABEL as VERDICT_LABEL, trustLesson, trustPresent } from './trust-tokens'
 import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('looks-right')!
@@ -111,59 +114,104 @@ export function TrustLooksRightLesson() {
     setSystemOpen(true)
   }
 
+  const specimenNote =
+    'Vote first, then open the system. This shows the request that screen would actually send.'
+
   const seeIt = (
-    <div className="space-y-2">
-      <p className="text-sm leading-snug text-stone-800 dark:text-stone-200">{TRUST_CASE_A_INTRO}</p>
-      <TrustSpecimen
+    <TrustKeepTogether>
+      <TrustCaseStage
         caseData={TRUST_CASE_A}
         underneathUnlocked={systemOpen}
-        lockedNote="Vote first, then open the system. This shows the request that screen would actually send."
+        lockedNote={specimenNote}
+        copy={
+          <p
+            className={cn(
+              present
+                ? 'text-3xl font-medium leading-snug text-stone-800 sm:text-4xl md:text-5xl dark:text-stone-200'
+                : 'text-xl leading-relaxed text-stone-800 dark:text-stone-200'
+            )}
+          >
+            {TRUST_CASE_A_INTRO}
+          </p>
+        }
       />
-    </div>
+    </TrustKeepTogether>
   )
 
   const tryIt = (
-    <TrustVote
-      compact
-      legend={TRUST_CENTRAL_QUESTION}
-      value={progress.baselineVote}
-      onChange={(baselineVote: TrustVerdict) => update({ baselineVote })}
-    />
+    <TrustKeepTogether>
+      <TrustCaseStage
+        caseData={TRUST_CASE_A}
+        underneathUnlocked={systemOpen}
+        lockedNote={specimenNote}
+        copy={
+          hydrated ? (
+            <>
+              <TrustTryHint
+                roleId={progress.role}
+                signal={progress.role ? PACKET.roleSignals[progress.role] : undefined}
+              />
+              <TrustVote
+                compact
+                stack
+                legend={TRUST_CENTRAL_QUESTION}
+                value={progress.baselineVote}
+                onChange={(baselineVote: TrustVerdict) => update({ baselineVote })}
+              />
+            </>
+          ) : (
+            <p className="text-sm text-stone-500">Loading your progress…</p>
+          )
+        }
+      />
+    </TrustKeepTogether>
   )
 
   const checkIt = voted ? (
-    <div className="space-y-3">
-      <p className="text-sm text-stone-800 dark:text-stone-200">
-        Your first call is saved
-        {voteLabel ? (
-          <>
-            {' '}
-            as <span className="font-semibold">{voteLabel}</span>
-          </>
-        ) : null}
-        . Now open the system and see what the card left out.
-      </p>
-      <button
-        type="button"
-        onClick={() => {
-          if (systemOpen) {
-            setSystemOpen(false)
-            return
-          }
-          openSystem()
-        }}
-        aria-expanded={systemOpen}
-        className="inline-flex items-center rounded-lg bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white dark:bg-cyan-500 dark:text-stone-950"
-      >
-        {systemOpen ? 'Hide the system' : 'Open the system'}
-      </button>
-      {systemOpen ? <TrustSystemLayers caseData={TRUST_CASE_A} onFirstInteraction={openSystem} /> : null}
-      {completed ? (
-        <p className="text-sm font-medium text-stone-900 dark:text-stone-100">
-          Complete: your vote is saved and you opened the system.
+    <>
+      <TrustKeepTogether className={cn('space-y-3', present && 'space-y-6')}>
+        <p className={cn(present ? trustPresent.body : trustLesson.body)}>
+          Your first call is saved
+          {voteLabel ? (
+            <>
+              {' '}
+              as <span className="font-semibold">{voteLabel}</span>
+            </>
+          ) : null}
+          . Now open the system and see what the card left out.
         </p>
-      ) : null}
-    </div>
+        <TrustIdeaPortrait id="idea-01-looks-right-polish-is-not-proof" />
+        <button
+          type="button"
+          onClick={() => {
+            if (systemOpen) {
+              setSystemOpen(false)
+              return
+            }
+            openSystem()
+          }}
+          aria-expanded={systemOpen}
+          className={cn(
+            'inline-flex items-center rounded-lg bg-stone-900 font-semibold text-white dark:bg-cyan-500 dark:text-stone-950',
+            present ? 'px-6 py-4 text-xl sm:text-2xl' : 'px-4 py-2.5 text-sm'
+          )}
+        >
+          {systemOpen ? 'Hide the system' : 'Open the system'}
+        </button>
+        {systemOpen ? <TrustSystemLayers caseData={TRUST_CASE_A} onFirstInteraction={openSystem} /> : null}
+        {systemOpen ? (
+          <TrustEvalSupporting id="eval-02" summary="Another example">
+            <TrustEvalDiagram id="eval-02" />
+          </TrustEvalSupporting>
+        ) : null}
+        {completed ? (
+          <p className={cn('font-medium text-stone-900 dark:text-stone-100', present ? trustPresent.note : 'text-sm')}>
+            Complete: your vote is saved and you opened the system.
+          </p>
+        ) : null}
+      </TrustKeepTogether>
+      <TrustEvalDiagram id="eval-01" />
+    </>
   ) : undefined
 
   const announce = voted && voteLabel
@@ -179,8 +227,9 @@ export function TrustLooksRightLesson() {
       idea={PACKET.idea}
       seeIt={seeIt}
       seeCaption={PACKET.seeCaption}
-      tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
+      tryIt={tryIt}
       tryCaption={PACKET.tryPrompt}
+      hideTryHint
       checkIt={checkIt}
       job={<LooksRightJob role={progress.role} onPick={(role) => update({ role })} />}
       doNow={PACKET.tryPrompt}

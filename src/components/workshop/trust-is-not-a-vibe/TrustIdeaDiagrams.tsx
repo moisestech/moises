@@ -5,7 +5,12 @@ import {
   type TrustIdeaDiagramId,
   type TrustRoleId,
 } from '@/content/workshops/trust-is-not-a-vibe'
+import { cn } from '@/lib/utils'
 import { TrustDiagramSvg, TrustEdge, TrustFigure, TrustNode, type TrustDiagramTone } from './diagram'
+import { TrustKeepTogether } from './TrustPresentPortions'
+import { usePresentationMode } from './TrustPresentation'
+import { TrustVerdictHover } from './TrustVerdictHover'
+import { trustIdea, trustLesson, trustPresent } from './trust-tokens'
 
 type FlowNode = {
   label: string | string[]
@@ -26,17 +31,20 @@ function LinearFlowSvg({
   title,
   description,
   orientation,
+  size = 'page',
 }: {
   nodes: readonly FlowNode[]
   title: string
   description: string
   orientation: 'horizontal' | 'vertical'
+  size?: 'page' | 'stage'
 }) {
   if (orientation === 'vertical') {
-    const vW = 240
-    const vH = 56
-    const vPitch = 78
-    const vPad = 16
+    const room = size === 'stage'
+    const vW = room ? 360 : 280
+    const vH = room ? 88 : 64
+    const vPitch = room ? 124 : 90
+    const vPad = room ? 24 : 16
     return (
       <TrustDiagramSvg
         viewBox={`0 0 ${vPad * 2 + vW} ${vPad + vH + (nodes.length - 1) * vPitch + 8}`}
@@ -57,9 +65,10 @@ function LinearFlowSvg({
                 label={node.label}
                 sub={node.sub}
                 shape={node.shape}
-                labelClassName="text-[13px]"
-                subClassName="text-[10px]"
-                leading={{ label: 15, sub: 12, gap: 2 }}
+                radius={node.shape === 'pill' ? vH / 2 : undefined}
+                labelClassName={room ? 'text-[22px]' : 'text-[16px]'}
+                subClassName={room ? 'text-[14px]' : 'text-[12px]'}
+                leading={room ? { label: 26, sub: 18, gap: 4 } : { label: 18, sub: 14, gap: 3 }}
               />
               {index < nodes.length - 1 ? (
                 <TrustEdge
@@ -235,7 +244,7 @@ function FourTasksDiagram() {
 function OutputKindsDiagram() {
   const title = 'Open-ended output'
   const description =
-    'An LLM produces text, code, or multi-step actions. There is often no single right answer, so a finished look can hide a planted break.'
+    'An LLM can write text, code, or a sequence of actions. There is often no single right answer, so a confident voice can hide a planted break in the facts, the permission, or the pause.'
   const kinds: FlowNode[] = [
     { label: 'Text', tone: 'stone' },
     { label: 'Code', tone: 'emerald' },
@@ -246,7 +255,7 @@ function OutputKindsDiagram() {
     <TrustFigure
       eyebrow="Open-ended"
       title={title}
-      caption="Breaks hide in the open-ended result, not in the voice."
+      caption="The break is in what the result does — a wrong count, a missing permission, a skipped pause — not in how the card sounds."
     >
       <div className="hidden sm:block">
         <TrustDiagramSvg viewBox="0 0 500 236" title={title} description={description}>
@@ -312,18 +321,44 @@ function EvalStepsDiagram() {
 }
 
 function GraderScoreDiagram() {
+  const { present } = usePresentationMode()
+  const nodes = [
+    { label: 'Output', tone: 'blue' as const },
+    { label: 'Grader', sub: 'code · model · human', tone: 'violet' as const },
+    { label: 'Score', shape: 'pill' as const, tone: 'emerald' as const },
+  ]
+  const title = 'Output becomes a score'
+  const description =
+    'A grader takes the system output and turns it into a score someone can act on.'
+
   return (
-    <LinearIdeaFlow
-      eyebrow="The grader"
-      title="Output becomes a score"
-      description="A grader takes the system output and turns it into a score someone can act on."
-      caption="The harness turns a write into a number a person can Allow, Ask, or Deny."
-      nodes={[
-        { label: 'Output', tone: 'blue' },
-        { label: 'Grader', sub: 'code · model · human', tone: 'violet' },
-        { label: 'Score', shape: 'pill', tone: 'emerald' },
-      ]}
-    />
+    <TrustKeepTogether data-trust-grader-score className="space-y-6">
+      <div>
+        <p
+          className={cn(
+            present
+              ? 'font-space-mono text-sm uppercase tracking-[0.2em] text-cyan-700 dark:text-cyan-400'
+              : trustLesson.eyebrow
+          )}
+        >
+          The grader
+        </p>
+        <p className={cn('mt-2', present ? trustPresent.title : trustIdea.title)}>{title}</p>
+        <p className={cn('mt-4', present ? trustPresent.body : 'max-w-[42ch] text-lg leading-snug text-stone-800 dark:text-stone-200')}>
+          The harness turns a write into a number a person can <TrustVerdictHover verdict="allow" />,{' '}
+          <TrustVerdictHover verdict="ask" />, or <TrustVerdictHover verdict="deny" />.
+        </p>
+      </div>
+      <div className={cn('mx-auto w-full', present ? 'max-w-xl' : 'max-w-sm')}>
+        <LinearFlowSvg
+          nodes={nodes}
+          title={title}
+          description={description}
+          orientation="vertical"
+          size={present ? 'stage' : 'page'}
+        />
+      </div>
+    </TrustKeepTogether>
   )
 }
 

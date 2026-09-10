@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, type ReactNode } from 'react'
+import { Fragment, isValidElement, useEffect, useState, type ReactNode } from 'react'
 import {
   getTrustLessonPacket,
   getTrustRole,
@@ -18,8 +18,10 @@ import { ROLE_ICON } from './TrustSeatSection'
 import { highlightIdeaTerms, IdeaTermsProvider } from './TrustIdeaCopy'
 import { TrustIdeaDiagram } from './TrustIdeaDiagrams'
 import { TrustRoleCheck } from './TrustRoleCheck'
+import { TrustIdeaQuote } from './TrustIdeaQuote'
+import { TrustIdeaScene } from './TrustIdeaScene'
 import { TrustIdeaStill } from './TrustIdeaStill'
-import { TrustTryHint } from './TrustSeatStance'
+import { trustTryHintPortions } from './TrustSeatStance'
 import {
   TRUST_ROLE_TONE,
   TRUST_SCROLL_MT,
@@ -29,6 +31,14 @@ import {
   trustPanelOpen,
   trustPresent,
 } from './trust-tokens'
+
+/** Lets Check it page a lesson fragment beside the seat question. */
+function unwrapFragment(node: ReactNode): ReactNode {
+  if (isValidElement(node) && node.type === Fragment) {
+    return (node.props as { children?: ReactNode }).children
+  }
+  return node
+}
 
 function PortionDots({ count, index }: { count: number; index: number }) {
   if (count <= 1) return null
@@ -53,6 +63,7 @@ function PacketStep({
   deck,
   hint,
   className,
+  portionsClassName,
   children,
 }: {
   step: number
@@ -60,6 +71,7 @@ function PacketStep({
   deck?: string
   hint?: ReactNode
   className?: string
+  portionsClassName?: string
   children: ReactNode
 }) {
   const { ref, current, focused, select } = useRegisterTrustStep(label)
@@ -68,6 +80,7 @@ function PacketStep({
   return (
     <section
       data-trust-panel-open={focused || undefined}
+      hidden={present && !focused}
       className={cn(
         'rounded-lg border-l-4',
         focused ? cn(trustPanelOpen, 'border-l-cyan-600') : cn(trustPanelIdle, 'border-l-transparent'),
@@ -90,9 +103,17 @@ function PacketStep({
           TRUST_SCROLL_MT
         )}
       >
-        <p className={trustLesson.eyebrow}>{step}</p>
+            <p
+              className={
+                present
+                  ? 'font-space-mono text-lg uppercase tracking-[0.2em] text-stone-500'
+                  : trustLesson.eyebrow
+              }
+            >
+              {step}
+            </p>
         <p className={cn(present ? trustPresent.title : trustLesson.title, 'mt-1')}>{label}</p>
-        {deck && (!present || !focused) ? (
+        {deck && !focused ? (
           <p className={present ? trustPresent.deck : trustLesson.deck}>{deck}</p>
         ) : null}
         {present && focused ? <PortionDots count={portionCount} index={portionIndex} /> : null}
@@ -105,7 +126,7 @@ function PacketStep({
           )}
         >
           {hint}
-          <TrustPresentPortions className={present ? trustPresent.body : undefined}>{children}</TrustPresentPortions>
+          <TrustPresentPortions className={portionsClassName}>{children}</TrustPresentPortions>
         </div>
       ) : null}
     </section>
@@ -122,12 +143,16 @@ export function TrustLessonPacket({
   where,
   idea,
   ideaBody,
+  ideaFigure,
+  ideaLandscape,
   seeIt,
   seeCaption,
   tryIt,
   tryCaption,
   checkIt,
   checkCaption,
+  checkPortionsClassName,
+  roleCheckAfter = false,
   job,
   doNow,
   doneWhen,
@@ -138,18 +163,33 @@ export function TrustLessonPacket({
   deeper,
   deeperHint,
   announce,
+  hideTryHint,
 }: {
   chapterId: TrustChapterId
   where: string
   idea: string
   /** Richer idea copy. When omitted, packet paragraphs or `idea` are used. */
   ideaBody?: ReactNode
+  /** Right-column figure for The idea. Replaces `ideaStill` when passed. */
+  ideaFigure?: ReactNode
+  /**
+   * Landscape teaching diagram after the claim. Pages as its own Present
+   * portion. Does not replace the vertical idea portrait.
+   */
+  ideaLandscape?: ReactNode
   seeIt: ReactNode
   seeCaption?: string
   tryIt: ReactNode
   tryCaption?: string
   checkIt?: ReactNode
   checkCaption?: string
+  /** Self-paced stack gap for Check it. Present still pages one child. */
+  checkPortionsClassName?: string
+  /**
+   * Default keeps the seat question first. Seeded Failures pages teaching
+   * first (diagram / portrait) and puts the check last.
+   */
+  roleCheckAfter?: boolean
   job: ReactNode
   doNow: string
   doneWhen: string
@@ -160,14 +200,32 @@ export function TrustLessonPacket({
   deeper?: ReactNode
   deeperHint?: string
   announce?: string
+  /** When the Try it body already holds the seat hint (card stage). */
+  hideTryHint?: boolean
 }) {
   const { ref: ideaRef, current: ideaCurrent, focused: ideaFocused, select: selectIdea } =
     useRegisterTrustStep('The idea')
-  const { present, focusIndex, releaseFocus, depthOpen, portionIndex, portionCount } = useTrustPresentation()
+  const { present, focusIndex, releaseFocus, depthOpen, portionIndex, portionCount, transitionActive } =
+    useTrustPresentation()
   const [briefOpen, setBriefOpen] = useState(false)
   const role = getTrustRole(roleId ?? null)
   const packetMeta = getTrustLessonPacket(chapterId)
   const SeatIcon = role ? ROLE_ICON[role.id] : null
+  const ideaSentences = packetMeta?.ideaParagraphs ?? [idea]
+  const showingIdeaDiagram = Boolean(
+    present &&
+      ideaFocused &&
+      (ideaLandscape || packetMeta?.ideaDiagram) &&
+      portionIndex >= ideaSentences.length
+  )
+  const roleCheck = (
+    <TrustRoleCheck
+      roleId={roleId ?? null}
+      check={roleId ? packetMeta?.roleChecks[roleId] : undefined}
+      choice={roleCheckChoice ?? null}
+      onPick={onRoleCheck}
+    />
+  )
 
   useEffect(() => {
     if (focusIndex >= 0) setBriefOpen(false)
@@ -184,13 +242,23 @@ export function TrustLessonPacket({
   }
 
   return (
-    <div className="lg:grid lg:grid-cols-[10rem_minmax(0,1fr)] lg:gap-x-10">
+    <div
+      className={cn(
+        'lg:grid lg:grid-cols-[10rem_minmax(0,1fr)] lg:gap-x-10',
+        present && transitionActive && 'hidden'
+      )}
+    >
       <TrustPageRail />
-      <div className="min-w-0 space-y-3" data-trust-deck>
+      <div
+        className={cn('min-w-0', !present && 'space-y-3')}
+        data-trust-deck
+        hidden={(present && transitionActive) || undefined}
+      >
         {present ? null : <TrustPageContents className="mb-4" />}
 
         <section
           data-trust-panel-open={briefOpen || undefined}
+          hidden={present && !briefOpen}
           className={cn(
             'rounded-lg border-l-4',
             briefOpen ? cn(trustPanelOpen, 'border-l-cyan-600') : cn(trustPanelIdle, 'border-l-transparent'),
@@ -238,6 +306,7 @@ export function TrustLessonPacket({
 
         <section
           data-trust-panel-open={ideaFocused || undefined}
+          hidden={present && !ideaFocused}
           className={cn(
             'rounded-lg border-l-4',
             ideaFocused
@@ -272,22 +341,74 @@ export function TrustLessonPacket({
                 present && 'px-5 py-6 sm:px-8 sm:py-8'
               )}
             >
-              <div className="gap-6 md:grid md:grid-cols-[minmax(0,1fr)_min(20rem,38%)] md:items-start">
-                <div className={present ? undefined : trustIdea.body}>
+              <div
+                className={cn(
+                  'gap-6',
+                  showingIdeaDiagram ||
+                    packetMeta?.ideaStills ||
+                    (ideaLandscape && !present) ||
+                    (!ideaFigure && !packetMeta?.ideaStill)
+                    ? 'block'
+                    : 'md:grid md:grid-cols-[minmax(0,1fr)_min(20rem,38%)] md:items-start'
+                )}
+              >
+                <div className={present || packetMeta?.ideaStills ? undefined : trustIdea.body}>
                   <IdeaTermsProvider>
-                    <TrustPresentPortions className={cn('space-y-4', present && trustPresent.body)}>
-                      {ideaBody ??
-                        (packetMeta?.ideaParagraphs ?? [idea]).map((paragraph) => (
-                          <p key={paragraph.slice(0, 40)}>
-                            {highlightIdeaTerms(paragraph, packetMeta?.ideaTerms ?? [])}
-                          </p>
-                        ))}
-                      {packetMeta?.ideaDiagram ? <TrustIdeaDiagram id={packetMeta.ideaDiagram} /> : null}
+                    <TrustPresentPortions
+                      className={cn(
+                        'space-y-4',
+                        present && !showingIdeaDiagram && !packetMeta?.ideaStills && trustPresent.body
+                      )}
+                    >
+                      {ideaLandscape && ideaFigure && !present && !ideaBody && !packetMeta?.ideaStills ? (
+                        <div className="md:grid md:grid-cols-[minmax(0,1fr)_min(20rem,38%)] md:items-start md:gap-6">
+                          <div className={cn('space-y-4', trustIdea.body)}>
+                            {ideaSentences.map((paragraph) => (
+                              <p key={paragraph.slice(0, 40)}>
+                                {highlightIdeaTerms(paragraph, packetMeta?.ideaTerms ?? [])}
+                              </p>
+                            ))}
+                          </div>
+                          {ideaFigure}
+                        </div>
+                      ) : (
+                        ideaBody ??
+                        ideaSentences.map((paragraph, index) => {
+                          const still = packetMeta?.ideaStills?.[index]
+                          const copy = (
+                            <p>{highlightIdeaTerms(paragraph, packetMeta?.ideaTerms ?? [])}</p>
+                          )
+                          return still ? (
+                            <TrustIdeaScene key={still.id} still={still} priority={index === 0}>
+                              {copy}
+                            </TrustIdeaScene>
+                          ) : (
+                            <p
+                              key={paragraph.slice(0, 40)}
+                              className={cn(!present && packetMeta?.ideaStills && trustIdea.body)}
+                            >
+                              {highlightIdeaTerms(paragraph, packetMeta?.ideaTerms ?? [])}
+                            </p>
+                          )
+                        })
+                      )}
+                      {ideaLandscape}
+                      {packetMeta?.ideaDiagram ? (
+                        <div data-trust-present-figure>
+                          <TrustIdeaDiagram id={packetMeta.ideaDiagram} />
+                        </div>
+                      ) : null}
+                      {packetMeta?.ideaQuote ? <TrustIdeaQuote quote={packetMeta.ideaQuote} /> : null}
                     </TrustPresentPortions>
                   </IdeaTermsProvider>
                 </div>
-                {packetMeta?.ideaStill ? (
-                  <TrustIdeaStill asset={packetMeta.ideaStill} className="mt-5 md:mt-0" />
+                {(ideaFigure || packetMeta?.ideaStill) &&
+                !packetMeta?.ideaStills &&
+                !showingIdeaDiagram &&
+                !(ideaLandscape && !present) ? (
+                  ideaFigure ?? (
+                    <TrustIdeaStill asset={packetMeta!.ideaStill!} className="mt-5 md:mt-0" />
+                  )
                 ) : null}
               </div>
             </div>
@@ -302,24 +423,37 @@ export function TrustLessonPacket({
           step={3}
           label="Try it"
           deck={tryCaption}
-          hint={
-            <TrustTryHint
-              roleId={roleId ?? null}
-              signal={roleId ? packetMeta?.roleSignals[roleId] : undefined}
-            />
-          }
+          portionsClassName={!hideTryHint ? 'space-y-6' : undefined}
         >
-          {tryIt}
+          <>
+            {hideTryHint
+              ? null
+              : trustTryHintPortions({
+                  roleId: roleId ?? null,
+                  signal: roleId ? packetMeta?.roleSignals[roleId] : undefined,
+                  present,
+                })}
+            {tryIt}
+          </>
         </PacketStep>
 
-        <PacketStep step={4} label="Check it" deck={checkCaption ?? 'One question for your seat.'}>
-          <TrustRoleCheck
-            roleId={roleId ?? null}
-            check={roleId ? packetMeta?.roleChecks[roleId] : undefined}
-            choice={roleCheckChoice ?? null}
-            onPick={onRoleCheck}
-          />
-          {checkIt ? <div className="mt-6">{checkIt}</div> : null}
+        <PacketStep
+          step={4}
+          label="Check it"
+          deck={checkCaption ?? 'One question for your seat.'}
+          portionsClassName={checkPortionsClassName ?? 'space-y-6'}
+        >
+          {roleCheckAfter ? (
+            <>
+              {unwrapFragment(checkIt)}
+              {roleCheck}
+            </>
+          ) : (
+            <>
+              {roleCheck}
+              {checkIt}
+            </>
+          )}
         </PacketStep>
 
         {announce ? (

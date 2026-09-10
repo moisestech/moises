@@ -1,32 +1,37 @@
 'use client'
 
+import { useState } from 'react'
 import {
   EVALS_ENGINEER_STACK,
   EVALS_TEACHING,
   TRUST_CASE_A,
-  TRUST_TOOL_LANDSCAPE,
   getTrustLessonPacket,
   getTrustRole,
   type TrustControlId,
 } from '@/content/workshops/trust-is-not-a-vibe'
+import { ConceptConstellation } from './ConceptConstellation'
 import { ControlMatch } from './ControlMatch'
 import { TrustCriterionCarry } from './TrustCriterionCarry'
 import { TrustEvalArchitecture } from './TrustEvalArchitecture'
 import { TrustEvalConfigExample } from './TrustEvalConfigExample'
+import { TrustEvalDiagram } from './TrustEvalDiagram'
 import { TrustEvalLoopStepper } from './TrustEvalLoopStepper'
-import { TrustGoldenSet } from './TrustGoldenSet'
 import { TrustGraderMatrix } from './TrustGraderMatrix'
+import { TrustHarnessSeeStage, useHarnessSeeExamples } from './TrustHarnessSeeIt'
+import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustLessonPacket } from './TrustLessonPacket'
+import { TrustKeepTogether } from './TrustPresentPortions'
 import { TrustPacketJob, TrustSeatStance } from './TrustSeatStance'
 import { usePresentationMode } from './TrustPresentation'
-import { TrustRegressionRun } from './TrustRegressionRun'
 import { TrustTeachingCards } from './TrustTeachingCards'
-import { TrustTraceDiagram } from './TrustTraceDiagram'
+import { TrustToolLandscape } from './TrustToolLandscape'
 import { TrustVote } from './TrustVote'
+import { cn } from '@/lib/utils'
 import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('the-harness')!
+const HARNESS_IDEA_ID = 'idea-09-the-harness-control-gate-vote' as const
 
 function harnessComplete(matches: Record<string, TrustControlId | undefined>, safeguard: string, verdict: unknown) {
   return (
@@ -39,6 +44,7 @@ function harnessComplete(matches: Record<string, TrustControlId | undefined>, sa
 export function TrustTheHarnessLesson() {
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
   const { present } = usePresentationMode()
+  const [goldenReady, setGoldenReady] = useState(false)
   const matched = Object.keys(progress.controlMatches).length
   const allMatched = matched === TRUST_CASE_A.failures.length
   const completed = progress.completedChapters.includes('the-harness')
@@ -54,20 +60,35 @@ export function TrustTheHarnessLesson() {
     if (harnessComplete(controlMatches, safeguard, teamVerdict)) markChapterComplete('the-harness')
   }
 
+  const see = useHarnessSeeExamples({
+    goldenReady,
+    onGoldenComplete: () => setGoldenReady(true),
+  })
+
   const tryIt = (
-    <ControlMatch
-      failures={TRUST_CASE_A.failures}
-      matches={progress.controlMatches}
-      onMatch={(failureId, control: TrustControlId) => {
-        const controlMatches = { ...progress.controlMatches, [failureId]: control }
-        update({ controlMatches })
-        tryComplete({ controlMatches })
-      }}
-    />
+    <TrustKeepTogether
+      className={cn(
+        'grid items-start gap-6',
+        present ? 'grid-cols-[minmax(0,1fr)_auto]' : 'md:grid-cols-[minmax(0,1fr)_auto]'
+      )}
+    >
+      <div className="min-w-0">
+        <ControlMatch
+          failures={TRUST_CASE_A.failures}
+          matches={progress.controlMatches}
+          onMatch={(failureId, control: TrustControlId) => {
+            const controlMatches = { ...progress.controlMatches, [failureId]: control }
+            update({ controlMatches })
+            tryComplete({ controlMatches })
+          }}
+        />
+      </div>
+      <TrustIdeaPortrait id={HARNESS_IDEA_ID} className="justify-self-end" />
+    </TrustKeepTogether>
   )
 
   const checkIt = allMatched ? (
-    <div className="space-y-6">
+    <>
       <label className="block">
         <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
           Name one safeguard before this may act
@@ -84,18 +105,21 @@ export function TrustTheHarnessLesson() {
           placeholder="A specific validation, approval, or rollback — not “human review.”"
         />
       </label>
-      <TrustVote
-        legend="Team verdict for Case A"
-        value={progress.teamVerdict}
-        onChange={(teamVerdict) => {
-          update({ teamVerdict })
-          tryComplete({ teamVerdict })
-        }}
-      />
-      {completed ? (
-        <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{PACKET.doneAfter}</p>
-      ) : null}
-    </div>
+      <TrustEvalDiagram id="eval-13" />
+      <TrustKeepTogether className="space-y-6">
+        <TrustVote
+          legend="Team verdict for Case A"
+          value={progress.teamVerdict}
+          onChange={(teamVerdict) => {
+            update({ teamVerdict })
+            tryComplete({ teamVerdict })
+          }}
+        />
+        {completed ? (
+          <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{PACKET.doneAfter}</p>
+        ) : null}
+      </TrustKeepTogether>
+    </>
   ) : undefined
 
   const announce = completed
@@ -109,7 +133,11 @@ export function TrustTheHarnessLesson() {
       chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
-      seeIt={<TrustTraceDiagram />}
+      ideaFigure={<TrustIdeaPortrait id={HARNESS_IDEA_ID} priority />}
+      ideaLandscape={<TrustEvalDiagram id="eval-07" />}
+      seeIt={
+        <TrustHarnessSeeStage placedCount={see.placedCount}>{see.slides}</TrustHarnessSeeStage>
+      }
       seeCaption={PACKET.seeCaption}
       tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
       tryCaption={PACKET.tryPrompt}
@@ -129,10 +157,9 @@ export function TrustTheHarnessLesson() {
       roleCheckChoice={roleCheckChoice(progress, PACKET.chapterId)}
       onRoleCheck={(choice) => update(withRoleCheck(progress, PACKET.chapterId, choice))}
       announce={announce}
-      deeperHint="Golden cases, the four graders, the eval loop, regression, architecture, and the toolkit."
+      deeperHint="The four graders, the eval loop, architecture, and the toolkit."
       deeper={
         <>
-          <TrustGoldenSet />
           <TrustGraderMatrix showOwners={present} />
           <TrustCriterionCarry
             criterion={progress.needToSee}
@@ -140,8 +167,10 @@ export function TrustTheHarnessLesson() {
             grader={progress.criterionGrader}
             onPickGrader={(criterionGrader) => update({ criterionGrader })}
           />
+          <TrustKeepTogether>
+            <ConceptConstellation clusterId="harness-reliability" />
+          </TrustKeepTogether>
           <TrustEvalLoopStepper showOwners={present} />
-          <TrustRegressionRun />
           <TrustEvalArchitecture />
           <TrustTeachingCards cards={EVALS_TEACHING['the-harness']} roleId={progress.role} />
           <aside className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
@@ -158,21 +187,10 @@ export function TrustTheHarnessLesson() {
             <p className="mt-3 text-xs text-slate-500">
               Tools that implement the architecture above. The architecture is the point; any of these can host it.
             </p>
-            <ul className="mt-1.5 space-y-1">
-              {TRUST_TOOL_LANDSCAPE.map((tool) => (
-                <li key={tool.name}>
-                  <a
-                    href={tool.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-medium underline-offset-2 hover:underline"
-                  >
-                    {tool.name}
-                  </a>
-                  <span className="text-slate-600 dark:text-slate-400"> — {tool.use}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-3">
+              <TrustEvalDiagram id="eval-12" />
+            </div>
+            <TrustToolLandscape className="mt-3" />
             <TrustEvalConfigExample className="mt-3" />
           </aside>
           <TrustInstructorClip chapterId="the-harness" />

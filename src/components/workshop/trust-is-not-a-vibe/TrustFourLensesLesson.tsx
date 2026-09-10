@@ -11,17 +11,20 @@ import {
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
 import { TrustFourSeatsDiagram } from './TrustFourSeatsDiagram'
+import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustSeatCoverage } from './TrustSeatCoverage'
 import { TrustLessonPacket } from './TrustLessonPacket'
+import { TrustKeepTogether } from './TrustPresentPortions'
 import { TrustSeatStance } from './TrustSeatStance'
 import { usePresentationMode } from './TrustPresentation'
 import { TrustTeachingCards } from './TrustTeachingCards'
-import { TRUST_ROLE_TONE } from './trust-tokens'
+import { TRUST_ROLE_TONE, trustPresent } from './trust-tokens'
 import { roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('four-lenses')!
 const TEACHING = EVALS_TEACHING['four-lenses']
+const IDEA_PORTRAIT_ID = 'idea-02-four-lenses-four-seats-one-card' as const
 
 function nextSeat(id: TrustRoleId): TrustRoleId {
   const index = TRUST_ROLES.findIndex((entry) => entry.id === id)
@@ -46,41 +49,62 @@ export function TrustFourLensesLesson() {
   }, [attributed, completed, markChapterComplete])
 
   const seeIt = (
-    <TrustFourSeatsDiagram
-      role={role}
-      signals={PACKET.roleSignals}
-      caption={PACKET.seeCaption}
-      onSelect={(id) => update({ role: id })}
-    />
+    <TrustKeepTogether>
+      <TrustFourSeatsDiagram
+        role={role}
+        signals={PACKET.roleSignals}
+        caption={PACKET.seeCaption}
+        lead={PACKET.seeLead}
+        onSelect={(id) => update({ role: id })}
+      />
+    </TrustKeepTogether>
   )
 
   const tryIt = roleData ? (
     <label className="block">
-      <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">{roleData.needToSeePrompt}</span>
       {staleNote ? (
-        <span className="mt-1 block text-sm text-stone-600 dark:text-stone-400">
+        <span
+          className={cn(
+            'mb-2 block text-stone-600 dark:text-stone-400',
+            present ? trustPresent.note : 'text-base'
+          )}
+        >
           You wrote this as {staleFor?.label ?? 'another seat'}. Rewrite it for {roleData.label}.
         </span>
       ) : null}
+      <span className="sr-only">{roleData.needToSeePrompt}</span>
       <textarea
         value={note}
         onChange={(event) => update({ needToSee: event.target.value, needToSeeRole: role })}
-        rows={3}
+        rows={present ? 4 : 3}
         placeholder={roleData.exampleNeedToSee}
-        className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-800 dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100"
+        className={cn(
+          'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-800 dark:border-stone-600 dark:bg-stone-950 dark:text-stone-100',
+          present ? cn('px-5 py-4', trustPresent.note) : 'text-lg leading-snug'
+        )}
       />
     </label>
   ) : (
     <div>
-      <p className="text-sm font-semibold text-stone-900 dark:text-stone-100">{PACKET.tryPrompt}</p>
-      <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
+      <p
+        className={cn(
+          'font-semibold text-stone-900 dark:text-stone-100',
+          present ? trustPresent.body : 'text-lg leading-snug sm:text-xl'
+        )}
+      >
+        {PACKET.tryPrompt}
+      </p>
+      <p className={cn('mt-1 text-stone-600 dark:text-stone-400', present ? trustPresent.note : 'text-base')}>
         Pick a seat in See it. The prompt changes to that job.
       </p>
       <textarea
-        rows={3}
+        rows={present ? 4 : 3}
         disabled
         placeholder="Pick a seat to start writing."
-        className="mt-2 w-full rounded-lg border border-dashed border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-500 dark:border-stone-600 dark:bg-stone-900"
+        className={cn(
+          'mt-3 w-full rounded-lg border border-dashed border-stone-300 bg-stone-50 px-3 py-2 text-stone-500 dark:border-stone-600 dark:bg-stone-900',
+          present ? cn('px-5 py-4', trustPresent.note) : 'text-lg leading-snug'
+        )}
       />
     </div>
   )
@@ -134,6 +158,7 @@ export function TrustFourLensesLesson() {
       chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
+      ideaFigure={<TrustIdeaPortrait id={IDEA_PORTRAIT_ID} priority />}
       seeIt={seeIt}
       seeCaption={PACKET.seeCaption}
       tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}

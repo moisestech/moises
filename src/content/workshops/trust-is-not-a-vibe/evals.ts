@@ -563,20 +563,65 @@ export const TRUST_TRACE_STEPS: readonly TrustTraceStep[] = [
  * Architecture first, vendors second. Rendered inside an Engineering "Go
  * deeper" panel only, so no seat is asked to memorize a stack.
  */
-export const TRUST_TOOL_LANDSCAPE: readonly { name: string; use: string; href: string }[] = [
-  { name: 'Promptfoo', use: 'Assertions and evals from the CLI or CI.', href: 'https://www.promptfoo.dev/docs/intro/' },
-  { name: 'Ragas', use: 'Retrieval and agent-oriented metrics.', href: 'https://docs.ragas.io/en/stable/' },
+const JOBS_CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload'
+
+export type TrustToolMark = {
+  id: string
+  name: string
+  use: string
+  href: string
+  logoSrc: string
+  logoAlt: string
+}
+
+export const TRUST_TOOL_LANDSCAPE: readonly TrustToolMark[] = [
   {
+    id: 'promptfoo',
+    name: 'Promptfoo',
+    use: 'Assertions and evals from the CLI or CI.',
+    href: 'https://www.promptfoo.dev/docs/intro/',
+    logoSrc: `${JOBS_CDN}/v1789047617/jobs/promptfoo-logo-landscape_ykivka.jpg`,
+    logoAlt: 'Promptfoo',
+  },
+  {
+    id: 'ragas',
+    name: 'Ragas',
+    use: 'Retrieval and agent-oriented metrics.',
+    href: 'https://docs.ragas.io/en/stable/',
+    logoSrc: `${JOBS_CDN}/v1789047616/jobs/ragas-logo-landscape_yj8sgi.png`,
+    logoAlt: 'Ragas',
+  },
+  {
+    id: 'langsmith',
     name: 'LangSmith',
     use: 'Datasets, offline experiments, traces, online evaluation.',
     href: 'https://docs.langchain.com/langsmith/evaluation',
+    logoSrc: `${JOBS_CDN}/v1789046938/jobs/langsmith-color-square_xyvyzq.png`,
+    logoAlt: 'LangSmith',
   },
-  { name: 'Langfuse', use: 'Tracing, datasets, experiments, evaluation.', href: 'https://langfuse.com/docs' },
-  { name: 'Arize Phoenix', use: 'Trace-based evaluation and observability.', href: 'https://arize.com/docs/phoenix' },
   {
+    id: 'langfuse',
+    name: 'Langfuse',
+    use: 'Tracing, datasets, experiments, evaluation.',
+    href: 'https://langfuse.com/docs',
+    logoSrc: `${JOBS_CDN}/v1789046936/jobs/langfuse-color-landscape_p3k9lh.webp`,
+    logoAlt: 'Langfuse',
+  },
+  {
+    id: 'arize-phoenix',
+    name: 'Arize Phoenix',
+    use: 'Trace-based evaluation and observability.',
+    href: 'https://arize.com/docs/phoenix',
+    logoSrc: `${JOBS_CDN}/v1789046937/jobs/ai-arise-evals-landscape-logo_wedrcj.png`,
+    logoAlt: 'Arize',
+  },
+  {
+    id: 'braintrust',
     name: 'Braintrust',
     use: 'Datasets, scorers, comparable experiments.',
     href: 'https://www.braintrust.dev/docs/evaluate',
+    logoSrc: `${JOBS_CDN}/v1789046935/jobs/braintrust-logo-landscape_t2aeq2.png`,
+    logoAlt: 'Braintrust',
   },
 ]
 

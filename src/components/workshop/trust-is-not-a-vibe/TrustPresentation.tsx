@@ -60,6 +60,11 @@ type TrustPresentationValue = {
   registerPortions: (count: number) => void
   next: () => void
   prev: () => void
+  /**
+   * Present-only chapter banner, before The idea. Not a rail step.
+   * Self-paced and Rehearse embeds stay false.
+   */
+  transitionActive: boolean
 }
 
 /**
@@ -88,6 +93,7 @@ const FALLBACK: TrustPresentationValue = {
   registerPortions: () => {},
   next: () => {},
   prev: () => {},
+  transitionActive: false,
 }
 
 const TrustPresentationContext = createContext<TrustPresentationValue>(FALLBACK)
@@ -110,7 +116,16 @@ function isTypingTarget(node: EventTarget | null): boolean {
 /** Space and Enter belong to whatever control has focus, not to the deck. */
 function isActivatableTarget(node: EventTarget | null): boolean {
   if (!(node instanceof HTMLElement)) return false
-  return Boolean(node.closest('button, a[href], summary, [role="button"], [role="tab"], [role="checkbox"]'))
+  return Boolean(
+    node.closest('button, a[href], summary, [role="button"], [role="tab"], [role="checkbox"], [role="menuitem"], [role="option"]')
+  )
+}
+
+/** Chapter and seat popovers must keep the arrow keys. */
+function isOverlayOpen(): boolean {
+  return Boolean(
+    document.querySelector('[data-radix-popper-content-wrapper], [role="dialog"][data-state="open"], [role="menu"][data-state="open"]')
+  )
 }
 
 export function TrustPresentationProvider({
@@ -149,24 +164,43 @@ export function TrustPresentationProvider({
   const [announcement, setAnnouncement] = useState('')
   const [portionIndex, setPortionIndex] = useState(0)
   const [portionCount, setPortionCount] = useState(1)
+  const [transitionActive, setTransitionActive] = useState(false)
   const preferLastPortion = useRef(false)
+
+  const beginTransition = useCallback((chapterSlug: string) => {
+    setTransitionActive(true)
+    setStepIndex(-1)
+    setFocusIndex(-1)
+    setArmed(false)
+    setPortionIndex(0)
+    const chapter = TRUST_CHAPTERS.find((item) => item.slug === chapterSlug)
+    if (!chapter) return
+    const index = TRUST_CHAPTERS.findIndex((item) => item.slug === chapterSlug)
+    setAnnouncement(`${index + 1} of ${TRUST_CHAPTERS.length}. ${chapter.title}.`)
+  }, [])
 
   const registry = useRef(new Map<string, { label: string; element: HTMLElement }>())
   const syncPending = useRef(false)
 
   useEffect(() => {
     const fromUrl = new URLSearchParams(window.location.search).get(TRUST_PRESENT_PARAM)
+    let nextPresent = false
     if (fromUrl === '1') {
       window.sessionStorage.setItem(TRUST_PRESENT_KEY, '1')
-      setPresent(true)
+      nextPresent = true
     } else if (fromUrl === '0') {
       window.sessionStorage.removeItem(TRUST_PRESENT_KEY)
-      setPresent(false)
+      nextPresent = false
     } else {
-      setPresent(window.sessionStorage.getItem(TRUST_PRESENT_KEY) === '1')
+      nextPresent = window.sessionStorage.getItem(TRUST_PRESENT_KEY) === '1'
     }
+    setPresent(nextPresent)
+    // Chapter load or jump while presenting opens the banner. Clicking Present
+    // on a chapter already on screen does not re-run this effect.
+    if (nextPresent && stepping && root && slug) beginTransition(slug)
+    else setTransitionActive(false)
     setHydrated(true)
-  }, [])
+  }, [beginTransition, root, slug, stepping])
 
   const enter = useCallback(() => {
     window.sessionStorage.setItem(TRUST_PRESENT_KEY, '1')
@@ -186,6 +220,8 @@ export function TrustPresentationProvider({
     setPresent(false)
     setDepthOpen(false)
     setStepIndex(-1)
+    setTransitionActive(false)
+    setFocusIndex((current) => (current < 0 ? 0 : current))
     if (document.fullscreenElement) {
       void document.exitFullscreen().catch(() => {})
     }
@@ -264,6 +300,7 @@ export function TrustPresentationProvider({
       const step = steps[index]
       if (!step) return
       preferLastPortion.current = opts?.at === 'end'
+      setTransitionActive(false)
       setFocusIndex(index)
       setArmed(false)
       setPortionIndex(opts?.at === 'end' ? 999 : 0)
@@ -295,6 +332,11 @@ export function TrustPresentationProvider({
   }, [router, slug])
 
   const next = useCallback(() => {
+    if (transitionActive) {
+      if (steps.length === 0) return
+      goToStep(0)
+      return
+    }
     // Sections render on the server but only register after hydration. Without
     // this guard an early keypress reads zero steps, looks like "past the last
     // step", and jumps the room into the next chapter.
@@ -335,12 +377,24 @@ export function TrustPresentationProvider({
       return
     }
     leaveChapter()
-  }, [announceStep, armed, goToStep, leaveChapter, pending, portionCount, portionIndex, stepIndex, steps.length])
+  }, [
+    announceStep,
+    armed,
+    goToStep,
+    leaveChapter,
+    pending,
+    portionCount,
+    portionIndex,
+    stepIndex,
+    steps.length,
+    transitionActive,
+  ])
 
   // Clamps at the first step rather than paging back a chapter. Advancing off
   // the end is a deliberate "we are done here"; going back is usually a
   // correction, and jumping the room to the previous chapter is not that.
   const prev = useCallback(() => {
+    if (transitionActive) return
     if (stepIndex < 0) {
       goToStep(0)
       return
@@ -353,8 +407,21 @@ export function TrustPresentationProvider({
       return
     }
     if (stepIndex > 0) goToStep(stepIndex - 1, { at: 'end' })
+    else if (present && stepping && root && slug) beginTransition(slug)
     else goToStep(0)
-  }, [announceStep, goToStep, portionCount, portionIndex, stepIndex])
+  }, [
+    announceStep,
+    beginTransition,
+    goToStep,
+    portionCount,
+    portionIndex,
+    present,
+    root,
+    slug,
+    stepIndex,
+    stepping,
+    transitionActive,
+  ])
 
   // A section appearing after the room acts means there is more to show here
   // after all, so the pending exit no longer reflects where we are.
@@ -369,6 +436,7 @@ export function TrustPresentationProvider({
       if (event.defaultPrevented) return
       if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return
       if (isTypingTarget(event.target)) return
+      if (isOverlayOpen()) return
 
       const forward = event.key === 'ArrowRight' || event.key === 'ArrowDown'
       const back = event.key === 'ArrowLeft' || event.key === 'ArrowUp'
@@ -420,6 +488,7 @@ export function TrustPresentationProvider({
       registerPortions,
       next,
       prev,
+      transitionActive,
     }),
     [
       armed,
@@ -441,6 +510,7 @@ export function TrustPresentationProvider({
       releaseFocus,
       slug,
       stepIndex,
+      transitionActive,
     ]
   )
 

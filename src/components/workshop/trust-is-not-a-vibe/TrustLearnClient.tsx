@@ -6,12 +6,13 @@ import { TrustChapterNav } from './TrustChapterNav'
 import { TrustFourLensesLesson } from './TrustFourLensesLesson'
 import { TrustLooksRightLesson } from './TrustLooksRightLesson'
 import { TrustPresentationBar } from './TrustPresentationBar'
-import { TrustPresentationProvider } from './TrustPresentation'
+import { TrustPresentationProvider, useTrustPresentation } from './TrustPresentation'
+import { TrustPresentTransition } from './TrustPresentTransition'
 import { TrustSeededFailuresLesson } from './TrustSeededFailuresLesson'
 import { TrustTheHarnessLesson } from './TrustTheHarnessLesson'
 import { TrustTheLoopLesson } from './TrustTheLoopLesson'
 import { TrustTransferLesson } from './TrustTransferLesson'
-import { trust } from './trust-tokens'
+import { TRUST_PAGE_GUTTER, TRUST_PRESENT_GUTTER, trust } from './trust-tokens'
 
 export function TrustLearnClient({ slug, embedded = false }: { slug: string; embedded?: boolean }) {
   const chapter = getTrustChapter(slug)
@@ -25,9 +26,12 @@ export function TrustLearnClient({ slug, embedded = false }: { slug: string; emb
 }
 
 function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean }) {
+  const { present, transitionActive } = useTrustPresentation()
   const chapter = getTrustChapter(slug)
 
   if (!chapter) return null
+
+  const showTransition = present && transitionActive && !embedded
 
   const body = (() => {
     switch (chapter.id) {
@@ -51,9 +55,23 @@ function TrustLearnBody({ slug, embedded }: { slug: string; embedded: boolean })
   const Shell = embedded ? 'section' : 'main'
 
   return (
-    <Shell className={cn(embedded ? '' : cn(trust.shell, 'overflow-x-clip pb-20'))}>
+    <Shell className={cn(embedded ? '' : cn(trust.shell, 'overflow-x-clip', !present && 'pb-20'))}>
       {embedded ? null : <TrustPresentationBar />}
-      <div className={embedded ? 'space-y-6' : cn(trust.gutter, "pb-16 pt-3 font-['MoMA_Sans']")}>
+      {showTransition ? (
+        <div data-trust-present-gutter className={cn(TRUST_PRESENT_GUTTER, "py-4 font-['MoMA_Sans']")}>
+          <TrustPresentTransition slug={chapter.slug} />
+        </div>
+      ) : null}
+      <div
+        data-trust-learn-column
+        data-trust-present-gutter={present && !showTransition ? true : undefined}
+        hidden={showTransition || undefined}
+        className={
+          embedded
+            ? 'space-y-6'
+            : cn(present ? TRUST_PRESENT_GUTTER : TRUST_PAGE_GUTTER, "font-['MoMA_Sans']", present ? 'py-4' : 'pb-16 pt-3')
+        }
+      >
         {body}
         {embedded ? null : <TrustChapterNav slug={chapter.slug} />}
       </div>

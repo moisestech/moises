@@ -9,6 +9,7 @@ import {
   type TrustGraderId,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { TrustEvalDiagram, TrustEvalSupporting } from './TrustEvalDiagram'
 import { ROLE_ICON } from './TrustSeatSection'
 import { trust, TRUST_ROLE_TONE, TRUST_SCROLL_MT } from './trust-tokens'
 
@@ -94,6 +95,15 @@ export function TrustCriterionCarry({
           <span className="font-medium text-stone-800 dark:text-stone-200">{picked.label}. </span>
           {picked.bestFor} <span className="text-stone-500">Blind spot: {picked.limitation}</span>
         </p>
+      ) : null}
+
+      {grader === 'judge' ? (
+        <TrustEvalSupporting id="eval-10" summary="Model-judge detail">
+          <TrustEvalDiagram id="eval-10" />
+          <TrustEvalSupporting id="eval-11" summary="Semantic grading" className="mt-4">
+            <TrustEvalDiagram id="eval-11" />
+          </TrustEvalSupporting>
+        </TrustEvalSupporting>
       ) : null}
     </div>
   )

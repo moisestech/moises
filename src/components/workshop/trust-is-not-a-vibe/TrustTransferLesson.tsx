@@ -11,18 +11,21 @@ import {
 import { ExitTicket } from './ExitTicket'
 import { OutputPeel } from './OutputPeel'
 import { TransferRubric } from './TransferRubric'
+import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustEvalPlan } from './TrustEvalPlan'
 import { TrustInstructorClip } from './TrustInstructorClip'
 import { TrustLessonPacket } from './TrustLessonPacket'
 import { TrustMethodTransfer } from './TrustMethodTransfer'
+import { TrustKeepTogether } from './TrustPresentPortions'
 import { TrustPacketJob, TrustSeatStance } from './TrustSeatStance'
 import { usePresentationMode } from './TrustPresentation'
 import { TrustTeachingCards } from './TrustTeachingCards'
 import { TrustVote } from './TrustVote'
-import { trust } from './trust-tokens'
+import { trust, trustPresent } from './trust-tokens'
 import { evalPlanComplete, roleCheckChoice, useTrustProgress, withRoleCheck } from './useTrustProgress'
 
 const PACKET = getTrustLessonPacket('transfer')!
+const TRANSFER_PORTRAIT_ID = 'idea-10-transfer-new-card-same-job' as const
 
 export function TrustTransferLesson() {
   const { progress, hydrated, update, markChapterComplete } = useTrustProgress()
@@ -37,21 +40,64 @@ export function TrustTransferLesson() {
   }
 
   const seeIt = (
-    <div className="space-y-6">
-      <OutputPeel caseData={TRUST_CASE_B} />
+    <>
+      <TrustKeepTogether className="space-y-4">
+        <p className={present ? trustPresent.body : trust.body}>
+          Case B uses the same evaluation unit. Fill task, cases, grader, evidence, and decision on
+          this intake — recall of Case A is not the test.
+        </p>
+        <dl className={present ? 'grid gap-3 sm:grid-cols-2' : 'grid gap-2 sm:grid-cols-2 text-sm'}>
+          <div className="rounded-lg border border-stone-200 px-3 py-2 dark:border-stone-700">
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">Task</dt>
+            <dd className="mt-1 text-stone-600 dark:text-stone-400">
+              Decide whether this waitlist intake may send acceptances.
+            </dd>
+          </div>
+          <div className="rounded-lg border border-stone-200 px-3 py-2 dark:border-stone-700">
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">Cases</dt>
+            <dd className="mt-1 text-stone-600 dark:text-stone-400">
+              A standard intake, a duplicate, a waitlist edge, and failures this agent already produced.
+            </dd>
+          </div>
+          <div className="rounded-lg border border-stone-200 px-3 py-2 dark:border-stone-700">
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">Grader</dt>
+            <dd className="mt-1 text-stone-600 dark:text-stone-400">
+              Code for counts and scopes. A person for tone and fairness.
+            </dd>
+          </div>
+          <div className="rounded-lg border border-stone-200 px-3 py-2 dark:border-stone-700">
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">Evidence</dt>
+            <dd className="mt-1 text-stone-600 dark:text-stone-400">
+              The trace: records retrieved, tool arguments, scopes, pass or fail.
+            </dd>
+          </div>
+          <div className="rounded-lg border border-stone-200 px-3 py-2 dark:border-stone-700 sm:col-span-2">
+            <dt className="font-semibold text-stone-900 dark:text-stone-100">Decision</dt>
+            <dd className="mt-1 text-stone-600 dark:text-stone-400">
+              Allow, Ask, or Deny this write — measured on this data, again.
+            </dd>
+          </div>
+        </dl>
+      </TrustKeepTogether>
+      <div className="space-y-6">
+        <p className={trust.body}>New card. Same job. Decide whether it may act.</p>
+        <OutputPeel caseData={TRUST_CASE_B} />
+      </div>
       <TrustMethodTransfer />
-    </div>
+    </>
   )
 
   const tryIt = (
-    <TrustVote
-      legend="Unseen case — Allow, Ask, or Deny?"
-      value={progress.transferVote}
-      onChange={(transferVote) => {
-        update({ transferVote })
-        tryFinish({ transferVote })
-      }}
-    />
+    <TrustKeepTogether data-trust-present-figure>
+      <TrustVote
+        legend="Unseen case — Allow, Ask, or Deny?"
+        value={progress.transferVote}
+        onChange={(transferVote) => {
+          update({ transferVote })
+          tryFinish({ transferVote })
+        }}
+      />
+    </TrustKeepTogether>
   )
 
   const checkIt = voted ? (
@@ -76,9 +122,12 @@ export function TrustTransferLesson() {
       chapterId={PACKET.chapterId}
       where={PACKET.where}
       idea={PACKET.idea}
+      ideaFigure={<TrustIdeaPortrait id={TRANSFER_PORTRAIT_ID} priority />}
       seeIt={seeIt}
       seeCaption={PACKET.seeCaption}
-      tryIt={hydrated ? tryIt : <p className="text-sm text-stone-500">Loading your progress…</p>}
+      tryIt={
+        hydrated ? tryIt : <p className={present ? trustPresent.note : 'text-sm text-stone-500'}>Loading your progress…</p>
+      }
       tryCaption={PACKET.tryPrompt}
       checkIt={checkIt}
       checkCaption="Write the evaluation plan you would bring."
