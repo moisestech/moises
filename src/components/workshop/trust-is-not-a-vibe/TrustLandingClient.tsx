@@ -11,7 +11,9 @@ import {
 import { cn } from '@/lib/utils'
 import { TrustCourseMap } from './TrustCourseMap'
 import { TrustGoDeeper } from './TrustGoDeeper'
-import { TrustClockList, TrustVocabGrid } from './TrustLandingInteract'
+import { TrustClockList } from './TrustLandingInteract'
+import { ConceptConstellation } from './ConceptConstellation'
+import { TRUST_VOCAB_ICON } from './TrustWorkshopMarks'
 import {
   TrustOverviewFact,
   TrustOverviewPath,
@@ -26,7 +28,7 @@ import { TrustOverviewSection } from './TrustOverviewSection'
 import { TrustQuestionBreak } from './TrustQuestionBreak'
 import { TrustPresentationBar } from './TrustPresentationBar'
 import { TrustPresentationProvider, useTrustPresentation } from './TrustPresentation'
-import { TrustSeatStudio } from './TrustSeatSection'
+import { TrustSeatLead, TrustSeatPreviewProvider, TrustSeatSection, TrustSeatStudio } from './TrustSeatSection'
 import { TRUST_PRESENT_GUTTER, trust } from './trust-tokens'
 
 const SECTION = Object.fromEntries(TRUST_OVERVIEW_SECTIONS.map((item) => [item.id, item])) as Record<
@@ -46,6 +48,7 @@ function TrustLandingBody() {
   const { present } = useTrustPresentation()
 
   return (
+    <TrustSeatPreviewProvider>
     <main className={cn(trust.shell, 'overflow-x-clip', !present && 'pb-20 sm:pb-24')}>
       <TrustPresentationBar />
       <div
@@ -77,17 +80,20 @@ function TrustLandingBody() {
             <TrustOverviewSection section={SECTION['the-path']} hideDeck>
               <TrustOverviewPath />
               <TrustClockList />
-              <TrustGoDeeper className="mt-6" hint="How the six chapters sit on one eval cycle.">
+              <TrustGoDeeper className="mt-6" preview hint="How the six chapters sit on one eval cycle.">
                 <TrustCourseMap />
               </TrustGoDeeper>
             </TrustOverviewSection>
 
             <TrustOverviewSection section={SECTION['your-seat']}>
-              <TrustSeatStudio />
+              <TrustSeatStudio>
+                <TrustSeatLead />
+                <TrustSeatSection variant="studio" />
+              </TrustSeatStudio>
             </TrustOverviewSection>
 
             <TrustOverviewSection section={SECTION.vocabulary}>
-              <TrustVocabGrid />
+              <ConceptConstellation clusterId="overview-vocab" icons={TRUST_VOCAB_ICON} />
             </TrustOverviewSection>
           </div>
         </div>
@@ -105,5 +111,6 @@ function TrustLandingBody() {
         )}
       </div>
     </main>
+    </TrustSeatPreviewProvider>
   )
 }

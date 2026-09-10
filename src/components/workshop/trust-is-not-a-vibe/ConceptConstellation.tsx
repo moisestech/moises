@@ -1,9 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import type { IconType } from 'react-icons'
 import { useReducedMotion } from 'framer-motion'
 import {
+  TRUST_DEFINITION_PORTRAIT_SIZE,
   getTrustConceptCluster,
+  getTrustDefinitionIllustration,
   type ConceptCluster,
   type ConceptClusterId,
   type ConceptItem,
@@ -26,38 +31,80 @@ function termSize(item: ConceptItem, present: boolean) {
   return primary ? 'text-xl' : 'text-lg'
 }
 
-export function ConceptConstellation({ clusterId }: { clusterId: ConceptClusterId }) {
+export function ConceptConstellation({
+  clusterId,
+  icons,
+}: {
+  clusterId: ConceptClusterId
+  icons?: Record<string, IconType>
+}) {
   const cluster = getTrustConceptCluster(clusterId)
   const { present, hydrated } = usePresentationMode()
   const reduceMotion = useReducedMotion()
-  const [activeId, setActiveId] = useState<string | null>(null)
+  const defaultId = firstPrimaryId(cluster)
+  const [activeId, setActiveId] = useState<string | null>(defaultId)
+  const termRefs = useRef<Array<HTMLButtonElement | null>>([])
 
   useEffect(() => {
     if (!hydrated) return
-    setActiveId(present ? null : firstPrimaryId(getTrustConceptCluster(clusterId)))
-  }, [clusterId, hydrated, present])
+    setActiveId(firstPrimaryId(getTrustConceptCluster(clusterId)))
+  }, [clusterId, hydrated])
 
   const active = cluster.items.find((item) => item.id === activeId) ?? null
   const live = active ? `${active.term}. ${active.definition}` : ''
+  const image = active?.imageId ? getTrustDefinitionIllustration(active.imageId) : null
+  const hasImages = cluster.items.some((item) => item.imageId)
+
+  const moveActive = (nextIndex: number) => {
+    const next = cluster.items[nextIndex]
+    if (!next) return
+    setActiveId(next.id)
+    termRefs.current[nextIndex]?.focus()
+  }
+
+  const onTermKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const last = cluster.items.length - 1
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      moveActive(index === last ? 0 : index + 1)
+      return
+    }
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      moveActive(index === 0 ? last : index - 1)
+      return
+    }
+    if (event.key === 'Home') {
+      event.preventDefault()
+      moveActive(0)
+      return
+    }
+    if (event.key === 'End') {
+      event.preventDefault()
+      moveActive(last)
+    }
+  }
 
   return (
-    <div
-      data-trust-concept-constellation={cluster.id}
-      className="overflow-x-hidden"
-    >
+    <div data-trust-concept-constellation={cluster.id} className="overflow-x-hidden">
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <div role="group" aria-label={cluster.ariaLabel} className="flex flex-wrap gap-2">
-          {cluster.items.map((item) => {
+          {cluster.items.map((item, index) => {
             const selected = item.id === activeId
+            const Icon = icons?.[item.id]
             return (
               <button
                 key={item.id}
+                ref={(node) => {
+                  termRefs.current[index] = node
+                }}
                 type="button"
                 data-trust-concept-term={item.id}
                 aria-pressed={selected}
                 onClick={() => setActiveId(item.id)}
+                onKeyDown={(event) => onTermKeyDown(event, index)}
                 className={cn(
-                  'inline-flex min-h-11 min-w-11 items-center rounded-xl border px-3 py-2 text-left font-semibold leading-snug',
+                  'inline-flex min-h-11 min-w-11 items-center gap-2 rounded-xl border px-3 py-2 text-left font-semibold leading-snug',
                   TRUST_SCROLL_MT,
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-950',
                   reduceMotion
@@ -70,6 +117,7 @@ export function ConceptConstellation({ clusterId }: { clusterId: ConceptClusterI
                     : 'border-stone-200 bg-white text-stone-950 hover:border-stone-400 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-50'
                 )}
               >
+                {Icon ? <Icon className="h-[1em] w-[1em] shrink-0" aria-hidden /> : null}
                 {item.term}
                 {selected ? <span className="sr-only"> (showing definition)</span> : null}
               </button>
@@ -81,7 +129,8 @@ export function ConceptConstellation({ clusterId }: { clusterId: ConceptClusterI
           data-trust-concept-panel
           className={cn(
             'rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 dark:border-stone-700 dark:bg-stone-900/60',
-            present ? 'min-h-48' : 'min-h-32'
+            present ? 'min-h-48' : 'min-h-32',
+            hasImages && (present ? 'min-h-[28rem]' : 'min-h-[22rem]')
           )}
         >
           <p className="sr-only" aria-live="polite">
@@ -107,7 +156,7 @@ export function ConceptConstellation({ clusterId }: { clusterId: ConceptClusterI
                 data-trust-concept-definition
                 className={cn(
                   'mt-2 leading-relaxed text-stone-700 dark:text-stone-300',
-                  present ? 'text-xl' : 'text-sm'
+                  present ? 'text-xl' : 'text-base'
                 )}
               >
                 {active.definition}
@@ -115,7 +164,7 @@ export function ConceptConstellation({ clusterId }: { clusterId: ConceptClusterI
               <p
                 className={cn(
                   'mt-3 leading-relaxed text-stone-600 dark:text-stone-400',
-                  present ? 'text-lg' : 'text-sm'
+                  present ? 'text-lg' : 'text-base'
                 )}
               >
                 <span className="font-medium text-stone-800 dark:text-stone-200">Why it matters. </span>
@@ -123,15 +172,38 @@ export function ConceptConstellation({ clusterId }: { clusterId: ConceptClusterI
               </p>
               {active.source ? (
                 <p className={cn('mt-3', present ? 'text-base' : 'text-sm')}>
-                  <a
-                    href={active.source.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-medium text-cyan-800 underline-offset-2 hover:underline dark:text-cyan-300"
-                  >
-                    {active.source.label}
-                  </a>
+                  {active.source.href.startsWith('/') ? (
+                    <Link
+                      href={active.source.href}
+                      className="font-medium text-cyan-800 underline-offset-2 hover:underline dark:text-cyan-300"
+                    >
+                      {active.source.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={active.source.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-cyan-800 underline-offset-2 hover:underline dark:text-cyan-300"
+                    >
+                      {active.source.label}
+                    </a>
+                  )}
                 </p>
+              ) : null}
+              {image ? (
+                <div className="relative mx-auto mt-4 w-full max-w-[16rem] sm:max-w-[18rem]">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={TRUST_DEFINITION_PORTRAIT_SIZE.width}
+                    height={TRUST_DEFINITION_PORTRAIT_SIZE.height}
+                    sizes="(max-width: 390px) 70vw, (max-width: 768px) 40vw, 18rem"
+                    className="h-auto w-full max-h-[min(28rem,55dvh)] object-contain object-top"
+                    loading="lazy"
+                    unoptimized
+                  />
+                </div>
               ) : null}
             </div>
           ) : (
@@ -144,16 +216,15 @@ export function ConceptConstellation({ clusterId }: { clusterId: ConceptClusterI
               Choose a term.
             </p>
           )}
-          {present ? (
-            <button
-              type="button"
-              onClick={() => setActiveId(null)}
-              disabled={!active}
-              className={cn(trustPresentChrome.control, 'mt-4 disabled:opacity-40')}
-            >
-              Reset terms
-            </button>
-          ) : null}
+          <button
+            type="button"
+            data-trust-concept-reset
+            onClick={() => setActiveId(defaultId)}
+            disabled={activeId === defaultId}
+            className={cn(trustPresentChrome.control, 'mt-4 disabled:opacity-40')}
+          >
+            Reset terms
+          </button>
         </div>
       </div>
     </div>

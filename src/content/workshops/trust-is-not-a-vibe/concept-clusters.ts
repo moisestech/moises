@@ -1,18 +1,26 @@
+import type { TrustDefinitionIllustrationId } from './definition-illustrations'
 import type { TrustTimeSegmentId } from './types'
 
 export type ConceptEmphasis = 'primary' | 'supporting'
 
 export type ConceptClusterId =
   | 'overview-core'
+  | 'overview-vocab'
   | 'seeded-inspect'
   | 'harness-core'
   | 'harness-reliability'
+  | 'looks-right-vibe'
+  | 'seeded-benchmark'
+  | 'loop-faithfulness'
+  | 'harness-judge'
+  | 'harness-baseline'
 
 export type ConceptItem = {
   id: string
   term: string
   definition: string
   whyItMatters: string
+  imageId?: TrustDefinitionIllustrationId
   emphasis?: ConceptEmphasis
   source?: {
     label: string
@@ -40,6 +48,7 @@ export const TRUST_CONCEPT_CLUSTERS: readonly ConceptCluster[] = [
         term: 'Eval',
         definition: 'A repeatable test of one behavior on representative cases, using an explicit grader.',
         whyItMatters: '‘Is it good?’ becomes a question the team can test again.',
+        imageId: 'definition-eval',
         emphasis: 'primary',
       },
       {
@@ -47,6 +56,7 @@ export const TRUST_CONCEPT_CLUSTERS: readonly ConceptCluster[] = [
         term: 'Task',
         definition: 'The single behavior the team has chosen to measure.',
         whyItMatters: 'A focused task prevents one score from hiding several different failures.',
+        imageId: 'definition-task',
         emphasis: 'primary',
       },
       {
@@ -54,6 +64,7 @@ export const TRUST_CONCEPT_CLUSTERS: readonly ConceptCluster[] = [
         term: 'Cases',
         definition: 'The representative inputs and situations used to test the task.',
         whyItMatters: 'Good cases include ordinary use, edge conditions, and known failures.',
+        imageId: 'definition-cases',
         emphasis: 'primary',
       },
       {
@@ -61,6 +72,7 @@ export const TRUST_CONCEPT_CLUSTERS: readonly ConceptCluster[] = [
         term: 'Grader',
         definition: 'The method that turns an output or trace into evidence against explicit criteria.',
         whyItMatters: 'A grader measures; it does not grant permission for the agent to act.',
+        imageId: 'definition-grader',
         emphasis: 'primary',
       },
     ],
@@ -167,6 +179,158 @@ export const TRUST_CONCEPT_CLUSTERS: readonly ConceptCluster[] = [
         definition: 'A previously passing behavior that fails after a change.',
         whyItMatters: 'Rerunning the golden set is how you catch what the last fix broke.',
         emphasis: 'supporting',
+      },
+    ],
+  },
+  {
+    id: 'overview-vocab',
+    chapterId: 'overview',
+    ariaLabel: 'Eight field terms',
+    defaultActiveId: 'vibe-eval',
+    items: [
+      {
+        id: 'vibe-eval',
+        term: 'Vibe eval',
+        definition: 'Watching it succeed once and calling that proof.',
+        whyItMatters: 'One clean run is a story. It is not a score you can rerun tomorrow.',
+        emphasis: 'primary',
+        source: { label: 'Taught in Looks Right', href: '/workshop/trust-is-not-a-vibe/learn/looks-right' },
+      },
+      {
+        id: 'eval',
+        term: 'Eval',
+        definition: 'A repeatable score for this agent, on this task, with this data.',
+        whyItMatters: 'If you cannot run it again on the same cases, it is not an eval.',
+        emphasis: 'primary',
+        source: { label: 'Taught in The Loop', href: '/workshop/trust-is-not-a-vibe/learn/the-loop' },
+      },
+      {
+        id: 'benchmark',
+        term: 'Benchmark',
+        definition: 'A generic model test. Useful for picking a starting model, not for proving your system.',
+        whyItMatters: 'A benchmark grades a model in the abstract. An eval grades this agent, here.',
+        emphasis: 'supporting',
+        source: { label: 'Taught in Seeded Failures', href: '/workshop/trust-is-not-a-vibe/learn/seeded-failures' },
+      },
+      {
+        id: 'golden-set',
+        term: 'Golden set',
+        definition: 'Six to twelve of your cases — common, edge, and every failure already seen. Also called an eval set.',
+        whyItMatters: 'Start with the failures you already know. That set is the harness, not a vibe.',
+        emphasis: 'supporting',
+        source: { label: 'Taught in The Harness', href: '/workshop/trust-is-not-a-vibe/learn/the-harness' },
+      },
+      {
+        id: 'faithfulness',
+        term: 'Faithfulness',
+        definition: 'True and backed by sources. The hallucination check. Also called groundedness.',
+        whyItMatters: 'If the card cannot point to a source, the claim is decoration.',
+        emphasis: 'supporting',
+        source: { label: 'Taught in The Loop', href: '/workshop/trust-is-not-a-vibe/learn/the-loop' },
+      },
+      {
+        id: 'llm-as-judge',
+        term: 'LLM-as-judge',
+        definition: 'A strong model grades against your rubric. Calibrate it on a human sample first.',
+        whyItMatters: 'The judge is only as honest as the human sample you checked it against.',
+        emphasis: 'supporting',
+        source: { label: 'Taught in The Harness', href: '/workshop/trust-is-not-a-vibe/learn/the-harness' },
+      },
+      {
+        id: 'baseline',
+        term: 'Baseline',
+        definition: 'The number you get before you start improving. Without it, “better” is a vibe.',
+        whyItMatters: 'Write the first number down. Otherwise every later run is theater.',
+        emphasis: 'supporting',
+        source: { label: 'Taught in The Harness', href: '/workshop/trust-is-not-a-vibe/learn/the-harness' },
+      },
+      {
+        id: 'whac-a-mole',
+        term: 'Whac-a-mole',
+        definition: 'Fix one failure, another pops. The loop exists because this does not stop.',
+        whyItMatters: 'A provider can change the model under you overnight. The loop is the point.',
+        emphasis: 'supporting',
+        source: { label: 'Taught in The Harness', href: '/workshop/trust-is-not-a-vibe/learn/the-harness' },
+      },
+    ],
+  },
+  {
+    id: 'looks-right-vibe',
+    chapterId: 'looks-right',
+    ariaLabel: 'Vibe eval',
+    defaultActiveId: 'vibe-eval',
+    items: [
+      {
+        id: 'vibe-eval',
+        term: 'Vibe eval',
+        definition: 'Watching it succeed once and calling that proof.',
+        whyItMatters: 'One clean run is a story. It is not a score you can rerun tomorrow.',
+        imageId: 'vibe-eval',
+        emphasis: 'primary',
+      },
+    ],
+  },
+  {
+    id: 'seeded-benchmark',
+    chapterId: 'seeded-failures',
+    ariaLabel: 'Benchmark',
+    defaultActiveId: 'benchmark',
+    items: [
+      {
+        id: 'benchmark',
+        term: 'Benchmark',
+        definition: 'A generic model test. Useful for picking a starting model, not for proving your system.',
+        whyItMatters: 'A benchmark grades a model in the abstract. An eval grades this agent, here.',
+        imageId: 'benchmark',
+        emphasis: 'primary',
+      },
+    ],
+  },
+  {
+    id: 'loop-faithfulness',
+    chapterId: 'the-loop',
+    ariaLabel: 'Faithfulness',
+    defaultActiveId: 'faithfulness',
+    items: [
+      {
+        id: 'faithfulness',
+        term: 'Faithfulness',
+        definition: 'True and backed by sources. The hallucination check. Also called groundedness.',
+        whyItMatters: 'If the card cannot point to a source, the claim is decoration.',
+        imageId: 'faithfulness',
+        emphasis: 'primary',
+      },
+    ],
+  },
+  {
+    id: 'harness-judge',
+    chapterId: 'the-harness',
+    ariaLabel: 'LLM-as-judge',
+    defaultActiveId: 'llm-as-judge',
+    items: [
+      {
+        id: 'llm-as-judge',
+        term: 'LLM-as-judge',
+        definition: 'A strong model grades against your rubric. Calibrate it on a human sample first.',
+        whyItMatters: 'The judge is only as honest as the human sample you checked it against.',
+        imageId: 'llm-as-judge',
+        emphasis: 'primary',
+      },
+    ],
+  },
+  {
+    id: 'harness-baseline',
+    chapterId: 'the-harness',
+    ariaLabel: 'Baseline',
+    defaultActiveId: 'baseline',
+    items: [
+      {
+        id: 'baseline',
+        term: 'Baseline',
+        definition: 'The number you get before you start improving. Without it, “better” is a vibe.',
+        whyItMatters: 'Write the first number down. Otherwise every later run is theater.',
+        imageId: 'baseline',
+        emphasis: 'primary',
       },
     ],
   },

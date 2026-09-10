@@ -15,6 +15,7 @@ import {
 import { cn } from '@/lib/utils'
 import { TrustEvalDiagram, TrustEvalSupporting } from './TrustEvalDiagram'
 import { TrustInstructorClip } from './TrustInstructorClip'
+import { ConceptConstellation } from './ConceptConstellation'
 import { TrustPolishAxis } from './TrustPolishAxis'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustLessonPacket } from './TrustLessonPacket'
@@ -180,6 +181,7 @@ export function TrustLooksRightLesson() {
           ) : null}
           . Now open the system and see what the card left out.
         </p>
+        <ConceptConstellation clusterId="looks-right-vibe" />
         <TrustIdeaPortrait id="idea-01-looks-right-polish-is-not-proof" />
         <button
           type="button"

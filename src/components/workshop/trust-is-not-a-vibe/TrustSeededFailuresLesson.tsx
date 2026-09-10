@@ -101,6 +101,9 @@ export function TrustSeededFailuresLesson() {
         A correct-looking answer can still be produced by an unsafe process.
       </p>
       <TrustKeepTogether>
+        <ConceptConstellation clusterId="seeded-benchmark" />
+      </TrustKeepTogether>
+      <TrustKeepTogether>
         <ConceptConstellation clusterId="seeded-inspect" />
       </TrustKeepTogether>
       <TrustKeepTogether className={cn('space-y-4', present && 'space-y-6')}>

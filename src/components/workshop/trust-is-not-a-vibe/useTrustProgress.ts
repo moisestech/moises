@@ -14,6 +14,16 @@ import type {
 } from '@/content/workshops/trust-is-not-a-vibe'
 
 export const TRUST_PROGRESS_KEY = 'trust-is-not-a-vibe:v1'
+const TRUST_PROGRESS_EVENT = 'trust-progress-change'
+
+function readProgress() {
+  return parseProgress(window.localStorage.getItem(TRUST_PROGRESS_KEY))
+}
+
+function writeProgress(next: TrustProgress) {
+  window.localStorage.setItem(TRUST_PROGRESS_KEY, JSON.stringify(next))
+  window.dispatchEvent(new Event(TRUST_PROGRESS_EVENT))
+}
 
 export type TrustRubric = Record<TrustRubricKey, TrustRubricScore | null>
 
@@ -172,14 +182,17 @@ export function useTrustProgress() {
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
-    setProgress(parseProgress(window.localStorage.getItem(TRUST_PROGRESS_KEY)))
+    setProgress(readProgress())
     setHydrated(true)
+    const sync = () => setProgress(readProgress())
+    window.addEventListener(TRUST_PROGRESS_EVENT, sync)
+    return () => window.removeEventListener(TRUST_PROGRESS_EVENT, sync)
   }, [])
 
   const update = useCallback((patch: Partial<TrustProgress>) => {
     setProgress((current) => {
       const next = { ...current, ...patch }
-      window.localStorage.setItem(TRUST_PROGRESS_KEY, JSON.stringify(next))
+      writeProgress(next)
       return next
     })
   }, [])
@@ -190,13 +203,14 @@ export function useTrustProgress() {
         ? current.completedChapters
         : [...current.completedChapters, id]
       const next = { ...current, completedChapters }
-      window.localStorage.setItem(TRUST_PROGRESS_KEY, JSON.stringify(next))
+      writeProgress(next)
       return next
     })
   }, [])
 
   const reset = useCallback(() => {
     window.localStorage.removeItem(TRUST_PROGRESS_KEY)
+    window.dispatchEvent(new Event(TRUST_PROGRESS_EVENT))
     setProgress(EMPTY_TRUST_PROGRESS)
   }, [])
 

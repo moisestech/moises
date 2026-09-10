@@ -19,11 +19,15 @@ import {
 import { cn } from '@/lib/utils'
 import { TrustFigure } from './diagram/TrustFigure'
 import { ConceptConstellation } from './ConceptConstellation'
+import { TrustGlowIcon, TrustGlowPhrase } from './TrustGlowPhrase'
+import { TrustDefinitionPortrait } from './TrustDefinitionPortrait'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
 import { TrustIdeaQuote } from './TrustIdeaQuote'
 import { TrustKeepTogether } from './TrustPresentPortions'
 import { TrustMark } from './TrustMarks'
 import { useTrustPresentation } from './TrustPresentation'
+import { TRUST_CHAPTER_RING, TRUST_WHY_ICON, TRUST_WHY_KIND } from './TrustWorkshopMarks'
+import { useTrustProgress } from './useTrustProgress'
 import {
   TRUST_VERDICT_CLASS,
   TRUST_VERDICT_FOCUS,
@@ -67,18 +71,64 @@ export function TrustOverviewFact({ label, value }: { label: string; value: stri
             : 'mt-2 text-lg leading-snug text-stone-800 sm:text-xl dark:text-stone-200'
         }
       >
-        {value}
+        {label === 'For' ? (
+          <>
+            Mixed teams —{' '}
+            <TrustGlowPhrase kind="pm">Product</TrustGlowPhrase>,{' '}
+            <TrustGlowPhrase kind="engineering">Engineering</TrustGlowPhrase>,{' '}
+            <TrustGlowPhrase kind="design">Design</TrustGlowPhrase>,{' '}
+            <TrustGlowPhrase kind="strategy">Strategy</TrustGlowPhrase>.
+          </>
+        ) : label === 'You do' ? (
+          <>
+            <TrustGlowPhrase kind="looks-right">Judge one confident agent card,</TrustGlowPhrase>
+            <br />
+            <TrustGlowPhrase kind="the-harness">then name the controls it is missing.</TrustGlowPhrase>
+          </>
+        ) : label === 'You leave with' ? (
+          <>
+            <TrustGlowPhrase kind="allow">A recorded verdict</TrustGlowPhrase>
+            {', '}
+            <TrustGlowPhrase kind="four-lenses">a seat</TrustGlowPhrase>
+            {', and '}
+            <TrustGlowPhrase kind="the-harness">one control you can defend</TrustGlowPhrase>.
+          </>
+        ) : (
+          value
+        )}
       </p>
     </div>
   )
 }
 
 function TrustOverviewStart() {
+  const { progress, hydrated, reset } = useTrustProgress()
+  const saved =
+    hydrated &&
+    Boolean(
+      progress.role ||
+        progress.baselineVote ||
+        progress.revote ||
+        progress.completedChapters.length ||
+        progress.namedFailures.length
+    )
+
   return (
     <div className="flex flex-wrap items-center gap-4">
       <Link href={START_HREF} className={trust.btnPrimary}>
         Start the lab
       </Link>
+      {hydrated ? (
+        <button
+          type="button"
+          onClick={reset}
+          className={trust.btnSecondary}
+          data-trust-overview-reset
+          disabled={!saved}
+        >
+          Reset saved progress
+        </button>
+      ) : null}
       <span className="text-sm text-stone-500">Chapter 1 · {TRUST_CHAPTERS[0].title}</span>
     </div>
   )
@@ -135,15 +185,18 @@ function TrustOverviewVerdictCard({ verdict }: { verdict: TrustVerdict }) {
           {TRUST_VERDICT_LABEL[verdict]}
         </span>
       </span>
-      {open ? (
-        <span
-          id={hintId}
-          data-trust-overview-verdict-hint={verdict}
-          className={cn('mt-3 block leading-snug', present ? 'text-xl sm:text-2xl' : 'text-base sm:text-lg')}
-        >
-          {TRUST_VERDICT_HINT[verdict]}
-        </span>
-      ) : null}
+      <span
+        id={hintId}
+        data-trust-overview-verdict-hint={verdict}
+        hidden={present ? !open : false}
+        className={cn(
+          'mt-3 block leading-relaxed',
+          present ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl',
+          !open && !present && 'text-stone-600 dark:text-stone-400'
+        )}
+      >
+        {TRUST_VERDICT_HINT[verdict]}
+      </span>
     </>
   )
 
@@ -267,12 +320,15 @@ function TrustOverviewWhyBeat({
   'data-trust-present-figure'?: boolean
 }) {
   const { present } = useTrustPresentation()
+  const glowKind = id in TRUST_WHY_KIND ? TRUST_WHY_KIND[id] : undefined
+  const WhyIcon = glowKind ? TRUST_WHY_ICON[id] : undefined
 
   return (
     <div
       data-trust-overview-why={id}
       data-trust-overview-outcome={outcome}
       className={cn(
+        'group/why',
         present
           ? 'grid items-start gap-8 lg:grid-cols-[minmax(18rem,34ch)_minmax(0,1fr)]'
           : 'grid items-start gap-5 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:gap-8',
@@ -280,6 +336,13 @@ function TrustOverviewWhyBeat({
       )}
     >
       <div className={present ? 'min-w-0 lg:order-1' : 'min-w-0 sm:order-2'}>
+        {WhyIcon && glowKind ? (
+          <TrustGlowIcon
+            kind={glowKind}
+            icon={WhyIcon}
+            className={cn('mb-3', TRUST_CHAPTER_RING[glowKind], 'group-hover/why:ring-2 group-hover/why:ring-offset-2')}
+          />
+        ) : null}
         {eyebrow ? (
           <p
             className={cn(
@@ -291,15 +354,15 @@ function TrustOverviewWhyBeat({
           </p>
         ) : null}
         {title ? (
-          <p className={cn(present ? trustPresent.body : 'mt-1 text-lg font-semibold text-stone-950 dark:text-stone-50')}>
+          <p className={cn(present ? trustPresent.body : 'mt-1 text-xl font-semibold text-stone-950 dark:text-stone-50')}>
             {title}
           </p>
         ) : null}
         {children ? (
           <div
             className={cn(
-              present ? cn(trustPresent.note, title ? 'mt-4' : undefined) : 'mt-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400',
-              !present && !title && trustOverview.body
+              present ? cn(trustPresent.note, title ? 'mt-4' : undefined) : 'mt-2 text-xl leading-relaxed text-stone-800 sm:text-2xl dark:text-stone-200',
+              !present && !title && 'max-w-[46ch] text-xl leading-relaxed text-stone-800 sm:text-2xl dark:text-stone-200'
             )}
           >
             {children}
@@ -307,7 +370,14 @@ function TrustOverviewWhyBeat({
         ) : null}
       </div>
       <div className={present ? 'min-w-0 lg:order-2' : 'min-w-0 sm:order-1'}>
-        <TrustOverviewWhyFigure figure={figure} compact={!present} />
+        <div
+          className={cn(
+            'rounded-lg transition duration-200 group-hover/why:ring-2 group-hover/why:ring-offset-2 group-hover/why:ring-offset-stone-50 dark:group-hover/why:ring-offset-stone-950 motion-reduce:transition-none',
+            glowKind ? TRUST_CHAPTER_RING[glowKind] : 'group-hover/why:ring-cyan-400'
+          )}
+        >
+          <TrustOverviewWhyFigure figure={figure} compact={!present} />
+        </div>
       </div>
     </div>
   )
@@ -399,8 +469,8 @@ export function trustOverviewWhyChildren() {
 const PATH_SECTION = TRUST_OVERVIEW_SECTIONS.find((item) => item.id === 'the-path')
 
 /**
- * 04 — chapter-ends copy left of idea-00. One Present portion; the clock list
- * pages after. Self-paced uses the same row.
+ * 04 — chapter-ends copy left of the checkpoint portrait. One Present portion;
+ * the clock list pages after. Self-paced uses the same row.
  */
 export function TrustOverviewPath() {
   const { present } = useTrustPresentation()
@@ -418,8 +488,8 @@ export function TrustOverviewPath() {
       >
         {deck}
       </p>
-      <TrustIdeaPortrait
-        id="idea-00-overview-eval-is-a-decision-system"
+      <TrustDefinitionPortrait
+        id="overview-checkpoints-build"
         className={cn('shrink-0 justify-self-end', present ? 'max-w-md' : 'max-w-[11rem]')}
       />
     </TrustKeepTogether>

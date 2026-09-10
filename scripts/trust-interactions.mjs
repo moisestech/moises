@@ -1385,7 +1385,8 @@ const browser = await chromium.launch()
   check('overview present: constellation shows Task', await overviewCluster.getByRole('button', { name: 'Task' }).isVisible())
   check('overview present: constellation shows Cases', await overviewCluster.getByRole('button', { name: 'Cases' }).isVisible())
   check('overview present: constellation shows Grader', await overviewCluster.getByRole('button', { name: 'Grader' }).isVisible())
-  check('overview present: constellation starts empty', await overviewCluster.getByText('Choose a term.').isVisible())
+  check('overview present: constellation starts on Eval', await overviewCluster.getByRole('button', { name: 'Eval' }).getAttribute('aria-pressed') === 'true')
+  check('overview present: constellation shows the Eval definition', await overviewCluster.locator('[data-trust-concept-definition]').isVisible())
   check('overview present: title beat hides on the constellation', !(await whyBeat('thesis').isVisible()))
   check('overview present: NIST waits after the constellation', (await page.locator('[data-trust-idea-quote]').count()) === 0)
   check('overview present: the model proposes still waits after the constellation', !(await whyBeat('proposes').isVisible()))
@@ -1450,11 +1451,11 @@ const browser = await chromium.launch()
   await rail.getByRole('button', { name: /The path/ }).click()
   await page.waitForTimeout(400)
   const pathCopy = page.locator('[data-trust-overview-path-copy]')
-  const pathPortrait = page.locator('#the-path [data-trust-idea-portrait="idea-00-overview-eval-is-a-decision-system"]')
+  const pathPortrait = page.locator('#the-path [data-trust-definition-portrait="overview-checkpoints-build"]')
   const pathClock = page.locator('#the-path').getByRole('link', { name: /1\.\s+Looks Right/ })
   check('overview present: path stays on step 4 of 6', /Step 4 of 6/.test(await announcement(page)), await announcement(page))
   check('overview present: path shows the chapter-ends copy', await pathCopy.isVisible())
-  check('overview present: path shows idea-00 beside the copy', await pathPortrait.isVisible())
+  check('overview present: path shows the checkpoint portrait beside the copy', await pathPortrait.isVisible())
   check('overview present: path clock waits on the idea', !(await pathClock.isVisible()))
   const presentPathSplit = await sitsLeftOf(pathCopy, pathPortrait)
   check('overview present: path copy sits left of the portrait', presentPathSplit.ok, presentPathSplit.detail)
@@ -1472,13 +1473,25 @@ const browser = await chromium.launch()
   check('overview present: clock meta is at least 18px', parseFloat(presentClockMeta) >= 18, presentClockMeta)
   const presentClockRow = page.locator('[data-trust-overview-clock-row="looks-right"]')
   const presentClockMetaEl = presentClockRow.locator('[data-trust-overview-clock-meta]')
+  check(
+    'overview present: clock row shows a chapter icon',
+    (await presentClockRow.locator('[data-trust-overview-clock-icon]').count()) === 1
+  )
+  const presentClockIdle = await presentClockRow.evaluate((el) => {
+    const style = getComputedStyle(el)
+    return { bg: style.backgroundColor, color: style.color }
+  })
   const presentMetaIdle = await presentClockMetaEl.evaluate((el) => getComputedStyle(el).color)
   await presentClockRow.hover()
+  const presentClockHover = await presentClockRow.evaluate((el) => {
+    const style = getComputedStyle(el)
+    return { bg: style.backgroundColor, color: style.color }
+  })
   const presentMetaHover = await presentClockMetaEl.evaluate((el) => getComputedStyle(el).color)
   check(
-    'overview present: clock hover darkens the muted line',
-    luma(presentMetaHover) < luma(presentMetaIdle) - 20,
-    `${presentMetaIdle} → ${presentMetaHover}`
+    'overview present: clock hover glows the chapter tone',
+    presentClockHover.bg !== presentClockIdle.bg || presentMetaHover !== presentMetaIdle,
+    `${presentClockIdle.bg} / ${presentMetaIdle} → ${presentClockHover.bg} / ${presentMetaHover}`
   )
   await page.locator('#the-path').screenshot({ path: join(PATH_SHOTS, 'present-clock.png') })
   await ctx.close()
@@ -1544,17 +1557,18 @@ const browser = await chromium.launch()
   check('self-paced question shows Ask', await self.locator('[data-trust-overview-verdict="ask"]').isVisible())
   check('self-paced question shows Deny', await self.locator('[data-trust-overview-verdict="deny"]').isVisible())
   check('self-paced Allow hint starts open', await self.locator('[data-trust-overview-verdict-hint="allow"]').isVisible())
-  check('self-paced Ask hint starts collapsed', !(await self.locator('[data-trust-overview-verdict-hint="ask"]').isVisible()))
-  check('self-paced Deny hint starts collapsed', !(await self.locator('[data-trust-overview-verdict-hint="deny"]').isVisible()))
+  check('self-paced Ask hint starts visible', await self.locator('[data-trust-overview-verdict-hint="ask"]').isVisible())
+  check('self-paced Deny hint starts visible', await self.locator('[data-trust-overview-verdict-hint="deny"]').isVisible())
   const selfAllowHintSize = await self.locator('[data-trust-overview-verdict-hint="allow"]').evaluate((el) => getComputedStyle(el).fontSize)
   check('self-paced Allow hint is at least 16px', parseFloat(selfAllowHintSize) >= 16, selfAllowHintSize)
   mkdirSync(QUESTION_SHOTS, { recursive: true })
   await self.locator('#the-question').screenshot({ path: join(QUESTION_SHOTS, 'self-paced-allow.png') })
   await self.locator('[data-trust-overview-verdict="ask"]').click()
   await self.waitForTimeout(200)
-  check('self-paced click opens Ask hint', await self.locator('[data-trust-overview-verdict-hint="ask"]').isVisible())
-  check('self-paced click collapses Allow hint', !(await self.locator('[data-trust-overview-verdict-hint="allow"]').isVisible()))
-  check('self-paced Deny stays collapsed after Ask', !(await self.locator('[data-trust-overview-verdict-hint="deny"]').isVisible()))
+  check('self-paced click keeps Ask hint visible', await self.locator('[data-trust-overview-verdict-hint="ask"]').isVisible())
+  check('self-paced click marks Ask open', Boolean(await self.locator('[data-trust-overview-verdict="ask"]').getAttribute('data-trust-overview-verdict-open')))
+  check('self-paced click keeps Allow hint visible', await self.locator('[data-trust-overview-verdict-hint="allow"]').isVisible())
+  check('self-paced click keeps Deny hint visible', await self.locator('[data-trust-overview-verdict-hint="deny"]').isVisible())
   check('self-paced why still shows the title beat', await self.locator('[data-trust-overview-why="thesis"]').isVisible())
   check(
     'self-paced why shows the overview constellation',
@@ -1580,9 +1594,9 @@ const browser = await chromium.launch()
     String(await self.locator('[data-trust-overview-outcome]:visible').count())
   )
   const selfPathCopy = self.locator('[data-trust-overview-path-copy]')
-  const selfPathPortrait = self.locator('#the-path [data-trust-idea-portrait="idea-00-overview-eval-is-a-decision-system"]')
+  const selfPathPortrait = self.locator('#the-path [data-trust-definition-portrait="overview-checkpoints-build"]')
   check('self-paced path still shows the chapter-ends copy', await selfPathCopy.isVisible())
-  check('self-paced path still shows idea-00', await selfPathPortrait.isVisible())
+  check('self-paced path still shows the checkpoint portrait', await selfPathPortrait.isVisible())
   check('self-paced path still shows the clock list', await self.locator('#the-path').getByRole('link', { name: /1\.\s+Looks Right/ }).isVisible())
   const selfPathSplit = await sitsLeftOf(selfPathCopy, selfPathPortrait)
   check('self-paced path copy sits left of the portrait', selfPathSplit.ok, selfPathSplit.detail)
@@ -1596,13 +1610,45 @@ const browser = await chromium.launch()
   )
   const selfClockRow = self.locator('[data-trust-overview-clock-row="looks-right"]')
   const selfClockMetaEl = selfClockRow.locator('[data-trust-overview-clock-meta]')
+  check(
+    'self-paced clock row shows a chapter icon',
+    (await selfClockRow.locator('[data-trust-overview-clock-icon]').count()) === 1
+  )
+  const selfClockIdle = await selfClockRow.evaluate((el) => {
+    const style = getComputedStyle(el)
+    return { bg: style.backgroundColor, color: style.color }
+  })
   const selfMetaIdle = await selfClockMetaEl.evaluate((el) => getComputedStyle(el).color)
   await selfClockRow.hover()
+  const selfClockHover = await selfClockRow.evaluate((el) => {
+    const style = getComputedStyle(el)
+    return { bg: style.backgroundColor, color: style.color }
+  })
   const selfMetaHover = await selfClockMetaEl.evaluate((el) => getComputedStyle(el).color)
   check(
-    'self-paced clock hover darkens the muted line',
-    luma(selfMetaHover) < luma(selfMetaIdle) - 20,
-    `${selfMetaIdle} → ${selfMetaHover}`
+    'self-paced clock hover glows the chapter tone',
+    selfClockHover.bg !== selfClockIdle.bg || selfMetaHover !== selfMetaIdle,
+    `${selfClockIdle.bg} / ${selfMetaIdle} → ${selfClockHover.bg} / ${selfMetaHover}`
+  )
+  check(
+    'self-paced For colors Product, Engineering, Design, and Strategy',
+    (await self.locator('[data-trust-overview-fact="For"] [data-trust-glow]').count()) === 4
+  )
+  check(
+    'self-paced Go deeper shows a preview',
+    await self.locator('#the-path [data-trust-go-deeper-preview]').isVisible()
+  )
+  check(
+    'self-paced vocabulary uses the constellation',
+    await self.locator('[data-trust-concept-constellation="overview-vocab"]').isVisible()
+  )
+  check(
+    'self-paced vocabulary keeps icons',
+    (await self.locator('[data-trust-concept-constellation="overview-vocab"] [data-trust-concept-term] svg').count()) >= 8
+  )
+  check(
+    'self-paced reset is available',
+    await self.locator('[data-trust-overview-reset]').isVisible()
   )
   mkdirSync(PATH_SHOTS, { recursive: true })
   await self.locator('#the-path').screenshot({ path: join(PATH_SHOTS, 'self-paced-idea.png') })
@@ -1646,7 +1692,7 @@ const browser = await chromium.launch()
   await page.goto(OVERVIEW, { waitUntil: 'networkidle' })
   await waitForSteps(page)
   const overviewIds = await collect('overview')
-  check('overview shows idea-00 on The path', overviewIds.includes('idea-00-overview-eval-is-a-decision-system'))
+  check('overview still shows idea-00 on Why it matters', overviewIds.includes('idea-00-overview-eval-is-a-decision-system'))
 
   await page.goto(`${LEARN}/looks-right`, { waitUntil: 'networkidle' })
   await waitForSteps(page)

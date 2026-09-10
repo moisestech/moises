@@ -69,7 +69,7 @@ export const TRUST_OVERVIEW_SECTIONS: readonly TrustOverviewSection[] = [
     number: '05',
     navLabel: 'Your seat',
     title: 'Pick the seat you keep for the whole lab',
-    deck: 'Four people inspect one case. Your seat changes what you are accountable for, not the case.',
+    deck: 'The case stays The send. The seat changes what you must see.',
   },
   {
     id: 'vocabulary',

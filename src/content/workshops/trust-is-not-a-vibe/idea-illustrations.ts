@@ -75,11 +75,11 @@ export const TRUST_IDEA_ILLUSTRATIONS: Record<TrustIdeaIllustrationId, TrustIdea
   },
   'idea-02-four-lenses-four-seats-one-card': {
     id: 'idea-02-four-lenses-four-seats-one-card',
-    src: `${CDN}/v1789002945/dccmiami/workshops/agentic-engineering-for-beginners/cohort-studio-four-lenses-vertical_k0nkjx.png`,
+    src: `${CDN}/v1789052648/dccmiami/workshops/agentic-engineering-for-beginners/ai-evals-four-lenses-vertical_romqrx.png`,
     alt: 'Teaching illustration — four seats read one enrollment card. Course language stays in the caption, not on the image.',
     caption: 'Four seats read the same card. What each job must protect is different.',
     route: `${TRUST_LEARN_BASE}/four-lenses`,
-    placement: 'Four Lenses · The idea · beside the claim',
+    placement: 'Overview · Why it matters · The team authorizes; Four Lenses · The idea · beside the claim',
     status: 'ready',
     lessonConcept: 'four-lenses',
   },

@@ -104,6 +104,15 @@ export {
   TRUST_IDEA_PORTRAIT_SIZE,
   TRUST_READY_IDEA_ILLUSTRATIONS,
 } from './idea-illustrations'
+export {
+  getTrustDefinitionIllustration,
+  TRUST_DEFINITION_ILLUSTRATIONS,
+  TRUST_DEFINITION_PORTRAIT_SIZE,
+} from './definition-illustrations'
+export type {
+  TrustDefinitionIllustration,
+  TrustDefinitionIllustrationId,
+} from './definition-illustrations'
 export type {
   TrustIdeaIllustration,
   TrustIdeaIllustrationId,
@@ -210,6 +219,7 @@ export {
   TRUST_ALONE_SLIDES,
   TRUST_FOUR_SEATS_BODY,
   TRUST_FOUR_SEATS_LEAD,
+  TRUST_SEND_OBJECT,
   TRUST_ISLAND_BEATS,
   TRUST_ONE_LINE,
   TRUST_OUTCOMES,

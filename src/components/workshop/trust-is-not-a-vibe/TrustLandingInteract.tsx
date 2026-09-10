@@ -22,6 +22,7 @@ import {
 import { cn } from '@/lib/utils'
 import { useTrustPresentation } from './TrustPresentation'
 import { TRUST_CHAPTER_TONE } from './trust-tokens'
+import { TRUST_CHAPTER_ICON } from './TrustWorkshopMarks'
 
 const VOCAB_ICON: Record<string, IconType> = {
   'Vibe eval': HiOutlineSparkles,
@@ -110,7 +111,10 @@ export function TrustClockList() {
 
   return (
     <ol data-trust-overview-clock className={present ? 'space-y-3' : 'space-y-2'}>
-      {TRUST_CHAPTERS.map((chapter) => (
+      {TRUST_CHAPTERS.map((chapter) => {
+        const Icon = TRUST_CHAPTER_ICON[chapter.id]
+        const tone = TRUST_CHAPTER_TONE[chapter.id]
+        return (
         <li key={chapter.id}>
           <Link
             href={`${TRUST_LEARN_BASE}/${chapter.slug}`}
@@ -120,34 +124,34 @@ export function TrustClockList() {
               'dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200',
               present
                 ? 'flex-col gap-2 px-5 py-4'
-                : 'flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:justify-between',
+                : 'flex-col gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-between',
               'motion-safe:hover:-translate-y-0.5 hover:shadow-md',
-              'hover:border-stone-900 hover:bg-stone-100 hover:text-stone-950',
-              'dark:hover:border-stone-100 dark:hover:bg-stone-800 dark:hover:text-white',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-              'focus-visible:border-stone-900 focus-visible:bg-stone-100 focus-visible:text-stone-950',
-              'focus-visible:ring-stone-900 focus-visible:ring-offset-stone-50',
-              'dark:focus-visible:border-stone-100 dark:focus-visible:bg-stone-800 dark:focus-visible:text-white',
-              'dark:focus-visible:ring-stone-100 dark:focus-visible:ring-offset-stone-950'
+              tone.hover,
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-50',
+              'dark:focus-visible:ring-offset-stone-950'
             )}
           >
+            <span className="flex items-center gap-3">
+              <Icon
+                data-trust-overview-clock-icon
+                className={cn('h-7 w-7 shrink-0 transition duration-200', tone.icon, 'group-hover:scale-110')}
+                aria-hidden
+              />
             <span
               data-trust-overview-clock-title
               className={cn(
                 'font-semibold text-stone-950 dark:text-stone-50',
-                'group-hover:text-stone-950 dark:group-hover:text-white',
-                'group-focus-visible:text-stone-950 dark:group-focus-visible:text-white',
                 present ? 'text-2xl sm:text-3xl' : 'text-xl'
               )}
             >
               {chapter.number}. {chapter.title}
             </span>
+            </span>
             <span
               data-trust-overview-clock-meta
               className={cn(
                 'text-stone-500 dark:text-stone-400',
-                'group-hover:text-stone-950 dark:group-hover:text-white',
-                'group-focus-visible:text-stone-950 dark:group-focus-visible:text-white',
+                'group-hover:text-current group-focus-visible:text-current',
                 present ? 'text-lg sm:text-xl' : 'text-base'
               )}
             >
@@ -155,7 +159,8 @@ export function TrustClockList() {
             </span>
           </Link>
         </li>
-      ))}
+        )
+      })}
     </ol>
   )
 }

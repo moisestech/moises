@@ -248,10 +248,21 @@ export const TRUST_OUTCOMES = [
 ] as const
 
 export const TRUST_FOUR_SEATS_LEAD =
-  'Four people inspect one recommendation. The case does not change when the seat does.'
+  'Product, Engineering, Design, and Strategy each ask a different question of that same card.'
 
 export const TRUST_FOUR_SEATS_BODY =
-  'The object is The send: an invented card that wants to confirm October 6, email 120 people, and auto-remove quiet participants. Product, Engineering, Design, and Strategy each ask a different question of that same card. Pick one job and keep it. You can change it later — the section stays here.'
+  'Pick one job and keep it. You can change it later — this section stays here.'
+
+export const TRUST_SEND_OBJECT = {
+  label: 'The object',
+  title: 'The send',
+  note: 'Invented card. Nothing has been sent.',
+  facts: [
+    { label: 'Date', value: 'Confirm October 6' },
+    { label: 'Reach', value: 'Email 120 people' },
+    { label: 'Write', value: 'Auto-remove quiet participants' },
+  ],
+} as const
 
 export const TRUST_QUICK_FACTS = [
   { label: 'Seats', value: 'PM · Eng · Design · Strategy' },

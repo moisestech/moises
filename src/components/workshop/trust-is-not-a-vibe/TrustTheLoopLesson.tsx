@@ -11,6 +11,7 @@ import {
   type TrustLoopStage,
 } from '@/content/workshops/trust-is-not-a-vibe'
 import { cn } from '@/lib/utils'
+import { ConceptConstellation } from './ConceptConstellation'
 import { LoopSeeStage, LoopTryStage, useLoopSeeSlides } from './LoopMapper'
 import { TrustEvalDiagram } from './TrustEvalDiagram'
 import { TrustIdeaPortrait } from './TrustIdeaPortrait'
@@ -51,6 +52,9 @@ export function TrustTheLoopLesson() {
   const seeIt = (
     <LoopSeeStage>
       <TrustEvalDiagram id="eval-05" />
+      <TrustKeepTogether>
+        <ConceptConstellation clusterId="loop-faithfulness" />
+      </TrustKeepTogether>
       {loopSlides}
     </LoopSeeStage>
   )

@@ -89,6 +89,9 @@ export function TrustTheHarnessLesson() {
 
   const checkIt = allMatched ? (
     <>
+      <TrustKeepTogether>
+        <ConceptConstellation clusterId="harness-baseline" />
+      </TrustKeepTogether>
       <label className="block">
         <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
           Name one safeguard before this may act

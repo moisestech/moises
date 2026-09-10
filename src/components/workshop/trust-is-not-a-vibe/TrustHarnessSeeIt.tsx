@@ -269,6 +269,11 @@ export function useHarnessSeeExamples({
       )
     }
     slides.push(
+      <TrustKeepTogether key="harness-judge" data-trust-harness-example="harness-judge">
+        <ConceptConstellation clusterId="harness-judge" />
+      </TrustKeepTogether>
+    )
+    slides.push(
       <TrustKeepTogether key="regression-intro" data-trust-harness-example="regression-intro">
         <TrustIdeaPortrait id="idea-08-the-harness-regression-whac-a-mole" />
         <TrustEvalDiagram id="eval-14" className="mt-4" />

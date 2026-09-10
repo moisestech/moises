@@ -41,27 +41,21 @@ export function TrustQuestionBreak({
       className={cn('group/ask relative overflow-hidden rounded-xl border border-cyan-400/40 bg-stone-950 text-cyan-100', className)}
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(34,211,238,0.08)_1px,transparent_1px)] [background-size:100%_3px] motion-safe:animate-pulse"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 mix-blend-screen transition-opacity duration-200 group-hover/ask:opacity-70 [background-image:repeating-linear-gradient(90deg,transparent,transparent_2px,rgba(0,0,0,0.35)_2px,rgba(0,0,0,0.35)_4px)]"
+        className="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(34,211,238,0.06)_1px,transparent_1px)] [background-size:100%_4px]"
         aria-hidden
       />
 
-      <div className="relative flex items-center justify-between border-b border-cyan-400/25 px-4 py-2 font-space-mono text-[10px] uppercase tracking-[0.22em] text-cyan-300/80 sm:px-5">
+      <div className="relative flex items-center justify-between border-b border-cyan-400/25 px-6 py-4 font-space-mono text-sm uppercase tracking-[0.16em] text-cyan-200 sm:px-8">
         <span>eval · authority threshold</span>
-        <span className="text-cyan-400/70">{ready ? 'ready' : 'typing'}</span>
+        <span className="text-cyan-200">{ready ? 'ready' : 'typing'}</span>
       </div>
 
-      <p className="relative px-4 py-6 font-space-mono text-xl leading-snug tracking-tight text-cyan-50 [image-rendering:pixelated] sm:px-5 sm:text-2xl md:text-3xl">
-        <span className="mr-3 text-cyan-400" aria-hidden>
+      <p className="relative px-6 py-10 font-space-mono text-3xl leading-snug tracking-tight text-white sm:px-8 sm:text-4xl md:text-5xl">
+        <span className="mr-3 text-cyan-200" aria-hidden>
           {prompt}
-          <span className="text-cyan-600"> &gt;</span>
+          <span className="text-cyan-400"> &gt;</span>
         </span>
-        <span className="transition-colors duration-200 group-hover/ask:text-white">
-          {shown}
-        </span>
+        <span>{shown}</span>
         <span
           className={cn(
             'ml-0.5 inline-block h-[1em] w-[0.55ch] translate-y-[0.12em] bg-cyan-300 align-baseline',
@@ -72,7 +66,7 @@ export function TrustQuestionBreak({
         />
       </p>
 
-      <p className="relative border-t border-cyan-400/20 px-4 py-2 font-space-mono text-[10px] uppercase tracking-[0.18em] text-cyan-400/70 sm:px-5">
+      <p className="relative border-t border-cyan-400/20 px-6 py-4 font-space-mono text-base leading-relaxed text-cyan-100 sm:px-8 sm:text-lg">
         Allow · Ask · Deny — before the system may write
       </p>
     </section>
