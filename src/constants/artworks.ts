@@ -175,6 +175,7 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       title: 'Taste the Algorithm',
       year: 2026,
       location: 'F*ck Art: Nature & Artifice, Museum of Sex, Miami',
+      location_url: 'https://museumofsex.com/exhibitions/fck-art-nature-artifice/',
       curator: 'Tam Gryn',
       description:
         'Taste the Algorithm is a sculpture that explores how algorithmic systems shape desire, preference, and the ways we learn to want. In an age where recommendation engines curate our appetites—from what we watch to what we buy to who we desire—the work interrogates the intimate feedback loop between human taste and machine learning. The piece materializes this relationship, asking viewers to consider how much of what we "like" has been learned from us, refined by us, and fed back to us. Presented in the context of Miami\'s highly sexualized urban landscape, the work connects algorithmic mediation to broader questions of desire, identity, and the body in digital culture.',
@@ -192,6 +193,10 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         }
       ],
       links: [
+        {
+          url: 'https://museumofsex.com/exhibitions/fck-art-nature-artifice/',
+          label: 'Museum of Sex — F*ck Art: Nature & Artifice',
+        },
         {
           url: 'https://www.artburstmiami.com/visual_arts/miami-museum-of-sex-fck-art-nature-and-artifice-exhibition',
           label: 'Artburst Miami — Museum of Sex exhibition',
@@ -264,6 +269,7 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
     simulation_faith: {
       title: 'Simulation Faith',
       year: 2025,
+      location: 'Technographies Alumni Show, New World School of the Arts, Miami',
       description:
         'Blurring the sacred with the synthetic, the work becomes a symbol of a generation whose spiritual frameworks are now mediated by technology. A minimalist installation featuring a suspended baby Jesus adorned with a glowing VR headset, exploring themes of faith, simulation, and technological transcendence. The work interrogates the intersection of spirituality and digital illusion, casting light on the ways belief systems evolve in an era mediated by screens and artificial experiences. By merging religious iconography with virtual immersion, the piece questions whether digital realities will become the new sacred spaces of the future.',
       medium: 'Mixed-media installation',
@@ -276,9 +282,13 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       role: 'Concept, Design, and Fabrication',
       images: [
         {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1789442928/art/moisestech-website/artworks/2025_simulation_faith/SimulationFaith-NWSA-Technographies-Alumni-Show-2025_saqdlj.jpg',
+          caption: 'Simulation Faith — Technographies Alumni Show, New World School of the Arts, 2025',
+        },
+        {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg',
-          caption: 'Simulation Faith - Suspended baby Jesus sculpture with VR headset'
-        }
+          caption: 'Simulation Faith — suspended baby Jesus sculpture with VR headset',
+        },
       ],
       tags: [
         'virtual reality art',

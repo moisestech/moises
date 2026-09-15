@@ -16,22 +16,33 @@ export const sfccMeta = {
 } as const;
 
 export const sfccSeo = {
-  title: 'Support materials | South Florida Cultural Consortium | Moises Sanabria',
+  title: 'Application materials | South Florida Cultural Consortium | Moises Sanabria',
   description:
-    'Work samples, artist statement, and bio for Moises Sanabria’s FY 2026–2027 South Florida Cultural Consortium Visual and Media Artists Grant application.',
+    'Applied works, support materials, artist statement, and bio for Moises Sanabria’s FY 2026–2027 South Florida Cultural Consortium Visual and Media Artists Grant application.',
 } as const;
 
 export const sfccIntro = {
   eyebrow: `${sfccMeta.organization} · ${sfccMeta.program}`,
-  headline: 'Support materials',
-  lede: 'Recent work samples, supporting video, artist statement, and biography for the FY 2026–2027 review.',
+  headline: 'Application materials',
+  lede: 'The works submitted for review, then supporting video, artist statement, and biography. Use the menu to move between sections.',
 } as const;
+
+export const sfccSections = [
+  { id: 'works', label: 'Applied works' },
+  { id: 'support', label: 'Support materials' },
+  { id: 'statement', label: 'Statement' },
+  { id: 'bio', label: 'Bio' },
+] as const;
 
 export const sfccStatement = artist.artist_statement;
 export const sfccBio = artist.artist_bio;
 
 const TASTE_IMAGE =
   'https://res.cloudinary.com/dck5rzi4h/image/upload/v1789442394/art/moisestech-website/artworks/2026_taste_the_algorithm/TasteTheAlgorithm_Museum-of-Sex-Miami_F_CK-Art_PhotoBy_Mateo-SeZa-1024x683_bus6vb.jpg';
+const SIMULATION_FAITH_NWSA =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1789442928/art/moisestech-website/artworks/2025_simulation_faith/SimulationFaith-NWSA-Technographies-Alumni-Show-2025_saqdlj.jpg';
+const SIMULATION_FAITH_SCULPTURE =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg';
 const BABY_AGI_STUDIO =
   'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp';
 const BABY_AGI_EXHIBITION =
@@ -42,6 +53,11 @@ export type SfccSampleImage = {
   caption: string;
 };
 
+export type SfccPressLink = {
+  href: string;
+  label: string;
+};
+
 export type SfccWorkSample = {
   id: string;
   title: string;
@@ -50,15 +66,14 @@ export type SfccWorkSample = {
   href: string;
   caption: string;
   artworkHref?: string;
-  articleHref?: string;
-  articleLabel?: string;
+  press?: readonly SfccPressLink[];
   kind: 'youtube' | 'vimeo' | 'image';
   videoId?: string;
   aspectRatio?: '16:9' | '9:16';
   images?: readonly SfccSampleImage[];
 };
 
-export const sfccWorkSamples: SfccWorkSample[] = [
+export const sfccAppliedWorks: SfccWorkSample[] = [
   {
     id: 'taste-the-algorithm',
     kind: 'image',
@@ -67,9 +82,16 @@ export const sfccWorkSamples: SfccWorkSample[] = [
     year: '2026',
     href: '/art/taste_the_algorithm',
     artworkHref: '/art/taste_the_algorithm',
-    articleHref:
-      'https://www.artburstmiami.com/visual_arts/miami-museum-of-sex-fck-art-nature-and-artifice-exhibition',
-    articleLabel: 'Artburst Miami',
+    press: [
+      {
+        href: 'https://museumofsex.com/exhibitions/fck-art-nature-artifice/',
+        label: 'Museum of Sex exhibition',
+      },
+      {
+        href: 'https://www.artburstmiami.com/visual_arts/miami-museum-of-sex-fck-art-nature-and-artifice-exhibition',
+        label: 'Artburst Miami',
+      },
+    ],
     caption:
       'Installation view, F*ck Art: Nature & Artifice, Museum of Sex, Miami. Photo: Mateo SeZa / SeZa Studios.',
     images: [
@@ -77,6 +99,28 @@ export const sfccWorkSamples: SfccWorkSample[] = [
         url: TASTE_IMAGE,
         caption:
           'Taste the Algorithm — F*ck Art: Nature & Artifice, Museum of Sex, Miami. Photo: Mateo SeZa / SeZa Studios.',
+      },
+    ],
+  },
+  {
+    id: 'simulation-faith',
+    kind: 'image',
+    title: 'Simulation Faith',
+    source: 'New World School of the Arts',
+    year: '2025',
+    href: '/art/simulation_faith',
+    artworkHref: '/art/simulation_faith',
+    caption:
+      'Installation view, Technographies Alumni Show, New World School of the Arts, 2025. Additional studio view of the sculpture below.',
+    images: [
+      {
+        url: SIMULATION_FAITH_NWSA,
+        caption:
+          'Simulation Faith — Technographies Alumni Show, New World School of the Arts, 2025',
+      },
+      {
+        url: SIMULATION_FAITH_SCULPTURE,
+        caption: 'Simulation Faith — suspended baby Jesus sculpture with VR headset',
       },
     ],
   },
@@ -128,6 +172,9 @@ export const sfccWorkSamples: SfccWorkSample[] = [
       },
     ],
   },
+];
+
+export const sfccSupportMaterials: SfccWorkSample[] = [
   {
     id: 'vernissage-studio-visit',
     kind: 'youtube',

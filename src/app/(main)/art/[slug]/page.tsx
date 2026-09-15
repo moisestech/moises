@@ -276,6 +276,27 @@ export default async function ArtPage({ params }: PageProps) {
                       </svg>
                     </a>
                   </div>
+                  <div>
+                    <p className="font-medium text-sm">
+                      <strong>Museum of Sex</strong> - "F*ck Art: Nature & Artifice"
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      Official exhibition page for the Miami presentation of Taste the Algorithm.
+                    </p>
+                    <a
+                      href="https://museumofsex.com/exhibitions/fck-art-nature-artifice/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline text-sm inline-flex items-center mt-2"
+                    >
+                      View exhibition →
+                      <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             )}

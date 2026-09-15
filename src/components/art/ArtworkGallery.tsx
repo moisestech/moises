@@ -13,11 +13,13 @@ export default function ArtworkGallery({
   images,
   className = 'mt-24',
   heading,
+  headingClassName = 'text-3xl font-bold mb-8',
 }: {
   title: string;
   images: GalleryImage[];
   className?: string;
   heading?: string;
+  headingClassName?: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -58,7 +60,7 @@ export default function ArtworkGallery({
   return (
     <>
       <div className={className}>
-        <h2 className="text-3xl font-bold mb-8">
+        <h2 className={headingClassName}>
           {heading ??
             `${images.length} Variation${images.length !== 1 ? 's' : ''} Online`}
         </h2>
