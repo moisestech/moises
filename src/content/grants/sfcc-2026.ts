@@ -34,6 +34,8 @@ export const sfccSections = [
   { id: 'bio', label: 'Bio' },
 ] as const;
 
+export type SfccSectionId = (typeof sfccSections)[number]['id'];
+
 export const sfccStatement = artist.artist_statement;
 export const sfccBio = artist.artist_bio;
 
@@ -203,3 +205,18 @@ export const sfccOgImage = {
   url: TASTE_IMAGE,
   alt: 'Taste the Algorithm at the Museum of Sex, Miami. Photo: Mateo SeZa / SeZa Studios.',
 } as const;
+
+export function sfccPreviewUrl(sample: SfccWorkSample): string | undefined {
+  if (sample.images?.[0]?.url) return sample.images[0].url;
+  if (sample.kind === 'youtube' && sample.videoId) {
+    return `https://i.ytimg.com/vi/${sample.videoId}/hqdefault.jpg`;
+  }
+  return undefined;
+}
+
+export function sfccSectionForId(id: string): SfccSectionId {
+  if (id === 'statement' || id === 'bio' || id === 'support' || id === 'works') return id;
+  if (sfccAppliedWorks.some((sample) => sample.id === id)) return 'works';
+  if (sfccSupportMaterials.some((sample) => sample.id === id)) return 'support';
+  return 'works';
+}

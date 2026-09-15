@@ -7,10 +7,16 @@ import {
   GRANT_DOSSIER_SUBNAV_HEIGHT_VAR,
   siteHeaderStickyTopClass,
 } from '@/config/site-header-layout';
-import { sfccSections } from '@/content/grants/sfcc-2026';
+import {
+  sfccAppliedWorks,
+  sfccSectionForId,
+  sfccSections,
+  type SfccSectionId,
+} from '@/content/grants/sfcc-2026';
 
 export default function SfccSectionNav() {
-  const [activeId, setActiveId] = useState(sfccSections[0].id);
+  const [activeId, setActiveId] = useState<string>(sfccSections[0].id);
+  const activeSection: SfccSectionId = sfccSectionForId(activeId);
 
   useEffect(() => {
     const syncSubnavHeight = () => {
@@ -42,7 +48,10 @@ export default function SfccSectionNav() {
   }, []);
 
   useEffect(() => {
-    const ids = sfccSections.map((section) => section.id);
+    const ids = [
+      ...sfccSections.map((section) => section.id),
+      ...sfccAppliedWorks.map((sample) => sample.id),
+    ];
     const elements = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
@@ -56,7 +65,7 @@ export default function SfccSectionNav() {
         const top = visible[0]?.target.id;
         if (top) setActiveId(top);
       },
-      { rootMargin: '-20% 0px -55% 0px', threshold: [0.1, 0.25, 0.5] },
+      { rootMargin: '-22% 0px -58% 0px', threshold: [0.1, 0.25, 0.5] },
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -68,29 +77,50 @@ export default function SfccSectionNav() {
       aria-label="Application sections"
       data-grant-dossier-sticky-nav
       className={cn(
-        'sticky z-30 -mx-4 mb-10 border-y border-stone-300 bg-[#f7f4ef]/95 backdrop-blur sm:-mx-6 dark:border-stone-700 dark:bg-neutral-950/95',
+        'sticky z-30 -mx-4 mb-8 border-y border-stone-200 bg-white/95 backdrop-blur sm:-mx-6',
         siteHeaderStickyTopClass,
       )}
     >
-      <p className="px-4 pt-2 text-[10px] uppercase tracking-widest text-stone-500 sm:px-6 dark:text-stone-400">
+      <p className="px-4 pt-2 text-[10px] uppercase tracking-widest text-stone-500 sm:px-6">
         Jump to
       </p>
-      <ul className="flex gap-2 overflow-x-auto overscroll-x-contain px-4 py-2.5 sm:px-6 [-webkit-overflow-scrolling:touch]">
+      <ul className="flex gap-2 overflow-x-auto overscroll-x-contain px-4 pt-2 sm:px-6 [-webkit-overflow-scrolling:touch]">
         {sfccSections.map((section) => {
-          const active = section.id === activeId;
+          const active = section.id === activeSection;
           return (
             <li key={section.id} className="shrink-0">
               <a
                 href={`#${section.id}`}
                 aria-current={active ? 'true' : undefined}
                 className={cn(
-                  'inline-flex min-h-11 items-center border px-3 py-2 text-xs font-medium uppercase tracking-wide transition-colors',
+                  'inline-flex min-h-10 items-center border px-3 py-1.5 text-xs font-medium uppercase tracking-wide transition-colors',
                   active
-                    ? 'border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-black'
-                    : 'border-stone-300 text-stone-700 hover:border-stone-500 dark:border-stone-600 dark:text-stone-300',
+                    ? 'border-stone-900 bg-stone-900 text-white'
+                    : 'border-stone-300 text-stone-700 hover:border-stone-500',
                 )}
               >
                 {section.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <ul className="flex gap-2 overflow-x-auto overscroll-x-contain px-4 py-2.5 sm:px-6 [-webkit-overflow-scrolling:touch]">
+        {sfccAppliedWorks.map((sample) => {
+          const active = sample.id === activeId;
+          return (
+            <li key={sample.id} className="shrink-0">
+              <a
+                href={`#${sample.id}`}
+                aria-current={active ? 'true' : undefined}
+                className={cn(
+                  'inline-flex min-h-10 items-center border px-3 py-1.5 text-xs font-medium transition-colors',
+                  active
+                    ? 'border-stone-900 bg-stone-900 text-white'
+                    : 'border-stone-200 text-stone-700 hover:border-stone-400',
+                )}
+              >
+                {sample.title}
               </a>
             </li>
           );
