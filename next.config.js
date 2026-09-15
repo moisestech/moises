@@ -65,6 +65,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/grant/sfcc',
+        destination: '/grant/sfcc-2026',
+        permanent: false,
+      },
+      {
         source: '/grants/four-artists-four-seasons',
         destination: '/grant/four-artists-four-seasons',
         permanent: false,

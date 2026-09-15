@@ -13,6 +13,17 @@ export type GrantDirectoryEntry = {
 
 const grantDirectoryEntries: GrantDirectoryEntry[] = [
   {
+    id: 'sfcc-2026',
+    title: 'SFCC Support Materials',
+    organization: 'South Florida Cultural Consortium',
+    route: '/grant/sfcc-2026',
+    updatedAt: '2026-09-14',
+    deadline: '2026-09-14',
+    status: 'active',
+    summary:
+      'FY 2026–2027 Visual and Media Artists Grant — studio visit and Bakehouse community video for review.',
+  },
+  {
     id: 'pioneer-works-residency-2027',
     title: 'Pioneer Works Visual Arts Residency 2027',
     organization: 'Pioneer Works',
