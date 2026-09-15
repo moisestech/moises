@@ -7,7 +7,7 @@ type YouTubePlayerProps = {
   videoId: string;
   title?: string;
   className?: string;
-  aspectRatio?: '16:9' | '4:3';
+  aspectRatio?: '16:9' | '4:3' | '9:16';
 };
 
 export default function YouTubePlayer({
@@ -18,7 +18,8 @@ export default function YouTubePlayer({
 }: YouTubePlayerProps) {
   const { theme } = useTheme();
   const [isLoading, setIsLoading] = React.useState(true);
-  const padding = aspectRatio === '16:9' ? 'pb-[56.25%]' : 'pb-[75%]';
+  const padding =
+    aspectRatio === '9:16' ? 'pb-[177.78%]' : aspectRatio === '4:3' ? 'pb-[75%]' : 'pb-[56.25%]';
 
   return (
     <div className={`relative w-full ${padding} ${className}`}>

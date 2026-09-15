@@ -70,6 +70,16 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/art/tech-prophecies',
+        destination: '/art/neural_chapel',
+        permanent: false,
+      },
+      {
+        source: '/art/tech_prophecies',
+        destination: '/art/neural_chapel',
+        permanent: false,
+      },
+      {
         source: '/grants/four-artists-four-seasons',
         destination: '/grant/four-artists-four-seasons',
         permanent: false,

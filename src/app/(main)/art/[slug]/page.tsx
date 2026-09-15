@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
-import VimeoPlayer from '@/components/common/VimeoPlayer';
+import ArtworkGallery from '@/components/art/ArtworkGallery';
+import ArtworkVideo from '@/components/art/ArtworkVideo';
 import { seoKeywordsAlpha } from '../../../../../lib/seoKeywords';
 import type { Metadata } from 'next';
 
@@ -104,6 +105,12 @@ export default async function ArtPage({ params }: PageProps) {
         />
       </div>
 
+      {artwork.video && (artwork.video.type === 'youtube' || artwork.video.type === 'vimeo') ? (
+        <div className="max-w-7xl mx-auto px-8 pt-12">
+          <ArtworkVideo video={artwork.video} />
+        </div>
+      ) : null}
+
       {/* Content Section */}
       <div className="max-w-7xl mx-auto py-16 px-11">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
@@ -177,6 +184,25 @@ export default async function ArtPage({ params }: PageProps) {
                 </div>
               </div>
             )}
+            {artwork.links && artwork.links.length > 0 ? (
+              <div>
+                <h3 className="text-lg font-bold mb-2">Links</h3>
+                <ul className="space-y-2">
+                  {artwork.links.map((link) => (
+                    <li key={link.url}>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-2"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
 
           {/* Description Column */}
@@ -254,78 +280,12 @@ export default async function ArtPage({ params }: PageProps) {
               </div>
             )}
 
-            {/* Video Section */}
-            {artwork.video && (
-              <div className="mt-16 mb-16">
-                <h3 className="text-2xl font-semibold mb-6">Video Documentation</h3>
-                {artwork.video.type === 'vimeo' && (
-                  <VimeoPlayer
-                    videoId={artwork.video.id}
-                    title={artwork.video.title}
-                    aspectRatio="16:9"
-                    className="mb-4"
-                  />
-                )}
-                {artwork.video.caption && (
-                  <p className="mt-4 text-base text-gray-600 dark:text-gray-400">
-                    {artwork.video.caption}
-                  </p>
-                )}
-                {artwork.video.technical_details && (
-                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-500">
-                    {artwork.video.technical_details}
-                  </p>
-                )}
-                <a 
-                  href={artwork.video.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  Watch on Vimeo
-                  <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                </a>
-              </div>
-            )}
           </div>
         </div>
 
-        {/* Variations Section */}
-        {artwork.images.length > 0 && (
-          <div className="mt-24">
-            <h2 className="text-3xl font-bold mb-8">
-              {artwork.images.length} Variation
-              {artwork.images.length !== 1 ? 's' : ''} Online
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {artwork.images.map((image, index) => (
-                <div
-                  key={index}
-                  className="aspect-square relative group cursor-pointer"
-                >
-                  <Image
-                    src={image.url}
-                    alt={
-                      image.caption ||
-                      `${artwork.title} - Variation ${index + 1}`
-                    }
-                    fill
-                    className="object-cover rounded-lg"
-                  />
-                  {image.caption && (
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 rounded-lg">
-                      <p className="text-white text-sm">{image.caption}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {artwork.images.length > 0 ? (
+          <ArtworkGallery title={artwork.title} images={artwork.images} />
+        ) : null}
 
         {/* Venue / support (only when defined on the artwork) */}
         {artwork.exhibition_support && (

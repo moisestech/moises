@@ -62,6 +62,7 @@ interface Artwork {
     format?: string;
     resolution?: string;
     technical_details?: string;
+    aspectRatio?: '16:9' | '4:3' | '9:16';
   };
 }
 
@@ -87,11 +88,19 @@ export const SELECTED_WORK_SLUGS: string[] = [
 ];
 
 export const artist: Artist = {
-  artist_statement:
-    'My work examines what it means to navigate "being chronically online" in an age where digital systems mediate nearly every facet of existence. At the intersection of machine philosophy, digital humanities, and memetics, I explore how technology reshapes our understanding of identity, value, and connection. This inquiry bridges contemporary art and the hyper-accelerated culture of the internet, channeling both humor and critique into conceptual frameworks. Through media such as AI algorithms, physical sculptures, and immersive installations, I create spaces that reflect on the absurdity, beauty, and impact of our entanglement with technology...',
+  artist_statement: `My work begins from a condition I think of as being born into the machine: not encountering computation as a tool outside us, but as infrastructure already organizing how we see, work, believe, desire, and assign value. Working across sculpture, performance, moving image, software, and artificial intelligence, I give physical form to systems that are usually experienced as invisible or inevitable.
 
-  artist_bio:
-    "Sanabria explores the network effects of automation and artificial intelligence on visual culture through poetic computation. His work encompasses manual techniques, conceptual art, and programming infrastructure, utilizing code and artistic gestures to create a unique aesthetic experience. At the human and emotional level, Sanabria's work emphasizes the creative kernel that is uniquely human, creating artworks that speculate on the value of data and the future of law amid technological change. In contrast, he employs innovative acceleration at a macro level, using the newest technologies to scaffold new forms of aesthetic governance over AI tools and social networks. Sanabria's pursuit of a visual language and aesthetic experience enabled by technology and imagination speaks to the critical importance of steering society's thinking amid incoming changes in techno-capitalism and social tendencies.",
+I often begin with familiar objects and symbols, religious icons, masks, shopping carts, treadmills, currency, computers, and push them through the logic of contemporary platforms. The results are plausible and absurd at once: devotion absorbed into virtual reality, privacy turned into luxury hardware, cognition displayed as merchandise, or a body walking endlessly while consuming a feed.
+
+Humor and meme language offer an immediate point of recognition, but the work ultimately asks questions about power and agency: Who designs the systems that organize everyday life? Who can access, shape, maintain, or refuse them?
+
+I think of these works as forms of aesthetic governance: situations where computational power becomes tangible enough to inhabit, question, or interrupt. Rather than illustrating technology, I use its systems, objects, and rituals to expose how digital culture becomes lived infrastructure.`,
+
+  artist_bio: `Moises Sanabria (b. 1990, Caracas, Venezuela) lives and works in Miami, Florida. He received a BFA from The Cooper Union in 2015 and studied at the School for Poetic Computation in 2013. Sanabria is an interdisciplinary artist whose practice examines what happens when intelligence, platforms, and automation become infrastructure, shaping attention, labor, belief, value, and social life.
+
+Working across sculpture, performance, moving image, software, artificial intelligence, and networked systems, he materializes otherwise invisible computational conditions through familiar objects, interfaces, and public systems. His work moves between artworks and infrastructure, asking not only what technology represents, but who can access, shape, maintain, and refuse the systems that increasingly organize culture.
+
+Sanabria co-founded the post-internet collective ART404 and Digital Culture Center Miami. Selected group exhibitions include ECCV (2026), Malmö, Sweden; Technofetishism (2025), MOMus, Thessaloniki, Greece; Notions of Home (2024), Institute of Contemporary Art, Miami, Florida; and CONTINUUM (2024), MUNAG, Guatemala City, Guatemala. He is an artist-in-residence at Bakehouse Art Complex and received the Miami Individual Artists Grant (2024).`,
 
   artworks: {
     privacy_is_a_luxury: {
@@ -178,9 +187,15 @@ export const artist: Artist = {
       role: 'Concept and Fabrication',
       images: [
         {
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483432/art/moisestech-website/exhibitions/oct_2024_post_masters_low_resolution/oct_2024_post_masters_low_resolution_poster_utzgio.png',
-          caption: 'Taste the Algorithm - Installation view at Museum of Sex. Photo: Mateo SeZa/SeZa Studios. Update with your photos when available.',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1789442394/art/moisestech-website/artworks/2026_taste_the_algorithm/TasteTheAlgorithm_Museum-of-Sex-Miami_F_CK-Art_PhotoBy_Mateo-SeZa-1024x683_bus6vb.jpg',
+          caption: 'Taste the Algorithm — installation view, F*ck Art: Nature & Artifice, Museum of Sex, Miami. Photo: Mateo SeZa / SeZa Studios.',
         }
+      ],
+      links: [
+        {
+          url: 'https://www.artburstmiami.com/visual_arts/miami-museum-of-sex-fck-art-nature-and-artifice-exhibition',
+          label: 'Artburst Miami — Museum of Sex exhibition',
+        },
       ],
       tags: [
         'algorithmic art',
@@ -196,7 +211,55 @@ export const artist: Artist = {
         'The work extends Sanabria\'s ongoing inquiry into how technology mediates human experience. By framing algorithmic influence through the lens of "taste"—a word that bridges sensory pleasure, aesthetic judgment, and cultural preference—the sculpture makes visible the invisible systems that increasingly shape what we want and how we want it.',
       exhibition: 'F*ck Art: Nature & Artifice',
       on_view: true,
-      // Add video when available: { type: 'vimeo', id: 'YOUR_VIMEO_ID', url: 'https://vimeo.com/YOUR_VIMEO_ID', title: '...', caption: '...' }
+    },
+    neural_chapel: {
+      title: 'Tech Prophecies: Neural Chapel',
+      year: 2026,
+      collaboration: 'Fabiola Larios',
+      location: 'ECCV 2026 · Tech Prophecies, Malmö, Sweden',
+      description:
+        'Tech Prophecies: Neural Chapel is a collaborative work with Fabiola Larios that treats generative models, sacred architecture, and machine vision as overlapping systems of belief. The work asks how prophecy, ritual, and computational seeing share a grammar when intelligence becomes environment rather than tool — a chapel assembled from neural process rather than stone.',
+      medium: 'Moving image, generative systems, collaborative research',
+      materials: [
+        'Generative video',
+        'Machine-vision research',
+        'Collaborative studio process',
+      ],
+      role: 'Concept, research, and presentation, with Fabiola Larios',
+      images: [
+        {
+          url: 'https://i.ytimg.com/vi/3Wc1bN54R_I/maxresdefault.jpg',
+          caption: 'Tech Prophecies: Neural Chapel — Fabiola Larios and Moises Sanabria, 2026',
+        },
+      ],
+      links: [
+        {
+          url: 'https://youtu.be/3Wc1bN54R_I',
+          label: 'Watch on YouTube',
+        },
+      ],
+      tags: [
+        'collaborative work',
+        'machine vision',
+        'generative video',
+        'sacred space',
+        'ECCV',
+        'Tech Prophecies',
+        'Fabiola Larios',
+      ],
+      interpretation:
+        'If Simulation Faith stages devotion as a headset, Neural Chapel stages the institution around that devotion: a computational sanctuary in which models, cameras, and prophecy occupy the same architecture.',
+      exhibition: 'ECCV 2026 · Tech Prophecies',
+      on_view: true,
+      video: {
+        type: 'youtube',
+        id: '3Wc1bN54R_I',
+        url: 'https://youtu.be/3Wc1bN54R_I',
+        title: 'Tech Prophecies: Neural Chapel | Fabiola Larios & Moises Sanabria | 2026',
+        caption: 'Collaborative work with Fabiola Larios, presented in the context of ECCV 2026 Tech Prophecies.',
+        format: 'HD Video',
+        aspectRatio: '16:9',
+      },
     },
     simulation_faith: {
       title: 'Simulation Faith',
@@ -431,7 +494,11 @@ export const artist: Artist = {
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1717961679/art/moisestech-website/moisesdsanabria-babyagi_ewquhe.webp',
-          caption: 'Baby AGI - Digital installation exploring AI development',
+          caption: 'Baby AGI — stroller assembled from gaming hardware, GPUs, and robotic hands',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483634/art/moisestech-website/exhibitions/dec_2023_bakehouse_breadbytes/exhibition_shot_1_v9nqyt.jpg',
+          caption: 'From Cradle to AGI — Breadbytes: Artmaking for the Next Generation, Bakehouse Art Complex, 2023–2024',
         },
       ],
       tags: [
@@ -1168,12 +1235,13 @@ export const artist: Artist = {
       exhibition: 'Aparadores, Mexico City',
       on_view: true,
       video: {
-        type: 'instagram',
-        id: 'DEA9GIrJxao',
-        url: 'https://www.instagram.com/p/DEA9GIrJxao/',
+        type: 'youtube',
+        id: 'qCkaEZjifXg',
+        url: 'https://www.youtube.com/shorts/qCkaEZjifXg',
         title: 'Doomscrolling Marathon',
-        caption: 'Installation documentation at Aparadores, Mexico City',
-        format: 'Instagram Video'
+        caption: 'Vertical documentation of the public LED installation at Aparadores, Mexico City — a TikTok scroll staged as urban spectacle.',
+        format: 'YouTube Short',
+        aspectRatio: '9:16',
       }
     },
     in_crypto_we_trust: {
