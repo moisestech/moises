@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
@@ -9,7 +10,11 @@ import {
   Workflow,
   type LucideIcon,
 } from 'lucide-react';
-import { institutionsHub as H, type PracticeLaneAccent } from '@/content/institutions/hub';
+import {
+  CONCEPTUAL_SYSTEM_VIEW_LABEL,
+  institutionsHub as H,
+  type PracticeLaneAccent,
+} from '@/content/institutions/hub';
 import { track } from '@/lib/analytics';
 import {
   INST_ACCENT,
@@ -70,7 +75,21 @@ export function PracticeLaneGrid() {
                       track('institutions_lane_select', { lane: lane.id })
                     }
                   >
-                    <div className="flex items-start justify-between gap-3">
+                    <figure className="-mx-5 -mt-5 sm:-mx-6 sm:-mt-6">
+                      <div className="relative aspect-square bg-[#F4F1EA]">
+                        <Image
+                          src={lane.illustration.src}
+                          alt={lane.illustration.alt}
+                          fill
+                          className="object-contain"
+                          sizes="(min-width: 640px) 40vw, 100vw"
+                        />
+                      </div>
+                      <figcaption className="border-b border-neutral-200 bg-[#F4F1EA] px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500 sm:px-6">
+                        {CONCEPTUAL_SYSTEM_VIEW_LABEL}
+                      </figcaption>
+                    </figure>
+                    <div className="mt-5 flex items-start justify-between gap-3">
                       <span
                         className={cn(
                           'inline-flex h-10 w-10 items-center justify-center',
@@ -92,7 +111,7 @@ export function PracticeLaneGrid() {
                       className={cn(
                         'mt-3 text-sm font-medium opacity-0 transition-opacity duration-200',
                         'group-hover:opacity-100 group-focus-visible:opacity-100',
-                        'max-sm:opacity-100',
+                        'max-sm:opacity-100 motion-reduce:opacity-100',
                         accent.text,
                       )}
                     >
@@ -117,7 +136,10 @@ export function PracticeLaneGrid() {
                     </ul>
                     <span className={cn('mt-5 inline-flex items-center gap-1.5 text-sm font-semibold', accent.text)}>
                       {lane.linkLabel}
-                      <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" aria-hidden />
+                      <ArrowRight
+                        className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+                        aria-hidden
+                      />
                     </span>
                   </Link>
                 </li>

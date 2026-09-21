@@ -8,6 +8,9 @@ export const INSTITUTIONAL_CALENDLY_URL =
 
 export const INSTITUTIONAL_EMAIL = 'm@moises.tech';
 
+/** Primary /institutions CTA — Calendly first, no intake form. */
+export const INSTITUTIONAL_SCHEDULE_CTA_LABEL = 'Schedule a 20-minute conversation';
+
 /**
  * Public collaboration offer line — single source for artist-infrastructure hero,
  * engagement, and CTA. Do not invent metrics or institutional fees here.
@@ -92,6 +95,12 @@ export const DCC_MIAMI = {
   fullName: 'Digital Culture Center Miami',
   href: 'https://dcc.miami',
   label: 'Artist-owned practice',
+  logo: {
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1776028503/dccmiami/dcc-miami-logo-small-black-text_jpqvd7.png',
+    alt: 'DCC Miami',
+    width: 320,
+    height: 80,
+  },
 } as const;
 
 /**
