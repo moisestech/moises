@@ -126,7 +126,7 @@ export function InstitutionsHubClient() {
             onClick={() => track('institutions_cta_click', { placement: 'sticky-nav' })}
           >
             <CalendarDays className="h-3.5 w-3.5" aria-hidden />
-            Discuss a project
+            {H.hero.primaryCta.label}
           </a>
         </InstContainer>
       </nav>

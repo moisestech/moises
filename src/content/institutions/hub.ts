@@ -16,10 +16,14 @@ import type { OpportunityAudienceKeywords } from '@/content/opportunities/types'
 import { N8N_LOGO } from '@/constants/art-of-ai-agents';
 import { digilabAsset } from '@/content/oolite-arts/media';
 import {
+  DCC_MIAMI,
   INSTITUTIONAL_CALENDLY_URL,
   INSTITUTIONAL_EMAIL,
+  INSTITUTIONAL_SCHEDULE_CTA_LABEL,
   INSTITUTIONAL_SERVICES_AVAILABILITY,
 } from './shared';
+
+export const CONCEPTUAL_SYSTEM_VIEW_LABEL = 'Conceptual system view';
 
 const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload';
 const jobsCdn = CDN;
@@ -84,6 +88,13 @@ export type PracticeLaneId =
 
 export type PracticeLaneAccent = 'web' | 'automation' | 'live' | 'lab';
 
+export type PracticeLaneIllustration = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type PracticeLane = {
   id: PracticeLaneId;
   index: string;
@@ -96,7 +107,35 @@ export type PracticeLane = {
   icon: 'database' | 'workflow' | 'radio' | 'flask';
   proofTags: string[];
   stack: LogoBandItem[];
+  illustration: PracticeLaneIllustration;
 };
+
+const LANE_ILLUSTRATIONS = {
+  web: {
+    src: `${CDN}/v1790015570/art/moisestech-website/institutions/service-web-salesforce-v01_lhqnqr.png`,
+    alt: 'A friendly three-dimensional collection and ticketing workstation connected by woven cables, with a ticket extending toward the viewer.',
+    width: 1254,
+    height: 1254,
+  },
+  automation: {
+    src: `${CDN}/v1790015569/art/moisestech-website/institutions/service-automation-operations-v02_fgkfod.png`,
+    alt: 'A connected automation workflow with intake, routing, timing, reports, folders, and documentation arranged as a tactile miniature system.',
+    width: 1536,
+    height: 1536,
+  },
+  live: {
+    src: `${CDN}/v1790015571/art/moisestech-website/institutions/service-livestream-digital-production-v01_pvzcd8.png`,
+    alt: 'A camera-to-archive livestream workflow with audio, switching, captions, distribution, and storage connected as one production system.',
+    width: 1254,
+    height: 1254,
+  },
+  lab: {
+    src: `${CDN}/v1790015573/art/moisestech-website/institutions/service-digital-labs-artist-programs-v01_bydydm.png`,
+    alt: 'A connected digital arts lab with a workstation, scanner, enclosed 3D printer, workshop table, VR dock, materials, and documentation binder.',
+    width: 1254,
+    height: 1254,
+  },
+} as const satisfies Record<PracticeLaneAccent, PracticeLaneIllustration>;
 
 export const ORG_RELATIONSHIP_LABELS: Record<OrgRelationship, string> = {
   lab: 'Employment · Lab operations',
@@ -203,7 +242,7 @@ export const institutionsHub = {
     availability: INSTITUTIONAL_SERVICES_AVAILABILITY,
     availabilityLabel: 'Currently available · project-based + fractional engagements',
     primaryCta: {
-      label: 'Discuss a project',
+      label: INSTITUTIONAL_SCHEDULE_CTA_LABEL,
       href: INSTITUTIONAL_CALENDLY_URL,
       external: true,
     },
@@ -273,8 +312,9 @@ export const institutionsHub = {
         role: 'Artist-owned cultural-technology practice',
         dates: 'Ongoing',
         accent: 'live' as PracticeLaneAccent,
-        href: 'https://dcc.miami',
+        href: DCC_MIAMI.href,
         external: true,
+        logo: DCC_MIAMI.logo,
       },
     ],
   },
@@ -292,6 +332,7 @@ export const institutionsHub = {
       icon: 'database',
       proofTags: ['ICA Miami', 'WordPress', 'Salesforce', 'GraphQL', 'AWS CloudFront', 'Registration'],
       stack: [STACK.salesforce, STACK.wordpress, STACK.bloomerang, STACK.aws],
+      illustration: LANE_ILLUSTRATIONS.web,
     },
     {
       id: 'automation-operations',
@@ -306,6 +347,7 @@ export const institutionsHub = {
       icon: 'workflow',
       proofTags: ['Airtable', 'n8n / Make', 'APIs', 'Structured outputs', 'Documentation'],
       stack: [STACK.airtable, STACK.n8n],
+      illustration: LANE_ILLUSTRATIONS.automation,
     },
     {
       id: 'livestream-production',
@@ -320,6 +362,7 @@ export const institutionsHub = {
       icon: 'radio',
       proofTags: ['ICA Miami Channel', 'OBS', 'Zoom webinars', 'Captions', 'YouTube', 'After Effects'],
       stack: [STACK.obs],
+      illustration: LANE_ILLUSTRATIONS.live,
     },
     {
       id: 'digital-labs-programs',
@@ -334,6 +377,7 @@ export const institutionsHub = {
       icon: 'flask',
       proofTags: ['Oolite Arts', '3D printing', '3D scanning', 'VR', 'Laser cutting', 'Creative coding'],
       stack: [],
+      illustration: LANE_ILLUSTRATIONS.lab,
     },
   ] satisfies PracticeLane[],
   system: {
@@ -648,7 +692,7 @@ export const institutionsHub = {
       },
     ],
     primaryCta: {
-      label: 'Schedule a 20-minute conversation',
+      label: INSTITUTIONAL_SCHEDULE_CTA_LABEL,
       href: INSTITUTIONAL_CALENDLY_URL,
     },
     secondaryCta: {
