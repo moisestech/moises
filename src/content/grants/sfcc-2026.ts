@@ -24,7 +24,9 @@ export const sfccSeo = {
 export const sfccIntro = {
   eyebrow: `${sfccMeta.organization} · ${sfccMeta.program}`,
   headline: 'Application materials',
-  lede: 'The works submitted for review, then supporting video, artist statement, and biography. Use the menu to move between sections.',
+  lede: 'Five recent works, then supporting video, artist statement, and biography. Use the menu to move between sections.',
+  throughLine:
+    'The through-line is belief, desire, and platform life made as objects — conditions a viewer can stand next to, not diagrams of technology.',
 } as const;
 
 export const sfccSections = [
@@ -66,11 +68,15 @@ export type SfccWorkSample = {
   source: string;
   year: string;
   href: string;
+  /** What the work does — read before venue credits. */
+  claim?: string;
   caption: string;
+  install?: string;
   artworkHref?: string;
   press?: readonly SfccPressLink[];
   kind: 'youtube' | 'vimeo' | 'image';
   videoId?: string;
+  videoTitle?: string;
   aspectRatio?: '16:9' | '9:16';
   images?: readonly SfccSampleImage[];
 };
@@ -94,6 +100,8 @@ export const sfccAppliedWorks: SfccWorkSample[] = [
         label: 'Artburst Miami',
       },
     ],
+    claim:
+      'Two phones share a pair of lips. Recommendation is staged as appetite: what we like is learned from us, refined, and fed back.',
     caption:
       'Installation view, F*ck Art: Nature & Artifice, Museum of Sex, Miami. Photo: Mateo SeZa / SeZa Studios.',
     images: [
@@ -112,8 +120,14 @@ export const sfccAppliedWorks: SfccWorkSample[] = [
     year: '2025',
     href: '/art/simulation_faith',
     artworkHref: '/art/simulation_faith',
+    claim:
+      'A suspended infant Christ wears a VR headset. Inherited devotion is recast as simulated presence.',
     caption:
-      'Installation view, Technographies Alumni Show, New World School of the Arts, 2025. Additional studio view of the sculpture below.',
+      'Installation view, Technographies Alumni Show, New World School of the Arts, Art Week 2025. Additional studio view below; exhibition walkthrough from the school’s documentation.',
+    install:
+      'Sculpture 3 × 2 × 1.5 ft. Ceiling suspension on steel cables; 8 × 8 ft footprint minimum; 10 ft ceiling height; 120V for LED. Dimmed ambient light, neutral walls.',
+    videoId: 'Xl680aww9Rc',
+    videoTitle: 'NWSA Technographies Exhibition — Art Week 2025',
     images: [
       {
         url: SIMULATION_FAITH_NWSA,
@@ -136,8 +150,10 @@ export const sfccAppliedWorks: SfccWorkSample[] = [
     year: '2024',
     href: 'https://www.youtube.com/shorts/qCkaEZjifXg',
     artworkHref: '/art/doomscrolling_marathon',
+    claim:
+      'A public LED restages the TikTok scroll as urban spectacle — the feed at the scale of the street.',
     caption:
-      'Vertical documentation of the public LED installation — a TikTok scroll staged as urban spectacle.',
+      'Vertical documentation of the public LED installation at Aparadores, Mexico City.',
   },
   {
     id: 'neural-chapel',
@@ -149,8 +165,10 @@ export const sfccAppliedWorks: SfccWorkSample[] = [
     year: '2026',
     href: 'https://youtu.be/3Wc1bN54R_I',
     artworkHref: '/art/neural_chapel',
+    claim:
+      'With Fabiola Larios. Generative models, cameras, and prophecy occupy the same architecture — a chapel assembled from neural process rather than stone.',
     caption:
-      'Collaborative work with Fabiola Larios, presented in the context of ECCV 2026 Tech Prophecies.',
+      'Collaborative moving-image work, presented in the context of ECCV 2026 Tech Prophecies, Malmö.',
   },
   {
     id: 'baby-agi',
@@ -161,8 +179,10 @@ export const sfccAppliedWorks: SfccWorkSample[] = [
     year: '2023',
     href: 'https://vimeo.com/1079770763',
     artworkHref: '/art/baby_agi',
+    claim:
+      'A stroller built from GPUs and robotic hands loops a generative cradle-to-AGI animation.',
     caption:
-      'Generative loop animation for the stroller sculpture shown in Breadbytes: Artmaking for the Next Generation. Click photographs to view fullscreen.',
+      'Shown in Breadbytes: Artmaking for the Next Generation, Bakehouse Art Complex. Click photographs to view fullscreen.',
     images: [
       {
         url: BABY_AGI_STUDIO,

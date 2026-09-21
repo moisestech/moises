@@ -82,7 +82,18 @@ function SampleFigure({
           {index + 1} of {total} · {sample.source} · {sample.year}
         </p>
         <h3 className="text-lg font-semibold text-stone-900">{sample.title}</h3>
-        <p className="text-base leading-relaxed text-stone-700">{sample.caption}</p>
+        {sample.claim ? (
+          <p className="text-base leading-relaxed text-stone-800">{sample.claim}</p>
+        ) : null}
+        <p className="text-sm leading-relaxed text-stone-600">{sample.caption}</p>
+        {sample.install ? (
+          <p className="text-sm leading-relaxed text-stone-600">
+            <span className="font-semibold uppercase tracking-[0.14em] text-stone-500">
+              Installation.{' '}
+            </span>
+            {sample.install}
+          </p>
+        ) : null}
         <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-600">
           {sample.artworkHref ? (
             <Link href={sample.artworkHref} className={linkClass}>
@@ -108,6 +119,16 @@ function SampleFigure({
               {item.label}
             </a>
           ))}
+          {sample.kind === 'image' && sample.videoId ? (
+            <a
+              href={`https://www.youtube.com/watch?v=${sample.videoId}`}
+              className={linkClass}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {sample.videoTitle ?? 'Exhibition video'}
+            </a>
+          ) : null}
         </p>
       </figcaption>
 
@@ -119,6 +140,19 @@ function SampleFigure({
             className="mt-4"
             heading={extraImages.length === 1 ? 'Additional view' : 'Photographs'}
             headingClassName="mb-4 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-stone-500"
+          />
+        </div>
+      ) : null}
+
+      {sample.kind === 'image' && sample.videoId ? (
+        <div className="border-t border-stone-200 px-4 pb-6 sm:px-5">
+          <p className="mb-4 mt-4 text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-stone-500">
+            Exhibition documentation
+          </p>
+          <YouTubePlayer
+            videoId={sample.videoId}
+            title={sample.videoTitle ?? sample.title}
+            aspectRatio="16:9"
           />
         </div>
       ) : null}
@@ -158,8 +192,11 @@ export default function SfccSupportMaterialsPage() {
             <h2 id="applied-works-heading" className="text-2xl font-semibold">
               Applied works
             </h2>
+            <p className="mt-3 max-w-[62ch] text-base leading-relaxed text-stone-800">
+              {sfccIntro.throughLine}
+            </p>
             <p className="mt-2 text-sm text-stone-600">
-              All five pieces submitted with this application. Use the menu or the index to jump.
+              Five pieces. Use the menu or the index to jump.
             </p>
           </div>
 
@@ -190,6 +227,11 @@ export default function SfccSupportMaterialsPage() {
                       <p className="text-sm font-semibold leading-snug text-stone-900 group-hover:underline">
                         {sample.title}
                       </p>
+                      {sample.claim ? (
+                        <p className="line-clamp-3 text-xs leading-snug text-stone-600">
+                          {sample.claim}
+                        </p>
+                      ) : null}
                     </div>
                   </a>
                 </li>

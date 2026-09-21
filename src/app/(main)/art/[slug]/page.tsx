@@ -105,7 +105,9 @@ export default async function ArtPage({ params }: PageProps) {
         />
       </div>
 
-      {artwork.video && (artwork.video.type === 'youtube' || artwork.video.type === 'vimeo') ? (
+      {artwork.video &&
+      params.slug !== 'simulation_faith' &&
+      (artwork.video.type === 'youtube' || artwork.video.type === 'vimeo') ? (
         <div className="max-w-7xl mx-auto px-8 pt-12">
           <ArtworkVideo video={artwork.video} />
         </div>
@@ -169,6 +171,25 @@ export default async function ArtPage({ params }: PageProps) {
                 <p>{artwork.dimensions}</p>
               </div>
             )}
+            {artwork.technical_requirements && (
+              <div>
+                <h3 className="text-lg font-bold mb-2">Installation</h3>
+                <ul className="space-y-2 text-sm">
+                  {artwork.technical_requirements.space?.dimensions ? (
+                    <li>{artwork.technical_requirements.space.dimensions}</li>
+                  ) : null}
+                  {artwork.technical_requirements.mounting?.length ? (
+                    <li>{artwork.technical_requirements.mounting.join('; ')}</li>
+                  ) : null}
+                  {artwork.technical_requirements.power?.length ? (
+                    <li>{artwork.technical_requirements.power.join('; ')}</li>
+                  ) : null}
+                  {artwork.technical_requirements.space?.requirements?.length ? (
+                    <li>{artwork.technical_requirements.space.requirements.join('; ')}</li>
+                  ) : null}
+                </ul>
+              </div>
+            )}
             {artwork.tags && (
               <div>
                 <h3 className="text-lg font-bold mb-2">Tags</h3>
@@ -211,6 +232,13 @@ export default async function ArtPage({ params }: PageProps) {
               description={artwork.description}
               interactiveContent={artwork.interactiveContent || []}
             />
+            {params.slug === 'simulation_faith' &&
+            artwork.video &&
+            (artwork.video.type === 'youtube' || artwork.video.type === 'vimeo') ? (
+              <div className="mt-10">
+                <ArtworkVideo video={artwork.video} heading="Exhibition documentation" />
+              </div>
+            ) : null}
             {artwork.interpretation && (
               <div className="mt-8">
                 <h3 className="text-lg font-semibold mb-4">Interpretation</h3>

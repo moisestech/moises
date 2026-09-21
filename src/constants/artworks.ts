@@ -290,6 +290,22 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           caption: 'Simulation Faith — suspended baby Jesus sculpture with VR headset',
         },
       ],
+      links: [
+        {
+          url: 'https://www.youtube.com/watch?v=Xl680aww9Rc',
+          label: 'NWSA Technographies exhibition video — Art Week 2025',
+        },
+      ],
+      video: {
+        type: 'youtube',
+        id: 'Xl680aww9Rc',
+        url: 'https://www.youtube.com/watch?v=Xl680aww9Rc',
+        title: 'New World School of the Arts — Technographies Exhibition, Art Week 2025',
+        caption:
+          'Exhibition documentation of Technographies at New World School of the Arts, Art Week 2025, where Simulation Faith was shown.',
+        format: 'HD Video',
+        aspectRatio: '16:9',
+      },
       tags: [
         'virtual reality art',
         'post-internet sculpture',
@@ -324,6 +340,7 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         }
       ],
       on_view: true,
+      exhibition: 'Technographies Alumni Show, New World School of the Arts, Art Week 2025',
       technical_requirements: {
         power: ['120V outlet', 'Low-voltage LED transformer'],
         mounting: ['Ceiling suspension system', 'Steel cables'],

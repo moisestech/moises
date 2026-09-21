@@ -11,7 +11,13 @@ type ArtworkVideoData = {
   aspectRatio?: '16:9' | '4:3' | '9:16';
 };
 
-export default function ArtworkVideo({ video }: { video: ArtworkVideoData }) {
+export default function ArtworkVideo({
+  video,
+  heading = 'Video documentation',
+}: {
+  video: ArtworkVideoData;
+  heading?: string;
+}) {
   const isVertical = video.aspectRatio === '9:16';
   const isYouTube = video.type === 'youtube';
   const isVimeo = video.type === 'vimeo';
@@ -43,7 +49,7 @@ export default function ArtworkVideo({ video }: { video: ArtworkVideoData }) {
 
   return (
     <div className="w-full">
-      <h2 className="text-2xl font-semibold mb-6">Video documentation</h2>
+      <h2 className="text-2xl font-semibold mb-6">{heading}</h2>
       <div className={isVertical ? 'mx-auto w-full max-w-[22rem]' : 'w-full'}>{player}</div>
       {video.caption ? (
         <p className="mt-4 text-base text-gray-600 dark:text-gray-400">{video.caption}</p>
