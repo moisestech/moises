@@ -110,7 +110,7 @@ export type PracticeLane = {
   illustration: PracticeLaneIllustration;
 };
 
-const LANE_ILLUSTRATIONS = {
+export const LANE_ILLUSTRATIONS = {
   web: {
     src: `${CDN}/v1790015570/art/moisestech-website/institutions/service-web-salesforce-v01_lhqnqr.png`,
     alt: 'A friendly three-dimensional collection and ticketing workstation connected by woven cables, with a ticket extending toward the viewer.',

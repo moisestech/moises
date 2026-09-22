@@ -29,8 +29,14 @@ type BannerLayerProps = {
   intrinsicRatio?: number;
   className?: string;
   priority?: boolean;
-  objectPosition?: 'center' | 'top';
+  objectPosition?: 'center' | 'top' | 'bottom';
 };
+
+function coverObjectPosition(objectPosition: 'center' | 'top' | 'bottom' = 'top') {
+  if (objectPosition === 'center') return { className: 'object-center', style: 'center' as const };
+  if (objectPosition === 'bottom') return { className: 'object-bottom', style: 'bottom' as const };
+  return { className: 'object-top', style: 'top' as const };
+}
 
 function BannerLayer({
   src,
@@ -43,7 +49,7 @@ function BannerLayer({
   objectPosition = 'top',
 }: BannerLayerProps) {
   const isSvgLocal = !remote && src.endsWith('.svg');
-  const coverPos = objectPosition === 'center' ? 'object-center' : 'object-top';
+  const coverPos = coverObjectPosition(objectPosition);
 
   if (presentation === 'contain-blur') {
     return (
@@ -117,8 +123,8 @@ function BannerLayer({
       <img
         src={src}
         alt={alt}
-        className={cn('h-full w-full object-cover', coverPos, className)}
-        style={{ objectPosition: objectPosition === 'center' ? 'center' : 'top' }}
+        className={cn('h-full w-full object-cover', coverPos.className, className)}
+        style={{ objectPosition: coverPos.style }}
       />
     );
   }
@@ -128,8 +134,8 @@ function BannerLayer({
       src={src}
       alt={alt}
       fill
-      className={cn('object-cover', coverPos, className)}
-      style={{ objectPosition: objectPosition === 'center' ? 'center' : 'top' }}
+      className={cn('object-cover', coverPos.className, className)}
+      style={{ objectPosition: coverPos.style }}
       sizes="100vw"
       priority={priority}
     />

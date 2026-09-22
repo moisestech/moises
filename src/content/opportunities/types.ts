@@ -44,7 +44,7 @@ export type ApplicationBanner = {
    * Cover-crop focal point. Default `top` matches recruiting banners.
    * Use `center` for cinematic stills that should stay vertically aligned in the strip.
    */
-  objectPosition?: 'center' | 'top';
+  objectPosition?: 'center' | 'top' | 'bottom';
   /** Accessible HTML overlay on the banner — never bake this text into the bitmap. */
   overlayLabel?: string;
 };
