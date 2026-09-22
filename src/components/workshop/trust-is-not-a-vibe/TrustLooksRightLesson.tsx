@@ -170,7 +170,7 @@ export function TrustLooksRightLesson() {
 
   const checkIt = voted ? (
     <>
-      <TrustKeepTogether className={cn('space-y-3', present && 'space-y-6')}>
+      <TrustKeepTogether>
         <p className={cn(present ? trustPresent.body : trustLesson.body)}>
           Your first call is saved
           {voteLabel ? (
@@ -179,9 +179,16 @@ export function TrustLooksRightLesson() {
               as <span className="font-semibold">{voteLabel}</span>
             </>
           ) : null}
-          . Now open the system and see what the card left out.
+          .
         </p>
+      </TrustKeepTogether>
+      <TrustKeepTogether>
         <ConceptConstellation clusterId="looks-right-vibe" />
+      </TrustKeepTogether>
+      <TrustKeepTogether className={cn('space-y-3', present && 'space-y-6')}>
+        <p className={cn(present ? trustPresent.body : trustLesson.body)}>
+          Now open the system and see what the card left out.
+        </p>
         <TrustIdeaPortrait id="idea-01-looks-right-polish-is-not-proof" />
         <button
           type="button"
