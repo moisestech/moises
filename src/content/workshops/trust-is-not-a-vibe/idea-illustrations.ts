@@ -49,7 +49,7 @@ export const TRUST_IDEA_ILLUSTRATIONS: Record<TrustIdeaIllustrationId, TrustIdea
     alt: 'Teaching illustration — an evaluation is a decision system that stops an agent before it may act. Not a product screenshot.',
     caption: 'An eval is a decision system: evidence in, a recorded Allow / Ask / Deny out.',
     route: TRUST_BASE,
-    placement: 'Overview · 03 Why it matters · title beat; 04 The path · before the clock',
+    placement: 'Overview · 03 Why it matters · title beat',
     status: 'ready',
     lessonConcept: 'overview',
   },

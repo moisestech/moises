@@ -192,14 +192,22 @@ export function ConceptConstellation({
                 </p>
               ) : null}
               {image ? (
-                <div className="relative mx-auto mt-4 w-full max-w-[16rem] sm:max-w-[18rem]">
+                <div
+                  className={cn(
+                    'relative mx-auto mt-4 w-full',
+                    present ? 'max-w-[20rem]' : 'max-w-[16rem] sm:max-w-[18rem]'
+                  )}
+                >
                   <Image
                     src={image.src}
                     alt={image.alt}
                     width={TRUST_DEFINITION_PORTRAIT_SIZE.width}
                     height={TRUST_DEFINITION_PORTRAIT_SIZE.height}
                     sizes="(max-width: 390px) 70vw, (max-width: 768px) 40vw, 18rem"
-                    className="h-auto w-full max-h-[min(28rem,55dvh)] object-contain object-top"
+                    className={cn(
+                      'h-auto w-full object-contain object-top',
+                      present ? 'max-h-[min(32rem,58dvh)]' : 'max-h-[min(28rem,55dvh)]'
+                    )}
                     loading="lazy"
                     unoptimized
                   />
