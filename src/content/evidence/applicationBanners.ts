@@ -190,15 +190,18 @@ export const institutionsDigitalSystemsBanner = defineApplicationBanner({
 });
 
 /**
- * /ica-miami — wide ICA exhibition still as page chrome.
- * Later-context only: not visual evidence of the 2019–2020 Digital Producer role.
+ * /ica-miami — ICA Miami Design District building.
+ * Institutional presence; later-reference photograph, not 2019–2020 workplace proof.
+ * Crop pinned to the bottom so the ICA MIAMI letters stay in frame.
  */
 export const icaMiamiSystemsBanner = defineApplicationBanner({
-  src: `${cdn}/v1739483923/art/moisestech-website/exhibitions/dec_2024_dminti_notions_of_home/NotionsOfHome_banner_soubxf.jpg`,
-  alt: 'Notions of Home — ICA Miami × Dminti exhibition banner',
-  intrinsicRatio: 21 / 9,
+  src: `${cdn}/v1790032307/art/moisestech-website/institutions/ica-miami-building-reference-2026_cazc0w.jpg`,
+  alt: 'ICA Miami Design District building — faceted facade and ICA MIAMI entrance letters',
+  intrinsicRatio: 1540 / 944,
   presentation: 'cover',
-  frameClass: FLAGSHIP_BANNER_FRAME,
+  objectPosition: 'bottom',
+  aspectClass:
+    '!aspect-[2.15/1] w-full !min-h-[200px] sm:!min-h-[260px] !max-h-[min(48vh,520px)]',
 });
 
 /** Morley — Art Director (Remote, Florida). */
