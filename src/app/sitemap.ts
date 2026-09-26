@@ -40,6 +40,15 @@ const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[0]['changeF
     { path: '/workshop/trust-is-not-a-vibe/learn/the-loop', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/workshop/trust-is-not-a-vibe/learn/the-harness', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/workshop/trust-is-not-a-vibe/learn/transfer', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab', changeFrequency: 'monthly', priority: 0.7 },
+    { path: '/workshop/artist-infrastructure-lab/learn/observe', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab/learn/structure', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab/learn/automate', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab/learn/judge', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab/learn/relate', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab/learn/publish', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab/learn/preserve', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/workshop/artist-infrastructure-lab/learn/hand-off', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/bio', changeFrequency: 'monthly', priority: 0.6 },
   ];
 
