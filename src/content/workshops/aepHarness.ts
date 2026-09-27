@@ -1,5 +1,6 @@
 import type { CodeInspectBlock, ProcessStep } from '@/content/opportunities/types';
 import { AEP_BLOB, AEP_REPO } from '@/content/opportunities/fdeEvidenceRegistry';
+import { AEP_THIN_SLICE_LINE } from '@/content/workshops/aep-workshop-copy';
 
 export const AEP_WORKSHOP_HREF = '/workshop/agentic-evidence-pipeline';
 
@@ -50,7 +51,7 @@ export const aepCodeInspect: CodeInspectBlock = {
   ],
 };
 
-export const aepThinSliceTitle = 'Proposed design-forward FDE thin slice';
+export const aepThinSliceTitle = AEP_THIN_SLICE_LINE;
 
 export const aepThinSliceIntro =
   'A bounded first engagement in the same six words as the FDE page. Facilitate and test are verbs inside Teach and Prototype — not extra stages. This is how I would enter an FDE method; it is not presented as completed client work.';

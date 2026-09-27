@@ -82,7 +82,11 @@ export function AepArchitectureDiagram({ className }: { className?: string }) {
 
 export function ModelVsHarness({ className }: { className?: string }) {
   return (
-    <section id="harness" className={cn('scroll-mt-32', className)} aria-labelledby="harness-heading">
+    <section
+      id="harness"
+      className={cn('scroll-mt-[calc(var(--site-header-height,5rem)+3.5rem)]', className)}
+      aria-labelledby="harness-heading"
+    >
       <h2 id="harness-heading" className={opp.h2}>
         Model vs harness
       </h2>
@@ -280,17 +284,17 @@ export function AepReviewDecision({ className }: { className?: string }) {
 const ROUTES = [
   {
     label: 'Allow',
-    treatment: 'solid' as const,
+    tone: 'border-emerald-300 bg-emerald-50/70 dark:border-emerald-800 dark:bg-emerald-950/30',
     body: 'Read approved, versioned public or synthetic source material. Tenant- and visibility-scoped retrieval.',
   },
   {
     label: 'Ask',
-    treatment: 'outline' as const,
+    tone: 'border-amber-300 bg-amber-50/70 dark:border-amber-800 dark:bg-amber-950/30',
     body: 'Pause for human review when the result is uncertain, adverse, or approval is required. Review is persisted state, not a browser modal.',
   },
   {
     label: 'Deny',
-    treatment: 'dashed' as const,
+    tone: 'border-rose-300 bg-rose-50/70 dark:border-rose-800 dark:bg-rose-950/30',
     body: 'Fail closed on unsupported citations. Return insufficient evidence. No autonomous third-party writes. No invented repair prose.',
   },
 ] as const;
@@ -308,13 +312,7 @@ export function AllowAskDeny({ className }: { className?: string }) {
         {ROUTES.map((route) => (
           <li
             key={route.label}
-            className={cn(
-              opp.card,
-              'p-4',
-              route.treatment === 'solid' && 'border-2 border-stone-400 dark:border-stone-500',
-              route.treatment === 'outline' && 'border-2 border-stone-400 bg-transparent dark:border-stone-500',
-              route.treatment === 'dashed' && 'border-2 border-dashed border-stone-400 dark:border-stone-500',
-            )}
+            className={cn(opp.card, 'border-2 p-4', route.tone)}
           >
             <p className={opp.label}>{route.label}</p>
             <p className={cn(opp.matrixSecondary, 'mt-2')}>{route.body}</p>
