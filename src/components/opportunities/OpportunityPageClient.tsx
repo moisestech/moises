@@ -36,18 +36,21 @@ import {
 } from '@/components/opportunities/FdeCaseDiagrams';
 import { TeachingJudgmentPanel } from '@/components/opportunities/TeachingJudgmentPanel';
 import { AEP_WORKSHOP_HREF } from '@/content/workshops/aepHarness';
+import { FdeFlagshipCallout } from '@/components/opportunities/FdeFlagshipCallout';
 import { SectionFlourish } from '@/components/opportunities/SectionFlourish';
 import { getOpportunityCompactAccent } from '@/config/opportunity-compact-section-theme';
 import { opp } from '@/components/opportunities/opportunityTheme';
 import { cn } from '@/lib/utils';
 import type { Opportunity } from '@/content/opportunities/types';
 import { RECRUITING_FDE_SCROLL_MT, RECRUITING_FDE_SUBNAV_TOP } from '@/config/recruiting-layout';
+import type { ReactNode } from 'react';
 
 type OpportunityPageClientProps = {
   opportunity: Opportunity;
+  afterHero?: ReactNode;
 };
 
-export function OpportunityPageClient({ opportunity }: OpportunityPageClientProps) {
+export function OpportunityPageClient({ opportunity, afterHero }: OpportunityPageClientProps) {
   if (opportunity.variant === 'full-dossier') {
     return <TechnologyProductStrategyClient />;
   }
@@ -107,6 +110,7 @@ export function OpportunityPageClient({ opportunity }: OpportunityPageClientProp
 
           <OpportunityColorSection sectionId="hero" className={cn('mt-2 sm:mt-4', fdeScrollMt)}>
             <OpportunityHero opportunity={opportunity} />
+            {afterHero ?? (opportunity.showFdeRoleMap ? <FdeFlagshipCallout className="mt-8 sm:mt-10" /> : null)}
           </OpportunityColorSection>
           {opportunity.showFdeRoleMap ? (
             <>

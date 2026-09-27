@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { FdeFlagshipCallout } from '@/components/opportunities/FdeFlagshipCallout';
 import { OpportunityPageClient } from '@/components/opportunities/OpportunityPageClient';
 import { forwardDeployedInterviewOpportunity } from '@/content/opportunities/deloitte-ai-design-facilitator-fde';
 
@@ -26,5 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function ForwardDeployedPage() {
-  return <OpportunityPageClient opportunity={forwardDeployedInterviewOpportunity} />;
+  return (
+    <OpportunityPageClient
+      opportunity={forwardDeployedInterviewOpportunity}
+      afterHero={<FdeFlagshipCallout className="mt-8 sm:mt-10" />}
+    />
+  );
 }

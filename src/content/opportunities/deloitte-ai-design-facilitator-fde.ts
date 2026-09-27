@@ -99,6 +99,8 @@ const overlayNav: Opportunity['navItems'] = [
   { id: 'case-studies', label: 'Evidence' },
   { id: 'teaching-cred', label: 'Teaching' },
   { id: 'code-inspect', label: 'Code', href: '/workshop/agentic-evidence-pipeline#harness' },
+  { id: 'aep-evidence', label: 'AEP status', href: '/forward-deployed/evidence' },
+  { id: 'aep-workflow', label: 'How I work', href: '/forward-deployed/agentic-workflow' },
   { id: 'process', label: 'Thin slice', href: '/workshop/agentic-evidence-pipeline#process' },
   { id: 'resume', label: 'Contact' },
 ];
@@ -110,6 +112,8 @@ const flagshipNav: Opportunity['navItems'] = [
   { id: 'case-studies', label: 'Evidence' },
   { id: 'teaching-cred', label: 'Teaching' },
   { id: 'code-inspect', label: 'Code', href: '/workshop/agentic-evidence-pipeline#harness' },
+  { id: 'aep-evidence', label: 'AEP status', href: '/forward-deployed/evidence' },
+  { id: 'aep-workflow', label: 'How I work', href: '/forward-deployed/agentic-workflow' },
   { id: 'process', label: 'Thin slice', href: '/workshop/agentic-evidence-pipeline#process' },
   { id: 'resume', label: 'Contact' },
 ];

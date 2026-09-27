@@ -46,7 +46,7 @@ export function isRecruitingSitePath(pathname: string | null): boolean {
   if (pathname === '/ai-engineering') return true;
   if (pathname === '/capabilities') return true;
   if (pathname === '/career-packet') return true;
-  if (pathname === '/forward-deployed') return true;
+  if (pathname === '/forward-deployed' || pathname.startsWith('/forward-deployed/')) return true;
   if (pathname === '/creative-ai') return true;
   if (pathname.startsWith('/projects/')) return true;
   return false;

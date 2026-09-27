@@ -9,6 +9,8 @@ const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[0]['changeF
     { path: '/capabilities', changeFrequency: 'weekly', priority: 0.95 },
     { path: '/ai-engineering', changeFrequency: 'weekly', priority: 0.95 },
     { path: '/forward-deployed', changeFrequency: 'weekly', priority: 0.95 },
+    { path: '/forward-deployed/evidence', changeFrequency: 'weekly', priority: 0.9 },
+    { path: '/forward-deployed/agentic-workflow', changeFrequency: 'weekly', priority: 0.9 },
     { path: '/creative-ai', changeFrequency: 'weekly', priority: 0.95 },
     { path: '/creative-strategist', changeFrequency: 'weekly', priority: 0.9 },
     { path: '/research', changeFrequency: 'monthly', priority: 0.85 },
