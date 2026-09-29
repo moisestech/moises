@@ -9,7 +9,7 @@ export {
   LAB_THESIS,
   LAB_TITLE,
   TRUTH_LABEL,
-} from './types'
+} from './types';
 export type {
   AutomateArtifact,
   AutomateRun,
@@ -33,9 +33,14 @@ export type {
   StructureArtifact,
   StructureFieldKey,
   TruthKind,
-} from './types'
+} from './types';
 
-export { LAB_CHAPTERS, getLabChapter, nextLabChapter, prevLabChapter } from './chapters'
+export {
+  LAB_CHAPTERS,
+  getLabChapter,
+  nextLabChapter,
+  prevLabChapter,
+} from './chapters';
 export {
   DEPENDENCIES,
   FIELD_STATUSES,
@@ -57,7 +62,7 @@ export {
   STORY_LAYERS,
   STRUCTURE_FIELDS,
   THIRTY_DAY_SAMPLE,
-} from './sample'
+} from './sample';
 export {
   automateNotes,
   handoffNotes,
@@ -69,9 +74,9 @@ export {
   publishNotes,
   relateNotes,
   structureNotes,
-} from './checks'
-export { LAB_MEDIA, labMedia } from './media'
-export type { LabMediaAsset } from './media'
+} from './checks';
+export { LAB_MARKS, LAB_MEDIA, labMark, labMedia } from './media';
+export type { LabMarkAsset, LabMarkId, LabMediaAsset } from './media';
 export {
   LAB_FORMATS,
   LAB_INSTRUCTOR,
@@ -82,4 +87,4 @@ export {
   LAB_RHYTHM,
   LAB_SHARED_CENTER,
   LAB_TOOLS,
-} from './proposal'
+} from './proposal';
