@@ -10,7 +10,7 @@ Use this order when picking a link:
 **Museum / nonprofit digital systems (e.g. Courtney at ICA):**
 
 1. **`/institutions`** — focused services page (web, Salesforce, automation, livestreaming, labs)
-2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof
+2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof. Smart Signs technical case: **`/bakehouse/smart-signs`**.
 3. Calendly — 20-minute conversation
 
 **Artist-facing workshops / incubators:**
@@ -75,12 +75,13 @@ Next phases: layout polish → 360 viewer → video entries in the same registry
 | `/institutions` | `hub.ts` | `InstitutionsHubClient.tsx` |
 | `/ica-miami` | `icaMiami.ts` | `IcaMiamiPageClient.tsx` |
 | `/bakehouse` | `bakehouse.ts` | `BakehousePageClient.tsx` |
+| `/bakehouse/smart-signs` | `bakehouse-smart-signs.ts` | `BakehouseSmartSignsClient.tsx` |
 | `/workshops` | `workshopsOfferings.ts` | `WorkshopClient.tsx` |
 | `/artist-sustainability` | `artistSustainability.ts` | `ArtistSustainabilityClient.tsx` |
 
 ## Known polish gaps
 
 - Workshops visual language still diverges from the institutional dossier system
-- Bakehouse SmartSign / systems photography still placeholder-heavy
+- Bakehouse Smart Signs case is `/bakehouse/smart-signs`. Install photography is still an empty slot. Do not use `smart-sign/users/bakehouse_*` portraits or the DCC website screenshot as install proof.
 - DCC.MIAMI public section deferred on `/artist-infrastructure` (insufficient documentary proof)
 - Museum of Sex hub card image mismatch (transmediale poster) — fix when touching hub media

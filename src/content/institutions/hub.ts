@@ -538,7 +538,7 @@ export const institutionsHub = {
         },
       ],
       facts: [
-        { value: 'Shipped', label: 'SmartSigns + Raspberry Pi / Anthias displays', verification: 'public' as const },
+        { value: 'In the building', label: 'SmartSigns + Raspberry Pi / Anthias — handoff in progress', verification: 'public' as const },
         { value: 'Proposed', label: 'Artist Portal on Assembly', verification: 'public' as const },
         { value: 'Future', label: 'Connected digital lab and communications partnership', verification: 'public' as const },
       ],
@@ -554,7 +554,7 @@ export const institutionsHub = {
         },
       ],
       href: '/bakehouse',
-      cta: 'Open Bakehouse systems case study',
+      cta: 'Open Bakehouse',
     },
   ],
   additionalEvidence: [

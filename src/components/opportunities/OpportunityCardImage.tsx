@@ -28,9 +28,17 @@ export function OpportunityCardImage({ src, alt, srcDark, local }: OpportunityCa
   return (
     <>
       <div
-        className="absolute inset-0 bg-stone-200 dark:bg-stone-800"
+        className={cn(
+          'absolute inset-0 bg-stone-200 dark:bg-stone-800',
+          !loaded && 'animate-pulse motion-reduce:animate-none',
+        )}
         aria-hidden
-      />
+      >
+        <div className="absolute inset-0 flex flex-col justify-end gap-2 p-4">
+          <span className="h-2 w-1/3 rounded-sm bg-stone-300 dark:bg-stone-600" />
+          <span className="h-2 w-2/3 rounded-sm bg-stone-300/80 dark:bg-stone-600/80" />
+        </div>
+      </div>
       {local ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -39,6 +47,9 @@ export function OpportunityCardImage({ src, alt, srcDark, local }: OpportunityCa
           className={cn('relative z-[1]', lightClass)}
           loading="lazy"
           onLoad={() => setLoaded(true)}
+          ref={(node) => {
+            if (node?.complete) setLoaded(true)
+          }}
         />
       ) : (
         <Image

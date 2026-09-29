@@ -17,7 +17,7 @@ export function AepArchitectureDiagram({ className }: { className?: string }) {
       <svg
         viewBox="0 0 760 168"
         role="img"
-        aria-label="AEP architecture: public or synthetic sources, normalize and version evidence, Postgres FTS and pgvector, typed LangGraph assessment, citation and policy gate, human review, append-only audit trail"
+        aria-label="AEP architecture: public or synthetic sources, normalize and version evidence, Postgres FTS and vector path, typed assessment, citation and policy gate, human review, append-only audit trail"
         className="h-auto w-full"
       >
         <title>Agentic Evidence Pipeline — architecture</title>

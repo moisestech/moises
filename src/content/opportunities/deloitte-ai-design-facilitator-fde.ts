@@ -1,11 +1,10 @@
 /**
  * Deloitte — AI Design Facilitator and Forward-Deployed Engineer II
- * Public send: /forward-deployed
  * Private overlay: /opportunities/deloitte-ai-design-facilitator-fde
  * Alias: /applied-ai/deloitte-ai-design-facilitator
  *
- * One factory, two surfaces. Public flagship is evergreen (no listing URL,
- * deadline, or employer overlay). Private overlay keeps requisition 360529.
+ * Public evergreen FDE send is independent: /forward-deployed
+ * (src/content/flagships/forward-deployed.ts). Do not reuse this factory for it.
  */
 
 import type { HonestyOverlay, Opportunity } from './types';
@@ -390,7 +389,3 @@ function createDesignFacilitatorFdeOpportunity(surface: FacilitatorSurface): Opp
 /** Private noindex overlay — /opportunities/deloitte-ai-design-facilitator-fde */
 export const deloitteAiDesignFacilitatorFdeOpportunity =
   createDesignFacilitatorFdeOpportunity('overlay');
-
-/** Public interview send — /forward-deployed */
-export const forwardDeployedInterviewOpportunity =
-  createDesignFacilitatorFdeOpportunity('flagship');

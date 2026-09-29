@@ -527,8 +527,8 @@ export const artistInfrastructurePage = {
         body: 'Artist-facing digital signage and kiosk infrastructure connecting spatial communication, staff-updatable programming, and maintainable technical workflows at Bakehouse Art Complex.',
         status: 'in-progress' as DeliveryStatus,
         statusNote:
-          'Active implementation / in progress. Dedicated install photography pending on the Bakehouse page.',
-        href: '/bakehouse',
+          'Institutional delivery. Anthias handoff is in progress. Install photography is not published yet.',
+        href: '/bakehouse/smart-signs',
         image: {
           src: BAKEHOUSE_IMAGE,
           alt: 'Bakehouse Art Complex open studios — institutional context for SmartSign systems',

@@ -1,6 +1,7 @@
 import { SiAirtable, SiClaude, SiFigma } from 'react-icons/si';
 import { cn } from '@/lib/utils';
 import { opp } from '@/components/opportunities/opportunityTheme';
+import type { HeroToolMark } from '@/content/opportunities/types';
 
 function CursorMark({ className }: { className?: string }) {
   return (
@@ -13,17 +14,41 @@ function CursorMark({ className }: { className?: string }) {
   );
 }
 
-const TOOLS = [
+const DEFAULT_TOOLS = [
   { id: 'cursor', label: 'Cursor', Icon: CursorMark },
   { id: 'claude', label: 'Claude', Icon: SiClaude },
   { id: 'airtable', label: 'Airtable', Icon: SiAirtable },
   { id: 'figma', label: 'Figma', Icon: SiFigma },
 ] as const;
 
-export function HeroToolMarks({ className }: { className?: string }) {
+type HeroToolMarksProps = {
+  className?: string;
+  items?: HeroToolMark[];
+};
+
+export function HeroToolMarks({ className, items }: HeroToolMarksProps) {
+  if (items?.length) {
+    return (
+      <ul className={cn('mt-5 flex flex-wrap items-center gap-2 sm:gap-3', className)} aria-label="Evidenced stack">
+        {items.map((item) => (
+          <li
+            key={item.alt}
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-stone-800 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={item.src} alt="" className="h-5 w-auto max-w-[2.5rem] object-contain" />
+            <span className={cn(opp.label, 'normal-case tracking-normal text-stone-700 dark:text-stone-200')}>
+              {item.alt}
+            </span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   return (
     <ul className={cn('mt-5 flex flex-wrap items-center gap-2 sm:gap-3', className)} aria-label="Daily tools">
-      {TOOLS.map(({ id, label, Icon }) => (
+      {DEFAULT_TOOLS.map(({ id, label, Icon }) => (
         <li
           key={id}
           className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-stone-800 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100"

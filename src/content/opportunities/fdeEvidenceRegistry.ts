@@ -66,6 +66,8 @@ export const FIELD_KIT_DEMO = 'https://flora-field-kit.vercel.app';
 export const FIELD_KIT_DEMO_CASE = `${FIELD_KIT_DEMO}/case/demo-miami-exhibition-teaser`;
 export const AEP_REPO = 'https://github.com/moisestech/agentic-evidence-pipeline';
 export const AEP_BLOB = `${AEP_REPO}/blob/main`;
+export const AGENTIC_OPS_REPO = 'https://github.com/moisestech/agentic-ops';
+export const AGENTIC_OPS_BLOB = `${AGENTIC_OPS_REPO}/blob/main`;
 
 const teachingWorkshop = digilabMedia['workshop.art-tech-coding'];
 const lore = evidenceProjects['lore-machine'];
@@ -195,6 +197,35 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
     ],
   },
   {
+    id: 'agentic-ops',
+    title: 'Agentic Ops',
+    lifecycleStage: 'Govern',
+    evidenceType: 'reference-implementation',
+    claim:
+      'LangGraph StateGraph: retrieve → tools → draft → evaluate → pause → execute or respond. WRITE tools stay pending until a person decides.',
+    limitation:
+      'Reference implementation. Fake provider is the CI default. Retrieval is keyword today. The tool server is MCP-shaped stdio, not an official MCP SDK deployment. Not a hosted customer product.',
+    whatChanged:
+      'A FastAPI runtime with an in-memory LangGraph MemorySaver, a permissioned tool catalog, citation/grounding checks, and an approval console. A Postgres checkpointer is next.',
+    whatThisProves:
+      'Python backend and agent-runtime engineering you can inspect. Not production multi-tenant ops.',
+    inspectHref: '/projects/agentic-ops',
+    inspectLabel: 'Inspect Agentic Ops',
+    illustration: {
+      src: evidenceProjects['agentic-ops'].imageSrc,
+      alt: evidenceProjects['agentic-ops'].imageAlt,
+    },
+    featured: true,
+    tools: ['Python', 'FastAPI', 'LangGraph'],
+    media: [
+      {
+        src: evidenceProjects['agentic-ops'].imageSrc,
+        alt: evidenceProjects['agentic-ops'].imageAlt,
+        caption: 'Reference runtime — not a product screenshot',
+      },
+    ],
+  },
+  {
     id: 'field-kit',
     title: 'Field Kit',
     lifecycleStage: 'Prototype',
@@ -297,19 +328,42 @@ export const fdeEvidenceRegistry: FdeEvidenceItem[] = [
   },
   {
     id: 'playwire',
-    title: 'Playwire — publisher integrations',
+    title: 'Playwire — solutions and data',
     lifecycleStage: 'Handoff',
     evidenceType: 'production-experience',
-    claim: 'Listen, integrate, leave the publisher able to operate the onboarding path.',
+    claim:
+      'Solutions Engineer: publisher integrations and JavaScript debugging. Data Analyst: Kinesis → Athena → Snowflake, Tableau, Slack reliability alerting.',
     limitation:
-      'Confidentiality-safe abstraction. No public case page. Client names, dashboards, and scale numbers are not disclosed here.',
+      'Confidentiality-safe. No client names, dashboards, throughput, or cost metrics. No public case page.',
     whatChanged:
-      'Publisher integrations and JS debugging for SaaS onboarding; data reliability alerting on the analytics side.',
-    whatThisProves: 'Client-facing solutions habit. Not a featured case this pass.',
+      'One year delivering SaaS onboarding integrations; one year migrating the analytics path onto Snowflake and alerting on data consistency.',
+    whatThisProves: 'Client-facing solutions engineering and enterprise data-pipeline work.',
     inspectHref: '/ai-engineering#proof',
     inspectLabel: 'Related proof on AI Engineering',
     illustration: { src: FDE_PORTRAITS.playwire.src, alt: FDE_PORTRAITS.playwire.alt },
+    featured: true,
+    tools: ['JavaScript', 'Kinesis', 'Athena', 'Snowflake'],
+  },
+  {
+    id: 'infra24-smartsigns',
+    title: 'Bakehouse SmartSigns',
+    lifecycleStage: 'Deploy',
+    evidenceType: 'production-experience',
+    claim:
+      'Raspberry Pi / Anthias displays at Bakehouse Art Complex: Linux, content workflow, networking, and install constraints across hardware and interface.',
+    limitation:
+      'Institutional delivery with operational handoff in progress. Install photography is not published yet. This is not the commercial SmartSign service page.',
+    whatChanged:
+      'A repeatable vertical screen format for artist and event promotion, coordinated with Bakehouse technology leadership.',
+    whatThisProves: 'Systems work below the browser. Not an embedded-engineering pivot.',
+    inspectHref: '/bakehouse/smart-signs',
+    inspectLabel: 'Open the Smart Signs case',
+    illustration: {
+      src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
+      alt: 'Stand-in frame. Not a Bakehouse Smart Sign installation photo.',
+    },
     supporting: true,
+    tools: ['Raspberry Pi', 'Linux', 'CMS'],
   },
   {
     id: 'thin-slice',
@@ -371,6 +425,41 @@ export const FDE_FEATURED_PROJECT_IDS = [
 
 export const FDE_SUPPORTING_IDS = ['field-kit', 'n8n-workshop', 'playwire'] as const;
 
+/** Public `/forward-deployed` engineering flagship — Deloitte overlay keeps the arrays above. */
+export const FDE_ENGINEERING_PROOF_IDS = [
+  'agentic-ops',
+  'lore-machine',
+  'playwire',
+  'bookleggers',
+  'infra24-smartsigns',
+  'aep',
+] as const;
+
+export const FDE_ENGINEERING_EXPLORER_IDS = [
+  'agentic-ops',
+  'lore-machine',
+  'playwire',
+  'bookleggers',
+  'infra24-smartsigns',
+  'aep',
+  'discover-lore',
+  'oolite-workshops',
+] as const;
+
+export const FDE_ENGINEERING_FEATURED_IDS = [
+  'agentic-ops',
+  'lore-machine',
+  'playwire-alumni',
+  'bookleggers-commerce-automation',
+] as const;
+
+export const FDE_ENGINEERING_SUPPORTING_IDS = [
+  'aep',
+  'oolite-workshops',
+  'n8n-workshop',
+  'field-kit',
+] as const;
+
 export function toExplorerRow(item: FdeEvidenceItem, surface: 'flagship' | 'overlay'): RoleMatchRow {
   return {
     requirement: item.title,
@@ -426,9 +515,21 @@ export function toSupportingItem(item: FdeEvidenceItem): SupportingEvidenceItem 
         ? FIELD_KIT_REPO
         : item.id === 'n8n-workshop'
           ? '/workshop/the-art-of-ai-agents'
-          : undefined,
+          : item.id === 'agentic-ops'
+            ? AGENTIC_OPS_REPO
+            : item.id === 'aep'
+              ? AEP_REPO
+              : undefined,
     secondaryLinkLabel:
-      item.id === 'field-kit' ? 'Inspect repo' : item.id === 'n8n-workshop' ? 'Art of AI Agents' : undefined,
+      item.id === 'field-kit'
+        ? 'Inspect repo'
+        : item.id === 'n8n-workshop'
+          ? 'Art of AI Agents'
+          : item.id === 'agentic-ops'
+            ? 'GitHub'
+            : item.id === 'aep'
+              ? 'AEP on GitHub'
+              : undefined,
     imageSrc: item.illustration.src,
     imageAlt: item.illustration.alt,
     imageLocal: item.illustration.local,
