@@ -1,20 +1,39 @@
-import type { TruthKind } from './types'
+import type { TruthKind } from './types';
 
 export type LabMediaAsset = {
-  id: string
-  filename: string
-  kind: TruthKind
-  caption: string
-  alt: string
-  /** Hosted URL. Storyboards and held photographs stay without a file. */
-  src?: string
-  aspect: '3/2' | '4/5' | '16/9'
-}
+  id: string;
+  filename: string;
+  kind: TruthKind;
+  caption: string;
+  alt: string;
+  /** Hosted landscape or storyboard card. Held photographs stay without a file. */
+  src?: string;
+  /** Matched 512px mark for the chapter path and compact navigation. */
+  iconSrc?: string;
+  /** Matched alpha PNG that can sit directly on the paper page. */
+  transparentSrc?: string;
+  aspect: '3/2' | '4/5' | '16/9';
+};
+
+export type LabMarkId =
+  | 'overview'
+  | 'why'
+  | 'path'
+  | 'tools'
+  | 'instructor'
+  | 'codesign';
+
+export type LabMarkAsset = {
+  id: LabMarkId;
+  alt: string;
+  iconSrc: string;
+  transparentSrc: string;
+};
 
 const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   coverB: {
     id: 'RATL-ILL-00-B',
-    filename: 'ratcliffe-cover-direction-b-semantic-workflow.png',
+    filename: 'cover-path-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual cover: source, interpretation, a human decision, a build, and a handoff, with one return path for revision. Not a photograph of a workshop.',
@@ -23,7 +42,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   coverA: {
     id: 'RATL-ILL-00-A',
-    filename: 'ratcliffe-cover-direction-a-moises-artist-interface.png',
+    filename: 'cover-split-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Alternate conceptual cover: an archive tray and a patch bay share one surface, with a visible review gate. Not documentary evidence.',
@@ -32,9 +51,10 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   facilitation: {
     id: 'RATL-FAC-01',
-    filename: 'ratcliffe-conceptual-workshop-facilitation.png',
+    filename: 'facilitation-landscape.png',
     kind: 'conceptual-visualization',
-    caption: 'Conceptual visualization of the proposed hands-on workshop format.',
+    caption:
+      'Conceptual visualization of the proposed hands-on workshop format.',
     alt: 'A facilitator and four learners work around a metal table with source cards and a review gate. Conceptual scene, not a documented session.',
     aspect: '3/2',
   },
@@ -76,7 +96,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   observe: {
     id: 'RATL-ILL-01',
-    filename: 'ratcliffe-ch01-observe-hidden-labor.png',
+    filename: 'observe-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual cutaway: a public output depends on source material, annotation, waiting, human judgment, maintenance, and documentation.',
@@ -85,7 +105,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   structure: {
     id: 'RATL-ILL-02',
-    filename: 'ratcliffe-ch02-structure-honest-gaps.png',
+    filename: 'structure-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual structure study: a responsible schema preserves explicit gaps and keeps uncertain material unassigned.',
@@ -94,7 +114,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   automate: {
     id: 'RATL-ILL-03',
-    filename: 'ratcliffe-ch03-automate-visible-routing.png',
+    filename: 'automate-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual automation study: an open route branches into review and hold, with a manual lever before the exit.',
@@ -103,7 +123,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   judge: {
     id: 'RATL-ILL-04',
-    filename: 'ratcliffe-ch04-judge-evidence-not-fluency.png',
+    filename: 'judge-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual evidence review: visual confidence does not establish support. A human reviewer decides what the source permits.',
@@ -112,7 +132,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   relate: {
     id: 'RATL-ILL-05',
-    filename: 'ratcliffe-ch05-relate-relationships-as-claims.png',
+    filename: 'relate-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual relationship study: confirmed, proposed, restricted, and unknown connections stay distinct and revisable.',
@@ -121,7 +141,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   publish: {
     id: 'RATL-ILL-06',
-    filename: 'ratcliffe-ch06-publish-visible-layers.png',
+    filename: 'publish-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual publishing assembly: source, metadata, context, interpretation, accessibility, credit, and reuse stay distinct.',
@@ -130,7 +150,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   preserve: {
     id: 'RATL-ILL-07',
-    filename: 'ratcliffe-ch07-preserve-outside-the-platform.png',
+    filename: 'preserve-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual preservation kit: source material, documentation, removable storage, and an independent copy remain usable when an external connection fails.',
@@ -139,7 +159,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   handoff: {
     id: 'RATL-ILL-08',
-    filename: 'ratcliffe-ch08-handoff-continuation-kit.png',
+    filename: 'hand-off-landscape.png',
     kind: 'conceptual-visualization',
     caption:
       'Conceptual handoff: a portable guide, dependency cards, and a matched connection let another person inspect and continue the system.',
@@ -148,7 +168,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   'story-observe': {
     id: 'RATL-STORY-01',
-    filename: 'storyboard-observe-the-work',
+    filename: 'story-observe-landscape.png',
     kind: 'storyboard',
     caption:
       'Storyboard, not a recording: map one finished output back to labor, source, delay, tools, and maintenance.',
@@ -157,7 +177,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   'story-judge': {
     id: 'RATL-STORY-04',
-    filename: 'storyboard-review-ai-clauses',
+    filename: 'story-judge-landscape.png',
     kind: 'storyboard',
     caption:
       'Storyboard, not a recording: compare the supplied date with an unsupported exact year, then revise without erasing the uncertainty.',
@@ -166,7 +186,7 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   'story-publish': {
     id: 'RATL-STORY-06',
-    filename: 'storyboard-compose-a-public-argument',
+    filename: 'story-publish-landscape.png',
     kind: 'storyboard',
     caption:
       'Storyboard, not a recording: reorder evidence, context, interpretation, accessibility, and credit, and preview the public result.',
@@ -175,42 +195,83 @@ const LAB_MEDIA_SOURCE: Record<string, LabMediaAsset> = {
   },
   'story-handoff': {
     id: 'RATL-STORY-08',
-    filename: 'storyboard-peer-operate-a-handoff',
+    filename: 'story-handoff-landscape.png',
     kind: 'storyboard',
     caption:
       'Storyboard, not a recording: a second person follows the guide, meets a missing dependency, chooses a fallback, and records the repair.',
     alt: 'A labeled storyboard card for the Hand Off demonstration. No video is available.',
     aspect: '16/9',
   },
-}
+};
 
-const CDN = 'https://res.cloudinary.com/dck5rzi4h/image/upload'
+const CDN =
+  'https://res.cloudinary.com/dck5rzi4h/image/upload/dccmiami/workshops/artist-infrastructure';
 
-/** Conceptual plates only. Portrait, teaching, workflow, and artifact stay unhosted. */
-const CLOUDINARY_SRC: Record<string, string> = {
-  coverB: `${CDN}/v1790463172/dccmiami/workshops/artist-infrastructure/ratcliffe-cover-direction-b-semantic-workflow_rvedx1.png`,
-  coverA: `${CDN}/v1790463160/dccmiami/workshops/artist-infrastructure/ratcliffe-cover-direction-a-moises-artist-interface_hm867k.png`,
-  facilitation: `${CDN}/v1790463168/dccmiami/workshops/artist-infrastructure/ratcliffe-conceptual-workshop-facilitation_p3lxru.png`,
-  observe: `${CDN}/v1790463182/dccmiami/workshops/artist-infrastructure/ratcliffe-ch01-observe-hidden-labor_trvamy.png`,
-  structure: `${CDN}/v1790463179/dccmiami/workshops/artist-infrastructure/ratcliffe-ch02-structure-honest-gaps_yrbaaj.png`,
-  automate: `${CDN}/v1790463183/dccmiami/workshops/artist-infrastructure/ratcliffe-ch03-automate-visible-routing_flmzrk.png`,
-  judge: `${CDN}/v1790463192/dccmiami/workshops/artist-infrastructure/ratcliffe-ch04-judge-evidence-not-fluency_y3phfo.png`,
-  relate: `${CDN}/v1790463179/dccmiami/workshops/artist-infrastructure/ratcliffe-ch05-relate-relationships-as-claims_gntqqh.png`,
-  publish: `${CDN}/v1790463194/dccmiami/workshops/artist-infrastructure/ratcliffe-ch06-publish-visible-layers_zpokvv.png`,
-  preserve: `${CDN}/v1790463195/dccmiami/workshops/artist-infrastructure/ratcliffe-ch07-preserve-outside-the-platform_ml2nu2.png`,
-  handoff: `${CDN}/v1790463190/dccmiami/workshops/artist-infrastructure/ratcliffe-ch08-handoff-continuation-kit_qt3yms.png`,
+const matchedObjectBase: Record<string, string> = {
+  coverB: 'cover-path',
+  coverA: 'cover-split',
+  facilitation: 'facilitation',
+  observe: 'observe',
+  structure: 'structure',
+  automate: 'automate',
+  judge: 'judge',
+  relate: 'relate',
+  publish: 'publish',
+  preserve: 'preserve',
+  handoff: 'hand-off',
+};
+
+function hosted(filename: string) {
+  return `${CDN}/${filename}`;
 }
 
 function withHostedFile(key: string, asset: LabMediaAsset): LabMediaAsset {
-  const src = CLOUDINARY_SRC[key]
-  if (!src) return asset
-  return { ...asset, src }
+  const objectBase = matchedObjectBase[key];
+  if (objectBase) {
+    return {
+      ...asset,
+      src: hosted(`${objectBase}-landscape.png`),
+      iconSrc: hosted(`${objectBase}-icon.png`),
+      transparentSrc: hosted(`${objectBase}-transparent.png`),
+    };
+  }
+  if (asset.kind === 'storyboard')
+    return { ...asset, src: hosted(asset.filename) };
+  return asset;
 }
 
 export const LAB_MEDIA: Record<string, LabMediaAsset> = Object.fromEntries(
-  Object.entries(LAB_MEDIA_SOURCE).map(([key, asset]) => [key, withHostedFile(key, asset)]),
-)
+  Object.entries(LAB_MEDIA_SOURCE).map(([key, asset]) => [
+    key,
+    withHostedFile(key, asset),
+  ])
+);
 
 export function labMedia(id: string): LabMediaAsset | undefined {
-  return LAB_MEDIA[id]
+  return LAB_MEDIA[id];
+}
+
+const LAB_MARK_SOURCE: Record<LabMarkId, string> = {
+  overview: 'Front door of the proposed lab.',
+  why: 'Two equal lenses: humanities and artist infrastructure.',
+  path: 'Eight steps forming one inspectable route.',
+  tools: 'Inspectable tools arranged in a tray.',
+  instructor: 'An anonymous teaching-practice figure.',
+  codesign: 'An open decision with room between two sides.',
+};
+
+export const LAB_MARKS: Record<LabMarkId, LabMarkAsset> = Object.fromEntries(
+  Object.entries(LAB_MARK_SOURCE).map(([id, alt]) => [
+    id,
+    {
+      id,
+      alt,
+      iconSrc: hosted(`mark-${id}-icon.png`),
+      transparentSrc: hosted(`mark-${id}-transparent.png`),
+    },
+  ])
+) as Record<LabMarkId, LabMarkAsset>;
+
+export function labMark(id: LabMarkId): LabMarkAsset {
+  return LAB_MARKS[id];
 }
