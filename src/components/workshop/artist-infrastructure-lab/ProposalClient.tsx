@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
+import Link from 'next/link';
 import {
   LAB_CHAPTERS,
   LAB_FORMATS,
@@ -15,13 +15,19 @@ import {
   LAB_THESIS,
   LAB_TITLE,
   LAB_TOOLS,
-} from '@/content/workshops/artist-infrastructure-lab'
-import { LabGhostButton, LabHeader, LabKicker, labPage, labWrap } from './LabChrome'
-import { LabMedia } from './LabMedia'
-import { useLabProject } from './useLabProject'
+} from '@/content/workshops/artist-infrastructure-lab';
+import {
+  LabGhostButton,
+  LabHeader,
+  LabKicker,
+  labPage,
+  labWrap,
+} from './LabChrome';
+import { LabIcon, LabMark, LabMedia, LabObject } from './LabMedia';
+import { useLabProject } from './useLabProject';
 
 export function ProposalClient() {
-  const { reset } = useLabProject()
+  const { reset } = useLabProject();
 
   return (
     <main className={labPage}>
@@ -30,15 +36,27 @@ export function ProposalClient() {
 
         <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-end">
           <div className="space-y-4">
-            <LabKicker>Eight studio sessions · one cumulative project</LabKicker>
-            <h1 className="text-4xl leading-tight tracking-tight sm:text-5xl">{LAB_TITLE}</h1>
+            <div className="flex items-start gap-3">
+              <LabMark id="overview" className="mt-1" />
+              <div className="space-y-2">
+                <LabKicker>
+                  Eight studio sessions · one cumulative project
+                </LabKicker>
+                <h1 className="text-4xl leading-tight tracking-tight sm:text-5xl">
+                  {LAB_TITLE}
+                </h1>
+              </div>
+            </div>
             <p className="text-lg leading-snug text-[#3d3832]">
               Digital humanities. Digital literacy. Systems artists can use.
             </p>
             <p className="text-xl leading-snug">{LAB_THESIS}</p>
             <p className="text-sm leading-relaxed text-[#5c564e]">
-              Open to co-development. The interactive chapters are a working preview on one illustrative sample. They are not a finished course and they do not connect to institutional systems.
+              Open to co-development. The interactive chapters are a working
+              preview on one illustrative sample. They are not a finished course
+              and they do not connect to institutional systems.
             </p>
+            <LabObject id="coverB" className="max-h-44 justify-self-start" />
             <Link
               href={`${LAB_LEARN}/observe`}
               className="inline-block border border-[#1c1916] bg-[#1c1916] px-4 py-2 text-sm text-[#f3eee6]"
@@ -50,10 +68,15 @@ export function ProposalClient() {
         </section>
 
         <section className="space-y-4" aria-labelledby="why-heading">
-          <LabKicker>Why this lab</LabKicker>
-          <h2 id="why-heading" className="text-3xl tracking-tight">
-            Two equal lenses
-          </h2>
+          <div className="flex items-start gap-3">
+            <LabMark id="why" />
+            <div className="space-y-1">
+              <LabKicker>Why this lab</LabKicker>
+              <h2 id="why-heading" className="text-3xl tracking-tight">
+                Two equal lenses
+              </h2>
+            </div>
+          </div>
           {LAB_PREMISE.map((paragraph) => (
             <p key={paragraph} className="max-w-3xl text-base leading-relaxed">
               {paragraph}
@@ -61,7 +84,10 @@ export function ProposalClient() {
           ))}
           <div className="grid gap-4 md:grid-cols-2">
             {LAB_LENSES.map((lens) => (
-              <article key={lens.id} className="border border-[#d9d0c3] bg-white p-4">
+              <article
+                key={lens.id}
+                className="border border-[#d9d0c3] bg-white p-4"
+              >
                 <h3 className="text-lg">{lens.title}</h3>
                 <ul className="mt-3 space-y-1 text-sm">
                   {lens.items.map((item) => (
@@ -71,19 +97,35 @@ export function ProposalClient() {
               </article>
             ))}
           </div>
-          <p className="border border-[#0f5f5c] bg-[#e5f2f1] px-4 py-3 text-sm">{LAB_SHARED_CENTER}</p>
+          <p className="border border-[#0f5f5c] bg-[#e5f2f1] px-4 py-3 text-sm">
+            {LAB_SHARED_CENTER}
+          </p>
           <p className="max-w-3xl text-sm leading-relaxed text-[#3d3832]">
-            The lab is meant to sit beside conversations about creative practice, entrepreneurship, digital presence, and institutional capacity. Its value is practical independence with critical judgment. Dimitry’s feedback should determine the cohort, the curriculum connections, the examples, and the delivery format. This page does not assume a departmental requirement or a partnership with other FIU units.
+            The lab is meant to sit beside conversations about creative
+            practice, entrepreneurship, digital presence, and institutional
+            capacity. Its value is practical independence with critical
+            judgment. Dimitry’s feedback should determine the cohort, the
+            curriculum connections, the examples, and the delivery format. This
+            page does not assume a departmental requirement or a partnership
+            with other FIU units.
           </p>
         </section>
 
         <section className="space-y-4" aria-labelledby="arc-heading">
-          <LabKicker>One project</LabKicker>
-          <h2 id="arc-heading" className="text-3xl tracking-tight">
-            Eight artifacts, carried forward
-          </h2>
+          <div className="flex items-start gap-3">
+            <LabMark id="path" />
+            <div className="space-y-1">
+              <LabKicker>One project</LabKicker>
+              <h2 id="arc-heading" className="text-3xl tracking-tight">
+                Eight artifacts, carried forward
+              </h2>
+            </div>
+          </div>
           <p className="max-w-3xl text-base leading-relaxed">
-            Every chapter asks a humanities question, builds an inspectable artifact, tests a failure, and hands the result to the next chapter. Each participant would choose a starting context. This preview uses one sample record so the path can be walked now.
+            Every chapter asks a humanities question, builds an inspectable
+            artifact, tests a failure, and hands the result to the next chapter.
+            Each participant would choose a starting context. This preview uses
+            one sample record so the path can be walked now.
           </p>
           <ol className="grid gap-3 sm:grid-cols-2">
             {LAB_CHAPTERS.map((chapter) => (
@@ -92,11 +134,16 @@ export function ProposalClient() {
                   href={`${LAB_LEARN}/${chapter.id}`}
                   className="block h-full border border-[#d9d0c3] bg-white p-4 hover:border-[#1c1916]"
                 >
-                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#0f5f5c]">
-                    {chapter.number} · {chapter.title}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <LabIcon id={chapter.plateId} />
+                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#0f5f5c]">
+                      {chapter.number} · {chapter.title}
+                    </p>
+                  </div>
                   <p className="mt-2 text-base">{chapter.artifact}</p>
-                  <p className="mt-1 text-sm text-[#5c564e]">{chapter.question}</p>
+                  <p className="mt-1 text-sm text-[#5c564e]">
+                    {chapter.question}
+                  </p>
                 </Link>
               </li>
             ))}
@@ -104,47 +151,81 @@ export function ProposalClient() {
         </section>
 
         <section className="space-y-4" aria-labelledby="tools-heading">
-          <LabKicker>Tools and teaching rhythm</LabKicker>
-          <h2 id="tools-heading" className="text-3xl tracking-tight">
-            What the lab uses, and what this preview refuses
-          </h2>
+          <div className="flex items-start gap-3">
+            <LabMark id="tools" />
+            <div className="space-y-1">
+              <LabKicker>Tools and teaching rhythm</LabKicker>
+              <h2 id="tools-heading" className="text-3xl tracking-tight">
+                What the lab uses, and what this preview refuses
+              </h2>
+            </div>
+          </div>
           <ul className="grid gap-3">
             {LAB_TOOLS.map((tool) => (
-              <li key={tool.name} className="border border-[#d9d0c3] bg-white p-4">
+              <li
+                key={tool.name}
+                className="border border-[#d9d0c3] bg-white p-4"
+              >
                 <h3 className="text-base">{tool.name}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-[#3d3832]">{tool.detail}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#3d3832]">
+                  {tool.detail}
+                </p>
               </li>
             ))}
           </ul>
           <ol className="flex flex-wrap gap-2">
             {LAB_RHYTHM.map((step, index) => (
-              <li key={step} className="border border-[#d9d0c3] px-3 py-2 text-sm">
+              <li
+                key={step}
+                className="border border-[#d9d0c3] px-3 py-2 text-sm"
+              >
                 {index + 1}. {step}
               </li>
             ))}
           </ol>
           <p className="max-w-3xl text-sm leading-relaxed text-[#5c564e]">
-            Course previews use deterministic local sample data. No live institutional systems, student records, messages, payment systems, or publication actions. Tool costs, licenses, classroom access, and approved accounts have to be checked before delivery.
+            Course previews use deterministic local sample data. No live
+            institutional systems, student records, messages, payment systems,
+            or publication actions. Tool costs, licenses, classroom access, and
+            approved accounts have to be checked before delivery.
           </p>
         </section>
 
         <section className="space-y-4" aria-labelledby="instructor-heading">
-          <LabKicker>Instructor</LabKicker>
-          <h2 id="instructor-heading" className="text-3xl tracking-tight">
-            Moises Sanabria
-          </h2>
-          <p className="max-w-2xl text-base leading-relaxed">{LAB_INSTRUCTOR}</p>
+          <div className="flex items-start gap-3">
+            <LabMark id="instructor" />
+            <div className="space-y-1">
+              <LabKicker>Instructor</LabKicker>
+              <h2 id="instructor-heading" className="text-3xl tracking-tight">
+                Moises Sanabria
+              </h2>
+            </div>
+          </div>
+          <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(220px,0.42fr)] md:items-center">
+            <p className="max-w-2xl text-base leading-relaxed">
+              {LAB_INSTRUCTOR}
+            </p>
+            <LabObject id="facilitation" className="max-h-52" />
+          </div>
           <LabMedia id="facilitation" />
         </section>
 
         <section className="space-y-4" aria-labelledby="codesign-heading">
-          <LabKicker>Co-development</LabKicker>
-          <h2 id="codesign-heading" className="text-3xl tracking-tight">
-            The backbone is ready to review. The delivery is not decided.
-          </h2>
+          <div className="flex items-start gap-3">
+            <LabMark id="codesign" />
+            <div className="space-y-1">
+              <LabKicker>Co-development</LabKicker>
+              <h2 id="codesign-heading" className="text-3xl tracking-tight">
+                The backbone is ready to review. The delivery is not decided.
+              </h2>
+            </div>
+          </div>
           <div className="grid gap-3 md:grid-cols-3">
             {LAB_FORMATS.map((format) => (
-              <article key={format.title} className="border border-[#d9d0c3] bg-white p-4">
+              <article
+                key={format.title}
+                className="border border-[#d9d0c3] bg-white p-4"
+              >
                 <h3 className="text-base">{format.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed">{format.body}</p>
               </article>
@@ -160,7 +241,8 @@ export function ProposalClient() {
           </div>
           <p className="text-base">{LAB_NEXT}</p>
           <p className="text-sm leading-relaxed text-[#3d3832]">
-            Portfolio references, not a claim that this proposal is an approved course:{' '}
+            Portfolio references, not a claim that this proposal is an approved
+            course:{' '}
             <a className="underline" href="https://www.moises.tech">
               moises.tech
             </a>
@@ -170,12 +252,15 @@ export function ProposalClient() {
             </Link>
             . Cover direction A remains an alternate.
           </p>
-          <LabMedia id="coverA" />
+          <div className="grid gap-6 lg:grid-cols-[minmax(220px,0.45fr)_minmax(0,1fr)] lg:items-center">
+            <LabObject id="coverA" className="max-h-64" />
+            <LabMedia id="coverA" />
+          </div>
           <LabGhostButton testId="reset-project" onClick={reset}>
             Clear this browser’s project package
           </LabGhostButton>
         </section>
       </div>
     </main>
-  )
+  );
 }
