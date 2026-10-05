@@ -21,7 +21,7 @@ export default function Exhibitions() {
   );
 
   // Past exhibitions to exclude from upcoming (ended in 2025)
-  const pastExhibitionTitles = ['Technofetishism: Whip it into Shape', 'Algoritmica Intima: Runtime'];
+  const pastExhibitionTitles = ['Technofetishism: Whip it into Shape', 'Algorítmica Íntima :: Runtime ::'];
 
   // Filter upcoming exhibitions (exclude current and past)
   const upcomingExhibitions = exhibitions.filter(exh => {
@@ -94,12 +94,14 @@ export default function Exhibitions() {
               className="group block"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-gray-800 mb-4">
-                <Image
-                  src={exhibition.imageUrl}
-                  alt={exhibition.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+                {exhibition.imageUrl ? (
+                  <Image
+                    src={exhibition.imageUrl}
+                    alt={exhibition.imageAlt || exhibition.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : null}
               </div>
               <div className="flex flex-col ml-11">
                 <h3 className="text-xl font-bold group-hover:underline">
@@ -123,12 +125,14 @@ export default function Exhibitions() {
             upcomingExhibitions.map((exhibition) => (
               <div key={exhibition.id} className="group">
                 <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-gray-800 mb-4">
-                  <Image
-                    src={exhibition.imageUrl}
-                    alt={exhibition.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
+                  {exhibition.imageUrl ? (
+                    <Image
+                      src={exhibition.imageUrl}
+                      alt={exhibition.imageAlt || exhibition.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : null}
                 </div>
                 <div className="flex flex-col ml-11">
                   <h3 className="text-xl font-bold group-hover:underline">
