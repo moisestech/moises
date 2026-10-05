@@ -13,6 +13,7 @@ Public teaching catalog sourced from `Workshops-All Data.csv`.
 | Hub UI | [`/workshops`](../src/app/(main)/workshops/page.tsx) + [`WorkshopClient.tsx`](../src/components/page/WorkshopClient.tsx) | Pilots + Ready catalog + legacy feature cards |
 | SEO landings | [`/workshop/[slug]`](../src/app/(main)/workshop/[slug]/page.tsx) + [`WorkshopCatalogLandingClient.tsx`](../src/components/workshops/WorkshopCatalogLandingClient.tsx) | Ready catalog titles (thin, indexable) |
 | Deep programs | `/workshop/own-your-digital-presence`, AI agents, etc. | Full syllabi (reserved — not overwritten by `[slug]`) |
+| AI Daily Operator | [`/workshop/build-your-ai-daily-operator`](../src/app/(main)/workshop/build-your-ai-daily-operator/page.tsx) | Separate program beside the artist catalog. Not a CSV row and not a thin `[slug]` landing. |
 | Digilab proof classes | [`/oolite-arts#classes`](../src/content/oolite-arts/case-study.ts) | Oolite case-study class archive |
 
 ## Ready landings (shipped)

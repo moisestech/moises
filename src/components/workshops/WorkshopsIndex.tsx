@@ -13,6 +13,12 @@ import { listReadyWorkshops, type WorkshopCatalogTrack } from '@/content/worksho
 import { getWorkshopCover } from '@/content/workshops/catalog-covers'
 import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings'
 import { WORKSHOP_HUB } from '@/constants/workshop-hub'
+import {
+  DAILY_OPERATOR_HREF,
+  DAILY_OPERATOR_METHOD,
+  DAILY_OPERATOR_PROMISE,
+  DAILY_OPERATOR_TITLE,
+} from '@/content/workshops/ai-daily-operator/program'
 import { track as trackEvent } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
@@ -173,6 +179,26 @@ export function WorkshopsIndex() {
               <span className="inline-block w-fit border-b border-[#f3eee6] pb-0.5 text-sm">Open the proposal</span>
             </div>
           </Link>
+        </section>
+
+        <section className="mt-28 border-t border-[#1c1916] pt-16" aria-labelledby="daily-operator-heading">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div className="max-w-xl space-y-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">A separate program</p>
+              <h2 id="daily-operator-heading" className="text-4xl tracking-tight">
+                {DAILY_OPERATOR_TITLE}
+              </h2>
+              <p className="text-lg leading-snug text-[#3d3832]">{DAILY_OPERATOR_PROMISE}</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#5c564e]">{DAILY_OPERATOR_METHOD}</p>
+            </div>
+            <Link
+              href={DAILY_OPERATOR_HREF}
+              onClick={() => trackEvent('workshop_card_click', { workshop: DAILY_OPERATOR_TITLE })}
+              className="inline-block w-fit border-b border-[#1c1916] pb-0.5 text-sm"
+            >
+              Read the curriculum
+            </Link>
+          </div>
         </section>
 
         <section className="mt-28" aria-label="Programs already built">
