@@ -159,14 +159,14 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
   },
   'agentic-ops': {
     id: 'agentic-ops',
-    title: 'Agentic Ops — auditable multi-tool agent runtime',
-    category: 'AI engineering · Building',
+    title: 'Agentic Ops — governed agent runtime',
+    category: 'Reference implementation · Python / FastAPI / LangGraph',
     summary:
-      'Planner → tools → state → retrieval → synthesis → human approval → execute. Public engineering flagship for MCP, HITL, evals, and reusable agent patterns. Building until demo and regression gates are live — not claimed as production ServiceNow.',
-    skillTags: ['MCP', 'HITL', 'Python', 'FastAPI', 'TypeScript', 'Evals', 'CI'],
+      'LangGraph StateGraph: retrieve → tools → draft → evaluate → pause → execute or respond. FastAPI, permissioned tools, keyword retrieval with citations, fake-provider evals, and an MCP-shaped stdio tool server. Not a hosted customer product and not an official MCP SDK deployment.',
+    skillTags: ['Python', 'FastAPI', 'LangGraph', 'HITL', 'Evals', 'MCP-shaped stdio'],
     imageSrc: AI24_WEBSITE_HERO_IMAGE,
-    imageAlt: 'Agentic Ops — organizational multi-tool agent runtime',
-    href: 'https://github.com/moisestech/agentic-ops',
+    imageAlt: 'Stand-in frame for Agentic Ops. Console screenshots live in the GitHub repo, not in this image.',
+    href: '/projects/agentic-ops',
   },
   'comfyui-output-provenance': {
     id: 'comfyui-output-provenance',
@@ -200,7 +200,7 @@ export const evidenceProjects: Record<EvidenceProjectId, EvidenceProject> = {
     category: 'Reference implementation · governance',
     summary:
       'Evidence in. Reviewable decisions out. TypeScript reference with hybrid retrieval, citation fail-closed, persisted human review, and an append-only audit trail. Synthetic fixtures and a fake-model harness — not a hosted customer product.',
-    skillTags: ['TypeScript', 'Postgres', 'Human review', 'Citation gate', 'LangGraph'],
+    skillTags: ['TypeScript', 'Postgres', 'Human review', 'Citation gate'],
     imageSrc: AEP_CARD_V2,
     imageSrcDark: AEP_CARD_V2_DARK,
     imageAlt:

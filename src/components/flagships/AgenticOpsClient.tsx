@@ -39,7 +39,8 @@ export function AgenticOpsClient() {
             />
           </div>
           <p className={opp.illustrationCaption}>
-            Status: <strong>Building</strong> — RAG / MCP / agents stay gated until demo + evals clear.
+            Status: <strong>Reference implementation</strong> — fake provider, keyword retrieval,
+            MCP-shaped stdio. Not a hosted customer product.
           </p>
         </div>
 
@@ -80,7 +81,7 @@ export function AgenticOpsClient() {
 
           <section className={opp.sectionSm} aria-labelledby="tools">
             <h2 id="tools" className={opp.h2}>
-              Four tools (MCP)
+              Four permissioned tools
             </h2>
             <ul className={cn(opp.tableWrap, 'mt-4 divide-y divide-stone-100 dark:divide-stone-800')} role="list">
               {project.tools.map((tool) => (
@@ -96,15 +97,37 @@ export function AgenticOpsClient() {
               ))}
             </ul>
             <p className={cn(opp.subtle, 'mt-3')}>
-              WRITE / EXTERNAL / SENSITIVE tools require human approval before execution.
+              WRITE tools require human approval. The stdio surface is MCP-shaped (discovery +
+              invocation), not an official MCP SDK server.
             </p>
           </section>
 
           <section className={opp.sectionSm} aria-labelledby="built">
             <h2 id="built" className={opp.h2}>
-              What is being built
+              What is implemented
             </h2>
             <p className={cn(opp.body, 'mt-3 max-w-3xl')}>{project.whatIBuilt}</p>
+          </section>
+
+          <section className={opp.sectionSm} aria-labelledby="inspect">
+            <h2 id="inspect" className={opp.h2}>
+              Code to inspect
+            </h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2" role="list">
+              {project.inspectLinks.map((link) => (
+                <li key={link.id}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={opp.cardInteractive}
+                  >
+                    <span className={opp.matrixPrimary}>{link.title}</span>
+                    <span className={cn(opp.matrixSecondary, 'block')}>{link.body}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </section>
 
           <section className={opp.sectionSm} aria-labelledby="stack">
@@ -122,7 +145,7 @@ export function AgenticOpsClient() {
 
           <section className={opp.sectionSm} aria-labelledby="gates">
             <h2 id="gates" className={opp.h2}>
-              Application-ready gates
+              Implementation status
             </h2>
             <ul className="mt-4 space-y-2" role="list">
               {project.gates.map((gate) => (

@@ -37,7 +37,7 @@ export const roleArchetypes: RoleArchetype[] = [
     coversApprox: 'AI / full-stack / agentic engineer cluster (skill-demand pattern, not dossier count)',
     status: 'live',
     notes:
-      'Public packet. Prefer /ai-engineering; Agentic Ops case shell: /projects/agentic-ops (Building). Shared skills: /capabilities#ai-engineering.',
+      'Public packet. Prefer /ai-engineering; Agentic Ops: /projects/agentic-ops (reference implementation). Shared skills: /capabilities#ai-engineering.',
   },
   {
     id: 'forward-deployed-engineer',
@@ -50,7 +50,7 @@ export const roleArchetypes: RoleArchetype[] = [
     coversApprox: 'FDE / client-facing / creative technologist delivery cluster',
     status: 'live',
     notes:
-      'Canonical flagship is /forward-deployed (lifecycle cases). Role overlay: /opportunities/forward-deployed-ai-engineer. Shared skills: /capabilities.',
+      'Canonical flagship is /forward-deployed (engineering-first FDE evidence). Deloitte overlay: /opportunities/deloitte-ai-design-facilitator-fde. Role overlay: /opportunities/forward-deployed-ai-engineer. Shared skills: /capabilities.',
   },
   {
     id: 'ai-solutions-architect',

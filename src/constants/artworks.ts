@@ -40,6 +40,15 @@ interface Artwork {
   tags: string[];
   interpretation?: string;
   exhibition?: string;
+  /** Chronology line under the year. Use when development and exhibition dates differ. */
+  yearNote?: string;
+  exhibitionHistory?: {
+    title: string;
+    date: string;
+    location: string;
+    href?: string;
+    note?: string;
+  }[];
   /** Renders below the page body when present; omit on works without a single venue/funder story. */
   exhibition_support?: ArtworkExhibitionSupport;
   on_view: boolean;
@@ -123,7 +132,20 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962524/art/moisestech-website/artworks/2025_privacy_mask/moises-sanabria-privacy-mask_ewms3y.jpg',
           caption: 'Corporate Anonymity - Gold Guy Fawkes mask with VPN logos and hardware'
-        }
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1740951050/art/moisestech-website/exhibitions/may_2025_netartgala_ny/net-art-gala-exhibition-banner-og_nxqcum.png',
+          caption: 'The Net Gala, Brooklyn, May 3, 2025 — event graphic. Not an installation photograph.',
+        },
+      ],
+      exhibitionHistory: [
+        {
+          title: 'The Net Gala',
+          date: 'May 3, 2025',
+          location: '64 Dobbin Street, Brooklyn, New York',
+          href: '/calendar/exhibitions/the-net-gala',
+          note: 'Sculpture / technological readymade.',
+        },
       ],
       tags: [
         'surveillance art',
@@ -174,6 +196,8 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
     taste_the_algorithm: {
       title: 'Taste the Algorithm',
       year: 2026,
+      yearNote:
+        'Developed 2025. Selected September 16, 2025 for F*ck Art Miami, Museum of Sex Miami. Exhibited 2026.',
       location: 'F*ck Art: Nature & Artifice, Museum of Sex, Miami',
       location_url: 'https://museumofsex.com/exhibitions/fck-art-nature-artifice/',
       curator: 'Tam Gryn',

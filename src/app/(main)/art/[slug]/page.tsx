@@ -91,6 +91,11 @@ export default async function ArtPage({ params }: PageProps) {
           <p className="text-4xl font-bold mt-4 text-black dark:text-white">
             {artwork.year}
           </p>
+          {artwork.yearNote ? (
+            <p className="mt-4 max-w-3xl text-lg font-medium leading-relaxed text-black dark:text-white md:text-xl">
+              {artwork.yearNote}
+            </p>
+          ) : null}
         </div>
       </div>
 
@@ -118,6 +123,30 @@ export default async function ArtPage({ params }: PageProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           {/* Metadata Column */}
           <div className="space-y-8">
+            {artwork.exhibitionHistory && artwork.exhibitionHistory.length > 0 ? (
+              <div>
+                <h3 className="text-lg font-bold mb-2">Exhibition history</h3>
+                <ul className="space-y-4">
+                  {artwork.exhibitionHistory.map((entry) => (
+                    <li key={`${entry.title}-${entry.date}`}>
+                      {entry.href ? (
+                        <a
+                          href={entry.href}
+                          className="font-medium text-blue-600 underline-offset-2 hover:underline dark:text-blue-400"
+                        >
+                          {entry.title}
+                        </a>
+                      ) : (
+                        <p className="font-medium">{entry.title}</p>
+                      )}
+                      <p>{entry.date}</p>
+                      <p>{entry.location}</p>
+                      {entry.note ? <p>{entry.note}</p> : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             {artwork.location && (
               <div>
                 <h3 className="text-lg font-bold mb-2">Location</h3>

@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import { FdeFlagshipCallout } from '@/components/opportunities/FdeFlagshipCallout';
-import { OpportunityPageClient } from '@/components/opportunities/OpportunityPageClient';
-import { forwardDeployedInterviewOpportunity } from '@/content/opportunities/deloitte-ai-design-facilitator-fde';
+import { ForwardDeployedClient } from '@/components/flagships/ForwardDeployedClient';
+import { forwardDeployedFlagship } from '@/content/flagships/forward-deployed';
 
-const { seo, applicationBanner } = forwardDeployedInterviewOpportunity;
-const ogImage = applicationBanner?.src;
+const { seo } = forwardDeployedFlagship;
 
 export const metadata: Metadata = {
   title: seo.title,
@@ -16,21 +14,14 @@ export const metadata: Metadata = {
     description: seo.description,
     type: 'website',
     url: 'https://moises.tech/forward-deployed',
-    ...(ogImage ? { images: [{ url: ogImage, alt: applicationBanner?.alt }] } : {}),
   },
   twitter: {
     card: 'summary_large_image',
     title: seo.title,
     description: seo.description,
-    ...(ogImage ? { images: [ogImage] } : {}),
   },
 };
 
 export default function ForwardDeployedPage() {
-  return (
-    <OpportunityPageClient
-      opportunity={forwardDeployedInterviewOpportunity}
-      afterHero={<FdeFlagshipCallout className="mt-8 sm:mt-10" />}
-    />
-  );
+  return <ForwardDeployedClient />;
 }

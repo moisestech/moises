@@ -2,6 +2,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { exhibitions } from "@/constants/exhibitions";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ExhibitionHistoryPage() {
   const { theme } = useTheme();
@@ -38,16 +39,31 @@ export default function ExhibitionHistoryPage() {
         </div>
         <div className="text-lg font-bold mb-6">{exhibitions.length} exhibitions online</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          {exhibitions.map(exh => (
-            <div key={exh.id} className="flex flex-col">
-              <div className="relative w-full h-48 mb-3 overflow-hidden bg-gray-200 dark:bg-gray-800">
-                <Image src={exh.imageUrl} alt={exh.title} fill className="object-cover" />
+          {exhibitions.map(exh => {
+            const card = (
+              <>
+                <div className="relative mb-3 h-48 w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+                  {exh.imageUrl ? (
+                    <Image src={exh.imageUrl} alt={exh.imageAlt || exh.title} fill className="object-cover" />
+                  ) : (
+                    <div className="flex h-full items-end p-3 text-sm font-medium">{exh.date}</div>
+                  )}
+                </div>
+                <div className="text-xl font-bold leading-tight mb-1">{exh.title}</div>
+                <div className="text-md text-gray-600 dark:text-gray-300 mb-1">{exh.date}</div>
+                <div className="text-md text-gray-600 dark:text-gray-300 mb-1">{exh.location}</div>
+              </>
+            );
+            return exh.slug ? (
+              <Link key={exh.id} href={`/calendar/exhibitions/${exh.slug}`} className="flex flex-col hover:underline">
+                {card}
+              </Link>
+            ) : (
+              <div key={exh.id} className="flex flex-col">
+                {card}
               </div>
-              <div className="text-xl font-bold leading-tight mb-1">{exh.title}</div>
-              <div className="text-md text-gray-600 dark:text-gray-300 mb-1">{exh.date}</div>
-              <div className="text-md text-gray-600 dark:text-gray-300 mb-1">{exh.location}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -5,9 +5,11 @@ interface Exhibition {
   id: number;
   title: string;
   date: string;
-  imageUrl: string;
+  imageUrl?: string;
+  imageAlt?: string;
   location?: string;
   description?: string;
+  slug?: string;
 }
 
 export default function ExhibitionGrid({ exhibitions }: { exhibitions: Exhibition[] }) {
@@ -16,7 +18,9 @@ export default function ExhibitionGrid({ exhibitions }: { exhibitions: Exhibitio
       {exhibitions.map(exh => (
         <div key={exh.id} className="flex flex-col">
           <div className="relative w-full h-48 mb-3 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-800">
-            <Image src={exh.imageUrl} alt={exh.title} fill className="object-cover" />
+            {exh.imageUrl ? (
+              <Image src={exh.imageUrl} alt={exh.imageAlt || exh.title} fill className="object-cover" />
+            ) : null}
           </div>
           <div className="text-xl font-bold leading-tight mb-1">{exh.title}</div>
           <div className="text-md text-gray-600 dark:text-gray-300 mb-1">{exh.date}</div>

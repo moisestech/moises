@@ -5,20 +5,20 @@ export const infra24Project: ProjectDossier = {
   seo: {
     title: 'Infra24 / Smart Sign — Deployed Systems | Moises Sanabria',
     description:
-      'Public display and digital infrastructure: CMS-driven smart signage, Raspberry Pi deployment, and community-facing automation systems.',
+      'Raspberry Pi and Anthias displays at Bakehouse Art Complex. Operational handoff is in progress. Install photography is not published yet.',
   },
   title: 'Infra24 / Smart Sign',
   category: 'Public display infrastructure',
   whatItIs:
-    'Experimental public display and digital infrastructure work exploring how screens, signage, and civic systems shape attention — deployed as museum-grade Smart Signs in Miami cultural venues.',
+    'Institutional display work at Bakehouse Art Complex: Raspberry Pi and Anthias screens for artist and event promotion. The technical case is the Smart Signs page. This dossier does not add screen counts, dates, or lobby maps.',
   whatIBuilt:
-    'Designed and deployed smart signage systems: CMS-driven content management, Raspberry Pi hardware integration, venue lobby installations, community content feeds, and automation for bilingual public-facing displays. Work informed ongoing institutional signage and mobile lab infrastructure.',
-  stack: ['Raspberry Pi', 'CMS', 'Signage systems', 'Automation', 'Hardware deployment', 'Community content'],
+    'Raspberry Pi / Anthias display workflows and a repeatable vertical screen format, coordinated with Bakehouse technology leadership. Operational handoff is in progress. Install photography is not published yet.',
+  stack: ['Raspberry Pi', 'Anthias', 'Linux', 'Content workflow'],
   whyItMatters:
     'Proof of real-world systems engineering beyond the browser — hardware ops, content workflows, and deployed infrastructure that non-technical venue staff can operate.',
   imageSrc:
     'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
-  imageAlt: 'Smart signage and digital infrastructure deployment',
-  externalHref: '/grant/knight-foundation/community-smart-signs',
-  externalLabel: 'Knight Foundation Smart Signs proposal',
+  imageAlt: 'Stand-in frame. Not a Bakehouse Smart Sign installation photo.',
+  externalHref: '/bakehouse/smart-signs',
+  externalLabel: 'Bakehouse Smart Signs case',
 };

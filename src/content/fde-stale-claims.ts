@@ -1,12 +1,12 @@
 /**
  * WEB-01 — stale-claim list. Confirm before any copy edit.
- * None of these are auto-fixed. WEB-04 may apply one-liners only if approved.
+ * None of these are auto-fixed.
  */
 export const FDE_STALE_CLAIMS = [
   {
     id: 'forward-deployed-is-deloitte-send',
     path: 'src/app/(main)/forward-deployed/page.tsx',
-    note: '/forward-deployed is the Deloitte Design Facilitator dossier, not a generic FDE landing. Keep.',
+    note: '/forward-deployed is the evergreen engineering FDE flagship. Deloitte Design Facilitator lives only at /opportunities/deloitte-ai-design-facilitator-fde.',
     action: 'keep',
   },
   {
@@ -18,13 +18,13 @@ export const FDE_STALE_CLAIMS = [
   {
     id: 'agentic-ops-homepage-tile',
     path: 'src/content/evidence/flagships.ts',
-    note: 'Agentic Ops homepage tile can be read as the production agent flagship. It is claimable: false. Do not promote. Do not delete this pass.',
+    note: 'Homepage recipes keep claimable: false so Agentic Ops is not read as a production product. /forward-deployed and /projects/agentic-ops may show it as a reference implementation.',
     action: 'keep',
   },
   {
     id: 'claude-deployed-sentence',
-    path: 'applications / future AEP copy',
-    note: 'Never write “I deployed a system using Claude” until AEP MODEL_PROVIDER / live eval config is verified in TICKET-00.',
+    path: 'applications / AEP / Agentic Ops copy',
+    note: 'Never write “I deployed a system using Claude” until a live MODEL_PROVIDER path is verified.',
     action: 'wait',
   },
   {

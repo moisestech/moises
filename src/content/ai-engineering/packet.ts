@@ -192,13 +192,13 @@ export const aiEngineeringPacket = {
       problem:
         'Organizations need auditable multi-tool agents for real workflows — planning, retrieval, budgeting, and task execution — without chatbot theater or unverifiable demos.',
       systemBuilt:
-        'Flagship runtime architecture: planner → MCP tools (documents, calendar, budget, actions) → pgvector retrieval → human approval → execute. Deterministic demo replay planned for recruiters. Status: Building until application-ready gates clear.',
-      stack: ['Python', 'FastAPI', 'TypeScript', 'Next.js', 'MCP', 'Postgres', 'pgvector', 'Evals', 'Docker'],
+        'Flagship runtime: LangGraph StateGraph (retrieve → tools → draft → evaluate → pause → execute). FastAPI, permissioned READ/WRITE tools, keyword retrieval with citations, fake-provider evals, MCP-shaped stdio. Not a hosted customer product. Hybrid/pgvector and official MCP SDK are next.',
+      stack: ['Python', 'FastAPI', 'LangGraph', 'TypeScript', 'Next.js', 'Postgres', 'Evals', 'Docker'],
       users: 'Institutional program ops; AI engineering hiring managers',
       outcome:
-        'Public case shell live at /projects/agentic-ops. RAG/MCP/agent claims stay Building — not Proven — until demo + evals ship.',
+        'Public case at /projects/agentic-ops. Reference implementation — keyword RAG, MCP-shaped tools, HITL, evals. Not production multi-tenant ops.',
       whyItMatters:
-        'Highest-leverage AI engineering proof: one repo covering orchestration, MCP, RAG, HITL, evals, and security-adjacent tool permissions without a zoo of toy demos.',
+        'Highest-leverage AI engineering proof: one repo covering LangGraph, FastAPI, permissioned tools, keyword retrieval, HITL, evals, and an MCP-shaped tool interface. Official MCP SDK and pgvector are next.',
       href: '/projects/agentic-ops',
       imageSrc: AI24_WEBSITE_HERO_IMAGE,
       imageAlt: 'Agentic Ops — organizational multi-tool agent runtime',
@@ -268,19 +268,19 @@ export const aiEngineeringPacket = {
     },
     {
       slug: 'infra24',
-      title: 'Infra24 / Smart Sign',
+      title: 'Bakehouse SmartSigns',
       problem:
-        'Cultural venues needed community-facing digital displays that non-technical staff could update without engineering support.',
+        'Bakehouse needed artist and event activity visible on screens without ad-hoc file drops.',
       systemBuilt:
-        'CMS-driven smart signage: Raspberry Pi deployment, content feeds, venue integrations, and automation for bilingual public displays.',
-      stack: ['Raspberry Pi', 'CMS', 'Next.js', 'Signage systems', 'Automation'],
-      users: 'Venue staff, community audiences, program coordinators',
-      outcome: 'Deployed signage systems with operable content workflows',
+        'Raspberry Pi / Anthias display workflows and a repeatable vertical screen format. Operational handoff is in progress. Install photography is not published yet.',
+      stack: ['Raspberry Pi', 'Anthias', 'Linux', 'Content workflow'],
+      users: 'Bakehouse artists, staff, and visitors',
+      outcome: 'Institutional displays in the building. Not a finished photographed fleet, and not the commercial SmartSign pitch.',
       whyItMatters:
-        'Real-world deployed infrastructure beyond the browser — ops, hardware-adjacent systems, and stakeholder-facing tooling.',
-      href: '/projects/infra24',
+        'The problem crossed the Linux box, the network, and the screen. That is forward-deployed signal, not an embedded-engineering pivot.',
+      href: '/bakehouse/smart-signs',
       imageSrc: proofProjectImageSrc('infra24', aiEngineeringVisuals.proofImageFallbacks.infra24),
-      imageAlt: 'Smart signage and digital infrastructure deployment',
+      imageAlt: 'DCC Miami site screenshot used as a stand-in. Not a Bakehouse SmartSign installation photo.',
     },
     {
       slug: 'oolite-digital-lab',

@@ -218,3 +218,19 @@ export const designFacilitationClaimedStackBand: LogoBandItem[] = [
   },
   { src: '/images/tech-logos/n8n.svg', alt: 'n8n', height: 36 },
 ];
+
+/** Public FDE flagship — evidenced engineering marks only. No CrewAI / Pinecone / Weaviate. */
+export const fdeEngineeringClaimedStackBand: LogoBandItem[] = [
+  { src: `${jobsCdn}/v1778692505/jobs/python-logo_edccrx.png`, alt: 'Python', height: 40 },
+  { src: `${jobsCdn}/v1778692505/jobs/FastAPI_logo.svg_qrodn7.png`, alt: 'FastAPI', height: 36 },
+  { src: 'https://cdn.simpleicons.org/typescript/3178C6', alt: 'TypeScript', height: 36 },
+  { src: `${jobsCdn}/v1778692505/jobs/lang-graph-logo_g4x6ik.svg`, alt: 'LangGraph', height: 34 },
+  { src: 'https://cdn.simpleicons.org/nodedotjs/339933', alt: 'Node.js', height: 36 },
+  { src: 'https://cdn.simpleicons.org/postgresql/4169E1', alt: 'PostgreSQL', height: 36 },
+  { src: 'https://cdn.simpleicons.org/docker/2496ED', alt: 'Docker', height: 36 },
+  { src: `${jobsCdn}/v1778692505/jobs/open-ai-logo_vvvlks.png`, alt: 'OpenAI', height: 36 },
+  { src: `${jobsCdn}/v1783032752/jobs/claude_logo_2023_wihocz.png`, alt: 'Anthropic', height: 36 },
+  { src: 'https://cdn.simpleicons.org/snowflake/29B5E8', alt: 'Snowflake', height: 36 },
+  { src: '/images/tech-logos/n8n.svg', alt: 'n8n', height: 36 },
+  { src: 'https://cdn.simpleicons.org/github', alt: 'GitHub', height: 36 },
+];

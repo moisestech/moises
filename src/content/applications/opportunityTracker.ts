@@ -377,7 +377,7 @@ export const opportunityTracker: ApplicationTrack[] = [
     employerUrl:
       'https://apply.deloitte.com/en_US/careers/JobDetail/AI-Design-Facilitator-and-Forward-Deployed-Engineer-II/360529',
     notes:
-      'Send URL is /forward-deployed (public flagship). Overlay /opportunities/deloitte-ai-design-facilitator-fde is the noindex adaptation for req 360529. Alias /applied-ai/deloitte-ai-design-facilitator. Listing recruiting ends October 1, 2026.',
+      'Send the overlay /opportunities/deloitte-ai-design-facilitator-fde (noindex, req 360529). Canonical public FDE URL /forward-deployed is now the evergreen engineering flagship, not this listing. Alias /applied-ai/deloitte-ai-design-facilitator. Listing recruiting ends October 1, 2026.',
   },
   {
     id: 'deloitte-frontier-fde',

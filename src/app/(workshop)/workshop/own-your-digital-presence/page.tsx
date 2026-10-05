@@ -20,6 +20,9 @@ export default function DigitalPresencePage() {
     <p className="mb-4">
       We will be using Squarespace as our platform, but the concepts we cover can be applied to any website builder or CMS.
     </p>
+    <p className="mb-4 max-w-3xl">
+      Bakehouse Art Complex edition, April 2025, Miami. Moises Sanabria led this multi-session workshop for Bakehouse artists on building an artist website, digital identity, presenting work online, search visibility, and artist autonomy on the web. Sessions ran April 24, April 26–27, and April 28, 2025.
+    </p>
   </div>
   <DigitalPresenceClient />
   </>

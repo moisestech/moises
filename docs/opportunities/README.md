@@ -4,6 +4,10 @@ Role-specific recruiting dossiers: compact technical briefs you can drop into em
 
 **Continuity:** site-wide audit and pickup protocol live in [`docs/site-health.md`](../site-health.md). Read that first in a new chat.
 
+## Evergreen FDE send — September 29, 2026
+
+`/forward-deployed` is the public engineering dossier: Agentic Ops (LangGraph reference runtime), Lore Machine, Playwire, Bookleggers, and Bakehouse SmartSigns. It does not render the Deloitte Design Facilitator factory. That overlay stays at `/opportunities/deloitte-ai-design-facilitator-fde` (unlisted, noindex). Do not point SmartSign proof at `/services/smartsign`. The technical case is `/bakehouse/smart-signs`. `/bakehouse` remains the partnership ask.
+
 ## Deloitte evidence update — August 28, 2026
 
 The AI Design Facilitator overlay now uses `designFacilitationEvidencePack.ts` to link a facilitator guide, learner exercise, and exit-ticket instrument. Materials are not labeled as measured learner outcomes. The dossier stays unlisted/noindex, which is not access control. The application tracker reflects the candidate-confirmed active interview process. Field Kit links to its fixture-prototype source; AEP is supporting reference-code evidence. The general Lore pipeline is employer-neutral; the condensed CoreStory variant keeps its role-specific introduction. No new shell or artwork-homepage changes are introduced.

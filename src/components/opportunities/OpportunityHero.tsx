@@ -323,7 +323,9 @@ export function OpportunityHero({ opportunity }: OpportunityHeroProps) {
             <HeroSecondaryActions ctas={ctas} onCta={onCta} githubProfileHref={githubProfileHref} />
           ) : null}
 
-          {opportunity.heroToolMarks?.length ? <HeroToolMarks /> : null}
+          {opportunity.heroToolMarks?.length ? (
+            <HeroToolMarks items={opportunity.heroToolMarks} />
+          ) : null}
 
           {opportunity.heroMetaChips?.length ? (
             <ul className="mt-4 flex flex-wrap gap-2" aria-label="Role focus">

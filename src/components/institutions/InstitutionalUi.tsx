@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -331,20 +331,56 @@ export function InstReveal({
 export function InstPlaceholder({
   label,
   note,
+  src,
+  alt,
 }: {
   label: string;
   note: string;
+  src?: string;
+  alt?: string;
 }) {
+  const [loaded, setLoaded] = useState(false);
+  const waiting = !src || !loaded;
+
   return (
     <div
       role="status"
-      className="border border-dashed border-amber-700/45 bg-amber-50 p-3 text-left text-amber-950 sm:p-4"
+      className="overflow-hidden border border-dashed border-amber-700/45 bg-amber-50 text-left text-amber-950"
     >
-      <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.16em] text-amber-800 sm:text-[11px]">
-        Placeholder · photo needed
-      </p>
-      <p className="text-sm font-medium">{label}</p>
-      <p className="mt-1 text-xs leading-relaxed text-amber-900/80">{note}</p>
+      <div
+        className={cn(
+          'relative aspect-[4/3] bg-stone-200/80',
+          waiting && 'animate-pulse motion-reduce:animate-none',
+        )}
+      >
+        <div className="absolute inset-0 flex flex-col justify-end gap-2 p-4" aria-hidden>
+          <span className="h-2 w-1/3 rounded-sm bg-stone-300" />
+          <span className="h-2 w-2/3 rounded-sm bg-stone-300/80" />
+          <span className="h-2 w-1/2 rounded-sm bg-stone-300/70" />
+        </div>
+        {src ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={src}
+            alt={alt || label}
+            className={cn(
+              'absolute inset-0 h-full w-full object-cover transition-opacity duration-500 motion-reduce:transition-none',
+              loaded ? 'opacity-100' : 'opacity-0',
+            )}
+            onLoad={() => setLoaded(true)}
+            ref={(node) => {
+              if (node?.complete) setLoaded(true);
+            }}
+          />
+        ) : null}
+      </div>
+      <div className="p-3 sm:p-4">
+        <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.16em] text-amber-800 sm:text-[11px]">
+          {src ? 'Photo' : 'Placeholder · photo needed'}
+        </p>
+        <p className="text-sm font-medium">{label}</p>
+        <p className="mt-1 text-xs leading-relaxed text-amber-900/80">{note}</p>
+      </div>
     </div>
   );
 }
