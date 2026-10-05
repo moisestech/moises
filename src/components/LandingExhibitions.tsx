@@ -10,11 +10,12 @@ export default function LandingExhibitions() {
   const [position, setPosition] = useState(0);
   const slideWidth = 580; // Width of each slide
   const gap = 24; // Gap between slides
+  const slides = exhibitions.filter((exhibition) => !exhibition.archiveOnly && exhibition.imageUrl);
 
   const nextSlide = () => {
     setPosition((prev) =>
       Math.max(
-        -(exhibitions.length - 2) * (slideWidth + gap),
+        -(slides.length - 2) * (slideWidth + gap),
         prev - (slideWidth + gap)
       )
     );
@@ -43,7 +44,7 @@ export default function LandingExhibitions() {
               onClick={nextSlide}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
               disabled={
-                position <= -(exhibitions.length - 2) * (slideWidth + gap)
+                position <= -(slides.length - 2) * (slideWidth + gap)
               }
             >
               <ChevronRight className="w-6 h-6" />
@@ -58,15 +59,15 @@ export default function LandingExhibitions() {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             style={{ minWidth: 0 }}
           >
-            {exhibitions.map((exhibition, index) => (
+            {slides.map((exhibition, index) => (
               <div
                 key={exhibition.id}
                 className="flex-none w-[calc(100vw-1rem)] sm:w-[420px] md:w-[580px] flex flex-col"
               >
                 <motion.a
-                  href={exhibition.link || '#'}
-                  target={exhibition.link && exhibition.link.startsWith('http') ? '_blank' : undefined}
-                  rel={exhibition.link && exhibition.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  href={exhibition.slug ? `/calendar/exhibitions/${exhibition.slug}` : exhibition.link || '#'}
+                  target={!exhibition.slug && exhibition.link && exhibition.link.startsWith('http') ? '_blank' : undefined}
+                  rel={!exhibition.slug && exhibition.link && exhibition.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="relative block group focus:outline-none"
                   whileHover={{ scale: 1.01 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -78,12 +79,12 @@ export default function LandingExhibitions() {
                     className="aspect-video relative overflow-hidden border-2 border-transparent group-hover:border-cyan-400 transition-all duration-300"
                   >
                     <Image
-                      src={exhibition.imageUrl}
-                      alt={exhibition.title}
+                      src={exhibition.imageUrl || ''}
+                      alt={exhibition.imageAlt || exhibition.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    {exhibition.link && exhibition.link.startsWith('http') && (
+                    {!exhibition.slug && exhibition.link && exhibition.link.startsWith('http') && (
                       <div className="absolute top-3 right-3 z-10 flex items-center gap-1 bg-black/60 rounded-full px-2 py-1">
                         <ExternalLink className="w-5 h-5 text-cyan-400" />
                         <span className="text-xs text-cyan-200 hidden group-hover:inline">External</span>

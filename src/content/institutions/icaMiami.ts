@@ -107,7 +107,7 @@ export const icaMiamiPage = {
       src: ICA_NOTIONS,
       alt: 'Notions of Home — ICA Miami × Dminti exhibition banner',
     },
-    href: '/calendar/exhibitions',
+    href: '/calendar/exhibitions/notions-of-home',
   },
   ctas: {
     primary: { label: INSTITUTIONAL_SCHEDULE_CTA_LABEL, href: INSTITUTIONAL_CALENDLY_URL },

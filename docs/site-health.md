@@ -5,7 +5,7 @@ Living audit of page families, source-of-truth paths, opportunity readiness, and
 
 Cursor rule: [`.cursor/rules/site-health.mdc`](../.cursor/rules/site-health.mdc)
 
-Last audit: **2026-08-07** · Last progress update: **2026-08-21 (Deloitte AI Design Facilitator overlay)**
+Last audit: **2026-08-07** · Last progress update: **2026-09-29 (evergreen `/forward-deployed` dossier)**
 
 ---
 
@@ -25,6 +25,7 @@ Use this table to resume work. Update when a pass ships.
 | **FLORA FDC dossier** | 2026-08-10 | `/opportunities/flora-forward-deployed-creative` upgraded to role-portfolio; links Field Kit subdomain + Technique placeholders | Unlisted / noindex; View Links still pending |
 | **Deloitte SN FDE** | 2026-08-18 | Compact `/opportunities/deloitte-servicenow-fde`; compact shell now renders `plan` when set | Private / noindex; SN CAD framed as 90-day ramp |
 | **Deloitte AI Design Facilitator** | 2026-08-21 | Compact `/opportunities/deloitte-ai-design-facilitator-fde` (req. 360529) | Private / noindex; design + teaching + incubation; consulting cadence as ramp |
+| **Evergreen FDE dossier** | 2026-09-29 | `/forward-deployed` detached from the Deloitte factory. Agentic Ops cited from `github.com/moisestech/agentic-ops` (LangGraph, MCP-shaped stdio, keyword retrieval, MemorySaver — not a Postgres checkpointer). Bakehouse Smart Signs technical case is `/bakehouse/smart-signs`. | Public send URL. Deloitte overlay stays employer-specific. |
 
 ### Production incident — `/creative-ai` 404
 
@@ -70,8 +71,8 @@ Standalone MCP demo, RAG demo, FastAPI demo, pgvector demo, Claude demo, OAuth d
 |---|---|---|---|
 | Institutions / Miami outreach | `/institutions` | `/artist-infrastructure`, `/oolite-arts`, `/ica-miami`, `/bakehouse`, `/workshops` | Museum digital systems, incubators, partners |
 | Digilab proof | `/oolite-arts` | Digilab media registry | Curators, panels, partners needing depth |
-| **Hiring flagship — agents** | `/projects/agentic-ops` | `/ai-engineering`, `/capabilities#ai-engineering` | Applied AI / FDE / SA (Building until gates) |
-| **Hiring flagship — FDE** | `/forward-deployed` | `/opportunities/forward-deployed-ai-engineer` overlay | Recruiters, FDE roles |
+| **Hiring flagship — agents** | `/projects/agentic-ops` | `github.com/moisestech/agentic-ops`, `/ai-engineering` | Reference implementation. Not a hosted customer product. |
+| **Hiring flagship — FDE** | `/forward-deployed` | `/projects/agentic-ops`, `/bakehouse/smart-signs` | Evergreen recruiter send. Not the Deloitte overlay. |
 | **Hiring flagship — Creative AI** | `/creative-ai` | `/creative-technologist` alias | Creative Tech / AD / innovation |
 | Hiring / recruiting skills | `/capabilities` | `/ai-engineering`, `/career-packet` | Recruiters, hiring managers |
 | **LIFE OS (ops)** | Airtable base `apprswzWnLrHBwFcx` via [`src/lib/life-os`](../src/lib/life-os/) | `GET /api/life-os?table=inbox` (token) | Agents / application PM — see [`docs/life-os.md`](./life-os.md) |

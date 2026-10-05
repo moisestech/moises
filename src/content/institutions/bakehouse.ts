@@ -51,7 +51,7 @@ export const bakehousePage = {
       id: 'shipped',
       status: 'Shipped',
       title: 'SmartSigns, kiosks, and display infrastructure',
-      body: 'Vertical smart-sign systems and Raspberry Pi / Anthias-based display workflows that promote artists, events, and studio activity through a repeatable screen format. Handoff of Anthias/SmartSigns operations is in progress—completion is the trust gate for the leadership conversation.',
+      body: 'Vertical smart-sign systems and Raspberry Pi / Anthias-based display workflows that promote artists, events, and studio activity through a repeatable screen format. The commercial SmartSign page is a separate pitch and is not the proof. Handoff of Anthias operations is in progress. Install photography is not published yet.',
       items: [
         'Artist and event promotion on vertical screens',
         'Raspberry Pi / Anthias display stack',
@@ -125,8 +125,9 @@ export const bakehousePage = {
     },
   },
   related: [
+    { label: 'Smart Signs case study', href: '/bakehouse/smart-signs' },
     { label: 'Institutions hub', href: '/institutions' },
-    { label: 'SmartSign service page', href: '/services/smartsign' },
+    { label: 'Forward-deployed evidence', href: '/forward-deployed#hardware' },
     { label: 'Oolite Arts case study', href: '/oolite-arts' },
     { label: DCC_MIAMI.name, href: DCC_MIAMI.href, external: true },
   ],

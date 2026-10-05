@@ -82,7 +82,7 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     title: 'Agentic Ops',
     subtitle: 'Auditable multi-tool agent runtime for organizational workflows',
     summary:
-      'Planner → tools → state → retrieval → synthesis → human approval → execute. MCP, RAG, evals, and HITL in one public engineering flagship (Building until demo + evals are live).',
+      'LangGraph StateGraph: retrieve → tools → draft → evaluate → pause → execute. FastAPI, permissioned tools, keyword retrieval, fake-provider evals, MCP-shaped stdio. Reference implementation — not a hosted customer product.',
     href: '/projects/agentic-ops',
     repoUrl: 'https://github.com/moisestech/agentic-ops',
     imageSrc:
@@ -93,9 +93,9 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
       'python',
       'typescript',
       'fastapi',
+      'langgraph',
       'nextjs',
       'postgres',
-      'pgvector',
       'docker',
       'mcp',
       'evals',
@@ -119,7 +119,7 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     title: 'Forward-Deployed Systems',
     subtitle: 'From ambiguous organizational problems to deployed technical systems',
     summary:
-      'Lifecycle proof: discover → map → prototype → deploy → enable → measure → iterate across Digilab, SmartSigns, Saturday Lab teaching instruments, and production automations.',
+      'Senior engineer who deploys systems with people: LangGraph reference runtime, Lore Machine, Playwire solutions and data work, Bakehouse SmartSigns, and a separate TypeScript evidence pipeline.',
     href: '/forward-deployed',
     imageSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1786744384/jobs/banners/forward-deployed-systems-banner_brf4sa.png',
@@ -171,11 +171,11 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     title: 'Bakehouse SmartSigns',
     subtitle: 'Physical display systems for institutional environments',
     summary:
-      'Raspberry Pi / Anthias kiosk infrastructure, content workflows, and venue deployment at Bakehouse Art Complex.',
-    href: '/services/smartsign',
+      'Raspberry Pi / Anthias displays at Bakehouse Art Complex. Institutional delivery; operational handoff in progress; install photos not yet published.',
+    href: '/bakehouse/smart-signs',
     imageSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1779309206/dccmiami/knight/dcc-miami-website-screenshot_mugf7d.png',
-    imageAlt: 'SmartSign institutional display systems',
+    imageAlt: 'Stand-in frame. Not a Bakehouse Smart Sign installation photo.',
     categories: ['forward-deployed', 'hardware', 'deployment'],
     skills: ['raspberry-pi', 'linux', 'cms', 'networking', 'training'],
     roles: ['forward-deployed-engineer', 'creative-technologist', 'solutions-engineer'],

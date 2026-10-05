@@ -225,6 +225,16 @@ export function BakehousePageClient() {
                   <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">
                     {bucket.body}
                   </p>
+                  {bucket.id === 'shipped' ? (
+                    <p className="mt-4">
+                      <Link
+                        href="/bakehouse/smart-signs"
+                        className="text-sm font-semibold underline underline-offset-4"
+                      >
+                        Open the Smart Signs case
+                      </Link>
+                    </p>
+                  ) : null}
                   <ul className="mt-6 grid gap-2 sm:grid-cols-2">
                     {bucket.items.map((item) => (
                       <li

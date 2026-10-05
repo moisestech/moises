@@ -259,8 +259,8 @@ export const sharedCreativeCaseStudies: CreativeCaseStudyModule[] = [
     imageSrc: `${CDN}/v1717960571/art/moisestech-website/digitaldivinities-moisesdsanabria-fabiolalarios-bakehouse-openstudios-spring-2024_f3ahbx.jpg`,
     imageAlt:
       'Bakehouse Art Complex — Digital Divinities open studios; spatial context for artist-facing digital and screen systems',
-    href: '/services/smartsign',
-    linkLabel: 'SmartSign work',
+    href: '/bakehouse/smart-signs',
+    linkLabel: 'Smart Signs case',
   },
 ];
 

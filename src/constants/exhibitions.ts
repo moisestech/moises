@@ -2,7 +2,7 @@ export interface Exhibitions {
   id: number;
   title: string;
   date: string;
-  imageUrl: string;
+  imageUrl?: string;
   location?: string;
   description?: string;
   tags?: string[];
@@ -13,6 +13,14 @@ export interface Exhibitions {
   partners?: string[];
   link?: string;
   shortName?: string;
+  /** Stable path segment for /calendar/exhibitions/[slug]. */
+  slug?: string;
+  activityType?: string;
+  imageAlt?: string;
+  /** Kept off the homepage carousel when there is no verified event photograph. */
+  archiveOnly?: boolean;
+  related?: { href: string; label: string }[];
+  externalLinkLabel?: string;
 }
 
 export const exhibitions: Exhibitions[] = [
@@ -32,27 +40,40 @@ export const exhibitions: Exhibitions[] = [
   },
   {
     id: 2,
-    title: 'The Net Art Gala',
-    date: 'May',
+    title: 'The Net Gala',
+    date: 'May 3, 2025',
+    slug: 'the-net-gala',
+    activityType: 'Sculpture / technological readymade',
     imageUrl:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1740951050/art/moisestech-website/exhibitions/may_2025_netartgala_ny/net-art-gala-exhibition-banner-og_nxqcum.png',
-    location: 'NY, USA',
-    description: 'This exhibition explores the complex relationship between humans and technology, examining how digital devices have evolved beyond tools to become objects of desire and worship. Through diverse artworks, the exhibition investigates how technology shapes modern identity, self-representation, and our understanding of gender in the digital age. Featured works highlight the intimate fusion of human bodies with technological extensions, revealing patterns of power, dependency, and pleasure in our digital interactions. The exhibition critically examines contemporary phenomena including technological messianism, digital behavior modification, innovation obsession, and the pursuit of perfection through technological means. It invites viewers to reflect on their own relationship with technology and its role in shaping human consciousness and desire.',
-    tags: ["Technology", "Identity", "Digital Culture", "Body Politics"],
-
+    imageAlt: 'The Net Gala — event graphic',
+    location: '64 Dobbin Street, Brooklyn, New York',
+    description:
+      'On May 3, 2025, Privacy is a Luxury was presented at The Net Gala, 64 Dobbin Street, Brooklyn, New York. The sculpture treats privacy as something sold rather than held: a gold Guy Fawkes mask carrying payment hardware and network equipment, so anonymity, surveillance, and identity sit on the same object.',
+    featured_work: 'Privacy is a Luxury',
+    // TODO: Add installation photography of Privacy is a Luxury at 64 Dobbin Street. Current image is the event graphic.
+    tags: ['Privacy', 'Surveillance', 'Sculpture', 'Network infrastructure'],
+    related: [
+      { href: '/art/privacy_is_a_luxury', label: 'Privacy is a Luxury' },
+    ],
   },
   {
     id: 3,
     title: 'Technofetishism: Whip it into Shape',
-    date: 'March 21, 2025 - August 31, 2025',
+    date: 'March 21 – August 31, 2025',
+    slug: 'technofetishism',
+    activityType: 'Group exhibition',
     imageUrl:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1740950484/art/moisestech-website/exhibitions/apr_2025_technofetishism_momus/momus-exhibition-banner_uun9rx.jpg',
-    location: 'MOMus-Experimental Center for the Arts (Warehouse B1, Pier A\', Port), Thessaloniki, Greece',
+    imageAlt: 'MOMus — Metropolitan Organisation of Museums of Visual Arts of Thessaloniki',
+    location: 'MOMus – Experimental Center for the Arts, Thessaloniki, Greece',
     shortName: 'MOMus',
-    description: 'A track from the 80\'s (Whip it, Devo), inspired by a novel from the 70\'s (Gravity\'s Rainbow, Thomas Pynchon) examines the collapse of a society, that stupefied by a delirium of overconsumption and information overload, worships the almost religious submission to technology —through which power is manifested, expanded, and normalized. The exhibition explores the fetishisation of technology by our contemporary techno-capitalist society, which has transformed technological objects into sources of sexual arousal, substitutes for desire, and venerated fetishes. The works presented offer a critical reflection on how technology mediates—and sometimes distorts—our notions of intimacy, eroticism, desire, and communication, our own identity, blurring the boundaries between freedom, compulsion, and constraint.',
+    description:
+      'International group exhibition at MOMus – Experimental Center for the Arts, Thessaloniki, on view March 21 through August 31, 2025. The exhibition examines bodies, desire, control, technology, overconsumption, and information overload. The site record credits Moises Sanabria’s contribution as a collaboration with Tom Galle and John Yuyi. He also made a recorded artist contribution in connection with the exhibition, on technology, intimacy, desire, and mediated relationships. That recording is not yet in the site archive.',
     tags: ["Technology", "Identity", "Digital Culture", "Body Politics", "Technofetishism", "Contemporary Art"],
     curator: 'Eirini Papakostantinou, Art Historian, Curator MOMus-Experimental Center for the Arts',
     featured_work: 'Collaboration with Tom Galle and John Yuyi',
+    // TODO: Add official MOMus installation photography and the recorded artist-contribution video if a URL or file is added to the repository.
     link: 'https://www.momus.gr/en/exhibitions/tehnofetihismos-whip-it-shape',
   },
   {
@@ -78,22 +99,40 @@ export const exhibitions: Exhibitions[] = [
   {
     id: 6,
     title: 'Low Resolution',
-    date: 'Oct 23, 2024',
+    date: 'October 19, 2024',
+    slug: 'low-resolution',
+    activityType: 'Moving-image screening',
     imageUrl:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483432/art/moisestech-website/exhibitions/oct_2024_post_masters_low_resolution/oct_2024_post_masters_low_resolution_poster_utzgio.png',
-    location: 'NY, USA',
+    imageAlt: 'Low Resolution GIF Screening poster, October 19, 2024, 568 Broadway, New York',
+    location: '568 Broadway, SoHo, New York, NY',
     description:
-      'Join us for the first open studio event of the year! Visit Bakehouse artists in their studios, groove to tunes by local DJs',
+      'One-night moving-image screening, Low Resolution GIF Screening \\ High Resolution Finissage, at 568 Broadway, SoHo, New York, on October 19, 2024. Moises Sanabria presented All Studios Everything, an internet-culture film. The artist CV records the screening as curated by Kelani Nichole for Postmasters Gallery, New York.',
+    featured_work: 'All Studios Everything',
+    curator: 'Kelani Nichole',
+    related: [
+      {
+        href: 'https://www.youtube.com/watch?v=XuSwUBULiQs',
+        label: 'All Studios Everything on YouTube',
+      },
+    ],
   },
   {
     id: 7,
     title: 'Notions of Home',
-    date: 'December 6, 2024',
+    date: 'December 2024',
+    slug: 'notions-of-home',
+    activityType: 'Exhibition / digital presentation',
     imageUrl:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483923/art/moisestech-website/exhibitions/dec_2024_dminti_notions_of_home/NotionsOfHome_banner_soubxf.jpg',
-    location: 'Miami, USA',
+    imageAlt:
+      'Notions of Home exhibition graphic listing Moises Sanabria with Fabiola Larios, ICA Miami, Dminti, and Tezos',
+    location: 'ICA Miami / Dminti / Tezos, Miami, FL',
     description:
-      'ICA Miami X Dminti presents Notions of Home, a group exhibition featuring works by artists from across the globe.',
+      'In December 2024, Moises Sanabria participated in Notions of Home, a group exhibition in Miami presented by ICA Miami, Dminti, and Tezos. The exhibition graphic lists him with Fabiola Larios.',
+    featured_work: 'With Fabiola Larios',
+    link: 'https://spotlight.tezos.com/art-on-tezos-2024-miami-art-week/',
+    externalLinkLabel: 'Art on Tezos — Miami Art Week',
   },
   {
     id: 8,
@@ -146,7 +185,9 @@ export const exhibitions: Exhibitions[] = [
     title: 'F*ck Art: Nature & Artifice',
     date: '2026',
     imageUrl:
-      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1739483432/art/moisestech-website/exhibitions/oct_2024_post_masters_low_resolution/oct_2024_post_masters_low_resolution_poster_utzgio.png',
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1789442394/art/moisestech-website/artworks/2026_taste_the_algorithm/TasteTheAlgorithm_Museum-of-Sex-Miami_F_CK-Art_PhotoBy_Mateo-SeZa-1024x683_bus6vb.jpg',
+    imageAlt:
+      'Taste the Algorithm installed at the Museum of Sex Miami in 2026. Photo: Mateo SeZa / SeZa Studios.',
     location: 'Museum of Sex, 2200 NW 24th Ave., Miami',
     shortName: 'Museum of Sex Miami',
     description:
@@ -159,12 +200,35 @@ export const exhibitions: Exhibitions[] = [
   },
   {
     id: 13,
-    title: 'Algoritmica Intima: Runtime',
-    date: 'June - July 2025',
+    title: 'Algorítmica Íntima :: Runtime ::',
+    date: 'June–July 2025',
+    slug: 'algoritmica-intima',
+    activityType: 'Group exhibition',
     imageUrl: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751123479/art/moisestech-website/exhibitions/june_2025_algoritmica_intima_cdmx/algoritmica-intima-exhibitions-june-2025_zmg4mq.jpg',
+    imageAlt:
+      'Algorítmica Íntima :: Runtime :: exhibition graphic, Centro Cultural Afirme, Mexico City, June–July 2025',
     location: 'Centro Cultural Afirme, Mexico City, Mexico',
-    description: 'An exhibition exploring the intimate relationship between algorithms and human experience, examining how computational processes shape our understanding of intimacy, identity, and connection in the digital age.',
-    tags: ["Digital Art", "Algorithms", "Intimacy", "Technology"],
-    curator: 'Centro Cultural Afirme',
+    description:
+      'International group exhibition at Centro Cultural Afirme, Mexico City, documented on the exhibition graphic as June–July 2025. The grant-year presentation context is June 21, 2025. The exhibition brings together artists working around algorithms, computational culture, technological mediation, and digital systems. The site record does not identify a separate title for the work Moises Sanabria presented.',
+    tags: ['Digital Art', 'Algorithms', 'Intimacy', 'Technology'],
+    // TODO: Add installation photography. The exhibition graphic does not name Moises Sanabria’s presented artwork.
+  },
+  {
+    id: 15,
+    title: 'New Media Block Party',
+    date: 'April 17, 2025',
+    slug: 'new-media-block-party',
+    activityType: 'AI24 Live / experimental AI media presentation',
+    location: 'Pérez Art Museum Miami, Miami, FL',
+    archiveOnly: true,
+    description:
+      'On April 17, 2025, Moises Sanabria participated in the New Media Block Party at Pérez Art Museum Miami alongside Fabiola Larios through AI24 Live, a collaborative platform. The presentation was experimental AI-generated media and moving image.',
+    featured_work: 'AI24 Live, with Fabiola Larios',
+    // TODO: Add permission-cleared New Media Block Party photography. Do not substitute unrelated PAMM or Digital Divinities images.
+    related: [{ href: '/ai24', label: 'AI24' }],
   },
 ];
+
+export function getExhibitionBySlug(slug: string) {
+  return exhibitions.find((exhibition) => exhibition.slug === slug);
+}
