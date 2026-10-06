@@ -61,6 +61,17 @@ export function dailyOperatorCloudinaryUrl(
 
 export const DAILY_OPERATOR_MEDIA = {
   core: {
+    attentionFlywheel: asset(
+      '00-core/attention-flywheel',
+      'ado-core-attention-flywheel',
+      {
+        concept: 'attention-flywheel',
+        role: 'diagram',
+        status: 'generated-local',
+        alt: 'A circular operating model connecting goals, business signals, judgment, attention, action, review, and system improvement.',
+        usage: ['web', 'lms', 'slides'],
+      },
+    ),
     operatorCore: asset('00-core/hero', 'ado-core-operator-core', {
       concept: 'operator-core',
       role: 'hero',
@@ -117,6 +128,17 @@ export const DAILY_OPERATOR_MEDIA = {
 
   modules: {
     m01: {
+      goalAttentionFunnel: asset(
+        '01-daily-operator/m01-attention-before-automation',
+        'ado-m01-goal-attention-funnel',
+        {
+          concept: 'goal-attention-funnel',
+          role: 'diagram',
+          status: 'generated-local',
+          alt: 'Many business demands passing through a goal and judgment funnel until only a few priorities receive attention.',
+          usage: ['web', 'lms', 'slides'],
+        },
+      ),
       fragmentedAttention: asset(
         '01-daily-operator/m01-attention-before-automation',
         'ado-m01-fragmented-attention',
@@ -137,7 +159,7 @@ export const DAILY_OPERATOR_MEDIA = {
         {
           concept: 'fact-interpretation-recommendation',
           role: 'diagram',
-          status: 'needed',
+          status: 'generated-local',
           alt: 'Three distinct stages separating facts, interpretation, and recommendations.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -151,7 +173,7 @@ export const DAILY_OPERATOR_MEDIA = {
         {
           concept: 'founder-profile',
           role: 'artifact',
-          status: 'needed',
+          status: 'generated-local',
           alt: 'A founder operating profile containing objectives, responsibilities, constraints, and approval boundaries.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -193,7 +215,7 @@ export const DAILY_OPERATOR_MEDIA = {
         {
           concept: 'source-of-truth',
           role: 'diagram',
-          status: 'needed',
+          status: 'generated-local',
           alt: 'Separate business systems remaining distinct while the operator selectively retrieves the right signal from each.',
           usage: ['web', 'lms', 'slides'],
         },
