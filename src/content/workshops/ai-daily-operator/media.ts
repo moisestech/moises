@@ -320,7 +320,7 @@ export const DAILY_OPERATOR_MEDIA = {
         {
           concept: 'friction-approval',
           role: 'object',
-          status: 'working',
+          status: 'generated-local',
           alt: 'Many business flows waiting at one human approval bottleneck.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -387,7 +387,7 @@ export const DAILY_OPERATOR_MEDIA = {
         {
           concept: 'weekly-operating-review',
           role: 'artifact',
-          status: 'needed',
+          status: 'generated-local',
           alt: 'A week of daily briefs resolving into what moved, what stuck, repeated friction, and one next improvement.',
           usage: ['web', 'lms', 'slides'],
         },
