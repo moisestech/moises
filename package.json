@@ -12,7 +12,8 @@
     "deploy": "npx vercel@latest --prod",
     "deploy:preview": "npx vercel@latest",
     "life-os:discover": "npx tsx scripts/life-os-discover.ts",
-    "life-os:list": "npx tsx scripts/life-os-discover.ts list"
+    "life-os:list": "npx tsx scripts/life-os-discover.ts list",
+    "asset:upload": "npx tsx scripts/upload-workshop-asset.ts"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
