@@ -11,7 +11,7 @@ Use this order when picking a link:
 
 1. **`/institutions`** — focused services page (web, Salesforce, automation, livestreaming, labs)
 2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof. Smart Signs technical case: **`/bakehouse/smart-signs`**.
-3. Calendly — 20-minute conversation
+3. Calendly — “Discuss a project”. Do not print a duration. The destination is the existing meeting link.
 
 **Artist-facing workshops / incubators:**
 

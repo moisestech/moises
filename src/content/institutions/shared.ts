@@ -8,8 +8,12 @@ export const INSTITUTIONAL_CALENDLY_URL =
 
 export const INSTITUTIONAL_EMAIL = 'm@moises.tech';
 
-/** Primary /institutions CTA — Calendly first, no intake form. */
-export const INSTITUTIONAL_SCHEDULE_CTA_LABEL = 'Schedule a 20-minute conversation';
+/**
+ * Primary /institutions and /ica-miami CTA.
+ * Opens INSTITUTIONAL_CALENDLY_URL. Do not print a duration:
+ * the event slug says 15 minutes and an older label said 20.
+ */
+export const INSTITUTIONAL_SCHEDULE_CTA_LABEL = 'Discuss a project';
 
 /**
  * Public collaboration offer line — single source for artist-infrastructure hero,

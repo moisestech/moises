@@ -2,7 +2,6 @@
 
 import { useCallback, useId, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import Image from 'next/image';
-import { AssetNeeded } from './AssetNeeded';
 import type { NeededAsset } from '@/content/oolite-arts/case-study';
 
 type Side = { src: string; alt: string } | null;
@@ -20,7 +19,6 @@ export function BeforeAfterSlider({
   afterLabel,
   before,
   after,
-  needed,
 }: Props) {
   const [position, setPosition] = useState(50);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -61,23 +59,18 @@ export function BeforeAfterSlider({
   };
 
   if (!before || !after) {
+    const still = after ?? before;
     return (
-      <div className="space-y-3">
+      <figure>
         <div className="relative aspect-[16/10] bg-neutral-200 overflow-hidden">
-          {after ? (
-            <Image src={after.src} alt={after.alt} fill className="object-cover" sizes="100vw" />
-          ) : before ? (
-            <Image src={before.src} alt={before.alt} fill className="object-cover" sizes="100vw" />
+          {still ? (
+            <Image src={still.src} alt={still.alt} fill className="object-cover" sizes="100vw" />
           ) : null}
-          <div className="absolute inset-0 bg-black/35 flex items-end p-4 sm:p-6">
-            <p className="text-white text-sm sm:text-base max-w-md">
-              Matched before/after media required for the interactive slider. Showing available lab
-              documentation until the pair is ready.
-            </p>
-          </div>
         </div>
-        <AssetNeeded asset={needed} />
-      </div>
+        <figcaption className="mt-3 text-sm leading-relaxed text-neutral-600">
+          The Digital Lab as operated. A matched earlier photograph from the same camera position is not part of this case study.
+        </figcaption>
+      </figure>
     );
   }
 

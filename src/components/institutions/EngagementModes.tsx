@@ -1,6 +1,6 @@
 'use client';
 
-import { Layers3, Search, Wrench, type LucideIcon } from 'lucide-react';
+import { BookOpen, ClipboardList, Layers3, Search, Wrench, type LucideIcon } from 'lucide-react';
 import { institutionsHub as H } from '@/content/institutions/hub';
 import { track } from '@/lib/analytics';
 import {
@@ -14,9 +14,11 @@ import {
 } from '@/components/institutions/InstitutionalUi';
 import { cn } from '@/lib/utils';
 
-const PROCESS_ICON: Record<(typeof H.process.steps)[number]['icon'], LucideIcon> = {
+const PROCESS_ICON: Record<(typeof H.process.steps)[number]['icon'] | (typeof H.engagement.modes)[number]['icon'], LucideIcon> = {
   search: Search,
+  clipboard: ClipboardList,
   wrench: Wrench,
+  book: BookOpen,
   layers: Layers3,
 };
 
@@ -34,7 +36,7 @@ export function ProcessSteps() {
             {H.process.title}
           </h2>
         </InstReveal>
-        <ol className="mt-10 grid gap-4 md:grid-cols-3">
+        <ol className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {H.process.steps.map((step, i) => {
             const Icon = PROCESS_ICON[step.icon];
             return (
@@ -94,9 +96,6 @@ export function EngagementModes() {
                     <Icon className="h-5 w-5" strokeWidth={1.75} />
                   </span>
                   <h3 className="mt-4 font-['MoMA_Sans'] text-lg font-semibold">{mode.title}</h3>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
-                    Typical duration · {mode.duration}
-                  </p>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-700">{mode.outcome}</p>
                   <p className="mt-3 text-xs leading-relaxed text-neutral-500">{mode.bestFor}</p>
                 </li>

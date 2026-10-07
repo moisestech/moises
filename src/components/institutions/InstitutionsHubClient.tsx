@@ -12,7 +12,7 @@ import {
   INST_SECTION_STICKY_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { OpportunityApplicationBanner } from '@/components/opportunities/OpportunityApplicationBanner';
-import { InstitutionsHero } from '@/components/institutions/InstitutionsHero';
+import { InstitutionsHero, ToolsFromPastWork } from '@/components/institutions/InstitutionsHero';
 import { InstitutionalProofStrip, CompoundingSystem } from '@/components/institutions/CompoundingSystem';
 import { PracticeLaneGrid } from '@/components/institutions/PracticeLaneGrid';
 import { AdditionalEvidence, FlagshipCaseStudies } from '@/components/institutions/FlagshipCaseStudies';
@@ -25,8 +25,10 @@ const SECTION_ACCENT: Record<string, 'ink' | 'ocean' | 'teal' | 'copper' | 'viol
   top: 'ink',
   services: 'ocean',
   system: 'teal',
+  tools: 'violet',
   work: 'ink',
   evidence: 'rose',
+  process: 'teal',
   engage: 'copper',
   archive: 'ocean',
 };
@@ -90,17 +92,23 @@ export function InstitutionsHubClient() {
       >
         <InstContainer className="flex items-center gap-2 py-2">
           <div className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {H.nav.map((item) => {
+            {H.nav.map((item, index) => {
               const active = activeNav === item.id;
+              const showDivider = item.quiet && !H.nav[index - 1]?.quiet;
               return (
+                <span key={item.id} className="inline-flex shrink-0 items-center">
+                  {showDivider ? (
+                    <span className="mx-2 h-4 w-px bg-neutral-300" aria-hidden />
+                  ) : null}
                 <a
-                  key={item.id}
                   href={`#${item.id}`}
                   className={cn(
                     'inline-flex min-h-11 shrink-0 items-center border-b-[3px] px-3 py-1.5 text-xs font-medium transition',
                     active
                       ? 'border-neutral-950 font-semibold text-neutral-950'
-                      : 'border-transparent text-neutral-600 hover:text-neutral-950',
+                      : item.quiet
+                        ? 'border-transparent text-neutral-500 hover:text-neutral-950'
+                        : 'border-transparent text-neutral-600 hover:text-neutral-950',
                     active && SECTION_ACCENT[item.id] === 'ocean' && 'border-sky-700',
                     active && SECTION_ACCENT[item.id] === 'teal' && 'border-teal-700',
                     active && SECTION_ACCENT[item.id] === 'copper' && 'border-amber-700',
@@ -115,6 +123,7 @@ export function InstitutionsHubClient() {
                 >
                   {item.label}
                 </a>
+                </span>
               );
             })}
           </div>
@@ -134,13 +143,14 @@ export function InstitutionsHubClient() {
       <InstitutionsHero />
       <InstitutionalProofStrip />
       <PracticeLaneGrid />
-      <CompoundingSystem />
       <FlagshipCaseStudies />
-      <AdditionalEvidence />
       <ProcessSteps />
       <EngagementModes />
-      <InstitutionArchive />
       <InstitutionsFinalCTA />
+      <CompoundingSystem />
+      <ToolsFromPastWork />
+      <AdditionalEvidence />
+      <InstitutionArchive />
     </InstPageShell>
   );
 }

@@ -9,7 +9,6 @@ import {
   digilabHeroParallaxLayers,
 } from '@/content/oolite-arts/media';
 import { InstFamilyNav } from '@/components/institutions/InstitutionalUi';
-import { AssetNeeded } from './AssetNeeded';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { LabSystemMap } from './LabSystemMap';
 import { VisibleInvisibleToggle } from './VisibleInvisibleToggle';
@@ -85,7 +84,7 @@ function DigilabHeroParallax() {
         <p className="text-white/90 text-base sm:text-xl max-w-2xl mb-2">
           {C.overview.supportingLine}
         </p>
-        <p className="font-mono text-[10px] text-white/60 tracking-wide">
+        <p className="font-mono text-[10px] text-white/60 tracking-wide motion-reduce:hidden">
           Hover to shift space · layered Digilab photography
         </p>
       </div>
@@ -224,6 +223,39 @@ export default function OoliteCaseStudy() {
       {/* Hero */}
       <section className="relative">
         <DigilabHeroParallax />
+      </section>
+
+      <section className="border-b border-black/10 bg-white" aria-labelledby="oolite-ops-heading">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11 py-10 sm:py-14">
+          <SectionLabel>{C.overview.operationalSummary.eyebrow}</SectionLabel>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <h2
+              id="oolite-ops-heading"
+              className="font-['MoMA_Sans'] text-2xl sm:text-4xl font-bold tracking-tight max-w-3xl"
+            >
+              {C.overview.operationalSummary.title}
+            </h2>
+            <Link
+              href={C.overview.operationalSummary.return.href}
+              className="shrink-0 font-mono text-[11px] tracking-[0.12em] uppercase underline underline-offset-4"
+            >
+              {C.overview.operationalSummary.return.label}
+            </Link>
+          </div>
+          <p className="mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-neutral-700">
+            {C.overview.operationalSummary.lead}
+          </p>
+          <dl className="mt-8 grid gap-4 sm:grid-cols-2">
+            {C.overview.operationalSummary.items.map((item) => (
+              <div key={item.label} className="border border-black/10 bg-[#F7F8FA] p-4">
+                <dt className="font-mono text-[11px] tracking-[0.14em] uppercase text-neutral-500">
+                  {item.label}
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-neutral-800">{item.text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </section>
 
       {/* Opening + credits */}
@@ -586,8 +618,7 @@ export default function OoliteCaseStudy() {
             Need → obstacle → support → result
           </h2>
           <p className="text-neutral-700 max-w-2xl mb-10">
-            Support patterns drawn from public curriculum—not named artists.
-            Consented mini case studies can replace these archetypes over time.
+            Support patterns drawn from the public curriculum. These are not named-artist case studies.
           </p>
           <div className="space-y-8">
             {C.artistStories.map((story) => (
@@ -619,9 +650,6 @@ export default function OoliteCaseStudy() {
                     </div>
                   ))}
                 </dl>
-                <div className="mt-6">
-                  <AssetNeeded asset={story.needed} />
-                </div>
               </article>
             ))}
           </div>
@@ -631,9 +659,6 @@ export default function OoliteCaseStudy() {
       {/* Invisible infrastructure — signature */}
       <section id="infrastructure" className="border-t border-black/10 bg-black text-white py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
-          <p className="font-mono text-[11px] sm:text-xs tracking-[0.18em] uppercase text-[#E10600] mb-3">
-            Signature section
-          </p>
           <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
             {C.visibleInvisible.title}
           </h2>
@@ -647,13 +672,15 @@ export default function OoliteCaseStudy() {
       {/* Outcomes */}
       <section id="outcomes" className="border-t border-black/10 bg-white py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
-          <SectionLabel>Outcomes dashboard</SectionLabel>
+          <SectionLabel>Published program facts</SectionLabel>
           <h2 className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-            Verified facts only
+            What Oolite Arts has published
           </h2>
-          <p className="text-neutral-600 text-sm mb-10 max-w-2xl">{C.metrics.asOfNote}</p>
+          <p className="text-neutral-600 text-sm mb-10 max-w-2xl">
+            These figures come from public Oolite Arts listings. Counts of artists, consultations, and documented workflows are not shown here.
+          </p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {C.metrics.items.map((m) => (
+            {C.metrics.items.filter((m) => m.verified).map((m) => (
               <div
                 key={m.id}
                 className={`border p-4 sm:p-5 min-h-[8rem] flex flex-col ${
@@ -663,7 +690,7 @@ export default function OoliteCaseStudy() {
                 }`}
               >
                 <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-neutral-500 mb-3">
-                  {m.verified ? 'Verified' : 'Pending verification'}
+                  Public listing
                 </p>
                 <p className="font-['MoMA_Sans'] text-3xl sm:text-4xl font-bold mb-1">
                   {m.value ?? '—'}

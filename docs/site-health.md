@@ -45,7 +45,7 @@ Use this table to resume work. Update when a pass ships.
 The site has **two institutional doors** and **three hiring flagships**. Conversion lifts come from deepening those proofs — not from more thin `/opportunities/*` pages.
 
 ```text
-Institutions send:  /institutions (museum digital systems)  →  /oolite-arts · /ica-miami (proof)  →  Calendly
+Institutions send:  /institutions (museum digital systems)  →  /oolite-arts · /ica-miami (proof)  →  Calendly (“Discuss a project”; no duration printed)
 Hiring flagships:   /projects/agentic-ops · /forward-deployed · /creative-ai
 Hiring skills SoT:  /capabilities  →  private /opportunities/[slug] (thin overlays)
 Do not mix doors:   incubators ≠ /ai-engineering; hiring ≠ /artist-infrastructure alone
