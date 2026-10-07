@@ -5,6 +5,7 @@ import { useCallback, useMemo, useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import {
   MOONLIGHTER_SLUG,
+  getLesson,
   getModule,
   moonlighterModules,
   sixHourRunOfShow,
@@ -33,6 +34,7 @@ export default function FacilitatePage() {
 
   const moduleId = bundle?.session.current_module ?? 0
   const curriculumModule = getModule(moduleId)
+  const lesson = curriculumModule ? getLesson(curriculumModule.id) : undefined
 
   const selected = useMemo(
     () => bundle?.participants.find((p) => p.id === selectedParticipant),
@@ -272,15 +274,47 @@ export default function FacilitatePage() {
               })}
             </ul>
             {curriculumModule && (
-              <div className="mt-4 border border-[var(--ml-soft-gray)] bg-white/50 p-3 text-sm">
-                <p className="font-medium">Demo cue</p>
-                <ul className="mt-2 list-disc pl-4 text-[var(--ml-ink)]/75">
-                  {curriculumModule.demos.map((d) => (
-                    <li key={d.id}>{d.title}</li>
-                  ))}
-                </ul>
-                <p className="mt-3 font-medium">Pass check</p>
-                <p className="mt-1 text-[var(--ml-ink)]/75">{curriculumModule.passCheck}</p>
+              <div className="mt-4 space-y-3 border border-[var(--ml-soft-gray)] bg-white/50 p-3 text-sm">
+                <div>
+                  <p className="font-medium">Demo cue</p>
+                  <ul className="mt-2 list-disc pl-4 text-[var(--ml-ink)]/75">
+                    {curriculumModule.demos.map((d) => (
+                      <li key={d.id}>{d.title}</li>
+                    ))}
+                  </ul>
+                </div>
+                {lesson && (
+                  <>
+                    <p className="leading-relaxed text-[var(--ml-ink)]/85">{lesson.cue.open}</p>
+                    <div>
+                      <p className="font-medium">During the demo</p>
+                      <ul className="mt-2 list-disc space-y-1 pl-4 text-[var(--ml-ink)]/75">
+                        {lesson.cue.demo.map((line) => (
+                          <li key={line}>{line}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="font-medium">While they work</p>
+                      <ul className="mt-2 list-disc space-y-1 pl-4 text-[var(--ml-ink)]/75">
+                        {lesson.cue.watch.map((line) => (
+                          <li key={line}>{line}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <p>
+                      <span className="font-medium">Close. </span>
+                      <span className="text-[var(--ml-ink)]/75">{lesson.cue.close}</span>
+                    </p>
+                    {lesson.cue.breakNote && (
+                      <p className="text-[var(--ml-controlled)]">{lesson.cue.breakNote}</p>
+                    )}
+                  </>
+                )}
+                <div>
+                  <p className="font-medium">Pass check</p>
+                  <p className="mt-1 text-[var(--ml-ink)]/75">{curriculumModule.passCheck}</p>
+                </div>
               </div>
             )}
           </div>

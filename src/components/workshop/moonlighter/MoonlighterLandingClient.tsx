@@ -20,6 +20,8 @@ import { GlossaryCard, MeshKeyword } from './MeshKeyword'
 import { MeshGlyph, MeshGlyphFrame } from './MeshGlyphs'
 import { InstructorTeachingCarousel } from './InstructorTeachingCarousel'
 import { ScheduleModuleRows } from './ScheduleModuleRows'
+import { ImageTo3dPaths } from './ImageTo3dPaths'
+import { PrinterAssumption } from './PrinterAssumption'
 
 const base = `/workshop/${MOONLIGHTER_SLUG}`
 
@@ -466,6 +468,9 @@ export function MoonlighterLandingClient() {
                 printers. The workshop is <MeshKeyword id="tool-flexible">tool-flexible</MeshKeyword>
                 : it teaches a transferable method rather than a single vendor interface.
               </p>
+              <div className="mt-6">
+                <ImageTo3dPaths compact />
+              </div>
             </EnterItem>
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 [perspective:800px]">
               {TOOL_PILLARS.map(({ label, icon, hint }, i) => (
@@ -619,6 +624,9 @@ export function MoonlighterLandingClient() {
               </div>
               <SectionMedia id="schedule-printers" tilt="medium" delay={0.06} />
             </div>
+          </div>
+          <div className="mt-6">
+            <PrinterAssumption />
           </div>
           <EnterItem>
             <ScheduleModuleRows rows={sixHourRunOfShow} />

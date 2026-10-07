@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 import {
+  getLesson,
   getModule,
   sixHourRunOfShow,
   workshopPromise,
@@ -18,6 +19,7 @@ export default function PresenterPage() {
   const { bundle, error } = useMoonlighterSession(code, 2500)
   const moduleId = bundle?.session.current_module ?? 0
   const curriculumModule = getModule(moduleId)
+  const lesson = getLesson(moduleId)
   const schedule = useMemo(
     () => sixHourRunOfShow.find((r) => r.moduleId === moduleId),
     [moduleId],
@@ -59,10 +61,20 @@ export default function PresenterPage() {
             <h2 className="mt-4 max-w-5xl text-4xl font-semibold leading-[1.1] md:text-6xl lg:text-7xl">
               {curriculumModule.header}
             </h2>
-            <p className="mt-6 max-w-3xl text-xl text-[var(--ml-paper)]/80 md:text-2xl md:leading-snug">
+            {lesson && (
+              <p className="mt-6 max-w-3xl text-2xl text-[var(--ml-paper)] md:text-3xl md:leading-snug">
+                {lesson.roomLine}
+              </p>
+            )}
+            <p className="mt-4 max-w-3xl text-lg text-[var(--ml-paper)]/70 md:text-xl">
               {curriculumModule.objective}
             </p>
-            <p className="mt-8 max-w-2xl border-l-2 border-[var(--ml-digital)] pl-4 text-lg text-[var(--ml-paper)]/70">
+            {lesson && (
+              <p className="mt-6 font-mono text-sm uppercase tracking-[0.16em] text-[var(--ml-digital)]">
+                Example · {lesson.example.title}
+              </p>
+            )}
+            <p className="mt-6 max-w-2xl border-l-2 border-[var(--ml-digital)] pl-4 text-lg text-[var(--ml-paper)]/70">
               Pass check: {curriculumModule.passCheck}
             </p>
           </div>
