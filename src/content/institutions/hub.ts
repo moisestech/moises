@@ -153,7 +153,7 @@ export const ORG_RELATIONSHIP_LABELS: Record<OrgRelationship, string> = {
 
 const STACK = {
   salesforce: {
-    src: 'https://cdn.simpleicons.org/salesforce/00A1E0',
+    src: `${jobsCdn}/v1791400518/jobs/salesforce-icon-square-transparent_izibeo.png`,
     alt: 'Salesforce',
     height: 28,
   },
