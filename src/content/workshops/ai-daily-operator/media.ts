@@ -442,7 +442,7 @@ export const DAILY_OPERATOR_MEDIA = {
       {
         concept: 'creative-artist',
         role: 'industry-overlay',
-        status: 'approved',
+        status: 'needed',
         alt: 'Founder Attention OS applied to grants, commissions, exhibitions, workshops, and creative production.',
         usage: ['web', 'lms', 'slides'],
       },
@@ -453,7 +453,7 @@ export const DAILY_OPERATOR_MEDIA = {
       {
         concept: 'consultant-agency',
         role: 'industry-overlay',
-        status: 'approved',
+        status: 'needed',
         alt: 'Founder Attention OS applied to proposals, retainers, client delivery, and follow-up.',
         usage: ['web', 'lms', 'slides'],
       },
@@ -464,7 +464,7 @@ export const DAILY_OPERATOR_MEDIA = {
       {
         concept: 'local-service',
         role: 'industry-overlay',
-        status: 'approved',
+        status: 'needed',
         alt: 'Founder Attention OS applied to appointments, quotes, jobs, payments, and customer requests.',
         usage: ['web', 'lms', 'slides'],
       },
@@ -475,7 +475,7 @@ export const DAILY_OPERATOR_MEDIA = {
       {
         concept: 'retail-hospitality',
         role: 'industry-overlay',
-        status: 'approved',
+        status: 'needed',
         alt: 'Founder Attention OS applied to staffing, sales, inventory, promotions, and customer communication.',
         usage: ['web', 'lms', 'slides'],
       },
@@ -486,7 +486,7 @@ export const DAILY_OPERATOR_MEDIA = {
       {
         concept: 'nonprofit-cultural',
         role: 'industry-overlay',
-        status: 'approved',
+        status: 'needed',
         alt: 'Founder Attention OS applied to grants, donors, programs, board commitments, and reporting.',
         usage: ['web', 'lms', 'slides'],
       },
@@ -497,7 +497,7 @@ export const DAILY_OPERATOR_MEDIA = {
       {
         concept: 'professional-services',
         role: 'industry-overlay',
-        status: 'approved',
+        status: 'needed',
         alt: 'Founder Attention OS applied to client matters, deadlines, billable work, pipeline, and compliance.',
         usage: ['web', 'lms', 'slides'],
       },
@@ -511,7 +511,7 @@ export const DAILY_OPERATOR_MEDIA = {
       {
         concept: 'dcc-operating-case',
         role: 'case-study',
-        status: 'approved',
+        status: 'needed',
         alt: 'DCC Miami as a real creative-business case with workshops, clients, proposals, invoices, deadlines, and capacity competing for attention.',
         usage: ['web', 'lms', 'slides'],
       },
