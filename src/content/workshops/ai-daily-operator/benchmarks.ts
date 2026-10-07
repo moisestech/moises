@@ -107,6 +107,27 @@ export const DAILY_OPERATOR_BENCHMARKS: readonly CourseBenchmark[] = [
   },
 
   {
+    id: 'claude-ai-fluency-small-business',
+    provider: 'Claude Academy',
+    title: 'AI Fluency for small businesses',
+    url: 'https://academy.claude.com/courses/ai-fluency-for-small-businesses',
+    kind: 'official-workshop',
+    priority: 'must-review',
+    whyItMatters:
+      'The closest official Anthropic benchmark for our audience: a 3.5-hour small-business course using the 4D framework, capabilities/limitations, privacy, automation selection, repeatable workflows, and human-in-the-loop.',
+    whatToBorrow: [
+      'Start from business values, goals, and constraints',
+      'Description-Discernment loop',
+      'Privacy/data hygiene for business information',
+      'Decide what should stay human-led',
+      'Build a repeatable AI-augmented workflow',
+      'Make human-in-the-loop explicit',
+    ],
+    whatNotToDuplicate: [
+      'A full generic small-business AI curriculum inside our Level I workshop',
+    ],
+  },
+  {
     id: 'claude-ai-fluency',
     provider: 'Claude Academy',
     title: 'AI Fluency: Framework and foundations',
@@ -239,6 +260,7 @@ export const DAILY_OPERATOR_BENCHMARK_REVIEW_ORDER = [
   'openai-ai-foundations',
   'openai-applied-ai-foundations',
   'openai-agents-workflows',
+  'claude-ai-fluency-small-business',
   'claude-ai-fluency',
   'claude-human-agent-teams',
   'claude-capabilities-limitations',
