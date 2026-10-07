@@ -78,18 +78,6 @@ export function InstitutionsHero() {
                 </div>
                 <p className="mt-1.5 text-xs leading-relaxed text-neutral-600">{collage.teaching.caption}</p>
               </div>
-              <div>
-                <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200">
-                  <Image
-                    src={collage.workflow.src}
-                    alt={collage.workflow.alt}
-                    fill
-                    className="object-cover object-left"
-                    sizes="(min-width: 1024px) 20vw, 50vw"
-                  />
-                </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-neutral-600">{collage.workflow.caption}</p>
-              </div>
               <div className="col-span-2 sm:col-span-1">
                 <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
                   {H.profile.label}
@@ -111,19 +99,33 @@ export function InstitutionsHero() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-neutral-200 pt-8">
-          <OpportunityAudienceKeywords data={H.audienceKeywords} className="mb-0 text-left" />
-        </div>
       </InstContainer>
+    </header>
+  );
+}
 
-      <div className="border-t border-neutral-200 bg-white py-6 sm:py-8">
-        <InstContainer>
-          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
-            {H.logoBandLabel}
-          </p>
-        </InstContainer>
+export function ToolsFromPastWork() {
+  return (
+    <section
+      id="tools"
+      className={`${INST_ANCHOR_SCROLL_MT_CLASS} border-b border-neutral-200 bg-white py-16 sm:py-20`}
+      aria-labelledby="tools-heading"
+    >
+      <InstContainer>
+        <InstSectionLabel accent="violet">{H.logoBandLabel}</InstSectionLabel>
+        <h2 id="tools-heading" className="max-w-3xl font-['MoMA_Sans'] text-[clamp(1.75rem,3.5vw,3rem)] font-semibold">
+          Systems used in prior engagements
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+          {H.logoBandCaption}
+        </p>
+      </InstContainer>
+      <div className="mt-8">
         <AnimatedLogoBand logos={[...H.logoBand]} bleed ariaLabel={H.logoBandLabel} />
       </div>
-    </header>
+      <InstContainer className="mt-10">
+        <OpportunityAudienceKeywords data={H.audienceKeywords} className="mb-0 text-left" />
+      </InstContainer>
+    </section>
   );
 }

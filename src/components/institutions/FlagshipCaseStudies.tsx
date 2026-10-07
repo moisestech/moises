@@ -3,7 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { institutionsHub as H, type InstitutionCaseStudy, type PracticeLaneAccent } from '@/content/institutions/hub';
+import {
+  CONCEPTUAL_SYSTEM_VIEW_LABEL,
+  institutionsHub as H,
+  type InstitutionCaseStudy,
+  type PracticeLaneAccent,
+} from '@/content/institutions/hub';
 import { track } from '@/lib/analytics';
 import {
   INST_ACCENT,
@@ -15,6 +20,8 @@ import {
 } from '@/components/institutions/InstitutionalUi';
 import { IcaSystemsDiagram } from '@/components/institutions/IcaSystemsDiagram';
 import { cn } from '@/lib/utils';
+
+const FLAGSHIP_ORDER = ['ica', 'oolite', 'bakehouse'];
 
 const STATUS_CLASS = {
   shipped: INST_ACCENT.emerald.chipActive,
@@ -48,15 +55,17 @@ export function FlagshipCaseStudies() {
         <InstReveal>
           <InstSectionLabel>Selected institutional work</InstSectionLabel>
           <h2 id="work-heading" className="font-['MoMA_Sans'] text-[clamp(1.75rem,3.5vw,3rem)] font-semibold">
-            Three case studies
+            ICA Miami, Oolite Arts, and Bakehouse
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-            Oolite, ICA Miami, and Bakehouse first. Locust Projects and exhibition history sit below as additional evidence.
+            Completed, active, and proposed work are labeled separately. Workshops and exhibition history stay further down the page.
           </p>
         </InstReveal>
 
         <div className="mt-12 space-y-16">
-          {H.flagship.map((study, index) => {
+          {[...H.flagship]
+            .sort((a, b) => FLAGSHIP_ORDER.indexOf(a.id) - FLAGSHIP_ORDER.indexOf(b.id))
+            .map((study, index) => {
             const accent = INST_ACCENT[LANE_ACCENT[study.primaryLane as PracticeLaneAccent]];
             const reverse = index % 2 === 1;
             return (
@@ -66,17 +75,29 @@ export function FlagshipCaseStudies() {
                   className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border border-neutral-200 bg-white')}
                 >
                   <div className={cn('grid lg:grid-cols-12', reverse && 'lg:[&>*:first-child]:order-2')}>
-                    <div className="relative min-h-[240px] bg-neutral-100 lg:col-span-5">
+                    <div className="flex flex-col bg-neutral-100 lg:col-span-5">
                       {study.media[0] ? (
-                        <Image
-                          src={study.media[0].src}
-                          alt={study.media[0].alt}
-                          fill
-                          className="object-cover"
-                          sizes="(min-width: 1024px) 42vw, 100vw"
-                        />
+                        <figure className="flex h-full flex-col">
+                          <div className="relative min-h-[240px] flex-1">
+                            <Image
+                              src={study.media[0].src}
+                              alt={study.media[0].alt}
+                              fill
+                              className="object-cover"
+                              sizes="(min-width: 1024px) 42vw, 100vw"
+                            />
+                          </div>
+                          {'caption' in study.media[0] && study.media[0].caption ? (
+                            <figcaption className="border-t border-neutral-200 bg-white px-4 py-3 text-xs leading-relaxed text-neutral-600">
+                              {study.media[0].caption}
+                            </figcaption>
+                          ) : null}
+                        </figure>
                       ) : 'diagram' in study && study.diagram ? (
-                        <div className="flex h-full items-center p-4 sm:p-6">
+                        <div className="flex h-full flex-col justify-center p-4 sm:p-6">
+                          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
+                            {CONCEPTUAL_SYSTEM_VIEW_LABEL}
+                          </p>
                           <IcaSystemsDiagram className="w-full" />
                         </div>
                       ) : null}
@@ -132,8 +153,17 @@ export function FlagshipCaseStudies() {
                       {study.media.length > 1 ? (
                         <ul className="mt-5 grid grid-cols-2 gap-2">
                           {study.media.slice(1).map((img) => (
-                            <li key={img.src} className="relative aspect-[16/10] overflow-hidden bg-neutral-200">
-                              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="200px" />
+                            <li key={img.src}>
+                              <figure>
+                                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-200">
+                                  <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="200px" />
+                                </div>
+                                {'caption' in img && img.caption ? (
+                                  <figcaption className="mt-1 text-xs leading-relaxed text-neutral-600">
+                                    {img.caption}
+                                  </figcaption>
+                                ) : null}
+                              </figure>
                             </li>
                           ))}
                         </ul>
@@ -176,7 +206,24 @@ export function AdditionalEvidence() {
           <h2 id="evidence-heading" className="font-['MoMA_Sans'] text-[clamp(1.75rem,3.5vw,3rem)] font-semibold">
             Workshops, platforms, and exhibition context
           </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+            Supporting context after the three institutional cases. AI24 and DCC Miami live here, not in the opening proof strip.
+          </p>
         </InstReveal>
+        <figure className="mt-10 max-w-3xl border border-neutral-200 bg-white">
+          <div className="relative aspect-[16/9] bg-neutral-100">
+            <Image
+              src={H.hero.collage.workflow.src}
+              alt={H.hero.collage.workflow.alt}
+              fill
+              className="object-contain object-left"
+              sizes="(min-width: 768px) 720px, 100vw"
+            />
+          </div>
+          <figcaption className="border-t border-neutral-200 px-4 py-3 text-sm leading-relaxed text-neutral-600">
+            Teaching diagram, not institutional proof. {H.hero.collage.workflow.caption}
+          </figcaption>
+        </figure>
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {H.additionalEvidence.map((study, i) => (
             <InstReveal key={study.id} delay={0.03 * i}>

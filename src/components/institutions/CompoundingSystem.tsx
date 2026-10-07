@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { institutionsHub as H, type PracticeLaneAccent } from '@/content/institutions/hub';
 import {
@@ -29,21 +28,12 @@ export function InstitutionalProofStrip() {
             {H.proof.eyebrow}
           </p>
         </InstReveal>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {H.proof.items.map((item, i) => {
             const accent = INST_ACCENT[LANE_ACCENT[item.accent as PracticeLaneAccent]];
             const inner = (
               <>
                 <span className={cn('mb-3 block h-1 w-8', accent.bar)} aria-hidden />
-                {'logo' in item && item.logo ? (
-                  <Image
-                    src={item.logo.src}
-                    alt={item.logo.alt}
-                    width={item.logo.width}
-                    height={item.logo.height}
-                    className="mb-3 h-7 w-auto max-w-[140px] object-contain object-left"
-                  />
-                ) : null}
                 <p className="font-['MoMA_Sans'] text-base font-semibold">{item.name}</p>
                 <p className="mt-1 text-sm text-neutral-700">{item.role}</p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
@@ -59,15 +49,9 @@ export function InstitutionalProofStrip() {
             return (
               <InstReveal key={item.id} delay={0.04 * i}>
                 <li>
-                  {'external' in item && item.external ? (
-                    <a href={item.href} target="_blank" rel="noopener noreferrer" className={className}>
-                      {inner}
-                    </a>
-                  ) : (
-                    <Link href={item.href} className={className}>
-                      {inner}
-                    </Link>
-                  )}
+                  <Link href={item.href ?? '/institutions'} className={className}>
+                    {inner}
+                  </Link>
                 </li>
               </InstReveal>
             );

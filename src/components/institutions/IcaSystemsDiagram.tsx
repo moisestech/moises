@@ -56,7 +56,7 @@ export function IcaSystemsDiagram({ className }: { className?: string }) {
         </span>
       </p>
       <figcaption className="mt-3 text-xs leading-relaxed text-neutral-600">
-        Museum data, public web, and livestream production as one connected workflow—not three vendor silos.
+        A reconstructed view of how collection data, the public site, and livestream production were connected during the 2019–2020 tenure. Not a map of current systems.
       </figcaption>
     </figure>
   );

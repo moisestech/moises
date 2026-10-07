@@ -107,6 +107,8 @@ export type PracticeLane = {
   icon: 'database' | 'workflow' | 'radio' | 'flask';
   proofTags: string[];
   stack: LogoBandItem[];
+  /** Historical example. Not a promise about a current stack. */
+  priorExample: string;
   illustration: PracticeLaneIllustration;
 };
 
@@ -194,7 +196,7 @@ export const institutionsLogoBand: LogoBandItem[] = [
 ];
 
 export const institutionsAudienceKeywords: OpportunityAudienceKeywords = {
-  lead: 'I work inside the software cultural organizations already use—',
+  lead: 'Examples of software from prior institutional work—',
   terms: [
     {
       label: 'Salesforce',
@@ -202,7 +204,7 @@ export const institutionsAudienceKeywords: OpportunityAudienceKeywords = {
     },
     {
       label: 'web support',
-      detail: 'WordPress, CMS, SEO, forms, and site maintenance without a new vendor for every update.',
+      detail: 'CMS support, forms, event pages, and site maintenance for publishing workflows.',
     },
     {
       label: 'automation',
@@ -219,13 +221,15 @@ export const institutionsHub = {
   meta: {
     title: 'Digital Systems for Arts Institutions — Moises Sanabria',
     description:
-      'Moises Sanabria builds web, Salesforce, automation, livestreaming, and digital-lab systems for museums, arts organizations, and artist-facing programs.',
+      'Moises Sanabria helps museums and arts organizations connect websites, communications, and operational workflows—with clear ownership and practical documentation.',
     url: 'https://moises.tech/institutions',
   },
   banner: institutionsDigitalSystemsBanner,
   bannerNote: null as string | null,
   logoBand: institutionsLogoBand,
-  logoBandLabel: 'Institutional software and production tools',
+  logoBandLabel: 'Tools from past work',
+  logoBandCaption:
+    'Software and production tools used in prior engagements. This is not a claim about any institution’s current stack.',
   audienceKeywords: institutionsAudienceKeywords,
   profile: {
     src: digilabAsset('portrait.moises').src,
@@ -234,11 +238,11 @@ export const institutionsHub = {
   },
   hero: {
     eyebrow: 'Institutional technology · Miami',
-    headline: 'Digital systems for museums, arts organizations, and artist-facing programs.',
+    headline: 'Less coordination. More capacity for your programs.',
     lead:
-      'I help cultural organizations improve the systems behind their public programs—from websites, Salesforce, and operational automation to livestreaming, digital production, and creative-technology labs.',
+      'I help museums and arts organizations connect their websites, communications, and operational workflows—so staff can spend less time managing handoffs and more time supporting programs and audiences.',
     support:
-      'With previous experience inside ICA Miami and recent technical direction at Oolite Arts, I can step into existing institutional environments quickly, reduce vendor handoffs, and move focused projects from diagnosis to implementation.',
+      'Previous work inside ICA Miami, and technical direction at Oolite Arts, inform how I approach connected digital operations for cultural organizations.',
     availability: INSTITUTIONAL_SERVICES_AVAILABILITY,
     availabilityLabel: 'Currently available · project-based + fractional engagements',
     primaryCta: {
@@ -247,7 +251,7 @@ export const institutionsHub = {
       external: true,
     },
     secondaryCta: {
-      label: 'View selected institutional work',
+      label: 'Explore selected work',
       href: '#work',
       external: false,
     },
@@ -271,13 +275,15 @@ export const institutionsHub = {
     },
   },
   nav: [
-    { id: 'top', label: 'Overview' },
-    { id: 'services', label: 'Services' },
-    { id: 'system', label: 'System' },
-    { id: 'work', label: 'Selected work' },
-    { id: 'evidence', label: 'Evidence' },
-    { id: 'engage', label: 'Engage' },
-    { id: 'archive', label: 'Experience' },
+    { id: 'top', label: 'Overview', quiet: false },
+    { id: 'services', label: 'Services', quiet: false },
+    { id: 'work', label: 'Work', quiet: false },
+    { id: 'process', label: 'Process', quiet: false },
+    { id: 'engage', label: 'Engage', quiet: false },
+    { id: 'system', label: 'Method', quiet: true },
+    { id: 'tools', label: 'Tools', quiet: true },
+    { id: 'evidence', label: 'Further', quiet: true },
+    { id: 'archive', label: 'Experience', quiet: true },
   ],
   proof: {
     eyebrow: 'Institutional context',
@@ -306,46 +312,42 @@ export const institutionsHub = {
         accent: 'automation' as PracticeLaneAccent,
         href: '/bakehouse',
       },
-      {
-        id: 'ai24',
-        name: 'AI24 / DCC Miami',
-        role: 'Artist-owned cultural-technology practice',
-        dates: 'Ongoing',
-        accent: 'live' as PracticeLaneAccent,
-        href: DCC_MIAMI.href,
-        external: true,
-        logo: DCC_MIAMI.logo,
-      },
     ],
   },
   lanes: [
     {
       id: 'web-salesforce',
       index: '01',
-      title: 'Web and Salesforce systems',
+      title: 'Website and communications',
       description:
-        'Website management, CMS support, Salesforce integrations, registration and membership workflows, forms, analytics, search, and SEO.',
-      solves: 'Keeps public sites, CRM data, and registration in one maintainable system.',
+        'CMS support, forms, event pages, integrations, and analytics.',
+      solves:
+        'Clearer publishing workflows and more consistent information across pages and communications.',
       href: '#work-ica',
       linkLabel: 'ICA systems case study',
       accent: 'web',
       icon: 'database',
       proofTags: ['ICA Miami', 'WordPress', 'Salesforce', 'GraphQL', 'AWS CloudFront', 'Registration'],
+      priorExample:
+        'At ICA Miami (2019–2020), collection records in Salesforce were connected to WordPress and ticketing. That describes the tenure, not ICA’s systems today.',
       stack: [STACK.salesforce, STACK.wordpress, STACK.bloomerang, STACK.aws],
       illustration: LANE_ILLUSTRATIONS.web,
     },
     {
       id: 'automation-operations',
       index: '02',
-      title: 'Automation and digital operations',
+      title: 'Registration, data, and reporting',
       description:
-        'Reporting, intake, booking, communications, documentation, and repetitive administrative workflows designed with human review and handoff.',
-      solves: 'Removes repetitive handoffs so staff time goes back to programs.',
+        'Salesforce integrations, data mapping, workflow automation, and reporting.',
+      solves:
+        'Less repeated entry and a clearer path from registration to useful reporting.',
       href: '#work-bakehouse',
       linkLabel: 'Bakehouse systems',
       accent: 'automation',
       icon: 'workflow',
       proofTags: ['Airtable', 'n8n / Make', 'APIs', 'Structured outputs', 'Documentation'],
+      priorExample:
+        'Registration, intake, and reporting work has used Airtable and n8n, with a person reviewing the handoff. Tools are chosen for the workflow in front of us.',
       stack: [STACK.airtable, STACK.n8n],
       illustration: LANE_ILLUSTRATIONS.automation,
     },
@@ -354,13 +356,16 @@ export const institutionsHub = {
       index: '03',
       title: 'Livestreaming and digital production',
       description:
-        'Public programs, member events, webinars, OBS production, captioning, hybrid events, and reusable media workflows.',
-      solves: 'Makes public programs reach remote audiences without a new vendor every time.',
+        'Streaming, audio and video workflows, captioning, and reusable production procedures.',
+      solves:
+        'A documented workflow from registration and production through captions and archive.',
       href: '#work-ica',
       linkLabel: 'ICA digital production',
       accent: 'live',
       icon: 'radio',
       proofTags: ['ICA Miami Channel', 'OBS', 'Zoom webinars', 'Captions', 'YouTube', 'After Effects'],
+      priorExample:
+        'At ICA Miami (2019–2020), livestreams, captions, and the Art + Research Center video channel were produced for programs beyond the building.',
       stack: [STACK.obs],
       illustration: LANE_ILLUSTRATIONS.live,
     },
@@ -369,13 +374,16 @@ export const institutionsHub = {
       index: '04',
       title: 'Digital labs and artist programs',
       description:
-        'Technical infrastructure, equipment planning, fabrication workflows, workshops, documentation, and artist support.',
-      solves: 'Turns a room of tools into an artist-facing program that staff can keep running.',
+        'Lab operations, fabrication workflows, training, and vendor coordination.',
+      solves:
+        'Equipment, booking, documentation, and artist support organized into a usable program.',
       href: '#work-oolite',
       linkLabel: 'Oolite Digital Lab',
       accent: 'lab',
       icon: 'flask',
       proofTags: ['Oolite Arts', '3D printing', '3D scanning', 'VR', 'Laser cutting', 'Creative coding'],
+      priorExample:
+        'At Oolite Arts, with Fabiola Larios, lab space, workshops, open hours, fabrication, and documentation were run as one artist-facing program.',
       stack: [],
       illustration: LANE_ILLUSTRATIONS.lab,
     },
@@ -386,7 +394,7 @@ export const institutionsHub = {
     caption:
       'The deliverable is not only the tool. It is the organization’s ability to keep using it.',
     callout:
-      'At Oolite, equipment, workshops, open-lab support, documentation, and artist access operated as one connected program. That same logic can be adapted to web systems, Salesforce workflows, public media, or institutional AI.',
+      'At Oolite Arts, with Fabiola Larios, equipment, workshops, open-lab support, documentation, and artist access operated as one program. The same sequence can be applied to a website, a registration workflow, or a public-program production.',
     steps: [
       {
         id: 'listen',
@@ -427,20 +435,31 @@ export const institutionsHub = {
       status: 'operated' as const,
       primaryLane: 'lab' as PracticeLaneAccent,
       summary:
-        'Technical direction connecting lab infrastructure, operations, booking, workshops, fabrication, vendors, and documentation into one artist-facing program.',
+        'With Director of Digital Lab Fabiola Larios, technical direction connected lab infrastructure, booking, workshops, fabrication, and documentation into one artist-facing program.',
       proofSequence: [
-        { stage: 'Need', text: 'A new lab, tools, and an artist-support mandate.' },
         {
-          stage: 'Intervention',
-          text: 'Layout, equipment and software readiness, workshops, open lab, vendor coordination, fabrication workflows, documentation.',
+          stage: 'Context',
+          text: 'Oolite Arts Digital Lab, Miami Beach. Technical Director of Digital, 2025–2026, with Director of Digital Lab Fabiola Larios.',
         },
         {
-          stage: 'Adoption',
-          text: 'Published open-lab days, English and Spanish support, workshops, consultations, and return visits.',
+          stage: 'Responsibility',
+          text: 'Turn a new lab and its tools into an artist-facing program that could host classes, open hours, and follow-up support.',
         },
         {
-          stage: 'Capacity',
-          text: 'Documented workflows and a reusable institutional model.',
+          stage: 'Contribution',
+          text: 'Technical direction across layout, equipment readiness, workshops, open-lab hours, fabrication workflows, intake, scheduling, and documentation.',
+        },
+        {
+          stage: 'Artifact',
+          text: 'A public Digital Lab with published hours, workshops, and written equipment and teaching workflows. Photographs and class listings are on the case study.',
+        },
+        {
+          stage: 'Result',
+          text: 'Open lab published Tuesday and Thursday, 10 a.m.–5 p.m., in English and Spanish. Public workshops include Artist Website for Beginners (capacity 10) and Intro to 3D Resin Printing (capacity 8).',
+        },
+        {
+          stage: 'Ownership',
+          text: 'Co-developed with Fabiola Larios and Oolite staff. Independent case study, not an official Oolite publication. Intake, scheduling, safety, and follow-up notes are how workshop knowledge continues into open-lab practice.',
         },
       ],
       facts: [
@@ -454,14 +473,17 @@ export const institutionsHub = {
         {
           src: OOLITE_DIGITAL_LAB_IMAGE,
           alt: OOLITE_DIGITAL_LAB_IMAGE_ALT,
+          caption: 'Oolite Digital Lab. Documentary photograph of the operated room, not a rendering.',
         },
         {
           src: digilabAsset('workshop.art-tech-coding').src,
           alt: digilabAsset('workshop.art-tech-coding').alt,
+          caption: 'Creative-coding workshop in use.',
         },
         {
           src: digilabAsset('workshop.resin-2026').src,
           alt: digilabAsset('workshop.resin-2026').alt,
+          caption: 'Resin printing workshop.',
         },
       ],
       href: '/oolite-arts',
@@ -474,33 +496,41 @@ export const institutionsHub = {
       headline: 'Connecting museum data, public programming, and digital audiences.',
       role: 'Digital Producer',
       dates: 'October 2019–December 2020',
-      statusLabel: 'Employment / operated',
+      statusLabel: 'Completed',
       status: 'operated' as const,
       primaryLane: 'web' as PracticeLaneAccent,
       summary:
-        'Salesforce-to-WordPress workflows, ticketing, website management, livestreaming, interactive video, cloud infrastructure, SEO, and vendor coordination.',
+        'During a completed Digital Producer tenure, collection data, the public site, livestreams, and vendor coordination for interactive video were part of one role.',
       proofSequence: [
         {
-          stage: 'Need',
-          text: 'Digital autonomy, faster updates, connected collection and program data, remote programs.',
+          stage: 'Context',
+          text: 'Institute of Contemporary Art, Miami. Completed employment as Digital Producer, October 2019–December 2020.',
         },
         {
-          stage: 'Intervention',
-          text: 'Web and data integration, vendor coordination, streaming workflows, captioning, forms, reporting, and production.',
+          stage: 'Responsibility',
+          text: 'The public website, collection data connected to ticketing, and digital production for programs that had to reach beyond the building.',
         },
         {
-          stage: 'Adoption',
-          text: 'Cross-department use across development, external affairs, education, curatorial, and programs.',
+          stage: 'Contribution',
+          text: 'Connected Salesforce collection records to WordPress and ticketing, maintained the public site, produced livestreams and captions, and coordinated vendors for interactive HTML5 video.',
         },
         {
-          stage: 'Capacity',
-          text: 'Lower vendor friction and reusable public-program workflows.',
+          stage: 'Artifact',
+          text: 'The public video channel for Art + Research Center lectures, plus the site and registration workflows operated during the tenure. Channel screenshots are on the case study.',
+        },
+        {
+          stage: 'Result',
+          text: 'Collection records could feed public pages and ticketing. Livestreams and captions were produced for remote programs, including the Institute’s international music program.',
+        },
+        {
+          stage: 'Ownership',
+          text: 'The role ended in December 2020. The lecture archive continued after that tenure. This does not describe ICA Miami’s current systems.',
         },
       ],
       facts: [
-        { value: 'Salesforce', label: 'Collection data → WordPress / ticketing', verification: 'public' as const },
-        { value: 'WordPress', label: 'Site management, GitHub, GraphQL, CloudFront', verification: 'public' as const },
-        { value: 'OBS', label: 'Livestreaming, YouTube, captions, After Effects', verification: 'public' as const },
+        { value: '2019–2020', label: 'Digital Producer tenure. Not current employment.', verification: 'public' as const },
+        { value: 'Collection → web', label: 'Salesforce records connected to WordPress and ticketing during the tenure', verification: 'public' as const },
+        { value: 'Public channel', label: 'A+RC lectures and programs. The archive continued after 2020.', verification: 'public' as const },
       ],
       media: [],
       href: '/ica-miami',
@@ -518,23 +548,31 @@ export const institutionsHub = {
       status: 'active' as const,
       primaryLane: 'automation' as PracticeLaneAccent,
       summary:
-        'SmartSigns, kiosk infrastructure, artist-facing systems, and portal planning—with shipped work separated from proposed work.',
+        'SmartSigns and kiosk infrastructure in the building, with portal and partnership work still proposed.',
       proofSequence: [
         {
-          stage: 'Need',
-          text: 'Make artist and program activity visible without recurring ad-hoc file drops.',
+          stage: 'Context',
+          text: 'Bakehouse Art Complex. Studio 43 work on institutional display systems. Active, with proposed modules labeled separately.',
         },
         {
-          stage: 'Intervention',
-          text: 'Reusable vertical display formats, device and content workflow, portal and governance planning.',
+          stage: 'Responsibility',
+          text: 'Make artist and program activity visible on in-building screens without recurring ad-hoc file drops.',
         },
         {
-          stage: 'Adoption',
-          text: 'Active operational coordination and handoff in progress.',
+          stage: 'Contribution',
+          text: 'SmartSigns and Raspberry Pi / Anthias display infrastructure. An Artist Portal on Assembly is proposed, not shipped.',
         },
         {
-          stage: 'Capacity',
-          text: 'A future shared content model across screens, portal, programs, and staff workflows.',
+          stage: 'Artifact',
+          text: 'Display infrastructure in the building, with handoff in progress. Install photography is not on this page.',
+        },
+        {
+          stage: 'Result',
+          text: 'The SmartSigns implementation is active. No adoption counts or time-saved figures are published.',
+        },
+        {
+          stage: 'Ownership',
+          text: 'Handoff for the display workflow is in progress. A connected digital lab and communications partnership remains a future proposal.',
         },
       ],
       facts: [
@@ -550,7 +588,9 @@ export const institutionsHub = {
       media: [
         {
           src: BAKEHOUSE_IMAGE,
-          alt: 'Bakehouse Art Complex — open studios and public-facing cultural context',
+          alt: 'Bakehouse Art Complex open studios. Cultural context, not a photograph of the SmartSigns installation.',
+          caption:
+            'Open studios at Bakehouse. This photograph is cultural context. It is not documentation of the SmartSigns installation.',
         },
       ],
       href: '/bakehouse',
@@ -627,67 +667,68 @@ export const institutionsHub = {
     },
   ] satisfies InstitutionCaseStudy[],
   process: {
-    eyebrow: 'How work begins',
-    title: 'Review, then build, then leave it usable',
+    eyebrow: 'How an engagement works',
+    title: 'Understand, scope, build, hand off',
     reassurance: [
-      'Works with existing tools',
-      'Human review for AI/automation',
-      'Clear shipped / proposed labeling',
-      'Documentation included',
-      'Scope and ownership defined',
+      'One real workflow at a time',
+      'Deliverables, timeline, and fee agreed before build',
+      'Reviewed against written acceptance criteria',
+      'Documentation and a named owner at handoff',
+      'Completed, active, and proposed work stay labeled',
     ],
     steps: [
       {
-        id: 'review',
+        id: 'understand',
         icon: 'search' as const,
-        title: 'Technical review',
-        body: 'Map tools, owners, handoffs, bottlenecks, permissions, and current costs. Define what should be repaired, automated, connected, or left alone.',
+        title: 'Understand',
+        body: 'Examine one real workflow and agree on the desired change. The first conversation is not a technical audit.',
+      },
+      {
+        id: 'scope',
+        icon: 'clipboard' as const,
+        title: 'Scope',
+        body: 'Define deliverables, responsibilities, timeline, and fee before implementation starts.',
       },
       {
         id: 'build',
         icon: 'wrench' as const,
         title: 'Build',
-        body: 'Deliver a focused implementation with clear scope, review gates, evidence, and practical staff involvement.',
+        body: 'Implement and review the work against the acceptance criteria in the scope.',
       },
       {
-        id: 'support',
-        icon: 'layers' as const,
-        title: 'Support and handoff',
-        body: 'Document the system, train the people using it, measure adoption, and establish the next maintenance rhythm.',
+        id: 'handoff',
+        icon: 'book' as const,
+        title: 'Handoff',
+        body: 'Document the result, train the people who will use it, and clarify who owns it afterward.',
       },
     ],
   },
   engagement: {
     eyebrow: 'Start with the right scope',
     title: 'Three ways to begin',
-    lead: 'Tell me what is slowing your team down.',
+    lead: 'A first project can be a bounded build, a paid review, or support after the scope is already clear.',
     modes: [
-      {
-        id: 'review',
-        title: 'Technical review',
-        duration: '2–4 weeks',
-        outcome:
-          'System map, bottleneck analysis, risk list, prioritized roadmap, and implementation options.',
-        bestFor:
-          'Institutions unsure whether the problem is the website, CRM, workflow, vendor structure, or ownership.',
-        icon: 'search' as const,
-      },
       {
         id: 'project',
         title: 'Focused project',
-        duration: '4–12 weeks',
-        outcome:
-          'One clearly defined system, integration, workflow, public program, or technical production setup—shipped and documented.',
-        bestFor: 'A known bottleneck with a bounded owner and a shippable artifact.',
+        outcome: 'Solve one defined problem, with deliverables and acceptance criteria written down.',
+        bestFor: 'A known workflow, a named owner, and a result the team can use.',
         icon: 'wrench' as const,
       },
       {
-        id: 'fractional',
-        title: 'Fractional support',
-        duration: 'Monthly / term-based',
+        id: 'review',
+        title: 'Paid technical review',
         outcome:
-          'Ongoing webmaster, automation, digital production, or technical leadership embedded alongside staff and vendors.',
-        bestFor: 'Teams that need continuity without a full-time hire or another vendor handoff.',
+          'Resolve a specific uncertainty before implementation: what should change, what should stay, and what a next project would include.',
+        bestFor: 'When the problem is real but the right intervention is not yet clear.',
+        icon: 'search' as const,
+      },
+      {
+        id: 'fractional',
+        title: 'Ongoing support',
+        outcome:
+          'Maintain agreed systems after scope, responsibilities, and ownership are clear.',
+        bestFor: 'Teams that already know what should keep running, and who is responsible for it.',
         icon: 'layers' as const,
       },
     ],
@@ -701,9 +742,8 @@ export const institutionsHub = {
     },
   },
   contact: {
-    headline:
-      'A website problem is often a workflow problem. A workflow problem is often an ownership problem. Let’s map the system.',
-    body: 'I am currently available for focused projects, technical reviews, institutional workshops, and fractional digital support in Miami and remotely.',
+    headline: 'Tell me what takes more effort than it should.',
+    body: 'The first conversation identifies the problem, the priority, and whether a focused engagement makes sense.',
     image: {
       src: digilabAsset('portrait.moises').src,
       alt: digilabAsset('portrait.moises').alt,

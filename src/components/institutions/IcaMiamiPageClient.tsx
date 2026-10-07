@@ -30,7 +30,7 @@ export function IcaMiamiPageClient() {
           {P.bannerNote}
         </p>
       ) : null}
-      <InstFamilyNav active="institutions" className={cn(INST_FAMILY_STICKY_CLASS, 'relative z-[1]')} />
+      <InstFamilyNav active="institutions" className={cn(INST_FAMILY_STICKY_CLASS, 'z-[1]')} />
 
       <header className="relative z-[1] border-b border-neutral-200/80">
         <InstContainer className="py-20 sm:py-28">
@@ -56,8 +56,8 @@ export function IcaMiamiPageClient() {
             <p className="mt-8 max-w-3xl text-lg leading-relaxed text-neutral-700 sm:text-xl">
               {P.hero.lead}
             </p>
-            <p className="mt-6 text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
-              {P.hero.availability}
+            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-neutral-600">
+              {P.hero.tenureNote}
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <InstPrimaryCta
@@ -106,6 +106,9 @@ export function IcaMiamiPageClient() {
             <p className="mt-8 max-w-3xl text-lg leading-relaxed text-neutral-700">
               {P.artResearchCenter.body}
             </p>
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">
+              {P.artResearchCenter.period}
+            </p>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-neutral-600">
               {P.artResearchCenter.support}
             </p>
@@ -152,12 +155,15 @@ export function IcaMiamiPageClient() {
               id="ica-diagram-heading"
               className="font-['MoMA_Sans'] text-[clamp(2rem,4.2vw,3.4rem)] font-semibold leading-[1.08]"
             >
-              Salesforce, web, and livestream as one workflow
+              {P.diagram.title}
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-neutral-700">
-              The public site, collection data, ticketing, and remote programs had to stay connected without a new vendor for every update.
+              {P.diagram.body}
             </p>
-            <IcaSystemsDiagram className="mt-12" />
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-neutral-500">
+              {CONCEPTUAL_SYSTEM_VIEW_LABEL}
+            </p>
+            <IcaSystemsDiagram className="mt-6" />
           </InstReveal>
         </InstContainer>
       </section>
@@ -165,19 +171,19 @@ export function IcaMiamiPageClient() {
       <section className="relative z-[1] border-b border-neutral-200/80 py-20 sm:py-28" aria-labelledby="ica-capabilities-heading">
         <InstContainer>
           <InstReveal>
-            <InstSectionLabel accent="ocean">Verified capabilities</InstSectionLabel>
+            <InstSectionLabel accent="ocean">What the role supported</InstSectionLabel>
             <h2
               id="ica-capabilities-heading"
               className="mt-4 font-['MoMA_Sans'] text-[clamp(2rem,4.2vw,3.4rem)] font-semibold leading-[1.08]"
             >
-              What the Digital Producer role covered
+              Contribution during the tenure
             </h2>
           </InstReveal>
           <ul className="mt-12 grid gap-6 sm:grid-cols-2">
-            {P.capabilities.map((item) => (
+            {P.contributions.map((item) => (
               <li
                 key={item.title}
-                className="group flex h-full flex-col border border-neutral-200 bg-white/80 backdrop-blur-sm transition duration-500 hover:border-sky-300 hover:shadow-[0_24px_60px_-36px_rgba(3,105,161,0.55)] motion-reduce:transition-none"
+                className="flex h-full flex-col border border-neutral-200 bg-white/80"
               >
                 {'illustration' in item && item.illustration ? (
                   <figure>
@@ -186,7 +192,7 @@ export function IcaMiamiPageClient() {
                         src={item.illustration.src}
                         alt={item.illustration.alt}
                         fill
-                        className="object-contain transition duration-700 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        className="object-contain"
                         sizes="(min-width: 640px) 40vw, 100vw"
                       />
                     </div>
@@ -195,9 +201,15 @@ export function IcaMiamiPageClient() {
                     </figcaption>
                   </figure>
                 ) : null}
-                <div className="p-7 sm:p-8">
+                <div className="flex flex-1 flex-col p-7 sm:p-8">
                   <h3 className="font-['MoMA_Sans'] text-2xl font-semibold leading-snug">{item.title}</h3>
                   <p className="mt-4 text-base leading-relaxed text-neutral-700 sm:text-lg">{item.body}</p>
+                  <details className="mt-5 border-t border-neutral-200 pt-4">
+                    <summary className="cursor-pointer text-sm font-medium text-neutral-800">
+                      Technical detail from the tenure
+                    </summary>
+                    <p className="mt-3 text-sm leading-relaxed text-neutral-700">{item.detail}</p>
+                  </details>
                 </div>
               </li>
             ))}
@@ -205,28 +217,7 @@ export function IcaMiamiPageClient() {
         </InstContainer>
       </section>
 
-      <section className="relative z-[1] border-b border-neutral-200/80 py-20 sm:py-28" aria-labelledby="ica-sequence-heading">
-        <InstContainer>
-          <InstReveal>
-            <h2
-              id="ica-sequence-heading"
-              className="font-['MoMA_Sans'] text-[clamp(2rem,4.2vw,3.4rem)] font-semibold leading-[1.08]"
-            >
-              Need → system → use → capacity
-            </h2>
-          </InstReveal>
-          <dl className="mt-12 grid gap-6 sm:grid-cols-2">
-            {P.proofSequence.map((step) => (
-              <div key={step.stage} className="border-l-2 border-sky-700 bg-gradient-to-br from-sky-50/80 to-transparent px-6 py-6">
-                <dt className="text-sm font-medium uppercase tracking-[0.14em] text-sky-900">{step.stage}</dt>
-                <dd className="mt-3 text-lg leading-relaxed text-neutral-800">{step.text}</dd>
-              </div>
-            ))}
-          </dl>
-        </InstContainer>
-      </section>
-
-      <section className="relative z-[1] py-20 sm:py-28" aria-labelledby="ica-later-heading">
+      <section className="relative z-[1] border-b border-neutral-200/80 py-20 sm:py-28" aria-labelledby="ica-later-heading">
         <InstContainer>
           <InstReveal>
             <InstSectionLabel>{P.laterContext.title}</InstSectionLabel>
@@ -253,7 +244,12 @@ export function IcaMiamiPageClient() {
                 {P.laterContext.image.alt}
               </figcaption>
             </figure>
-            <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-16 max-w-3xl border-t border-neutral-200 pt-10">
+              <h3 className="font-['MoMA_Sans'] text-2xl font-semibold">{P.bridge.title}</h3>
+              <p className="mt-4 text-lg leading-relaxed text-neutral-700">{P.bridge.body}</p>
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <InstSecondaryCta href={P.ctas.back.href} label={P.ctas.back.label} />
               <InstPrimaryCta
                 href={P.ctas.primary.href}
                 label={P.ctas.primary.label}

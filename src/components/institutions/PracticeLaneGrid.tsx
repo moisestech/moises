@@ -34,13 +34,6 @@ const LANE_ICON: Record<(typeof H.lanes)[number]['icon'], LucideIcon> = {
   flask: FlaskConical,
 };
 
-const LANE_FLOW: Record<(typeof H.lanes)[number]['id'], string> = {
-  'web-salesforce': 'Salesforce → WordPress / ticketing → public site',
-  'automation-operations': 'Intake → Airtable / n8n → documented handoff',
-  'livestream-production': 'OBS → captions → YouTube / hybrid program',
-  'digital-labs-programs': 'Equipment → workshop / open lab → documentation',
-};
-
 export function PracticeLaneGrid() {
   return (
     <section
@@ -52,8 +45,11 @@ export function PracticeLaneGrid() {
         <InstReveal>
           <InstSectionLabel accent="ocean">Practice lanes</InstSectionLabel>
           <h2 id="lanes-heading" className="font-['MoMA_Sans'] text-[clamp(1.75rem,3.5vw,3rem)] font-semibold">
-            Four ways to engage the systems behind the program
+            Outcomes an engagement can pursue
           </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+            These are directions a project can take. They are not results already delivered for every institution.
+          </p>
         </InstReveal>
         <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {H.lanes.map((lane, index) => {
@@ -62,34 +58,26 @@ export function PracticeLaneGrid() {
             const Icon = LANE_ICON[lane.icon];
             return (
               <InstReveal key={lane.id} delay={0.05 * index}>
-                <li>
-                  <Link
-                    href={lane.href}
-                    id={lane.id}
-                    className={cn(
-                      'group flex h-full flex-col border border-neutral-200 bg-white p-5 transition sm:p-6',
-                      'hover:ring-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
-                      accent.ring,
-                    )}
-                    onClick={() =>
-                      track('institutions_lane_select', { lane: lane.id })
-                    }
-                  >
-                    <figure className="-mx-5 -mt-5 sm:-mx-6 sm:-mt-6">
-                      <div className="relative aspect-square bg-[#F4F1EA]">
-                        <Image
-                          src={lane.illustration.src}
-                          alt={lane.illustration.alt}
-                          fill
-                          className="object-contain"
-                          sizes="(min-width: 640px) 40vw, 100vw"
-                        />
-                      </div>
-                      <figcaption className="border-b border-neutral-200 bg-[#F4F1EA] px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500 sm:px-6">
-                        {CONCEPTUAL_SYSTEM_VIEW_LABEL}
-                      </figcaption>
-                    </figure>
-                    <div className="mt-5 flex items-start justify-between gap-3">
+                <li
+                  id={lane.id}
+                  className={cn('flex h-full flex-col border border-neutral-200 bg-white', accent.ring)}
+                >
+                  <figure>
+                    <div className="relative aspect-square bg-[#F4F1EA]">
+                      <Image
+                        src={lane.illustration.src}
+                        alt={lane.illustration.alt}
+                        fill
+                        className="object-contain"
+                        sizes="(min-width: 640px) 40vw, 100vw"
+                      />
+                    </div>
+                    <figcaption className="border-b border-neutral-200 bg-[#F4F1EA] px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500 sm:px-6">
+                      {CONCEPTUAL_SYSTEM_VIEW_LABEL}
+                    </figcaption>
+                  </figure>
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <div className="flex items-start justify-between gap-3">
                       <span
                         className={cn(
                           'inline-flex h-10 w-10 items-center justify-center',
@@ -106,42 +94,42 @@ export function PracticeLaneGrid() {
                     <h3 className="mt-4 font-['MoMA_Sans'] text-lg font-semibold leading-snug sm:text-xl">
                       {lane.title}
                     </h3>
+                    <p className={cn('mt-3 text-sm font-medium leading-relaxed', accent.text)}>
+                      Potential outcome: {lane.solves}
+                    </p>
                     <p className="mt-3 text-sm leading-relaxed text-neutral-700">{lane.description}</p>
-                    <p
+                    <details className="mt-4 border-t border-neutral-200 pt-3">
+                      <summary className="cursor-pointer text-sm font-medium text-neutral-800">
+                        Prior work in this lane
+                      </summary>
+                      <p className="mt-3 text-sm leading-relaxed text-neutral-700">{lane.priorExample}</p>
+                      <LaneStackVisual logos={lane.stack} />
+                      <ul className="mt-4 flex flex-wrap gap-1.5">
+                        {lane.proofTags.map((tag) => (
+                          <li
+                            key={tag}
+                            className={cn(
+                              'border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em]',
+                              accent.chip,
+                            )}
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                    <Link
+                      href={lane.href}
                       className={cn(
-                        'mt-3 text-sm font-medium opacity-0 transition-opacity duration-200',
-                        'group-hover:opacity-100 group-focus-visible:opacity-100',
-                        'max-sm:opacity-100 motion-reduce:opacity-100',
+                        'mt-5 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold',
                         accent.text,
                       )}
+                      onClick={() => track('institutions_lane_select', { lane: lane.id })}
                     >
-                      What this solves: {lane.solves}
-                    </p>
-                    <LaneStackVisual logos={lane.stack} />
-                    <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-neutral-500">
-                      {LANE_FLOW[lane.id]}
-                    </p>
-                    <ul className="mt-4 flex flex-wrap gap-1.5">
-                      {lane.proofTags.map((tag) => (
-                        <li
-                          key={tag}
-                          className={cn(
-                            'border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em]',
-                            accent.chip,
-                          )}
-                        >
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
-                    <span className={cn('mt-5 inline-flex items-center gap-1.5 text-sm font-semibold', accent.text)}>
                       {lane.linkLabel}
-                      <ArrowRight
-                        className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
-                        aria-hidden
-                      />
-                    </span>
-                  </Link>
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                    </Link>
+                  </div>
                 </li>
               </InstReveal>
             );
