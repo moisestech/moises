@@ -52,6 +52,9 @@ export function ProgramClient() {
               <a href="#levels" className="border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]">
                 Read the five levels
               </a>
+              <Link href="/workshop/build-your-ai-daily-operator/level-i" className="border border-[#1c1916] px-4 py-2.5 text-sm">
+                Open Level I toolkit
+              </Link>
               <a href={hostMail} className="border border-[#1c1916] px-4 py-2.5 text-sm">
                 Ask to host Level I
               </a>
