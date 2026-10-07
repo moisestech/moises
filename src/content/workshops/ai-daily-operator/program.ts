@@ -11,7 +11,7 @@ export const DAILY_OPERATOR_TITLE = 'Build Your AI Daily Operator'
 export const DAILY_OPERATOR_METHOD = 'Founder Attention OS'
 export const DAILY_OPERATOR_PROMISE =
   'Know what deserves your attention, and build the systems that support it.'
-export const DAILY_OPERATOR_STATUS = 'Curriculum in development. Not an enrolled course.'
+export const DAILY_OPERATOR_STATUS = 'Level I is pilot-ready for hosted workshops. The full Founder Attention OS curriculum remains in development.'
 export const DAILY_OPERATOR_SENTENCE =
   'The course teaches someone to make their work progressively legible to an intelligent system.'
 
