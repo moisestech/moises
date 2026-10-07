@@ -19,6 +19,8 @@ export type DailyOperatorMediaStatus =
   | 'approved'
   | 'rejected'
 
+export type DailyOperatorMediaDelivery = 'local' | 'cloudinary'
+
 export type DailyOperatorMediaRole =
   | 'hero'
   | 'artifact'
@@ -36,6 +38,7 @@ export type DailyOperatorMediaAsset = {
   concept: string
   role: DailyOperatorMediaRole
   status: DailyOperatorMediaStatus
+  delivery: DailyOperatorMediaDelivery
   alt: string
   usage: readonly ('web' | 'lms' | 'slides' | 'social')[]
 }
@@ -43,11 +46,12 @@ export type DailyOperatorMediaAsset = {
 function asset(
   folder: string,
   fileName: string,
-  config: Omit<DailyOperatorMediaAsset, 'publicId' | 'folder'>,
+  config: Omit<DailyOperatorMediaAsset, 'publicId' | 'folder' | 'delivery'> & { delivery?: DailyOperatorMediaDelivery },
 ): DailyOperatorMediaAsset {
   return {
     publicId: `${DAILY_OPERATOR_MEDIA_ROOT}/${folder}/${fileName}`,
     folder: `${DAILY_OPERATOR_MEDIA_ROOT}/${folder}`,
+    delivery: config.delivery ?? 'local',
     ...config,
   }
 }
@@ -227,6 +231,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'permission-map',
           role: 'artifact',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'A map showing which business sources an AI system may read, draft from, or never act on alone.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -266,6 +271,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'friction-retrieval',
           role: 'object',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'Repeated retrieval from multiple sources to answer one recurring business question.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -277,6 +283,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'friction-reconciliation',
           role: 'object',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'Two conflicting business records being manually reconciled.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -288,6 +295,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'friction-memory',
           role: 'object',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'Important commitments depending on fragile human memory rather than a reliable system.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -299,6 +307,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'friction-transfer',
           role: 'object',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'Information being manually copied between two otherwise clean business systems.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -310,6 +319,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'friction-decision',
           role: 'object',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'The same routine judgment being reconstructed repeatedly instead of encoded as a clear rule.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -321,6 +331,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'friction-approval',
           role: 'object',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'Many business flows waiting at one human approval bottleneck.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -332,6 +343,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'friction-communication',
           role: 'object',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'The same information repeatedly rewritten for several channels and recipients.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -346,6 +358,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'impact-frequency-ease-risk',
           role: 'diagram',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'A four-factor decision model for choosing whether a repeated friction is worth automating.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -360,6 +373,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'workflow-blueprint',
           role: 'artifact',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'A governed workflow moving through trigger, context, reasoning, output, approval, action, and record.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -388,6 +402,7 @@ export const DAILY_OPERATOR_MEDIA = {
           concept: 'weekly-operating-review',
           role: 'artifact',
           status: 'approved',
+          delivery: 'cloudinary',
           alt: 'A week of daily briefs resolving into what moved, what stuck, repeated friction, and one next improvement.',
           usage: ['web', 'lms', 'slides'],
         },
