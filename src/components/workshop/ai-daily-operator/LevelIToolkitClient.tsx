@@ -7,6 +7,7 @@ import {
   LEVEL_I_OPENING,
   LEVEL_I_WALKTHROUGH,
 } from '@/content/workshops/ai-daily-operator/level-i-walkthrough'
+import { DAILY_OPERATOR_BASE_PROMPT } from '@/content/workshops/ai-daily-operator/operator-prompt'
 
 export function LevelIToolkitClient() {
   return (
@@ -74,6 +75,22 @@ export function LevelIToolkitClient() {
               </li>
             ))}
           </ol>
+        </section>
+
+        <section className="pt-24" aria-labelledby="portable-prompt-heading">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Portable baseline</p>
+          <h2 id="portable-prompt-heading" className="mt-3 text-4xl tracking-tight">
+            Daily Operator prompt
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#3d3832]">
+            Use this only after completing the Founder Profile and Attention Rules. Replace both placeholders before first use.
+          </p>
+          <details className="mt-6 border border-[#d9d0c3] bg-[#fbf7f1] p-5">
+            <summary className="cursor-pointer text-sm font-medium">Open portable prompt</summary>
+            <pre className="mt-5 max-h-[42rem] overflow-auto whitespace-pre-wrap text-xs leading-relaxed text-[#3d3832]">
+              {DAILY_OPERATOR_BASE_PROMPT}
+            </pre>
+          </details>
         </section>
 
         <section id="artifacts" className="scroll-mt-28 pt-24" aria-labelledby="artifacts-heading">
