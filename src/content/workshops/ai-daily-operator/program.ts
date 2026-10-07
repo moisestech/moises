@@ -11,9 +11,10 @@ export const DAILY_OPERATOR_TITLE = 'Build Your AI Daily Operator'
 export const DAILY_OPERATOR_METHOD = 'Founder Attention OS'
 export const DAILY_OPERATOR_PROMISE =
   'Know what deserves your attention, and build the systems that support it.'
-export const DAILY_OPERATOR_STATUS = 'Curriculum in development. Not an enrolled course.'
+export const DAILY_OPERATOR_STATUS =
+  'Level I available for hosted pilot cohorts. Full program in development.'
 export const DAILY_OPERATOR_SENTENCE =
-  'The course teaches someone to make their work progressively legible to an intelligent system.'
+  'You are not learning how to make AI more productive. You are learning how to make your business legible enough that an intelligent system can help you decide what deserves attention.'
 
 export const DAILY_OPERATOR_FOR = {
   hosts: 'Accelerators, chambers, arts institutions, and schools that need a curriculum they can host.',
@@ -99,7 +100,7 @@ export const DAILY_OPERATOR_LEVELS: readonly DailyOperatorLevel[] = [
     title: 'AI Daily Operator',
     time: '90 minutes',
     question: 'What deserves my attention today?',
-    note: 'No integrations. This is the session a host can book now. It has to be useful on ordinary tools.',
+    note: 'No integrations. In the room they build a Founder Profile, tomorrow’s brief, and one Friction Card. Attention Rules and the Daily Operator instructions are generated from the profile.',
     can: [
       'Say what AI can and cannot reliably do with the material in front of them.',
       'Separate an outcome from a task.',
@@ -120,7 +121,7 @@ export const DAILY_OPERATOR_LEVELS: readonly DailyOperatorLevel[] = [
     id: 'II',
     title: 'Connected Operator',
     time: 'About 2 hours',
-    question: 'Which source should the system trust for which kind of information?',
+    question: 'What information should the system trust?',
     note: 'The lesson is not how to connect a calendar. Missing is unknown. It is not false.',
     can: [
       'Assign each signal a source of truth, a frequency, a trust level, and a permission.',
@@ -133,7 +134,7 @@ export const DAILY_OPERATOR_LEVELS: readonly DailyOperatorLevel[] = [
     id: 'III',
     title: 'Business Pulse',
     time: '60 minutes in the full curriculum',
-    question: 'What economically matters?',
+    question: 'What economically or missionally matters?',
     note: 'Money enters here, not during onboarding. A figure belongs in the brief only when it changes a decision.',
     can: [
       'Read revenue, receivables, pipeline, cash constraint, and delivery obligation as inputs to a decision.',
@@ -157,10 +158,10 @@ export const DAILY_OPERATOR_LEVELS: readonly DailyOperatorLevel[] = [
   },
   {
     id: 'V',
-    title: 'From operator to operating system',
+    title: 'AI Workflow Builder',
     time: 'Cohort or advanced workshop',
-    question: 'How should one chosen friction actually run?',
-    note: 'Automation is taught only here. The tool can be ChatGPT, Claude, Zapier, Make, n8n, or whatever already holds the work.',
+    question: 'What should actually run differently?',
+    note: 'Automation is taught only here. One governed workflow is the step into an operating system. The tool can be n8n, Zapier, Make, or whatever already holds the work.',
     can: [
       'Choose one friction and specify Trigger, Context, Reasoning, Output, Approval, Action, and Record.',
       'Place that workflow on a ladder: manual, assisted, connected, scheduled, approval-based action, conditional automation.',
@@ -171,32 +172,25 @@ export const DAILY_OPERATOR_LEVELS: readonly DailyOperatorLevel[] = [
   },
 ]
 
-/** Host-facing names. A buyer can take Level I alone, or the sequence. */
-export const DAILY_OPERATOR_CREDENTIALS = [
-  { id: 'I' as const, name: 'AI Daily Operator', time: '90 minutes', offer: 'Build a personal operating brief.' },
-  { id: 'II' as const, name: 'Connected Business', time: '+2 hours', offer: 'Connect business context and trustworthy sources.' },
-  { id: 'III' as const, name: 'Business Friction', time: '+2 hours', offer: 'Diagnose the systems that cost attention.' },
-  { id: 'IV' as const, name: 'AI Workflow Builder', time: '+3–4 hours', offer: 'Design and implement one workflow.' },
-  { id: 'V' as const, name: 'AI Operating System', time: 'Cohort', offer: 'Recurring intelligence, permissions, and operations.' },
-] as const
-
 export type DailyOperatorArtifact = {
   n: number
   name: string
   level: DailyOperatorLevelId
   detail: string
+  /** Level I only: built in the room, or generated from the Founder Profile. */
+  room?: 'build' | 'generated'
 }
 
 export const DAILY_OPERATOR_ARTIFACTS: readonly DailyOperatorArtifact[] = [
-  { n: 1, name: 'Founder Profile', level: 'I', detail: 'What the system must understand about the person and the work.' },
-  { n: 2, name: 'Attention Rules', level: 'I', detail: 'What earns attention, and what does not.' },
-  { n: 3, name: 'Daily Operator', level: 'I', detail: 'The working instructions for a brief.' },
-  { n: 4, name: 'Daily Operating Brief', level: 'I', detail: 'A first brief, made from information already at hand.' },
+  { n: 1, name: 'Founder Profile', level: 'I', room: 'build', detail: 'Built in the room. Compressed: what the system must understand about the person and the work.' },
+  { n: 2, name: 'Attention Rules', level: 'I', room: 'generated', detail: 'Generated from the Founder Profile. What earns attention, and what does not.' },
+  { n: 3, name: 'Daily Operator', level: 'I', room: 'generated', detail: 'Generated from the Founder Profile. The working instructions for a brief.' },
+  { n: 4, name: 'Daily Operating Brief', level: 'I', room: 'build', detail: 'Built in the room. Tomorrow, prioritized.' },
   { n: 5, name: 'Business Source Map', level: 'II', detail: 'Signal, source of truth, frequency, trust, and permission.' },
   { n: 6, name: 'Permission Map', level: 'II', detail: 'What the system may read, draft, or never do alone.' },
   { n: 7, name: 'Business Pulse', level: 'III', detail: 'Revenue, commitments, collections, pipeline, risk, and capacity, as decisions.' },
   { n: 8, name: 'Friction Log', level: 'IV', detail: 'Repeated manual acts, written down before they are scored.' },
-  { n: 9, name: 'Friction Map', level: 'IV', detail: 'Those acts classified and scored. Level I leaves only a first note.' },
+  { n: 9, name: 'Friction Map', level: 'IV', detail: 'Those acts classified and scored. Level I builds one Friction Card toward this map.' },
   { n: 10, name: 'Workflow Blueprint', level: 'V', detail: 'Trigger, context, reasoning, output, approval, action, record.' },
   { n: 11, name: 'Weekly Operating Review', level: 'V', detail: 'How the brief is corrected after a week of use.' },
   { n: 12, name: '90-Day Improvement Roadmap', level: 'V', detail: 'One sequence of improvements, not a pile of automations.' },
@@ -276,15 +270,17 @@ export const DAILY_OPERATOR_LABS = [
 ] as const
 
 export const DAILY_OPERATOR_SCALEUP = [
-  { range: '0–10', title: 'Why productivity is not enough' },
-  { range: '10–20', title: 'Commitments, Revenue, Risk, Capacity' },
-  { range: '20–35', title: 'Teach the system the business' },
-  { range: '35–50', title: 'Build the Daily Operator' },
-  { range: '50–60', title: 'Run tomorrow through it' },
-  { range: '60–70', title: 'Where did the information come from?' },
-  { range: '70–80', title: 'Find one friction' },
-  { range: '80–88', title: 'Choose one improvement' },
-  { range: '88–90', title: 'Start a seven-day experiment' },
+  { range: '0–5', title: 'Before and after', why: 'Show the brief before explaining the theory.' },
+  { range: '5–12', title: 'Attention is not productivity', why: 'Establish the point of view.' },
+  { range: '12–20', title: 'Commitments, Revenue or Mission, Risk, Capacity', why: 'Teach the decision model.' },
+  { range: '20–32', title: 'Build a Founder Profile', why: 'Make the work legible.' },
+  { range: '32–47', title: 'Generate the first Daily Operator', why: 'Leave with the instructions, produced from the profile.' },
+  { range: '47–57', title: 'Run tomorrow through it', why: 'Test it on a real day.' },
+  { range: '57–65', title: 'Critique the answer', why: 'Separate fact, interpretation, and recommendation.' },
+  { range: '65–74', title: 'Find one friction', why: 'One card: something retrieved, remembered, reconciled, copied, or decided by hand.' },
+  { range: '74–82', title: 'DCC, connected', why: 'Show what a connection changes. Participants do not need to understand DCC to understand their own work.' },
+  { range: '82–87', title: 'Choose one improvement', why: 'No automation sprawl.' },
+  { range: '87–90', title: 'Start the seven-day experiment', why: 'The session ends on use.' },
 ] as const
 
 export type DailyOperatorModule = {
@@ -302,7 +298,7 @@ export const DAILY_OPERATOR_MODULES: readonly DailyOperatorModule[] = [
   { n: 4, title: 'Daily Operator', question: 'How should the day be prioritized?', time: '60 min', level: 'I' },
   { n: 5, title: 'Calendar as Capacity', question: 'What have I actually committed?', time: '45 min', level: 'II' },
   { n: 6, title: 'Signals and Sources', question: 'Where does the truth of the work live?', time: '45 min', level: 'II' },
-  { n: 7, title: 'Money and Pipeline', question: 'What economically matters?', time: '60 min', level: 'III' },
+  { n: 7, title: 'Money and Pipeline', question: 'What economically or missionally matters?', time: '60 min', level: 'III' },
   { n: 8, title: 'Friction Intelligence', question: 'What repeatedly steals attention?', time: '60 min', level: 'IV' },
   { n: 9, title: 'Automation Selection', question: 'What is actually worth automating?', time: '45 min', level: 'V' },
   { n: 10, title: 'Build One Workflow', question: 'How should that one system operate?', time: '90 min', level: 'V' },
@@ -311,11 +307,187 @@ export const DAILY_OPERATOR_MODULES: readonly DailyOperatorModule[] = [
 ]
 
 export const DAILY_OPERATOR_CAPSTONE = {
-  title: 'Seven-day experiment',
-  time: 'Asynchronous',
-  level: 'V' as const,
-  detail: 'Use the brief for seven days. Note what it got wrong, what was missing, and what still required a person.',
+  title: 'The Seven-Day Attention Experiment',
+  time: 'Starts at the end of Level I',
+  detail: 'Use the Daily Operator for seven days. The educational product becomes an operational diagnostic.',
+  track: [
+    'What it got right.',
+    'What it got wrong.',
+    'What information was missing.',
+    'What repeatedly required manual work.',
+    'Where it should not have acted.',
+    'What one system change would improve next week.',
+  ],
 }
+
+export const DAILY_OPERATOR_PROJECTS = [
+  {
+    id: 'I' as const,
+    product: 'AI Daily Operator',
+    project: 'Tomorrow Brief',
+    able: 'Turn commitments and objectives into a prioritized day.',
+    artifact: 'Daily Operating Brief',
+    builds: ['Founder Profile', 'Tomorrow’s Operating Brief', 'Friction Card'],
+    generated: ['Attention Rules', 'Daily Operator'],
+  },
+  {
+    id: 'II' as const,
+    product: 'Connected Operator',
+    project: 'Source of Truth Map',
+    able: 'Tell the system where different kinds of business truth live.',
+    artifact: 'Business Source Map and Permission Map',
+  },
+  {
+    id: 'III' as const,
+    product: 'Business Pulse',
+    project: 'Money-to-Attention Case',
+    able: 'Decide when money or pipeline information should change today’s priorities.',
+    artifact: 'Business Pulse',
+  },
+  {
+    id: 'IV' as const,
+    product: 'Friction Intelligence',
+    project: 'Friction Autopsy',
+    able: 'Identify repeated manual work and choose what deserves intervention.',
+    artifact: 'Friction Map',
+  },
+  {
+    id: 'V' as const,
+    product: 'AI Workflow Builder',
+    project: 'Build One Flow',
+    able: 'Turn one justified friction into a governed workflow.',
+    artifact: 'Workflow Blueprint and 90-Day Roadmap',
+  },
+] as const
+
+export const DAILY_OPERATOR_SOFTWARE = {
+  rule: 'Level I never fails because somebody does not have an integration.',
+  layers: [
+    { layer: 'AI', defaultTool: 'ChatGPT or Claude', alternatives: 'Gemini later, if needed', requirement: 'Required' },
+    { layer: 'Calendar', defaultTool: 'Google Calendar', alternatives: 'Microsoft Outlook', requirement: 'Level II optional' },
+    { layer: 'Email', defaultTool: 'Gmail', alternatives: 'Outlook', requirement: 'Level II optional' },
+    { layer: 'Documents', defaultTool: 'Google Drive or files', alternatives: 'Microsoft 365, Dropbox', requirement: 'Optional' },
+    { layer: 'Finance', defaultTool: 'QuickBooks', alternatives: 'A manual worksheet or sample data', requirement: 'Level III optional' },
+    { layer: 'CRM', defaultTool: 'Airtable', alternatives: 'HubSpot, Sheets, Notion', requirement: 'Level II–IV optional' },
+    { layer: 'Automation', defaultTool: 'n8n', alternatives: 'Zapier, Make', requirement: 'Level V' },
+    { layer: 'Course site', defaultTool: 'moises.tech', alternatives: '—', requirement: 'Canonical home' },
+    { layer: 'Curriculum source', defaultTool: 'GitHub', alternatives: '—', requirement: 'Internal source of truth' },
+    { layer: 'Intake and results', defaultTool: 'Airtable', alternatives: 'Forms or Sheets', requirement: 'Instructor operations' },
+    { layer: 'DCC example', defaultTool: 'Airtable and the studio’s systems', alternatives: '—', requirement: 'Case study, not a prerequisite' },
+  ],
+} as const
+
+export const DAILY_OPERATOR_FORMATS = {
+  demo: {
+    calendar: [
+      { time: '10:00', item: 'Meeting' },
+      { time: '11:00', item: 'Email' },
+      { time: '2:00', item: 'Client call' },
+      { time: '4:00', item: 'ScaleUp' },
+    ],
+    brief: [
+      { label: 'Today’s outcome', text: 'Send the proposal that can generate this month’s next engagement, and protect the production block required for Friday.' },
+      { label: 'Needs you', text: '10:00 client call — a scope decision.' },
+      { label: 'Money', text: 'One meaningful invoice is overdue.' },
+      { label: 'Focus', text: '11:15–12:45, the proposal.' },
+      { label: 'Can wait', text: 'Website cleanup.' },
+      { label: 'Friction', text: 'Two places had to be checked by hand to learn the invoice status.' },
+    ],
+  },
+  boundary: {
+    ends: 'Here is the business friction I would improve.',
+    doesNotEnd: 'Now we are going to integrate everything.',
+    choices: ['Do it themselves.', 'Continue to Level V.', 'Ask for it to be implemented.'],
+    note: 'Implementation is a separate scope. The workshop is not the integration.',
+  },
+  afterward: [
+    'I built an AI Daily Operator that can help me decide what deserves my attention.',
+    'I discovered where my business information is fragmented.',
+    'I know the one process I would improve next.',
+  ],
+} as const
+
+export const DAILY_OPERATOR_PRINCIPLES = [
+  { principle: 'Attention before automation', line: 'Do not automate something until you know why it deserves to exist.' },
+  { principle: 'Outcome before task', line: '“Send the proposal” is a task. “Secure scope approval” is an outcome.' },
+  { principle: 'Calendar is capacity', line: 'A meeting calendar is also a model of what a person can realistically carry.' },
+  { principle: 'Missing is not false', line: 'If a source has no follow-up date, the system does not know that no follow-up is needed.' },
+  { principle: 'Money is context', line: 'Financial information belongs in the brief when it changes a decision.' },
+  { principle: 'Facts are not interpretation', line: 'Separate what happened from what the system recommends.' },
+  { principle: 'Friction is evidence', line: 'Repeated manual work is something to investigate, not an automatic build.' },
+  { principle: 'One improvement', line: 'Choose the highest-consequence friction.' },
+  { principle: 'Human authority stays visible', line: 'Recommend, explain, ask, then act.' },
+  { principle: 'Tools are replaceable', line: 'The method should survive a change of chatbot, ledger, or connector.' },
+] as const
+
+export const DAILY_OPERATOR_PRICING = {
+  label: 'Ranges to test. Not a checkout, and not the artist-pilot seat rate.',
+  offers: [
+    { offer: 'Level I — 90 minutes, plus the later materials', individual: '$125–$175', institutional: '$1,500 hosted, up to about 15' },
+    { offer: 'Levels I–II', individual: '$250–$350', institutional: '$3,000 hosted' },
+    { offer: 'Levels I–IV', individual: '$450–$650', institutional: '$5,000–$6,500 hosted' },
+    { offer: 'Full five-level cohort', individual: '$750–$950', institutional: '$7,500+ hosted' },
+    { offer: 'Self-paced core', individual: '$199', institutional: 'Licensing later' },
+    { offer: 'Friction Review', individual: '+$250–$400', institutional: 'Can be bundled' },
+    { offer: 'Implementation sprint', individual: '—', institutional: '$2,500–$7,500+, separate scope' },
+  ],
+  scaleUp: {
+    name: 'ScaleUp Pilot Cohort',
+    terms: 'Sponsored pilot pricing, not a public price of zero.',
+    exchange: [
+      'Anonymized learning notes',
+      'Participant feedback',
+      'Completed friction maps',
+      'Testimonials where someone agrees',
+      'Before and after briefs',
+    ],
+  },
+} as const
+
+export const DAILY_OPERATOR_SUCCESS_METRICS = [
+  { when: 'By minute 60', measure: 'Most of the room has produced a useful operating brief.' },
+  { when: 'By minute 75', measure: 'Nearly everyone can name at least one concrete friction.' },
+  {
+    when: 'At the end',
+    measure: 'Each person can name what deserves attention, what can wait, one source the work depends on, and one friction worth investigating.',
+  },
+  {
+    when: 'Seven days later',
+    measure: 'Who ran the brief again, who used it three or more times, what was repeatedly missing, which recommendations were wrong, which friction appeared most, whether they would keep using it, and whether they want Level II.',
+  },
+] as const
+
+export const DAILY_OPERATOR_PILOT_TACTICS = [
+  'Demo first, theory second. Earn curiosity within five minutes.',
+  'Use tomorrow, not everything in the business.',
+  'The system interviews the participant one question at a time.',
+  'Offer a fictional-data escape hatch. Nobody has to expose financial or customer information in the room.',
+  'Two-minute connector rule. If an integration becomes troubleshooting, switch to manual inputs and continue.',
+  'Use DCC only where it clarifies something.',
+  'Have them challenge the ranking. What evidence put the first item above the second?',
+  'Label outputs: fact, interpretation, recommendation.',
+  'Do not automate during the first breakthrough. The friction is the discovery.',
+  'End on use, not applause. Run it tomorrow morning for seven days.',
+] as const
+
+export const DAILY_OPERATOR_SCENARIO_KIT = [
+  'A calendar',
+  'Five emails',
+  'Three leads',
+  'Four invoices',
+  'One overdue deliverable',
+  'One employee request',
+  'One low-priority distraction',
+] as const
+
+export const DAILY_OPERATOR_SCENARIO_PACKS = [
+  { id: 'creative', title: 'Creative studio', nouns: 'Commission, grant, exhibition, late invoice.' },
+  { id: 'consulting', title: 'Consulting agency', nouns: 'Proposal, client delivery, retainer, lead.' },
+  { id: 'service', title: 'Home or local service', nouns: 'Quotes, appointments, collections.' },
+  { id: 'retail', title: 'Retail or hospitality', nouns: 'Staffing, sales, inventory.' },
+  { id: 'nonprofit', title: 'Nonprofit', nouns: 'Grant, donor, board, program deadline.' },
+  { id: 'professional', title: 'Professional services', nouns: 'Client matter, billable capacity, compliance deadline.' },
+] as const
 
 /**
  * Market benchmark. Author notes only — do not render on the public page.
