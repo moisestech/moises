@@ -8,6 +8,7 @@ import {
   LEVEL_I_WALKTHROUGH,
 } from '@/content/workshops/ai-daily-operator/level-i-walkthrough'
 import { DAILY_OPERATOR_BASE_PROMPT } from '@/content/workshops/ai-daily-operator/operator-prompt'
+import { DAILY_OPERATOR_RESOURCES } from '@/content/workshops/ai-daily-operator/resources'
 
 export function LevelIToolkitClient() {
   return (
@@ -36,6 +37,28 @@ export function LevelIToolkitClient() {
             Your worksheet answers are stored only in this browser using local storage. Nothing is sent to the course site.
           </p>
         </header>
+
+        <section className="pt-16" aria-labelledby="official-learning-heading">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Official foundations</p>
+          <h2 id="official-learning-heading" className="mt-3 text-3xl tracking-tight">
+            Learn the tools from the people who make them
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#3d3832]">
+            This workshop does not try to replace broad product training. If you are new to ChatGPT or Claude, use the official academies for fundamentals and come back here to build the attention system.
+          </p>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+            {DAILY_OPERATOR_RESOURCES.filter((resource) =>
+              ['openai-ai-foundations', 'openai-small-business-hub', 'claude-ai-fluency', 'claude-capabilities-limitations'].includes(resource.id),
+            ).map((resource) => (
+              <li key={resource.id} className="border-t border-[#d9d0c3] pt-3">
+                <a href={resource.url} target="_blank" rel="noreferrer" className="text-sm font-medium underline underline-offset-4">
+                  {resource.provider} — {resource.title}
+                </a>
+                <p className="mt-1 text-xs leading-relaxed text-[#5c564e]">{resource.useInProgram}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <section id="walkthrough" className="scroll-mt-28 pt-20" aria-labelledby="walkthrough-heading">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Live exercise</p>
