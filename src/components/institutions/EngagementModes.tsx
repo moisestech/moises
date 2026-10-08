@@ -5,6 +5,7 @@ import { institutionsHub as H } from '@/content/institutions/hub';
 import { track } from '@/lib/analytics';
 import {
   INST_ACCENT,
+  INST_ACCENT_WASH,
   InstContainer,
   InstPrimaryCta,
   InstReveal,
@@ -48,23 +49,25 @@ export function ProcessSteps() {
                   <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-neutral-500">
                     {String(i + 1).padStart(2, '0')}
                   </p>
-                  <h3 className="mt-1 font-['MoMA_Sans'] text-lg font-semibold">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-neutral-700">{step.body}</p>
+                  <h3 className="mt-1 font-['MoMA_Sans'] text-xl font-semibold">{step.title}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-neutral-800">{step.body}</p>
                 </li>
               </InstReveal>
             );
           })}
         </ol>
-        <ul className="mt-8 flex flex-wrap gap-2">
-          {H.process.reassurance.map((item) => (
-            <li
-              key={item}
-              className="border border-neutral-300 bg-white px-3 py-1.5 text-xs text-neutral-700"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
+        <details className="mt-8 border-t border-neutral-200 pt-3">
+          <summary className="cursor-pointer text-base font-medium text-neutral-900">
+            What stays in scope
+          </summary>
+          <ul className="mt-4 space-y-2">
+            {H.process.reassurance.map((item) => (
+              <li key={item} className="text-base leading-relaxed text-neutral-800">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </details>
       </InstContainer>
     </section>
   );
@@ -83,7 +86,7 @@ export function EngagementModes() {
           <h2 id="engage-heading" className="font-['MoMA_Sans'] text-[clamp(1.75rem,3.5vw,3rem)] font-semibold">
             {H.engagement.title}
           </h2>
-          <p className="mt-3 max-w-2xl text-base font-medium text-neutral-800">{H.engagement.lead}</p>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-neutral-800 sm:text-lg">{H.engagement.lead}</p>
         </InstReveal>
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
           {H.engagement.modes.map((mode, i) => {
@@ -91,13 +94,32 @@ export function EngagementModes() {
             const accent = INST_ACCENT[(['ocean', 'teal', 'copper'] as const)[i] ?? 'ink'];
             return (
               <InstReveal key={mode.id} delay={0.05 * i}>
-                <li id={`engage-${mode.id}`} className="flex h-full flex-col border border-neutral-200 bg-white p-5 sm:p-6">
-                  <span className={`inline-flex h-10 w-10 items-center justify-center ${accent.iconBg}`} aria-hidden>
-                    <Icon className="h-5 w-5" strokeWidth={1.75} />
-                  </span>
-                  <h3 className="mt-4 font-['MoMA_Sans'] text-lg font-semibold">{mode.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-700">{mode.outcome}</p>
-                  <p className="mt-3 text-xs leading-relaxed text-neutral-500">{mode.bestFor}</p>
+                <li
+                  id={`engage-${mode.id}`}
+                  className="group relative flex h-full flex-col overflow-hidden border border-neutral-200 bg-white p-5 sm:p-6"
+                >
+                  <div
+                    aria-hidden
+                    className={cn(
+                      'pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:transition-none',
+                      INST_ACCENT_WASH[(['ocean', 'teal', 'copper'] as const)[i] ?? 'ink'],
+                    )}
+                  />
+                  <div className="relative flex h-full flex-col">
+                    <span className={`inline-flex h-10 w-10 items-center justify-center ${accent.iconBg}`} aria-hidden>
+                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    </span>
+                    <div className="mt-4 rounded-sm p-2 transition duration-300 hover:bg-white/80">
+                      <h3 className="font-['MoMA_Sans'] text-xl font-semibold sm:text-2xl">{mode.title}</h3>
+                      <p className="mt-3 text-base leading-relaxed text-neutral-800">{mode.outcome}</p>
+                    </div>
+                    <details className="mt-2 rounded-sm p-2 transition duration-300 hover:bg-white/80">
+                      <summary className="cursor-pointer text-base font-medium text-neutral-900">
+                        When this fits
+                      </summary>
+                      <p className="mt-3 text-base leading-relaxed text-neutral-800">{mode.bestFor}</p>
+                    </details>
+                  </div>
                 </li>
               </InstReveal>
             );

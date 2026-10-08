@@ -29,7 +29,7 @@ export function InstitutionsHero() {
             <p className="mt-5 max-w-[42rem] text-base leading-relaxed text-neutral-700 sm:text-lg">
               {H.hero.lead}
             </p>
-            <p className="mt-4 max-w-[42rem] text-sm leading-relaxed text-neutral-600 sm:text-base">
+            <p className="mt-4 max-w-[42rem] text-base leading-relaxed text-neutral-700 sm:text-lg">
               {H.hero.support}
             </p>
             <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">
@@ -64,7 +64,7 @@ export function InstitutionsHero() {
                     sizes="(min-width: 1024px) 42vw, 100vw"
                   />
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-neutral-600">{collage.main.caption}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-neutral-700">{collage.main.caption}</p>
               </div>
               <div>
                 <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200">
@@ -76,7 +76,7 @@ export function InstitutionsHero() {
                     sizes="(min-width: 1024px) 20vw, 50vw"
                   />
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-neutral-600">{collage.teaching.caption}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-neutral-700">{collage.teaching.caption}</p>
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
@@ -116,7 +116,7 @@ export function ToolsFromPastWork() {
         <h2 id="tools-heading" className="max-w-3xl font-['MoMA_Sans'] text-[clamp(1.75rem,3.5vw,3rem)] font-semibold">
           Systems used in prior engagements
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-neutral-700">
           {H.logoBandCaption}
         </p>
       </InstContainer>

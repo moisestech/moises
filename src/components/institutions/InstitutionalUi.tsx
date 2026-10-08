@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -12,6 +12,7 @@ import {
   FlaskConical,
   GraduationCap,
   LayoutGrid,
+  Library,
   MonitorSmartphone,
   Network,
   Presentation,
@@ -137,26 +138,49 @@ export const LANE_ACCENT = {
   lab: 'copper',
 } as const satisfies Record<string, keyof typeof INST_ACCENT>;
 
+/** Quiet accent washes for card hover. Not a full-page gradient. */
+export const INST_ACCENT_WASH: Record<keyof typeof INST_ACCENT, string> = {
+  ink: 'from-neutral-100 via-white to-neutral-50',
+  teal: 'from-teal-50 via-white to-emerald-50',
+  copper: 'from-amber-50 via-white to-orange-50',
+  ocean: 'from-sky-50 via-white to-cyan-50',
+  rose: 'from-rose-50 via-white to-orange-50',
+  sky: 'from-cyan-50 via-white to-sky-50',
+  emerald: 'from-emerald-50 via-white to-teal-50',
+  violet: 'from-violet-50 via-white to-fuchsia-50',
+};
+
 /**
  * Site header is `fixed` (expanded ≈ 192px / 12rem, collapses to 80px).
- * Family nav must stick *below* that live height — never `top-0`.
+ * Family and section strips stick below that live height, with a gap so the
+ * header does not cover them. Never `top-0`.
+ * InstFamilyNav publishes `--inst-family-nav-height`.
+ * A `[data-inst-section-nav]` publishes `--inst-section-nav-height`.
  */
+export const INST_PAGE_TOP_CLASS =
+  'pt-[calc(var(--site-header-expanded-height,12rem)+var(--inst-header-gap,0.5rem))]';
+
 export const INST_FAMILY_STICKY_CLASS =
-  'sticky z-40 top-[var(--site-header-height,12rem)] transition-[top] duration-300 ease-in-out';
+  'sticky z-40 top-[calc(var(--site-header-height,12rem)+var(--inst-header-gap,0.5rem))] transition-[top] duration-300 ease-in-out';
 
-/** Page-section chips sit under the family strip (~3.75rem). */
+/** Page-section chips sit under the measured family strip. */
 export const INST_SECTION_STICKY_CLASS =
-  'sticky z-30 top-[calc(var(--site-header-height,12rem)+3.75rem)] transition-[top] duration-300 ease-in-out';
+  'sticky z-30 top-[calc(var(--site-header-height,12rem)+var(--inst-header-gap,0.5rem)+var(--inst-family-nav-height,4rem))] transition-[top] duration-300 ease-in-out';
 
-/** Anchor offset: live header + family nav + section nav. */
+/** Anchor offset: live header + gap + family nav + section nav. */
 export const INST_ANCHOR_SCROLL_MT_CLASS =
-  'scroll-mt-[calc(var(--site-header-height,12rem)+7.5rem)]';
+  'scroll-mt-[calc(var(--site-header-height,12rem)+var(--inst-header-gap,0.5rem)+var(--inst-family-nav-height,4rem)+var(--inst-section-nav-height,3.25rem)+0.5rem)]';
+
+/** Pages whose only sticky strip is the family nav. */
+export const INST_FAMILY_ANCHOR_SCROLL_MT_CLASS =
+  'scroll-mt-[calc(var(--site-header-height,12rem)+var(--inst-header-gap,0.5rem)+var(--inst-family-nav-height,4rem)+0.5rem)]';
 
 const FAMILY_ICONS: Record<InstitutionalFamilyMatch, LucideIcon> = {
   'artist-infrastructure': Network,
   institutions: LayoutGrid,
   'oolite-arts': FlaskConical,
   bakehouse: MonitorSmartphone,
+  bookleggers: Library,
   workshops: Presentation,
 };
 
@@ -186,9 +210,50 @@ export function InstFamilyNav({
     INSTITUTIONAL_FAMILY_NAV.find((item) => pathname.includes(item.match))?.match;
   const dark = tone === 'hub';
   const reduce = useReducedMotion();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const family = navRef.current;
+    if (!family) return;
+
+    const publish = () => {
+      const familyHeight = Math.round(family.getBoundingClientRect().height);
+      if (familyHeight > 0) {
+        document.documentElement.style.setProperty('--inst-family-nav-height', `${familyHeight}px`);
+      }
+      const section = document.querySelector('[data-inst-section-nav]');
+      if (section) {
+        const sectionHeight = Math.round(section.getBoundingClientRect().height);
+        if (sectionHeight > 0) {
+          document.documentElement.style.setProperty(
+            '--inst-section-nav-height',
+            `${sectionHeight}px`,
+          );
+        }
+      } else {
+        document.documentElement.style.removeProperty('--inst-section-nav-height');
+      }
+    };
+
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(family);
+    const section = document.querySelector('[data-inst-section-nav]');
+    if (section) observer.observe(section);
+    window.addEventListener('resize', publish);
+    const frame = window.requestAnimationFrame(publish);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', publish);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
     <nav
+      ref={navRef}
+      data-inst-family-nav
       className={cn(
         'border-b',
         dark

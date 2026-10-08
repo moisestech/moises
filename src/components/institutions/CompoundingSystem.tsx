@@ -35,7 +35,7 @@ export function InstitutionalProofStrip() {
               <>
                 <span className={cn('mb-3 block h-1 w-8', accent.bar)} aria-hidden />
                 <p className="font-['MoMA_Sans'] text-base font-semibold">{item.name}</p>
-                <p className="mt-1 text-sm text-neutral-700">{item.role}</p>
+                <p className="mt-1 text-base text-neutral-800">{item.role}</p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">
                   {item.dates}
                 </p>

@@ -91,13 +91,13 @@ export function LaneStackVisual({
   return (
     <ul className={cn('mt-4 flex flex-wrap items-center gap-3', accentClass)} aria-label="Software in this lane">
       {logos.map((logo) => (
-        <li key={logo.alt} className="flex h-9 items-center border border-neutral-200 bg-white px-2.5">
+        <li key={logo.alt} className="flex h-14 items-center border border-neutral-200 bg-white px-3">
           <Image
             src={logo.src}
             alt={logo.alt}
-            width={Math.round((logo.height ?? 28) * 3)}
+            width={Math.round((logo.height ?? 28) * 4)}
             height={logo.height ?? 28}
-            className="h-5 w-auto max-w-[88px] object-contain"
+            className="h-10 w-auto max-w-[140px] object-contain"
           />
         </li>
       ))}

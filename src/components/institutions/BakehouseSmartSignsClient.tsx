@@ -11,6 +11,10 @@ import {
   InstReveal,
   InstSectionLabel,
   INST_ACCENT,
+  INST_ANCHOR_SCROLL_MT_CLASS,
+  INST_FAMILY_STICKY_CLASS,
+  INST_PAGE_TOP_CLASS,
+  INST_SECTION_STICKY_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { cn } from '@/lib/utils';
 
@@ -26,12 +30,16 @@ const SECTION_NAV = [
 
 export function BakehouseSmartSignsClient() {
   return (
-    <InstPageShell>
-      <InstFamilyNav active="bakehouse" className="sticky top-0 z-40" />
+    <InstPageShell className={INST_PAGE_TOP_CLASS}>
+      <InstFamilyNav active="bakehouse" className={INST_FAMILY_STICKY_CLASS} />
 
       <nav
-        className="sticky top-[45px] z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
+        className={cn(
+          INST_SECTION_STICKY_CLASS,
+          'border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur',
+        )}
         aria-label="Smart Signs sections"
+        data-inst-section-nav
       >
         <InstContainer className="flex gap-1.5 overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {SECTION_NAV.map((item) => (
@@ -70,7 +78,7 @@ export function BakehouseSmartSignsClient() {
         </InstContainer>
       </header>
 
-      <section id="audience" className="scroll-mt-28 border-b border-neutral-200 py-12 sm:py-16">
+      <section id="audience" className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-12 sm:py-16')}>
         <InstContainer>
           <InstReveal>
             <InstSectionLabel>{S.audience.eyebrow}</InstSectionLabel>
@@ -84,7 +92,7 @@ export function BakehouseSmartSignsClient() {
         </InstContainer>
       </section>
 
-      <section id="proven" className="scroll-mt-28 border-b border-neutral-200 py-12 sm:py-16">
+      <section id="proven" className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-12 sm:py-16')}>
         <InstContainer>
           <InstReveal>
             <InstSectionLabel accent="emerald">{S.proven.eyebrow}</InstSectionLabel>
@@ -105,7 +113,7 @@ export function BakehouseSmartSignsClient() {
         </InstContainer>
       </section>
 
-      <section id="withheld" className="scroll-mt-28 border-b border-neutral-200 py-12 sm:py-16">
+      <section id="withheld" className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-12 sm:py-16')}>
         <InstContainer>
           <InstReveal>
             <InstSectionLabel accent="copper">{S.withheld.eyebrow}</InstSectionLabel>
@@ -137,7 +145,7 @@ export function BakehouseSmartSignsClient() {
         </InstContainer>
       </section>
 
-      <section id="media" className="scroll-mt-28 border-b border-neutral-200 py-12 sm:py-16">
+      <section id="media" className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-12 sm:py-16')}>
         <InstContainer>
           <InstReveal>
             <InstSectionLabel accent="copper">Media</InstSectionLabel>
@@ -156,7 +164,7 @@ export function BakehouseSmartSignsClient() {
         </InstContainer>
       </section>
 
-      <section id="next" className="scroll-mt-28 py-12 sm:py-16">
+      <section id="next" className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'py-12 sm:py-16')}>
         <InstContainer>
           <InstReveal>
             <InstSectionLabel>Next</InstSectionLabel>

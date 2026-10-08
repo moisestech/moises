@@ -64,7 +64,11 @@
 
     /* Published by `Header` on measure; fallbacks until hydration. */
     --site-header-height: 5rem;
-    --site-header-expanded-height: 10rem;
+    --site-header-expanded-height: 12rem;
+    /* Institutional strips. Family nav publishes the live family height. */
+    --inst-header-gap: 0.5rem;
+    --inst-family-nav-height: 4rem;
+    --inst-section-nav-height: 3.25rem;
     --grant-dossier-subnav-height: 3.5rem;
     --trust-subnav-height: 3.5rem;
     --trust-course-bar-height: 3.25rem;

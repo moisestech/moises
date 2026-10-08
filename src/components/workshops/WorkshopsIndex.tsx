@@ -13,6 +13,12 @@ import { listReadyWorkshops, type WorkshopCatalogTrack } from '@/content/worksho
 import { getWorkshopCover } from '@/content/workshops/catalog-covers'
 import { institutionalWorkshopOfferings } from '@/content/institutions/workshopsOfferings'
 import { WORKSHOP_HUB } from '@/constants/workshop-hub'
+import {
+  InstFamilyNav,
+  INST_FAMILY_ANCHOR_SCROLL_MT_CLASS,
+  INST_FAMILY_STICKY_CLASS,
+  INST_PAGE_TOP_CLASS,
+} from '@/components/institutions/InstitutionalUi'
 import { track as trackEvent } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
@@ -97,8 +103,12 @@ export function WorkshopsIndex() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f3eee6] text-[#1c1916]">
-      <div className="mx-auto w-full max-w-6xl px-5 pb-28 pt-36 sm:px-8 sm:pt-64">
+    <main className={cn('min-h-screen bg-[#f3eee6] text-[#1c1916]', INST_PAGE_TOP_CLASS)}>
+      <InstFamilyNav
+        active="workshops"
+        className={cn(INST_FAMILY_STICKY_CLASS, 'bg-[#f3eee6]/95 [&_div]:max-w-6xl')}
+      />
+      <div className="mx-auto w-full max-w-6xl px-5 pb-28 pt-12 sm:px-8 sm:pt-16">
         <header className="grid items-end gap-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(16rem,0.85fr)] lg:gap-20">
           <div className="max-w-xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Teaching</p>
@@ -195,7 +205,7 @@ export function WorkshopsIndex() {
           </div>
         </section>
 
-        <section id="catalog" className="mt-32 scroll-mt-52" aria-labelledby="catalog-heading">
+        <section id="catalog" className={cn('mt-32', INST_FAMILY_ANCHOR_SCROLL_MT_CLASS)} aria-labelledby="catalog-heading">
           <div className="max-w-xl space-y-3">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Catalog</p>
             <h2 id="catalog-heading" className="text-4xl tracking-tight">
@@ -252,7 +262,7 @@ export function WorkshopsIndex() {
 
         <section
           id="hosts"
-          className="mt-32 scroll-mt-52 grid gap-14 border-t border-[#1c1916] pt-16 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]"
+          className={cn('mt-32 grid gap-14 border-t border-[#1c1916] pt-16 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]', INST_FAMILY_ANCHOR_SCROLL_MT_CLASS)}
         >
           <div className="space-y-5">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">For hosts</p>

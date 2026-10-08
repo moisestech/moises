@@ -73,6 +73,13 @@ export const INSTITUTIONAL_FAMILY_NAV = [
     accent: 'copper',
   },
   {
+    href: '/bookleggers',
+    label: 'Bookleggers',
+    match: 'bookleggers',
+    short: 'Commerce',
+    accent: 'emerald',
+  },
+  {
     href: '/workshops',
     label: 'Workshops',
     match: 'workshops',

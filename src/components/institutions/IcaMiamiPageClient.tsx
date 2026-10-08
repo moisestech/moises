@@ -15,6 +15,7 @@ import {
   InstSecondaryCta,
   InstSectionLabel,
   INST_FAMILY_STICKY_CLASS,
+  INST_PAGE_TOP_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { IcaSystemsDiagram } from '@/components/institutions/IcaSystemsDiagram';
 import { IcaMiamiAtmosphere } from '@/components/institutions/IcaMiamiAtmosphere';
@@ -22,7 +23,7 @@ import { cn } from '@/lib/utils';
 
 export function IcaMiamiPageClient() {
   return (
-    <InstPageShell className="relative overflow-hidden pt-[192px]">
+    <InstPageShell className={cn('relative', INST_PAGE_TOP_CLASS)}>
       <IcaMiamiAtmosphere />
       <OpportunityApplicationBanner banner={P.banner} className="relative z-[1] mb-0" />
       {P.bannerNote ? (
