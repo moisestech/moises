@@ -47,6 +47,7 @@ export const WORKSHOP_RESERVED_DEEP_SLUGS = [
   'moonlighter-ai-3d-printing',
   'agentic-evidence-pipeline',
   'trust-is-not-a-vibe',
+  'build-your-ai-daily-operator',
 ] as const;
 
 export const workshopCatalog: WorkshopCatalogEntry[] = [
@@ -561,6 +562,34 @@ export const workshopCatalog: WorkshopCatalogEntry[] = [
     href: '/workshop/trust-is-not-a-vibe',
     sortOrder: 7,
   },
+  {
+    slug: 'build-your-ai-daily-operator',
+    title: 'Build Your AI Daily Operator',
+    publicTitle: 'Build Your AI Daily Operator',
+    track: 'AI Literacy' as WorkshopCatalogTrack,
+    status: 'in-development',
+    level: 'Beginner–Intermediate',
+    duration: '90 minutes (Level I)',
+    subtitle:
+      'Build a practical Founder Attention OS for deciding what deserves your attention, why it matters, and what can wait.',
+    hook:
+      'Turn a real workday into an operating brief organized around commitments, revenue or mission, risk, and capacity.',
+    shortDescription:
+      'A hands-on workshop for founders, artists, small-business owners, and institutional leaders. Participants build a Founder Profile, Attention Rules, a portable Daily Operator, and a real Daily Operating Brief before identifying one recurring friction worth investigating. Level I requires no integrations; the deeper curriculum connects trusted sources, business signals, friction diagnosis, and governed workflows.',
+    whyNow:
+      'Calendars and task lists show activity, but they rarely explain what actually deserves scarce founder attention. As AI tools become more capable, the harder problem is making the business legible enough that a system can help prioritize without inventing context or acting beyond its authority.',
+    learningOutcomes: [
+      'Separate outcomes from tasks and rank a real day through Commitments, Revenue or Mission, Risk, and Capacity',
+      'Build a Founder Profile and explicit Attention Rules for what requires the founder, what can be delegated, and what must remain approval-gated',
+      'Generate and challenge a Daily Operating Brief instead of accepting a fluent recommendation at face value',
+      'Separate fact, interpretation, and recommendation when inspecting AI judgment',
+      'Identify one repeated manual friction without assuming automation is the answer',
+    ],
+    featured: true,
+    href: '/workshop/build-your-ai-daily-operator',
+    sortOrder: 5,
+  },
+
 ] as const;
 
 export function getWorkshopBySlug(slug: string) {
