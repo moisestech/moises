@@ -64,8 +64,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'Using my Founder Profile and 30-day outcome, help me write concise Attention Rules for Commitments, Revenue / Mission, Risk, and Capacity. Also define what normally requires me, what can be delegated, what AI may assist with, and what can usually wait. Make the rules force tradeoffs rather than label everything important.',
     leavesWith: 'Artifact 02 — Attention Rules.',
     captureIds: [
-      'ado-howto-chatgpt-l1-attention-rules-03',
-      'ado-howto-claude-l1-attention-rules-03',
+      'ado-howto-chatgpt-l1-operator-setup-03',
+      'ado-howto-claude-l1-operator-setup-03',
     ],
   },
   {
@@ -80,8 +80,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'Create a portable Daily Operator instruction using my Founder Profile and Attention Rules. Its job is to answer: What needs me today, why does it matter, and what can wait? It must optimize attention rather than activity, use the four lenses, distinguish facts from interpretation and recommendation, ask for missing information rather than invent it, follow Recommend → Explain → Ask → Act, and notice recurring friction without interrupting every brief.',
     leavesWith: 'Artifact 03 — Daily Operator.',
     captureIds: [
-      'ado-howto-chatgpt-l1-daily-operator-04',
-      'ado-howto-claude-l1-daily-operator-04',
+      'ado-howto-chatgpt-l1-operator-setup-03',
+      'ado-howto-claude-l1-operator-setup-03',
     ],
   },
   {
@@ -96,8 +96,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'Here is the information I currently have for [TODAY/TOMORROW]: [PASTE OR DESCRIBE CALENDAR, DEADLINES, FOLLOW-UPS, OPPORTUNITIES, TASKS, AND ANY MONEY OR MISSION SIGNALS THAT MAY MATTER]. Use my Daily Operator and produce my Daily Operating Brief.',
     leavesWith: 'Artifact 04 — first Daily Operating Brief.',
     captureIds: [
-      'ado-howto-chatgpt-l1-daily-brief-05',
-      'ado-howto-claude-l1-daily-brief-05',
+      'ado-howto-chatgpt-l1-daily-brief-04',
+      'ado-howto-claude-l1-daily-brief-04',
     ],
   },
   {
@@ -112,8 +112,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'Why did you rank priority #1 above priority #2? Show the tradeoff through Commitments, Revenue / Mission, Risk, and Capacity. If the ranking depends on missing context, say exactly what is missing.',
     leavesWith: 'A visible prioritization tradeoff.',
     captureIds: [
-      'ado-howto-chatgpt-l1-challenge-priority-06',
-      'ado-howto-claude-l1-challenge-priority-06',
+      'ado-howto-chatgpt-l1-challenge-evidence-05',
+      'ado-howto-claude-l1-challenge-evidence-05',
     ],
   },
   {
@@ -128,8 +128,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'For the highest-priority recommendation, separate your reasoning into exactly three sections: FACT — what I actually provided; INTERPRETATION — what you inferred from those facts; RECOMMENDATION — what you think I should do. Do not move an inference into FACT.',
     leavesWith: 'Fact / Interpretation / Recommendation evidence.',
     captureIds: [
-      'ado-howto-chatgpt-l1-fact-interpretation-07',
-      'ado-howto-claude-l1-fact-interpretation-07',
+      'ado-howto-chatgpt-l1-challenge-evidence-05',
+      'ado-howto-claude-l1-challenge-evidence-05',
     ],
   },
   {
@@ -144,8 +144,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'Looking only at what happened during this exercise, what information did I have to manually retrieve, remember, reconcile, transfer, decide, approve, or rewrite? Name the strongest recurring friction, why it matters, and where that information currently lives. Do not recommend an automation yet.',
     leavesWith: 'One initial Friction Log note.',
     captureIds: [
-      'ado-howto-chatgpt-l1-friction-08',
-      'ado-howto-claude-l1-friction-08',
+      'ado-howto-chatgpt-l1-friction-06',
+      'ado-howto-claude-l1-friction-06',
     ],
   },
   {
@@ -160,8 +160,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'What is the smallest improvement that would make tomorrow’s brief more accurate or less manual? Consider a clearer rule, better source of truth, delegation, or missing context before recommending a connection or automation.',
     leavesWith: 'One next improvement.',
     captureIds: [
-      'ado-howto-chatgpt-l1-improvement-09',
-      'ado-howto-claude-l1-improvement-09',
+      'ado-howto-chatgpt-l1-friction-06',
+      'ado-howto-claude-l1-friction-06',
     ],
   },
   {
@@ -176,8 +176,8 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
       'For the next seven days, when I ask for my Daily Operating Brief, end with two short questions: What did I get wrong or miss? What information did I have to reconstruct manually? Use my answers to improve the Founder Profile, Attention Rules, and Friction Log without silently changing my approval boundaries.',
     leavesWith: 'Seven-Day Experiment started.',
     captureIds: [
-      'ado-howto-chatgpt-l1-seven-day-10',
-      'ado-howto-claude-l1-seven-day-10',
+      'ado-howto-chatgpt-l1-seven-day-07',
+      'ado-howto-claude-l1-seven-day-07',
     ],
   },
 ]
@@ -185,7 +185,7 @@ export const LEVEL_I_WALKTHROUGH: readonly LevelOneWalkthroughStep[] = [
 export const LEVEL_I_CAPTURE_PLAN = {
   chatgpt: {
     folder:
-      'dccmiami/workshops/ai-daily-operator/09-tool-guides/chatgpt',
+      'moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i',
     required: LEVEL_I_WALKTHROUGH.map((step) =>
       step.captureIds.find((id) => id.includes('chatgpt')),
     ).filter(Boolean),
@@ -193,7 +193,7 @@ export const LEVEL_I_CAPTURE_PLAN = {
   },
   claude: {
     folder:
-      'dccmiami/workshops/ai-daily-operator/09-tool-guides/claude',
+      'moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i',
     required: LEVEL_I_WALKTHROUGH.map((step) =>
       step.captureIds.find((id) => id.includes('claude')),
     ).filter(Boolean),
