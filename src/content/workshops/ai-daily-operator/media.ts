@@ -1,16 +1,21 @@
 /**
  * Build Your AI Daily Operator — canonical media registry.
  *
- * Cloudinary root mirrors the course architecture:
- * dccmiami/workshops/ai-daily-operator/
+ * Media registry for Build Your AI Daily Operator.
  *
- * Keep public IDs stable. Replace an approved asset in place rather than
- * versioning production filenames. Drafts belong in 90-drafts-archive.
+ * Legacy/generated-local assets still point at the original DCC working
+ * namespace until their binaries are reconciled. Verified public assets may
+ * override that path with canonical Moises.tech Cloudinary IDs.
+ *
+ * Never infer an upload from a target path: delivery='cloudinary' is reserved
+ * for assets physically verified in Cloudinary.
  */
 
 export const DAILY_OPERATOR_CLOUDINARY_CLOUD = 'dck5rzi4h' as const
 export const DAILY_OPERATOR_MEDIA_ROOT =
   'dccmiami/workshops/ai-daily-operator' as const
+export const DAILY_OPERATOR_CANONICAL_MEDIA_ROOT =
+  'moisestech/workshops/build-your-ai-daily-operator' as const
 
 export type DailyOperatorMediaStatus =
   | 'needed'
@@ -46,13 +51,21 @@ export type DailyOperatorMediaAsset = {
 function asset(
   folder: string,
   fileName: string,
-  config: Omit<DailyOperatorMediaAsset, 'publicId' | 'folder' | 'delivery'> & { delivery?: DailyOperatorMediaDelivery },
+  config: Omit<DailyOperatorMediaAsset, 'publicId' | 'folder' | 'delivery'> & {
+    delivery?: DailyOperatorMediaDelivery
+    publicIdOverride?: string
+    folderOverride?: string
+  },
 ): DailyOperatorMediaAsset {
+  const { publicIdOverride, folderOverride, ...assetConfig } = config
+  const resolvedFolder =
+    folderOverride ?? `${DAILY_OPERATOR_MEDIA_ROOT}/${folder}`
+
   return {
-    publicId: `${DAILY_OPERATOR_MEDIA_ROOT}/${folder}/${fileName}`,
-    folder: `${DAILY_OPERATOR_MEDIA_ROOT}/${folder}`,
-    delivery: config.delivery ?? 'local',
-    ...config,
+    publicId: publicIdOverride ?? `${resolvedFolder}/${fileName}`,
+    folder: resolvedFolder,
+    delivery: assetConfig.delivery ?? 'local',
+    ...assetConfig,
   }
 }
 
@@ -232,6 +245,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'artifact',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/source-access/permission-map',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/source-access',
           alt: 'A map showing which business sources an AI system may read, draft from, or never act on alone.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -272,6 +287,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'object',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/retrieval/friction-retrieval',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/retrieval',
           alt: 'Repeated retrieval from multiple sources to answer one recurring business question.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -284,6 +301,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'object',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/reconciliation/friction-reconciliation',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/reconciliation',
           alt: 'Two conflicting business records being manually reconciled.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -296,6 +315,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'object',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/memory/friction-memory',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/memory',
           alt: 'Important commitments depending on fragile human memory rather than a reliable system.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -308,6 +329,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'object',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/transfer/friction-transfer',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/transfer',
           alt: 'Information being manually copied between two otherwise clean business systems.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -320,6 +343,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'object',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/decision/friction-decision',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/decision',
           alt: 'The same routine judgment being reconstructed repeatedly instead of encoded as a clear rule.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -332,6 +357,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'object',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/approval/friction-approval',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/approval',
           alt: 'Many business flows waiting at one human approval bottleneck.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -344,6 +371,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'object',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/communication/friction-communication',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/communication',
           alt: 'The same information repeatedly rewritten for several channels and recipients.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -359,6 +388,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'diagram',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/automation-selection/impact-frequency-ease-risk',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/automation-selection',
           alt: 'A four-factor decision model for choosing whether a repeated friction is worth automating.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -374,6 +405,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'artifact',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/workflow-blueprint/workflow-blueprint',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/workflow-blueprint',
           alt: 'A governed workflow moving through trigger, context, reasoning, output, approval, action, and record.',
           usage: ['web', 'lms', 'slides'],
         },
@@ -403,6 +436,8 @@ export const DAILY_OPERATOR_MEDIA = {
           role: 'artifact',
           status: 'approved',
           delivery: 'cloudinary',
+          publicIdOverride: 'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/weekly-review/weekly-operating-review',
+          folderOverride: 'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/weekly-review',
           alt: 'A week of daily briefs resolving into what moved, what stuck, repeated friction, and one next improvement.',
           usage: ['web', 'lms', 'slides'],
         },
