@@ -53,6 +53,7 @@ src/app/(main)/workshop/build-your-ai-daily-operator/page.tsx
 src/app/(main)/workshop/build-your-ai-daily-operator/level-i/page.tsx
 src/components/workshop/ai-daily-operator/ProgramClient.tsx
 src/components/workshop/ai-daily-operator/LevelIToolkitClient.tsx
+src/components/workshop/ai-daily-operator/LevelIAssessment.tsx
 src/components/workshop/ai-daily-operator/ArtifactWorksheet.tsx
 
 src/content/workshops/ai-daily-operator/program.ts
@@ -60,6 +61,7 @@ src/content/workshops/ai-daily-operator/media.ts
 src/content/workshops/ai-daily-operator/artifacts.ts
 src/content/workshops/ai-daily-operator/operator-prompt.ts
 src/content/workshops/ai-daily-operator/level-i-walkthrough.ts
+src/content/workshops/ai-daily-operator/level-i-assessment.ts
 src/content/workshops/ai-daily-operator/tool-guides.ts
 src/content/workshops/ai-daily-operator/resources.ts
 src/content/workshops/ai-daily-operator/benchmarks.ts
@@ -570,11 +572,14 @@ Preserve:
 - browser-local worksheet saving;
 - Copy as text;
 - Print / PDF;
-- participant privacy guidance;
+- explicit minimum-safe-context privacy guidance;
 - synthetic fallback;
 - official Academy resource links;
 - portable vendor-neutral prompt;
-- 90-minute walkthrough.
+- 90-minute walkthrough;
+- 10-question scenario-based competency check;
+- 80% passing threshold;
+- artifact evidence remains the main proof of learning, not quiz score alone.
 
 Audit for consistency against:
 
@@ -781,9 +786,11 @@ This pass is complete when:
 7. friction + approval + review make the methodology visibly distinct from a generic AI productivity course;
 8. official Academy links remain available;
 9. no fake documentary/UI evidence is present;
-10. typecheck/build/route checks pass;
-11. changes remain on `cursor/ai-daily-operator`;
-12. nothing is merged to main.
+10. Level I includes the privacy boundary and scenario-based competency check;
+11. the canonical Level I capture plan is 7 screenshots + 1 short video per platform, not one screenshot per walkthrough step;
+12. typecheck/build/route checks pass;
+13. changes remain on `cursor/ai-daily-operator`;
+14. nothing is merged to main.
 
 At the end, produce a concise implementation report:
 
