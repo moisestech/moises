@@ -279,7 +279,7 @@ export const flagshipEvidence: Record<FlagshipEvidenceId, FlagshipEvidence> = {
     title: 'Bookleggers Commerce Automation',
     subtitle: 'Make + Square + Airtable ops sync',
     summary: 'Client-facing commerce automation for a nonprofit library — live sync workflows.',
-    href: '/ai-engineering#proof',
+    href: '/bookleggers',
     imageSrc:
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788209502/dccmiami/workshops/make-airtable-no-code-square-data-ingestion-ai-automation-banner-bookleggers_h4e9k9.png',
     imageAlt: 'Bookleggers — Make, Airtable, and Square no-code data-ingestion automation banner',

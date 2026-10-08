@@ -10,7 +10,7 @@ Use this order when picking a link:
 **Museum / nonprofit digital systems (e.g. Courtney at ICA):**
 
 1. **`/institutions`** — focused services page (web, Salesforce, automation, livestreaming, labs)
-2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof. Smart Signs technical case: **`/bakehouse/smart-signs`**.
+2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof. Smart Signs technical case: **`/bakehouse/smart-signs`**. **`/bookleggers`** is the Square-to-Airtable handoff, listed after those three.
 3. Calendly — “Discuss a project”. Do not print a duration. The destination is the existing meeting link.
 
 **Artist-facing workshops / incubators:**
@@ -25,6 +25,8 @@ Use this order when picking a link:
 Sophia’s research door includes **`/research/the-algorithm-is-outside`**.
 
 Workshop catalog detail: [`docs/workshops-catalog.md`](../workshops-catalog.md).
+
+Family and section menus stick below the measured site header (`INST_FAMILY_STICKY_CLASS`, `INST_SECTION_STICKY_CLASS`). Do not pin those strips with `top-0`.
 
 Hiring proof is a **different family:** `/capabilities` → employer dossiers. Do not send incubators to `/ai-engineering` as the Miami outreach link.
 

@@ -341,13 +341,13 @@ export const institutionsHub = {
         'Salesforce integrations, data mapping, workflow automation, and reporting.',
       solves:
         'Less repeated entry and a clearer path from registration to useful reporting.',
-      href: '#work-bakehouse',
-      linkLabel: 'Bakehouse systems',
+      href: '/bookleggers',
+      linkLabel: 'Bookleggers case',
       accent: 'automation',
       icon: 'workflow',
-      proofTags: ['Airtable', 'n8n / Make', 'APIs', 'Structured outputs', 'Documentation'],
+      proofTags: ['Bookleggers', 'Square', 'Make.com', 'Airtable', 'n8n'],
       priorExample:
-        'Registration, intake, and reporting work has used Airtable and n8n, with a person reviewing the handoff. Tools are chosen for the workflow in front of us.',
+        'At Bookleggers Library, a live Make.com scenario syncs Square point-of-sale transactions into Airtable so staff can see sales and inventory without a manual spreadsheet handoff. Other registration and reporting work has used Airtable and n8n, with a person reviewing the handoff.',
       stack: [STACK.airtable, STACK.n8n],
       illustration: LANE_ILLUSTRATIONS.automation,
     },
@@ -595,6 +595,59 @@ export const institutionsHub = {
       ],
       href: '/bakehouse',
       cta: 'Open Bakehouse',
+    },
+    {
+      id: 'bookleggers',
+      slug: 'bookleggers',
+      institution: 'Bookleggers Library',
+      headline: 'Square sales land in Airtable, so staff are not the spreadsheet.',
+      role: 'Client operations handoff',
+      dates: 'Live scenario',
+      statusLabel: 'Completed handoff',
+      status: 'operated' as const,
+      primaryLane: 'automation' as PracticeLaneAccent,
+      summary:
+        'A live Make.com scenario syncs Square point-of-sale transactions into Airtable so Bookleggers Library staff can see sales and inventory without a manual spreadsheet handoff.',
+      proofSequence: [
+        {
+          stage: 'Context',
+          text: 'Bookleggers Library, a resident organization at Bakehouse Art Complex. Sales happen at a Square point of sale.',
+        },
+        {
+          stage: 'Responsibility',
+          text: 'Staff needed sales and inventory visibility in Airtable without exporting spreadsheets by hand.',
+        },
+        {
+          stage: 'Contribution',
+          text: 'A Make.com scenario sends Square transactions into Airtable.',
+        },
+        {
+          stage: 'Artifact',
+          text: 'The live scenario and the Airtable view staff use. The public image is a diagram of that sync.',
+        },
+        {
+          stage: 'Result',
+          text: 'Library staff can see sales and inventory without a manual spreadsheet handoff.',
+        },
+        {
+          stage: 'Ownership',
+          text: 'Bookleggers Library staff operate the view. Independent client work. It does not describe Bakehouse Art Complex systems.',
+        },
+      ],
+      facts: [
+        { value: 'Square → Airtable', label: 'Live Make.com scenario', verification: 'public' as const },
+        { value: 'Staff', label: 'Bookleggers Library operates the sales and inventory view', verification: 'public' as const },
+        { value: 'Independent', label: 'Not a Bakehouse partnership proposal', verification: 'public' as const },
+      ],
+      media: [
+        {
+          src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1788209502/dccmiami/workshops/make-airtable-no-code-square-data-ingestion-ai-automation-banner-bookleggers_h4e9k9.png',
+          alt: 'Bookleggers — Make, Airtable, and Square no-code data-ingestion automation banner',
+          caption: 'A diagram of the sync. Not a photograph of the library floor.',
+        },
+      ],
+      href: '/bookleggers',
+      cta: 'Open Bookleggers case',
     },
   ],
   additionalEvidence: [

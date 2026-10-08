@@ -27,6 +27,7 @@ const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[0]['changeF
     { path: '/institutions', changeFrequency: 'monthly', priority: 0.8 },
     { path: '/ica-miami', changeFrequency: 'monthly', priority: 0.75 },
     { path: '/bakehouse', changeFrequency: 'monthly', priority: 0.75 },
+    { path: '/bookleggers', changeFrequency: 'monthly', priority: 0.75 },
     { path: '/bakehouse/smart-signs', changeFrequency: 'monthly', priority: 0.8 },
     { path: '/services/smartsign', changeFrequency: 'monthly', priority: 0.75 },
     { path: '/ai24', changeFrequency: 'monthly', priority: 0.8 },

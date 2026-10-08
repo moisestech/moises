@@ -16,6 +16,10 @@ import {
   InstSecondaryCta,
   InstSectionLabel,
   INST_ACCENT,
+  INST_ANCHOR_SCROLL_MT_CLASS,
+  INST_FAMILY_STICKY_CLASS,
+  INST_PAGE_TOP_CLASS,
+  INST_SECTION_STICKY_CLASS,
 } from '@/components/institutions/InstitutionalUi';
 import { cn } from '@/lib/utils';
 
@@ -75,12 +79,16 @@ export function BakehousePageClient() {
   }, []);
 
   return (
-    <InstPageShell>
-      <InstFamilyNav active="bakehouse" className="sticky top-0 z-40" />
+    <InstPageShell className={INST_PAGE_TOP_CLASS}>
+      <InstFamilyNav active="bakehouse" className={INST_FAMILY_STICKY_CLASS} />
 
       <nav
-        className="sticky top-[45px] z-30 border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur"
+        className={cn(
+          INST_SECTION_STICKY_CLASS,
+          'border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur',
+        )}
         aria-label="Bakehouse sections"
+        data-inst-section-nav
       >
         <InstContainer className="flex gap-1.5 overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {SECTION_NAV.map((item) => {
@@ -157,7 +165,7 @@ export function BakehousePageClient() {
 
       <section
         id="thesis"
-        className="scroll-mt-28 border-b border-neutral-200 py-12 sm:py-16"
+        className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-12 sm:py-16')}
         aria-labelledby="thesis-heading"
       >
         <InstContainer>
@@ -202,7 +210,7 @@ export function BakehousePageClient() {
             <section
               key={bucket.id}
               id={bucket.id}
-              className="scroll-mt-28 border-b border-neutral-200 py-12 sm:py-16"
+              className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-12 sm:py-16')}
               aria-labelledby={`${bucket.id}-heading`}
             >
               <InstContainer>
@@ -266,7 +274,7 @@ export function BakehousePageClient() {
 
       <section
         id="ask"
-        className="scroll-mt-28 border-b border-neutral-200 py-14 sm:py-16"
+        className={cn(INST_ANCHOR_SCROLL_MT_CLASS, 'border-b border-neutral-200 py-14 sm:py-16')}
         aria-labelledby="ask-heading"
       >
         <InstContainer>
