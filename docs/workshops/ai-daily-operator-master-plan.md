@@ -49,7 +49,9 @@ FACT → INTERPRETATION → RECOMMENDATION
 ## Source-of-truth architecture
 
 - `program.ts` — curriculum / competency map
-- `media.ts` — conceptual media registry + Cloudinary delivery
+- `media.ts` — intentionally public conceptual media registry + Cloudinary delivery
+- `image-manifest.json` — full audited production-media state
+- `cloudinary-migration-map.json` — verified DCC → Moises namespace migration
 - `artifacts.ts` — participant artifact schemas
 - `level-i-walkthrough.ts` — timed Level I facilitation flow
 - `operator-prompt.ts` — portable vendor-neutral Daily Operator prompt
@@ -58,7 +60,13 @@ FACT → INTERPRETATION → RECOMMENDATION
 
 ## Media architecture
 
-Cloudinary root:
+Canonical Cloudinary root:
+
+```
+moisestech/workshops/build-your-ai-daily-operator/
+```
+
+Legacy/source namespace (preserve until migration is verified):
 
 ```
 dccmiami/workshops/ai-daily-operator/
@@ -71,10 +79,10 @@ Key layers:
 - `02-connected-operator` — sources and permissions
 - `03-business-pulse`
 - `04-friction-intelligence`
-- `05-workflow-builder`
+- `05-operating-system`
 - `06-capstone`
 - `07-industry-overlays`
-- `08-dcc-case-study`
+- `08-case-studies/dcc-miami`
 - `09-tool-guides` — real UI only, never generated
 - `10-participant-artifacts` — previews/examples/exports
 - `11-course-docs` — final PDF/media exports, not editable strategy source
