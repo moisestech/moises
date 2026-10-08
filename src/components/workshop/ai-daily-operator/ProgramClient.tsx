@@ -15,7 +15,6 @@ import {
   DAILY_OPERATOR_OWNS,
   DAILY_OPERATOR_PATH,
   DAILY_OPERATOR_PILOT_TACTICS,
-  DAILY_OPERATOR_PRICING,
   DAILY_OPERATOR_PRINCIPLES,
   DAILY_OPERATOR_PROGRESSION,
   DAILY_OPERATOR_PROJECTS,
@@ -468,36 +467,6 @@ export function ProgramClient() {
               </li>
             ))}
           </ul>
-        </section>
-
-        <section className="mt-28" aria-labelledby="pricing-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Host offer</p>
-            <h2 id="pricing-heading" className="mt-3 text-4xl tracking-tight">
-              Ranges to test
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_PRICING.label}</p>
-          </div>
-          <ul className="mt-10 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
-            {DAILY_OPERATOR_PRICING.offers.map((offer) => (
-              <li key={offer.offer} className="grid gap-2 py-4 sm:grid-cols-[minmax(0,1.2fr)_auto_auto] sm:items-baseline sm:gap-8">
-                <span className="tracking-tight">{offer.offer}</span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#5c564e]">{offer.individual}</span>
-                <span className="text-sm text-[#3d3832]">{offer.institutional}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 max-w-xl">
-            <h3 className="text-2xl tracking-tight">{DAILY_OPERATOR_PRICING.scaleUp.name}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_PRICING.scaleUp.terms}</p>
-            <ul className="mt-3 space-y-1">
-              {DAILY_OPERATOR_PRICING.scaleUp.exchange.map((item) => (
-                <li key={item} className="text-sm leading-relaxed text-[#3d3832]">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
         </section>
 
         <section className="mt-28" aria-labelledby="boundary-heading">
