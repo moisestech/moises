@@ -19,7 +19,7 @@ export const DAILY_OPERATOR_SENTENCE =
 export const DAILY_OPERATOR_FOR = {
   hosts: 'Accelerators, chambers, arts institutions, and schools that need a curriculum they can host.',
   participants: 'Founders, artists, small-business owners, and institutional leaders deciding whether Level I is the right session.',
-  case: 'On this site the worked example is a creative practice. DCC Miami is the documented operating case.',
+  case: 'On this site the worked example is a creative practice. DCC Miami is used as a sanitized operating example while documentary evidence is still being assembled.',
   instructor: 'Moises Sanabria teaches it. The method stays his.',
 } as const
 
