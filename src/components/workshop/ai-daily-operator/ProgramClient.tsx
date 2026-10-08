@@ -71,7 +71,13 @@ export function ProgramClient() {
               </a>
             </div>
           </div>
-          <div className="border-t border-[#1c1916]">
+          <div>
+            <WorkshopMediaFigure
+              asset={DAILY_OPERATOR_MEDIA.core.operatorCore}
+              priority
+              caption="Many business signals compete for one finite resource: your attention. The operator narrows those signals into a smaller set of meaningful actions."
+            />
+            <div className="mt-8 border-t border-[#1c1916]">
             <p className="border-b border-[#d9d0c3] py-4 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
               Who this page is for
             </p>
@@ -93,6 +99,7 @@ export function ProgramClient() {
                 <dd className="mt-1 text-base leading-relaxed">{DAILY_OPERATOR_FOR.instructor}</dd>
               </div>
             </dl>
+            </div>
           </div>
         </header>
 
@@ -132,6 +139,11 @@ export function ProgramClient() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_PROGRESSION}</p>
           </div>
+          <WorkshopMediaFigure
+            asset={DAILY_OPERATOR_MEDIA.core.attentionFlywheel}
+            caption="The system improves as goals shape signals, signals inform judgment, finite attention becomes action, and review changes the system for the next cycle."
+            className="mt-10 max-w-5xl"
+          />
           <ol className="mt-10 grid gap-px bg-[#d9d0c3] sm:grid-cols-2 lg:grid-cols-3">
             {DAILY_OPERATOR_PATH.map((step, index) => (
               <li key={step.id} className="bg-[#f3eee6] p-5">
@@ -362,6 +374,11 @@ export function ProgramClient() {
               caption="A governed workflow separates context and reasoning from approval, action, and the durable record."
             />
           </div>
+          <WorkshopMediaFigure
+            asset={DAILY_OPERATOR_MEDIA.modules.m11.humanApprovalGate}
+            caption="Consequential action crosses a visible human boundary: recommend, explain, ask, then act only after approval."
+            className="mt-10 max-w-5xl"
+          />
           <WorkshopMediaFigure
             asset={DAILY_OPERATOR_MEDIA.modules.m12.weeklyReview}
             caption="The weekly review closes the loop: what moved, what stalled, what repeated, and what one improvement deserves attention next."
