@@ -7,11 +7,11 @@
     "branch": "cursor/ai-daily-operator"
   },
   "manifestVersion": 1,
-  "lastAudited": "2026-10-07",
+  "lastAudited": "2026-10-08",
   "canonicalCloudinaryRoot": "moisestech/workshops/build-your-ai-daily-operator",
   "legacySourceRoot": "dccmiami/workshops/ai-daily-operator",
   "inventoryScope": {
-    "includes": "All assets currently represented by the typed media registry, verified Cloudinary assets, and minimum planned real-tool captures.",
+    "includes": "All assets currently represented by the typed media registry, verified Cloudinary assets, the canonical Level I capture plan, and planned real-tool captures for later levels.",
     "excludes": "Unindexed historical R&D images from older chat/image-generation sessions whose binaries or stable identifiers are not currently available.",
     "rule": "Do not claim this manifest is exhaustive until historical source binaries are reconciled. Add newly recovered exploration/reference/rejected assets here before publishing or deleting them."
   },
@@ -819,15 +819,15 @@
     },
     {
       "source": null,
-      "targetFilename": "chatgpt-level-i-goal.png",
+      "targetFilename": "chatgpt-level-i-goal-01.png",
       "status": "real-documentation",
       "section": "09-tool-guides/chatgpt/level-i",
-      "assetId": "ADO-HOWTO-CHATGPT-L1-GOAL-001",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-GOAL-01",
       "role": "tool-guide",
       "generatedVsReal": "real-required",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
-        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/goal",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/goal-01",
         "uploadStatus": "awaiting-manual-capture",
         "version": null,
         "secureUrl": null,
@@ -838,19 +838,19 @@
       "usedOn": [
         "level-i"
       ],
-      "notes": "Capture the current real product UI. Never generate a fake interface."
+      "notes": "State one 30-day outcome. Capture the current real product UI. Never generate a fake interface."
     },
     {
       "source": null,
-      "targetFilename": "chatgpt-level-i-daily-brief.png",
+      "targetFilename": "chatgpt-level-i-founder-profile-02.png",
       "status": "real-documentation",
       "section": "09-tool-guides/chatgpt/level-i",
-      "assetId": "ADO-HOWTO-CHATGPT-L1-BRIEF-001",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-FOUNDER-PROFILE-02",
       "role": "tool-guide",
       "generatedVsReal": "real-required",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
-        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/daily-brief",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/founder-profile-02",
         "uploadStatus": "awaiting-manual-capture",
         "version": null,
         "secureUrl": null,
@@ -861,19 +861,157 @@
       "usedOn": [
         "level-i"
       ],
-      "notes": "Capture the current real product UI. Never generate a fake interface."
+      "notes": "Build the Founder Profile progressively. Capture the current real product UI. Never generate a fake interface."
     },
     {
       "source": null,
-      "targetFilename": "claude-level-i-goal.png",
+      "targetFilename": "chatgpt-level-i-operator-setup-03.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-OPERATOR-SETUP-03",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/operator-setup-03",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Create Attention Rules and the Daily Operator. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "chatgpt-level-i-daily-brief-04.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-DAILY-BRIEF-04",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/daily-brief-04",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Generate a Daily Operating Brief. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "chatgpt-level-i-challenge-evidence-05.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-CHALLENGE-EVIDENCE-05",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/challenge-evidence-05",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Challenge the ranking and inspect the evidence. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "chatgpt-level-i-friction-06.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-FRICTION-06",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/friction-06",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Identify one observed friction. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "chatgpt-level-i-seven-day-07.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-SEVEN-DAY-07",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/seven-day-07",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Start the seven-day experiment. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "chatgpt-level-i-demo-video.mp4",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-DEMO-VIDEO",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/demo-video",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Level I end-to-end demo. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-goal-01.png",
       "status": "real-documentation",
       "section": "09-tool-guides/claude/level-i",
-      "assetId": "ADO-HOWTO-CLAUDE-L1-GOAL-001",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-GOAL-01",
       "role": "tool-guide",
       "generatedVsReal": "real-required",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
-        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/goal",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/goal-01",
         "uploadStatus": "awaiting-manual-capture",
         "version": null,
         "secureUrl": null,
@@ -884,19 +1022,19 @@
       "usedOn": [
         "level-i"
       ],
-      "notes": "Capture the current real product UI. Never generate a fake interface."
+      "notes": "State one 30-day outcome. Capture the current real product UI. Never generate a fake interface."
     },
     {
       "source": null,
-      "targetFilename": "claude-level-i-daily-brief.png",
+      "targetFilename": "claude-level-i-founder-profile-02.png",
       "status": "real-documentation",
       "section": "09-tool-guides/claude/level-i",
-      "assetId": "ADO-HOWTO-CLAUDE-L1-BRIEF-001",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-FOUNDER-PROFILE-02",
       "role": "tool-guide",
       "generatedVsReal": "real-required",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
-        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/daily-brief",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/founder-profile-02",
         "uploadStatus": "awaiting-manual-capture",
         "version": null,
         "secureUrl": null,
@@ -907,7 +1045,145 @@
       "usedOn": [
         "level-i"
       ],
-      "notes": "Capture the current real product UI. Never generate a fake interface."
+      "notes": "Build the Founder Profile progressively. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-operator-setup-03.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-OPERATOR-SETUP-03",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/operator-setup-03",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Create Attention Rules and the Daily Operator. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-daily-brief-04.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-DAILY-BRIEF-04",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/daily-brief-04",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Generate a Daily Operating Brief. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-challenge-evidence-05.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-CHALLENGE-EVIDENCE-05",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/challenge-evidence-05",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Challenge the ranking and inspect the evidence. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-friction-06.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-FRICTION-06",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/friction-06",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Identify one observed friction. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-seven-day-07.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-SEVEN-DAY-07",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/seven-day-07",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Start the seven-day experiment. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-demo-video.mp4",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-DEMO-VIDEO",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/demo-video",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Level I end-to-end demo. Capture the current real product UI. Never generate a fake interface."
     }
   ]
 }
