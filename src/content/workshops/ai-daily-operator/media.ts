@@ -82,13 +82,20 @@ export const DAILY_OPERATOR_MEDIA = {
   core: {
     attentionFlywheel: asset(
       '00-core/attention-flywheel',
-      'ado-core-attention-flywheel',
+      'attention-flywheel',
       {
         concept: 'attention-flywheel',
         role: 'diagram',
-        status: 'generated-local',
-        alt: 'A circular operating model connecting goals, business signals, judgment, attention, action, review, and system improvement.',
-        usage: ['web', 'lms', 'slides'],
+        status: 'approved',
+        delivery: 'cloudinary',
+        publicIdOverride:
+          'moisestech/workshops/build-your-ai-daily-operator/00-core/attention-flywheel/attention-flywheel',
+        folderOverride:
+          'moisestech/workshops/build-your-ai-daily-operator/00-core/attention-flywheel',
+        width: 1600,
+        height: 1000,
+        alt: 'Founder Attention OS loop: goals, signals, judgment, finite attention, action, review, and system improvement returning to goals.',
+        usage: ['web', 'lms', 'slides', 'social'],
       },
     ),
     operatorCore: asset('00-core/hero', 'operator-core', {
@@ -444,13 +451,20 @@ export const DAILY_OPERATOR_MEDIA = {
 
     m11: {
       humanApprovalGate: asset(
-        '05-workflow-builder/m11-trust-and-approval',
-        'ado-m11-human-approval-gate',
+        '05-operating-system/human-approval',
+        'human-approval-gate',
         {
           concept: 'human-approval-gate',
           role: 'diagram',
           status: 'approved',
-          alt: 'An AI recommendation stopping at a human approval gate before consequential action.',
+          delivery: 'cloudinary',
+          publicIdOverride:
+            'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/human-approval/human-approval-gate',
+          folderOverride:
+            'moisestech/workshops/build-your-ai-daily-operator/05-operating-system/human-approval',
+          width: 1600,
+          height: 1000,
+          alt: 'A governed approval flow where the system recommends and explains, a person can revise, stop, or approve, and action happens only after approval.',
           usage: ['web', 'lms', 'slides'],
         },
       ),
