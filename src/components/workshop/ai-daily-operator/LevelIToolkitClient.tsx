@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { ArtifactWorksheet } from '@/components/workshop/ai-daily-operator/ArtifactWorksheet'
+import { LevelIAssessment } from '@/components/workshop/ai-daily-operator/LevelIAssessment'
 import { LEVEL_I_ARTIFACTS } from '@/content/workshops/ai-daily-operator/artifacts'
 import {
   LEVEL_I_OPENING,
@@ -9,6 +10,7 @@ import {
 } from '@/content/workshops/ai-daily-operator/level-i-walkthrough'
 import { DAILY_OPERATOR_BASE_PROMPT } from '@/content/workshops/ai-daily-operator/operator-prompt'
 import { DAILY_OPERATOR_RESOURCES } from '@/content/workshops/ai-daily-operator/resources'
+import { SYNTHETIC_LEVEL_I_CASE } from '@/content/workshops/ai-daily-operator/synthetic-case'
 
 export function LevelIToolkitClient() {
   return (
@@ -29,6 +31,9 @@ export function LevelIToolkitClient() {
             <a href="#artifacts" className="border border-[#1c1916] px-4 py-2.5 text-sm">
               Open worksheets
             </a>
+            <a href="#assessment" className="border border-[#d9d0c3] px-4 py-2.5 text-sm">
+              Competency check
+            </a>
             <Link href="/workshop/build-your-ai-daily-operator" className="border border-[#d9d0c3] px-4 py-2.5 text-sm">
               Program overview
             </Link>
@@ -37,6 +42,49 @@ export function LevelIToolkitClient() {
             Your worksheet answers are stored only in this browser using local storage. Nothing is sent to the course site.
           </p>
         </header>
+
+        <section className="pt-16" aria-labelledby="data-boundary-heading">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+            Before you begin
+          </p>
+          <h2 id="data-boundary-heading" className="mt-3 text-3xl tracking-tight">
+            Use the minimum safe context
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#3d3832]">
+            Level I does not require sensitive business data. Do not paste passwords, bank credentials, regulated information, confidential customer or personnel records, or information you do not have permission to share. Use only the context needed for the decision, sanitize it when appropriate, or use the fictional practice case.
+          </p>
+          <details className="mt-6 border border-[#d9d0c3] bg-[#fbf7f1] p-5">
+            <summary className="cursor-pointer text-sm font-medium">
+              Use the fictional practice case — {SYNTHETIC_LEVEL_I_CASE.name}
+            </summary>
+            <div className="mt-5 grid gap-6 text-sm leading-relaxed text-[#3d3832] sm:grid-cols-2">
+              <div>
+                <p className="font-medium">Business</p>
+                <p className="mt-1">{SYNTHETIC_LEVEL_I_CASE.founderProfile.business}</p>
+              </div>
+              <div>
+                <p className="font-medium">30-day outcome</p>
+                <p className="mt-1">{SYNTHETIC_LEVEL_I_CASE.founderProfile.thirtyDayOutcome}</p>
+              </div>
+              <div>
+                <p className="font-medium">Today’s signals</p>
+                <ul className="mt-2 list-disc space-y-1 pl-5">
+                  {SYNTHETIC_LEVEL_I_CASE.workday.signals.map((signal) => (
+                    <li key={signal}>{signal}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="font-medium">Possible tasks</p>
+                <ul className="mt-2 list-disc space-y-1 pl-5">
+                  {SYNTHETIC_LEVEL_I_CASE.workday.tasks.map((task) => (
+                    <li key={task}>{task}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </details>
+        </section>
 
         <section className="pt-16" aria-labelledby="official-learning-heading">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Official foundations</p>
@@ -131,6 +179,8 @@ export function LevelIToolkitClient() {
             ))}
           </div>
         </section>
+
+        <LevelIAssessment />
       </div>
     </main>
   )
