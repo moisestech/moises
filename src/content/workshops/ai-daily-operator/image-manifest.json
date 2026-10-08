@@ -31,7 +31,7 @@
   "assets": [
     {
       "source": null,
-      "targetFilename": "operator-core.webp",
+      "targetFilename": "operator-core.png",
       "status": "canonical",
       "section": "00-core/hero",
       "assetId": "ADO-CORE-HERO-001",
@@ -40,15 +40,22 @@
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/hero",
         "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/hero/operator-core",
-        "uploadStatus": "pending-source-reconciliation",
-        "version": null,
-        "secureUrl": null,
-        "width": null,
-        "height": null,
-        "format": null
+        "uploadStatus": "uploaded",
+        "version": 1791490573,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791490573/moisestech/workshops/build-your-ai-daily-operator/00-core/hero/operator-core.png",
+        "width": 1536,
+        "height": 1024,
+        "format": "png",
+        "asset_id": "0dcef944c4e2e5e79cd43c07c947d639"
       },
-      "usedOn": [],
-      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+      "usedOn": [
+        "program-page",
+        "workshop-catalog",
+        "og-social",
+        "lms",
+        "slides"
+      ],
+      "notes": "Canonical Operator Core selected and uploaded. Source image is generated conceptual imagery, not documentary evidence."
     },
     {
       "source": null,
@@ -1184,6 +1191,48 @@
         "level-i"
       ],
       "notes": "Level I end-to-end demo. Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": "a_clean_high_end_3d_render_conceptual_illustrati.png",
+      "targetFilename": "operator-core-radial-01.png",
+      "status": "exploration",
+      "section": "90-drafts-archive/exploration",
+      "assetId": "ADO-CORE-HERO-EXP-001",
+      "role": "hero",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/exploration",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/exploration/operator-core-radial-01",
+        "uploadStatus": "uploaded",
+        "version": null,
+        "secureUrl": null,
+        "width": 1536,
+        "height": 1024,
+        "format": "png"
+      },
+      "usedOn": [],
+      "notes": "Archived exploration. Radial composition is less legible as scarce-attention filtering than the selected canonical Operator Core."
+    },
+    {
+      "source": "futuristic_signal_filtering_core.png",
+      "targetFilename": "operator-core-filtering-study-01.png",
+      "status": "exploration",
+      "section": "90-drafts-archive/exploration",
+      "assetId": "ADO-CORE-HERO-EXP-002",
+      "role": "hero",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/exploration",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/exploration/operator-core-filtering-study-01",
+        "uploadStatus": "uploaded",
+        "version": null,
+        "secureUrl": null,
+        "width": 1536,
+        "height": 1024,
+        "format": "png"
+      },
+      "usedOn": [],
+      "notes": "Archived earlier filtering study. Useful R&D, not public."
     }
   ]
 }
