@@ -1,0 +1,167 @@
+{
+  "workshop": "build-your-ai-daily-operator",
+  "canonicalRoot": "moisestech/workshops/build-your-ai-daily-operator",
+  "legacyRoot": "dccmiami/workshops/ai-daily-operator",
+  "rule": "This file records namespace migration only. It does not authorize deletion of legacy assets.",
+  "migrated": [
+    {
+      "concept": "permission-map",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/source-access/permission-map",
+        "version": 1791429428,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429428/moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/source-access/permission-map.png",
+        "width": 1448,
+        "height": 1086,
+        "format": "png",
+        "assetId": "77a6faa1f92fd762c8c28b2141e04257"
+      }
+    },
+    {
+      "concept": "friction-retrieval",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/retrieval/friction-retrieval",
+        "version": 1791429367,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429367/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/retrieval/friction-retrieval.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "37c5e0826fac33d70a4c3f8db830b4f3"
+      }
+    },
+    {
+      "concept": "friction-reconciliation",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/reconciliation/friction-reconciliation",
+        "version": 1791429371,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429371/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/reconciliation/friction-reconciliation.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "d50f8e79b53c4283d47ce58ce2eca544"
+      }
+    },
+    {
+      "concept": "friction-memory",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/memory/friction-memory",
+        "version": 1791429375,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429375/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/memory/friction-memory.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "30c9941dbb603e36731bc09f592c19bd"
+      }
+    },
+    {
+      "concept": "friction-transfer",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/transfer/friction-transfer",
+        "version": 1791429378,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429378/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/transfer/friction-transfer.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "48859fc17bdfdb88365fba3406ae0299"
+      }
+    },
+    {
+      "concept": "friction-decision",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/decision/friction-decision",
+        "version": 1791429382,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429382/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/decision/friction-decision.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "5a03433d06d9a230529f450052cd8c91"
+      }
+    },
+    {
+      "concept": "friction-approval",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/approval/friction-approval",
+        "version": 1791429386,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429386/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/approval/friction-approval.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "6ae19ec4397879754b4f8934fff28e20"
+      }
+    },
+    {
+      "concept": "friction-communication",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/communication/friction-communication",
+        "version": 1791429390,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429390/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/communication/friction-communication.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "4198792698d897525129497aa189e75c"
+      }
+    },
+    {
+      "concept": "impact-frequency-ease-risk",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/automation-selection/impact-frequency-ease-risk",
+        "version": 1791429393,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429393/moisestech/workshops/build-your-ai-daily-operator/05-operating-system/automation-selection/impact-frequency-ease-risk.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "assetId": "aaadf87ff4166ab386e73f598ccaf669"
+      }
+    },
+    {
+      "concept": "workflow-blueprint",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/workflow-blueprint/workflow-blueprint",
+        "version": 1791429397,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429397/moisestech/workshops/build-your-ai-daily-operator/05-operating-system/workflow-blueprint/workflow-blueprint.png",
+        "width": 1448,
+        "height": 1086,
+        "format": "png",
+        "assetId": "d72d5cd012a214a6026bb8317b78b9fb"
+      }
+    },
+    {
+      "concept": "weekly-operating-review",
+      "to": {
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/weekly-review/weekly-operating-review",
+        "version": 1791429401,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429401/moisestech/workshops/build-your-ai-daily-operator/05-operating-system/weekly-review/weekly-operating-review.png",
+        "width": 1536,
+        "height": 1024,
+        "format": "png",
+        "assetId": "ad69e54c8a223d812adf1ed176adac39"
+      }
+    }
+  ],
+  "pending": [
+    "operator-core",
+    "attention-flywheel",
+    "business-signal-set",
+    "commitments",
+    "revenue-mission",
+    "risk",
+    "capacity",
+    "goal-attention-funnel",
+    "fragmented-attention",
+    "fact-interpretation-recommendation",
+    "founder-profile",
+    "daily-operating-brief",
+    "calendar-capacity",
+    "source-of-truth",
+    "business-pulse",
+    "friction-overview",
+    "human-approval-gate",
+    "90-day-improvement-roadmap",
+    "seven-day-experiment"
+  ],
+  "deliberatelyNotMigrated": [
+    "industry overlays — remain exploration until template approval",
+    "DCC operating case — must become real/sanitized documentary evidence",
+    "tool screenshots — must be manually captured from current real interfaces",
+    "vendor logos — use current official brand assets only"
+  ]
+}
