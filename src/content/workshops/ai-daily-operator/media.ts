@@ -91,12 +91,19 @@ export const DAILY_OPERATOR_MEDIA = {
         usage: ['web', 'lms', 'slides'],
       },
     ),
-    operatorCore: asset('00-core/hero', 'ado-core-operator-core', {
+    operatorCore: asset('00-core/hero', 'operator-core', {
       concept: 'operator-core',
       role: 'hero',
-      status: 'generated-local',
-      alt: 'A central operator core receiving multiple business signals and producing one prioritized output.',
-      usage: ['web', 'lms', 'slides'],
+      status: 'approved',
+      delivery: 'cloudinary',
+      publicIdOverride:
+        'moisestech/workshops/build-your-ai-daily-operator/00-core/hero/operator-core',
+      folderOverride:
+        'moisestech/workshops/build-your-ai-daily-operator/00-core/hero',
+      width: 1536,
+      height: 1024,
+      alt: 'A finite amber attention core filters many business signals into a smaller set of prioritized actions.',
+      usage: ['web', 'lms', 'slides', 'social'],
     }),
     signalSet: asset('00-core/signal-library', 'ado-core-signal-set', {
       concept: 'business-signal-set',
