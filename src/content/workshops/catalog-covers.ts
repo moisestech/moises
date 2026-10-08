@@ -52,6 +52,10 @@ export const WORKSHOP_TRACK_VISUAL: Record<
  * Primary cover per catalog slug. Prefer exact filename matches; otherwise nearest thematic still.
  */
 export const WORKSHOP_CATALOG_COVERS: Record<string, { src: string; alt: string }> = {
+  'build-your-ai-daily-operator': {
+    src: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791490573/moisestech/workshops/build-your-ai-daily-operator/00-core/hero/operator-core.png',
+    alt: 'Founder Attention OS Operator Core filtering many business signals into a smaller set of prioritized actions.',
+  },
   'moonlighter-ai-3d-printing': {
     src: LANDING_MEDIA_CDN['hero-pipeline'],
     alt: 'AI-assisted 3D printing workshop — pipeline from image to print',
