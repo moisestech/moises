@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import { WorkshopMediaFigure } from '@/components/workshop/ai-daily-operator/WorkshopMediaFigure'
 import { WORKSHOP_HUB } from '@/constants/workshop-hub'
+import { DAILY_OPERATOR_MEDIA } from '@/content/workshops/ai-daily-operator/media'
 import {
   DAILY_OPERATOR_ARTIFACTS,
   DAILY_OPERATOR_CAPSTONE,
@@ -31,6 +33,16 @@ import {
 } from '@/content/workshops/ai-daily-operator/program'
 
 const hostMail = `mailto:${WORKSHOP_HUB.FOOTER.EMAIL}?subject=${encodeURIComponent('Level I — Build Your AI Daily Operator')}`
+
+const frictionMedia = [
+  ['Retrieval', DAILY_OPERATOR_MEDIA.modules.m08.retrieval],
+  ['Reconciliation', DAILY_OPERATOR_MEDIA.modules.m08.reconciliation],
+  ['Memory', DAILY_OPERATOR_MEDIA.modules.m08.memory],
+  ['Transfer', DAILY_OPERATOR_MEDIA.modules.m08.transfer],
+  ['Decision', DAILY_OPERATOR_MEDIA.modules.m08.decision],
+  ['Approval', DAILY_OPERATOR_MEDIA.modules.m08.approval],
+  ['Communication', DAILY_OPERATOR_MEDIA.modules.m08.communication],
+] as const
 
 export function ProgramClient() {
   return (
@@ -199,6 +211,29 @@ export function ProgramClient() {
           </ol>
         </section>
 
+        <section className="mt-28" aria-labelledby="source-access-heading">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
+            <div className="max-w-xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+                Level II · source authority
+              </p>
+              <h2 id="source-access-heading" className="mt-3 text-4xl tracking-tight">
+                Connected does not mean autonomous
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
+                A calendar can be authoritative about scheduled commitments without being authoritative about priority. Email can contain relationship context without permission to send. A connected system still needs explicit source and approval boundaries.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-[#3d3832]">
+                The Permission Map separates what a system may read, draft, recommend, or act on only after a person approves it.
+              </p>
+            </div>
+            <WorkshopMediaFigure
+              asset={DAILY_OPERATOR_MEDIA.modules.m06.permissionMap}
+              caption="Permission is graduated. Reading a source is different from drafting from it, recommending a change, or taking consequential action."
+            />
+          </div>
+        </section>
+
         <section className="mt-28" aria-labelledby="projects-heading">
           <div className="max-w-xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Five projects</p>
@@ -278,6 +313,60 @@ export function ProgramClient() {
               </span>
             </li>
           </ol>
+        </section>
+
+        <section className="mt-28" aria-labelledby="friction-media-heading">
+          <div className="max-w-xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+              Level IV · friction intelligence
+            </p>
+            <h2 id="friction-media-heading" className="mt-3 text-4xl tracking-tight">
+              Repeated manual work is evidence
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
+              The course names seven recurring forms of friction before deciding whether any of them deserves a workflow. The diagnosis comes first.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {frictionMedia.map(([label, asset]) => (
+              <div key={label}>
+                <WorkshopMediaFigure asset={asset} />
+                <p className="mt-3 text-lg tracking-tight">{label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-28" aria-labelledby="governed-system-heading">
+          <div className="max-w-xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+              Level V · from friction to system
+            </p>
+            <h2 id="governed-system-heading" className="mt-3 text-4xl tracking-tight">
+              Automate only what earns it
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
+              Impact, frequency, ease, and risk decide whether a friction should stay manual, be simplified, delegated, assisted, connected, or automated. When a workflow is justified, consequential action remains governed.
+            </p>
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-[#0f5f5c]">
+              Recommend → Explain → Ask → Act
+            </p>
+          </div>
+          <div className="mt-10 grid gap-10 lg:grid-cols-2">
+            <WorkshopMediaFigure
+              asset={DAILY_OPERATOR_MEDIA.modules.m09.frictionScore}
+              caption="Automation selection: judge the friction before choosing a system."
+            />
+            <WorkshopMediaFigure
+              asset={DAILY_OPERATOR_MEDIA.modules.m10.workflowBlueprint}
+              caption="A governed workflow separates context and reasoning from approval, action, and the durable record."
+            />
+          </div>
+          <WorkshopMediaFigure
+            asset={DAILY_OPERATOR_MEDIA.modules.m12.weeklyReview}
+            caption="The weekly review closes the loop: what moved, what stalled, what repeated, and what one improvement deserves attention next."
+            className="mt-10 max-w-4xl"
+          />
         </section>
 
         <section className="mt-28" aria-labelledby="artifacts-heading">
@@ -543,7 +632,7 @@ export function ProgramClient() {
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Next</p>
             <h2 className="text-4xl tracking-tight">Ask for Level I</h2>
             <p className="text-base leading-relaxed text-[#3d3832]">
-              Moises Sanabria. {DAILY_OPERATOR_METHOD}. DCC Miami is the documented operating case. The next step is a 90-minute session, not a checkout.
+              Moises Sanabria. {DAILY_OPERATOR_METHOD}. DCC Miami is used as a sanitized operating example while documentary evidence is still being assembled. The next step is a 90-minute session, not a checkout.
             </p>
             <a href={hostMail} className="inline-block border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]">
               {WORKSHOP_HUB.FOOTER.EMAIL}
