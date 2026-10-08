@@ -59,24 +59,30 @@
     },
     {
       "source": null,
-      "targetFilename": "attention-flywheel.webp",
+      "targetFilename": "attention-flywheel.svg",
       "status": "canonical",
       "section": "00-core/attention-flywheel",
       "assetId": "ADO-CORE-ATTENTION-001",
       "role": "diagram",
-      "generatedVsReal": "generated",
+      "generatedVsReal": "deterministic",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/attention-flywheel",
         "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/attention-flywheel/attention-flywheel",
-        "uploadStatus": "pending-source-reconciliation",
-        "version": null,
-        "secureUrl": null,
-        "width": null,
-        "height": null,
-        "format": null
+        "uploadStatus": "uploaded",
+        "version": 1791491441,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791491441/moisestech/workshops/build-your-ai-daily-operator/00-core/attention-flywheel/attention-flywheel.svg",
+        "width": 1600,
+        "height": 1000,
+        "format": "svg",
+        "asset_id": "fe50c20aab0a15c9fe9eb5a78c51ab11"
       },
-      "usedOn": [],
-      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+      "usedOn": [
+        "program-page",
+        "level-i",
+        "slides",
+        "social"
+      ],
+      "notes": "Canonical deterministic SVG. Exact loop: Goals → Signals → Judgment → Attention → Action → Review → System Improvement → Goals."
     },
     {
       "source": null,
@@ -594,24 +600,29 @@
     },
     {
       "source": null,
-      "targetFilename": "human-approval-gate.webp",
+      "targetFilename": "human-approval-gate.svg",
       "status": "canonical",
       "section": "05-operating-system/human-approval",
       "assetId": "ADO-L5-APPROVAL-GATE-001",
       "role": "diagram",
-      "generatedVsReal": "generated",
+      "generatedVsReal": "deterministic",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/human-approval",
         "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/human-approval/human-approval-gate",
-        "uploadStatus": "pending-source-reconciliation",
-        "version": null,
-        "secureUrl": null,
-        "width": null,
-        "height": null,
-        "format": null
+        "uploadStatus": "uploaded",
+        "version": 1791491487,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791491487/moisestech/workshops/build-your-ai-daily-operator/05-operating-system/human-approval/human-approval-gate.svg",
+        "width": 1600,
+        "height": 1000,
+        "format": "svg",
+        "asset_id": "72c1b7937dd8f3dd973fd446b3aa3ed2"
       },
-      "usedOn": [],
-      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+      "usedOn": [
+        "program-page",
+        "level-v",
+        "slides"
+      ],
+      "notes": "Canonical deterministic SVG showing Recommend → Explain → Ask → Act, with explicit revise/stop paths before consequential action."
     },
     {
       "source": "dccmiami/workshops/ai-daily-operator/05-workflow-builder/m12-weekly-operator-review/ado-m12-weekly-operating-review",
@@ -1233,6 +1244,111 @@
       },
       "usedOn": [],
       "notes": "Archived earlier filtering study. Useful R&D, not public."
+    },
+    {
+      "source": "ai_daily_operator_01_hero.png",
+      "targetFilename": "legacy-marketing-hero.png",
+      "status": "reference",
+      "section": "90-drafts-archive/reference",
+      "assetId": "ADO-REF-MARKETING-HERO-001",
+      "role": "marketing",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference/legacy-marketing-hero",
+        "uploadStatus": "uploaded",
+        "version": null,
+        "secureUrl": null,
+        "width": 1536,
+        "height": 1024,
+        "format": "png"
+      },
+      "usedOn": [],
+      "notes": "Reference only. Contains baked copy and fake UI; never use as documentary or current product UI."
+    },
+    {
+      "source": "ai_daily_operator_02_fragmented_attention.png",
+      "targetFilename": "fragmented-attention-marketing-study.png",
+      "status": "reference",
+      "section": "90-drafts-archive/reference",
+      "assetId": "ADO-REF-FRAGMENTED-001",
+      "role": "marketing",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference/fragmented-attention-marketing-study",
+        "uploadStatus": "uploaded",
+        "version": null,
+        "secureUrl": null,
+        "width": 1536,
+        "height": 1024,
+        "format": "png"
+      },
+      "usedOn": [],
+      "notes": "Reference only. Useful messaging study; contains staged scene and baked copy."
+    },
+    {
+      "source": "ai_daily_operator_03_founder_attention_os.png",
+      "targetFilename": "founder-attention-os-linear-study.png",
+      "status": "reference",
+      "section": "90-drafts-archive/reference",
+      "assetId": "ADO-REF-FOUNDER-OS-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference/founder-attention-os-linear-study",
+        "uploadStatus": "uploaded",
+        "version": null,
+        "secureUrl": null,
+        "width": 1536,
+        "height": 1024,
+        "format": "png"
+      },
+      "usedOn": [],
+      "notes": "Reference only. Older linear model with baked copy; superseded by the canonical seven-stage Attention Flywheel."
+    },
+    {
+      "source": "ai_daily_operator_04_daily_operating_brief.png",
+      "targetFilename": "daily-operating-brief-marketing-study.png",
+      "status": "reference",
+      "section": "90-drafts-archive/reference",
+      "assetId": "ADO-REF-DAILY-BRIEF-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/reference/daily-operating-brief-marketing-study",
+        "uploadStatus": "uploaded",
+        "version": null,
+        "secureUrl": null,
+        "width": 1536,
+        "height": 1024,
+        "format": "png"
+      },
+      "usedOn": [],
+      "notes": "Reference only. Fake UI with baked copy; production brief must be rendered from the real artifact component."
+    },
+    {
+      "source": "neon_glass_attention_flywheel.png",
+      "targetFilename": "attention-flywheel-glass-exploration.png",
+      "status": "exploration",
+      "section": "90-drafts-archive/exploration",
+      "assetId": "ADO-CORE-ATTENTION-EXP-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/exploration",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/90-drafts-archive/exploration/attention-flywheel-glass-exploration",
+        "uploadStatus": "uploaded",
+        "version": null,
+        "secureUrl": null,
+        "width": 1600,
+        "height": 1200,
+        "format": "png"
+      },
+      "usedOn": [],
+      "notes": "Exploration only. Visually useful but does not encode the exact seven-stage operating loop."
     }
   ]
 }
