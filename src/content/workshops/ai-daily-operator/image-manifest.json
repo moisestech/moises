@@ -275,24 +275,31 @@
     },
     {
       "source": null,
-      "targetFilename": "daily-operating-brief.webp",
+      "targetFilename": "daily-operating-brief.svg",
       "status": "canonical",
       "section": "01-daily-operator/daily-brief",
       "assetId": "ADO-L1-DAILY-BRIEF-001",
       "role": "artifact",
-      "generatedVsReal": "generated",
+      "generatedVsReal": "deterministic",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/daily-brief",
         "publicId": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/daily-brief/daily-operating-brief",
-        "uploadStatus": "pending-source-reconciliation",
-        "version": null,
-        "secureUrl": null,
-        "width": null,
-        "height": null,
-        "format": null
+        "uploadStatus": "uploaded",
+        "version": 1791492348,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791492348/moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/daily-brief/daily-operating-brief.svg",
+        "width": 1600,
+        "height": 1200,
+        "format": "svg",
+        "asset_id": "7019036e5f326217537312b1f6a0e94a"
       },
-      "usedOn": [],
-      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+      "usedOn": [
+        "program-page",
+        "level-i",
+        "lms",
+        "slides",
+        "social"
+      ],
+      "notes": "Canonical deterministic artifact preview built from the actual Daily Operating Brief structure and the fictional Northstar Studio Co. fallback case. Not product UI."
     },
     {
       "source": null,
@@ -381,24 +388,30 @@
     },
     {
       "source": null,
-      "targetFilename": "friction-overview.webp",
+      "targetFilename": "friction-overview.svg",
       "status": "canonical",
       "section": "04-friction-intelligence/overview",
       "assetId": "ADO-L4-FRICTION-OVERVIEW-001",
       "role": "diagram",
-      "generatedVsReal": "generated",
+      "generatedVsReal": "deterministic",
       "cloudinary": {
         "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/overview",
         "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/overview/friction-overview",
-        "uploadStatus": "pending-source-reconciliation",
-        "version": null,
-        "secureUrl": null,
-        "width": null,
-        "height": null,
-        "format": null
+        "uploadStatus": "uploaded",
+        "version": 1791492358,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791492358/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/overview/friction-overview.svg",
+        "width": 1600,
+        "height": 1100,
+        "format": "svg",
+        "asset_id": "f2eefdfcd97e874ac1891f4aea932506"
       },
-      "usedOn": [],
-      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+      "usedOn": [
+        "level-iv",
+        "lms",
+        "slides",
+        "social"
+      ],
+      "notes": "Canonical taxonomy overview. The live program page additionally renders the seven detailed canonical friction objects."
     },
     {
       "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-retrieval",
