@@ -1,0 +1,913 @@
+{
+  "workshop": {
+    "slug": "build-your-ai-daily-operator",
+    "title": "Build Your AI Daily Operator",
+    "method": "Founder Attention OS",
+    "repository": "moisestech/moises",
+    "branch": "cursor/ai-daily-operator"
+  },
+  "manifestVersion": 1,
+  "lastAudited": "2026-10-07",
+  "canonicalCloudinaryRoot": "moisestech/workshops/build-your-ai-daily-operator",
+  "legacySourceRoot": "dccmiami/workshops/ai-daily-operator",
+  "inventoryScope": {
+    "includes": "All assets currently represented by the typed media registry, verified Cloudinary assets, and minimum planned real-tool captures.",
+    "excludes": "Unindexed historical R&D images from older chat/image-generation sessions whose binaries or stable identifiers are not currently available.",
+    "rule": "Do not claim this manifest is exhaustive until historical source binaries are reconciled. Add newly recovered exploration/reference/rejected assets here before publishing or deleting them."
+  },
+  "allowedStatuses": [
+    "canonical",
+    "supporting",
+    "reference",
+    "exploration",
+    "rejected",
+    "real-documentation"
+  ],
+  "migrationPolicy": {
+    "legacyAssets": "Leave dccmiami assets untouched until the new Moises.tech page is verified.",
+    "canonicalRule": "Only uploaded assets with real returned metadata may be referenced by the public site.",
+    "generatedVsReal": "Generated visual explanation is allowed; generated imagery may not impersonate real product UI, participant evidence, workshop evidence, or business results."
+  },
+  "assets": [
+    {
+      "source": null,
+      "targetFilename": "operator-core.webp",
+      "status": "canonical",
+      "section": "00-core/hero",
+      "assetId": "ADO-CORE-HERO-001",
+      "role": "hero",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/hero",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/hero/operator-core",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "attention-flywheel.webp",
+      "status": "canonical",
+      "section": "00-core/attention-flywheel",
+      "assetId": "ADO-CORE-ATTENTION-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/attention-flywheel",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/attention-flywheel/attention-flywheel",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "business-signal-set.webp",
+      "status": "supporting",
+      "section": "00-core/signal-library",
+      "assetId": "ADO-CORE-SIGNALS-001",
+      "role": "signal",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/signal-library",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/signal-library/business-signal-set",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "commitments.webp",
+      "status": "supporting",
+      "section": "00-core/judgment-lenses",
+      "assetId": "ADO-LENS-COMMITMENTS-001",
+      "role": "lens",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses/commitments",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "revenue-mission.webp",
+      "status": "supporting",
+      "section": "00-core/judgment-lenses",
+      "assetId": "ADO-LENS-REVENUE-MISSION-001",
+      "role": "lens",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses/revenue-mission",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "risk.webp",
+      "status": "supporting",
+      "section": "00-core/judgment-lenses",
+      "assetId": "ADO-LENS-RISK-001",
+      "role": "lens",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses/risk",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "capacity.webp",
+      "status": "supporting",
+      "section": "00-core/judgment-lenses",
+      "assetId": "ADO-LENS-CAPACITY-001",
+      "role": "lens",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/00-core/judgment-lenses/capacity",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "goal-attention-funnel.webp",
+      "status": "supporting",
+      "section": "01-daily-operator/attention",
+      "assetId": "ADO-L1-ATTENTION-FUNNEL-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/attention",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/attention/goal-attention-funnel",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "fragmented-attention.webp",
+      "status": "supporting",
+      "section": "01-daily-operator/attention",
+      "assetId": "ADO-L1-FRAGMENTED-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/attention",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/attention/fragmented-attention",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "fact-interpretation-recommendation.webp",
+      "status": "supporting",
+      "section": "01-daily-operator/ai-fluency",
+      "assetId": "ADO-L1-FIR-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/ai-fluency",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/ai-fluency/fact-interpretation-recommendation",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "founder-profile.webp",
+      "status": "supporting",
+      "section": "01-daily-operator/founder-profile",
+      "assetId": "ADO-L1-FOUNDER-PROFILE-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/founder-profile",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/founder-profile/founder-profile",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "daily-operating-brief.webp",
+      "status": "canonical",
+      "section": "01-daily-operator/daily-brief",
+      "assetId": "ADO-L1-DAILY-BRIEF-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/daily-brief",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/daily-brief/daily-operating-brief",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "calendar-capacity.webp",
+      "status": "supporting",
+      "section": "02-connected-operator/calendar-capacity",
+      "assetId": "ADO-L2-CALENDAR-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/calendar-capacity",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/calendar-capacity/calendar-capacity",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "source-of-truth.webp",
+      "status": "supporting",
+      "section": "02-connected-operator/sources",
+      "assetId": "ADO-L2-SOURCE-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/sources",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/sources/source-of-truth",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/02-connected-operator/m06-signals-and-sources/ado-m06-permission-map",
+      "targetFilename": "permission-map.png",
+      "status": "canonical",
+      "section": "02-connected-operator/source-access",
+      "assetId": "ADO-L2-PERMISSION-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/source-access",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/source-access/permission-map",
+        "uploadStatus": "uploaded",
+        "version": 1791429428,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429428/moisestech/workshops/build-your-ai-daily-operator/02-connected-operator/source-access/permission-map.png",
+        "width": 1448,
+        "height": 1086,
+        "format": "png",
+        "asset_id": "77a6faa1f92fd762c8c28b2141e04257"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": null,
+      "targetFilename": "business-pulse.webp",
+      "status": "supporting",
+      "section": "03-business-pulse",
+      "assetId": "ADO-L3-PULSE-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/03-business-pulse",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/03-business-pulse/business-pulse",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "friction-overview.webp",
+      "status": "canonical",
+      "section": "04-friction-intelligence/overview",
+      "assetId": "ADO-L4-FRICTION-OVERVIEW-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/overview",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/overview/friction-overview",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-retrieval",
+      "targetFilename": "friction-retrieval.png",
+      "status": "canonical",
+      "section": "04-friction-intelligence/retrieval",
+      "assetId": "ADO-L4-RETRIEVAL-001",
+      "role": "object",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/retrieval",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/retrieval/friction-retrieval",
+        "uploadStatus": "uploaded",
+        "version": 1791429367,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429367/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/retrieval/friction-retrieval.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "37c5e0826fac33d70a4c3f8db830b4f3"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-reconciliation",
+      "targetFilename": "friction-reconciliation.png",
+      "status": "canonical",
+      "section": "04-friction-intelligence/reconciliation",
+      "assetId": "ADO-L4-RECONCILIATION-001",
+      "role": "object",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/reconciliation",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/reconciliation/friction-reconciliation",
+        "uploadStatus": "uploaded",
+        "version": 1791429371,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429371/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/reconciliation/friction-reconciliation.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "d50f8e79b53c4283d47ce58ce2eca544"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-memory",
+      "targetFilename": "friction-memory.png",
+      "status": "canonical",
+      "section": "04-friction-intelligence/memory",
+      "assetId": "ADO-L4-MEMORY-001",
+      "role": "object",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/memory",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/memory/friction-memory",
+        "uploadStatus": "uploaded",
+        "version": 1791429375,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429375/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/memory/friction-memory.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "30c9941dbb603e36731bc09f592c19bd"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-transfer",
+      "targetFilename": "friction-transfer.png",
+      "status": "canonical",
+      "section": "04-friction-intelligence/transfer",
+      "assetId": "ADO-L4-TRANSFER-001",
+      "role": "object",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/transfer",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/transfer/friction-transfer",
+        "uploadStatus": "uploaded",
+        "version": 1791429378,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429378/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/transfer/friction-transfer.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "48859fc17bdfdb88365fba3406ae0299"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-decision",
+      "targetFilename": "friction-decision.png",
+      "status": "canonical",
+      "section": "04-friction-intelligence/decision",
+      "assetId": "ADO-L4-DECISION-001",
+      "role": "object",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/decision",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/decision/friction-decision",
+        "uploadStatus": "uploaded",
+        "version": 1791429382,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429382/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/decision/friction-decision.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "5a03433d06d9a230529f450052cd8c91"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-approval",
+      "targetFilename": "friction-approval.png",
+      "status": "canonical",
+      "section": "04-friction-intelligence/approval",
+      "assetId": "ADO-L4-APPROVAL-001",
+      "role": "object",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/approval",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/approval/friction-approval",
+        "uploadStatus": "uploaded",
+        "version": 1791429386,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429386/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/approval/friction-approval.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "6ae19ec4397879754b4f8934fff28e20"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/04-friction-intelligence/m08-friction-intelligence/ado-m08-friction-communication",
+      "targetFilename": "friction-communication.png",
+      "status": "canonical",
+      "section": "04-friction-intelligence/communication",
+      "assetId": "ADO-L4-COMMUNICATION-001",
+      "role": "object",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/communication",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/communication/friction-communication",
+        "uploadStatus": "uploaded",
+        "version": 1791429390,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429390/moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/communication/friction-communication.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "4198792698d897525129497aa189e75c"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/05-workflow-builder/m09-automation-selection/ado-m09-impact-frequency-ease-risk",
+      "targetFilename": "impact-frequency-ease-risk.png",
+      "status": "canonical",
+      "section": "05-operating-system/automation-selection",
+      "assetId": "ADO-L5-SELECTION-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/automation-selection",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/automation-selection/impact-frequency-ease-risk",
+        "uploadStatus": "uploaded",
+        "version": 1791429393,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429393/moisestech/workshops/build-your-ai-daily-operator/05-operating-system/automation-selection/impact-frequency-ease-risk.png",
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "asset_id": "aaadf87ff4166ab386e73f598ccaf669"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/05-workflow-builder/m10-build-one-workflow/ado-m10-workflow-blueprint",
+      "targetFilename": "workflow-blueprint.png",
+      "status": "canonical",
+      "section": "05-operating-system/workflow-blueprint",
+      "assetId": "ADO-L5-WORKFLOW-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/workflow-blueprint",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/workflow-blueprint/workflow-blueprint",
+        "uploadStatus": "uploaded",
+        "version": 1791429397,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429397/moisestech/workshops/build-your-ai-daily-operator/05-operating-system/workflow-blueprint/workflow-blueprint.png",
+        "width": 1448,
+        "height": 1086,
+        "format": "png",
+        "asset_id": "d72d5cd012a214a6026bb8317b78b9fb"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": null,
+      "targetFilename": "human-approval-gate.webp",
+      "status": "canonical",
+      "section": "05-operating-system/human-approval",
+      "assetId": "ADO-L5-APPROVAL-GATE-001",
+      "role": "diagram",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/human-approval",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/human-approval/human-approval-gate",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": "dccmiami/workshops/ai-daily-operator/05-workflow-builder/m12-weekly-operator-review/ado-m12-weekly-operating-review",
+      "targetFilename": "weekly-operating-review.png",
+      "status": "canonical",
+      "section": "05-operating-system/weekly-review",
+      "assetId": "ADO-L5-WEEKLY-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/weekly-review",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/weekly-review/weekly-operating-review",
+        "uploadStatus": "uploaded",
+        "version": 1791429401,
+        "secureUrl": "https://res.cloudinary.com/dck5rzi4h/image/upload/v1791429401/moisestech/workshops/build-your-ai-daily-operator/05-operating-system/weekly-review/weekly-operating-review.png",
+        "width": 1536,
+        "height": 1024,
+        "format": "png",
+        "asset_id": "ad69e54c8a223d812adf1ed176adac39"
+      },
+      "usedOn": [],
+      "notes": "Migrated from the DCC source namespace into the canonical Moises.tech namespace. Preserve the old DCC asset until the site migration is verified."
+    },
+    {
+      "source": null,
+      "targetFilename": "90-day-improvement-roadmap.webp",
+      "status": "supporting",
+      "section": "05-operating-system/90-day-roadmap",
+      "assetId": "ADO-L5-ROADMAP-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/90-day-roadmap",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/05-operating-system/90-day-roadmap/90-day-improvement-roadmap",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "seven-day-experiment.webp",
+      "status": "supporting",
+      "section": "06-capstone/seven-day-experiment",
+      "assetId": "ADO-CAPSTONE-7DAY-001",
+      "role": "artifact",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/06-capstone/seven-day-experiment",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/06-capstone/seven-day-experiment/seven-day-experiment",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Approved/intended concept exists in typed registry, but the source binary has not yet been reconciled into the canonical Moises.tech namespace."
+    },
+    {
+      "source": null,
+      "targetFilename": "creative-artist.webp",
+      "status": "exploration",
+      "section": "07-industry-overlays/creative-artist",
+      "assetId": "ADO-OVERLAY-CREATIVE-001",
+      "role": "industry-overlay",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/creative-artist",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/creative-artist/creative-artist",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Planned industry overlay. Do not generate or publish until the base visual template is approved."
+    },
+    {
+      "source": null,
+      "targetFilename": "consultant-agency.webp",
+      "status": "exploration",
+      "section": "07-industry-overlays/consultant-agency",
+      "assetId": "ADO-OVERLAY-CONSULTANT-001",
+      "role": "industry-overlay",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/consultant-agency",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/consultant-agency/consultant-agency",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Planned industry overlay. Do not generate or publish until the base visual template is approved."
+    },
+    {
+      "source": null,
+      "targetFilename": "local-service.webp",
+      "status": "exploration",
+      "section": "07-industry-overlays/local-service",
+      "assetId": "ADO-OVERLAY-LOCAL-SERVICE-001",
+      "role": "industry-overlay",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/local-service",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/local-service/local-service",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Planned industry overlay. Do not generate or publish until the base visual template is approved."
+    },
+    {
+      "source": null,
+      "targetFilename": "retail-hospitality.webp",
+      "status": "exploration",
+      "section": "07-industry-overlays/retail-hospitality",
+      "assetId": "ADO-OVERLAY-RETAIL-001",
+      "role": "industry-overlay",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/retail-hospitality",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/retail-hospitality/retail-hospitality",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Planned industry overlay. Do not generate or publish until the base visual template is approved."
+    },
+    {
+      "source": null,
+      "targetFilename": "nonprofit-cultural.webp",
+      "status": "exploration",
+      "section": "07-industry-overlays/nonprofit-cultural",
+      "assetId": "ADO-OVERLAY-NONPROFIT-001",
+      "role": "industry-overlay",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/nonprofit-cultural",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/nonprofit-cultural/nonprofit-cultural",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Planned industry overlay. Do not generate or publish until the base visual template is approved."
+    },
+    {
+      "source": null,
+      "targetFilename": "professional-services.webp",
+      "status": "exploration",
+      "section": "07-industry-overlays/professional-services",
+      "assetId": "ADO-OVERLAY-PRO-SERVICES-001",
+      "role": "industry-overlay",
+      "generatedVsReal": "generated",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/professional-services",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/07-industry-overlays/professional-services/professional-services",
+        "uploadStatus": "pending-source-reconciliation",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Planned industry overlay. Do not generate or publish until the base visual template is approved."
+    },
+    {
+      "source": null,
+      "targetFilename": "dcc-operating-case.webp",
+      "status": "real-documentation",
+      "section": "08-case-studies/dcc-miami",
+      "assetId": "ADO-CASE-DCC-001",
+      "role": "case-study",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/08-case-studies/dcc-miami",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/08-case-studies/dcc-miami/dcc-operating-case",
+        "uploadStatus": "awaiting-real-evidence",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [],
+      "notes": "Do not publish a generated image as proof of DCC operations. Build this from sanitized real screenshots/documents/captures after approval."
+    },
+    {
+      "source": null,
+      "targetFilename": "chatgpt-level-i-goal.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-GOAL-001",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/goal",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "chatgpt-level-i-daily-brief.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/chatgpt/level-i",
+      "assetId": "ADO-HOWTO-CHATGPT-L1-BRIEF-001",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/chatgpt/level-i/daily-brief",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-goal.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-GOAL-001",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/goal",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Capture the current real product UI. Never generate a fake interface."
+    },
+    {
+      "source": null,
+      "targetFilename": "claude-level-i-daily-brief.png",
+      "status": "real-documentation",
+      "section": "09-tool-guides/claude/level-i",
+      "assetId": "ADO-HOWTO-CLAUDE-L1-BRIEF-001",
+      "role": "tool-guide",
+      "generatedVsReal": "real-required",
+      "cloudinary": {
+        "assetFolder": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i",
+        "publicId": "moisestech/workshops/build-your-ai-daily-operator/09-tool-guides/claude/level-i/daily-brief",
+        "uploadStatus": "awaiting-manual-capture",
+        "version": null,
+        "secureUrl": null,
+        "width": null,
+        "height": null,
+        "format": null
+      },
+      "usedOn": [
+        "level-i"
+      ],
+      "notes": "Capture the current real product UI. Never generate a fake interface."
+    }
+  ]
+}
