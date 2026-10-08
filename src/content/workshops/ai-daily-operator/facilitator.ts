@@ -96,6 +96,23 @@ export const LEVEL_I_FACILITATOR = {
     'Use the synthetic fallback case for participant practice.',
   ],
   assessment: {
+    scenarioCheck: {
+      questions: 10,
+      passCount: 8,
+      passPercent: 80,
+      principle:
+        'Scenario-based. Test whether the participant can transfer the judgment method, not whether they remember product buttons.',
+    },
+    completionEvidence: [
+      'Founder Profile completed.',
+      'Attention Rules reviewed.',
+      'Daily Operator saved.',
+      'Daily Operating Brief run on a real or synthetic day.',
+      'At least one priority challenged.',
+      'Fact / Interpretation / Recommendation checked once.',
+      'One observed Friction Log note captured.',
+      'Competency check scored at least 8/10.',
+    ],
     pass: [
       'Can state the current business outcome.',
       'Can explain why priority #1 outranks #2.',
