@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { WorkshopMediaFigure } from '@/components/workshop/ai-daily-operator/WorkshopMediaFigure'
+import { ToolGuidePlaceholders } from '@/components/workshop/ai-daily-operator/ToolGuidePlaceholders'
 import { WORKSHOP_HUB } from '@/constants/workshop-hub'
 import { DAILY_OPERATOR_MEDIA } from '@/content/workshops/ai-daily-operator/media'
 import {
@@ -60,12 +61,12 @@ export function ProgramClient() {
               {DAILY_OPERATOR_STATUS}
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="#levels" className="border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]">
-                Read the five levels
-              </a>
-              <Link href="/workshop/build-your-ai-daily-operator/level-i" className="border border-[#1c1916] px-4 py-2.5 text-sm">
-                Open Level I toolkit
+              <Link href="/workshop/build-your-ai-daily-operator/level-i" className="border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]">
+                Start with Level I
               </Link>
+              <a href="#levels" className="border border-[#1c1916] px-4 py-2.5 text-sm">
+                See the five-level path
+              </a>
               <a href={hostMail} className="border border-[#1c1916] px-4 py-2.5 text-sm">
                 Ask to host Level I
               </a>
@@ -102,6 +103,62 @@ export function ProgramClient() {
             </div>
           </div>
         </header>
+
+        <section id="level-i-first" className="mt-28" aria-labelledby="level-i-first-heading">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
+            <div className="max-w-xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+                Start here · Level I
+              </p>
+              <h2 id="level-i-first-heading" className="mt-3 text-4xl tracking-tight">
+                Build the first useful version in 90 minutes
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
+                No integrations are required. Start with one 30-day outcome, make the business legible enough to prioritize a real day, then challenge the ranking instead of accepting a fluent answer.
+              </p>
+              <ul className="mt-7 space-y-3 text-sm leading-relaxed text-[#3d3832]">
+                <li>Founder Profile</li>
+                <li>Attention Rules</li>
+                <li>Portable Daily Operator</li>
+                <li>Daily Operating Brief</li>
+                <li>One observed friction + seven-day experiment</li>
+                <li>Scenario-based competency check</li>
+              </ul>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="/workshop/build-your-ai-daily-operator/level-i"
+                  className="border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]"
+                >
+                  Open Level I toolkit
+                </Link>
+                <a href={hostMail} className="border border-[#1c1916] px-4 py-2.5 text-sm">
+                  Host Level I
+                </a>
+              </div>
+            </div>
+            <WorkshopMediaFigure
+              asset={DAILY_OPERATOR_MEDIA.modules.m04.dailyOperatingBrief}
+              caption="A deterministic preview of the artifact participants build. The actual worksheet remains editable in the Level I toolkit."
+            />
+          </div>
+
+          <div className="mt-14 border-t border-[#d9d0c3] pt-8">
+            <div className="max-w-2xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+                Real walkthroughs
+              </p>
+              <h3 className="mt-3 text-2xl tracking-tight">
+                The teaching slots are ready; current product UI comes next
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">
+                ChatGPT and Claude follow the same method. These placeholders reserve the exact documentation layer that will be replaced by current real screenshots and short demos after the final participant run.
+              </p>
+            </div>
+            <div className="mt-6">
+              <ToolGuidePlaceholders level="I" mode="compact" />
+            </div>
+          </div>
+        </section>
 
         <section className="mt-28 grid gap-16 lg:grid-cols-2" aria-labelledby="territory-heading">
           <div>
