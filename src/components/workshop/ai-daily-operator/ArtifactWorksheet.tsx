@@ -96,6 +96,7 @@ export function ArtifactWorksheet({
   useEffect(() => {
     try {
       window.localStorage.setItem(storageKey(artifact), JSON.stringify(answers))
+      window.dispatchEvent(new Event('ai-daily-operator:progress-update'))
     } catch {
       // The worksheet remains usable without local persistence.
     }
