@@ -215,14 +215,21 @@ export const DAILY_OPERATOR_MEDIA = {
 
     m04: {
       dailyOperatingBrief: asset(
-        '01-daily-operator/m04-daily-operator',
-        'ado-m04-daily-operating-brief',
+        '01-daily-operator/daily-brief',
+        'daily-operating-brief',
         {
           concept: 'daily-operating-brief',
           role: 'artifact',
-          status: 'generated-local',
-          alt: 'A Daily Operating Brief organized around outcome, needs you, money, focus, and what can wait.',
-          usage: ['web', 'lms', 'slides'],
+          status: 'approved',
+          delivery: 'cloudinary',
+          publicIdOverride:
+            'moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/daily-brief/daily-operating-brief',
+          folderOverride:
+            'moisestech/workshops/build-your-ai-daily-operator/01-daily-operator/daily-brief',
+          width: 1600,
+          height: 1200,
+          alt: 'A Daily Operating Brief organized around outcome, commitments, top priorities, meaningful signals, focus, and what can wait.',
+          usage: ['web', 'lms', 'slides', 'social'],
         },
       ),
     },
@@ -287,14 +294,21 @@ export const DAILY_OPERATOR_MEDIA = {
 
     m08: {
       frictionOverview: asset(
-        '04-friction-intelligence/m08-friction-intelligence',
-        'ado-m08-friction-overview',
+        '04-friction-intelligence/overview',
+        'friction-overview',
         {
           concept: 'friction-overview',
           role: 'diagram',
-          status: 'generated-local',
-          alt: 'A visible bottleneck created by repeated manual retrieval, transfer, and coordination.',
-          usage: ['web', 'lms', 'slides'],
+          status: 'approved',
+          delivery: 'cloudinary',
+          publicIdOverride:
+            'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/overview/friction-overview',
+          folderOverride:
+            'moisestech/workshops/build-your-ai-daily-operator/04-friction-intelligence/overview',
+          width: 1600,
+          height: 1100,
+          alt: 'Seven recurring forms of business friction surrounding finite founder attention: retrieval, reconciliation, memory, transfer, decision, approval, and communication.',
+          usage: ['web', 'lms', 'slides', 'social'],
         },
       ),
       retrieval: asset(
