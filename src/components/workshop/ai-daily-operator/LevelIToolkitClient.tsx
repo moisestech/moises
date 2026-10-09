@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import { ArtifactWorksheet } from '@/components/workshop/ai-daily-operator/ArtifactWorksheet'
 import { LevelIAssessment } from '@/components/workshop/ai-daily-operator/LevelIAssessment'
+import { LevelICompletionSummary } from '@/components/workshop/ai-daily-operator/LevelICompletionSummary'
+import { LevelIFeedback } from '@/components/workshop/ai-daily-operator/LevelIFeedback'
+import { ToolGuidePlaceholders } from '@/components/workshop/ai-daily-operator/ToolGuidePlaceholders'
 import { LEVEL_I_ARTIFACTS } from '@/content/workshops/ai-daily-operator/artifacts'
 import {
   LEVEL_I_OPENING,
@@ -33,6 +36,9 @@ export function LevelIToolkitClient() {
             </a>
             <a href="#assessment" className="border border-[#d9d0c3] px-4 py-2.5 text-sm">
               Competency check
+            </a>
+            <a href="#completion" className="border border-[#d9d0c3] px-4 py-2.5 text-sm">
+              Completion state
             </a>
             <Link href="/workshop/build-your-ai-daily-operator" className="border border-[#d9d0c3] px-4 py-2.5 text-sm">
               Program overview
@@ -108,6 +114,21 @@ export function LevelIToolkitClient() {
           </ul>
         </section>
 
+        <section className="pt-20" aria-labelledby="walkthrough-media-heading">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+            Real product walkthroughs
+          </p>
+          <h2 id="walkthrough-media-heading" className="mt-3 text-3xl tracking-tight">
+            The capture plan is ready; the real UI comes next
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#3d3832]">
+            These slots are intentionally placeholders. They will be replaced with current ChatGPT and Claude screenshots and short recordings after the final participant run. No generated interface is used as evidence.
+          </p>
+          <div className="mt-8">
+            <ToolGuidePlaceholders level="I" />
+          </div>
+        </section>
+
         <section id="walkthrough" className="scroll-mt-28 pt-20" aria-labelledby="walkthrough-heading">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Live exercise</p>
           <h2 id="walkthrough-heading" className="mt-3 text-4xl tracking-tight">
@@ -181,6 +202,8 @@ export function LevelIToolkitClient() {
         </section>
 
         <LevelIAssessment />
+        <LevelICompletionSummary />
+        <LevelIFeedback />
       </div>
     </main>
   )
