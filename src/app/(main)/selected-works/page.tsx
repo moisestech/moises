@@ -22,7 +22,7 @@ export default function SelectedWorksPage() {
             partners.
           </p>
         </div>
-        <ArtworkGrid slugs={SELECTED_WORK_SLUGS} />
+        <ArtworkGrid slugs={SELECTED_WORK_SLUGS} imageSkeleton />
       </div>
     </main>
   );

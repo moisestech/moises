@@ -18,7 +18,7 @@ export default function EarlyWorksCollection() {
         </div>
       </div>
       
-      <ArtworkGrid minYear={2010} maxYear={2014} />
+      <ArtworkGrid minYear={2010} maxYear={2014} imageSkeleton />
     </main>
   );
 } 

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
 import { cvData } from '@/constants/cv';
 import { moisesSanabriaHeadshot } from '@/content/evidence/recruitingLogoBand';
 import { motion, Variants } from 'framer-motion';
@@ -202,7 +202,7 @@ const CvClientPage = ({
               className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 print:w-20 print:h-20"
               title="Download headshot (opens full resolution)"
             >
-              <Image
+              <ImageWithSkeleton
                 src={moisesSanabriaHeadshot}
                 alt="Moises Sanabria — professional headshot"
                 fill
