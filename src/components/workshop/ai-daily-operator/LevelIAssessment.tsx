@@ -37,6 +37,7 @@ export function LevelIAssessment() {
     try {
       const stored: StoredAssessment = { answers, submitted }
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
+      window.dispatchEvent(new Event('ai-daily-operator:progress-update'))
     } catch {
       // Assessment remains usable without local persistence.
     }
