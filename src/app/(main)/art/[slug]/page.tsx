@@ -112,7 +112,9 @@ export default async function ArtPage({ params }: PageProps) {
 
       {artwork.video &&
       params.slug !== 'simulation_faith' &&
-      (artwork.video.type === 'youtube' || artwork.video.type === 'vimeo') ? (
+      (artwork.video.type === 'youtube' ||
+        artwork.video.type === 'vimeo' ||
+        artwork.video.type === 'file') ? (
         <div className="max-w-7xl mx-auto px-8 pt-12">
           <ArtworkVideo video={artwork.video} />
         </div>
