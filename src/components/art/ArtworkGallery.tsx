@@ -70,19 +70,26 @@ export default function ArtworkGallery({
               key={`${image.url}-${index}`}
               type="button"
               onClick={() => setOpenIndex(index)}
-              className="aspect-square relative group overflow-hidden rounded-lg text-left"
+              className="group text-left"
               aria-label={`View ${image.caption || `${title} — ${index + 1}`} fullscreen`}
             >
-              <Image
-                src={image.url}
-                alt={image.caption || `${title} - Variation ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
+              <span className="relative block aspect-square overflow-hidden rounded-lg">
+                <Image
+                  src={image.url}
+                  alt={image.caption || `${title} - Variation ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+                {image.caption ? (
+                  <span className="absolute inset-0 hidden items-end bg-black/60 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:flex">
+                    <span className="text-sm text-white">{image.caption}</span>
+                  </span>
+                ) : null}
+              </span>
               {image.caption ? (
-                <span className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <span className="text-white text-sm">{image.caption}</span>
+                <span className="mt-2 block text-xs leading-snug text-neutral-700 dark:text-neutral-300 md:sr-only">
+                  {image.caption}
                 </span>
               ) : null}
             </button>
@@ -113,7 +120,7 @@ export default function ArtworkGallery({
                   event.stopPropagation();
                   showPrev();
                 }}
-                className="absolute left-3 sm:left-6 text-white text-sm uppercase tracking-wide"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-sm uppercase tracking-wide text-white sm:left-6"
               >
                 Previous
               </button>

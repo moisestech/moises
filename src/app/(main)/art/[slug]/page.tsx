@@ -83,12 +83,12 @@ export default async function ArtPage({ params }: PageProps) {
   return (
     <main className="w-full">
       {/* Title Banner */}
-      <div className={`${color} w-full py-20 px-8 mt-40`}>
+      <div className={`${color} w-full px-4 py-12 mt-28 sm:mt-36 sm:px-8 sm:py-16 md:mt-40 md:py-20`}>
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-8xl font-bold text-black dark:text-white">
+          <h1 className="text-5xl font-bold leading-[0.95] text-black dark:text-white sm:text-6xl lg:text-8xl">
             {artwork.title}
           </h1>
-          <p className="text-4xl font-bold mt-4 text-black dark:text-white">
+          <p className="mt-4 text-2xl font-bold text-black dark:text-white sm:text-4xl">
             {artwork.year}
           </p>
           {artwork.yearNote ? (
@@ -115,13 +115,13 @@ export default async function ArtPage({ params }: PageProps) {
       (artwork.video.type === 'youtube' ||
         artwork.video.type === 'vimeo' ||
         artwork.video.type === 'file') ? (
-        <div className="max-w-7xl mx-auto px-8 pt-12">
+        <div className="max-w-7xl mx-auto px-4 pt-8 sm:px-8 sm:pt-12">
           <ArtworkVideo video={artwork.video} />
         </div>
       ) : null}
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto py-16 px-11">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16 lg:px-11">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           {/* Metadata Column */}
           <div className="space-y-8">
