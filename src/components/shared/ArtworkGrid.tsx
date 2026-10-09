@@ -1,15 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { artist } from '@/constants/artworks';
+import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
 
 interface ArtworkGridProps {
   minYear?: number;
   maxYear?: number;
   /** When provided, show only these artworks in this order */
   slugs?: string[];
+  /** Pulse placeholder until each card image loads. Off by default so existing grids stay unchanged. */
+  imageSkeleton?: boolean;
 }
 
-export default function ArtworkGrid({ minYear, maxYear, slugs }: ArtworkGridProps) {
+export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = false }: ArtworkGridProps) {
   // Get artwork entries with their slugs
   let artworkEntries: [string, typeof artist.artworks[string]][];
 
@@ -63,15 +66,32 @@ export default function ArtworkGrid({ minYear, maxYear, slugs }: ArtworkGridProp
           >
             <article className="flex flex-col md:flex-row h-auto md:h-[400px] lg:h-[500px] overflow-hidden w-full">
               {/* Image Section - Always First on Mobile */}
-              <div className="w-full md:w-2/3 h-[300px] md:h-full order-1">
-                <Image
-                  className="w-full h-full object-cover"
-                  width={1920}
-                  height={1080}
-                  src={artwork.images[0].url}
-                  alt={artwork.images[0].caption || artwork.title}
-                  priority={index === 0}
-                />
+              <div
+                className={
+                  imageSkeleton
+                    ? 'relative w-full md:w-2/3 h-[300px] md:h-full order-1 overflow-hidden'
+                    : 'w-full md:w-2/3 h-[300px] md:h-full order-1'
+                }
+              >
+                {imageSkeleton ? (
+                  <ImageWithSkeleton
+                    className="object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 66vw"
+                    src={artwork.images[0].url}
+                    alt={artwork.images[0].caption || artwork.title}
+                    priority={index === 0}
+                  />
+                ) : (
+                  <Image
+                    className="w-full h-full object-cover"
+                    width={1920}
+                    height={1080}
+                    src={artwork.images[0].url}
+                    alt={artwork.images[0].caption || artwork.title}
+                    priority={index === 0}
+                  />
+                )}
               </div>
 
               {/* Text Section - Always Second on Mobile */}

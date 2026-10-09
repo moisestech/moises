@@ -23,17 +23,39 @@ export default function ArtworkVideo({
   const isVimeo = video.type === 'vimeo';
 
   if (!isYouTube && !isVimeo) {
+    if (video.type !== 'file') {
+      return (
+        <p className="text-sm">
+          <a
+            href={video.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2"
+          >
+            Watch {video.title}
+          </a>
+        </p>
+      );
+    }
+
     return (
-      <p className="text-sm">
-        <a
-          href={video.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-2"
-        >
-          Watch {video.title}
-        </a>
-      </p>
+      <div className="w-full">
+        <h2 className="mb-6 text-2xl font-semibold">{heading}</h2>
+        <div className={isVertical ? 'mx-auto w-full max-w-[22rem]' : 'w-full'}>
+          <video
+            src={video.url}
+            controls
+            playsInline
+            preload="metadata"
+            className="h-auto w-full bg-black"
+          >
+            <a href={video.url}>Watch {video.title}</a>
+          </video>
+        </div>
+        {video.caption ? (
+          <p className="mt-4 text-base text-gray-600 dark:text-gray-400">{video.caption}</p>
+        ) : null}
+      </div>
     );
   }
 

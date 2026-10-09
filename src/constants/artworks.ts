@@ -753,10 +753,62 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       ],
       images: [
         {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558664/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-11_v04wjo.jpg',
+          caption: 'Treadmill facing a coding workstation and three vertical screens.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558667/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-12_yr8vyk.jpg',
+          caption: 'The performer on the treadmill at the workstation, with the grass station to the left.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-9_w0niny.jpg',
+          caption: 'The treadmill, three screens, and a grass patch outlined in green light. The LED sign reads TOUCH GRASS.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558670/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-10_rbhwtm.jpg',
+          caption: 'The treadmill and screens beside a grass patch. The LED sign reads FEEL NATURE.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-8_qzcuzs.jpg',
+          caption: 'Seated at the grass station beside three vertical screens. The LED sign reads SEE GARDEN.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558662/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-2_ctk3zb.jpg',
+          caption: 'Seated with a laptop beside an LED sign that reads FEEL NATURE.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558663/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-4_e3tldq.jpg',
+          caption: 'Coding on a laptop at the grass station.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-6_xu2aqu.jpg',
+          caption: 'Hands on the grass patch. The LED sign reads TOUCH GRASS.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558663/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-3_btsmru.jpg',
+          caption: 'A hand on the grass patch beneath an LED sign that reads TOUCH GRASS.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-7_i7n3r0.jpg',
+          caption: 'A hand on the grass patch beneath an LED sign that reads FEEL NATURE.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558669/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-13_v7klkn.jpg',
+          caption: 'The grass patch outlined in green light. The LED sign reads TOUCH GRASS.',
+        },
+        {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
-          caption: 'Doom Scrolling Treadmill - View 4',
+          caption: 'Doom Scrolling Treadmill documentation.',
         },
       ],
+      video: {
+        type: 'file',
+        id: 'doomscrolling-treadmill',
+        url: 'https://res.cloudinary.com/dck5rzi4h/video/upload/v1791236864/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/Moises_DoomScrolling-Treadmill_bcf7oz.mp4',
+        title: 'Doom Scrolling Treadmill',
+        aspectRatio: '9:16',
+        caption: 'Short video documentation of Doom Scrolling Treadmill.',
+      },
       tags: [
         'performance art',
         'digital distraction',

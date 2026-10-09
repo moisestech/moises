@@ -18,7 +18,7 @@ export default function RecentWorksCollection() {
         </div>
       </div>
       
-      <ArtworkGrid minYear={2020} maxYear={2025} />
+      <ArtworkGrid minYear={2020} maxYear={2025} imageSkeleton />
     </main>
   );
 } 
