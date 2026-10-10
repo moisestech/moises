@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
 import ArtworkGallery from '@/components/art/ArtworkGallery';
+import ArtworkMediaCarousel from '@/components/art/ArtworkMediaCarousel';
 import ArtworkVideo from '@/components/art/ArtworkVideo';
 import { seoKeywordsAlpha } from '../../../../../lib/seoKeywords';
 import type { Metadata } from 'next';
@@ -79,6 +80,7 @@ export default async function ArtPage({ params }: PageProps) {
   // Find the index of this artwork to determine its color
   const artworkIndex = Object.keys(artist.artworks).indexOf(params.slug);
   const color = colors[artworkIndex % colors.length];
+  const useCarousel = artwork.mediaLayout === 'carousel';
 
   return (
     <main className="w-full">
@@ -91,6 +93,11 @@ export default async function ArtPage({ params }: PageProps) {
           <p className="mt-4 text-2xl font-bold text-black dark:text-white sm:text-4xl">
             {artwork.year}
           </p>
+          {artwork.presentationTitle ? (
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-black dark:text-white md:text-xl">
+              {artwork.presentationTitle}
+            </p>
+          ) : null}
           {artwork.yearNote ? (
             <p className="mt-4 max-w-3xl text-lg font-medium leading-relaxed text-black dark:text-white md:text-xl">
               {artwork.yearNote}
@@ -100,6 +107,7 @@ export default async function ArtPage({ params }: PageProps) {
       </div>
 
       {/* Main Image */}
+      {!useCarousel ? (
       <div className="w-full relative h-[70vh]">
         <Image
           src={artwork.images[0].url}
@@ -109,8 +117,27 @@ export default async function ArtPage({ params }: PageProps) {
           priority
         />
       </div>
+      ) : null}
+
+      {useCarousel ? (
+        <ArtworkMediaCarousel
+          title={artwork.title}
+          images={artwork.images}
+          video={
+            artwork.video
+              ? {
+                  url: artwork.video.url,
+                  title: artwork.video.title,
+                  caption: artwork.video.caption,
+                }
+              : null
+          }
+          photoCredit={artwork.photoCredit}
+        />
+      ) : null}
 
       {artwork.video &&
+      !useCarousel &&
       params.slug !== 'simulation_faith' &&
       (artwork.video.type === 'youtube' ||
         artwork.video.type === 'vimeo' ||
@@ -122,7 +149,15 @@ export default async function ArtPage({ params }: PageProps) {
 
       {/* Content Section */}
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16 lg:px-11">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+        {artwork.oneLine ? (
+          <p className="max-w-3xl text-xl leading-snug md:text-2xl">{artwork.oneLine}</p>
+        ) : null}
+        {artwork.researchQuestion ? (
+          <p className="mt-8 max-w-4xl text-2xl font-medium leading-tight md:text-4xl">
+            {artwork.researchQuestion}
+          </p>
+        ) : null}
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-16 ${artwork.oneLine || artwork.researchQuestion ? 'mt-16' : ''}`}>
           {/* Metadata Column */}
           <div className="space-y-8">
             {artwork.exhibitionHistory && artwork.exhibitionHistory.length > 0 ? (
@@ -238,7 +273,7 @@ export default async function ArtPage({ params }: PageProps) {
             )}
             {artwork.links && artwork.links.length > 0 ? (
               <div>
-                <h3 className="text-lg font-bold mb-2">Links</h3>
+                <h3 className="text-lg font-bold mb-2">{artwork.linksLabel || 'Links'}</h3>
                 <ul className="space-y-2">
                   {artwork.links.map((link) => (
                     <li key={link.url}>
@@ -363,7 +398,7 @@ export default async function ArtPage({ params }: PageProps) {
           </div>
         </div>
 
-        {artwork.images.length > 0 ? (
+        {artwork.images.length > 0 && !useCarousel ? (
           <ArtworkGallery title={artwork.title} images={artwork.images} />
         ) : null}
 
