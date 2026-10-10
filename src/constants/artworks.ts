@@ -70,6 +70,10 @@ interface Artwork {
   linksLabel?: string;
   /** Opt-in documentation carousel. Other artworks keep the existing hero and gallery. */
   mediaLayout?: 'carousel';
+  /** Other works shown at the end of the page. `note` states the relationship. */
+  related?: { slug: string; note: string }[];
+  /** Path from this work back to the studio. */
+  studio?: { href: string; label: string; text: string };
   video?: {
     type: string;
     id: string;
@@ -858,6 +862,21 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           note: 'Presented as Doomscrolling Treadmill + Touch Grass Station; 24-hour durational performance.',
         },
       ],
+      related: [
+        {
+          slug: 'doomscrolling_marathon',
+          note: 'The feed staged as a public screen in Mexico City, apart from the body on the treadmill.',
+        },
+        {
+          slug: 'baby_agi',
+          note: 'A studio object: a stroller assembled from gaming hardware and robotic hands.',
+        },
+      ],
+      studio: {
+        href: '/visit',
+        label: 'Visit the studio',
+        text: 'Studio 43 at Bakehouse Art Complex is where the practice becomes material. A filmed visit shows the room, works in progress, and how objects are assembled.',
+      },
       tags: [
         'performance art',
         'digital distraction',

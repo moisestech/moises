@@ -6,6 +6,8 @@ import InteractiveText from '@/components/InteractiveText';
 import ArtworkGallery from '@/components/art/ArtworkGallery';
 import ArtworkMediaCarousel from '@/components/art/ArtworkMediaCarousel';
 import ArtworkVideo from '@/components/art/ArtworkVideo';
+import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
+import Link from 'next/link';
 import { seoKeywordsAlpha } from '../../../../../lib/seoKeywords';
 import type { Metadata } from 'next';
 
@@ -463,6 +465,55 @@ export default async function ArtPage({ params }: PageProps) {
             </div>
           </div>
         )}
+
+        {artwork.related && artwork.related.length > 0 ? (
+          <section className="mt-24 border-t border-gray-200 pt-16 dark:border-gray-800" aria-labelledby="related-works-heading">
+            <h2 id="related-works-heading" className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              Related works
+            </h2>
+            <ul className="mt-8 grid grid-cols-1 gap-12 sm:grid-cols-2">
+              {artwork.related.map((item) => {
+                const work = artist.artworks[item.slug];
+                if (!work?.images[0]) return null;
+                return (
+                  <li key={item.slug}>
+                    <Link href={`/art/${item.slug}`} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+                      <div className="relative aspect-[4/5] bg-neutral-950">
+                        <ImageWithSkeleton
+                          src={work.images[0].url}
+                          alt={work.images[0].caption || work.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 36rem"
+                          className="object-contain"
+                        />
+                      </div>
+                      <h3 className="mt-4 text-2xl font-semibold underline-offset-4 group-hover:underline">
+                        {work.title}
+                      </h3>
+                      <p className="mt-1 text-sm tabular-nums">{work.year}</p>
+                      <p className="mt-3 max-w-prose text-base leading-relaxed">{item.note}</p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ) : null}
+
+        {artwork.studio ? (
+          <section className="mt-16 border-t border-gray-200 pt-12 dark:border-gray-800" aria-labelledby="studio-heading">
+            <h2 id="studio-heading" className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              Studio
+            </h2>
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed">{artwork.studio.text}</p>
+            <Link
+              href={artwork.studio.href}
+              className="mt-6 inline-flex min-h-11 items-center text-lg underline underline-offset-4"
+            >
+              {artwork.studio.label}
+            </Link>
+          </section>
+        ) : null}
       </div>
     </main>
   );
