@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
 import { cn } from '@/lib/utils';
 
-type CarouselImage = { url: string; caption?: string };
+type CarouselImage = { url: string; caption?: string; alt?: string };
 
 type CarouselVideo = {
   url: string;
@@ -13,7 +13,7 @@ type CarouselVideo = {
 };
 
 type Slide =
-  | { kind: 'image'; url: string; caption?: string; key: string }
+  | { kind: 'image'; url: string; caption?: string; alt?: string; key: string }
   | { kind: 'video'; url: string; title: string; caption?: string; key: string };
 
 function cloudinaryWidth(url: string, width: number) {
@@ -30,6 +30,7 @@ function buildSlides(images: CarouselImage[], video?: CarouselVideo | null): Sli
     kind: 'image',
     url: image.url,
     caption: image.caption,
+    alt: image.alt,
     key: `${image.url}-${index}`,
   }));
   if (!video?.url) return imageSlides;
@@ -219,7 +220,7 @@ export default function ArtworkMediaCarousel({
                 {slide.kind === 'image' && near ? (
                   <ImageWithSkeleton
                     src={cloudinaryWidth(slide.url, slideIndex === index ? 2000 : 1200)}
-                    alt={slide.caption || title}
+                    alt={slide.alt || slide.caption || title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 80rem"
                     priority={slideIndex === 0}
@@ -328,7 +329,7 @@ export default function ArtworkMediaCarousel({
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black p-4 sm:p-8"
           role="dialog"
           aria-modal="true"
-          aria-label={active.caption || title}
+          aria-label={active.alt || active.caption || title}
           onClick={() => setLightbox(false)}
         >
           <button
@@ -361,7 +362,7 @@ export default function ArtworkMediaCarousel({
           <figure className="relative h-[80vh] w-full max-w-[90vw]" onClick={(event) => event.stopPropagation()}>
             <ImageWithSkeleton
               src={cloudinaryWidth(active.url, 2400)}
-              alt={active.caption || title}
+              alt={active.alt || active.caption || title}
               fill
               sizes="90vw"
               className="object-contain"

@@ -7,15 +7,15 @@ export const EYEBEAM_INQUIRY = {
   hero: {
     headline: 'Materializing the Internet',
     subheadline:
-      'Works and inquiries by Moises Sanabria on platform logic, attention, belief, and networked life.',
+      'Who Can Say No? Material studies of agency, refusal, and distributed technological systems.',
     intro:
       'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and AI/full-stack engineer. His work materializes the internet through sculpture, performance, machine learning, and networked systems—making visible the infrastructures that shape how we see, feel, work, and believe. Across installations, public research, and technical experimentation, he examines how digital systems move from being tools into environments that structure collective life.',
   },
 
   currentInquiry: {
-    title: 'Current Inquiry: Born into the Machine',
+    title: 'Current Inquiry: Who Can Say No?',
     content:
-      'Born into the Machine is an ongoing artistic and research framework exploring what happens when technological systems stop feeling like external tools and begin operating as environments. The project looks at how platforms, algorithms, interfaces, and networked infrastructures shape labor, attention, ritual, memory, identity, and belief. Through artworks, writing, talks, and experimental systems, this inquiry asks how digital life becomes lived reality.',
+      'Who Can Say No? is a series of material studies about agency, refusal, and distributed technological systems. It starts from one question: what happens to agency when an action can no longer be traced to a single actor, but moves across people, machines, interfaces, institutions, and infrastructures? The working hypothesis is that agency is not only the ability to act. It may also be the ability to interrupt, redirect, decline, or refuse. If systems act for us, then the ability to stop them, slow them, or say no becomes the most fragile form of agency we have. Stepping away does not stop the system.',
   },
 
   technology: {
@@ -26,90 +26,56 @@ export const EYEBEAM_INQUIRY = {
 
   selectedWorks: [
     {
+      slug: 'five_million_dollars',
+      title: '5 Million Dollars 1 Terabyte',
+      year: 2011,
+      medium: 'ART404 (Manuel Palou and Moises Sanabria). Sculpture.',
+      description:
+        'Manuel Palou and Moises Sanabria met at New World School of the Arts and formed ART404. The hard drive was Moises’s. They traveled to transmediale 2012 together. A store-bought black hard drive on a plinth holds roughly a terabyte of pirated software, games, music, and books.',
+      relevance: 'Same method, 2011 to 2024: an invisible system inside a familiar object.',
+      images: [
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657685/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_02_pedestal-angle_4180px.jpg',
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657657/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_06_moises-sanabria-with-the-work_941px.jpg',
+          caption: 'Moises Sanabria with the work.',
+          alt: 'Moises Sanabria standing beside the hard drive on its plinth.',
+        },
+        {
+          type: 'image',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657652/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_01_transmediale-2012-vitrine_photo-genz-lindner_4928px.jpg',
+          caption:
+            'Installation view, Dark Drives, transmediale 2012, Berlin. © Genz, Lindner / transmediale, CC BY-NC-SA.',
+        },
+      ],
+    },
+    {
       slug: 'doomscrolling_treadmill',
-      title: 'Doomscrolling Treadmill',
+      title: 'Doom Scrolling Treadmill',
       year: 2024,
-      medium: 'Performance installation with treadmill, screens, workstation, and live platform interface.',
+      medium: '24-hour durational performance.',
       description:
-        'A durational work centered on bodily exhaustion, remote labor, and algorithmic attention capture. While walking on a treadmill, I code, scroll, and work within a mediated environment that collapses labor, performance, and platform dependency into one continuous loop.',
-      relevance: 'Examines attention as infrastructure and the body as a site of platform governance.',
-      images: [
-        {
-          type: 'video',
-          vimeoId: '1009954393',
-          caption: 'Doomscrolling Treadmill + Touch Grass Station - Chroma Art Film Festival',
-        },
-        {
-          type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
-          caption: 'Doom Scrolling Treadmill - View',
-        },
-        {
-          type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831898/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-4_qjc5w3.jpg',
-          caption: 'Doom Scrolling Treadmill - View 2',
-        },
-        {
-          type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831896/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-5_rji3st.jpg',
-          caption: 'Doom Scrolling Treadmill - View 3',
-        },
-        {
-          type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831899/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-3_ugyjht.jpg',
-          caption: 'Touch Grass Station - View',
-        },
-        {
-          type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831898/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-2_qjc5w3.jpg',
-          caption: 'Touch Grass Station - View 2',
-        },
-        {
-          type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1743116742/art/moisestech-website/artworks/2024_doomscrolling_marathon/moises-sanabria-doomscrolling-marathon-proyecto-aparadores-cdmx-2024_jilui4.png',
-          caption: 'Doomscrolling Marathon - Installation at Aparadores, Mexico City',
-        },
-      ],
-    },
-    {
-      slug: 'simulation_faith',
-      title: 'Simulation Faith',
-      year: 2025,
-      medium: 'Sculptural installation.',
-      description:
-        'A devotional figure reimagined through synthetic mediation, asking how spiritual symbols persist, mutate, or become absorbed into technologically saturated reality.',
-      relevance: 'Explores belief, ritual, and mediated perception in synthetic environments.',
+        'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
+      relevance: 'Same method, 2011 to 2024: a familiar action holds the system.',
       images: [
         {
           type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg',
-          caption: 'Simulation Faith - Suspended baby Jesus sculpture with VR headset',
-        },
-      ],
-    },
-    {
-      slug: 'price_of_existence',
-      title: 'Price of Existence',
-      year: 2024,
-      medium: 'Sculpture.',
-      description:
-        'A human skeleton wrapped in devalued Venezuelan currency, reflecting on collapse, value, extraction, and the instability of material and symbolic systems.',
-      relevance: 'Connects economic systems, memory, and embodied precarity.',
-      images: [
-        {
-          type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1738035709/art/moisestech-website/price_of_existence_wideshot.png',
-          caption: 'Price of Existence - Full installation view',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558664/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-11_v04wjo.jpg',
+          caption: 'Treadmill facing a coding workstation and three vertical screens.',
         },
         {
           type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831890/art/moisestech-website/price_of_existence_detail_uuw5yf.jpg',
-          caption: 'Price of Existence - Detail view',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558667/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-12_yr8vyk.jpg',
+          caption: 'The performer on the treadmill at the workstation, with the grass station to the left.',
         },
         {
           type: 'image',
-          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1753724794/art/moisestech-website/artworks/2024_price_of_existence/MoisesSanabria-PriceOfExistence-2024_e4mizb.jpg',
-          caption: 'Price of Existence - 2024 installation at MUNAG, Antigua Guatemala',
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-9_w0niny.jpg',
+          caption: 'The treadmill, three screens, and a grass patch outlined in green light. The LED sign reads TOUCH GRASS.',
         },
       ],
     },
