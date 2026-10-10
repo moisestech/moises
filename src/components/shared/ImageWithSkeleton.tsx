@@ -15,9 +15,11 @@ export default function ImageWithSkeleton({
   alt,
   fill,
   onLoad,
+  onError,
   ...rest
 }: ImageWithSkeletonProps) {
   const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const markLoaded = useCallback((img: HTMLImageElement | null) => {
     if (img?.complete && img.naturalWidth > 0) setLoaded(true);
@@ -37,9 +39,14 @@ export default function ImageWithSkeleton({
         aria-hidden
         className={cn(
           'pointer-events-none absolute inset-0 bg-neutral-200 dark:bg-neutral-800 print:hidden',
-          loaded ? 'opacity-0' : 'animate-pulse motion-reduce:animate-none',
+          failed || loaded ? 'opacity-0' : 'animate-pulse motion-reduce:animate-none',
         )}
       />
+      {failed ? (
+        <span className="absolute inset-0 flex items-center justify-center p-4 text-center text-sm text-neutral-600 dark:text-neutral-300">
+          {alt}
+        </span>
+      ) : null}
       <Image
         {...rest}
         ref={markLoaded}
@@ -47,10 +54,15 @@ export default function ImageWithSkeleton({
         fill={fill}
         className={cn(
           'transition-opacity duration-300 motion-reduce:transition-none',
-          loaded ? 'opacity-100' : 'opacity-0 print:opacity-100',
+          loaded && !failed ? 'opacity-100' : 'opacity-0 print:opacity-100',
           className,
         )}
         onLoad={handleLoad}
+        onError={(event) => {
+          setFailed(true);
+          setLoaded(true);
+          onError?.(event);
+        }}
       />
     </>
   );

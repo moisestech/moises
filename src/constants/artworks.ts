@@ -61,6 +61,15 @@ interface Artwork {
       requirements?: string[];
     };
   };
+  oneLine?: string;
+  researchQuestion?: string;
+  /** Combined presentation title. Does not replace `title`. */
+  presentationTitle?: string;
+  photoCredit?: string;
+  /** Sidebar heading for `links`. Defaults to "Links". */
+  linksLabel?: string;
+  /** Opt-in documentation carousel. Other artworks keep the existing hero and gallery. */
+  mediaLayout?: 'carousel';
   video?: {
     type: string;
     id: string;
@@ -741,9 +750,20 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
     doomscrolling_treadmill: {
       title: 'Doom Scrolling Treadmill',
       year: 2024,
-      location: 'Chroma Film Festival',
+      location: 'Chroma Art Film Festival, Superblue, Miami',
+      location_url:
+        'https://chromaartfilmfestival.org/2024/09/11/exploring-the-intersection-of-digital-distraction-and-nature-doomscrolling-treadmill-touch-grass-station-at-chroma-art-film-festival/',
+      medium: '24-hour durational performance',
+      presentationTitle: 'Doomscrolling Treadmill + Touch Grass Station',
+      oneLine:
+        'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
+      researchQuestion:
+        'When a body begins performing at the rhythm of a platform, who is acting on whom?',
+      photoCredit: 'Brooke D’Avanzo',
+      linksLabel: 'Documentation',
+      mediaLayout: 'carousel',
       description:
-        'Doom Scrolling Treadmill is a 24-hour performance art piece that explores the tension between digital distraction, productivity, and the human need to reconnect with nature. The artist alternates between walking on a treadmill, coding, and watching TikTok, mirroring the repetitive nature of digital engagement in modern life.',
+        'Doom Scrolling Treadmill is a 24-hour durational performance in which Sanabria moves between walking on a treadmill, coding, watching TikTok, and stepping onto Touch Grass Station. Work, entertainment, self-tracking, and platform attention collapse into a repetitive bodily loop. The adjacent grass patch introduces a deliberately low-tech interruption—not as a simple solution to screen life, but as a question about whether stepping away constitutes agency when the systems organizing attention continue running.',
       materials: [
         'Treadmill',
         'Vertical HD screens',
@@ -751,6 +771,8 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         'Grass patch',
         'LED panel',
       ],
+      // Drive folder MoisesSanabria-DoomscrollingTreadmill-TouchGrassStation-Caff24 has 13 JPGs.
+      // Twelve of those photographs are mapped to Cloudinary below. The thirteenth original is not linked until that file is identified.
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558664/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-11_v04wjo.jpg',
@@ -809,6 +831,33 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         aspectRatio: '9:16',
         caption: 'Short video documentation of Doom Scrolling Treadmill.',
       },
+      links: [
+        {
+          url: 'https://chromaartfilmfestival.org/2024/09/11/exploring-the-intersection-of-digital-distraction-and-nature-doomscrolling-treadmill-touch-grass-station-at-chroma-art-film-festival/',
+          label: 'Chroma Art Film Festival — feature',
+        },
+        {
+          url: 'https://vimeo.com/1009954393',
+          label: 'Vimeo — Chroma Art Film Festival',
+        },
+        {
+          url: 'https://www.instagram.com/p/DPPjPjbEauV/',
+          label: 'Instagram post',
+        },
+        {
+          url: 'https://www.instagram.com/reel/C_yHggqsRwv/',
+          label: 'Instagram reel',
+        },
+      ],
+      exhibitionHistory: [
+        {
+          title: 'Chroma Art Film Festival 2024',
+          date: 'August 17–18, 2024',
+          location: 'Superblue, Miami, Florida',
+          href: 'https://chromaartfilmfestival.org/2024/09/11/exploring-the-intersection-of-digital-distraction-and-nature-doomscrolling-treadmill-touch-grass-station-at-chroma-art-film-festival/',
+          note: 'Presented as Doomscrolling Treadmill + Touch Grass Station; 24-hour durational performance.',
+        },
+      ],
       tags: [
         'performance art',
         'digital distraction',
