@@ -8,7 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import VimeoPlayer from '@/components/common/VimeoPlayer';
 
 export type WorkMediaItem =
-  | { type: 'image'; url: string; caption?: string }
+  | { type: 'image'; url: string; caption?: string; alt?: string }
   | { type: 'video'; vimeoId: string; caption?: string };
 
 interface WorkImageCarouselProps {
@@ -83,7 +83,7 @@ export function WorkImageCarousel({
             {currentItem.type === 'image' ? (
               <Image
                 src={currentItem.url}
-                alt={currentItem.caption || alt}
+                alt={currentItem.alt || currentItem.caption || alt}
                 fill
                 className="object-contain"
                 sizes="(max-width: 768px) 100vw, 672px"

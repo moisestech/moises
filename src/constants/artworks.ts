@@ -32,6 +32,7 @@ interface Artwork {
   images: {
     url: string;
     caption?: string;
+    alt?: string;
   }[];
   links?: {
     url: string;
@@ -70,6 +71,10 @@ interface Artwork {
   linksLabel?: string;
   /** Opt-in documentation carousel. Other artworks keep the existing hero and gallery. */
   mediaLayout?: 'carousel';
+  /** Other works shown at the end of the page. `note` states the relationship. */
+  related?: { slug: string; note: string }[];
+  /** Path from this work back to the studio. */
+  studio?: { href: string; label: string; text: string };
   video?: {
     type: string;
     id: string;
@@ -858,6 +863,25 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           note: 'Presented as Doomscrolling Treadmill + Touch Grass Station; 24-hour durational performance.',
         },
       ],
+      related: [
+        {
+          slug: 'five_million_dollars',
+          note: 'Same method, 2011 → 2024.',
+        },
+        {
+          slug: 'doomscrolling_marathon',
+          note: 'The feed staged as a public screen in Mexico City, apart from the body on the treadmill.',
+        },
+        {
+          slug: 'baby_agi',
+          note: 'A studio object: a stroller assembled from gaming hardware and robotic hands.',
+        },
+      ],
+      studio: {
+        href: '/visit',
+        label: 'Visit the studio',
+        text: 'Studio 43 at Bakehouse Art Complex is where the practice becomes material. A filmed visit shows the room, works in progress, and how objects are assembled.',
+      },
       tags: [
         'performance art',
         'digital distraction',
@@ -1156,9 +1180,15 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       year: 2011,
       location: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible, Berlin',
       curator: 'Jacob Lillemose',
-      collaboration: 'ART404, Manuel Palou',
-      description: 
-        'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968).',
+      collaboration: 'ART404 (Manuel Palou and Moises Sanabria)',
+      role: 'Co-founder, ART404',
+      yearNote:
+        'Shown at Art 404, Low Budget Gallery, New York, 2011; exhibited at transmediale 2012, Berlin.',
+      location_url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
+      oneLine:
+        'A store-bought black hard drive on a plinth, holding roughly a terabyte of pirated software, games, music and books valued at five million dollars.',
+      description:
+        'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968). This description follows the transmediale archive text.',
       description_es:
         'A primera vista, el disco duro externo negro colocado en el pedestal es reconocible como un objeto de deseo vendido en tiendas de medios de todo el mundo. Su estética minimalista fría invoca la autoridad de la tecnología. Es una caja negra que protege de manera eficiente y segura lo que hay dentro. Sin embargo, el contenido invisible cuenta una historia diferente. El disco duro contiene software descargado y recopilado ilegalmente por valor de $5 millones, desde AutoCAD hasta libros de ficción, llenando su capacidad de 1 terabyte. El objeto encarna un desafío a los derechos de propiedad intelectual, presentándose como un artefacto ambiguo que es simultáneamente hermoso, efectivo e ilegal - muy parecido al monolito negro de 2001: Una Odisea del Espacio (1968) de Stanley Kubrick.',
       materials: [
@@ -1166,36 +1196,71 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         'Illegally downloaded software collection ($5M worth)',
         'Custom plinth'
       ],
-      medium: 'New Media Installation',
+      medium: 'Sculpture / new media installation',
       dimensions: '16.5 cm x 11.4 cm x 3.8 cm (hard drive) + pedestal base',
       weight: 'Approximately 2-3 kg (including pedestal)',
+      mediaLayout: 'carousel',
+      linksLabel: 'Press & archive',
       images: [
         {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657685/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_02_pedestal-angle_4180px.jpg',
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657655/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_03_vertical-front_1901px.jpg',
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751681091/art/moisestech-website/artworks/2011_5_million_1_terabyte/five-million-dollars-1-terabyte-2011-art404_daxvlx.jpg',
-          caption: '5 Million Dollars 1 Terabyte - Installation view at transmediale 2012. © Genz, Lindner / transmediale',
-        }
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657655/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_05_side-close_1857px.jpg',
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657657/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_06_moises-sanabria-with-the-work_941px.jpg',
+          caption: 'Moises Sanabria with the work.',
+          alt: 'Moises Sanabria standing beside the hard drive on its plinth.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657652/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_01_transmediale-2012-vitrine_photo-genz-lindner_4928px.jpg',
+          caption:
+            'Installation view, Dark Drives, transmediale 2012, Berlin. © Genz, Lindner / transmediale, CC BY-NC-SA.',
+        },
+      ],
+      exhibitionHistory: [
+        {
+          title: 'Art 404 — Low Budget Gallery',
+          date: '2011',
+          location: 'New York',
+          href: 'https://rhizome.org/editorial/2011/aug/16/5-million-dollars-1-terabyte-2011/',
+        },
+        {
+          title: 'Dark Drives: Uneasy Energies in Technological Times — transmediale 2012 in/compatible',
+          date: '2012',
+          location: 'Haus der Kulturen der Welt, Berlin',
+          href: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
+        },
       ],
       links: [
+        { url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte', label: 'transmediale archive — artwork' },
+        { url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte-by-art-404', label: 'transmediale archive — installation photo' },
+        { url: 'https://archive.transmediale.de/content/art-404', label: 'transmediale archive — Art 404' },
+        { url: 'https://rhizome.org/editorial/2011/aug/16/5-million-dollars-1-terabyte-2011/', label: 'Rhizome — Jason Huff, Aug 16, 2011' },
+        { url: 'https://thenextweb.com/news/the-software-heist-of-the-century-or-a-modern-art-masterpiece', label: 'The Next Web — Aug 17, 2011' },
+        { url: 'https://gizmodo.com/this-5-million-piece-of-art-is-a-1-terabyte-hard-drive-5833654', label: 'Gizmodo — Aug 23, 2011' },
+        { url: 'https://yro.slashdot.org/story/11/09/08/1326233/5M-In-Torrented-Files-Presented-As-Art', label: 'Slashdot — Sep 8, 2011' },
+        { url: 'https://www.huffpost.com/entry/five-million-dollars-of-s_n_951150', label: 'HuffPost' },
+        { url: 'https://www.theregister.com/2011/11/28/pirated_software_hard_drive_art/', label: 'The Register — Nov 28, 2011' },
+        { url: 'https://rhizome.org/editorial/2012/apr/9/post-trolling-conversation-art-404/', label: 'Rhizome — Post-Trolling: A Conversation with Art404, Apr 9, 2012' },
+        { url: 'https://miamirail.org/essays/street-view/', label: 'Miami Rail — Street View, Brian Droitcour' },
+      ],
+      related: [
         {
-          url: 'https://rhizome.org/editorial/2011/aug/16/5-million-dollars-1-terabyte-2011/',
-          label: 'Rhizome Editorial - 5 Million Dollars 1 Terabyte'
+          slug: 'doomscrolling_treadmill',
+          note: 'Same method, 2011 → 2024.',
         },
-        {
-          url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
-          label: 'Transmediale Archive - Artwork Documentation'
-        },
-        {
-          url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte-by-art-404',
-          label: 'Transmediale Archive - Installation Photography'
-        },
-        {
-          url: 'https://archive.transmediale.de/content/art-404',
-          label: 'Art 404 Artist Profile'
-        },
-        {
-          url: 'https://archive.transmediale.de/festival-2012/exhibition',
-          label: 'Dark Drives Exhibition Documentation'
-        }
       ],
       tags: [
         'conceptual art',

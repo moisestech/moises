@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
 import { cn } from '@/lib/utils';
 
-type CarouselImage = { url: string; caption?: string };
+type CarouselImage = { url: string; caption?: string; alt?: string };
 
 type CarouselVideo = {
   url: string;
@@ -13,7 +13,7 @@ type CarouselVideo = {
 };
 
 type Slide =
-  | { kind: 'image'; url: string; caption?: string; key: string }
+  | { kind: 'image'; url: string; caption?: string; alt?: string; key: string }
   | { kind: 'video'; url: string; title: string; caption?: string; key: string };
 
 function cloudinaryWidth(url: string, width: number) {
@@ -30,6 +30,7 @@ function buildSlides(images: CarouselImage[], video?: CarouselVideo | null): Sli
     kind: 'image',
     url: image.url,
     caption: image.caption,
+    alt: image.alt,
     key: `${image.url}-${index}`,
   }));
   if (!video?.url) return imageSlides;
@@ -77,10 +78,10 @@ export default function ArtworkMediaCarousel({
     (next: number) => {
       const el = scrollerRef.current;
       if (!el || slides.length === 0) return;
-      const wrapped = (next + slides.length) % slides.length;
-      setIndex(wrapped);
+      const clamped = Math.min(slides.length - 1, Math.max(0, next));
+      setIndex(clamped);
       el.scrollTo({
-        left: wrapped * el.clientWidth,
+        left: clamped * el.clientWidth,
         behavior: reducedMotion ? 'auto' : 'smooth',
       });
     },
@@ -183,10 +184,10 @@ export default function ArtworkMediaCarousel({
     <div className="mx-auto w-full max-w-7xl px-4 pt-8 sm:px-8 sm:pt-12">
       <div
         ref={frameRef}
-        className="outline-none"
+        className="outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black dark:focus-visible:outline-white"
         role="region"
         aria-roledescription="carousel"
-        aria-label={`${title} documentation`}
+        aria-label={`${title} documentation. Use the arrow keys to move between slides.`}
         tabIndex={0}
         onKeyDown={(event) => {
           if (event.key === 'ArrowLeft') {
@@ -199,10 +200,11 @@ export default function ArtworkMediaCarousel({
           }
         }}
       >
+        <div className="relative">
         <div
           ref={scrollerRef}
           onScroll={onScrollerScroll}
-          className="flex w-full snap-x snap-mandatory overflow-x-auto scroll-smooth bg-neutral-950 motion-reduce:scroll-auto"
+          className="flex w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth bg-neutral-950 motion-reduce:scroll-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {slides.map((slide, slideIndex) => {
             const near = Math.abs(slideIndex - index) <= 1;
@@ -218,7 +220,7 @@ export default function ArtworkMediaCarousel({
                 {slide.kind === 'image' && near ? (
                   <ImageWithSkeleton
                     src={cloudinaryWidth(slide.url, slideIndex === index ? 2000 : 1200)}
-                    alt={slide.caption || title}
+                    alt={slide.alt || slide.caption || title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 80rem"
                     priority={slideIndex === 0}
@@ -236,6 +238,7 @@ export default function ArtworkMediaCarousel({
                     />
                     <video
                       ref={videoRef}
+                      aria-label={slide.title}
                       src={slide.url}
                       poster={images[0] ? cloudinaryWidth(images[0].url, 1600) : undefined}
                       controls
@@ -271,24 +274,43 @@ export default function ArtworkMediaCarousel({
           })}
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm">
+        <div className={cn(
+          'pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/80 to-transparent px-3 pt-16 text-sm text-white',
+          active?.kind === 'video' ? 'pb-14' : 'pb-3',
+        )}>
           <p className="tabular-nums tracking-wide" aria-live="polite">
             {countLabel}
             <span className="sr-only">
               {active?.kind === 'video' ? ', video' : ', photograph'}
+              {active?.caption ? `. ${active.caption}` : ''}
             </span>
           </p>
-          <div className="flex items-center gap-4">
-            <button type="button" className="underline underline-offset-4" onClick={() => scrollToIndex(index - 1)}>
+          <div className="pointer-events-auto flex items-center">
+            <button
+              type="button"
+              className="inline-flex min-h-11 items-center px-3 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:opacity-40"
+              onClick={() => scrollToIndex(index - 1)}
+              disabled={index === 0}
+            >
               Previous
             </button>
-            <button type="button" className="underline underline-offset-4" onClick={() => scrollToIndex(index + 1)}>
+            <button
+              type="button"
+              className="inline-flex min-h-11 items-center px-3 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:opacity-40"
+              onClick={() => scrollToIndex(index + 1)}
+              disabled={index === slides.length - 1}
+            >
               Next
             </button>
-            <button type="button" className="underline underline-offset-4" onClick={openViewer}>
+            <button
+              type="button"
+              className="inline-flex min-h-11 items-center px-3 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              onClick={openViewer}
+            >
               Fullscreen
             </button>
           </div>
+        </div>
         </div>
         {active?.caption ? (
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
@@ -297,7 +319,7 @@ export default function ArtworkMediaCarousel({
         ) : (
           <p className="mt-3 text-sm text-neutral-500"> </p>
         )}
-        {photoCredit ? (
+        {photoCredit && active?.kind === 'image' ? (
           <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">Photos: {photoCredit}</p>
         ) : null}
       </div>
@@ -307,7 +329,7 @@ export default function ArtworkMediaCarousel({
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black p-4 sm:p-8"
           role="dialog"
           aria-modal="true"
-          aria-label={active.caption || title}
+          aria-label={active.alt || active.caption || title}
           onClick={() => setLightbox(false)}
         >
           <button
@@ -340,7 +362,7 @@ export default function ArtworkMediaCarousel({
           <figure className="relative h-[80vh] w-full max-w-[90vw]" onClick={(event) => event.stopPropagation()}>
             <ImageWithSkeleton
               src={cloudinaryWidth(active.url, 2400)}
-              alt={active.caption || title}
+              alt={active.alt || active.caption || title}
               fill
               sizes="90vw"
               className="object-contain"
