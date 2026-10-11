@@ -1,6 +1,15 @@
 import { formatBoxDimensionsInchesLwh } from '@/lib/dimensions';
 import { InteractiveContent } from './research';
 
+/** A research path from a finished work. Optional on each artwork. */
+export interface ArtworkResearchLink {
+  eyebrow?: string;
+  title: string;
+  text: string;
+  href: string;
+  linkLabel?: string;
+}
+
 /** Optional venue / funder block for artwork detail footer */
 export interface ArtworkExhibitionSupport {
   text: string;
@@ -64,6 +73,10 @@ interface Artwork {
   };
   oneLine?: string;
   researchQuestion?: string;
+  /** Unresolved research this work opens. Renders after related works. */
+  currentInquiry?: ArtworkResearchLink;
+  /** Wider project context. Visually secondary to `currentInquiry`. */
+  researchThread?: ArtworkResearchLink;
   /** Combined presentation title. Does not replace `title`. */
   presentationTitle?: string;
   photoCredit?: string;
@@ -75,6 +88,16 @@ interface Artwork {
   related?: { slug: string; note: string }[];
   /** Path from this work back to the studio. */
   studio?: { href: string; label: string; text: string };
+  /** Speculative studies. Rendered apart from installation documentation, and only when images exist. */
+  processStudies?: {
+    title?: string;
+    intro?: string;
+    images: {
+      url: string;
+      caption?: string;
+      alt?: string;
+    }[];
+  };
   video?: {
     type: string;
     id: string;
@@ -98,6 +121,22 @@ interface Artist {
 }
 
 /** Canon works for Selected Works page — institutional entry point */
+const CURRENT_INQUIRY_WHO_CAN_SAY_NO: ArtworkResearchLink = {
+  eyebrow: 'Current inquiry',
+  title: 'Who Can Say No?',
+  text: 'These works led toward an unresolved question: what happens to agency when actions are distributed across people, machines, interfaces, institutions, and infrastructures?',
+  href: '/eyebeam',
+  linkLabel: 'Follow the current inquiry',
+};
+
+const RESEARCH_THREAD_BORN_INTO_THE_MACHINE: ArtworkResearchLink = {
+  eyebrow: 'Broader research',
+  title: 'Born into the Machine',
+  text: 'A broader inquiry into how machine systems become environments shaping attention, labor, memory, value, and everyday life.',
+  href: '/research/born-into-the-machine',
+  linkLabel: 'Explore Born into the Machine',
+};
+
 export const SELECTED_WORK_SLUGS: string[] = [
   'privacy_is_a_luxury',
   'digital_divinities',
@@ -863,6 +902,12 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           note: 'Presented as Doomscrolling Treadmill + Touch Grass Station; 24-hour durational performance.',
         },
       ],
+      processStudies: {
+        title: 'Process / Early studies',
+        intro:
+          "Early image studies used speculative visualization to test how a workstation, treadmill, screens, and the idea of 'touching grass' might occupy the same physical system.",
+        images: [],
+      },
       related: [
         {
           slug: 'five_million_dollars',
@@ -877,6 +922,8 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           note: 'A studio object: a stroller assembled from gaming hardware and robotic hands.',
         },
       ],
+      currentInquiry: CURRENT_INQUIRY_WHO_CAN_SAY_NO,
+      researchThread: RESEARCH_THREAD_BORN_INTO_THE_MACHINE,
       studio: {
         href: '/visit',
         label: 'Visit the studio',
@@ -1262,6 +1309,8 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           note: 'Same method, 2011 → 2024.',
         },
       ],
+      currentInquiry: CURRENT_INQUIRY_WHO_CAN_SAY_NO,
+      researchThread: RESEARCH_THREAD_BORN_INTO_THE_MACHINE,
       tags: [
         'conceptual art',
         'digital property',
