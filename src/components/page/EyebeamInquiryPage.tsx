@@ -55,33 +55,42 @@ export default function EyebeamInquiryPage() {
 
         {/* Current Inquiry */}
         <section className="mb-16 sm:mb-24">
-          <Link
-            href="/research/born-into-the-machine"
-            className="block group"
+          <GlitchText
+            as="h2"
+            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}
           >
-            <GlitchText
-              as="h2"
-              className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight group-hover:underline ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}
-            >
-              {EYEBEAM_INQUIRY.currentInquiry.title}
-            </GlitchText>
-          </Link>
+            {EYEBEAM_INQUIRY.currentInquiry.title}
+          </GlitchText>
           <p
-            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] ${
+            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] mb-8 font-medium ${
+              isDark ? 'text-gray-200' : 'text-gray-800'
+            }`}
+          >
+            {EYEBEAM_INQUIRY.currentInquiry.proposition}
+          </p>
+          <p
+            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] mb-8 ${
               isDark ? 'text-gray-400' : 'text-gray-600'
             }`}
           >
             {EYEBEAM_INQUIRY.currentInquiry.content}
           </p>
-          <Link
-            href="/research/born-into-the-machine"
-            className={`inline-block mt-6 text-[20px] sm:text-[24px] font-medium underline underline-offset-4 ${
-              isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-blue-600 hover:text-blue-700'
+          <p
+            className={`text-[20px] sm:text-[24px] leading-[1.45] max-w-5xl ${
+              isDark ? 'text-gray-400' : 'text-gray-600'
             }`}
           >
-            Explore Born into the Machine →
+            {EYEBEAM_INQUIRY.currentInquiry.method}
+          </p>
+          <Link
+            href="/research/born-into-the-machine"
+            className={`inline-block mt-8 text-[18px] sm:text-[20px] font-medium underline underline-offset-4 ${
+              isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-800'
+            }`}
+          >
+            Broader research: Born into the Machine →
           </Link>
         </section>
 
