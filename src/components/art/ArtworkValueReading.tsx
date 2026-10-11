@@ -8,26 +8,24 @@ const TERMS: { id: TermId; label: string; reading: string }[] = [
   {
     id: 'object',
     label: 'Object',
-    reading:
-      'The physical carrier is an ordinary consumer hard drive. The five-million-dollar claim comes from what is stored inside, not from the object itself.',
+    reading: 'The carrier is an ordinary hard drive; the claim comes from what is stored inside.',
   },
   {
     id: 'content',
     label: 'Content',
     reading:
-      'The drive contains copied software, games, music, and books whose retail prices were used to construct the work’s claimed value.',
+      'Copied software, games, music, and books whose retail prices were used to construct the claimed value.',
   },
   {
     id: 'copy',
     label: 'Copy',
     reading:
-      'Digital copying can multiply access without consuming the source in the way a physical commodity is consumed.',
+      'Copying can multiply access without consuming the source the way a physical commodity is consumed.',
   },
   {
     id: 'price',
     label: 'Price',
-    reading:
-      'The five-million-dollar figure applies market prices to files whose copies can circulate independently of the physical carrier.',
+    reading: 'The figure applies market prices to files that can circulate apart from the drive.',
   },
   {
     id: 'ownership',
@@ -39,7 +37,7 @@ const TERMS: { id: TermId; label: string; reading: string }[] = [
     id: 'access',
     label: 'Access',
     reading:
-      'The object concentrates access to a large body of software and media while leaving its legal and economic boundaries unresolved.',
+      'The object concentrates access while leaving its legal and economic boundaries unresolved.',
   },
 ];
 
