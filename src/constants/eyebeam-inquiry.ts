@@ -6,22 +6,72 @@
 export const EYEBEAM_INQUIRY = {
   hero: {
     headline: 'Materializing the Internet',
-    subheadline:
-      'Who Can Say No? Material studies of agency, refusal, and distributed technological systems.',
     intro:
-      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and AI/full-stack engineer. His work materializes the internet through sculpture, performance, machine learning, and networked systems—making visible the infrastructures that shape how we see, feel, work, and believe. Across installations, public research, and technical experimentation, he examines how digital systems move from being tools into environments that structure collective life.',
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet as object, performance, and infrastructure. Working between academic aesthetics and internet culture, he uses familiar objects, humor, and computational systems to examine how networked technologies reorganize value, labor, attention, belief, and identity. His technical background is not separate from his artistic practice; it is one of the materials of the work.',
   },
 
   currentInquiry: {
-    title: 'Current Inquiry: Who Can Say No?',
-    content:
-      'Who Can Say No? is a series of material studies about agency, refusal, and distributed technological systems. It starts from one question: what happens to agency when an action can no longer be traced to a single actor, but moves across people, machines, interfaces, institutions, and infrastructures? The working hypothesis is that agency is not only the ability to act. It may also be the ability to interrupt, redirect, decline, or refuse. If systems act for us, then the ability to stop them, slow them, or say no becomes the most fragile form of agency we have. Stepping away does not stop the system.',
+    eyebrow: 'Current inquiry',
+    title: 'Who Can Say No?',
+    proposition: 'Efficiency is not the same as agency.',
+    stakes:
+      'AI is collapsing the distance between intention and execution while making the chain of responsibility between them longer.',
+    gap: 'The agency gap is the distance between convenience and meaningful control, consent, responsibility, and refusal.',
+    authority:
+      'Authority is distributed across users, workers, models, interfaces, companies, institutions, and physical infrastructure.',
+    questions:
+      'Who initiates, frames, recommends, decides, executes, alters, refuses, and bears the consequences?',
   },
 
+  method: {
+    steps: [
+      'Delegated action',
+      'Agency Map',
+      'One contradiction',
+      'Material argument',
+      'Peer reading',
+      'Revision',
+    ],
+    instrument:
+      'The map is not the artwork. It is a research instrument. The artwork isolates one contradiction and makes it physically perceptible through a familiar object, gesture, or performance.',
+    argument: 'These works are material arguments rather than illustrations of technology.',
+    examples:
+      'A system recommends that two people meet. An object passes from a person through a model, a machine, and a fabricator. A message goes out before anyone has time to reconsider it.',
+    unresolved:
+      'The question is still open: where efficiency expands agency, where it only increases output, and where it quietly moves responsibility or the chance to refuse. A different reading of the same action changes the map, and what gets made next.',
+  },
+
+  lineage: [
+    {
+      year: '2011',
+      terms: 'Value / ownership / copying',
+      title: '5 Million Dollars 1 Terabyte',
+      note: '',
+    },
+    {
+      year: '2024',
+      terms: 'Attention / labor / platform logic',
+      title: 'Doom Scrolling Treadmill',
+      note: '',
+    },
+    {
+      year: '2026',
+      terms: 'Agency / delegation / refusal',
+      title: 'Who Can Say No?',
+      note: 'Current inquiry',
+    },
+  ],
+
   technology: {
-    title: 'Technology in the Practice',
+    title: 'From Systems to Material',
     content:
-      'Technology in my work is both medium and subject. I use machine learning, software, livestream systems, public interfaces, and sculptural assemblage not simply as tools, but as ways to investigate how computation becomes social form. My practice is interested in the point where infrastructure becomes aesthetic, where interface becomes behavior, and where invisible technical systems become bodily and cultural realities.',
+      'Building the systems is part of the practice, not a separate job beside it. The works reduce a chain I know from software to something a person can encounter without technical training. A labor-saving system can create more labor: learning the tool, checking the output, correcting it, and keeping up. What remains at stake is judgment, context, embodiment, trust, responsibility, care, and refusal. The question is whether automation can regenerate that agency, or whether it only asks for more output.',
+  },
+
+  broaderResearch: {
+    text: 'Born into the Machine is the wider inquiry into intelligence as infrastructure — attention, adaptation, labor, value, and agency.',
+    label: 'Broader research: Born into the Machine →',
+    href: '/research/born-into-the-machine',
   },
 
   selectedWorks: [
@@ -31,8 +81,9 @@ export const EYEBEAM_INQUIRY = {
       year: 2011,
       medium: 'ART404 (Manuel Palou and Moises Sanabria). Sculpture.',
       description:
-        'Manuel Palou and Moises Sanabria met at New World School of the Arts and formed ART404. The hard drive was Moises’s. They traveled to transmediale 2012 together. A store-bought black hard drive on a plinth holds roughly a terabyte of pirated software, games, music, and books.',
-      relevance: 'Same method, 2011 to 2024: an invisible system inside a familiar object.',
+        'A store-bought black hard drive on a plinth holds roughly a terabyte of pirated software, games, music, and books valued at approximately five million dollars, compressing questions of ownership, copying, scarcity, and value into an ordinary object.',
+      relevance:
+        'An early example of the method: an invisible digital economy becomes legible through a materially simple contradiction.',
       images: [
         {
           type: 'image',
@@ -60,7 +111,8 @@ export const EYEBEAM_INQUIRY = {
       medium: '24-hour durational performance.',
       description:
         'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
-      relevance: 'Same method, 2011 to 2024: a familiar action holds the system.',
+      relevance:
+        'The same method moves from the object to the body: platform attention becomes physical labor, repetition, and time.',
       images: [
         {
           type: 'image',
@@ -82,7 +134,6 @@ export const EYEBEAM_INQUIRY = {
   ],
 
   contact: {
-    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and AI/full-stack engineer. He is Co-founder and Creative Director of AI24 Live, Digital Technical Director at Oolite Arts, and a resident artist at Bakehouse Art Complex. His work spans sculpture, installation, machine learning, and live systems, focusing on how technological infrastructures shape perception, labor, and collective life.',
     closing:
       'For exhibitions, public programs, writing, workshops, or artist-led technology conversations, please get in touch.',
     links: [

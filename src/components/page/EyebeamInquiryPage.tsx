@@ -6,28 +6,33 @@ import { EYEBEAM_INQUIRY } from '@/constants/eyebeam-inquiry';
 import { WorkImageCarousel } from './WorkImageCarousel';
 import { GlitchText } from '@/components/common/GlitchText';
 
+const bodyClass = 'text-lg sm:text-xl leading-relaxed max-w-3xl';
+
 export default function EyebeamInquiryPage() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const muted = isDark ? 'text-gray-400' : 'text-gray-600';
+  const heading = isDark ? 'text-white' : 'text-gray-900';
+  const focusClass = `focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
+    isDark ? 'focus-visible:outline-white' : 'focus-visible:outline-black'
+  }`;
+  const linkClass = `min-h-[44px] min-w-[44px] inline-flex items-center text-lg sm:text-xl font-medium underline underline-offset-4 hover:no-underline py-2 ${focusClass} ${
+    isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-blue-600 hover:text-blue-700'
+  }`;
 
   return (
     <main
-      className={`min-h-screen pt-24 sm:pt-32 pb-16 sm:pb-24 transition-colors duration-300 ${
+      className={`min-h-screen overflow-x-clip pt-24 sm:pt-32 pb-16 sm:pb-24 transition-colors duration-300 ${
         isDark ? 'bg-black text-white' : 'bg-white text-black'
       }`}
     >
-      {/* Hero - 200px heading area, full-width */}
       <section
-        className={`mt-[200px] min-h-[200px] flex flex-col justify-center px-6 sm:px-10 lg:px-11 mb-12 sm:mb-16 ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}
+        className={`mt-10 sm:mt-24 lg:mt-[200px] min-h-0 lg:min-h-[200px] flex flex-col justify-center overflow-x-clip px-6 sm:px-10 lg:px-11 mb-12 sm:mb-16 ${heading}`}
       >
         <div className="w-full max-w-7xl mx-auto">
           <GlitchText
             as="h1"
-            className={`text-5xl sm:text-7xl md:text-8xl lg:text-[140px] xl:text-[200px] font-bold tracking-tight leading-[0.9] ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}
+            className={`max-w-full text-[clamp(2.75rem,7.2vw,7.75rem)] font-bold tracking-tight leading-[0.9] ${heading}`}
           >
             {EYEBEAM_INQUIRY.hero.headline}
           </GlitchText>
@@ -35,174 +40,146 @@ export default function EyebeamInquiryPage() {
       </section>
 
       <article className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-11">
-        {/* Hero subheadline and intro */}
         <section className="mb-16 sm:mb-24 border-b border-current/10 pb-16 sm:pb-24">
-          <p
-            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] mb-8 ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            }`}
-          >
-            {EYEBEAM_INQUIRY.hero.subheadline}
-          </p>
-          <p
-            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] ${
-              isDark ? 'text-gray-400' : 'text-gray-600'
-            }`}
-          >
-            {EYEBEAM_INQUIRY.hero.intro}
-          </p>
+          <p className={`${bodyClass} ${muted}`}>{EYEBEAM_INQUIRY.hero.intro}</p>
         </section>
 
-        {/* Current Inquiry */}
         <section className="mb-16 sm:mb-24">
-          <Link
-            href="/research/born-into-the-machine"
-            className="block group"
-          >
-            <GlitchText
-              as="h2"
-              className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight group-hover:underline ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}
-            >
-              {EYEBEAM_INQUIRY.currentInquiry.title}
-            </GlitchText>
-          </Link>
-          <p
-            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] ${
-              isDark ? 'text-gray-400' : 'text-gray-600'
-            }`}
-          >
-            {EYEBEAM_INQUIRY.currentInquiry.content}
+          <p className={`text-sm tracking-wide uppercase mb-3 ${muted}`}>
+            {EYEBEAM_INQUIRY.currentInquiry.eyebrow}
           </p>
-          <Link
-            href="/research/born-into-the-machine"
-            className={`inline-block mt-6 text-[20px] sm:text-[24px] font-medium underline underline-offset-4 ${
-              isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-blue-600 hover:text-blue-700'
+          <GlitchText
+            as="h2"
+            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${heading}`}
+          >
+            {EYEBEAM_INQUIRY.currentInquiry.title}
+          </GlitchText>
+          <p
+            className={`text-3xl sm:text-5xl md:text-6xl leading-tight mb-8 max-w-4xl font-medium ${
+              isDark ? 'text-gray-200' : 'text-gray-800'
             }`}
           >
-            Explore Born into the Machine →
-          </Link>
+            {EYEBEAM_INQUIRY.currentInquiry.proposition}
+          </p>
+          <div className={`space-y-5 ${muted}`}>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.currentInquiry.stakes}</p>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.currentInquiry.gap}</p>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.currentInquiry.authority}</p>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.currentInquiry.questions}</p>
+          </div>
         </section>
 
-        {/* Selected Works */}
+        <section className="mb-16 sm:mb-24">
+          <h2 className="sr-only">Method</h2>
+          <ol className="max-w-3xl border-b border-current/15">
+            {EYEBEAM_INQUIRY.method.steps.map((step, index) => (
+              <li
+                key={step}
+                className="flex items-baseline gap-4 border-t border-current/15 py-3 sm:py-4"
+              >
+                <span className={`w-8 shrink-0 text-sm tabular-nums ${muted}`}>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="text-lg sm:text-xl">{step}</span>
+              </li>
+            ))}
+          </ol>
+          <div className={`mt-8 space-y-5 ${muted}`}>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.method.instrument}</p>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.method.argument}</p>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.method.examples}</p>
+            <p className={bodyClass}>{EYEBEAM_INQUIRY.method.unresolved}</p>
+          </div>
+        </section>
+
         <section className="mb-16 sm:mb-24">
           <GlitchText
             as="h2"
-            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-10 tracking-tight ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}
+            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-10 tracking-tight ${heading}`}
           >
             Selected Works
           </GlitchText>
+          <ol className="max-w-3xl mb-12 sm:mb-16 border-b border-current/15">
+            {EYEBEAM_INQUIRY.lineage.map((row) => (
+              <li
+                key={row.year}
+                className="grid grid-cols-1 sm:grid-cols-[5.5rem_1fr] gap-1 sm:gap-6 border-t border-current/15 py-4"
+              >
+                <span className={`text-sm tabular-nums ${muted}`}>{row.year}</span>
+                <span>
+                  <span className={`block text-sm tracking-wide ${muted}`}>{row.terms}</span>
+                  <span className="mt-1 block text-lg sm:text-xl">
+                    {row.title}
+                    {row.note ? (
+                      <span className={`mt-1 block text-sm sm:ml-3 sm:mt-0 sm:inline ${muted}`}>
+                        {row.note}
+                      </span>
+                    ) : null}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ol>
+
           <div className="space-y-16 sm:space-y-20">
             {EYEBEAM_INQUIRY.selectedWorks.map((work) => (
-              <Link
-                key={work.slug}
-                href={`/art/${work.slug}`}
-                className="block space-y-4 sm:space-y-6 group"
-              >
-                <div onClick={(e) => e.stopPropagation()}>
-                  <WorkImageCarousel images={work.images} alt={work.title} />
-                </div>
+              <article key={work.slug} className="space-y-4 sm:space-y-6">
+                <WorkImageCarousel images={work.images} alt={work.title} />
                 <div>
-                  <h3
-                    className={`text-xl sm:text-2xl font-semibold mb-2 group-hover:underline ${
-                      isDark ? 'text-white' : 'text-gray-900'
-                    }`}
-                  >
-                    {work.title} ({work.year})
+                  <h3 className={`text-xl sm:text-2xl font-semibold mb-2 ${heading}`}>
+                    <Link
+                      href={`/art/${work.slug}`}
+                      className={`underline-offset-4 hover:underline ${focusClass}`}
+                    >
+                      {work.title} ({work.year})
+                    </Link>
                   </h3>
-                  <p
-                    className={`text-[20px] sm:text-[24px] mb-3 ${
-                      isDark ? 'text-gray-400' : 'text-gray-600'
-                    }`}
-                  >
-                    {work.medium}
-                  </p>
-                  <p
-                    className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] mb-4 ${
-                      isDark ? 'text-gray-300' : 'text-gray-700'
-                    }`}
-                  >
+                  <p className={`text-lg sm:text-xl mb-3 ${muted}`}>{work.medium}</p>
+                  <p className={`${bodyClass} mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                     {work.description}
                   </p>
-                  <p
-                    className={`text-[20px] sm:text-[24px] italic ${
-                      isDark ? 'text-gray-500' : 'text-gray-500'
-                    }`}
-                  >
-                    <strong>Relevance:</strong> {work.relevance}
-                  </p>
-                  <span
-                    className={`inline-block mt-4 text-[20px] sm:text-[24px] font-medium underline underline-offset-4 ${
-                      isDark ? 'text-cyan-400 group-hover:text-cyan-300' : 'text-blue-600 group-hover:text-blue-700'
-                    }`}
-                  >
+                  <p className={`${bodyClass} italic ${muted}`}>{work.relevance}</p>
+                  <Link href={`/art/${work.slug}`} className={`mt-4 ${linkClass}`}>
                     View work →
-                  </span>
+                  </Link>
                 </div>
-              </Link>
+              </article>
             ))}
           </div>
         </section>
 
-        {/* Technology in the Practice */}
         <section className="mb-16 sm:mb-24 border-t border-current/10 pt-16 sm:pt-24">
           <GlitchText
             as="h2"
-            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}
+            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${heading}`}
           >
             {EYEBEAM_INQUIRY.technology.title}
           </GlitchText>
-          <p
-            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] ${
-              isDark ? 'text-gray-400' : 'text-gray-600'
-            }`}
-          >
-            {EYEBEAM_INQUIRY.technology.content}
-          </p>
+          <p className={`${bodyClass} ${muted}`}>{EYEBEAM_INQUIRY.technology.content}</p>
         </section>
 
-        {/* Contact */}
+        <section className="mb-16 sm:mb-24">
+          <p className={`${bodyClass} mb-4 ${muted}`}>{EYEBEAM_INQUIRY.broaderResearch.text}</p>
+          <Link href={EYEBEAM_INQUIRY.broaderResearch.href} className={linkClass}>
+            {EYEBEAM_INQUIRY.broaderResearch.label}
+          </Link>
+        </section>
+
         <section className="mb-16 sm:mb-24 border-t border-current/10 pt-16 sm:pt-24">
           <GlitchText
             as="h2"
-            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}
+            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${heading}`}
           >
             Contact
           </GlitchText>
-          <p
-            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] mb-8 ${
-              isDark ? 'text-gray-400' : 'text-gray-600'
-            }`}
-          >
-            {EYEBEAM_INQUIRY.contact.bio}
-          </p>
-          <div className="flex flex-wrap gap-4 sm:gap-6 mb-8">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
             {EYEBEAM_INQUIRY.contact.links.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`min-h-[44px] min-w-[44px] inline-flex items-center text-[20px] sm:text-[24px] font-medium underline underline-offset-4 hover:no-underline py-2 ${
-                  isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-blue-600 hover:text-blue-700'
-                }`}
-              >
+              <Link key={link.label} href={link.href} className={linkClass}>
                 {link.label}
               </Link>
             ))}
           </div>
-          <p
-            className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] ${
-              isDark ? 'text-gray-500' : 'text-gray-600'
-            }`}
-          >
-            {EYEBEAM_INQUIRY.contact.closing}
-          </p>
+          <p className={`${bodyClass} ${muted}`}>{EYEBEAM_INQUIRY.contact.closing}</p>
         </section>
       </article>
     </main>
