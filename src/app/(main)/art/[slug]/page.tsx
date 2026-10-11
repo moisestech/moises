@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
+import ArtworkAgencyMap from '@/components/art/ArtworkAgencyMap';
 import ArtworkGallery from '@/components/art/ArtworkGallery';
 import ArtworkMediaCarousel from '@/components/art/ArtworkMediaCarousel';
 import ArtworkResearchBridge from '@/components/art/ArtworkResearchBridge';
@@ -466,6 +467,36 @@ export default async function ArtPage({ params }: PageProps) {
             </div>
           </div>
         )}
+
+        {params.slug === 'doomscrolling_treadmill' ? <ArtworkAgencyMap /> : null}
+
+        {artwork.processStudies && artwork.processStudies.images.length > 0 ? (
+          <section className="mt-24 border-t border-dashed border-gray-300 pt-16 dark:border-gray-700" aria-labelledby="process-studies-heading">
+            <h2 id="process-studies-heading" className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              {artwork.processStudies.title || 'Process / Early studies'}
+            </h2>
+            {artwork.processStudies.intro ? (
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed">{artwork.processStudies.intro}</p>
+            ) : null}
+            <ul className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2">
+              {artwork.processStudies.images.map((image) => (
+                <li key={image.url} className="border border-gray-200 p-4 dark:border-gray-800">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Study</p>
+                  <div className="relative mt-4 aspect-[4/3] bg-neutral-100 dark:bg-neutral-900">
+                    <ImageWithSkeleton
+                      src={image.url}
+                      alt={image.alt || image.caption || 'Process study'}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 36rem"
+                      className="object-contain"
+                    />
+                  </div>
+                  {image.caption ? <p className="mt-3 text-sm leading-relaxed">{image.caption}</p> : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         {artwork.related && artwork.related.length > 0 ? (
           <section className="mt-24 border-t border-gray-200 pt-16 dark:border-gray-800" aria-labelledby="related-works-heading">

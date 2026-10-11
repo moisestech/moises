@@ -88,6 +88,16 @@ interface Artwork {
   related?: { slug: string; note: string }[];
   /** Path from this work back to the studio. */
   studio?: { href: string; label: string; text: string };
+  /** Speculative studies. Rendered apart from installation documentation, and only when images exist. */
+  processStudies?: {
+    title?: string;
+    intro?: string;
+    images: {
+      url: string;
+      caption?: string;
+      alt?: string;
+    }[];
+  };
   video?: {
     type: string;
     id: string;
@@ -892,6 +902,12 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           note: 'Presented as Doomscrolling Treadmill + Touch Grass Station; 24-hour durational performance.',
         },
       ],
+      processStudies: {
+        title: 'Process / Early studies',
+        intro:
+          "Early image studies used speculative visualization to test how a workstation, treadmill, screens, and the idea of 'touching grass' might occupy the same physical system.",
+        images: [],
+      },
       related: [
         {
           slug: 'five_million_dollars',
