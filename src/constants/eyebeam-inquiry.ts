@@ -9,19 +9,22 @@ export const EYEBEAM_INQUIRY = {
     subheadline:
       'Who Can Say No? Material studies of agency, refusal, and distributed technological systems.',
     intro:
-      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and AI/full-stack engineer. His work materializes the internet through sculpture, performance, machine learning, and networked systems—making visible the infrastructures that shape how we see, feel, work, and believe. Across installations, public research, and technical experimentation, he examines how digital systems move from being tools into environments that structure collective life.',
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer. His work materializes the Internet through sculpture, performance, moving image, and computational systems. Across his practice, he examines how networked technologies transform value, labor, attention, identity, and belief—and how digital systems move from tools into environments that increasingly act on physical and social life.',
   },
 
   currentInquiry: {
     title: 'Current Inquiry: Who Can Say No?',
+    proposition: 'Efficiency is not the same as agency.',
     content:
-      'Who Can Say No? is a series of material studies about agency, refusal, and distributed technological systems. It starts from one question: what happens to agency when an action can no longer be traced to a single actor, but moves across people, machines, interfaces, institutions, and infrastructures? The working hypothesis is that agency is not only the ability to act. It may also be the ability to interrupt, redirect, decline, or refuse. If systems act for us, then the ability to stop them, slow them, or say no becomes the most fragile form of agency we have. Stepping away does not stop the system.',
+      'Who Can Say No? grows from a long-running question in my practice: how the Internet transforms the value of objects, labor, and attention by routing them through systems that are increasingly automated. AI changes the stakes because software can now move beyond organizing information toward recommending, generating, communicating, routing, scheduling, and executing increasingly complex actions. AI is collapsing the distance between intention and execution while making the chain of responsibility between them longer. The project asks where agency remains inside those chains: who initiates, frames, recommends, decides, executes, alters, refuses, and bears the consequences.',
+    method:
+      'I begin with a real delegated action, map the actors and decision points around it, identify one contradiction, and translate that contradiction into a materially simple sculpture or performance. The map is not the artwork; it is a research instrument for finding where optimization, responsibility, consent, hesitation, and refusal become unstable. Peer disagreement is part of the method: if another reading relocates agency, the map changes, and so does what I materialize next.',
   },
 
   technology: {
-    title: 'Technology in the Practice',
+    title: 'From Systems to Material',
     content:
-      'Technology in my work is both medium and subject. I use machine learning, software, livestream systems, public interfaces, and sculptural assemblage not simply as tools, but as ways to investigate how computation becomes social form. My practice is interested in the point where infrastructure becomes aesthetic, where interface becomes behavior, and where invisible technical systems become bodily and cultural realities.',
+      'Because I also build technological systems, I am interested in translating relationships I understand through software into physical situations that do not require technical expertise to encounter. Rather than reproduce the complexity of an AI model, CRM, fabrication workflow, or automated communication chain, I reduce a system to a familiar object, gesture, or contradiction. This lets me ask a practical question with artistic stakes: can automation increase human agency rather than simply increase output? The work looks for the point where efficiency expands capacity, where it redistributes responsibility, and where it begins to optimize away reflection, consent, memory, or the ability to say no.',
   },
 
   selectedWorks: [
@@ -31,8 +34,8 @@ export const EYEBEAM_INQUIRY = {
       year: 2011,
       medium: 'ART404 (Manuel Palou and Moises Sanabria). Sculpture.',
       description:
-        'Manuel Palou and Moises Sanabria met at New World School of the Arts and formed ART404. The hard drive was Moises’s. They traveled to transmediale 2012 together. A store-bought black hard drive on a plinth holds roughly a terabyte of pirated software, games, music, and books.',
-      relevance: 'Same method, 2011 to 2024: an invisible system inside a familiar object.',
+        'A store-bought black hard drive on a plinth holds roughly a terabyte of pirated software, games, music, and books valued at approximately five million dollars, compressing questions of ownership, copying, scarcity, and value into an ordinary object.',
+      relevance: 'An early example of the method: an invisible digital economy becomes legible through a materially simple contradiction.',
       images: [
         {
           type: 'image',
@@ -60,7 +63,7 @@ export const EYEBEAM_INQUIRY = {
       medium: '24-hour durational performance.',
       description:
         'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
-      relevance: 'Same method, 2011 to 2024: a familiar action holds the system.',
+      relevance: 'The same method moves from the object to the body: platform attention becomes physical labor, repetition, and time.',
       images: [
         {
           type: 'image',
@@ -82,7 +85,7 @@ export const EYEBEAM_INQUIRY = {
   ],
 
   contact: {
-    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and AI/full-stack engineer. He is Co-founder and Creative Director of AI24 Live, Digital Technical Director at Oolite Arts, and a resident artist at Bakehouse Art Complex. His work spans sculpture, installation, machine learning, and live systems, focusing on how technological infrastructures shape perception, labor, and collective life.',
+    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet through sculpture, performance, moving image, and computational systems. His practice examines how networked technologies transform value, labor, attention, identity, and belief. He is Co-founder and Creative Director of AI24 Live and works across art, software, fabrication, and education in Miami.',
     closing:
       'For exhibitions, public programs, writing, workshops, or artist-led technology conversations, please get in touch.',
     links: [
