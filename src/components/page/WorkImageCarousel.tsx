@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -31,7 +31,16 @@ export function WorkImageCarousel({
   const isDark = theme === 'dark';
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 = prev, 1 = next
+  const [reduceMotion, setReduceMotion] = useState(false);
   const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sync = () => setReduceMotion(media.matches);
+    sync();
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
 
   const goTo = useCallback(
     (index: number, dir: number) => {
@@ -75,10 +84,14 @@ export function WorkImageCarousel({
             key={currentIndex}
             className="absolute inset-0 flex items-center justify-center bg-black"
             custom={direction}
-            initial={{ x: direction > 0 ? '100%' : '-100%' }}
+            initial={{ x: reduceMotion ? 0 : direction > 0 ? '100%' : '-100%' }}
             animate={{ x: 0 }}
-            exit={{ x: direction > 0 ? '-100%' : '100%' }}
-            transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+            exit={{ x: reduceMotion ? 0 : direction > 0 ? '-100%' : '100%' }}
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { type: 'tween', duration: 0.35, ease: 'easeInOut' }
+            }
           >
             {currentItem.type === 'image' ? (
               <Image
@@ -108,7 +121,7 @@ export function WorkImageCarousel({
             <button
               type="button"
               onClick={goPrev}
-              className={`absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white transition-all hover:bg-black/70 ${
+              className={`absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white transition-all hover:bg-black/70 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                 showControlsOnTouch
                   ? 'opacity-80 max-md:opacity-90 md:opacity-0 md:group-hover:opacity-60 md:hover:opacity-100'
                   : 'opacity-0 group-hover:opacity-100 md:opacity-60 md:hover:opacity-100'
@@ -120,7 +133,7 @@ export function WorkImageCarousel({
             <button
               type="button"
               onClick={goNext}
-              className={`absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white transition-all hover:bg-black/70 ${
+              className={`absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white transition-all hover:bg-black/70 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                 showControlsOnTouch
                   ? 'opacity-80 max-md:opacity-90 md:opacity-0 md:group-hover:opacity-60 md:hover:opacity-100'
                   : 'opacity-0 group-hover:opacity-100 md:opacity-60 md:hover:opacity-100'
@@ -141,7 +154,7 @@ export function WorkImageCarousel({
               key={index}
               type="button"
               onClick={() => index !== currentIndex && goTo(index, index > currentIndex ? 1 : -1)}
-              className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 before:block before:h-2 before:w-2 before:rounded-full before:content-[''] ${
+              className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 before:block before:h-2 before:w-2 before:rounded-full before:content-[''] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                 index === currentIndex
                   ? isDark
                     ? 'before:bg-white before:scale-125'
