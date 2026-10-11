@@ -6,25 +6,72 @@
 export const EYEBEAM_INQUIRY = {
   hero: {
     headline: 'Materializing the Internet',
-    subheadline:
-      'Who Can Say No? Material studies of agency, refusal, and distributed technological systems.',
     intro:
-      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet as object, performance, and infrastructure. Working between academic aesthetics and internet culture, he uses familiar objects, humor, and computational systems to examine how networked technologies reorganize value, labor, attention, belief, and identity. His technical background is not separate from the artistic practice; it is one of the materials of the work.',
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet as object, performance, and infrastructure. Working between academic aesthetics and internet culture, he uses familiar objects, humor, and computational systems to examine how networked technologies reorganize value, labor, attention, belief, and identity. His technical background is not separate from his artistic practice; it is one of the materials of the work.',
   },
 
   currentInquiry: {
-    title: 'Current Inquiry: Who Can Say No?',
+    eyebrow: 'Current inquiry',
+    title: 'Who Can Say No?',
     proposition: 'Efficiency is not the same as agency.',
-    content:
-      'Who Can Say No? grows from a long-running question in my practice: how the Internet transforms the value of objects, labor, and attention by routing them through systems that are increasingly automated. AI changes the stakes because software can now move beyond organizing information toward recommending, generating, communicating, routing, scheduling, and executing increasingly complex actions. AI is collapsing the distance between intention and execution while making the chain of responsibility between them longer. I am interested in the agency gap between convenience and meaningful control, consent, and responsibility: who initiates, frames, recommends, decides, executes, alters, refuses, and bears the consequences.',
-    method:
-      'I begin with a real delegated action, map the actors and decision points around it, identify one contradiction, and translate that contradiction into a materially simple sculpture or performance. These works are material arguments, not illustrations of technology. The map is a research instrument for finding where optimization, responsibility, consent, hesitation, and refusal become unstable. Peer disagreement is part of the method: if another reading relocates agency, the map changes, and so does what I materialize next.',
+    stakes:
+      'AI is collapsing the distance between intention and execution while making the chain of responsibility between them longer.',
+    gap: 'The agency gap is the distance between convenience and meaningful control, consent, responsibility, and refusal.',
+    authority:
+      'Authority is distributed across users, workers, models, interfaces, companies, institutions, and physical infrastructure.',
+    questions:
+      'Who initiates, frames, recommends, decides, executes, alters, refuses, and bears the consequences?',
   },
+
+  method: {
+    steps: [
+      'Delegated action',
+      'Agency Map',
+      'One contradiction',
+      'Material argument',
+      'Peer reading',
+      'Revision',
+    ],
+    instrument:
+      'The map is not the artwork. It is a research instrument. The artwork isolates one contradiction and makes it physically perceptible through a familiar object, gesture, or performance.',
+    argument: 'These works are material arguments rather than illustrations of technology.',
+    examples:
+      'A system recommends that two people meet. An object passes from a person through a model, a machine, and a fabricator. A message goes out before anyone has time to reconsider it.',
+    unresolved:
+      'The question is still open: where efficiency expands agency, where it only increases output, and where it quietly moves responsibility or the chance to refuse. A different reading of the same action changes the map, and what gets made next.',
+  },
+
+  lineage: [
+    {
+      year: '2011',
+      terms: 'Value / ownership / copying',
+      title: '5 Million Dollars 1 Terabyte',
+      note: '',
+    },
+    {
+      year: '2024',
+      terms: 'Attention / labor / platform logic',
+      title: 'Doom Scrolling Treadmill',
+      note: '',
+    },
+    {
+      year: '2026',
+      terms: 'Agency / delegation / refusal',
+      title: 'Who Can Say No?',
+      note: 'Current inquiry',
+    },
+  ],
 
   technology: {
     title: 'From Systems to Material',
     content:
-      'Because I also build technological systems, I am interested in translating relationships I understand through software into physical situations that do not require technical expertise to encounter. Rather than reproduce the complexity of an AI model, CRM, fabrication workflow, or automated communication chain, I reduce a system to a familiar object, gesture, or contradiction. As intelligence becomes cheaper, faster, and more widely distributed through platforms, I am interested in what remains distinctly human: judgment, context, embodiment, trust, responsibility, care, and refusal. The practical question is whether automation can regenerate human agency rather than simply increase output.',
+      'Building the systems is part of the practice, not a separate job beside it. The works reduce a chain I know from software to something a person can encounter without technical training. A labor-saving system can create more labor: learning the tool, checking the output, correcting it, and keeping up. What remains at stake is judgment, context, embodiment, trust, responsibility, care, and refusal. The question is whether automation can regenerate that agency, or whether it only asks for more output.',
+  },
+
+  broaderResearch: {
+    text: 'Born into the Machine is the wider inquiry into intelligence as infrastructure — attention, adaptation, labor, value, and agency.',
+    label: 'Broader research: Born into the Machine →',
+    href: '/research/born-into-the-machine',
   },
 
   selectedWorks: [
@@ -35,7 +82,8 @@ export const EYEBEAM_INQUIRY = {
       medium: 'ART404 (Manuel Palou and Moises Sanabria). Sculpture.',
       description:
         'A store-bought black hard drive on a plinth holds roughly a terabyte of pirated software, games, music, and books valued at approximately five million dollars, compressing questions of ownership, copying, scarcity, and value into an ordinary object.',
-      relevance: 'An early example of the method: an invisible digital economy becomes legible through a materially simple contradiction.',
+      relevance:
+        'An early example of the method: an invisible digital economy becomes legible through a materially simple contradiction.',
       images: [
         {
           type: 'image',
@@ -63,7 +111,8 @@ export const EYEBEAM_INQUIRY = {
       medium: '24-hour durational performance.',
       description:
         'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
-      relevance: 'The same method moves from the object to the body: platform attention becomes physical labor, repetition, and time.',
+      relevance:
+        'The same method moves from the object to the body: platform attention becomes physical labor, repetition, and time.',
       images: [
         {
           type: 'image',
@@ -85,7 +134,6 @@ export const EYEBEAM_INQUIRY = {
   ],
 
   contact: {
-    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet as object, performance, and infrastructure. Working between academic aesthetics and internet culture, he uses familiar objects, humor, and computational systems to examine how networked technologies reorganize value, labor, attention, belief, and identity. He is Co-founder and Creative Director of AI24 Live and works across art, software, fabrication, and education in Miami.',
     closing:
       'For exhibitions, public programs, writing, workshops, or artist-led technology conversations, please get in touch.',
     links: [
