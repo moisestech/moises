@@ -9,22 +9,22 @@ export const EYEBEAM_INQUIRY = {
     subheadline:
       'Who Can Say No? Material studies of agency, refusal, and distributed technological systems.',
     intro:
-      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer. His work materializes the Internet through sculpture, performance, moving image, and computational systems. Across his practice, he examines how networked technologies transform value, labor, attention, identity, and belief—and how digital systems move from tools into environments that increasingly act on physical and social life.',
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet as object, performance, and infrastructure. Working between academic aesthetics and internet culture, he uses familiar objects, humor, and computational systems to examine how networked technologies reorganize value, labor, attention, belief, and identity. His technical background is not separate from the artistic practice; it is one of the materials of the work.',
   },
 
   currentInquiry: {
     title: 'Current Inquiry: Who Can Say No?',
     proposition: 'Efficiency is not the same as agency.',
     content:
-      'Who Can Say No? grows from a long-running question in my practice: how the Internet transforms the value of objects, labor, and attention by routing them through systems that are increasingly automated. AI changes the stakes because software can now move beyond organizing information toward recommending, generating, communicating, routing, scheduling, and executing increasingly complex actions. AI is collapsing the distance between intention and execution while making the chain of responsibility between them longer. The project asks where agency remains inside those chains: who initiates, frames, recommends, decides, executes, alters, refuses, and bears the consequences.',
+      'Who Can Say No? grows from a long-running question in my practice: how the Internet transforms the value of objects, labor, and attention by routing them through systems that are increasingly automated. AI changes the stakes because software can now move beyond organizing information toward recommending, generating, communicating, routing, scheduling, and executing increasingly complex actions. AI is collapsing the distance between intention and execution while making the chain of responsibility between them longer. I am interested in the agency gap between convenience and meaningful control, consent, and responsibility: who initiates, frames, recommends, decides, executes, alters, refuses, and bears the consequences.',
     method:
-      'I begin with a real delegated action, map the actors and decision points around it, identify one contradiction, and translate that contradiction into a materially simple sculpture or performance. The map is not the artwork; it is a research instrument for finding where optimization, responsibility, consent, hesitation, and refusal become unstable. Peer disagreement is part of the method: if another reading relocates agency, the map changes, and so does what I materialize next.',
+      'I begin with a real delegated action, map the actors and decision points around it, identify one contradiction, and translate that contradiction into a materially simple sculpture or performance. These works are material arguments, not illustrations of technology. The map is a research instrument for finding where optimization, responsibility, consent, hesitation, and refusal become unstable. Peer disagreement is part of the method: if another reading relocates agency, the map changes, and so does what I materialize next.',
   },
 
   technology: {
     title: 'From Systems to Material',
     content:
-      'Because I also build technological systems, I am interested in translating relationships I understand through software into physical situations that do not require technical expertise to encounter. Rather than reproduce the complexity of an AI model, CRM, fabrication workflow, or automated communication chain, I reduce a system to a familiar object, gesture, or contradiction. This lets me ask a practical question with artistic stakes: can automation increase human agency rather than simply increase output? The work looks for the point where efficiency expands capacity, where it redistributes responsibility, and where it begins to optimize away reflection, consent, memory, or the ability to say no.',
+      'Because I also build technological systems, I am interested in translating relationships I understand through software into physical situations that do not require technical expertise to encounter. Rather than reproduce the complexity of an AI model, CRM, fabrication workflow, or automated communication chain, I reduce a system to a familiar object, gesture, or contradiction. As intelligence becomes cheaper, faster, and more widely distributed through platforms, I am interested in what remains distinctly human: judgment, context, embodiment, trust, responsibility, care, and refusal. The practical question is whether automation can regenerate human agency rather than simply increase output.',
   },
 
   selectedWorks: [
@@ -85,7 +85,7 @@ export const EYEBEAM_INQUIRY = {
   ],
 
   contact: {
-    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet through sculpture, performance, moving image, and computational systems. His practice examines how networked technologies transform value, labor, attention, identity, and belief. He is Co-founder and Creative Director of AI24 Live and works across art, software, fabrication, and education in Miami.',
+    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet as object, performance, and infrastructure. Working between academic aesthetics and internet culture, he uses familiar objects, humor, and computational systems to examine how networked technologies reorganize value, labor, attention, belief, and identity. He is Co-founder and Creative Director of AI24 Live and works across art, software, fabrication, and education in Miami.',
     closing:
       'For exhibitions, public programs, writing, workshops, or artist-led technology conversations, please get in touch.',
     links: [
