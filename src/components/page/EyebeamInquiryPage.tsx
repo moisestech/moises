@@ -55,19 +55,14 @@ export default function EyebeamInquiryPage() {
 
         {/* Current Inquiry */}
         <section className="mb-16 sm:mb-24">
-          <Link
-            href="/research/born-into-the-machine"
-            className="block group"
+          <GlitchText
+            as="h2"
+            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}
           >
-            <GlitchText
-              as="h2"
-              className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight group-hover:underline ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}
-            >
-              {EYEBEAM_INQUIRY.currentInquiry.title}
-            </GlitchText>
-          </Link>
+            {EYEBEAM_INQUIRY.currentInquiry.title}
+          </GlitchText>
           <p
             className={`text-[28px] sm:text-[36px] md:text-[43px] leading-[1.2] ${
               isDark ? 'text-gray-400' : 'text-gray-600'
@@ -75,14 +70,6 @@ export default function EyebeamInquiryPage() {
           >
             {EYEBEAM_INQUIRY.currentInquiry.content}
           </p>
-          <Link
-            href="/research/born-into-the-machine"
-            className={`inline-block mt-6 text-[20px] sm:text-[24px] font-medium underline underline-offset-4 ${
-              isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-blue-600 hover:text-blue-700'
-            }`}
-          >
-            Explore Born into the Machine →
-          </Link>
         </section>
 
         {/* Selected Works */}
@@ -164,6 +151,20 @@ export default function EyebeamInquiryPage() {
           >
             {EYEBEAM_INQUIRY.technology.content}
           </p>
+        </section>
+
+        <section className="mb-16 sm:mb-24 border-t border-current/10 pt-10">
+          <p className={`text-xs font-semibold uppercase tracking-wider ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+            {EYEBEAM_INQUIRY.broaderResearch.eyebrow}
+          </p>
+          <Link
+            href={EYEBEAM_INQUIRY.broaderResearch.href}
+            className={`mt-3 inline-flex min-h-11 items-center text-base underline underline-offset-4 ${
+              isDark ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            {EYEBEAM_INQUIRY.broaderResearch.title}
+          </Link>
         </section>
 
         {/* Contact */}

@@ -9,7 +9,7 @@ export const EYEBEAM_INQUIRY = {
     subheadline:
       'Who Can Say No? Material studies of agency, refusal, and distributed technological systems.',
     intro:
-      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and AI/full-stack engineer. His work materializes the internet through sculpture, performance, machine learning, and networked systems—making visible the infrastructures that shape how we see, feel, work, and believe. Across installations, public research, and technical experimentation, he examines how digital systems move from being tools into environments that structure collective life.',
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist. His work materializes the Internet through sculpture, performance, moving image, and computational systems, making visible the infrastructures that shape how we see, feel, work, and believe.',
   },
 
   currentInquiry: {
@@ -21,7 +21,7 @@ export const EYEBEAM_INQUIRY = {
   technology: {
     title: 'Technology in the Practice',
     content:
-      'Technology in my work is both medium and subject. I use machine learning, software, livestream systems, public interfaces, and sculptural assemblage not simply as tools, but as ways to investigate how computation becomes social form. My practice is interested in the point where infrastructure becomes aesthetic, where interface becomes behavior, and where invisible technical systems become bodily and cultural realities.',
+      'Because I also build technological systems, I am interested in translating relationships I understand through software into physical situations that do not require technical expertise to encounter. Rather than reproduce the technical complexity of the systems I examine, I reduce them to familiar objects, gestures, and contradictions so that questions of control, dependency, labor, responsibility, and refusal can become perceptible.',
   },
 
   selectedWorks: [
@@ -31,8 +31,8 @@ export const EYEBEAM_INQUIRY = {
       year: 2011,
       medium: 'ART404 (Manuel Palou and Moises Sanabria). Sculpture.',
       description:
-        'Manuel Palou and Moises Sanabria met at New World School of the Arts and formed ART404. The hard drive was Moises’s. They traveled to transmediale 2012 together. A store-bought black hard drive on a plinth holds roughly a terabyte of pirated software, games, music, and books.',
-      relevance: 'Same method, 2011 to 2024: an invisible system inside a familiar object.',
+        '5 Million Dollars 1 Terabyte compresses questions of digital ownership, copying, scarcity, and value into an ordinary hard drive. It establishes an early method in the practice: translating an invisible system into a simple material contradiction.',
+      relevance: 'An invisible system becomes legible through an ordinary object.',
       images: [
         {
           type: 'image',
@@ -60,7 +60,7 @@ export const EYEBEAM_INQUIRY = {
       medium: '24-hour durational performance.',
       description:
         'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
-      relevance: 'Same method, 2011 to 2024: a familiar action holds the system.',
+      relevance: 'The same method moves from the object to the body: platform attention becomes physical labor.',
       images: [
         {
           type: 'image',
@@ -81,8 +81,14 @@ export const EYEBEAM_INQUIRY = {
     },
   ],
 
+  broaderResearch: {
+    eyebrow: 'Broader research',
+    title: 'Born into the Machine',
+    href: '/research/born-into-the-machine',
+  },
+
   contact: {
-    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and AI/full-stack engineer. He is Co-founder and Creative Director of AI24 Live, Digital Technical Director at Oolite Arts, and a resident artist at Bakehouse Art Complex. His work spans sculpture, installation, machine learning, and live systems, focusing on how technological infrastructures shape perception, labor, and collective life.',
+    bio: 'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet through sculpture, performance, moving image, and computational systems. His practice examines how networked technologies shape attention, labor, value, identity, and belief. He is a resident artist at Bakehouse Art Complex.',
     closing:
       'For exhibitions, public programs, writing, workshops, or artist-led technology conversations, please get in touch.',
     links: [

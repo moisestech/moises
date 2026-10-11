@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Materializing the Internet | Moises Sanabria',
     description:
-      'Works and inquiries by Moises Sanabria on platform logic, attention, belief, and networked life.',
+      'Works and inquiries by Moises Sanabria on agency, refusal, and distributed technological systems.',
     type: 'website',
     url: 'https://moises.tech/eyebeam',
   },

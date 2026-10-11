@@ -5,6 +5,7 @@ import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
 import ArtworkGallery from '@/components/art/ArtworkGallery';
 import ArtworkMediaCarousel from '@/components/art/ArtworkMediaCarousel';
+import ArtworkResearchBridge from '@/components/art/ArtworkResearchBridge';
 import ArtworkVideo from '@/components/art/ArtworkVideo';
 import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
 import Link from 'next/link';
@@ -499,6 +500,8 @@ export default async function ArtPage({ params }: PageProps) {
             </ul>
           </section>
         ) : null}
+
+        <ArtworkResearchBridge inquiry={artwork.currentInquiry} thread={artwork.researchThread} />
 
         {artwork.studio ? (
           <section className="mt-16 border-t border-gray-200 pt-12 dark:border-gray-800" aria-labelledby="studio-heading">
