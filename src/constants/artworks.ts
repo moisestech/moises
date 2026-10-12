@@ -28,6 +28,8 @@ interface Artwork {
   /** When set, the Location line links here (e.g. official exhibition page). */
   location_url?: string;
   curator?: string;
+  /** When set, the Curator line links here. */
+  curator_url?: string;
   collaboration?: string;
   technical_assistant?: string;
   description: string;
@@ -816,8 +818,8 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         'Grass patch',
         'LED panel',
       ],
-      // Drive folder MoisesSanabria-DoomscrollingTreadmill-TouchGrassStation-Caff24 has 13 JPGs.
-      // Twelve of those photographs are mapped to Cloudinary below. The thirteenth original is not linked until that file is identified.
+      // drive-numbering-map.tsv maps all 13 Drive photos. #1 (social-01) and #5 (chroma-fest-2024_01)
+      // are identified and not in this carousel until Moises adds them. #13 is chroma-fest-2024_09.
       images: [
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558664/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-11_v04wjo.jpg',
@@ -1231,6 +1233,7 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       year: 2011,
       location: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible, Berlin',
       curator: 'Jacob Lillemose',
+      curator_url: 'https://archive.transmediale.de/content/jacob-lillemose',
       collaboration: 'ART404 (Manuel Palou and Moises Sanabria)',
       yearNote:
         'Shown at Art 404, Low Budget Gallery, New York, 2011; exhibited at transmediale 2012, Berlin.',

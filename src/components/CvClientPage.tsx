@@ -9,9 +9,7 @@ import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import EnhancedDescription from '@/components/EnhancedDescription';
 import InteractiveText from '@/components/InteractiveText';
-import CvExhibitionsSection from '@/components/cv/CvExhibitionsSection';
 import { CvCollapsibleSection } from '@/components/cv/CvCollapsibleSection';
-import type { CVExhibition } from '@/types/cv';
 
 // Animation variants for list items
 const getListItemVariants = (isDark: boolean): Variants => ({
@@ -103,19 +101,13 @@ const InteractiveDescription = ({ details, interactiveContent }: {
   );
 };
 
-const CvClientPage = ({
-  airtableExhibitions,
-  airtableError,
-}: {
-  airtableExhibitions?: Record<string, CVExhibition[]>;
+const CvClientPage = (_props: {
+  airtableExhibitions?: unknown;
   airtableError?: string | null;
 }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const listItemVariants = getListItemVariants(isDark);
-  const hasAirtableExhibitions =
-    airtableExhibitions &&
-    Object.values(airtableExhibitions).some((items) => items.length > 0);
 
   return (
     <div className="max-w-7xl px-4 sm:px-6 md:px-11 pt-4 sm:pt-6 md:pb-6 mx-auto print:py-4 print:px-2">
@@ -271,6 +263,52 @@ const CvClientPage = ({
           </ul>
         </CvCollapsibleSection>
 
+        <CvCollapsibleSection id="fellowships" title="Fellowships and Residencies" defaultOpen={false}>
+          <ul className="space-y-3 print:space-y-1">
+            {cvData.fellowships.map((item, index) => (
+              <motion.li
+                key={index}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={listItemVariants}
+                className="flex flex-col sm:flex-row print:flex-row p-2 rounded-md transition-colors"
+              >
+                <div className="w-full sm:w-32 font-medium print:w-24 print:text-xs">{item.year}</div>
+                <div className="flex-1 print:text-xs">
+                  <div>{item.title}</div>
+                  <div className="text-gray-600 dark:text-gray-400">{item.location}</div>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        </CvCollapsibleSection>
+
+        <CvCollapsibleSection id="collectives" title="Collectives and Roles" defaultOpen={false}>
+          <ul className="space-y-3 print:space-y-1">
+            {cvData.collectives.map((item, index) => (
+              <motion.li
+                key={index}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={listItemVariants}
+                className="flex flex-col sm:flex-row print:flex-row p-2 rounded-md transition-colors"
+              >
+                <div className="w-full sm:w-32 font-medium print:w-24 print:text-xs">{item.period}</div>
+                <div className="flex-1 print:text-xs">
+                  <div>{item.title}</div>
+                  <div className="text-gray-600 dark:text-gray-400">{item.location}</div>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        </CvCollapsibleSection>
+
         <CvCollapsibleSection id="experience" title="Professional Experience" defaultOpen={false}>
           <ul className="space-y-5 print:space-y-2">
             {cvData.experience.map((exp, index) => (
@@ -367,49 +405,33 @@ const CvClientPage = ({
 
         <CvCollapsibleSection id="exhibitions" title="Exhibitions" defaultOpen>
 
-          {process.env.NODE_ENV === 'development' && airtableError ? (
-            <p className="text-xs text-red-600 mb-2">{airtableError}</p>
-          ) : null}
-
-          {hasAirtableExhibitions ? (
-            <>
-              <h3 className="text-lg font-medium mb-3 pl-2">Selected Exhibitions</h3>
-              <CvExhibitionsSection
-                exhibitionsByYear={airtableExhibitions}
-                listItemVariants={listItemVariants}
-              />
-            </>
-          ) : (
-            <>
-              <h3 className="text-lg font-medium mb-3 pl-2">Collective</h3>
-              <ul className="space-y-3 print:space-y-1 mb-6">
-                {cvData.exhibitions.collective.map((exhibition, index) => (
-                  <motion.li
-                    key={index}
-                    custom={index}
-                    initial="hidden"
-                    whileInView="visible"
-                    whileHover="hover"
-                    viewport={{ once: true, amount: 0.1 }}
-                    variants={listItemVariants}
-                    className="flex flex-col sm:flex-row print:flex-row p-2 rounded-md transition-colors"
-                  >
-                    <div className="w-full sm:w-32 font-medium print:w-24 print:text-xs">
-                      {exhibition.year}
-                    </div>
-                    <div className="flex-1 print:text-xs">
-                      <InteractiveLink
-                        title={exhibition.title}
-                        url={exhibition.url}
-                        interactiveContent={exhibition.interactiveContent}
-                      />
-                      <div className="text-gray-600 dark:text-gray-400">{exhibition.location}</div>
-                    </div>
-                  </motion.li>
-                ))}
-              </ul>
-            </>
-          )}
+          <h3 className="text-lg font-medium mb-3 pl-2">Selected Exhibitions</h3>
+          <ul className="space-y-3 print:space-y-1 mb-6">
+            {cvData.exhibitions.collective.map((exhibition, index) => (
+              <motion.li
+                key={index}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true, amount: 0.1 }}
+                variants={listItemVariants}
+                className="flex flex-col sm:flex-row print:flex-row p-2 rounded-md transition-colors"
+              >
+                <div className="w-full sm:w-32 font-medium print:w-24 print:text-xs">
+                  {exhibition.year}
+                </div>
+                <div className="flex-1 print:text-xs">
+                  <InteractiveLink
+                    title={exhibition.title}
+                    url={exhibition.url}
+                    interactiveContent={exhibition.interactiveContent}
+                  />
+                  <div className="text-gray-600 dark:text-gray-400">{exhibition.location}</div>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
           
           <h3 className="text-lg font-medium mb-3 pl-2">Screenings</h3>
           <ul className="space-y-3 print:space-y-1 mb-6">

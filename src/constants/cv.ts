@@ -12,19 +12,14 @@ export const cvData = {
   },
   education: [
     {
-      year: "2020",
-      institution: "The Knight Foundation Art + Research Center (A+RC) program ICA",
-      location: "Miami, US"
+      year: "2026",
+      institution: "Scale Up Miami for Visual Artists, The Idea Center at Miami Dade College",
+      location: "Miami"
     },
     {
       year: "2020",
-      institution: "RunwayML - Deep Dive Course by Derrick Shultz",
-      location: "Online Course"
-    },
-    {
-      year: "2020",
-      institution: "Stylegan2 - Deep Dive Course by Derrick Shultz",
-      location: "Online Course"
+      institution: "Knight Foundation Art + Research Center (A+RC), ICA Miami",
+      location: "Miami"
     },
     {
       year: "2018",
@@ -43,22 +38,22 @@ export const cvData = {
     },
     {
       year: "2009 – 2011",
-      institution: "New World School of Art",
-      location: "Miami, FL, School of Art"
+      institution: "New World School of the Arts",
+      location: "Miami"
     }
   ],
   experience: [
     {
-      role: "Technical Director of Digital",
+      role: "Technical Director, Digital Lab",
       employer: "Oolite Arts",
-      period: "September 2025 – 2026",
-      details: "Knight-funded Digital Lab — public programs, artist access, and institutional digital infrastructure supporting Miami's creative community."
+      period: "through Sept 2026",
+      details: "AI literacy programming for artists and community learners, Miami."
     },
     {
       role: "Remote Production Assistant",
       employer: "Wang Shui",
       period: "April 2021 – April 2022",
-      details: "Hammerman Museum 2021 & Whitney Museum Biennial 2022. Creation of datasets, GAN training, image generation, interpolation videos, TouchDesigner features."
+      details: "Datasets, GAN training, image generation, and TouchDesigner. Hammer Museum, 2021; Whitney Biennial, 2022."
     },
     {
       role: "Remote Production Assistant",
@@ -67,11 +62,40 @@ export const cvData = {
       details: "Whitney Museum of American Art, responsible for the electronic component of Jared's installation, creating custom videos that were magnified and played through waterproof LED strips intertwined throughout the installation."
     }
   ],
+  fellowships: [
+    {
+      year: "2026",
+      title: "Wolfsonian–FIU Creative Fellowship, Digital Practice",
+      location: "Miami Beach"
+    },
+    {
+      year: "2023–2025",
+      title: "Artist in Residence, Bakehouse Art Complex",
+      location: "Miami"
+    },
+    {
+      year: "2017",
+      title: "Fellow, Recalibrated, Institute at Art Center South Florida",
+      location: "Miami"
+    }
+  ],
+  collectives: [
+    {
+      period: "2011–",
+      title: "Co-founder, ART404 (with Manuel Palou)",
+      location: "New York / Miami"
+    },
+    {
+      period: "2023–",
+      title: "Co-founder, AI24 Live (with Fabiola Larios)",
+      location: "AI media channel"
+    }
+  ],
   publications: [
     {
       year: "2024",
-      title: "Oolite Media Art Salon series",
-      details: "Curated by Kelani Nicole, Miami, FL, USA",
+      title: "Our Media Art Salon series",
+      details: "Curated by Kelani Nichole, Miami",
       link: "https://drive.google.com/file/d/16AJTphGcx4crHOeLI6PH2Yr9ywbX5gUh/view?usp=drive_link",
       interactiveContent: [
         {
@@ -87,12 +111,12 @@ export const cvData = {
         },
         {
           type: "link",
-          text: "Kelani Nicole",
+          text: "Kelani Nichole",
           content: {
             text: "Curator and founder of TRANSFER Gallery, specializing in computer-based practices",
             link: {
               url: "https://www.transfergallery.com/about",
-              label: "Learn more about Kelani Nicole"
+              label: "Learn more about Kelani Nichole"
             }
           }
         }
@@ -132,7 +156,7 @@ export const cvData = {
   grants: [
     {
       year: "2024",
-      title: "Miami Grant Program"
+      title: "Miami Individual Artists Grant Program"
     },
     {
       year: "2012",
@@ -145,14 +169,17 @@ export const cvData = {
   ],
   exhibitions: {
     collective: [
+      { year: "2025", title: "F*ck Art: Nature & Artifice", location: "Museum of Sex, Miami" },
+      { year: "2025", title: "Algorítmica Íntima", location: "Mexico City" },
+      { year: "2025", title: "New Media Block Party and Floating Films", location: "PAMM.TV, Pérez Art Museum Miami" },
       { 
         year: "2025", 
-        title: "Net Art Gala", 
+        title: "The Net Gala", 
         location: "New York City, NY, USA",
         url: "https://netartgala.com",
         interactiveContent: [{
           type: "link",
-          text: "Net Art Gala",
+          text: "The Net Gala",
           content: {
             text: "A celebration of internet art and digital culture",
             link: {
@@ -164,8 +191,8 @@ export const cvData = {
       },
       { 
         year: "2025", 
-        title: "Technofetishism", 
-        location: "MOMus, Greece",
+        title: "Technofetishism: Whip It into Shape",
+        location: "MOMus, Thessaloniki, Greece",
         url: "https://www.momus.gr/en/exhibitions/tehnofetihismos-whip-it-shape",
         interactiveContent: [{
           type: "link",
@@ -181,8 +208,8 @@ export const cvData = {
       },
       { 
         year: "2024", 
-        title: "Chroma Art Film Festival", 
-        location: "Interactive Installation at SuperBlue, Miami, FL, USA",
+        title: "Doom Scrolling Treadmill + Touch Grass Station",
+        location: "24-hour durational performance, Chroma Art Film Festival, Superblue, Miami (Aug 17–18)",
         url: "https://vimeo.com/1009954393",
         interactiveContent: [{
           type: "link",
@@ -257,6 +284,8 @@ export const cvData = {
         title: "Doom Scrolling Treadmill", 
         location: "Performance in Flux, Miami Art Society, Miami, FL, USA" 
       },
+      { year: "2023", title: "Ephemeral Reflections of Digital Divinities", location: "Miami" },
+      { year: "2023", title: "5000 AI Everydays, Recursive Value", location: "Curated by Kelani Nichole, Oolite Arts Satellite, Miami" },
       { 
         year: "2023", 
         title: "Breadbytes", 
@@ -313,6 +342,9 @@ export const cvData = {
         title: "Chroma Art Film Festival", 
         location: "Interactive Installation at SuperBlue in Miami, FL, USA" 
       },
+      { year: "2022", title: "Beyond Money", location: "BILIA, Mexico City" },
+      { year: "2022", title: "Beyond Markets", location: "Times Square, New York" },
+      { year: "2022", title: "Metaverse Jacuzzi", location: "Lonely Rocks, Untitled Art Fair, Miami" },
       { 
         year: "2022", 
         title: "Data Dating Desire", 
@@ -333,7 +365,7 @@ export const cvData = {
       { 
         year: "2022", 
         title: "Techno Romance, Data Dating Desire", 
-        location: "Le Commun, Electron Festival, Geneva, Italy",
+        location: "Le Commun, Electron Festival, Geneva, Switzerland",
         url: "https://www.datadating.online/",
         interactiveContent: [{
           type: "link",
@@ -401,15 +433,15 @@ export const cvData = {
         }]
       },
       { 
-        year: "2018", 
-        title: "Data Dating", 
-        location: "Galerie Charlot, London, United Kingdom",
+        year: "2018",
+        title: "Data Dating",
+        location: "Curated by Valentina Peri, Galerie Charlot, Paris",
         url: "https://www.datadating.online/",
         interactiveContent: [{
           type: "link",
           text: "Data Dating",
           content: {
-            text: "London iteration of the Data Dating exhibition series",
+            text: "Paris iteration of the Data Dating exhibition series, curated by Valentina Peri",
             link: {
               url: "https://www.datadating.online/",
               label: "Visit exhibition website"
@@ -418,9 +450,9 @@ export const cvData = {
         }]
       },
       { 
-        year: "2018", 
-        title: "Data Dating", 
-        location: "Galerie Charlot, Tel Aviv",
+        year: "2018–2019",
+        title: "Data Dating",
+        location: "Curated by Valentina Peri, Galerie Charlot, Tel Aviv",
         url: "https://www.datadating.online/",
         interactiveContent: [{
           type: "link",
@@ -451,6 +483,7 @@ export const cvData = {
           }
         }]
       },
+      { year: "2017", title: "Materialising the Internet", location: "MU Hybrid Art House, Eindhoven" },
       { 
         year: "2016", 
         title: "Whisper to me in HTML", 
@@ -490,8 +523,8 @@ export const cvData = {
       { year: "2013", title: "School for Poetic Computation The First Class", location: "Eyebeam, New York City, New York, USA" },
       { 
         year: "2012", 
-        title: "In/Compatible", 
-        location: "Transmediale 2k+12, Hause Der Kulturen Der Welt, Berlin, Germany", 
+        title: "Dark Drives, transmediale 2k+12 in/compatible — 5 Million Dollars 1 Terabyte (ART404)",
+        location: "Haus der Kulturen der Welt, Berlin",
         url: "https://archive.transmediale.de/content/5-million-dollars-1-terabyte", 
         interactiveContent: [{
           type: "link",
@@ -504,6 +537,12 @@ export const cvData = {
             }
           }
         }]
+      },
+      {
+        year: "2011",
+        title: "5 Million Dollars 1 Terabyte (ART404)",
+        location: "Low Budget Gallery, New York",
+        url: "https://archive.transmediale.de/content/art-404"
       }
     ],
     screening: [
@@ -552,6 +591,12 @@ export const cvData = {
     ]
   },
   talks: [
+    { year: "2026", title: "The Art of AI Agents", location: "Locust Projects, Miami" },
+    {
+      year: "2026",
+      title: "Vibe Coding Net Art into HTML; Intro to 3D Resin Printing for Artists; Artist Websites for Beginners",
+      location: "Oolite Arts, Miami Beach"
+    },
     { 
       year: "2023", 
       title: "AI and the Arts: A Masterclass", 
@@ -571,7 +616,7 @@ export const cvData = {
     },
     { 
       year: "2023", 
-      title: "AI Images, Class 21: Artist Talk with Moises Sanabria and Erik Salvaggio", 
+      title: "AI Images, Class 21: Artist Talk with Eryk Salvaggio", 
       location: "Remote",
       url: "https://www.youtube.com/watch?v=DH273DuESzM&ab_channel=ErykSalvaggio",
       interactiveContent: [{
@@ -589,7 +634,7 @@ export const cvData = {
     { 
       year: "2023", 
       title: "Text to Video: Creating Experimental Art with Generative AI", 
-      location: "University of Columbia, NYC, USA",
+      location: "Teachers College, Columbia University, New York",
       url: "https://www.tc.columbia.edu/events/info/text-to-video-creating-experimental-art-with-generative-ai-11373138/",
       interactiveContent: [{
         type: "link",

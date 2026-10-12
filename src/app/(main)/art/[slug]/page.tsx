@@ -212,7 +212,20 @@ export default async function ArtPage({ params }: PageProps) {
             {artwork.curator && (
               <div>
                 <h3 className="text-lg font-bold mb-2">Curator</h3>
-                <p>{artwork.curator}</p>
+                {artwork.curator_url ? (
+                  <p>
+                    <a
+                      href={artwork.curator_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-2"
+                    >
+                      {artwork.curator}
+                    </a>
+                  </p>
+                ) : (
+                  <p>{artwork.curator}</p>
+                )}
               </div>
             )}
             {artwork.collaboration && (
