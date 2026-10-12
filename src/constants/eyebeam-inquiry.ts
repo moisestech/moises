@@ -7,7 +7,7 @@ export const EYEBEAM_INQUIRY = {
   hero: {
     headline: 'Materializing the Internet',
     intro:
-      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer whose work materializes the Internet as object, performance, and infrastructure. Working between academic aesthetics and internet culture, he uses familiar objects, humor, and computational systems to examine how networked technologies reorganize value, labor, attention, belief, and identity. His technical background is not separate from his artistic practice; it is one of the materials of the work.',
+      'Moises Sanabria is a Venezuelan-born, Miami-based interdisciplinary artist and software engineer. His practice materializes the Internet as objects, performances, and infrastructures, using familiar technologies, humor, and computational systems to examine value, labor, attention, belief, identity, and agency. He earned a BFA from The Cooper Union and studied at the School for Poetic Computation. His work has been presented at transmediale, ICA Miami, MOMus, Superblue, and MUNAG. He is currently a resident artist at Bakehouse Art Complex, where he develops physical-digital works and artist-led technological systems.',
   },
 
   currentInquiry: {
@@ -39,6 +39,24 @@ export const EYEBEAM_INQUIRY = {
       'A system recommends that two people meet. An object passes from a person through a model, a machine, and a fabricator. A message goes out before anyone has time to reconsider it.',
     unresolved:
       'The question is still open: where efficiency expands agency, where it only increases output, and where it quietly moves responsibility or the chance to refuse. A different reading of the same action changes the map, and what gets made next.',
+  },
+
+  residencyProposal: {
+    eyebrow: 'Eyebeam AGENCY Virtual Residency',
+    title: 'Residency focus',
+    project:
+      'Who Can Say No? is a research-driven series of material studies about delegated action, refusal, and responsibility in AI systems. The project begins with specific delegated actions and builds Agency Maps that trace who initiates, frames, recommends, decides, executes, alters, can refuse, and ultimately bears the consequences. The map is a research instrument, not the artwork: each study isolates one contradiction and translates it into a materially simple sculpture, object, or performance that can be understood without technical expertise.',
+    agency:
+      'The project approaches AGENCY through the “agency gap”: the distance between convenience and meaningful control, consent, responsibility, and refusal. AI can shorten the path from intention to execution while making the chain of responsibility longer and less visible. The central question is not only who can act, but who can pause, redirect, modify, refuse, and remain accountable for what happens next.',
+    milestones: [
+      'Develop a repeatable Agency Map vocabulary for tracing delegated action.',
+      'Produce two to three materially simple sculptural, performative, or object-based studies.',
+      'Establish a research method that distinguishes increased output from increased agency and recognizes hidden adaptation labor.',
+    ],
+    exchange:
+      'I bring experience across art, AI systems, software, automation, fabrication, prototyping, and creative coding. I hope to contribute through close reading of systems and through practical technical knowledge when it is useful. In return, I want productive disagreement: social, political, embodied, and nontechnical perspectives that challenge my definitions of agency, refusal, responsibility, and efficiency, and help identify which maps contain a material contradiction worth making physical.',
+    support:
+      'The project does not require a large production budget or specialized fabrication team. The most valuable support is intellectual and editorial: readings, conversations, peer critique, and occasional consultation around agency, labor, ethics, infrastructure, and AI. I can share Agency Maps, notes, videos, software prototypes, and physical studies remotely. When a study exceeds my fabrication capacity, occasional advice or introductions to relevant specialists would be useful.',
   },
 
   lineage: [
