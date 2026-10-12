@@ -94,13 +94,13 @@ export default function EyebeamInquiryPage() {
         </section>
 
         <section className="mb-16 sm:mb-24">
+          <EyebeamLineage rows={EYEBEAM_INQUIRY.lineage} muted={muted} />
           <GlitchText
             as="h2"
             className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-10 tracking-tight ${heading}`}
           >
             Selected Works
           </GlitchText>
-          <EyebeamLineage rows={EYEBEAM_INQUIRY.lineage} muted={muted} />
 
           <div className="space-y-16 sm:space-y-20">
             {EYEBEAM_INQUIRY.selectedWorks.map((work) => (

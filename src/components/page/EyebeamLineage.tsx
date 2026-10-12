@@ -34,9 +34,9 @@ export default function EyebeamLineage({
 
   return (
     <div className="mb-12 max-w-3xl sm:mb-16">
-      <h3 id={headingId} className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+      <h2 id={headingId} className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
         Practice lineage
-      </h3>
+      </h2>
       <p className="mt-4 text-2xl font-medium leading-tight sm:text-3xl">The subject changes. The method persists.</p>
       <div className="mt-8 border-b border-current/15" role="group" aria-labelledby={headingId}>
         {rows.map((row) => {

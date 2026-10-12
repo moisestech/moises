@@ -4,38 +4,44 @@ import { useEffect, useId, useState } from 'react';
 
 type TermId = 'object' | 'content' | 'copy' | 'price' | 'ownership' | 'access';
 
-const TERMS: { id: TermId; label: string; reading: string }[] = [
+const TERMS: { id: TermId; label: string; signal: string; reading: string }[] = [
   {
     id: 'object',
     label: 'Object',
+    signal: '1 HARD DRIVE',
     reading: 'The carrier is an ordinary hard drive; the claim comes from what is stored inside.',
   },
   {
     id: 'content',
     label: 'Content',
+    signal: '~1 TERABYTE',
     reading:
       'Copied software, games, music, and books whose retail prices were used to construct the claimed value.',
   },
   {
     id: 'copy',
     label: 'Copy',
+    signal: 'COPY ≠ CONSUMPTION',
     reading:
       'Copying can multiply access without consuming the source the way a physical commodity is consumed.',
   },
   {
     id: 'price',
     label: 'Price',
+    signal: '$5,000,000?',
     reading: 'The figure applies market prices to files that can circulate apart from the drive.',
   },
   {
     id: 'ownership',
     label: 'Ownership',
+    signal: 'POSSESSION ≠ PERMISSION',
     reading:
       'Possessing the drive, owning the files, and having permission to use them are different forms of control.',
   },
   {
     id: 'access',
     label: 'Access',
+    signal: 'ACCESS ≠ OWNERSHIP',
     reading:
       'The object concentrates access while leaving its legal and economic boundaries unresolved.',
   },
@@ -114,17 +120,19 @@ export default function ArtworkValueReading() {
       </div>
 
       <div className="mt-12 max-w-3xl border-t border-gray-200 pt-8 dark:border-gray-800">
-        <p className="text-sm tracking-[0.2em] text-gray-500 dark:text-gray-400">1 TB</p>
-        <p
-          className={`mt-2 text-4xl font-medium tracking-tight sm:text-6xl ${
-            reduced ? '' : 'transition-opacity duration-300'
-          }`}
-        >
-          $5,000,000?
-        </p>
-        <p id={readingId} aria-live="polite" className="mt-8 max-w-2xl text-lg leading-relaxed sm:text-xl">
-          {active.reading}
-        </p>
+        <div aria-live="polite">
+          <p
+            key={active.id}
+            className={`max-w-full text-3xl font-medium leading-tight tracking-tight sm:text-5xl ${
+              reduced ? '' : 'transition-opacity duration-300'
+            }`}
+          >
+            {active.signal}
+          </p>
+          <p id={readingId} className="mt-8 max-w-2xl text-lg leading-relaxed sm:text-xl">
+            {active.reading}
+          </p>
+        </div>
         <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">A reading of the artwork, not a valuation.</p>
       </div>
     </section>
