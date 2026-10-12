@@ -64,7 +64,7 @@ export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = f
           <Link
             href={`/art/${slug}`}
             key={slug}
-            className="group cursor-pointer"
+            className="group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-900 dark:focus-visible:outline-neutral-100"
           >
             <article className="flex flex-col md:flex-row h-auto md:h-[400px] lg:h-[500px] overflow-hidden w-full">
               {/* Image Section - Always First on Mobile */}
