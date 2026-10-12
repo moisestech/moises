@@ -122,6 +122,12 @@ export function MoonlighterLandingClient() {
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <Link
+              href={`${base}/gate-1`}
+              className="uppercase tracking-[0.12em] text-[var(--ml-ink)]/70 underline-offset-4 transition-colors hover:text-[var(--ml-accent)] hover:underline"
+            >
+              Studio guide
+            </Link>
+            <Link
               href={`${base}/resources`}
               className="uppercase tracking-[0.12em] text-[var(--ml-ink)]/70 underline-offset-4 transition-colors hover:text-[var(--ml-accent)] hover:underline"
             >
