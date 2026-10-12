@@ -10,11 +10,12 @@ type CarouselVideo = {
   url: string;
   title: string;
   caption?: string;
+  duration?: string;
 };
 
 type Slide =
   | { kind: 'image'; url: string; caption?: string; alt?: string; key: string }
-  | { kind: 'video'; url: string; title: string; caption?: string; key: string };
+  | { kind: 'video'; url: string; title: string; caption?: string; duration?: string; key: string };
 
 function cloudinaryWidth(url: string, width: number) {
   const marker = '/image/upload/';
@@ -39,6 +40,7 @@ function buildSlides(images: CarouselImage[], video?: CarouselVideo | null): Sli
     url: video.url,
     title: video.title,
     caption: video.caption,
+    duration: video.duration,
     key: video.url,
   };
   if (imageSlides.length < 2) return [...imageSlides, videoSlide];
@@ -72,6 +74,7 @@ export default function ArtworkMediaCarousel({
   const [lightbox, setLightbox] = useState(false);
 
   const active = slides[index];
+  const videoIndex = slides.findIndex((slide) => slide.kind === 'video');
   const countLabel = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
 
   const scrollToIndex = useCallback(
@@ -302,6 +305,15 @@ export default function ArtworkMediaCarousel({
             >
               Next
             </button>
+            {videoIndex >= 0 && index !== videoIndex ? (
+              <button
+                type="button"
+                className="inline-flex min-h-11 items-center px-3 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                onClick={() => scrollToIndex(videoIndex)}
+              >
+                Video
+              </button>
+            ) : null}
             <button
               type="button"
               className="inline-flex min-h-11 items-center px-3 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -319,6 +331,21 @@ export default function ArtworkMediaCarousel({
         ) : (
           <p className="mt-3 text-sm text-neutral-500"> </p>
         )}
+        {active?.kind === 'video' ? (
+          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+            <a
+              href={active.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Watch video directly ↗
+            </a>
+            {active.duration ? (
+              <span className="text-neutral-500 dark:text-neutral-400">Runtime {active.duration}</span>
+            ) : null}
+          </p>
+        ) : null}
         {photoCredit && active?.kind === 'image' ? (
           <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">Photos: {photoCredit}</p>
         ) : null}
