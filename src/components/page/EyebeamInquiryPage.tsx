@@ -166,9 +166,21 @@ export default function EyebeamInquiryPage() {
                     {work.description}
                   </p>
                   <p className={`${bodyClass} italic ${muted}`}>{work.relevance}</p>
-                  <Link href={`/art/${work.slug}`} className={`mt-4 ${linkClass}`}>
-                    View work →
-                  </Link>
+                  <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+                    <Link href={`/art/${work.slug}`} className={linkClass}>
+                      View work →
+                    </Link>
+                    {'video' in work && work.video ? (
+                      <a
+                        href={work.video.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={linkClass}
+                      >
+                        {work.video.label} · {work.video.timestamp} ↗
+                      </a>
+                    ) : null}
+                  </div>
                 </div>
               </article>
             ))}
