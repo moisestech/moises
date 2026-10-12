@@ -134,6 +134,7 @@ export default async function ArtPage({ params }: PageProps) {
                   url: artwork.video.url,
                   title: artwork.video.title,
                   caption: artwork.video.caption,
+                  duration: artwork.video.duration,
                 }
               : null
           }
