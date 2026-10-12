@@ -13,7 +13,7 @@ export default async function About() {
         Previously, he was an active member of the digital art collective ART404
         (Artnotfound) from 2011 to 2019, which he co-founded. Moises attended
         the School of Poetic Computation and the Cooper Union in New York. He
-        has exhibited at Transmediale 2k+12, Hause Der Kulturen Der Welt
+        has exhibited at Transmediale 2k+12, Haus der Kulturen der Welt
         (Berlin), Institute of Contemporary Art Miami, Bikini Wax Gallery
         (Mexico City), Kunsthalle Giessen (Berlin), and has participated in
         group shows internationally. In addition, he has been featured in
