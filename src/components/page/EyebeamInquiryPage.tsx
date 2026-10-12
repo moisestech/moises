@@ -93,6 +93,52 @@ export default function EyebeamInquiryPage() {
           </div>
         </section>
 
+        <section className="mb-16 sm:mb-24 border-t border-current/10 pt-16 sm:pt-24">
+          <p className={`text-sm tracking-wide uppercase mb-3 ${muted}`}>
+            {EYEBEAM_INQUIRY.residencyProposal.eyebrow}
+          </p>
+          <GlitchText
+            as="h2"
+            className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 tracking-tight ${heading}`}
+          >
+            {EYEBEAM_INQUIRY.residencyProposal.title}
+          </GlitchText>
+          <div className={`space-y-10 ${muted}`}>
+            <div className="space-y-3">
+              <h3 className={`text-xl sm:text-2xl font-semibold ${heading}`}>Project</h3>
+              <p className={bodyClass}>{EYEBEAM_INQUIRY.residencyProposal.project}</p>
+            </div>
+            <div className="space-y-3">
+              <h3 className={`text-xl sm:text-2xl font-semibold ${heading}`}>Agency</h3>
+              <p className={bodyClass}>{EYEBEAM_INQUIRY.residencyProposal.agency}</p>
+            </div>
+            <div className="space-y-3">
+              <h3 className={`text-xl sm:text-2xl font-semibold ${heading}`}>During the residency</h3>
+              <ol className="max-w-3xl border-b border-current/15">
+                {EYEBEAM_INQUIRY.residencyProposal.milestones.map((milestone, index) => (
+                  <li
+                    key={milestone}
+                    className="grid grid-cols-[2rem_1fr] gap-4 border-t border-current/15 py-3 sm:py-4"
+                  >
+                    <span className={`text-sm tabular-nums ${muted}`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-lg sm:text-xl">{milestone}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="space-y-3">
+              <h3 className={`text-xl sm:text-2xl font-semibold ${heading}`}>Exchange</h3>
+              <p className={bodyClass}>{EYEBEAM_INQUIRY.residencyProposal.exchange}</p>
+            </div>
+            <div className="space-y-3">
+              <h3 className={`text-xl sm:text-2xl font-semibold ${heading}`}>Support</h3>
+              <p className={bodyClass}>{EYEBEAM_INQUIRY.residencyProposal.support}</p>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-16 sm:mb-24">
           <EyebeamLineage rows={EYEBEAM_INQUIRY.lineage} muted={muted} />
           <GlitchText
