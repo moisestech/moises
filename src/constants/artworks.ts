@@ -138,15 +138,16 @@ const RESEARCH_THREAD_BORN_INTO_THE_MACHINE: ArtworkResearchLink = {
 };
 
 export const SELECTED_WORK_SLUGS: string[] = [
-  'privacy_is_a_luxury',
-  'digital_divinities',
-  'taste_the_algorithm',
-  'simulation_faith',
-  'price_of_existence',
-  'doomscrolling_treadmill',
-  'smart_shoppers',
+  'five_million_dollars',
   'vr_hug',
   'beyond_money',
+  'digital_divinities',
+  'doomscrolling_treadmill',
+  'price_of_existence',
+  'smart_shoppers',
+  'simulation_faith',
+  'privacy_is_a_luxury',
+  'taste_the_algorithm',
 ];
 
 export const artist: Artist = {
@@ -1601,7 +1602,7 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           }
         }
       ],
-      on_view: true,
+      on_view: false,
       technical_requirements: {
         power: ['Standard electrical outlet for holographic projection system', 'LED lighting system'],
         mounting: ['Floor installation - lightweight structure (15-25kg)', 'Stable surface for 1m cube'],

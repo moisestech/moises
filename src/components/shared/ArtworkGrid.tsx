@@ -34,11 +34,13 @@ export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = f
     });
   }
 
-  artworkEntries = artworkEntries.sort(([, a], [, b]) => {
-    if (a.on_view && !b.on_view) return -1;
-    if (!a.on_view && b.on_view) return 1;
-    return 0;
-  });
+  if (!slugs?.length) {
+    artworkEntries = artworkEntries.sort(([, a], [, b]) => {
+      if (a.on_view && !b.on_view) return -1;
+      if (!a.on_view && b.on_view) return 1;
+      return 0;
+    });
+  }
 
   const colors = {
     'bg-lime-400': 'text-lime-500',
@@ -62,7 +64,7 @@ export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = f
           <Link
             href={`/art/${slug}`}
             key={slug}
-            className="group cursor-pointer"
+            className="group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-900 dark:focus-visible:outline-neutral-100"
           >
             <article className="flex flex-col md:flex-row h-auto md:h-[400px] lg:h-[500px] overflow-hidden w-full">
               {/* Image Section - Always First on Mobile */}
