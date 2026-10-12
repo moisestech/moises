@@ -1602,7 +1602,7 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           }
         }
       ],
-      on_view: true,
+      on_view: false,
       technical_requirements: {
         power: ['Standard electrical outlet for holographic projection system', 'LED lighting system'],
         mounting: ['Floor installation - lightweight structure (15-25kg)', 'Stable surface for 1m cube'],
