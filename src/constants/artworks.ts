@@ -870,11 +870,14 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       ],
       video: {
         type: 'file',
-        id: 'doomscrolling-treadmill',
-        url: 'https://res.cloudinary.com/dck5rzi4h/video/upload/v1791236864/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/Moises_DoomScrolling-Treadmill_bcf7oz.mp4',
-        title: 'Doom Scrolling Treadmill',
-        aspectRatio: '9:16',
-        caption: 'Short video documentation of Doom Scrolling Treadmill.',
+        id: 'doomscrolling-treadmill-chroma-art-film-festival',
+        url: 'https://res.cloudinary.com/dck5rzi4h/video/upload/v1791769674/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/doomscrolling-treadmill-chroma-art-film-festival_g1gw1h.mp4',
+        title: 'Doomscrolling Treadmill + Touch Grass Station — Chroma Art Film Festival',
+        aspectRatio: '16:9',
+        duration: '0:42',
+        format: 'MP4',
+        resolution: '1280 × 720',
+        caption: 'Video documentation from Chroma Art Film Festival at Superblue, Miami, 2024.',
       },
       links: [
         {
