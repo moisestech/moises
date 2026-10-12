@@ -34,11 +34,13 @@ export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = f
     });
   }
 
-  artworkEntries = artworkEntries.sort(([, a], [, b]) => {
-    if (a.on_view && !b.on_view) return -1;
-    if (!a.on_view && b.on_view) return 1;
-    return 0;
-  });
+  if (!slugs?.length) {
+    artworkEntries = artworkEntries.sort(([, a], [, b]) => {
+      if (a.on_view && !b.on_view) return -1;
+      if (!a.on_view && b.on_view) return 1;
+      return 0;
+    });
+  }
 
   const colors = {
     'bg-lime-400': 'text-lime-500',
