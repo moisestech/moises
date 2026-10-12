@@ -137,6 +137,12 @@ export const EYEBEAM_INQUIRY = {
         'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
       relevance:
         'The same method moves from the object to the body: platform attention becomes physical labor, repetition, and time.',
+      video: {
+        url: 'https://res.cloudinary.com/dck5rzi4h/video/upload/v1791769674/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/doomscrolling-treadmill-chroma-art-film-festival_g1gw1h.mp4',
+        label: 'Work sample video',
+        duration: '0:42',
+        timestamp: '00:00–00:42',
+      },
       images: [
         {
           type: 'image',
