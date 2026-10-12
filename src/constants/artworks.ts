@@ -1228,12 +1228,13 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       location: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible, Berlin',
       curator: 'Jacob Lillemose',
       collaboration: 'ART404 (Manuel Palou and Moises Sanabria)',
-      role: 'Co-founder, ART404',
       yearNote:
         'Shown at Art 404, Low Budget Gallery, New York, 2011; exhibited at transmediale 2012, Berlin.',
       location_url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
       oneLine:
         'A store-bought black hard drive on a plinth, holding roughly a terabyte of pirated software, games, music and books valued at five million dollars.',
+      researchQuestion:
+        'Who controls value when possession, copying, ownership, and access no longer mean the same thing?',
       description:
         'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968). This description follows the transmediale archive text.',
       description_es:
@@ -1245,7 +1246,6 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       ],
       medium: 'Sculpture / new media installation',
       dimensions: '16.5 cm x 11.4 cm x 3.8 cm (hard drive) + pedestal base',
-      weight: 'Approximately 2-3 kg (including pedestal)',
       mediaLayout: 'carousel',
       linksLabel: 'Press & archive',
       images: [

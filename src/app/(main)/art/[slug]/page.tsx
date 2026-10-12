@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
 import ArtworkAgencyMap from '@/components/art/ArtworkAgencyMap';
+import ArtworkValueReading from '@/components/art/ArtworkValueReading';
 import ArtworkGallery from '@/components/art/ArtworkGallery';
 import ArtworkMediaCarousel from '@/components/art/ArtworkMediaCarousel';
 import ArtworkResearchBridge from '@/components/art/ArtworkResearchBridge';
@@ -469,6 +470,7 @@ export default async function ArtPage({ params }: PageProps) {
         )}
 
         {params.slug === 'doomscrolling_treadmill' ? <ArtworkAgencyMap /> : null}
+        {params.slug === 'five_million_dollars' ? <ArtworkValueReading /> : null}
 
         {artwork.processStudies && artwork.processStudies.images.length > 0 ? (
           <section className="mt-24 border-t border-dashed border-gray-300 pt-16 dark:border-gray-700" aria-labelledby="process-studies-heading">

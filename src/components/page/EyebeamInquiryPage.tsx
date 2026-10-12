@@ -5,6 +5,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { EYEBEAM_INQUIRY } from '@/constants/eyebeam-inquiry';
 import { WorkImageCarousel } from './WorkImageCarousel';
 import { GlitchText } from '@/components/common/GlitchText';
+import EyebeamLineage from './EyebeamLineage';
 
 const bodyClass = 'text-lg sm:text-xl leading-relaxed max-w-3xl';
 
@@ -93,33 +94,13 @@ export default function EyebeamInquiryPage() {
         </section>
 
         <section className="mb-16 sm:mb-24">
+          <EyebeamLineage rows={EYEBEAM_INQUIRY.lineage} muted={muted} />
           <GlitchText
             as="h2"
             className={`text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 sm:mb-10 tracking-tight ${heading}`}
           >
             Selected Works
           </GlitchText>
-          <ol className="max-w-3xl mb-12 sm:mb-16 border-b border-current/15">
-            {EYEBEAM_INQUIRY.lineage.map((row) => (
-              <li
-                key={row.year}
-                className="grid grid-cols-1 sm:grid-cols-[5.5rem_1fr] gap-1 sm:gap-6 border-t border-current/15 py-4"
-              >
-                <span className={`text-sm tabular-nums ${muted}`}>{row.year}</span>
-                <span>
-                  <span className={`block text-sm tracking-wide ${muted}`}>{row.terms}</span>
-                  <span className="mt-1 block text-lg sm:text-xl">
-                    {row.title}
-                    {row.note ? (
-                      <span className={`mt-1 block text-sm sm:ml-3 sm:mt-0 sm:inline ${muted}`}>
-                        {row.note}
-                      </span>
-                    ) : null}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ol>
 
           <div className="space-y-16 sm:space-y-20">
             {EYEBEAM_INQUIRY.selectedWorks.map((work) => (

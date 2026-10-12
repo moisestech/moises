@@ -47,18 +47,24 @@ export const EYEBEAM_INQUIRY = {
       terms: 'Value / ownership / copying',
       title: '5 Million Dollars 1 Terabyte',
       note: '',
+      reading:
+        'A hard drive makes an invisible digital economy legible through a contradiction between object, copy, price, and ownership.',
     },
     {
       year: '2024',
       terms: 'Attention / labor / platform logic',
       title: 'Doom Scrolling Treadmill',
       note: '',
+      reading:
+        'A treadmill makes platform attention bodily by collapsing work, entertainment, movement, and repetition.',
     },
     {
       year: '2026',
       terms: 'Agency / delegation / refusal',
       title: 'Who Can Say No?',
       note: 'Current inquiry',
+      reading:
+        'The same method turns toward delegated action: who can alter, refuse, and bear the consequences of what a system does?',
     },
   ],
 
