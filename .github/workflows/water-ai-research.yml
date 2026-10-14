@@ -1,0 +1,32 @@
+name: Water and AI research media
+
+on:
+  pull_request:
+    paths:
+      - 'src/content/research/water-and-ai-media.json'
+      - 'src/content/research/water-and-ai.ts'
+      - 'src/app/(main)/research/the-cloud-is-thirsty/**'
+      - 'src/app/(main)/research/page.tsx'
+      - 'scripts/validate-water-ai-assets.mjs'
+      - '.github/workflows/water-ai-research.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/research/water-and-ai-media.json'
+      - 'src/content/research/water-and-ai.ts'
+      - 'scripts/validate-water-ai-assets.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-media:
+    name: Verify selected image metadata
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check Cloudinary source-of-truth manifest
+        run: node scripts/validate-water-ai-assets.mjs
