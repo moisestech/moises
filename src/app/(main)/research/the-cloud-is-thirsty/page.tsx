@@ -67,6 +67,12 @@ export default function TheCloudIsThirstyPage() {
         </p>
       </header>
 
+      <nav aria-label="In this research note" className="my-6 flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.12em] print:hidden">
+        <a href="#studies" className="border border-stone-300 px-3 py-2 transition-colors hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-900">2026 studies ↘</a>
+        <a href="#method" className="border border-stone-300 px-3 py-2 transition-colors hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-900">Method ↘</a>
+        <a href="#lineage" className="border border-stone-300 px-3 py-2 transition-colors hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-900">Lineage ↘</a>
+      </nav>
+
       <section aria-labelledby="opening" className="grid gap-10 border-b border-stone-300 py-14 dark:border-stone-700 md:grid-cols-12 md:gap-16">
         <div className="md:col-span-4">
           <h2 id="opening" className="text-xl font-semibold">The question</h2>
