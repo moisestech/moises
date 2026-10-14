@@ -126,7 +126,7 @@ export default function ResearchIndexPage() {
       </section>
 
       <p className="mb-8 text-sm text-gray-500 dark:text-gray-400 font-mono uppercase tracking-widest">
-        {projectMeta.researchSeries} · {projects.length + 1} dossiers on this index
+        {projectMeta.researchSeries} · {projects.length + 2} dossiers on this index
       </p>
 
       {/* Idea Center sprint */}
@@ -182,6 +182,34 @@ export default function ResearchIndexPage() {
             </h2>
             <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">
               {BITM_CARD.description}
+            </p>
+          </div>
+        </Link>
+
+        {/* Research note in preparation: typographic card, no substitute artwork image. */}
+        <Link
+          href="/research/the-cloud-is-thirsty"
+          className="group block overflow-hidden border border-stone-300 bg-[#151c1c] text-stone-50 shadow-lg transition-shadow hover:shadow-2xl dark:border-stone-700"
+        >
+          <div className="flex aspect-[4/3] flex-col justify-between p-6 sm:p-8">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#b6c7bf]">
+              Water / AI / Material Internet
+            </p>
+            <p className="max-w-xs text-4xl font-semibold leading-[0.95] tracking-tight">
+              The cloud <span className="font-normal italic">is thirsty.</span>
+            </p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-stone-400">
+              Research note · 2026
+            </p>
+          </div>
+          <div className="px-6 pb-6 sm:px-8 sm:pb-8">
+            <h2 className="text-xl font-bold">Water, AI, and the Material Internet</h2>
+            <p className="mt-2 text-sm leading-relaxed text-stone-300">
+              Speculative sculptural studies on water, cooling, digital infrastructure, and the
+              ordinary objects that give computation a physical body.
+            </p>
+            <p className="mt-3 font-mono text-xs uppercase tracking-[0.12em] text-[#b6c7bf]">
+              Read the research note →
             </p>
           </div>
         </Link>
