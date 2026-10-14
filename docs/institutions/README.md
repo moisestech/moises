@@ -21,6 +21,8 @@ Use this order when picking a link:
 
 **Private:** `/artist-sustainability` — YoungArts supplement (`noindex`) — not a public outreach door.
 
+**Unlisted review:** `/bfi-archive` — Bas Fisher Invitational archive migration (`noindex`, not in the family nav, sitemap, or proof grids). A text link sits in the `/artist-infrastructure` footer. That link is not access control. Public promotion still needs BFI’s permission.
+
 **Named contact audits:** Dimitry Chamy + Sophia (MadArts) — [`docs/outreach/madarts-dimitry-send-audit.md`](../outreach/madarts-dimitry-send-audit.md).  
 Sophia’s research door includes **`/research/the-algorithm-is-outside`**.
 
@@ -80,6 +82,7 @@ Next phases: layout polish → 360 viewer → video entries in the same registry
 | `/bakehouse/smart-signs` | `bakehouse-smart-signs.ts` | `BakehouseSmartSignsClient.tsx` |
 | `/workshops` | `workshopsOfferings.ts` | `WorkshopClient.tsx` |
 | `/artist-sustainability` | `artistSustainability.ts` | `ArtistSustainabilityClient.tsx` |
+| `/bfi-archive` | `bfi-archive.ts` | `BfiArchiveClient.tsx` |
 
 ## Known polish gaps
 

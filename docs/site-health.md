@@ -153,6 +153,7 @@ Full inventory table: [`docs/opportunities/README.md`](./opportunities/README.md
 - **Workshops:** Ready catalog now on `/workshops#catalog` (`catalog.ts`); visual system still diverges from Inst shell — restyle later. Deep `/workshop/[slug]` landings still phased.
 - **Bakehouse:** honest shipped/proposed buckets work; SmartSign photography still placeholder.
 - **Digilab:** registry + portraits live; layout polish and 360/video are next (see Digilab workflow doc).
+- **BFI archive review:** `/bfi-archive` is an unlisted noindex case on the institutional shell. Footer link only from `/artist-infrastructure`. Not a public send URL until BFI agrees.
 
 ---
 

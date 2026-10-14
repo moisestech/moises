@@ -651,6 +651,7 @@ export const artistInfrastructurePage = {
       { label: 'The Art of AI Agents', href: '/workshop/the-art-of-ai-agents' },
       { label: 'View workshop formats', href: '/workshops#catalog' },
       { label: 'Oolite Arts case study', href: '/oolite-arts' },
+      { label: 'BFI archive migration (review)', href: '/bfi-archive' },
       { label: 'Bookable workshops hub', href: '/workshops' },
       { label: 'Miami institutions directory', href: '/institutions' },
     ],
