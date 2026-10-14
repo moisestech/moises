@@ -6,6 +6,26 @@
  * art/moisestech-website/research/ai-water-material-internet/
  * The older, already-hosted assets are intentionally reused at their original URLs.
  */
+import waterMediaManifest from './water-and-ai-media.json';
+
+/** All image URLs come from a Cloudinary upload receipt, never a guessed URL. */
+type WaterMediaEntry = {
+  status: 'pending' | 'ready';
+  publicId: string;
+  secureUrl: string | null;
+  alt: string;
+  caption: string;
+};
+type WaterStudyKey = keyof typeof waterMediaManifest.studies;
+const CLOUDINARY_DELIVERY = `https://res.cloudinary.com/${waterMediaManifest.cloudinaryCloud}/image/upload/`;
+
+function approvedImageFor(study: WaterStudyKey): WaterStudy['image'] {
+  const entry = waterMediaManifest.studies[study] as WaterMediaEntry;
+  if (entry.status !== 'ready' || !entry.secureUrl) return null;
+  if (!entry.secureUrl.startsWith(CLOUDINARY_DELIVERY)) return null;
+  return { src: entry.secureUrl, alt: entry.alt, caption: entry.caption };
+}
+
 export type WaterStudy = {
   id: string;
   number: string;
@@ -28,7 +48,7 @@ export const waterStudies: WaterStudy[] = [
     status: 'In development / image selection pending',
     premise: 'A computer survives on the water a human would drink.',
     text: 'Two unopened 24-packs of generic bottled drinking water form a low, self-standing support for a GPU. Clear cooling tubes cross the boundary between a machine’s heat and a human supply. The reveal happens in stages: the GPU is on the water; the GPU appears to use the water; machine survival begins to compete with human survival. No elaborate pedestal or technological spectacle is needed.',
-    image: null,
+    image: approvedImageFor('human-coolant'),
   },
   {
     id: 'still-processing',
@@ -39,7 +59,7 @@ export const waterStudies: WaterStudy[] = [
     status: 'In development / image selection pending',
     premise: 'A workstation leaks what it can no longer process.',
     text: 'An old beige computer continues to run while water exits the monitor, falls from the CD-ROM tray, and returns to a shallow reflective reservoir through a recirculating system. Vines and cables mingle around the machine. It first reads as a crying computer and then as a small, persistent circuit of cooling, exhaustion, and maintenance.',
-    image: null,
+    image: approvedImageFor('still-processing'),
   },
   {
     id: 'paper-waterfall',
@@ -50,7 +70,7 @@ export const waterStudies: WaterStudy[] = [
     status: 'Working study / image selection pending',
     premise: 'A feed becomes a flood of physical residue.',
     text: 'Continuous strips of printed information descend from inexpensive printers and collect on the floor. There is no literal water in this version: the waterfall is a visual grammar for digital circulation, overflow, and accumulation. It connects the water studies to the material waste of seemingly weightless information.',
-    image: null,
+    image: approvedImageFor('paper-waterfall'),
   },
 ];
 
