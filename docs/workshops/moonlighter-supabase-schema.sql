@@ -1,5 +1,8 @@
 -- Moonlighter workshop live session schema (run in Supabase SQL editor when ready).
--- App falls back to in-memory/local store if SUPABASE_* is unset.
+-- If SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are unset, the app uses a
+-- rehearsal-only in-memory store that does not survive a restart.
+-- If those variables are set, session writes go to these tables and do not
+-- fall back to memory when a write fails.
 
 create table if not exists moonlighter_sessions (
   id uuid primary key default gen_random_uuid(),
@@ -62,8 +65,15 @@ create table if not exists moonlighter_handoffs (
   approval_status text not null default 'ready_for_review',
   expected_pickup text not null default '',
   notes text not null default '',
+  project_slug text not null default '',
+  rubric_summary text not null default '',
+  reference_rights boolean not null default false,
   updated_at timestamptz not null default now()
 );
+
+alter table moonlighter_handoffs add column if not exists project_slug text not null default '';
+alter table moonlighter_handoffs add column if not exists rubric_summary text not null default '';
+alter table moonlighter_handoffs add column if not exists reference_rights boolean not null default false;
 
 create table if not exists moonlighter_recovery_log (
   id uuid primary key default gen_random_uuid(),

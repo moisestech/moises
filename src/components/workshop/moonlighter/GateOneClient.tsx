@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState, type KeyboardEvent } from 'react'
 import Link from 'next/link'
 import { MoonlighterShell } from './MoonlighterShell'
 import { printAttemptPolicySummary } from '@/content/workshops/moonlighter-ai-3d-printing/policy'
+import { participantStorageKey } from '@/lib/workshop/moonlighter/useMoonlighterSession'
 
 const stages = [
   { name: 'Reference', time: '01', description: 'Choose one clear subject and record your right to use it.', output: 'Reference image + permission confirmation', tasks: ['One recognizable subject', 'Complete silhouette and clean background', 'Rights and privacy checked', 'Save the original and working image'] },
@@ -29,20 +30,114 @@ export function GateOneClient() {
   const [project, setProject] = useState('')
   const [tier, setTier] = useState('mini')
   const [consent, setConsent] = useState(false)
+  const [sessionCode, setSessionCode] = useState('')
+  const [displayName, setDisplayName] = useState('')
+  const [joinedName, setJoinedName] = useState<string | null>(null)
+  const [joinedToken, setJoinedToken] = useState<string | null>(null)
+  const [offline, setOffline] = useState<boolean | null>(null)
+  const [sending, setSending] = useState(false)
+  const [requestState, setRequestState] = useState<'idle' | 'sent'>('idle')
+  const [requestError, setRequestError] = useState<string | null>(null)
   const current = stages[step]
   const allTasks = current.tasks.every(task => completed.includes(current.name + ':' + task))
+  const everyStageComplete = stages.every(stage => stage.tasks.every(task => completed.includes(stage.name + ':' + task)))
   const rated = rubric.every(([name]) => !!ratings[name])
   const blocked = Object.values(ratings).includes('red')
-  const approvalReady = allTasks && rated && !blocked && consent && project.trim().length > 0
+  const approvalReady = everyStageComplete && rated && !blocked && consent && project.trim().length > 0
+
+  useEffect(() => {
+    const code = sessionCode.trim().toUpperCase()
+    if (code.length !== 6) return
+    const token = localStorage.getItem(participantStorageKey(code))
+    if (!token) return
+    let cancelled = false
+    void fetch(`/api/workshop/moonlighter/session?code=${encodeURIComponent(code)}`).then(async (res) => {
+      if (!res.ok || cancelled) return
+      const data = await res.json()
+      const me = (data.participants ?? []).find((person: { token: string; display_name: string }) => person.token === token)
+      if (!me || cancelled) return
+      setJoinedToken(token)
+      setJoinedName(me.display_name)
+      setOffline(Boolean(data.offline))
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [sessionCode])
 
   function toggleTask(task: string) {
     const id = current.name + ':' + task
     setCompleted(old => old.includes(id) ? old.filter(x => x !== id) : [...old, id])
+    setRequestState('idle')
+  }
+
+  function moveStage(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      setStep(value => Math.min(value + 1, stages.length - 1))
+    }
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      setStep(value => Math.max(value - 1, 0))
+    }
+  }
+
+  async function joinSession() {
+    setRequestError(null)
+    const code = sessionCode.trim().toUpperCase()
+    const name = displayName.trim()
+    if (!code || !name) {
+      setRequestError('Enter the session code and the name you use in class.')
+      return
+    }
+    const res = await fetch('/api/workshop/moonlighter/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'join', code, displayName: name }),
+    })
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok) {
+      setRequestError(typeof data.error === 'string' ? data.error : 'Could not join this session.')
+      return
+    }
+    localStorage.setItem(participantStorageKey(data.session.code), data.participant.token)
+    setSessionCode(data.session.code)
+    setJoinedToken(data.participant.token)
+    setJoinedName(data.participant.display_name)
+    setOffline(Boolean(data.offline))
+  }
+
+  async function requestReview() {
+    if (!joinedToken || !approvalReady || sending) return
+    setSending(true)
+    setRequestError(null)
+    const code = sessionCode.trim().toUpperCase()
+    const res = await fetch(`/api/workshop/moonlighter/session/${code}/participants`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'gate_review',
+        token: joinedToken,
+        project_title: project.trim(),
+        tier,
+        ratings,
+        stages_complete: true,
+        reference_rights: true,
+      }),
+    })
+    const data = await res.json().catch(() => ({}))
+    setSending(false)
+    if (!res.ok) {
+      setRequestError(typeof data.error === 'string' ? data.error : 'The review request was not saved.')
+      return
+    }
+    setRequestState('sent')
+    setOffline(Boolean(data.offline))
   }
 
   return (
     <MoonlighterShell>
-      <main className="mx-auto w-full max-w-7xl px-4 pb-24 pt-10 sm:px-6 lg:px-10">
+      <main className="mx-auto w-full max-w-7xl overflow-x-hidden px-4 pb-24 pt-10 sm:px-6 lg:px-10">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--ml-soft-gray)] pb-5 text-xs font-semibold uppercase tracking-[0.17em]">
           <Link href="/workshop/moonlighter-ai-3d-printing" className="underline underline-offset-4">← From Image to Object</Link>
           <span className="text-[var(--ml-ink)]/60">Student studio guide · Gate 1</span>
@@ -54,9 +149,9 @@ export function GateOneClient() {
           </div>
           <p className="max-w-md text-base leading-relaxed text-[var(--ml-ink)]/70 sm:text-lg">One reference. One mesh. One printable decision. Follow the six checkpoints, save your source files, then request instructor approval for one print attempt.</p>
         </header>
-        <div className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-[var(--ml-soft-gray)] sm:grid-cols-3 lg:grid-cols-6" aria-label="Workshop phases">
+        <div className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-[var(--ml-soft-gray)] sm:grid-cols-3 lg:grid-cols-6" role="tablist" aria-label="Workshop phases" onKeyDown={moveStage}>
           {stages.map((s, index) => (
-            <button key={s.time} type="button" onClick={() => setStep(index)} aria-current={step === index ? 'step' : undefined} className={`min-h-24 p-3 text-left transition-colors sm:p-4 ${step === index ? 'bg-[var(--ml-charcoal)] text-white' : 'bg-[var(--ml-paper)] hover:bg-white'}`}>
+            <button key={s.time} type="button" role="tab" aria-selected={step === index} onClick={() => setStep(index)} className={`min-h-24 p-3 text-left transition-colors sm:p-4 ${step === index ? 'bg-[var(--ml-charcoal)] text-white' : 'bg-[var(--ml-paper)] hover:bg-white'}`}>
               <span className="block text-xs opacity-60">{s.time} / 06</span>
               <span className="mt-2 block text-sm font-semibold">{s.name}</span>
             </button>
@@ -89,19 +184,35 @@ export function GateOneClient() {
           <aside className="space-y-5 lg:sticky lg:top-8">
             <section className="rounded-2xl bg-[var(--ml-charcoal)] p-5 text-white sm:p-6">
               <h3 className="text-xl font-semibold">Production decision</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">Self-check before submitting to your instructor. This does not authorize printer access.</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/70">Self-check before the instructor reviews the file. A review request does not start a print.</p>
+              <label className="mt-6 block text-xs uppercase tracking-wider text-white/70">Session code
+                <input value={sessionCode} onChange={e => setSessionCode(e.target.value.toUpperCase())} maxLength={6} autoCapitalize="characters" spellCheck={false} placeholder="ABC123" className="mt-2 w-full rounded-md border border-white/20 bg-white p-3 text-sm normal-case tracking-normal text-black" />
+              </label>
+              {joinedToken ? (
+                <p className="mt-3 text-sm text-white/80">Joined as {joinedName}.</p>
+              ) : (
+                <>
+                  <label className="mt-4 block text-xs uppercase tracking-wider text-white/70">Name in class
+                    <input value={displayName} onChange={e => setDisplayName(e.target.value)} maxLength={40} className="mt-2 w-full rounded-md border border-white/20 bg-white p-3 text-sm normal-case tracking-normal text-black" />
+                  </label>
+                  <button type="button" onClick={() => void joinSession()} className="mt-3 w-full rounded-full border border-white/40 px-4 py-2 text-sm">Join session</button>
+                </>
+              )}
+              {offline === true && <p className="mt-3 text-xs leading-relaxed text-white/70">Rehearsal only. This session lives in server memory and will not survive a restart.</p>}
               <label className="mt-6 block text-xs uppercase tracking-wider text-white/70">Project name
-                <input value={project} onChange={e => setProject(e.target.value)} maxLength={80} placeholder="e.g. tidal-form" className="mt-2 w-full rounded-md border border-white/20 bg-white p-3 text-sm normal-case tracking-normal text-black" />
+                <input value={project} onChange={e => { setProject(e.target.value); setRequestState('idle') }} maxLength={80} placeholder="e.g. tidal-form" className="mt-2 w-full rounded-md border border-white/20 bg-white p-3 text-sm normal-case tracking-normal text-black" />
               </label>
               <label className="mt-4 block text-xs uppercase tracking-wider text-white/70">Production tier
-                <select value={tier} onChange={e => setTier(e.target.value)} className="mt-2 w-full rounded-md bg-white p-3 text-sm normal-case tracking-normal text-black"><option value="mini">MINI / 35–70 mm</option><option value="sculpture">SCULPTURE / 80–120 mm</option></select>
+                <select value={tier} onChange={e => { setTier(e.target.value); setRequestState('idle') }} className="mt-2 w-full rounded-md bg-white p-3 text-sm normal-case tracking-normal text-black"><option value="mini">MINI / 35–70 mm</option><option value="sculpture">SCULPTURE / 80–120 mm</option></select>
               </label>
               <div className="mt-6 space-y-3">
-                {rubric.map(([name, description]) => <fieldset key={name} className="border-t border-white/20 pt-3"><legend className="text-sm font-semibold">{name}</legend><p className="mt-1 text-xs text-white/60">{description}</p><div className="mt-2 flex flex-wrap gap-2">{(['green','amber','red'] as const).map(value => <label key={value} className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs capitalize ${ratings[name] === value ? 'border-white bg-white text-black' : 'border-white/30'}`}><input className="sr-only" type="radio" name={name} checked={ratings[name] === value} onChange={() => setRatings(old => ({...old,[name]:value}))} />{value}</label>)}</div></fieldset>)}
+                {rubric.map(([name, description]) => <fieldset key={name} className="border-t border-white/20 pt-3"><legend className="text-sm font-semibold">{name}</legend><p className="mt-1 text-xs text-white/60">{description}</p><div className="mt-2 flex flex-wrap gap-2">{(['green','amber','red'] as const).map(value => <label key={value} className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs capitalize ${ratings[name] === value ? 'border-white bg-white text-black' : 'border-white/30'}`}><input className="sr-only" type="radio" name={name} checked={ratings[name] === value} onChange={() => { setRatings(old => ({...old,[name]:value})); setRequestState('idle') }} />{value}</label>)}</div></fieldset>)}
               </div>
-              <label className="mt-5 flex items-start gap-3 text-xs leading-relaxed text-white/80"><input type="checkbox" className="mt-1" checked={consent} onChange={e => setConsent(e.target.checked)} />I have rights to use my reference and understand that permission to publicly document my work is a separate, optional decision.</label>
-              <div role="status" className="mt-5 rounded-lg bg-white/10 p-4 text-sm leading-relaxed">{blocked ? 'RED / Revise or regenerate before approval.' : approvalReady ? 'READY FOR INSTRUCTOR REVIEW / Save your .3mf and ask for approval. This is not a submitted request.' : rated && Object.values(ratings).includes('amber') ? 'AMBER / Review repairs and support risks with instructor.' : 'NOT YET READY / Finish the stage checklist, project name, rubric and rights check.'}</div>
-              <p className="mt-3 text-xs text-white/55">This guide is a local worksheet: entries are not uploaded or shared with the instructor.</p>
+              <label className="mt-5 flex items-start gap-3 text-xs leading-relaxed text-white/80"><input type="checkbox" className="mt-1" checked={consent} onChange={e => { setConsent(e.target.checked); setRequestState('idle') }} />I have rights to use my reference and understand that permission to publicly document my work is a separate, optional decision.</label>
+              <div role="status" className="mt-5 rounded-lg bg-white/10 p-4 text-sm leading-relaxed">{blocked ? 'RED / Revise or regenerate before approval.' : approvalReady ? 'READY / The six checkpoints, rubric, project name, and rights check are complete.' : rated && Object.values(ratings).includes('amber') ? 'AMBER / Review repairs and support risks with the instructor. Amber can still be sent for review.' : 'NOT YET READY / Finish all six checkpoints, the project name, the rubric, and the rights check.'}</div>
+              <button type="button" disabled={!joinedToken || !approvalReady || sending} onClick={() => void requestReview()} className="mt-4 w-full rounded-full bg-white px-4 py-3 text-sm font-semibold text-black disabled:opacity-40">{sending ? 'Sending…' : requestState === 'sent' ? 'Review requested' : 'Request instructor review'}</button>
+              {requestError && <p role="alert" className="mt-3 text-xs leading-relaxed text-white">{requestError}</p>}
+              <p className="mt-3 text-xs leading-relaxed text-white/55">{joinedToken ? (requestState === 'sent' ? 'The instructor can see this draft. Printer lanes stay idle until they assign one.' : 'The request writes a review draft. It does not assign a printer.') : 'This checklist stays on this computer until you join a session.'}</p>
             </section>
             <section className="rounded-2xl border border-[var(--ml-soft-gray)] p-5 text-sm leading-relaxed sm:p-6">
               <h3 className="text-lg font-semibold">One approved print</h3>

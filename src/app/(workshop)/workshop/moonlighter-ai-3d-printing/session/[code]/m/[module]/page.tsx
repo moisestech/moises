@@ -66,7 +66,7 @@ export default function ParticipantModulePage() {
         pace={me?.pace ?? 'follow'}
         onPaceChange={(p) => void setPace(p)}
         progress={`${curriculumModule.id + 1} / 10`}
-        saveStatus={bundle?.offline ? 'Local save' : 'Synced'}
+        saveStatus={bundle?.offline ? 'Rehearsal only' : 'Synced'}
         onHelpFlag={(c) => void setHelpFlag(c)}
       />
       {bundle?.session.mode === 'hold' && (
