@@ -5,14 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "check:claims": "node scripts/check-claim-placeholders.mjs",
-    "build": "node scripts/check-claim-placeholders.mjs && next build",
+    "build": "node scripts/check-claim-placeholders.mjs && node scripts/validate-water-ai-assets.mjs && next build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
     "deploy": "npx vercel@latest --prod",
     "deploy:preview": "npx vercel@latest",
     "life-os:discover": "npx tsx scripts/life-os-discover.ts",
-    "life-os:list": "npx tsx scripts/life-os-discover.ts list"
+    "life-os:list": "npx tsx scripts/life-os-discover.ts list",
+    "check:water-media": "node scripts/validate-water-ai-assets.mjs"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",

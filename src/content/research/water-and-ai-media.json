@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "cloudinaryCloud": "dck5rzi4h",
+  "cloudinaryFolder": "art/moisestech-website/research/ai-water-material-internet",
+  "note": "Only populate ready assets with the artist-approved original image and a Cloudinary-returned secure_url. Pending items must never display stock or substitute artwork.",
+  "studies": {
+    "human-coolant": {
+      "status": "pending",
+      "publicId": "art/moisestech-website/research/ai-water-material-internet/human-coolant-01",
+      "secureUrl": null,
+      "version": null,
+      "format": null,
+      "width": null,
+      "height": null,
+      "alt": "Human Coolant, AI-assisted sculpture study showing computer graphics hardware and bottled drinking water",
+      "caption": "Human Coolant · Moises Sanabria · AI-assisted speculative sculpture study · 2026",
+      "sourceFile": null,
+      "verifiedAt": null
+    },
+    "still-processing": {
+      "status": "pending",
+      "publicId": "art/moisestech-website/research/ai-water-material-internet/still-processing-01",
+      "secureUrl": null,
+      "version": null,
+      "format": null,
+      "width": null,
+      "height": null,
+      "alt": "Still Processing, AI-assisted sculpture study of a beige desktop workstation leaking water into a shallow reservoir",
+      "caption": "Still Processing · Moises Sanabria · AI-assisted speculative sculpture study · 2026",
+      "sourceFile": null,
+      "verifiedAt": null
+    },
+    "paper-waterfall": {
+      "status": "pending",
+      "publicId": "art/moisestech-website/research/ai-water-material-internet/paper-waterfall-01",
+      "secureUrl": null,
+      "version": null,
+      "format": null,
+      "width": null,
+      "height": null,
+      "alt": "Paper Waterfall, AI-assisted installation study showing streams of receipt paper descending from printers",
+      "caption": "Paper Waterfall · Moises Sanabria · related AI-assisted installation study · 2026",
+      "sourceFile": null,
+      "verifiedAt": null
+    }
+  }
+}
