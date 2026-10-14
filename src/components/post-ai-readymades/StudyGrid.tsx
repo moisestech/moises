@@ -21,6 +21,17 @@ export function StudyGrid() {
         icon={LayoutGrid}
       />
 
+      <p className="mb-8 max-w-2xl text-sm leading-relaxed text-[#555555] dark:text-neutral-300">
+        Studies about water, cooling, and the material cost of computation are gathered in{' '}
+        <Link
+          href="/research/the-cloud-is-thirsty"
+          className="underline underline-offset-4 transition hover:text-emerald-800 dark:hover:text-emerald-300"
+        >
+          The Cloud Is Thirsty
+        </Link>
+        .
+      </p>
+
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {postAiReadymadesStudies.map((study) => (
           <StudyCard key={study.id} study={study} onSelect={setSelectedStudy} />
