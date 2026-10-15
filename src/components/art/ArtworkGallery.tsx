@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { objectCoverProps, type ImageAnchor } from '@/lib/imageAnchor';
 
 type GalleryImage = {
   url: string;
   caption?: string;
+  anchor?: ImageAnchor;
 };
 
 export default function ArtworkGallery({
@@ -78,7 +80,7 @@ export default function ArtworkGallery({
                   src={image.url}
                   alt={image.caption || `${title} - Variation ${index + 1}`}
                   fill
-                  className="object-cover"
+                  {...objectCoverProps(image.anchor)}
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />
                 {image.caption ? (

@@ -5,6 +5,7 @@ import { artist } from '@/constants/artworks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { objectCoverProps } from '@/lib/imageAnchor';
 
 export default function LandingCollection() {
   const [randomArtworks, setRandomArtworks] = useState<[string, any][]>([]);
@@ -37,7 +38,9 @@ export default function LandingCollection() {
 
         {/* Column 2 - Artwork Grid */}
         <div className="md:col-span-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
-          {randomArtworks.map(([key, artwork]) => (
+          {randomArtworks.map(([key, artwork]) => {
+            const cover = objectCoverProps(artwork.images[0].anchor);
+            return (
             <Link 
               key={key} 
               href={`/art/${key}`} 
@@ -48,7 +51,8 @@ export default function LandingCollection() {
                   src={artwork.images[0].url}
                   alt={artwork.images[0].caption || artwork.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className={`${cover.className} transition-transform duration-300 group-hover:scale-105`}
+                  style={cover.style}
                 />
               </div>
               <div className="space-y-1">
@@ -62,7 +66,8 @@ export default function LandingCollection() {
                 )}
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { artist } from '@/constants/artworks';
 import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
+import { objectCoverProps } from '@/lib/imageAnchor';
 
 interface ArtworkGridProps {
   minYear?: number;
@@ -59,6 +60,7 @@ export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = f
         const bgColor = bgColors[index % bgColors.length];
         const textColor = colors[bgColor as keyof typeof colors];
         const isEven = index % 2 === 0;
+        const cover = objectCoverProps(artwork.images[0].anchor);
 
         return (
           <Link
@@ -77,7 +79,8 @@ export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = f
               >
                 {imageSkeleton ? (
                   <ImageWithSkeleton
-                    className="object-cover"
+                    className={cover.className}
+                    style={cover.style}
                     fill
                     sizes="(max-width: 768px) 100vw, 66vw"
                     src={artwork.images[0].url}
@@ -86,7 +89,8 @@ export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = f
                   />
                 ) : (
                   <Image
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full ${cover.className}`}
+                    style={cover.style}
                     width={1920}
                     height={1080}
                     src={artwork.images[0].url}

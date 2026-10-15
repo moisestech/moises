@@ -1,4 +1,5 @@
 import { artist, SELECTED_WORK_SLUGS } from '@/constants/artworks';
+import type { ImageAnchor } from '@/lib/imageAnchor';
 
 export type HomeHeroSlide = {
   slug: string;
@@ -6,6 +7,7 @@ export type HomeHeroSlide = {
   year: number;
   imageUrl: string;
   imageAlt: string;
+  imageAnchor?: ImageAnchor;
   href: string;
 };
 
@@ -54,6 +56,7 @@ export function getHomeHeroSlides(): HomeHeroSlide[] {
         year: artwork.year,
         imageUrl: image.url,
         imageAlt,
+        imageAnchor: image.anchor,
         href: `/art/${slug}`,
       },
     ];

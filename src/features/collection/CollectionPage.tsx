@@ -3,6 +3,7 @@ import { artist } from '@/constants/artworks';
 import { useTheme } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
+import { objectCoverProps } from '@/lib/imageAnchor';
 
 export default function CollectionPage() {
   const { theme } = useTheme();
@@ -44,20 +45,23 @@ export default function CollectionPage() {
         </div>
         <div className="text-lg font-bold mb-6">Showing {artworks.length} artworks online</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-          {artworks.map(([slug, art]) => (
+          {artworks.map(([slug, art]) => {
+            const cover = art.images[0] ? objectCoverProps(art.images[0].anchor) : null;
+            return (
             <Link
               key={slug}
               href={`/art/${slug}`}
               className="flex flex-col group transition-transform hover:scale-[1.02] duration-200"
             >
               <div className="relative w-full h-48 mb-3 overflow-hidden bg-gray-200 dark:bg-gray-800">
-                {art.images && art.images[0] && (
+                {art.images && art.images[0] && cover && (
                   <ImageWithSkeleton
                     src={art.images[0].url}
                     alt={art.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className={`${cover.className} transition-transform duration-300 group-hover:scale-105`}
+                    style={cover.style}
                   />
                 )}
               </div>
@@ -65,7 +69,8 @@ export default function CollectionPage() {
               <div className="text-md text-gray-600 dark:text-gray-300 mb-1">{art.year}</div>
               {art.on_view && <div className="text-green-500 font-bold text-sm mb-1">On view</div>}
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { HomeHeroSlide } from '@/constants/homeHero';
+import { objectCoverProps } from '@/lib/imageAnchor';
 
 const SWIPE_THRESHOLD = 50;
 
@@ -89,7 +90,7 @@ export function HomeHeroCarousel({ slides, defaultSlug }: HomeHeroCarouselProps)
                   src={currentSlide.imageUrl}
                   alt={currentSlide.imageAlt}
                   fill
-                  className="object-cover"
+                  {...objectCoverProps(currentSlide.imageAnchor)}
                   sizes="(max-width: 768px) 100vw, 1400px"
                   priority={currentIndex === initialIndex}
                 />
