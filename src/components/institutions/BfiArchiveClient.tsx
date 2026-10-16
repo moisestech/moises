@@ -1,12 +1,15 @@
 'use client';
 
+import { useEffect, type ReactNode } from 'react';
 import Link from 'next/link';
 import { bfiArchive } from '@/content/institutions/bfi-archive';
+import { BFI_PAGE_IMAGES, BFI_PENDING_SLOTS, BFI_SYSTEMS, type BfiPageImage, type BfiSystemId } from '@/content/institutions/bfi-archive-media';
 import { BfiArchitectureDiagram, BfiRelationshipDiagram } from '@/components/institutions/BfiArchiveDiagrams';
 import {
   InstContainer,
   InstPageShell,
   InstReveal,
+  InstPlaceholder,
   InstSectionLabel,
   INST_ACCENT,
   INST_PAGE_TOP_CLASS,
@@ -32,9 +35,27 @@ const SECTION_STICKY =
 const SECTION_ANCHOR =
   'scroll-mt-[calc(var(--site-header-height,12rem)+var(--inst-header-gap,0.5rem)+var(--inst-section-nav-height,3.25rem)+0.5rem)]';
 
-const showDraftArtwork = process.env.NODE_ENV !== 'production';
+const SLOT = Object.fromEntries(BFI_PENDING_SLOTS.map((slot) => [slot.id, slot])) as Record<
+  (typeof BFI_PENDING_SLOTS)[number]['id'],
+  (typeof BFI_PENDING_SLOTS)[number]
+>;
+
+function openSection(id: string) {
+  const section = document.getElementById(id);
+  const details = section?.querySelector('details');
+  if (details instanceof HTMLDetailsElement) details.open = true;
+  section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 export function BfiArchiveClient() {
+  useEffect(() => {
+    const id = window.location.hash.replace('#', '');
+    if (!id) return;
+    const section = document.getElementById(id);
+    const details = section?.querySelector('details');
+    if (details instanceof HTMLDetailsElement) details.open = true;
+  }, []);
+
   return (
     <InstPageShell className={INST_PAGE_TOP_CLASS}>
       <p className="border-b border-amber-200 bg-amber-50 px-4 py-2 text-center text-xs leading-relaxed text-amber-950 sm:text-sm">
@@ -48,6 +69,11 @@ export function BfiArchiveClient() {
               key={item.id}
               href={`#${item.id}`}
               className={cn('shrink-0 border px-3 py-1.5 text-xs font-medium transition', INST_ACCENT.ink.chip)}
+              onClick={(event) => {
+                event.preventDefault();
+                openSection(item.id);
+                window.history.replaceState(null, '', `#${item.id}`);
+              }}
             >
               {item.label}
             </a>
@@ -58,8 +84,12 @@ export function BfiArchiveClient() {
       <header className="border-b border-neutral-200">
         <InstContainer className="py-12 sm:py-16 lg:py-20">
           <InstReveal>
-            <InstSectionLabel>{S.hero.eyebrow}</InstSectionLabel>
-            <h1 className="max-w-4xl font-['MoMA_Sans'] text-3xl font-semibold leading-[1.12] tracking-tight sm:text-4xl md:text-5xl">
+            <div className="flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={BFI_PAGE_IMAGES.logo.src} alt={BFI_PAGE_IMAGES.logo.alt} className="h-12 w-12 bg-white" />
+              <InstSectionLabel>{S.hero.eyebrow}</InstSectionLabel>
+            </div>
+            <h1 className="mt-4 max-w-4xl font-['MoMA_Sans'] text-3xl font-semibold leading-[1.12] tracking-tight sm:text-4xl md:text-5xl">
               {S.hero.headline}
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-700 sm:text-lg">{S.hero.lead}</p>
@@ -71,6 +101,10 @@ export function BfiArchiveClient() {
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">{S.hero.roleLabel}</p>
               <p className="mt-1 text-base font-semibold text-neutral-950">{S.hero.role}</p>
               <p className="mt-2 text-sm leading-relaxed text-neutral-700">{S.hero.scope}</p>
+            </div>
+            <SystemLegend />
+            <div className="mt-8 max-w-4xl">
+              <EvidenceImage image={BFI_PAGE_IMAGES.cover} />
             </div>
           </InstReveal>
         </InstContainer>
@@ -95,204 +129,159 @@ export function BfiArchiveClient() {
         </InstContainer>
       </section>
 
-      <section id="problem" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 py-12 sm:py-16')}>
-        <InstContainer>
-          <InstReveal>
-            <InstSectionLabel accent="copper">{S.problem.eyebrow}</InstSectionLabel>
-            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.problem.title}</h2>
-            {S.problem.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">
-                {paragraph}
+      <SectionAccordion id="problem" eyebrow={S.problem.eyebrow} title={S.problem.title} accent="copper">
+        {S.problem.paragraphs.map((paragraph) => (
+          <p key={paragraph} className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">
+            {paragraph}
+          </p>
+        ))}
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+          {S.problem.surfaces.map((surface) => (
+            <li key={surface.label} className={cn('border p-4', SURFACE_CLASS[surface.label])}>
+              <p className="text-base font-semibold">{surface.label}</p>
+              <p className="mt-1 text-sm leading-relaxed text-neutral-700">{surface.body}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-8 max-w-3xl">
+          <EvidenceImage image={BFI_PAGE_IMAGES.cargoFiles} />
+        </div>
+      </SectionAccordion>
+
+      <SectionAccordion id="approach" eyebrow={S.approach.eyebrow} title={S.approach.title}>
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.approach.lead}</p>
+        <ol className="mt-8 grid gap-3">
+          {S.approach.responsibilities.map((item, index) => (
+            <li key={item.label} className={cn('grid gap-2 border p-4 sm:grid-cols-[8rem_1fr] sm:gap-4', APPROACH_CLASS[index])}>
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">
+                0{index + 1} · {item.role}
               </p>
-            ))}
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {S.problem.surfaces.map((surface) => (
-                <li key={surface.label} className="border border-neutral-300 bg-white p-4">
-                  <p className="text-base font-semibold">{surface.label}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-neutral-700">{surface.body}</p>
-                </li>
-              ))}
-            </ul>
-            {showDraftArtwork ? (
-              <DraftFrame
-                label="Development placeholder"
-                title={S.problem.title}
-                note="Illustration not approved. The four historical diagrams stay private and are not shown here."
-              />
-            ) : null}
-          </InstReveal>
-        </InstContainer>
-      </section>
+              <div>
+                <p className="text-base font-semibold">{item.label}</p>
+                <p className="mt-1 text-sm leading-relaxed text-neutral-700">{item.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-4 max-w-3xl border border-neutral-300 bg-neutral-100 px-4 py-3 text-sm leading-relaxed text-neutral-800">
+          {S.approach.tooling}
+        </p>
+        <blockquote className="mt-4 max-w-3xl border-l-4 border-neutral-950 bg-white px-4 py-3 font-['MoMA_Sans'] text-lg font-medium leading-relaxed text-neutral-950">
+          {S.approach.principle}
+        </blockquote>
+        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          <EvidenceImage image={BFI_PAGE_IMAGES.driveFolder} />
+          <EvidenceImage image={BFI_PAGE_IMAGES.githubRepo} />
+        </div>
+        <BfiArchitectureDiagram />
+      </SectionAccordion>
 
-      <section id="approach" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 py-12 sm:py-16')}>
-        <InstContainer>
-          <InstReveal>
-            <InstSectionLabel>{S.approach.eyebrow}</InstSectionLabel>
-            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.approach.title}</h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.approach.lead}</p>
-            <ol className="mt-8 grid gap-3">
-              {S.approach.responsibilities.map((item, index) => (
-                <li key={item.label} className="grid gap-2 border border-neutral-300 bg-white p-4 sm:grid-cols-[8rem_1fr] sm:gap-4">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">
-                    0{index + 1} · {item.role}
-                  </p>
-                  <div>
-                    <p className="text-base font-semibold">{item.label}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-neutral-700">{item.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-4 max-w-3xl border border-neutral-300 bg-neutral-100 px-4 py-3 text-sm leading-relaxed text-neutral-800">
-              {S.approach.tooling}
-            </p>
-            <blockquote className="mt-4 max-w-3xl border-l-4 border-neutral-950 bg-white px-4 py-3 font-['MoMA_Sans'] text-lg font-medium leading-relaxed text-neutral-950">
-              {S.approach.principle}
-            </blockquote>
-            {showDraftArtwork ? (
-              <DraftFrame
-                label="Development placeholder"
-                title={S.approach.title}
-                note="Companion illustration not approved."
-              />
-            ) : null}
-            <BfiArchitectureDiagram />
-          </InstReveal>
-        </InstContainer>
-      </section>
-
-      <section id="examples" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 py-12 sm:py-16')}>
-        <InstContainer>
-          <InstReveal>
-            <InstSectionLabel accent="teal">{S.examples.eyebrow}</InstSectionLabel>
-            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.examples.title}</h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.examples.lead}</p>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-600">
-              Schematic only. The Dear Miami screenshot montage — source, structured record, website, and a
-              redacted review excerpt — is not on this page yet.
-            </p>
-            <ul className="mt-8 grid gap-4 lg:grid-cols-3">
-              {S.examples.items.map((item) => (
-                <li key={item.id} className="flex flex-col border border-neutral-300 bg-white">
-                  <div className="border-b border-dashed border-neutral-300 bg-[#fbfaf7] px-4 py-3">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">
-                      Schematic · not a screenshot
-                    </p>
-                    <p className="mt-2 text-sm font-medium text-neutral-800">{item.kicker}</p>
-                  </div>
-                  <div className="flex flex-1 flex-col p-4">
-                    <h3 className="font-['MoMA_Sans'] text-xl font-semibold">{item.title}</h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-700">{item.body}</p>
-                    <p className="mt-4 text-sm">
-                      <a href={item.href} className="font-medium underline underline-offset-4" target="_blank" rel="noopener noreferrer">
-                        {item.hrefLabel}
-                      </a>
-                    </p>
-                    {item.sourceHref && item.sourceLabel ? (
-                      <p className="mt-2 text-sm">
-                        <a
-                          href={item.sourceHref}
-                          className="text-neutral-700 underline underline-offset-4"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {item.sourceLabel}
-                        </a>
-                      </p>
-                    ) : null}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </InstReveal>
-        </InstContainer>
-      </section>
-
-      <section id="outcome" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 bg-[#f7f6f3] py-12 sm:py-16')}>
-        <InstContainer>
-          <InstReveal>
-            <InstSectionLabel accent="teal">{S.outcome.eyebrow}</InstSectionLabel>
-            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.outcome.title}</h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.outcome.lead}</p>
-            <ul className="mt-8 grid gap-3 lg:grid-cols-3">
-              {S.outcome.points.map((point) => (
-                <li key={point.title} className="border border-neutral-300 bg-white p-5">
-                  <p className="text-base font-semibold text-neutral-950">{point.title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-neutral-700">{point.body}</p>
-                </li>
-              ))}
-            </ul>
-          </InstReveal>
-        </InstContainer>
-      </section>
-
-      <section id="delivered" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 py-12 sm:py-16')}>
-        <InstContainer>
-          <InstReveal>
-            <InstSectionLabel accent="teal">{S.delivered.eyebrow}</InstSectionLabel>
-            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.delivered.title}</h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.delivered.dateLine}</p>
-            <div className="mt-8 grid gap-4">
-              {S.delivered.groups.map((group) => (
-                <div key={group.label} className="border border-neutral-300 bg-white p-4 sm:p-5">
-                  <h3 className="text-base font-semibold">{group.label}</h3>
-                  <ul className="mt-3 space-y-2">
-                    {group.items.map((item) => (
-                      <li key={item} className="border-l-2 border-neutral-950 py-1 pl-3 text-sm leading-relaxed text-neutral-800">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+      <SectionAccordion id="examples" eyebrow={S.examples.eyebrow} title={S.examples.title} accent="teal">
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.examples.lead}</p>
+        <ul className="mt-8 grid gap-4 lg:grid-cols-3">
+          {S.examples.items.map((item) => (
+            <li key={item.id} className={cn('flex flex-col border bg-white', EXAMPLE_BORDER[item.id])}>
+              {item.id === 'dear-miami' ? (
+                <div className="grid gap-4 p-3">
+                  <EvidenceImage image={BFI_PAGE_IMAGES.dearMiamiCargo} />
+                  <EvidenceImage image={BFI_PAGE_IMAGES.dearMiamiAirtable} />
                 </div>
-              ))}
-            </div>
-            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-              {S.delivered.additions.map((item) => (
-                <li key={item.href} className="border border-neutral-300 bg-white px-4 py-3 text-sm">
+              ) : (
+                <ImageSlot id={item.id === 'loni-johnson' ? 'evidence.loni-johnson' : 'evidence.conversation'} />
+              )}
+              <div className="flex flex-1 flex-col p-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {EXAMPLE_SYSTEMS[item.id].map((system) => (
+                    <SystemChip key={system} id={system} />
+                  ))}
+                </div>
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">{item.kicker}</p>
+                <h3 className="mt-2 font-['MoMA_Sans'] text-xl font-semibold">{item.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-700">{item.body}</p>
+                <p className="mt-4 text-sm">
                   <a href={item.href} className="font-medium underline underline-offset-4" target="_blank" rel="noopener noreferrer">
-                    {item.title}
+                    {item.hrefLabel}
                   </a>
-                </li>
-              ))}
-            </ul>
-          </InstReveal>
-        </InstContainer>
-      </section>
+                </p>
+                {item.sourceHref && item.sourceLabel ? (
+                  <p className="mt-2 text-sm">
+                    <a
+                      href={item.sourceHref}
+                      className="text-neutral-700 underline underline-offset-4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.sourceLabel}
+                    </a>
+                  </p>
+                ) : null}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </SectionAccordion>
 
-      <section id="remains" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 py-12 sm:py-16')}>
-        <InstContainer>
-          <InstReveal>
-            <InstSectionLabel accent="copper">{S.remains.eyebrow}</InstSectionLabel>
-            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.remains.title}</h2>
-            <ul className="mt-6 grid gap-2">
-              {S.remains.items.map((item) => (
-                <li key={item} className="border-l-2 border-amber-700 bg-amber-50/80 py-2.5 pl-3 text-sm leading-relaxed text-neutral-800">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </InstReveal>
-        </InstContainer>
-      </section>
+      <SectionAccordion id="outcome" eyebrow={S.outcome.eyebrow} title={S.outcome.title} accent="teal">
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.outcome.lead}</p>
+        <ul className="mt-8 grid gap-3 lg:grid-cols-3">
+          {S.outcome.points.map((point) => (
+            <li key={point.title} className="border border-neutral-300 bg-white p-5">
+              <p className="text-base font-semibold text-neutral-950">{point.title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-700">{point.body}</p>
+            </li>
+          ))}
+        </ul>
+      </SectionAccordion>
 
-      <section id="capability" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 py-12 sm:py-16')}>
-        <InstContainer>
-          <InstReveal>
-            <InstSectionLabel>{S.capability.eyebrow}</InstSectionLabel>
-            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.capability.title}</h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.capability.lead}</p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {S.capability.points.map((point) => (
-                <li key={point.title} className="border border-neutral-300 bg-white p-4">
-                  <p className="text-base font-semibold">{point.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-neutral-700">{point.body}</p>
-                </li>
-              ))}
-            </ul>
-            <BfiRelationshipDiagram />
-          </InstReveal>
-        </InstContainer>
-      </section>
+      <SectionAccordion id="delivered" eyebrow={S.delivered.eyebrow} title={S.delivered.title} accent="teal">
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.delivered.dateLine}</p>
+        <div className="mt-8 grid gap-4">
+          {S.delivered.groups.map((group) => (
+            <div key={group.label} className="border border-neutral-300 bg-white p-4 sm:p-5">
+              <h3 className="text-base font-semibold">{group.label}</h3>
+              <ul className="mt-3 space-y-2">
+                {group.items.map((item) => (
+                  <li key={item} className="border-l-2 border-neutral-950 py-1 pl-3 text-sm leading-relaxed text-neutral-800">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+          {S.delivered.additions.map((item) => (
+            <li key={item.href} className="border border-neutral-300 bg-white px-4 py-3 text-sm">
+              <a href={item.href} className="font-medium underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+                {item.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </SectionAccordion>
+
+      <SectionAccordion id="remains" eyebrow={S.remains.eyebrow} title={S.remains.title} accent="copper">
+        <ul className="mt-6 grid gap-2">
+          {S.remains.items.map((item) => (
+            <li key={item} className="border-l-2 border-amber-700 bg-amber-50/80 py-2.5 pl-3 text-sm leading-relaxed text-neutral-800">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </SectionAccordion>
+
+      <SectionAccordion id="capability" eyebrow={S.capability.eyebrow} title={S.capability.title}>
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.capability.lead}</p>
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+          {S.capability.points.map((point) => (
+            <li key={point.title} className="border border-neutral-300 bg-white p-4">
+              <p className="text-base font-semibold">{point.title}</p>
+              <p className="mt-1 text-sm leading-relaxed text-neutral-700">{point.body}</p>
+            </li>
+          ))}
+        </ul>
+        <BfiRelationshipDiagram />
+      </SectionAccordion>
 
       <section className="bg-neutral-950 py-14 text-white sm:py-16">
         <InstContainer>
@@ -328,14 +317,99 @@ export function BfiArchiveClient() {
   );
 }
 
-function DraftFrame({ label, title, note }: { label: string; title: string; note: string }) {
+function SectionAccordion({
+  id,
+  eyebrow,
+  title,
+  accent,
+  children,
+}: {
+  id: string;
+  eyebrow: string;
+  title: string;
+  accent?: 'ink' | 'ocean' | 'teal' | 'copper' | 'rose';
+  children: ReactNode;
+}) {
   return (
-    <div className="mt-8 border border-dashed border-amber-700/50 bg-amber-50 p-4 text-amber-950" role="status">
-      <div className="flex aspect-video items-end border border-neutral-950/80 bg-[#fbfaf7] p-4">
-        <p className="max-w-md font-['MoMA_Sans'] text-2xl font-semibold leading-tight text-neutral-950">{title}</p>
-      </div>
-      <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em]">{label}</p>
-      <p className="mt-1 text-sm leading-relaxed">{note}</p>
-    </div>
+    <section id={id} className={cn(SECTION_ANCHOR, 'border-b border-neutral-200')}>
+      <details className="group">
+        <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+          <InstContainer className="flex items-start justify-between gap-6 py-6 sm:py-8">
+            <span>
+              <InstSectionLabel accent={accent}>{eyebrow}</InstSectionLabel>
+              <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{title}</h2>
+            </span>
+            <span className="mt-1 shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">
+              <span className="group-open:hidden">Open</span>
+              <span className="hidden group-open:inline">Close</span>
+            </span>
+          </InstContainer>
+        </summary>
+        <InstContainer className="pb-12 sm:pb-16">{children}</InstContainer>
+      </details>
+    </section>
   );
+}
+
+const SURFACE_CLASS: Record<string, string> = {
+  Cargo: 'border-amber-800 bg-amber-50',
+  Workbook: 'border-amber-800 bg-amber-50',
+  Airtable: 'border-teal-800 bg-teal-50',
+  Webflow: 'border-violet-800 bg-violet-50',
+};
+
+const APPROACH_CLASS = [
+  'border-amber-800 bg-amber-50',
+  'border-emerald-800 bg-emerald-50',
+  'border-neutral-400 bg-white',
+  'border-teal-800 bg-teal-50',
+  'border-violet-800 bg-violet-50',
+] as const;
+
+const EXAMPLE_BORDER: Record<string, string> = {
+  'dear-miami': 'border-amber-800',
+  'loni-johnson': 'border-violet-800',
+  conversation: 'border-violet-800',
+};
+
+const EXAMPLE_SYSTEMS: Record<string, readonly BfiSystemId[]> = {
+  'dear-miami': ['cargo', 'airtable', 'webflow'],
+  'loni-johnson': ['cargo', 'webflow'],
+  conversation: ['webflow'],
+};
+
+function SystemLegend() {
+  return (
+    <ul className="mt-6 flex flex-wrap gap-2" aria-label="System colors">
+      {(Object.keys(BFI_SYSTEMS) as BfiSystemId[]).map((id) => (
+        <li key={id}>
+          <SystemChip id={id} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function SystemChip({ id }: { id: BfiSystemId }) {
+  const system = BFI_SYSTEMS[id];
+  return (
+    <span className={cn('inline-flex border px-2.5 py-1 text-xs font-medium', INST_ACCENT[system.accent].chip)}>
+      {system.label}
+    </span>
+  );
+}
+
+function EvidenceImage({ image }: { image: BfiPageImage }) {
+  return (
+    <figure>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={image.src} alt={image.alt} className="w-full border border-neutral-300 bg-white" />
+      <figcaption className="mt-2 text-sm leading-relaxed text-neutral-600">{image.caption}</figcaption>
+    </figure>
+  );
+}
+
+function ImageSlot({ id }: { id: keyof typeof SLOT }) {
+  const slot = SLOT[id];
+  return <InstPlaceholder label={slot.title} note={`${slot.note} ${slot.folder}`} />;
 }

@@ -678,6 +678,7 @@ export function SupportingProofCard({
   secondaryHref,
   secondaryLabel,
   image,
+  id,
 }: {
   title: string;
   org: string;
@@ -687,20 +688,26 @@ export function SupportingProofCard({
   href: string;
   secondaryHref?: string;
   secondaryLabel?: string;
-  image: InstMedia;
+  image?: InstMedia;
+  id?: string;
 }) {
   return (
-    <article className="group overflow-hidden border border-neutral-200 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0">
-      <div className="relative aspect-[16/10] overflow-hidden bg-neutral-200">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          className="object-cover transition duration-700 group-hover:scale-[1.04]"
-          sizes="(max-width: 768px) 100vw, 480px"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 to-transparent" />
-      </div>
+    <article
+      id={id}
+      className="group h-fit scroll-mt-28 self-start overflow-hidden border border-neutral-200 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:hover:translate-y-0"
+    >
+      {image ? (
+        <div className="relative aspect-[16/10] overflow-hidden bg-neutral-200">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            className="object-cover transition duration-700 group-hover:scale-[1.04]"
+            sizes="(max-width: 768px) 100vw, 480px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 to-transparent" />
+        </div>
+      ) : null}
       <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
           <DeliveryStatusBadge status={status} />

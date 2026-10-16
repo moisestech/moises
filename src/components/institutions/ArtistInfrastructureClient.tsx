@@ -38,6 +38,7 @@ const SECTION_NAV = [
   { id: 'positioning', label: 'Positioning', accent: 'ink' as const, icon: 'palette' },
   { id: 'curriculum', label: 'Curriculum', accent: 'ocean' as const, icon: 'graduation' },
   { id: 'oolite-proof', label: 'Oolite', accent: 'teal' as const, icon: 'layers' },
+  { id: 'bfi-archive', label: 'BFI', accent: 'ink' as const, icon: 'layers' },
   { id: 'process', label: 'Process', accent: 'teal' as const, icon: 'workflow' },
   { id: 'supporting-proof', label: 'Proof', accent: 'copper' as const, icon: 'sparkles' },
   { id: 'practice', label: 'Practice', accent: 'rose' as const, icon: 'flask' },
@@ -250,10 +251,11 @@ export function ArtistInfrastructureClient() {
               body={card.body}
               status={card.status}
               statusNote={card.statusNote}
+              id={card.id}
               href={card.href}
               secondaryHref={'secondaryHref' in card ? card.secondaryHref : undefined}
               secondaryLabel={'secondaryLabel' in card ? card.secondaryLabel : undefined}
-              image={card.image}
+              image={'image' in card ? card.image : undefined}
             />
           ))}
         </ProofStrip>

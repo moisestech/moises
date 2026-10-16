@@ -553,6 +553,15 @@ export const artistInfrastructurePage = {
           category: 'medium' as const,
         } satisfies InstMedia,
       },
+      {
+        id: 'bfi-archive',
+        title: 'Bas Fisher Invitational archive',
+        org: 'Review · 2 October 2026',
+        body: 'From scattered archive pages to a collection people can trust, review, and maintain. This covers the current milestone: preserved sources, structured records, and staging pages. It is not a finished migration.',
+        status: 'in-progress' as DeliveryStatus,
+        statusNote: 'Unlisted review. Public promotion still needs BFI’s agreement.',
+        href: '/bfi-archive',
+      },
     ],
   },
   practice: {

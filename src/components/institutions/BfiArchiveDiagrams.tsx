@@ -1,54 +1,64 @@
 import { BFI_EVIDENCE_DATE, BFI_SCHEMA_DATE } from '@/content/institutions/bfi-archive';
+import { BFI_PAGE_IMAGES } from '@/content/institutions/bfi-archive-media';
+import { cn } from '@/lib/utils';
 
-const implemented = 'border-neutral-950 bg-white';
 const held = 'border-dashed border-amber-800 bg-amber-50';
+
+const ZONE_CLASS = {
+  cargo: 'border-amber-800 bg-amber-50',
+  files: 'border-emerald-800 bg-emerald-50',
+  canonical: 'border-neutral-400 bg-white',
+  airtable: 'border-teal-800 bg-teal-50',
+  webflow: 'border-violet-800 bg-violet-50',
+  tooling: 'border-neutral-950 bg-neutral-100',
+} as const;
 
 export function BfiArchitectureDiagram() {
   return (
-    <figure className="mt-8">
-      <figcaption className="max-w-3xl text-sm leading-relaxed text-neutral-700">
+    <div className="mt-8">
+      <p className="max-w-3xl text-sm leading-relaxed text-neutral-700">
         How a record moves, as of {BFI_EVIDENCE_DATE}. Solid boxes are in place for this milestone.
         Dashed boxes are not done. Arrows are one direction, and only after a person approves the change.
-      </figcaption>
+      </p>
       <div className="mt-5 border border-neutral-300 bg-[#fbfaf7] p-4 sm:p-6">
         <div className="grid gap-3 lg:grid-cols-5">
           <Zone
             kicker="Sources"
             title="Cargo + workbook"
             body="Historical pages and the workbook listing."
-            tone="done"
+            tone="cargo"
           />
           <Zone
             kicker="Preservation"
             title="Files + manifests"
             body="Original HTML, checksums, and the media manifest."
-            tone="done"
+            tone="files"
           />
           <Zone
             kicker="Canonical data"
             title="Normalized records"
             body="One working record per source, with a stable key."
-            tone="done"
+            tone="canonical"
           />
           <Zone
             kicker="Editorial review"
             title="Airtable + review sheet"
             body="Structured records and the questions still open."
-            tone="done"
+            tone="airtable"
           />
           <Zone
             kicker="Presentation"
             title="Webflow staging"
             body="The webflow.io site. Not the custom domain."
-            tone="done"
+            tone="webflow"
           />
         </div>
         <ol className="mt-4 grid gap-2 text-sm text-neutral-800 sm:grid-cols-2">
-          <li className={`border px-3 py-2 ${implemented}`}>
+          <li className="border border-neutral-950 bg-white px-3 py-2">
             <span className="font-semibold">Human approval</span> sits before any write to Airtable or Webflow.
             There is no automatic two-way sync.
           </li>
-          <li className="border border-neutral-300 bg-neutral-100 px-3 py-2">
+          <li className={`border px-3 py-2 ${ZONE_CLASS.tooling}`}>
             <span className="font-semibold">Cursor / GitHub</span> sit beside this path. They run the work.
             They are not archival stores.
           </li>
@@ -60,7 +70,18 @@ export function BfiArchitectureDiagram() {
           </li>
         </ol>
       </div>
-    </figure>
+      <figure className="mt-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={BFI_PAGE_IMAGES.earlierBoard.src}
+          alt={BFI_PAGE_IMAGES.earlierBoard.alt}
+          className="w-full border border-neutral-300 bg-white"
+        />
+        <figcaption className="mt-2 text-sm leading-relaxed text-neutral-600">
+          {BFI_PAGE_IMAGES.earlierBoard.caption}
+        </figcaption>
+      </figure>
+    </div>
   );
 }
 
@@ -73,10 +94,10 @@ function Zone({
   kicker: string;
   title: string;
   body: string;
-  tone: 'done' | 'open';
+  tone: keyof typeof ZONE_CLASS | 'held';
 }) {
   return (
-    <div className={`border p-3 ${tone === 'done' ? implemented : held}`}>
+    <div className={cn('border p-3', tone === 'held' ? held : ZONE_CLASS[tone])}>
       <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">{kicker}</p>
       <p className="mt-2 text-base font-semibold leading-snug text-neutral-950">{title}</p>
       <p className="mt-2 text-sm leading-relaxed text-neutral-700">{body}</p>
@@ -107,7 +128,7 @@ export function BfiRelationshipDiagram() {
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {LINKED.map(([from, field, to, inverse]) => (
-            <li key={`${from}-${field}`} className="border border-neutral-950 bg-white p-3">
+            <li key={`${from}-${field}`} className="border border-teal-800 bg-teal-50 p-3">
               <p className="text-base font-semibold text-neutral-950">
                 {from}
                 <span className="px-2 font-normal text-neutral-400" aria-hidden>
@@ -123,6 +144,17 @@ export function BfiRelationshipDiagram() {
             </li>
           ))}
         </ul>
+        <figure className="mt-6">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={BFI_PAGE_IMAGES.earlierRelationships.src}
+            alt={BFI_PAGE_IMAGES.earlierRelationships.alt}
+            className="w-full border border-teal-800 bg-white"
+          />
+          <figcaption className="mt-2 text-sm leading-relaxed text-neutral-600">
+            {BFI_PAGE_IMAGES.earlierRelationships.caption}
+          </figcaption>
+        </figure>
       </section>
 
       <section aria-labelledby="bfi-provenance">
