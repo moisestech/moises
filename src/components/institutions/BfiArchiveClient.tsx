@@ -17,11 +17,12 @@ const S = bfiArchive;
 
 const SECTION_NAV = [
   { id: 'problem', label: 'Problem' },
-  { id: 'approach', label: 'Approach' },
-  { id: 'examples', label: 'Examples' },
+  { id: 'approach', label: 'Method' },
+  { id: 'examples', label: 'Evidence' },
+  { id: 'outcome', label: 'Outcome' },
   { id: 'delivered', label: 'Delivered' },
-  { id: 'remains', label: 'Remains' },
-  { id: 'capability', label: 'Method' },
+  { id: 'remains', label: 'Remaining' },
+  { id: 'capability', label: 'Reusable' },
 ] as const;
 
 const SECTION_STICKY =
@@ -66,9 +67,33 @@ export function BfiArchiveClient() {
               <span className="font-semibold">{S.hero.status}</span>
               <span className="mt-1 block text-neutral-700">{S.hero.statusNote}</span>
             </p>
+            <div className="mt-4 max-w-2xl border border-neutral-300 bg-[#fbfaf7] p-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">{S.hero.roleLabel}</p>
+              <p className="mt-1 text-base font-semibold text-neutral-950">{S.hero.role}</p>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-700">{S.hero.scope}</p>
+            </div>
           </InstReveal>
         </InstContainer>
       </header>
+
+      <section className="border-b border-neutral-200 bg-white py-10 sm:py-12">
+        <InstContainer>
+          <InstReveal>
+            <InstSectionLabel accent="teal">{S.snapshot.eyebrow}</InstSectionLabel>
+            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.snapshot.title}</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.snapshot.lead}</p>
+            <dl className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {S.snapshot.stats.map((stat) => (
+                <div key={stat.label} className="border border-neutral-300 bg-[#f7f6f3] p-4">
+                  <dt className="text-sm font-medium text-neutral-700">{stat.label}</dt>
+                  <dd className="mt-2 font-['MoMA_Sans'] text-3xl font-semibold tracking-tight text-neutral-950">{stat.value}</dd>
+                  <p className="mt-2 text-xs leading-relaxed text-neutral-600">{stat.note}</p>
+                </div>
+              ))}
+            </dl>
+          </InstReveal>
+        </InstContainer>
+      </section>
 
       <section id="problem" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 py-12 sm:py-16')}>
         <InstContainer>
@@ -121,6 +146,9 @@ export function BfiArchiveClient() {
             <p className="mt-4 max-w-3xl border border-neutral-300 bg-neutral-100 px-4 py-3 text-sm leading-relaxed text-neutral-800">
               {S.approach.tooling}
             </p>
+            <blockquote className="mt-4 max-w-3xl border-l-4 border-neutral-950 bg-white px-4 py-3 font-['MoMA_Sans'] text-lg font-medium leading-relaxed text-neutral-950">
+              {S.approach.principle}
+            </blockquote>
             {showDraftArtwork ? (
               <DraftFrame
                 label="Development placeholder"
@@ -173,6 +201,24 @@ export function BfiArchiveClient() {
                       </p>
                     ) : null}
                   </div>
+                </li>
+              ))}
+            </ul>
+          </InstReveal>
+        </InstContainer>
+      </section>
+
+      <section id="outcome" className={cn(SECTION_ANCHOR, 'border-b border-neutral-200 bg-[#f7f6f3] py-12 sm:py-16')}>
+        <InstContainer>
+          <InstReveal>
+            <InstSectionLabel accent="teal">{S.outcome.eyebrow}</InstSectionLabel>
+            <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{S.outcome.title}</h2>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.outcome.lead}</p>
+            <ul className="mt-8 grid gap-3 lg:grid-cols-3">
+              {S.outcome.points.map((point) => (
+                <li key={point.title} className="border border-neutral-300 bg-white p-5">
+                  <p className="text-base font-semibold text-neutral-950">{point.title}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-700">{point.body}</p>
                 </li>
               ))}
             </ul>
