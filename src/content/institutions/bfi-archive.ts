@@ -30,9 +30,41 @@ export const bfiArchive = {
     eyebrow: 'Bas Fisher Invitational · Archive migration',
     headline: 'From scattered archive pages to a collection people can trust, review, and maintain.',
     lead:
-      'Historical programs already lived on an older website, in a workbook, in a structured archive, and on a newer website. This milestone keeps those sources, connects the records that match, and leaves the uncertain ones for a person to decide.',
+      'BFI needed to move historical material forward without losing the source, duplicating pages that already existed, or turning uncertain identities into false certainty. I built a migration and review system that separates what can be reconciled from what still needs a person to decide.',
     status: 'Ongoing migration · first milestone delivered',
     statusNote: `Staging site only, as of ${BFI_EVIDENCE_DATE}. The public custom domain was not changed.`,
+    roleLabel: 'My role',
+    role: 'Archive systems + migration engineering',
+    scope:
+      'Source preservation, data reconciliation, canonical records, editorial review gates, safe CMS writes, and a repeatable path from historical evidence to public staging.',
+  },
+  snapshot: {
+    eyebrow: 'At a glance',
+    title: 'The migration could move quickly without pretending every record was certain.',
+    lead:
+      'The useful outcome was not “more pages.” It was a system that could recognize what already existed, preserve where a claim came from, and stop when the evidence was not strong enough.',
+    stats: [
+      {
+        value: '322',
+        label: 'canonical records modeled',
+        note: '136 event/program records + 186 artist records',
+      },
+      {
+        value: '163',
+        label: 'durable HTML source packages',
+        note: 'preserved as source evidence before migration',
+      },
+      {
+        value: '1,088',
+        label: 'media references inventoried',
+        note: '670 checksum-verified; gaps stayed visible',
+      },
+      {
+        value: '41 / 42',
+        label: 'selected programs with staging pages',
+        note: 'one stayed blocked rather than being invented',
+      },
+    ],
   },
   problem: {
     eyebrow: 'The original problem',
@@ -82,6 +114,8 @@ export const bfiArchive = {
     ],
     tooling:
       'Cursor and GitHub are how the work is written and run. They are not archival databases, and they do not own the files.',
+    principle:
+      'Most migrations optimize for moving records. This process also optimizes for knowing when not to move one.',
   },
   examples: {
     eyebrow: 'Three examples',
@@ -117,6 +151,26 @@ export const bfiArchive = {
         hrefLabel: 'Conversation page on the staging site',
         sourceHref: null,
         sourceLabel: null,
+      },
+    ],
+  },
+  outcome: {
+    eyebrow: 'What changed',
+    title: 'BFI gained a safer way to move the archive forward.',
+    lead:
+      'The technical work reduced uncertainty for the people maintaining the archive. Existing work was recognized instead of overwritten, unresolved questions became visible, and the next batch can reuse the same checks instead of starting from scratch.',
+    points: [
+      {
+        title: 'Lower duplicate risk',
+        body: 'Existing Webflow pages are reconciled before a new page is created, so migration does not automatically mean copying.',
+      },
+      {
+        title: 'Human judgment stays explicit',
+        body: 'When dates, identities, or event relationships are uncertain, the record moves into review instead of being silently normalized.',
+      },
+      {
+        title: 'The next batch is repeatable',
+        body: 'Source evidence, canonical keys, approval gates, and staging checks form a workflow that can be reused as the archive grows.',
       },
     ],
   },
