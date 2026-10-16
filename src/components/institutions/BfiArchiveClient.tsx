@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { bfiArchive } from '@/content/institutions/bfi-archive';
 import { BFI_PAGE_IMAGES, BFI_PENDING_SLOTS, BFI_SYSTEMS, type BfiPageImage, type BfiSystemId } from '@/content/institutions/bfi-archive-media';
@@ -28,6 +28,41 @@ const SECTION_NAV = [
   { id: 'capability', label: 'Reusable' },
 ] as const;
 
+type SectionId = (typeof SECTION_NAV)[number]['id'];
+
+const MARK = {
+  copper: 'bg-amber-700',
+  emerald: 'bg-emerald-700',
+  neutral: 'bg-neutral-400',
+  teal: 'bg-teal-700',
+  violet: 'bg-violet-800',
+} as const;
+
+type PathMark = keyof typeof MARK;
+
+const SECTION_META: Record<
+  SectionId,
+  { n: string; accent: keyof typeof INST_ACCENT; marks?: readonly PathMark[]; held?: boolean }
+> = {
+  problem: { n: '01', accent: 'copper' },
+  approach: { n: '02', accent: 'ink', marks: ['copper', 'emerald', 'neutral', 'teal', 'violet'] },
+  examples: { n: '03', accent: 'ink', marks: ['copper', 'teal', 'violet'] },
+  outcome: { n: '04', accent: 'ink' },
+  delivered: { n: '05', accent: 'violet' },
+  remains: { n: '06', accent: 'copper', held: true },
+  capability: { n: '07', accent: 'ink' },
+};
+
+const SUMMARY_TONE: Record<SectionId, string> = {
+  problem: 'hover:bg-amber-50 group-open:border-l-amber-700 group-open:bg-amber-50',
+  approach: 'hover:bg-neutral-100 group-open:border-l-neutral-950 group-open:bg-neutral-100',
+  examples: 'hover:bg-neutral-100 group-open:border-l-neutral-950 group-open:bg-neutral-100',
+  outcome: 'hover:bg-neutral-100 group-open:border-l-neutral-950 group-open:bg-neutral-100',
+  delivered: 'hover:bg-violet-50 group-open:border-l-violet-800 group-open:bg-violet-50',
+  remains: 'hover:bg-amber-50 group-open:border-l-amber-800 group-open:bg-amber-50',
+  capability: 'hover:bg-neutral-100 group-open:border-l-neutral-950 group-open:bg-neutral-100',
+};
+
 const SECTION_STICKY =
   'sticky z-30 top-[calc(var(--site-header-height,12rem)+var(--inst-header-gap,0.5rem))] border-b border-neutral-200 bg-[#f7f6f3]/90 backdrop-blur transition-[top] duration-300 ease-in-out';
 
@@ -40,7 +75,7 @@ const SLOT = Object.fromEntries(BFI_PENDING_SLOTS.map((slot) => [slot.id, slot])
   (typeof BFI_PENDING_SLOTS)[number]
 >;
 
-function openSection(id: string) {
+function revealSection(id: string) {
   const section = document.getElementById(id);
   const details = section?.querySelector('details');
   if (details instanceof HTMLDetailsElement) details.open = true;
@@ -48,12 +83,23 @@ function openSection(id: string) {
 }
 
 export function BfiArchiveClient() {
+  const [openIds, setOpenIds] = useState<ReadonlySet<string>>(() => new Set());
+
+  function setSectionOpen(id: string, open: boolean) {
+    setOpenIds((current) => {
+      if (current.has(id) === open) return current;
+      const next = new Set(current);
+      if (open) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }
+
   useEffect(() => {
     const id = window.location.hash.replace('#', '');
-    if (!id) return;
-    const section = document.getElementById(id);
-    const details = section?.querySelector('details');
-    if (details instanceof HTMLDetailsElement) details.open = true;
+    if (!(id in SECTION_META)) return;
+    revealSection(id);
+    setSectionOpen(id, true);
   }, []);
 
   return (
@@ -64,20 +110,35 @@ export function BfiArchiveClient() {
 
       <nav className={SECTION_STICKY} aria-label="Archive migration sections" data-inst-section-nav>
         <InstContainer className="flex gap-1.5 overflow-x-auto py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {SECTION_NAV.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={cn('shrink-0 border px-3 py-1.5 text-xs font-medium transition', INST_ACCENT.ink.chip)}
-              onClick={(event) => {
-                event.preventDefault();
-                openSection(item.id);
-                window.history.replaceState(null, '', `#${item.id}`);
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
+          {SECTION_NAV.map((item) => {
+            const open = openIds.has(item.id);
+            const meta = SECTION_META[item.id];
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={open ? 'true' : undefined}
+                className={cn(
+                  'shrink-0 border px-3 py-1.5 font-mono text-xs font-medium transition',
+                  meta.held
+                    ? open
+                      ? 'border-amber-800 bg-amber-800 text-white'
+                      : 'border-dashed border-amber-800 bg-amber-50 text-amber-950 hover:bg-amber-100'
+                    : open
+                      ? INST_ACCENT[meta.accent].chipActive
+                      : INST_ACCENT[meta.accent].chip,
+                )}
+                onClick={(event) => {
+                  event.preventDefault();
+                  revealSection(item.id);
+                  setSectionOpen(item.id, true);
+                  window.history.replaceState(null, '', `#${item.id}`);
+                }}
+              >
+                {meta.n} {item.label}
+              </a>
+            );
+          })}
         </InstContainer>
       </nav>
 
@@ -129,7 +190,7 @@ export function BfiArchiveClient() {
         </InstContainer>
       </section>
 
-      <SectionAccordion id="problem" eyebrow={S.problem.eyebrow} title={S.problem.title} accent="copper">
+      <SectionAccordion id="problem" eyebrow={S.problem.eyebrow} title={S.problem.title} onToggle={setSectionOpen}>
         {S.problem.paragraphs.map((paragraph) => (
           <p key={paragraph} className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">
             {paragraph}
@@ -148,7 +209,7 @@ export function BfiArchiveClient() {
         </div>
       </SectionAccordion>
 
-      <SectionAccordion id="approach" eyebrow={S.approach.eyebrow} title={S.approach.title}>
+      <SectionAccordion id="approach" eyebrow={S.approach.eyebrow} title={S.approach.title} onToggle={setSectionOpen}>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.approach.lead}</p>
         <ol className="mt-8 grid gap-3">
           {S.approach.responsibilities.map((item, index) => (
@@ -176,7 +237,7 @@ export function BfiArchiveClient() {
         <BfiArchitectureDiagram />
       </SectionAccordion>
 
-      <SectionAccordion id="examples" eyebrow={S.examples.eyebrow} title={S.examples.title} accent="teal">
+      <SectionAccordion id="examples" eyebrow={S.examples.eyebrow} title={S.examples.title} onToggle={setSectionOpen}>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.examples.lead}</p>
         <ul className="mt-8 grid gap-4 lg:grid-cols-3">
           {S.examples.items.map((item) => (
@@ -221,7 +282,7 @@ export function BfiArchiveClient() {
         </ul>
       </SectionAccordion>
 
-      <SectionAccordion id="outcome" eyebrow={S.outcome.eyebrow} title={S.outcome.title} accent="teal">
+      <SectionAccordion id="outcome" eyebrow={S.outcome.eyebrow} title={S.outcome.title} onToggle={setSectionOpen}>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.outcome.lead}</p>
         <ul className="mt-8 grid gap-3 lg:grid-cols-3">
           {S.outcome.points.map((point) => (
@@ -233,7 +294,7 @@ export function BfiArchiveClient() {
         </ul>
       </SectionAccordion>
 
-      <SectionAccordion id="delivered" eyebrow={S.delivered.eyebrow} title={S.delivered.title} accent="teal">
+      <SectionAccordion id="delivered" eyebrow={S.delivered.eyebrow} title={S.delivered.title} onToggle={setSectionOpen}>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.delivered.dateLine}</p>
         <div className="mt-8 grid gap-4">
           {S.delivered.groups.map((group) => (
@@ -260,7 +321,7 @@ export function BfiArchiveClient() {
         </ul>
       </SectionAccordion>
 
-      <SectionAccordion id="remains" eyebrow={S.remains.eyebrow} title={S.remains.title} accent="copper">
+      <SectionAccordion id="remains" eyebrow={S.remains.eyebrow} title={S.remains.title} onToggle={setSectionOpen}>
         <ul className="mt-6 grid gap-2">
           {S.remains.items.map((item) => (
             <li key={item} className="border-l-2 border-amber-700 bg-amber-50/80 py-2.5 pl-3 text-sm leading-relaxed text-neutral-800">
@@ -270,7 +331,7 @@ export function BfiArchiveClient() {
         </ul>
       </SectionAccordion>
 
-      <SectionAccordion id="capability" eyebrow={S.capability.eyebrow} title={S.capability.title}>
+      <SectionAccordion id="capability" eyebrow={S.capability.eyebrow} title={S.capability.title} onToggle={setSectionOpen}>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-700 sm:text-base">{S.capability.lead}</p>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {S.capability.points.map((point) => (
@@ -321,23 +382,34 @@ function SectionAccordion({
   id,
   eyebrow,
   title,
-  accent,
+  onToggle,
   children,
 }: {
-  id: string;
+  id: SectionId;
   eyebrow: string;
   title: string;
-  accent?: 'ink' | 'ocean' | 'teal' | 'copper' | 'rose';
+  onToggle: (id: SectionId, open: boolean) => void;
   children: ReactNode;
 }) {
+  const meta = SECTION_META[id];
   return (
     <section id={id} className={cn(SECTION_ANCHOR, 'border-b border-neutral-200')}>
-      <details className="group">
-        <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-          <InstContainer className="flex items-start justify-between gap-6 py-6 sm:py-8">
-            <span>
-              <InstSectionLabel accent={accent}>{eyebrow}</InstSectionLabel>
-              <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold sm:text-3xl">{title}</h2>
+      <details className="group" onToggle={(event) => onToggle(id, event.currentTarget.open)}>
+        <summary
+          className={cn(
+            'cursor-pointer list-none border-l-4 border-l-transparent transition-colors [&::-webkit-details-marker]:hidden',
+            'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-neutral-950',
+            SUMMARY_TONE[id],
+          )}
+        >
+          <InstContainer className="flex items-start justify-between gap-6 py-8 sm:py-11">
+            <span className="flex min-w-0 items-start gap-4 sm:gap-5">
+              <SectionNumber n={meta.n} accent={meta.accent} held={meta.held} />
+              <span className="min-w-0">
+                <InstSectionLabel accent={meta.held ? 'copper' : meta.accent}>{eyebrow}</InstSectionLabel>
+                <h2 className="max-w-3xl font-['MoMA_Sans'] text-2xl font-semibold leading-snug sm:text-3xl">{title}</h2>
+                {meta.marks ? <PathMarks marks={meta.marks} /> : null}
+              </span>
             </span>
             <span className="mt-1 shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-neutral-500">
               <span className="group-open:hidden">Open</span>
@@ -348,6 +420,38 @@ function SectionAccordion({
         <InstContainer className="pb-12 sm:pb-16">{children}</InstContainer>
       </details>
     </section>
+  );
+}
+
+function SectionNumber({
+  n,
+  accent,
+  held,
+}: {
+  n: string;
+  accent: keyof typeof INST_ACCENT;
+  held?: boolean;
+}) {
+  return (
+    <span
+      className={cn(
+        'inline-flex h-11 w-11 shrink-0 items-center justify-center font-mono text-sm font-medium',
+        held ? 'border border-dashed border-amber-800 bg-amber-50 text-amber-950' : INST_ACCENT[accent].iconBg,
+      )}
+      aria-hidden
+    >
+      {n}
+    </span>
+  );
+}
+
+function PathMarks({ marks }: { marks: readonly PathMark[] }) {
+  return (
+    <span className="mt-4 flex gap-1.5" aria-hidden>
+      {marks.map((mark) => (
+        <span key={mark} className={cn('h-1.5 w-7', MARK[mark])} />
+      ))}
+    </span>
   );
 }
 
