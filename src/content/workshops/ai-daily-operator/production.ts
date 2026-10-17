@@ -97,6 +97,46 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     status: 'done',
   },
   {
+    id: 'ado-p0-delivery-variants',
+    title: 'Codify Level I Core and Studio as one competency model',
+    phase: 'remote-now',
+    minutes: 30,
+    owner: 'ChatGPT/Cursor',
+    definitionOfDone:
+      'Core remains the 90-minute minimum useful build; Studio adds coached iteration and transfer without becoming a separate curriculum.',
+    status: 'done',
+  },
+  {
+    id: 'ado-p0-pilot-preflight',
+    title: 'Codify host, participant, and facilitator preflight',
+    phase: 'pre-pilot',
+    minutes: 30,
+    owner: 'ChatGPT/Cursor',
+    definitionOfDone:
+      'Required operational, privacy, accessibility, tool-access, and evidence-capture checks exist in typed course content.',
+    status: 'done',
+  },
+  {
+    id: 'ado-p0-pilot-ops',
+    title: 'Build browser-local pilot operations capture',
+    phase: 'pre-pilot',
+    minutes: 60,
+    owner: 'ChatGPT/Cursor',
+    definitionOfDone:
+      'A noindex facilitator route can record preflight, cohort after-action data, facilitator scores, clarity delta, founder minutes, and export JSON without sending participant data to a server.',
+    status: 'done',
+  },
+  {
+    id: 'ado-prepilot-browser-qa',
+    title: 'Run browser QA on Level I participant and facilitator flows',
+    phase: 'pre-pilot',
+    minutes: 45,
+    owner: 'shared',
+    definitionOfDone:
+      'Core toolkit and facilitator ops route pass desktop/mobile interaction, keyboard, persistence, reset, copy, download, and noindex checks.',
+    status: 'ready',
+  },
+  {
     id: 'ado-p1-chatgpt-run',
     title: 'Run Level I toolkit end-to-end in ChatGPT',
     phase: 'desktop-capture',
