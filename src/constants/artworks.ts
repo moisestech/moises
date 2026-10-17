@@ -1,5 +1,15 @@
 import { formatBoxDimensionsInchesLwh } from '@/lib/dimensions';
+import type { ImageAnchor } from '@/lib/imageAnchor';
 import { InteractiveContent } from './research';
+
+/** A research path from a finished work. Optional on each artwork. */
+export interface ArtworkResearchLink {
+  eyebrow?: string;
+  title: string;
+  text: string;
+  href: string;
+  linkLabel?: string;
+}
 
 /** Optional venue / funder block for artwork detail footer */
 export interface ArtworkExhibitionSupport {
@@ -19,6 +29,8 @@ interface Artwork {
   /** When set, the Location line links here (e.g. official exhibition page). */
   location_url?: string;
   curator?: string;
+  /** When set, the Curator line links here. */
+  curator_url?: string;
   collaboration?: string;
   technical_assistant?: string;
   description: string;
@@ -32,6 +44,9 @@ interface Artwork {
   images: {
     url: string;
     caption?: string;
+    alt?: string;
+    /** Crop anchor for object-cover frames. Defaults to center. */
+    anchor?: ImageAnchor;
   }[];
   links?: {
     url: string;
@@ -61,6 +76,34 @@ interface Artwork {
       requirements?: string[];
     };
   };
+  oneLine?: string;
+  researchQuestion?: string;
+  /** Unresolved research this work opens. Renders after related works. */
+  currentInquiry?: ArtworkResearchLink;
+  /** Wider project context. Visually secondary to `currentInquiry`. */
+  researchThread?: ArtworkResearchLink;
+  /** Combined presentation title. Does not replace `title`. */
+  presentationTitle?: string;
+  photoCredit?: string;
+  /** Sidebar heading for `links`. Defaults to "Links". */
+  linksLabel?: string;
+  /** Opt-in documentation carousel. Other artworks keep the existing hero and gallery. */
+  mediaLayout?: 'carousel';
+  /** Other works shown at the end of the page. `note` states the relationship. */
+  related?: { slug: string; note: string }[];
+  /** Path from this work back to the studio. */
+  studio?: { href: string; label: string; text: string };
+  /** Speculative studies. Rendered apart from installation documentation, and only when images exist. */
+  processStudies?: {
+    title?: string;
+    intro?: string;
+    images: {
+      url: string;
+      caption?: string;
+      alt?: string;
+      anchor?: ImageAnchor;
+    }[];
+  };
   video?: {
     type: string;
     id: string;
@@ -84,16 +127,33 @@ interface Artist {
 }
 
 /** Canon works for Selected Works page — institutional entry point */
+const CURRENT_INQUIRY_WHO_CAN_SAY_NO: ArtworkResearchLink = {
+  eyebrow: 'Current inquiry',
+  title: 'Who Can Say No?',
+  text: 'These works led toward an unresolved question: what happens to agency when actions are distributed across people, machines, interfaces, institutions, and infrastructures?',
+  href: '/eyebeam',
+  linkLabel: 'Follow the current inquiry',
+};
+
+const RESEARCH_THREAD_BORN_INTO_THE_MACHINE: ArtworkResearchLink = {
+  eyebrow: 'Broader research',
+  title: 'Born into the Machine',
+  text: 'A broader inquiry into how machine systems become environments shaping attention, labor, memory, value, and everyday life.',
+  href: '/research/born-into-the-machine',
+  linkLabel: 'Explore Born into the Machine',
+};
+
 export const SELECTED_WORK_SLUGS: string[] = [
-  'privacy_is_a_luxury',
-  'digital_divinities',
-  'taste_the_algorithm',
-  'simulation_faith',
-  'price_of_existence',
-  'doomscrolling_treadmill',
-  'smart_shoppers',
+  'five_million_dollars',
   'vr_hug',
   'beyond_money',
+  'digital_divinities',
+  'doomscrolling_treadmill',
+  'price_of_existence',
+  'smart_shoppers',
+  'simulation_faith',
+  'privacy_is_a_luxury',
+  'taste_the_algorithm',
 ];
 
 export const artist: Artist = {
@@ -308,10 +368,12 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1789442928/art/moisestech-website/artworks/2025_simulation_faith/SimulationFaith-NWSA-Technographies-Alumni-Show-2025_saqdlj.jpg',
           caption: 'Simulation Faith — Technographies Alumni Show, New World School of the Arts, 2025',
+          anchor: 'top',
         },
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg',
           caption: 'Simulation Faith — suspended baby Jesus sculpture with VR headset',
+          anchor: 'top',
         },
       ],
       links: [
@@ -741,9 +803,20 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
     doomscrolling_treadmill: {
       title: 'Doom Scrolling Treadmill',
       year: 2024,
-      location: 'Chroma Film Festival',
+      location: 'Chroma Art Film Festival, Superblue, Miami',
+      location_url:
+        'https://chromaartfilmfestival.org/2024/09/11/exploring-the-intersection-of-digital-distraction-and-nature-doomscrolling-treadmill-touch-grass-station-at-chroma-art-film-festival/',
+      medium: '24-hour durational performance',
+      presentationTitle: 'Doomscrolling Treadmill + Touch Grass Station',
+      oneLine:
+        'Doom Scrolling Treadmill turns the feed into a bodily loop, collapsing work, entertainment, movement, and attention into the same repetitive action.',
+      researchQuestion:
+        'When a body begins performing at the rhythm of a platform, who is acting on whom?',
+      photoCredit: 'Brooke D’Avanzo',
+      linksLabel: 'Documentation',
+      mediaLayout: 'carousel',
       description:
-        'Doom Scrolling Treadmill is a 24-hour performance art piece that explores the tension between digital distraction, productivity, and the human need to reconnect with nature. The artist alternates between walking on a treadmill, coding, and watching TikTok, mirroring the repetitive nature of digital engagement in modern life.',
+        'Doom Scrolling Treadmill is a 24-hour durational performance in which Sanabria moves between walking on a treadmill, coding, watching TikTok, and stepping onto Touch Grass Station. Work, entertainment, self-tracking, and platform attention collapse into a repetitive bodily loop. The adjacent grass patch introduces a deliberately low-tech interruption—not as a simple solution to screen life, but as a question about whether stepping away constitutes agency when the systems organizing attention continue running.',
       materials: [
         'Treadmill',
         'Vertical HD screens',
@@ -751,12 +824,125 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         'Grass patch',
         'LED panel',
       ],
+      // drive-numbering-map.tsv maps all 13 Drive photos. #1 (social-01) and #5 (chroma-fest-2024_01)
+      // are identified and not in this carousel until Moises adds them. #13 is chroma-fest-2024_09.
       images: [
         {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558664/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-11_v04wjo.jpg',
+          caption: 'Treadmill facing a coding workstation and three vertical screens.',
+          // Tall portrait. A hard top crop is ceiling; 26% keeps the screens and laptop in a short hero.
+          anchor: 'center 26%',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558667/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-12_yr8vyk.jpg',
+          caption: 'The performer on the treadmill at the workstation, with the grass station to the left.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-9_w0niny.jpg',
+          caption: 'The treadmill, three screens, and a grass patch outlined in green light. The LED sign reads TOUCH GRASS.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558670/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-10_rbhwtm.jpg',
+          caption: 'The treadmill and screens beside a grass patch. The LED sign reads FEEL NATURE.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-8_qzcuzs.jpg',
+          caption: 'Seated at the grass station beside three vertical screens. The LED sign reads SEE GARDEN.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558662/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-2_ctk3zb.jpg',
+          caption: 'Seated with a laptop beside an LED sign that reads FEEL NATURE.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558663/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-4_e3tldq.jpg',
+          caption: 'Coding on a laptop at the grass station.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-6_xu2aqu.jpg',
+          caption: 'Hands on the grass patch. The LED sign reads TOUCH GRASS.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558663/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-3_btsmru.jpg',
+          caption: 'A hand on the grass patch beneath an LED sign that reads TOUCH GRASS.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558668/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-7_i7n3r0.jpg',
+          caption: 'A hand on the grass patch beneath an LED sign that reads FEEL NATURE.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558669/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-13_v7klkn.jpg',
+          caption: 'The grass patch outlined in green light. The LED sign reads TOUCH GRASS.',
+        },
+        {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1737831895/art/moisestech-website/touchgrass-doomscrolling-treadmill-stations-6_cwf4ns.jpg',
-          caption: 'Doom Scrolling Treadmill - View 4',
+          caption: 'Doom Scrolling Treadmill documentation.',
         },
       ],
+      video: {
+        type: 'file',
+        id: 'doomscrolling-treadmill-chroma-art-film-festival',
+        url: 'https://res.cloudinary.com/dck5rzi4h/video/upload/v1791769674/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/doomscrolling-treadmill-chroma-art-film-festival_g1gw1h.mp4',
+        title: 'Doomscrolling Treadmill + Touch Grass Station — Chroma Art Film Festival',
+        aspectRatio: '16:9',
+        duration: '0:42',
+        format: 'MP4',
+        resolution: '1280 × 720',
+        caption: 'Video documentation from Chroma Art Film Festival at Superblue, Miami, 2024.',
+      },
+      links: [
+        {
+          url: 'https://chromaartfilmfestival.org/2024/09/11/exploring-the-intersection-of-digital-distraction-and-nature-doomscrolling-treadmill-touch-grass-station-at-chroma-art-film-festival/',
+          label: 'Chroma Art Film Festival — feature',
+        },
+        {
+          url: 'https://vimeo.com/1009954393',
+          label: 'Vimeo — Chroma Art Film Festival',
+        },
+        {
+          url: 'https://www.instagram.com/p/DPPjPjbEauV/',
+          label: 'Instagram post',
+        },
+        {
+          url: 'https://www.instagram.com/reel/C_yHggqsRwv/',
+          label: 'Instagram reel',
+        },
+      ],
+      exhibitionHistory: [
+        {
+          title: 'Chroma Art Film Festival 2024',
+          date: 'August 17–18, 2024',
+          location: 'Superblue, Miami, Florida',
+          href: 'https://chromaartfilmfestival.org/2024/09/11/exploring-the-intersection-of-digital-distraction-and-nature-doomscrolling-treadmill-touch-grass-station-at-chroma-art-film-festival/',
+          note: 'Presented as Doomscrolling Treadmill + Touch Grass Station; 24-hour durational performance.',
+        },
+      ],
+      processStudies: {
+        title: 'Process / Early studies',
+        intro:
+          "Early image studies used speculative visualization to test how a workstation, treadmill, screens, and the idea of 'touching grass' might occupy the same physical system.",
+        images: [],
+      },
+      related: [
+        {
+          slug: 'five_million_dollars',
+          note: 'Same method, 2011 → 2024.',
+        },
+        {
+          slug: 'doomscrolling_marathon',
+          note: 'The feed staged as a public screen in Mexico City, apart from the body on the treadmill.',
+        },
+        {
+          slug: 'baby_agi',
+          note: 'A studio object: a stroller assembled from gaming hardware and robotic hands.',
+        },
+      ],
+      currentInquiry: CURRENT_INQUIRY_WHO_CAN_SAY_NO,
+      researchThread: RESEARCH_THREAD_BORN_INTO_THE_MACHINE,
+      studio: {
+        href: '/visit',
+        label: 'Visit the studio',
+        text: 'Studio 43 at Bakehouse Art Complex is where the practice becomes material. A filmed visit shows the room, works in progress, and how objects are assembled.',
+      },
       tags: [
         'performance art',
         'digital distraction',
@@ -1055,9 +1241,17 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
       year: 2011,
       location: 'Dark Drives: Uneasy Energies in Technological Times, transmediale 2012 in/compatible, Berlin',
       curator: 'Jacob Lillemose',
-      collaboration: 'ART404, Manuel Palou',
-      description: 
-        'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968).',
+      curator_url: 'https://archive.transmediale.de/content/jacob-lillemose',
+      collaboration: 'ART404 (Manuel Palou and Moises Sanabria)',
+      yearNote:
+        'Shown at Art 404, Low Budget Gallery, New York, 2011; exhibited at transmediale 2012, Berlin.',
+      location_url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
+      oneLine:
+        'A store-bought black hard drive on a plinth, holding roughly a terabyte of pirated software, games, music and books valued at five million dollars.',
+      researchQuestion:
+        'Who controls value when possession, copying, ownership, and access no longer mean the same thing?',
+      description:
+        'From the look of it, the black external hard drive placed on the plinth is recognizable as an object of desire sold at media stores all over the world. Its cool minimalist aesthetic invokes the authority of technology. It is a black box that efficiently and securely protects what is inside. However, the invisible content tells a different story. The hard drive contains illegally downloaded and collected software worth $5 million, from AutoCAD to fiction books, filling its 1 terabyte capacity. The object embodies a challenge to intellectual property rights, presenting itself as an ambiguous artifact that is simultaneously beautiful, effective, and unlawful - much like the black monolith from Stanley Kubrick\'s 2001: A Space Odyssey (1968). This description follows the transmediale archive text.',
       description_es:
         'A primera vista, el disco duro externo negro colocado en el pedestal es reconocible como un objeto de deseo vendido en tiendas de medios de todo el mundo. Su estética minimalista fría invoca la autoridad de la tecnología. Es una caja negra que protege de manera eficiente y segura lo que hay dentro. Sin embargo, el contenido invisible cuenta una historia diferente. El disco duro contiene software descargado y recopilado ilegalmente por valor de $5 millones, desde AutoCAD hasta libros de ficción, llenando su capacidad de 1 terabyte. El objeto encarna un desafío a los derechos de propiedad intelectual, presentándose como un artefacto ambiguo que es simultáneamente hermoso, efectivo e ilegal - muy parecido al monolito negro de 2001: Una Odisea del Espacio (1968) de Stanley Kubrick.',
       materials: [
@@ -1065,37 +1259,73 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         'Illegally downloaded software collection ($5M worth)',
         'Custom plinth'
       ],
-      medium: 'New Media Installation',
+      medium: 'Sculpture / new media installation',
       dimensions: '16.5 cm x 11.4 cm x 3.8 cm (hard drive) + pedestal base',
-      weight: 'Approximately 2-3 kg (including pedestal)',
+      mediaLayout: 'carousel',
+      linksLabel: 'Press & archive',
       images: [
         {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657685/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_02_pedestal-angle_4180px.jpg',
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657655/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_03_vertical-front_1901px.jpg',
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1751681091/art/moisestech-website/artworks/2011_5_million_1_terabyte/five-million-dollars-1-terabyte-2011-art404_daxvlx.jpg',
-          caption: '5 Million Dollars 1 Terabyte - Installation view at transmediale 2012. © Genz, Lindner / transmediale',
-        }
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657655/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_05_side-close_1857px.jpg',
+          caption: '5 Million Dollars 1 Terabyte, 2011.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657657/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_06_moises-sanabria-with-the-work_941px.jpg',
+          caption: 'Moises Sanabria with the work.',
+          alt: 'Moises Sanabria standing beside the hard drive on its plinth.',
+        },
+        {
+          url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791657652/art/moisestech-website/artworks/2011_5_million_1_terabyte/art404_5-million-dollars-1-terabyte_01_transmediale-2012-vitrine_photo-genz-lindner_4928px.jpg',
+          caption:
+            'Installation view, Dark Drives, transmediale 2012, Berlin. © Genz, Lindner / transmediale, CC BY-NC-SA.',
+        },
+      ],
+      exhibitionHistory: [
+        {
+          title: 'Art 404 — Low Budget Gallery',
+          date: '2011',
+          location: 'New York',
+          href: 'https://rhizome.org/editorial/2011/aug/16/5-million-dollars-1-terabyte-2011/',
+        },
+        {
+          title: 'Dark Drives: Uneasy Energies in Technological Times — transmediale 2012 in/compatible',
+          date: '2012',
+          location: 'Haus der Kulturen der Welt, Berlin',
+          href: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
+        },
       ],
       links: [
-        {
-          url: 'https://rhizome.org/editorial/2011/aug/16/5-million-dollars-1-terabyte-2011/',
-          label: 'Rhizome Editorial - 5 Million Dollars 1 Terabyte'
-        },
-        {
-          url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte',
-          label: 'Transmediale Archive - Artwork Documentation'
-        },
-        {
-          url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte-by-art-404',
-          label: 'Transmediale Archive - Installation Photography'
-        },
-        {
-          url: 'https://archive.transmediale.de/content/art-404',
-          label: 'Art 404 Artist Profile'
-        },
-        {
-          url: 'https://archive.transmediale.de/festival-2012/exhibition',
-          label: 'Dark Drives Exhibition Documentation'
-        }
+        { url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte', label: 'transmediale archive — artwork' },
+        { url: 'https://archive.transmediale.de/content/5-million-dollars-1-terabyte-by-art-404', label: 'transmediale archive — installation photo' },
+        { url: 'https://archive.transmediale.de/content/art-404', label: 'transmediale archive — Art 404' },
+        { url: 'https://rhizome.org/editorial/2011/aug/16/5-million-dollars-1-terabyte-2011/', label: 'Rhizome — Jason Huff, Aug 16, 2011' },
+        { url: 'https://thenextweb.com/news/the-software-heist-of-the-century-or-a-modern-art-masterpiece', label: 'The Next Web — Aug 17, 2011' },
+        { url: 'https://gizmodo.com/this-5-million-piece-of-art-is-a-1-terabyte-hard-drive-5833654', label: 'Gizmodo — Aug 23, 2011' },
+        { url: 'https://yro.slashdot.org/story/11/09/08/1326233/5M-In-Torrented-Files-Presented-As-Art', label: 'Slashdot — Sep 8, 2011' },
+        { url: 'https://www.huffpost.com/entry/five-million-dollars-of-s_n_951150', label: 'HuffPost' },
+        { url: 'https://www.theregister.com/2011/11/28/pirated_software_hard_drive_art/', label: 'The Register — Nov 28, 2011' },
+        { url: 'https://rhizome.org/editorial/2012/apr/9/post-trolling-conversation-art-404/', label: 'Rhizome — Post-Trolling: A Conversation with Art404, Apr 9, 2012' },
+        { url: 'https://miamirail.org/essays/street-view/', label: 'Miami Rail — Street View, Brian Droitcour' },
       ],
+      related: [
+        {
+          slug: 'doomscrolling_treadmill',
+          note: 'Same method, 2011 → 2024.',
+        },
+      ],
+      currentInquiry: CURRENT_INQUIRY_WHO_CAN_SAY_NO,
+      researchThread: RESEARCH_THREAD_BORN_INTO_THE_MACHINE,
       tags: [
         'conceptual art',
         'digital property',
@@ -1386,7 +1616,7 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
           }
         }
       ],
-      on_view: true,
+      on_view: false,
       technical_requirements: {
         power: ['Standard electrical outlet for holographic projection system', 'LED lighting system'],
         mounting: ['Floor installation - lightweight structure (15-25kg)', 'Stable surface for 1m cube'],

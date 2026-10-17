@@ -37,6 +37,8 @@ import {
   InstContainer,
   InstFamilyNav,
   InstPageShell,
+  INST_FAMILY_STICKY_CLASS,
+  INST_PAGE_TOP_CLASS,
   InstPrimaryCta,
   InstReveal,
   InstSecondaryCta,
@@ -88,8 +90,8 @@ export function WorkshopCatalogLandingClient({ slug }: { slug: string }) {
   )}`;
 
   return (
-    <InstPageShell className="pt-[192px]">
-      <InstFamilyNav active="workshops" className="sticky top-0 z-40" />
+    <InstPageShell className={INST_PAGE_TOP_CLASS}>
+      <InstFamilyNav active="workshops" className={INST_FAMILY_STICKY_CLASS} />
 
       {isQuickBooks ? (
         <div className="relative w-full overflow-hidden border-b border-neutral-200 bg-[#1c1916]">

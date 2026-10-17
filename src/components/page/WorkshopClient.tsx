@@ -38,7 +38,11 @@ import {
 } from '@/content/workshops/catalog-covers'
 import { PilotPricingBand } from '@/components/institutions/PilotPricingBand'
 import { InstitutionalOfferingsAccordion } from '@/components/workshops/InstitutionalOfferingsAccordion'
-import { InstFamilyNav } from '@/components/institutions/InstitutionalUi'
+import {
+  InstFamilyNav,
+  INST_FAMILY_STICKY_CLASS,
+  INST_PAGE_TOP_CLASS,
+} from '@/components/institutions/InstitutionalUi'
 import { track } from '@/lib/analytics'
 import { useTheme } from '@/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
@@ -181,14 +185,15 @@ export default function WorkshopClient() {
   return (
     <main
       className={cn(
-        'relative flex min-h-screen flex-col items-center overflow-hidden',
+        'relative flex min-h-screen flex-col items-center',
+        INST_PAGE_TOP_CLASS,
         /* Follows html.dark (same toggle as nav); avoids relying on context alone */
         'bg-zinc-100 text-zinc-900 dark:bg-black dark:text-white'
       )}
     >
       <div
         className={cn(
-          'absolute inset-0 z-0 opacity-[0.22] transition-opacity duration-300 dark:opacity-100'
+          'absolute inset-0 z-0 overflow-hidden opacity-[0.22] transition-opacity duration-300 dark:opacity-100'
         )}
         aria-hidden
       >
@@ -202,16 +207,15 @@ export default function WorkshopClient() {
         aria-hidden
       />
 
-      <div className="relative z-20 w-full pt-20 sm:pt-24">
-        <InstFamilyNav
-          active="workshops"
-          tone={isDark ? 'hub' : 'dossier'}
-          className={cn(
-            '[&_div]:max-w-6xl',
-            isDark ? 'bg-black/70' : 'bg-zinc-100/95',
-          )}
-        />
-      </div>
+      <InstFamilyNav
+        active="workshops"
+        tone={isDark ? 'hub' : 'dossier'}
+        className={cn(
+          INST_FAMILY_STICKY_CLASS,
+          'w-full [&_div]:max-w-6xl',
+          isDark ? 'bg-black/70' : 'bg-zinc-100/95',
+        )}
+      />
 
       <div className="relative z-10 w-full max-w-6xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 md:pt-16 pb-12 sm:pb-20">
         <motion.header

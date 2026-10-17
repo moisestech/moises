@@ -10,8 +10,8 @@ Use this order when picking a link:
 **Museum / nonprofit digital systems (e.g. Courtney at ICA):**
 
 1. **`/institutions`** — focused services page (web, Salesforce, automation, livestreaming, labs)
-2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof. Smart Signs technical case: **`/bakehouse/smart-signs`**.
-3. Calendly — 20-minute conversation
+2. **`/ica-miami`** · **`/oolite-arts`** · **`/bakehouse`** — flagship proof. Smart Signs technical case: **`/bakehouse/smart-signs`**. **`/bookleggers`** is the Square-to-Airtable handoff, listed after those three.
+3. Calendly — “Discuss a project”. Do not print a duration. The destination is the existing meeting link.
 
 **Artist-facing workshops / incubators:**
 
@@ -21,10 +21,14 @@ Use this order when picking a link:
 
 **Private:** `/artist-sustainability` — YoungArts supplement (`noindex`) — not a public outreach door.
 
+**Unlisted review:** `/bfi-archive` — Bas Fisher Invitational archive migration (`noindex`, not in the family nav or sitemap). A proof card and section link sit on `/artist-infrastructure`, with the same text link in that page’s footer. That link is not access control. Public promotion still needs BFI’s permission.
+
 **Named contact audits:** Dimitry Chamy + Sophia (MadArts) — [`docs/outreach/madarts-dimitry-send-audit.md`](../outreach/madarts-dimitry-send-audit.md).  
 Sophia’s research door includes **`/research/the-algorithm-is-outside`**.
 
 Workshop catalog detail: [`docs/workshops-catalog.md`](../workshops-catalog.md).
+
+Family and section menus stick below the measured site header (`INST_FAMILY_STICKY_CLASS`, `INST_SECTION_STICKY_CLASS`). Do not pin those strips with `top-0`.
 
 Hiring proof is a **different family:** `/capabilities` → employer dossiers. Do not send incubators to `/ai-engineering` as the Miami outreach link.
 
@@ -78,6 +82,7 @@ Next phases: layout polish → 360 viewer → video entries in the same registry
 | `/bakehouse/smart-signs` | `bakehouse-smart-signs.ts` | `BakehouseSmartSignsClient.tsx` |
 | `/workshops` | `workshopsOfferings.ts` | `WorkshopClient.tsx` |
 | `/artist-sustainability` | `artistSustainability.ts` | `ArtistSustainabilityClient.tsx` |
+| `/bfi-archive` | `bfi-archive.ts` | `BfiArchiveClient.tsx` |
 
 ## Known polish gaps
 

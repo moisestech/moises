@@ -126,7 +126,7 @@ export default function ResearchIndexPage() {
       </section>
 
       <p className="mb-8 text-sm text-gray-500 dark:text-gray-400 font-mono uppercase tracking-widest">
-        {projectMeta.researchSeries} · {projects.length + 1} dossiers on this index
+        {projectMeta.researchSeries} · {projects.length + 2} dossiers on this index
       </p>
 
       {/* Idea Center sprint */}
@@ -182,6 +182,31 @@ export default function ResearchIndexPage() {
             </h2>
             <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">
               {BITM_CARD.description}
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          href="/research/the-cloud-is-thirsty"
+          className="block group border rounded-xl overflow-hidden shadow-lg bg-white dark:bg-black/40 hover:shadow-2xl transition-shadow duration-200"
+        >
+          <div className="relative aspect-[4/3] mb-4 bg-stone-100 dark:bg-stone-900">
+            <Image
+              src="https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000724/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_081_spring-coolant.png"
+              alt="Spring Coolant, an image study of a graphics card resting on packs of bottled spring water"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <div className="px-4 pb-4">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-500 mb-1">
+              Water selection · 2026
+            </p>
+            <h2 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              The Cloud Is Thirsty
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">
+              Nine image studies on water, cooling, and the material body of computation, drawn from 365 Post-AI Readymades.
             </p>
           </div>
         </Link>

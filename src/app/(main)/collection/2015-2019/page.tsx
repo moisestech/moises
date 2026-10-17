@@ -18,7 +18,7 @@ export default function Collection2015to2019() {
         </div>
       </div>
       
-      <ArtworkGrid minYear={2015} maxYear={2019} />
+      <ArtworkGrid minYear={2015} maxYear={2019} imageSkeleton />
     </main>
   );
 } 

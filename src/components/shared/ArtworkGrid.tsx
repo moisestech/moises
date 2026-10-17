@@ -1,15 +1,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { artist } from '@/constants/artworks';
+import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
+import { objectCoverProps } from '@/lib/imageAnchor';
 
 interface ArtworkGridProps {
   minYear?: number;
   maxYear?: number;
   /** When provided, show only these artworks in this order */
   slugs?: string[];
+  /** Pulse placeholder until each card image loads. Off by default so existing grids stay unchanged. */
+  imageSkeleton?: boolean;
 }
 
-export default function ArtworkGrid({ minYear, maxYear, slugs }: ArtworkGridProps) {
+export default function ArtworkGrid({ minYear, maxYear, slugs, imageSkeleton = false }: ArtworkGridProps) {
   // Get artwork entries with their slugs
   let artworkEntries: [string, typeof artist.artworks[string]][];
 
@@ -31,11 +35,13 @@ export default function ArtworkGrid({ minYear, maxYear, slugs }: ArtworkGridProp
     });
   }
 
-  artworkEntries = artworkEntries.sort(([, a], [, b]) => {
-    if (a.on_view && !b.on_view) return -1;
-    if (!a.on_view && b.on_view) return 1;
-    return 0;
-  });
+  if (!slugs?.length) {
+    artworkEntries = artworkEntries.sort(([, a], [, b]) => {
+      if (a.on_view && !b.on_view) return -1;
+      if (!a.on_view && b.on_view) return 1;
+      return 0;
+    });
+  }
 
   const colors = {
     'bg-lime-400': 'text-lime-500',
@@ -54,24 +60,44 @@ export default function ArtworkGrid({ minYear, maxYear, slugs }: ArtworkGridProp
         const bgColor = bgColors[index % bgColors.length];
         const textColor = colors[bgColor as keyof typeof colors];
         const isEven = index % 2 === 0;
+        const cover = objectCoverProps(artwork.images[0].anchor);
 
         return (
           <Link
             href={`/art/${slug}`}
             key={slug}
-            className="group cursor-pointer"
+            className="group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-900 dark:focus-visible:outline-neutral-100"
           >
             <article className="flex flex-col md:flex-row h-auto md:h-[400px] lg:h-[500px] overflow-hidden w-full">
               {/* Image Section - Always First on Mobile */}
-              <div className="w-full md:w-2/3 h-[300px] md:h-full order-1">
-                <Image
-                  className="w-full h-full object-cover"
-                  width={1920}
-                  height={1080}
-                  src={artwork.images[0].url}
-                  alt={artwork.images[0].caption || artwork.title}
-                  priority={index === 0}
-                />
+              <div
+                className={
+                  imageSkeleton
+                    ? 'relative w-full md:w-2/3 h-[300px] md:h-full order-1 overflow-hidden'
+                    : 'w-full md:w-2/3 h-[300px] md:h-full order-1'
+                }
+              >
+                {imageSkeleton ? (
+                  <ImageWithSkeleton
+                    className={cover.className}
+                    style={cover.style}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 66vw"
+                    src={artwork.images[0].url}
+                    alt={artwork.images[0].caption || artwork.title}
+                    priority={index === 0}
+                  />
+                ) : (
+                  <Image
+                    className={`w-full h-full ${cover.className}`}
+                    style={cover.style}
+                    width={1920}
+                    height={1080}
+                    src={artwork.images[0].url}
+                    alt={artwork.images[0].caption || artwork.title}
+                    priority={index === 0}
+                  />
+                )}
               </div>
 
               {/* Text Section - Always Second on Mobile */}

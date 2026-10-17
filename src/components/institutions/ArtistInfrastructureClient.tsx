@@ -9,6 +9,9 @@ import {
   InstContainer,
   InstFamilyNav,
   InstPageShell,
+  INST_FAMILY_ANCHOR_SCROLL_MT_CLASS,
+  INST_FAMILY_STICKY_CLASS,
+  INST_PAGE_TOP_CLASS,
   InstReveal,
   InstSectionLabel,
   INST_ACCENT,
@@ -35,6 +38,7 @@ const SECTION_NAV = [
   { id: 'positioning', label: 'Positioning', accent: 'ink' as const, icon: 'palette' },
   { id: 'curriculum', label: 'Curriculum', accent: 'ocean' as const, icon: 'graduation' },
   { id: 'oolite-proof', label: 'Oolite', accent: 'teal' as const, icon: 'layers' },
+  { id: 'bfi-archive', label: 'BFI', accent: 'ink' as const, icon: 'layers' },
   { id: 'process', label: 'Process', accent: 'teal' as const, icon: 'workflow' },
   { id: 'supporting-proof', label: 'Proof', accent: 'copper' as const, icon: 'sparkles' },
   { id: 'practice', label: 'Practice', accent: 'rose' as const, icon: 'flask' },
@@ -72,7 +76,7 @@ export function ArtistInfrastructureClient() {
   }, []);
 
   return (
-    <InstPageShell className="pt-[192px]">
+    <InstPageShell className={INST_PAGE_TOP_CLASS}>
       <OpportunityApplicationBanner banner={P.banner} className="mb-0" />
       {P.bannerNote ? (
         <p className="border-b border-neutral-200 bg-amber-50/80 px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-amber-950 sm:px-6">
@@ -80,7 +84,7 @@ export function ArtistInfrastructureClient() {
         </p>
       ) : null}
 
-      <InstFamilyNav active="artist-infrastructure" className="sticky top-0 z-40" />
+      <InstFamilyNav active="artist-infrastructure" className={INST_FAMILY_STICKY_CLASS} />
 
       <nav
         className="border-b border-neutral-200 bg-[#f7f6f3]"
@@ -147,7 +151,7 @@ export function ArtistInfrastructureClient() {
           cards={P.positioning.cards}
         />
 
-        <section id="curriculum" className="scroll-mt-28 border-t border-neutral-200 py-12 sm:py-16">
+        <section id="curriculum" className={cn(INST_FAMILY_ANCHOR_SCROLL_MT_CLASS, 'border-t border-neutral-200 py-12 sm:py-16')}>
           <InstReveal>
             <InstSectionLabel accent="ocean">{P.curriculum.eyebrow}</InstSectionLabel>
             <h2 className="font-[MoMA_Sans] text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -203,7 +207,7 @@ export function ArtistInfrastructureClient() {
 
         <section
           id="oolite-proof"
-          className="scroll-mt-28 border-t border-neutral-200 py-12 sm:py-16"
+          className={cn(INST_FAMILY_ANCHOR_SCROLL_MT_CLASS, 'border-t border-neutral-200 py-12 sm:py-16')}
         >
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
             <InstReveal>
@@ -247,10 +251,11 @@ export function ArtistInfrastructureClient() {
               body={card.body}
               status={card.status}
               statusNote={card.statusNote}
+              id={card.id}
               href={card.href}
               secondaryHref={'secondaryHref' in card ? card.secondaryHref : undefined}
               secondaryLabel={'secondaryLabel' in card ? card.secondaryLabel : undefined}
-              image={card.image}
+              image={'image' in card ? card.image : undefined}
             />
           ))}
         </ProofStrip>

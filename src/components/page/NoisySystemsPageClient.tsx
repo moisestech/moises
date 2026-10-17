@@ -93,7 +93,8 @@ export default function NoisySystemsPageClient() {
                 ? work.imageOverride
                 : artwork.images[0];
               const imageUrl = image.url;
-              const imageAlt = 'alt' in image ? image.alt : (image.caption || artwork.title);
+              const imageAlt =
+                image.alt || ('caption' in image ? image.caption : undefined) || artwork.title;
               return (
                 <ArtworkEntry
                   key={work.slug}

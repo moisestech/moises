@@ -45,7 +45,7 @@ Use this table to resume work. Update when a pass ships.
 The site has **two institutional doors** and **three hiring flagships**. Conversion lifts come from deepening those proofs — not from more thin `/opportunities/*` pages.
 
 ```text
-Institutions send:  /institutions (museum digital systems)  →  /oolite-arts · /ica-miami (proof)  →  Calendly
+Institutions send:  /institutions (museum digital systems)  →  /oolite-arts · /ica-miami (proof)  →  Calendly (“Discuss a project”; no duration printed). `/bookleggers` is the Square-to-Airtable handoff, after the opening three. Family and section strips stick below the live header, not at `top-0`. BFI is not a public case until verified facts exist.
 Hiring flagships:   /projects/agentic-ops · /forward-deployed · /creative-ai
 Hiring skills SoT:  /capabilities  →  private /opportunities/[slug] (thin overlays)
 Do not mix doors:   incubators ≠ /ai-engineering; hiring ≠ /artist-infrastructure alone
@@ -153,6 +153,7 @@ Full inventory table: [`docs/opportunities/README.md`](./opportunities/README.md
 - **Workshops:** Ready catalog now on `/workshops#catalog` (`catalog.ts`); visual system still diverges from Inst shell — restyle later. Deep `/workshop/[slug]` landings still phased.
 - **Bakehouse:** honest shipped/proposed buckets work; SmartSign photography still placeholder.
 - **Digilab:** registry + portraits live; layout polish and 360/video are next (see Digilab workflow doc).
+- **BFI archive review:** `/bfi-archive` is an unlisted noindex case on the institutional shell. Linked from the `/artist-infrastructure` proof section, section nav, and footer. Not a public send URL until BFI agrees.
 
 ---
 

@@ -44,6 +44,8 @@ export type Study = {
 /** Seed entry: image required; date + tombstone/research fields optional and fillable later. */
 export type StudySeed = {
   imageUrl: string;
+  /** Deck number such as `081`. Overrides list position when set. */
+  number?: string;
   date?: string;
   year?: string;
   title?: string;
@@ -153,10 +155,60 @@ const STUDY_SEEDS: StudySeed[] = [
       'https://res.cloudinary.com/dck5rzi4h/image/upload/v1785524899/art/moisestech-website/research/post-ai-readymades/ChatGPT_Image_Jul_31_2026_02_58_44_PM_wpblgm.png',
     date: '2026-07-31',
   },
+  // Deck numbers. Dates left blank until Moises fills them.
+  // 026 Operational Risk is uploaded but omitted: the 31 Jul 2026 render is already study 026.
+  {
+    number: '048',
+    title: 'Still Processing',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000735/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_048_still-processing.png',
+  },
+  {
+    number: '052',
+    title: 'Beach Mode',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000737/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_052_beach-mode.png',
+  },
+  {
+    number: '081',
+    title: 'Spring Coolant',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000724/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_081_spring-coolant.png',
+  },
+  {
+    number: '082',
+    title: 'Land Update',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000725/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_082_land-update.png',
+  },
+  {
+    number: '083',
+    title: 'Feed Spill',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000726/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_083_feed-spill.png',
+  },
+  {
+    number: '084',
+    title: 'Wet Algorithm',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000728/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_084_wet-algorithm.png',
+  },
+  {
+    number: '085',
+    title: 'More Context',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000729/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_085_more-context.png',
+  },
+  {
+    number: '086',
+    title: 'Hydrant Compute',
+    imageUrl:
+      'https://res.cloudinary.com/dck5rzi4h/image/upload/v1792000730/art/moisestech-website/research/post-ai-readymades/moises-sanabria_post-ai-readymades_086_hydrant-compute.png',
+  },
 ];
 
 function makeStudy(index: number, seed: StudySeed): Study {
-  const number = String(index + 1).padStart(3, '0');
+  const number = (seed.number ?? String(index + 1)).padStart(3, '0');
   const yearFromDate = seed.date?.slice(0, 4);
   return {
     id: number,

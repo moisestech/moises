@@ -82,6 +82,38 @@ export const OOLITE_ARTS_CASE_STUDY = {
       'Developed with Director of Digital Lab Fabiola Larios; Moises Sanabria as Technical Director of Digital; with Oolite staff, participating artists, and institutional partners.',
     disclaimer:
       'This independent case study documents work developed at Oolite Arts in collaboration with staff, artists, and participants. It is not an official Oolite Arts publication.',
+    operationalSummary: {
+      eyebrow: 'Operational summary',
+      title: 'Separate tools, one artist-facing workflow',
+      lead:
+        'With Fabiola Larios, Director of Digital Lab, technical direction connected the Digital Lab’s space, equipment, teaching, open hours, and documentation into a program artists could use.',
+      return: {
+        label: 'Back to institutional overview',
+        href: '/institutions',
+      },
+      items: [
+        {
+          label: 'Lab infrastructure',
+          text: 'Layout, workstation readiness, and a room at Studio 105 that could host classes and open lab as one environment.',
+        },
+        {
+          label: 'Booking and communications',
+          text: 'Published open-lab days, plus scheduling and open-lab communications treated as part of the program.',
+        },
+        {
+          label: 'Artist-facing programs',
+          text: 'Public workshops, including Artist Website for Beginners and Intro to 3D Resin Printing, and open hours in English and Spanish.',
+        },
+        {
+          label: 'Equipment and fabrication',
+          text: 'Resin workflows covering file readiness, supervised demos, wash and cure, and a path to later print support.',
+        },
+        {
+          label: 'Documentation and handoff',
+          text: 'Equipment guides, curriculum outlines, intake and troubleshooting patterns, and follow-up consultation framing so a workshop could continue into open-lab practice.',
+        },
+      ],
+    },
     publicLab: {
       hours: 'Tuesday and Thursday, 10 a.m.–5 p.m.',
       languages: 'English and Spanish',
@@ -610,7 +642,7 @@ export const OOLITE_ARTS_CASE_STUDY = {
   visibleInvisible: {
     title: 'The Invisible Infrastructure',
     lead:
-      'This is where a hiring manager or institutional director sees that we were not merely standing next to the machines—we helped design the operating system around them.',
+      'Classes, equipment, and finished objects were the part visitors could see. Intake, scheduling, safety, curriculum, and documentation made that use repeatable.',
     visible: [
       'Classes',
       'Printers',

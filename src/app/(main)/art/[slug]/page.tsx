@@ -3,8 +3,15 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { InteractiveContent } from '@/constants/research';
 import InteractiveText from '@/components/InteractiveText';
+import ArtworkAgencyMap from '@/components/art/ArtworkAgencyMap';
+import ArtworkValueReading from '@/components/art/ArtworkValueReading';
 import ArtworkGallery from '@/components/art/ArtworkGallery';
+import ArtworkMediaCarousel from '@/components/art/ArtworkMediaCarousel';
+import ArtworkResearchBridge from '@/components/art/ArtworkResearchBridge';
 import ArtworkVideo from '@/components/art/ArtworkVideo';
+import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
+import { objectCoverProps } from '@/lib/imageAnchor';
+import Link from 'next/link';
 import { seoKeywordsAlpha } from '../../../../../lib/seoKeywords';
 import type { Metadata } from 'next';
 
@@ -79,18 +86,24 @@ export default async function ArtPage({ params }: PageProps) {
   // Find the index of this artwork to determine its color
   const artworkIndex = Object.keys(artist.artworks).indexOf(params.slug);
   const color = colors[artworkIndex % colors.length];
+  const useCarousel = artwork.mediaLayout === 'carousel';
 
   return (
     <main className="w-full">
       {/* Title Banner */}
-      <div className={`${color} w-full py-20 px-8 mt-40`}>
+      <div className={`${color} w-full px-4 py-12 mt-28 sm:mt-36 sm:px-8 sm:py-16 md:mt-40 md:py-20`}>
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-8xl font-bold text-black dark:text-white">
+          <h1 className="text-5xl font-bold leading-[0.95] text-black dark:text-white sm:text-6xl lg:text-8xl">
             {artwork.title}
           </h1>
-          <p className="text-4xl font-bold mt-4 text-black dark:text-white">
+          <p className="mt-4 text-2xl font-bold text-black dark:text-white sm:text-4xl">
             {artwork.year}
           </p>
+          {artwork.presentationTitle ? (
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-black dark:text-white md:text-xl">
+              {artwork.presentationTitle}
+            </p>
+          ) : null}
           {artwork.yearNote ? (
             <p className="mt-4 max-w-3xl text-lg font-medium leading-relaxed text-black dark:text-white md:text-xl">
               {artwork.yearNote}
@@ -100,27 +113,58 @@ export default async function ArtPage({ params }: PageProps) {
       </div>
 
       {/* Main Image */}
+      {!useCarousel ? (
       <div className="w-full relative h-[70vh]">
         <Image
           src={artwork.images[0].url}
           alt={artwork.images[0].caption || artwork.title}
           fill
-          className="object-cover"
+          {...objectCoverProps(artwork.images[0].anchor)}
           priority
         />
       </div>
+      ) : null}
+
+      {useCarousel ? (
+        <ArtworkMediaCarousel
+          title={artwork.title}
+          images={artwork.images}
+          video={
+            artwork.video
+              ? {
+                  url: artwork.video.url,
+                  title: artwork.video.title,
+                  caption: artwork.video.caption,
+                  duration: artwork.video.duration,
+                }
+              : null
+          }
+          photoCredit={artwork.photoCredit}
+        />
+      ) : null}
 
       {artwork.video &&
+      !useCarousel &&
       params.slug !== 'simulation_faith' &&
-      (artwork.video.type === 'youtube' || artwork.video.type === 'vimeo') ? (
-        <div className="max-w-7xl mx-auto px-8 pt-12">
+      (artwork.video.type === 'youtube' ||
+        artwork.video.type === 'vimeo' ||
+        artwork.video.type === 'file') ? (
+        <div className="max-w-7xl mx-auto px-4 pt-8 sm:px-8 sm:pt-12">
           <ArtworkVideo video={artwork.video} />
         </div>
       ) : null}
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto py-16 px-11">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16 lg:px-11">
+        {artwork.oneLine ? (
+          <p className="max-w-3xl text-xl leading-snug md:text-2xl">{artwork.oneLine}</p>
+        ) : null}
+        {artwork.researchQuestion ? (
+          <p className="mt-8 max-w-4xl text-2xl font-medium leading-tight md:text-4xl">
+            {artwork.researchQuestion}
+          </p>
+        ) : null}
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-16 ${artwork.oneLine || artwork.researchQuestion ? 'mt-16' : ''}`}>
           {/* Metadata Column */}
           <div className="space-y-8">
             {artwork.exhibitionHistory && artwork.exhibitionHistory.length > 0 ? (
@@ -169,7 +213,20 @@ export default async function ArtPage({ params }: PageProps) {
             {artwork.curator && (
               <div>
                 <h3 className="text-lg font-bold mb-2">Curator</h3>
-                <p>{artwork.curator}</p>
+                {artwork.curator_url ? (
+                  <p>
+                    <a
+                      href={artwork.curator_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-2"
+                    >
+                      {artwork.curator}
+                    </a>
+                  </p>
+                ) : (
+                  <p>{artwork.curator}</p>
+                )}
               </div>
             )}
             {artwork.collaboration && (
@@ -236,7 +293,7 @@ export default async function ArtPage({ params }: PageProps) {
             )}
             {artwork.links && artwork.links.length > 0 ? (
               <div>
-                <h3 className="text-lg font-bold mb-2">Links</h3>
+                <h3 className="text-lg font-bold mb-2">{artwork.linksLabel || 'Links'}</h3>
                 <ul className="space-y-2">
                   {artwork.links.map((link) => (
                     <li key={link.url}>
@@ -361,7 +418,7 @@ export default async function ArtPage({ params }: PageProps) {
           </div>
         </div>
 
-        {artwork.images.length > 0 ? (
+        {artwork.images.length > 0 && !useCarousel ? (
           <ArtworkGallery title={artwork.title} images={artwork.images} />
         ) : null}
 
@@ -426,6 +483,88 @@ export default async function ArtPage({ params }: PageProps) {
             </div>
           </div>
         )}
+
+        {params.slug === 'doomscrolling_treadmill' ? <ArtworkAgencyMap /> : null}
+        {params.slug === 'five_million_dollars' ? <ArtworkValueReading /> : null}
+
+        {artwork.processStudies && artwork.processStudies.images.length > 0 ? (
+          <section className="mt-24 border-t border-dashed border-gray-300 pt-16 dark:border-gray-700" aria-labelledby="process-studies-heading">
+            <h2 id="process-studies-heading" className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              {artwork.processStudies.title || 'Process / Early studies'}
+            </h2>
+            {artwork.processStudies.intro ? (
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed">{artwork.processStudies.intro}</p>
+            ) : null}
+            <ul className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2">
+              {artwork.processStudies.images.map((image) => (
+                <li key={image.url} className="border border-gray-200 p-4 dark:border-gray-800">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Study</p>
+                  <div className="relative mt-4 aspect-[4/3] bg-neutral-100 dark:bg-neutral-900">
+                    <ImageWithSkeleton
+                      src={image.url}
+                      alt={image.alt || image.caption || 'Process study'}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 36rem"
+                      className="object-contain"
+                    />
+                  </div>
+                  {image.caption ? <p className="mt-3 text-sm leading-relaxed">{image.caption}</p> : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        {artwork.related && artwork.related.length > 0 ? (
+          <section className="mt-24 border-t border-gray-200 pt-16 dark:border-gray-800" aria-labelledby="related-works-heading">
+            <h2 id="related-works-heading" className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              Related works
+            </h2>
+            <ul className="mt-8 grid grid-cols-1 gap-12 sm:grid-cols-2">
+              {artwork.related.map((item) => {
+                const work = artist.artworks[item.slug];
+                if (!work?.images[0]) return null;
+                return (
+                  <li key={item.slug}>
+                    <Link href={`/art/${item.slug}`} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+                      <div className="relative aspect-[4/5] bg-neutral-950">
+                        <ImageWithSkeleton
+                          src={work.images[0].url}
+                          alt={work.images[0].caption || work.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 36rem"
+                          className="object-contain"
+                        />
+                      </div>
+                      <h3 className="mt-4 text-2xl font-semibold underline-offset-4 group-hover:underline">
+                        {work.title}
+                      </h3>
+                      <p className="mt-1 text-sm tabular-nums">{work.year}</p>
+                      <p className="mt-3 max-w-prose text-base leading-relaxed">{item.note}</p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ) : null}
+
+        <ArtworkResearchBridge inquiry={artwork.currentInquiry} thread={artwork.researchThread} />
+
+        {artwork.studio ? (
+          <section className="mt-16 border-t border-gray-200 pt-12 dark:border-gray-800" aria-labelledby="studio-heading">
+            <h2 id="studio-heading" className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              Studio
+            </h2>
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed">{artwork.studio.text}</p>
+            <Link
+              href={artwork.studio.href}
+              className="mt-6 inline-flex min-h-11 items-center text-lg underline underline-offset-4"
+            >
+              {artwork.studio.label}
+            </Link>
+          </section>
+        ) : null}
       </div>
     </main>
   );

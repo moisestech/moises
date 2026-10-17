@@ -1,4 +1,5 @@
 import { artist, SELECTED_WORK_SLUGS } from '@/constants/artworks';
+import type { ImageAnchor } from '@/lib/imageAnchor';
 
 export type HomeHeroSlide = {
   slug: string;
@@ -6,19 +7,20 @@ export type HomeHeroSlide = {
   year: number;
   imageUrl: string;
   imageAlt: string;
+  imageAnchor?: ImageAnchor;
   href: string;
 };
 
 /** Curated subset of selected works for the homepage hero carousel. */
 export const HOME_HERO_SLUGS = [
-  'privacy_is_a_luxury',
-  'smart_shoppers',
   'doomscrolling_treadmill',
+  'smart_shoppers',
   'simulation_faith',
+  'privacy_is_a_luxury',
 ] as const;
 
 /** Pinned initial slide — must appear in HOME_HERO_SLUGS. */
-export const HOME_HERO_DEFAULT_SLUG = 'privacy_is_a_luxury';
+export const HOME_HERO_DEFAULT_SLUG = 'doomscrolling_treadmill';
 
 function assertHomeHeroConfig() {
   if (process.env.NODE_ENV === 'production') return;
@@ -50,10 +52,11 @@ export function getHomeHeroSlides(): HomeHeroSlide[] {
     return [
       {
         slug,
-        title: artwork.title,
+        title: artwork.presentationTitle ?? artwork.title,
         year: artwork.year,
         imageUrl: image.url,
         imageAlt,
+        imageAnchor: image.anchor,
         href: `/art/${slug}`,
       },
     ];

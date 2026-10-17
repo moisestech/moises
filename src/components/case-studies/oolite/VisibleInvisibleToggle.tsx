@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { AssetNeeded } from './AssetNeeded';
 import { OOLITE_ARTS_CASE_STUDY } from '@/content/oolite-arts/case-study';
 
 const data = OOLITE_ARTS_CASE_STUDY.visibleInvisible;
@@ -70,8 +69,6 @@ export function VisibleInvisibleToggle({ tone = 'light' }: { tone?: 'light' | 'd
           </li>
         ))}
       </ul>
-
-      <AssetNeeded asset={data.neededDocs} tone={tone} />
     </div>
   );
 }
