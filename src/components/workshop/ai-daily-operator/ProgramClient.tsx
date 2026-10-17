@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { WorkshopMediaFigure } from '@/components/workshop/ai-daily-operator/WorkshopMediaFigure'
 import { ToolGuidePlaceholders } from '@/components/workshop/ai-daily-operator/ToolGuidePlaceholders'
 import { WORKSHOP_HUB } from '@/constants/workshop-hub'
+import { LEVEL_I_DELIVERY } from '@/content/workshops/ai-daily-operator/delivery'
 import { DAILY_OPERATOR_MEDIA } from '@/content/workshops/ai-daily-operator/media'
 import {
   DAILY_OPERATOR_ARTIFACTS,
@@ -9,47 +10,34 @@ import {
   DAILY_OPERATOR_FOR,
   DAILY_OPERATOR_FORMATS,
   DAILY_OPERATOR_JUDGMENT,
-  DAILY_OPERATOR_LABS,
   DAILY_OPERATOR_LENSES,
   DAILY_OPERATOR_LEVELS,
   DAILY_OPERATOR_METHOD,
   DAILY_OPERATOR_MODULES,
   DAILY_OPERATOR_OVERLAYS,
-  DAILY_OPERATOR_OWNS,
   DAILY_OPERATOR_PATH,
-  DAILY_OPERATOR_PILOT_TACTICS,
   DAILY_OPERATOR_PRINCIPLES,
-  DAILY_OPERATOR_PROGRESSION,
   DAILY_OPERATOR_PROJECTS,
   DAILY_OPERATOR_PROMISE,
-  DAILY_OPERATOR_REFUSALS,
   DAILY_OPERATOR_SCALEUP,
-  DAILY_OPERATOR_SCENARIO_KIT,
   DAILY_OPERATOR_SCENARIO_PACKS,
   DAILY_OPERATOR_SENTENCE,
   DAILY_OPERATOR_SOFTWARE,
   DAILY_OPERATOR_STATUS,
-  DAILY_OPERATOR_SUCCESS_METRICS,
   DAILY_OPERATOR_TITLE,
 } from '@/content/workshops/ai-daily-operator/program'
 
 const hostMail = `mailto:${WORKSHOP_HUB.FOOTER.EMAIL}?subject=${encodeURIComponent('Level I — Build Your AI Daily Operator')}`
+const levelIHref = '/workshop/build-your-ai-daily-operator/level-i'
 
-const frictionMedia = [
-  ['Retrieval', DAILY_OPERATOR_MEDIA.modules.m08.retrieval],
-  ['Reconciliation', DAILY_OPERATOR_MEDIA.modules.m08.reconciliation],
-  ['Memory', DAILY_OPERATOR_MEDIA.modules.m08.memory],
-  ['Transfer', DAILY_OPERATOR_MEDIA.modules.m08.transfer],
-  ['Decision', DAILY_OPERATOR_MEDIA.modules.m08.decision],
-  ['Approval', DAILY_OPERATOR_MEDIA.modules.m08.approval],
-  ['Communication', DAILY_OPERATOR_MEDIA.modules.m08.communication],
-] as const
+const button = 'border border-[#1c1916] px-4 py-2.5 text-sm'
+const buttonSolid = `${button} bg-[#1c1916] text-[#f3eee6]`
 
 export function ProgramClient() {
   return (
     <main className="min-h-screen bg-[#f3eee6] text-[#1c1916]">
       <div className="mx-auto w-full max-w-6xl px-5 pb-28 pt-36 sm:px-8 sm:pt-64">
-        <header className="grid gap-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)] lg:gap-20">
+        <header className="grid gap-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(16rem,0.85fr)] lg:gap-20">
           <div className="max-w-xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
               {DAILY_OPERATOR_METHOD}
@@ -61,146 +49,34 @@ export function ProgramClient() {
               {DAILY_OPERATOR_STATUS}
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link href="/workshop/build-your-ai-daily-operator/level-i" className="border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]">
+              <Link href={levelIHref} className={buttonSolid}>
                 Start with Level I
               </Link>
-              <a href="#levels" className="border border-[#1c1916] px-4 py-2.5 text-sm">
+              <a href={hostMail} className={button}>
+                Host Level I
+              </a>
+              <a href="#levels" className={button}>
                 See the five-level path
               </a>
-              <a href={hostMail} className="border border-[#1c1916] px-4 py-2.5 text-sm">
-                Ask to host Level I
-              </a>
             </div>
-          </div>
-          <div>
-            <WorkshopMediaFigure
-              asset={DAILY_OPERATOR_MEDIA.core.operatorCore}
-              priority
-              caption="Many business signals compete for one finite resource: your attention. The operator narrows those signals into a smaller set of meaningful actions."
-            />
-            <div className="mt-8 border-t border-[#1c1916]">
-            <p className="border-b border-[#d9d0c3] py-4 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
-              Who this page is for
-            </p>
-            <dl className="divide-y divide-[#d9d0c3]">
-              <div className="py-4">
-                <dt className="text-sm text-[#5c564e]">Hosts</dt>
-                <dd className="mt-1 text-base leading-relaxed">{DAILY_OPERATOR_FOR.hosts}</dd>
-              </div>
-              <div className="py-4">
-                <dt className="text-sm text-[#5c564e]">Participants</dt>
-                <dd className="mt-1 text-base leading-relaxed">{DAILY_OPERATOR_FOR.participants}</dd>
-              </div>
-              <div className="py-4">
-                <dt className="text-sm text-[#5c564e]">On this site</dt>
-                <dd className="mt-1 text-base leading-relaxed">{DAILY_OPERATOR_FOR.case}</dd>
-              </div>
-              <div className="py-4">
-                <dt className="text-sm text-[#5c564e]">Instructor</dt>
-                <dd className="mt-1 text-base leading-relaxed">{DAILY_OPERATOR_FOR.instructor}</dd>
-              </div>
-            </dl>
-            </div>
-          </div>
-        </header>
-
-        <section id="level-i-first" className="mt-28" aria-labelledby="level-i-first-heading">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
-            <div className="max-w-xl">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
-                Start here · Level I
-              </p>
-              <h2 id="level-i-first-heading" className="mt-3 text-4xl tracking-tight">
-                Build the first useful version in 90 minutes
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-                No integrations are required. Start with one 30-day outcome, make the business legible enough to prioritize a real day, then challenge the ranking instead of accepting a fluent answer.
-              </p>
-              <ul className="mt-7 space-y-3 text-sm leading-relaxed text-[#3d3832]">
-                <li>Founder Profile</li>
-                <li>Attention Rules</li>
-                <li>Portable Daily Operator</li>
-                <li>Daily Operating Brief</li>
-                <li>One observed friction + seven-day experiment</li>
-                <li>Scenario-based competency check</li>
-              </ul>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/workshop/build-your-ai-daily-operator/level-i"
-                  className="border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]"
-                >
-                  Open Level I toolkit
-                </Link>
-                <a href={hostMail} className="border border-[#1c1916] px-4 py-2.5 text-sm">
-                  Host Level I
-                </a>
-              </div>
-            </div>
-            <WorkshopMediaFigure
-              asset={DAILY_OPERATOR_MEDIA.modules.m04.dailyOperatingBrief}
-              caption="A deterministic preview of the artifact participants build. The actual worksheet remains editable in the Level I toolkit."
-            />
-          </div>
-
-          <div className="mt-14 border-t border-[#d9d0c3] pt-8">
-            <div className="max-w-2xl">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
-                Real walkthroughs
-              </p>
-              <h3 className="mt-3 text-2xl tracking-tight">
-                The teaching slots are ready; current product UI comes next
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">
-                ChatGPT and Claude follow the same method. These placeholders reserve the exact documentation layer that will be replaced by current real screenshots and short demos after the final participant run.
-              </p>
-            </div>
-            <div className="mt-6">
-              <ToolGuidePlaceholders level="I" mode="compact" />
-            </div>
-          </div>
-        </section>
-
-        <section className="mt-28 grid gap-16 lg:grid-cols-2" aria-labelledby="territory-heading">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Territory</p>
-            <h2 id="territory-heading" className="mt-3 text-4xl tracking-tight">
-              What this refuses
-            </h2>
-            <ul className="mt-8 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
-              {DAILY_OPERATOR_REFUSALS.map((item) => (
-                <li key={item} className="py-3 text-lg leading-snug">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">What it owns</p>
-            <h2 className="mt-3 text-4xl tracking-tight">Attention, then a system</h2>
-            <ul className="mt-8 space-y-6">
-              {DAILY_OPERATOR_OWNS.map((item) => (
-                <li key={item.title}>
-                  <p className="text-lg tracking-tight">{item.title}</p>
-                  <p className="mt-1 max-w-md text-sm leading-relaxed text-[#3d3832]">{item.detail}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="mt-28" aria-labelledby="path-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">The path</p>
-            <h2 id="path-heading" className="mt-3 text-4xl tracking-tight">
-              Make the work legible
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_PROGRESSION}</p>
           </div>
           <WorkshopMediaFigure
-            asset={DAILY_OPERATOR_MEDIA.core.attentionFlywheel}
-            caption="The system improves as goals shape signals, signals inform judgment, finite attention becomes action, and review changes the system for the next cycle."
-            className="mt-10 max-w-5xl"
+            asset={DAILY_OPERATOR_MEDIA.core.operatorCore}
+            priority
+            caption="Many signals compete for one finite resource: the founder’s attention."
           />
+        </header>
+
+        <section className="mt-28" aria-labelledby="scarce-heading">
+          <div className="max-w-xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">The scarce resource</p>
+            <h2 id="scarce-heading" className="mt-3 text-4xl tracking-tight">
+              Founder attention runs out before the task list does
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
+              A calendar can be full and still hide the decision. The work is to say what deserves the person, why, and what can wait. Automation comes after that sentence is true.
+            </p>
+          </div>
           <ol className="mt-10 grid gap-px bg-[#d9d0c3] sm:grid-cols-2 lg:grid-cols-3">
             {DAILY_OPERATOR_PATH.map((step, index) => (
               <li key={step.id} className="bg-[#f3eee6] p-5">
@@ -210,28 +86,26 @@ export function ProgramClient() {
               </li>
             ))}
           </ol>
-          <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        </section>
+
+        <section className="mt-28" aria-labelledby="core-heading">
+          <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <h3 className="text-2xl tracking-tight">Judgment</h3>
-              <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#3d3832]">
-                Four questions, in this order. The lenses sit inside the third.
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
+                Level I · {LEVEL_I_DELIVERY.core.name}
               </p>
-              <ol className="mt-6 space-y-2">
-                {DAILY_OPERATOR_JUDGMENT.map((question, index) => (
-                  <li key={question} className="flex gap-4 border-b border-[#d9d0c3] py-3">
-                    <span className="font-mono text-[11px] text-[#0f5f5c]">0{index + 1}</span>
-                    <span>{question}</span>
-                  </li>
-                ))}
-              </ol>
+              <h2 id="core-heading" className="mt-3 text-4xl tracking-tight">
+                Useful in {LEVEL_I_DELIVERY.core.duration}
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[#3d3832]">{LEVEL_I_DELIVERY.competency}</p>
+              <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">{LEVEL_I_DELIVERY.core.audience}</p>
             </div>
             <div>
-              <h3 className="text-2xl tracking-tight">Four lenses</h3>
-              <ul className="mt-6 grid gap-6 sm:grid-cols-2">
-                {DAILY_OPERATOR_LENSES.map((lens) => (
-                  <li key={lens.id}>
-                    <p className="text-lg tracking-tight">{lens.label}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-[#3d3832]">{lens.detail}</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">In the room</p>
+              <ul className="mt-4 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
+                {LEVEL_I_DELIVERY.core.includes.map((item) => (
+                  <li key={item} className="py-3 text-sm leading-relaxed">
+                    {item}
                   </li>
                 ))}
               </ul>
@@ -239,305 +113,37 @@ export function ProgramClient() {
           </div>
         </section>
 
-        <section id="levels" className="mt-28 scroll-mt-32" aria-labelledby="levels-heading">
+        <section className="mt-28" aria-labelledby="leave-heading">
           <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Competency map</p>
-            <h2 id="levels-heading" className="mt-3 text-4xl tracking-tight">
-              Five levels
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">What you leave with</p>
+            <h2 id="leave-heading" className="mt-3 text-4xl tracking-tight">
+              Four artifacts, one friction, seven days of use
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              Each level is what a participant can demonstrably do, and the artifact that proves it. Lessons attach here later.
-            </p>
           </div>
-          <ol className="mt-12 space-y-16">
-            {DAILY_OPERATOR_LEVELS.map((level) => (
-              <li key={level.id} className="grid gap-8 border-t border-[#1c1916] pt-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
-                <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Level {level.id}</p>
-                  <h3 className="mt-3 text-3xl tracking-tight">{level.title}</h3>
-                  <p className="mt-4 text-lg leading-snug">{level.question}</p>
-                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.16em] text-[#5c564e]">{level.time}</p>
-                  {level.note ? <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#3d3832]">{level.note}</p> : null}
-                </div>
-                <div className="space-y-6">
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#0f5f5c]">Can</p>
-                    <ul className="mt-3 space-y-2">
-                      {level.can.map((item) => (
-                        <li key={item} className="text-sm leading-relaxed text-[#3d3832]">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#0f5f5c]">Leaves with</p>
-                    <p className="mt-3 text-sm leading-relaxed">{level.leavesWith.join(' · ')}</p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="mt-28" aria-labelledby="source-access-heading">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
-            <div className="max-w-xl">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
-                Level II · source authority
-              </p>
-              <h2 id="source-access-heading" className="mt-3 text-4xl tracking-tight">
-                Connected does not mean autonomous
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-                A calendar can be authoritative about scheduled commitments without being authoritative about priority. Email can contain relationship context without permission to send. A connected system still needs explicit source and approval boundaries.
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-[#3d3832]">
-                The Permission Map separates what a system may read, draft, recommend, or act on only after a person approves it.
-              </p>
-            </div>
-            <WorkshopMediaFigure
-              asset={DAILY_OPERATOR_MEDIA.modules.m06.permissionMap}
-              caption="Permission is graduated. Reading a source is different from drafting from it, recommending a change, or taking consequential action."
-            />
-          </div>
-        </section>
-
-        <section className="mt-28" aria-labelledby="projects-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Five projects</p>
-            <h2 id="projects-heading" className="mt-3 text-4xl tracking-tight">
-              Each level leaves a project
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              The product name and the level are the same. A host can book Level I alone, or the sequence.
-            </p>
-          </div>
-          <ol className="mt-10 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
-            {DAILY_OPERATOR_PROJECTS.map((item) => (
-              <li key={item.id} className="grid gap-3 py-6 lg:grid-cols-[4rem_minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-8">
-                <span className="font-mono text-[11px] text-[#0f5f5c]">{item.id}</span>
-                <div>
-                  <p className="text-lg tracking-tight">{item.project}</p>
-                  <p className="mt-1 text-sm text-[#5c564e]">{item.product}</p>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-sm leading-relaxed text-[#3d3832]">{item.able}</p>
-                  <p className="text-sm leading-relaxed">{item.artifact}</p>
-                  {'builds' in item ? (
-                    <p className="text-sm leading-relaxed text-[#3d3832]">
-                      Built in the room: {item.builds.join(', ')}. Generated from the profile: {item.generated.join(', ')}.
-                    </p>
-                  ) : null}
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-10 max-w-xl">
-            <h3 className="text-2xl tracking-tight">{DAILY_OPERATOR_CAPSTONE.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">
-              {DAILY_OPERATOR_CAPSTONE.detail} {DAILY_OPERATOR_CAPSTONE.time}.
-            </p>
-            <ul className="mt-4 space-y-2">
-              {DAILY_OPERATOR_CAPSTONE.track.map((line) => (
-                <li key={line} className="text-sm leading-relaxed">
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="mt-28" aria-labelledby="modules-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Full curriculum</p>
-            <h2 id="modules-heading" className="mt-3 text-4xl tracking-tight">
-              A map, not the lessons
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              About 8–10 hours. Modules 1–4 are Level I, 5–6 are Level II, 7 is Level III, 8 is Level IV, and 9–12 are Level V. The seven-day experiment starts when Level I ends.
-            </p>
-          </div>
-          <ol className="mt-10 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
-            {DAILY_OPERATOR_MODULES.map((module) => (
-              <li key={module.n} className="grid gap-2 py-4 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-6">
-                <span className="font-mono text-[11px] text-[#0f5f5c]">{String(module.n).padStart(2, '0')}</span>
-                <span>
-                  <span className="tracking-tight">{module.title}</span>
-                  <span className="mt-1 block text-sm text-[#3d3832]">{module.question}</span>
-                </span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#5c564e]">
-                  L{module.level} · {module.time}
-                </span>
-              </li>
-            ))}
-            <li className="grid gap-2 py-4 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-6">
-              <span className="font-mono text-[11px] text-[#0f5f5c]">—</span>
-              <span>
-                <span className="tracking-tight">{DAILY_OPERATOR_CAPSTONE.title}</span>
-                <span className="mt-1 block text-sm text-[#3d3832]">{DAILY_OPERATOR_CAPSTONE.detail}</span>
-              </span>
-              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#5c564e]">
-                {DAILY_OPERATOR_CAPSTONE.time}
-              </span>
-            </li>
-          </ol>
-        </section>
-
-        <section className="mt-28" aria-labelledby="friction-media-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
-              Level IV · friction intelligence
-            </p>
-            <h2 id="friction-media-heading" className="mt-3 text-4xl tracking-tight">
-              Repeated manual work is evidence
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              The course names seven recurring forms of friction before deciding whether any of them deserves a workflow. The diagnosis comes first.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {frictionMedia.map(([label, asset]) => (
-              <div key={label}>
-                <WorkshopMediaFigure asset={asset} />
-                <p className="mt-3 text-lg tracking-tight">{label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-28" aria-labelledby="governed-system-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">
-              Level V · from friction to system
-            </p>
-            <h2 id="governed-system-heading" className="mt-3 text-4xl tracking-tight">
-              Automate only what earns it
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              Impact, frequency, ease, and risk decide whether a friction should stay manual, be simplified, delegated, assisted, connected, or automated. When a workflow is justified, consequential action remains governed.
-            </p>
-            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-[#0f5f5c]">
-              Recommend → Explain → Ask → Act
-            </p>
-          </div>
-          <div className="mt-10 grid gap-10 lg:grid-cols-2">
-            <WorkshopMediaFigure
-              asset={DAILY_OPERATOR_MEDIA.modules.m09.frictionScore}
-              caption="Automation selection: judge the friction before choosing a system."
-            />
-            <WorkshopMediaFigure
-              asset={DAILY_OPERATOR_MEDIA.modules.m10.workflowBlueprint}
-              caption="A governed workflow separates context and reasoning from approval, action, and the durable record."
-            />
-          </div>
-          <WorkshopMediaFigure
-            asset={DAILY_OPERATOR_MEDIA.modules.m11.humanApprovalGate}
-            caption="Consequential action crosses a visible human boundary: recommend, explain, ask, then act only after approval."
-            className="mt-10 max-w-5xl"
-          />
-          <WorkshopMediaFigure
-            asset={DAILY_OPERATOR_MEDIA.modules.m12.weeklyReview}
-            caption="The weekly review closes the loop: what moved, what stalled, what repeated, and what one improvement deserves attention next."
-            className="mt-10 max-w-4xl"
-          />
-        </section>
-
-        <section className="mt-28" aria-labelledby="artifacts-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">What they leave owning</p>
-            <h2 id="artifacts-heading" className="mt-3 text-4xl tracking-tight">
-              Twelve artifacts
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              By the end, the sequence has documented how the work operates.
-            </p>
-          </div>
-          <ol className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-            {DAILY_OPERATOR_ARTIFACTS.map((artifact) => (
-              <li key={artifact.n} className="border-t border-[#d9d0c3] pt-4">
-                <p className="font-mono text-[11px] text-[#0f5f5c]">
-                  {String(artifact.n).padStart(2, '0')} · Level {artifact.level}
-                  {artifact.room === 'build' ? ' · Built in the room' : null}
-                  {artifact.room === 'generated' ? ' · Generated' : null}
-                </p>
-                <p className="mt-2 text-lg tracking-tight">{artifact.name}</p>
-                <p className="mt-1 text-sm leading-relaxed text-[#3d3832]">{artifact.detail}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="mt-28" aria-labelledby="overlays-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">One method</p>
-            <h2 id="overlays-heading" className="mt-3 text-4xl tracking-tight">
-              The examples change
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              Commitments, revenue or mission, risk, capacity, signals, friction, and workflow stay put. The nouns change with the work.
-            </p>
-          </div>
-          <ul className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {DAILY_OPERATOR_OVERLAYS.map((overlay) => (
-              <li key={overlay.id}>
-                <h3 className="text-xl tracking-tight">{overlay.title}</h3>
-                {'caseStudy' in overlay ? (
-                  <p className="mt-2 text-sm text-[#0f5f5c]">{overlay.caseStudy}</p>
+          <ol className="mt-10 grid gap-8 sm:grid-cols-2">
+            {DAILY_OPERATOR_PROJECTS.filter((item) => item.id === 'I').map((item) => (
+              <li key={item.id} className="sm:col-span-2">
+                <p className="text-lg tracking-tight">{item.project}</p>
+                <p className="mt-2 text-sm leading-relaxed text-[#3d3832]">{item.able}</p>
+                {'builds' in item ? (
+                  <p className="mt-3 text-sm leading-relaxed">
+                    Built in the room: {item.builds.join(', ')}. Generated from the profile:{' '}
+                    {item.generated.join(', ')}.
+                  </p>
                 ) : null}
-                <ul className="mt-3 space-y-2">
-                  {overlay.lines.map((line) => (
-                    <li key={line} className="text-sm leading-relaxed text-[#3d3832]">
-                      {line}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-14 max-w-xl">
-            <h3 className="text-2xl tracking-tight">Later labs</h3>
-            <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">
-              After the core, the same method can open a functional lab. These are not separate courses, and they are not built yet.
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {DAILY_OPERATOR_LABS.map((lab) => (
-                <li key={lab} className="border border-[#d9d0c3] px-3 py-2 text-sm">
-                  {lab}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="mt-28" aria-labelledby="scaleup-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Doorway</p>
-            <h2 id="scaleup-heading" className="mt-3 text-4xl tracking-tight">
-              The 90-minute ScaleUp session
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              Level I runs the whole arc in miniature. It does not teach the full curriculum. The deeper levels open after.
-            </p>
-          </div>
-          <ol className="mt-10 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
-            {DAILY_OPERATOR_SCALEUP.map((beat) => (
-              <li key={beat.range} className="grid gap-2 py-4 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-4">
-                <span className="font-mono text-[11px] text-[#0f5f5c]">{beat.range}</span>
-                <span>
-                  <span className="tracking-tight">{beat.title}</span>
-                  <span className="mt-1 block text-sm text-[#3d3832]">{beat.why}</span>
-                </span>
               </li>
             ))}
           </ol>
+          <p className="mt-8 max-w-xl text-sm leading-relaxed text-[#3d3832]">
+            {DAILY_OPERATOR_CAPSTONE.title}. {DAILY_OPERATOR_CAPSTONE.detail}
+          </p>
         </section>
 
-        <section className="mt-28" aria-labelledby="demo-heading">
+        <section className="mt-28" aria-labelledby="brief-heading">
           <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Opening</p>
-            <h2 id="demo-heading" className="mt-3 text-4xl tracking-tight">
-              Five minutes, then the point is obvious
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">The artifact</p>
+            <h2 id="brief-heading" className="mt-3 text-4xl tracking-tight">
+              A Daily Operating Brief, not a longer calendar
             </h2>
           </div>
           <div className="mt-10 grid gap-10 lg:grid-cols-2">
@@ -553,7 +159,7 @@ export function ProgramClient() {
               </ul>
             </div>
             <div>
-              <h3 className="text-xl tracking-tight">The Daily Operator</h3>
+              <h3 className="text-xl tracking-tight">The brief</h3>
               <ul className="mt-4 space-y-4">
                 {DAILY_OPERATOR_FORMATS.demo.brief.map((row) => (
                   <li key={row.label}>
@@ -566,149 +172,233 @@ export function ProgramClient() {
           </div>
         </section>
 
-        <section className="mt-28" aria-labelledby="principles-heading">
+        <section className="mt-28" aria-labelledby="lenses-heading">
           <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Every level</p>
-            <h2 id="principles-heading" className="mt-3 text-4xl tracking-tight">
-              The lines that recur
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Evidence</p>
+            <h2 id="lenses-heading" className="mt-3 text-4xl tracking-tight">
+              Four lenses, then fact, interpretation, recommendation
             </h2>
           </div>
           <ul className="mt-10 grid gap-8 sm:grid-cols-2">
-            {DAILY_OPERATOR_PRINCIPLES.map((item) => (
-              <li key={item.principle}>
-                <p className="text-lg tracking-tight">{item.principle}</p>
-                <p className="mt-1 text-sm leading-relaxed text-[#3d3832]">{item.line}</p>
+            {DAILY_OPERATOR_LENSES.map((lens) => (
+              <li key={lens.id}>
+                <p className="text-lg tracking-tight">{lens.label}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#3d3832]">{lens.detail}</p>
               </li>
             ))}
           </ul>
-        </section>
-
-        <section className="mt-28" aria-labelledby="software-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Tools</p>
-            <h2 id="software-heading" className="mt-3 text-4xl tracking-tight">
-              Required, optional, advanced
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_SOFTWARE.rule}</p>
-          </div>
-          <ul className="mt-10 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
-            {DAILY_OPERATOR_SOFTWARE.layers.map((layer) => (
-              <li key={layer.layer} className="grid gap-1 py-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-6">
-                <span className="tracking-tight">{layer.layer}</span>
-                <span className="text-sm leading-relaxed text-[#3d3832]">
-                  {layer.defaultTool}
-                  {layer.alternatives !== '—' ? `. ${layer.alternatives}.` : ''}
-                </span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#5c564e]">{layer.requirement}</span>
+          <ol className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+            {DAILY_OPERATOR_JUDGMENT.map((question, index) => (
+              <li key={question} className="text-sm">
+                <span className="font-mono text-[11px] text-[#0f5f5c]">0{index + 1}</span> {question}
               </li>
             ))}
-          </ul>
+          </ol>
         </section>
 
-        <section className="mt-28" aria-labelledby="scenarios-heading">
+        <section className="mt-28" aria-labelledby="proof-heading">
           <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Escape hatch</p>
-            <h2 id="scenarios-heading" className="mt-3 text-4xl tracking-tight">
-              One fictional company, six noun sets
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Proof</p>
+            <h2 id="proof-heading" className="mt-3 text-4xl tracking-tight">
+              The walkthrough slots are waiting on a real run
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
-              Someone who does not want to use their own information works from a prepared kit. The records are not written yet. The kit is the same. The nouns change.
+              ChatGPT needs 7 screenshots and 1 short video. Claude needs the same. These placeholders stay until that capture exists. Nothing here is a generated interface.
             </p>
           </div>
-          <ul className="mt-8 flex flex-wrap gap-2">
-            {DAILY_OPERATOR_SCENARIO_KIT.map((item) => (
-              <li key={item} className="border border-[#d9d0c3] px-3 py-2 text-sm">
-                {item}
-              </li>
-            ))}
-          </ul>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {DAILY_OPERATOR_SCENARIO_PACKS.map((pack) => (
-              <li key={pack.id}>
-                <p className="text-lg tracking-tight">{pack.title}</p>
-                <p className="mt-1 text-sm leading-relaxed text-[#3d3832]">{pack.nouns}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-8">
+            <ToolGuidePlaceholders level="I" mode="compact" />
+          </div>
         </section>
 
-        <section className="mt-28" aria-labelledby="boundary-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">After the course</p>
-            <h2 id="boundary-heading" className="mt-3 text-4xl tracking-tight">
-              The friction, then a choice
-            </h2>
-            <p className="mt-4 text-lg leading-snug">{DAILY_OPERATOR_FORMATS.boundary.ends}</p>
-            <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_FORMATS.boundary.note}</p>
+        <section className="mt-28" aria-labelledby="friction-heading">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">After the brief</p>
+              <h2 id="friction-heading" className="mt-3 text-4xl tracking-tight">
+                Friction becomes a decision: delegate, retain, redesign, or automate
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_FORMATS.boundary.ends}</p>
+              <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_FORMATS.boundary.note}</p>
+              <ul className="mt-6 space-y-2">
+                {DAILY_OPERATOR_FORMATS.boundary.choices.map((choice) => (
+                  <li key={choice} className="text-sm leading-relaxed">
+                    {choice}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <WorkshopMediaFigure
+              asset={DAILY_OPERATOR_MEDIA.modules.m08.frictionOverview}
+              caption="Repeated manual work is evidence. It is not yet a system."
+            />
           </div>
-          <ol className="mt-8 max-w-xl space-y-2">
-            {DAILY_OPERATOR_FORMATS.boundary.choices.map((choice, index) => (
-              <li key={choice} className="flex gap-4 border-b border-[#d9d0c3] py-3">
-                <span className="font-mono text-[11px] text-[#0f5f5c]">0{index + 1}</span>
-                <span>{choice}</span>
-              </li>
-            ))}
-          </ol>
         </section>
 
-        <section className="mt-28" aria-labelledby="afterward-heading">
-          <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">What they should be able to say</p>
-            <h2 id="afterward-heading" className="mt-3 text-4xl tracking-tight">
-              The learning objectives
-            </h2>
+        <section className="mt-28" aria-labelledby="approval-heading">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+            <WorkshopMediaFigure
+              asset={DAILY_OPERATOR_MEDIA.modules.m11.humanApprovalGate}
+              caption="The system recommends and explains. A person approves before a consequential action."
+            />
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Authority</p>
+              <h2 id="approval-heading" className="mt-3 text-4xl tracking-tight">
+                Recommend, explain, ask, then act
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
+                Unknown stays unknown. A missing field is not a false one. The person remains visible before anything that commits the work.
+              </p>
+            </div>
           </div>
-          <ul className="mt-8 max-w-xl space-y-4">
-            {DAILY_OPERATOR_FORMATS.afterward.map((line) => (
-              <li key={line} className="text-lg leading-snug">
-                {line}
-              </li>
-            ))}
-          </ul>
         </section>
 
-        <section className="mt-28" aria-labelledby="tactics-heading">
+        <section id="levels" className="mt-28 scroll-mt-32" aria-labelledby="levels-heading">
           <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">In the room</p>
-            <h2 id="tactics-heading" className="mt-3 text-4xl tracking-tight">
-              How Level I is taught
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">The path</p>
+            <h2 id="levels-heading" className="mt-3 text-4xl tracking-tight">
+              Core, Studio, then five levels
             </h2>
+            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">
+              Level I is the competency. {LEVEL_I_DELIVERY.core.name} delivers it in {LEVEL_I_DELIVERY.core.duration}.{' '}
+              {LEVEL_I_DELIVERY.studio.name} uses {LEVEL_I_DELIVERY.studio.duration} for the same artifacts, with more coaching.
+            </p>
           </div>
-          <ol className="mt-8 max-w-xl space-y-3">
-            {DAILY_OPERATOR_PILOT_TACTICS.map((tactic, index) => (
-              <li key={tactic} className="flex gap-4 text-sm leading-relaxed">
-                <span className="font-mono text-[11px] text-[#0f5f5c]">{String(index + 1).padStart(2, '0')}</span>
-                <span>{tactic}</span>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-10 grid gap-10 lg:grid-cols-2">
+            <div>
+              <h3 className="text-2xl tracking-tight">
+                {LEVEL_I_DELIVERY.studio.name} · {LEVEL_I_DELIVERY.studio.duration}
+              </h3>
+              <ul className="mt-4 space-y-2">
+                {LEVEL_I_DELIVERY.studio.adds.map((item) => (
+                  <li key={item} className="text-sm leading-relaxed text-[#3d3832]">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ol className="divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
+              {DAILY_OPERATOR_LEVELS.map((level) => (
+                <li key={level.id} className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-4 py-4">
+                  <span className="font-mono text-[11px] text-[#0f5f5c]">{level.id}</span>
+                  <span>
+                    <span className="tracking-tight">{level.title}</span>
+                    <span className="mt-1 block text-sm text-[#3d3832]">{level.question}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <details className="mt-12 border-t border-[#d9d0c3] pt-6">
+            <summary className="cursor-pointer text-sm tracking-tight">Full curriculum map</summary>
+            <div className="mt-8 grid gap-10 lg:grid-cols-2">
+              <div>
+                <h3 className="text-lg tracking-tight">Projects</h3>
+                <ul className="mt-3 space-y-2">
+                  {DAILY_OPERATOR_PROJECTS.map((item) => (
+                    <li key={item.id} className="text-sm leading-relaxed">
+                      {item.id} · {item.project} — {item.artifact}
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="mt-8 text-lg tracking-tight">Modules</h3>
+                <ul className="mt-3 space-y-1">
+                  {DAILY_OPERATOR_MODULES.map((module) => (
+                    <li key={module.n} className="text-sm text-[#3d3832]">
+                      {module.n}. {module.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg tracking-tight">Artifacts</h3>
+                <ul className="mt-3 space-y-1">
+                  {DAILY_OPERATOR_ARTIFACTS.map((artifact) => (
+                    <li key={artifact.n} className="text-sm text-[#3d3832]">
+                      {artifact.n}. {artifact.name} · Level {artifact.level}
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="mt-8 text-lg tracking-tight">90-minute beats</h3>
+                <ul className="mt-3 space-y-1">
+                  {DAILY_OPERATOR_SCALEUP.map((beat) => (
+                    <li key={beat.range} className="text-sm text-[#3d3832]">
+                      {beat.range} {beat.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg tracking-tight">Principles</h3>
+                <ul className="mt-3 space-y-2">
+                  {DAILY_OPERATOR_PRINCIPLES.map((item) => (
+                    <li key={item.principle} className="text-sm text-[#3d3832]">
+                      {item.principle}. {item.line}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg tracking-tight">Tools and scenarios</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_SOFTWARE.rule}</p>
+                <ul className="mt-3 space-y-1">
+                  {DAILY_OPERATOR_SOFTWARE.layers.map((layer) => (
+                    <li key={layer.layer} className="text-sm text-[#3d3832]">
+                      {layer.layer}: {layer.defaultTool} · {layer.requirement}
+                    </li>
+                  ))}
+                </ul>
+                <ul className="mt-4 space-y-1">
+                  {DAILY_OPERATOR_SCENARIO_PACKS.map((pack) => (
+                    <li key={pack.id} className="text-sm text-[#3d3832]">
+                      {pack.title}
+                    </li>
+                  ))}
+                </ul>
+                <ul className="mt-4 space-y-1">
+                  {DAILY_OPERATOR_OVERLAYS.map((overlay) => (
+                    <li key={overlay.id} className="text-sm text-[#3d3832]">
+                      {overlay.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </details>
         </section>
 
-        <section className="mt-28" aria-labelledby="metrics-heading">
+        <section className="mt-28" aria-labelledby="host-heading">
           <div className="max-w-xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Pilot evidence</p>
-            <h2 id="metrics-heading" className="mt-3 text-4xl tracking-tight">
-              What the first cohort is for
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Hosts</p>
+            <h2 id="host-heading" className="mt-3 text-4xl tracking-tight">
+              A pilot can be hosted before the course is called proven
             </h2>
+            <p className="mt-4 text-base leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_FOR.hosts}</p>
+            <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_FOR.case}</p>
+            <p className="mt-3 text-sm leading-relaxed text-[#3d3832]">{DAILY_OPERATOR_FOR.instructor}</p>
           </div>
-          <ul className="mt-10 divide-y divide-[#d9d0c3] border-y border-[#d9d0c3]">
-            {DAILY_OPERATOR_SUCCESS_METRICS.map((metric) => (
-              <li key={metric.when} className="grid gap-2 py-4 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8">
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#0f5f5c]">{metric.when}</span>
-                <span className="text-sm leading-relaxed text-[#3d3832]">{metric.measure}</span>
-              </li>
-            ))}
-          </ul>
         </section>
 
         <section className="mt-28 grid gap-10 border-t border-[#1c1916] pt-16 sm:grid-cols-[minmax(0,1fr)_minmax(0,16rem)] sm:items-end">
           <div className="max-w-xl space-y-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#0f5f5c]">Next</p>
-            <h2 className="text-4xl tracking-tight">Ask for Level I</h2>
+            <h2 className="text-4xl tracking-tight">Start with Level I</h2>
             <p className="text-base leading-relaxed text-[#3d3832]">
-              Moises Sanabria. {DAILY_OPERATOR_METHOD}. DCC Miami is used as a sanitized operating example while documentary evidence is still being assembled. The next step is a 90-minute session, not a checkout.
+              Open the toolkit, or write to host a 90-minute Core. {DAILY_OPERATOR_FOR.case}
             </p>
-            <a href={hostMail} className="inline-block border border-[#1c1916] bg-[#1c1916] px-4 py-2.5 text-sm text-[#f3eee6]">
+            <div className="flex flex-wrap gap-3">
+              <Link href={levelIHref} className={buttonSolid}>
+                Start with Level I
+              </Link>
+              <a href={hostMail} className={button}>
+                Host Level I
+              </a>
+              <a href="#levels" className={button}>
+                See the five-level path
+              </a>
+            </div>
+            <a href={hostMail} className="inline-block text-sm">
               {WORKSHOP_HUB.FOOTER.EMAIL}
             </a>
           </div>

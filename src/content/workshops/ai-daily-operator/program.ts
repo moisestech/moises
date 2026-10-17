@@ -200,7 +200,7 @@ export const DAILY_OPERATOR_OVERLAYS = [
   {
     id: 'creative',
     title: 'Creative / artist',
-    caseStudy: 'DCC Miami is the documented case.',
+    caseStudy: 'DCC Miami is a sanitized operating example while documentary evidence is still being assembled.',
     lines: [
       'Commitments: exhibitions, commissions, grants.',
       'Revenue: sales, workshops, commissions.',
