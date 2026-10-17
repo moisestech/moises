@@ -9,8 +9,12 @@ import {
   type LevelIFeedbackScale,
   type LevelIFeedbackState,
 } from '@/content/workshops/ai-daily-operator/level-i-feedback'
+import {
+  LEVEL_I_FEEDBACK_STORAGE_KEY,
+  parseStoredJson,
+} from '@/content/workshops/ai-daily-operator/level-i-state'
 
-const STORAGE_KEY = 'ai-daily-operator:level-i-feedback'
+const STORAGE_KEY = LEVEL_I_FEEDBACK_STORAGE_KEY
 
 function scaleButton(
   value: LevelIFeedbackScale,
@@ -70,7 +74,8 @@ export function LevelIFeedback() {
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY)
-      if (raw) setFeedback(JSON.parse(raw) as LevelIFeedbackState)
+      const stored = parseStoredJson<Partial<LevelIFeedbackState> | null>(raw, null)
+      if (stored) setFeedback({ ...EMPTY_LEVEL_I_FEEDBACK, ...stored })
     } catch {
       // Feedback remains usable without persistence.
     }

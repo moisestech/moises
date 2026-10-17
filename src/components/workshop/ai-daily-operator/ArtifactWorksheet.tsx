@@ -5,11 +5,12 @@ import type {
   ArtifactField,
   ParticipantArtifact,
 } from '@/content/workshops/ai-daily-operator/artifacts'
+import { artifactStorageKey } from '@/content/workshops/ai-daily-operator/level-i-state'
 
 type Answers = Record<string, string>
 
 function storageKey(artifact: ParticipantArtifact) {
-  return `ai-daily-operator:artifact:${artifact.slug}`
+  return artifactStorageKey(artifact.slug)
 }
 
 function inputClass() {

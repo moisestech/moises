@@ -2,77 +2,59 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { LEVEL_I_ARTIFACTS } from '@/content/workshops/ai-daily-operator/artifacts'
+import { LEVEL_I_ASSESSMENT } from '@/content/workshops/ai-daily-operator/level-i-assessment'
 import {
-  LEVEL_I_ASSESSMENT,
-  LEVEL_I_ASSESSMENT_PASS_COUNT,
-} from '@/content/workshops/ai-daily-operator/level-i-assessment'
+  artifactStorageKey,
+  assessmentPassed,
+  EMPTY_PRACTICAL_EVIDENCE,
+  LEVEL_I_ASSESSMENT_STORAGE_KEY,
+  LEVEL_I_EVIDENCE_STORAGE_KEY,
+  LEVEL_I_PROGRESS_EVENT,
+  levelIComplete,
+  parseStoredJson,
+  practicalEvidenceComplete,
+  readAssessment,
+  readPracticalEvidence,
+  scoreAssessment,
+  worksheetComplete,
+  answeredFieldCount,
+  type PracticalEvidence,
+} from '@/content/workshops/ai-daily-operator/level-i-state'
 
 type Answers = Record<string, string>
 
-type StoredAssessment = {
-  answers?: Answers
-  submitted?: boolean
-}
-
-type EvidenceState = {
-  challengedPriority: boolean
-  checkedEvidence: boolean
-  frictionCaptured: boolean
-  frictionNote: string
-}
-
-const EVIDENCE_KEY = 'ai-daily-operator:level-i-completion-evidence'
-const ASSESSMENT_KEY = 'ai-daily-operator:level-i-assessment'
-const PROGRESS_EVENT = 'ai-daily-operator:progress-update'
-
-function artifactStorageKey(slug: string) {
-  return `ai-daily-operator:artifact:${slug}`
-}
-
-function safeReadJson<T>(key: string, fallback: T): T {
+function safeWindowRead(key: string): string | null {
+  if (typeof window === 'undefined') return null
   try {
-    const raw = window.localStorage.getItem(key)
-    return raw ? (JSON.parse(raw) as T) : fallback
+    return window.localStorage.getItem(key)
   } catch {
-    return fallback
+    return null
   }
 }
 
 export function LevelICompletionSummary() {
   const [tick, setTick] = useState(0)
-  const [evidence, setEvidence] = useState<EvidenceState>({
-    challengedPriority: false,
-    checkedEvidence: false,
-    frictionCaptured: false,
-    frictionNote: '',
-  })
+  const [evidence, setEvidence] = useState<PracticalEvidence>(EMPTY_PRACTICAL_EVIDENCE)
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    setEvidence(
-      safeReadJson<EvidenceState>(EVIDENCE_KEY, {
-        challengedPriority: false,
-        checkedEvidence: false,
-        frictionCaptured: false,
-        frictionNote: '',
-      }),
-    )
+    setEvidence(readPracticalEvidence(safeWindowRead(LEVEL_I_EVIDENCE_STORAGE_KEY)))
   }, [])
 
   useEffect(() => {
     const refresh = () => setTick((value) => value + 1)
-    window.addEventListener(PROGRESS_EVENT, refresh)
+    window.addEventListener(LEVEL_I_PROGRESS_EVENT, refresh)
     window.addEventListener('storage', refresh)
     return () => {
-      window.removeEventListener(PROGRESS_EVENT, refresh)
+      window.removeEventListener(LEVEL_I_PROGRESS_EVENT, refresh)
       window.removeEventListener('storage', refresh)
     }
   }, [])
 
   useEffect(() => {
     try {
-      window.localStorage.setItem(EVIDENCE_KEY, JSON.stringify(evidence))
-      window.dispatchEvent(new Event(PROGRESS_EVENT))
+      window.localStorage.setItem(LEVEL_I_EVIDENCE_STORAGE_KEY, JSON.stringify(evidence))
+      window.dispatchEvent(new Event(LEVEL_I_PROGRESS_EVENT))
     } catch {
       // Completion state remains usable without persistence.
     }
@@ -90,51 +72,42 @@ export function LevelICompletionSummary() {
     }
 
     const artifacts = LEVEL_I_ARTIFACTS.map((artifact) => {
-      const answers = safeReadJson<Answers>(artifactStorageKey(artifact.slug), {})
+      const raw = safeWindowRead(artifactStorageKey(artifact.slug))
+      const answers = parseStoredJson<Answers>(raw, {})
       const fields = artifact.sections.flatMap((section) => section.fields)
-      const answered = fields.filter((field) => answers[field.id]?.trim()).length
+      const fieldIds = fields.map((field) => field.id)
+      const answered = answeredFieldCount(fieldIds, answers)
       return {
         slug: artifact.slug,
         title: artifact.title,
         answered,
         total: fields.length,
-        complete: answered === fields.length,
+        complete: worksheetComplete(fieldIds, answers),
       }
     })
 
-    const assessment = safeReadJson<StoredAssessment>(ASSESSMENT_KEY, {})
-    const assessmentAnswers = assessment.answers ?? {}
-    const assessmentScore = LEVEL_I_ASSESSMENT.reduce(
-      (total, question) =>
-        total +
-        (assessmentAnswers[question.id] === question.correctOptionId ? 1 : 0),
-      0,
-    )
+    const assessment = readAssessment(safeWindowRead(LEVEL_I_ASSESSMENT_STORAGE_KEY))
+    const assessmentScore = scoreAssessment(assessment.answers)
 
     return {
       artifacts,
       allArtifactsComplete: artifacts.every((artifact) => artifact.complete),
       assessmentScore,
       assessmentSubmitted: Boolean(assessment.submitted),
-      assessmentPassed:
-        Boolean(assessment.submitted) &&
-        assessmentScore >= LEVEL_I_ASSESSMENT_PASS_COUNT,
+      assessmentPassed: assessmentPassed(assessmentScore, assessment.submitted),
     }
   }, [tick])
 
-  const evidenceComplete =
-    evidence.challengedPriority &&
-    evidence.checkedEvidence &&
-    evidence.frictionCaptured &&
-    evidence.frictionNote.trim().length > 0
+  const evidenceComplete = practicalEvidenceComplete(evidence)
 
-  const complete =
-    progress.allArtifactsComplete &&
-    progress.assessmentPassed &&
-    evidenceComplete
+  const complete = levelIComplete({
+    artifactsComplete: progress.allArtifactsComplete,
+    assessmentPassed: progress.assessmentPassed,
+    evidenceComplete,
+  })
 
   const updateEvidence = useCallback(
-    <K extends keyof EvidenceState>(key: K, value: EvidenceState[K]) => {
+    <K extends keyof PracticalEvidence>(key: K, value: PracticalEvidence[K]) => {
       setEvidence((current) => ({ ...current, [key]: value }))
     },
     [],
@@ -235,7 +208,7 @@ export function LevelICompletionSummary() {
             <label key={key} className="flex gap-3 text-sm leading-relaxed text-[#3d3832]">
               <input
                 type="checkbox"
-                checked={Boolean(evidence[key as keyof EvidenceState])}
+                checked={Boolean(evidence[key as keyof PracticalEvidence])}
                 onChange={(event) =>
                   updateEvidence(
                     key as 'challengedPriority' | 'checkedEvidence' | 'frictionCaptured',

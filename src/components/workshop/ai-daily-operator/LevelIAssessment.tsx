@@ -7,15 +7,16 @@ import {
   LEVEL_I_ASSESSMENT_PASS_PERCENT,
   LEVEL_I_COMPLETION_REQUIREMENTS,
 } from '@/content/workshops/ai-daily-operator/level-i-assessment'
+import {
+  assessmentPassed,
+  assessmentPercent,
+  LEVEL_I_ASSESSMENT_STORAGE_KEY,
+  LEVEL_I_PROGRESS_EVENT,
+  readAssessment,
+  scoreAssessment,
+} from '@/content/workshops/ai-daily-operator/level-i-state'
 
 type Answers = Record<string, string>
-
-const STORAGE_KEY = 'ai-daily-operator:level-i-assessment'
-
-type StoredAssessment = {
-  answers: Answers
-  submitted: boolean
-}
 
 export function LevelIAssessment() {
   const [answers, setAnswers] = useState<Answers>({})
@@ -23,11 +24,11 @@ export function LevelIAssessment() {
 
   useEffect(() => {
     try {
-      const raw = window.localStorage.getItem(STORAGE_KEY)
+      const raw = window.localStorage.getItem(LEVEL_I_ASSESSMENT_STORAGE_KEY)
       if (!raw) return
-      const stored = JSON.parse(raw) as StoredAssessment
-      setAnswers(stored.answers ?? {})
-      setSubmitted(Boolean(stored.submitted))
+      const stored = readAssessment(raw)
+      setAnswers(stored.answers as Answers)
+      setSubmitted(stored.submitted)
     } catch {
       // Assessment remains usable without local persistence.
     }
@@ -35,9 +36,11 @@ export function LevelIAssessment() {
 
   useEffect(() => {
     try {
-      const stored: StoredAssessment = { answers, submitted }
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
-      window.dispatchEvent(new Event('ai-daily-operator:progress-update'))
+      window.localStorage.setItem(
+        LEVEL_I_ASSESSMENT_STORAGE_KEY,
+        JSON.stringify({ answers, submitted }),
+      )
+      window.dispatchEvent(new Event(LEVEL_I_PROGRESS_EVENT))
     } catch {
       // Assessment remains usable without local persistence.
     }
@@ -45,18 +48,10 @@ export function LevelIAssessment() {
 
   const answeredCount = Object.keys(answers).filter((id) => answers[id]).length
 
-  const score = useMemo(
-    () =>
-      LEVEL_I_ASSESSMENT.reduce(
-        (total, question) =>
-          total + (answers[question.id] === question.correctOptionId ? 1 : 0),
-        0,
-      ),
-    [answers],
-  )
+  const score = useMemo(() => scoreAssessment(answers), [answers])
 
-  const percent = Math.round((score / LEVEL_I_ASSESSMENT.length) * 100)
-  const passed = score >= LEVEL_I_ASSESSMENT_PASS_COUNT
+  const percent = assessmentPercent(score)
+  const passed = assessmentPassed(score, submitted)
   const readyToSubmit = answeredCount === LEVEL_I_ASSESSMENT.length
 
   const choose = (questionId: string, optionId: string) => {

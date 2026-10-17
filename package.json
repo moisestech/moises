@@ -13,7 +13,8 @@
     "deploy:preview": "npx vercel@latest",
     "life-os:discover": "npx tsx scripts/life-os-discover.ts",
     "life-os:list": "npx tsx scripts/life-os-discover.ts list",
-    "asset:upload": "npx tsx scripts/upload-workshop-asset.ts"
+    "asset:upload": "npx tsx scripts/upload-workshop-asset.ts",
+    "test:level-i": "npx tsx --test src/content/workshops/ai-daily-operator/level-i-state.test.ts"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
