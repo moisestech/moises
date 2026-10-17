@@ -64,7 +64,7 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     owner: 'ChatGPT/Cursor',
     definitionOfDone:
       'A complete fictional business can be used for every Level I exercise when participants do not want to use real information.',
-    status: 'todo',
+    status: 'done',
   },
   {
     id: 'ado-p0-privacy',
@@ -74,7 +74,7 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     owner: 'ChatGPT/Cursor',
     definitionOfDone:
       'Toolkit and facilitator guide clearly state what not to expose and when to use the synthetic fallback.',
-    status: 'ready',
+    status: 'done',
   },
   {
     id: 'ado-p0-followup',
@@ -84,7 +84,7 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     owner: 'ChatGPT/Cursor',
     definitionOfDone:
       'Participants receive one lightweight daily use instruction and one end-of-week review path without motivational spam.',
-    status: 'todo',
+    status: 'done',
   },
   {
     id: 'ado-p0-core-media',
@@ -94,7 +94,7 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     owner: 'shared',
     definitionOfDone:
       'Approved core concepts are present in Cloudinary and media.ts marks delivery=cloudinary.',
-    status: 'ready',
+    status: 'done',
   },
   {
     id: 'ado-p1-chatgpt-run',
@@ -123,7 +123,7 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     minutes: 30,
     owner: 'Moises',
     definitionOfDone:
-      'Five minimum screenshots per platform plus one short end-to-end demo recording exist and are promoted to Cloudinary.',
+      'ChatGPT: 7 screenshots + 1 short video. Claude: 7 screenshots + 1 short video. Real product UI only, promoted to Cloudinary.',
     status: 'blocked-manual',
   },
   {
@@ -137,6 +137,26 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     status: 'blocked-manual',
   },
   {
+    id: 'ado-p1-completion-data',
+    title: 'Record completion data from a hosted Level I cohort',
+    phase: 'post-pilot',
+    minutes: null,
+    owner: 'Moises',
+    definitionOfDone:
+      'A real cohort has completion counts, assessment results, clarity before and after, and a seven-day reuse signal. Do not invent these figures.',
+    status: 'blocked-manual',
+  },
+  {
+    id: 'ado-p1-dcc-documentary',
+    title: 'Assemble documentary evidence for the DCC Miami operating example',
+    phase: 'desktop-capture',
+    minutes: null,
+    owner: 'Moises',
+    definitionOfDone:
+      'The public and host materials can call DCC a documented case only after permissioned records exist. Until then it remains a sanitized operating example.',
+    status: 'blocked-manual',
+  },
+  {
     id: 'ado-prepilot-offer',
     title: 'Finalize Level I institutional pilot offer',
     phase: 'pre-pilot',
@@ -144,7 +164,7 @@ export const DAILY_OPERATOR_PRODUCTION_TASKS: readonly ProductionTask[] = [
     owner: 'shared',
     definitionOfDone:
       'One-page host offer states outcome, audience, 90-minute format, requirements, participant outputs, pilot price, and follow-up.',
-    status: 'todo',
+    status: 'done',
   },
   {
     id: 'ado-prepilot-pricing',
