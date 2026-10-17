@@ -1,4 +1,5 @@
 import { formatBoxDimensionsInchesLwh } from '@/lib/dimensions';
+import type { ImageAnchor } from '@/lib/imageAnchor';
 import { InteractiveContent } from './research';
 
 /** A research path from a finished work. Optional on each artwork. */
@@ -44,6 +45,8 @@ interface Artwork {
     url: string;
     caption?: string;
     alt?: string;
+    /** Crop anchor for object-cover frames. Defaults to center. */
+    anchor?: ImageAnchor;
   }[];
   links?: {
     url: string;
@@ -98,6 +101,7 @@ interface Artwork {
       url: string;
       caption?: string;
       alt?: string;
+      anchor?: ImageAnchor;
     }[];
   };
   video?: {
@@ -364,10 +368,12 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1789442928/art/moisestech-website/artworks/2025_simulation_faith/SimulationFaith-NWSA-Technographies-Alumni-Show-2025_saqdlj.jpg',
           caption: 'Simulation Faith — Technographies Alumni Show, New World School of the Arts, 2025',
+          anchor: 'top',
         },
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1742962577/art/moisestech-website/artworks/2025_simulation_faith/moises-sanabria-simulation-faith_vdshq3.jpg',
           caption: 'Simulation Faith — suspended baby Jesus sculpture with VR headset',
+          anchor: 'top',
         },
       ],
       links: [
@@ -824,6 +830,8 @@ Sanabria co-founded the post-internet collective ART404 and Digital Culture Cent
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558664/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-11_v04wjo.jpg',
           caption: 'Treadmill facing a coding workstation and three vertical screens.',
+          // Tall portrait. A hard top crop is ceiling; 26% keeps the screens and laptop in a short hero.
+          anchor: 'center 26%',
         },
         {
           url: 'https://res.cloudinary.com/dck5rzi4h/image/upload/v1791558667/art/moisestech-website/artworks/2024-doomscrolling-treadmill-touch-grass-station/moises-sanabria-doom-scrolling-treadmill-12_yr8vyk.jpg',

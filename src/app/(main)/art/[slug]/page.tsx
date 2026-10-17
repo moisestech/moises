@@ -10,6 +10,7 @@ import ArtworkMediaCarousel from '@/components/art/ArtworkMediaCarousel';
 import ArtworkResearchBridge from '@/components/art/ArtworkResearchBridge';
 import ArtworkVideo from '@/components/art/ArtworkVideo';
 import ImageWithSkeleton from '@/components/shared/ImageWithSkeleton';
+import { objectCoverProps } from '@/lib/imageAnchor';
 import Link from 'next/link';
 import { seoKeywordsAlpha } from '../../../../../lib/seoKeywords';
 import type { Metadata } from 'next';
@@ -118,7 +119,7 @@ export default async function ArtPage({ params }: PageProps) {
           src={artwork.images[0].url}
           alt={artwork.images[0].caption || artwork.title}
           fill
-          className="object-cover"
+          {...objectCoverProps(artwork.images[0].anchor)}
           priority
         />
       </div>
