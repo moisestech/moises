@@ -1,6 +1,7 @@
 'use client'
 
 import { approvalStates } from '@/content/workshops/moonlighter-ai-3d-printing'
+import { rubricHasAmber, rubricHasRed } from '@/lib/workshop/moonlighter/gate-review'
 import type { MoonlighterHandoff } from '@/lib/workshop/moonlighter/types'
 
 export function HandoffCard({
@@ -32,6 +33,20 @@ export function HandoffCard({
         Production handoff
       </p>
       {participantName && <p className="mt-1 font-medium">{participantName}</p>}
+      <div className="mt-3 space-y-1 text-xs leading-relaxed">
+        <p>Project ID {handoff?.project_slug || '—'}</p>
+        <p>Reference rights: {handoff?.reference_rights ? 'Yes' : 'No'}</p>
+        <p>Documentation consent: No</p>
+        {rubricHasAmber(handoff?.rubric_summary ?? '') && (
+          <p className="font-semibold text-[var(--ml-accent)]">Amber</p>
+        )}
+        {rubricHasRed(handoff?.rubric_summary ?? '') && (
+          <p className="font-semibold text-[var(--ml-diagnose)]">Red</p>
+        )}
+        {handoff?.rubric_summary ? (
+          <pre className="whitespace-pre-wrap font-sans">{handoff.rubric_summary}</pre>
+        ) : null}
+      </div>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {fields.map(({ key, label }) => (
           <label key={key} className="block">

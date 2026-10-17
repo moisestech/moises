@@ -63,11 +63,15 @@ export type MoonlighterPrinter = {
   state: PrinterState
 }
 
+/** Gate 1 review checkpoint. Not a curriculum module id. */
+export const GATE1_CHECKPOINT_MODULE = 61
+
 export type MoonlighterHandoff = {
   id: string
   session_id: string
   participant_id: string
   project_title: string
+  project_slug: string
   approved_filename: string
   tier: string
   dimensions: string
@@ -77,6 +81,8 @@ export type MoonlighterHandoff = {
   approval_status: string
   expected_pickup: string
   notes: string
+  rubric_summary: string
+  reference_rights: boolean
   updated_at: string
 }
 
