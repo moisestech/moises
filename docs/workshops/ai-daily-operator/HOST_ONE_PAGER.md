@@ -128,4 +128,4 @@ This is a working pilot range and should be validated after the first hosted ses
 **Moises Sanabria**  
 Artist · Full-Stack / AI Engineer · Creative Technologist
 
-Founder Attention OS is taught through real operating practice, with DCC Miami serving as a documented creative-business case rather than a hypothetical automation demo.
+Founder Attention OS is taught through operating practice. DCC Miami is used as a sanitized operating example while documentary evidence is still being assembled.

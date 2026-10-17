@@ -151,7 +151,9 @@ Rate 1–5 only after writing evidence.
 
 - 
 
-## 11. Questions to compare against Session 2
+## 11. Notes from the one observed session
+
+There has been one observed Scale Up session. Do not invent a second session or compare against one.
 
 - 
 - 
@@ -169,4 +171,4 @@ Only capture paraphrases unless a direct quote is genuinely necessary.
 
 **What evidence supports that?**
 
-**Would I make any outreach decision from this class alone?** No — compare with Session 2 first.
+**Would I make any outreach decision from this class alone?** No. One observed session is not a reason to reach out.
