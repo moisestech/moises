@@ -1,6 +1,7 @@
 /**
- * In-memory + localStorage session store for rehearsal when Supabase is unavailable.
- * Server APIs use this as fallback; browser also mirrors participant token locally.
+ * Rehearsal-only session store. Used when SUPABASE_URL and
+ * SUPABASE_SERVICE_ROLE_KEY are unset. A restart clears it.
+ * This is not a locked Gate 1 record.
  */
 
 import { randomUUID } from 'crypto'
@@ -74,7 +75,7 @@ export function createOfflineSession(): MoonlighterSession {
     const printer: MoonlighterPrinter = {
       id: randomUUID(),
       session_id: session.id,
-      unit: `Printer ${i}`,
+      unit: `ML-P0${i}`,
       color: i === 1 ? 'black' : i === 2 ? 'white' : i === 3 ? 'accent' : 'black',
       job: null,
       participant_id: null,
@@ -208,14 +209,23 @@ export function updatePrinter(
 }
 
 export function upsertHandoff(
-  input: Omit<MoonlighterHandoff, 'id' | 'updated_at'> & { id?: string },
+  input: Omit<MoonlighterHandoff, 'id' | 'updated_at' | 'project_slug' | 'rubric_summary' | 'reference_rights'> & {
+    id?: string
+    project_slug?: string
+    rubric_summary?: string
+    reference_rights?: boolean
+  },
 ): MoonlighterHandoff {
   const s = store()
   const existing = [...s.handoffs.values()].find(
     (h) => h.participant_id === input.participant_id && h.session_id === input.session_id,
   )
   const row: MoonlighterHandoff = {
+    ...existing,
     ...input,
+    project_slug: input.project_slug ?? existing?.project_slug ?? '',
+    rubric_summary: input.rubric_summary ?? existing?.rubric_summary ?? '',
+    reference_rights: input.reference_rights ?? existing?.reference_rights ?? false,
     id: input.id ?? existing?.id ?? randomUUID(),
     updated_at: now(),
   }

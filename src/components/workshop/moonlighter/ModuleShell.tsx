@@ -20,7 +20,9 @@ import { CheckpointAction } from './CheckpointAction'
 import { WorkflowRail } from './WorkflowRail'
 import { PolicyDrawer } from './PolicyDrawer'
 import { ArchiveChecklist } from './ArchiveChecklist'
-import { archiveFolderSpec } from '@/content/workshops/moonlighter-ai-3d-printing'
+import { ImageTo3dPaths } from './ImageTo3dPaths'
+import { PrinterAssumption } from './PrinterAssumption'
+import { archiveFolderSpec, getLesson } from '@/content/workshops/moonlighter-ai-3d-printing'
 
 export function ModuleShell({
   module,
@@ -45,6 +47,7 @@ export function ModuleShell({
   const [support, setSupport] = useState<'low' | 'moderate' | 'high'>('low')
   const [tipsOpen, setTipsOpen] = useState(false)
 
+  const lesson = getLesson(module.id)
   const prev = module.id > 0 ? module.id - 1 : null
   const next = module.id < 9 ? module.id + 1 : null
 
@@ -73,6 +76,7 @@ export function ModuleShell({
     if (module.id === 3 || module.id === 4) {
       return (
         <div className="space-y-4">
+          {module.id === 3 && <ImageTo3dPaths />}
           <OrbitViewer />
           {module.qualityLabels && (
             <QualityGate value={quality} labels={module.qualityLabels} onChange={setQuality} />
@@ -86,16 +90,27 @@ export function ModuleShell({
     if (module.id === 6) {
       return (
         <div className="space-y-4">
+          <PrinterAssumption />
           <TierSelector value={tier} onChange={setTier} />
           <SupportMeter value={support} onChange={setSupport} />
         </div>
       )
     }
     if (module.id === 7) {
-      return <SliceEstimate estimate={{ timeMin: tier === 'miniature' ? 55 : 140, grams: 28, supports: support }} />
+      return (
+        <div className="space-y-4">
+          <PrinterAssumption />
+          <SliceEstimate estimate={{ timeMin: tier === 'miniature' ? 55 : 140, grams: 28, supports: support }} />
+        </div>
+      )
     }
     if (module.id === 8) {
-      return <PolicyDrawer onAcknowledge={onPolicyAck} />
+      return (
+        <div className="space-y-4">
+          <PrinterAssumption />
+          <PolicyDrawer onAcknowledge={onPolicyAck} />
+        </div>
+      )
     }
     if (module.id === 9) {
       return <ArchiveChecklist items={[...archiveFolderSpec]} />
@@ -116,12 +131,56 @@ export function ModuleShell({
               <DemoVideoCard key={demo.id} demo={demo} />
             ))}
           </div>
+          {lesson && (
+            <section className="border-l-2 border-[var(--ml-digital)] pl-4">
+              <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--ml-digital)]">
+                Example in the room
+              </p>
+              <h2 className="mt-1 text-lg font-medium">{lesson.example.title}</h2>
+              <p className="mt-2 max-w-[720px] text-sm leading-relaxed text-[var(--ml-ink)]/85">
+                {lesson.example.shows}
+              </p>
+              <p className="mt-2 max-w-[720px] text-sm leading-relaxed text-[var(--ml-ink)]/65">
+                {lesson.example.contrast}
+              </p>
+              {lesson.workedPrompts && (
+                <div className="mt-4 space-y-3">
+                  {lesson.workedPrompts.map((prompt) => (
+                    <div key={prompt.label} className="border border-[var(--ml-soft-gray)] bg-white/60 p-3">
+                      <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--ml-ink)]/50">
+                        {prompt.label}
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-[var(--ml-ink)]/80">{prompt.text}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          )}
           <section>
             <h2 className="text-lg font-medium">Guided task</h2>
-            <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-[var(--ml-ink)]/85">
-              {module.guidedTasks.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
+            <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-[var(--ml-ink)]/45">
+              Save to {lesson?.fileTarget ?? module.output}
+            </p>
+            <ol className="mt-4 space-y-4">
+              {(lesson?.steps ?? module.guidedTasks.map((t) => ({ title: t, instruction: '', doneWhen: '' }))).map(
+                (step, index) => (
+                  <li key={step.title} className="border border-[var(--ml-soft-gray)] bg-white/50 p-4">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--ml-ink)]/45">
+                      {String(index + 1).padStart(2, '0')}
+                    </p>
+                    <h3 className="mt-1 text-sm font-medium">{step.title}</h3>
+                    {step.instruction && (
+                      <p className="mt-2 text-sm leading-relaxed text-[var(--ml-ink)]/85">{step.instruction}</p>
+                    )}
+                    {step.doneWhen && (
+                      <p className="mt-2 text-xs leading-relaxed text-[var(--ml-verified)]">
+                        Done when: {step.doneWhen}
+                      </p>
+                    )}
+                  </li>
+                ),
+              )}
             </ol>
             {module.teach && (
               <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-[var(--ml-ink)]/75">
@@ -156,6 +215,15 @@ export function ModuleShell({
                     <li key={t}>{t}</li>
                   ))}
                 </ul>
+                {lesson && lesson.fixes.length > 0 && (
+                  <ul className="space-y-2">
+                    {lesson.fixes.map((fix) => (
+                      <li key={fix.signal}>
+                        <span className="font-medium text-[var(--ml-ink)]">{fix.signal}.</span> {fix.action}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <ul className="list-disc space-y-1 pl-4">
                   {module.troubleshooting.map((t) => (
                     <li key={t}>{t}</li>

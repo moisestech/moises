@@ -20,6 +20,8 @@ import { GlossaryCard, MeshKeyword } from './MeshKeyword'
 import { MeshGlyph, MeshGlyphFrame } from './MeshGlyphs'
 import { InstructorTeachingCarousel } from './InstructorTeachingCarousel'
 import { ScheduleModuleRows } from './ScheduleModuleRows'
+import { ImageTo3dPaths } from './ImageTo3dPaths'
+import { PrinterAssumption } from './PrinterAssumption'
 
 const base = `/workshop/${MOONLIGHTER_SLUG}`
 
@@ -121,6 +123,12 @@ export function MoonlighterLandingClient() {
             Workshops
           </Link>
           <div className="flex flex-wrap items-center gap-3 text-sm">
+            <Link
+              href={`${base}/gate-1`}
+              className="uppercase tracking-[0.12em] text-[var(--ml-ink)]/70 underline-offset-4 transition-colors hover:text-[var(--ml-accent)] hover:underline"
+            >
+              Studio guide
+            </Link>
             <Link
               href={`${base}/resources`}
               className="uppercase tracking-[0.12em] text-[var(--ml-ink)]/70 underline-offset-4 transition-colors hover:text-[var(--ml-accent)] hover:underline"
@@ -460,6 +468,9 @@ export function MoonlighterLandingClient() {
                 printers. The workshop is <MeshKeyword id="tool-flexible">tool-flexible</MeshKeyword>
                 : it teaches a transferable method rather than a single vendor interface.
               </p>
+              <div className="mt-6">
+                <ImageTo3dPaths compact />
+              </div>
             </EnterItem>
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 [perspective:800px]">
               {TOOL_PILLARS.map(({ label, icon, hint }, i) => (
@@ -613,6 +624,9 @@ export function MoonlighterLandingClient() {
               </div>
               <SectionMedia id="schedule-printers" tilt="medium" delay={0.06} />
             </div>
+          </div>
+          <div className="mt-6">
+            <PrinterAssumption />
           </div>
           <EnterItem>
             <ScheduleModuleRows rows={sixHourRunOfShow} />
