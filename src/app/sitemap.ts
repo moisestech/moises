@@ -5,6 +5,7 @@ const ORIGIN = 'https://moises.tech';
 /** Public hire + institutional + art entry URLs. Private opportunity overlays stay out. */
 const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[0]['changeFrequency']; priority: number }[] =
   [
+    { path: '/art/proof-of-human-work', changeFrequency: 'monthly', priority: 0.8 },
     { path: '/', changeFrequency: 'weekly', priority: 1 },
     { path: '/capabilities', changeFrequency: 'weekly', priority: 0.95 },
     { path: '/ai-engineering', changeFrequency: 'weekly', priority: 0.95 },
